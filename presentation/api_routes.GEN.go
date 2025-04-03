@@ -10,6 +10,46 @@ import (
 
 func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 
+	// GuestLogin
+	fw.Post("/"+domain.GuestLoginAction, func(c *fiber.Ctx) error {
+		in := domain.GuestLoginIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.GuestLoginAction); err != nil {
+			return nil
+		}
+		out := d.GuestLogin(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// GuestRegister
+	fw.Post("/"+domain.GuestRegisterAction, func(c *fiber.Ctx) error {
+		in := domain.GuestRegisterIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.GuestRegisterAction); err != nil {
+			return nil
+		}
+		out := d.GuestRegister(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// GuestResendVerificationEmail
+	fw.Post("/"+domain.GuestResendVerificationEmailAction, func(c *fiber.Ctx) error {
+		in := domain.GuestResendVerificationEmailIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.GuestResendVerificationEmailAction); err != nil {
+			return nil
+		}
+		out := d.GuestResendVerificationEmail(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// GuestVerifyEmail
+	fw.Post("/"+domain.GuestVerifyEmailAction, func(c *fiber.Ctx) error {
+		in := domain.GuestVerifyEmailIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.GuestVerifyEmailAction); err != nil {
+			return nil
+		}
+		out := d.GuestVerifyEmail(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// UserLogout
 	fw.Post("/"+domain.UserLogoutAction, func(c *fiber.Ctx) error {
 		in := domain.UserLogoutIn{}

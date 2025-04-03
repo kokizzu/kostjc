@@ -7,6 +7,10 @@ import (
 )
 
 var allCommands = []string{
+	domain.GuestLoginAction,
+	domain.GuestRegisterAction,
+	domain.GuestResendVerificationEmailAction,
+	domain.GuestVerifyEmailAction,
 	domain.UserLogoutAction,
 	domain.UserProfileAction,
 }

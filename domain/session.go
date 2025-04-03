@@ -37,11 +37,10 @@ type Session struct {
 
 // list of first segment of url path, if empty then only /guest segment
 const (
-	GuestSegment   = `guest`
-	UserSegment    = `user`
-	BuyerSegment   = `buyer`
-	AdminSegment   = `admin`
-	RealtorSegment = `realtor`
+	GuestSegment = `guest`
+	UserSegment  = `user`
+	BuyerSegment = `staff`
+	AdminSegment = `admin`
 )
 
 func (s *Session) MarshalEnkodo(enc *enkodo.Encoder) (err error) {

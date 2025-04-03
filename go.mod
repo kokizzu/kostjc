@@ -12,6 +12,7 @@ require (
 	github.com/joho/godotenv v1.4.0
 	github.com/kokizzu/ch-timed-buffer v1.2025.1416
 	github.com/kokizzu/gotro v1.3503.236
+	github.com/kokizzu/id64 v1.2829.1452
 	github.com/kokizzu/lexid v1.2423.1347
 	github.com/kpango/fastime v1.1.9
 	github.com/mojura/enkodo v0.5.6
@@ -19,6 +20,7 @@ require (
 	github.com/rs/zerolog v1.29.1
 	github.com/segmentio/fasthash v1.0.3
 	github.com/tarantool/go-tarantool v1.12.1
+	github.com/vburenin/nsync v0.0.0-20160822015540-9a75d1c80410
 	github.com/wneessen/go-mail v0.3.9
 	github.com/yosuke-furukawa/json5 v0.1.1
 	github.com/zeebo/xxh3 v1.0.2

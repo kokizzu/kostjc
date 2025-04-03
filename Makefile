@@ -24,7 +24,7 @@ modtidy:
 
 fixtags:
 	# fix struct tags
-	go generate domain
+	go generate ./domain
 
 orm:
 	# generate ORM

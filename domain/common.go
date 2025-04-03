@@ -101,7 +101,7 @@ type RequestCommon struct {
 	Action        string          `json:"action" form:"action" query:"action" long:"action" msg:"action"`
 	Lat           float64         `json:"lat" form:"lat" query:"lat" long:"lat" msg:"lat"`
 	Long          float64         `json:"long" form:"long" query:"long" long:"long" msg:"long"`
-	RefId         uint64
+	RefId         uint64          `json:"refId,string" form:"refId" query:"refId" long:"refId" msg:"refId"`
 
 	// in seconds
 	now   int64     `json:"-" form:"now" query:"now" long:"now" msg:"-"`
@@ -360,9 +360,8 @@ func (o *ResponseCommon) Traces() string {
 func (d *Domain) segmentsFromSession(s *Session) M.SB {
 	s.IsSuperAdmin = d.Superadmins[s.Email]
 	s.Segments = M.SB{
-		UserSegment:    true,
-		BuyerSegment:   true,
-		RealtorSegment: true,
+		UserSegment:  true,
+		GuestSegment: true,
 	}
 	if s.IsSuperAdmin {
 		s.Segments[AdminSegment] = true

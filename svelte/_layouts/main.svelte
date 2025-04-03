@@ -1,6 +1,6 @@
 <script>
-  /** @typedef {import('../_types/user').User} User */
-  /** @typedef {import('../_types/master').Access} Access */
+  /** @typedef {import('../_types/users').User} User */
+  /** @typedef {import('../_types/masters').Access} Access */
 
   import SideMenu from '../_partials/SideMenu.svelte';
   import Navbar from '../_partials/Navbar.svelte';
