@@ -184,6 +184,40 @@ exports.GuestResendVerificationEmail = async function GuestResendVerificationEma
 }
 
 /**
+ * @typedef {Object} GuestResetPasswordIn
+ * @property {String} secretCode
+ * @property {String} hash
+ * @property {String} password
+ */
+const GuestResetPasswordIn = {
+  secretCode: '', // string
+  hash: '', // string
+  password: '', // string
+}
+/**
+ * @typedef {Object} GuestResetPasswordOut
+ * @property {Object} ok
+ */
+const GuestResetPasswordOut = {
+  ok: false, // bool
+}
+/**
+ * @callback GuestResetPasswordCallback
+ * @param {GuestResetPasswordOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {GuestResetPasswordIn} i
+ * @param {GuestResetPasswordCallback} cb
+ * @returns {Promise}
+ */
+exports.GuestResetPassword = async function GuestResetPassword( i, cb ) {
+  return await axios.post( '/guest/resetPassword', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} GuestVerifyEmailIn
  * @property {String} secretCode
  * @property {String} hash
@@ -302,6 +336,38 @@ const UserProfileOut = {
  */
 exports.UserProfile = async function UserProfile( i, cb ) {
   return await axios.post( '/user/profile', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} UserSessionKillIn
+ * @property {String} sessionTokenHash
+ */
+const UserSessionKillIn = {
+  sessionTokenHash: '', // string
+}
+/**
+ * @typedef {Object} UserSessionKillOut
+ * @property {number} logoutAt
+ * @property {number} sessionTerminated
+ */
+const UserSessionKillOut = {
+  logoutAt: 0, // int64
+  sessionTerminated: 0, // int64
+}
+/**
+ * @callback UserSessionKillCallback
+ * @param {UserSessionKillOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {UserSessionKillIn} i
+ * @param {UserSessionKillCallback} cb
+ * @returns {Promise}
+ */
+exports.UserSessionKill = async function UserSessionKill( i, cb ) {
+  return await axios.post( '/user/sessionKill', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }

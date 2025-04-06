@@ -40,6 +40,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// GuestResetPassword
+	fw.Post("/"+domain.GuestResetPasswordAction, func(c *fiber.Ctx) error {
+		in := domain.GuestResetPasswordIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.GuestResetPasswordAction); err != nil {
+			return nil
+		}
+		out := d.GuestResetPassword(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// GuestVerifyEmail
 	fw.Post("/"+domain.GuestVerifyEmailAction, func(c *fiber.Ctx) error {
 		in := domain.GuestVerifyEmailIn{}
@@ -67,6 +77,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 			return nil
 		}
 		out := d.UserProfile(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// UserSessionKill
+	fw.Post("/"+domain.UserSessionKillAction, func(c *fiber.Ctx) error {
+		in := domain.UserSessionKillIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.UserSessionKillAction); err != nil {
+			return nil
+		}
+		out := d.UserSessionKill(&in)
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 

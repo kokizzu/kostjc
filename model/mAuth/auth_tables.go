@@ -6,16 +6,21 @@ import (
 )
 
 const (
+	Id         = `id`
+	CreatedAt  = `createdAt`
+	CreatedBy  = `createdBy`
+	UpdatedAt  = `updatedAt`
+	UpdatedBy  = `updatedBy`
+	DeletedAt  = `deletedAt`
+	DeletedBy  = `deletedBy`
+	RestoredBy = `restoredBy`
+)
+
+const (
 	TableUsers Tt.TableName = `users`
 
-	Id            = `id`
 	Email         = `email`
 	Password      = `password`
-	CreatedAt     = `createdAt`
-	CreatedBy     = `createdBy`
-	UpdatedAt     = `updatedAt`
-	UpdatedBy     = `updatedBy`
-	DeletedAt     = `deletedAt`
 	PasswordSetAt = `passwordSetAt`
 	SecretCode    = `secretCode`
 	SecretCodeAt  = `secretCodeAt`
@@ -32,9 +37,8 @@ const (
 	UserId       = `userId`
 	ExpiredAt    = `expiredAt`
 	Device       = `device`
-
-	LoginAt  = `loginAt`
-	LoginIPs = `loginIPs`
+	LoginAt      = `loginAt`
+	LoginIPs     = `loginIPs`
 )
 
 const (
@@ -42,6 +46,27 @@ const (
 
 	UserMessage = `userMessage`
 	AdminReply  = `adminReply`
+)
+
+const (
+	TableTenants Tt.TableName = `tenants`
+
+	TenantName       = `tenantName`
+	KtpRegion        = `ktpRegion`
+	KtpNumber        = `ktpNumber`
+	KtpName          = `ktpName`
+	KtpPlaceBirth    = `ktpPlaceBirth`
+	KtpDateBirth     = `ktpDateBirth`
+	KtpGender        = `ktpGender`
+	KtpAddress       = `ktpAddress`
+	KtpRtRw          = `ktpRtRw`
+	KtpKelurahanDesa = `ktpKelurahanDesa`
+	KtpKecamatan     = `ktpKecamatan`
+	KtpReligion      = `ktpReligion`
+	KtpMaritalStatus = `ktpMaritalStatus`
+	KtpCitizenship   = `ktpCitizenship`
+	TelegramUsername = `telegramUsername`
+	WhatsappNumber   = `whatsappNumber`
 )
 
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{

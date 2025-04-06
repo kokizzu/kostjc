@@ -36,6 +36,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.GuestResendVerificationEmail(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.GuestResetPasswordAction:
+		in := domain.GuestResetPasswordIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.GuestResetPassword(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.GuestVerifyEmailAction:
 		in := domain.GuestVerifyEmailIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -58,6 +66,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 			return
 		}
 		out := b.UserProfile(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.UserSessionKillAction:
+		in := domain.UserSessionKillIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.UserSessionKill(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	}
