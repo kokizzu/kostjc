@@ -102,8 +102,6 @@ func main() {
 		return err
 	})
 
-	oauth := conf.EnvOauth()
-
 	L.PanicIf(eg.Wait(), `eg.Wait`) // if error, make sure no error on: docker compose up
 	for _, closer := range closers {
 		closer := closer
@@ -112,16 +110,12 @@ func main() {
 
 	// create domain object
 	d := &domain.Domain{
-		AuthOltp:     tConn,
-		AuthOlap:     cConn,
-		PropOltp:     tConn,
-		PropOlap:     cConn,
-		BusinessOltp: tConn,
-		StorOltp:     tConn,
-		Mailer:       mailer,
-		IsBgSvc:      false,
-		Oauth:        oauth,
-		Log:          log,
+		AuthOltp: tConn,
+		AuthOlap: cConn,
+		PropOltp: tConn,
+		Mailer:   mailer,
+		IsBgSvc:  false,
+		Log:      log,
 
 		Superadmins: conf.EnvSuperAdmins(),
 
@@ -135,7 +129,7 @@ func main() {
 	// check table existence
 	if mode != `migrate` {
 		L.Print(`verifying table schema, if failed, run: go run main.go migrate`)
-		model.VerifyTables(tConn, cConn)
+		model.VerifyTables(tConn, cConn, tConn)
 	}
 
 	// start

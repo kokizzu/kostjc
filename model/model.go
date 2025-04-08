@@ -7,17 +7,15 @@ import (
 	"github.com/rs/zerolog"
 
 	"kostjc/model/mAuth/wcAuth"
+	"kostjc/model/mProperty"
 
 	"kostjc/model/mAuth"
 )
 
 type Migrator struct {
-	AuthOltp     *Tt.Adapter
-	AuthOlap     *Ch.Adapter
-	PropOltp     *Tt.Adapter
-	PropOlap     *Ch.Adapter
-	BusinessOltp *Tt.Adapter
-	StorOltp     *Tt.Adapter
+	AuthOltp *Tt.Adapter
+	AuthOlap *Ch.Adapter
+	PropOltp *Tt.Adapter
 }
 
 func RunMigration(logger *zerolog.Logger, authOltp *Tt.Adapter, authOlap *Ch.Adapter) {
@@ -27,10 +25,13 @@ func RunMigration(logger *zerolog.Logger, authOltp *Tt.Adapter, authOlap *Ch.Ada
 	m := Migrator{
 		AuthOltp: authOltp,
 		AuthOlap: authOlap,
+		PropOltp: authOltp,
 	}
 	mAuth.TarantoolTables[mAuth.TableUsers].PreUnique1MigrationHook = wcAuth.UniqueUsernameMigration
+
 	m.AuthOltp.MigrateTables(mAuth.TarantoolTables)
 	m.AuthOlap.MigrateTables(mAuth.ClickhouseTables)
+	m.PropOltp.MigrateTables(mProperty.TarantoolTables)
 }
 
 // VerifyTables function to check whether tables are there or not
@@ -38,7 +39,9 @@ func RunMigration(logger *zerolog.Logger, authOltp *Tt.Adapter, authOlap *Ch.Ada
 func VerifyTables(
 	authOltp *Tt.Adapter,
 	authOlap *Ch.Adapter,
+	propOltp *Tt.Adapter,
 ) {
 	Ch.CheckClickhouseTables(authOlap, mAuth.ClickhouseTables)
 	Tt.CheckTarantoolTables(authOltp, mAuth.TarantoolTables)
+	Tt.CheckTarantoolTables(propOltp, mProperty.TarantoolTables)
 }

@@ -42,13 +42,6 @@ const (
 )
 
 const (
-	TableFeedbacks Tt.TableName = `feedbacks`
-
-	UserMessage = `userMessage`
-	AdminReply  = `adminReply`
-)
-
-const (
 	TableTenants Tt.TableName = `tenants`
 
 	TenantName       = `tenantName`
@@ -105,6 +98,36 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 		},
 		Unique1: SessionToken,
 		Engine:  Tt.Memtx,
+	},
+	TableTenants: {
+		Fields: []Tt.Field{
+			{Id, Tt.Unsigned},
+			{TenantName, Tt.String},
+			{KtpRegion, Tt.String},
+			{KtpNumber, Tt.String},
+			{KtpName, Tt.String},
+			{KtpPlaceBirth, Tt.String},
+			{KtpDateBirth, Tt.String},
+			{KtpGender, Tt.String},
+			{KtpAddress, Tt.String},
+			{KtpRtRw, Tt.String},
+			{KtpKelurahanDesa, Tt.String},
+			{KtpKecamatan, Tt.String},
+			{KtpReligion, Tt.String},
+			{KtpMaritalStatus, Tt.String},
+			{KtpCitizenship, Tt.String},
+			{TelegramUsername, Tt.String},
+			{WhatsappNumber, Tt.String},
+			{CreatedAt, Tt.Integer},
+			{CreatedBy, Tt.Unsigned},
+			{UpdatedAt, Tt.Integer},
+			{UpdatedBy, Tt.Unsigned},
+			{DeletedAt, Tt.Integer},
+			{DeletedBy, Tt.Unsigned},
+			{RestoredBy, Tt.Unsigned},
+		},
+		AutoIncrementId: true,
+		Engine:          Tt.Memtx,
 	},
 }
 

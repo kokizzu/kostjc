@@ -21,21 +21,10 @@ type Domain struct {
 	AuthOlap *Ch.Adapter
 
 	PropOltp *Tt.Adapter
-	PropOlap *Ch.Adapter
-
-	BusinessOltp *Tt.Adapter
-
-	StorOltp *Tt.Adapter
 
 	Mailer xMailer.Mailer
 
 	IsBgSvc bool // long-running program
-
-	// 3rd party
-	Oauth conf.OauthConf
-
-	// oauth related cache
-	googleUserInfoEndpointCache string
 
 	// timed buffer
 	authLogs *chBuffer.TimedBuffer

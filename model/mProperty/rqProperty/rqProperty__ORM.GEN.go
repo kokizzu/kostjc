@@ -13,12 +13,400 @@ import (
 	"github.com/kokizzu/gotro/X"
 )
 
-// Buildings DAO reader/query struct
+// Bookings DAO reader/query struct
 //
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file rqProperty__ORM.GEN.go
 //go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type rqProperty__ORM.GEN.go
 //go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type rqProperty__ORM.GEN.go
 //go:generate replacer -afterprefix "By\" form" "By,string\" form" type rqProperty__ORM.GEN.go
+type Bookings struct {
+	Adapter       *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id            uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	DateStart     string      `json:"dateStart" form:"dateStart" query:"dateStart" long:"dateStart" msg:"dateStart"`
+	DateEnd       string      `json:"dateEnd" form:"dateEnd" query:"dateEnd" long:"dateEnd" msg:"dateEnd"`
+	BasePriceIDR  int64       `json:"basePriceIDR" form:"basePriceIDR" query:"basePriceIDR" long:"basePriceIDR" msg:"basePriceIDR"`
+	Facilities    string      `json:"facilities" form:"facilities" query:"facilities" long:"facilities" msg:"facilities"`
+	TotalPriceIDR int64       `json:"totalPriceIDR" form:"totalPriceIDR" query:"totalPriceIDR" long:"totalPriceIDR" msg:"totalPriceIDR"`
+	PaidAt        string      `json:"paidAt" form:"paidAt" query:"paidAt" long:"paidAt" msg:"paidAt"`
+	TenantId      uint64      `json:"tenantId,string" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
+	CreatedAt     string      `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy     uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt     string      `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy     uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt     string      `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy     uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy    uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+}
+
+// NewBookings create new ORM reader/query object
+func NewBookings(adapter *Tt.Adapter) *Bookings {
+	return &Bookings{Adapter: adapter}
+}
+
+// SpaceName returns full package and table name
+func (b *Bookings) SpaceName() string { //nolint:dupl false positive
+	return string(mProperty.TableBookings) // casting required to string from Tt.TableName
+}
+
+// SqlTableName returns quoted table name
+func (b *Bookings) SqlTableName() string { //nolint:dupl false positive
+	return `"bookings"`
+}
+
+func (b *Bookings) UniqueIndexId() string { //nolint:dupl false positive
+	return `id`
+}
+
+// FindById Find one by Id
+func (b *Bookings) FindById() bool { //nolint:dupl false positive
+	res, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), 0, 1, tarantool.IterEq, A.X{b.Id})
+	if L.IsError(err, `Bookings.FindById failed: `+b.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		b.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
+// SqlSelectAllFields generate Sql select fields
+func (b *Bookings) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "dateStart"
+	, "dateEnd"
+	, "basePriceIDR"
+	, "facilities"
+	, "totalPriceIDR"
+	, "paidAt"
+	, "tenantId"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// SqlSelectAllUncensoredFields generate Sql select fields
+func (b *Bookings) SqlSelectAllUncensoredFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "dateStart"
+	, "dateEnd"
+	, "basePriceIDR"
+	, "facilities"
+	, "totalPriceIDR"
+	, "paidAt"
+	, "tenantId"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// ToUpdateArray generate slice of update command
+func (b *Bookings) ToUpdateArray() A.X { //nolint:dupl false positive
+	return A.X{
+		A.X{`=`, 0, b.Id},
+		A.X{`=`, 1, b.DateStart},
+		A.X{`=`, 2, b.DateEnd},
+		A.X{`=`, 3, b.BasePriceIDR},
+		A.X{`=`, 4, b.Facilities},
+		A.X{`=`, 5, b.TotalPriceIDR},
+		A.X{`=`, 6, b.PaidAt},
+		A.X{`=`, 7, b.TenantId},
+		A.X{`=`, 8, b.CreatedAt},
+		A.X{`=`, 9, b.CreatedBy},
+		A.X{`=`, 10, b.UpdatedAt},
+		A.X{`=`, 11, b.UpdatedBy},
+		A.X{`=`, 12, b.DeletedAt},
+		A.X{`=`, 13, b.DeletedBy},
+		A.X{`=`, 14, b.RestoredBy},
+	}
+}
+
+// IdxId return name of the index
+func (b *Bookings) IdxId() int { //nolint:dupl false positive
+	return 0
+}
+
+// SqlId return name of the column being indexed
+func (b *Bookings) SqlId() string { //nolint:dupl false positive
+	return `"id"`
+}
+
+// IdxDateStart return name of the index
+func (b *Bookings) IdxDateStart() int { //nolint:dupl false positive
+	return 1
+}
+
+// SqlDateStart return name of the column being indexed
+func (b *Bookings) SqlDateStart() string { //nolint:dupl false positive
+	return `"dateStart"`
+}
+
+// IdxDateEnd return name of the index
+func (b *Bookings) IdxDateEnd() int { //nolint:dupl false positive
+	return 2
+}
+
+// SqlDateEnd return name of the column being indexed
+func (b *Bookings) SqlDateEnd() string { //nolint:dupl false positive
+	return `"dateEnd"`
+}
+
+// IdxBasePriceIDR return name of the index
+func (b *Bookings) IdxBasePriceIDR() int { //nolint:dupl false positive
+	return 3
+}
+
+// SqlBasePriceIDR return name of the column being indexed
+func (b *Bookings) SqlBasePriceIDR() string { //nolint:dupl false positive
+	return `"basePriceIDR"`
+}
+
+// IdxFacilities return name of the index
+func (b *Bookings) IdxFacilities() int { //nolint:dupl false positive
+	return 4
+}
+
+// SqlFacilities return name of the column being indexed
+func (b *Bookings) SqlFacilities() string { //nolint:dupl false positive
+	return `"facilities"`
+}
+
+// IdxTotalPriceIDR return name of the index
+func (b *Bookings) IdxTotalPriceIDR() int { //nolint:dupl false positive
+	return 5
+}
+
+// SqlTotalPriceIDR return name of the column being indexed
+func (b *Bookings) SqlTotalPriceIDR() string { //nolint:dupl false positive
+	return `"totalPriceIDR"`
+}
+
+// IdxPaidAt return name of the index
+func (b *Bookings) IdxPaidAt() int { //nolint:dupl false positive
+	return 6
+}
+
+// SqlPaidAt return name of the column being indexed
+func (b *Bookings) SqlPaidAt() string { //nolint:dupl false positive
+	return `"paidAt"`
+}
+
+// IdxTenantId return name of the index
+func (b *Bookings) IdxTenantId() int { //nolint:dupl false positive
+	return 7
+}
+
+// SqlTenantId return name of the column being indexed
+func (b *Bookings) SqlTenantId() string { //nolint:dupl false positive
+	return `"tenantId"`
+}
+
+// IdxCreatedAt return name of the index
+func (b *Bookings) IdxCreatedAt() int { //nolint:dupl false positive
+	return 8
+}
+
+// SqlCreatedAt return name of the column being indexed
+func (b *Bookings) SqlCreatedAt() string { //nolint:dupl false positive
+	return `"createdAt"`
+}
+
+// IdxCreatedBy return name of the index
+func (b *Bookings) IdxCreatedBy() int { //nolint:dupl false positive
+	return 9
+}
+
+// SqlCreatedBy return name of the column being indexed
+func (b *Bookings) SqlCreatedBy() string { //nolint:dupl false positive
+	return `"createdBy"`
+}
+
+// IdxUpdatedAt return name of the index
+func (b *Bookings) IdxUpdatedAt() int { //nolint:dupl false positive
+	return 10
+}
+
+// SqlUpdatedAt return name of the column being indexed
+func (b *Bookings) SqlUpdatedAt() string { //nolint:dupl false positive
+	return `"updatedAt"`
+}
+
+// IdxUpdatedBy return name of the index
+func (b *Bookings) IdxUpdatedBy() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlUpdatedBy return name of the column being indexed
+func (b *Bookings) SqlUpdatedBy() string { //nolint:dupl false positive
+	return `"updatedBy"`
+}
+
+// IdxDeletedAt return name of the index
+func (b *Bookings) IdxDeletedAt() int { //nolint:dupl false positive
+	return 12
+}
+
+// SqlDeletedAt return name of the column being indexed
+func (b *Bookings) SqlDeletedAt() string { //nolint:dupl false positive
+	return `"deletedAt"`
+}
+
+// IdxDeletedBy return name of the index
+func (b *Bookings) IdxDeletedBy() int { //nolint:dupl false positive
+	return 13
+}
+
+// SqlDeletedBy return name of the column being indexed
+func (b *Bookings) SqlDeletedBy() string { //nolint:dupl false positive
+	return `"deletedBy"`
+}
+
+// IdxRestoredBy return name of the index
+func (b *Bookings) IdxRestoredBy() int { //nolint:dupl false positive
+	return 14
+}
+
+// SqlRestoredBy return name of the column being indexed
+func (b *Bookings) SqlRestoredBy() string { //nolint:dupl false positive
+	return `"restoredBy"`
+}
+
+// ToArray receiver fields to slice
+func (b *Bookings) ToArray() A.X { //nolint:dupl false positive
+	var id any = nil
+	if b.Id != 0 {
+		id = b.Id
+	}
+	return A.X{
+		id,
+		b.DateStart,     // 1
+		b.DateEnd,       // 2
+		b.BasePriceIDR,  // 3
+		b.Facilities,    // 4
+		b.TotalPriceIDR, // 5
+		b.PaidAt,        // 6
+		b.TenantId,      // 7
+		b.CreatedAt,     // 8
+		b.CreatedBy,     // 9
+		b.UpdatedAt,     // 10
+		b.UpdatedBy,     // 11
+		b.DeletedAt,     // 12
+		b.DeletedBy,     // 13
+		b.RestoredBy,    // 14
+	}
+}
+
+// FromArray convert slice to receiver fields
+func (b *Bookings) FromArray(a A.X) *Bookings { //nolint:dupl false positive
+	b.Id = X.ToU(a[0])
+	b.DateStart = X.ToS(a[1])
+	b.DateEnd = X.ToS(a[2])
+	b.BasePriceIDR = X.ToI(a[3])
+	b.Facilities = X.ToS(a[4])
+	b.TotalPriceIDR = X.ToI(a[5])
+	b.PaidAt = X.ToS(a[6])
+	b.TenantId = X.ToU(a[7])
+	b.CreatedAt = X.ToS(a[8])
+	b.CreatedBy = X.ToU(a[9])
+	b.UpdatedAt = X.ToS(a[10])
+	b.UpdatedBy = X.ToU(a[11])
+	b.DeletedAt = X.ToS(a[12])
+	b.DeletedBy = X.ToU(a[13])
+	b.RestoredBy = X.ToU(a[14])
+	return b
+}
+
+// FromUncensoredArray convert slice to receiver fields
+func (b *Bookings) FromUncensoredArray(a A.X) *Bookings { //nolint:dupl false positive
+	b.Id = X.ToU(a[0])
+	b.DateStart = X.ToS(a[1])
+	b.DateEnd = X.ToS(a[2])
+	b.BasePriceIDR = X.ToI(a[3])
+	b.Facilities = X.ToS(a[4])
+	b.TotalPriceIDR = X.ToI(a[5])
+	b.PaidAt = X.ToS(a[6])
+	b.TenantId = X.ToU(a[7])
+	b.CreatedAt = X.ToS(a[8])
+	b.CreatedBy = X.ToU(a[9])
+	b.UpdatedAt = X.ToS(a[10])
+	b.UpdatedBy = X.ToU(a[11])
+	b.DeletedAt = X.ToS(a[12])
+	b.DeletedBy = X.ToU(a[13])
+	b.RestoredBy = X.ToU(a[14])
+	return b
+}
+
+// FindOffsetLimit returns slice of struct, order by idx, eg. .UniqueIndex*()
+func (b *Bookings) FindOffsetLimit(offset, limit uint32, idx string) []Bookings { //nolint:dupl false positive
+	var rows []Bookings
+	res, err := b.Adapter.Select(b.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Bookings.FindOffsetLimit failed: `+b.SpaceName()) {
+		return rows
+	}
+	for _, row := range res.Tuples() {
+		item := Bookings{}
+		rows = append(rows, *item.FromArray(row))
+	}
+	return rows
+}
+
+// FindArrOffsetLimit returns as slice of slice order by idx eg. .UniqueIndex*()
+func (b *Bookings) FindArrOffsetLimit(offset, limit uint32, idx string) ([]A.X, Tt.QueryMeta) { //nolint:dupl false positive
+	var rows []A.X
+	res, err := b.Adapter.Select(b.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Bookings.FindOffsetLimit failed: `+b.SpaceName()) {
+		return rows, Tt.QueryMetaFrom(res, err)
+	}
+	tuples := res.Tuples()
+	rows = make([]A.X, len(tuples))
+	for z, row := range tuples {
+		rows[z] = row
+	}
+	return rows, Tt.QueryMetaFrom(res, nil)
+}
+
+// Total count number of rows
+func (b *Bookings) Total() int64 { //nolint:dupl false positive
+	rows := b.Adapter.CallBoxSpace(b.SpaceName()+`:count`, A.X{})
+	if len(rows) > 0 && len(rows[0]) > 0 {
+		return X.ToI(rows[0][0])
+	}
+	return 0
+}
+
+// BookingsFieldTypeMap returns key value of field name and key
+var BookingsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
+	`id`:            Tt.Unsigned,
+	`dateStart`:     Tt.String,
+	`dateEnd`:       Tt.String,
+	`basePriceIDR`:  Tt.Integer,
+	`facilities`:    Tt.String,
+	`totalPriceIDR`: Tt.Integer,
+	`paidAt`:        Tt.String,
+	`tenantId`:      Tt.Unsigned,
+	`createdAt`:     Tt.String,
+	`createdBy`:     Tt.Unsigned,
+	`updatedAt`:     Tt.String,
+	`updatedBy`:     Tt.Unsigned,
+	`deletedAt`:     Tt.String,
+	`deletedBy`:     Tt.Unsigned,
+	`restoredBy`:    Tt.Unsigned,
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
+// Buildings DAO reader/query struct
 type Buildings struct {
 	Adapter       *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
 	Id            uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
@@ -948,6 +1336,376 @@ var LocationsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
 
+// Payments DAO reader/query struct
+type Payments struct {
+	Adapter       *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id            uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	BookingId     uint64      `json:"bookingId,string" form:"bookingId" query:"bookingId" long:"bookingId" msg:"bookingId"`
+	PaymentAt     string      `json:"paymentAt" form:"paymentAt" query:"paymentAt" long:"paymentAt" msg:"paymentAt"`
+	PaidIDR       int64       `json:"paidIDR" form:"paidIDR" query:"paidIDR" long:"paidIDR" msg:"paidIDR"`
+	PaymentMethod string      `json:"paymentMethod" form:"paymentMethod" query:"paymentMethod" long:"paymentMethod" msg:"paymentMethod"`
+	PaymentStatus string      `json:"paymentStatus" form:"paymentStatus" query:"paymentStatus" long:"paymentStatus" msg:"paymentStatus"`
+	Note          string      `json:"note" form:"note" query:"note" long:"note" msg:"note"`
+	CreatedAt     string      `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy     uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt     string      `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy     uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt     string      `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy     uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy    uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+}
+
+// NewPayments create new ORM reader/query object
+func NewPayments(adapter *Tt.Adapter) *Payments {
+	return &Payments{Adapter: adapter}
+}
+
+// SpaceName returns full package and table name
+func (p *Payments) SpaceName() string { //nolint:dupl false positive
+	return string(mProperty.TablePayments) // casting required to string from Tt.TableName
+}
+
+// SqlTableName returns quoted table name
+func (p *Payments) SqlTableName() string { //nolint:dupl false positive
+	return `"payments"`
+}
+
+func (p *Payments) UniqueIndexId() string { //nolint:dupl false positive
+	return `id`
+}
+
+// FindById Find one by Id
+func (p *Payments) FindById() bool { //nolint:dupl false positive
+	res, err := p.Adapter.Select(p.SpaceName(), p.UniqueIndexId(), 0, 1, tarantool.IterEq, A.X{p.Id})
+	if L.IsError(err, `Payments.FindById failed: `+p.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		p.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
+// SqlSelectAllFields generate Sql select fields
+func (p *Payments) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "bookingId"
+	, "paymentAt"
+	, "paidIDR"
+	, "paymentMethod"
+	, "paymentStatus"
+	, "note"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// SqlSelectAllUncensoredFields generate Sql select fields
+func (p *Payments) SqlSelectAllUncensoredFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "bookingId"
+	, "paymentAt"
+	, "paidIDR"
+	, "paymentMethod"
+	, "paymentStatus"
+	, "note"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// ToUpdateArray generate slice of update command
+func (p *Payments) ToUpdateArray() A.X { //nolint:dupl false positive
+	return A.X{
+		A.X{`=`, 0, p.Id},
+		A.X{`=`, 1, p.BookingId},
+		A.X{`=`, 2, p.PaymentAt},
+		A.X{`=`, 3, p.PaidIDR},
+		A.X{`=`, 4, p.PaymentMethod},
+		A.X{`=`, 5, p.PaymentStatus},
+		A.X{`=`, 6, p.Note},
+		A.X{`=`, 7, p.CreatedAt},
+		A.X{`=`, 8, p.CreatedBy},
+		A.X{`=`, 9, p.UpdatedAt},
+		A.X{`=`, 10, p.UpdatedBy},
+		A.X{`=`, 11, p.DeletedAt},
+		A.X{`=`, 12, p.DeletedBy},
+		A.X{`=`, 13, p.RestoredBy},
+	}
+}
+
+// IdxId return name of the index
+func (p *Payments) IdxId() int { //nolint:dupl false positive
+	return 0
+}
+
+// SqlId return name of the column being indexed
+func (p *Payments) SqlId() string { //nolint:dupl false positive
+	return `"id"`
+}
+
+// IdxBookingId return name of the index
+func (p *Payments) IdxBookingId() int { //nolint:dupl false positive
+	return 1
+}
+
+// SqlBookingId return name of the column being indexed
+func (p *Payments) SqlBookingId() string { //nolint:dupl false positive
+	return `"bookingId"`
+}
+
+// IdxPaymentAt return name of the index
+func (p *Payments) IdxPaymentAt() int { //nolint:dupl false positive
+	return 2
+}
+
+// SqlPaymentAt return name of the column being indexed
+func (p *Payments) SqlPaymentAt() string { //nolint:dupl false positive
+	return `"paymentAt"`
+}
+
+// IdxPaidIDR return name of the index
+func (p *Payments) IdxPaidIDR() int { //nolint:dupl false positive
+	return 3
+}
+
+// SqlPaidIDR return name of the column being indexed
+func (p *Payments) SqlPaidIDR() string { //nolint:dupl false positive
+	return `"paidIDR"`
+}
+
+// IdxPaymentMethod return name of the index
+func (p *Payments) IdxPaymentMethod() int { //nolint:dupl false positive
+	return 4
+}
+
+// SqlPaymentMethod return name of the column being indexed
+func (p *Payments) SqlPaymentMethod() string { //nolint:dupl false positive
+	return `"paymentMethod"`
+}
+
+// IdxPaymentStatus return name of the index
+func (p *Payments) IdxPaymentStatus() int { //nolint:dupl false positive
+	return 5
+}
+
+// SqlPaymentStatus return name of the column being indexed
+func (p *Payments) SqlPaymentStatus() string { //nolint:dupl false positive
+	return `"paymentStatus"`
+}
+
+// IdxNote return name of the index
+func (p *Payments) IdxNote() int { //nolint:dupl false positive
+	return 6
+}
+
+// SqlNote return name of the column being indexed
+func (p *Payments) SqlNote() string { //nolint:dupl false positive
+	return `"note"`
+}
+
+// IdxCreatedAt return name of the index
+func (p *Payments) IdxCreatedAt() int { //nolint:dupl false positive
+	return 7
+}
+
+// SqlCreatedAt return name of the column being indexed
+func (p *Payments) SqlCreatedAt() string { //nolint:dupl false positive
+	return `"createdAt"`
+}
+
+// IdxCreatedBy return name of the index
+func (p *Payments) IdxCreatedBy() int { //nolint:dupl false positive
+	return 8
+}
+
+// SqlCreatedBy return name of the column being indexed
+func (p *Payments) SqlCreatedBy() string { //nolint:dupl false positive
+	return `"createdBy"`
+}
+
+// IdxUpdatedAt return name of the index
+func (p *Payments) IdxUpdatedAt() int { //nolint:dupl false positive
+	return 9
+}
+
+// SqlUpdatedAt return name of the column being indexed
+func (p *Payments) SqlUpdatedAt() string { //nolint:dupl false positive
+	return `"updatedAt"`
+}
+
+// IdxUpdatedBy return name of the index
+func (p *Payments) IdxUpdatedBy() int { //nolint:dupl false positive
+	return 10
+}
+
+// SqlUpdatedBy return name of the column being indexed
+func (p *Payments) SqlUpdatedBy() string { //nolint:dupl false positive
+	return `"updatedBy"`
+}
+
+// IdxDeletedAt return name of the index
+func (p *Payments) IdxDeletedAt() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlDeletedAt return name of the column being indexed
+func (p *Payments) SqlDeletedAt() string { //nolint:dupl false positive
+	return `"deletedAt"`
+}
+
+// IdxDeletedBy return name of the index
+func (p *Payments) IdxDeletedBy() int { //nolint:dupl false positive
+	return 12
+}
+
+// SqlDeletedBy return name of the column being indexed
+func (p *Payments) SqlDeletedBy() string { //nolint:dupl false positive
+	return `"deletedBy"`
+}
+
+// IdxRestoredBy return name of the index
+func (p *Payments) IdxRestoredBy() int { //nolint:dupl false positive
+	return 13
+}
+
+// SqlRestoredBy return name of the column being indexed
+func (p *Payments) SqlRestoredBy() string { //nolint:dupl false positive
+	return `"restoredBy"`
+}
+
+// ToArray receiver fields to slice
+func (p *Payments) ToArray() A.X { //nolint:dupl false positive
+	var id any = nil
+	if p.Id != 0 {
+		id = p.Id
+	}
+	return A.X{
+		id,
+		p.BookingId,     // 1
+		p.PaymentAt,     // 2
+		p.PaidIDR,       // 3
+		p.PaymentMethod, // 4
+		p.PaymentStatus, // 5
+		p.Note,          // 6
+		p.CreatedAt,     // 7
+		p.CreatedBy,     // 8
+		p.UpdatedAt,     // 9
+		p.UpdatedBy,     // 10
+		p.DeletedAt,     // 11
+		p.DeletedBy,     // 12
+		p.RestoredBy,    // 13
+	}
+}
+
+// FromArray convert slice to receiver fields
+func (p *Payments) FromArray(a A.X) *Payments { //nolint:dupl false positive
+	p.Id = X.ToU(a[0])
+	p.BookingId = X.ToU(a[1])
+	p.PaymentAt = X.ToS(a[2])
+	p.PaidIDR = X.ToI(a[3])
+	p.PaymentMethod = X.ToS(a[4])
+	p.PaymentStatus = X.ToS(a[5])
+	p.Note = X.ToS(a[6])
+	p.CreatedAt = X.ToS(a[7])
+	p.CreatedBy = X.ToU(a[8])
+	p.UpdatedAt = X.ToS(a[9])
+	p.UpdatedBy = X.ToU(a[10])
+	p.DeletedAt = X.ToS(a[11])
+	p.DeletedBy = X.ToU(a[12])
+	p.RestoredBy = X.ToU(a[13])
+	return p
+}
+
+// FromUncensoredArray convert slice to receiver fields
+func (p *Payments) FromUncensoredArray(a A.X) *Payments { //nolint:dupl false positive
+	p.Id = X.ToU(a[0])
+	p.BookingId = X.ToU(a[1])
+	p.PaymentAt = X.ToS(a[2])
+	p.PaidIDR = X.ToI(a[3])
+	p.PaymentMethod = X.ToS(a[4])
+	p.PaymentStatus = X.ToS(a[5])
+	p.Note = X.ToS(a[6])
+	p.CreatedAt = X.ToS(a[7])
+	p.CreatedBy = X.ToU(a[8])
+	p.UpdatedAt = X.ToS(a[9])
+	p.UpdatedBy = X.ToU(a[10])
+	p.DeletedAt = X.ToS(a[11])
+	p.DeletedBy = X.ToU(a[12])
+	p.RestoredBy = X.ToU(a[13])
+	return p
+}
+
+// FindOffsetLimit returns slice of struct, order by idx, eg. .UniqueIndex*()
+func (p *Payments) FindOffsetLimit(offset, limit uint32, idx string) []Payments { //nolint:dupl false positive
+	var rows []Payments
+	res, err := p.Adapter.Select(p.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Payments.FindOffsetLimit failed: `+p.SpaceName()) {
+		return rows
+	}
+	for _, row := range res.Tuples() {
+		item := Payments{}
+		rows = append(rows, *item.FromArray(row))
+	}
+	return rows
+}
+
+// FindArrOffsetLimit returns as slice of slice order by idx eg. .UniqueIndex*()
+func (p *Payments) FindArrOffsetLimit(offset, limit uint32, idx string) ([]A.X, Tt.QueryMeta) { //nolint:dupl false positive
+	var rows []A.X
+	res, err := p.Adapter.Select(p.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Payments.FindOffsetLimit failed: `+p.SpaceName()) {
+		return rows, Tt.QueryMetaFrom(res, err)
+	}
+	tuples := res.Tuples()
+	rows = make([]A.X, len(tuples))
+	for z, row := range tuples {
+		rows[z] = row
+	}
+	return rows, Tt.QueryMetaFrom(res, nil)
+}
+
+// Total count number of rows
+func (p *Payments) Total() int64 { //nolint:dupl false positive
+	rows := p.Adapter.CallBoxSpace(p.SpaceName()+`:count`, A.X{})
+	if len(rows) > 0 && len(rows[0]) > 0 {
+		return X.ToI(rows[0][0])
+	}
+	return 0
+}
+
+// PaymentsFieldTypeMap returns key value of field name and key
+var PaymentsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
+	`id`:            Tt.Unsigned,
+	`bookingId`:     Tt.Unsigned,
+	`paymentAt`:     Tt.String,
+	`paidIDR`:       Tt.Integer,
+	`paymentMethod`: Tt.String,
+	`paymentStatus`: Tt.String,
+	`note`:          Tt.String,
+	`createdAt`:     Tt.String,
+	`createdBy`:     Tt.Unsigned,
+	`updatedAt`:     Tt.String,
+	`updatedBy`:     Tt.Unsigned,
+	`deletedAt`:     Tt.String,
+	`deletedBy`:     Tt.Unsigned,
+	`restoredBy`:    Tt.Unsigned,
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
 // Rooms DAO reader/query struct
 type Rooms struct {
 	Adapter         *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
@@ -963,6 +1721,8 @@ type Rooms struct {
 	DeletedAt       int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
 	DeletedBy       uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
 	RestoredBy      uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+	BuildingId      uint64      `json:"buildingId,string" form:"buildingId" query:"buildingId" long:"buildingId" msg:"buildingId"`
+	LastUseAt       int64       `json:"lastUseAt" form:"lastUseAt" query:"lastUseAt" long:"lastUseAt" msg:"lastUseAt"`
 }
 
 // NewRooms create new ORM reader/query object
@@ -1012,6 +1772,8 @@ func (r *Rooms) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "deletedAt"
 	, "deletedBy"
 	, "restoredBy"
+	, "buildingId"
+	, "lastUseAt"
 	`
 }
 
@@ -1029,6 +1791,8 @@ func (r *Rooms) SqlSelectAllUncensoredFields() string { //nolint:dupl false posi
 	, "deletedAt"
 	, "deletedBy"
 	, "restoredBy"
+	, "buildingId"
+	, "lastUseAt"
 	`
 }
 
@@ -1047,6 +1811,8 @@ func (r *Rooms) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 9, r.DeletedAt},
 		A.X{`=`, 10, r.DeletedBy},
 		A.X{`=`, 11, r.RestoredBy},
+		A.X{`=`, 12, r.BuildingId},
+		A.X{`=`, 13, r.LastUseAt},
 	}
 }
 
@@ -1170,6 +1936,26 @@ func (r *Rooms) SqlRestoredBy() string { //nolint:dupl false positive
 	return `"restoredBy"`
 }
 
+// IdxBuildingId return name of the index
+func (r *Rooms) IdxBuildingId() int { //nolint:dupl false positive
+	return 12
+}
+
+// SqlBuildingId return name of the column being indexed
+func (r *Rooms) SqlBuildingId() string { //nolint:dupl false positive
+	return `"buildingId"`
+}
+
+// IdxLastUseAt return name of the index
+func (r *Rooms) IdxLastUseAt() int { //nolint:dupl false positive
+	return 13
+}
+
+// SqlLastUseAt return name of the column being indexed
+func (r *Rooms) SqlLastUseAt() string { //nolint:dupl false positive
+	return `"lastUseAt"`
+}
+
 // ToArray receiver fields to slice
 func (r *Rooms) ToArray() A.X { //nolint:dupl false positive
 	var id any = nil
@@ -1189,6 +1975,8 @@ func (r *Rooms) ToArray() A.X { //nolint:dupl false positive
 		r.DeletedAt,       // 9
 		r.DeletedBy,       // 10
 		r.RestoredBy,      // 11
+		r.BuildingId,      // 12
+		r.LastUseAt,       // 13
 	}
 }
 
@@ -1206,6 +1994,8 @@ func (r *Rooms) FromArray(a A.X) *Rooms { //nolint:dupl false positive
 	r.DeletedAt = X.ToI(a[9])
 	r.DeletedBy = X.ToU(a[10])
 	r.RestoredBy = X.ToU(a[11])
+	r.BuildingId = X.ToU(a[12])
+	r.LastUseAt = X.ToI(a[13])
 	return r
 }
 
@@ -1223,6 +2013,8 @@ func (r *Rooms) FromUncensoredArray(a A.X) *Rooms { //nolint:dupl false positive
 	r.DeletedAt = X.ToI(a[9])
 	r.DeletedBy = X.ToU(a[10])
 	r.RestoredBy = X.ToU(a[11])
+	r.BuildingId = X.ToU(a[12])
+	r.LastUseAt = X.ToI(a[13])
 	return r
 }
 
@@ -1278,6 +2070,8 @@ var RoomsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`deletedAt`:       Tt.Integer,
 	`deletedBy`:       Tt.Unsigned,
 	`restoredBy`:      Tt.Unsigned,
+	`buildingId`:      Tt.Unsigned,
+	`lastUseAt`:       Tt.Integer,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

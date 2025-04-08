@@ -169,9 +169,6 @@ func testDomain() (*Domain, func()) {
 		AuthOlap: testCh,
 
 		PropOltp: testTt,
-		PropOlap: testCh,
-
-		StorOltp: testTt,
 
 		Mailer:  xMailer.Mailer{SendMailFunc: testMailer.SendMailFunc},
 		IsBgSvc: false,

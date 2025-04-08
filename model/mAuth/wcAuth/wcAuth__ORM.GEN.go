@@ -200,6 +200,488 @@ func (s *SessionsMutator) SetAll(from rqAuth.Sessions, excludeMap, forceMap M.SB
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
 
+// TenantsMutator DAO writer/command struct
+type TenantsMutator struct {
+	rqAuth.Tenants
+	mutations []A.X
+	logs      []A.X
+}
+
+// NewTenantsMutator create new ORM writer/command object
+func NewTenantsMutator(adapter *Tt.Adapter) (res *TenantsMutator) {
+	res = &TenantsMutator{Tenants: rqAuth.Tenants{Adapter: adapter}}
+	return
+}
+
+// Logs get array of logs [field, old, new]
+func (t *TenantsMutator) Logs() []A.X { //nolint:dupl false positive
+	return t.logs
+}
+
+// HaveMutation check whether Set* methods ever called
+func (t *TenantsMutator) HaveMutation() bool { //nolint:dupl false positive
+	return len(t.mutations) > 0
+}
+
+// ClearMutations clear all previously called Set* methods
+func (t *TenantsMutator) ClearMutations() { //nolint:dupl false positive
+	t.mutations = []A.X{}
+	t.logs = []A.X{}
+}
+
+// DoOverwriteById update all columns, error if not exists, not using mutations/Set*
+func (t *TenantsMutator) DoOverwriteById() bool { //nolint:dupl false positive
+	_, err := t.Adapter.Update(t.SpaceName(), t.UniqueIndexId(), A.X{t.Id}, t.ToUpdateArray())
+	return !L.IsError(err, `Tenants.DoOverwriteById failed: `+t.SpaceName())
+}
+
+// DoUpdateById update only mutated fields, error if not exists, use Find* and Set* methods instead of direct assignment
+func (t *TenantsMutator) DoUpdateById() bool { //nolint:dupl false positive
+	if !t.HaveMutation() {
+		return true
+	}
+	_, err := t.Adapter.Update(t.SpaceName(), t.UniqueIndexId(), A.X{t.Id}, t.mutations)
+	return !L.IsError(err, `Tenants.DoUpdateById failed: `+t.SpaceName())
+}
+
+// DoDeletePermanentById permanent delete
+func (t *TenantsMutator) DoDeletePermanentById() bool { //nolint:dupl false positive
+	_, err := t.Adapter.Delete(t.SpaceName(), t.UniqueIndexId(), A.X{t.Id})
+	return !L.IsError(err, `Tenants.DoDeletePermanentById failed: `+t.SpaceName())
+}
+
+// func (t *TenantsMutator) DoUpsert() bool { //nolint:dupl false positive
+//	arr := t.ToArray()
+//	_, err := t.Adapter.Upsert(t.SpaceName(), arr, A.X{
+//		A.X{`=`, 0, t.Id},
+//		A.X{`=`, 1, t.TenantName},
+//		A.X{`=`, 2, t.KtpRegion},
+//		A.X{`=`, 3, t.KtpNumber},
+//		A.X{`=`, 4, t.KtpName},
+//		A.X{`=`, 5, t.KtpPlaceBirth},
+//		A.X{`=`, 6, t.KtpDateBirth},
+//		A.X{`=`, 7, t.KtpGender},
+//		A.X{`=`, 8, t.KtpAddress},
+//		A.X{`=`, 9, t.KtpRtRw},
+//		A.X{`=`, 10, t.KtpKelurahanDesa},
+//		A.X{`=`, 11, t.KtpKecamatan},
+//		A.X{`=`, 12, t.KtpReligion},
+//		A.X{`=`, 13, t.KtpMaritalStatus},
+//		A.X{`=`, 14, t.KtpCitizenship},
+//		A.X{`=`, 15, t.TelegramUsername},
+//		A.X{`=`, 16, t.WhatsappNumber},
+//		A.X{`=`, 17, t.CreatedAt},
+//		A.X{`=`, 18, t.CreatedBy},
+//		A.X{`=`, 19, t.UpdatedAt},
+//		A.X{`=`, 20, t.UpdatedBy},
+//		A.X{`=`, 21, t.DeletedAt},
+//		A.X{`=`, 22, t.DeletedBy},
+//		A.X{`=`, 23, t.RestoredBy},
+//	})
+//	return !L.IsError(err, `Tenants.DoUpsert failed: `+t.SpaceName()+ `\n%#v`, arr)
+// }
+
+// DoInsert insert, error if already exists
+func (t *TenantsMutator) DoInsert() bool { //nolint:dupl false positive
+	arr := t.ToArray()
+	row, err := t.Adapter.Insert(t.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			t.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `Tenants.DoInsert failed: `+t.SpaceName()+`\n%#v`, arr)
+}
+
+// DoUpsert upsert, insert or overwrite, will error only when there's unique secondary key being violated
+// replace = upsert, only error when there's unique secondary key
+// previous name: DoReplace
+func (t *TenantsMutator) DoUpsert() bool { //nolint:dupl false positive
+	arr := t.ToArray()
+	row, err := t.Adapter.Replace(t.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			t.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `Tenants.DoUpsert failed: `+t.SpaceName()+`\n%#v`, arr)
+}
+
+// SetId create mutations, should not duplicate
+func (t *TenantsMutator) SetId(val uint64) bool { //nolint:dupl false positive
+	if val != t.Id {
+		t.mutations = append(t.mutations, A.X{`=`, 0, val})
+		t.logs = append(t.logs, A.X{`id`, t.Id, val})
+		t.Id = val
+		return true
+	}
+	return false
+}
+
+// SetTenantName create mutations, should not duplicate
+func (t *TenantsMutator) SetTenantName(val string) bool { //nolint:dupl false positive
+	if val != t.TenantName {
+		t.mutations = append(t.mutations, A.X{`=`, 1, val})
+		t.logs = append(t.logs, A.X{`tenantName`, t.TenantName, val})
+		t.TenantName = val
+		return true
+	}
+	return false
+}
+
+// SetKtpRegion create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpRegion(val string) bool { //nolint:dupl false positive
+	if val != t.KtpRegion {
+		t.mutations = append(t.mutations, A.X{`=`, 2, val})
+		t.logs = append(t.logs, A.X{`ktpRegion`, t.KtpRegion, val})
+		t.KtpRegion = val
+		return true
+	}
+	return false
+}
+
+// SetKtpNumber create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpNumber(val string) bool { //nolint:dupl false positive
+	if val != t.KtpNumber {
+		t.mutations = append(t.mutations, A.X{`=`, 3, val})
+		t.logs = append(t.logs, A.X{`ktpNumber`, t.KtpNumber, val})
+		t.KtpNumber = val
+		return true
+	}
+	return false
+}
+
+// SetKtpName create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpName(val string) bool { //nolint:dupl false positive
+	if val != t.KtpName {
+		t.mutations = append(t.mutations, A.X{`=`, 4, val})
+		t.logs = append(t.logs, A.X{`ktpName`, t.KtpName, val})
+		t.KtpName = val
+		return true
+	}
+	return false
+}
+
+// SetKtpPlaceBirth create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpPlaceBirth(val string) bool { //nolint:dupl false positive
+	if val != t.KtpPlaceBirth {
+		t.mutations = append(t.mutations, A.X{`=`, 5, val})
+		t.logs = append(t.logs, A.X{`ktpPlaceBirth`, t.KtpPlaceBirth, val})
+		t.KtpPlaceBirth = val
+		return true
+	}
+	return false
+}
+
+// SetKtpDateBirth create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpDateBirth(val string) bool { //nolint:dupl false positive
+	if val != t.KtpDateBirth {
+		t.mutations = append(t.mutations, A.X{`=`, 6, val})
+		t.logs = append(t.logs, A.X{`ktpDateBirth`, t.KtpDateBirth, val})
+		t.KtpDateBirth = val
+		return true
+	}
+	return false
+}
+
+// SetKtpGender create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpGender(val string) bool { //nolint:dupl false positive
+	if val != t.KtpGender {
+		t.mutations = append(t.mutations, A.X{`=`, 7, val})
+		t.logs = append(t.logs, A.X{`ktpGender`, t.KtpGender, val})
+		t.KtpGender = val
+		return true
+	}
+	return false
+}
+
+// SetKtpAddress create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpAddress(val string) bool { //nolint:dupl false positive
+	if val != t.KtpAddress {
+		t.mutations = append(t.mutations, A.X{`=`, 8, val})
+		t.logs = append(t.logs, A.X{`ktpAddress`, t.KtpAddress, val})
+		t.KtpAddress = val
+		return true
+	}
+	return false
+}
+
+// SetKtpRtRw create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpRtRw(val string) bool { //nolint:dupl false positive
+	if val != t.KtpRtRw {
+		t.mutations = append(t.mutations, A.X{`=`, 9, val})
+		t.logs = append(t.logs, A.X{`ktpRtRw`, t.KtpRtRw, val})
+		t.KtpRtRw = val
+		return true
+	}
+	return false
+}
+
+// SetKtpKelurahanDesa create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpKelurahanDesa(val string) bool { //nolint:dupl false positive
+	if val != t.KtpKelurahanDesa {
+		t.mutations = append(t.mutations, A.X{`=`, 10, val})
+		t.logs = append(t.logs, A.X{`ktpKelurahanDesa`, t.KtpKelurahanDesa, val})
+		t.KtpKelurahanDesa = val
+		return true
+	}
+	return false
+}
+
+// SetKtpKecamatan create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpKecamatan(val string) bool { //nolint:dupl false positive
+	if val != t.KtpKecamatan {
+		t.mutations = append(t.mutations, A.X{`=`, 11, val})
+		t.logs = append(t.logs, A.X{`ktpKecamatan`, t.KtpKecamatan, val})
+		t.KtpKecamatan = val
+		return true
+	}
+	return false
+}
+
+// SetKtpReligion create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpReligion(val string) bool { //nolint:dupl false positive
+	if val != t.KtpReligion {
+		t.mutations = append(t.mutations, A.X{`=`, 12, val})
+		t.logs = append(t.logs, A.X{`ktpReligion`, t.KtpReligion, val})
+		t.KtpReligion = val
+		return true
+	}
+	return false
+}
+
+// SetKtpMaritalStatus create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpMaritalStatus(val string) bool { //nolint:dupl false positive
+	if val != t.KtpMaritalStatus {
+		t.mutations = append(t.mutations, A.X{`=`, 13, val})
+		t.logs = append(t.logs, A.X{`ktpMaritalStatus`, t.KtpMaritalStatus, val})
+		t.KtpMaritalStatus = val
+		return true
+	}
+	return false
+}
+
+// SetKtpCitizenship create mutations, should not duplicate
+func (t *TenantsMutator) SetKtpCitizenship(val string) bool { //nolint:dupl false positive
+	if val != t.KtpCitizenship {
+		t.mutations = append(t.mutations, A.X{`=`, 14, val})
+		t.logs = append(t.logs, A.X{`ktpCitizenship`, t.KtpCitizenship, val})
+		t.KtpCitizenship = val
+		return true
+	}
+	return false
+}
+
+// SetTelegramUsername create mutations, should not duplicate
+func (t *TenantsMutator) SetTelegramUsername(val string) bool { //nolint:dupl false positive
+	if val != t.TelegramUsername {
+		t.mutations = append(t.mutations, A.X{`=`, 15, val})
+		t.logs = append(t.logs, A.X{`telegramUsername`, t.TelegramUsername, val})
+		t.TelegramUsername = val
+		return true
+	}
+	return false
+}
+
+// SetWhatsappNumber create mutations, should not duplicate
+func (t *TenantsMutator) SetWhatsappNumber(val string) bool { //nolint:dupl false positive
+	if val != t.WhatsappNumber {
+		t.mutations = append(t.mutations, A.X{`=`, 16, val})
+		t.logs = append(t.logs, A.X{`whatsappNumber`, t.WhatsappNumber, val})
+		t.WhatsappNumber = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedAt create mutations, should not duplicate
+func (t *TenantsMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positive
+	if val != t.CreatedAt {
+		t.mutations = append(t.mutations, A.X{`=`, 17, val})
+		t.logs = append(t.logs, A.X{`createdAt`, t.CreatedAt, val})
+		t.CreatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedBy create mutations, should not duplicate
+func (t *TenantsMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != t.CreatedBy {
+		t.mutations = append(t.mutations, A.X{`=`, 18, val})
+		t.logs = append(t.logs, A.X{`createdBy`, t.CreatedBy, val})
+		t.CreatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedAt create mutations, should not duplicate
+func (t *TenantsMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positive
+	if val != t.UpdatedAt {
+		t.mutations = append(t.mutations, A.X{`=`, 19, val})
+		t.logs = append(t.logs, A.X{`updatedAt`, t.UpdatedAt, val})
+		t.UpdatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedBy create mutations, should not duplicate
+func (t *TenantsMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != t.UpdatedBy {
+		t.mutations = append(t.mutations, A.X{`=`, 20, val})
+		t.logs = append(t.logs, A.X{`updatedBy`, t.UpdatedBy, val})
+		t.UpdatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedAt create mutations, should not duplicate
+func (t *TenantsMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positive
+	if val != t.DeletedAt {
+		t.mutations = append(t.mutations, A.X{`=`, 21, val})
+		t.logs = append(t.logs, A.X{`deletedAt`, t.DeletedAt, val})
+		t.DeletedAt = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedBy create mutations, should not duplicate
+func (t *TenantsMutator) SetDeletedBy(val uint64) bool { //nolint:dupl false positive
+	if val != t.DeletedBy {
+		t.mutations = append(t.mutations, A.X{`=`, 22, val})
+		t.logs = append(t.logs, A.X{`deletedBy`, t.DeletedBy, val})
+		t.DeletedBy = val
+		return true
+	}
+	return false
+}
+
+// SetRestoredBy create mutations, should not duplicate
+func (t *TenantsMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false positive
+	if val != t.RestoredBy {
+		t.mutations = append(t.mutations, A.X{`=`, 23, val})
+		t.logs = append(t.logs, A.X{`restoredBy`, t.RestoredBy, val})
+		t.RestoredBy = val
+		return true
+	}
+	return false
+}
+
+// SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
+func (t *TenantsMutator) SetAll(from rqAuth.Tenants, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
+	if excludeMap == nil { // list of fields to exclude
+		excludeMap = M.SB{}
+	}
+	if forceMap == nil { // list of fields to force overwrite
+		forceMap = M.SB{}
+	}
+	if !excludeMap[`id`] && (forceMap[`id`] || from.Id != 0) {
+		t.Id = from.Id
+		changed = true
+	}
+	if !excludeMap[`tenantName`] && (forceMap[`tenantName`] || from.TenantName != ``) {
+		t.TenantName = S.Trim(from.TenantName)
+		changed = true
+	}
+	if !excludeMap[`ktpRegion`] && (forceMap[`ktpRegion`] || from.KtpRegion != ``) {
+		t.KtpRegion = S.Trim(from.KtpRegion)
+		changed = true
+	}
+	if !excludeMap[`ktpNumber`] && (forceMap[`ktpNumber`] || from.KtpNumber != ``) {
+		t.KtpNumber = S.Trim(from.KtpNumber)
+		changed = true
+	}
+	if !excludeMap[`ktpName`] && (forceMap[`ktpName`] || from.KtpName != ``) {
+		t.KtpName = S.Trim(from.KtpName)
+		changed = true
+	}
+	if !excludeMap[`ktpPlaceBirth`] && (forceMap[`ktpPlaceBirth`] || from.KtpPlaceBirth != ``) {
+		t.KtpPlaceBirth = S.Trim(from.KtpPlaceBirth)
+		changed = true
+	}
+	if !excludeMap[`ktpDateBirth`] && (forceMap[`ktpDateBirth`] || from.KtpDateBirth != ``) {
+		t.KtpDateBirth = S.Trim(from.KtpDateBirth)
+		changed = true
+	}
+	if !excludeMap[`ktpGender`] && (forceMap[`ktpGender`] || from.KtpGender != ``) {
+		t.KtpGender = S.Trim(from.KtpGender)
+		changed = true
+	}
+	if !excludeMap[`ktpAddress`] && (forceMap[`ktpAddress`] || from.KtpAddress != ``) {
+		t.KtpAddress = S.Trim(from.KtpAddress)
+		changed = true
+	}
+	if !excludeMap[`ktpRtRw`] && (forceMap[`ktpRtRw`] || from.KtpRtRw != ``) {
+		t.KtpRtRw = S.Trim(from.KtpRtRw)
+		changed = true
+	}
+	if !excludeMap[`ktpKelurahanDesa`] && (forceMap[`ktpKelurahanDesa`] || from.KtpKelurahanDesa != ``) {
+		t.KtpKelurahanDesa = S.Trim(from.KtpKelurahanDesa)
+		changed = true
+	}
+	if !excludeMap[`ktpKecamatan`] && (forceMap[`ktpKecamatan`] || from.KtpKecamatan != ``) {
+		t.KtpKecamatan = S.Trim(from.KtpKecamatan)
+		changed = true
+	}
+	if !excludeMap[`ktpReligion`] && (forceMap[`ktpReligion`] || from.KtpReligion != ``) {
+		t.KtpReligion = S.Trim(from.KtpReligion)
+		changed = true
+	}
+	if !excludeMap[`ktpMaritalStatus`] && (forceMap[`ktpMaritalStatus`] || from.KtpMaritalStatus != ``) {
+		t.KtpMaritalStatus = S.Trim(from.KtpMaritalStatus)
+		changed = true
+	}
+	if !excludeMap[`ktpCitizenship`] && (forceMap[`ktpCitizenship`] || from.KtpCitizenship != ``) {
+		t.KtpCitizenship = S.Trim(from.KtpCitizenship)
+		changed = true
+	}
+	if !excludeMap[`telegramUsername`] && (forceMap[`telegramUsername`] || from.TelegramUsername != ``) {
+		t.TelegramUsername = S.Trim(from.TelegramUsername)
+		changed = true
+	}
+	if !excludeMap[`whatsappNumber`] && (forceMap[`whatsappNumber`] || from.WhatsappNumber != ``) {
+		t.WhatsappNumber = S.Trim(from.WhatsappNumber)
+		changed = true
+	}
+	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {
+		t.CreatedAt = from.CreatedAt
+		changed = true
+	}
+	if !excludeMap[`createdBy`] && (forceMap[`createdBy`] || from.CreatedBy != 0) {
+		t.CreatedBy = from.CreatedBy
+		changed = true
+	}
+	if !excludeMap[`updatedAt`] && (forceMap[`updatedAt`] || from.UpdatedAt != 0) {
+		t.UpdatedAt = from.UpdatedAt
+		changed = true
+	}
+	if !excludeMap[`updatedBy`] && (forceMap[`updatedBy`] || from.UpdatedBy != 0) {
+		t.UpdatedBy = from.UpdatedBy
+		changed = true
+	}
+	if !excludeMap[`deletedAt`] && (forceMap[`deletedAt`] || from.DeletedAt != 0) {
+		t.DeletedAt = from.DeletedAt
+		changed = true
+	}
+	if !excludeMap[`deletedBy`] && (forceMap[`deletedBy`] || from.DeletedBy != 0) {
+		t.DeletedBy = from.DeletedBy
+		changed = true
+	}
+	if !excludeMap[`restoredBy`] && (forceMap[`restoredBy`] || from.RestoredBy != 0) {
+		t.RestoredBy = from.RestoredBy
+		changed = true
+	}
+	return
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
 // UsersMutator DAO writer/command struct
 type UsersMutator struct {
 	rqAuth.Users

@@ -241,6 +241,556 @@ var SessionsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
 
+// Tenants DAO reader/query struct
+type Tenants struct {
+	Adapter          *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id               uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	TenantName       string      `json:"tenantName" form:"tenantName" query:"tenantName" long:"tenantName" msg:"tenantName"`
+	KtpRegion        string      `json:"ktpRegion" form:"ktpRegion" query:"ktpRegion" long:"ktpRegion" msg:"ktpRegion"`
+	KtpNumber        string      `json:"ktpNumber" form:"ktpNumber" query:"ktpNumber" long:"ktpNumber" msg:"ktpNumber"`
+	KtpName          string      `json:"ktpName" form:"ktpName" query:"ktpName" long:"ktpName" msg:"ktpName"`
+	KtpPlaceBirth    string      `json:"ktpPlaceBirth" form:"ktpPlaceBirth" query:"ktpPlaceBirth" long:"ktpPlaceBirth" msg:"ktpPlaceBirth"`
+	KtpDateBirth     string      `json:"ktpDateBirth" form:"ktpDateBirth" query:"ktpDateBirth" long:"ktpDateBirth" msg:"ktpDateBirth"`
+	KtpGender        string      `json:"ktpGender" form:"ktpGender" query:"ktpGender" long:"ktpGender" msg:"ktpGender"`
+	KtpAddress       string      `json:"ktpAddress" form:"ktpAddress" query:"ktpAddress" long:"ktpAddress" msg:"ktpAddress"`
+	KtpRtRw          string      `json:"ktpRtRw" form:"ktpRtRw" query:"ktpRtRw" long:"ktpRtRw" msg:"ktpRtRw"`
+	KtpKelurahanDesa string      `json:"ktpKelurahanDesa" form:"ktpKelurahanDesa" query:"ktpKelurahanDesa" long:"ktpKelurahanDesa" msg:"ktpKelurahanDesa"`
+	KtpKecamatan     string      `json:"ktpKecamatan" form:"ktpKecamatan" query:"ktpKecamatan" long:"ktpKecamatan" msg:"ktpKecamatan"`
+	KtpReligion      string      `json:"ktpReligion" form:"ktpReligion" query:"ktpReligion" long:"ktpReligion" msg:"ktpReligion"`
+	KtpMaritalStatus string      `json:"ktpMaritalStatus" form:"ktpMaritalStatus" query:"ktpMaritalStatus" long:"ktpMaritalStatus" msg:"ktpMaritalStatus"`
+	KtpCitizenship   string      `json:"ktpCitizenship" form:"ktpCitizenship" query:"ktpCitizenship" long:"ktpCitizenship" msg:"ktpCitizenship"`
+	TelegramUsername string      `json:"telegramUsername" form:"telegramUsername" query:"telegramUsername" long:"telegramUsername" msg:"telegramUsername"`
+	WhatsappNumber   string      `json:"whatsappNumber" form:"whatsappNumber" query:"whatsappNumber" long:"whatsappNumber" msg:"whatsappNumber"`
+	CreatedAt        int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy        uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt        int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy        uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt        int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy        uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy       uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+}
+
+// NewTenants create new ORM reader/query object
+func NewTenants(adapter *Tt.Adapter) *Tenants {
+	return &Tenants{Adapter: adapter}
+}
+
+// SpaceName returns full package and table name
+func (t *Tenants) SpaceName() string { //nolint:dupl false positive
+	return string(mAuth.TableTenants) // casting required to string from Tt.TableName
+}
+
+// SqlTableName returns quoted table name
+func (t *Tenants) SqlTableName() string { //nolint:dupl false positive
+	return `"tenants"`
+}
+
+func (t *Tenants) UniqueIndexId() string { //nolint:dupl false positive
+	return `id`
+}
+
+// FindById Find one by Id
+func (t *Tenants) FindById() bool { //nolint:dupl false positive
+	res, err := t.Adapter.Select(t.SpaceName(), t.UniqueIndexId(), 0, 1, tarantool.IterEq, A.X{t.Id})
+	if L.IsError(err, `Tenants.FindById failed: `+t.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		t.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
+// SqlSelectAllFields generate Sql select fields
+func (t *Tenants) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "tenantName"
+	, "ktpRegion"
+	, "ktpNumber"
+	, "ktpName"
+	, "ktpPlaceBirth"
+	, "ktpDateBirth"
+	, "ktpGender"
+	, "ktpAddress"
+	, "ktpRtRw"
+	, "ktpKelurahanDesa"
+	, "ktpKecamatan"
+	, "ktpReligion"
+	, "ktpMaritalStatus"
+	, "ktpCitizenship"
+	, "telegramUsername"
+	, "whatsappNumber"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// SqlSelectAllUncensoredFields generate Sql select fields
+func (t *Tenants) SqlSelectAllUncensoredFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "tenantName"
+	, "ktpRegion"
+	, "ktpNumber"
+	, "ktpName"
+	, "ktpPlaceBirth"
+	, "ktpDateBirth"
+	, "ktpGender"
+	, "ktpAddress"
+	, "ktpRtRw"
+	, "ktpKelurahanDesa"
+	, "ktpKecamatan"
+	, "ktpReligion"
+	, "ktpMaritalStatus"
+	, "ktpCitizenship"
+	, "telegramUsername"
+	, "whatsappNumber"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// ToUpdateArray generate slice of update command
+func (t *Tenants) ToUpdateArray() A.X { //nolint:dupl false positive
+	return A.X{
+		A.X{`=`, 0, t.Id},
+		A.X{`=`, 1, t.TenantName},
+		A.X{`=`, 2, t.KtpRegion},
+		A.X{`=`, 3, t.KtpNumber},
+		A.X{`=`, 4, t.KtpName},
+		A.X{`=`, 5, t.KtpPlaceBirth},
+		A.X{`=`, 6, t.KtpDateBirth},
+		A.X{`=`, 7, t.KtpGender},
+		A.X{`=`, 8, t.KtpAddress},
+		A.X{`=`, 9, t.KtpRtRw},
+		A.X{`=`, 10, t.KtpKelurahanDesa},
+		A.X{`=`, 11, t.KtpKecamatan},
+		A.X{`=`, 12, t.KtpReligion},
+		A.X{`=`, 13, t.KtpMaritalStatus},
+		A.X{`=`, 14, t.KtpCitizenship},
+		A.X{`=`, 15, t.TelegramUsername},
+		A.X{`=`, 16, t.WhatsappNumber},
+		A.X{`=`, 17, t.CreatedAt},
+		A.X{`=`, 18, t.CreatedBy},
+		A.X{`=`, 19, t.UpdatedAt},
+		A.X{`=`, 20, t.UpdatedBy},
+		A.X{`=`, 21, t.DeletedAt},
+		A.X{`=`, 22, t.DeletedBy},
+		A.X{`=`, 23, t.RestoredBy},
+	}
+}
+
+// IdxId return name of the index
+func (t *Tenants) IdxId() int { //nolint:dupl false positive
+	return 0
+}
+
+// SqlId return name of the column being indexed
+func (t *Tenants) SqlId() string { //nolint:dupl false positive
+	return `"id"`
+}
+
+// IdxTenantName return name of the index
+func (t *Tenants) IdxTenantName() int { //nolint:dupl false positive
+	return 1
+}
+
+// SqlTenantName return name of the column being indexed
+func (t *Tenants) SqlTenantName() string { //nolint:dupl false positive
+	return `"tenantName"`
+}
+
+// IdxKtpRegion return name of the index
+func (t *Tenants) IdxKtpRegion() int { //nolint:dupl false positive
+	return 2
+}
+
+// SqlKtpRegion return name of the column being indexed
+func (t *Tenants) SqlKtpRegion() string { //nolint:dupl false positive
+	return `"ktpRegion"`
+}
+
+// IdxKtpNumber return name of the index
+func (t *Tenants) IdxKtpNumber() int { //nolint:dupl false positive
+	return 3
+}
+
+// SqlKtpNumber return name of the column being indexed
+func (t *Tenants) SqlKtpNumber() string { //nolint:dupl false positive
+	return `"ktpNumber"`
+}
+
+// IdxKtpName return name of the index
+func (t *Tenants) IdxKtpName() int { //nolint:dupl false positive
+	return 4
+}
+
+// SqlKtpName return name of the column being indexed
+func (t *Tenants) SqlKtpName() string { //nolint:dupl false positive
+	return `"ktpName"`
+}
+
+// IdxKtpPlaceBirth return name of the index
+func (t *Tenants) IdxKtpPlaceBirth() int { //nolint:dupl false positive
+	return 5
+}
+
+// SqlKtpPlaceBirth return name of the column being indexed
+func (t *Tenants) SqlKtpPlaceBirth() string { //nolint:dupl false positive
+	return `"ktpPlaceBirth"`
+}
+
+// IdxKtpDateBirth return name of the index
+func (t *Tenants) IdxKtpDateBirth() int { //nolint:dupl false positive
+	return 6
+}
+
+// SqlKtpDateBirth return name of the column being indexed
+func (t *Tenants) SqlKtpDateBirth() string { //nolint:dupl false positive
+	return `"ktpDateBirth"`
+}
+
+// IdxKtpGender return name of the index
+func (t *Tenants) IdxKtpGender() int { //nolint:dupl false positive
+	return 7
+}
+
+// SqlKtpGender return name of the column being indexed
+func (t *Tenants) SqlKtpGender() string { //nolint:dupl false positive
+	return `"ktpGender"`
+}
+
+// IdxKtpAddress return name of the index
+func (t *Tenants) IdxKtpAddress() int { //nolint:dupl false positive
+	return 8
+}
+
+// SqlKtpAddress return name of the column being indexed
+func (t *Tenants) SqlKtpAddress() string { //nolint:dupl false positive
+	return `"ktpAddress"`
+}
+
+// IdxKtpRtRw return name of the index
+func (t *Tenants) IdxKtpRtRw() int { //nolint:dupl false positive
+	return 9
+}
+
+// SqlKtpRtRw return name of the column being indexed
+func (t *Tenants) SqlKtpRtRw() string { //nolint:dupl false positive
+	return `"ktpRtRw"`
+}
+
+// IdxKtpKelurahanDesa return name of the index
+func (t *Tenants) IdxKtpKelurahanDesa() int { //nolint:dupl false positive
+	return 10
+}
+
+// SqlKtpKelurahanDesa return name of the column being indexed
+func (t *Tenants) SqlKtpKelurahanDesa() string { //nolint:dupl false positive
+	return `"ktpKelurahanDesa"`
+}
+
+// IdxKtpKecamatan return name of the index
+func (t *Tenants) IdxKtpKecamatan() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlKtpKecamatan return name of the column being indexed
+func (t *Tenants) SqlKtpKecamatan() string { //nolint:dupl false positive
+	return `"ktpKecamatan"`
+}
+
+// IdxKtpReligion return name of the index
+func (t *Tenants) IdxKtpReligion() int { //nolint:dupl false positive
+	return 12
+}
+
+// SqlKtpReligion return name of the column being indexed
+func (t *Tenants) SqlKtpReligion() string { //nolint:dupl false positive
+	return `"ktpReligion"`
+}
+
+// IdxKtpMaritalStatus return name of the index
+func (t *Tenants) IdxKtpMaritalStatus() int { //nolint:dupl false positive
+	return 13
+}
+
+// SqlKtpMaritalStatus return name of the column being indexed
+func (t *Tenants) SqlKtpMaritalStatus() string { //nolint:dupl false positive
+	return `"ktpMaritalStatus"`
+}
+
+// IdxKtpCitizenship return name of the index
+func (t *Tenants) IdxKtpCitizenship() int { //nolint:dupl false positive
+	return 14
+}
+
+// SqlKtpCitizenship return name of the column being indexed
+func (t *Tenants) SqlKtpCitizenship() string { //nolint:dupl false positive
+	return `"ktpCitizenship"`
+}
+
+// IdxTelegramUsername return name of the index
+func (t *Tenants) IdxTelegramUsername() int { //nolint:dupl false positive
+	return 15
+}
+
+// SqlTelegramUsername return name of the column being indexed
+func (t *Tenants) SqlTelegramUsername() string { //nolint:dupl false positive
+	return `"telegramUsername"`
+}
+
+// IdxWhatsappNumber return name of the index
+func (t *Tenants) IdxWhatsappNumber() int { //nolint:dupl false positive
+	return 16
+}
+
+// SqlWhatsappNumber return name of the column being indexed
+func (t *Tenants) SqlWhatsappNumber() string { //nolint:dupl false positive
+	return `"whatsappNumber"`
+}
+
+// IdxCreatedAt return name of the index
+func (t *Tenants) IdxCreatedAt() int { //nolint:dupl false positive
+	return 17
+}
+
+// SqlCreatedAt return name of the column being indexed
+func (t *Tenants) SqlCreatedAt() string { //nolint:dupl false positive
+	return `"createdAt"`
+}
+
+// IdxCreatedBy return name of the index
+func (t *Tenants) IdxCreatedBy() int { //nolint:dupl false positive
+	return 18
+}
+
+// SqlCreatedBy return name of the column being indexed
+func (t *Tenants) SqlCreatedBy() string { //nolint:dupl false positive
+	return `"createdBy"`
+}
+
+// IdxUpdatedAt return name of the index
+func (t *Tenants) IdxUpdatedAt() int { //nolint:dupl false positive
+	return 19
+}
+
+// SqlUpdatedAt return name of the column being indexed
+func (t *Tenants) SqlUpdatedAt() string { //nolint:dupl false positive
+	return `"updatedAt"`
+}
+
+// IdxUpdatedBy return name of the index
+func (t *Tenants) IdxUpdatedBy() int { //nolint:dupl false positive
+	return 20
+}
+
+// SqlUpdatedBy return name of the column being indexed
+func (t *Tenants) SqlUpdatedBy() string { //nolint:dupl false positive
+	return `"updatedBy"`
+}
+
+// IdxDeletedAt return name of the index
+func (t *Tenants) IdxDeletedAt() int { //nolint:dupl false positive
+	return 21
+}
+
+// SqlDeletedAt return name of the column being indexed
+func (t *Tenants) SqlDeletedAt() string { //nolint:dupl false positive
+	return `"deletedAt"`
+}
+
+// IdxDeletedBy return name of the index
+func (t *Tenants) IdxDeletedBy() int { //nolint:dupl false positive
+	return 22
+}
+
+// SqlDeletedBy return name of the column being indexed
+func (t *Tenants) SqlDeletedBy() string { //nolint:dupl false positive
+	return `"deletedBy"`
+}
+
+// IdxRestoredBy return name of the index
+func (t *Tenants) IdxRestoredBy() int { //nolint:dupl false positive
+	return 23
+}
+
+// SqlRestoredBy return name of the column being indexed
+func (t *Tenants) SqlRestoredBy() string { //nolint:dupl false positive
+	return `"restoredBy"`
+}
+
+// ToArray receiver fields to slice
+func (t *Tenants) ToArray() A.X { //nolint:dupl false positive
+	var id any = nil
+	if t.Id != 0 {
+		id = t.Id
+	}
+	return A.X{
+		id,
+		t.TenantName,       // 1
+		t.KtpRegion,        // 2
+		t.KtpNumber,        // 3
+		t.KtpName,          // 4
+		t.KtpPlaceBirth,    // 5
+		t.KtpDateBirth,     // 6
+		t.KtpGender,        // 7
+		t.KtpAddress,       // 8
+		t.KtpRtRw,          // 9
+		t.KtpKelurahanDesa, // 10
+		t.KtpKecamatan,     // 11
+		t.KtpReligion,      // 12
+		t.KtpMaritalStatus, // 13
+		t.KtpCitizenship,   // 14
+		t.TelegramUsername, // 15
+		t.WhatsappNumber,   // 16
+		t.CreatedAt,        // 17
+		t.CreatedBy,        // 18
+		t.UpdatedAt,        // 19
+		t.UpdatedBy,        // 20
+		t.DeletedAt,        // 21
+		t.DeletedBy,        // 22
+		t.RestoredBy,       // 23
+	}
+}
+
+// FromArray convert slice to receiver fields
+func (t *Tenants) FromArray(a A.X) *Tenants { //nolint:dupl false positive
+	t.Id = X.ToU(a[0])
+	t.TenantName = X.ToS(a[1])
+	t.KtpRegion = X.ToS(a[2])
+	t.KtpNumber = X.ToS(a[3])
+	t.KtpName = X.ToS(a[4])
+	t.KtpPlaceBirth = X.ToS(a[5])
+	t.KtpDateBirth = X.ToS(a[6])
+	t.KtpGender = X.ToS(a[7])
+	t.KtpAddress = X.ToS(a[8])
+	t.KtpRtRw = X.ToS(a[9])
+	t.KtpKelurahanDesa = X.ToS(a[10])
+	t.KtpKecamatan = X.ToS(a[11])
+	t.KtpReligion = X.ToS(a[12])
+	t.KtpMaritalStatus = X.ToS(a[13])
+	t.KtpCitizenship = X.ToS(a[14])
+	t.TelegramUsername = X.ToS(a[15])
+	t.WhatsappNumber = X.ToS(a[16])
+	t.CreatedAt = X.ToI(a[17])
+	t.CreatedBy = X.ToU(a[18])
+	t.UpdatedAt = X.ToI(a[19])
+	t.UpdatedBy = X.ToU(a[20])
+	t.DeletedAt = X.ToI(a[21])
+	t.DeletedBy = X.ToU(a[22])
+	t.RestoredBy = X.ToU(a[23])
+	return t
+}
+
+// FromUncensoredArray convert slice to receiver fields
+func (t *Tenants) FromUncensoredArray(a A.X) *Tenants { //nolint:dupl false positive
+	t.Id = X.ToU(a[0])
+	t.TenantName = X.ToS(a[1])
+	t.KtpRegion = X.ToS(a[2])
+	t.KtpNumber = X.ToS(a[3])
+	t.KtpName = X.ToS(a[4])
+	t.KtpPlaceBirth = X.ToS(a[5])
+	t.KtpDateBirth = X.ToS(a[6])
+	t.KtpGender = X.ToS(a[7])
+	t.KtpAddress = X.ToS(a[8])
+	t.KtpRtRw = X.ToS(a[9])
+	t.KtpKelurahanDesa = X.ToS(a[10])
+	t.KtpKecamatan = X.ToS(a[11])
+	t.KtpReligion = X.ToS(a[12])
+	t.KtpMaritalStatus = X.ToS(a[13])
+	t.KtpCitizenship = X.ToS(a[14])
+	t.TelegramUsername = X.ToS(a[15])
+	t.WhatsappNumber = X.ToS(a[16])
+	t.CreatedAt = X.ToI(a[17])
+	t.CreatedBy = X.ToU(a[18])
+	t.UpdatedAt = X.ToI(a[19])
+	t.UpdatedBy = X.ToU(a[20])
+	t.DeletedAt = X.ToI(a[21])
+	t.DeletedBy = X.ToU(a[22])
+	t.RestoredBy = X.ToU(a[23])
+	return t
+}
+
+// FindOffsetLimit returns slice of struct, order by idx, eg. .UniqueIndex*()
+func (t *Tenants) FindOffsetLimit(offset, limit uint32, idx string) []Tenants { //nolint:dupl false positive
+	var rows []Tenants
+	res, err := t.Adapter.Select(t.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Tenants.FindOffsetLimit failed: `+t.SpaceName()) {
+		return rows
+	}
+	for _, row := range res.Tuples() {
+		item := Tenants{}
+		rows = append(rows, *item.FromArray(row))
+	}
+	return rows
+}
+
+// FindArrOffsetLimit returns as slice of slice order by idx eg. .UniqueIndex*()
+func (t *Tenants) FindArrOffsetLimit(offset, limit uint32, idx string) ([]A.X, Tt.QueryMeta) { //nolint:dupl false positive
+	var rows []A.X
+	res, err := t.Adapter.Select(t.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Tenants.FindOffsetLimit failed: `+t.SpaceName()) {
+		return rows, Tt.QueryMetaFrom(res, err)
+	}
+	tuples := res.Tuples()
+	rows = make([]A.X, len(tuples))
+	for z, row := range tuples {
+		rows[z] = row
+	}
+	return rows, Tt.QueryMetaFrom(res, nil)
+}
+
+// Total count number of rows
+func (t *Tenants) Total() int64 { //nolint:dupl false positive
+	rows := t.Adapter.CallBoxSpace(t.SpaceName()+`:count`, A.X{})
+	if len(rows) > 0 && len(rows[0]) > 0 {
+		return X.ToI(rows[0][0])
+	}
+	return 0
+}
+
+// TenantsFieldTypeMap returns key value of field name and key
+var TenantsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
+	`id`:               Tt.Unsigned,
+	`tenantName`:       Tt.String,
+	`ktpRegion`:        Tt.String,
+	`ktpNumber`:        Tt.String,
+	`ktpName`:          Tt.String,
+	`ktpPlaceBirth`:    Tt.String,
+	`ktpDateBirth`:     Tt.String,
+	`ktpGender`:        Tt.String,
+	`ktpAddress`:       Tt.String,
+	`ktpRtRw`:          Tt.String,
+	`ktpKelurahanDesa`: Tt.String,
+	`ktpKecamatan`:     Tt.String,
+	`ktpReligion`:      Tt.String,
+	`ktpMaritalStatus`: Tt.String,
+	`ktpCitizenship`:   Tt.String,
+	`telegramUsername`: Tt.String,
+	`whatsappNumber`:   Tt.String,
+	`createdAt`:        Tt.Integer,
+	`createdBy`:        Tt.Unsigned,
+	`updatedAt`:        Tt.Integer,
+	`updatedBy`:        Tt.Unsigned,
+	`deletedAt`:        Tt.Integer,
+	`deletedBy`:        Tt.Unsigned,
+	`restoredBy`:       Tt.Unsigned,
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
 // Users DAO reader/query struct
 type Users struct {
 	Adapter       *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`

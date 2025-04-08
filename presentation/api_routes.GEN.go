@@ -60,6 +60,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// UserLocation
+	fw.Post("/"+domain.UserLocationAction, func(c *fiber.Ctx) error {
+		in := domain.UserLocationIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.UserLocationAction); err != nil {
+			return nil
+		}
+		out := d.UserLocation(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// UserLogout
 	fw.Post("/"+domain.UserLogoutAction, func(c *fiber.Ctx) error {
 		in := domain.UserLogoutIn{}
