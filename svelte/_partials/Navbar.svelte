@@ -1,6 +1,6 @@
 <script>
-  import { Icon } from '../../node_modules/svelte-icons-pack/dist';
-  import { RiUserFacesUserLine, RiCommunicationChatQuoteLine } from '../../node_modules/svelte-icons-pack/dist/ri';
+  import { Icon } from '../node_modules/svelte-icons-pack/dist';
+  import { RiUserFacesUserLine, RiCommunicationChatQuoteLine } from '../node_modules/svelte-icons-pack/dist/ri';
 
   export let username = /** @type {string} */ ('unknown');
 </script>
@@ -8,7 +8,7 @@
 <header>
   <div class="label">
     <a href="/" class="logo">
-      <h2>HapSTR</h2>
+      <h2>KostJC</h2>
     </a>
   </div>
   <div class="info">

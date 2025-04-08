@@ -3,7 +3,7 @@
   /** @typedef {import('../_types/masters.js').Access} Access */
 
   import { UserLogout } from '../jsApi.GEN';
-  import { notifier } from '../notifier';
+  import { notifier } from '../_components/xNotifier.js';
 
   export let access = /** @type {Access} */ ({});
 
@@ -24,10 +24,10 @@
       }
 
       notifier.showSuccess( 'Logged out' );
-      window.location = /** @type {Location | (string & Location)} */ ('/');
 
       return new Promise( resolve => {
         setTimeout( () => {
+          window.location.href = '/';
           resolve();
         }, 1000 );
       });
@@ -39,6 +39,7 @@
   <div class="container">
     <nav class="nav-menu">
       <a href="/" class:active={pathLv1 === ''}>Home</a>
+      <a href="/user/location" class:active={pathLv1 === 'location'}>Location</a>
     </nav>
     <span class="separator" />
     <nav class="nav-menu">

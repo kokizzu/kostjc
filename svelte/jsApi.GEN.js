@@ -252,6 +252,123 @@ exports.GuestVerifyEmail = async function GuestVerifyEmail( i, cb ) {
 }
 
 /**
+ * @typedef {Object} UserLocationIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} location.id
+ * @property {String} location.name
+ * @property {String} location.address
+ * @property {String} location.gmapLocation
+ * @property {number} location.createdAt
+ * @property {number} location.createdBy
+ * @property {number} location.updatedAt
+ * @property {number} location.updatedBy
+ * @property {number} location.deletedAt
+ * @property {number} location.deletedBy
+ * @property {number} location.restoredBy
+ */
+const UserLocationIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  location: { // rqProperty.Locations
+    id: 0, // uint64
+    name: '', // string
+    address: '', // string
+    gmapLocation: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Locations
+}
+/**
+ * @typedef {Object} UserLocationOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} location.id
+ * @property {String} location.name
+ * @property {String} location.address
+ * @property {String} location.gmapLocation
+ * @property {number} location.createdAt
+ * @property {number} location.createdBy
+ * @property {number} location.updatedAt
+ * @property {number} location.updatedBy
+ * @property {number} location.deletedAt
+ * @property {number} location.deletedBy
+ * @property {number} location.restoredBy
+ * @property {Object} locations
+ */
+const UserLocationOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  location: { // rqProperty.Locations
+    id: 0, // uint64
+    name: '', // string
+    address: '', // string
+    gmapLocation: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Locations
+  locations: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback UserLocationCallback
+ * @param {UserLocationOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {UserLocationIn} i
+ * @param {UserLocationCallback} cb
+ * @returns {Promise}
+ */
+exports.UserLocation = async function UserLocation( i, cb ) {
+  return await axios.post( '/user/location', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} UserLogoutIn
  */
 const UserLogoutIn = {

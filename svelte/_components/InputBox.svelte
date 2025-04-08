@@ -1,5 +1,5 @@
 <script>
-  /** @typedef {import('../_types/master').InputType} InputType */
+  /** @typedef {import('../_types/masters.js').InputType} InputType */
 
   import { onMount } from 'svelte';
   import { Icon } from '../node_modules/svelte-icons-pack/dist';

@@ -5,9 +5,10 @@
   import { onMount, tick } from 'svelte';
   import { GuestLogin, GuestRegister } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier.js';
-  import InputBox from './_components/InputBox.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { FaSolidCircleNotch } from './node_modules/svelte-icons-pack/dist/fa';
+  import InputBox from './_components/InputBox.svelte';
+  import LayoutMain from './_layouts/main.svelte';
 
   let title = '#{title}';
   let user  = /** @type {User} */ ({/* user */});
@@ -24,10 +25,10 @@
 
   let passInput = /** @type {HTMLInputElement} */ ({});
 
-  const ModeLogin = 'login';
-  const ModeRegister = 'register';
-  const ModeUser = 'user';
-  const ModeFgPassword = 'forgot_password';
+  const ModeLogin       = 'LOGIN';
+  const ModeRegister    = 'REGISTER';
+  const ModeUser        = 'USER';
+  const ModeFgPassword  = 'FORGOT_PASSWORD';
 
   let Mode = ModeLogin;
 
@@ -84,6 +85,7 @@
     }
 
     const i = {email, password};
+
     await GuestRegister( i, async function( /** @type any */ o ) {
       if( o.error ) {
         isSubmitting = false;
@@ -134,10 +136,10 @@
 <svelte:window on:hashchange={onHashChange}/>
 
 {#if Mode === ModeUser}
-  <div>
+  <LayoutMain access={segments} user={user}>
     <h1>Welcome {user.userName}</h1>
     <p>Access: {JSON.stringify(segments)}</p>
-  </div>
+  </LayoutMain>
 {:else}
 <section class="auth-section">
   <div class="main-container">
@@ -208,10 +210,10 @@
       {/if}
       <div class="foot-auth">
         {#if Mode!==ModeRegister}
-          <p>Have no account? <a href="#REGISTER" on:click={() => (Mode = ModeRegister)}>register</a></p>
+          <p>Have no account? <a href={`#${ModeRegister}`} on:click={() => (Mode = ModeRegister)}>register</a></p>
         {/if}
         {#if Mode!==ModeLogin}
-          <p>Already have account? <a href="#LOGIN" on:click={() => (Mode = ModeLogin)}>login</a></p>
+          <p>Already have account? <a href={`#${ModeLogin}`} on:click={() => (Mode = ModeLogin)}>login</a></p>
         {/if}
       </div>
     </div>
