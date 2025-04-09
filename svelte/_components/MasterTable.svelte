@@ -23,7 +23,7 @@
   } from '../node_modules/svelte-icons-pack/dist/cg';
   import InputBox from './InputBox.svelte';
   import { onMount } from 'svelte';
-  import { datetime } from './xformatter.js';
+  import { datetime } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
 
   export let FIELDS = /** @type Field[] */ ([]); // bind
@@ -220,7 +220,7 @@
     filterTable.Hide();
     // Make a 'filters' payload from variable filtersMap
     // Make it with format { key: [value, value] }
-    let filters = {};
+    let filters = /** @type {Record<string, string[]>} */ ({});
     for (let key in filtersMap) {
       let value = filtersMap[key];
       if (value) filters[key] = value.split('|');
@@ -335,12 +335,6 @@
             {/if}
           {/if}
         {/each}
-
-        {#if isCoordFieldsExist}
-          <div class="map_container">
-            <Map bind:this={mapElm} bind:Coord {OnClickMap} IsClickable IsDraggable />
-          </div>
-        {/if}
       </div>
       <div class="foot">
         <button class="ok" on:click={handleSubmitEdit}>Save</button>
@@ -349,11 +343,11 @@
   </div>
 {/if}
 
-<div class="table_root">
-  <div class="actions_container">
+<div class="table-root">
+  <div class="actions-container">
     <div class="left">
-      <div class="actions_btn">
-        <button class="action_btn" on:click={() => filterTable.Show()} title="filter table">
+      <div class="actions-button">
+        <button class="btn" on:click={() => filterTable.Show()} title="filter table">
           <Icon color="var(--gray-007)" size="16" src={RiSystemFilterLine} />
         </button>
         <!-- Action buttons -->
@@ -367,8 +361,8 @@
     </div>
     <div class="right">
       {#if CAN_SEARCH_ROW}
-        <div class="search_handler">
-          <button class="search_btn" title="Search">
+        <div class="search-handler">
+          <button class="search-btn" title="Search">
             <Icon color="var(--gray-007)" size="16" src={IoSearch} />
           </button>
           <input placeholder="Search..." type="text" name="searchRow" id="searchRow" class="search" />
@@ -606,11 +600,6 @@
     gap: 10px;
   }
 
-  .popup_container .popup .forms .map_container {
-    width: 100%;
-    height: 200px;
-  }
-
   .popup_container .popup .foot {
     display: flex;
     flex-direction: row;
@@ -654,7 +643,7 @@
     }
   }
 
-  :global(.action_btn:hover svg) {
+  :global(.action-btn:hover svg) {
     fill: var(--violet-005);
   }
 
@@ -680,7 +669,7 @@
     margin-bottom: -5px;
   }
 
-  .table_root {
+  .table-root {
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -688,19 +677,20 @@
     border: 1px solid var(--gray-003);
     padding: 0 0 20px 0;
     overflow: hidden;
+    font-size: var(--font-base);
   }
 
-  .table_root .text-violet {
+  .table-root .text-violet {
     color: var(--violet-005);
     font-weight: 600;
     padding: 5px;
   }
 
-  .table_root p {
+  .table-root p {
     margin: 0;
   }
 
-  .table_root .actions_container {
+  .table-root .actions-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -709,15 +699,15 @@
     background-color: #fff;
   }
 
-  .table_root .actions_container .left,
-  .table_root .actions_container .right {
+  .table-root .actions-container .left,
+  .table-root .actions-container .right {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
   }
 
-  .table_root .actions_container .left .debug .btn {
+  .table-root .actions-container .left .debug .btn {
     border: none;
     background-color: var(--violet-006);
     color: #fff;
@@ -732,11 +722,11 @@
     cursor: pointer;
   }
 
-  .table_root .actions_container .left .debug .btn:hover {
+  .table-root .actions-container .left .debug .btn:hover {
     background-color: var(--violet-005);
   }
 
-  .table_root .actions_container .right .search_handler {
+  .table-root .actions-container .right .search-handler {
     display: flex;
     flex-direction: row;
     width: fit-content;
@@ -744,7 +734,7 @@
     position: relative;
   }
 
-  .table_root .actions_container .right .search_handler input.search {
+  .table-root .actions-container .right .search-handler input.search {
     padding: 12px 40px 12px 15px;
     border-radius: 8px;
     border: none;
@@ -752,13 +742,13 @@
     width: 370px;
   }
 
-  .table_root .actions_container .right .search_handler input.search:focus {
+  .table-root .actions-container .right .search-handler input.search:focus {
     border-color: none;
     outline: 1px solid var(--gray-003);
     box-shadow: var(--shadow-md);
   }
 
-  .table_root .actions_container .right .search_handler .search_btn {
+  .table-root .actions-container .right .search-handler .search-btn {
     position: absolute;
     background-color: transparent;
     padding: 8px;
@@ -772,27 +762,28 @@
     top: 3px;
   }
 
-  .table_root .actions_container .right .search_handler .search_btn:hover {
+  .table-root .actions-container .right .search-handler .search-btn:hover {
     background-color: var(--violet-transparent);
   }
 
-  :global(.table_root .actions_container .right .search_handler .search_btn:hover svg) {
+  :global(.table-root .actions-container .right .search-handler .search-btn:hover svg) {
     fill: var(--violet-005);
   }
 
-  .table_root .actions_container .actions_btn {
+  .table-root .actions-container .actions-button {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 5px;
   }
 
-  .table_root .table_container {
+  .table-root .table_container {
     overflow-x: auto;
     scrollbar-color: var(--gray-003) transparent;
     scrollbar-width: thin;
   }
 
-  .table_root .table_container table {
+  .table-root .table_container table {
     width: 100%;
     background: #fff;
     border-top: 1px solid var(--gray-003);
@@ -802,14 +793,15 @@
     border-collapse: separate;
     border-spacing: 0;
     overflow: hidden;
+    font-size: var(--font-base);
   }
 
-  .table_root .table_container table thead {
+  .table-root .table_container table thead {
     box-shadow: none;
     border-bottom: 1px solid var(--gray-003);
   }
 
-  .table_root .table_container table thead tr th {
+  .table-root .table_container table thead tr th {
     padding: 12px;
 		background-color: var(--gray-001);
 		text-transform: capitalize;
@@ -820,83 +812,83 @@
     text-wrap: nowrap;
   }
 
-  .table_root .table_container table thead tr th.textarea,
-  .table_root .table_container table thead tr th.staff {
+  .table-root .table_container table thead tr th.textarea,
+  .table-root .table_container table thead tr th.staff {
     min-width: 280px !important;
   }
 
-  .table_root .table_container table thead tr th.datetime {
+  .table-root .table_container table thead tr th.datetime {
     min-width: 140px !important;
   }
 
-  .table_root .table_container table tbody tr.deleted {
+  .table-root .table_container table tbody tr.deleted {
     color: var(--red-005);
   }
 
-  .table_root .table_container table thead tr th.no {
+  .table-root .table_container table thead tr th.no {
     width: 30px;
   }
 
-  .table_root .table_container table thead tr th.a_row {
+  .table-root .table_container table thead tr th.a_row {
     max-width: fit-content;
     min-width: fit-content;
     width: fit-content;
   }
 
-  .table_root .table_container table thead tr th:last-child {
+  .table-root .table_container table thead tr th:last-child {
     border-right: none;
   }
 
-  .table_root .table_container table tbody tr td {
+  .table-root .table_container table tbody tr td {
     padding: 8px 12px;
   }
 
-	.table_root .table_container table tbody tr td {
+	.table-root .table_container table tbody tr td {
     padding: 8px 12px;
 		border-right: 1px solid var(--gray-004);
 		border-bottom: 1px solid var(--gray-004);
   }
 
-	.table_root .table_container table tbody tr:last-child td,
-	.table_root .table_container table tbody tr:last-child th {
+	.table-root .table_container table tbody tr:last-child td,
+	.table-root .table_container table tbody tr:last-child th {
 		border-bottom: none !important;
 	}
 
-  .table_root .table_container table tbody tr:last-child td:last-child {
+  .table-root .table_container table tbody tr:last-child td:last-child {
     border-right: none !important;
   }
 
-	.table_root .table_container table tbody tr td.num_row {
+	.table-root .table_container table tbody tr td.num_row {
 		border-right: 1px solid var(--gray-003);
 		font-weight: 600;
 		text-align: center;
 	}
 
-  .table_root .table_container table tbody tr:last-child td,
-  .table_root .table_container table tbody tr:last-child th {
+  .table-root .table_container table tbody tr:last-child td,
+  .table-root .table_container table tbody tr:last-child th {
     border-bottom: none !important;
   }
 
-  .table_root .table_container table tbody tr:last-child td:last-child {
+  .table-root .table_container table tbody tr:last-child td:last-child {
     border-right: none !important;
   }
 
-  .table_root .table_container table tbody tr td:last-child {
+  .table-root .table_container table tbody tr td:last-child {
     border-right: none !important;
   }
 
-  .table_root .table_container table tbody tr th {
+  .table-root .table_container table tbody tr th {
     text-align: center;
     border-right: 1px solid var(--gray-004);
     border-bottom: 1px solid var(--gray-004);
   }
 
-  .table_root .table_container table tbody tr td .actions {
+  .table-root .table_container table tbody tr td .actions {
     display: flex;
     flex-direction: row;
   }
 
-  .table_root .table_container table tbody tr td .actions .btn {
+  .table-root .table_container table tbody tr td .actions .btn {
     border: none;
     padding: 6px;
     border-radius: 8px;
@@ -907,15 +899,15 @@
     align-items: center;
   }
 
-  .table_root .table_container table tbody tr td .actions .btn:hover {
+  .table-root .table_container table tbody tr td .actions .btn:hover {
     background-color: var(--violet-transparent);
   }
 
-  :global(.table_root .table_container table tbody tr td .actions .btn:hover svg) {
+  :global(.table-root .table_container table tbody tr td .actions .btn:hover svg) {
     fill: var(--violet-005);
   }
 
-  .table_root .pagination_container {
+  .table-root .pagination_container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -923,20 +915,20 @@
     padding: 15px 15px 0 15px;
   }
 
-  .table_root .pagination_container .filter {
+  .table-root .pagination_container .filter {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
   }
 
-  .table_root .pagination_container .filter .row_to_show {
+  .table-root .pagination_container .filter .row_to_show {
     position: relative;
     width: fit-content;
     height: fit-content;
   }
 
-  .table_root .pagination_container .filter .row_to_show .btn {
+  .table-root .pagination_container .filter .row_to_show .btn {
     border: none;
     background-color: var(--violet-transparent);
     color: var(--violet-005);
@@ -953,11 +945,11 @@
     cursor: pointer;
   }
 
-  .table_root .pagination_container .filter .row_to_show .btn:hover {
+  .table-root .pagination_container .filter .row_to_show .btn:hover {
     background-color: var(--violet-002);
   }
 
-  .table_root .pagination_container .filter .row_to_show .rows {
+  .table-root .pagination_container .filter .row_to_show .rows {
     display: flex;
     flex-direction: column-reverse;
     position: absolute;
@@ -968,7 +960,7 @@
     background-color: #fff;
   }
 
-  .table_root .pagination_container .filter .row_to_show .rows button {
+  .table-root .pagination_container .filter .row_to_show .rows button {
     border: none;
     background-color: transparent;
     padding: 5px;
@@ -976,12 +968,12 @@
     color: var(--gray-007);
   }
 
-  .table_root .pagination_container .filter .row_to_show .rows button:hover {
+  .table-root .pagination_container .filter .row_to_show .rows button:hover {
     background-color: var(--violet-transparent);
     color: var(--violet-007);
   }
 
-  .table_root .pagination_container .pagination {
+  .table-root .pagination_container .pagination {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -989,7 +981,7 @@
     overflow: hidden;
   }
 
-  .table_root .pagination_container .pagination .btn {
+  .table-root .pagination_container .pagination .btn {
     border: none;
     background-color: transparent;
     display: flex;
@@ -1004,29 +996,29 @@
     border: 1px solid transparent;
   }
 
-  .table_root .pagination_container .pagination .btn:hover {
+  .table-root .pagination_container .pagination .btn:hover {
     border: 1px solid var(--gray-004);
   }
 
-  .table_root .pagination_container .pagination .btn.active {
+  .table-root .pagination_container .pagination .btn.active {
     background-color: var(--violet-transparent);
     color: var(--violet-006);
     font-weight: 600;
     border: 1px solid var(--violet-004);
   }
 
-  .table_root .pagination_container .pagination .btn.to {
+  .table-root .pagination_container .pagination .btn.to {
     background-color: var(--violet-006);
     color: #fff;
     font-weight: 600;
     border: none;
   }
 
-  .table_root .pagination_container .pagination .btn.to:hover {
+  .table-root .pagination_container .pagination .btn.to:hover {
     background-color: var(--violet-005);
   }
 
-  .table_root .pagination_container .pagination .btn.to:disabled {
+  .table-root .pagination_container .pagination .btn.to:disabled {
     background-color: var(--gray-002);
     color: var(--gray-006);
     font-weight: 600;
@@ -1035,25 +1027,25 @@
   }
 
   @media only screen and (max-width: 768px) {
-    .table_root .actions_container {
+    .table-root .actions-container {
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .table_root .actions_container .left {
+    .table-root .actions-container .left {
       flex-wrap: wrap;
     }
 
-    .table_root .table_container {
+    .table-root .table_container {
       overflow-x: scroll;
     }
 
-    .table_root .pagination_container {
+    .table-root .pagination_container {
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .table_root .pagination_container .pagination {
+    .table-root .pagination_container .pagination {
       gap: 2px;
     }
   }

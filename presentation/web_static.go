@@ -1,8 +1,6 @@
 package presentation
 
 import (
-	"fmt"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/kokizzu/gotro/M"
 
@@ -24,31 +22,22 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	})
 
 	fw.Get(`/`+domain.UserLocationAction, func(ctx *fiber.Ctx) error {
-		fmt.Println(`Here 1`)
 		var in domain.UserLocationIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserLocationAction)
-		fmt.Println(`Here 2`)
 		if err != nil {
-			fmt.Println(`Here 3`)
 			return err
 		}
 
-		fmt.Println(`Here 4`)
-
 		if notLogin(ctx, d, in.RequestCommon) {
-			fmt.Println(`Here 5`)
 			return ctx.Redirect(`/`, 302)
 		}
 
-		fmt.Println(`Here 6`)
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 
-		fmt.Println(`Here 7`)
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
 		out := d.UserLocation(&in)
 
-		fmt.Println(`Here 8`)
 		return views.RenderLocation(ctx, M.SX{
 			`title`:     `User Location`,
 			`user`:      user,

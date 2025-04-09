@@ -342,13 +342,13 @@
 
 
 <style>/* fakecss:./_components/InputBox.esbuild-svelte-fake-css */
-.show.svelte-2bfxz1.svelte-2bfxz1 {
+.show.svelte-axevbn.svelte-axevbn.svelte-axevbn {
   display: block;
 }
-.hidden.svelte-2bfxz1.svelte-2bfxz1 {
+.hidden.svelte-axevbn.svelte-axevbn.svelte-axevbn {
   display: none;
 }
-.input-box.svelte-2bfxz1.svelte-2bfxz1 {
+.input_box.svelte-axevbn.svelte-axevbn.svelte-axevbn {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -358,13 +358,13 @@
   flex-direction: column;
   gap: 5px;
 }
-.input-box.with-password.svelte-2bfxz1 input.svelte-2bfxz1 {
+.input_box.with_password.svelte-axevbn input.svelte-axevbn.svelte-axevbn {
   padding-right: 40px !important;
 }
-.input-box.bool.svelte-2bfxz1.svelte-2bfxz1 {
+.input_box.bool.svelte-axevbn.svelte-axevbn.svelte-axevbn {
   width: fit-content;
 }
-.input-box.svelte-2bfxz1 .label.svelte-2bfxz1 {
+.input_box.svelte-axevbn .label.svelte-axevbn.svelte-axevbn {
   font-size: var(--font-base);
   margin-left: 10px;
   overflow: hidden;
@@ -373,27 +373,25 @@
   -webkit-line-clamp: 1;
   line-clamp: 1;
 }
-.input-box.svelte-2bfxz1 input.svelte-2bfxz1,
-.input-box.svelte-2bfxz1 textarea.svelte-2bfxz1,
-.input-box.svelte-2bfxz1 select.svelte-2bfxz1 {
+.input_box.svelte-axevbn input.svelte-axevbn.svelte-axevbn,
+.input_box.svelte-axevbn textarea.svelte-axevbn.svelte-axevbn {
   width: 100%;
   border: 1px solid var(--gray-003);
-  border-radius: 8px;
+  border-radius: 5px;
   background-color: transparent;
-  padding: 12px 12px;
+  padding: 10px 12px;
 }
-.input-box.svelte-2bfxz1 input.svelte-2bfxz1:focus,
-.input-box.svelte-2bfxz1 textarea.svelte-2bfxz1:focus,
-.input-box.svelte-2bfxz1 select.svelte-2bfxz1:focus {
-  border-color: var(--orange-005);
-  outline: 1px solid var(--orange-005);
+.input_box.svelte-axevbn input.svelte-axevbn.svelte-axevbn:focus,
+.input_box.svelte-axevbn textarea.svelte-axevbn.svelte-axevbn:focus {
+  border-color: var(--sky-005);
+  outline: 1px solid var(--sky-005);
 }
-.color_box.svelte-2bfxz1.svelte-2bfxz1 {
+.color_box.svelte-axevbn.svelte-axevbn.svelte-axevbn {
   display: flex;
   flex-direction: column;
   justify-content: start;
 }
-.color-input.svelte-2bfxz1.svelte-2bfxz1 {
+.color-input.svelte-axevbn.svelte-axevbn.svelte-axevbn {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -404,21 +402,72 @@
   cursor: pointer;
   padding: 0 !important;
 }
-.color-input.svelte-2bfxz1.svelte-2bfxz1::-webkit-color-swatch {
+.color-input.svelte-axevbn.svelte-axevbn.svelte-axevbn::-webkit-color-swatch {
   border-radius: 5px;
   border: none;
 }
-.color-input.svelte-2bfxz1.svelte-2bfxz1::-moz-color-swatch {
+.color-input.svelte-axevbn.svelte-axevbn.svelte-axevbn::-moz-color-swatch {
   border-radius: 5px;
   border: none;
 }
-.input-box.svelte-2bfxz1 textarea.svelte-2bfxz1 {
+.input_box.svelte-axevbn textarea.svelte-axevbn.svelte-axevbn {
   resize: vertical;
   height: 90px;
   min-height: 50px;
   max-height: 300px;
 }
-.input-box.svelte-2bfxz1 .eye.svelte-2bfxz1 {
+.switcher.svelte-axevbn.svelte-axevbn.svelte-axevbn {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-left: 0 !important;
+}
+.switcher.svelte-axevbn input.svelte-axevbn.svelte-axevbn {
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.switcher.svelte-axevbn .slider.svelte-axevbn.svelte-axevbn {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-005);
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.switcher.svelte-axevbn .slider.svelte-axevbn.svelte-axevbn:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.switcher.svelte-axevbn input.svelte-axevbn:checked + .slider.svelte-axevbn {
+  background-color: var(--sky-006) !important;
+}
+.switcher.svelte-axevbn input.svelte-axevbn:focus + .slider.svelte-axevbn {
+  box-shadow: 0 0 1px var(--sky-006) !important;
+}
+.switcher.svelte-axevbn input.svelte-axevbn:checked + .slider.svelte-axevbn:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.switcher.svelte-axevbn .slider.svelte-axevbn.svelte-axevbn {
+  border-radius: 34px;
+}
+.switcher.svelte-axevbn .slider.svelte-axevbn.svelte-axevbn:before {
+  border-radius: 50%;
+}
+.input_box.svelte-axevbn .eye.svelte-axevbn.svelte-axevbn {
   position: absolute;
   height: fit-content;
   width: fit-content;
@@ -430,23 +479,106 @@
   border: none;
   cursor: pointer;
 }
-.input-box.svelte-2bfxz1 .eye.svelte-2bfxz1:focus {
-  border: none;
-  outline: none;
+.input_box .eye:hover svg {
+  fill: var(--blue-005);
 }
-.input-box .eye:hover svg {
-  fill: var(--orange-005);
-}
-.input_percentage.svelte-2bfxz1.svelte-2bfxz1 {
+.input_percentage.svelte-axevbn.svelte-axevbn.svelte-axevbn {
   display: flex;
   position: relative;
 }
-.input_percentage.svelte-2bfxz1 input.svelte-2bfxz1 {
+.input_percentage.svelte-axevbn input.svelte-axevbn.svelte-axevbn {
   padding-right: 30px !important;
+}
+.input_percentage.svelte-axevbn span.svelte-axevbn.svelte-axevbn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-weight: 700;
+}
+.input_box.svelte-axevbn .options_container.svelte-axevbn.svelte-axevbn {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.input_box.svelte-axevbn .options_container .input_container.svelte-axevbn.svelte-axevbn {
+  position: relative;
+  width: 100%;
+}
+.input_box.svelte-axevbn .options_container .input_container input.svelte-axevbn.svelte-axevbn {
+  padding-right: 30px !important;
+}
+.input_box.svelte-axevbn .options_container .input_container .arrow.svelte-axevbn.svelte-axevbn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 2px solid transparent;
+  cursor: pointer;
+  padding: 8px;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.input_box.svelte-axevbn .options_container .input_container .arrow.svelte-axevbn.svelte-axevbn:hover {
+  background-color: var(--gray-001);
+  border-top: 2px solid var(--gray-003);
+  border-bottom: 2px solid var(--gray-003);
+  border-left: 1px solid var(--gray-003);
+  border-right: 2px solid var(--gray-003);
+  padding: 12px;
+  outline: 1px solid var(--gray-003);
+}
+.input_box .options_container .input_container .arrow .dropdown {
+  transition: all .2s ease-in-out;
+}
+.input_box .options_container .input_container .arrow .rotate {
+  transition: all .2s ease-in-out;
+  transform: rotate(90deg);
+}
+.input_box.svelte-axevbn .options_container .options_list.svelte-axevbn.svelte-axevbn {
+  margin-top: 5px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #FFF;
+  border: 1px solid var(--gray-003);
+  border-radius: 8px;
+  height: fit-content;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1999;
+}
+.input_box.svelte-axevbn .options_container .options_list .option.svelte-axevbn.svelte-axevbn {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #FFF;
+  border: none;
+  height: fit-content;
+  width: 100%;
+  text-align: left;
+}
+.input_box.svelte-axevbn .options_container .options_list .option.svelte-axevbn.svelte-axevbn:hover {
+  background-color: var(--gray-002);
+}
+.input_box .options_container .options_list .option.active {
+  background-color: var(--gray-002) !important;
 }
 
 /* fakecss:./_partials/SideMenu.esbuild-svelte-fake-css */
-aside.svelte-1hfp3dx.svelte-1hfp3dx {
+aside.svelte-17p6uij.svelte-17p6uij {
   position: fixed;
   top: var(--navbar-height);
   left: 0;
@@ -455,14 +587,15 @@ aside.svelte-1hfp3dx.svelte-1hfp3dx {
   width: var(--sidemenu-width);
   border-right: 1px solid var(--gray-002);
   background-color: #FFF;
+  font-size: var(--font-md);
 }
-aside.svelte-1hfp3dx .separator.svelte-1hfp3dx {
+aside.svelte-17p6uij .separator.svelte-17p6uij {
   width: 80%;
   margin: auto;
   height: 1px;
   background-color: var(--gray-002);
 }
-aside.svelte-1hfp3dx .container.svelte-1hfp3dx {
+aside.svelte-17p6uij .container.svelte-17p6uij {
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -471,7 +604,7 @@ aside.svelte-1hfp3dx .container.svelte-1hfp3dx {
   width: 100%;
   margin: 0;
 }
-aside.svelte-1hfp3dx .container .nav-menu.svelte-1hfp3dx {
+aside.svelte-17p6uij .container .nav-menu.svelte-17p6uij {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -480,8 +613,8 @@ aside.svelte-1hfp3dx .container .nav-menu.svelte-1hfp3dx {
   width: 100%;
   margin: 0;
 }
-aside.svelte-1hfp3dx .container .nav-menu a.svelte-1hfp3dx,
-aside.svelte-1hfp3dx .container .nav-menu button.svelte-1hfp3dx {
+aside.svelte-17p6uij .container .nav-menu a.svelte-17p6uij,
+aside.svelte-17p6uij .container .nav-menu button.svelte-17p6uij {
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -490,20 +623,20 @@ aside.svelte-1hfp3dx .container .nav-menu button.svelte-1hfp3dx {
   padding: 10px 15px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 17px;
   color: var(--gray-008);
   border: none;
   background-color: transparent;
+  font-size: var(--font-md);
 }
-aside.svelte-1hfp3dx .container .nav-menu a.svelte-1hfp3dx:hover,
-aside.svelte-1hfp3dx .container .nav-menu button.svelte-1hfp3dx:hover {
+aside.svelte-17p6uij .container .nav-menu a.svelte-17p6uij:hover,
+aside.svelte-17p6uij .container .nav-menu button.svelte-17p6uij:hover {
   background-color: var(--gray-001);
 }
-aside.svelte-1hfp3dx .container .nav-menu a.active.svelte-1hfp3dx {
+aside.svelte-17p6uij .container .nav-menu a.active.svelte-17p6uij {
   background-color: var(--orange-transparent);
   color: var(--orange-007);
 }
-aside.svelte-1hfp3dx .container .nav-menu button.red.svelte-1hfp3dx:hover {
+aside.svelte-17p6uij .container .nav-menu button.red.svelte-17p6uij:hover {
   background-color: var(--red-transparent);
   color: var(--red-007);
 }
@@ -589,7 +722,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
 }
 
 /* fakecss:./_layouts/main.esbuild-svelte-fake-css */
-.root_layout.svelte-pbt6ik.svelte-pbt6ik {
+.root_layout.svelte-19mkv9n.svelte-19mkv9n {
   display: block;
   top: 0;
   bottom: 0;
@@ -598,12 +731,12 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   height: 100vh;
   width: 100vw;
 }
-.root_layout.svelte-pbt6ik .root_container.svelte-pbt6ik {
+.root_layout.svelte-19mkv9n .root_container.svelte-19mkv9n {
   height: 100%;
   width: 100%;
   display: flex;
 }
-.root_layout.svelte-pbt6ik .root_container .root_content.svelte-pbt6ik {
+.root_layout.svelte-19mkv9n .root_container .root_content.svelte-19mkv9n {
   display: flex;
   flex-direction: column;
   -webkit-box-orient: vertical;
@@ -618,7 +751,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   margin-bottom: 0;
   overflow: hidden;
 }
-.root_layout.svelte-pbt6ik .root_container .root_content .content.svelte-pbt6ik {
+.root_layout.svelte-19mkv9n .root_container .root_content .content.svelte-19mkv9n {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -626,6 +759,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   overflow-y: auto;
   padding: 0;
   margin: 0;
+  font-size: var(--font-base);
 }
 
 /* fakecss:./index.esbuild-svelte-fake-css */
@@ -3434,6 +3568,12 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     node.addEventListener(event, handler, options);
     return () => node.removeEventListener(event, handler, options);
   }
+  function prevent_default(fn) {
+    return function(event) {
+      event.preventDefault();
+      return fn.call(this, event);
+    };
+  }
   function attr(node, attribute, value) {
     if (value == null)
       node.removeAttribute(attribute);
@@ -3444,6 +3584,9 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     for (const key in attributes) {
       attr(node, key, attributes[key]);
     }
+  }
+  function to_number(value) {
+    return value === "" ? null : +value;
   }
   function children(element2) {
     return Array.from(element2.childNodes);
@@ -3457,22 +3600,6 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   }
   function set_input_value(input, value) {
     input.value = value == null ? "" : value;
-  }
-  function select_option(select, value, mounting) {
-    for (let i = 0; i < select.options.length; i += 1) {
-      const option = select.options[i];
-      if (option.__value === value) {
-        option.selected = true;
-        return;
-      }
-    }
-    if (!mounting || value !== void 0) {
-      select.selectedIndex = -1;
-    }
-  }
-  function select_value(select) {
-    const selected_option = select.querySelector(":checked");
-    return selected_option && selected_option.__value;
   }
   function toggle_class(element2, name, toggle) {
     element2.classList.toggle(name, !!toggle);
@@ -4291,19 +4418,34 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   var AiOutlineEyeInvisible = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2Q889.47 375.11 816.7 305l-50.88 50.88C807.31 395.53 843.45 447.4 874.7 512 791.5 684.2 673.4 766 512 766q-72.67 0-133.87-22.38L323 798.75Q408 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5zm-63.57-320.64L836 122.88a8 8 0 0 0-11.32 0L715.31 232.2Q624.86 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.69 119.4 136.5 191.41L112.48 835a8 8 0 0 0 0 11.31L155.17 889a8 8 0 0 0 11.31 0l712.15-712.12a8 8 0 0 0 0-11.32zM149.3 512C232.6 339.8 350.7 258 512 258c54.54 0 104.13 9.36 149.12 28.39l-70.3 70.3a176 176 0 0 0-238.13 238.13l-83.42 83.42C223.1 637.49 183.3 582.28 149.3 512zm246.7 0a112.11 112.11 0 0 1 146.2-106.69L401.31 546.2A112 112 0 0 1 396 512z"></path><path d="M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 0 0 227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 0 1-112 112z"></path>' };
   var AiOutlineEye = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path>' };
 
+  // _components/xGenerator.js
+  function RandString(length) {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters[randomIndex];
+    }
+    return result;
+  }
+
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
+  var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
+  var RiArrowsArrowRightSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path>' };
+
   // _components/InputBox.svelte
   function get_each_context_1(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[0] = list[i];
+    child_ctx[44] = list[i];
     return child_ctx;
   }
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[24] = list[i][0];
-    child_ctx[0] = list[i][1];
+    child_ctx[43] = list[i][0];
+    child_ctx[44] = list[i][1];
     return child_ctx;
   }
-  function create_else_block(ctx) {
+  function create_else_block_1(ctx) {
     let label_1;
     let t0;
     let t1;
@@ -4315,31 +4457,31 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         label_1 = element("label");
         t0 = text(
           /*label*/
-          ctx[3]
+          ctx[5]
         );
         t1 = space();
         input = element("input");
-        attr(label_1, "class", "label svelte-2bfxz1");
+        attr(label_1, "class", "label svelte-axevbn");
         attr(
           label_1,
           "for",
           /*id*/
-          ctx[2]
+          ctx[0]
         );
         attr(input, "type", "text");
         attr(
           input,
           "id",
           /*id*/
-          ctx[2]
+          ctx[0]
         );
         attr(
           input,
           "placeholder",
           /*placeholder*/
-          ctx[4]
+          ctx[6]
         );
-        attr(input, "class", "svelte-2bfxz1");
+        attr(input, "class", "svelte-axevbn");
       },
       m(target, anchor) {
         insert(target, label_1, anchor);
@@ -4349,60 +4491,60 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         set_input_value(
           input,
           /*value*/
-          ctx[0]
+          ctx[1]
         );
         if (!mounted) {
           dispose = listen(
             input,
             "input",
-            /*input_input_handler_7*/
-            ctx[23]
+            /*input_input_handler_11*/
+            ctx[40]
           );
           mounted = true;
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
+        if (dirty[0] & /*label*/
+        32)
           set_data(
             t0,
             /*label*/
-            ctx2[3]
+            ctx2[5]
           );
-        if (dirty & /*id*/
-        4) {
+        if (dirty[0] & /*id*/
+        1) {
           attr(
             label_1,
             "for",
             /*id*/
-            ctx2[2]
+            ctx2[0]
           );
         }
-        if (dirty & /*id*/
-        4) {
+        if (dirty[0] & /*id*/
+        1) {
           attr(
             input,
             "id",
             /*id*/
-            ctx2[2]
+            ctx2[0]
           );
         }
-        if (dirty & /*placeholder*/
-        16) {
+        if (dirty[0] & /*placeholder*/
+        64) {
           attr(
             input,
             "placeholder",
             /*placeholder*/
-            ctx2[4]
+            ctx2[6]
           );
         }
-        if (dirty & /*value, valuesArr*/
-        257 && input.value !== /*value*/
-        ctx2[0]) {
+        if (dirty[0] & /*value*/
+        2 && input.value !== /*value*/
+        ctx2[1]) {
           set_input_value(
             input,
             /*value*/
-            ctx2[0]
+            ctx2[1]
           );
         }
       },
@@ -4419,555 +4561,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       }
     };
   }
-  function create_if_block_12(ctx) {
-    let t;
-    let input;
-    let mounted;
-    let dispose;
-    let if_block = (
-      /*label*/
-      (ctx[3] || /*label*/
-      ctx[3] !== "") && create_if_block_13(ctx)
-    );
-    return {
-      c() {
-        if (if_block)
-          if_block.c();
-        t = space();
-        input = element("input");
-        attr(input, "type", "month");
-        attr(
-          input,
-          "id",
-          /*id*/
-          ctx[2]
-        );
-        attr(
-          input,
-          "placeholder",
-          /*placeholder*/
-          ctx[4]
-        );
-        attr(input, "class", "svelte-2bfxz1");
-      },
-      m(target, anchor) {
-        if (if_block)
-          if_block.m(target, anchor);
-        insert(target, t, anchor);
-        insert(target, input, anchor);
-        set_input_value(
-          input,
-          /*value*/
-          ctx[0]
-        );
-        if (!mounted) {
-          dispose = listen(
-            input,
-            "input",
-            /*input_input_handler_6*/
-            ctx[22]
-          );
-          mounted = true;
-        }
-      },
-      p(ctx2, dirty) {
-        if (
-          /*label*/
-          ctx2[3] || /*label*/
-          ctx2[3] !== ""
-        ) {
-          if (if_block) {
-            if_block.p(ctx2, dirty);
-          } else {
-            if_block = create_if_block_13(ctx2);
-            if_block.c();
-            if_block.m(t.parentNode, t);
-          }
-        } else if (if_block) {
-          if_block.d(1);
-          if_block = null;
-        }
-        if (dirty & /*id*/
-        4) {
-          attr(
-            input,
-            "id",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*placeholder*/
-        16) {
-          attr(
-            input,
-            "placeholder",
-            /*placeholder*/
-            ctx2[4]
-          );
-        }
-        if (dirty & /*value, valuesArr*/
-        257) {
-          set_input_value(
-            input,
-            /*value*/
-            ctx2[0]
-          );
-        }
-      },
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(t);
-          detach(input);
-        }
-        if (if_block)
-          if_block.d(detaching);
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function create_if_block_11(ctx) {
-    let label_1;
-    let t0;
-    let t1;
-    let input;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        label_1 = element("label");
-        t0 = text(
-          /*label*/
-          ctx[3]
-        );
-        t1 = space();
-        input = element("input");
-        attr(label_1, "class", "label svelte-2bfxz1");
-        attr(
-          label_1,
-          "for",
-          /*id*/
-          ctx[2]
-        );
-        attr(input, "type", "date");
-        attr(
-          input,
-          "id",
-          /*id*/
-          ctx[2]
-        );
-        attr(
-          input,
-          "placeholder",
-          /*placeholder*/
-          ctx[4]
-        );
-        attr(input, "class", "svelte-2bfxz1");
-      },
-      m(target, anchor) {
-        insert(target, label_1, anchor);
-        append(label_1, t0);
-        insert(target, t1, anchor);
-        insert(target, input, anchor);
-        set_input_value(
-          input,
-          /*value*/
-          ctx[0]
-        );
-        if (!mounted) {
-          dispose = listen(
-            input,
-            "input",
-            /*input_input_handler_5*/
-            ctx[21]
-          );
-          mounted = true;
-        }
-      },
-      p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
-          set_data(
-            t0,
-            /*label*/
-            ctx2[3]
-          );
-        if (dirty & /*id*/
-        4) {
-          attr(
-            label_1,
-            "for",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*id*/
-        4) {
-          attr(
-            input,
-            "id",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*placeholder*/
-        16) {
-          attr(
-            input,
-            "placeholder",
-            /*placeholder*/
-            ctx2[4]
-          );
-        }
-        if (dirty & /*value, valuesArr*/
-        257) {
-          set_input_value(
-            input,
-            /*value*/
-            ctx2[0]
-          );
-        }
-      },
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(label_1);
-          detach(t1);
-          detach(input);
-        }
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function create_if_block_10(ctx) {
-    let label_1;
-    let t0;
-    let t1;
-    let select;
-    let mounted;
-    let dispose;
-    let each_value_1 = ensure_array_like(
-      /*valuesArr*/
-      ctx[8]
-    );
-    let each_blocks = [];
-    for (let i = 0; i < each_value_1.length; i += 1) {
-      each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
-    }
-    return {
-      c() {
-        label_1 = element("label");
-        t0 = text(
-          /*label*/
-          ctx[3]
-        );
-        t1 = space();
-        select = element("select");
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          each_blocks[i].c();
-        }
-        attr(label_1, "class", "label svelte-2bfxz1");
-        attr(
-          label_1,
-          "for",
-          /*id*/
-          ctx[2]
-        );
-        attr(
-          select,
-          "id",
-          /*id*/
-          ctx[2]
-        );
-        attr(
-          select,
-          "placeholder",
-          /*placeholder*/
-          ctx[4]
-        );
-        attr(select, "class", "svelte-2bfxz1");
-        if (
-          /*value*/
-          ctx[0] === void 0
-        )
-          add_render_callback(() => (
-            /*select_change_handler_1*/
-            ctx[20].call(select)
-          ));
-      },
-      m(target, anchor) {
-        insert(target, label_1, anchor);
-        append(label_1, t0);
-        insert(target, t1, anchor);
-        insert(target, select, anchor);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          if (each_blocks[i]) {
-            each_blocks[i].m(select, null);
-          }
-        }
-        select_option(
-          select,
-          /*value*/
-          ctx[0],
-          true
-        );
-        if (!mounted) {
-          dispose = listen(
-            select,
-            "change",
-            /*select_change_handler_1*/
-            ctx[20]
-          );
-          mounted = true;
-        }
-      },
-      p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
-          set_data(
-            t0,
-            /*label*/
-            ctx2[3]
-          );
-        if (dirty & /*id*/
-        4) {
-          attr(
-            label_1,
-            "for",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*valuesArr*/
-        256) {
-          each_value_1 = ensure_array_like(
-            /*valuesArr*/
-            ctx2[8]
-          );
-          let i;
-          for (i = 0; i < each_value_1.length; i += 1) {
-            const child_ctx = get_each_context_1(ctx2, each_value_1, i);
-            if (each_blocks[i]) {
-              each_blocks[i].p(child_ctx, dirty);
-            } else {
-              each_blocks[i] = create_each_block_1(child_ctx);
-              each_blocks[i].c();
-              each_blocks[i].m(select, null);
-            }
-          }
-          for (; i < each_blocks.length; i += 1) {
-            each_blocks[i].d(1);
-          }
-          each_blocks.length = each_value_1.length;
-        }
-        if (dirty & /*id*/
-        4) {
-          attr(
-            select,
-            "id",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*placeholder*/
-        16) {
-          attr(
-            select,
-            "placeholder",
-            /*placeholder*/
-            ctx2[4]
-          );
-        }
-        if (dirty & /*value, valuesArr*/
-        257) {
-          select_option(
-            select,
-            /*value*/
-            ctx2[0]
-          );
-        }
-      },
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(label_1);
-          detach(t1);
-          detach(select);
-        }
-        destroy_each(each_blocks, detaching);
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function create_if_block_9(ctx) {
-    let label_1;
-    let t0;
-    let t1;
-    let select;
-    let mounted;
-    let dispose;
-    let each_value = ensure_array_like(Object.entries(
-      /*valuesObj*/
-      ctx[7]
-    ));
-    let each_blocks = [];
-    for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
-    }
-    return {
-      c() {
-        label_1 = element("label");
-        t0 = text(
-          /*label*/
-          ctx[3]
-        );
-        t1 = space();
-        select = element("select");
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          each_blocks[i].c();
-        }
-        attr(label_1, "class", "label svelte-2bfxz1");
-        attr(
-          label_1,
-          "for",
-          /*id*/
-          ctx[2]
-        );
-        attr(
-          select,
-          "id",
-          /*id*/
-          ctx[2]
-        );
-        attr(
-          select,
-          "placeholder",
-          /*placeholder*/
-          ctx[4]
-        );
-        attr(select, "class", "svelte-2bfxz1");
-        if (
-          /*value*/
-          ctx[0] === void 0
-        )
-          add_render_callback(() => (
-            /*select_change_handler*/
-            ctx[19].call(select)
-          ));
-      },
-      m(target, anchor) {
-        insert(target, label_1, anchor);
-        append(label_1, t0);
-        insert(target, t1, anchor);
-        insert(target, select, anchor);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          if (each_blocks[i]) {
-            each_blocks[i].m(select, null);
-          }
-        }
-        select_option(
-          select,
-          /*value*/
-          ctx[0],
-          true
-        );
-        if (!mounted) {
-          dispose = listen(
-            select,
-            "change",
-            /*select_change_handler*/
-            ctx[19]
-          );
-          mounted = true;
-        }
-      },
-      p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
-          set_data(
-            t0,
-            /*label*/
-            ctx2[3]
-          );
-        if (dirty & /*id*/
-        4) {
-          attr(
-            label_1,
-            "for",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*Object, valuesObj*/
-        128) {
-          each_value = ensure_array_like(Object.entries(
-            /*valuesObj*/
-            ctx2[7]
-          ));
-          let i;
-          for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context(ctx2, each_value, i);
-            if (each_blocks[i]) {
-              each_blocks[i].p(child_ctx, dirty);
-            } else {
-              each_blocks[i] = create_each_block(child_ctx);
-              each_blocks[i].c();
-              each_blocks[i].m(select, null);
-            }
-          }
-          for (; i < each_blocks.length; i += 1) {
-            each_blocks[i].d(1);
-          }
-          each_blocks.length = each_value.length;
-        }
-        if (dirty & /*id*/
-        4) {
-          attr(
-            select,
-            "id",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*placeholder*/
-        16) {
-          attr(
-            select,
-            "placeholder",
-            /*placeholder*/
-            ctx2[4]
-          );
-        }
-        if (dirty & /*value, valuesArr*/
-        257) {
-          select_option(
-            select,
-            /*value*/
-            ctx2[0]
-          );
-        }
-      },
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(label_1);
-          detach(t1);
-          detach(select);
-        }
-        destroy_each(each_blocks, detaching);
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function create_if_block_8(ctx) {
+  function create_if_block_15(ctx) {
     let label_1;
     let t0;
     let t1;
@@ -4980,27 +4574,27 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         label_1 = element("label");
         t0 = text(
           /*label*/
-          ctx[3]
+          ctx[5]
         );
         t1 = space();
         div = element("div");
         input = element("input");
-        attr(label_1, "class", "label svelte-2bfxz1");
+        attr(label_1, "class", "label svelte-axevbn");
         attr(
           label_1,
           "for",
           /*id*/
-          ctx[2]
+          ctx[0]
         );
         attr(input, "type", "color");
         attr(
           input,
           "id",
           /*id*/
-          ctx[2]
+          ctx[0]
         );
-        attr(input, "class", "color-input svelte-2bfxz1");
-        attr(div, "class", "color_box svelte-2bfxz1");
+        attr(input, "class", "color-input svelte-axevbn");
+        attr(div, "class", "color_box svelte-axevbn");
       },
       m(target, anchor) {
         insert(target, label_1, anchor);
@@ -5011,50 +4605,50 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         set_input_value(
           input,
           /*value*/
-          ctx[0]
+          ctx[1]
         );
         if (!mounted) {
           dispose = listen(
             input,
             "input",
-            /*input_input_handler_4*/
-            ctx[18]
+            /*input_input_handler_10*/
+            ctx[39]
           );
           mounted = true;
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
+        if (dirty[0] & /*label*/
+        32)
           set_data(
             t0,
             /*label*/
-            ctx2[3]
+            ctx2[5]
           );
-        if (dirty & /*id*/
-        4) {
+        if (dirty[0] & /*id*/
+        1) {
           attr(
             label_1,
             "for",
             /*id*/
-            ctx2[2]
+            ctx2[0]
           );
         }
-        if (dirty & /*id*/
-        4) {
+        if (dirty[0] & /*id*/
+        1) {
           attr(
             input,
             "id",
             /*id*/
-            ctx2[2]
+            ctx2[0]
           );
         }
-        if (dirty & /*value, valuesArr*/
-        257) {
+        if (dirty[0] & /*value*/
+        2) {
           set_input_value(
             input,
             /*value*/
-            ctx2[0]
+            ctx2[1]
           );
         }
       },
@@ -5071,7 +4665,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       }
     };
   }
-  function create_if_block_4(ctx) {
+  function create_if_block_11(ctx) {
     let label_1;
     let t0;
     let t1;
@@ -5083,14 +4677,14 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     let dispose;
     let if_block = (
       /*type*/
-      ctx[5] === "password" && create_if_block_5(ctx)
+      ctx[3] === "password" && create_if_block_12(ctx)
     );
     return {
       c() {
         label_1 = element("label");
         t0 = text(
           /*label*/
-          ctx[3]
+          ctx[5]
         );
         t1 = space();
         input = element("input");
@@ -5098,26 +4692,26 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         if (if_block)
           if_block.c();
         if_block_anchor = empty();
-        attr(label_1, "class", "label svelte-2bfxz1");
+        attr(label_1, "class", "label svelte-axevbn");
         attr(
           label_1,
           "for",
           /*id*/
-          ctx[2]
+          ctx[0]
         );
         attr(
           input,
           "id",
           /*id*/
-          ctx[2]
+          ctx[0]
         );
         attr(
           input,
           "placeholder",
           /*placeholder*/
-          ctx[4]
+          ctx[6]
         );
-        attr(input, "class", "svelte-2bfxz1");
+        attr(input, "class", "svelte-axevbn");
       },
       m(target, anchor) {
         insert(target, label_1, anchor);
@@ -5127,9 +4721,9 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         set_input_value(
           input,
           /*value*/
-          ctx[0]
+          ctx[1]
         );
-        ctx[17](input);
+        ctx[38](input);
         insert(target, t2, anchor);
         if (if_block)
           if_block.m(target, anchor);
@@ -5139,68 +4733,68 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           dispose = listen(
             input,
             "input",
-            /*input_input_handler_3*/
-            ctx[16]
+            /*input_input_handler_9*/
+            ctx[37]
           );
           mounted = true;
         }
       },
       p(ctx2, dirty) {
-        if (!current || dirty & /*label*/
-        8)
+        if (!current || dirty[0] & /*label*/
+        32)
           set_data(
             t0,
             /*label*/
-            ctx2[3]
+            ctx2[5]
           );
-        if (!current || dirty & /*id*/
-        4) {
+        if (!current || dirty[0] & /*id*/
+        1) {
           attr(
             label_1,
             "for",
             /*id*/
-            ctx2[2]
+            ctx2[0]
           );
         }
-        if (!current || dirty & /*id*/
-        4) {
+        if (!current || dirty[0] & /*id*/
+        1) {
           attr(
             input,
             "id",
             /*id*/
-            ctx2[2]
+            ctx2[0]
           );
         }
-        if (!current || dirty & /*placeholder*/
-        16) {
+        if (!current || dirty[0] & /*placeholder*/
+        64) {
           attr(
             input,
             "placeholder",
             /*placeholder*/
-            ctx2[4]
+            ctx2[6]
           );
         }
-        if (dirty & /*value, valuesArr*/
-        257 && input.value !== /*value*/
-        ctx2[0]) {
+        if (dirty[0] & /*value*/
+        2 && input.value !== /*value*/
+        ctx2[1]) {
           set_input_value(
             input,
             /*value*/
-            ctx2[0]
+            ctx2[1]
           );
         }
         if (
           /*type*/
-          ctx2[5] === "password"
+          ctx2[3] === "password"
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
-            if (dirty & /*type*/
-            32) {
+            if (dirty[0] & /*type*/
+            8) {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_5(ctx2);
+            if_block = create_if_block_12(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -5231,9 +4825,830 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           detach(t2);
           detach(if_block_anchor);
         }
-        ctx[17](null);
+        ctx[38](null);
         if (if_block)
           if_block.d(detaching);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block_10(ctx) {
+    let label_1;
+    let t0;
+    let t1;
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[5]
+        );
+        t1 = space();
+        input = element("input");
+        attr(label_1, "class", "label svelte-axevbn");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+        attr(input, "type", "date");
+        attr(
+          input,
+          "id",
+          /*id*/
+          ctx[0]
+        );
+        attr(
+          input,
+          "placeholder",
+          /*placeholder*/
+          ctx[6]
+        );
+        attr(input, "class", "svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*value*/
+          ctx[1]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_8*/
+            ctx[36]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*label*/
+        32)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[5]
+          );
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            input,
+            "id",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*placeholder*/
+        64) {
+          attr(
+            input,
+            "placeholder",
+            /*placeholder*/
+            ctx2[6]
+          );
+        }
+        if (dirty[0] & /*value*/
+        2) {
+          set_input_value(
+            input,
+            /*value*/
+            ctx2[1]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(label_1);
+          detach(t1);
+          detach(input);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block_9(ctx) {
+    let label_1;
+    let t0;
+    let t1;
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[5]
+        );
+        t1 = space();
+        input = element("input");
+        attr(label_1, "class", "label svelte-axevbn");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+        attr(input, "type", "email");
+        attr(
+          input,
+          "id",
+          /*id*/
+          ctx[0]
+        );
+        attr(
+          input,
+          "placeholder",
+          /*placeholder*/
+          ctx[6]
+        );
+        attr(input, "class", "svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*value*/
+          ctx[1]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_7*/
+            ctx[35]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*label*/
+        32)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[5]
+          );
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            input,
+            "id",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*placeholder*/
+        64) {
+          attr(
+            input,
+            "placeholder",
+            /*placeholder*/
+            ctx2[6]
+          );
+        }
+        if (dirty[0] & /*value*/
+        2 && input.value !== /*value*/
+        ctx2[1]) {
+          set_input_value(
+            input,
+            /*value*/
+            ctx2[1]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(label_1);
+          detach(t1);
+          detach(input);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block_8(ctx) {
+    let label_1;
+    let t0;
+    let t1;
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[5]
+        );
+        t1 = space();
+        input = element("input");
+        attr(label_1, "class", "label svelte-axevbn");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+        attr(input, "type", "text");
+        attr(
+          input,
+          "id",
+          /*id*/
+          ctx[0]
+        );
+        attr(
+          input,
+          "placeholder",
+          /*placeholder*/
+          ctx[6]
+        );
+        attr(input, "autocomplete", "off");
+        attr(input, "class", "svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*value*/
+          ctx[1]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_6*/
+            ctx[34]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*label*/
+        32)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[5]
+          );
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            input,
+            "id",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*placeholder*/
+        64) {
+          attr(
+            input,
+            "placeholder",
+            /*placeholder*/
+            ctx2[6]
+          );
+        }
+        if (dirty[0] & /*value*/
+        2 && input.value !== /*value*/
+        ctx2[1]) {
+          set_input_value(
+            input,
+            /*value*/
+            ctx2[1]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(label_1);
+          detach(t1);
+          detach(input);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block_7(ctx) {
+    let label_1;
+    let t0;
+    let t1;
+    let textarea;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[5]
+        );
+        t1 = space();
+        textarea = element("textarea");
+        attr(label_1, "class", "label svelte-axevbn");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+        attr(
+          textarea,
+          "id",
+          /*id*/
+          ctx[0]
+        );
+        attr(
+          textarea,
+          "placeholder",
+          /*placeholder*/
+          ctx[6]
+        );
+        attr(textarea, "class", "svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
+        insert(target, textarea, anchor);
+        set_input_value(
+          textarea,
+          /*value*/
+          ctx[1]
+        );
+        if (!mounted) {
+          dispose = listen(
+            textarea,
+            "input",
+            /*textarea_input_handler*/
+            ctx[33]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*label*/
+        32)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[5]
+          );
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            textarea,
+            "id",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*placeholder*/
+        64) {
+          attr(
+            textarea,
+            "placeholder",
+            /*placeholder*/
+            ctx2[6]
+          );
+        }
+        if (dirty[0] & /*value*/
+        2) {
+          set_input_value(
+            textarea,
+            /*value*/
+            ctx2[1]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(label_1);
+          detach(t1);
+          detach(textarea);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block_6(ctx) {
+    let label_1;
+    let t0;
+    let t1;
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[5]
+        );
+        t1 = space();
+        input = element("input");
+        attr(label_1, "class", "label svelte-axevbn");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+        attr(input, "type", "number");
+        attr(
+          input,
+          "id",
+          /*id*/
+          ctx[0]
+        );
+        attr(
+          input,
+          "placeholder",
+          /*placeholder*/
+          ctx[6]
+        );
+        attr(input, "class", "svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*value*/
+          ctx[1]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_5*/
+            ctx[32]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*label*/
+        32)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[5]
+          );
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            input,
+            "id",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*placeholder*/
+        64) {
+          attr(
+            input,
+            "placeholder",
+            /*placeholder*/
+            ctx2[6]
+          );
+        }
+        if (dirty[0] & /*value*/
+        2 && to_number(input.value) !== /*value*/
+        ctx2[1]) {
+          set_input_value(
+            input,
+            /*value*/
+            ctx2[1]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(label_1);
+          detach(t1);
+          detach(input);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block_5(ctx) {
+    let label_1;
+    let t0;
+    let t1;
+    let div;
+    let input;
+    let t2;
+    let span;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[5]
+        );
+        t1 = space();
+        div = element("div");
+        input = element("input");
+        t2 = space();
+        span = element("span");
+        span.textContent = "%";
+        attr(label_1, "class", "label svelte-axevbn");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+        attr(input, "type", "number");
+        attr(
+          input,
+          "id",
+          /*id*/
+          ctx[0]
+        );
+        attr(
+          input,
+          "placeholder",
+          /*placeholder*/
+          ctx[6]
+        );
+        attr(input, "class", "svelte-axevbn");
+        attr(span, "class", "svelte-axevbn");
+        attr(div, "class", "input_percentage svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
+        insert(target, div, anchor);
+        append(div, input);
+        set_input_value(
+          input,
+          /*value*/
+          ctx[1]
+        );
+        append(div, t2);
+        append(div, span);
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_4*/
+            ctx[31]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*label*/
+        32)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[5]
+          );
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            input,
+            "id",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*placeholder*/
+        64) {
+          attr(
+            input,
+            "placeholder",
+            /*placeholder*/
+            ctx2[6]
+          );
+        }
+        if (dirty[0] & /*value*/
+        2 && to_number(input.value) !== /*value*/
+        ctx2[1]) {
+          set_input_value(
+            input,
+            /*value*/
+            ctx2[1]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(label_1);
+          detach(t1);
+          detach(div);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block_4(ctx) {
+    let label_1;
+    let t0;
+    let t1;
+    let input;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[5]
+        );
+        t1 = space();
+        input = element("input");
+        attr(label_1, "class", "label svelte-axevbn");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+        attr(input, "type", "date");
+        attr(
+          input,
+          "id",
+          /*id*/
+          ctx[0]
+        );
+        attr(
+          input,
+          "placeholder",
+          /*placeholder*/
+          ctx[6]
+        );
+        attr(input, "class", "svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
+        insert(target, input, anchor);
+        set_input_value(
+          input,
+          /*value*/
+          ctx[1]
+        );
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "input",
+            /*input_input_handler_3*/
+            ctx[30]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*label*/
+        32)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[5]
+          );
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            input,
+            "id",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*placeholder*/
+        64) {
+          attr(
+            input,
+            "placeholder",
+            /*placeholder*/
+            ctx2[6]
+          );
+        }
+        if (dirty[0] & /*value*/
+        2) {
+          set_input_value(
+            input,
+            /*value*/
+            ctx2[1]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(label_1);
+          detach(t1);
+          detach(input);
+        }
         mounted = false;
         dispose();
       }
@@ -5251,31 +5666,31 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         label_1 = element("label");
         t0 = text(
           /*label*/
-          ctx[3]
+          ctx[5]
         );
         t1 = space();
         input = element("input");
-        attr(label_1, "class", "label svelte-2bfxz1");
+        attr(label_1, "class", "label svelte-axevbn");
         attr(
           label_1,
           "for",
           /*id*/
-          ctx[2]
+          ctx[0]
         );
-        attr(input, "type", "date");
+        attr(input, "type", "number");
         attr(
           input,
           "id",
           /*id*/
-          ctx[2]
+          ctx[0]
         );
         attr(
           input,
           "placeholder",
           /*placeholder*/
-          ctx[4]
+          ctx[6]
         );
-        attr(input, "class", "svelte-2bfxz1");
+        attr(input, "class", "svelte-axevbn");
       },
       m(target, anchor) {
         insert(target, label_1, anchor);
@@ -5285,190 +5700,60 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         set_input_value(
           input,
           /*value*/
-          ctx[0]
+          ctx[1]
         );
         if (!mounted) {
           dispose = listen(
             input,
             "input",
             /*input_input_handler_2*/
-            ctx[15]
+            ctx[29]
           );
           mounted = true;
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
+        if (dirty[0] & /*label*/
+        32)
           set_data(
             t0,
             /*label*/
-            ctx2[3]
+            ctx2[5]
           );
-        if (dirty & /*id*/
-        4) {
+        if (dirty[0] & /*id*/
+        1) {
           attr(
             label_1,
             "for",
             /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*id*/
-        4) {
-          attr(
-            input,
-            "id",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*placeholder*/
-        16) {
-          attr(
-            input,
-            "placeholder",
-            /*placeholder*/
-            ctx2[4]
-          );
-        }
-        if (dirty & /*value, valuesArr*/
-        257) {
-          set_input_value(
-            input,
-            /*value*/
             ctx2[0]
           );
         }
-      },
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(label_1);
-          detach(t1);
-          detach(input);
-        }
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function create_if_block_2(ctx) {
-    let label_1;
-    let t0;
-    let t1;
-    let input;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        label_1 = element("label");
-        t0 = text(
-          /*label*/
-          ctx[3]
-        );
-        t1 = space();
-        input = element("input");
-        attr(label_1, "class", "label svelte-2bfxz1");
-        attr(
-          label_1,
-          "for",
-          /*id*/
-          ctx[2]
-        );
-        attr(input, "type", "email");
-        attr(
-          input,
-          "id",
-          /*id*/
-          ctx[2]
-        );
-        attr(
-          input,
-          "placeholder",
-          /*placeholder*/
-          ctx[4]
-        );
-        attr(
-          input,
-          "autocomplete",
-          /*autocomplete*/
-          ctx[6]
-        );
-        attr(input, "class", "svelte-2bfxz1");
-      },
-      m(target, anchor) {
-        insert(target, label_1, anchor);
-        append(label_1, t0);
-        insert(target, t1, anchor);
-        insert(target, input, anchor);
-        set_input_value(
-          input,
-          /*value*/
-          ctx[0]
-        );
-        if (!mounted) {
-          dispose = listen(
-            input,
-            "input",
-            /*input_input_handler_1*/
-            ctx[14]
-          );
-          mounted = true;
-        }
-      },
-      p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
-          set_data(
-            t0,
-            /*label*/
-            ctx2[3]
-          );
-        if (dirty & /*id*/
-        4) {
-          attr(
-            label_1,
-            "for",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*id*/
-        4) {
+        if (dirty[0] & /*id*/
+        1) {
           attr(
             input,
             "id",
             /*id*/
-            ctx2[2]
+            ctx2[0]
           );
         }
-        if (dirty & /*placeholder*/
-        16) {
-          attr(
-            input,
-            "placeholder",
-            /*placeholder*/
-            ctx2[4]
-          );
-        }
-        if (dirty & /*autocomplete*/
+        if (dirty[0] & /*placeholder*/
         64) {
           attr(
             input,
-            "autocomplete",
-            /*autocomplete*/
+            "placeholder",
+            /*placeholder*/
             ctx2[6]
           );
         }
-        if (dirty & /*value, valuesArr*/
-        257 && input.value !== /*value*/
-        ctx2[0]) {
+        if (dirty[0] & /*value*/
+        2 && to_number(input.value) !== /*value*/
+        ctx2[1]) {
           set_input_value(
             input,
             /*value*/
-            ctx2[0]
+            ctx2[1]
           );
         }
       },
@@ -5486,233 +5771,175 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     };
   }
   function create_if_block_1(ctx) {
-    let label_1;
-    let t0;
-    let t1;
-    let input;
-    let mounted;
-    let dispose;
+    let current_block_type_index;
+    let if_block;
+    let if_block_anchor;
+    let current;
+    const if_block_creators = [create_if_block_2, create_else_block];
+    const if_blocks = [];
+    function select_block_type_1(ctx2, dirty) {
+      if (
+        /*isObject*/
+        ctx2[7]
+      )
+        return 0;
+      return 1;
+    }
+    current_block_type_index = select_block_type_1(ctx, [-1, -1]);
+    if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
     return {
       c() {
-        label_1 = element("label");
-        t0 = text(
-          /*label*/
-          ctx[3]
-        );
-        t1 = space();
-        input = element("input");
-        attr(label_1, "class", "label svelte-2bfxz1");
-        attr(
-          label_1,
-          "for",
-          /*id*/
-          ctx[2]
-        );
-        attr(input, "type", "text");
-        attr(
-          input,
-          "id",
-          /*id*/
-          ctx[2]
-        );
-        attr(
-          input,
-          "placeholder",
-          /*placeholder*/
-          ctx[4]
-        );
-        attr(
-          input,
-          "autocomplete",
-          /*autocomplete*/
-          ctx[6]
-        );
-        attr(input, "class", "svelte-2bfxz1");
+        if_block.c();
+        if_block_anchor = empty();
       },
       m(target, anchor) {
-        insert(target, label_1, anchor);
-        append(label_1, t0);
-        insert(target, t1, anchor);
-        insert(target, input, anchor);
-        set_input_value(
-          input,
-          /*value*/
-          ctx[0]
-        );
-        if (!mounted) {
-          dispose = listen(
-            input,
-            "input",
-            /*input_input_handler*/
-            ctx[13]
-          );
-          mounted = true;
-        }
+        if_blocks[current_block_type_index].m(target, anchor);
+        insert(target, if_block_anchor, anchor);
+        current = true;
       },
       p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
-          set_data(
-            t0,
-            /*label*/
-            ctx2[3]
-          );
-        if (dirty & /*id*/
-        4) {
-          attr(
-            label_1,
-            "for",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*id*/
-        4) {
-          attr(
-            input,
-            "id",
-            /*id*/
-            ctx2[2]
-          );
-        }
-        if (dirty & /*placeholder*/
-        16) {
-          attr(
-            input,
-            "placeholder",
-            /*placeholder*/
-            ctx2[4]
-          );
-        }
-        if (dirty & /*autocomplete*/
-        64) {
-          attr(
-            input,
-            "autocomplete",
-            /*autocomplete*/
-            ctx2[6]
-          );
-        }
-        if (dirty & /*value, valuesArr*/
-        257 && input.value !== /*value*/
-        ctx2[0]) {
-          set_input_value(
-            input,
-            /*value*/
-            ctx2[0]
-          );
+        let previous_block_index = current_block_type_index;
+        current_block_type_index = select_block_type_1(ctx2, dirty);
+        if (current_block_type_index === previous_block_index) {
+          if_blocks[current_block_type_index].p(ctx2, dirty);
+        } else {
+          group_outros();
+          transition_out(if_blocks[previous_block_index], 1, 1, () => {
+            if_blocks[previous_block_index] = null;
+          });
+          check_outros();
+          if_block = if_blocks[current_block_type_index];
+          if (!if_block) {
+            if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx2);
+            if_block.c();
+          } else {
+            if_block.p(ctx2, dirty);
+          }
+          transition_in(if_block, 1);
+          if_block.m(if_block_anchor.parentNode, if_block_anchor);
         }
       },
-      i: noop,
-      o: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(if_block);
+        current = true;
+      },
+      o(local) {
+        transition_out(if_block);
+        current = false;
+      },
       d(detaching) {
         if (detaching) {
-          detach(label_1);
-          detach(t1);
-          detach(input);
+          detach(if_block_anchor);
         }
-        mounted = false;
-        dispose();
+        if_blocks[current_block_type_index].d(detaching);
       }
     };
   }
   function create_if_block(ctx) {
-    let label_1;
+    let label0;
     let t0;
     let t1;
-    let textarea;
+    let label1;
+    let input;
+    let t2;
+    let span;
     let mounted;
     let dispose;
     return {
       c() {
-        label_1 = element("label");
+        label0 = element("label");
         t0 = text(
           /*label*/
-          ctx[3]
+          ctx[5]
         );
         t1 = space();
-        textarea = element("textarea");
-        attr(label_1, "class", "label svelte-2bfxz1");
+        label1 = element("label");
+        input = element("input");
+        t2 = space();
+        span = element("span");
+        attr(label0, "class", "label svelte-axevbn");
         attr(
-          label_1,
+          label0,
           "for",
           /*id*/
-          ctx[2]
-        );
-        attr(
-          textarea,
-          "id",
-          /*id*/
-          ctx[2]
-        );
-        attr(
-          textarea,
-          "placeholder",
-          /*placeholder*/
-          ctx[4]
-        );
-        attr(textarea, "class", "svelte-2bfxz1");
-      },
-      m(target, anchor) {
-        insert(target, label_1, anchor);
-        append(label_1, t0);
-        insert(target, t1, anchor);
-        insert(target, textarea, anchor);
-        set_input_value(
-          textarea,
-          /*value*/
           ctx[0]
         );
+        attr(input, "type", "checkbox");
+        attr(
+          input,
+          "id",
+          /*id*/
+          ctx[0]
+        );
+        attr(input, "class", "svelte-axevbn");
+        attr(span, "class", "slider svelte-axevbn");
+        attr(label1, "class", "switcher svelte-axevbn");
+        attr(
+          label1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+      },
+      m(target, anchor) {
+        insert(target, label0, anchor);
+        append(label0, t0);
+        insert(target, t1, anchor);
+        insert(target, label1, anchor);
+        append(label1, input);
+        input.checked = /*value*/
+        ctx[1];
+        append(label1, t2);
+        append(label1, span);
         if (!mounted) {
           dispose = listen(
-            textarea,
-            "input",
-            /*textarea_input_handler*/
-            ctx[12]
+            input,
+            "change",
+            /*input_change_handler*/
+            ctx[18]
           );
           mounted = true;
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
+        if (dirty[0] & /*label*/
+        32)
           set_data(
             t0,
             /*label*/
-            ctx2[3]
+            ctx2[5]
           );
-        if (dirty & /*id*/
-        4) {
+        if (dirty[0] & /*id*/
+        1) {
           attr(
-            label_1,
+            label0,
             "for",
             /*id*/
-            ctx2[2]
+            ctx2[0]
           );
         }
-        if (dirty & /*id*/
-        4) {
+        if (dirty[0] & /*id*/
+        1) {
           attr(
-            textarea,
+            input,
             "id",
             /*id*/
-            ctx2[2]
+            ctx2[0]
           );
         }
-        if (dirty & /*placeholder*/
-        16) {
+        if (dirty[0] & /*value*/
+        2) {
+          input.checked = /*value*/
+          ctx2[1];
+        }
+        if (dirty[0] & /*id*/
+        1) {
           attr(
-            textarea,
-            "placeholder",
-            /*placeholder*/
-            ctx2[4]
-          );
-        }
-        if (dirty & /*value, valuesArr*/
-        257) {
-          set_input_value(
-            textarea,
-            /*value*/
+            label1,
+            "for",
+            /*id*/
             ctx2[0]
           );
         }
@@ -5721,172 +5948,26 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       o: noop,
       d(detaching) {
         if (detaching) {
-          detach(label_1);
+          detach(label0);
           detach(t1);
-          detach(textarea);
+          detach(label1);
         }
         mounted = false;
         dispose();
       }
     };
   }
-  function create_if_block_13(ctx) {
-    let label_1;
-    let t;
-    return {
-      c() {
-        label_1 = element("label");
-        t = text(
-          /*label*/
-          ctx[3]
-        );
-        attr(label_1, "class", "label svelte-2bfxz1");
-        attr(
-          label_1,
-          "for",
-          /*id*/
-          ctx[2]
-        );
-      },
-      m(target, anchor) {
-        insert(target, label_1, anchor);
-        append(label_1, t);
-      },
-      p(ctx2, dirty) {
-        if (dirty & /*label*/
-        8)
-          set_data(
-            t,
-            /*label*/
-            ctx2[3]
-          );
-        if (dirty & /*id*/
-        4) {
-          attr(
-            label_1,
-            "for",
-            /*id*/
-            ctx2[2]
-          );
-        }
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(label_1);
-        }
-      }
-    };
-  }
-  function create_each_block_1(ctx) {
-    let option;
-    let t_value = (
-      /*value*/
-      ctx[0] + ""
-    );
-    let t;
-    let option_value_value;
-    let option_selected_value;
-    return {
-      c() {
-        option = element("option");
-        t = text(t_value);
-        option.__value = option_value_value = /*value*/
-        ctx[0];
-        set_input_value(option, option.__value);
-        option.selected = option_selected_value = /*value*/
-        ctx[0] === /*value*/
-        ctx[0];
-      },
-      m(target, anchor) {
-        insert(target, option, anchor);
-        append(option, t);
-      },
-      p(ctx2, dirty) {
-        if (dirty & /*valuesArr*/
-        256 && t_value !== (t_value = /*value*/
-        ctx2[0] + ""))
-          set_data(t, t_value);
-        if (dirty & /*valuesArr*/
-        256 && option_value_value !== (option_value_value = /*value*/
-        ctx2[0])) {
-          option.__value = option_value_value;
-          set_input_value(option, option.__value);
-        }
-        if (dirty & /*valuesArr*/
-        256 && option_selected_value !== (option_selected_value = /*value*/
-        ctx2[0] === /*value*/
-        ctx2[0])) {
-          option.selected = option_selected_value;
-        }
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(option);
-        }
-      }
-    };
-  }
-  function create_each_block(ctx) {
-    let option;
-    let t_value = (
-      /*value*/
-      ctx[0] + ""
-    );
-    let t;
-    let option_value_value;
-    let option_selected_value;
-    return {
-      c() {
-        option = element("option");
-        t = text(t_value);
-        option.__value = option_value_value = /*key*/
-        ctx[24];
-        set_input_value(option, option.__value);
-        option.selected = option_selected_value = /*value*/
-        ctx[0] === /*value*/
-        ctx[0];
-      },
-      m(target, anchor) {
-        insert(target, option, anchor);
-        append(option, t);
-      },
-      p(ctx2, dirty) {
-        if (dirty & /*valuesObj*/
-        128 && t_value !== (t_value = /*value*/
-        ctx2[0] + ""))
-          set_data(t, t_value);
-        if (dirty & /*valuesObj*/
-        128 && option_value_value !== (option_value_value = /*key*/
-        ctx2[24])) {
-          option.__value = option_value_value;
-          set_input_value(option, option.__value);
-        }
-        if (dirty & /*valuesObj*/
-        128 && option_selected_value !== (option_selected_value = /*value*/
-        ctx2[0] === /*value*/
-        ctx2[0])) {
-          option.selected = option_selected_value;
-        }
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(option);
-        }
-      }
-    };
-  }
-  function create_if_block_5(ctx) {
+  function create_if_block_12(ctx) {
     let button;
     let t;
-    let button_title_value;
     let current;
     let mounted;
     let dispose;
     let if_block0 = !/*isShowPassword*/
-    ctx[9] && create_if_block_7(ctx);
+    ctx[8] && create_if_block_14(ctx);
     let if_block1 = (
       /*isShowPassword*/
-      ctx[9] && create_if_block_6(ctx)
+      ctx[8] && create_if_block_13(ctx)
     );
     return {
       c() {
@@ -5896,9 +5977,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         t = space();
         if (if_block1)
           if_block1.c();
-        attr(button, "class", "eye svelte-2bfxz1");
-        attr(button, "title", button_title_value = /*isShowPassword*/
-        ctx[9] ? "Hide Password" : "Show Password");
+        attr(button, "class", "eye svelte-axevbn");
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -5913,21 +5992,21 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             button,
             "click",
             /*toggleShowPassword*/
-            ctx[11]
+            ctx[15]
           );
           mounted = true;
         }
       },
       p(ctx2, dirty) {
         if (!/*isShowPassword*/
-        ctx2[9]) {
+        ctx2[8]) {
           if (if_block0) {
-            if (dirty & /*isShowPassword*/
-            512) {
+            if (dirty[0] & /*isShowPassword*/
+            256) {
               transition_in(if_block0, 1);
             }
           } else {
-            if_block0 = create_if_block_7(ctx2);
+            if_block0 = create_if_block_14(ctx2);
             if_block0.c();
             transition_in(if_block0, 1);
             if_block0.m(button, t);
@@ -5941,15 +6020,15 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         }
         if (
           /*isShowPassword*/
-          ctx2[9]
+          ctx2[8]
         ) {
           if (if_block1) {
-            if (dirty & /*isShowPassword*/
-            512) {
+            if (dirty[0] & /*isShowPassword*/
+            256) {
               transition_in(if_block1, 1);
             }
           } else {
-            if_block1 = create_if_block_6(ctx2);
+            if_block1 = create_if_block_13(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
             if_block1.m(button, null);
@@ -5960,11 +6039,6 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             if_block1 = null;
           });
           check_outros();
-        }
-        if (!current || dirty & /*isShowPassword*/
-        512 && button_title_value !== (button_title_value = /*isShowPassword*/
-        ctx2[9] ? "Hide Password" : "Show Password")) {
-          attr(button, "title", button_title_value);
         }
       },
       i(local) {
@@ -5992,7 +6066,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       }
     };
   }
-  function create_if_block_7(ctx) {
+  function create_if_block_14(ctx) {
     let icon;
     let current;
     icon = new Icon_default({
@@ -6025,7 +6099,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       }
     };
   }
-  function create_if_block_6(ctx) {
+  function create_if_block_13(ctx) {
     let icon;
     let current;
     icon = new Icon_default({
@@ -6058,6 +6132,534 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       }
     };
   }
+  function create_else_block(ctx) {
+    let label_1;
+    let t0;
+    let t1;
+    let div2;
+    let div0;
+    let input;
+    let t2;
+    let button;
+    let icon;
+    let t3;
+    let div1;
+    let div1_class_value;
+    let div2_class_value;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        className: "icon " + /*isShowOptions*/
+        (ctx[11] ? "rotate" : "dropdown"),
+        color: "var(--gray-007)",
+        src: RiArrowsArrowRightSLine,
+        size: "17"
+      }
+    });
+    let each_value_1 = ensure_array_like(
+      /*values*/
+      ctx[4]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value_1.length; i += 1) {
+      each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    }
+    return {
+      c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[5]
+        );
+        t1 = space();
+        div2 = element("div");
+        div0 = element("div");
+        input = element("input");
+        t2 = space();
+        button = element("button");
+        create_component(icon.$.fragment);
+        t3 = space();
+        div1 = element("div");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(label_1, "class", "label svelte-axevbn");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+        attr(input, "type", "text");
+        attr(input, "class", "svelte-axevbn");
+        attr(button, "class", "arrow svelte-axevbn");
+        attr(div0, "class", "input_container svelte-axevbn");
+        attr(div1, "class", div1_class_value = "options_list " + /*isShowOptions*/
+        (ctx[11] ? "show" : "hidden") + " svelte-axevbn");
+        attr(div2, "class", div2_class_value = "options_container " + /*randStr*/
+        ctx[14] + " svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
+        insert(target, div2, anchor);
+        append(div2, div0);
+        append(div0, input);
+        set_input_value(
+          input,
+          /*valueToShowFromObj*/
+          ctx[10]
+        );
+        append(div0, t2);
+        append(div0, button);
+        mount_component(icon, button, null);
+        append(div2, t3);
+        append(div2, div1);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div1, null);
+          }
+        }
+        current = true;
+        if (!mounted) {
+          dispose = [
+            listen(
+              input,
+              "input",
+              /*input_input_handler_1*/
+              ctx[24]
+            ),
+            listen(
+              input,
+              "focus",
+              /*focus_handler_1*/
+              ctx[25]
+            ),
+            listen(
+              input,
+              "blur",
+              /*blur_handler_1*/
+              ctx[26]
+            ),
+            listen(
+              input,
+              "keyup",
+              /*handleKey*/
+              ctx[17]
+            ),
+            listen(
+              button,
+              "click",
+              /*click_handler_2*/
+              ctx[27]
+            )
+          ];
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (!current || dirty[0] & /*label*/
+        32)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[5]
+          );
+        if (!current || dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*valueToShowFromObj*/
+        1024 && input.value !== /*valueToShowFromObj*/
+        ctx2[10]) {
+          set_input_value(
+            input,
+            /*valueToShowFromObj*/
+            ctx2[10]
+          );
+        }
+        const icon_changes = {};
+        if (dirty[0] & /*isShowOptions*/
+        2048)
+          icon_changes.className = "icon " + /*isShowOptions*/
+          (ctx2[11] ? "rotate" : "dropdown");
+        icon.$set(icon_changes);
+        if (dirty[0] & /*randStr, value, values, valueToShowFromObj, isShowOptions*/
+        19474) {
+          each_value_1 = ensure_array_like(
+            /*values*/
+            ctx2[4]
+          );
+          let i;
+          for (i = 0; i < each_value_1.length; i += 1) {
+            const child_ctx = get_each_context_1(ctx2, each_value_1, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block_1(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div1, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value_1.length;
+        }
+        if (!current || dirty[0] & /*isShowOptions*/
+        2048 && div1_class_value !== (div1_class_value = "options_list " + /*isShowOptions*/
+        (ctx2[11] ? "show" : "hidden") + " svelte-axevbn")) {
+          attr(div1, "class", div1_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(label_1);
+          detach(t1);
+          detach(div2);
+        }
+        destroy_component(icon);
+        destroy_each(each_blocks, detaching);
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function create_if_block_2(ctx) {
+    let label_1;
+    let t0;
+    let t1;
+    let div2;
+    let div0;
+    let input;
+    let t2;
+    let button;
+    let icon;
+    let t3;
+    let div1;
+    let div1_class_value;
+    let div2_class_value;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        className: "icon " + /*isShowOptions*/
+        (ctx[11] ? "rotate" : "dropdown"),
+        color: "var(--gray-007)",
+        src: RiArrowsArrowRightSLine,
+        size: "17"
+      }
+    });
+    let each_value = ensure_array_like(Object.entries(
+      /*values*/
+      ctx[4]
+    ));
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    }
+    return {
+      c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[5]
+        );
+        t1 = space();
+        div2 = element("div");
+        div0 = element("div");
+        input = element("input");
+        t2 = space();
+        button = element("button");
+        create_component(icon.$.fragment);
+        t3 = space();
+        div1 = element("div");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(label_1, "class", "label svelte-axevbn");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
+        attr(input, "type", "text");
+        attr(input, "class", "svelte-axevbn");
+        attr(button, "class", "arrow svelte-axevbn");
+        attr(div0, "class", "input_container svelte-axevbn");
+        attr(div1, "class", div1_class_value = "options_list " + /*isShowOptions*/
+        (ctx[11] ? "show" : "hidden") + " svelte-axevbn");
+        attr(div2, "class", div2_class_value = null_to_empty(`options_container ${/*randStr*/
+        ctx[14]}`) + " svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
+        insert(target, div2, anchor);
+        append(div2, div0);
+        append(div0, input);
+        set_input_value(
+          input,
+          /*valueToShowFromObj*/
+          ctx[10]
+        );
+        append(div0, t2);
+        append(div0, button);
+        mount_component(icon, button, null);
+        append(div2, t3);
+        append(div2, div1);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div1, null);
+          }
+        }
+        current = true;
+        if (!mounted) {
+          dispose = [
+            listen(
+              input,
+              "input",
+              /*input_input_handler*/
+              ctx[19]
+            ),
+            listen(
+              input,
+              "focus",
+              /*focus_handler*/
+              ctx[20]
+            ),
+            listen(input, "blur", prevent_default(
+              /*blur_handler*/
+              ctx[21]
+            )),
+            listen(
+              input,
+              "keyup",
+              /*handleKey*/
+              ctx[17]
+            ),
+            listen(
+              button,
+              "click",
+              /*click_handler*/
+              ctx[22]
+            )
+          ];
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (!current || dirty[0] & /*label*/
+        32)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[5]
+          );
+        if (!current || dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
+        if (dirty[0] & /*valueToShowFromObj*/
+        1024 && input.value !== /*valueToShowFromObj*/
+        ctx2[10]) {
+          set_input_value(
+            input,
+            /*valueToShowFromObj*/
+            ctx2[10]
+          );
+        }
+        const icon_changes = {};
+        if (dirty[0] & /*isShowOptions*/
+        2048)
+          icon_changes.className = "icon " + /*isShowOptions*/
+          (ctx2[11] ? "rotate" : "dropdown");
+        icon.$set(icon_changes);
+        if (dirty[0] & /*randStr, value, values, valueToShowFromObj, isShowOptions, optionClicked*/
+        27666) {
+          each_value = ensure_array_like(Object.entries(
+            /*values*/
+            ctx2[4]
+          ));
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div1, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value.length;
+        }
+        if (!current || dirty[0] & /*isShowOptions*/
+        2048 && div1_class_value !== (div1_class_value = "options_list " + /*isShowOptions*/
+        (ctx2[11] ? "show" : "hidden") + " svelte-axevbn")) {
+          attr(div1, "class", div1_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(label_1);
+          detach(t1);
+          detach(div2);
+        }
+        destroy_component(icon);
+        destroy_each(each_blocks, detaching);
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function create_each_block_1(ctx) {
+    let button;
+    let t0_value = (
+      /*v*/
+      ctx[44] + ""
+    );
+    let t0;
+    let t1;
+    let button_class_value;
+    let mounted;
+    let dispose;
+    function click_handler_3() {
+      return (
+        /*click_handler_3*/
+        ctx[28](
+          /*v*/
+          ctx[44]
+        )
+      );
+    }
+    return {
+      c() {
+        button = element("button");
+        t0 = text(t0_value);
+        t1 = space();
+        attr(button, "class", button_class_value = "option " + /*randStr*/
+        ctx[14] + " svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, button, anchor);
+        append(button, t0);
+        append(button, t1);
+        if (!mounted) {
+          dispose = listen(button, "click", prevent_default(click_handler_3));
+          mounted = true;
+        }
+      },
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+        if (dirty[0] & /*values*/
+        16 && t0_value !== (t0_value = /*v*/
+        ctx[44] + ""))
+          set_data(t0, t0_value);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(button);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_each_block(ctx) {
+    let button;
+    let t0_value = (
+      /*v*/
+      ctx[44] + ""
+    );
+    let t0;
+    let t1;
+    let button_class_value;
+    let mounted;
+    let dispose;
+    function click_handler_1() {
+      return (
+        /*click_handler_1*/
+        ctx[23](
+          /*k*/
+          ctx[43],
+          /*v*/
+          ctx[44]
+        )
+      );
+    }
+    return {
+      c() {
+        button = element("button");
+        t0 = text(t0_value);
+        t1 = space();
+        attr(button, "class", button_class_value = "option " + /*randStr*/
+        ctx[14] + " svelte-axevbn");
+      },
+      m(target, anchor) {
+        insert(target, button, anchor);
+        append(button, t0);
+        append(button, t1);
+        if (!mounted) {
+          dispose = listen(button, "click", click_handler_1);
+          mounted = true;
+        }
+      },
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+        if (dirty[0] & /*values*/
+        16 && t0_value !== (t0_value = /*v*/
+        ctx[44] + ""))
+          set_data(t0, t0_value);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(button);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
   function create_fragment2(ctx) {
     let div1;
     let div0;
@@ -6069,83 +6671,98 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     const if_block_creators = [
       create_if_block,
       create_if_block_1,
-      create_if_block_2,
       create_if_block_3,
       create_if_block_4,
+      create_if_block_5,
+      create_if_block_6,
+      create_if_block_7,
       create_if_block_8,
       create_if_block_9,
       create_if_block_10,
       create_if_block_11,
-      create_if_block_12,
-      create_else_block
+      create_if_block_15,
+      create_else_block_1
     ];
     const if_blocks = [];
     function select_block_type(ctx2, dirty) {
       if (
         /*type*/
-        ctx2[5] === "textarea"
+        ctx2[3] === "bool" || /*type*/
+        ctx2[3] === "checkbox"
       )
         return 0;
       if (
         /*type*/
-        ctx2[5] === "text"
+        ctx2[3] == "select" || /*type*/
+        ctx2[3] === "combobox"
       )
         return 1;
       if (
         /*type*/
-        ctx2[5] === "email"
+        ctx2[3] === "number"
       )
         return 2;
       if (
         /*type*/
-        ctx2[5] === "date"
+        ctx2[3] === "datetime"
       )
         return 3;
       if (
         /*type*/
-        ctx2[5] === "password"
+        ctx2[3] === "percentage"
       )
         return 4;
       if (
         /*type*/
-        ctx2[5] === "color"
+        ctx2[3] === "float"
       )
         return 5;
       if (
         /*type*/
-        ctx2[5] === "combobox-obj"
+        ctx2[3] === "textarea"
       )
         return 6;
       if (
         /*type*/
-        ctx2[5] === "combobox-arr"
+        ctx2[3] === "text"
       )
         return 7;
       if (
         /*type*/
-        ctx2[5] === "date"
+        ctx2[3] === "email"
       )
         return 8;
       if (
         /*type*/
-        ctx2[5] === "month"
+        ctx2[3] === "date"
       )
         return 9;
-      return 10;
+      if (
+        /*type*/
+        ctx2[3] === "password"
+      )
+        return 10;
+      if (
+        /*type*/
+        ctx2[3] === "color"
+      )
+        return 11;
+      return 12;
     }
-    current_block_type_index = select_block_type(ctx, -1);
+    current_block_type_index = select_block_type(ctx, [-1, -1]);
     if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
     return {
       c() {
         div1 = element("div");
         div0 = element("div");
         if_block.c();
-        attr(div0, "class", div0_class_value = "input-box " + /*type*/
-        (ctx[5] == "password" ? "with-password" : "") + " svelte-2bfxz1");
+        attr(div0, "class", div0_class_value = "input_box " + /*type*/
+        (ctx[3] == "bool" ? "bool" : "") + " " + /*type*/
+        (ctx[3] == "password" ? "with_password" : "") + " svelte-axevbn");
         attr(div1, "class", div1_class_value = null_to_empty(
           /*className*/
-          ctx[1]
-        ) + " svelte-2bfxz1");
+          ctx[2]
+        ) + " svelte-axevbn");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
@@ -6153,7 +6770,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         if_blocks[current_block_type_index].m(div0, null);
         current = true;
       },
-      p(ctx2, [dirty]) {
+      p(ctx2, dirty) {
         let previous_block_index = current_block_type_index;
         current_block_type_index = select_block_type(ctx2, dirty);
         if (current_block_type_index === previous_block_index) {
@@ -6174,16 +6791,17 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           transition_in(if_block, 1);
           if_block.m(div0, null);
         }
-        if (!current || dirty & /*type*/
-        32 && div0_class_value !== (div0_class_value = "input-box " + /*type*/
-        (ctx2[5] == "password" ? "with-password" : "") + " svelte-2bfxz1")) {
+        if (!current || dirty[0] & /*type*/
+        8 && div0_class_value !== (div0_class_value = "input_box " + /*type*/
+        (ctx2[3] == "bool" ? "bool" : "") + " " + /*type*/
+        (ctx2[3] == "password" ? "with_password" : "") + " svelte-axevbn")) {
           attr(div0, "class", div0_class_value);
         }
-        if (!current || dirty & /*className*/
-        2 && div1_class_value !== (div1_class_value = null_to_empty(
+        if (!current || dirty[0] & /*className*/
+        4 && div1_class_value !== (div1_class_value = null_to_empty(
           /*className*/
-          ctx2[1]
-        ) + " svelte-2bfxz1")) {
+          ctx2[2]
+        ) + " svelte-axevbn")) {
           attr(div1, "class", div1_class_value);
         }
       },
@@ -6206,183 +6824,336 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     };
   }
   function instance2($self, $props, $invalidate) {
-    let { className = (
-      /** @type {string} */
-      ""
-    ) } = $props;
-    let { id = (
-      /** @type {string} */
-      ""
-    ) } = $props;
-    let { label = (
-      /** @type {string} */
-      ""
-    ) } = $props;
-    let { value = (
-      /** @type {string} */
-      ""
-    ) } = $props;
-    let { placeholder = (
-      /** @type {string} */
-      ""
-    ) } = $props;
+    let { className = "" } = $props;
     let { type = (
-      /** @type {InputType | string} */
+      /** @type {InputType | any} */
       "text"
     ) } = $props;
-    let { autocomplete = (
-      /** @type {('on' | 'off')} */
-      "on"
-    ) } = $props;
-    let { valuesObj = (
-      /** @type {Record<string, string>} */
+    let { id } = $props;
+    let { value } = $props;
+    let { values = (
+      /** @type {
+        Array<string|number> | Record<string|number, string> | any
+      } */
       {}
     ) } = $props;
-    let { valuesArr = (
-      /** @type {any[]} */
-      []
-    ) } = $props;
-    let isShowPassword = (
-      /** @type {boolean} */
-      false
-    );
-    let inputElm = (
-      /** @type {HTMLInputElement} */
-      null
-    );
+    let { label } = $props;
+    let { placeholder = "" } = $props;
+    let { isObject = false } = $props;
+    if (isObject)
+      value = value + "";
+    let isShowPassword = false;
+    let inputElm;
+    let valueToShowFromObj = value + "";
+    const randStr = RandString(5);
     onMount(() => {
       if (type === "password")
-        $invalidate(10, inputElm.type = type, inputElm);
+        $invalidate(9, inputElm.type = type, inputElm);
+      if (type === "bool")
+        $invalidate(0, id = id + Math.random());
+      if (isObject) {
+        if (type === "combobox" || type === "select") {
+          const valuesArr = Object.entries(values);
+          $invalidate(1, value = valuesArr[0][0]);
+        }
+        if (values && values[value])
+          $invalidate(10, valueToShowFromObj = values[value]);
+        else
+          $invalidate(10, valueToShowFromObj = "");
+      } else {
+        if (type === "combobox" || type === "select") {
+          $invalidate(1, value = values[0]);
+        }
+        $invalidate(10, valueToShowFromObj = value + "");
+      }
     });
     function toggleShowPassword() {
-      $invalidate(9, isShowPassword = !isShowPassword);
+      $invalidate(8, isShowPassword = !isShowPassword);
       if (isShowPassword)
-        $invalidate(10, inputElm.type = "text", inputElm);
+        $invalidate(9, inputElm.type = "text", inputElm);
       else
-        $invalidate(10, inputElm.type = "password", inputElm);
+        $invalidate(9, inputElm.type = "password", inputElm);
     }
-    function textarea_input_handler() {
-      value = this.value;
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
+    let isShowOptions = false;
+    let currentFocus = -1;
+    function filterOptions(options) {
+      if (valueToShowFromObj === "") {
+        options.forEach((option) => {
+          option.style.display = "block";
+        });
+        $invalidate(12, currentFocus = -1);
+        return;
+      } else {
+        options.forEach((option) => {
+          const textValue = option.textContent;
+          if (textValue.toUpperCase().indexOf(valueToShowFromObj.toUpperCase()) > -1) {
+            option.style.display = "block";
+          } else {
+            option.style.display = "none";
+          }
+        });
+      }
+    }
+    function highlightOption(options, isIncreased) {
+      if (!options.length)
+        return;
+      if (isIncreased) {
+        $invalidate(12, currentFocus++, currentFocus);
+      } else {
+        $invalidate(12, currentFocus--, currentFocus);
+      }
+      if (currentFocus < 0)
+        $invalidate(12, currentFocus = options.length - 1);
+      if (currentFocus > options.length - 1)
+        $invalidate(12, currentFocus = 0);
+      removeActive(options);
+      if (options[currentFocus] && options[currentFocus].style.display === "none") {
+        highlightOption(options, isIncreased);
+      }
+      ;
+      if (options[currentFocus]) {
+        options[currentFocus].classList.add("active");
+        options[currentFocus].scrollIntoView({ block: "nearest" });
+      }
+    }
+    function removeActive(options) {
+      if (!options.length) {
+        options = document.querySelectorAll(".option." + randStr);
+      }
+      ;
+      options.forEach((option) => option.classList.remove("active"));
+    }
+    function handleKey(e) {
+      const options = document.querySelectorAll(".option." + randStr);
+      switch (e.key) {
+        case "ArrowDown":
+          highlightOption(options, true);
+          break;
+        case "ArrowUp":
+          highlightOption(options, false);
+          break;
+        case "Enter":
+          if (currentFocus > -1) {
+            options[currentFocus].click();
+            removeActive(options);
+            $invalidate(13, optionClicked = false);
+          }
+          break;
+        default:
+          filterOptions(options);
+          break;
+      }
+    }
+    let optionClicked = false;
+    function input_change_handler() {
+      value = this.checked;
+      $invalidate(1, value);
     }
     function input_input_handler() {
-      value = this.value;
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
+      valueToShowFromObj = this.value;
+      $invalidate(10, valueToShowFromObj);
     }
+    const focus_handler = () => $invalidate(11, isShowOptions = true);
+    const blur_handler = () => {
+      console.log("isOptionClicked", optionClicked);
+      $invalidate(12, currentFocus = -1);
+      const options = document.querySelectorAll(".option ." + randStr);
+      removeActive(options);
+      $invalidate(10, valueToShowFromObj = values[value]);
+      setTimeout(
+        () => {
+          if (optionClicked) {
+            $invalidate(11, isShowOptions = false);
+          } else {
+            setTimeout(
+              () => {
+                $invalidate(11, isShowOptions = false);
+                $invalidate(13, optionClicked = false);
+              },
+              100
+            );
+          }
+        },
+        200
+      );
+    };
+    const click_handler = () => $invalidate(11, isShowOptions = !isShowOptions);
+    const click_handler_1 = (k, v) => {
+      $invalidate(1, value = k);
+      $invalidate(10, valueToShowFromObj = v);
+      $invalidate(11, isShowOptions = false);
+      $invalidate(13, optionClicked = true);
+    };
     function input_input_handler_1() {
-      value = this.value;
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
+      valueToShowFromObj = this.value;
+      $invalidate(10, valueToShowFromObj);
     }
+    const focus_handler_1 = () => $invalidate(11, isShowOptions = true);
+    const blur_handler_1 = () => {
+      $invalidate(12, currentFocus = -1);
+      const options = document.querySelectorAll(".option ." + randStr);
+      removeActive(options);
+      $invalidate(10, valueToShowFromObj = value || values[value] || values[0] || options[0].textContent);
+      ;
+      if (isShowOptions)
+        $invalidate(13, optionClicked = true);
+      setTimeout(
+        () => {
+          if (optionClicked) {
+            $invalidate(11, isShowOptions = false);
+          } else {
+            setTimeout(
+              () => {
+                $invalidate(11, isShowOptions = false);
+                $invalidate(13, optionClicked = false);
+              },
+              100
+            );
+          }
+        },
+        200
+      );
+    };
+    const click_handler_2 = () => $invalidate(11, isShowOptions = !isShowOptions);
+    const click_handler_3 = (v) => {
+      $invalidate(1, value = v);
+      $invalidate(10, valueToShowFromObj = v);
+      $invalidate(11, isShowOptions = false);
+    };
     function input_input_handler_2() {
-      value = this.value;
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
+      value = to_number(this.value);
+      $invalidate(1, value);
     }
     function input_input_handler_3() {
       value = this.value;
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
+      $invalidate(1, value);
+    }
+    function input_input_handler_4() {
+      value = to_number(this.value);
+      $invalidate(1, value);
+    }
+    function input_input_handler_5() {
+      value = to_number(this.value);
+      $invalidate(1, value);
+    }
+    function textarea_input_handler() {
+      value = this.value;
+      $invalidate(1, value);
+    }
+    function input_input_handler_6() {
+      value = this.value;
+      $invalidate(1, value);
+    }
+    function input_input_handler_7() {
+      value = this.value;
+      $invalidate(1, value);
+    }
+    function input_input_handler_8() {
+      value = this.value;
+      $invalidate(1, value);
+    }
+    function input_input_handler_9() {
+      value = this.value;
+      $invalidate(1, value);
     }
     function input_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         inputElm = $value;
-        $invalidate(10, inputElm);
+        $invalidate(9, inputElm);
       });
     }
-    function input_input_handler_4() {
+    function input_input_handler_10() {
       value = this.value;
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
+      $invalidate(1, value);
     }
-    function select_change_handler() {
-      value = select_value(this);
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
-    }
-    function select_change_handler_1() {
-      value = select_value(this);
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
-    }
-    function input_input_handler_5() {
+    function input_input_handler_11() {
       value = this.value;
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
-    }
-    function input_input_handler_6() {
-      value = this.value;
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
-    }
-    function input_input_handler_7() {
-      value = this.value;
-      $invalidate(0, value);
-      $invalidate(8, valuesArr);
+      $invalidate(1, value);
     }
     $self.$set = ($props2) => {
       if ("className" in $props2)
-        $invalidate(1, className = $props2.className);
-      if ("id" in $props2)
-        $invalidate(2, id = $props2.id);
-      if ("label" in $props2)
-        $invalidate(3, label = $props2.label);
-      if ("value" in $props2)
-        $invalidate(0, value = $props2.value);
-      if ("placeholder" in $props2)
-        $invalidate(4, placeholder = $props2.placeholder);
+        $invalidate(2, className = $props2.className);
       if ("type" in $props2)
-        $invalidate(5, type = $props2.type);
-      if ("autocomplete" in $props2)
-        $invalidate(6, autocomplete = $props2.autocomplete);
-      if ("valuesObj" in $props2)
-        $invalidate(7, valuesObj = $props2.valuesObj);
-      if ("valuesArr" in $props2)
-        $invalidate(8, valuesArr = $props2.valuesArr);
+        $invalidate(3, type = $props2.type);
+      if ("id" in $props2)
+        $invalidate(0, id = $props2.id);
+      if ("value" in $props2)
+        $invalidate(1, value = $props2.value);
+      if ("values" in $props2)
+        $invalidate(4, values = $props2.values);
+      if ("label" in $props2)
+        $invalidate(5, label = $props2.label);
+      if ("placeholder" in $props2)
+        $invalidate(6, placeholder = $props2.placeholder);
+      if ("isObject" in $props2)
+        $invalidate(7, isObject = $props2.isObject);
     };
     return [
+      id,
       value,
       className,
-      id,
+      type,
+      values,
       label,
       placeholder,
-      type,
-      autocomplete,
-      valuesObj,
-      valuesArr,
+      isObject,
       isShowPassword,
       inputElm,
+      valueToShowFromObj,
+      isShowOptions,
+      currentFocus,
+      optionClicked,
+      randStr,
       toggleShowPassword,
-      textarea_input_handler,
+      removeActive,
+      handleKey,
+      input_change_handler,
       input_input_handler,
+      focus_handler,
+      blur_handler,
+      click_handler,
+      click_handler_1,
       input_input_handler_1,
+      focus_handler_1,
+      blur_handler_1,
+      click_handler_2,
+      click_handler_3,
       input_input_handler_2,
       input_input_handler_3,
-      input_binding,
       input_input_handler_4,
-      select_change_handler,
-      select_change_handler_1,
       input_input_handler_5,
+      textarea_input_handler,
       input_input_handler_6,
-      input_input_handler_7
+      input_input_handler_7,
+      input_input_handler_8,
+      input_input_handler_9,
+      input_binding,
+      input_input_handler_10,
+      input_input_handler_11
     ];
   }
   var InputBox = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance2, create_fragment2, safe_not_equal, {
-        className: 1,
-        id: 2,
-        label: 3,
-        value: 0,
-        placeholder: 4,
-        type: 5,
-        autocomplete: 6,
-        valuesObj: 7,
-        valuesArr: 8
-      });
+      init(
+        this,
+        options,
+        instance2,
+        create_fragment2,
+        safe_not_equal,
+        {
+          className: 2,
+          type: 3,
+          id: 0,
+          value: 1,
+          values: 4,
+          label: 5,
+          placeholder: 6,
+          isObject: 7
+        },
+        null,
+        [-1, -1]
+      );
     }
   };
   var InputBox_default = InputBox;
@@ -6425,7 +7196,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         button = element("button");
         button.textContent = "Logout";
         attr(a0, "href", "/");
-        attr(a0, "class", "svelte-1hfp3dx");
+        attr(a0, "class", "svelte-17p6uij");
         toggle_class(
           a0,
           "active",
@@ -6433,27 +7204,27 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           ctx[1] === ""
         );
         attr(a1, "href", "/user/location");
-        attr(a1, "class", "svelte-1hfp3dx");
+        attr(a1, "class", "svelte-17p6uij");
         toggle_class(
           a1,
           "active",
-          /*pathLv1*/
-          ctx[1] === "location"
+          /*pathLv2*/
+          ctx[2] === "location"
         );
-        attr(nav0, "class", "nav-menu svelte-1hfp3dx");
-        attr(span, "class", "separator svelte-1hfp3dx");
+        attr(nav0, "class", "nav-menu svelte-17p6uij");
+        attr(span, "class", "separator svelte-17p6uij");
         attr(a2, "href", "/user");
-        attr(a2, "class", "svelte-1hfp3dx");
+        attr(a2, "class", "svelte-17p6uij");
         toggle_class(
           a2,
           "active",
           /*pathAll*/
           ctx[0] === "/user"
         );
-        attr(button, "class", "red svelte-1hfp3dx");
-        attr(nav1, "class", "nav-menu svelte-1hfp3dx");
-        attr(div, "class", "container svelte-1hfp3dx");
-        attr(aside, "class", "svelte-1hfp3dx");
+        attr(button, "class", "red svelte-17p6uij");
+        attr(nav1, "class", "nav-menu svelte-17p6uij");
+        attr(div, "class", "container svelte-17p6uij");
+        attr(aside, "class", "svelte-17p6uij");
       },
       m(target, anchor) {
         insert(target, aside, anchor);
@@ -6474,7 +7245,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             button,
             "click",
             /*logout*/
-            ctx[2]
+            ctx[3]
           );
           mounted = true;
         }
@@ -6532,20 +7303,17 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     }
     $self.$set = ($props2) => {
       if ("access" in $props2)
-        $invalidate(3, access = $props2.access);
+        $invalidate(4, access = $props2.access);
     };
-    return [pathAll, pathLv1, logout, access];
+    return [pathAll, pathLv1, pathLv2, logout, access];
   }
   var SideMenu = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance3, create_fragment3, safe_not_equal, { access: 3 });
+      init(this, options, instance3, create_fragment3, safe_not_equal, { access: 4 });
     }
   };
   var SideMenu_default = SideMenu;
-
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
-  var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
 
   // _partials/Navbar.svelte
   function create_fragment4(ctx) {
@@ -6790,11 +7558,11 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           default_slot.c();
         t2 = space();
         create_component(footer.$.fragment);
-        attr(main, "class", "content svelte-pbt6ik");
+        attr(main, "class", "content svelte-19mkv9n");
         attr(div0, "class", div0_class_value = "root_content " + /*$isShrinkMenu*/
-        (ctx[2] ? "shrink" : "expand") + " svelte-pbt6ik");
-        attr(div1, "class", "root_container svelte-pbt6ik");
-        attr(div2, "class", "root_layout svelte-pbt6ik");
+        (ctx[2] ? "shrink" : "expand") + " svelte-19mkv9n");
+        attr(div1, "class", "root_container svelte-19mkv9n");
+        attr(div2, "class", "root_layout svelte-19mkv9n");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -6850,7 +7618,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         }
         if (!current || dirty & /*$isShrinkMenu*/
         4 && div0_class_value !== (div0_class_value = "root_content " + /*$isShrinkMenu*/
-        (ctx2[2] ? "shrink" : "expand") + " svelte-pbt6ik")) {
+        (ctx2[2] ? "shrink" : "expand") + " svelte-19mkv9n")) {
           attr(div0, "class", div0_class_value);
         }
       },
@@ -6974,7 +7742,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     );
     let if_block7 = (
       /*Mode*/
-      ctx[5] !== ModeLogin && create_if_block_14(ctx)
+      ctx[5] !== ModeLogin && create_if_block_16(ctx)
     );
     return {
       c() {
@@ -7225,7 +7993,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           if (if_block7) {
             if_block7.p(ctx2, dirty);
           } else {
-            if_block7 = create_if_block_14(ctx2);
+            if_block7 = create_if_block_16(ctx2);
             if_block7.c();
             if_block7.m(div3, null);
           }
@@ -7867,7 +8635,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       }
     };
   }
-  function create_if_block_14(ctx) {
+  function create_if_block_16(ctx) {
     let p;
     let t0;
     let a;

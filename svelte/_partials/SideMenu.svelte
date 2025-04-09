@@ -39,7 +39,7 @@
   <div class="container">
     <nav class="nav-menu">
       <a href="/" class:active={pathLv1 === ''}>Home</a>
-      <a href="/user/location" class:active={pathLv1 === 'location'}>Location</a>
+      <a href="/user/location" class:active={pathLv2 === 'location'}>Location</a>
     </nav>
     <span class="separator" />
     <nav class="nav-menu">
@@ -59,6 +59,7 @@
     width: var(--sidemenu-width);
     border-right: 1px solid var(--gray-002);
     background-color: #FFF;
+    font-size: var(--font-md);
   }
 
   aside .separator {
@@ -98,10 +99,10 @@
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 17px;
     color: var(--gray-008);
     border: none;
     background-color: transparent;
+    font-size: var(--font-md);
   }
 
   aside .container .nav-menu a:hover,

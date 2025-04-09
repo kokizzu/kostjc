@@ -65,5 +65,6 @@
     overflow-y: auto;
     padding: 0;
     margin: 0;
+    font-size: var(--font-base);
   }
 </style>

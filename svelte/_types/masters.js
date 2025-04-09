@@ -2,7 +2,8 @@
  * @typedef { 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local'
 * | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number'
 * | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit'
-* | 'tel' | 'text' | 'time' | 'url' | 'week' | 'combobox-obj' | 'combobox-arr'
+* | 'tel' | 'text' | 'time' | 'url' | 'week' | 'combobox-obj' | 'combobox-arr' | 'combobox'
+* | 'select-obj' | 'select-arr' | 'select' | 'textarea' | 'datetime' | 'percentage'
 * } InputType
 */
 module.exports = {};
@@ -36,17 +37,17 @@ module.exports = {};
 module.exports = {}
 
 /**
-* @typedef {Object} Field
-* @property {string} name
-* @property {string} label
-* @property {string} description
-* @property {string} type
-* @property {string} inputType
-* @property {boolean} readOnly
-* @property {string} mapping
-* @property {Record<string, any>} validations
-* @property {string} refEndpoint
-*/
+ * @typedef {Object} Field
+ * @property {string} name
+ * @property {string} label
+ * @property {string} description
+ * @property {string} type
+ * @property {InputType} inputType
+ * @property {boolean} readOnly
+ * @property {string[]} validations
+ * @property {string[]} ref
+ * @property {string} refEndpoint
+ */
 module.exports = {};
 
 /**
@@ -78,11 +79,10 @@ module.exports = {};
 module.exports = {};
 
 /**
-* @typedef {Object} ExtendedAction
-* @property {import('../node_modules/svelte-icons-pack').IconType} icon?
-* @property {string} label?
-* @property {(row: any) => string} link?
-* @property {(row: any) => any | void} onClick?
-* @property {() => boolean} showIf?
-*/
-module.exports = {};
+ * @typedef {Object} ExtendedAction 
+ * @property {import("svelte-icons-pack").IconType} icon
+ * @property {boolean} isTargetBlank - if true, open link in new window
+ * @property {(row: any) => string} link
+ * @property {string} tooltip
+ */
+module.exports = {}
