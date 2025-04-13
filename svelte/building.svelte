@@ -4,12 +4,13 @@
   /** @typedef {import('./_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('./_types/users.js').User} User */
-  /** @typedef {import('./_types/property.js').Facility} Facility */
+  /** @typedef {import('./_types/property.js').Building} Building */
+  /** @typedef {import('./_types/property.js').Location} Location */
   
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { UserFacility } from './jsApi.GEN';
+  import { UserBuilding } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
@@ -17,8 +18,9 @@
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
-  let facility  = /** @type {Facility} */ ({/* facility */});
-  let facilities = /** @type {any[][]} */([/* facilities */]);
+  let building  = /** @type {Building} */ ({/* building */});
+  let buildings = /** @type {any[][]} */([/* buildings */]);
+  let locations = /** @type {Location[]} */([/* locations */]);
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
 
@@ -26,24 +28,27 @@
   let popUpForms = /** @type {
     import('svelte').SvelteComponent | HTMLElement | PopUpForms |any
   } */ (null);
-  let isSubmitAddFacility = /** @type boolean */ (false);
+  let isSubmitAddBuilding = /** @type boolean */ (false);
 
-  onMount(() => isPopUpFormReady = true);
+  onMount(() => {
+    isPopUpFormReady = true
+    console.log('Locations: ', locations);
+  });
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await UserFacility( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+    await UserBuilding( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').UserBuildingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
-        isSubmitAddFacility = false;
+        isSubmitAddBuilding = false;
         if (o.error) {
           console.log(o);
           notifier.showError(o.error);
           return
         }
         pager = o.pager;
-        facilities = o.facilities;
+        buildings = o.buildings;
       }
     );
   }
@@ -51,13 +56,13 @@
   async function OnRestore(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      facility: {
+      building: {
         id: row[0]
       },
       cmd: 'restore'
     });
-    await UserFacility(i,
-      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+    await UserBuilding(i,
+      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -67,8 +72,8 @@
         }
 
         pager = o.pager;
-        facilities = o.facilities;
-        notifier.showSuccess(`Facility '${row[1]}' restored !!`);
+        buildings = o.buildings;
+        notifier.showSuccess(`Building '${row[1]}' restored !!`);
 
         OnRefresh(pager);
       }
@@ -78,13 +83,13 @@
   async function OnDelete(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      facility: {
+      building: {
         id: row[0]
       },
       cmd: 'delete'
     });
-    await UserFacility(i,
-      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+    await UserBuilding(i,
+      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -94,8 +99,8 @@
         }
 
         pager = o.pager;
-        facilities = o.facilities;
-        notifier.showSuccess(`Facility '${row[1]}' deleted !!`);
+        buildings = o.buildings;
+        notifier.showSuccess(`Building '${row[1]}' deleted !!`);
 
         OnRefresh(pager);
       }
@@ -103,19 +108,20 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Facility ID to Edit: ' + String(id));
-    const facility = {
+    console.log('Building ID to Edit: ' + String(id));
+    const building = {
       id: payloads[0],
-      facilityName: payloads[1],
-      extraChargeIDR: Number(payloads[2]),
+      buildingName: String(payloads[1]),
+      locationId: String(payloads[2]),
+      facilitiesObj: String(payloads[3]),
     }
     const i = /** @type {any}*/ ({
       pager,
-      facility,
+      building,
       cmd: 'upsert'
     });
-    await UserFacility(i,
-      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+    await UserBuilding(i,
+      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -125,32 +131,33 @@
         }
 
         pager = o.pager;
-        facilities = o.facilities;
-        notifier.showSuccess(`Facility '${facility.facilityName}' updated !!`);
+        buildings = o.buildings;
+        notifier.showSuccess(`Building '${building.buildingName}' updated !!`);
 
         OnRefresh(pager);
       }
     );
   }
 
-  async function OnAddFacility(/** @type any[] */ payloads) {
-    isSubmitAddFacility = true;
+  async function OnAddBuilding(/** @type any[] */ payloads) {
+    isSubmitAddBuilding = true;
 
-    const facility = /** @type {any} */ ({
-      facilityName: payloads[1],
-      extraChargeIDR: Number(payloads[2]),
+    const building = /** @type {any} */ ({
+      buildingName: String(payloads[1]),
+      locationId: String(payloads[2]),
+      facilitiesObj: String(payloads[3]),
     });
     const i = /** @type {any} */ ({
       pager,
-      facility,
+      building,
       cmd: 'upsert'
     });
 
-    await UserFacility(i,
-      /** @type {import('../jsApi.GEN').UserFacilityCallback} */
+    await UserBuilding(i,
+      /** @type {import('../jsApi.GEN').TenantAdminProductsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
-        isSubmitAddFacility = false;
+        isSubmitAddBuilding = false;
         if (o.error) {
           console.log(o);
           notifier.showError(o.error);
@@ -158,8 +165,8 @@
         }
         
         pager = o.pager;
-        facilities = o.facilities;
-        notifier.showSuccess(`Facility '${facility.facilityName}' created !!`);
+        buildings = o.buildings;
+        notifier.showSuccess(`Building '${building.buildingName}' created !!`);
 
         popUpForms.Reset();
 
@@ -173,21 +180,21 @@
 {#if isPopUpFormReady}
   <PopUpForms
     bind:this={popUpForms}
-    heading="Add Facility"
+    heading="Add Building"
     FIELDS={fields}
-    bind:isSubmitted={isSubmitAddFacility}
-    OnSubmit={OnAddFacility}
+    bind:isSubmitted={isSubmitAddBuilding}
+    OnSubmit={OnAddBuilding}
   />
 {/if}
 
 <LayoutMain access={segments} user={user}>
-  <div class="master-facility">
-    <h2>Master Facility</h2>
+  <div class="master-building">
+    <h2>Master Building</h2>
     <MasterTable
       ACCESS={segments}
       bind:FIELDS={fields}
       bind:PAGER={pager}
-      bind:MASTER_ROWS={facilities}
+      bind:MASTER_ROWS={buildings}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
@@ -202,7 +209,7 @@
     <button
       class="btn"
       on:click={() => popUpForms.Show()}
-      title="add facility"
+      title="add building"
     >
       <Icon
         color="var(--gray-007)"
@@ -215,14 +222,14 @@
 </LayoutMain>
 
 <style>
-  .master-facility {
+  .master-building {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
   }
 
-  .master-facility h2 {
+  .master-building h2 {
     margin: 0;
   }
 </style>

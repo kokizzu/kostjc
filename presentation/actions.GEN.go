@@ -12,6 +12,7 @@ var allCommands = []string{
 	domain.GuestResendVerificationEmailAction,
 	domain.GuestResetPasswordAction,
 	domain.GuestVerifyEmailAction,
+	domain.UserBuildingAction,
 	domain.UserFacilityAction,
 	domain.UserLocationAction,
 	domain.UserLogoutAction,

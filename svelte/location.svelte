@@ -149,7 +149,7 @@
     });
 
     await UserLocation(i,
-      /** @type {import('../jsApi.GEN').TenantAdminProductsCallback} */
+      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddLocation = false;

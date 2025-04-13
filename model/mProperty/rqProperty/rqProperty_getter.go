@@ -35,6 +35,21 @@ FROM ` + l.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 	return
 }
 
+func (l *Locations) FindAll() []Locations {
+	const comment = `-- Locations) FindAll`
+
+	queryRows := comment + `
+SELECT ` + l.SqlSelectAllFields() + ` FROM ` + l.SqlTableName()
+
+	var rows = []Locations{}
+	l.Adapter.QuerySql(queryRows, func(row []any) {
+		l.FromArray(row)
+		rows = append(rows, *l)
+	})
+
+	return rows
+}
+
 func (f *Facilities) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud.PagerOut) (res [][]any) {
 	const comment = `-- Facilities) FindByPagination`
 
@@ -57,6 +72,35 @@ SELECT ` + meta.ToSelect() + `
 FROM ` + f.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 
 	f.Adapter.QuerySql(queryRows, func(row []any) {
+		row[0] = X.ToS(row[0]) // ensure id is string
+		res = append(res, row)
+	})
+
+	return
+}
+
+func (b *Buildings) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud.PagerOut) (res [][]any) {
+	const comment = `-- Buildings) FindByPagination`
+
+	validFields := LocationsFieldTypeMap
+	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+
+	queryCount := comment + `
+SELECT COUNT(1)
+FROM ` + b.SqlTableName() + whereAndSql + `
+LIMIT 1`
+	b.Adapter.QuerySql(queryCount, func(row []any) {
+		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
+	})
+
+	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	limitOffsetSql := out.LimitOffsetSql()
+
+	queryRows := comment + `
+SELECT ` + meta.ToSelect() + `
+FROM ` + b.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
+
+	b.Adapter.QuerySql(queryRows, func(row []any) {
 		row[0] = X.ToS(row[0]) // ensure id is string
 		res = append(res, row)
 	})

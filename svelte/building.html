@@ -1449,14 +1449,14 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   }
 }
 
-/* fakecss:./location.esbuild-svelte-fake-css */
-.master-location.svelte-1gfpwgb.svelte-1gfpwgb {
+/* fakecss:./building.esbuild-svelte-fake-css */
+.master-building.svelte-1xkhkqp.svelte-1xkhkqp {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
 }
-.master-location.svelte-1gfpwgb h2.svelte-1gfpwgb {
+.master-building.svelte-1xkhkqp h2.svelte-1xkhkqp {
   margin: 0;
 }
 </style>
@@ -3929,13 +3929,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       exports.GuestVerifyEmail = async function GuestVerifyEmail(i, cb) {
         return await axios.post("/guest/verifyEmail", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.UserBuilding = async function UserBuilding(i, cb) {
+      exports.UserBuilding = async function UserBuilding2(i, cb) {
         return await axios.post("/user/building", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserFacility = async function UserFacility(i, cb) {
         return await axios.post("/user/facility", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.UserLocation = async function UserLocation2(i, cb) {
+      exports.UserLocation = async function UserLocation(i, cb) {
         return await axios.post("/user/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserLogout = async function UserLogout2(i, cb) {
@@ -12537,7 +12537,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   };
   var MasterTable_default = MasterTable;
 
-  // location.svelte
+  // building.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
   // _components/PopUpForms.svelte
@@ -13164,7 +13164,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   };
   var PopUpForms_default = PopUpForms;
 
-  // location.svelte
+  // building.svelte
   function create_if_block5(ctx) {
     let popupforms;
     let updating_isSubmitted;
@@ -13173,21 +13173,21 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       ctx[12](value);
     }
     let popupforms_props = {
-      heading: "Add Location",
+      heading: "Add Building",
       FIELDS: (
         /*fields*/
         ctx[1]
       ),
       OnSubmit: (
-        /*OnAddLocation*/
+        /*OnAddBuilding*/
         ctx[10]
       )
     };
     if (
-      /*isSubmitAddLocation*/
+      /*isSubmitAddBuilding*/
       ctx[5] !== void 0
     ) {
-      popupforms_props.isSubmitted = /*isSubmitAddLocation*/
+      popupforms_props.isSubmitted = /*isSubmitAddBuilding*/
       ctx[5];
     }
     popupforms = new PopUpForms_default({ props: popupforms_props });
@@ -13207,10 +13207,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         2)
           popupforms_changes.FIELDS = /*fields*/
           ctx2[1];
-        if (!updating_isSubmitted && dirty & /*isSubmitAddLocation*/
+        if (!updating_isSubmitted && dirty & /*isSubmitAddBuilding*/
         32) {
           updating_isSubmitted = true;
-          popupforms_changes.isSubmitted = /*isSubmitAddLocation*/
+          popupforms_changes.isSubmitted = /*isSubmitAddBuilding*/
           ctx2[5];
           add_flush_callback(() => updating_isSubmitted = false);
         }
@@ -13250,7 +13250,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         button = element("button");
         create_component(icon.$.fragment);
         attr(button, "class", "btn");
-        attr(button, "title", "add account");
+        attr(button, "title", "add building");
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -13345,10 +13345,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       ctx[2];
     }
     if (
-      /*locations*/
+      /*buildings*/
       ctx[0] !== void 0
     ) {
-      mastertable_props.MASTER_ROWS = /*locations*/
+      mastertable_props.MASTER_ROWS = /*buildings*/
       ctx[0];
     }
     mastertable = new MasterTable_default({ props: mastertable_props });
@@ -13359,11 +13359,11 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       c() {
         div = element("div");
         h2 = element("h2");
-        h2.textContent = "Master Location";
+        h2.textContent = "Master Building";
         t1 = space();
         create_component(mastertable.$.fragment);
-        attr(h2, "class", "svelte-1gfpwgb");
-        attr(div, "class", "master-location svelte-1gfpwgb");
+        attr(h2, "class", "svelte-1xkhkqp");
+        attr(div, "class", "master-building svelte-1xkhkqp");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -13392,10 +13392,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           ctx2[2];
           add_flush_callback(() => updating_PAGER = false);
         }
-        if (!updating_MASTER_ROWS && dirty & /*locations*/
+        if (!updating_MASTER_ROWS && dirty & /*buildings*/
         1) {
           updating_MASTER_ROWS = true;
-          mastertable_changes.MASTER_ROWS = /*locations*/
+          mastertable_changes.MASTER_ROWS = /*buildings*/
           ctx2[0];
           add_flush_callback(() => updating_MASTER_ROWS = false);
         }
@@ -13474,7 +13474,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           check_outros();
         }
         const layoutmain_changes = {};
-        if (dirty & /*$scope, fields, pager, locations, popUpForms*/
+        if (dirty & /*$scope, fields, pager, buildings, popUpForms*/
         131095) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
@@ -13510,10 +13510,14 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     /** @type {Access} */
     {/* segments */}
   );
+  var locations = (
+    /** @type {Location[]} */
+    [/* locations */]
+  );
   function instance10($self, $props, $invalidate) {
-    let locations = (
+    let buildings = (
       /** @type {any[][]} */
-      [/* locations */]
+      [/* buildings */]
     );
     let fields = (
       /** @type {Field[]} */
@@ -13533,27 +13537,30 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       } */
       null
     );
-    let isSubmitAddLocation = (
+    let isSubmitAddBuilding = (
       /** @type boolean */
       false
     );
-    onMount(() => $invalidate(3, isPopUpFormReady = true));
+    onMount(() => {
+      $invalidate(3, isPopUpFormReady = true);
+      console.log("Locations: ", locations);
+    });
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: "list" };
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserBuilding)(
         // @ts-ignore
         i,
-        /** @type {import('./jsApi.GEN').UserLocationCallback} */
+        /** @type {import('./jsApi.GEN').UserBuildingCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddLocation = false);
+          $invalidate(5, isSubmitAddBuilding = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
+          $invalidate(0, buildings = o.buildings);
         }
       );
     }
@@ -13562,13 +13569,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         /** @type {any}*/
         {
           pager,
-          location: { id: row[0] },
+          building: { id: row[0] },
           cmd: "restore"
         }
       );
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserBuilding)(
         i,
-        /** @type {import('./jsApi.GEN').UserLocationCallback} */
+        /** @type {import('./jsApi.GEN').UserBuildingCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13577,8 +13584,8 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
-          notifier.showSuccess(`Location '${row[1]}' restored !!`);
+          $invalidate(0, buildings = o.buildings);
+          notifier.showSuccess(`Building '${row[1]}' restored !!`);
           OnRefresh(pager);
         }
       );
@@ -13588,13 +13595,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         /** @type {any}*/
         {
           pager,
-          location: { id: row[0] },
+          building: { id: row[0] },
           cmd: "delete"
         }
       );
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserBuilding)(
         i,
-        /** @type {import('./jsApi.GEN').UserLocationCallback} */
+        /** @type {import('./jsApi.GEN').UserBuildingCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13603,8 +13610,8 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
-          notifier.showSuccess(`Location '${row[1]}' deleted !!`);
+          $invalidate(0, buildings = o.buildings);
+          notifier.showSuccess(`Building '${row[1]}' deleted !!`);
           OnRefresh(pager);
         }
       );
@@ -13612,21 +13619,21 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     async function OnEdit(id, payloads) {
       console.log(
         /** @type any[]*/
-        "Location ID to Edit: " + String(id)
+        "Building ID to Edit: " + String(id)
       );
-      const location = {
+      const building = {
         id: payloads[0],
-        name: payloads[1],
-        address: payloads[2],
-        gmapLocation: payloads[3]
+        buildingName: String(payloads[1]),
+        locationId: String(payloads[2]),
+        facilitiesObj: String(payloads[3])
       };
       const i = (
         /** @type {any}*/
-        { pager, location, cmd: "upsert" }
+        { pager, building, cmd: "upsert" }
       );
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserBuilding)(
         i,
-        /** @type {import('./jsApi.GEN').UserLocationCallback} */
+        /** @type {import('./jsApi.GEN').UserBuildingCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13635,40 +13642,40 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
-          notifier.showSuccess(`Location '${location.name}' updated !!`);
+          $invalidate(0, buildings = o.buildings);
+          notifier.showSuccess(`Building '${building.buildingName}' updated !!`);
           OnRefresh(pager);
         }
       );
     }
-    async function OnAddLocation(payloads) {
-      $invalidate(5, isSubmitAddLocation = true);
-      const location = (
+    async function OnAddBuilding(payloads) {
+      $invalidate(5, isSubmitAddBuilding = true);
+      const building = (
         /** @type {any} */
         {
-          name: payloads[1],
-          address: payloads[2],
-          gmapLocation: payloads[3]
+          buildingName: String(payloads[1]),
+          locationId: String(payloads[2]),
+          facilitiesObj: String(payloads[3])
         }
       );
       const i = (
         /** @type {any} */
-        { pager, location, cmd: "upsert" }
+        { pager, building, cmd: "upsert" }
       );
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserBuilding)(
         i,
-        /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+        /** @type {import('../jsApi.GEN').TenantAdminProductsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddLocation = false);
+          $invalidate(5, isSubmitAddBuilding = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
-          notifier.showSuccess(`Location '${location.name}' created !!`);
+          $invalidate(0, buildings = o.buildings);
+          notifier.showSuccess(`Building '${building.buildingName}' created !!`);
           popUpForms.Reset();
           OnRefresh(pager);
         }
@@ -13682,8 +13689,8 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       });
     }
     function popupforms_isSubmitted_binding(value) {
-      isSubmitAddLocation = value;
-      $invalidate(5, isSubmitAddLocation);
+      isSubmitAddBuilding = value;
+      $invalidate(5, isSubmitAddBuilding);
     }
     const click_handler = () => popUpForms.Show();
     function mastertable_FIELDS_binding(value) {
@@ -13695,21 +13702,21 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       $invalidate(2, pager);
     }
     function mastertable_MASTER_ROWS_binding(value) {
-      locations = value;
-      $invalidate(0, locations);
+      buildings = value;
+      $invalidate(0, buildings);
     }
     return [
-      locations,
+      buildings,
       fields,
       pager,
       isPopUpFormReady,
       popUpForms,
-      isSubmitAddLocation,
+      isSubmitAddBuilding,
       OnRefresh,
       OnRestore,
       OnDelete,
       OnEdit,
-      OnAddLocation,
+      OnAddBuilding,
       popupforms_binding,
       popupforms_isSubmitted_binding,
       click_handler,
@@ -13718,16 +13725,16 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       mastertable_MASTER_ROWS_binding
     ];
   }
-  var Location = class extends SvelteComponent {
+  var Building = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance10, create_fragment10, safe_not_equal, {});
     }
   };
-  var location_default = Location;
+  var building_default = Building;
 
-  // location.svelte.ts
-  var app = new location_default({ target: document.getElementById("app") });
+  // building.svelte.ts
+  var app = new building_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

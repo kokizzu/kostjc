@@ -3929,6 +3929,9 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       exports.GuestVerifyEmail = async function GuestVerifyEmail(i, cb) {
         return await axios.post("/guest/verifyEmail", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.UserBuilding = async function UserBuilding(i, cb) {
+        return await axios.post("/user/building", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.UserFacility = async function UserFacility2(i, cb) {
         return await axios.post("/user/facility", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -5029,11 +5032,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     let t3;
     let a2;
     let t5;
-    let span;
-    let t6;
-    let nav1;
     let a3;
+    let t7;
+    let span;
     let t8;
+    let nav1;
+    let a4;
+    let t10;
     let button;
     let mounted;
     let dispose;
@@ -5051,12 +5056,15 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         a2 = element("a");
         a2.textContent = "Facility";
         t5 = space();
-        span = element("span");
-        t6 = space();
-        nav1 = element("nav");
         a3 = element("a");
-        a3.textContent = "Profile";
+        a3.textContent = "Building";
+        t7 = space();
+        span = element("span");
         t8 = space();
+        nav1 = element("nav");
+        a4 = element("a");
+        a4.textContent = "Profile";
+        t10 = space();
         button = element("button");
         button.textContent = "Logout";
         attr(a0, "href", "/");
@@ -5083,12 +5091,20 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           /*pathLv2*/
           ctx[2] === "facility"
         );
-        attr(nav0, "class", "nav-menu svelte-17p6uij");
-        attr(span, "class", "separator svelte-17p6uij");
-        attr(a3, "href", "/user");
+        attr(a3, "href", "/user/building");
         attr(a3, "class", "svelte-17p6uij");
         toggle_class(
           a3,
+          "active",
+          /*pathLv2*/
+          ctx[2] === "building"
+        );
+        attr(nav0, "class", "nav-menu svelte-17p6uij");
+        attr(span, "class", "separator svelte-17p6uij");
+        attr(a4, "href", "/user");
+        attr(a4, "class", "svelte-17p6uij");
+        toggle_class(
+          a4,
           "active",
           /*pathAll*/
           ctx[0] === "/user"
@@ -5107,12 +5123,14 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         append(nav0, a1);
         append(nav0, t3);
         append(nav0, a2);
-        append(div, t5);
+        append(nav0, t5);
+        append(nav0, a3);
+        append(div, t7);
         append(div, span);
-        append(div, t6);
+        append(div, t8);
         append(div, nav1);
-        append(nav1, a3);
-        append(nav1, t8);
+        append(nav1, a4);
+        append(nav1, t10);
         append(nav1, button);
         if (!mounted) {
           dispose = listen(
@@ -13155,13 +13173,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       ctx[12](value);
     }
     let popupforms_props = {
-      heading: "Add Location",
+      heading: "Add Facility",
       FIELDS: (
         /*fields*/
         ctx[1]
       ),
       OnSubmit: (
-        /*OnAddLocation*/
+        /*OnAddFacility*/
         ctx[10]
       )
     };
@@ -13232,7 +13250,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         button = element("button");
         create_component(icon.$.fragment);
         attr(button, "class", "btn");
-        attr(button, "title", "add account");
+        attr(button, "title", "add facility");
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -13525,7 +13543,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       await (0, import_jsApi2.UserFacility)(
         // @ts-ignore
         i,
-        /** @type {import('./jsApi.GEN').FacilityCallback} */
+        /** @type {import('./jsApi.GEN').UserFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           $invalidate(5, isSubmitAddFacility = false);
@@ -13550,7 +13568,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       );
       await (0, import_jsApi2.UserFacility)(
         i,
-        /** @type {import('./jsApi.GEN').FacilityCallback} */
+        /** @type {import('./jsApi.GEN').UserFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13560,7 +13578,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           }
           $invalidate(2, pager = o.pager);
           $invalidate(0, facilities = o.facilities);
-          notifier.showSuccess(`Location '${row[1]}' restored !!`);
+          notifier.showSuccess(`Facility '${row[1]}' restored !!`);
           OnRefresh(pager);
         }
       );
@@ -13576,7 +13594,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       );
       await (0, import_jsApi2.UserFacility)(
         i,
-        /** @type {import('./jsApi.GEN').FacilityCallback} */
+        /** @type {import('./jsApi.GEN').UserFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13607,7 +13625,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       );
       await (0, import_jsApi2.UserFacility)(
         i,
-        /** @type {import('./jsApi.GEN').FacilityCallback} */
+        /** @type {import('./jsApi.GEN').UserFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13622,7 +13640,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         }
       );
     }
-    async function OnAddLocation(payloads) {
+    async function OnAddFacility(payloads) {
       $invalidate(5, isSubmitAddFacility = true);
       const facility = (
         /** @type {any} */
@@ -13637,7 +13655,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       );
       await (0, import_jsApi2.UserFacility)(
         i,
-        /** @type {import('../jsApi.GEN').TenantAdminProductsCallback} */
+        /** @type {import('../jsApi.GEN').UserFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           $invalidate(5, isSubmitAddFacility = false);
@@ -13648,7 +13666,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           }
           $invalidate(2, pager = o.pager);
           $invalidate(0, facilities = o.facilities);
-          notifier.showSuccess(`Location '${facility.name}' created !!`);
+          notifier.showSuccess(`Facility '${facility.facilityName}' created !!`);
           popUpForms.Reset();
           OnRefresh(pager);
         }
@@ -13689,7 +13707,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       OnRestore,
       OnDelete,
       OnEdit,
-      OnAddLocation,
+      OnAddFacility,
       popupforms_binding,
       popupforms_isSubmitted_binding,
       click_handler,

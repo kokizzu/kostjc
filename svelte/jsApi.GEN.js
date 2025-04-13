@@ -252,6 +252,126 @@ exports.GuestVerifyEmail = async function GuestVerifyEmail( i, cb ) {
 }
 
 /**
+ * @typedef {Object} UserBuildingIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} building.id
+ * @property {String} building.buildingName
+ * @property {number} building.locationId
+ * @property {String} building.facilitiesObj
+ * @property {number} building.createdAt
+ * @property {number} building.createdBy
+ * @property {number} building.updatedAt
+ * @property {number} building.updatedBy
+ * @property {number} building.deletedAt
+ * @property {number} building.deletedBy
+ * @property {number} building.restoredBy
+ */
+const UserBuildingIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  building: { // rqProperty.Buildings
+    id: 0, // uint64
+    buildingName: '', // string
+    locationId: 0, // uint64
+    facilitiesObj: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Buildings
+}
+/**
+ * @typedef {Object} UserBuildingOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {Object} locations
+ * @property {number} building.id
+ * @property {String} building.buildingName
+ * @property {number} building.locationId
+ * @property {String} building.facilitiesObj
+ * @property {number} building.createdAt
+ * @property {number} building.createdBy
+ * @property {number} building.updatedAt
+ * @property {number} building.updatedBy
+ * @property {number} building.deletedAt
+ * @property {number} building.deletedBy
+ * @property {number} building.restoredBy
+ * @property {Object} buildings
+ */
+const UserBuildingOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  locations: { // []rqProperty.Locations
+  }, // []rqProperty.Locations
+  building: { // rqProperty.Buildings
+    id: 0, // uint64
+    buildingName: '', // string
+    locationId: 0, // uint64
+    facilitiesObj: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Buildings
+  buildings: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback UserBuildingCallback
+ * @param {UserBuildingOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {UserBuildingIn} i
+ * @param {UserBuildingCallback} cb
+ * @returns {Promise}
+ */
+exports.UserBuilding = async function UserBuilding( i, cb ) {
+  return await axios.post( '/user/building', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} UserFacilityIn
  * @property {String} cmd
  * @property {Object} withMeta

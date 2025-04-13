@@ -77,6 +77,35 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.UserBuildingAction, func(ctx *fiber.Ctx) error {
+		var in domain.UserBuildingIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserBuildingAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.UserBuilding(&in)
+
+		return views.RenderBuilding(ctx, M.SX{
+			`title`:     `User Building`,
+			`user`:      user,
+			`segments`:  segments,
+			`building`:  out.Building,
+			`buildings`: out.Buildings,
+			`locations`: out.Locations,
+			`fields`:    out.Meta.Fields,
+			`pager`:     out.Pager,
+		})
+	})
+
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {
 		return views.RenderDebug(ctx, M.SX{})
 	})

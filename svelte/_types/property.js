@@ -28,3 +28,19 @@ module.exports = {};
  * @property {string} restoredBy
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} Building
+ * @property {string} id
+ * @property {string} buildingName
+ * @property {number} locationId
+ * @property {string} facilitiesObj
+ * @property {number} createdAt
+ * @property {string} createdBy
+ * @property {number} updatedAt
+ * @property {string} updatedBy
+ * @property {number} deletedAt
+ * @property {string} deletedBy
+ * @property {string} restoredBy
+ */
+module.exports = {};
