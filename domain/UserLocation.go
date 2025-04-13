@@ -87,7 +87,7 @@ var UserLocationMeta = zCrud.Meta{
 			Name:      mProperty.DeletedAt,
 			Label:     `Deleted At`,
 			DataType:  zCrud.DataTypeInt,
-			InputType: zCrud.InputTypeHidden,
+			InputType: zCrud.InputTypeDateTime,
 			ReadOnly:  true,
 		},
 	},

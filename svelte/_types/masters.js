@@ -9,6 +9,11 @@
 module.exports = {};
 
 /**
+ * @typedef { 'string' | 'int' | 'float' | 'intArr' | 'mapping' | 'currency' } DataType
+*/
+module.exports = {};
+
+/**
 * @typedef {Object} Access
 * @property {boolean} admin
 * @property {boolean} staff
@@ -41,12 +46,13 @@ module.exports = {}
  * @property {string} name
  * @property {string} label
  * @property {string} description
- * @property {string} type
+ * @property {DataType} type
  * @property {InputType} inputType
  * @property {boolean} readOnly
+ * @property {string} mapping
  * @property {string[]} validations
- * @property {string[]} ref
  * @property {string} refEndpoint
+ * @property {string} ref
  */
 module.exports = {};
 

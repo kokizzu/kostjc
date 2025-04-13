@@ -1449,14 +1449,14 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   }
 }
 
-/* fakecss:./location.esbuild-svelte-fake-css */
-.master-location.svelte-1gfpwgb.svelte-1gfpwgb {
+/* fakecss:./facility.esbuild-svelte-fake-css */
+.master-facility.svelte-1fytyq7.svelte-1fytyq7 {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
 }
-.master-location.svelte-1gfpwgb h2.svelte-1gfpwgb {
+.master-facility.svelte-1fytyq7 h2.svelte-1fytyq7 {
   margin: 0;
 }
 </style>
@@ -3929,10 +3929,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       exports.GuestVerifyEmail = async function GuestVerifyEmail(i, cb) {
         return await axios.post("/guest/verifyEmail", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.UserFacility = async function UserFacility(i, cb) {
+      exports.UserFacility = async function UserFacility2(i, cb) {
         return await axios.post("/user/facility", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.UserLocation = async function UserLocation2(i, cb) {
+      exports.UserLocation = async function UserLocation(i, cb) {
         return await axios.post("/user/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserLogout = async function UserLogout2(i, cb) {
@@ -12519,7 +12519,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   };
   var MasterTable_default = MasterTable;
 
-  // location.svelte
+  // facility.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
   // _components/PopUpForms.svelte
@@ -13146,7 +13146,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   };
   var PopUpForms_default = PopUpForms;
 
-  // location.svelte
+  // facility.svelte
   function create_if_block5(ctx) {
     let popupforms;
     let updating_isSubmitted;
@@ -13166,10 +13166,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       )
     };
     if (
-      /*isSubmitAddLocation*/
+      /*isSubmitAddFacility*/
       ctx[5] !== void 0
     ) {
-      popupforms_props.isSubmitted = /*isSubmitAddLocation*/
+      popupforms_props.isSubmitted = /*isSubmitAddFacility*/
       ctx[5];
     }
     popupforms = new PopUpForms_default({ props: popupforms_props });
@@ -13189,10 +13189,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         2)
           popupforms_changes.FIELDS = /*fields*/
           ctx2[1];
-        if (!updating_isSubmitted && dirty & /*isSubmitAddLocation*/
+        if (!updating_isSubmitted && dirty & /*isSubmitAddFacility*/
         32) {
           updating_isSubmitted = true;
-          popupforms_changes.isSubmitted = /*isSubmitAddLocation*/
+          popupforms_changes.isSubmitted = /*isSubmitAddFacility*/
           ctx2[5];
           add_flush_callback(() => updating_isSubmitted = false);
         }
@@ -13327,10 +13327,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       ctx[2];
     }
     if (
-      /*locations*/
+      /*facilities*/
       ctx[0] !== void 0
     ) {
-      mastertable_props.MASTER_ROWS = /*locations*/
+      mastertable_props.MASTER_ROWS = /*facilities*/
       ctx[0];
     }
     mastertable = new MasterTable_default({ props: mastertable_props });
@@ -13341,11 +13341,11 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       c() {
         div = element("div");
         h2 = element("h2");
-        h2.textContent = "Master Location";
+        h2.textContent = "Master Facility";
         t1 = space();
         create_component(mastertable.$.fragment);
-        attr(h2, "class", "svelte-1gfpwgb");
-        attr(div, "class", "master-location svelte-1gfpwgb");
+        attr(h2, "class", "svelte-1fytyq7");
+        attr(div, "class", "master-facility svelte-1fytyq7");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -13374,10 +13374,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           ctx2[2];
           add_flush_callback(() => updating_PAGER = false);
         }
-        if (!updating_MASTER_ROWS && dirty & /*locations*/
+        if (!updating_MASTER_ROWS && dirty & /*facilities*/
         1) {
           updating_MASTER_ROWS = true;
-          mastertable_changes.MASTER_ROWS = /*locations*/
+          mastertable_changes.MASTER_ROWS = /*facilities*/
           ctx2[0];
           add_flush_callback(() => updating_MASTER_ROWS = false);
         }
@@ -13456,7 +13456,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           check_outros();
         }
         const layoutmain_changes = {};
-        if (dirty & /*$scope, fields, pager, locations, popUpForms*/
+        if (dirty & /*$scope, fields, pager, facilities, popUpForms*/
         131095) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
@@ -13493,9 +13493,9 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     {/* segments */}
   );
   function instance10($self, $props, $invalidate) {
-    let locations = (
+    let facilities = (
       /** @type {any[][]} */
-      [/* locations */]
+      [/* facilities */]
     );
     let fields = (
       /** @type {Field[]} */
@@ -13515,27 +13515,27 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       } */
       null
     );
-    let isSubmitAddLocation = (
+    let isSubmitAddFacility = (
       /** @type boolean */
       false
     );
     onMount(() => $invalidate(3, isPopUpFormReady = true));
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: "list" };
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserFacility)(
         // @ts-ignore
         i,
-        /** @type {import('./jsApi.GEN').UserLocationCallback} */
+        /** @type {import('./jsApi.GEN').FacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddLocation = false);
+          $invalidate(5, isSubmitAddFacility = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
+          $invalidate(0, facilities = o.facilities);
         }
       );
     }
@@ -13544,13 +13544,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         /** @type {any}*/
         {
           pager,
-          location: { id: row[0] },
+          facility: { id: row[0] },
           cmd: "restore"
         }
       );
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserFacility)(
         i,
-        /** @type {import('./jsApi.GEN').UserLocationCallback} */
+        /** @type {import('./jsApi.GEN').FacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13559,7 +13559,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
+          $invalidate(0, facilities = o.facilities);
           notifier.showSuccess(`Location '${row[1]}' restored !!`);
           OnRefresh(pager);
         }
@@ -13570,13 +13570,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         /** @type {any}*/
         {
           pager,
-          location: { id: row[0] },
+          facility: { id: row[0] },
           cmd: "delete"
         }
       );
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserFacility)(
         i,
-        /** @type {import('./jsApi.GEN').UserLocationCallback} */
+        /** @type {import('./jsApi.GEN').FacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13585,8 +13585,8 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
-          notifier.showSuccess(`Location '${row[1]}' deleted !!`);
+          $invalidate(0, facilities = o.facilities);
+          notifier.showSuccess(`Facility '${row[1]}' deleted !!`);
           OnRefresh(pager);
         }
       );
@@ -13594,21 +13594,20 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     async function OnEdit(id, payloads) {
       console.log(
         /** @type any[]*/
-        "Location ID to Edit: " + String(id)
+        "Facility ID to Edit: " + String(id)
       );
-      const location = {
+      const facility = {
         id: payloads[0],
-        name: payloads[1],
-        address: payloads[2],
-        gmapLocation: payloads[3]
+        facilityName: payloads[1],
+        extraChargeIDR: Number(payloads[2])
       };
       const i = (
         /** @type {any}*/
-        { pager, location, cmd: "upsert" }
+        { pager, facility, cmd: "upsert" }
       );
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserFacility)(
         i,
-        /** @type {import('./jsApi.GEN').UserLocationCallback} */
+        /** @type {import('./jsApi.GEN').FacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13617,40 +13616,39 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
-          notifier.showSuccess(`Location '${location.name}' updated !!`);
+          $invalidate(0, facilities = o.facilities);
+          notifier.showSuccess(`Facility '${facility.facilityName}' updated !!`);
           OnRefresh(pager);
         }
       );
     }
     async function OnAddLocation(payloads) {
-      $invalidate(5, isSubmitAddLocation = true);
-      const location = (
+      $invalidate(5, isSubmitAddFacility = true);
+      const facility = (
         /** @type {any} */
         {
-          name: payloads[1],
-          address: payloads[2],
-          gmapLocation: payloads[3]
+          facilityName: payloads[1],
+          extraChargeIDR: Number(payloads[2])
         }
       );
       const i = (
         /** @type {any} */
-        { pager, location, cmd: "upsert" }
+        { pager, facility, cmd: "upsert" }
       );
-      await (0, import_jsApi2.UserLocation)(
+      await (0, import_jsApi2.UserFacility)(
         i,
         /** @type {import('../jsApi.GEN').TenantAdminProductsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddLocation = false);
+          $invalidate(5, isSubmitAddFacility = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, locations = o.locations);
-          notifier.showSuccess(`Location '${location.name}' created !!`);
+          $invalidate(0, facilities = o.facilities);
+          notifier.showSuccess(`Location '${facility.name}' created !!`);
           popUpForms.Reset();
           OnRefresh(pager);
         }
@@ -13664,8 +13662,8 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       });
     }
     function popupforms_isSubmitted_binding(value) {
-      isSubmitAddLocation = value;
-      $invalidate(5, isSubmitAddLocation);
+      isSubmitAddFacility = value;
+      $invalidate(5, isSubmitAddFacility);
     }
     const click_handler = () => popUpForms.Show();
     function mastertable_FIELDS_binding(value) {
@@ -13677,16 +13675,16 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       $invalidate(2, pager);
     }
     function mastertable_MASTER_ROWS_binding(value) {
-      locations = value;
-      $invalidate(0, locations);
+      facilities = value;
+      $invalidate(0, facilities);
     }
     return [
-      locations,
+      facilities,
       fields,
       pager,
       isPopUpFormReady,
       popUpForms,
-      isSubmitAddLocation,
+      isSubmitAddFacility,
       OnRefresh,
       OnRestore,
       OnDelete,
@@ -13700,16 +13698,16 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       mastertable_MASTER_ROWS_binding
     ];
   }
-  var Location = class extends SvelteComponent {
+  var Facility = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance10, create_fragment10, safe_not_equal, {});
     }
   };
-  var location_default = Location;
+  var facility_default = Facility;
 
-  // location.svelte.ts
-  var app = new location_default({ target: document.getElementById("app") });
+  // facility.svelte.ts
+  var app = new facility_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

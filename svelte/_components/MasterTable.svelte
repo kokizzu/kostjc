@@ -23,7 +23,7 @@
   } from '../node_modules/svelte-icons-pack/dist/cg';
   import InputBox from './InputBox.svelte';
   import { onMount } from 'svelte';
-  import { datetime } from './xFormatter.js';
+  import { datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
 
   export let FIELDS = /** @type Field[] */ ([]); // bind
@@ -452,6 +452,8 @@
                       <span>--</span>
                     {/if}
                   </td>
+                {:else if f.type == 'currency'}
+                  <td>{row[idx] ? formatPrice(row[idx], (f.mapping || 'IDR')) : '--'}</td>
                 {:else if f.inputType === 'datetime'}
                   <td>{row[idx] ? datetime(row[idx]) : '--'}</td>
                 {:else if f.inputType === 'combobox' && REFS[f.name]}

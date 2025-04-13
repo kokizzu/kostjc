@@ -52,6 +52,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.GuestVerifyEmail(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.UserFacilityAction:
+		in := domain.UserFacilityIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.UserFacility(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.UserLocationAction:
 		in := domain.UserLocationIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

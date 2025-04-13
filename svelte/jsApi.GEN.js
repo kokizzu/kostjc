@@ -252,6 +252,119 @@ exports.GuestVerifyEmail = async function GuestVerifyEmail( i, cb ) {
 }
 
 /**
+ * @typedef {Object} UserFacilityIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} facility.id
+ * @property {String} facility.facilityName
+ * @property {number} facility.extraChargeIDR
+ * @property {number} facility.createdAt
+ * @property {number} facility.createdBy
+ * @property {number} facility.updatedAt
+ * @property {number} facility.updatedBy
+ * @property {number} facility.deletedAt
+ * @property {number} facility.deletedBy
+ * @property {number} facility.restoredBy
+ */
+const UserFacilityIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  facility: { // rqProperty.Facilities
+    id: 0, // uint64
+    facilityName: '', // string
+    extraChargeIDR: 0, // int64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Facilities
+}
+/**
+ * @typedef {Object} UserFacilityOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} facility.id
+ * @property {String} facility.facilityName
+ * @property {number} facility.extraChargeIDR
+ * @property {number} facility.createdAt
+ * @property {number} facility.createdBy
+ * @property {number} facility.updatedAt
+ * @property {number} facility.updatedBy
+ * @property {number} facility.deletedAt
+ * @property {number} facility.deletedBy
+ * @property {number} facility.restoredBy
+ * @property {Object} facilities
+ */
+const UserFacilityOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  facility: { // rqProperty.Facilities
+    id: 0, // uint64
+    facilityName: '', // string
+    extraChargeIDR: 0, // int64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Facilities
+  facilities: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback UserFacilityCallback
+ * @param {UserFacilityOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {UserFacilityIn} i
+ * @param {UserFacilityCallback} cb
+ * @returns {Promise}
+ */
+exports.UserFacility = async function UserFacility( i, cb ) {
+  return await axios.post( '/user/facility', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} UserLocationIn
  * @property {String} cmd
  * @property {Object} withMeta

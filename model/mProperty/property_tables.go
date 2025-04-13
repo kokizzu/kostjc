@@ -25,7 +25,7 @@ const (
 	TableFacilities Tt.TableName = `facilities`
 
 	FacilityName   = `facilityName`
-	extraChargeIDR = `extraChargeIDR`
+	ExtraChargeIDR = `extraChargeIDR`
 )
 
 const (
@@ -91,7 +91,7 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 		Fields: []Tt.Field{
 			{Id, Tt.Unsigned},
 			{FacilityName, Tt.String},
-			{extraChargeIDR, Tt.Integer},
+			{ExtraChargeIDR, Tt.Integer},
 			{CreatedAt, Tt.Integer},
 			{CreatedBy, Tt.Unsigned},
 			{UpdatedAt, Tt.Integer},

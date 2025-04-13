@@ -10,6 +10,7 @@ import (
 var viewList = map[string]string{
 	`Debug`:    `../svelte/debug.html`,    // ../svelte/debug.svelte
 	`Error`:    `../svelte/error.html`,    // ../svelte/error.svelte
+	`Facility`: `../svelte/facility.html`, // ../svelte/facility.svelte
 	`Index`:    `../svelte/index.html`,    // ../svelte/index.svelte
 	`Location`: `../svelte/location.html`, // ../svelte/location.svelte
 }
@@ -22,6 +23,11 @@ func (v *Views) RenderDebug(c *fiber.Ctx, m M.SX) error {
 func (v *Views) RenderError(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`Error`].Str(m))
+}
+
+func (v *Views) RenderFacility(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`Facility`].Str(m))
 }
 
 func (v *Views) RenderIndex(c *fiber.Ctx, m M.SX) error {

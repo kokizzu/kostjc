@@ -19,11 +19,12 @@ type InputType string
 type Validation string
 
 const (
-	DataTypeString  DataType = `string`
-	DataTypeInt     DataType = `int`
-	DataTypeFloat   DataType = `float`
-	DataTypeIntArr  DataType = `intArr`
-	DataTypeMapping DataType = `mapping`
+	DataTypeString   DataType = `string`
+	DataTypeInt      DataType = `int`
+	DataTypeFloat    DataType = `float`
+	DataTypeIntArr   DataType = `intArr`
+	DataTypeMapping  DataType = `mapping`
+	DataTypeCurrency DataType = `currency`
 
 	InputTypeText     InputType = `text`
 	InputTypeTextArea InputType = `textarea`
