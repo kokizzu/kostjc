@@ -1449,14 +1449,14 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   }
 }
 
-/* fakecss:./building.esbuild-svelte-fake-css */
-.master-building.svelte-1xkhkqp.svelte-1xkhkqp {
+/* fakecss:./tenantsManagement.esbuild-svelte-fake-css */
+.master-tenants.svelte-1pu8wr1.svelte-1pu8wr1 {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
 }
-.master-building.svelte-1xkhkqp h2.svelte-1xkhkqp {
+.master-tenants.svelte-1pu8wr1 h2.svelte-1pu8wr1 {
   margin: 0;
 }
 </style>
@@ -3929,7 +3929,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       exports.GuestVerifyEmail = async function GuestVerifyEmail(i, cb) {
         return await axios.post("/guest/verifyEmail", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.UserBuilding = async function UserBuilding2(i, cb) {
+      exports.UserBuilding = async function UserBuilding(i, cb) {
         return await axios.post("/user/building", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserFacility = async function UserFacility(i, cb) {
@@ -3947,7 +3947,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       exports.UserSessionKill = async function UserSessionKill(i, cb) {
         return await axios.post("/user/sessionKill", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.UserTenants = async function UserTenants(i, cb) {
+      exports.UserTenants = async function UserTenants2(i, cb) {
         return await axios.post("/user/tenantsManagement", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
     }
@@ -12558,7 +12558,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   };
   var MasterTable_default = MasterTable;
 
-  // building.svelte
+  // tenantsManagement.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
   // _components/PopUpForms.svelte
@@ -13185,7 +13185,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
   };
   var PopUpForms_default = PopUpForms;
 
-  // building.svelte
+  // tenantsManagement.svelte
   function create_if_block5(ctx) {
     let popupforms;
     let updating_isSubmitted;
@@ -13194,21 +13194,21 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       ctx[12](value);
     }
     let popupforms_props = {
-      heading: "Add Building",
+      heading: "Add Tenant",
       FIELDS: (
         /*fields*/
         ctx[1]
       ),
       OnSubmit: (
-        /*OnAddBuilding*/
+        /*OnAddTenant*/
         ctx[10]
       )
     };
     if (
-      /*isSubmitAddBuilding*/
+      /*isSubmitTenant*/
       ctx[5] !== void 0
     ) {
-      popupforms_props.isSubmitted = /*isSubmitAddBuilding*/
+      popupforms_props.isSubmitted = /*isSubmitTenant*/
       ctx[5];
     }
     popupforms = new PopUpForms_default({ props: popupforms_props });
@@ -13228,10 +13228,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         2)
           popupforms_changes.FIELDS = /*fields*/
           ctx2[1];
-        if (!updating_isSubmitted && dirty & /*isSubmitAddBuilding*/
+        if (!updating_isSubmitted && dirty & /*isSubmitTenant*/
         32) {
           updating_isSubmitted = true;
-          popupforms_changes.isSubmitted = /*isSubmitAddBuilding*/
+          popupforms_changes.isSubmitted = /*isSubmitTenant*/
           ctx2[5];
           add_flush_callback(() => updating_isSubmitted = false);
         }
@@ -13271,7 +13271,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         button = element("button");
         create_component(icon.$.fragment);
         attr(button, "class", "btn");
-        attr(button, "title", "add building");
+        attr(button, "title", "add tenant");
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -13328,7 +13328,6 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     }
     let mastertable_props = {
       ACCESS: segments,
-      REFS: { "locationId": locations },
       CAN_EDIT_ROW: true,
       CAN_SEARCH_ROW: true,
       CAN_DELETE_ROW: true,
@@ -13367,10 +13366,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       ctx[2];
     }
     if (
-      /*buildings*/
+      /*tenants*/
       ctx[0] !== void 0
     ) {
-      mastertable_props.MASTER_ROWS = /*buildings*/
+      mastertable_props.MASTER_ROWS = /*tenants*/
       ctx[0];
     }
     mastertable = new MasterTable_default({ props: mastertable_props });
@@ -13381,11 +13380,11 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       c() {
         div = element("div");
         h2 = element("h2");
-        h2.textContent = "Master Building";
+        h2.textContent = "Master Tenants";
         t1 = space();
         create_component(mastertable.$.fragment);
-        attr(h2, "class", "svelte-1xkhkqp");
-        attr(div, "class", "master-building svelte-1xkhkqp");
+        attr(h2, "class", "svelte-1pu8wr1");
+        attr(div, "class", "master-tenants svelte-1pu8wr1");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -13414,10 +13413,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           ctx2[2];
           add_flush_callback(() => updating_PAGER = false);
         }
-        if (!updating_MASTER_ROWS && dirty & /*buildings*/
+        if (!updating_MASTER_ROWS && dirty & /*tenants*/
         1) {
           updating_MASTER_ROWS = true;
-          mastertable_changes.MASTER_ROWS = /*buildings*/
+          mastertable_changes.MASTER_ROWS = /*tenants*/
           ctx2[0];
           add_flush_callback(() => updating_MASTER_ROWS = false);
         }
@@ -13496,7 +13495,7 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           check_outros();
         }
         const layoutmain_changes = {};
-        if (dirty & /*$scope, fields, pager, buildings, popUpForms*/
+        if (dirty & /*$scope, fields, pager, tenants, popUpForms*/
         131095) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
@@ -13532,14 +13531,10 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     /** @type {Access} */
     {/* segments */}
   );
-  var locations = (
-    /** @type {Record<Number, string>} */
-    {/* locations */}
-  );
   function instance10($self, $props, $invalidate) {
-    let buildings = (
+    let tenants = (
       /** @type {any[][]} */
-      [/* buildings */]
+      [/* tenants */]
     );
     let fields = (
       /** @type {Field[]} */
@@ -13559,30 +13554,27 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       } */
       null
     );
-    let isSubmitAddBuilding = (
+    let isSubmitTenant = (
       /** @type boolean */
       false
     );
-    onMount(() => {
-      $invalidate(3, isPopUpFormReady = true);
-      console.log("Locations: ", locations);
-    });
+    onMount(() => $invalidate(3, isPopUpFormReady = true));
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: "list" };
-      await (0, import_jsApi2.UserBuilding)(
+      await (0, import_jsApi2.UserTenants)(
         // @ts-ignore
         i,
-        /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+        /** @type {import('./jsApi.GEN').UserTenantsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddBuilding = false);
+          $invalidate(5, isSubmitTenant = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, buildings = o.buildings);
+          $invalidate(0, tenants = o.tenants);
         }
       );
     }
@@ -13591,13 +13583,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         /** @type {any}*/
         {
           pager,
-          building: { id: row[0] },
+          tenant: { id: row[0] },
           cmd: "restore"
         }
       );
-      await (0, import_jsApi2.UserBuilding)(
+      await (0, import_jsApi2.UserTenants)(
         i,
-        /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+        /** @type {import('./jsApi.GEN').UserTenantsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13606,8 +13598,8 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, buildings = o.buildings);
-          notifier.showSuccess(`Building '${row[1]}' restored !!`);
+          $invalidate(0, tenants = o.tenants);
+          notifier.showSuccess(`Tenant '${row[1]}' restored !!`);
           OnRefresh(pager);
         }
       );
@@ -13617,13 +13609,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         /** @type {any}*/
         {
           pager,
-          building: { id: row[0] },
+          tenant: { id: row[0] },
           cmd: "delete"
         }
       );
-      await (0, import_jsApi2.UserBuilding)(
+      await (0, import_jsApi2.UserTenants)(
         i,
-        /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+        /** @type {import('./jsApi.GEN').UserTenantsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13632,8 +13624,8 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, buildings = o.buildings);
-          notifier.showSuccess(`Building '${row[1]}' deleted !!`);
+          $invalidate(0, tenants = o.tenants);
+          notifier.showSuccess(`Tenant '${row[1]}' deleted !!`);
           OnRefresh(pager);
         }
       );
@@ -13641,21 +13633,34 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     async function OnEdit(id, payloads) {
       console.log(
         /** @type any[]*/
-        "Building ID to Edit: " + String(id)
+        "Tenant ID to Edit: " + String(id)
       );
-      const building = {
+      const tenant = {
         id: payloads[0],
-        buildingName: String(payloads[1]),
-        locationId: String(payloads[2]),
-        facilitiesObj: String(payloads[3])
+        tenantName: payloads[1],
+        ktpRegion: payloads[2],
+        ktpNumber: payloads[3],
+        ktpName: payloads[4],
+        ktpPlaceBirth: payloads[5],
+        ktpDateBirth: payloads[6],
+        ktpGender: payloads[7],
+        ktpAddress: payloads[8],
+        ktpRtRw: payloads[9],
+        ktpKelurahanDesa: payloads[10],
+        ktpKecamatan: payloads[11],
+        ktpReligion: payloads[12],
+        ktpMaritalStatus: payloads[13],
+        ktpCitizenship: payloads[14],
+        telegramUsername: payloads[15],
+        whatsappNumber: payloads[16]
       };
       const i = (
         /** @type {any}*/
-        { pager, building, cmd: "upsert" }
+        { pager, tenant, cmd: "upsert" }
       );
-      await (0, import_jsApi2.UserBuilding)(
+      await (0, import_jsApi2.UserTenants)(
         i,
-        /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+        /** @type {import('./jsApi.GEN').UserTenantsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13664,40 +13669,53 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, buildings = o.buildings);
-          notifier.showSuccess(`Building '${building.buildingName}' updated !!`);
+          $invalidate(0, tenants = o.tenants);
+          notifier.showSuccess(`Tenant '${tenant.facilityName}' updated !!`);
           OnRefresh(pager);
         }
       );
     }
-    async function OnAddBuilding(payloads) {
-      $invalidate(5, isSubmitAddBuilding = true);
-      const building = (
+    async function OnAddTenant(payloads) {
+      $invalidate(5, isSubmitTenant = true);
+      const tenant = (
         /** @type {any} */
         {
-          buildingName: String(payloads[1]),
-          locationId: String(payloads[2]),
-          facilitiesObj: String(payloads[3])
+          tenantName: payloads[1],
+          ktpRegion: payloads[2],
+          ktpNumber: payloads[3],
+          ktpName: payloads[4],
+          ktpPlaceBirth: payloads[5],
+          ktpDateBirth: payloads[6],
+          ktpGender: payloads[7],
+          ktpAddress: payloads[8],
+          ktpRtRw: payloads[9],
+          ktpKelurahanDesa: payloads[10],
+          ktpKecamatan: payloads[11],
+          ktpReligion: payloads[12],
+          ktpMaritalStatus: payloads[13],
+          ktpCitizenship: payloads[14],
+          telegramUsername: payloads[15],
+          whatsappNumber: payloads[16]
         }
       );
       const i = (
         /** @type {any} */
-        { pager, building, cmd: "upsert" }
+        { pager, tenant, cmd: "upsert" }
       );
-      await (0, import_jsApi2.UserBuilding)(
+      await (0, import_jsApi2.UserTenants)(
         i,
-        /** @type {import('../jsApi.GEN').TenantAdminProductsCallback} */
+        /** @type {import('../jsApi.GEN').UserTenantsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddBuilding = false);
+          $invalidate(5, isSubmitTenant = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, buildings = o.buildings);
-          notifier.showSuccess(`Building '${building.buildingName}' created !!`);
+          $invalidate(0, tenants = o.tenants);
+          notifier.showSuccess(`Tenant '${tenant.facilityName}' created !!`);
           popUpForms.Reset();
           OnRefresh(pager);
         }
@@ -13711,8 +13729,8 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       });
     }
     function popupforms_isSubmitted_binding(value) {
-      isSubmitAddBuilding = value;
-      $invalidate(5, isSubmitAddBuilding);
+      isSubmitTenant = value;
+      $invalidate(5, isSubmitTenant);
     }
     const click_handler = () => popUpForms.Show();
     function mastertable_FIELDS_binding(value) {
@@ -13724,21 +13742,21 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       $invalidate(2, pager);
     }
     function mastertable_MASTER_ROWS_binding(value) {
-      buildings = value;
-      $invalidate(0, buildings);
+      tenants = value;
+      $invalidate(0, tenants);
     }
     return [
-      buildings,
+      tenants,
       fields,
       pager,
       isPopUpFormReady,
       popUpForms,
-      isSubmitAddBuilding,
+      isSubmitTenant,
       OnRefresh,
       OnRestore,
       OnDelete,
       OnEdit,
-      OnAddBuilding,
+      OnAddTenant,
       popupforms_binding,
       popupforms_isSubmitted_binding,
       click_handler,
@@ -13747,16 +13765,16 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       mastertable_MASTER_ROWS_binding
     ];
   }
-  var Building = class extends SvelteComponent {
+  var TenantsManagement = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance10, create_fragment10, safe_not_equal, {});
     }
   };
-  var building_default = Building;
+  var tenantsManagement_default = TenantsManagement;
 
-  // building.svelte.ts
-  var app = new building_default({ target: document.getElementById("app") });
+  // tenantsManagement.svelte.ts
+  var app = new tenantsManagement_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

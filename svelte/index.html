@@ -3382,6 +3382,9 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       exports.UserSessionKill = async function UserSessionKill(i, cb) {
         return await axios.post("/user/sessionKill", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.UserTenants = async function UserTenants(i, cb) {
+        return await axios.post("/user/tenantsManagement", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
     }
   });
 
@@ -6859,8 +6862,11 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         $invalidate(0, id = id + Math.random());
       if (isObject) {
         if (type === "combobox" || type === "select") {
-          const valuesArr = Object.entries(values);
-          $invalidate(1, value = valuesArr[0][0]);
+          try {
+            const valuesArr = Object.entries(values);
+            $invalidate(1, value = valuesArr[0][0]);
+          } catch (error) {
+          }
         }
         if (values && values[value])
           $invalidate(10, valueToShowFromObj = values[value]);
@@ -7178,11 +7184,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     let t5;
     let a3;
     let t7;
-    let span;
-    let t8;
-    let nav1;
     let a4;
+    let t9;
+    let span;
     let t10;
+    let nav1;
+    let a5;
+    let t12;
     let button;
     let mounted;
     let dispose;
@@ -7203,12 +7211,15 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         a3 = element("a");
         a3.textContent = "Building";
         t7 = space();
-        span = element("span");
-        t8 = space();
-        nav1 = element("nav");
         a4 = element("a");
-        a4.textContent = "Profile";
+        a4.textContent = "Tenant";
+        t9 = space();
+        span = element("span");
         t10 = space();
+        nav1 = element("nav");
+        a5 = element("a");
+        a5.textContent = "Profile";
+        t12 = space();
         button = element("button");
         button.textContent = "Logout";
         attr(a0, "href", "/");
@@ -7243,12 +7254,20 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           /*pathLv2*/
           ctx[2] === "building"
         );
-        attr(nav0, "class", "nav-menu svelte-17p6uij");
-        attr(span, "class", "separator svelte-17p6uij");
-        attr(a4, "href", "/user");
+        attr(a4, "href", "/user/tenantsManagement");
         attr(a4, "class", "svelte-17p6uij");
         toggle_class(
           a4,
+          "active",
+          /*pathLv2*/
+          ctx[2] === "tenantsManagement"
+        );
+        attr(nav0, "class", "nav-menu svelte-17p6uij");
+        attr(span, "class", "separator svelte-17p6uij");
+        attr(a5, "href", "/user");
+        attr(a5, "class", "svelte-17p6uij");
+        toggle_class(
+          a5,
           "active",
           /*pathAll*/
           ctx[0] === "/user"
@@ -7269,12 +7288,14 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         append(nav0, a2);
         append(nav0, t5);
         append(nav0, a3);
-        append(div, t7);
+        append(nav0, t7);
+        append(nav0, a4);
+        append(div, t9);
         append(div, span);
-        append(div, t8);
+        append(div, t10);
         append(div, nav1);
-        append(nav1, a4);
-        append(nav1, t10);
+        append(nav1, a5);
+        append(nav1, t12);
         append(nav1, button);
         if (!mounted) {
           dispose = listen(

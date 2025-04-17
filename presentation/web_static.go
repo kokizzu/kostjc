@@ -6,6 +6,7 @@ import (
 
 	"kostjc/domain"
 	"kostjc/model/mAuth/rqAuth"
+	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/zCrud"
 )
 
@@ -90,6 +91,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 
+		loc := rqProperty.NewLocations(d.PropOltp)
+		locations := loc.FindLocationChoices()
+
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
 		out := d.UserBuilding(&in)
@@ -100,9 +104,37 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`segments`:  segments,
 			`building`:  out.Building,
 			`buildings`: out.Buildings,
-			`locations`: out.Locations,
+			`locations`: locations,
 			`fields`:    out.Meta.Fields,
 			`pager`:     out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.UserTenantsAction, func(ctx *fiber.Ctx) error {
+		var in domain.UserTenantsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserTenantsAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.UserTenants(&in)
+
+		return views.RenderTenantsManagement(ctx, M.SX{
+			`title`:    `User Tenants`,
+			`user`:     user,
+			`segments`: segments,
+			`tenant`:   out.Tenant,
+			`tenants`:  out.Tenants,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
 		})
 	})
 

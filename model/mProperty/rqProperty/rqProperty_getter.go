@@ -107,3 +107,20 @@ FROM ` + b.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 
 	return
 }
+
+func (l *Locations) FindLocationChoices() map[uint64]string {
+	const comment = `-- Locations) FindLocationChoices`
+
+	queryRows := comment + `
+SELECT ` + l.SqlId() + `, ` + l.SqlName() + ` FROM ` + l.SqlTableName() + `
+ORDER BY ` + l.SqlName() + ` ASC`
+
+	out := make(map[uint64]string)
+	l.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 2 {
+			out[X.ToU(row[0])] = X.ToS(row[1])
+		}
+	})
+
+	return out
+}

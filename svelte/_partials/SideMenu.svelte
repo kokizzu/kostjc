@@ -42,6 +42,7 @@
       <a href="/user/location" class:active={pathLv2 === 'location'}>Location</a>
       <a href="/user/facility" class:active={pathLv2 === 'facility'}>Facility</a>
       <a href="/user/building" class:active={pathLv2 === 'building'}>Building</a>
+      <a href="/user/tenantsManagement" class:active={pathLv2 === 'tenantsManagement'}>Tenant</a>
     </nav>
     <span class="separator" />
     <nav class="nav-menu">

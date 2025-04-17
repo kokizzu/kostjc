@@ -100,6 +100,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.UserSessionKill(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.UserTenantsAction:
+		in := domain.UserTenantsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.UserTenants(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	}
 }
 

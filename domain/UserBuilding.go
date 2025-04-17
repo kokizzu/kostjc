@@ -25,11 +25,10 @@ type (
 	}
 	UserBuildingOut struct {
 		ResponseCommon
-		Pager     zCrud.PagerOut         `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-		Meta      *zCrud.Meta            `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
-		Locations []rqProperty.Locations `json:"locations" form:"locations" query:"locations" long:"locations" msg:"locations"`
-		Building  rqProperty.Buildings   `json:"building" form:"building" query:"building" long:"building" msg:"building"`
-		Buildings [][]any                `json:"buildings" form:"buildings" query:"buildings" long:"buildings" msg:"buildings"`
+		Pager     zCrud.PagerOut       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Meta      *zCrud.Meta          `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
+		Building  rqProperty.Buildings `json:"building" form:"building" query:"building" long:"building" msg:"building"`
+		Buildings [][]any              `json:"buildings" form:"buildings" query:"buildings" long:"buildings" msg:"buildings"`
 	}
 )
 
@@ -64,7 +63,7 @@ var UserBuildingMeta = zCrud.Meta{
 			Name:      mProperty.LocationId,
 			Label:     `Location`,
 			DataType:  zCrud.DataTypeInt,
-			InputType: zCrud.InputTypeText,
+			InputType: zCrud.InputTypeCombobox,
 			ReadOnly:  false,
 		},
 		{
@@ -184,9 +183,6 @@ func (d *Domain) UserBuilding(in *UserBuildingIn) (out UserBuildingOut) {
 			&in.Pager,
 			&out.Pager,
 		)
-
-		loc := rqProperty.NewLocations(d.PropOltp)
-		out.Locations = loc.FindAll()
 	}
 
 	return

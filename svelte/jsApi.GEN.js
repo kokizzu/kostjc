@@ -306,7 +306,6 @@ const UserBuildingIn = {
  * @property {Object} meta.fields
  * @property {Object} meta.mutex
  * @property {String} meta.cachedSelect
- * @property {Object} locations
  * @property {number} building.id
  * @property {String} building.buildingName
  * @property {number} building.locationId
@@ -337,8 +336,6 @@ const UserBuildingOut = {
     }, // sync.Mutex
     cachedSelect: '', // string
   }, // zCrud.Meta
-  locations: { // []rqProperty.Locations
-  }, // []rqProperty.Locations
   building: { // rqProperty.Buildings
     id: 0, // uint64
     buildingName: '', // string
@@ -718,6 +715,175 @@ const UserSessionKillOut = {
  */
 exports.UserSessionKill = async function UserSessionKill( i, cb ) {
   return await axios.post( '/user/sessionKill', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} UserTenantsIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} tenant.id
+ * @property {String} tenant.tenantName
+ * @property {String} tenant.ktpRegion
+ * @property {String} tenant.ktpNumber
+ * @property {String} tenant.ktpName
+ * @property {String} tenant.ktpPlaceBirth
+ * @property {String} tenant.ktpDateBirth
+ * @property {String} tenant.ktpGender
+ * @property {String} tenant.ktpAddress
+ * @property {String} tenant.ktpRtRw
+ * @property {String} tenant.ktpKelurahanDesa
+ * @property {String} tenant.ktpKecamatan
+ * @property {String} tenant.ktpReligion
+ * @property {String} tenant.ktpMaritalStatus
+ * @property {String} tenant.ktpCitizenship
+ * @property {String} tenant.telegramUsername
+ * @property {String} tenant.whatsappNumber
+ * @property {number} tenant.createdAt
+ * @property {number} tenant.createdBy
+ * @property {number} tenant.updatedAt
+ * @property {number} tenant.updatedBy
+ * @property {number} tenant.deletedAt
+ * @property {number} tenant.deletedBy
+ * @property {number} tenant.restoredBy
+ */
+const UserTenantsIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  tenant: { // rqAuth.Tenants
+    id: 0, // uint64
+    tenantName: '', // string
+    ktpRegion: '', // string
+    ktpNumber: '', // string
+    ktpName: '', // string
+    ktpPlaceBirth: '', // string
+    ktpDateBirth: '', // string
+    ktpGender: '', // string
+    ktpAddress: '', // string
+    ktpRtRw: '', // string
+    ktpKelurahanDesa: '', // string
+    ktpKecamatan: '', // string
+    ktpReligion: '', // string
+    ktpMaritalStatus: '', // string
+    ktpCitizenship: '', // string
+    telegramUsername: '', // string
+    whatsappNumber: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqAuth.Tenants
+}
+/**
+ * @typedef {Object} UserTenantsOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} tenant.id
+ * @property {String} tenant.tenantName
+ * @property {String} tenant.ktpRegion
+ * @property {String} tenant.ktpNumber
+ * @property {String} tenant.ktpName
+ * @property {String} tenant.ktpPlaceBirth
+ * @property {String} tenant.ktpDateBirth
+ * @property {String} tenant.ktpGender
+ * @property {String} tenant.ktpAddress
+ * @property {String} tenant.ktpRtRw
+ * @property {String} tenant.ktpKelurahanDesa
+ * @property {String} tenant.ktpKecamatan
+ * @property {String} tenant.ktpReligion
+ * @property {String} tenant.ktpMaritalStatus
+ * @property {String} tenant.ktpCitizenship
+ * @property {String} tenant.telegramUsername
+ * @property {String} tenant.whatsappNumber
+ * @property {number} tenant.createdAt
+ * @property {number} tenant.createdBy
+ * @property {number} tenant.updatedAt
+ * @property {number} tenant.updatedBy
+ * @property {number} tenant.deletedAt
+ * @property {number} tenant.deletedBy
+ * @property {number} tenant.restoredBy
+ * @property {Object} tenants
+ */
+const UserTenantsOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  tenant: { // rqAuth.Tenants
+    id: 0, // uint64
+    tenantName: '', // string
+    ktpRegion: '', // string
+    ktpNumber: '', // string
+    ktpName: '', // string
+    ktpPlaceBirth: '', // string
+    ktpDateBirth: '', // string
+    ktpGender: '', // string
+    ktpAddress: '', // string
+    ktpRtRw: '', // string
+    ktpKelurahanDesa: '', // string
+    ktpKecamatan: '', // string
+    ktpReligion: '', // string
+    ktpMaritalStatus: '', // string
+    ktpCitizenship: '', // string
+    telegramUsername: '', // string
+    whatsappNumber: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqAuth.Tenants
+  tenants: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback UserTenantsCallback
+ * @param {UserTenantsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {UserTenantsIn} i
+ * @param {UserTenantsCallback} cb
+ * @returns {Promise}
+ */
+exports.UserTenants = async function UserTenants( i, cb ) {
+  return await axios.post( '/user/tenantsManagement', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }

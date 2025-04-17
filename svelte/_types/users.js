@@ -26,3 +26,32 @@ module.exports = {}
  * @property {string} loginIPs
  */
 module.exports = {}
+
+/**
+ * @typedef {Object} Tenant
+ * @property {string | number} id
+ * @property {string} tenantName
+ * @property {string} ktpRegion
+ * @property {string} ktpNumber
+ * @property {string} ktpName
+ * @property {string} ktpPlaceBirth
+ * @property {string} ktpDateBirth
+ * @property {string} ktpGender
+ * @property {string} ktpAddress
+ * @property {string} ktpRtRw
+ * @property {string} ktpKelurahanDesa
+ * @property {string} ktpKecamatan
+ * @property {string} ktpReligion
+ * @property {string} ktpMaritalStatus
+ * @property {string} ktpCitizenship
+ * @property {string} telegramUsername
+ * @property {string} whatsappNumber
+ * @property {number} createdAt
+ * @property {string} createdBy
+ * @property {number} updatedAt
+ * @property {string} updatedBy
+ * @property {number} deletedAt
+ * @property {string} deletedBy
+ * @property {string} restoredBy
+ */
+module.exports = {}

@@ -4,13 +4,12 @@
   /** @typedef {import('./_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('./_types/users.js').User} User */
-  /** @typedef {import('./_types/property.js').Building} Building */
-  /** @typedef {import('./_types/property.js').Location} Location */
+  /** @typedef {import('./_types/users.js').Tenant} Tenant */
   
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { UserBuilding } from './jsApi.GEN';
+  import { UserTenants } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
@@ -18,9 +17,8 @@
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
-  let building  = /** @type {Building} */ ({/* building */});
-  let buildings = /** @type {any[][]} */([/* buildings */]);
-  let locations = /** @type {Record<Number, string>} */({/* locations */});
+  let tenant  = /** @type {Tenant} */ ({/* tenant */});
+  let tenants = /** @type {any[][]} */([/* tenants */]);
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
 
@@ -28,27 +26,24 @@
   let popUpForms = /** @type {
     import('svelte').SvelteComponent | HTMLElement | PopUpForms |any
   } */ (null);
-  let isSubmitAddBuilding = /** @type boolean */ (false);
+  let isSubmitTenant = /** @type boolean */ (false);
 
-  onMount(() => {
-    isPopUpFormReady = true
-    console.log('Locations: ', locations);
-  });
+  onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await UserBuilding( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await UserTenants( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').UserTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
-        isSubmitAddBuilding = false;
+        isSubmitTenant = false;
         if (o.error) {
           console.log(o);
           notifier.showError(o.error);
           return
         }
         pager = o.pager;
-        buildings = o.buildings;
+        tenants = o.tenants;
       }
     );
   }
@@ -56,13 +51,13 @@
   async function OnRestore(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      building: {
+      tenant: {
         id: row[0]
       },
       cmd: 'restore'
     });
-    await UserBuilding(i,
-      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await UserTenants(i,
+      /** @type {import('./jsApi.GEN').UserTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -72,8 +67,8 @@
         }
 
         pager = o.pager;
-        buildings = o.buildings;
-        notifier.showSuccess(`Building '${row[1]}' restored !!`);
+        tenants = o.tenants;
+        notifier.showSuccess(`Tenant '${row[1]}' restored !!`);
 
         OnRefresh(pager);
       }
@@ -83,13 +78,13 @@
   async function OnDelete(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      building: {
+      tenant: {
         id: row[0]
       },
       cmd: 'delete'
     });
-    await UserBuilding(i,
-      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await UserTenants(i,
+      /** @type {import('./jsApi.GEN').UserTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -99,8 +94,8 @@
         }
 
         pager = o.pager;
-        buildings = o.buildings;
-        notifier.showSuccess(`Building '${row[1]}' deleted !!`);
+        tenants = o.tenants;
+        notifier.showSuccess(`Tenant '${row[1]}' deleted !!`);
 
         OnRefresh(pager);
       }
@@ -108,20 +103,33 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Building ID to Edit: ' + String(id));
-    const building = {
+    console.log('Tenant ID to Edit: ' + String(id));
+    const tenant = {
       id: payloads[0],
-      buildingName: String(payloads[1]),
-      locationId: String(payloads[2]),
-      facilitiesObj: String(payloads[3]),
+      tenantName: payloads[1],
+      ktpRegion: payloads[2],
+      ktpNumber: payloads[3],
+      ktpName: payloads[4],
+      ktpPlaceBirth: payloads[5],
+      ktpDateBirth: payloads[6],
+      ktpGender: payloads[7],
+      ktpAddress: payloads[8],
+      ktpRtRw: payloads[9],
+      ktpKelurahanDesa: payloads[10],
+      ktpKecamatan: payloads[11],
+      ktpReligion: payloads[12],
+      ktpMaritalStatus: payloads[13],
+      ktpCitizenship: payloads[14],
+      telegramUsername: payloads[15],
+      whatsappNumber: payloads[16]
     }
     const i = /** @type {any}*/ ({
       pager,
-      building,
+      tenant,
       cmd: 'upsert'
     });
-    await UserBuilding(i,
-      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await UserTenants(i,
+      /** @type {import('./jsApi.GEN').UserTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -131,33 +139,46 @@
         }
 
         pager = o.pager;
-        buildings = o.buildings;
-        notifier.showSuccess(`Building '${building.buildingName}' updated !!`);
+        tenants = o.tenants;
+        notifier.showSuccess(`Tenant '${tenant.facilityName}' updated !!`);
 
         OnRefresh(pager);
       }
     );
   }
 
-  async function OnAddBuilding(/** @type any[] */ payloads) {
-    isSubmitAddBuilding = true;
+  async function OnAddTenant(/** @type any[] */ payloads) {
+    isSubmitTenant = true;
 
-    const building = /** @type {any} */ ({
-      buildingName: String(payloads[1]),
-      locationId: String(payloads[2]),
-      facilitiesObj: String(payloads[3]),
+    const tenant = /** @type {any} */ ({
+      tenantName: payloads[1],
+      ktpRegion: payloads[2],
+      ktpNumber: payloads[3],
+      ktpName: payloads[4],
+      ktpPlaceBirth: payloads[5],
+      ktpDateBirth: payloads[6],
+      ktpGender: payloads[7],
+      ktpAddress: payloads[8],
+      ktpRtRw: payloads[9],
+      ktpKelurahanDesa: payloads[10],
+      ktpKecamatan: payloads[11],
+      ktpReligion: payloads[12],
+      ktpMaritalStatus: payloads[13],
+      ktpCitizenship: payloads[14],
+      telegramUsername: payloads[15],
+      whatsappNumber: payloads[16]
     });
     const i = /** @type {any} */ ({
       pager,
-      building,
+      tenant,
       cmd: 'upsert'
     });
 
-    await UserBuilding(i,
-      /** @type {import('../jsApi.GEN').TenantAdminProductsCallback} */
+    await UserTenants(i,
+      /** @type {import('../jsApi.GEN').UserTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
-        isSubmitAddBuilding = false;
+        isSubmitTenant = false;
         if (o.error) {
           console.log(o);
           notifier.showError(o.error);
@@ -165,8 +186,8 @@
         }
         
         pager = o.pager;
-        buildings = o.buildings;
-        notifier.showSuccess(`Building '${building.buildingName}' created !!`);
+        tenants = o.tenants;
+        notifier.showSuccess(`Tenant '${tenant.facilityName}' created !!`);
 
         popUpForms.Reset();
 
@@ -180,24 +201,21 @@
 {#if isPopUpFormReady}
   <PopUpForms
     bind:this={popUpForms}
-    heading="Add Building"
+    heading="Add Tenant"
     FIELDS={fields}
-    bind:isSubmitted={isSubmitAddBuilding}
-    OnSubmit={OnAddBuilding}
+    bind:isSubmitted={isSubmitTenant}
+    OnSubmit={OnAddTenant}
   />
 {/if}
 
 <LayoutMain access={segments} user={user}>
-  <div class="master-building">
-    <h2>Master Building</h2>
+  <div class="master-tenants">
+    <h2>Master Tenants</h2>
     <MasterTable
       ACCESS={segments}
-      REFS={{
-        'locationId': locations
-      }}
       bind:FIELDS={fields}
       bind:PAGER={pager}
-      bind:MASTER_ROWS={buildings}
+      bind:MASTER_ROWS={tenants}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
@@ -212,7 +230,7 @@
     <button
       class="btn"
       on:click={() => popUpForms.Show()}
-      title="add building"
+      title="add tenant"
     >
       <Icon
         color="var(--gray-007)"
@@ -225,14 +243,14 @@
 </LayoutMain>
 
 <style>
-  .master-building {
+  .master-tenants {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
   }
 
-  .master-building h2 {
+  .master-tenants h2 {
     margin: 0;
   }
 </style>

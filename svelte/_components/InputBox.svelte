@@ -33,8 +33,10 @@
     if (type === 'bool') id = id + Math.random();
     if (isObject) {
       if (type === 'combobox' || type === 'select') {
-        const valuesArr = Object.entries(values);
-        value = valuesArr[0][0];
+        try {
+          const valuesArr = Object.entries(values);
+          value = valuesArr[0][0];
+        } catch (error) {}
       }
       if (values && values[value]) valueToShowFromObj = values[value];
       else valueToShowFromObj = '';
