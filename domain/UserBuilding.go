@@ -70,8 +70,12 @@ var UserBuildingMeta = zCrud.Meta{
 			Name:      mProperty.FacilitiesObj,
 			Label:     `Facilities`,
 			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeText,
-			ReadOnly:  false,
+			InputType: zCrud.InputTypeTextArea,
+			Description: `{
+  "facilityName": "Pillow",
+  "extraChargeIDR": 20000
+}`,
+			ReadOnly: false,
 		},
 		{
 			Name:      mProperty.CreatedAt,

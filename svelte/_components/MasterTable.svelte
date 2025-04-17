@@ -337,7 +337,7 @@
         {/each}
       </div>
       <div class="foot">
-        <button class="ok" on:click={handleSubmitEdit}>Save</button>
+        <button class="ok" on:click={handleSubmitEdit}>Submit</button>
       </div>
     </div>
   </div>

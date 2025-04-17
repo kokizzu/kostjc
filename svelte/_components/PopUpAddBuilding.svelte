@@ -1,27 +1,39 @@
 <script>
-  /** @typedef {import('../_types/masters').Field} Field */
+  /** @typedef {import('../_types/property').Building} Building */
 
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
 
-  export let heading = 'Add product';
-  export let FIELDS = /** @type Field[] */ ([]);
-  export let isSubmitted = false;
-  let isShow = false;
-  let payloads = [];
+  let isShow = /** @type {boolean} */ (false);
 
-  export let OnSubmit = async function(/** @type any[] */ payloads) {}  
+  export let isSubmitted  = /** @type {boolean} */ (false);
+  export let locations = /** @type {Record<number, string>} */ ({});
+
+  let buildingName = '';
+  let locationId = 0;
+  let facilitiesObj = '';
+
+  export let OnSubmit = async function(/** @type {Building} */ building) {
+    console.log('OnSubmit :::', building);
+  }
+
+  async function submitAdd() {
+    const building = /** @type {Building} */ ({
+      buildingName,
+      locationId,
+      facilitiesObj
+    });
+
+    await OnSubmit(building);
+  }
 
   export const Show = () => isShow = true;
   export const Hide = () => isShow = false;
 
   export const Reset = () => {
-    payloads = [];
-    if (FIELDS && FIELDS.length > 0) {
-			FIELDS.forEach(() => payloads = [...payloads, '']);
-		}
+
   }
   
   const cancel = () => {
@@ -32,35 +44,47 @@
 <div class={`popup_container ${isShow ? 'show' : ''}`}>
   <div class="popup">
     <header class="header">
-      <h2>{heading}</h2>
+      <h2>Add Building</h2>
       <button on:click={Hide}>
         <Icon size="22" color="var(--red-005)" src={IoClose}/>
       </button>
     </header>
     <div class="forms">
-      {#each (FIELDS || []) as field, idx}
-        {#if field.name !== 'id'}
-          {#if !field.readOnly}
-            <InputBox
-              id={field.name}
-              label={field.label}
-              placeholder={field.description}
-              bind:value={payloads[idx]}
-              type={field.inputType}
-              values={field.ref}
-            />
-          {/if}
-        {/if}
-      {/each}
+      <InputBox
+        id="buildingName"
+        label="Building Name"
+        bind:value={buildingName}
+        type="text"
+        placeholder="Kost JC"
+      />
+      <InputBox
+        id="location"
+        label="Location"
+        isObject={true}
+        bind:value={locationId}
+        type="combobox"
+        values={locations}
+      />
+      <InputBox
+        id="facilitiesObj"
+        label="Facilities"
+        bind:value={facilitiesObj}
+        type="textarea"
+        placeholder={`{
+  "facilityName": "Pillow",
+  "extraChargeIDR": 20000
+}
+        `}
+      />
     </div>
     <div class="foot">
       <div class="left">
       </div>
       <div class="right">
         <button class="cancel" on:click|preventDefault={cancel}>Cancel</button>
-        <button class="ok" on:click|preventDefault={() => OnSubmit(payloads)} disabled={isSubmitted}>
+        <button class="ok" on:click|preventDefault={submitAdd} disabled={isSubmitted}>
           {#if !isSubmitted}
-            <span>Ok</span>
+            <span>Submit</span>
           {/if}
           {#if isSubmitted}
             <Icon className="spin" color="#FFF" size="14" src={FiLoader} />

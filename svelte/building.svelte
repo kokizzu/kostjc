@@ -12,7 +12,7 @@
   import { onMount } from 'svelte';
   import { UserBuilding } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
-  import PopUpForms from './_components/PopUpForms.svelte';
+  import PopUpAddBuilding from './_components/PopUpAddBuilding.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
 
@@ -26,7 +26,7 @@
 
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
-    import('svelte').SvelteComponent | HTMLElement | PopUpForms |any
+    import('svelte').SvelteComponent | HTMLElement | PopUpAddBuilding |any
   } */ (null);
   let isSubmitAddBuilding = /** @type boolean */ (false);
 
@@ -139,14 +139,8 @@
     );
   }
 
-  async function OnAddBuilding(/** @type any[] */ payloads) {
+  async function OnAddBuilding(/** @type {Building} */ building) {
     isSubmitAddBuilding = true;
-
-    const building = /** @type {any} */ ({
-      buildingName: String(payloads[1]),
-      locationId: String(payloads[2]),
-      facilitiesObj: String(payloads[3]),
-    });
     const i = /** @type {any} */ ({
       pager,
       building,
@@ -178,11 +172,10 @@
 </script>
 
 {#if isPopUpFormReady}
-  <PopUpForms
+  <PopUpAddBuilding
     bind:this={popUpForms}
-    heading="Add Building"
-    FIELDS={fields}
     bind:isSubmitted={isSubmitAddBuilding}
+    locations={locations}
     OnSubmit={OnAddBuilding}
   />
 {/if}
