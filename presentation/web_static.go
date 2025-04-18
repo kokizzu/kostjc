@@ -138,6 +138,38 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.UserBookingAction, func(ctx *fiber.Ctx) error {
+		var in domain.UserBookingIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserBookingAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		tenant := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tenant.FindTenantChoices()
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.UserBooking(&in)
+
+		return views.RenderBooking(ctx, M.SX{
+			`title`:    `User Booking`,
+			`user`:     user,
+			`segments`: segments,
+			`booking`:  out.Booking,
+			`bookings`: out.Bookings,
+			`tenants`:  tenants,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {
 		return views.RenderDebug(ctx, M.SX{})
 	})

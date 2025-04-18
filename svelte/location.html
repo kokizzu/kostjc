@@ -5042,11 +5042,13 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
     let t7;
     let a4;
     let t9;
-    let span;
-    let t10;
-    let nav1;
     let a5;
+    let t11;
+    let span;
     let t12;
+    let nav1;
+    let a6;
+    let t14;
     let button;
     let mounted;
     let dispose;
@@ -5068,14 +5070,17 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         a3.textContent = "Building";
         t7 = space();
         a4 = element("a");
-        a4.textContent = "Tenant";
+        a4.textContent = "Booking";
         t9 = space();
-        span = element("span");
-        t10 = space();
-        nav1 = element("nav");
         a5 = element("a");
-        a5.textContent = "Profile";
+        a5.textContent = "Tenant";
+        t11 = space();
+        span = element("span");
         t12 = space();
+        nav1 = element("nav");
+        a6 = element("a");
+        a6.textContent = "Profile";
+        t14 = space();
         button = element("button");
         button.textContent = "Logout";
         attr(a0, "href", "/");
@@ -5110,20 +5115,28 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           /*pathLv2*/
           ctx[2] === "building"
         );
-        attr(a4, "href", "/user/tenantsManagement");
+        attr(a4, "href", "/user/booking");
         attr(a4, "class", "svelte-17p6uij");
         toggle_class(
           a4,
+          "active",
+          /*pathLv2*/
+          ctx[2] === "booking"
+        );
+        attr(a5, "href", "/user/tenantsManagement");
+        attr(a5, "class", "svelte-17p6uij");
+        toggle_class(
+          a5,
           "active",
           /*pathLv2*/
           ctx[2] === "tenantsManagement"
         );
         attr(nav0, "class", "nav-menu svelte-17p6uij");
         attr(span, "class", "separator svelte-17p6uij");
-        attr(a5, "href", "/user");
-        attr(a5, "class", "svelte-17p6uij");
+        attr(a6, "href", "/user");
+        attr(a6, "class", "svelte-17p6uij");
         toggle_class(
-          a5,
+          a6,
           "active",
           /*pathAll*/
           ctx[0] === "/user"
@@ -5146,12 +5159,14 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
         append(nav0, a3);
         append(nav0, t7);
         append(nav0, a4);
-        append(div, t9);
+        append(nav0, t9);
+        append(nav0, a5);
+        append(div, t11);
         append(div, span);
-        append(div, t10);
+        append(div, t12);
         append(div, nav1);
-        append(nav1, a5);
-        append(nav1, t12);
+        append(nav1, a6);
+        append(nav1, t14);
         append(nav1, button);
         if (!mounted) {
           dispose = listen(

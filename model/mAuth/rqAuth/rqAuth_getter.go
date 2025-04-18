@@ -124,3 +124,21 @@ FROM ` + t.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 
 	return
 }
+
+func (t *Tenants) FindTenantChoices() map[uint64]string {
+	const comment = `-- Tenants) FindTenantChoices`
+
+	queryRows := comment + `
+SELECT ` + t.SqlId() + `, ` + t.SqlTenantName() + `, ` + t.SqlWhatsappNumber() + ` FROM ` + t.SqlTableName() + `
+ORDER BY ` + t.SqlTenantName() + ` ASC`
+
+	out := make(map[uint64]string)
+	t.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 3 {
+			nameWithNum := X.ToS(row[1]) + " (" + X.ToS(row[2]) + ")"
+			out[X.ToU(row[0])] = nameWithNum
+		}
+	})
+
+	return out
+}
