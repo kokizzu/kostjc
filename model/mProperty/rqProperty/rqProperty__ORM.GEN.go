@@ -25,15 +25,15 @@ type Bookings struct {
 	DateStart     string      `json:"dateStart" form:"dateStart" query:"dateStart" long:"dateStart" msg:"dateStart"`
 	DateEnd       string      `json:"dateEnd" form:"dateEnd" query:"dateEnd" long:"dateEnd" msg:"dateEnd"`
 	BasePriceIDR  int64       `json:"basePriceIDR" form:"basePriceIDR" query:"basePriceIDR" long:"basePriceIDR" msg:"basePriceIDR"`
-	Facilities    string      `json:"facilities" form:"facilities" query:"facilities" long:"facilities" msg:"facilities"`
+	Facilities    []any       `json:"facilities" form:"facilities" query:"facilities" long:"facilities" msg:"facilities"`
 	TotalPriceIDR int64       `json:"totalPriceIDR" form:"totalPriceIDR" query:"totalPriceIDR" long:"totalPriceIDR" msg:"totalPriceIDR"`
 	PaidAt        string      `json:"paidAt" form:"paidAt" query:"paidAt" long:"paidAt" msg:"paidAt"`
 	TenantId      uint64      `json:"tenantId,string" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
-	CreatedAt     string      `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedAt     int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
 	CreatedBy     uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
-	UpdatedAt     string      `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedAt     int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
 	UpdatedBy     uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
-	DeletedAt     string      `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedAt     int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
 	DeletedBy     uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
 	RestoredBy    uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
 }
@@ -313,15 +313,15 @@ func (b *Bookings) FromArray(a A.X) *Bookings { //nolint:dupl false positive
 	b.DateStart = X.ToS(a[1])
 	b.DateEnd = X.ToS(a[2])
 	b.BasePriceIDR = X.ToI(a[3])
-	b.Facilities = X.ToS(a[4])
+	b.Facilities = X.ToArr(a[4])
 	b.TotalPriceIDR = X.ToI(a[5])
 	b.PaidAt = X.ToS(a[6])
 	b.TenantId = X.ToU(a[7])
-	b.CreatedAt = X.ToS(a[8])
+	b.CreatedAt = X.ToI(a[8])
 	b.CreatedBy = X.ToU(a[9])
-	b.UpdatedAt = X.ToS(a[10])
+	b.UpdatedAt = X.ToI(a[10])
 	b.UpdatedBy = X.ToU(a[11])
-	b.DeletedAt = X.ToS(a[12])
+	b.DeletedAt = X.ToI(a[12])
 	b.DeletedBy = X.ToU(a[13])
 	b.RestoredBy = X.ToU(a[14])
 	return b
@@ -333,15 +333,15 @@ func (b *Bookings) FromUncensoredArray(a A.X) *Bookings { //nolint:dupl false po
 	b.DateStart = X.ToS(a[1])
 	b.DateEnd = X.ToS(a[2])
 	b.BasePriceIDR = X.ToI(a[3])
-	b.Facilities = X.ToS(a[4])
+	b.Facilities = X.ToArr(a[4])
 	b.TotalPriceIDR = X.ToI(a[5])
 	b.PaidAt = X.ToS(a[6])
 	b.TenantId = X.ToU(a[7])
-	b.CreatedAt = X.ToS(a[8])
+	b.CreatedAt = X.ToI(a[8])
 	b.CreatedBy = X.ToU(a[9])
-	b.UpdatedAt = X.ToS(a[10])
+	b.UpdatedAt = X.ToI(a[10])
 	b.UpdatedBy = X.ToU(a[11])
-	b.DeletedAt = X.ToS(a[12])
+	b.DeletedAt = X.ToI(a[12])
 	b.DeletedBy = X.ToU(a[13])
 	b.RestoredBy = X.ToU(a[14])
 	return b
@@ -391,15 +391,15 @@ var BookingsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`dateStart`:     Tt.String,
 	`dateEnd`:       Tt.String,
 	`basePriceIDR`:  Tt.Integer,
-	`facilities`:    Tt.String,
+	`facilities`:    Tt.Array,
 	`totalPriceIDR`: Tt.Integer,
 	`paidAt`:        Tt.String,
 	`tenantId`:      Tt.Unsigned,
-	`createdAt`:     Tt.String,
+	`createdAt`:     Tt.Integer,
 	`createdBy`:     Tt.Unsigned,
-	`updatedAt`:     Tt.String,
+	`updatedAt`:     Tt.Integer,
 	`updatedBy`:     Tt.Unsigned,
-	`deletedAt`:     Tt.String,
+	`deletedAt`:     Tt.Integer,
 	`deletedBy`:     Tt.Unsigned,
 	`restoredBy`:    Tt.Unsigned,
 }
@@ -1346,11 +1346,11 @@ type Payments struct {
 	PaymentMethod string      `json:"paymentMethod" form:"paymentMethod" query:"paymentMethod" long:"paymentMethod" msg:"paymentMethod"`
 	PaymentStatus string      `json:"paymentStatus" form:"paymentStatus" query:"paymentStatus" long:"paymentStatus" msg:"paymentStatus"`
 	Note          string      `json:"note" form:"note" query:"note" long:"note" msg:"note"`
-	CreatedAt     string      `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedAt     int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
 	CreatedBy     uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
-	UpdatedAt     string      `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedAt     int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
 	UpdatedBy     uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
-	DeletedAt     string      `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedAt     int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
 	DeletedBy     uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
 	RestoredBy    uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
 }
@@ -1619,11 +1619,11 @@ func (p *Payments) FromArray(a A.X) *Payments { //nolint:dupl false positive
 	p.PaymentMethod = X.ToS(a[4])
 	p.PaymentStatus = X.ToS(a[5])
 	p.Note = X.ToS(a[6])
-	p.CreatedAt = X.ToS(a[7])
+	p.CreatedAt = X.ToI(a[7])
 	p.CreatedBy = X.ToU(a[8])
-	p.UpdatedAt = X.ToS(a[9])
+	p.UpdatedAt = X.ToI(a[9])
 	p.UpdatedBy = X.ToU(a[10])
-	p.DeletedAt = X.ToS(a[11])
+	p.DeletedAt = X.ToI(a[11])
 	p.DeletedBy = X.ToU(a[12])
 	p.RestoredBy = X.ToU(a[13])
 	return p
@@ -1638,11 +1638,11 @@ func (p *Payments) FromUncensoredArray(a A.X) *Payments { //nolint:dupl false po
 	p.PaymentMethod = X.ToS(a[4])
 	p.PaymentStatus = X.ToS(a[5])
 	p.Note = X.ToS(a[6])
-	p.CreatedAt = X.ToS(a[7])
+	p.CreatedAt = X.ToI(a[7])
 	p.CreatedBy = X.ToU(a[8])
-	p.UpdatedAt = X.ToS(a[9])
+	p.UpdatedAt = X.ToI(a[9])
 	p.UpdatedBy = X.ToU(a[10])
-	p.DeletedAt = X.ToS(a[11])
+	p.DeletedAt = X.ToI(a[11])
 	p.DeletedBy = X.ToU(a[12])
 	p.RestoredBy = X.ToU(a[13])
 	return p
@@ -1695,11 +1695,11 @@ var PaymentsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`paymentMethod`: Tt.String,
 	`paymentStatus`: Tt.String,
 	`note`:          Tt.String,
-	`createdAt`:     Tt.String,
+	`createdAt`:     Tt.Integer,
 	`createdBy`:     Tt.Unsigned,
-	`updatedAt`:     Tt.String,
+	`updatedAt`:     Tt.Integer,
 	`updatedBy`:     Tt.Unsigned,
-	`deletedAt`:     Tt.String,
+	`deletedAt`:     Tt.Integer,
 	`deletedBy`:     Tt.Unsigned,
 	`restoredBy`:    Tt.Unsigned,
 }

@@ -3929,6 +3929,9 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
       exports.GuestVerifyEmail = async function GuestVerifyEmail(i, cb) {
         return await axios.post("/guest/verifyEmail", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.UserBooking = async function UserBooking(i, cb) {
+        return await axios.post("/user/booking", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.UserBuilding = async function UserBuilding(i, cb) {
         return await axios.post("/user/building", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };

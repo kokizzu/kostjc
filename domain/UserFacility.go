@@ -59,7 +59,7 @@ var UserFacilityMeta = zCrud.Meta{
 			Name:      mProperty.ExtraChargeIDR,
 			Label:     `Extra Charge`,
 			DataType:  zCrud.DataTypeCurrency,
-			InputType: zCrud.InputTypeText,
+			InputType: zCrud.InputTypeNumber,
 			ReadOnly:  false,
 			Mapping:   `IDR`,
 		},

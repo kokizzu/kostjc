@@ -1,6 +1,15 @@
 package mProperty
 
-import "github.com/kokizzu/gotro/D/Tt"
+import (
+	"time"
+
+	"github.com/kokizzu/gotro/D/Tt"
+)
+
+func IsValidDate(dateStr, format string) bool {
+	_, err := time.Parse(format, dateStr)
+	return err == nil
+}
 
 const (
 	Id         = `id`
@@ -146,15 +155,15 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{DateStart, Tt.String},
 			{DateEnd, Tt.String},
 			{BasePriceIDR, Tt.Integer},
-			{Facilities, Tt.String},
+			{Facilities, Tt.Array},
 			{TotalPriceIDR, Tt.Integer},
 			{PaidAt, Tt.String},
 			{TenantId, Tt.Unsigned},
-			{CreatedAt, Tt.String},
+			{CreatedAt, Tt.Integer},
 			{CreatedBy, Tt.Unsigned},
-			{UpdatedAt, Tt.String},
+			{UpdatedAt, Tt.Integer},
 			{UpdatedBy, Tt.Unsigned},
-			{DeletedAt, Tt.String},
+			{DeletedAt, Tt.Integer},
 			{DeletedBy, Tt.Unsigned},
 			{RestoredBy, Tt.Unsigned},
 		},
@@ -170,11 +179,11 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{PaymentMethod, Tt.String},
 			{PaymentStatus, Tt.String},
 			{Note, Tt.String},
-			{CreatedAt, Tt.String},
+			{CreatedAt, Tt.Integer},
 			{CreatedBy, Tt.Unsigned},
-			{UpdatedAt, Tt.String},
+			{UpdatedAt, Tt.Integer},
 			{UpdatedBy, Tt.Unsigned},
-			{DeletedAt, Tt.String},
+			{DeletedAt, Tt.Integer},
 			{DeletedBy, Tt.Unsigned},
 			{RestoredBy, Tt.Unsigned},
 		},

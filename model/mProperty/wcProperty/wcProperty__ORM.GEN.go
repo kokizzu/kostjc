@@ -28,6 +28,7 @@ type BookingsMutator struct {
 // NewBookingsMutator create new ORM writer/command object
 func NewBookingsMutator(adapter *Tt.Adapter) (res *BookingsMutator) {
 	res = &BookingsMutator{Bookings: rqProperty.Bookings{Adapter: adapter}}
+	res.Facilities = []any{}
 	return
 }
 
@@ -163,14 +164,11 @@ func (b *BookingsMutator) SetBasePriceIDR(val int64) bool { //nolint:dupl false 
 }
 
 // SetFacilities create mutations, should not duplicate
-func (b *BookingsMutator) SetFacilities(val string) bool { //nolint:dupl false positive
-	if val != b.Facilities {
-		b.mutations = append(b.mutations, A.X{`=`, 4, val})
-		b.logs = append(b.logs, A.X{`facilities`, b.Facilities, val})
-		b.Facilities = val
-		return true
-	}
-	return false
+func (b *BookingsMutator) SetFacilities(val []any) bool { //nolint:dupl false positive
+	b.mutations = append(b.mutations, A.X{`=`, 4, val})
+	b.logs = append(b.logs, A.X{`facilities`, b.Facilities, val})
+	b.Facilities = val
+	return true
 }
 
 // SetTotalPriceIDR create mutations, should not duplicate
@@ -207,7 +205,7 @@ func (b *BookingsMutator) SetTenantId(val uint64) bool { //nolint:dupl false pos
 }
 
 // SetCreatedAt create mutations, should not duplicate
-func (b *BookingsMutator) SetCreatedAt(val string) bool { //nolint:dupl false positive
+func (b *BookingsMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positive
 	if val != b.CreatedAt {
 		b.mutations = append(b.mutations, A.X{`=`, 8, val})
 		b.logs = append(b.logs, A.X{`createdAt`, b.CreatedAt, val})
@@ -229,7 +227,7 @@ func (b *BookingsMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false po
 }
 
 // SetUpdatedAt create mutations, should not duplicate
-func (b *BookingsMutator) SetUpdatedAt(val string) bool { //nolint:dupl false positive
+func (b *BookingsMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positive
 	if val != b.UpdatedAt {
 		b.mutations = append(b.mutations, A.X{`=`, 10, val})
 		b.logs = append(b.logs, A.X{`updatedAt`, b.UpdatedAt, val})
@@ -251,7 +249,7 @@ func (b *BookingsMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false po
 }
 
 // SetDeletedAt create mutations, should not duplicate
-func (b *BookingsMutator) SetDeletedAt(val string) bool { //nolint:dupl false positive
+func (b *BookingsMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positive
 	if val != b.DeletedAt {
 		b.mutations = append(b.mutations, A.X{`=`, 12, val})
 		b.logs = append(b.logs, A.X{`deletedAt`, b.DeletedAt, val})
@@ -307,8 +305,8 @@ func (b *BookingsMutator) SetAll(from rqProperty.Bookings, excludeMap, forceMap 
 		b.BasePriceIDR = from.BasePriceIDR
 		changed = true
 	}
-	if !excludeMap[`facilities`] && (forceMap[`facilities`] || from.Facilities != ``) {
-		b.Facilities = S.Trim(from.Facilities)
+	if !excludeMap[`facilities`] && (forceMap[`facilities`] || from.Facilities != nil) {
+		b.Facilities = from.Facilities
 		changed = true
 	}
 	if !excludeMap[`totalPriceIDR`] && (forceMap[`totalPriceIDR`] || from.TotalPriceIDR != 0) {
@@ -323,24 +321,24 @@ func (b *BookingsMutator) SetAll(from rqProperty.Bookings, excludeMap, forceMap 
 		b.TenantId = from.TenantId
 		changed = true
 	}
-	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != ``) {
-		b.CreatedAt = S.Trim(from.CreatedAt)
+	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {
+		b.CreatedAt = from.CreatedAt
 		changed = true
 	}
 	if !excludeMap[`createdBy`] && (forceMap[`createdBy`] || from.CreatedBy != 0) {
 		b.CreatedBy = from.CreatedBy
 		changed = true
 	}
-	if !excludeMap[`updatedAt`] && (forceMap[`updatedAt`] || from.UpdatedAt != ``) {
-		b.UpdatedAt = S.Trim(from.UpdatedAt)
+	if !excludeMap[`updatedAt`] && (forceMap[`updatedAt`] || from.UpdatedAt != 0) {
+		b.UpdatedAt = from.UpdatedAt
 		changed = true
 	}
 	if !excludeMap[`updatedBy`] && (forceMap[`updatedBy`] || from.UpdatedBy != 0) {
 		b.UpdatedBy = from.UpdatedBy
 		changed = true
 	}
-	if !excludeMap[`deletedAt`] && (forceMap[`deletedAt`] || from.DeletedAt != ``) {
-		b.DeletedAt = S.Trim(from.DeletedAt)
+	if !excludeMap[`deletedAt`] && (forceMap[`deletedAt`] || from.DeletedAt != 0) {
+		b.DeletedAt = from.DeletedAt
 		changed = true
 	}
 	if !excludeMap[`deletedBy`] && (forceMap[`deletedBy`] || from.DeletedBy != 0) {
@@ -1339,7 +1337,7 @@ func (p *PaymentsMutator) SetNote(val string) bool { //nolint:dupl false positiv
 }
 
 // SetCreatedAt create mutations, should not duplicate
-func (p *PaymentsMutator) SetCreatedAt(val string) bool { //nolint:dupl false positive
+func (p *PaymentsMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positive
 	if val != p.CreatedAt {
 		p.mutations = append(p.mutations, A.X{`=`, 7, val})
 		p.logs = append(p.logs, A.X{`createdAt`, p.CreatedAt, val})
@@ -1361,7 +1359,7 @@ func (p *PaymentsMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false po
 }
 
 // SetUpdatedAt create mutations, should not duplicate
-func (p *PaymentsMutator) SetUpdatedAt(val string) bool { //nolint:dupl false positive
+func (p *PaymentsMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positive
 	if val != p.UpdatedAt {
 		p.mutations = append(p.mutations, A.X{`=`, 9, val})
 		p.logs = append(p.logs, A.X{`updatedAt`, p.UpdatedAt, val})
@@ -1383,7 +1381,7 @@ func (p *PaymentsMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false po
 }
 
 // SetDeletedAt create mutations, should not duplicate
-func (p *PaymentsMutator) SetDeletedAt(val string) bool { //nolint:dupl false positive
+func (p *PaymentsMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positive
 	if val != p.DeletedAt {
 		p.mutations = append(p.mutations, A.X{`=`, 11, val})
 		p.logs = append(p.logs, A.X{`deletedAt`, p.DeletedAt, val})
@@ -1451,24 +1449,24 @@ func (p *PaymentsMutator) SetAll(from rqProperty.Payments, excludeMap, forceMap 
 		p.Note = S.Trim(from.Note)
 		changed = true
 	}
-	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != ``) {
-		p.CreatedAt = S.Trim(from.CreatedAt)
+	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {
+		p.CreatedAt = from.CreatedAt
 		changed = true
 	}
 	if !excludeMap[`createdBy`] && (forceMap[`createdBy`] || from.CreatedBy != 0) {
 		p.CreatedBy = from.CreatedBy
 		changed = true
 	}
-	if !excludeMap[`updatedAt`] && (forceMap[`updatedAt`] || from.UpdatedAt != ``) {
-		p.UpdatedAt = S.Trim(from.UpdatedAt)
+	if !excludeMap[`updatedAt`] && (forceMap[`updatedAt`] || from.UpdatedAt != 0) {
+		p.UpdatedAt = from.UpdatedAt
 		changed = true
 	}
 	if !excludeMap[`updatedBy`] && (forceMap[`updatedBy`] || from.UpdatedBy != 0) {
 		p.UpdatedBy = from.UpdatedBy
 		changed = true
 	}
-	if !excludeMap[`deletedAt`] && (forceMap[`deletedAt`] || from.DeletedAt != ``) {
-		p.DeletedAt = S.Trim(from.DeletedAt)
+	if !excludeMap[`deletedAt`] && (forceMap[`deletedAt`] || from.DeletedAt != 0) {
+		p.DeletedAt = from.DeletedAt
 		changed = true
 	}
 	if !excludeMap[`deletedBy`] && (forceMap[`deletedBy`] || from.DeletedBy != 0) {

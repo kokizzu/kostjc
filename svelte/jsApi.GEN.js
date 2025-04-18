@@ -252,6 +252,141 @@ exports.GuestVerifyEmail = async function GuestVerifyEmail( i, cb ) {
 }
 
 /**
+ * @typedef {Object} UserBookingIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} booking.id
+ * @property {String} booking.dateStart
+ * @property {String} booking.dateEnd
+ * @property {number} booking.basePriceIDR
+ * @property {Object} booking.facilities
+ * @property {number} booking.totalPriceIDR
+ * @property {String} booking.paidAt
+ * @property {number} booking.tenantId
+ * @property {number} booking.createdAt
+ * @property {number} booking.createdBy
+ * @property {number} booking.updatedAt
+ * @property {number} booking.updatedBy
+ * @property {number} booking.deletedAt
+ * @property {number} booking.deletedBy
+ * @property {number} booking.restoredBy
+ */
+const UserBookingIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  booking: { // rqProperty.Bookings
+    id: 0, // uint64
+    dateStart: '', // string
+    dateEnd: '', // string
+    basePriceIDR: 0, // int64
+    facilities: { // []any
+    }, // []any
+    totalPriceIDR: 0, // int64
+    paidAt: '', // string
+    tenantId: 0, // uint64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Bookings
+}
+/**
+ * @typedef {Object} UserBookingOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} booking.id
+ * @property {String} booking.dateStart
+ * @property {String} booking.dateEnd
+ * @property {number} booking.basePriceIDR
+ * @property {Object} booking.facilities
+ * @property {number} booking.totalPriceIDR
+ * @property {String} booking.paidAt
+ * @property {number} booking.tenantId
+ * @property {number} booking.createdAt
+ * @property {number} booking.createdBy
+ * @property {number} booking.updatedAt
+ * @property {number} booking.updatedBy
+ * @property {number} booking.deletedAt
+ * @property {number} booking.deletedBy
+ * @property {number} booking.restoredBy
+ * @property {Object} bookings
+ */
+const UserBookingOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  booking: { // rqProperty.Bookings
+    id: 0, // uint64
+    dateStart: '', // string
+    dateEnd: '', // string
+    basePriceIDR: 0, // int64
+    facilities: { // []any
+    }, // []any
+    totalPriceIDR: 0, // int64
+    paidAt: '', // string
+    tenantId: 0, // uint64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Bookings
+  bookings: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback UserBookingCallback
+ * @param {UserBookingOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {UserBookingIn} i
+ * @param {UserBookingCallback} cb
+ * @returns {Promise}
+ */
+exports.UserBooking = async function UserBooking( i, cb ) {
+  return await axios.post( '/user/booking', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} UserBuildingIn
  * @property {String} cmd
  * @property {Object} withMeta
