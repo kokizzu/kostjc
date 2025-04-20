@@ -34,7 +34,7 @@ module.exports = {};
  * @property {string|number} id
  * @property {string} buildingName
  * @property {number} locationId
- * @property {string} facilitiesObj
+ * @property {number[]} facilities
  * @property {number} createdAt
  * @property {string} createdBy
  * @property {number} updatedAt
@@ -51,7 +51,7 @@ module.exports = {};
  * @property {string} dateStart
  * @property {string} dateEnd
  * @property {number} basePriceIDR
- * @property {number[]} facilities
+ * @property {string} facilitiesObj
  * @property {number} totalPriceIDR
  * @property {string} paidAt
  * @property {string} tenantId

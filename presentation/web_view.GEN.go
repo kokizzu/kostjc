@@ -15,6 +15,7 @@ var viewList = map[string]string{
 	`Facility`:          `../svelte/facility.html`,          // ../svelte/facility.svelte
 	`Index`:             `../svelte/index.html`,             // ../svelte/index.svelte
 	`Location`:          `../svelte/location.html`,          // ../svelte/location.svelte
+	`Stock`:             `../svelte/stock.html`,             // ../svelte/stock.svelte
 	`TenantsManagement`: `../svelte/tenantsManagement.html`, // ../svelte/tenantsManagement.svelte
 }
 
@@ -51,6 +52,11 @@ func (v *Views) RenderIndex(c *fiber.Ctx, m M.SX) error {
 func (v *Views) RenderLocation(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`Location`].Str(m))
+}
+
+func (v *Views) RenderStock(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`Stock`].Str(m))
 }
 
 func (v *Views) RenderTenantsManagement(c *fiber.Ctx, m M.SX) error {

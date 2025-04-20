@@ -5,8 +5,6 @@ import (
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
-
-	"github.com/goccy/go-json"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file UserBuilding.go
@@ -67,15 +65,11 @@ var UserBuildingMeta = zCrud.Meta{
 			ReadOnly:  false,
 		},
 		{
-			Name:      mProperty.FacilitiesObj,
+			Name:      mProperty.Facilities,
 			Label:     `Facilities`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeTextArea,
-			Description: `{
-  "facilityName": "Pillow",
-  "extraChargeIDR": 20000
-}`,
-			ReadOnly: false,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  false,
 		},
 		{
 			Name:      mProperty.CreatedAt,
@@ -154,13 +148,11 @@ func (d *Domain) UserBuilding(in *UserBuildingIn) (out UserBuildingOut) {
 			bld.SetLocationId(in.Building.LocationId)
 		}
 
-		if in.Building.FacilitiesObj != "" {
-			var facilities []rqProperty.Buildings
-			if err := json.Unmarshal([]byte(in.Building.FacilitiesObj), &facilities); err != nil {
-
-			}
-			bld.SetFacilitiesObj(in.Building.FacilitiesObj)
+		if len(in.Building.Facilities) == 0 {
+			in.Building.Facilities = []any{}
 		}
+
+		bld.SetFacilities(in.Building.Facilities)
 
 		if bld.Id == 0 {
 			bld.SetCreatedAt(in.UnixNow())

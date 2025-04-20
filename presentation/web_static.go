@@ -94,19 +94,23 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		loc := rqProperty.NewLocations(d.PropOltp)
 		locations := loc.FindLocationChoices()
 
+		fac := rqProperty.NewFacilities(d.PropOltp)
+		facilities := fac.FindAll()
+
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
 		out := d.UserBuilding(&in)
 
 		return views.RenderBuilding(ctx, M.SX{
-			`title`:     `User Building`,
-			`user`:      user,
-			`segments`:  segments,
-			`building`:  out.Building,
-			`buildings`: out.Buildings,
-			`locations`: locations,
-			`fields`:    out.Meta.Fields,
-			`pager`:     out.Pager,
+			`title`:      `User Building`,
+			`user`:       user,
+			`segments`:   segments,
+			`building`:   out.Building,
+			`buildings`:  out.Buildings,
+			`locations`:  locations,
+			`facilities`: facilities,
+			`fields`:     out.Meta.Fields,
+			`pager`:      out.Pager,
 		})
 	})
 
@@ -154,19 +158,23 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		tenant := rqAuth.NewTenants(d.AuthOltp)
 		tenants := tenant.FindTenantChoices()
 
+		fac := rqProperty.NewFacilities(d.PropOltp)
+		facilities := fac.FindAll()
+
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
 		out := d.UserBooking(&in)
 
 		return views.RenderBooking(ctx, M.SX{
-			`title`:    `User Booking`,
-			`user`:     user,
-			`segments`: segments,
-			`booking`:  out.Booking,
-			`bookings`: out.Bookings,
-			`tenants`:  tenants,
-			`fields`:   out.Meta.Fields,
-			`pager`:    out.Pager,
+			`title`:      `User Booking`,
+			`user`:       user,
+			`segments`:   segments,
+			`booking`:    out.Booking,
+			`bookings`:   out.Bookings,
+			`tenants`:    tenants,
+			`facilities`: facilities,
+			`fields`:     out.Meta.Fields,
+			`pager`:      out.Pager,
 		})
 	})
 

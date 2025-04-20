@@ -5,29 +5,31 @@
   /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/property.js').Booking} Booking */
+  /** @typedef {import('./_types/property.js').Facility} Facility */
   
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
   import { UserBooking } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
-  import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import PopUpAddBooking from './_components/PopUpAddBooking.svelte';
 
-  let user      = /** @type {User} */ ({/* user */});
-  let segments  = /** @type {Access} */ ({/* segments */});
-  let booking  = /** @type {Booking} */ ({/* booking */});
-  let bookings = /** @type {any[][]} */([/* bookings */]);
-  let tenants = /** @type {Record<Number, string>} */({/* tenants */});
-  let fields    = /** @type {Field[]} */ ([/* fields */]);
-  let pager     = /** @type {PagerOut} */ ({/* pager */});
+  let user        = /** @type {User} */ ({/* user */});
+  let segments    = /** @type {Access} */ ({/* segments */});
+  let booking     = /** @type {Booking} */ ({/* booking */});
+  let bookings    = /** @type {any[][]} */([/* bookings */]);
+  let tenants     = /** @type {Record<Number, string>} */({/* tenants */});
+  let facilities  = /** @type {Facility[]} */ ([/* facilities */]);
+  let fields      = /** @type {Field[]} */ ([/* fields */]);
+  let pager       = /** @type {PagerOut} */ ({/* pager */});
 
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
-    import('svelte').SvelteComponent | HTMLElement |any
+    import('svelte').SvelteComponent | HTMLElement| PopUpAddBooking |any
   } */ (null);
-  let isSubmitAddBuilding = /** @type boolean */ (false);
+  let isSubmitAddBooking = /** @type boolean */ (false);
 
   onMount(() => {
     isPopUpFormReady = true
@@ -39,7 +41,7 @@
       i, /** @type {import('./jsApi.GEN').UserBookingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
-        isSubmitAddBuilding = false;
+        isSubmitAddBooking = false;
         if (o.error) {
           console.log(o);
           notifier.showError(o.error);
@@ -137,21 +139,20 @@
     );
   }
 
-  async function OnAddBooking(/** @type any[] */ payloads) {
-    isSubmitAddBuilding = true;
+  async function OnAddBooking(/** @type {Booking} */ booking, /** @type {number[]} */ facilities) {
+    isSubmitAddBooking = true;
     const i = /** @type {any} */ ({
       pager,
-      booking: {
-        id: payloads[0],
-      },
+      facilities,
+      booking,
       cmd: 'upsert'
     });
 
     await UserBooking(i,
-      /** @type {import('../jsApi.GEN').TenantAdminProductsCallback} */
+      /** @type {import('../jsApi.GEN').UserBookingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
-        isSubmitAddBuilding = false;
+        isSubmitAddBooking = false;
         if (o.error) {
           console.log(o);
           notifier.showError(o.error);
@@ -172,12 +173,12 @@
 </script>
 
 {#if isPopUpFormReady}
-  <PopUpForms
+  <PopUpAddBooking
     bind:this={popUpForms}
-    heading="Add Facility"
-    FIELDS={fields}
-    bind:isSubmitted={isSubmitAddBuilding}
+    bind:isSubmitted={isSubmitAddBooking}
     OnSubmit={OnAddBooking}
+    facilities={facilities}
+    tenants={tenants}
   />
 {/if}
 

@@ -28,7 +28,6 @@ type BookingsMutator struct {
 // NewBookingsMutator create new ORM writer/command object
 func NewBookingsMutator(adapter *Tt.Adapter) (res *BookingsMutator) {
 	res = &BookingsMutator{Bookings: rqProperty.Bookings{Adapter: adapter}}
-	res.Facilities = []any{}
 	return
 }
 
@@ -76,7 +75,7 @@ func (b *BookingsMutator) DoDeletePermanentById() bool { //nolint:dupl false pos
 //		A.X{`=`, 1, b.DateStart},
 //		A.X{`=`, 2, b.DateEnd},
 //		A.X{`=`, 3, b.BasePriceIDR},
-//		A.X{`=`, 4, b.Facilities},
+//		A.X{`=`, 4, b.FacilitiesObj},
 //		A.X{`=`, 5, b.TotalPriceIDR},
 //		A.X{`=`, 6, b.PaidAt},
 //		A.X{`=`, 7, b.TenantId},
@@ -163,12 +162,15 @@ func (b *BookingsMutator) SetBasePriceIDR(val int64) bool { //nolint:dupl false 
 	return false
 }
 
-// SetFacilities create mutations, should not duplicate
-func (b *BookingsMutator) SetFacilities(val []any) bool { //nolint:dupl false positive
-	b.mutations = append(b.mutations, A.X{`=`, 4, val})
-	b.logs = append(b.logs, A.X{`facilities`, b.Facilities, val})
-	b.Facilities = val
-	return true
+// SetFacilitiesObj create mutations, should not duplicate
+func (b *BookingsMutator) SetFacilitiesObj(val string) bool { //nolint:dupl false positive
+	if val != b.FacilitiesObj {
+		b.mutations = append(b.mutations, A.X{`=`, 4, val})
+		b.logs = append(b.logs, A.X{`facilitiesObj`, b.FacilitiesObj, val})
+		b.FacilitiesObj = val
+		return true
+	}
+	return false
 }
 
 // SetTotalPriceIDR create mutations, should not duplicate
@@ -305,8 +307,8 @@ func (b *BookingsMutator) SetAll(from rqProperty.Bookings, excludeMap, forceMap 
 		b.BasePriceIDR = from.BasePriceIDR
 		changed = true
 	}
-	if !excludeMap[`facilities`] && (forceMap[`facilities`] || from.Facilities != nil) {
-		b.Facilities = from.Facilities
+	if !excludeMap[`facilitiesObj`] && (forceMap[`facilitiesObj`] || from.FacilitiesObj != ``) {
+		b.FacilitiesObj = S.Trim(from.FacilitiesObj)
 		changed = true
 	}
 	if !excludeMap[`totalPriceIDR`] && (forceMap[`totalPriceIDR`] || from.TotalPriceIDR != 0) {
@@ -364,6 +366,7 @@ type BuildingsMutator struct {
 // NewBuildingsMutator create new ORM writer/command object
 func NewBuildingsMutator(adapter *Tt.Adapter) (res *BuildingsMutator) {
 	res = &BuildingsMutator{Buildings: rqProperty.Buildings{Adapter: adapter}}
+	res.Facilities = []any{}
 	return
 }
 
@@ -410,7 +413,7 @@ func (b *BuildingsMutator) DoDeletePermanentById() bool { //nolint:dupl false po
 //		A.X{`=`, 0, b.Id},
 //		A.X{`=`, 1, b.BuildingName},
 //		A.X{`=`, 2, b.LocationId},
-//		A.X{`=`, 3, b.FacilitiesObj},
+//		A.X{`=`, 3, b.Facilities},
 //		A.X{`=`, 4, b.CreatedAt},
 //		A.X{`=`, 5, b.CreatedBy},
 //		A.X{`=`, 6, b.UpdatedAt},
@@ -483,15 +486,12 @@ func (b *BuildingsMutator) SetLocationId(val uint64) bool { //nolint:dupl false 
 	return false
 }
 
-// SetFacilitiesObj create mutations, should not duplicate
-func (b *BuildingsMutator) SetFacilitiesObj(val string) bool { //nolint:dupl false positive
-	if val != b.FacilitiesObj {
-		b.mutations = append(b.mutations, A.X{`=`, 3, val})
-		b.logs = append(b.logs, A.X{`facilitiesObj`, b.FacilitiesObj, val})
-		b.FacilitiesObj = val
-		return true
-	}
-	return false
+// SetFacilities create mutations, should not duplicate
+func (b *BuildingsMutator) SetFacilities(val []any) bool { //nolint:dupl false positive
+	b.mutations = append(b.mutations, A.X{`=`, 3, val})
+	b.logs = append(b.logs, A.X{`facilities`, b.Facilities, val})
+	b.Facilities = val
+	return true
 }
 
 // SetCreatedAt create mutations, should not duplicate
@@ -591,8 +591,8 @@ func (b *BuildingsMutator) SetAll(from rqProperty.Buildings, excludeMap, forceMa
 		b.LocationId = from.LocationId
 		changed = true
 	}
-	if !excludeMap[`facilitiesObj`] && (forceMap[`facilitiesObj`] || from.FacilitiesObj != ``) {
-		b.FacilitiesObj = S.Trim(from.FacilitiesObj)
+	if !excludeMap[`facilities`] && (forceMap[`facilities`] || from.Facilities != nil) {
+		b.Facilities = from.Facilities
 		changed = true
 	}
 	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {

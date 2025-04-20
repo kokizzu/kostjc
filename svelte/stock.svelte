@@ -4,53 +4,46 @@
   /** @typedef {import('./_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('./_types/users.js').User} User */
-  /** @typedef {import('./_types/property.js').Building} Building */
-  /** @typedef {import('./_types/property.js').Location} Location */
   /** @typedef {import('./_types/property.js').Facility} Facility */
   
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { UserBuilding } from './jsApi.GEN';
+  import { UserFacility } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
-  import PopUpAddBuilding from './_components/PopUpAddBuilding.svelte';
+  import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
-  let building  = /** @type {Building} */ ({/* building */});
-  let buildings = /** @type {any[][]} */([/* buildings */]);
-  let locations = /** @type {Record<Number, string>} */({/* locations */});
-  let facilities = /** @type {Facility[]} */ ([/* facilities */]);
+  let facility  = /** @type {Facility} */ ({/* facility */});
+  let facilities = /** @type {any[][]} */([/* facilities */]);
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
 
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
-    import('svelte').SvelteComponent | HTMLElement | PopUpAddBuilding |any
+    import('svelte').SvelteComponent | HTMLElement | PopUpForms |any
   } */ (null);
-  let isSubmitAddBuilding = /** @type boolean */ (false);
+  let isSubmitAddFacility = /** @type boolean */ (false);
 
-  onMount(() => {
-    isPopUpFormReady = true
-    console.log('Locations: ', locations);
-  });
+  onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await UserBuilding( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await UserFacility( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').UserFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
-        isSubmitAddBuilding = false;
+        isSubmitAddFacility = false;
         if (o.error) {
           console.log(o);
           notifier.showError(o.error);
           return
         }
         pager = o.pager;
-        buildings = o.buildings;
+        facilities = o.facilities;
       }
     );
   }
@@ -58,13 +51,13 @@
   async function OnRestore(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      building: {
+      facility: {
         id: row[0]
       },
       cmd: 'restore'
     });
-    await UserBuilding(i,
-      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await UserFacility(i,
+      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -74,8 +67,8 @@
         }
 
         pager = o.pager;
-        buildings = o.buildings;
-        notifier.showSuccess(`Building '${row[1]}' restored !!`);
+        facilities = o.facilities;
+        notifier.showSuccess(`Facility '${row[1]}' restored !!`);
 
         OnRefresh(pager);
       }
@@ -85,13 +78,13 @@
   async function OnDelete(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      building: {
+      facility: {
         id: row[0]
       },
       cmd: 'delete'
     });
-    await UserBuilding(i,
-      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await UserFacility(i,
+      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -101,8 +94,8 @@
         }
 
         pager = o.pager;
-        buildings = o.buildings;
-        notifier.showSuccess(`Building '${row[1]}' deleted !!`);
+        facilities = o.facilities;
+        notifier.showSuccess(`Facility '${row[1]}' deleted !!`);
 
         OnRefresh(pager);
       }
@@ -110,20 +103,19 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Building ID to Edit: ' + String(id));
-    const building = {
+    console.log('Facility ID to Edit: ' + String(id));
+    const facility = {
       id: payloads[0],
-      buildingName: String(payloads[1]),
-      locationId: String(payloads[2]),
-      facilitiesObj: String(payloads[3]),
+      facilityName: payloads[1],
+      extraChargeIDR: Number(payloads[2]),
     }
     const i = /** @type {any}*/ ({
       pager,
-      building,
+      facility,
       cmd: 'upsert'
     });
-    await UserBuilding(i,
-      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await UserFacility(i,
+      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -133,27 +125,32 @@
         }
 
         pager = o.pager;
-        buildings = o.buildings;
-        notifier.showSuccess(`Building '${building.buildingName}' updated !!`);
+        facilities = o.facilities;
+        notifier.showSuccess(`Facility '${facility.facilityName}' updated !!`);
 
         OnRefresh(pager);
       }
     );
   }
 
-  async function OnAddBuilding(/** @type {Building} */ building) {
-    isSubmitAddBuilding = true;
+  async function OnAddFacility(/** @type any[] */ payloads) {
+    isSubmitAddFacility = true;
+
+    const facility = /** @type {any} */ ({
+      facilityName: payloads[1],
+      extraChargeIDR: Number(payloads[2]),
+    });
     const i = /** @type {any} */ ({
       pager,
-      building,
+      facility,
       cmd: 'upsert'
     });
 
-    await UserBuilding(i,
-      /** @type {import('../jsApi.GEN').UserBuildingCallback} */
+    await UserFacility(i,
+      /** @type {import('../jsApi.GEN').UserFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
-        isSubmitAddBuilding = false;
+        isSubmitAddFacility = false;
         if (o.error) {
           console.log(o);
           notifier.showError(o.error);
@@ -161,8 +158,8 @@
         }
         
         pager = o.pager;
-        buildings = o.buildings;
-        notifier.showSuccess(`Building '${building.buildingName}' created !!`);
+        facilities = o.facilities;
+        notifier.showSuccess(`Facility '${facility.facilityName}' created !!`);
 
         popUpForms.Reset();
 
@@ -174,26 +171,23 @@
 </script>
 
 {#if isPopUpFormReady}
-  <PopUpAddBuilding
+  <PopUpForms
     bind:this={popUpForms}
-    bind:isSubmitted={isSubmitAddBuilding}
-    locations={locations}
-    facilities={facilities}
-    OnSubmit={OnAddBuilding}
+    heading="Add Facility"
+    FIELDS={fields}
+    bind:isSubmitted={isSubmitAddFacility}
+    OnSubmit={OnAddFacility}
   />
 {/if}
 
 <LayoutMain access={segments} user={user}>
-  <div class="master-building">
-    <h2>Master Building</h2>
+  <div class="master-facility">
+    <h2>Master Facility</h2>
     <MasterTable
       ACCESS={segments}
-      REFS={{
-        'locationId': locations
-      }}
       bind:FIELDS={fields}
       bind:PAGER={pager}
-      bind:MASTER_ROWS={buildings}
+      bind:MASTER_ROWS={facilities}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
@@ -208,7 +202,7 @@
     <button
       class="btn"
       on:click={() => popUpForms.Show()}
-      title="add building"
+      title="add facility"
     >
       <Icon
         color="var(--gray-007)"
@@ -221,14 +215,14 @@
 </LayoutMain>
 
 <style>
-  .master-building {
+  .master-facility {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
   }
 
-  .master-building h2 {
+  .master-facility h2 {
     margin: 0;
   }
 </style>

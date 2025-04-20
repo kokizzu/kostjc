@@ -3964,14 +3964,17 @@ footer.svelte-1tm73ji nav a.svelte-1tm73ji:hover {
           return "";
         if (typeof unixSec === "string")
           return unixSec;
-        let dt = new Date(unixSec * 1e3);
+        const dt = new Date(unixSec * 1e3);
         if (!humanize) {
-          dt = dt.toISOString();
-          return dt.substring(0, 10) + " " + dt.substring(11, 16);
+          const year = dt.getFullYear();
+          const month = String(dt.getMonth() + 1).padStart(2, "0");
+          const day = String(dt.getDate()).padStart(2, "0");
+          const hours = String(dt.getHours()).padStart(2, "0");
+          const minutes = String(dt.getMinutes()).padStart(2, "0");
+          return `${year}-${month}-${day} ${hours}:${minutes}`;
         }
         const options = { day: "2-digit", month: "long", year: "numeric" };
-        const formattedDate = dt.toLocaleDateString(void 0, options);
-        return formattedDate;
+        return dt.toLocaleDateString(void 0, options);
       }
       function localeDatetime(unixSec) {
         if (!unixSec)

@@ -3,14 +3,20 @@
 function datetime(unixSec, humanize) {
   if (!unixSec) return '';
   if (typeof unixSec === 'string') return unixSec; // might not be unix time
-  let dt = new Date(unixSec * 1000);
+
+  const dt = new Date(unixSec * 1000);
+
   if (!humanize) {
-    dt = dt.toISOString();
-    return dt.substring(0, 10) + ' ' + dt.substring(11, 16);
+    const year = dt.getFullYear();
+    const month = String(dt.getMonth() + 1).padStart(2, '0');
+    const day = String(dt.getDate()).padStart(2, '0');
+    const hours = String(dt.getHours()).padStart(2, '0');
+    const minutes = String(dt.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
   }
+
   const options = { day: '2-digit', month: 'long', year: 'numeric' };
-  const formattedDate = dt.toLocaleDateString(undefined, options);
-  return formattedDate;
+  return dt.toLocaleDateString(undefined, options);
 }
 
 function localeDatetime(unixSec) {

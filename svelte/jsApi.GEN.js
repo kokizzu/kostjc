@@ -259,11 +259,12 @@ exports.GuestVerifyEmail = async function GuestVerifyEmail( i, cb ) {
  * @property {number} pager.perPage
  * @property {Object} pager.filters
  * @property {Array<String>} pager.order
+ * @property {Object} facilties
  * @property {number} booking.id
  * @property {String} booking.dateStart
  * @property {String} booking.dateEnd
  * @property {number} booking.basePriceIDR
- * @property {Object} booking.facilities
+ * @property {String} booking.facilitiesObj
  * @property {number} booking.totalPriceIDR
  * @property {String} booking.paidAt
  * @property {number} booking.tenantId
@@ -285,13 +286,14 @@ const UserBookingIn = {
     }, // map[string][]string
     order: [], // []string
   }, // zCrud.PagerIn
+  facilties: { // []uint64
+  }, // []uint64
   booking: { // rqProperty.Bookings
     id: 0, // uint64
     dateStart: '', // string
     dateEnd: '', // string
     basePriceIDR: 0, // int64
-    facilities: { // []any
-    }, // []any
+    facilitiesObj: '', // string
     totalPriceIDR: 0, // int64
     paidAt: '', // string
     tenantId: 0, // uint64
@@ -319,7 +321,7 @@ const UserBookingIn = {
  * @property {String} booking.dateStart
  * @property {String} booking.dateEnd
  * @property {number} booking.basePriceIDR
- * @property {Object} booking.facilities
+ * @property {String} booking.facilitiesObj
  * @property {number} booking.totalPriceIDR
  * @property {String} booking.paidAt
  * @property {number} booking.tenantId
@@ -354,8 +356,7 @@ const UserBookingOut = {
     dateStart: '', // string
     dateEnd: '', // string
     basePriceIDR: 0, // int64
-    facilities: { // []any
-    }, // []any
+    facilitiesObj: '', // string
     totalPriceIDR: 0, // int64
     paidAt: '', // string
     tenantId: 0, // uint64
@@ -397,7 +398,7 @@ exports.UserBooking = async function UserBooking( i, cb ) {
  * @property {number} building.id
  * @property {String} building.buildingName
  * @property {number} building.locationId
- * @property {String} building.facilitiesObj
+ * @property {Object} building.facilities
  * @property {number} building.createdAt
  * @property {number} building.createdBy
  * @property {number} building.updatedAt
@@ -420,7 +421,8 @@ const UserBuildingIn = {
     id: 0, // uint64
     buildingName: '', // string
     locationId: 0, // uint64
-    facilitiesObj: '', // string
+    facilities: { // []any
+    }, // []any
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64
@@ -444,7 +446,7 @@ const UserBuildingIn = {
  * @property {number} building.id
  * @property {String} building.buildingName
  * @property {number} building.locationId
- * @property {String} building.facilitiesObj
+ * @property {Object} building.facilities
  * @property {number} building.createdAt
  * @property {number} building.createdBy
  * @property {number} building.updatedAt
@@ -475,7 +477,8 @@ const UserBuildingOut = {
     id: 0, // uint64
     buildingName: '', // string
     locationId: 0, // uint64
-    facilitiesObj: '', // string
+    facilities: { // []any
+    }, // []any
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64

@@ -153,3 +153,18 @@ FROM ` + b.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 
 	return
 }
+
+func (f *Facilities) FindAll() []Facilities {
+	const comment = `-- Facilities) FindAll`
+
+	queryRows := comment + `
+SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName()
+
+	var rows = []Facilities{}
+	f.Adapter.QuerySql(queryRows, func(row []any) {
+		f.FromArray(row)
+		rows = append(rows, *f)
+	})
+
+	return rows
+}

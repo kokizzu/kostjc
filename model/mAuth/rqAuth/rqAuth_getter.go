@@ -135,7 +135,11 @@ ORDER BY ` + t.SqlTenantName() + ` ASC`
 	out := make(map[uint64]string)
 	t.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) == 3 {
-			nameWithNum := X.ToS(row[1]) + " (" + X.ToS(row[2]) + ")"
+			whatsappNum := ""
+			if X.ToS(row[2]) != "" {
+				whatsappNum = " (" + X.ToS(row[2]) + ")"
+			}
+			nameWithNum := X.ToS(row[1]) + whatsappNum
 			out[X.ToU(row[0])] = nameWithNum
 		}
 	})

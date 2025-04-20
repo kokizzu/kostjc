@@ -25,7 +25,7 @@ type Bookings struct {
 	DateStart     string      `json:"dateStart" form:"dateStart" query:"dateStart" long:"dateStart" msg:"dateStart"`
 	DateEnd       string      `json:"dateEnd" form:"dateEnd" query:"dateEnd" long:"dateEnd" msg:"dateEnd"`
 	BasePriceIDR  int64       `json:"basePriceIDR" form:"basePriceIDR" query:"basePriceIDR" long:"basePriceIDR" msg:"basePriceIDR"`
-	Facilities    []any       `json:"facilities" form:"facilities" query:"facilities" long:"facilities" msg:"facilities"`
+	FacilitiesObj string      `json:"facilitiesObj" form:"facilitiesObj" query:"facilitiesObj" long:"facilitiesObj" msg:"facilitiesObj"`
 	TotalPriceIDR int64       `json:"totalPriceIDR" form:"totalPriceIDR" query:"totalPriceIDR" long:"totalPriceIDR" msg:"totalPriceIDR"`
 	PaidAt        string      `json:"paidAt" form:"paidAt" query:"paidAt" long:"paidAt" msg:"paidAt"`
 	TenantId      uint64      `json:"tenantId,string" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
@@ -77,7 +77,7 @@ func (b *Bookings) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "dateStart"
 	, "dateEnd"
 	, "basePriceIDR"
-	, "facilities"
+	, "facilitiesObj"
 	, "totalPriceIDR"
 	, "paidAt"
 	, "tenantId"
@@ -97,7 +97,7 @@ func (b *Bookings) SqlSelectAllUncensoredFields() string { //nolint:dupl false p
 	, "dateStart"
 	, "dateEnd"
 	, "basePriceIDR"
-	, "facilities"
+	, "facilitiesObj"
 	, "totalPriceIDR"
 	, "paidAt"
 	, "tenantId"
@@ -118,7 +118,7 @@ func (b *Bookings) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 1, b.DateStart},
 		A.X{`=`, 2, b.DateEnd},
 		A.X{`=`, 3, b.BasePriceIDR},
-		A.X{`=`, 4, b.Facilities},
+		A.X{`=`, 4, b.FacilitiesObj},
 		A.X{`=`, 5, b.TotalPriceIDR},
 		A.X{`=`, 6, b.PaidAt},
 		A.X{`=`, 7, b.TenantId},
@@ -172,14 +172,14 @@ func (b *Bookings) SqlBasePriceIDR() string { //nolint:dupl false positive
 	return `"basePriceIDR"`
 }
 
-// IdxFacilities return name of the index
-func (b *Bookings) IdxFacilities() int { //nolint:dupl false positive
+// IdxFacilitiesObj return name of the index
+func (b *Bookings) IdxFacilitiesObj() int { //nolint:dupl false positive
 	return 4
 }
 
-// SqlFacilities return name of the column being indexed
-func (b *Bookings) SqlFacilities() string { //nolint:dupl false positive
-	return `"facilities"`
+// SqlFacilitiesObj return name of the column being indexed
+func (b *Bookings) SqlFacilitiesObj() string { //nolint:dupl false positive
+	return `"facilitiesObj"`
 }
 
 // IdxTotalPriceIDR return name of the index
@@ -293,7 +293,7 @@ func (b *Bookings) ToArray() A.X { //nolint:dupl false positive
 		b.DateStart,     // 1
 		b.DateEnd,       // 2
 		b.BasePriceIDR,  // 3
-		b.Facilities,    // 4
+		b.FacilitiesObj, // 4
 		b.TotalPriceIDR, // 5
 		b.PaidAt,        // 6
 		b.TenantId,      // 7
@@ -313,7 +313,7 @@ func (b *Bookings) FromArray(a A.X) *Bookings { //nolint:dupl false positive
 	b.DateStart = X.ToS(a[1])
 	b.DateEnd = X.ToS(a[2])
 	b.BasePriceIDR = X.ToI(a[3])
-	b.Facilities = X.ToArr(a[4])
+	b.FacilitiesObj = X.ToS(a[4])
 	b.TotalPriceIDR = X.ToI(a[5])
 	b.PaidAt = X.ToS(a[6])
 	b.TenantId = X.ToU(a[7])
@@ -333,7 +333,7 @@ func (b *Bookings) FromUncensoredArray(a A.X) *Bookings { //nolint:dupl false po
 	b.DateStart = X.ToS(a[1])
 	b.DateEnd = X.ToS(a[2])
 	b.BasePriceIDR = X.ToI(a[3])
-	b.Facilities = X.ToArr(a[4])
+	b.FacilitiesObj = X.ToS(a[4])
 	b.TotalPriceIDR = X.ToI(a[5])
 	b.PaidAt = X.ToS(a[6])
 	b.TenantId = X.ToU(a[7])
@@ -391,7 +391,7 @@ var BookingsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`dateStart`:     Tt.String,
 	`dateEnd`:       Tt.String,
 	`basePriceIDR`:  Tt.Integer,
-	`facilities`:    Tt.Array,
+	`facilitiesObj`: Tt.String,
 	`totalPriceIDR`: Tt.Integer,
 	`paidAt`:        Tt.String,
 	`tenantId`:      Tt.Unsigned,
@@ -408,18 +408,18 @@ var BookingsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 
 // Buildings DAO reader/query struct
 type Buildings struct {
-	Adapter       *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
-	Id            uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
-	BuildingName  string      `json:"buildingName" form:"buildingName" query:"buildingName" long:"buildingName" msg:"buildingName"`
-	LocationId    uint64      `json:"locationId,string" form:"locationId" query:"locationId" long:"locationId" msg:"locationId"`
-	FacilitiesObj string      `json:"facilitiesObj" form:"facilitiesObj" query:"facilitiesObj" long:"facilitiesObj" msg:"facilitiesObj"`
-	CreatedAt     int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
-	CreatedBy     uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
-	UpdatedAt     int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
-	UpdatedBy     uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
-	DeletedAt     int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
-	DeletedBy     uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
-	RestoredBy    uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+	Adapter      *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id           uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	BuildingName string      `json:"buildingName" form:"buildingName" query:"buildingName" long:"buildingName" msg:"buildingName"`
+	LocationId   uint64      `json:"locationId,string" form:"locationId" query:"locationId" long:"locationId" msg:"locationId"`
+	Facilities   []any       `json:"facilities" form:"facilities" query:"facilities" long:"facilities" msg:"facilities"`
+	CreatedAt    int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy    uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt    int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy    uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt    int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy    uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy   uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
 }
 
 // NewBuildings create new ORM reader/query object
@@ -460,7 +460,7 @@ func (b *Buildings) SqlSelectAllFields() string { //nolint:dupl false positive
 	return ` "id"
 	, "buildingName"
 	, "locationId"
-	, "facilitiesObj"
+	, "facilities"
 	, "createdAt"
 	, "createdBy"
 	, "updatedAt"
@@ -476,7 +476,7 @@ func (b *Buildings) SqlSelectAllUncensoredFields() string { //nolint:dupl false 
 	return ` "id"
 	, "buildingName"
 	, "locationId"
-	, "facilitiesObj"
+	, "facilities"
 	, "createdAt"
 	, "createdBy"
 	, "updatedAt"
@@ -493,7 +493,7 @@ func (b *Buildings) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 0, b.Id},
 		A.X{`=`, 1, b.BuildingName},
 		A.X{`=`, 2, b.LocationId},
-		A.X{`=`, 3, b.FacilitiesObj},
+		A.X{`=`, 3, b.Facilities},
 		A.X{`=`, 4, b.CreatedAt},
 		A.X{`=`, 5, b.CreatedBy},
 		A.X{`=`, 6, b.UpdatedAt},
@@ -534,14 +534,14 @@ func (b *Buildings) SqlLocationId() string { //nolint:dupl false positive
 	return `"locationId"`
 }
 
-// IdxFacilitiesObj return name of the index
-func (b *Buildings) IdxFacilitiesObj() int { //nolint:dupl false positive
+// IdxFacilities return name of the index
+func (b *Buildings) IdxFacilities() int { //nolint:dupl false positive
 	return 3
 }
 
-// SqlFacilitiesObj return name of the column being indexed
-func (b *Buildings) SqlFacilitiesObj() string { //nolint:dupl false positive
-	return `"facilitiesObj"`
+// SqlFacilities return name of the column being indexed
+func (b *Buildings) SqlFacilities() string { //nolint:dupl false positive
+	return `"facilities"`
 }
 
 // IdxCreatedAt return name of the index
@@ -622,16 +622,16 @@ func (b *Buildings) ToArray() A.X { //nolint:dupl false positive
 	}
 	return A.X{
 		id,
-		b.BuildingName,  // 1
-		b.LocationId,    // 2
-		b.FacilitiesObj, // 3
-		b.CreatedAt,     // 4
-		b.CreatedBy,     // 5
-		b.UpdatedAt,     // 6
-		b.UpdatedBy,     // 7
-		b.DeletedAt,     // 8
-		b.DeletedBy,     // 9
-		b.RestoredBy,    // 10
+		b.BuildingName, // 1
+		b.LocationId,   // 2
+		b.Facilities,   // 3
+		b.CreatedAt,    // 4
+		b.CreatedBy,    // 5
+		b.UpdatedAt,    // 6
+		b.UpdatedBy,    // 7
+		b.DeletedAt,    // 8
+		b.DeletedBy,    // 9
+		b.RestoredBy,   // 10
 	}
 }
 
@@ -640,7 +640,7 @@ func (b *Buildings) FromArray(a A.X) *Buildings { //nolint:dupl false positive
 	b.Id = X.ToU(a[0])
 	b.BuildingName = X.ToS(a[1])
 	b.LocationId = X.ToU(a[2])
-	b.FacilitiesObj = X.ToS(a[3])
+	b.Facilities = X.ToArr(a[3])
 	b.CreatedAt = X.ToI(a[4])
 	b.CreatedBy = X.ToU(a[5])
 	b.UpdatedAt = X.ToI(a[6])
@@ -656,7 +656,7 @@ func (b *Buildings) FromUncensoredArray(a A.X) *Buildings { //nolint:dupl false 
 	b.Id = X.ToU(a[0])
 	b.BuildingName = X.ToS(a[1])
 	b.LocationId = X.ToU(a[2])
-	b.FacilitiesObj = X.ToS(a[3])
+	b.Facilities = X.ToArr(a[3])
 	b.CreatedAt = X.ToI(a[4])
 	b.CreatedBy = X.ToU(a[5])
 	b.UpdatedAt = X.ToI(a[6])
@@ -707,17 +707,17 @@ func (b *Buildings) Total() int64 { //nolint:dupl false positive
 
 // BuildingsFieldTypeMap returns key value of field name and key
 var BuildingsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
-	`id`:            Tt.Unsigned,
-	`buildingName`:  Tt.String,
-	`locationId`:    Tt.Unsigned,
-	`facilitiesObj`: Tt.String,
-	`createdAt`:     Tt.Integer,
-	`createdBy`:     Tt.Unsigned,
-	`updatedAt`:     Tt.Integer,
-	`updatedBy`:     Tt.Unsigned,
-	`deletedAt`:     Tt.Integer,
-	`deletedBy`:     Tt.Unsigned,
-	`restoredBy`:    Tt.Unsigned,
+	`id`:           Tt.Unsigned,
+	`buildingName`: Tt.String,
+	`locationId`:   Tt.Unsigned,
+	`facilities`:   Tt.Array,
+	`createdAt`:    Tt.Integer,
+	`createdBy`:    Tt.Unsigned,
+	`updatedAt`:    Tt.Integer,
+	`updatedBy`:    Tt.Unsigned,
+	`deletedAt`:    Tt.Integer,
+	`deletedBy`:    Tt.Unsigned,
+	`restoredBy`:   Tt.Unsigned,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

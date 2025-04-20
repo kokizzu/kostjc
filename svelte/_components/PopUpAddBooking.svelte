@@ -1,44 +1,58 @@
 <script>
-  /** @typedef {import('../_types/property').Building} Building */
+  /** @typedef {import('../_types/property').Booking} Booking */
   /** @typedef {import('../_types/property').Facility} Facility */
 
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
-  import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import { RiArrowsArrowDropRightLine } from '../node_modules/svelte-icons-pack/dist/ri';
+  import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
+  import { dateISOFormat } from './xFormatter';
 
   let isShow = /** @type {boolean} */ (false);
 
   export let isSubmitted  = /** @type {boolean} */ (false);
-  export let locations = /** @type {Record<number, string>} */ ({});
+  export let tenants = /** @type {Record<number, string>} */ ({});
   export let facilities = /** @type {Facility[]} */ ([]);
 
-  let buildingName = '';
-  let locationId = 0;
-  let facilitiesNums = /** @type {number[]} */ ([]);
+  let dateStart = dateISOFormat(0);
+  let dateEnd = dateISOFormat(30);
+  let basePriceIDR = 0;
+  let facilitiesNums = /** @type {number[]} */([]);
+  let totalPriceIDR = 0;
+  let paidAt = dateISOFormat(0);
+  let tenantId = 0;
 
-  export let OnSubmit = async function(/** @type {Building} */ building) {
-    console.log('OnSubmit :::', building);
+  export let OnSubmit = async function(/** @type {Booking} */ booking, /** @type {number[]} */ facilities) {
+    console.log('OnSubmit :::', booking, facilities);
   }
 
   async function submitAdd() {
-    const building = /** @type {Building|any} */ ({
-      buildingName: buildingName,
-      locationId: locationId,
-      facilities: facilitiesNums
+    totalPriceIDR = basePriceIDR + facilitiesPrice;
+    const booking = /** @type {Booking|any} */ ({
+      dateStart,
+      dateEnd,
+      basePriceIDR,
+      totalPriceIDR,
+      paidAt,
+      tenantId,
     });
 
-    await OnSubmit(building);
+    await OnSubmit(booking, facilitiesNums);
   }
 
   export const Show = () => isShow = true;
   export const Hide = () => isShow = false;
 
   export const Reset = () => {
-    buildingName = '';
-    locationId = 0;
+    dateStart = dateISOFormat(0);
+    dateEnd = dateISOFormat(30);
+    basePriceIDR = 0;
     facilitiesNums = [];
+    totalPriceIDR = 0;
+    paidAt = dateISOFormat(0);
+    tenantId = 0;
+    facilitiesToShow = [];
   }
   
   const cancel = () => {
@@ -48,6 +62,7 @@
   let facilitiesToShow = /** @type {Facility[]} */ ([]);
   let showFacilities = false;
   let selectedFacility = 'Facility....';
+  let facilitiesPrice = 0;
 
   function handleStationListClose() {
 		showFacilities = false;
@@ -62,11 +77,13 @@
 	function toFacilityShow(/** @type {Facility} */ facility) {
     selectedFacility = facility.facilityName;
     showFacilities = false;
+    facilitiesPrice += facility.extraChargeIDR;
     facilitiesNums = [...facilitiesNums, Number(facility.id)];
 		facilitiesToShow = [...facilitiesToShow, facility];
 	}
 
 	const removeFacility = (/** @type {number} */ idx) => {
+    facilitiesPrice -= facilitiesToShow[idx].extraChargeIDR;
     facilitiesNums = facilitiesNums.filter(( _, i ) => i !== idx);
 		facilitiesToShow = facilitiesToShow.filter(( _, i ) => i !== idx);
 	}
@@ -75,26 +92,32 @@
 <div class={`popup_container ${isShow ? 'show' : ''}`}>
   <div class="popup">
     <header class="header">
-      <h2>Add Building</h2>
+      <h2>Add Booking</h2>
       <button on:click={Hide}>
         <Icon size="22" color="var(--red-005)" src={IoClose}/>
       </button>
     </header>
     <div class="forms">
       <InputBox
-        id="buildingName"
-        label="Building Name"
-        bind:value={buildingName}
-        type="text"
-        placeholder="Kost JC"
+        id="dateStart"
+        label="Date Start"
+        bind:value={dateStart}
+        type="datetime"
+        placeholder="YYYY-MM-DD"
       />
       <InputBox
-        id="location"
-        label="Location"
-        isObject={true}
-        bind:value={locationId}
-        type="combobox"
-        values={locations}
+        id="dateEnd"
+        label="Date End"
+        bind:value={dateEnd}
+        type="datetime"
+        placeholder="YYYY-MM-DD"
+      />
+      <InputBox
+        id="basePriceIDR"
+        label="Base Price IDR"
+        bind:value={basePriceIDR}
+        type="number"
+        placeholder="0"
       />
       <div class="facilities-form">
         <label class="label" for="facilities">Facilities</label>
@@ -136,6 +159,28 @@
           </div>
         </div>
       </div>
+      <div class="input-totalprice">
+        <label class="label" for="totalPriceIDR">Total Price</label>
+        <div class="totalprice">
+          <span class="baseprice">{basePriceIDR} + </span>
+          <span class="facilityprice">{facilitiesPrice}</span>
+        </div>
+      </div>
+      <InputBox
+        id="paidAt"
+        label="Paid At"
+        bind:value={paidAt}
+        type="datetime"
+        placeholder="YYYY-MM-DD"
+      />
+      <InputBox
+        id="tenantId"
+        label="Tenant"
+        bind:value={tenantId}
+        type="combobox"
+        values={tenants}
+        isObject={true}
+      />
     </div>
     <div class="foot">
       <div class="left">
@@ -161,7 +206,7 @@
       transform: rotate(0deg);
     }
     to {
-      transform: rotate(360deg);
+      transform: rotate(180deg);
     }
   }
 
@@ -442,6 +487,39 @@
 		color: var(--sky-009);
     background-color: #0ea5e920;
 	}
+
+  .input-totalprice {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: var(--gray-007);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .input-totalprice label {
+    font-size: var(--font-base);
+    margin-left: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+
+  .input-totalprice .totalprice {
+    width: 100%;
+    border: 1px solid var(--gray-003);
+    border-radius: 5px;
+    background-color: var(--gray-001);
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+  }
 
   @media only screen and (max-width : 768px) {
     .popup_container {

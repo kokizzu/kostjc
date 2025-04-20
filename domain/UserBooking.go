@@ -7,6 +7,8 @@ import (
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
 	"time"
+
+	"github.com/goccy/go-json"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file UserBooking.go
@@ -18,10 +20,11 @@ import (
 type (
 	UserBookingIn struct {
 		RequestCommon
-		Cmd      string              `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
-		WithMeta bool                `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
-		Pager    zCrud.PagerIn       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-		Booking  rqProperty.Bookings `json:"booking" form:"booking" query:"booking" long:"booking" msg:"booking"`
+		Cmd        string              `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
+		WithMeta   bool                `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
+		Pager      zCrud.PagerIn       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Facilities []uint64            `json:"facilities" form:"facilities" query:"facilities" long:"facilities" msg:"facilities"`
+		Booking    rqProperty.Bookings `json:"booking" form:"booking" query:"booking" long:"booking" msg:"booking"`
 	}
 	UserBookingOut struct {
 		ResponseCommon
@@ -66,18 +69,18 @@ var UserBookingMeta = zCrud.Meta{
 		},
 		{
 			Name:      mProperty.BasePriceIDR,
-			Label:     `Date End`,
+			Label:     `Base Price`,
 			DataType:  zCrud.DataTypeCurrency,
 			InputType: zCrud.InputTypeNumber,
 			ReadOnly:  false,
 			Mapping:   `IDR`,
 		},
 		{
-			Name:      mProperty.Facilities,
+			Name:      mProperty.FacilitiesObj,
 			Label:     `Facilities`,
 			DataType:  zCrud.DataTypeIntArr,
 			InputType: zCrud.InputTypeCombobox,
-			ReadOnly:  false,
+			ReadOnly:  true,
 		},
 		{
 			Name:      mProperty.TotalPriceIDR,
@@ -172,8 +175,27 @@ func (d *Domain) UserBooking(in *UserBookingIn) (out UserBookingOut) {
 			bk.SetDateEnd(in.Booking.DateEnd)
 		}
 
+		facilities := []mProperty.FacilityObj{}
+		for _, id := range in.Facilities {
+			fac := rqProperty.NewFacilities(d.PropOltp)
+			fac.Id = id
+			if fac.FindById() {
+				facilities = append(facilities, mProperty.FacilityObj{
+					FacilityName:   fac.FacilityName,
+					ExtraChargeIDR: fac.ExtraChargeIDR,
+				})
+			}
+		}
+
+		facilitiesByt, err := json.Marshal(facilities)
+		if err != nil {
+			out.SetError(500, ErrUserBookingSaveFailed)
+			return
+		} else {
+			bk.SetFacilitiesObj(string(facilitiesByt))
+		}
+
 		bk.SetBasePriceIDR(in.Booking.BasePriceIDR)
-		bk.SetFacilities(in.Booking.Facilities)
 		bk.SetTotalPriceIDR(in.Booking.TotalPriceIDR)
 
 		if mProperty.IsValidDate(in.Booking.PaidAt, time.DateOnly) {

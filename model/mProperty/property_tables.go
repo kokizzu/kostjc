@@ -37,12 +37,17 @@ const (
 	ExtraChargeIDR = `extraChargeIDR`
 )
 
+type FacilityObj struct {
+	FacilityName   string `json:"facilityName"`
+	ExtraChargeIDR int64  `json:"extraChargeIDR"`
+}
+
 const (
 	TableBuildings Tt.TableName = `buildings`
 
-	BuildingName  = `buildingName`
-	LocationId    = `locationId`
-	FacilitiesObj = `facilitiesObj`
+	BuildingName = `buildingName`
+	LocationId   = `locationId`
+	Facilities   = `facilities`
 )
 
 const (
@@ -61,9 +66,9 @@ const (
 	DateStart     = `dateStart`
 	DateEnd       = `dateEnd`
 	BasePriceIDR  = `basePriceIDR`
-	Facilities    = `facilities`
 	TotalPriceIDR = `totalPriceIDR`
 	PaidAt        = `paidAt`
+	FacilitiesObj = `facilitiesObj`
 	TenantId      = `tenantId`
 )
 
@@ -117,7 +122,7 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{Id, Tt.Unsigned},
 			{BuildingName, Tt.String},
 			{LocationId, Tt.Unsigned},
-			{FacilitiesObj, Tt.String},
+			{Facilities, Tt.Array},
 			{CreatedAt, Tt.Integer},
 			{CreatedBy, Tt.Unsigned},
 			{UpdatedAt, Tt.Integer},
@@ -155,7 +160,7 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{DateStart, Tt.String},
 			{DateEnd, Tt.String},
 			{BasePriceIDR, Tt.Integer},
-			{Facilities, Tt.Array},
+			{FacilitiesObj, Tt.String},
 			{TotalPriceIDR, Tt.Integer},
 			{PaidAt, Tt.String},
 			{TenantId, Tt.Unsigned},
