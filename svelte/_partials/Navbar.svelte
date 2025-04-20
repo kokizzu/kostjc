@@ -69,7 +69,7 @@
     gap: 6px;
     text-decoration: none;
     color: var(--gray-008);
-    padding: 10px 20px;
+    padding: 8px 20px;
     border-radius: 9999px;
     border: 1px solid var(--gray-002);
   }

@@ -186,7 +186,7 @@
 
 <LayoutMain access={segments} user={user}>
   <div class="master-building">
-    <h2>Master Building</h2>
+    <h2>Building Management</h2>
     <MasterTable
       ACCESS={segments}
       REFS={{

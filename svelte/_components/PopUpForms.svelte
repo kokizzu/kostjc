@@ -60,7 +60,7 @@
         <button class="cancel" on:click|preventDefault={cancel}>Cancel</button>
         <button class="ok" on:click|preventDefault={() => OnSubmit(payloads)} disabled={isSubmitted}>
           {#if !isSubmitted}
-            <span>Ok</span>
+            <span>Submit</span>
           {/if}
           {#if isSubmitted}
             <Icon className="spin" color="#FFF" size="14" src={FiLoader} />
@@ -120,7 +120,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		padding: 10px 20px;
+		padding: 15px 20px;
 		border-bottom: 1px solid var(--gray-004);
 	}
 
@@ -160,7 +160,7 @@
     justify-content: space-between;
 		gap: 10px;
 		align-items: center;
-		padding: 10px 20px;
+		padding: 15px 20px;
 		border-top: 1px solid var(--gray-004);
 	}
 
@@ -198,12 +198,12 @@
 	}
 
 	.popup_container .popup .foot button.cancel {
-		background-color: #fbbf2430;
-		color: var(--amber-005);
+		background-color: transparent;
+    color: var(--gray-007);
 	}
 
 	.popup_container .popup .foot button.cancel:hover {
-		background-color: #fbbf2450;
+		background-color: var(--gray-001);
 	}
 
   @media only screen and (max-width : 768px) {

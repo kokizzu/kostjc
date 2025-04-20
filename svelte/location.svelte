@@ -28,7 +28,9 @@
   } */ (null);
   let isSubmitAddLocation = /** @type boolean */ (false);
 
-  onMount(() => isPopUpFormReady = true);
+  onMount(() => {
+    isPopUpFormReady = true;
+  });
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
@@ -184,7 +186,7 @@
 
 <LayoutMain access={segments} user={user}>
   <div class="master-location">
-    <h2>Master Location</h2>
+    <h2>Location Management</h2>
     <MasterTable
       ACCESS={segments}
       bind:FIELDS={fields}

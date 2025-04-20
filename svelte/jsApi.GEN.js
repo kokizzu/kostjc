@@ -48,6 +48,7 @@ const GuestLoginIn = {
  * @property {number} user.lastLoginAt
  * @property {String} user.fullName
  * @property {String} user.userName
+ * @property {String} user.role
  * @property {Object} segments
  */
 const GuestLoginOut = {
@@ -67,6 +68,7 @@ const GuestLoginOut = {
     lastLoginAt: 0, // int64
     fullName: '', // string
     userName: '', // string
+    role: '', // string
   }, // rqAuth.Users
   segments: { // M.SB
   }, // M.SB
@@ -113,6 +115,7 @@ const GuestRegisterIn = {
  * @property {number} user.lastLoginAt
  * @property {String} user.fullName
  * @property {String} user.userName
+ * @property {String} user.role
  * @property {String} verifyEmailUrl
  */
 const GuestRegisterOut = {
@@ -132,6 +135,7 @@ const GuestRegisterOut = {
     lastLoginAt: 0, // int64
     fullName: '', // string
     userName: '', // string
+    role: '', // string
   }, // rqAuth.Users
   verifyEmailUrl: '', // string
 }
@@ -259,7 +263,7 @@ exports.GuestVerifyEmail = async function GuestVerifyEmail( i, cb ) {
  * @property {number} pager.perPage
  * @property {Object} pager.filters
  * @property {Array<String>} pager.order
- * @property {Object} facilties
+ * @property {Object} facilities
  * @property {number} booking.id
  * @property {String} booking.dateStart
  * @property {String} booking.dateEnd
@@ -286,7 +290,7 @@ const UserBookingIn = {
     }, // map[string][]string
     order: [], // []string
   }, // zCrud.PagerIn
-  facilties: { // []uint64
+  facilities: { // []uint64
   }, // []uint64
   booking: { // rqProperty.Bookings
     id: 0, // uint64
@@ -765,6 +769,135 @@ exports.UserLogout = async function UserLogout( i, cb ) {
 }
 
 /**
+ * @typedef {Object} UserPaymentIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} payment.id
+ * @property {number} payment.bookingId
+ * @property {String} payment.paymentAt
+ * @property {number} payment.paidIDR
+ * @property {String} payment.paymentMethod
+ * @property {String} payment.paymentStatus
+ * @property {String} payment.note
+ * @property {number} payment.createdAt
+ * @property {number} payment.createdBy
+ * @property {number} payment.updatedAt
+ * @property {number} payment.updatedBy
+ * @property {number} payment.deletedAt
+ * @property {number} payment.deletedBy
+ * @property {number} payment.restoredBy
+ */
+const UserPaymentIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  payment: { // rqProperty.Payments
+    id: 0, // uint64
+    bookingId: 0, // uint64
+    paymentAt: '', // string
+    paidIDR: 0, // int64
+    paymentMethod: '', // string
+    paymentStatus: '', // string
+    note: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Payments
+}
+/**
+ * @typedef {Object} UserPaymentOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} payment.id
+ * @property {number} payment.bookingId
+ * @property {String} payment.paymentAt
+ * @property {number} payment.paidIDR
+ * @property {String} payment.paymentMethod
+ * @property {String} payment.paymentStatus
+ * @property {String} payment.note
+ * @property {number} payment.createdAt
+ * @property {number} payment.createdBy
+ * @property {number} payment.updatedAt
+ * @property {number} payment.updatedBy
+ * @property {number} payment.deletedAt
+ * @property {number} payment.deletedBy
+ * @property {number} payment.restoredBy
+ * @property {Object} payments
+ */
+const UserPaymentOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  payment: { // rqProperty.Payments
+    id: 0, // uint64
+    bookingId: 0, // uint64
+    paymentAt: '', // string
+    paidIDR: 0, // int64
+    paymentMethod: '', // string
+    paymentStatus: '', // string
+    note: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Payments
+  payments: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback UserPaymentCallback
+ * @param {UserPaymentOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {UserPaymentIn} i
+ * @param {UserPaymentCallback} cb
+ * @returns {Promise}
+ */
+exports.UserPayment = async function UserPayment( i, cb ) {
+  return await axios.post( '/user/payment', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} UserProfileIn
  */
 const UserProfileIn = {
@@ -786,6 +919,7 @@ const UserProfileIn = {
  * @property {number} user.lastLoginAt
  * @property {String} user.fullName
  * @property {String} user.userName
+ * @property {String} user.role
  * @property {Object} segments
  */
 const UserProfileOut = {
@@ -805,6 +939,7 @@ const UserProfileOut = {
     lastLoginAt: 0, // int64
     fullName: '', // string
     userName: '', // string
+    role: '', // string
   }, // rqAuth.Users
   segments: { // M.SB
   }, // M.SB
@@ -853,6 +988,35 @@ const UserSessionKillOut = {
  */
 exports.UserSessionKill = async function UserSessionKill( i, cb ) {
   return await axios.post( '/user/sessionKill', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} UserSessionsActiveIn
+ */
+const UserSessionsActiveIn = {
+}
+/**
+ * @typedef {Object} UserSessionsActiveOut
+ * @property {Object} sessionsActive
+ */
+const UserSessionsActiveOut = {
+  sessionsActive: { // []rqAuth.Sessions
+  }, // []rqAuth.Sessions
+}
+/**
+ * @callback UserSessionsActiveCallback
+ * @param {UserSessionsActiveOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {UserSessionsActiveIn} i
+ * @param {UserSessionsActiveCallback} cb
+ * @returns {Promise}
+ */
+exports.UserSessionsActive = async function UserSessionsActive( i, cb ) {
+  return await axios.post( '/user/sessionsActive', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
@@ -1022,6 +1186,79 @@ const UserTenantsOut = {
  */
 exports.UserTenants = async function UserTenants( i, cb ) {
   return await axios.post( '/user/tenantsManagement', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} UserUpdateProfileIn
+ * @property {String} userName
+ * @property {String} fullName
+ * @property {String} email
+ * @property {String} country
+ * @property {String} language
+ */
+const UserUpdateProfileIn = {
+  userName: '', // string
+  fullName: '', // string
+  email: '', // string
+  country: '', // string
+  language: '', // string
+}
+/**
+ * @typedef {Object} UserUpdateProfileOut
+ * @property {number} user.id
+ * @property {String} user.email
+ * @property {String} user.password
+ * @property {number} user.createdAt
+ * @property {number} user.createdBy
+ * @property {number} user.updatedAt
+ * @property {number} user.updatedBy
+ * @property {number} user.deletedAt
+ * @property {number} user.passwordSetAt
+ * @property {String} user.secretCode
+ * @property {number} user.secretCodeAt
+ * @property {number} user.verifiedAt
+ * @property {number} user.lastLoginAt
+ * @property {String} user.fullName
+ * @property {String} user.userName
+ * @property {String} user.role
+ * @property {Object} segments
+ */
+const UserUpdateProfileOut = {
+  user: { // rqAuth.Users
+    id: 0, // uint64
+    email: '', // string
+    password: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    passwordSetAt: 0, // int64
+    secretCode: '', // string
+    secretCodeAt: 0, // int64
+    verifiedAt: 0, // int64
+    lastLoginAt: 0, // int64
+    fullName: '', // string
+    userName: '', // string
+    role: '', // string
+  }, // rqAuth.Users
+  segments: { // M.SB
+  }, // M.SB
+}
+/**
+ * @callback UserUpdateProfileCallback
+ * @param {UserProfileOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {UserUpdateProfileIn} i
+ * @param {UserUpdateProfileCallback} cb
+ * @returns {Promise}
+ */
+exports.UserUpdateProfile = async function UserUpdateProfile( i, cb ) {
+  return await axios.post( '/user/updateProfile', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }

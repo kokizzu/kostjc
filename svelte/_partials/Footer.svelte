@@ -36,7 +36,7 @@
 	}
 
 	footer nav a:hover {
-		color: var(--orange-005);
+		color: var(--blue-005);
 		text-decoration: underline;
 	}
 </style>

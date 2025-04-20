@@ -16,9 +16,28 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		_, user, segments := userInfoFromContext(ctx, d)
 
 		return views.RenderIndex(ctx, M.SX{
-			`title`:    `KostJC`,
+			`title`:    `KostJC | Home`,
 			`user`:     user,
 			`segments`: segments,
+		})
+	})
+
+	fw.Get(`/user`, func(ctx *fiber.Ctx) error {
+		in, user, segments := userInfoFromContext(ctx, d)
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		in.RequestCommon.Action = domain.UserSessionsActiveAction
+		out := d.UserSessionsActive(&domain.UserSessionsActiveIn{
+			RequestCommon: in.RequestCommon,
+		})
+
+		return views.RenderUser(ctx, M.SX{
+			`title`:          `KostJC | User Profile`,
+			`user`:           user,
+			`segments`:       segments,
+			`activeSessions`: out.SessionsActive,
 		})
 	})
 
@@ -40,7 +59,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.UserLocation(&in)
 
 		return views.RenderLocation(ctx, M.SX{
-			`title`:     `User Location`,
+			`title`:     `KostJC | Location Management`,
 			`user`:      user,
 			`segments`:  segments,
 			`location`:  out.Location,
@@ -68,7 +87,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.UserFacility(&in)
 
 		return views.RenderFacility(ctx, M.SX{
-			`title`:      `User Facility`,
+			`title`:      `KostJC | Facility Management`,
 			`user`:       user,
 			`segments`:   segments,
 			`facility`:   out.Facility,
@@ -103,7 +122,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.UserBuilding(&in)
 
 		return views.RenderBuilding(ctx, M.SX{
-			`title`:             `User Building`,
+			`title`:             `KostJC | Building Management`,
 			`user`:              user,
 			`segments`:          segments,
 			`building`:          out.Building,
@@ -134,11 +153,39 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.UserTenants(&in)
 
 		return views.RenderTenantsManagement(ctx, M.SX{
-			`title`:    `User Tenants`,
+			`title`:    `KostJC | Tenant Management`,
 			`user`:     user,
 			`segments`: segments,
 			`tenant`:   out.Tenant,
 			`tenants`:  out.Tenants,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.UserPaymentAction, func(ctx *fiber.Ctx) error {
+		var in domain.UserPaymentIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserPaymentAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.UserPayment(&in)
+
+		return views.RenderPayment(ctx, M.SX{
+			`title`:    `KostJC | Payment Management`,
+			`user`:     user,
+			`segments`: segments,
+			`payment`:  out.Payment,
+			`payments`: out.Payments,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 		})
@@ -168,7 +215,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.UserBooking(&in)
 
 		return views.RenderBooking(ctx, M.SX{
-			`title`:      `User Booking`,
+			`title`:      `KostJC | Booking Management`,
 			`user`:       user,
 			`segments`:   segments,
 			`booking`:    out.Booking,

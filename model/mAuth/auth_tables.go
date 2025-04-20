@@ -17,6 +17,11 @@ const (
 )
 
 const (
+	UserRoleStaff = `staff`
+	UserRoleAdmin = `admin`
+)
+
+const (
 	TableUsers Tt.TableName = `users`
 
 	Email         = `email`
@@ -28,6 +33,7 @@ const (
 	LastLoginAt   = `lastLoginAt`
 	FullName      = `fullName`
 	UserName      = `userName`
+	Role          = `role`
 )
 
 const (
@@ -80,6 +86,7 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{LastLoginAt, Tt.Integer},
 			{FullName, Tt.String},
 			{UserName, Tt.String},
+			{Role, Tt.String},
 		},
 		AutoIncrementId:  true,
 		Unique1:          Email,

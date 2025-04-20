@@ -249,7 +249,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		padding: 10px 20px;
+		padding: 15px 20px;
 		border-bottom: 1px solid var(--gray-004);
 	}
 
@@ -289,7 +289,7 @@
     justify-content: space-between;
 		gap: 10px;
 		align-items: center;
-		padding: 10px 20px;
+		padding: 15px 20px;
 		border-top: 1px solid var(--gray-004);
 	}
 
@@ -327,12 +327,12 @@
 	}
 
 	.popup_container .popup .foot button.cancel {
-		background-color: #fbbf2430;
-		color: var(--amber-005);
+		background-color: transparent;
+    color: var(--gray-007);
 	}
 
 	.popup_container .popup .foot button.cancel:hover {
-		background-color: #fbbf2450;
+		background-color: var(--gray-001);
 	}
 
   .facilities-form {

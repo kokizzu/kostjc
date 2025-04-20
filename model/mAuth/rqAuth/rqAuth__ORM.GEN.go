@@ -809,6 +809,7 @@ type Users struct {
 	LastLoginAt   int64       `json:"lastLoginAt" form:"lastLoginAt" query:"lastLoginAt" long:"lastLoginAt" msg:"lastLoginAt"`
 	FullName      string      `json:"fullName" form:"fullName" query:"fullName" long:"fullName" msg:"fullName"`
 	UserName      string      `json:"userName" form:"userName" query:"userName" long:"userName" msg:"userName"`
+	Role          string      `json:"role" form:"role" query:"role" long:"role" msg:"role"`
 }
 
 // NewUsers create new ORM reader/query object
@@ -899,6 +900,7 @@ func (u *Users) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "lastLoginAt"
 	, "fullName"
 	, "userName"
+	, "role"
 	`
 }
 
@@ -919,6 +921,7 @@ func (u *Users) SqlSelectAllUncensoredFields() string { //nolint:dupl false posi
 	, "lastLoginAt"
 	, "fullName"
 	, "userName"
+	, "role"
 	`
 }
 
@@ -940,6 +943,7 @@ func (u *Users) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 12, u.LastLoginAt},
 		A.X{`=`, 13, u.FullName},
 		A.X{`=`, 14, u.UserName},
+		A.X{`=`, 15, u.Role},
 	}
 }
 
@@ -1093,6 +1097,16 @@ func (u *Users) SqlUserName() string { //nolint:dupl false positive
 	return `"userName"`
 }
 
+// IdxRole return name of the index
+func (u *Users) IdxRole() int { //nolint:dupl false positive
+	return 15
+}
+
+// SqlRole return name of the column being indexed
+func (u *Users) SqlRole() string { //nolint:dupl false positive
+	return `"role"`
+}
+
 // CensorFields remove sensitive fields for output
 func (u *Users) CensorFields() { //nolint:dupl false positive
 	u.Password = ``
@@ -1122,6 +1136,7 @@ func (u *Users) ToArray() A.X { //nolint:dupl false positive
 		u.LastLoginAt,   // 12
 		u.FullName,      // 13
 		u.UserName,      // 14
+		u.Role,          // 15
 	}
 }
 
@@ -1142,6 +1157,7 @@ func (u *Users) FromArray(a A.X) *Users { //nolint:dupl false positive
 	u.LastLoginAt = X.ToI(a[12])
 	u.FullName = X.ToS(a[13])
 	u.UserName = X.ToS(a[14])
+	u.Role = X.ToS(a[15])
 	return u
 }
 
@@ -1159,6 +1175,7 @@ func (u *Users) FromUncensoredArray(a A.X) *Users { //nolint:dupl false positive
 	u.LastLoginAt = X.ToI(a[12])
 	u.FullName = X.ToS(a[13])
 	u.UserName = X.ToS(a[14])
+	u.Role = X.ToS(a[15])
 	return u
 }
 
@@ -1217,6 +1234,7 @@ var UsersFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`lastLoginAt`:   Tt.Integer,
 	`fullName`:      Tt.String,
 	`userName`:      Tt.String,
+	`role`:          Tt.String,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

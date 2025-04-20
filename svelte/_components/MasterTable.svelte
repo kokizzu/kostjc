@@ -355,7 +355,7 @@
       </div>
       {#if isAjaxSubmitted}
         <div class="loader">
-          <Icon className="spin" color="var(--violet-007)" size="28" src={FiLoader} />
+          <Icon className="spin" color="var(--blue-007)" size="28" src={FiLoader} />
         </div>
       {/if}
     </div>
@@ -484,7 +484,7 @@
   <div class="pagination_container">
     <div class="filter">
       <div class="showing">
-        <p>Showing <span class="text-violet">{totalRowsCurrent}</span> /</p>
+        <p>Showing <span class="text-blue">{totalRowsCurrent}</span> /</p>
       </div>
       <div class="row_to_show">
         {#if showRowsNum}
@@ -502,7 +502,7 @@
       <p>record(s)</p>
     </div>
     <div>
-      <p>Total:<span class="text-violet">{totalRows}</span></p>
+      <p>Total:<span class="text-blue">{totalRows}</span></p>
     </div>
     <div class="pagination">
       <button disabled={currentPage == 1} class="btn to" title="Go to first page" on:click={() => goToPage(1)}>
@@ -650,7 +650,7 @@
   }
 
   :global(.action-btn:hover svg) {
-    fill: var(--violet-005);
+    fill: var(--blue-005);
   }
 
   :global(.spin) {
@@ -686,8 +686,8 @@
     font-size: var(--font-base);
   }
 
-  .table-root .text-violet {
-    color: var(--violet-005);
+  .table-root .text-blue {
+    color: var(--blue-005);
     font-weight: 600;
     padding: 5px;
   }
@@ -715,7 +715,7 @@
 
   .table-root .actions-container .left .debug .btn {
     border: none;
-    background-color: var(--violet-006);
+    background-color: var(--blue-006);
     color: #fff;
     width: fit-content;
     padding: 4px 10px;
@@ -729,7 +729,7 @@
   }
 
   .table-root .actions-container .left .debug .btn:hover {
-    background-color: var(--violet-005);
+    background-color: var(--blue-005);
   }
 
   .table-root .actions-container .right .search-handler {
@@ -769,11 +769,11 @@
   }
 
   .table-root .actions-container .right .search-handler .search-btn:hover {
-    background-color: var(--violet-transparent);
+    background-color: var(--blue-transparent);
   }
 
   :global(.table-root .actions-container .right .search-handler .search-btn:hover svg) {
-    fill: var(--violet-005);
+    fill: var(--blue-005);
   }
 
   .table-root .actions-container .actions-button {
@@ -906,11 +906,11 @@
   }
 
   .table-root .table_container table tbody tr td .actions .btn:hover {
-    background-color: var(--violet-transparent);
+    background-color: var(--blue-transparent);
   }
 
   :global(.table-root .table_container table tbody tr td .actions .btn:hover svg) {
-    fill: var(--violet-005);
+    fill: var(--blue-005);
   }
 
   .table-root .pagination_container {
@@ -936,12 +936,12 @@
 
   .table-root .pagination_container .filter .row_to_show .btn {
     border: none;
-    background-color: var(--violet-transparent);
-    color: var(--violet-005);
+    background-color: var(--blue-transparent);
+    color: var(--blue-005);
     width: fit-content;
     padding: 3px 3px 3px 6px;
     font-weight: 600;
-    border: 1px solid var(--violet-004);
+    border: 1px solid var(--blue-004);
     border-radius: 9999px;
     display: flex;
     flex-direction: row;
@@ -952,7 +952,7 @@
   }
 
   .table-root .pagination_container .filter .row_to_show .btn:hover {
-    background-color: var(--violet-002);
+    background-color: var(--blue-002);
   }
 
   .table-root .pagination_container .filter .row_to_show .rows {
@@ -975,8 +975,8 @@
   }
 
   .table-root .pagination_container .filter .row_to_show .rows button:hover {
-    background-color: var(--violet-transparent);
-    color: var(--violet-007);
+    background-color: var(--blue-transparent);
+    color: var(--blue-007);
   }
 
   .table-root .pagination_container .pagination {
@@ -1007,21 +1007,21 @@
   }
 
   .table-root .pagination_container .pagination .btn.active {
-    background-color: var(--violet-transparent);
-    color: var(--violet-006);
+    background-color: var(--blue-transparent);
+    color: var(--blue-006);
     font-weight: 600;
-    border: 1px solid var(--violet-004);
+    border: 1px solid var(--blue-004);
   }
 
   .table-root .pagination_container .pagination .btn.to {
-    background-color: var(--violet-006);
+    background-color: var(--blue-006);
     color: #fff;
     font-weight: 600;
     border: none;
   }
 
   .table-root .pagination_container .pagination .btn.to:hover {
-    background-color: var(--violet-005);
+    background-color: var(--blue-005);
   }
 
   .table-root .pagination_container .pagination .btn.to:disabled {

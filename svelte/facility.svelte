@@ -182,7 +182,7 @@
 
 <LayoutMain access={segments} user={user}>
   <div class="master-facility">
-    <h2>Master Facility</h2>
+    <h2>Facility Management</h2>
     <MasterTable
       ACCESS={segments}
       bind:FIELDS={fields}

@@ -137,14 +137,15 @@
 
 {#if Mode === ModeUser}
   <LayoutMain access={segments} user={user}>
-    <h1>Welcome {user.userName}</h1>
-    <p>Access: {JSON.stringify(segments)}</p>
+    <div>
+      <h1>Welcome {user.userName}</h1>
+    </div>
   </LayoutMain>
 {:else}
 <section class="auth-section">
   <div class="main-container">
     <div class="title-container">
-      <p>{title}</p>
+      <p>KostJC</p>
       <h1>{Mode.split( '_' ).join( ' ' )}</h1>
     </div>
     <div class="form-container">
@@ -210,10 +211,10 @@
       {/if}
       <div class="foot-auth">
         {#if Mode!==ModeRegister}
-          <p>Have no account? <a href={`#${ModeRegister}`} on:click={() => (Mode = ModeRegister)}>register</a></p>
+          <p>Have no account? <a href={`#${ModeRegister}`} on:click={() => (Mode = ModeRegister)}>Register</a></p>
         {/if}
         {#if Mode!==ModeLogin}
-          <p>Already have account? <a href={`#${ModeLogin}`} on:click={() => (Mode = ModeLogin)}>login</a></p>
+          <p>Already have account? <a href={`#${ModeLogin}`} on:click={() => (Mode = ModeLogin)}>Login</a></p>
         {/if}
       </div>
     </div>
@@ -268,7 +269,7 @@
   .auth-section .main-container .title-container p {
     font-size: 16px;
     font-weight: 600;
-    color: var(--orange-005);
+    color: var(--blue-005);
     margin: 0;
   }
 
@@ -313,7 +314,7 @@
     padding: 12px;
     font-size: 15px;
     font-weight: 600;
-    background-color: var(--orange-006);
+    background-color: var(--blue-006);
     border-radius: 8px;
     color: white;
     border: none;
@@ -321,7 +322,7 @@
   }
 
   .auth-section .main-container .form-container .button-container button:hover {
-    background-color : var(--orange-005);
+    background-color : var(--blue-005);
   }
 
   .auth-section .main-container .form-container .oauth-container {
@@ -359,6 +360,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    text-align: center;
   }
 
   .auth-section .main-container .form-container .foot-auth p {

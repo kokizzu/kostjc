@@ -210,7 +210,7 @@
 
 <LayoutMain access={segments} user={user}>
   <div class="master-tenants">
-    <h2>Master Tenants</h2>
+    <h2>Tenant Management</h2>
     <MasterTable
       ACCESS={segments}
       bind:FIELDS={fields}

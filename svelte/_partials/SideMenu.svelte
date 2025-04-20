@@ -4,6 +4,12 @@
 
   import { UserLogout } from '../jsApi.GEN';
   import { notifier } from '../_components/xNotifier.js';
+  import { Icon } from '../node_modules/svelte-icons-pack/dist';
+  import {
+    RiBuildingsHome2Line, RiMapMapPin2Line, RiUserFacesUser3Line,
+    RiUserFacesUserFollowLine, RiBuildingsHotelLine, RiBusinessCalendarScheduleLine,
+    RiFoodCupLine, RiSystemLogoutBoxRLine, RiFinanceWallet3Line
+  } from '../node_modules/svelte-icons-pack/dist/ri';
 
   export let access = /** @type {Access} */ ({});
 
@@ -38,17 +44,48 @@
 <aside>
   <div class="container">
     <nav class="nav-menu">
-      <a href="/" class:active={pathLv1 === ''}>Home</a>
-      <a href="/user/location" class:active={pathLv2 === 'location'}>Location</a>
-      <a href="/user/facility" class:active={pathLv2 === 'facility'}>Facility</a>
-      <a href="/user/building" class:active={pathLv2 === 'building'}>Building</a>
-      <a href="/user/booking" class:active={pathLv2 === 'booking'}>Booking</a>
-      <a href="/user/tenantsManagement" class:active={pathLv2 === 'tenantsManagement'}>Tenant</a>
+      <a href="/" class:active={pathLv1 === ''}>
+        <Icon src={RiBuildingsHome2Line} size="17" />
+        <span>Home</span>
+      </a>
+      <a href="/user" class:active={pathAll === '/user'}>
+        <Icon src={RiUserFacesUser3Line} size="17" />
+        <span>Profile</span>
+      </a>
+    </nav>
+    <h3 class="nav-menu-title">Admin</h3>
+    <nav class="nav-menu">
+      <a href="/user/location" class:active={pathLv2 === 'location'}>
+        <Icon src={RiMapMapPin2Line} size="17" />
+        <span>Locations</span>
+      </a>
+      <a href="/user/facility" class:active={pathLv2 === 'facility'}>
+        <Icon src={RiFoodCupLine} size="17" />
+        <span>Facilities</span>
+      </a>
+      <a href="/user/building" class:active={pathLv2 === 'building'}>
+        <Icon src={RiBuildingsHotelLine} size="17" />
+        <span>Buildings</span>
+      </a>
+      <a href="/user/booking" class:active={pathLv2 === 'booking'}>
+        <Icon src={RiBusinessCalendarScheduleLine} size="17" />
+        <span>Bookings</span>
+      </a>
+      <a href="/user/payment" class:active={pathLv2 === 'payment'}>
+        <Icon src={RiFinanceWallet3Line} size="17" />
+        <span>Payments</span>
+      </a>
+      <a href="/user/tenantsManagement" class:active={pathLv2 === 'tenantsManagement'}>
+        <Icon src={RiUserFacesUserFollowLine} size="17" />
+        <span>Tenants</span>
+      </a>
     </nav>
     <span class="separator" />
     <nav class="nav-menu">
-      <a href="/user" class:active={pathAll === '/user'}>Profile</a>
-      <button class="red" on:click={logout}>Logout</button>
+      <button class="red" on:click={logout}>
+        <Icon src={RiSystemLogoutBoxRLine} size="17" />
+        <span>Logout</span>
+      </button>
     </nav>
   </div>
 </aside>
@@ -67,20 +104,29 @@
   }
 
   aside .separator {
-    width: 80%;
+    width: 100%;
     margin: auto;
     height: 1px;
     background-color: var(--gray-002);
   }
 
   aside .container {
-    padding: 10px;
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
     height: fit-content;
     width: 100%;
     margin: 0;
+  }
+
+  aside .container .nav-menu-title {
+    margin: 0;
+    padding: 10px 25px;
+    border-bottom: 1px solid var(--gray-002);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
   }
 
   aside .container .nav-menu {
@@ -91,6 +137,7 @@
     flex-wrap: nowrap;
     width: 100%;
     margin: 0;
+    padding: 0 10px;
   }
 
   aside .container .nav-menu a,
@@ -100,6 +147,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    gap: 10px;
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
@@ -115,8 +163,8 @@
   }
 
   aside .container .nav-menu a.active {
-    background-color: var(--orange-transparent);
-    color: var(--orange-007);
+    background-color: var(--blue-transparent);
+    color: var(--blue-007);
   }
 
   aside .container .nav-menu button.red:hover {

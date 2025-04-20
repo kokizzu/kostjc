@@ -184,7 +184,7 @@
 
 <LayoutMain access={segments} user={user}>
   <div class="master-booking">
-    <h2>Master Booking</h2>
+    <h2>Booking Management</h2>
     <MasterTable
       ACCESS={segments}
       REFS={{

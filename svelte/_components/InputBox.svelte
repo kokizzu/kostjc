@@ -341,8 +341,8 @@
 
   .input_box input:focus,
   .input_box textarea:focus {
-    border-color: var(--sky-005);
-    outline: 1px solid var(--sky-005);
+    border-color: var(--blue-005);
+    outline: 1px solid var(--blue-005);
   }
 
   .color_box {
@@ -445,11 +445,15 @@
     width: fit-content;
     background-color: transparent;
     padding: 0;
-    top: 30px;
+    top: 31px;
     bottom: auto;
     right: 10px;
     border: none;
     cursor: pointer;
+  }
+
+  .input_box .eye:focus {
+    outline: none;
   }
 
   :global(.input_box .eye:hover svg) {

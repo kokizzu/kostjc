@@ -92,6 +92,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.UserLogout(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.UserPaymentAction:
+		in := domain.UserPaymentIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.UserPayment(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.UserProfileAction:
 		in := domain.UserProfileIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -108,12 +116,28 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.UserSessionKill(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.UserSessionsActiveAction:
+		in := domain.UserSessionsActiveIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.UserSessionsActive(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.UserTenantsAction:
 		in := domain.UserTenantsIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
 			return
 		}
 		out := b.UserTenants(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.UserUpdateProfileAction:
+		in := domain.UserUpdateProfileIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.UserUpdateProfile(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	}

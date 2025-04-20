@@ -39,7 +39,6 @@ type Session struct {
 const (
 	GuestSegment = `guest`
 	UserSegment  = `user`
-	BuyerSegment = `staff`
 	AdminSegment = `admin`
 )
 

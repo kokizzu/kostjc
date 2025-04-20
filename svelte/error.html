@@ -3,18 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>/*! title */</title>
     <link href="/css.gg.css" rel="stylesheet">
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
-    <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#F97316">
-    <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="HapSTR">
-    <meta name="application-name" content="HapSTR">
-    <meta name="msapplication-TileColor" content="#F97316">
-    <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
-    <meta name="theme-color" content="#FFF">
+    <link rel="shortcut icon" href="/assets/favicon.png">
   </head>
   <body>
     <style>
@@ -167,8 +156,16 @@
       }
 
       *::selection {
-        background: var(--orange-005);
+        background: var(--blue-005);
         color: #ffff;
+      }
+
+      @font-face {
+        font-family: 'National Park';
+        src: url('/assets/fonts/national-park/NationalPark-VariableFont_wght.ttf') format('truetype');
+        font-weight: 100 900; /* Variable range */
+        font-stretch: 75% 125%;
+        font-style: normal;
       }
 
       html {
@@ -177,7 +174,7 @@
         line-height-step: 1.15;
         -webkit-text-size-adjust: 100%;
         font-size: 13px;
-        font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+        font-family: 'National Park', sans-serif;
       }
 
       body {
@@ -187,7 +184,7 @@
       }
 
       button {
-        font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+        font-family: 'National Park', sans-serif;
       }
 
       hr {
@@ -214,8 +211,8 @@
       }
 
       .actions-button .btn:hover {
-        background-color: var(--orange-transparent);
-        color: var(--orange-005);
+        background-color: var(--blue-transparent);
+        color: var(--blue-005);
       }
 
       .actions-button .btn:disabled {
@@ -224,7 +221,7 @@
       }
 
       .actions-button .btn:hover svg {
-        fill: var(--orange-005);
+        fill: var(--blue-005);
       }
 
       .actions-button .btn:disabled svg {
@@ -263,59 +260,59 @@
       }
 
       .notifyjs-container .notifyjs-notification.alert-success {
-        color: #155724;
+        color: var(--green-006);
         background-color: #d4edda;
-        border-color: #c3e6cb;
+        border-color: var(--green-003);
       }
 
       .notifyjs-container .notifyjs-notification.alert-danger {
-        color: #721c24;
+        color: var(--red-006);
         background-color: #f8d7da;
         border-color: #f5c6cb;
       }
 
       .notifyjs-container .notifyjs-notification.alert-warning {
-        color: #856404;
+        color: var(--amber-006);
         background-color: #fff3cd;
         border-color: #ffeeba;
       }
 
       .notifyjs-container .notifyjs-notification.alert-info {
-        color: #0c5460;
+        color: var(--blue-006);
         background-color: #d1ecf1;
         border-color: #bee5eb;
       }
 
       .notifyjs-container .notifyjs-notification.alert-success p.progress {
-        background: #155724;
+        background: var(--green-006);
       }
 
       .notifyjs-container .notifyjs-notification.alert-danger p.progress {
-        background: #721c24;
+        background: var(--red-006);
       }
 
       .notifyjs-container .notifyjs-notification.alert-warning p.progress {
-        background: #856404;
+        background: var(--amber-006);
       }
 
       .notifyjs-container .notifyjs-notification.alert-info p.progress {
-        background: #0c5460;
+        background: var(--blue-006);
       }
 
       .notifyjs-container .notifyjs-notification.alert-success .notifyjs-icon svg {
-        fill: #155724;
+        fill: var(--green-006);
       }
 
       .notifyjs-container .notifyjs-notification.alert-danger .notifyjs-icon svg {
-        fill: #721c24;
+        fill: var(--red-006);
       }
 
       .notifyjs-container .notifyjs-notification.alert-warning .notifyjs-icon svg {
-        fill: #856404;
+        fill: var(--amber-006);
       }
 
       .notifyjs-container .notifyjs-notification.alert-info .notifyjs-icon svg {
-        fill: #0c5460;
+        fill: var(--blue-006);
       }
 
       .notifyjs-container .notifyjs-notification .notifyjs-icon {
