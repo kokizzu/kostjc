@@ -96,21 +96,23 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		fac := rqProperty.NewFacilities(d.PropOltp)
 		facilities := fac.FindAll()
+		facilitiesChoices := fac.FindFacilitiesChoices()
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
 		out := d.UserBuilding(&in)
 
 		return views.RenderBuilding(ctx, M.SX{
-			`title`:      `User Building`,
-			`user`:       user,
-			`segments`:   segments,
-			`building`:   out.Building,
-			`buildings`:  out.Buildings,
-			`locations`:  locations,
-			`facilities`: facilities,
-			`fields`:     out.Meta.Fields,
-			`pager`:      out.Pager,
+			`title`:             `User Building`,
+			`user`:              user,
+			`segments`:          segments,
+			`building`:          out.Building,
+			`buildings`:         out.Buildings,
+			`locations`:         locations,
+			`facilities`:        facilities,
+			`facilitiesChoices`: facilitiesChoices,
+			`fields`:            out.Meta.Fields,
+			`pager`:             out.Pager,
 		})
 	})
 

@@ -78,7 +78,7 @@ var UserBookingMeta = zCrud.Meta{
 		{
 			Name:      mProperty.FacilitiesObj,
 			Label:     `Facilities`,
-			DataType:  zCrud.DataTypeIntArr,
+			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeCombobox,
 			ReadOnly:  true,
 		},
@@ -156,6 +156,7 @@ func (d *Domain) UserBooking(in *UserBookingIn) (out UserBookingOut) {
 			if in.Cmd == zCrud.CmdDelete {
 				if bk.DeletedAt == 0 {
 					bk.SetDeletedAt(in.UnixNow())
+					bk.SetDeletedBy(sess.UserId)
 				}
 			}
 
@@ -175,28 +176,35 @@ func (d *Domain) UserBooking(in *UserBookingIn) (out UserBookingOut) {
 			bk.SetDateEnd(in.Booking.DateEnd)
 		}
 
-		facilities := []mProperty.FacilityObj{}
-		for _, id := range in.Facilities {
-			fac := rqProperty.NewFacilities(d.PropOltp)
-			fac.Id = id
-			if fac.FindById() {
-				facilities = append(facilities, mProperty.FacilityObj{
-					FacilityName:   fac.FacilityName,
-					ExtraChargeIDR: fac.ExtraChargeIDR,
-				})
+		if len(in.Facilities) > 0 {
+			facilities := []mProperty.FacilityObj{}
+			for _, id := range in.Facilities {
+				fac := rqProperty.NewFacilities(d.PropOltp)
+				fac.Id = id
+				if fac.FindById() {
+					facilities = append(facilities, mProperty.FacilityObj{
+						FacilityName:   fac.FacilityName,
+						ExtraChargeIDR: fac.ExtraChargeIDR,
+					})
+				}
+			}
+
+			facilitiesByt, err := json.Marshal(facilities)
+			if err != nil {
+				out.SetError(500, ErrUserBookingSaveFailed)
+				return
+			} else {
+				bk.SetFacilitiesObj(string(facilitiesByt))
 			}
 		}
 
-		facilitiesByt, err := json.Marshal(facilities)
-		if err != nil {
-			out.SetError(500, ErrUserBookingSaveFailed)
-			return
-		} else {
-			bk.SetFacilitiesObj(string(facilitiesByt))
+		if in.Booking.BasePriceIDR > 0 {
+			bk.SetBasePriceIDR(in.Booking.BasePriceIDR)
 		}
 
-		bk.SetBasePriceIDR(in.Booking.BasePriceIDR)
-		bk.SetTotalPriceIDR(in.Booking.TotalPriceIDR)
+		if in.Booking.TotalPriceIDR > 0 {
+			bk.SetTotalPriceIDR(in.Booking.TotalPriceIDR)
+		}
 
 		if mProperty.IsValidDate(in.Booking.PaidAt, time.DateOnly) {
 			bk.SetPaidAt(in.Booking.PaidAt)

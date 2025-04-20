@@ -7,6 +7,7 @@ import (
 	"kostjc/model/zCrud"
 
 	"github.com/kokizzu/gotro/M"
+	"github.com/kokizzu/gotro/S"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file UserTenants.go
@@ -236,6 +237,10 @@ func (d *Domain) UserTenants(in *UserTenantsIn) (out UserTenantsOut) {
 					tenant.SetRestoredBy(sess.UserId)
 				}
 			}
+		}
+
+		if in.Tenant.KtpRegion != "" {
+			in.Tenant.KtpRegion = S.ToUpper(in.Tenant.KtpRegion)
 		}
 
 		tenant.SetAll(in.Tenant, M.SB{}, M.SB{})

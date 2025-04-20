@@ -67,7 +67,7 @@ var UserBuildingMeta = zCrud.Meta{
 		{
 			Name:      mProperty.Facilities,
 			Label:     `Facilities`,
-			DataType:  zCrud.DataTypeInt,
+			DataType:  zCrud.DataTypeIntArr,
 			InputType: zCrud.InputTypeCombobox,
 			ReadOnly:  false,
 		},

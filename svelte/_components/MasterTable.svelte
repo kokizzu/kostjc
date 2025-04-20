@@ -77,7 +77,7 @@
   // Rows per page
   let currentRows = PAGER.perPage;
   // Rows per page options
-  let rowsToShow = [10, 20, 40, 60, 70, 100, 200];
+  let rowsToShow = [5, 10, 20, 50, 70, 100, 200];
   // State for show rows options
   let showRowsNum = false;
   // Total rows
@@ -452,6 +452,10 @@
                       <span>--</span>
                     {/if}
                   </td>
+                {:else if f.type == 'intArr'}  
+                  <td>{row[idx] ? (
+                    Object.entries(REFS[f.name]).map(([k, v]) => `${v}`).join(', ')
+                  ) : '--'}</td>
                 {:else if f.type == 'currency'}
                   <td>{row[idx] ? formatPrice(row[idx], (f.mapping || 'IDR')) : '--'}</td>
                 {:else if f.inputType === 'datetime'}
@@ -956,7 +960,7 @@
     flex-direction: column-reverse;
     position: absolute;
     width: 100%;
-    top: -180px;
+    top: -200px;
     border-radius: 5px;
     border: 1px solid var(--gray-004);
     background-color: #fff;

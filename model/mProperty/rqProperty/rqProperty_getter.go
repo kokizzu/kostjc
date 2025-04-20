@@ -168,3 +168,20 @@ SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName()
 
 	return rows
 }
+
+func (f *Facilities) FindFacilitiesChoices() map[uint64]string {
+	const comment = `-- Locations) FindLocationChoices`
+
+	queryRows := comment + `
+SELECT ` + f.SqlId() + `, ` + f.SqlFacilityName() + ` FROM ` + f.SqlTableName() + `
+ORDER BY ` + f.SqlFacilityName() + ` ASC`
+
+	out := make(map[uint64]string)
+	f.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 2 {
+			out[X.ToU(row[0])] = X.ToS(row[1])
+		}
+	})
+
+	return out
+}

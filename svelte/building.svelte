@@ -23,6 +23,7 @@
   let buildings = /** @type {any[][]} */([/* buildings */]);
   let locations = /** @type {Record<Number, string>} */({/* locations */});
   let facilities = /** @type {Facility[]} */ ([/* facilities */]);
+  let facilitiesChoices = /** @type {Record<Number, string>} */({/* facilitiesChoices */});
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
 
@@ -189,7 +190,8 @@
     <MasterTable
       ACCESS={segments}
       REFS={{
-        'locationId': locations
+        'locationId': locations,
+        'facilities': facilitiesChoices
       }}
       bind:FIELDS={fields}
       bind:PAGER={pager}

@@ -107,7 +107,8 @@ function formatPrice(price, currency) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency,
-      maximumSignificantDigits: 4,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(price);
   } catch(err) {
     console.log('formatPrice failed', err, price, currency);

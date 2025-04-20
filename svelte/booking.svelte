@@ -56,7 +56,7 @@
   async function OnRestore(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      building: {
+      booking: {
         id: row[0]
       },
       cmd: 'restore'
@@ -83,7 +83,7 @@
   async function OnDelete(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      building: {
+      booking: {
         id: row[0]
       },
       cmd: 'delete'
@@ -109,7 +109,7 @@
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
     console.log('Booking ID to Edit: ' + String(id));
-    const building = {
+    const booking = {
       id: payloads[0],
       buildingName: String(payloads[1]),
       locationId: String(payloads[2]),
@@ -117,7 +117,7 @@
     }
     const i = /** @type {any}*/ ({
       pager,
-      building,
+      booking,
       cmd: 'upsert'
     });
     await UserBooking(i,
@@ -132,7 +132,7 @@
 
         pager = o.pager;
         bookings = o.bookings;
-        notifier.showSuccess(`Booking '${building.buildingName}' updated !!`);
+        notifier.showSuccess(`Booking '${booking.buildingName}' updated !!`);
 
         OnRefresh(pager);
       }
@@ -194,7 +194,7 @@
       bind:PAGER={pager}
       bind:MASTER_ROWS={bookings}
 
-      CAN_EDIT_ROW
+      CAN_EDIT_ROW={false}
       CAN_SEARCH_ROW
       CAN_DELETE_ROW
       CAN_RESTORE_ROW
