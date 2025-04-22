@@ -8,7 +8,8 @@
   import {
     RiBuildingsHome2Line, RiMapMapPin2Line, RiUserFacesUser3Line,
     RiUserFacesUserFollowLine, RiBuildingsHotelLine, RiBusinessCalendarScheduleLine,
-    RiFoodCupLine, RiSystemLogoutBoxRLine, RiFinanceWallet3Line
+    RiFoodCupLine, RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
+    RiBusinessInboxUnarchiveLine
   } from '../node_modules/svelte-icons-pack/dist/ri';
 
   export let access = /** @type {Access} */ ({});
@@ -74,6 +75,10 @@
       <a href="/admin/payment" class:active={pathLv2 === 'payment'}>
         <Icon src={RiFinanceWallet3Line} size="20" />
         <span>Payments</span>
+      </a>
+      <a href="/admin/stock" class:active={pathLv2 === 'stock'}>
+        <Icon src={RiBusinessInboxUnarchiveLine} size="20" />
+        <span>Stocks</span>
       </a>
       <a href="/admin/tenants" class:active={pathLv2 === 'tenants'}>
         <Icon src={RiUserFacesUserFollowLine} size="20" />

@@ -637,6 +637,127 @@ exports.AdminPayment = async function AdminPayment( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminStockIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} stock.id
+ * @property {String} stock.stockName
+ * @property {String} stock.stockAddedAt
+ * @property {number} stock.quantity
+ * @property {number} stock.priceIDR
+ * @property {number} stock.createdAt
+ * @property {number} stock.createdBy
+ * @property {number} stock.updatedAt
+ * @property {number} stock.updatedBy
+ * @property {number} stock.deletedAt
+ * @property {number} stock.deletedBy
+ * @property {number} stock.restoredBy
+ */
+const AdminStockIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  stock: { // rqProperty.Stocks
+    id: 0, // uint64
+    stockName: '', // string
+    stockAddedAt: '', // string
+    quantity: 0, // int64
+    priceIDR: 0, // int64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Stocks
+}
+/**
+ * @typedef {Object} AdminStockOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} stock.id
+ * @property {String} stock.stockName
+ * @property {String} stock.stockAddedAt
+ * @property {number} stock.quantity
+ * @property {number} stock.priceIDR
+ * @property {number} stock.createdAt
+ * @property {number} stock.createdBy
+ * @property {number} stock.updatedAt
+ * @property {number} stock.updatedBy
+ * @property {number} stock.deletedAt
+ * @property {number} stock.deletedBy
+ * @property {number} stock.restoredBy
+ * @property {Object} stocks
+ */
+const AdminStockOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  stock: { // rqProperty.Stocks
+    id: 0, // uint64
+    stockName: '', // string
+    stockAddedAt: '', // string
+    quantity: 0, // int64
+    priceIDR: 0, // int64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Stocks
+  stocks: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback AdminStockCallback
+ * @param {AdminStockOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminStockIn} i
+ * @param {AdminStockCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminStock = async function AdminStock( i, cb ) {
+  return await axios.post( '/admin/stock', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminTenantsIn
  * @property {String} cmd
  * @property {Object} withMeta

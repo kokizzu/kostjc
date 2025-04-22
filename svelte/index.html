@@ -3374,6 +3374,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       exports.AdminPayment = async function AdminPayment(i, cb) {
         return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminStock = async function AdminStock(i, cb) {
+        return await axios.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminTenants = async function AdminTenants(i, cb) {
         return await axios.post("/admin/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -3406,6 +3409,133 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       };
       exports.UserUpdateProfile = async function UserUpdateProfile(i, cb) {
         return await axios.post("/user/updateProfile", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+    }
+  });
+
+  // _components/xFormatter.js
+  var require_xFormatter = __commonJS({
+    "_components/xFormatter.js"(exports, module) {
+      function datetime(unixSec, humanize) {
+        if (!unixSec)
+          return "";
+        if (typeof unixSec === "string")
+          return unixSec;
+        const dt = new Date(unixSec * 1e3);
+        if (!humanize) {
+          const year = dt.getFullYear();
+          const month = String(dt.getMonth() + 1).padStart(2, "0");
+          const day = String(dt.getDate()).padStart(2, "0");
+          const hours = String(dt.getHours()).padStart(2, "0");
+          const minutes = String(dt.getMinutes()).padStart(2, "0");
+          return `${year}-${month}-${day} ${hours}:${minutes}`;
+        }
+        const options = { day: "2-digit", month: "long", year: "numeric" };
+        return dt.toLocaleDateString(void 0, options);
+      }
+      function localeDatetime(unixSec) {
+        if (!unixSec)
+          return "";
+        const dt = new Date(unixSec * 1e3);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = dt.getDate();
+        const month = dt.toLocaleDateString("default", { month: "short" });
+        const year = dt.getFullYear();
+        let hh = dt.getHours();
+        if (hh < 10)
+          hh = "0" + hh;
+        let mm = dt.getMinutes();
+        if (mm < 10)
+          mm = "0" + mm;
+        const formattedDate = `${date} ${month} ${year} - ${hh}:${mm}`;
+        return formattedDate;
+      }
+      function utcDatetime(unixSec) {
+        if (!unixSec)
+          return "";
+        let dt = new Date(unixSec * 1e3);
+        if (typeof unixSec !== "number")
+          dt = new Date(unixSec);
+        const year = dt.toLocaleDateString("en-US", { year: "2-digit", timeZone: "UTC" });
+        const month = dt.toLocaleDateString("en-US", { month: "2-digit", timeZone: "UTC" });
+        const date = dt.getUTCDate();
+        let hh = dt.getUTCHours();
+        if (hh < 10)
+          hh = "0" + hh;
+        let mm = dt.getUTCMinutes();
+        if (mm < 10)
+          mm = "0" + mm;
+        const formattedDate = `${date}/${month}/${year} - ${hh}:${mm}`;
+        return formattedDate;
+      }
+      function isoTime(unixSec) {
+        if (!unixSec)
+          return "";
+        const dt = new Date(unixSec * 1e3);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = dt.getDate();
+        const month = dt.toLocaleDateString("default", { month: "2-digit" });
+        const year = dt.getFullYear();
+        let hh = dt.getHours();
+        if (hh < 10)
+          hh = "0" + hh;
+        let mm = dt.getMinutes();
+        if (mm < 10)
+          mm = "0" + mm;
+        const formattedDate = `${year}-${month}-${date} ${hh}:${mm}`;
+        return formattedDate;
+      }
+      function isoDate(unixSec) {
+        if (!unixSec)
+          return "";
+        const dt = new Date(unixSec * 1e3);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = dt.getDate();
+        const month = dt.toLocaleDateString("default", { month: "2-digit" });
+        const year = dt.getFullYear();
+        const formattedDate = `${year}-${month}-${date}`;
+        return formattedDate;
+      }
+      function dateISOFormat2(dayTo = 0) {
+        const dt = new Date();
+        dt.setDate(dt.getDate() + dayTo);
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = String(dt.getMonth() + 1).padStart(2, "0");
+        const year = dt.getFullYear();
+        return `${year}-${month}-${date}`;
+      }
+      function loadScript(url, callback) {
+        let script = (
+          /** @type {HTMLScriptElement} */
+          document.createElement("script")
+        );
+        script.type = "text/javascript";
+        script.src = url;
+        script.onload = () => callback();
+        document.getElementsByTagName("head")[0].appendChild(script);
+      }
+      function formatPrice(price, currency) {
+        try {
+          return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(price);
+        } catch (err) {
+          console.log("formatPrice failed", err, price, currency);
+          return `${currency} ${price}`;
+        }
+      }
+      module.exports = {
+        datetime,
+        localeDatetime,
+        utcDatetime,
+        isoTime,
+        isoDate,
+        dateISOFormat: dateISOFormat2,
+        loadScript,
+        formatPrice
       };
     }
   });
@@ -4464,6 +4594,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
   var RiBusinessCalendarScheduleLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M7 3V1H9V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V9H20V5H17V7H15V5H9V7H7V5H4V19H10V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7ZM17 12C14.7909 12 13 13.7909 13 16C13 18.2091 14.7909 20 17 20C19.2091 20 21 18.2091 21 16C21 13.7909 19.2091 12 17 12ZM11 16C11 12.6863 13.6863 10 17 10C20.3137 10 23 12.6863 23 16C23 19.3137 20.3137 22 17 22C13.6863 22 11 19.3137 11 16ZM16 13V16.4142L18.2929 18.7071L19.7071 17.2929L18 15.5858V13H16Z"></path>' };
+  var RiBusinessInboxUnarchiveLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 3L22 7V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V7.00353L4 3H20ZM20 9H4V19H20V9ZM12 10L16 14H13V18H11V14H8L12 10ZM18.764 5H5.236L4.237 7H19.764L18.764 5Z"></path>' };
   var RiUserFacesUser3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"></path>' };
   var RiUserFacesUserFollowLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M14 14.252V16.3414C13.3744 16.1203 12.7013 16 12 16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM17.7929 19.9142L21.3284 16.3787L22.7426 17.7929L17.7929 22.7426L14.2574 19.2071L15.6716 17.7929L17.7929 19.9142Z"></path>' };
   var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
@@ -4474,6 +4605,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var RiArrowsArrowRightSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path>' };
 
   // _components/InputBox.svelte
+  var import_xFormatter = __toESM(require_xFormatter());
   function get_each_context_1(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[45] = list[i];
@@ -6963,6 +7095,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let valueToShowFromObj = value + "";
     const randStr = RandString(5);
     onMount(() => {
+      if (type === "datetime") {
+        $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(0));
+      }
       if (type === "password")
         $invalidate(10, inputElm.type = type, inputElm);
       if (type === "bool")
@@ -7330,13 +7465,18 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let t23;
     let span7;
     let t25;
-    let span8;
+    let a8;
+    let icon8;
     let t26;
+    let span8;
+    let t28;
+    let span9;
+    let t29;
     let nav2;
     let button;
-    let icon8;
-    let t27;
-    let span9;
+    let icon9;
+    let t30;
+    let span10;
     let current;
     let mounted;
     let dispose;
@@ -7366,11 +7506,17 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     });
     icon7 = new Icon_default({
       props: {
-        src: RiUserFacesUserFollowLine,
+        src: RiBusinessInboxUnarchiveLine,
         size: "20"
       }
     });
     icon8 = new Icon_default({
+      props: {
+        src: RiUserFacesUserFollowLine,
+        size: "20"
+      }
+    });
+    icon9 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
     return {
@@ -7428,16 +7574,22 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         create_component(icon7.$.fragment);
         t23 = space();
         span7 = element("span");
-        span7.textContent = "Tenants";
+        span7.textContent = "Stocks";
         t25 = space();
-        span8 = element("span");
+        a8 = element("a");
+        create_component(icon8.$.fragment);
         t26 = space();
+        span8 = element("span");
+        span8.textContent = "Tenants";
+        t28 = space();
+        span9 = element("span");
+        t29 = space();
         nav2 = element("nav");
         button = element("button");
-        create_component(icon8.$.fragment);
-        t27 = space();
-        span9 = element("span");
-        span9.textContent = "Logout";
+        create_component(icon9.$.fragment);
+        t30 = space();
+        span10 = element("span");
+        span10.textContent = "Logout";
         attr(a0, "href", "/");
         attr(a0, "class", "svelte-2xd6p5");
         toggle_class(
@@ -7496,16 +7648,24 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           /*pathLv2*/
           ctx[2] === "payment"
         );
-        attr(a7, "href", "/admin/tenants");
+        attr(a7, "href", "/admin/stock");
         attr(a7, "class", "svelte-2xd6p5");
         toggle_class(
           a7,
           "active",
           /*pathLv2*/
+          ctx[2] === "stock"
+        );
+        attr(a8, "href", "/admin/tenants");
+        attr(a8, "class", "svelte-2xd6p5");
+        toggle_class(
+          a8,
+          "active",
+          /*pathLv2*/
           ctx[2] === "tenants"
         );
         attr(nav1, "class", "nav-menu svelte-2xd6p5");
-        attr(span8, "class", "separator svelte-2xd6p5");
+        attr(span9, "class", "separator svelte-2xd6p5");
         attr(button, "class", "red svelte-2xd6p5");
         attr(nav2, "class", "nav-menu svelte-2xd6p5");
         attr(div, "class", "container svelte-2xd6p5");
@@ -7557,14 +7717,19 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         mount_component(icon7, a7, null);
         append(a7, t23);
         append(a7, span7);
-        append(div, t25);
-        append(div, span8);
-        append(div, t26);
+        append(nav1, t25);
+        append(nav1, a8);
+        mount_component(icon8, a8, null);
+        append(a8, t26);
+        append(a8, span8);
+        append(div, t28);
+        append(div, span9);
+        append(div, t29);
         append(div, nav2);
         append(nav2, button);
-        mount_component(icon8, button, null);
-        append(button, t27);
-        append(button, span9);
+        mount_component(icon9, button, null);
+        append(button, t30);
+        append(button, span10);
         current = true;
         if (!mounted) {
           dispose = listen(
@@ -7589,6 +7754,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         transition_in(icon6.$.fragment, local);
         transition_in(icon7.$.fragment, local);
         transition_in(icon8.$.fragment, local);
+        transition_in(icon9.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -7601,6 +7767,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         transition_out(icon6.$.fragment, local);
         transition_out(icon7.$.fragment, local);
         transition_out(icon8.$.fragment, local);
+        transition_out(icon9.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -7616,6 +7783,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         destroy_component(icon6);
         destroy_component(icon7);
         destroy_component(icon8);
+        destroy_component(icon9);
         mounted = false;
         dispose();
       }

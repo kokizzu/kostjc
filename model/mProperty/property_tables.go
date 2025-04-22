@@ -83,6 +83,15 @@ const (
 	Note          = `note`
 )
 
+const (
+	TableStocks Tt.TableName = `stocks`
+
+	StockName    = `stockName`
+	StockAddedAt = `stockAddedAt`
+	Quantity     = `quantity`
+	PriceIDR     = `priceIDR`
+)
+
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 	TableLocations: {
 		Fields: []Tt.Field{
@@ -184,6 +193,24 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{PaymentMethod, Tt.String},
 			{PaymentStatus, Tt.String},
 			{Note, Tt.String},
+			{CreatedAt, Tt.Integer},
+			{CreatedBy, Tt.Unsigned},
+			{UpdatedAt, Tt.Integer},
+			{UpdatedBy, Tt.Unsigned},
+			{DeletedAt, Tt.Integer},
+			{DeletedBy, Tt.Unsigned},
+			{RestoredBy, Tt.Unsigned},
+		},
+		AutoIncrementId: true,
+		Engine:          Tt.Memtx,
+	},
+	TableStocks: {
+		Fields: []Tt.Field{
+			{Id, Tt.Unsigned},
+			{StockName, Tt.String},
+			{StockAddedAt, Tt.String},
+			{Quantity, Tt.Integer},
+			{PriceIDR, Tt.Integer},
 			{CreatedAt, Tt.Integer},
 			{CreatedBy, Tt.Unsigned},
 			{UpdatedAt, Tt.Integer},

@@ -231,6 +231,34 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminStockAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminStockIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminStockAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.AdminStock(&in)
+
+		return views.RenderStock(ctx, M.SX{
+			`title`:    `KostJC | Stock Management`,
+			`user`:     user,
+			`segments`: segments,
+			`stock`:    out.Stock,
+			`stocks`:   out.Stocks,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {
 		return views.RenderDebug(ctx, M.SX{})
 	})

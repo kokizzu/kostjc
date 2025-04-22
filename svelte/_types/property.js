@@ -83,3 +83,20 @@ module.exports = {};
  * @property {string} restoredBy
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} Stock
+ * @property {string|number} id
+ * @property {string} stockName
+ * @property {string} stockAddedAt
+ * @property {number} quantity 
+ * @property {number} priceIDR 
+ * @property {number} createdAt
+ * @property {string} createdBy
+ * @property {number} updatedAt
+ * @property {string} updatedBy
+ * @property {number} deletedAt
+ * @property {string} deletedBy
+ * @property {string} restoredBy
+ */
+module.exports = {};

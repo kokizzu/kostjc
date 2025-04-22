@@ -4,12 +4,12 @@
   /** @typedef {import('./_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('./_types/users.js').User} User */
-  /** @typedef {import('./_types/property.js').Facility} Facility */
+  /** @typedef {import('./_types/property.js').Stock} Stock */
   
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { AdminFacility } from './jsApi.GEN';
+  import { AdminStock } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
@@ -17,8 +17,8 @@
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
-  let facility  = /** @type {Facility} */ ({/* facility */});
-  let facilities = /** @type {any[][]} */([/* facilities */]);
+  let stock  = /** @type {Stock} */ ({/* stock */});
+  let stocks = /** @type {any[][]} */([/* stocks */]);
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
 
@@ -32,8 +32,8 @@
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await AdminFacility( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
+    await AdminStock( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').AdminStockCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddFacility = false;
@@ -43,7 +43,7 @@
           return
         }
         pager = o.pager;
-        facilities = o.facilities;
+        stocks = o.stocks;
       }
     );
   }
@@ -51,13 +51,13 @@
   async function OnRestore(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      facility: {
+      stock: {
         id: row[0]
       },
       cmd: 'restore'
     });
-    await AdminFacility(i,
-      /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
+    await AdminStock(i,
+      /** @type {import('./jsApi.GEN').AdminStockCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -67,8 +67,8 @@
         }
 
         pager = o.pager;
-        facilities = o.facilities;
-        notifier.showSuccess(`Facility '${row[1]}' restored !!`);
+        stocks = o.stocks;
+        notifier.showSuccess(`Stock '${row[1]}' restored !!`);
 
         OnRefresh(pager);
       }
@@ -78,13 +78,13 @@
   async function OnDelete(/** @type any[] */ row) {
     const i = /** @type {any}*/ ({
       pager,
-      facility: {
+      stock: {
         id: row[0]
       },
       cmd: 'delete'
     });
-    await AdminFacility(i,
-      /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
+    await AdminStock(i,
+      /** @type {import('./jsApi.GEN').AdminStockCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -94,8 +94,8 @@
         }
 
         pager = o.pager;
-        facilities = o.facilities;
-        notifier.showSuccess(`Facility '${row[1]}' deleted !!`);
+        stocks = o.stocks;
+        notifier.showSuccess(`Stock '${row[1]}' deleted !!`);
 
         OnRefresh(pager);
       }
@@ -103,19 +103,20 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Facility ID to Edit: ' + String(id));
-    const facility = {
+    const stock = {
       id: payloads[0],
-      facilityName: payloads[1],
-      extraChargeIDR: Number(payloads[2]),
+      stockName: payloads[1],
+      stockAddedAt: payloads[2],
+      quantity: Number(payloads[3]),
+      priceIDR: Number(payloads[4])
     }
     const i = /** @type {any}*/ ({
       pager,
-      facility,
+      stock,
       cmd: 'upsert'
     });
-    await AdminFacility(i,
-      /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
+    await AdminStock(i,
+      /** @type {import('./jsApi.GEN').AdminStockCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -125,8 +126,8 @@
         }
 
         pager = o.pager;
-        facilities = o.facilities;
-        notifier.showSuccess(`Facility '${facility.facilityName}' updated !!`);
+        stocks = o.stocks;
+        notifier.showSuccess(`Stock '${stock.stockName}' updated !!`);
 
         OnRefresh(pager);
       }
@@ -136,18 +137,20 @@
   async function OnAddFacility(/** @type any[] */ payloads) {
     isSubmitAddFacility = true;
 
-    const facility = /** @type {any} */ ({
-      facilityName: payloads[1],
-      extraChargeIDR: Number(payloads[2]),
+    const stock = /** @type {any} */ ({
+      stockName: payloads[1],
+      stockAddedAt: payloads[2],
+      quantity: Number(payloads[3]),
+      priceIDR: Number(payloads[4])
     });
     const i = /** @type {any} */ ({
       pager,
-      facility,
+      stock,
       cmd: 'upsert'
     });
 
-    await AdminFacility(i,
-      /** @type {import('../jsApi.GEN').AdminFacilityCallback} */
+    await AdminStock(i,
+      /** @type {import('../jsApi.GEN').AdminStockCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddFacility = false;
@@ -158,8 +161,8 @@
         }
         
         pager = o.pager;
-        facilities = o.facilities;
-        notifier.showSuccess(`Facility '${facility.facilityName}' created !!`);
+        stocks = o.stocks;
+        notifier.showSuccess(`Stock '${stock.facilityName}' created !!`);
 
         popUpForms.Reset();
 
@@ -173,7 +176,7 @@
 {#if isPopUpFormReady}
   <PopUpForms
     bind:this={popUpForms}
-    heading="Add Facility"
+    heading="Add Stock"
     FIELDS={fields}
     bind:isSubmitted={isSubmitAddFacility}
     OnSubmit={OnAddFacility}
@@ -181,13 +184,13 @@
 {/if}
 
 <LayoutMain access={segments} user={user}>
-  <div class="master-facility">
-    <h2>Master Facility</h2>
+  <div class="master-stock">
+    <h2>Master Stock</h2>
     <MasterTable
       ACCESS={segments}
       bind:FIELDS={fields}
       bind:PAGER={pager}
-      bind:MASTER_ROWS={facilities}
+      bind:MASTER_ROWS={stocks}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
@@ -202,7 +205,7 @@
     <button
       class="btn"
       on:click={() => popUpForms.Show()}
-      title="add facility"
+      title="add stock"
     >
       <Icon
         color="var(--gray-007)"
@@ -215,14 +218,14 @@
 </LayoutMain>
 
 <style>
-  .master-facility {
+  .master-stock {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
   }
 
-  .master-facility h2 {
+  .master-stock h2 {
     margin: 0;
   }
 </style>

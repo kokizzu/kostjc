@@ -2075,3 +2075,337 @@ var RoomsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
+// Stocks DAO reader/query struct
+type Stocks struct {
+	Adapter      *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id           uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	StockName    string      `json:"stockName" form:"stockName" query:"stockName" long:"stockName" msg:"stockName"`
+	StockAddedAt string      `json:"stockAddedAt" form:"stockAddedAt" query:"stockAddedAt" long:"stockAddedAt" msg:"stockAddedAt"`
+	Quantity     int64       `json:"quantity" form:"quantity" query:"quantity" long:"quantity" msg:"quantity"`
+	PriceIDR     int64       `json:"priceIDR" form:"priceIDR" query:"priceIDR" long:"priceIDR" msg:"priceIDR"`
+	CreatedAt    int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy    uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt    int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy    uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt    int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy    uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy   uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+}
+
+// NewStocks create new ORM reader/query object
+func NewStocks(adapter *Tt.Adapter) *Stocks {
+	return &Stocks{Adapter: adapter}
+}
+
+// SpaceName returns full package and table name
+func (s *Stocks) SpaceName() string { //nolint:dupl false positive
+	return string(mProperty.TableStocks) // casting required to string from Tt.TableName
+}
+
+// SqlTableName returns quoted table name
+func (s *Stocks) SqlTableName() string { //nolint:dupl false positive
+	return `"stocks"`
+}
+
+func (s *Stocks) UniqueIndexId() string { //nolint:dupl false positive
+	return `id`
+}
+
+// FindById Find one by Id
+func (s *Stocks) FindById() bool { //nolint:dupl false positive
+	res, err := s.Adapter.Select(s.SpaceName(), s.UniqueIndexId(), 0, 1, tarantool.IterEq, A.X{s.Id})
+	if L.IsError(err, `Stocks.FindById failed: `+s.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		s.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
+// SqlSelectAllFields generate Sql select fields
+func (s *Stocks) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "stockName"
+	, "stockAddedAt"
+	, "quantity"
+	, "priceIDR"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// SqlSelectAllUncensoredFields generate Sql select fields
+func (s *Stocks) SqlSelectAllUncensoredFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "stockName"
+	, "stockAddedAt"
+	, "quantity"
+	, "priceIDR"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// ToUpdateArray generate slice of update command
+func (s *Stocks) ToUpdateArray() A.X { //nolint:dupl false positive
+	return A.X{
+		A.X{`=`, 0, s.Id},
+		A.X{`=`, 1, s.StockName},
+		A.X{`=`, 2, s.StockAddedAt},
+		A.X{`=`, 3, s.Quantity},
+		A.X{`=`, 4, s.PriceIDR},
+		A.X{`=`, 5, s.CreatedAt},
+		A.X{`=`, 6, s.CreatedBy},
+		A.X{`=`, 7, s.UpdatedAt},
+		A.X{`=`, 8, s.UpdatedBy},
+		A.X{`=`, 9, s.DeletedAt},
+		A.X{`=`, 10, s.DeletedBy},
+		A.X{`=`, 11, s.RestoredBy},
+	}
+}
+
+// IdxId return name of the index
+func (s *Stocks) IdxId() int { //nolint:dupl false positive
+	return 0
+}
+
+// SqlId return name of the column being indexed
+func (s *Stocks) SqlId() string { //nolint:dupl false positive
+	return `"id"`
+}
+
+// IdxStockName return name of the index
+func (s *Stocks) IdxStockName() int { //nolint:dupl false positive
+	return 1
+}
+
+// SqlStockName return name of the column being indexed
+func (s *Stocks) SqlStockName() string { //nolint:dupl false positive
+	return `"stockName"`
+}
+
+// IdxStockAddedAt return name of the index
+func (s *Stocks) IdxStockAddedAt() int { //nolint:dupl false positive
+	return 2
+}
+
+// SqlStockAddedAt return name of the column being indexed
+func (s *Stocks) SqlStockAddedAt() string { //nolint:dupl false positive
+	return `"stockAddedAt"`
+}
+
+// IdxQuantity return name of the index
+func (s *Stocks) IdxQuantity() int { //nolint:dupl false positive
+	return 3
+}
+
+// SqlQuantity return name of the column being indexed
+func (s *Stocks) SqlQuantity() string { //nolint:dupl false positive
+	return `"quantity"`
+}
+
+// IdxPriceIDR return name of the index
+func (s *Stocks) IdxPriceIDR() int { //nolint:dupl false positive
+	return 4
+}
+
+// SqlPriceIDR return name of the column being indexed
+func (s *Stocks) SqlPriceIDR() string { //nolint:dupl false positive
+	return `"priceIDR"`
+}
+
+// IdxCreatedAt return name of the index
+func (s *Stocks) IdxCreatedAt() int { //nolint:dupl false positive
+	return 5
+}
+
+// SqlCreatedAt return name of the column being indexed
+func (s *Stocks) SqlCreatedAt() string { //nolint:dupl false positive
+	return `"createdAt"`
+}
+
+// IdxCreatedBy return name of the index
+func (s *Stocks) IdxCreatedBy() int { //nolint:dupl false positive
+	return 6
+}
+
+// SqlCreatedBy return name of the column being indexed
+func (s *Stocks) SqlCreatedBy() string { //nolint:dupl false positive
+	return `"createdBy"`
+}
+
+// IdxUpdatedAt return name of the index
+func (s *Stocks) IdxUpdatedAt() int { //nolint:dupl false positive
+	return 7
+}
+
+// SqlUpdatedAt return name of the column being indexed
+func (s *Stocks) SqlUpdatedAt() string { //nolint:dupl false positive
+	return `"updatedAt"`
+}
+
+// IdxUpdatedBy return name of the index
+func (s *Stocks) IdxUpdatedBy() int { //nolint:dupl false positive
+	return 8
+}
+
+// SqlUpdatedBy return name of the column being indexed
+func (s *Stocks) SqlUpdatedBy() string { //nolint:dupl false positive
+	return `"updatedBy"`
+}
+
+// IdxDeletedAt return name of the index
+func (s *Stocks) IdxDeletedAt() int { //nolint:dupl false positive
+	return 9
+}
+
+// SqlDeletedAt return name of the column being indexed
+func (s *Stocks) SqlDeletedAt() string { //nolint:dupl false positive
+	return `"deletedAt"`
+}
+
+// IdxDeletedBy return name of the index
+func (s *Stocks) IdxDeletedBy() int { //nolint:dupl false positive
+	return 10
+}
+
+// SqlDeletedBy return name of the column being indexed
+func (s *Stocks) SqlDeletedBy() string { //nolint:dupl false positive
+	return `"deletedBy"`
+}
+
+// IdxRestoredBy return name of the index
+func (s *Stocks) IdxRestoredBy() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlRestoredBy return name of the column being indexed
+func (s *Stocks) SqlRestoredBy() string { //nolint:dupl false positive
+	return `"restoredBy"`
+}
+
+// ToArray receiver fields to slice
+func (s *Stocks) ToArray() A.X { //nolint:dupl false positive
+	var id any = nil
+	if s.Id != 0 {
+		id = s.Id
+	}
+	return A.X{
+		id,
+		s.StockName,    // 1
+		s.StockAddedAt, // 2
+		s.Quantity,     // 3
+		s.PriceIDR,     // 4
+		s.CreatedAt,    // 5
+		s.CreatedBy,    // 6
+		s.UpdatedAt,    // 7
+		s.UpdatedBy,    // 8
+		s.DeletedAt,    // 9
+		s.DeletedBy,    // 10
+		s.RestoredBy,   // 11
+	}
+}
+
+// FromArray convert slice to receiver fields
+func (s *Stocks) FromArray(a A.X) *Stocks { //nolint:dupl false positive
+	s.Id = X.ToU(a[0])
+	s.StockName = X.ToS(a[1])
+	s.StockAddedAt = X.ToS(a[2])
+	s.Quantity = X.ToI(a[3])
+	s.PriceIDR = X.ToI(a[4])
+	s.CreatedAt = X.ToI(a[5])
+	s.CreatedBy = X.ToU(a[6])
+	s.UpdatedAt = X.ToI(a[7])
+	s.UpdatedBy = X.ToU(a[8])
+	s.DeletedAt = X.ToI(a[9])
+	s.DeletedBy = X.ToU(a[10])
+	s.RestoredBy = X.ToU(a[11])
+	return s
+}
+
+// FromUncensoredArray convert slice to receiver fields
+func (s *Stocks) FromUncensoredArray(a A.X) *Stocks { //nolint:dupl false positive
+	s.Id = X.ToU(a[0])
+	s.StockName = X.ToS(a[1])
+	s.StockAddedAt = X.ToS(a[2])
+	s.Quantity = X.ToI(a[3])
+	s.PriceIDR = X.ToI(a[4])
+	s.CreatedAt = X.ToI(a[5])
+	s.CreatedBy = X.ToU(a[6])
+	s.UpdatedAt = X.ToI(a[7])
+	s.UpdatedBy = X.ToU(a[8])
+	s.DeletedAt = X.ToI(a[9])
+	s.DeletedBy = X.ToU(a[10])
+	s.RestoredBy = X.ToU(a[11])
+	return s
+}
+
+// FindOffsetLimit returns slice of struct, order by idx, eg. .UniqueIndex*()
+func (s *Stocks) FindOffsetLimit(offset, limit uint32, idx string) []Stocks { //nolint:dupl false positive
+	var rows []Stocks
+	res, err := s.Adapter.Select(s.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Stocks.FindOffsetLimit failed: `+s.SpaceName()) {
+		return rows
+	}
+	for _, row := range res.Tuples() {
+		item := Stocks{}
+		rows = append(rows, *item.FromArray(row))
+	}
+	return rows
+}
+
+// FindArrOffsetLimit returns as slice of slice order by idx eg. .UniqueIndex*()
+func (s *Stocks) FindArrOffsetLimit(offset, limit uint32, idx string) ([]A.X, Tt.QueryMeta) { //nolint:dupl false positive
+	var rows []A.X
+	res, err := s.Adapter.Select(s.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Stocks.FindOffsetLimit failed: `+s.SpaceName()) {
+		return rows, Tt.QueryMetaFrom(res, err)
+	}
+	tuples := res.Tuples()
+	rows = make([]A.X, len(tuples))
+	for z, row := range tuples {
+		rows[z] = row
+	}
+	return rows, Tt.QueryMetaFrom(res, nil)
+}
+
+// Total count number of rows
+func (s *Stocks) Total() int64 { //nolint:dupl false positive
+	rows := s.Adapter.CallBoxSpace(s.SpaceName()+`:count`, A.X{})
+	if len(rows) > 0 && len(rows[0]) > 0 {
+		return X.ToI(rows[0][0])
+	}
+	return 0
+}
+
+// StocksFieldTypeMap returns key value of field name and key
+var StocksFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
+	`id`:           Tt.Unsigned,
+	`stockName`:    Tt.String,
+	`stockAddedAt`: Tt.String,
+	`quantity`:     Tt.Integer,
+	`priceIDR`:     Tt.Integer,
+	`createdAt`:    Tt.Integer,
+	`createdBy`:    Tt.Unsigned,
+	`updatedAt`:    Tt.Integer,
+	`updatedBy`:    Tt.Unsigned,
+	`deletedAt`:    Tt.Integer,
+	`deletedBy`:    Tt.Unsigned,
+	`restoredBy`:   Tt.Unsigned,
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

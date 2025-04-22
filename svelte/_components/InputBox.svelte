@@ -6,6 +6,7 @@
   import { AiOutlineEye, AiOutlineEyeInvisible } from '../node_modules/svelte-icons-pack/dist/ai';
   import { RandString } from './xGenerator';
   import { RiArrowsArrowRightSLine } from '../node_modules/svelte-icons-pack/dist/ri';
+  import { dateISOFormat } from './xFormatter';
 
   export let className = '';
   export let type = /** @type {InputType | any} */ ('text');
@@ -29,6 +30,9 @@
   const randStr = RandString(5);
   
   onMount(() => {
+    if (type === 'datetime') {
+      value = dateISOFormat(0);
+    }
     if (type === 'password') inputElm.type = type;
     // Boolean input must be use random id, because it's a checkbox
     if (type === 'bool') id = id + Math.random();
