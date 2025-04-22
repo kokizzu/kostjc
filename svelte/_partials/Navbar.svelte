@@ -31,7 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 50px;
     border-bottom: 1px solid var(--gray-002);
     background-color: #FFF;
     z-index: 100;

@@ -11,10 +11,10 @@
   export let access = /** @type {Access} */ ({});
 </script>
 
-<div class="root_layout">
-  <div class="root_container">
+<div class="root-layout">
+  <div class="root-container">
     <Navbar username={user.userName}/>
-    <div class="root_content { $isShrinkMenu ? 'shrink' : 'expand' }">
+    <div class="root-content { $isShrinkMenu ? 'shrink' : 'expand' }">
       <SideMenu {access} />
       <main class="content">
         <slot />
@@ -25,7 +25,7 @@
 </div>
 
 <style>
-  .root_layout {
+  .root-layout {
     display: block;
 		top: 0;
 		bottom: 0;
@@ -35,13 +35,13 @@
 		width: 100vw;
   }
 
-  .root_layout .root_container {
+  .root-layout .root-container {
     height: 100%;
 		width: 100%;
 		display: flex;
   }
 
-  .root_layout .root_container .root_content {
+  .root-layout .root-container .root-content {
 		display: flex;
 		flex-direction: column;
 		-webkit-box-orient: vertical;
@@ -52,12 +52,12 @@
     max-width: 100%;
     margin-top: var(--navbar-height);
     margin-left: var(--sidemenu-width);
-    margin-right: 0;
+    margin-right: 30px;
     margin-bottom: 0;
     overflow: hidden;
   }
 
-  .root_layout .root_container .root_content .content {
+  .root-layout .root-container .root-content .content {
     display: flex;
 		flex-direction: column;
 		justify-content: space-between;

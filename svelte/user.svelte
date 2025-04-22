@@ -116,8 +116,8 @@
 </script>
 
 <LayoutMain access={segments} user={user}>
-	<div class="user-details">
-		<div class="profile-sessions-container">
+	<div class="user-detail-container">
+		<div class="user-profile">
 			<div class="profile">
 				<h2>Profile</h2>
 				<div class="profile-form">
@@ -152,10 +152,6 @@
 							(user.lastLoginAt && user.lastLoginAt > 0)
 							? datetime(user.lastLoginAt) : '0'
 						}</div>
-						<div class="pill-box">Verified At: {
-							(user.verifiedAt && user.verifiedAt > 0)
-							? datetime(user.verifiedAt) : '0'
-						}</div>
 					</div>
 					<SubmitButton
 						on:click={updateProfile}
@@ -164,75 +160,76 @@
 					/>
 				</div>
 			</div>
-			<div class="sessions">
-				<h2>Sessions</h2>
-				<div class="table-root">
-					<div class="table-container">
-						<table>
-							<thead>
-								<tr>
-									<th class="no">No</th>
-									<th class="a-row">Action</th>
-									<th>IP Address</th>
-									<th class="datetime">Expired At</th>
-									<th>Device</th>
-								</tr>
-							</thead>
-							<tbody>
-								{#each (activeSessions || []) as session, i}
-									<tr>
-										<td class="num-row">{i + 1}</td>
-										<td>
-											<div class="actions">
-												<button class="btn" title="Kill Session"
-													on:click={() => killSession(session.sessionToken)}>
-													<Icon
-														size="17"
-														src={RiSystemDeleteBinLine}
-														color="var(--gray-008)"
-													/>
-												</button>
-											</div>
-										</td>
-										<td>{session.loginIPs || '0'}</td>
-										<td class="datetime">{
-											(session.expiredAt && session.expiredAt > 0)
-											? datetime(session.expiredAt) : '0'
-										}</td>
-										<td>{session.device || '--'}</td>
-									</tr>
-								{/each}
-							</tbody>
-						</table>
-					</div>
+			<div class="password">
+				<h2>Change Password</h2>
+				<InputBox
+					label="Old Password"
+					id="old-password"
+					type="password"
+					bind:value={oldPassword}
+				/>
+				<InputBox
+					label="New Password"
+					id="new-password"
+					type="password"
+					bind:value={newPassword}
+				/>
+				<InputBox
+					label="Confirm New Password"
+					id="conf-new-password"
+					type="password"
+					bind:value={confNewPassword}
+				/>
+				<div class="submit-btn">
+					<SubmitButton
+						on:click={changePassword}
+						isSubmitted={isSubmitPassword}
+						label="Update Password"
+					/>
 				</div>
 			</div>
 		</div>
-		<div class="password">
-			<InputBox
-				label="Old Password"
-				id="old-password"
-				type="password"
-				bind:value={oldPassword}
-			/>
-			<InputBox
-				label="New Password"
-				id="new-password"
-				type="password"
-				bind:value={newPassword}
-			/>
-			<InputBox
-				label="Confirm New Password"
-				id="conf-new-password"
-				type="password"
-				bind:value={confNewPassword}
-			/>
-			<div class="submit-btn">
-				<SubmitButton
-					on:click={changePassword}
-					isSubmitted={isSubmitPassword}
-					label="Update Password"
-				/>
+		<div class="sessions">
+			<h2>Sessions</h2>
+			<div class="table-root">
+				<div class="table-container">
+					<table>
+						<thead>
+							<tr>
+								<th class="no">No</th>
+								<th class="a-row">Action</th>
+								<th>IP Address</th>
+								<th class="datetime">Expired At</th>
+								<th>Device</th>
+							</tr>
+						</thead>
+						<tbody>
+							{#each (activeSessions || []) as session, i}
+								<tr>
+									<td class="num-row">{i + 1}</td>
+									<td>
+										<div class="actions">
+											<button class="btn" title="Kill Session"
+												on:click={() => killSession(session.sessionToken)}>
+												<Icon
+													size="17"
+													src={RiSystemDeleteBinLine}
+													color="var(--gray-008)"
+												/>
+											</button>
+										</div>
+									</td>
+									<td>{session.loginIPs || '0'}</td>
+									<td class="datetime">{
+										(session.expiredAt && session.expiredAt > 0)
+										? datetime(session.expiredAt) : '0'
+									}</td>
+									<td>{session.device || '--'}</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -252,46 +249,47 @@
 		animation : spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 	}
 	
-	.user-details {
+	.user-detail-container {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding: 20px;
+	}
+
+	.user-detail-container .user-profile {
+		width: 100%;
 		display: grid;
 		grid-template-columns: 65% auto;
 		gap: 20px;
-		padding: 20px;
-	}
-
-	.user-details .profile-sessions-container {
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-	}
-
-	.user-details .profile-sessions-container .profile {
-		display: flex;
-		flex-direction: column;
-		padding: 20px;
 		border: 1px solid var(--gray-002);
 		border-radius: 8px;
+		padding: 20px;
+	}
+
+	.user-detail-container .user-profile .profile {
+		display: flex;
+		flex-direction: column;
 		height: fit-content;
 		gap: 20px;
 	}
 
-	.user-details .profile-sessions-container .profile h2 {
+	.user-detail-container .user-profile .profile h2 {
 		margin: 0;;
 	}
 
-	.user-details .profile-sessions-container .profile .profile-form {
+	.user-detail-container .user-profile .profile .profile-form {
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
 	}
 
-	.user-details .profile-sessions-container .profile .profile-form .row {
+	.user-detail-container .user-profile .profile .profile-form .row {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 10px;
 	}
 
-	.user-details .profile-sessions-container .profile .profile-form .row .pill-box {
+	.user-detail-container .user-profile .profile .profile-form .row .pill-box {
 		display: flex;
 		align-items: center;
 		height: fit-content;
@@ -301,17 +299,31 @@
 		background-color: var(--gray-001);
 	}
 
-	.user-details .password {
+	.user-detail-container .user-profile .password {
 		display: flex;
 		flex-direction: column;
 		padding: 20px;
-		border: 1px solid var(--gray-002);
 		border-radius: 8px;
+		background-color: var(--blue-transparent);
 		height: fit-content;
 		gap: 10px;
 	}
 
-	.user-details .password .submit-btn {
+	.user-detail-container .user-profile .password h2 {
+		color: var(--blue-006);
+		margin: 0 0 10px 0;
+	}
+
+	:global(.user-detail-container .user-profile .password .label) {
+		color: var(--blue-006);
+	}
+
+	:global(.user-detail-container .user-profile .password input) {
+		border: 1px solid var(--blue-005) !important;
+		background-color: #FFF !important;
+	}
+
+	.user-detail-container .user-profile .password .submit-btn {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;

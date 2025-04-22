@@ -36,7 +36,7 @@
   .submit-btn {
     border: none;
     width: fit-content;
-    padding: 12px 15px;
+    padding: 8px 15px;
     border-radius: 8px;
     background-color: var(--blue-006);
     color: #fff;

@@ -45,45 +45,45 @@
   <div class="container">
     <nav class="nav-menu">
       <a href="/" class:active={pathLv1 === ''}>
-        <Icon src={RiBuildingsHome2Line} size="17" />
+        <Icon src={RiBuildingsHome2Line} size="20" />
         <span>Home</span>
       </a>
       <a href="/user" class:active={pathAll === '/user'}>
-        <Icon src={RiUserFacesUser3Line} size="17" />
+        <Icon src={RiUserFacesUser3Line} size="20" />
         <span>Profile</span>
       </a>
     </nav>
     <h3 class="nav-menu-title">Admin</h3>
     <nav class="nav-menu">
       <a href="/admin/location" class:active={pathLv2 === 'location'}>
-        <Icon src={RiMapMapPin2Line} size="17" />
+        <Icon src={RiMapMapPin2Line} size="20" />
         <span>Locations</span>
       </a>
       <a href="/admin/facility" class:active={pathLv2 === 'facility'}>
-        <Icon src={RiFoodCupLine} size="17" />
+        <Icon src={RiFoodCupLine} size="20" />
         <span>Facilities</span>
       </a>
       <a href="/admin/building" class:active={pathLv2 === 'building'}>
-        <Icon src={RiBuildingsHotelLine} size="17" />
+        <Icon src={RiBuildingsHotelLine} size="20" />
         <span>Buildings</span>
       </a>
       <a href="/admin/booking" class:active={pathLv2 === 'booking'}>
-        <Icon src={RiBusinessCalendarScheduleLine} size="17" />
+        <Icon src={RiBusinessCalendarScheduleLine} size="20" />
         <span>Bookings</span>
       </a>
       <a href="/admin/payment" class:active={pathLv2 === 'payment'}>
-        <Icon src={RiFinanceWallet3Line} size="17" />
+        <Icon src={RiFinanceWallet3Line} size="20" />
         <span>Payments</span>
       </a>
       <a href="/admin/tenants" class:active={pathLv2 === 'tenants'}>
-        <Icon src={RiUserFacesUserFollowLine} size="17" />
+        <Icon src={RiUserFacesUserFollowLine} size="20" />
         <span>Tenants</span>
       </a>
     </nav>
     <span class="separator" />
     <nav class="nav-menu">
       <button class="red" on:click={logout}>
-        <Icon src={RiSystemLogoutBoxRLine} size="17" />
+        <Icon src={RiSystemLogoutBoxRLine} size="20" />
         <span>Logout</span>
       </button>
     </nav>
@@ -122,7 +122,7 @@
 
   aside .container .nav-menu-title {
     margin: 0;
-    padding: 10px 25px;
+    padding: 10px 25px 10px 70px;
     border-bottom: 1px solid var(--gray-002);
     font-weight: 600;
     text-transform: uppercase;
@@ -137,7 +137,7 @@
     flex-wrap: nowrap;
     width: 100%;
     margin: 0;
-    padding: 0 10px;
+    padding: 0 10px 0 50px;
   }
 
   aside .container .nav-menu a,
@@ -154,7 +154,7 @@
     color: var(--gray-008);
     border: none;
     background-color: transparent;
-    font-size: var(--font-md);
+    font-size: var(--font-lg);
   }
 
   aside .container .nav-menu a:hover,
