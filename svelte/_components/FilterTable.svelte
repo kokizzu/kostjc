@@ -48,7 +48,7 @@
 			</div>
 			<div class="foot">
 				<button class="cancel" on:click={() => isVisible = false}>Cancel</button>
-				<button class="ok" on:click|preventDefault>Ok</button>
+				<button class="ok" on:click|preventDefault>Submit</button>
 			</div>
 		</div>
 	</div>
@@ -143,7 +143,7 @@
 	.popup_filter_container .popup .filters .row .inputs input {
 		width: 320px;
     border: 1px solid var(--gray-003);
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: transparent;
     padding: 10px 12px;
 	}
@@ -170,7 +170,7 @@
 	}
 
 	.popup_filter_container .popup .foot button {
-		padding: 8px 13px;
+		padding: 8px 18px;
 		border-radius: 9999px;
 		border: none;
 		color: #FFF;
@@ -188,9 +188,12 @@
 	}
 
 	.popup_filter_container .popup .foot button.cancel {
-		background-color: #fbbf2420;
-		color: var(--amber-005);
-		border: 1px solid var(--amber-005);
+		background-color: transparent;
+    color: var(--gray-007);
+	}
+
+	.popup_filter_container .popup .foot button.cancel:hover {
+		background-color: var(--gray-001);
 	}
 
 	@media only screen and (max-width : 768px) {

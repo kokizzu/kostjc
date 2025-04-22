@@ -64,3 +64,22 @@ module.exports = {};
  * @property {string} restoredBy
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} Payment
+ * @property {string|number} id 
+ * @property {string} bookingId
+ * @property {string} paymentAt
+ * @property {number} paidIDR
+ * @property {string} paymentMethod
+ * @property {string} paymentStatus
+ * @property {string} note
+ * @property {number} createdAt
+ * @property {string} createdBy
+ * @property {number} updatedAt
+ * @property {string} updatedBy
+ * @property {number} deletedAt
+ * @property {string} deletedBy
+ * @property {string} restoredBy
+ */
+module.exports = {};

@@ -156,6 +156,7 @@
             label="Email"
             type="text"
             bind:value={email}
+            autocomplete="on"
           />
         {/if}
 

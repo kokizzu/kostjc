@@ -176,6 +176,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 
+		bk := rqProperty.NewBookings(d.PropOltp)
+		bookings := bk.FindBookingChoices()
+
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
 		out := d.UserPayment(&in)
@@ -186,6 +189,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`segments`: segments,
 			`payment`:  out.Payment,
 			`payments`: out.Payments,
+			`bookings`: bookings,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 		})

@@ -682,7 +682,6 @@
     border-radius: 10px;
     border: 1px solid var(--gray-003);
     padding: 0 0 20px 0;
-    overflow: hidden;
     font-size: var(--font-base);
   }
 
@@ -703,6 +702,7 @@
     align-items: center;
     padding: 10px 15px;
     background-color: #fff;
+    border-radius: 10px;
   }
 
   .table-root .actions-container .left,
@@ -743,15 +743,14 @@
   .table-root .actions-container .right .search-handler input.search {
     padding: 12px 40px 12px 15px;
     border-radius: 8px;
-    border: none;
-    background-color: var(--gray-001);
+    border: 1px solid var(--gray-003);
+    background-color: transparent;
     width: 370px;
   }
 
   .table-root .actions-container .right .search-handler input.search:focus {
-    border-color: none;
-    outline: 1px solid var(--gray-003);
-    box-shadow: var(--shadow-md);
+    border-color: var(--blue-005);
+    outline: 1px solid var(--blue-005);
   }
 
   .table-root .actions-container .right .search-handler .search-btn {
@@ -765,7 +764,7 @@
     border-radius: 8px;
     cursor: pointer;
     right: 5px;
-    top: 3px;
+    top: 4px;
   }
 
   .table-root .actions-container .right .search-handler .search-btn:hover {

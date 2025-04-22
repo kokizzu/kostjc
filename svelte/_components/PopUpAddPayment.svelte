@@ -1,27 +1,51 @@
 <script>
-  /** @typedef {import('../_types/masters').Field} Field */
+  /** @typedef {import('../_types/property').Payment} Payment */
 
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
+  import { dateISOFormat } from './xFormatter';
 
-  export let heading = 'Add product';
-  export let FIELDS = /** @type Field[] */ ([]);
-  export let isSubmitted = false;
-  let isShow = false;
-  let payloads = [];
+  let isShow = /** @type {boolean} */ (false);
 
-  export let OnSubmit = async function(/** @type any[] */ payloads) {}  
+  export let isSubmitted  = /** @type {boolean} */ (false);
+  export let bookings = /** @type {Record<number, string>} */ ({});
+
+  let bookingId = 0;
+  let paymentAt = dateISOFormat(0);
+  let paidIDR = 0;
+  let paymentMethod = '';
+  let paymentStatus = '';
+  let note = '';
+
+  export let OnSubmit = async function(/** @type {Payment} */ payment) {
+    console.log('OnSubmit :::', payment);
+  }
+
+  async function submitAdd() {
+    const payment = /** @type {Payment|any} */ ({
+      bookingId: bookingId,
+      paymentAt: paymentAt,
+      paidIDR: paidIDR,
+      paymentMethod: paymentMethod,
+      paymentStatus: paymentStatus,
+      note: note
+    });
+
+    await OnSubmit(payment);
+  }
 
   export const Show = () => isShow = true;
   export const Hide = () => isShow = false;
 
   export const Reset = () => {
-    payloads = [];
-    if (FIELDS && FIELDS.length > 0) {
-			FIELDS.forEach(() => payloads = [...payloads, '']);
-		}
+    bookingId = 0;
+    paymentAt = dateISOFormat(0);
+    paidIDR = 0;
+    paymentMethod = '';
+    paymentStatus = '';
+    note = '';
   }
   
   const cancel = () => {
@@ -32,33 +56,63 @@
 <div class={`popup_container ${isShow ? 'show' : ''}`}>
   <div class="popup">
     <header class="header">
-      <h2>{heading}</h2>
+      <h2>Add Building</h2>
       <button on:click={Hide}>
         <Icon size="22" color="var(--red-005)" src={IoClose}/>
       </button>
     </header>
     <div class="forms">
-      {#each (FIELDS || []) as field, idx}
-        {#if field.name !== 'id'}
-          {#if !field.readOnly}
-            <InputBox
-              id={field.name}
-              label={field.label}
-              placeholder={field.description}
-              bind:value={payloads[idx]}
-              type={field.inputType}
-              values={field.ref}
-            />
-          {/if}
-        {/if}
-      {/each}
+      <InputBox
+        id="booking"
+        label="Booking"
+        isObject={true}
+        bind:value={bookingId}
+        type="combobox"
+        values={bookings}
+      />
+      <InputBox
+        id="paymentAt"
+        label="Payment At"
+        bind:value={paymentAt}
+        type="datetime"
+        placeholder="YYYY-MM-DD"
+      />
+      <InputBox
+        id="paidIDR"
+        label="Total Paid"
+        bind:value={paidIDR}
+        type="number"
+        placeholder="0"
+      />
+      <InputBox
+        id="paymentMethod"
+        label="Payment Method"
+        bind:value={paymentMethod}
+        type="text"
+        placeholder="Cash"
+      />
+      <InputBox
+        id="paymentStatus"
+        label="Payment Status"
+        bind:value={paymentStatus}
+        type="combobox"
+        placeholder="Paid"
+        values={['Paid', 'Unpaid', 'Pending', 'Cancelled']}
+      />
+      <InputBox
+        id="note"
+        label="Note"
+        bind:value={note}
+        type="textarea"
+        placeholder="Note"
+      />
     </div>
     <div class="foot">
       <div class="left">
       </div>
       <div class="right">
         <button class="cancel" on:click|preventDefault={cancel}>Cancel</button>
-        <button class="ok" on:click|preventDefault={() => OnSubmit(payloads)} disabled={isSubmitted}>
+        <button class="ok" on:click|preventDefault={submitAdd} disabled={isSubmitted}>
           {#if !isSubmitted}
             <span>Submit</span>
           {/if}
@@ -205,6 +259,12 @@
 	.popup_container .popup .foot button.cancel:hover {
 		background-color: var(--gray-001);
 	}
+
+  .facilities-form {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
 
   @media only screen and (max-width : 768px) {
     .popup_container {

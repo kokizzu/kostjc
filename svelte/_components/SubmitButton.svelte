@@ -1,6 +1,6 @@
 <script>
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
-  import { FiSend, FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
+  import { RiSystemLoaderLine } from '../node_modules/svelte-icons-pack/dist/ri';
 
   export let isSubmitted  = /** @type {boolean} */ (false);
   export let isFullWidth  = /** @type {boolean} */ (false);
@@ -8,11 +8,8 @@
 </script>
 
 <button class={isFullWidth ? 'submit-btn full-width' : 'submit-btn'} on:click|preventDefault>
-  {#if !isSubmitted}
-    <Icon color="#FFF" size="14" src={FiSend} />
-  {/if}
   {#if isSubmitted}
-    <Icon className="spin" color="#FFF" size="14" src={FiLoader} />
+    <Icon className="spin" color="#FFF" size="15" src={RiSystemLoaderLine} />
   {/if}
   <span>{label}</span>
 </button>

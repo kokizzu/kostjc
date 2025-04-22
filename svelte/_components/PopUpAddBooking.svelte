@@ -301,7 +301,7 @@
   }
 
 	.popup_container .popup .foot button {
-		padding: 8px 13px;
+		padding: 8px 18px;
 		border-radius: 9999px;
 		border: none;
 		color: #FFF;

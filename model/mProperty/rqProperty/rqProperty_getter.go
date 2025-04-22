@@ -2,6 +2,7 @@ package rqProperty
 
 import (
 	"kostjc/model/zCrud"
+	"strconv"
 
 	"github.com/kokizzu/gotro/X"
 )
@@ -213,4 +214,45 @@ FROM ` + p.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 	})
 
 	return
+}
+
+func (b *Bookings) FindBookingChoices() map[uint64]string {
+	const comment = `-- Bookings) FindBookingChoices`
+
+	queryRows := comment + `
+SELECT ` + b.SqlId() + `, ` + b.SqlTotalPriceIDR() + ` FROM ` + b.SqlTableName() + `
+ORDER BY ` + b.SqlId() + ` ASC`
+
+	out := make(map[uint64]string)
+	b.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 2 {
+			idWithPrice := `#` + X.ToS(row[0]) + ` - ` + formatCurrency(X.ToI(row[1]), `IDR`)
+			out[X.ToU(row[0])] = idWithPrice
+		}
+	})
+
+	return out
+}
+
+func formatCurrency(value int64, currency string) string {
+	str := strconv.FormatInt(value, 10)
+
+	runes := []rune(str)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+
+	var result []rune
+	for i, r := range runes {
+		if i > 0 && i%3 == 0 {
+			result = append(result, ',')
+		}
+		result = append(result, r)
+	}
+
+	for i, j := 0, len(result)-1; i < j; i, j = i+1, j-1 {
+		result[i], result[j] = result[j], result[i]
+	}
+
+	return currency + ` ` + string(result)
 }

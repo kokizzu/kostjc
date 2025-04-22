@@ -11,6 +11,7 @@
   export let type = /** @type {InputType | any} */ ('text');
   export let id;
   export let value;
+  export let autocomplete = 'off';
 
   export let values = /** @type {
     Array<string|number> | Record<string|number, string> | any
@@ -242,10 +243,10 @@
       {/if}
     {:else if type === 'number'}
       <label class="label" for={id}>{label}</label>
-      <input type="number" bind:value={value} {id} {placeholder}/>
+      <input type="number" bind:value={value} {id} {placeholder} {autocomplete}/>
     {:else if type === 'datetime'}
       <label class="label" for={id}>{label}</label>
-      <input type="date" bind:value={value} {id} {placeholder}/>
+      <input type="date" bind:value={value} {id} {placeholder} />
     {:else if type === 'percentage'}
       <label class="label" for={id}>{label}</label>
       <div class="input_percentage">
@@ -254,22 +255,22 @@
       </div>
     {:else if type === 'float'}
       <label class="label" for={id}>{label}</label>
-      <input type="number" bind:value={value} {id} {placeholder}/>
+      <input type="number" bind:value={value} {id} {placeholder} {autocomplete}/>
     {:else if type === 'textarea'}
       <label class="label" for={id}>{label}</label>
       <textarea bind:value={value} {id} {placeholder}></textarea>
     {:else if type === 'text'}
       <label class="label" for={id}>{label}</label>
-      <input type="text" bind:value={value} {id} {placeholder} autocomplete="off" />
+      <input type="text" bind:value={value} {id} {placeholder} {autocomplete}/>
     {:else if type === 'email'}
       <label class="label" for={id}>{label}</label>
-      <input type="email" bind:value={value} {id} {placeholder}/>
+      <input type="email" bind:value={value} {id} {placeholder} {autocomplete}/>
     {:else if type === 'date'}
       <label class="label" for={id}>{label}</label>
       <input type="date" bind:value={value} {id} {placeholder}/>
     {:else if type === 'password'}
       <label class="label" for={id}>{label}</label>
-      <input bind:value={value} {id} bind:this={inputElm} {placeholder}/>
+      <input bind:value={value} {id} bind:this={inputElm} {placeholder} autocomplete="off"/>
       {#if type === 'password'}
         <button class="eye" on:click={toggleShowPassword}>
           {#if !isShowPassword}
@@ -287,7 +288,7 @@
       </div>
     {:else}
       <label class="label" for={id}>{label}</label>
-      <input type="text" bind:value={value} {id} {placeholder}/>
+      <input type="text" bind:value={value} {id} {placeholder} {autocomplete}/>
     {/if}
   </div>
 </div>

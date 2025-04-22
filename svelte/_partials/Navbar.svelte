@@ -8,6 +8,7 @@
 <header>
   <div class="label">
     <a href="/" class="logo">
+      <img src="/assets/house.svg" alt="House" />
       <h2>KostJC</h2>
     </a>
   </div>
@@ -48,10 +49,16 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    gap: 8px;
     font-size: 17px;
     color: var(--gray-008);
     text-decoration: none;
     width: calc(var(--sidemenu-width) - 20px);
+  }
+
+  header .label .logo img {
+    width: 30px;
+    height: auto;
   }
 
   header .info {
