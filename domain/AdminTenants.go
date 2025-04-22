@@ -10,21 +10,21 @@ import (
 	"github.com/kokizzu/gotro/S"
 )
 
-//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file UserTenants.go
-//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type UserTenants.go
-//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type UserTenants.go
-//go:generate replacer -afterprefix "By\" form" "By,string\" form" type UserTenants.go
-//go:generate farify doublequote --file UserTenants.go
+//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminTenants.go
+//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminTenants.go
+//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminTenants.go
+//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminTenants.go
+//go:generate farify doublequote --file AdminTenants.go
 
 type (
-	UserTenantsIn struct {
+	AdminTenantsIn struct {
 		RequestCommon
 		Cmd      string         `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
 		WithMeta bool           `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
 		Pager    zCrud.PagerIn  `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Tenant   rqAuth.Tenants `json:"tenant" form:"tenant" query:"tenant" long:"tenant" msg:"tenant"`
 	}
-	UserTenantsOut struct {
+	AdminTenantsOut struct {
 		ResponseCommon
 		Pager   zCrud.PagerOut `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Meta    *zCrud.Meta    `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
@@ -34,17 +34,17 @@ type (
 )
 
 const (
-	UserTenantsAction = `user/tenantsManagement`
+	AdminTenantsAction = `admin/tenants`
 
-	ErrUserTenantsNotFound          = `building not found`
-	ErrUserTenantsSaveFailed        = `failed to save building`
-	ErrUserTenantsDeleteFailed      = `failed to delete building`
-	ErrUserTenantsRestoreFailed     = `failed to restore building`
-	ErrUserTenantsLocationNotFound  = `location not found`
-	ErrUserTenantsInvalidFacilities = `invalid facilities`
+	ErrAdminTenantsNotFound          = `building not found`
+	ErrAdminTenantsSaveFailed        = `failed to save building`
+	ErrAdminTenantsDeleteFailed      = `failed to delete building`
+	ErrAdminTenantsRestoreFailed     = `failed to restore building`
+	ErrAdminTenantsLocationNotFound  = `location not found`
+	ErrAdminTenantsInvalidFacilities = `invalid facilities`
 )
 
-var UserTenantsMeta = zCrud.Meta{
+var AdminTenantsMeta = zCrud.Meta{
 	Fields: []zCrud.Field{
 		{
 			Name:      mAuth.Id,
@@ -200,7 +200,7 @@ var UserTenantsMeta = zCrud.Meta{
 	},
 }
 
-func (d *Domain) UserTenants(in *UserTenantsIn) (out UserTenantsOut) {
+func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
 	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
@@ -211,7 +211,7 @@ func (d *Domain) UserTenants(in *UserTenantsIn) (out UserTenantsOut) {
 	out.refId = in.Tenant.Id
 
 	if in.WithMeta {
-		out.Meta = &UserTenantsMeta
+		out.Meta = &AdminTenantsMeta
 	}
 
 	switch in.Cmd {
@@ -221,7 +221,7 @@ func (d *Domain) UserTenants(in *UserTenantsIn) (out UserTenantsOut) {
 		tenant.Id = in.Tenant.Id
 		if tenant.Id > 0 {
 			if !tenant.FindById() {
-				out.SetError(400, ErrUserTenantsNotFound)
+				out.SetError(400, ErrAdminTenantsNotFound)
 				return
 			}
 
@@ -254,7 +254,7 @@ func (d *Domain) UserTenants(in *UserTenantsIn) (out UserTenantsOut) {
 		tenant.SetUpdatedBy(sess.UserId)
 
 		if !tenant.DoUpsert() {
-			out.SetError(500, ErrUserTenantsSaveFailed)
+			out.SetError(500, ErrAdminTenantsSaveFailed)
 			return
 		}
 
@@ -266,7 +266,7 @@ func (d *Domain) UserTenants(in *UserTenantsIn) (out UserTenantsOut) {
 	case zCrud.CmdList:
 		tenant := rqAuth.NewTenants(d.AuthOltp)
 		out.Tenants = tenant.FindByPagination(
-			&UserTenantsMeta,
+			&AdminTenantsMeta,
 			&in.Pager,
 			&out.Pager,
 		)

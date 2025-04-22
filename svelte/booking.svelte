@@ -10,7 +10,7 @@
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { UserBooking } from './jsApi.GEN';
+  import { AdminBooking } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
@@ -37,8 +37,8 @@
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await UserBooking( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').UserBookingCallback} */
+    await AdminBooking( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').AdminBookingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddBooking = false;
@@ -61,8 +61,8 @@
       },
       cmd: 'restore'
     });
-    await UserBooking(i,
-      /** @type {import('./jsApi.GEN').UserBookingCallback} */
+    await AdminBooking(i,
+      /** @type {import('./jsApi.GEN').AdminBookingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -88,8 +88,8 @@
       },
       cmd: 'delete'
     });
-    await UserBooking(i,
-      /** @type {import('./jsApi.GEN').UserBookingCallback} */
+    await AdminBooking(i,
+      /** @type {import('./jsApi.GEN').AdminBookingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -120,8 +120,8 @@
       booking,
       cmd: 'upsert'
     });
-    await UserBooking(i,
-      /** @type {import('./jsApi.GEN').UserBookingCallback} */
+    await AdminBooking(i,
+      /** @type {import('./jsApi.GEN').AdminBookingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -148,8 +148,8 @@
       cmd: 'upsert'
     });
 
-    await UserBooking(i,
-      /** @type {import('../jsApi.GEN').UserBookingCallback} */
+    await AdminBooking(i,
+      /** @type {import('../jsApi.GEN').AdminBookingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddBooking = false;

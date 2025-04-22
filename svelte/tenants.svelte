@@ -9,7 +9,7 @@
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { UserTenants } from './jsApi.GEN';
+  import { AdminTenants } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
@@ -32,8 +32,8 @@
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await UserTenants( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').UserTenantsCallback} */
+    await AdminTenants( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitTenant = false;
@@ -56,8 +56,8 @@
       },
       cmd: 'restore'
     });
-    await UserTenants(i,
-      /** @type {import('./jsApi.GEN').UserTenantsCallback} */
+    await AdminTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -83,8 +83,8 @@
       },
       cmd: 'delete'
     });
-    await UserTenants(i,
-      /** @type {import('./jsApi.GEN').UserTenantsCallback} */
+    await AdminTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -128,8 +128,8 @@
       tenant,
       cmd: 'upsert'
     });
-    await UserTenants(i,
-      /** @type {import('./jsApi.GEN').UserTenantsCallback} */
+    await AdminTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -174,8 +174,8 @@
       cmd: 'upsert'
     });
 
-    await UserTenants(i,
-      /** @type {import('../jsApi.GEN').UserTenantsCallback} */
+    await AdminTenants(i,
+      /** @type {import('../jsApi.GEN').AdminTenantsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitTenant = false;

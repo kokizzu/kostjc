@@ -8,21 +8,21 @@ import (
 	"time"
 )
 
-//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file UserPayment.go
-//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type UserPayment.go
-//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type UserPayment.go
-//go:generate replacer -afterprefix "By\" form" "By,string\" form" type UserPayment.go
-//go:generate farify doublequote --file UserPayment.go
+//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminPayment.go
+//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminPayment.go
+//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminPayment.go
+//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminPayment.go
+//go:generate farify doublequote --file AdminPayment.go
 
 type (
-	UserPaymentIn struct {
+	AdminPaymentIn struct {
 		RequestCommon
 		Cmd      string              `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
 		WithMeta bool                `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
 		Pager    zCrud.PagerIn       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Payment  rqProperty.Payments `json:"payment" form:"payment" query:"payment" long:"payment" msg:"payment"`
 	}
-	UserPaymentOut struct {
+	AdminPaymentOut struct {
 		ResponseCommon
 		Pager    zCrud.PagerOut      `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Meta     *zCrud.Meta         `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
@@ -32,16 +32,16 @@ type (
 )
 
 const (
-	UserPaymentAction = `user/payment`
+	AdminPaymentAction = `admin/payment`
 
-	ErrUserPaymentNotFound          = `payment not found`
-	ErrUserPaymentBookingIdNotFound = `booking id not found for this payment`
-	ErrUserPaymentSaveFailed        = `failed to save payment`
-	ErrUserPaymentDeleteFailed      = `failed to delete payment`
-	ErrUserPaymentRestoreFailed     = `failed to restore payment`
+	ErrAdminPaymentNotFound          = `payment not found`
+	ErrAdminPaymentBookingIdNotFound = `booking id not found for this payment`
+	ErrAdminPaymentSaveFailed        = `failed to save payment`
+	ErrAdminPaymentDeleteFailed      = `failed to delete payment`
+	ErrAdminPaymentRestoreFailed     = `failed to restore payment`
 )
 
-var UserPaymentMeta = zCrud.Meta{
+var AdminPaymentMeta = zCrud.Meta{
 	Fields: []zCrud.Field{
 		{
 			Name:      mProperty.Id,
@@ -117,7 +117,7 @@ var UserPaymentMeta = zCrud.Meta{
 	},
 }
 
-func (d *Domain) UserPayment(in *UserPaymentIn) (out UserPaymentOut) {
+func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
 	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
@@ -128,7 +128,7 @@ func (d *Domain) UserPayment(in *UserPaymentIn) (out UserPaymentOut) {
 	out.refId = in.Payment.Id
 
 	if in.WithMeta {
-		out.Meta = &UserPaymentMeta
+		out.Meta = &AdminPaymentMeta
 	}
 
 	switch in.Cmd {
@@ -138,7 +138,7 @@ func (d *Domain) UserPayment(in *UserPaymentIn) (out UserPaymentOut) {
 		pym.Id = in.Payment.Id
 		if pym.Id > 0 {
 			if !pym.FindById() {
-				out.SetError(400, ErrUserPaymentNotFound)
+				out.SetError(400, ErrAdminPaymentNotFound)
 				return
 			}
 
@@ -160,7 +160,7 @@ func (d *Domain) UserPayment(in *UserPaymentIn) (out UserPaymentOut) {
 			bkd := rqProperty.NewBookings(d.PropOltp)
 			bkd.Id = in.Payment.BookingId
 			if !bkd.FindById() {
-				out.SetError(400, ErrUserPaymentBookingIdNotFound)
+				out.SetError(400, ErrAdminPaymentBookingIdNotFound)
 				return
 			}
 
@@ -196,7 +196,7 @@ func (d *Domain) UserPayment(in *UserPaymentIn) (out UserPaymentOut) {
 		pym.SetUpdatedBy(sess.UserId)
 
 		if !pym.DoUpsert() {
-			out.SetError(500, ErrUserPaymentSaveFailed)
+			out.SetError(500, ErrAdminPaymentSaveFailed)
 			return
 		}
 
@@ -208,7 +208,7 @@ func (d *Domain) UserPayment(in *UserPaymentIn) (out UserPaymentOut) {
 	case zCrud.CmdList:
 		pym := rqProperty.NewPayments(d.PropOltp)
 		out.Payments = pym.FindByPagination(
-			&UserPaymentMeta,
+			&AdminPaymentMeta,
 			&in.Pager,
 			&out.Pager,
 		)

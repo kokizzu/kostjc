@@ -9,7 +9,7 @@
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { UserFacility } from './jsApi.GEN';
+  import { AdminFacility } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
@@ -32,8 +32,8 @@
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await UserFacility( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+    await AdminFacility( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddFacility = false;
@@ -56,8 +56,8 @@
       },
       cmd: 'restore'
     });
-    await UserFacility(i,
-      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+    await AdminFacility(i,
+      /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -83,8 +83,8 @@
       },
       cmd: 'delete'
     });
-    await UserFacility(i,
-      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+    await AdminFacility(i,
+      /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -114,8 +114,8 @@
       facility,
       cmd: 'upsert'
     });
-    await UserFacility(i,
-      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+    await AdminFacility(i,
+      /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -146,8 +146,8 @@
       cmd: 'upsert'
     });
 
-    await UserFacility(i,
-      /** @type {import('../jsApi.GEN').UserFacilityCallback} */
+    await AdminFacility(i,
+      /** @type {import('../jsApi.GEN').AdminFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddFacility = false;

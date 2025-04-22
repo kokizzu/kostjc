@@ -11,7 +11,7 @@
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { UserBuilding } from './jsApi.GEN';
+  import { AdminBuilding } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import PopUpAddBuilding from './_components/PopUpAddBuilding.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
@@ -40,8 +40,8 @@
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await UserBuilding( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await AdminBuilding( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').AdminBuildingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddBuilding = false;
@@ -64,8 +64,8 @@
       },
       cmd: 'restore'
     });
-    await UserBuilding(i,
-      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await AdminBuilding(i,
+      /** @type {import('./jsApi.GEN').AdminBuildingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -91,8 +91,8 @@
       },
       cmd: 'delete'
     });
-    await UserBuilding(i,
-      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await AdminBuilding(i,
+      /** @type {import('./jsApi.GEN').AdminBuildingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -123,8 +123,8 @@
       building,
       cmd: 'upsert'
     });
-    await UserBuilding(i,
-      /** @type {import('./jsApi.GEN').UserBuildingCallback} */
+    await AdminBuilding(i,
+      /** @type {import('./jsApi.GEN').AdminBuildingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -150,8 +150,8 @@
       cmd: 'upsert'
     });
 
-    await UserBuilding(i,
-      /** @type {import('../jsApi.GEN').UserBuildingCallback} */
+    await AdminBuilding(i,
+      /** @type {import('../jsApi.GEN').AdminBuildingCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddBuilding = false;

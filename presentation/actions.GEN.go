@@ -7,21 +7,21 @@ import (
 )
 
 var allCommands = []string{
+	domain.AdminBookingAction,
+	domain.AdminBuildingAction,
+	domain.AdminFacilityAction,
+	domain.AdminLocationAction,
+	domain.AdminPaymentAction,
+	domain.AdminTenantsAction,
 	domain.GuestLoginAction,
 	domain.GuestRegisterAction,
 	domain.GuestResendVerificationEmailAction,
 	domain.GuestResetPasswordAction,
 	domain.GuestVerifyEmailAction,
-	domain.UserBookingAction,
-	domain.UserBuildingAction,
-	domain.UserFacilityAction,
-	domain.UserLocationAction,
 	domain.UserLogoutAction,
-	domain.UserPaymentAction,
 	domain.UserProfileAction,
 	domain.UserSessionKillAction,
 	domain.UserSessionsActiveAction,
-	domain.UserTenantsAction,
 	domain.UserUpdateProfileAction,
 }
 

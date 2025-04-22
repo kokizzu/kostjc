@@ -7,21 +7,21 @@ import (
 	"kostjc/model/zCrud"
 )
 
-//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file UserBuilding.go
-//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type UserBuilding.go
-//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type UserBuilding.go
-//go:generate replacer -afterprefix "By\" form" "By,string\" form" type UserBuilding.go
-//go:generate farify doublequote --file UserBuilding.go
+//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminBuilding.go
+//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminBuilding.go
+//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminBuilding.go
+//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminBuilding.go
+//go:generate farify doublequote --file AdminBuilding.go
 
 type (
-	UserBuildingIn struct {
+	AdminBuildingIn struct {
 		RequestCommon
 		Cmd      string               `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
 		WithMeta bool                 `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
 		Pager    zCrud.PagerIn        `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Building rqProperty.Buildings `json:"building" form:"building" query:"building" long:"building" msg:"building"`
 	}
-	UserBuildingOut struct {
+	AdminBuildingOut struct {
 		ResponseCommon
 		Pager     zCrud.PagerOut       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Meta      *zCrud.Meta          `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
@@ -31,17 +31,17 @@ type (
 )
 
 const (
-	UserBuildingAction = `user/building`
+	AdminBuildingAction = `admin/building`
 
-	ErrUserBuildingNotFound          = `building not found`
-	ErrUserBuildingSaveFailed        = `failed to save building`
-	ErrUserBuildingDeleteFailed      = `failed to delete building`
-	ErrUserBuildingRestoreFailed     = `failed to restore building`
-	ErrUserBuildingLocationNotFound  = `location not found`
-	ErrUserBuildingInvalidFacilities = `invalid facilities`
+	ErrAdminBuildingNotFound          = `building not found`
+	ErrAdminBuildingSaveFailed        = `failed to save building`
+	ErrAdminBuildingDeleteFailed      = `failed to delete building`
+	ErrAdminBuildingRestoreFailed     = `failed to restore building`
+	ErrAdminBuildingLocationNotFound  = `location not found`
+	ErrAdminBuildingInvalidFacilities = `invalid facilities`
 )
 
-var UserBuildingMeta = zCrud.Meta{
+var AdminBuildingMeta = zCrud.Meta{
 	Fields: []zCrud.Field{
 		{
 			Name:      mProperty.Id,
@@ -95,7 +95,7 @@ var UserBuildingMeta = zCrud.Meta{
 	},
 }
 
-func (d *Domain) UserBuilding(in *UserBuildingIn) (out UserBuildingOut) {
+func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
 	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
@@ -106,7 +106,7 @@ func (d *Domain) UserBuilding(in *UserBuildingIn) (out UserBuildingOut) {
 	out.refId = in.Building.Id
 
 	if in.WithMeta {
-		out.Meta = &UserBuildingMeta
+		out.Meta = &AdminBuildingMeta
 	}
 
 	switch in.Cmd {
@@ -116,7 +116,7 @@ func (d *Domain) UserBuilding(in *UserBuildingIn) (out UserBuildingOut) {
 		bld.Id = in.Building.Id
 		if bld.Id > 0 {
 			if !bld.FindById() {
-				out.SetError(400, ErrUserBuildingNotFound)
+				out.SetError(400, ErrAdminBuildingNotFound)
 				return
 			}
 
@@ -142,7 +142,7 @@ func (d *Domain) UserBuilding(in *UserBuildingIn) (out UserBuildingOut) {
 			loc := rqProperty.NewLocations(d.PropOltp)
 			loc.Id = in.Building.LocationId
 			if !loc.FindById() {
-				out.SetError(400, ErrUserBuildingLocationNotFound)
+				out.SetError(400, ErrAdminBuildingLocationNotFound)
 				return
 			}
 			bld.SetLocationId(in.Building.LocationId)
@@ -163,7 +163,7 @@ func (d *Domain) UserBuilding(in *UserBuildingIn) (out UserBuildingOut) {
 		bld.SetUpdatedBy(sess.UserId)
 
 		if !bld.DoUpsert() {
-			out.SetError(500, ErrUserBuildingSaveFailed)
+			out.SetError(500, ErrAdminBuildingSaveFailed)
 			return
 		}
 
@@ -175,7 +175,7 @@ func (d *Domain) UserBuilding(in *UserBuildingIn) (out UserBuildingOut) {
 	case zCrud.CmdList:
 		bld := rqProperty.NewBuildings(d.PropOltp)
 		out.Buildings = bld.FindByPagination(
-			&UserBuildingMeta,
+			&AdminBuildingMeta,
 			&in.Pager,
 			&out.Pager,
 		)

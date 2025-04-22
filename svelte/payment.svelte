@@ -9,7 +9,7 @@
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { UserPayment } from './jsApi.GEN';
+  import { AdminPayment } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import PopUpAddPayment from './_components/PopUpAddPayment.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
@@ -33,8 +33,8 @@
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await UserPayment( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').UserPaymentCallback} */
+    await AdminPayment( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddPayment = false;
@@ -57,8 +57,8 @@
       },
       cmd: 'restore'
     });
-    await UserPayment(i,
-      /** @type {import('./jsApi.GEN').UserPaymentCallback} */
+    await AdminPayment(i,
+      /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -84,8 +84,8 @@
       },
       cmd: 'delete'
     });
-    await UserPayment(i,
-      /** @type {import('./jsApi.GEN').UserPaymentCallback} */
+    await AdminPayment(i,
+      /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -118,8 +118,8 @@
       payment,
       cmd: 'upsert'
     });
-    await UserPayment(i,
-      /** @type {import('./jsApi.GEN').UserPaymentCallback} */
+    await AdminPayment(i,
+      /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -145,8 +145,8 @@
       cmd: 'upsert'
     });
 
-    await UserPayment(i,
-      /** @type {import('../jsApi.GEN').UserPaymentCallback} */
+    await AdminPayment(i,
+      /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddPayment = false;

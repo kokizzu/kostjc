@@ -9,7 +9,7 @@
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
   import { onMount } from 'svelte';
-  import { UserLocation } from './jsApi.GEN';
+  import { AdminLocation } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
@@ -34,8 +34,8 @@
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = { pager: pagerIn, cmd: 'list' };
-    await UserLocation( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').UserLocationCallback} */
+    await AdminLocation( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').AdminLocationCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddLocation = false;
@@ -58,8 +58,8 @@
       },
       cmd: 'restore'
     });
-    await UserLocation(i,
-      /** @type {import('./jsApi.GEN').UserLocationCallback} */
+    await AdminLocation(i,
+      /** @type {import('./jsApi.GEN').AdminLocationCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -85,8 +85,8 @@
       },
       cmd: 'delete'
     });
-    await UserLocation(i,
-      /** @type {import('./jsApi.GEN').UserLocationCallback} */
+    await AdminLocation(i,
+      /** @type {import('./jsApi.GEN').AdminLocationCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -117,8 +117,8 @@
       location,
       cmd: 'upsert'
     });
-    await UserLocation(i,
-      /** @type {import('./jsApi.GEN').UserLocationCallback} */
+    await AdminLocation(i,
+      /** @type {import('./jsApi.GEN').AdminLocationCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -150,8 +150,8 @@
       cmd: 'upsert'
     });
 
-    await UserLocation(i,
-      /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+    await AdminLocation(i,
+      /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddLocation = false;

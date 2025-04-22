@@ -328,11 +328,6 @@
         height: 16px;
       }
     </style>
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js', { scope: '/' });
-      }
-    </script>
   
 
 <main id="app"></main><script>document.getElementById('app').innerHTML=''</script><!---->
@@ -3930,6 +3925,24 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           cb(data);
         };
       }
+      exports.AdminBooking = async function AdminBooking(i, cb) {
+        return await axios.post("/admin/booking", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminBuilding = async function AdminBuilding(i, cb) {
+        return await axios.post("/admin/building", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminFacility = async function AdminFacility2(i, cb) {
+        return await axios.post("/admin/facility", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminLocation = async function AdminLocation(i, cb) {
+        return await axios.post("/admin/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminPayment = async function AdminPayment(i, cb) {
+        return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminTenants = async function AdminTenants(i, cb) {
+        return await axios.post("/admin/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.GuestLogin = async function GuestLogin(i, cb) {
         return await axios.post("/guest/login", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -3945,23 +3958,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       exports.GuestVerifyEmail = async function GuestVerifyEmail(i, cb) {
         return await axios.post("/guest/verifyEmail", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.UserBooking = async function UserBooking(i, cb) {
-        return await axios.post("/user/booking", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.UserBuilding = async function UserBuilding(i, cb) {
-        return await axios.post("/user/building", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.UserFacility = async function UserFacility2(i, cb) {
-        return await axios.post("/user/facility", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.UserLocation = async function UserLocation(i, cb) {
-        return await axios.post("/user/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
       exports.UserLogout = async function UserLogout2(i, cb) {
         return await axios.post("/user/logout", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.UserPayment = async function UserPayment(i, cb) {
-        return await axios.post("/user/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserProfile = async function UserProfile(i, cb) {
         return await axios.post("/user/profile", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -3971,9 +3969,6 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       };
       exports.UserSessionsActive = async function UserSessionsActive(i, cb) {
         return await axios.post("/user/sessionsActive", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.UserTenants = async function UserTenants(i, cb) {
-        return await axios.post("/user/tenantsManagement", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserUpdateProfile = async function UserUpdateProfile(i, cb) {
         return await axios.post("/user/updateProfile", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -5408,7 +5403,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         );
         attr(nav0, "class", "nav-menu svelte-1y8ut7m");
         attr(h3, "class", "nav-menu-title svelte-1y8ut7m");
-        attr(a2, "href", "/user/location");
+        attr(a2, "href", "/admin/location");
         attr(a2, "class", "svelte-1y8ut7m");
         toggle_class(
           a2,
@@ -5416,7 +5411,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           /*pathLv2*/
           ctx[2] === "location"
         );
-        attr(a3, "href", "/user/facility");
+        attr(a3, "href", "/admin/facility");
         attr(a3, "class", "svelte-1y8ut7m");
         toggle_class(
           a3,
@@ -5424,7 +5419,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           /*pathLv2*/
           ctx[2] === "facility"
         );
-        attr(a4, "href", "/user/building");
+        attr(a4, "href", "/admin/building");
         attr(a4, "class", "svelte-1y8ut7m");
         toggle_class(
           a4,
@@ -5432,7 +5427,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           /*pathLv2*/
           ctx[2] === "building"
         );
-        attr(a5, "href", "/user/booking");
+        attr(a5, "href", "/admin/booking");
         attr(a5, "class", "svelte-1y8ut7m");
         toggle_class(
           a5,
@@ -5440,7 +5435,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           /*pathLv2*/
           ctx[2] === "booking"
         );
-        attr(a6, "href", "/user/payment");
+        attr(a6, "href", "/admin/payment");
         attr(a6, "class", "svelte-1y8ut7m");
         toggle_class(
           a6,
@@ -5448,13 +5443,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           /*pathLv2*/
           ctx[2] === "payment"
         );
-        attr(a7, "href", "/user/tenantsManagement");
+        attr(a7, "href", "/admin/tenants");
         attr(a7, "class", "svelte-1y8ut7m");
         toggle_class(
           a7,
           "active",
           /*pathLv2*/
-          ctx[2] === "tenantsManagement"
+          ctx[2] === "tenants"
         );
         attr(nav1, "class", "nav-menu svelte-1y8ut7m");
         attr(span8, "class", "separator svelte-1y8ut7m");
@@ -13930,10 +13925,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     onMount(() => $invalidate(3, isPopUpFormReady = true));
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: "list" };
-      await (0, import_jsApi2.UserFacility)(
+      await (0, import_jsApi2.AdminFacility)(
         // @ts-ignore
         i,
-        /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+        /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           $invalidate(5, isSubmitAddFacility = false);
@@ -13956,9 +13951,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           cmd: "restore"
         }
       );
-      await (0, import_jsApi2.UserFacility)(
+      await (0, import_jsApi2.AdminFacility)(
         i,
-        /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+        /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -13982,9 +13977,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           cmd: "delete"
         }
       );
-      await (0, import_jsApi2.UserFacility)(
+      await (0, import_jsApi2.AdminFacility)(
         i,
-        /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+        /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -14013,9 +14008,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /** @type {any}*/
         { pager, facility, cmd: "upsert" }
       );
-      await (0, import_jsApi2.UserFacility)(
+      await (0, import_jsApi2.AdminFacility)(
         i,
-        /** @type {import('./jsApi.GEN').UserFacilityCallback} */
+        /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -14043,9 +14038,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /** @type {any} */
         { pager, facility, cmd: "upsert" }
       );
-      await (0, import_jsApi2.UserFacility)(
+      await (0, import_jsApi2.AdminFacility)(
         i,
-        /** @type {import('../jsApi.GEN').UserFacilityCallback} */
+        /** @type {import('../jsApi.GEN').AdminFacilityCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           $invalidate(5, isSubmitAddFacility = false);

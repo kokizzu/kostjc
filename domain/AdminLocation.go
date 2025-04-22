@@ -7,21 +7,21 @@ import (
 	"kostjc/model/zCrud"
 )
 
-//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file UserLocation.go
-//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type UserLocation.go
-//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type UserLocation.go
-//go:generate replacer -afterprefix "By\" form" "By,string\" form" type UserLocation.go
-//go:generate farify doublequote --file UserLocation.go
+//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminLocation.go
+//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminLocation.go
+//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminLocation.go
+//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminLocation.go
+//go:generate farify doublequote --file AdminLocation.go
 
 type (
-	UserLocationIn struct {
+	AdminLocationIn struct {
 		RequestCommon
 		Cmd      string               `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
 		WithMeta bool                 `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
 		Pager    zCrud.PagerIn        `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Location rqProperty.Locations `json:"location" form:"location" query:"location" long:"location" msg:"location"`
 	}
-	UserLocationOut struct {
+	AdminLocationOut struct {
 		ResponseCommon
 		Pager     zCrud.PagerOut       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Meta      *zCrud.Meta          `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
@@ -31,15 +31,15 @@ type (
 )
 
 const (
-	UserLocationAction = `user/location`
+	AdminLocationAction = `admin/location`
 
-	ErrUserLocationNotFound      = `location not found`
-	ErrUserLocationSaveFailed    = `failed to save location`
-	ErrUserLocationDeleteFailed  = `failed to delete location`
-	ErrUserLocationRestoreFailed = `failed to restore location`
+	ErrAdminLocationNotFound      = `location not found`
+	ErrAdminLocationSaveFailed    = `failed to save location`
+	ErrAdminLocationDeleteFailed  = `failed to delete location`
+	ErrAdminLocationRestoreFailed = `failed to restore location`
 )
 
-var UserLocationMeta = zCrud.Meta{
+var AdminLocationMeta = zCrud.Meta{
 	Fields: []zCrud.Field{
 		{
 			Name:      mProperty.Id,
@@ -93,7 +93,7 @@ var UserLocationMeta = zCrud.Meta{
 	},
 }
 
-func (d *Domain) UserLocation(in *UserLocationIn) (out UserLocationOut) {
+func (d *Domain) AdminLocation(in *AdminLocationIn) (out AdminLocationOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
 	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
@@ -104,7 +104,7 @@ func (d *Domain) UserLocation(in *UserLocationIn) (out UserLocationOut) {
 	out.refId = in.Location.Id
 
 	if in.WithMeta {
-		out.Meta = &UserLocationMeta
+		out.Meta = &AdminLocationMeta
 	}
 
 	switch in.Cmd {
@@ -114,7 +114,7 @@ func (d *Domain) UserLocation(in *UserLocationIn) (out UserLocationOut) {
 		loc.Id = in.Location.Id
 		if loc.Id > 0 {
 			if !loc.FindById() {
-				out.SetError(400, ErrUserLocationNotFound)
+				out.SetError(400, ErrAdminLocationNotFound)
 				return
 			}
 
@@ -153,7 +153,7 @@ func (d *Domain) UserLocation(in *UserLocationIn) (out UserLocationOut) {
 		loc.SetUpdatedBy(sess.UserId)
 
 		if !loc.DoUpsert() {
-			out.SetError(500, ErrUserLocationSaveFailed)
+			out.SetError(500, ErrAdminLocationSaveFailed)
 			return
 		}
 
@@ -165,7 +165,7 @@ func (d *Domain) UserLocation(in *UserLocationIn) (out UserLocationOut) {
 	case zCrud.CmdList:
 		loc := rqProperty.NewLocations(d.PropOltp)
 		out.Locations = loc.FindByPagination(
-			&UserLocationMeta,
+			&AdminLocationMeta,
 			&in.Pager,
 			&out.Pager,
 		)

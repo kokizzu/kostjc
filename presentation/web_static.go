@@ -41,9 +41,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.UserLocationAction, func(ctx *fiber.Ctx) error {
-		var in domain.UserLocationIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserLocationAction)
+	fw.Get(`/`+domain.AdminLocationAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminLocationIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminLocationAction)
 		if err != nil {
 			return err
 		}
@@ -56,7 +56,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
-		out := d.UserLocation(&in)
+		out := d.AdminLocation(&in)
 
 		return views.RenderLocation(ctx, M.SX{
 			`title`:     `KostJC | Location Management`,
@@ -69,9 +69,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.UserFacilityAction, func(ctx *fiber.Ctx) error {
-		var in domain.UserFacilityIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserFacilityAction)
+	fw.Get(`/`+domain.AdminFacilityAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminFacilityIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminFacilityAction)
 		if err != nil {
 			return err
 		}
@@ -84,7 +84,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
-		out := d.UserFacility(&in)
+		out := d.AdminFacility(&in)
 
 		return views.RenderFacility(ctx, M.SX{
 			`title`:      `KostJC | Facility Management`,
@@ -97,9 +97,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.UserBuildingAction, func(ctx *fiber.Ctx) error {
-		var in domain.UserBuildingIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserBuildingAction)
+	fw.Get(`/`+domain.AdminBuildingAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminBuildingIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminBuildingAction)
 		if err != nil {
 			return err
 		}
@@ -119,7 +119,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
-		out := d.UserBuilding(&in)
+		out := d.AdminBuilding(&in)
 
 		return views.RenderBuilding(ctx, M.SX{
 			`title`:             `KostJC | Building Management`,
@@ -135,9 +135,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.UserTenantsAction, func(ctx *fiber.Ctx) error {
-		var in domain.UserTenantsIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserTenantsAction)
+	fw.Get(`/`+domain.AdminTenantsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminTenantsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminTenantsAction)
 		if err != nil {
 			return err
 		}
@@ -150,9 +150,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
-		out := d.UserTenants(&in)
+		out := d.AdminTenants(&in)
 
-		return views.RenderTenantsManagement(ctx, M.SX{
+		return views.RenderTenants(ctx, M.SX{
 			`title`:    `KostJC | Tenant Management`,
 			`user`:     user,
 			`segments`: segments,
@@ -163,9 +163,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.UserPaymentAction, func(ctx *fiber.Ctx) error {
-		var in domain.UserPaymentIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserPaymentAction)
+	fw.Get(`/`+domain.AdminPaymentAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminPaymentIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminPaymentAction)
 		if err != nil {
 			return err
 		}
@@ -181,7 +181,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
-		out := d.UserPayment(&in)
+		out := d.AdminPayment(&in)
 
 		return views.RenderPayment(ctx, M.SX{
 			`title`:    `KostJC | Payment Management`,
@@ -195,9 +195,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.UserBookingAction, func(ctx *fiber.Ctx) error {
-		var in domain.UserBookingIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserBookingAction)
+	fw.Get(`/`+domain.AdminBookingAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminBookingIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminBookingAction)
 		if err != nil {
 			return err
 		}
@@ -216,7 +216,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
-		out := d.UserBooking(&in)
+		out := d.AdminBooking(&in)
 
 		return views.RenderBooking(ctx, M.SX{
 			`title`:      `KostJC | Booking Management`,

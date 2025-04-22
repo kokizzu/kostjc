@@ -12,6 +12,54 @@ import (
 
 func cmdRun(b *domain.Domain, action string, payload []byte) {
 	switch action {
+	case domain.AdminBookingAction:
+		in := domain.AdminBookingIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminBooking(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminBuildingAction:
+		in := domain.AdminBuildingIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminBuilding(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminFacilityAction:
+		in := domain.AdminFacilityIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminFacility(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminLocationAction:
+		in := domain.AdminLocationIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminLocation(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminPaymentAction:
+		in := domain.AdminPaymentIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminPayment(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminTenantsAction:
+		in := domain.AdminTenantsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminTenants(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.GuestLoginAction:
 		in := domain.GuestLoginIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -52,52 +100,12 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.GuestVerifyEmail(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
-	case domain.UserBookingAction:
-		in := domain.UserBookingIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.UserBooking(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.UserBuildingAction:
-		in := domain.UserBuildingIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.UserBuilding(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.UserFacilityAction:
-		in := domain.UserFacilityIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.UserFacility(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.UserLocationAction:
-		in := domain.UserLocationIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.UserLocation(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
 	case domain.UserLogoutAction:
 		in := domain.UserLogoutIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
 			return
 		}
 		out := b.UserLogout(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.UserPaymentAction:
-		in := domain.UserPaymentIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.UserPayment(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.UserProfileAction:
@@ -122,14 +130,6 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 			return
 		}
 		out := b.UserSessionsActive(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.UserTenantsAction:
-		in := domain.UserTenantsIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.UserTenants(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.UserUpdateProfileAction:

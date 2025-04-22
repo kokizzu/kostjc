@@ -7,21 +7,21 @@ import (
 	"kostjc/model/zCrud"
 )
 
-//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file UserFacility.go
-//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type UserFacility.go
-//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type UserFacility.go
-//go:generate replacer -afterprefix "By\" form" "By,string\" form" type UserFacility.go
-//go:generate farify doublequote --file UserFacility.go
+//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminFacility.go
+//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminFacility.go
+//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminFacility.go
+//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminFacility.go
+//go:generate farify doublequote --file AdminFacility.go
 
 type (
-	UserFacilityIn struct {
+	AdminFacilityIn struct {
 		RequestCommon
 		Cmd      string                `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
 		WithMeta bool                  `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
 		Pager    zCrud.PagerIn         `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Facility rqProperty.Facilities `json:"facility" form:"facility" query:"facility" long:"facility" msg:"facility"`
 	}
-	UserFacilityOut struct {
+	AdminFacilityOut struct {
 		ResponseCommon
 		Pager      zCrud.PagerOut        `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Meta       *zCrud.Meta           `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
@@ -31,15 +31,15 @@ type (
 )
 
 const (
-	UserFacilityAction = `user/facility`
+	AdminFacilityAction = `admin/facility`
 
-	ErrUserFacilityNotFound      = `facility not found`
-	ErrUserFacilitySaveFailed    = `failed to save facility`
-	ErrUserFacilityDeleteFailed  = `failed to delete facility`
-	ErrUserFacilityRestoreFailed = `failed to restore facility`
+	ErrAdminFacilityNotFound      = `facility not found`
+	ErrAdminFacilitySaveFailed    = `failed to save facility`
+	ErrAdminFacilityDeleteFailed  = `failed to delete facility`
+	ErrAdminFacilityRestoreFailed = `failed to restore facility`
 )
 
-var UserFacilityMeta = zCrud.Meta{
+var AdminFacilityMeta = zCrud.Meta{
 	Fields: []zCrud.Field{
 		{
 			Name:      mProperty.Id,
@@ -87,7 +87,7 @@ var UserFacilityMeta = zCrud.Meta{
 	},
 }
 
-func (d *Domain) UserFacility(in *UserFacilityIn) (out UserFacilityOut) {
+func (d *Domain) AdminFacility(in *AdminFacilityIn) (out AdminFacilityOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
 	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
@@ -98,7 +98,7 @@ func (d *Domain) UserFacility(in *UserFacilityIn) (out UserFacilityOut) {
 	out.refId = in.Facility.Id
 
 	if in.WithMeta {
-		out.Meta = &UserFacilityMeta
+		out.Meta = &AdminFacilityMeta
 	}
 
 	switch in.Cmd {
@@ -108,7 +108,7 @@ func (d *Domain) UserFacility(in *UserFacilityIn) (out UserFacilityOut) {
 		fac.Id = in.Facility.Id
 		if fac.Id > 0 {
 			if !fac.FindById() {
-				out.SetError(400, ErrUserFacilityNotFound)
+				out.SetError(400, ErrAdminFacilityNotFound)
 				return
 			}
 
@@ -143,7 +143,7 @@ func (d *Domain) UserFacility(in *UserFacilityIn) (out UserFacilityOut) {
 		fac.SetUpdatedBy(sess.UserId)
 
 		if !fac.DoUpsert() {
-			out.SetError(500, ErrUserFacilitySaveFailed)
+			out.SetError(500, ErrAdminFacilitySaveFailed)
 			return
 		}
 
@@ -155,7 +155,7 @@ func (d *Domain) UserFacility(in *UserFacilityIn) (out UserFacilityOut) {
 	case zCrud.CmdList:
 		fac := rqProperty.NewFacilities(d.PropOltp)
 		out.Facilities = fac.FindByPagination(
-			&UserFacilityMeta,
+			&AdminFacilityMeta,
 			&in.Pager,
 			&out.Pager,
 		)

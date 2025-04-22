@@ -11,14 +11,14 @@ import (
 	"github.com/goccy/go-json"
 )
 
-//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file UserBooking.go
-//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type UserBooking.go
-//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type UserBooking.go
-//go:generate replacer -afterprefix "By\" form" "By,string\" form" type UserBooking.go
-//go:generate farify doublequote --file UserBooking.go
+//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminBooking.go
+//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminBooking.go
+//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminBooking.go
+//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminBooking.go
+//go:generate farify doublequote --file AdminBooking.go
 
 type (
-	UserBookingIn struct {
+	AdminBookingIn struct {
 		RequestCommon
 		Cmd        string              `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
 		WithMeta   bool                `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
@@ -26,7 +26,7 @@ type (
 		Facilities []uint64            `json:"facilities" form:"facilities" query:"facilities" long:"facilities" msg:"facilities"`
 		Booking    rqProperty.Bookings `json:"booking" form:"booking" query:"booking" long:"booking" msg:"booking"`
 	}
-	UserBookingOut struct {
+	AdminBookingOut struct {
 		ResponseCommon
 		Pager    zCrud.PagerOut      `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Meta     *zCrud.Meta         `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
@@ -36,15 +36,15 @@ type (
 )
 
 const (
-	UserBookingAction = `user/booking`
+	AdminBookingAction = `admin/booking`
 
-	ErrUserBookingNotFound      = `booking not found`
-	ErrUserBookingSaveFailed    = `failed to save booking`
-	ErrUserBookingDeleteFailed  = `failed to delete booking`
-	ErrUserBookingRestoreFailed = `failed to restore booking`
+	ErrAdminBookingNotFound      = `booking not found`
+	ErrAdminBookingSaveFailed    = `failed to save booking`
+	ErrAdminBookingDeleteFailed  = `failed to delete booking`
+	ErrAdminBookingRestoreFailed = `failed to restore booking`
 )
 
-var UserBookingMeta = zCrud.Meta{
+var AdminBookingMeta = zCrud.Meta{
 	Fields: []zCrud.Field{
 		{
 			Name:      mProperty.Id,
@@ -128,7 +128,7 @@ var UserBookingMeta = zCrud.Meta{
 	},
 }
 
-func (d *Domain) UserBooking(in *UserBookingIn) (out UserBookingOut) {
+func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
 	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
@@ -139,7 +139,7 @@ func (d *Domain) UserBooking(in *UserBookingIn) (out UserBookingOut) {
 	out.refId = in.Booking.Id
 
 	if in.WithMeta {
-		out.Meta = &UserBookingMeta
+		out.Meta = &AdminBookingMeta
 	}
 
 	switch in.Cmd {
@@ -149,7 +149,7 @@ func (d *Domain) UserBooking(in *UserBookingIn) (out UserBookingOut) {
 		bk.Id = in.Booking.Id
 		if bk.Id > 0 {
 			if !bk.FindById() {
-				out.SetError(400, ErrUserBookingNotFound)
+				out.SetError(400, ErrAdminBookingNotFound)
 				return
 			}
 
@@ -191,7 +191,7 @@ func (d *Domain) UserBooking(in *UserBookingIn) (out UserBookingOut) {
 
 			facilitiesByt, err := json.Marshal(facilities)
 			if err != nil {
-				out.SetError(500, ErrUserBookingSaveFailed)
+				out.SetError(500, ErrAdminBookingSaveFailed)
 				return
 			} else {
 				bk.SetFacilitiesObj(string(facilitiesByt))
@@ -228,7 +228,7 @@ func (d *Domain) UserBooking(in *UserBookingIn) (out UserBookingOut) {
 		bk.SetUpdatedBy(sess.UserId)
 
 		if !bk.DoUpsert() {
-			out.SetError(500, ErrUserBookingSaveFailed)
+			out.SetError(500, ErrAdminBookingSaveFailed)
 			return
 		}
 
@@ -240,7 +240,7 @@ func (d *Domain) UserBooking(in *UserBookingIn) (out UserBookingOut) {
 	case zCrud.CmdList:
 		bk := rqProperty.NewBookings(d.PropOltp)
 		out.Bookings = bk.FindByPagination(
-			&UserBookingMeta,
+			&AdminBookingMeta,
 			&in.Pager,
 			&out.Pager,
 		)

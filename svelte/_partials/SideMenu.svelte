@@ -55,27 +55,27 @@
     </nav>
     <h3 class="nav-menu-title">Admin</h3>
     <nav class="nav-menu">
-      <a href="/user/location" class:active={pathLv2 === 'location'}>
+      <a href="/admin/location" class:active={pathLv2 === 'location'}>
         <Icon src={RiMapMapPin2Line} size="17" />
         <span>Locations</span>
       </a>
-      <a href="/user/facility" class:active={pathLv2 === 'facility'}>
+      <a href="/admin/facility" class:active={pathLv2 === 'facility'}>
         <Icon src={RiFoodCupLine} size="17" />
         <span>Facilities</span>
       </a>
-      <a href="/user/building" class:active={pathLv2 === 'building'}>
+      <a href="/admin/building" class:active={pathLv2 === 'building'}>
         <Icon src={RiBuildingsHotelLine} size="17" />
         <span>Buildings</span>
       </a>
-      <a href="/user/booking" class:active={pathLv2 === 'booking'}>
+      <a href="/admin/booking" class:active={pathLv2 === 'booking'}>
         <Icon src={RiBusinessCalendarScheduleLine} size="17" />
         <span>Bookings</span>
       </a>
-      <a href="/user/payment" class:active={pathLv2 === 'payment'}>
+      <a href="/admin/payment" class:active={pathLv2 === 'payment'}>
         <Icon src={RiFinanceWallet3Line} size="17" />
         <span>Payments</span>
       </a>
-      <a href="/user/tenantsManagement" class:active={pathLv2 === 'tenantsManagement'}>
+      <a href="/admin/tenants" class:active={pathLv2 === 'tenants'}>
         <Icon src={RiUserFacesUserFollowLine} size="17" />
         <span>Tenants</span>
       </a>
