@@ -100,3 +100,22 @@ module.exports = {};
  * @property {string} restoredBy
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} Room
+ * @property {string|number} id
+ * @property {string} roomName
+ * @property {number} basePriceIDR
+ * @property {string} currentTenantId
+ * @property {string} firstUseAt
+ * @property {number} createdAt 
+ * @property {string} createdBy 
+ * @property {number} updatedAt 
+ * @property {string} updatedBy 
+ * @property {number} deletedAt 
+ * @property {string} deletedBy 
+ * @property {string} restoredBy
+ * @property {string} buildingId
+ * @property {string} lastUseAt
+ */
+module.exports = {};

@@ -637,6 +637,135 @@ exports.AdminPayment = async function AdminPayment( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminRoomIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} room.id
+ * @property {String} room.roomName
+ * @property {number} room.basePriceIDR
+ * @property {number} room.currentTenantId
+ * @property {String} room.firstUseAt
+ * @property {number} room.createdAt
+ * @property {number} room.createdBy
+ * @property {number} room.updatedAt
+ * @property {number} room.updatedBy
+ * @property {number} room.deletedAt
+ * @property {number} room.deletedBy
+ * @property {number} room.restoredBy
+ * @property {number} room.buildingId
+ * @property {String} room.lastUseAt
+ */
+const AdminRoomIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  room: { // rqProperty.Rooms
+    id: 0, // uint64
+    roomName: '', // string
+    basePriceIDR: 0, // int64
+    currentTenantId: 0, // uint64
+    firstUseAt: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+    buildingId: 0, // uint64
+    lastUseAt: '', // string
+  }, // rqProperty.Rooms
+}
+/**
+ * @typedef {Object} AdminRoomOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} room.id
+ * @property {String} room.roomName
+ * @property {number} room.basePriceIDR
+ * @property {number} room.currentTenantId
+ * @property {String} room.firstUseAt
+ * @property {number} room.createdAt
+ * @property {number} room.createdBy
+ * @property {number} room.updatedAt
+ * @property {number} room.updatedBy
+ * @property {number} room.deletedAt
+ * @property {number} room.deletedBy
+ * @property {number} room.restoredBy
+ * @property {number} room.buildingId
+ * @property {String} room.lastUseAt
+ * @property {Object} rooms
+ */
+const AdminRoomOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  room: { // rqProperty.Rooms
+    id: 0, // uint64
+    roomName: '', // string
+    basePriceIDR: 0, // int64
+    currentTenantId: 0, // uint64
+    firstUseAt: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+    buildingId: 0, // uint64
+    lastUseAt: '', // string
+  }, // rqProperty.Rooms
+  rooms: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback AdminRoomCallback
+ * @param {AdminRoomOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminRoomIn} i
+ * @param {AdminRoomCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminRoom = async function AdminRoom( i, cb ) {
+  return await axios.post( '/admin/room', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminStockIn
  * @property {String} cmd
  * @property {Object} withMeta

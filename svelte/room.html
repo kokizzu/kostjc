@@ -1338,7 +1338,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   }
 }
 
-/* fakecss:./_components/PopUpAddPayment.esbuild-svelte-fake-css */
+/* fakecss:./_components/PopUpAddRoom.esbuild-svelte-fake-css */
 @keyframes svelte-tl6747-spin {
   from {
     transform: rotate(0deg);
@@ -1465,14 +1465,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   }
 }
 
-/* fakecss:./payment.esbuild-svelte-fake-css */
-.master-payment.svelte-178y3s1.svelte-178y3s1 {
+/* fakecss:./room.esbuild-svelte-fake-css */
+.master-room.svelte-1blkkuz.svelte-1blkkuz {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
 }
-.master-payment.svelte-178y3s1 h2.svelte-178y3s1 {
+.master-room.svelte-1blkkuz h2.svelte-1blkkuz {
   margin: 0;
 }
 </style>
@@ -3942,10 +3942,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       exports.AdminLocation = async function AdminLocation(i, cb) {
         return await axios.post("/admin/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminPayment = async function AdminPayment2(i, cb) {
+      exports.AdminPayment = async function AdminPayment(i, cb) {
         return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminRoom = async function AdminRoom(i, cb) {
+      exports.AdminRoom = async function AdminRoom2(i, cb) {
         return await axios.post("/admin/room", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminStock = async function AdminStock(i, cb) {
@@ -5228,6 +5228,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var RiBusinessCalendarScheduleLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M7 3V1H9V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V9H20V5H17V7H15V5H9V7H7V5H4V19H10V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7ZM17 12C14.7909 12 13 13.7909 13 16C13 18.2091 14.7909 20 17 20C19.2091 20 21 18.2091 21 16C21 13.7909 19.2091 12 17 12ZM11 16C11 12.6863 13.6863 10 17 10C20.3137 10 23 12.6863 23 16C23 19.3137 20.3137 22 17 22C13.6863 22 11 19.3137 11 16ZM16 13V16.4142L18.2929 18.7071L19.7071 17.2929L18 15.5858V13H16Z"></path>' };
   var RiBusinessInboxUnarchiveLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 3L22 7V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V7.00353L4 3H20ZM20 9H4V19H20V9ZM12 10L16 14H13V18H11V14H8L12 10ZM18.764 5H5.236L4.237 7H19.764L18.764 5Z"></path>' };
   var RiOthersDoorOpenLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M1.99805 21.0001V19.0001L3.99805 18.9999V4.83465C3.99805 4.35136 4.34367 3.93723 4.81916 3.85078L14.2907 2.12868C14.6167 2.0694 14.9291 2.28564 14.9884 2.61167C14.9948 2.64708 14.998 2.68301 14.998 2.719V3.9999L18.998 4.00007C19.5503 4.00007 19.998 4.44779 19.998 5.00007V18.9999L21.998 19.0001V21.0001H17.998V6.00007L14.998 5.9999V21.0001H1.99805ZM12.998 4.3965L5.99805 5.66923V19.0001H12.998V4.3965ZM11.998 11.0001V13.0001H9.99805V11.0001H11.998Z"></path>' };
+  var RiDocumentFileCodeLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M15 4H5V20H19V8H15V4ZM3 2.9918C3 2.44405 3.44749 2 3.9985 2H16L20.9997 7L21 20.9925C21 21.5489 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918ZM17.6569 12L14.1213 15.5355L12.7071 14.1213L14.8284 12L12.7071 9.87868L14.1213 8.46447L17.6569 12ZM6.34315 12L9.87868 8.46447L11.2929 9.87868L9.17157 12L11.2929 14.1213L9.87868 15.5355L6.34315 12Z"></path>' };
   var RiUserFacesUser3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"></path>' };
   var RiUserFacesUserFollowLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M14 14.252V16.3414C13.3744 16.1203 12.7013 16 12 16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM17.7929 19.9142L21.3284 16.3787L22.7426 17.7929L17.7929 22.7426L14.2574 19.2071L15.6716 17.7929L17.7929 19.9142Z"></path>' };
   var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
@@ -13004,10 +13005,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   };
   var MasterTable_default = MasterTable;
 
-  // payment.svelte
+  // room.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
-  // _components/PopUpAddPayment.svelte
+  // _components/PopUpAddRoom.svelte
   var import_xFormatter3 = __toESM(require_xFormatter());
   function create_if_block_111(ctx) {
     let span;
@@ -13108,115 +13109,118 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
     });
     function inputbox0_value_binding(value) {
-      ctx[15](value);
+      ctx[16](value);
     }
     let inputbox0_props = {
-      id: "booking",
-      label: "Booking",
-      isObject: true,
-      type: "combobox",
-      values: (
-        /*bookings*/
-        ctx[1]
-      )
+      id: "roomName",
+      label: "Room Name",
+      type: "text",
+      placeholder: "D13"
     };
     if (
-      /*bookingId*/
-      ctx[4] !== void 0
+      /*roomName*/
+      ctx[5] !== void 0
     ) {
-      inputbox0_props.value = /*bookingId*/
-      ctx[4];
+      inputbox0_props.value = /*roomName*/
+      ctx[5];
     }
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
     function inputbox1_value_binding(value) {
-      ctx[16](value);
-    }
-    let inputbox1_props = {
-      id: "paymentAt",
-      label: "Payment At",
-      type: "datetime",
-      placeholder: "YYYY-MM-DD"
-    };
-    if (
-      /*paymentAt*/
-      ctx[5] !== void 0
-    ) {
-      inputbox1_props.value = /*paymentAt*/
-      ctx[5];
-    }
-    inputbox1 = new InputBox_default({ props: inputbox1_props });
-    binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
-    function inputbox2_value_binding(value) {
       ctx[17](value);
     }
-    let inputbox2_props = {
-      id: "paidIDR",
-      label: "Total Paid",
+    let inputbox1_props = {
+      id: "basePriceIDR",
+      label: "Base Price",
       type: "number",
       placeholder: "0"
     };
     if (
-      /*paidIDR*/
+      /*basePriceIDR*/
       ctx[6] !== void 0
     ) {
-      inputbox2_props.value = /*paidIDR*/
+      inputbox1_props.value = /*basePriceIDR*/
       ctx[6];
+    }
+    inputbox1 = new InputBox_default({ props: inputbox1_props });
+    binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
+    function inputbox2_value_binding(value) {
+      ctx[18](value);
+    }
+    let inputbox2_props = {
+      id: "currentTenantId",
+      label: "Current Tenant",
+      type: "combobox",
+      values: (
+        /*tenants*/
+        ctx[2]
+      ),
+      isObject: true
+    };
+    if (
+      /*currentTenantId*/
+      ctx[7] !== void 0
+    ) {
+      inputbox2_props.value = /*currentTenantId*/
+      ctx[7];
     }
     inputbox2 = new InputBox_default({ props: inputbox2_props });
     binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
     function inputbox3_value_binding(value) {
-      ctx[18](value);
+      ctx[19](value);
     }
     let inputbox3_props = {
-      id: "paymentMethod",
-      label: "Payment Method",
-      type: "text",
-      placeholder: "Cash"
+      id: "buildingId",
+      label: "Building",
+      type: "combobox",
+      values: (
+        /*buildings*/
+        ctx[1]
+      ),
+      isObject: true
     };
     if (
-      /*paymentMethod*/
-      ctx[7] !== void 0
+      /*buildingId*/
+      ctx[8] !== void 0
     ) {
-      inputbox3_props.value = /*paymentMethod*/
-      ctx[7];
+      inputbox3_props.value = /*buildingId*/
+      ctx[8];
     }
     inputbox3 = new InputBox_default({ props: inputbox3_props });
     binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
     function inputbox4_value_binding(value) {
-      ctx[19](value);
+      ctx[20](value);
     }
     let inputbox4_props = {
-      id: "paymentStatus",
-      label: "Payment Status",
-      type: "combobox",
-      placeholder: "Paid",
-      values: ["Paid", "Unpaid", "Pending", "Cancelled"]
+      id: "firstUseAt",
+      label: "First Use At",
+      type: "datetime",
+      placeholder: "YYYY-MM-DD"
     };
     if (
-      /*paymentStatus*/
-      ctx[8] !== void 0
+      /*firstUseAt*/
+      ctx[9] !== void 0
     ) {
-      inputbox4_props.value = /*paymentStatus*/
-      ctx[8];
+      inputbox4_props.value = /*firstUseAt*/
+      ctx[9];
     }
     inputbox4 = new InputBox_default({ props: inputbox4_props });
     binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
     function inputbox5_value_binding(value) {
-      ctx[20](value);
+      ctx[21](value);
     }
     let inputbox5_props = {
-      id: "note",
-      label: "Note",
-      type: "textarea",
-      placeholder: "Note"
+      id: "lastUseAt",
+      label: "Last Use At",
+      type: "datetime",
+      placeholder: "YYYY-MM-DD"
     };
     if (
-      /*note*/
-      ctx[9] !== void 0
+      /*lastUseAt*/
+      ctx[10] !== void 0
     ) {
-      inputbox5_props.value = /*note*/
-      ctx[9];
+      inputbox5_props.value = /*lastUseAt*/
+      ctx[10];
     }
     inputbox5 = new InputBox_default({ props: inputbox5_props });
     binding_callbacks.push(() => bind(inputbox5, "value", inputbox5_value_binding));
@@ -13232,7 +13236,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         div4 = element("div");
         header = element("header");
         h2 = element("h2");
-        h2.textContent = "Add Building";
+        h2.textContent = "Add Room";
         t1 = space();
         button0 = element("button");
         create_component(icon.$.fragment);
@@ -13277,7 +13281,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         attr(div3, "class", "foot svelte-tl6747");
         attr(div4, "class", "popup svelte-tl6747");
         attr(div5, "class", div5_class_value = null_to_empty(`popup_container ${/*isShow*/
-        ctx[3] ? "show" : ""}`) + " svelte-tl6747");
+        ctx[4] ? "show" : ""}`) + " svelte-tl6747");
       },
       m(target, anchor) {
         insert(target, div5, anchor);
@@ -13320,15 +13324,15 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
               button0,
               "click",
               /*Hide*/
-              ctx[2]
+              ctx[3]
             ),
             listen(button1, "click", prevent_default(
               /*cancel*/
-              ctx[11]
+              ctx[12]
             )),
             listen(button2, "click", prevent_default(
               /*submitAdd*/
-              ctx[10]
+              ctx[11]
             ))
           ];
           mounted = true;
@@ -13336,60 +13340,64 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       },
       p(ctx2, [dirty]) {
         const inputbox0_changes = {};
-        if (dirty & /*bookings*/
-        2)
-          inputbox0_changes.values = /*bookings*/
-          ctx2[1];
-        if (!updating_value && dirty & /*bookingId*/
-        16) {
+        if (!updating_value && dirty & /*roomName*/
+        32) {
           updating_value = true;
-          inputbox0_changes.value = /*bookingId*/
-          ctx2[4];
+          inputbox0_changes.value = /*roomName*/
+          ctx2[5];
           add_flush_callback(() => updating_value = false);
         }
         inputbox0.$set(inputbox0_changes);
         const inputbox1_changes = {};
-        if (!updating_value_1 && dirty & /*paymentAt*/
-        32) {
+        if (!updating_value_1 && dirty & /*basePriceIDR*/
+        64) {
           updating_value_1 = true;
-          inputbox1_changes.value = /*paymentAt*/
-          ctx2[5];
+          inputbox1_changes.value = /*basePriceIDR*/
+          ctx2[6];
           add_flush_callback(() => updating_value_1 = false);
         }
         inputbox1.$set(inputbox1_changes);
         const inputbox2_changes = {};
-        if (!updating_value_2 && dirty & /*paidIDR*/
-        64) {
+        if (dirty & /*tenants*/
+        4)
+          inputbox2_changes.values = /*tenants*/
+          ctx2[2];
+        if (!updating_value_2 && dirty & /*currentTenantId*/
+        128) {
           updating_value_2 = true;
-          inputbox2_changes.value = /*paidIDR*/
-          ctx2[6];
+          inputbox2_changes.value = /*currentTenantId*/
+          ctx2[7];
           add_flush_callback(() => updating_value_2 = false);
         }
         inputbox2.$set(inputbox2_changes);
         const inputbox3_changes = {};
-        if (!updating_value_3 && dirty & /*paymentMethod*/
-        128) {
+        if (dirty & /*buildings*/
+        2)
+          inputbox3_changes.values = /*buildings*/
+          ctx2[1];
+        if (!updating_value_3 && dirty & /*buildingId*/
+        256) {
           updating_value_3 = true;
-          inputbox3_changes.value = /*paymentMethod*/
-          ctx2[7];
+          inputbox3_changes.value = /*buildingId*/
+          ctx2[8];
           add_flush_callback(() => updating_value_3 = false);
         }
         inputbox3.$set(inputbox3_changes);
         const inputbox4_changes = {};
-        if (!updating_value_4 && dirty & /*paymentStatus*/
-        256) {
+        if (!updating_value_4 && dirty & /*firstUseAt*/
+        512) {
           updating_value_4 = true;
-          inputbox4_changes.value = /*paymentStatus*/
-          ctx2[8];
+          inputbox4_changes.value = /*firstUseAt*/
+          ctx2[9];
           add_flush_callback(() => updating_value_4 = false);
         }
         inputbox4.$set(inputbox4_changes);
         const inputbox5_changes = {};
-        if (!updating_value_5 && dirty & /*note*/
-        512) {
+        if (!updating_value_5 && dirty & /*lastUseAt*/
+        1024) {
           updating_value_5 = true;
-          inputbox5_changes.value = /*note*/
-          ctx2[9];
+          inputbox5_changes.value = /*lastUseAt*/
+          ctx2[10];
           add_flush_callback(() => updating_value_5 = false);
         }
         inputbox5.$set(inputbox5_changes);
@@ -13433,8 +13441,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           ctx2[0];
         }
         if (!current || dirty & /*isShow*/
-        8 && div5_class_value !== (div5_class_value = null_to_empty(`popup_container ${/*isShow*/
-        ctx2[3] ? "show" : ""}`) + " svelte-tl6747")) {
+        16 && div5_class_value !== (div5_class_value = null_to_empty(`popup_container ${/*isShow*/
+        ctx2[4] ? "show" : ""}`) + " svelte-tl6747")) {
           attr(div5, "class", div5_class_value);
         }
       },
@@ -13491,89 +13499,96 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       /** @type {boolean} */
       false
     ) } = $props;
-    let { bookings: bookings2 = (
+    let { buildings: buildings2 = (
       /** @type {Record<number, string>} */
       {}
     ) } = $props;
-    let bookingId = 0;
-    let paymentAt = (0, import_xFormatter3.dateISOFormat)(0);
-    let paidIDR = 0;
-    let paymentMethod = "";
-    let paymentStatus = "";
-    let note = "";
-    let { OnSubmit = async function(payment) {
-      console.log("OnSubmit :::", payment);
+    let { tenants: tenants2 = (
+      /** @type {Record<number, string>} */
+      {}
+    ) } = $props;
+    let roomName = "";
+    let basePriceIDR = 0;
+    let currentTenantId = 0;
+    let buildingId = 0;
+    let firstUseAt = (0, import_xFormatter3.dateISOFormat)(0);
+    let lastUseAt = (0, import_xFormatter3.dateISOFormat)(30);
+    let { OnSubmit = async function(room) {
+      console.log("OnSubmit :::", room);
     } } = $props;
     async function submitAdd() {
-      const payment = (
-        /** @type {Payment|any} */
+      const room = (
+        /** @type {Room|any} */
         {
-          bookingId,
-          paymentAt,
-          paidIDR,
-          paymentMethod,
-          paymentStatus,
-          note
+          roomName,
+          basePriceIDR,
+          currentTenantId,
+          buildingId,
+          firstUseAt,
+          lastUseAt
         }
       );
-      await OnSubmit(payment);
+      await OnSubmit(room);
     }
-    const Show = () => $invalidate(3, isShow = true);
-    const Hide = () => $invalidate(3, isShow = false);
+    const Show = () => $invalidate(4, isShow = true);
+    const Hide = () => $invalidate(4, isShow = false);
     const Reset = () => {
-      $invalidate(4, bookingId = 0);
-      $invalidate(5, paymentAt = (0, import_xFormatter3.dateISOFormat)(0));
-      $invalidate(6, paidIDR = 0);
-      $invalidate(7, paymentMethod = "");
-      $invalidate(8, paymentStatus = "");
-      $invalidate(9, note = "");
+      $invalidate(5, roomName = "");
+      $invalidate(6, basePriceIDR = 0);
+      $invalidate(7, currentTenantId = 0);
+      $invalidate(8, buildingId = 0);
+      $invalidate(9, firstUseAt = (0, import_xFormatter3.dateISOFormat)(0));
+      $invalidate(10, lastUseAt = (0, import_xFormatter3.dateISOFormat)(30));
     };
     const cancel = () => {
-      $invalidate(3, isShow = false);
+      $invalidate(4, isShow = false);
     };
     function inputbox0_value_binding(value) {
-      bookingId = value;
-      $invalidate(4, bookingId);
+      roomName = value;
+      $invalidate(5, roomName);
     }
     function inputbox1_value_binding(value) {
-      paymentAt = value;
-      $invalidate(5, paymentAt);
+      basePriceIDR = value;
+      $invalidate(6, basePriceIDR);
     }
     function inputbox2_value_binding(value) {
-      paidIDR = value;
-      $invalidate(6, paidIDR);
+      currentTenantId = value;
+      $invalidate(7, currentTenantId);
     }
     function inputbox3_value_binding(value) {
-      paymentMethod = value;
-      $invalidate(7, paymentMethod);
+      buildingId = value;
+      $invalidate(8, buildingId);
     }
     function inputbox4_value_binding(value) {
-      paymentStatus = value;
-      $invalidate(8, paymentStatus);
+      firstUseAt = value;
+      $invalidate(9, firstUseAt);
     }
     function inputbox5_value_binding(value) {
-      note = value;
-      $invalidate(9, note);
+      lastUseAt = value;
+      $invalidate(10, lastUseAt);
     }
     $self.$set = ($props2) => {
       if ("isSubmitted" in $props2)
         $invalidate(0, isSubmitted = $props2.isSubmitted);
-      if ("bookings" in $props2)
-        $invalidate(1, bookings2 = $props2.bookings);
+      if ("buildings" in $props2)
+        $invalidate(1, buildings2 = $props2.buildings);
+      if ("tenants" in $props2)
+        $invalidate(2, tenants2 = $props2.tenants);
       if ("OnSubmit" in $props2)
-        $invalidate(12, OnSubmit = $props2.OnSubmit);
+        $invalidate(13, OnSubmit = $props2.OnSubmit);
     };
     return [
       isSubmitted,
-      bookings2,
+      buildings2,
+      tenants2,
       Hide,
       isShow,
-      bookingId,
-      paymentAt,
-      paidIDR,
-      paymentMethod,
-      paymentStatus,
-      note,
+      roomName,
+      basePriceIDR,
+      currentTenantId,
+      buildingId,
+      firstUseAt,
+      lastUseAt,
       submitAdd,
       cancel,
       OnSubmit,
@@ -13587,117 +13602,137 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       inputbox5_value_binding
     ];
   }
-  var PopUpAddPayment = class extends SvelteComponent {
+  var PopUpAddRoom = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance9, create_fragment9, safe_not_equal, {
         isSubmitted: 0,
-        bookings: 1,
-        OnSubmit: 12,
-        Show: 13,
-        Hide: 2,
-        Reset: 14
+        buildings: 1,
+        tenants: 2,
+        OnSubmit: 13,
+        Show: 14,
+        Hide: 3,
+        Reset: 15
       });
     }
     get Show() {
-      return this.$.ctx[13];
-    }
-    get Hide() {
-      return this.$.ctx[2];
-    }
-    get Reset() {
       return this.$.ctx[14];
     }
+    get Hide() {
+      return this.$.ctx[3];
+    }
+    get Reset() {
+      return this.$.ctx[15];
+    }
   };
-  var PopUpAddPayment_default = PopUpAddPayment;
+  var PopUpAddRoom_default = PopUpAddRoom;
 
-  // payment.svelte
+  // room.svelte
   function create_if_block5(ctx) {
-    let popupaddpayment;
+    let popupaddroom;
     let updating_isSubmitted;
     let current;
-    function popupaddpayment_isSubmitted_binding(value) {
+    function popupaddroom_isSubmitted_binding(value) {
       ctx[12](value);
     }
-    let popupaddpayment_props = {
-      bookings,
+    let popupaddroom_props = {
+      tenants,
+      buildings,
       OnSubmit: (
-        /*OnAddPayment*/
+        /*OnAddRoom*/
         ctx[10]
       )
     };
     if (
-      /*isSubmitAddPayment*/
+      /*isSubmitAddRoom*/
       ctx[5] !== void 0
     ) {
-      popupaddpayment_props.isSubmitted = /*isSubmitAddPayment*/
+      popupaddroom_props.isSubmitted = /*isSubmitAddRoom*/
       ctx[5];
     }
-    popupaddpayment = new PopUpAddPayment_default({ props: popupaddpayment_props });
-    ctx[11](popupaddpayment);
-    binding_callbacks.push(() => bind(popupaddpayment, "isSubmitted", popupaddpayment_isSubmitted_binding));
+    popupaddroom = new PopUpAddRoom_default({ props: popupaddroom_props });
+    ctx[11](popupaddroom);
+    binding_callbacks.push(() => bind(popupaddroom, "isSubmitted", popupaddroom_isSubmitted_binding));
     return {
       c() {
-        create_component(popupaddpayment.$.fragment);
+        create_component(popupaddroom.$.fragment);
       },
       m(target, anchor) {
-        mount_component(popupaddpayment, target, anchor);
+        mount_component(popupaddroom, target, anchor);
         current = true;
       },
       p(ctx2, dirty) {
-        const popupaddpayment_changes = {};
-        if (!updating_isSubmitted && dirty & /*isSubmitAddPayment*/
+        const popupaddroom_changes = {};
+        if (!updating_isSubmitted && dirty & /*isSubmitAddRoom*/
         32) {
           updating_isSubmitted = true;
-          popupaddpayment_changes.isSubmitted = /*isSubmitAddPayment*/
+          popupaddroom_changes.isSubmitted = /*isSubmitAddRoom*/
           ctx2[5];
           add_flush_callback(() => updating_isSubmitted = false);
         }
-        popupaddpayment.$set(popupaddpayment_changes);
+        popupaddroom.$set(popupaddroom_changes);
       },
       i(local) {
         if (current)
           return;
-        transition_in(popupaddpayment.$.fragment, local);
+        transition_in(popupaddroom.$.fragment, local);
         current = true;
       },
       o(local) {
-        transition_out(popupaddpayment.$.fragment, local);
+        transition_out(popupaddroom.$.fragment, local);
         current = false;
       },
       d(detaching) {
         ctx[11](null);
-        destroy_component(popupaddpayment, detaching);
+        destroy_component(popupaddroom, detaching);
       }
     };
   }
   function create_default_slot_1(ctx) {
-    let button;
-    let icon;
+    let button0;
+    let icon0;
+    let t;
+    let button1;
+    let icon1;
     let current;
     let mounted;
     let dispose;
-    icon = new Icon_default({
+    icon0 = new Icon_default({
       props: {
         color: "var(--gray-007)",
         size: "18",
         src: RiSystemAddBoxLine
       }
     });
+    icon1 = new Icon_default({
+      props: {
+        color: "var(--gray-007)",
+        size: "18",
+        src: RiDocumentFileCodeLine
+      }
+    });
     return {
       c() {
-        button = element("button");
-        create_component(icon.$.fragment);
-        attr(button, "class", "btn");
-        attr(button, "title", "add payment");
+        button0 = element("button");
+        create_component(icon0.$.fragment);
+        t = space();
+        button1 = element("button");
+        create_component(icon1.$.fragment);
+        attr(button0, "class", "btn");
+        attr(button0, "title", "Add Room");
+        attr(button1, "class", "btn");
+        attr(button1, "title", "Export to JSON");
       },
       m(target, anchor) {
-        insert(target, button, anchor);
-        mount_component(icon, button, null);
+        insert(target, button0, anchor);
+        mount_component(icon0, button0, null);
+        insert(target, t, anchor);
+        insert(target, button1, anchor);
+        mount_component(icon1, button1, null);
         current = true;
         if (!mounted) {
           dispose = listen(
-            button,
+            button0,
             "click",
             /*click_handler*/
             ctx[13]
@@ -13709,18 +13744,23 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       i(local) {
         if (current)
           return;
-        transition_in(icon.$.fragment, local);
+        transition_in(icon0.$.fragment, local);
+        transition_in(icon1.$.fragment, local);
         current = true;
       },
       o(local) {
-        transition_out(icon.$.fragment, local);
+        transition_out(icon0.$.fragment, local);
+        transition_out(icon1.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
-          detach(button);
+          detach(button0);
+          detach(t);
+          detach(button1);
         }
-        destroy_component(icon);
+        destroy_component(icon0);
+        destroy_component(icon1);
         mounted = false;
         dispose();
       }
@@ -13746,7 +13786,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     let mastertable_props = {
       ACCESS: segments,
-      REFS: { "bookingId": bookings },
+      REFS: {
+        "currentTenantId": tenants,
+        "buildingId": buildings
+      },
       CAN_EDIT_ROW: true,
       CAN_SEARCH_ROW: true,
       CAN_DELETE_ROW: true,
@@ -13785,10 +13828,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[2];
     }
     if (
-      /*payments*/
+      /*rooms*/
       ctx[0] !== void 0
     ) {
-      mastertable_props.MASTER_ROWS = /*payments*/
+      mastertable_props.MASTER_ROWS = /*rooms*/
       ctx[0];
     }
     mastertable = new MasterTable_default({ props: mastertable_props });
@@ -13799,11 +13842,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       c() {
         div = element("div");
         h2 = element("h2");
-        h2.textContent = "Payment Management";
+        h2.textContent = "Room Management";
         t1 = space();
         create_component(mastertable.$.fragment);
-        attr(h2, "class", "svelte-178y3s1");
-        attr(div, "class", "master-payment svelte-178y3s1");
+        attr(h2, "class", "svelte-1blkkuz");
+        attr(div, "class", "master-room svelte-1blkkuz");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -13832,10 +13875,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           ctx2[2];
           add_flush_callback(() => updating_PAGER = false);
         }
-        if (!updating_MASTER_ROWS && dirty & /*payments*/
+        if (!updating_MASTER_ROWS && dirty & /*rooms*/
         1) {
           updating_MASTER_ROWS = true;
-          mastertable_changes.MASTER_ROWS = /*payments*/
+          mastertable_changes.MASTER_ROWS = /*rooms*/
           ctx2[0];
           add_flush_callback(() => updating_MASTER_ROWS = false);
         }
@@ -13914,7 +13957,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           check_outros();
         }
         const layoutmain_changes = {};
-        if (dirty & /*$scope, fields, pager, payments, popUpForms*/
+        if (dirty & /*$scope, fields, pager, rooms, popUpForms*/
         131095) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
@@ -13950,14 +13993,18 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     /** @type {Access} */
     {/* segments */}
   );
-  var bookings = (
+  var tenants = (
     /** @type {Record<Number, string>} */
-    {/* bookings */}
+    {/* tenants */}
+  );
+  var buildings = (
+    /** @type {Record<Number, string>} */
+    {/* buildings */}
   );
   function instance10($self, $props, $invalidate) {
-    let payments = (
+    let rooms = (
       /** @type {any[][]} */
-      [/* payments */]
+      [/* rooms */]
     );
     let fields = (
       /** @type {Field[]} */
@@ -13973,31 +14020,33 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     );
     let popUpForms = (
       /** @type {
-        import('svelte').SvelteComponent | HTMLElement | PopUpAddPayment |any
+        import('svelte').SvelteComponent | HTMLElement | PopUpAddRoom |any
       } */
       null
     );
-    let isSubmitAddPayment = (
+    let isSubmitAddRoom = (
       /** @type boolean */
       false
     );
-    onMount(() => $invalidate(3, isPopUpFormReady = true));
+    onMount(() => {
+      $invalidate(3, isPopUpFormReady = true);
+    });
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: "list" };
-      await (0, import_jsApi2.AdminPayment)(
+      await (0, import_jsApi2.AdminRoom)(
         // @ts-ignore
         i,
-        /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+        /** @type {import('./jsApi.GEN').AdminRoomCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddPayment = false);
+          $invalidate(5, isSubmitAddRoom = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, payments = o.payments);
+          $invalidate(0, rooms = o.rooms);
         }
       );
     }
@@ -14006,13 +14055,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /** @type {any}*/
         {
           pager,
-          payment: { id: row[0] },
+          room: { id: row[0] },
           cmd: "restore"
         }
       );
-      await (0, import_jsApi2.AdminPayment)(
+      await (0, import_jsApi2.AdminRoom)(
         i,
-        /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+        /** @type {import('./jsApi.GEN').AdminRoomCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -14021,8 +14070,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, payments = o.payments);
-          notifier.showSuccess(`Payment #${row[0]} restored !!`);
+          $invalidate(0, rooms = o.rooms);
+          notifier.showSuccess(`Room '${row[1]}' restored !!`);
           OnRefresh(pager);
         }
       );
@@ -14032,13 +14081,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /** @type {any}*/
         {
           pager,
-          payment: { id: row[0] },
+          room: { id: row[0] },
           cmd: "delete"
         }
       );
-      await (0, import_jsApi2.AdminPayment)(
+      await (0, import_jsApi2.AdminRoom)(
         i,
-        /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+        /** @type {import('./jsApi.GEN').AdminRoomCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -14047,30 +14096,33 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, payments = o.payments);
-          notifier.showSuccess(`Payment deleted !!`);
+          $invalidate(0, rooms = o.rooms);
+          notifier.showSuccess(`Room '${row[1]}' deleted !!`);
           OnRefresh(pager);
         }
       );
     }
     async function OnEdit(id, payloads) {
-      const payment = {
-        id,
-        /** @type {any[]} */
-        bookingId: payloads[1],
-        paymentAt: payloads[2],
-        paidIDR: payloads[3],
-        paymentMethod: payloads[4],
-        paymentStatus: payloads[5],
-        note: payloads[6]
+      console.log(
+        /** @type any[]*/
+        "Room ID to Edit: " + String(id)
+      );
+      const room = {
+        id: payloads[0],
+        roomName: String(payloads[1]),
+        basePriceIDR: Number(payloads[2]),
+        currentTenantId: payloads[3],
+        buildingId: payloads[4],
+        firstUseAt: String(payloads[5]),
+        lastUseAt: String(payloads[6])
       };
       const i = (
         /** @type {any}*/
-        { pager, payment, cmd: "upsert" }
+        { pager, room, cmd: "upsert" }
       );
-      await (0, import_jsApi2.AdminPayment)(
+      await (0, import_jsApi2.AdminRoom)(
         i,
-        /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+        /** @type {import('./jsApi.GEN').AdminRoomCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -14079,47 +14131,47 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, payments = o.payments);
-          notifier.showSuccess(`Payment #${payment.id} updated !!`);
+          $invalidate(0, rooms = o.rooms);
+          notifier.showSuccess(`Room '${room.buildingName}' updated !!`);
           OnRefresh(pager);
         }
       );
     }
-    async function OnAddPayment(payment) {
-      $invalidate(5, isSubmitAddPayment = true);
+    async function OnAddRoom(room) {
+      $invalidate(5, isSubmitAddRoom = true);
       const i = (
         /** @type {any} */
-        { pager, payment, cmd: "upsert" }
+        { pager, room, cmd: "upsert" }
       );
-      await (0, import_jsApi2.AdminPayment)(
+      await (0, import_jsApi2.AdminRoom)(
         i,
-        /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+        /** @type {import('../jsApi.GEN').AdminRoomCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddPayment = false);
+          $invalidate(5, isSubmitAddRoom = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, payments = o.payments);
-          notifier.showSuccess(`Payment created !!`);
+          $invalidate(0, rooms = o.rooms);
+          notifier.showSuccess(`Room '${room.roomName}' created !!`);
           popUpForms.Reset();
           OnRefresh(pager);
         }
       );
       popUpForms.Hide();
     }
-    function popupaddpayment_binding($value) {
+    function popupaddroom_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         popUpForms = $value;
         $invalidate(4, popUpForms);
       });
     }
-    function popupaddpayment_isSubmitted_binding(value) {
-      isSubmitAddPayment = value;
-      $invalidate(5, isSubmitAddPayment);
+    function popupaddroom_isSubmitted_binding(value) {
+      isSubmitAddRoom = value;
+      $invalidate(5, isSubmitAddRoom);
     }
     const click_handler = () => popUpForms.Show();
     function mastertable_FIELDS_binding(value) {
@@ -14131,39 +14183,39 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       $invalidate(2, pager);
     }
     function mastertable_MASTER_ROWS_binding(value) {
-      payments = value;
-      $invalidate(0, payments);
+      rooms = value;
+      $invalidate(0, rooms);
     }
     return [
-      payments,
+      rooms,
       fields,
       pager,
       isPopUpFormReady,
       popUpForms,
-      isSubmitAddPayment,
+      isSubmitAddRoom,
       OnRefresh,
       OnRestore,
       OnDelete,
       OnEdit,
-      OnAddPayment,
-      popupaddpayment_binding,
-      popupaddpayment_isSubmitted_binding,
+      OnAddRoom,
+      popupaddroom_binding,
+      popupaddroom_isSubmitted_binding,
       click_handler,
       mastertable_FIELDS_binding,
       mastertable_PAGER_binding,
       mastertable_MASTER_ROWS_binding
     ];
   }
-  var Payment = class extends SvelteComponent {
+  var Room = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance10, create_fragment10, safe_not_equal, {});
     }
   };
-  var payment_default = Payment;
+  var room_default = Room;
 
-  // payment.svelte.ts
-  var app = new payment_default({ target: document.getElementById("app") });
+  // room.svelte.ts
+  var app = new room_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

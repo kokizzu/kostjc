@@ -34,8 +34,7 @@
   let isSubmitAddBuilding = /** @type boolean */ (false);
 
   onMount(() => {
-    isPopUpFormReady = true
-    console.log('Locations: ', locations);
+    isPopUpFormReady = true;
   });
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
@@ -214,7 +213,7 @@
     >
       <Icon
         color="var(--gray-007)"
-        size="16"
+        size="18"
         src={RiSystemAddBoxLine}
       />
     </button>

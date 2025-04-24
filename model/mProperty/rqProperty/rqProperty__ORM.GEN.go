@@ -1713,7 +1713,7 @@ type Rooms struct {
 	RoomName        string      `json:"roomName" form:"roomName" query:"roomName" long:"roomName" msg:"roomName"`
 	BasePriceIDR    int64       `json:"basePriceIDR" form:"basePriceIDR" query:"basePriceIDR" long:"basePriceIDR" msg:"basePriceIDR"`
 	CurrentTenantId uint64      `json:"currentTenantId,string" form:"currentTenantId" query:"currentTenantId" long:"currentTenantId" msg:"currentTenantId"`
-	FirstUseAt      int64       `json:"firstUseAt" form:"firstUseAt" query:"firstUseAt" long:"firstUseAt" msg:"firstUseAt"`
+	FirstUseAt      string      `json:"firstUseAt" form:"firstUseAt" query:"firstUseAt" long:"firstUseAt" msg:"firstUseAt"`
 	CreatedAt       int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
 	CreatedBy       uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
 	UpdatedAt       int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
@@ -1722,7 +1722,7 @@ type Rooms struct {
 	DeletedBy       uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
 	RestoredBy      uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
 	BuildingId      uint64      `json:"buildingId,string" form:"buildingId" query:"buildingId" long:"buildingId" msg:"buildingId"`
-	LastUseAt       int64       `json:"lastUseAt" form:"lastUseAt" query:"lastUseAt" long:"lastUseAt" msg:"lastUseAt"`
+	LastUseAt       string      `json:"lastUseAt" form:"lastUseAt" query:"lastUseAt" long:"lastUseAt" msg:"lastUseAt"`
 }
 
 // NewRooms create new ORM reader/query object
@@ -1986,7 +1986,7 @@ func (r *Rooms) FromArray(a A.X) *Rooms { //nolint:dupl false positive
 	r.RoomName = X.ToS(a[1])
 	r.BasePriceIDR = X.ToI(a[2])
 	r.CurrentTenantId = X.ToU(a[3])
-	r.FirstUseAt = X.ToI(a[4])
+	r.FirstUseAt = X.ToS(a[4])
 	r.CreatedAt = X.ToI(a[5])
 	r.CreatedBy = X.ToU(a[6])
 	r.UpdatedAt = X.ToI(a[7])
@@ -1995,7 +1995,7 @@ func (r *Rooms) FromArray(a A.X) *Rooms { //nolint:dupl false positive
 	r.DeletedBy = X.ToU(a[10])
 	r.RestoredBy = X.ToU(a[11])
 	r.BuildingId = X.ToU(a[12])
-	r.LastUseAt = X.ToI(a[13])
+	r.LastUseAt = X.ToS(a[13])
 	return r
 }
 
@@ -2005,7 +2005,7 @@ func (r *Rooms) FromUncensoredArray(a A.X) *Rooms { //nolint:dupl false positive
 	r.RoomName = X.ToS(a[1])
 	r.BasePriceIDR = X.ToI(a[2])
 	r.CurrentTenantId = X.ToU(a[3])
-	r.FirstUseAt = X.ToI(a[4])
+	r.FirstUseAt = X.ToS(a[4])
 	r.CreatedAt = X.ToI(a[5])
 	r.CreatedBy = X.ToU(a[6])
 	r.UpdatedAt = X.ToI(a[7])
@@ -2014,7 +2014,7 @@ func (r *Rooms) FromUncensoredArray(a A.X) *Rooms { //nolint:dupl false positive
 	r.DeletedBy = X.ToU(a[10])
 	r.RestoredBy = X.ToU(a[11])
 	r.BuildingId = X.ToU(a[12])
-	r.LastUseAt = X.ToI(a[13])
+	r.LastUseAt = X.ToS(a[13])
 	return r
 }
 
@@ -2062,7 +2062,7 @@ var RoomsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`roomName`:        Tt.String,
 	`basePriceIDR`:    Tt.Integer,
 	`currentTenantId`: Tt.Unsigned,
-	`firstUseAt`:      Tt.Integer,
+	`firstUseAt`:      Tt.String,
 	`createdAt`:       Tt.Integer,
 	`createdBy`:       Tt.Unsigned,
 	`updatedAt`:       Tt.Integer,
@@ -2071,7 +2071,7 @@ var RoomsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`deletedBy`:       Tt.Unsigned,
 	`restoredBy`:      Tt.Unsigned,
 	`buildingId`:      Tt.Unsigned,
-	`lastUseAt`:       Tt.Integer,
+	`lastUseAt`:       Tt.String,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

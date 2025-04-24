@@ -210,7 +210,7 @@
     >
       <Icon
         color="var(--gray-007)"
-        size="16"
+        size="18"
         src={RiSystemAddBoxLine}
       />
     </button>

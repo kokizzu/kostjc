@@ -43,6 +43,7 @@
     flex-direction: row;
     gap: 0;
     align-items: center;
+    padding-left: 20px;
   }
 
   header .label .logo {

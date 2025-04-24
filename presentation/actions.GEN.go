@@ -12,6 +12,7 @@ var allCommands = []string{
 	domain.AdminFacilityAction,
 	domain.AdminLocationAction,
 	domain.AdminPaymentAction,
+	domain.AdminRoomAction,
 	domain.AdminStockAction,
 	domain.AdminTenantsAction,
 	domain.GuestLoginAction,

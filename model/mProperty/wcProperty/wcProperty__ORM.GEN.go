@@ -1626,7 +1626,7 @@ func (r *RoomsMutator) SetCurrentTenantId(val uint64) bool { //nolint:dupl false
 }
 
 // SetFirstUseAt create mutations, should not duplicate
-func (r *RoomsMutator) SetFirstUseAt(val int64) bool { //nolint:dupl false positive
+func (r *RoomsMutator) SetFirstUseAt(val string) bool { //nolint:dupl false positive
 	if val != r.FirstUseAt {
 		r.mutations = append(r.mutations, A.X{`=`, 4, val})
 		r.logs = append(r.logs, A.X{`firstUseAt`, r.FirstUseAt, val})
@@ -1725,7 +1725,7 @@ func (r *RoomsMutator) SetBuildingId(val uint64) bool { //nolint:dupl false posi
 }
 
 // SetLastUseAt create mutations, should not duplicate
-func (r *RoomsMutator) SetLastUseAt(val int64) bool { //nolint:dupl false positive
+func (r *RoomsMutator) SetLastUseAt(val string) bool { //nolint:dupl false positive
 	if val != r.LastUseAt {
 		r.mutations = append(r.mutations, A.X{`=`, 13, val})
 		r.logs = append(r.logs, A.X{`lastUseAt`, r.LastUseAt, val})
@@ -1759,8 +1759,8 @@ func (r *RoomsMutator) SetAll(from rqProperty.Rooms, excludeMap, forceMap M.SB) 
 		r.CurrentTenantId = from.CurrentTenantId
 		changed = true
 	}
-	if !excludeMap[`firstUseAt`] && (forceMap[`firstUseAt`] || from.FirstUseAt != 0) {
-		r.FirstUseAt = from.FirstUseAt
+	if !excludeMap[`firstUseAt`] && (forceMap[`firstUseAt`] || from.FirstUseAt != ``) {
+		r.FirstUseAt = S.Trim(from.FirstUseAt)
 		changed = true
 	}
 	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {
@@ -1795,8 +1795,8 @@ func (r *RoomsMutator) SetAll(from rqProperty.Rooms, excludeMap, forceMap M.SB) 
 		r.BuildingId = from.BuildingId
 		changed = true
 	}
-	if !excludeMap[`lastUseAt`] && (forceMap[`lastUseAt`] || from.LastUseAt != 0) {
-		r.LastUseAt = from.LastUseAt
+	if !excludeMap[`lastUseAt`] && (forceMap[`lastUseAt`] || from.LastUseAt != ``) {
+		r.LastUseAt = S.Trim(from.LastUseAt)
 		changed = true
 	}
 	return

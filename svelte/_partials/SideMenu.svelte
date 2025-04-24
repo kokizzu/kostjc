@@ -8,9 +8,10 @@
   import {
     RiBuildingsHome2Line, RiMapMapPin2Line, RiUserFacesUser3Line,
     RiUserFacesUserFollowLine, RiBuildingsHotelLine, RiBusinessCalendarScheduleLine,
-    RiFoodCupLine, RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
-    RiBusinessInboxUnarchiveLine
+    RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
+    RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine
   } from '../node_modules/svelte-icons-pack/dist/ri';
+  import { LuHandPlatter } from '../node_modules/svelte-icons-pack/dist/lu';
 
   export let access = /** @type {Access} */ ({});
 
@@ -61,12 +62,16 @@
         <span>Locations</span>
       </a>
       <a href="/admin/facility" class:active={pathLv2 === 'facility'}>
-        <Icon src={RiFoodCupLine} size="20" />
+        <Icon src={LuHandPlatter} size="20" />
         <span>Facilities</span>
       </a>
       <a href="/admin/building" class:active={pathLv2 === 'building'}>
         <Icon src={RiBuildingsHotelLine} size="20" />
         <span>Buildings</span>
+      </a>
+      <a href="/admin/room" class:active={pathLv2 === 'room'}>
+        <Icon src={RiOthersDoorOpenLine} size="20" />
+        <span>Rooms</span>
       </a>
       <a href="/admin/booking" class:active={pathLv2 === 'booking'}>
         <Icon src={RiBusinessCalendarScheduleLine} size="20" />

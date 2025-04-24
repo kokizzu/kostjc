@@ -348,7 +348,7 @@
     <div class="left">
       <div class="actions-button">
         <button class="btn" on:click={() => filterTable.Show()} title="filter table">
-          <Icon color="var(--gray-007)" size="16" src={RiSystemFilterLine} />
+          <Icon color="var(--gray-007)" size="18" src={RiSystemFilterLine} />
         </button>
         <!-- Action buttons -->
         <slot />

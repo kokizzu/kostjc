@@ -133,9 +133,9 @@
 
 	.popup_filter_container .popup .filters .row .inputs label {
 		padding: 8px 12px;
-		background-color: #0ea5e920;
-		color: var(--sky-007);
-		font-weight: 600;
+		background-color: var(--blue-transparent);
+		color: var(--blue-006);
+		font-weight: 500;
 		border-radius: 9999px;
 		text-transform: capitalize;
 	}
@@ -149,8 +149,8 @@
 	}
 
 	.popup_filter_container .popup .filters .row .inputs input:focus {
-    border-color: var(--sky-005);
-    outline: 1px solid var(--sky-005);
+    border-color: var(--blue-005);
+    outline: 1px solid var(--blue-005);
   }
 
 	.popup_filter_container .popup .filters .row .actions {

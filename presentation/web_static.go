@@ -97,6 +97,42 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminRoomAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminRoomIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminRoomAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		tenant := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tenant.FindTenantChoices()
+
+		building := rqProperty.NewBuildings(d.PropOltp)
+		buildings := building.FindBuildingChoices()
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.AdminRoom(&in)
+
+		return views.RenderRoom(ctx, M.SX{
+			`title`:     `KostJC | Room Management`,
+			`user`:      user,
+			`segments`:  segments,
+			`room`:      out.Room,
+			`rooms`:     out.Rooms,
+			`tenants`:   tenants,
+			`buildings`: buildings,
+			`fields`:    out.Meta.Fields,
+			`pager`:     out.Pager,
+		})
+	})
+
 	fw.Get(`/`+domain.AdminBuildingAction, func(ctx *fiber.Ctx) error {
 		var in domain.AdminBuildingIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminBuildingAction)
