@@ -2,7 +2,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>/*! title */</title>
-    <link href="/css.gg.css" rel="stylesheet">
     <link rel="shortcut icon" href="/assets/favicon.png">
   </head>
   <body>
@@ -14074,12 +14073,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     async function OnEdit(id, payloads) {
       console.log(
         /** @type any[]*/
-        "Facility ID to Edit: " + String(id)
+        "Facility ID to Edit: " + String(payloads)
       );
       const facility = {
-        id: payloads[0],
+        id,
         facilityName: payloads[1],
-        extraChargeIDR: Number(payloads[2])
+        facilityType: payloads[2],
+        extraChargeIDR: Number(payloads[3])
       };
       const i = (
         /** @type {any}*/
@@ -14108,7 +14108,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /** @type {any} */
         {
           facilityName: payloads[1],
-          extraChargeIDR: Number(payloads[2])
+          facilityType: payloads[2],
+          extraChargeIDR: Number(payloads[3])
         }
       );
       const i = (
@@ -14129,11 +14130,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           $invalidate(2, pager = o.pager);
           $invalidate(0, facilities = o.facilities);
           notifier.showSuccess(`Facility '${facility.facilityName}' created !!`);
-          popUpForms.Reset();
           OnRefresh(pager);
+          popUpForms.Reset();
+          popUpForms.Hide();
         }
       );
-      popUpForms.Hide();
     }
     function popupforms_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {

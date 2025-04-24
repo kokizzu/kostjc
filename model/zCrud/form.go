@@ -26,15 +26,16 @@ const (
 	DataTypeMapping  DataType = `mapping`
 	DataTypeCurrency DataType = `currency`
 
-	InputTypeText     InputType = `text`
-	InputTypeTextArea InputType = `textarea`
-	InputTypeEmail    InputType = `email`
-	InputTypePassword InputType = `password`
-	InputTypeCombobox InputType = `combobox`
-	InputTypeCheckbox InputType = `checkbox`
-	InputTypeNumber   InputType = `number`
-	InputTypeHidden   InputType = `hidden`
-	InputTypeDateTime InputType = `datetime`
+	InputTypeText        InputType = `text`
+	InputTypeTextArea    InputType = `textarea`
+	InputTypeEmail       InputType = `email`
+	InputTypePassword    InputType = `password`
+	InputTypeCombobox    InputType = `combobox`
+	InputTypeComboboxArr InputType = `combobox-arr`
+	InputTypeCheckbox    InputType = `checkbox`
+	InputTypeNumber      InputType = `number`
+	InputTypeHidden      InputType = `hidden`
+	InputTypeDateTime    InputType = `datetime`
 
 	ValidationRequired Validation = `required`
 	ValidationMinLen   Validation = `minLen`

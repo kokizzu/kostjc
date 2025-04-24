@@ -691,6 +691,7 @@ func (f *FacilitiesMutator) DoDeletePermanentById() bool { //nolint:dupl false p
 //		A.X{`=`, 7, f.DeletedAt},
 //		A.X{`=`, 8, f.DeletedBy},
 //		A.X{`=`, 9, f.RestoredBy},
+//		A.X{`=`, 10, f.FacilityType},
 //	})
 //	return !L.IsError(err, `Facilities.DoUpsert failed: `+f.SpaceName()+ `\n%#v`, arr)
 // }
@@ -833,6 +834,17 @@ func (f *FacilitiesMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false
 	return false
 }
 
+// SetFacilityType create mutations, should not duplicate
+func (f *FacilitiesMutator) SetFacilityType(val string) bool { //nolint:dupl false positive
+	if val != f.FacilityType {
+		f.mutations = append(f.mutations, A.X{`=`, 10, val})
+		f.logs = append(f.logs, A.X{`facilityType`, f.FacilityType, val})
+		f.FacilityType = val
+		return true
+	}
+	return false
+}
+
 // SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
 func (f *FacilitiesMutator) SetAll(from rqProperty.Facilities, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
 	if excludeMap == nil { // list of fields to exclude
@@ -879,6 +891,10 @@ func (f *FacilitiesMutator) SetAll(from rqProperty.Facilities, excludeMap, force
 	}
 	if !excludeMap[`restoredBy`] && (forceMap[`restoredBy`] || from.RestoredBy != 0) {
 		f.RestoredBy = from.RestoredBy
+		changed = true
+	}
+	if !excludeMap[`facilityType`] && (forceMap[`facilityType`] || from.FacilityType != ``) {
+		f.FacilityType = S.Trim(from.FacilityType)
 		changed = true
 	}
 	return

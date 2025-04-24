@@ -2,7 +2,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>/*! title */</title>
-    <link href="/css.gg.css" rel="stylesheet">
     <link rel="shortcut icon" href="/assets/favicon.png">
   </head>
   <body>
@@ -14133,11 +14132,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           $invalidate(2, pager = o.pager);
           $invalidate(0, locations = o.locations);
           notifier.showSuccess(`Location '${location.name}' created !!`);
-          popUpForms.Reset();
           OnRefresh(pager);
+          popUpForms.Reset();
+          popUpForms.Hide();
         }
       );
-      popUpForms.Hide();
     }
     function popupforms_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {

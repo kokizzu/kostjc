@@ -37,6 +37,7 @@ const (
 	ErrAdminFacilitySaveFailed    = `failed to save facility`
 	ErrAdminFacilityDeleteFailed  = `failed to delete facility`
 	ErrAdminFacilityRestoreFailed = `failed to restore facility`
+	ErrAdminFacilityTypeInvalid   = `invalid facility type, must be Room/Building`
 )
 
 var AdminFacilityMeta = zCrud.Meta{
@@ -49,19 +50,29 @@ var AdminFacilityMeta = zCrud.Meta{
 			ReadOnly:  true,
 		},
 		{
-			Name:      mProperty.FacilityName,
-			Label:     `Facility Name`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeText,
-			ReadOnly:  false,
+			Name:        mProperty.FacilityName,
+			Label:       `Facility Name`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeText,
+			ReadOnly:    false,
+			Description: `Bedcover`,
 		},
 		{
-			Name:      mProperty.ExtraChargeIDR,
-			Label:     `Extra Charge`,
-			DataType:  zCrud.DataTypeCurrency,
-			InputType: zCrud.InputTypeNumber,
-			ReadOnly:  false,
-			Mapping:   `IDR`,
+			Name:        mProperty.FacilityType,
+			Label:       `Facility Type`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeText,
+			ReadOnly:    false,
+			Description: `Room/Building`,
+		},
+		{
+			Name:        mProperty.ExtraChargeIDR,
+			Label:       `Extra Charge`,
+			DataType:    zCrud.DataTypeCurrency,
+			InputType:   zCrud.InputTypeNumber,
+			ReadOnly:    false,
+			Mapping:     `IDR`,
+			Description: `40000`,
 		},
 		{
 			Name:      mProperty.CreatedAt,
@@ -128,6 +139,14 @@ func (d *Domain) AdminFacility(in *AdminFacilityIn) (out AdminFacilityOut) {
 
 		if in.Facility.FacilityName != `` {
 			fac.SetFacilityName(in.Facility.FacilityName)
+		}
+
+		if in.Facility.FacilityType != `` {
+			if !mProperty.IsValidFacilityType(in.Facility.FacilityType) {
+				out.SetError(400, ErrAdminFacilityTypeInvalid)
+				return
+			}
+			fac.SetFacilityType(in.Facility.FacilityType)
 		}
 
 		if in.Facility.ExtraChargeIDR != 0 {

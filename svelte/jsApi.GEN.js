@@ -295,6 +295,7 @@ exports.AdminBuilding = async function AdminBuilding( i, cb ) {
  * @property {number} facility.deletedAt
  * @property {number} facility.deletedBy
  * @property {number} facility.restoredBy
+ * @property {String} facility.facilityType
  */
 const AdminFacilityIn = {
   cmd: '', // string
@@ -317,6 +318,7 @@ const AdminFacilityIn = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    facilityType: '', // string
   }, // rqProperty.Facilities
 }
 /**
@@ -340,6 +342,7 @@ const AdminFacilityIn = {
  * @property {number} facility.deletedAt
  * @property {number} facility.deletedBy
  * @property {number} facility.restoredBy
+ * @property {String} facility.facilityType
  * @property {Object} facilities
  */
 const AdminFacilityOut = {
@@ -370,6 +373,7 @@ const AdminFacilityOut = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    facilityType: '', // string
   }, // rqProperty.Facilities
   facilities: { // [][]any
   }, // [][]any

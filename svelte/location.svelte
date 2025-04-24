@@ -165,12 +165,11 @@
         locations = o.locations;
         notifier.showSuccess(`Location '${location.name}' created !!`);
 
-        popUpForms.Reset();
-
         OnRefresh(pager);
+        popUpForms.Reset();
+        popUpForms.Hide();
       }
     );
-    popUpForms.Hide();
   }
 </script>
 

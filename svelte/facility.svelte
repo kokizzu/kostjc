@@ -103,11 +103,12 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Facility ID to Edit: ' + String(id));
+    console.log('Facility ID to Edit: ' + String(payloads));
     const facility = {
-      id: payloads[0],
+      id: id,
       facilityName: payloads[1],
-      extraChargeIDR: Number(payloads[2]),
+      facilityType: payloads[2],
+      extraChargeIDR: Number(payloads[3]),
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -138,7 +139,8 @@
 
     const facility = /** @type {any} */ ({
       facilityName: payloads[1],
-      extraChargeIDR: Number(payloads[2]),
+      facilityType: payloads[2],
+      extraChargeIDR: Number(payloads[3]),
     });
     const i = /** @type {any} */ ({
       pager,
@@ -160,13 +162,12 @@
         pager = o.pager;
         facilities = o.facilities;
         notifier.showSuccess(`Facility '${facility.facilityName}' created !!`);
-
-        popUpForms.Reset();
-
+        
         OnRefresh(pager);
+        popUpForms.Reset();
+        popUpForms.Hide();
       }
     );
-    popUpForms.Hide();
   }
 </script>
 

@@ -19,6 +19,7 @@ module.exports = {};
  * @property {string|number} id
  * @property {string} facilityName
  * @property {number} extraChargeIDR
+ * @property {string} facilityType
  * @property {number} createdAt
  * @property {string} createdBy
  * @property {number} updatedAt
