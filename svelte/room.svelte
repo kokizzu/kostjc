@@ -181,12 +181,15 @@
   }
 
   let isShowPopUpExportRoom = false;
+  let roomsObjContainer;
   const hidePopUpExportRoom = () => {
     isShowPopUpExportRoom = false;
   }
 
   let roomsObjJson = '';
   const showPopUpExportRoom = () => {
+    const firstChild = roomsObjContainer.firstElementChild;
+    firstChild.style.width = '100%';
     let roomsObj = [];
     (rooms || []).forEach((r) => {
       let roomObj = {};
@@ -240,7 +243,7 @@
       </button>
     </header>
     <div class="forms">
-      <div class="rooms-object-container">
+      <div class="rooms-object-container" bind:this={roomsObjContainer}>
         <Highlight language={json} code={roomsObjJson} let:highlighted>
           <LineNumbers {highlighted}/>
         </Highlight>
@@ -473,8 +476,12 @@
     overflow-y: auto;
     background-color: #282c34;
     /* color: var(--green-006); */
-    padding: 10px;
+    padding: 10px 2px 10px 0;
     border-radius: 10px;
+  }
+
+  .object-highlighter {
+    width: 100%;
   }
 
   @media only screen and (max-width : 768px) {
