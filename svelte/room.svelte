@@ -14,7 +14,12 @@
   import { notifier } from './_components/xNotifier';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine, RiDocumentFileCodeLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import { IoClose } from './node_modules/svelte-icons-pack/dist/io';
   import PopUpAddRoom from './_components/PopUpAddRoom.svelte';
+  import Highlight from './node_modules/svelte-highlight/Highlight.svelte';
+  import LineNumbers from  './node_modules/svelte-highlight/LineNumbers.svelte'; 
+  import json from 'svelte-highlight/languages/json';
+  import atomOneDark from 'svelte-highlight/styles/atom-one-dark';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -112,11 +117,13 @@
     const room = {
       id: payloads[0],
       roomName: String(payloads[1]),
-      basePriceIDR: Number(payloads[2]),
-      currentTenantId: payloads[3],
-      buildingId: payloads[4],
-      firstUseAt: String(payloads[5]),
-      lastUseAt: String(payloads[6])
+      roomSize: String(payloads[2]),
+      basePriceIDR: Number(payloads[3]),
+      currentTenantId: payloads[4],
+      buildingId: payloads[5],
+      firstUseAt: String(payloads[6]),
+      lastUseAt: String(payloads[7]),
+      imageUrl: String(payloads[8])
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -172,6 +179,46 @@
     );
     popUpForms.Hide();
   }
+
+  let isShowPopUpExportRoom = false;
+  const hidePopUpExportRoom = () => {
+    isShowPopUpExportRoom = false;
+  }
+
+  let roomsObjJson = '';
+  const showPopUpExportRoom = () => {
+    let roomsObj = [];
+    (rooms || []).forEach((r) => {
+      let roomObj = {};
+      (fields || []).forEach((f, fId) => {
+        switch (f.name) {
+          case 'roomName':
+            roomObj.name = r[fId];
+          case 'roomSize':
+            roomObj.size = r[fId];
+          case 'basePriceIDR':
+            roomObj.normalPrice = r[fId];
+          case 'lastUseAt':
+            roomObj.availableAt = r[fId];
+          case 'imageUrl':
+            roomObj.image_url = r[fId];
+        }
+      });
+      roomsObj = [...roomsObj, roomObj];
+    })
+    console.log('Rooms Objects: ', roomsObj);
+    roomsObjJson = JSON.stringify(roomsObj, null, 2);
+    isShowPopUpExportRoom = true;
+  }
+  const exportRoomToJson = () => {
+    const blob = new Blob([roomsObjJson], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'rooms.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -183,6 +230,39 @@
     OnSubmit={OnAddRoom}
   />
 {/if}
+
+<div class={`popup_container ${isShowPopUpExportRoom ? 'show' : ''}`}>
+  <div class="popup">
+    <header class="header">
+      <h2>Export Room</h2>
+      <button on:click={hidePopUpExportRoom}>
+        <Icon size="22" color="var(--red-005)" src={IoClose}/>
+      </button>
+    </header>
+    <div class="forms">
+      <div class="rooms-object-container">
+        <Highlight language={json} code={roomsObjJson} let:highlighted>
+          <LineNumbers {highlighted}/>
+        </Highlight>
+      </div>
+    </div>
+    <div class="foot">
+      <div class="left">
+      </div>
+      <div class="right">
+        <button class="cancel" on:click|preventDefault={hidePopUpExportRoom}>Cancel</button>
+        <button class="ok" on:click|preventDefault={exportRoomToJson}>
+            <Icon color="#FFF" size="16" src={RiDocumentFileCodeLine} />
+            <span>Export</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<svelte:head>
+  {@html atomOneDark}
+</svelte:head>
 
 <LayoutMain access={segments} user={user}>
   <div class="master-room">
@@ -220,6 +300,7 @@
     </button>
     <button
       class="btn"
+      on:click={showPopUpExportRoom}
       title="Export to JSON"
     >
       <Icon
@@ -242,5 +323,163 @@
 
   .master-room h2 {
     margin: 0;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  :global(.spin) {
+    animation: spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .popup_container {
+    display: none;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		z-index: 2000;
+		background-color: rgba(0 0 0 / 40%);
+		backdrop-filter: blur(1px);
+		justify-content: center;
+		padding: 50px;
+    overflow: auto;
+	}
+
+  .popup_container.show {
+    display: flex;
+  }
+
+	.popup_container .popup {
+		border-radius: 8px;
+		background-color: #FFF;
+		height: fit-content;
+		width: 600px;
+		display: flex;
+		flex-direction: column;
+	}
+
+  .popup_container .popup header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 15px 20px;
+		border-bottom: 1px solid var(--gray-004);
+	}
+
+	.popup_container .popup header h2 {
+		margin: 0;
+	}
+
+	.popup_container .popup header button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 5px;
+		border-radius: 50%;
+		border: none;
+		background-color: transparent;
+		cursor: pointer;
+	}
+
+	.popup_container .popup header button:hover {
+		background-color: #ef444420;
+	}
+
+	.popup_container .popup header button:active {
+		background-color: #ef444430;
+	}
+
+	.popup_container .popup .forms {
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.popup_container .popup .foot {
+		display: flex;
+		flex-direction: row;
+    justify-content: space-between;
+		gap: 10px;
+		align-items: center;
+		padding: 15px 20px;
+		border-top: 1px solid var(--gray-004);
+	}
+
+  .popup_container .popup .foot .right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+	.popup_container .popup .foot button {
+		padding: 8px 18px;
+		border-radius: 9999px;
+		border: none;
+		color: #FFF;
+		cursor: pointer;
+		font-weight: 600;
+	}
+
+	.popup_container .popup .foot button.ok {
+		background-color: var(--green-006);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+	}
+
+	.popup_container .popup .foot button.ok:hover {
+		background-color: var(--green-005);
+	}
+
+	.popup_container .popup .foot button.ok:disabled {
+		cursor: not-allowed;
+		background-color: var(--gray-003);
+		color: var(--gray-007);
+	}
+
+	.popup_container .popup .foot button.cancel {
+		background-color: transparent;
+    color: var(--gray-007);
+	}
+
+	.popup_container .popup .foot button.cancel:hover {
+		background-color: var(--gray-001);
+	}
+
+  .facilities-form {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .rooms-object-container {
+    display: flex;
+    width: 100%;
+    height: 400px;
+    overflow-y: auto;
+    background-color: #282c34;
+    /* color: var(--green-006); */
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  @media only screen and (max-width : 768px) {
+    .popup_container {
+      padding: 10px;
+    }
   }
 </style>

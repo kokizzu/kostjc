@@ -2,61 +2,23 @@
   /** @typedef {import('../_types/property').Room} Room */
 
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
-  import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
+  import { RiDocumentFileCodeLine } from '../node_modules/svelte-icons-pack/dist/ri';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
-  import InputBox from './InputBox.svelte';
-  import { dateISOFormat } from './xFormatter';
 
   let isShow = /** @type {boolean} */ (false);
-
-  export let isSubmitted  = /** @type {boolean} */ (false);
-  export let buildings = /** @type {Record<number, string>} */ ({});
-  export let tenants = /** @type {Record<number, string>} */ ({});
-
-  let roomName = '';
-  let basePriceIDR = 0;
-  let currentTenantId = 0;
-  let buildingId = 0;
-  let firstUseAt = dateISOFormat(0);
-  let lastUseAt = dateISOFormat(30);
-  let roomSize = '';
-  let imageUrl = '';
-
-  export let OnSubmit = async function(/** @type {Room} */ room) {
-    console.log('OnSubmit :::', room);
-  }
-
-  async function submitAdd() {
-    const room = /** @type {Room|any} */ ({
-      roomName,
-      basePriceIDR,
-      currentTenantId,
-      buildingId,
-      firstUseAt,
-      lastUseAt,
-      roomSize,
-      imageUrl
-    });
-
-    await OnSubmit(room);
-  }
 
   export const Show = () => isShow = true;
   export const Hide = () => isShow = false;
 
   export const Reset = () => {
-    roomName = '';
-    basePriceIDR = 0;
-    currentTenantId = 0;
-    buildingId = 0;
-    firstUseAt = dateISOFormat(0);
-    lastUseAt = dateISOFormat(30);
-    roomSize = '';
-    imageUrl = '';
   }
   
   const cancel = () => {
     isShow = false;
+  }
+
+  function exportJson() {
+    console.log("bakekok")
   }
 </script>
 
@@ -69,77 +31,16 @@
       </button>
     </header>
     <div class="forms">
-      <InputBox
-        id="roomName"
-        label="Room Name"
-        bind:value={roomName}
-        type="text"
-        placeholder="D13"
-      />
-      <InputBox
-        id="basePriceIDR"
-        label="Base Price"
-        bind:value={basePriceIDR}
-        type="number"
-        placeholder="0"
-      />
-      <InputBox
-        id="currentTenantId"
-        label="Current Tenant"
-        bind:value={currentTenantId}
-        type="combobox"
-        values={tenants}
-        isObject={true}
-      />
-      <InputBox
-        id="buildingId"
-        label="Building"
-        bind:value={buildingId}
-        type="combobox"
-        values={buildings}
-        isObject={true}
-      />
-      <InputBox
-        id="roomSize"
-        label="Room Size"
-        bind:value={roomSize}
-        type="text"
-        placeholder="2x2.5"
-      />
-      <InputBox
-        id="imageUrl"
-        label="Image URL"
-        bind:value={imageUrl}
-        type="text"
-        placeholder="img-D13.jpg"
-      />
-      <InputBox
-        id="firstUseAt"
-        label="First Use At"
-        bind:value={firstUseAt}
-        type="datetime"
-        placeholder="YYYY-MM-DD"
-      />
-      <InputBox
-        id="lastUseAt"
-        label="Last Use At"
-        bind:value={lastUseAt}
-        type="datetime"
-        placeholder="YYYY-MM-DD"
-      />
+      <p>Export here</p>
     </div>
     <div class="foot">
       <div class="left">
       </div>
       <div class="right">
         <button class="cancel" on:click|preventDefault={cancel}>Cancel</button>
-        <button class="ok" on:click|preventDefault={submitAdd} disabled={isSubmitted}>
-          {#if !isSubmitted}
+        <button class="ok" on:click|preventDefault={exportJson}>
+            <Icon className="spin" color="#FFF" size="14" src={RiDocumentFileCodeLine} />
             <span>Submit</span>
-          {/if}
-          {#if isSubmitted}
-            <Icon className="spin" color="#FFF" size="14" src={FiLoader} />
-          {/if}
         </button>
       </div>
     </div>

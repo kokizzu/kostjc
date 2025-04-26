@@ -109,6 +109,8 @@ module.exports = {};
  * @property {number} basePriceIDR
  * @property {string} currentTenantId
  * @property {string} firstUseAt
+ * @property {string} roomSize
+ * @property {string} imageUrl
  * @property {number} createdAt 
  * @property {string} createdBy 
  * @property {number} updatedAt 

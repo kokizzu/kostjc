@@ -1565,6 +1565,8 @@ func (r *RoomsMutator) DoDeletePermanentById() bool { //nolint:dupl false positi
 //		A.X{`=`, 11, r.RestoredBy},
 //		A.X{`=`, 12, r.BuildingId},
 //		A.X{`=`, 13, r.LastUseAt},
+//		A.X{`=`, 14, r.RoomSize},
+//		A.X{`=`, 15, r.ImageUrl},
 //	})
 //	return !L.IsError(err, `Rooms.DoUpsert failed: `+r.SpaceName()+ `\n%#v`, arr)
 // }
@@ -1751,6 +1753,28 @@ func (r *RoomsMutator) SetLastUseAt(val string) bool { //nolint:dupl false posit
 	return false
 }
 
+// SetRoomSize create mutations, should not duplicate
+func (r *RoomsMutator) SetRoomSize(val string) bool { //nolint:dupl false positive
+	if val != r.RoomSize {
+		r.mutations = append(r.mutations, A.X{`=`, 14, val})
+		r.logs = append(r.logs, A.X{`roomSize`, r.RoomSize, val})
+		r.RoomSize = val
+		return true
+	}
+	return false
+}
+
+// SetImageUrl create mutations, should not duplicate
+func (r *RoomsMutator) SetImageUrl(val string) bool { //nolint:dupl false positive
+	if val != r.ImageUrl {
+		r.mutations = append(r.mutations, A.X{`=`, 15, val})
+		r.logs = append(r.logs, A.X{`imageUrl`, r.ImageUrl, val})
+		r.ImageUrl = val
+		return true
+	}
+	return false
+}
+
 // SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
 func (r *RoomsMutator) SetAll(from rqProperty.Rooms, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
 	if excludeMap == nil { // list of fields to exclude
@@ -1813,6 +1837,14 @@ func (r *RoomsMutator) SetAll(from rqProperty.Rooms, excludeMap, forceMap M.SB) 
 	}
 	if !excludeMap[`lastUseAt`] && (forceMap[`lastUseAt`] || from.LastUseAt != ``) {
 		r.LastUseAt = S.Trim(from.LastUseAt)
+		changed = true
+	}
+	if !excludeMap[`roomSize`] && (forceMap[`roomSize`] || from.RoomSize != ``) {
+		r.RoomSize = S.Trim(from.RoomSize)
+		changed = true
+	}
+	if !excludeMap[`imageUrl`] && (forceMap[`imageUrl`] || from.ImageUrl != ``) {
+		r.ImageUrl = S.Trim(from.ImageUrl)
 		changed = true
 	}
 	return

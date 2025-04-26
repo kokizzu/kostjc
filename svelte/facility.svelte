@@ -176,6 +176,9 @@
     bind:this={popUpForms}
     heading="Add Facility"
     FIELDS={fields}
+    REFS={{
+      'facilityType': ['Room', 'Building']
+    }}
     bind:isSubmitted={isSubmitAddFacility}
     OnSubmit={OnAddFacility}
   />
@@ -189,6 +192,9 @@
       bind:FIELDS={fields}
       bind:PAGER={pager}
       bind:MASTER_ROWS={facilities}
+      REFS={{
+        'facilityType': ['Room', 'Building']
+      }}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW

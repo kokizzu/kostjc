@@ -1741,6 +1741,8 @@ type Rooms struct {
 	RestoredBy      uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
 	BuildingId      uint64      `json:"buildingId,string" form:"buildingId" query:"buildingId" long:"buildingId" msg:"buildingId"`
 	LastUseAt       string      `json:"lastUseAt" form:"lastUseAt" query:"lastUseAt" long:"lastUseAt" msg:"lastUseAt"`
+	RoomSize        string      `json:"roomSize" form:"roomSize" query:"roomSize" long:"roomSize" msg:"roomSize"`
+	ImageUrl        string      `json:"imageUrl" form:"imageUrl" query:"imageUrl" long:"imageUrl" msg:"imageUrl"`
 }
 
 // NewRooms create new ORM reader/query object
@@ -1792,6 +1794,8 @@ func (r *Rooms) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "restoredBy"
 	, "buildingId"
 	, "lastUseAt"
+	, "roomSize"
+	, "imageUrl"
 	`
 }
 
@@ -1811,6 +1815,8 @@ func (r *Rooms) SqlSelectAllUncensoredFields() string { //nolint:dupl false posi
 	, "restoredBy"
 	, "buildingId"
 	, "lastUseAt"
+	, "roomSize"
+	, "imageUrl"
 	`
 }
 
@@ -1831,6 +1837,8 @@ func (r *Rooms) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 11, r.RestoredBy},
 		A.X{`=`, 12, r.BuildingId},
 		A.X{`=`, 13, r.LastUseAt},
+		A.X{`=`, 14, r.RoomSize},
+		A.X{`=`, 15, r.ImageUrl},
 	}
 }
 
@@ -1974,6 +1982,26 @@ func (r *Rooms) SqlLastUseAt() string { //nolint:dupl false positive
 	return `"lastUseAt"`
 }
 
+// IdxRoomSize return name of the index
+func (r *Rooms) IdxRoomSize() int { //nolint:dupl false positive
+	return 14
+}
+
+// SqlRoomSize return name of the column being indexed
+func (r *Rooms) SqlRoomSize() string { //nolint:dupl false positive
+	return `"roomSize"`
+}
+
+// IdxImageUrl return name of the index
+func (r *Rooms) IdxImageUrl() int { //nolint:dupl false positive
+	return 15
+}
+
+// SqlImageUrl return name of the column being indexed
+func (r *Rooms) SqlImageUrl() string { //nolint:dupl false positive
+	return `"imageUrl"`
+}
+
 // ToArray receiver fields to slice
 func (r *Rooms) ToArray() A.X { //nolint:dupl false positive
 	var id any = nil
@@ -1995,6 +2023,8 @@ func (r *Rooms) ToArray() A.X { //nolint:dupl false positive
 		r.RestoredBy,      // 11
 		r.BuildingId,      // 12
 		r.LastUseAt,       // 13
+		r.RoomSize,        // 14
+		r.ImageUrl,        // 15
 	}
 }
 
@@ -2014,6 +2044,8 @@ func (r *Rooms) FromArray(a A.X) *Rooms { //nolint:dupl false positive
 	r.RestoredBy = X.ToU(a[11])
 	r.BuildingId = X.ToU(a[12])
 	r.LastUseAt = X.ToS(a[13])
+	r.RoomSize = X.ToS(a[14])
+	r.ImageUrl = X.ToS(a[15])
 	return r
 }
 
@@ -2033,6 +2065,8 @@ func (r *Rooms) FromUncensoredArray(a A.X) *Rooms { //nolint:dupl false positive
 	r.RestoredBy = X.ToU(a[11])
 	r.BuildingId = X.ToU(a[12])
 	r.LastUseAt = X.ToS(a[13])
+	r.RoomSize = X.ToS(a[14])
+	r.ImageUrl = X.ToS(a[15])
 	return r
 }
 
@@ -2090,6 +2124,8 @@ var RoomsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`restoredBy`:      Tt.Unsigned,
 	`buildingId`:      Tt.Unsigned,
 	`lastUseAt`:       Tt.String,
+	`roomSize`:        Tt.String,
+	`imageUrl`:        Tt.String,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

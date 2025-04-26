@@ -30,6 +30,9 @@
   const randStr = RandString(5);
   
   onMount(() => {
+    if (type === 'combobox-arr' && !value) {
+      value = values[0];
+    }
     if (type === 'datetime') {
       value = dateISOFormat(0);
     }
@@ -146,6 +149,12 @@
         <input type="checkbox" id={id} bind:checked={value}>
         <span class="slider"></span>
       </label>
+    {:else if type === 'combobox-arr'}
+      <select bind:value={value}>
+        {#each values as item}
+          <option value={item}>{item}</option>
+        {/each}
+      </select>
     {:else if type == 'select' || type === 'combobox'}
       {#if isObject}
         <label class="label" for={id}>{label}</label>
@@ -336,7 +345,8 @@
   }
 
   .input_box input,
-  .input_box textarea {
+  .input_box textarea,
+  .input_box select {
     width: 100%;
     border: 1px solid var(--gray-003);
     border-radius: 5px;
@@ -345,7 +355,8 @@
   }
 
   .input_box input:focus,
-  .input_box textarea:focus {
+  .input_box textarea:focus,
+  .input_box select:focus {
     border-color: var(--blue-005);
     outline: 1px solid var(--blue-005);
   }

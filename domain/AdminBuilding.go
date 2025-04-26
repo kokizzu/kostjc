@@ -5,6 +5,8 @@ import (
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
+
+	"github.com/kokizzu/gotro/X"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminBuilding.go
@@ -69,7 +71,7 @@ var AdminBuildingMeta = zCrud.Meta{
 			Label:     `Facilities`,
 			DataType:  zCrud.DataTypeIntArr,
 			InputType: zCrud.InputTypeCombobox,
-			ReadOnly:  false,
+			ReadOnly:  true,
 		},
 		{
 			Name:      mProperty.CreatedAt,
@@ -150,6 +152,21 @@ func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 
 		if len(in.Building.Facilities) == 0 {
 			in.Building.Facilities = []any{}
+		}
+
+		for _, v := range in.Building.Facilities {
+			facId := X.ToU(v)
+			fac := rqProperty.NewFacilities(d.PropOltp)
+			fac.Id = facId
+			if !fac.FindById() {
+				out.SetError(400, ErrAdminBuildingInvalidFacilities)
+				return
+			}
+
+			if fac.FacilityType == mProperty.FacilityTypeRoom {
+				out.SetError(400, ErrAdminBuildingInvalidFacilities)
+				return
+			}
 		}
 
 		bld.SetFacilities(in.Building.Facilities)

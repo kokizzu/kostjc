@@ -8,7 +8,9 @@
 
   export let heading = 'Add product';
   export let FIELDS = /** @type Field[] */ ([]);
+  export let REFS = {};
   export let isSubmitted = false;
+
   let isShow = false;
   let payloads = [];
 
@@ -41,14 +43,34 @@
       {#each (FIELDS || []) as field, idx}
         {#if field.name !== 'id'}
           {#if !field.readOnly}
-            <InputBox
-              id={field.name}
-              label={field.label}
-              placeholder={field.description}
-              bind:value={payloads[idx]}
-              type={field.inputType}
-              values={field.ref}
-            />
+            {#if field.inputType === 'combobox'}
+              <InputBox
+                id={field.name}
+                label={field.label}
+                placeholder={field.description}
+                bind:value={payloads[idx]}
+                type={field.inputType}
+                values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
+                isObject={REFS && REFS[field.name] ? true : false}
+              />
+            {:else if field.inputType === 'combobox-arr'}
+              <InputBox
+                id={field.name}
+                label={field.label}
+                placeholder={field.description}
+                bind:value={payloads[idx]}
+                type={field.inputType}
+                values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
+              />
+            {:else}
+              <InputBox
+                id={field.name}
+                label={field.label}
+                placeholder={field.description}
+                bind:value={payloads[idx]}
+                type={field.inputType}
+              />
+            {/if}
           {/if}
         {/if}
       {/each}

@@ -61,7 +61,7 @@ var AdminFacilityMeta = zCrud.Meta{
 			Name:        mProperty.FacilityType,
 			Label:       `Facility Type`,
 			DataType:    zCrud.DataTypeString,
-			InputType:   zCrud.InputTypeText,
+			InputType:   zCrud.InputTypeComboboxArr,
 			ReadOnly:    false,
 			Description: `Room/Building`,
 		},

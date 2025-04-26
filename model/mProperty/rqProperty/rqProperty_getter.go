@@ -170,11 +170,67 @@ SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName()
 	return rows
 }
 
+func (f *Facilities) FindAllTypeBuilding() []Facilities {
+	const comment = `-- Facilities) FindAllTypeBuilding`
+
+	queryRows := comment + `
+SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName() + `
+WHERE ` + f.SqlFacilityType() + ` = 'Building'`
+
+	var rows = []Facilities{}
+	f.Adapter.QuerySql(queryRows, func(row []any) {
+		f.FromArray(row)
+		rows = append(rows, *f)
+	})
+
+	return rows
+}
+
+func (f *Facilities) FindAllTypeRoom() []Facilities {
+	const comment = `-- Facilities) FindAllTypeRoom`
+
+	queryRows := comment + `
+SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName() + `
+WHERE ` + f.SqlFacilityType() + ` = 'Room'`
+
+	var rows = []Facilities{}
+	f.Adapter.QuerySql(queryRows, func(row []any) {
+		f.FromArray(row)
+		rows = append(rows, *f)
+	})
+
+	return rows
+}
+
 func (f *Facilities) FindFacilitiesChoices() map[uint64]string {
 	const comment = `-- Locations) FindLocationChoices`
 
 	queryRows := comment + `
+SELECT ` + f.SqlId() + `, ` + f.SqlFacilityName() + `, ` + f.SqlFacilityType() + ` FROM ` + f.SqlTableName() + `
+ORDER BY ` + f.SqlFacilityName() + ` ASC`
+
+	out := make(map[uint64]string)
+	f.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 3 {
+			facilityName := X.ToS(row[1])
+			facilityType := X.ToS(row[2])
+			if facilityType != `` {
+				facilityName += ` (` + facilityType + `)`
+			}
+
+			out[X.ToU(row[0])] = facilityName
+		}
+	})
+
+	return out
+}
+
+func (f *Facilities) FindFacilitiesBuildingChoices() map[uint64]string {
+	const comment = `-- Locations) FindFacilitiesBuildingChoices`
+
+	queryRows := comment + `
 SELECT ` + f.SqlId() + `, ` + f.SqlFacilityName() + ` FROM ` + f.SqlTableName() + `
+WHERE ` + f.SqlFacilityType() + ` = 'Building'
 ORDER BY ` + f.SqlFacilityName() + ` ASC`
 
 	out := make(map[uint64]string)

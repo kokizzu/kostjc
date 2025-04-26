@@ -68,6 +68,8 @@ const (
 	FirstUseAt      = `firstUseAt`
 	LastUseAt       = `lastUseAt`
 	BuildingId      = `buildingId`
+	RoomSize        = `roomSize`
+	ImageUrl        = `imageUrl`
 )
 
 const (
@@ -170,6 +172,8 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{RestoredBy, Tt.Unsigned},
 			{BuildingId, Tt.Unsigned},
 			{LastUseAt, Tt.String},
+			{RoomSize, Tt.String},
+			{ImageUrl, Tt.String},
 		},
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,

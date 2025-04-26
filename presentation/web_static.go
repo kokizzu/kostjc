@@ -150,8 +150,8 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		locations := loc.FindLocationChoices()
 
 		fac := rqProperty.NewFacilities(d.PropOltp)
-		facilities := fac.FindAll()
-		facilitiesChoices := fac.FindFacilitiesChoices()
+		facilities := fac.FindAllTypeBuilding()
+		facilitiesChoices := fac.FindFacilitiesBuildingChoices()
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList

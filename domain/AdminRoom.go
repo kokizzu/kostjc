@@ -6,7 +6,10 @@ import (
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
+	"strings"
 	"time"
+
+	"github.com/kokizzu/gotro/S"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminRoom.go
@@ -41,6 +44,7 @@ const (
 	ErrAdminRoomRestoreFailed    = `failed to restore room`
 	ErrAdminRoomTenantNotFound   = `tenant not found`
 	ErrAdminRoomBuildingNotFound = `building not found`
+	ErrAdminRoomInvalidSize      = `invalid room size, must be both Number x Number, e.g: 2x2`
 )
 
 var AdminRoomMeta = zCrud.Meta{
@@ -59,6 +63,14 @@ var AdminRoomMeta = zCrud.Meta{
 			InputType:   zCrud.InputTypeText,
 			ReadOnly:    false,
 			Description: `D13`,
+		},
+		{
+			Name:        mProperty.RoomSize,
+			Label:       `Room Size`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeText,
+			ReadOnly:    false,
+			Description: `2x2.5`,
 		},
 		{
 			Name:      mProperty.BasePriceIDR,
@@ -95,6 +107,14 @@ var AdminRoomMeta = zCrud.Meta{
 			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeDateTime,
 			ReadOnly:  false,
+		},
+		{
+			Name:        mProperty.ImageUrl,
+			Label:       `Image URL`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeText,
+			ReadOnly:    false,
+			Description: `img-D13.jpg`,
 		},
 		{
 			Name:      mProperty.CreatedAt,
@@ -195,6 +215,19 @@ func (d *Domain) AdminRoom(in *AdminRoomIn) (out AdminRoomOut) {
 			room.SetLastUseAt(in.Room.LastUseAt)
 		}
 
+		if in.Room.ImageUrl != `` {
+			room.SetImageUrl(in.Room.ImageUrl)
+		}
+
+		if in.Room.RoomSize != `` {
+			if !isValidRoomSize(in.Room.RoomSize) {
+				out.SetError(400, ErrAdminRoomInvalidSize)
+				return
+			}
+
+			room.SetRoomSize(in.Room.RoomSize)
+		}
+
 		if room.Id == 0 {
 			room.SetCreatedAt(in.UnixNow())
 			room.SetCreatedBy(sess.UserId)
@@ -223,4 +256,38 @@ func (d *Domain) AdminRoom(in *AdminRoomIn) (out AdminRoomOut) {
 	}
 
 	return
+}
+
+func isValidRoomSize(rawsize string) bool {
+	if !strings.Contains(rawsize, `x`) {
+		return false
+	}
+
+	sizeSlice := S.Split(rawsize, `x`)
+
+	if len(sizeSlice) != 2 {
+		return false
+	}
+
+	var sizeX, sizeY float64
+
+	sizeX = S.ToF(sizeSlice[0])
+	if sizeX <= 0 {
+		sizeX = float64(S.ToU(sizeSlice[0]))
+	}
+
+	if sizeX <= 0 {
+		return false
+	}
+
+	sizeY = S.ToF(sizeSlice[1])
+	if sizeY <= 0 {
+		sizeY = float64(S.ToU(sizeSlice[1]))
+	}
+
+	if sizeY <= 0 {
+		return false
+	}
+
+	return true
 }
