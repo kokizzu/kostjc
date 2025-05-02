@@ -389,6 +389,9 @@
               <th class="a_row">Actions</th>
             {:else}
               <th
+                style="
+                  {f.name === 'ktpRegion' ? 'min-width: 250px;' : ''}
+                "
                 class="
 								{f.inputType === 'textarea' ? 'textarea' : ''}
 								{f.inputType === 'datetime' ? 'datetime' : ''}

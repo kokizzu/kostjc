@@ -10778,11 +10778,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[83].label + ""
     );
     let t;
+    let th_style_value;
     let th_class_value;
     return {
       c() {
         th = element("th");
         t = text(t_value);
+        attr(th, "style", th_style_value = /*f*/
+        ctx[83].name === "ktpRegion" ? "min-width: 250px;" : "");
         attr(th, "class", th_class_value = /*f*/
         (ctx[83].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
         (ctx[83].inputType === "datetime" ? "datetime" : "") + " " + /*f*/
@@ -10797,6 +10800,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         1 && t_value !== (t_value = /*f*/
         ctx2[83].label + ""))
           set_data(t, t_value);
+        if (dirty[0] & /*FIELDS*/
+        1 && th_style_value !== (th_style_value = /*f*/
+        ctx2[83].name === "ktpRegion" ? "min-width: 250px;" : "")) {
+          attr(th, "style", th_style_value);
+        }
         if (dirty[0] & /*FIELDS*/
         1 && th_class_value !== (th_class_value = /*f*/
         (ctx2[83].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
