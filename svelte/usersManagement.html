@@ -1461,14 +1461,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   }
 }
 
-/* fakecss:./stock.esbuild-svelte-fake-css */
-.master-stock.svelte-eabrp1.svelte-eabrp1 {
+/* fakecss:./usersManagement.esbuild-svelte-fake-css */
+.master-user.svelte-1ltdm4r.svelte-1ltdm4r {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
 }
-.master-stock.svelte-eabrp1 h2.svelte-eabrp1 {
+.master-user.svelte-1ltdm4r h2.svelte-1ltdm4r {
   margin: 0;
 }
 </style>
@@ -3944,13 +3944,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       exports.AdminRoom = async function AdminRoom(i, cb) {
         return await axios.post("/admin/room", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminStock = async function AdminStock2(i, cb) {
+      exports.AdminStock = async function AdminStock(i, cb) {
         return await axios.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminTenants = async function AdminTenants(i, cb) {
         return await axios.post("/admin/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminUsersManagement = async function AdminUsersManagement(i, cb) {
+      exports.AdminUsersManagement = async function AdminUsersManagement2(i, cb) {
         return await axios.post("/admin/usersManagement", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.GuestLogin = async function GuestLogin(i, cb) {
@@ -13470,7 +13470,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   };
   var MasterTable_default = MasterTable;
 
-  // stock.svelte
+  // usersManagement.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
   // _components/PopUpForms.svelte
@@ -14460,7 +14460,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   };
   var PopUpForms_default = PopUpForms;
 
-  // stock.svelte
+  // usersManagement.svelte
   function create_if_block6(ctx) {
     let popupforms;
     let updating_isSubmitted;
@@ -14469,21 +14469,22 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[12](value);
     }
     let popupforms_props = {
-      heading: "Add Stock",
+      heading: "Add User",
       FIELDS: (
         /*fields*/
         ctx[1]
       ),
+      REFS: { "role": ["Admin", "User"] },
       OnSubmit: (
-        /*OnAddFacility*/
+        /*OnAddUser*/
         ctx[10]
       )
     };
     if (
-      /*isSubmitAddFacility*/
+      /*isSubmitAddUser*/
       ctx[5] !== void 0
     ) {
-      popupforms_props.isSubmitted = /*isSubmitAddFacility*/
+      popupforms_props.isSubmitted = /*isSubmitAddUser*/
       ctx[5];
     }
     popupforms = new PopUpForms_default({ props: popupforms_props });
@@ -14503,10 +14504,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         2)
           popupforms_changes.FIELDS = /*fields*/
           ctx2[1];
-        if (!updating_isSubmitted && dirty & /*isSubmitAddFacility*/
+        if (!updating_isSubmitted && dirty & /*isSubmitAddUser*/
         32) {
           updating_isSubmitted = true;
-          popupforms_changes.isSubmitted = /*isSubmitAddFacility*/
+          popupforms_changes.isSubmitted = /*isSubmitAddUser*/
           ctx2[5];
           add_flush_callback(() => updating_isSubmitted = false);
         }
@@ -14546,7 +14547,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         button = element("button");
         create_component(icon.$.fragment);
         attr(button, "class", "btn");
-        attr(button, "title", "add stock");
+        attr(button, "title", "add user");
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -14603,6 +14604,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     let mastertable_props = {
       ACCESS: segments,
+      REFS: { "role": ["Admin", "User"] },
       CAN_EDIT_ROW: true,
       CAN_SEARCH_ROW: true,
       CAN_DELETE_ROW: true,
@@ -14641,10 +14643,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[2];
     }
     if (
-      /*stocks*/
+      /*users*/
       ctx[0] !== void 0
     ) {
-      mastertable_props.MASTER_ROWS = /*stocks*/
+      mastertable_props.MASTER_ROWS = /*users*/
       ctx[0];
     }
     mastertable = new MasterTable_default({ props: mastertable_props });
@@ -14655,11 +14657,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       c() {
         div = element("div");
         h2 = element("h2");
-        h2.textContent = "Master Stock";
+        h2.textContent = "User Management";
         t1 = space();
         create_component(mastertable.$.fragment);
-        attr(h2, "class", "svelte-eabrp1");
-        attr(div, "class", "master-stock svelte-eabrp1");
+        attr(h2, "class", "svelte-1ltdm4r");
+        attr(div, "class", "master-user svelte-1ltdm4r");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -14688,10 +14690,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           ctx2[2];
           add_flush_callback(() => updating_PAGER = false);
         }
-        if (!updating_MASTER_ROWS && dirty & /*stocks*/
+        if (!updating_MASTER_ROWS && dirty & /*users*/
         1) {
           updating_MASTER_ROWS = true;
-          mastertable_changes.MASTER_ROWS = /*stocks*/
+          mastertable_changes.MASTER_ROWS = /*users*/
           ctx2[0];
           add_flush_callback(() => updating_MASTER_ROWS = false);
         }
@@ -14770,7 +14772,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           check_outros();
         }
         const layoutmain_changes = {};
-        if (dirty & /*$scope, fields, pager, stocks, popUpForms*/
+        if (dirty & /*$scope, fields, pager, users, popUpForms*/
         131095) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
@@ -14807,9 +14809,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     {/* segments */}
   );
   function instance10($self, $props, $invalidate) {
-    let stocks = (
+    let users = (
       /** @type {any[][]} */
-      [/* stocks */]
+      [/* users */]
     );
     let fields = (
       /** @type {Field[]} */
@@ -14819,6 +14821,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       /** @type {PagerOut} */
       {/* pager */}
     );
+    console.log("usersManagement: ", users);
     let isPopUpFormReady = (
       /** @type boolean */
       false
@@ -14829,27 +14832,27 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       } */
       null
     );
-    let isSubmitAddFacility = (
+    let isSubmitAddUser = (
       /** @type boolean */
       false
     );
     onMount(() => $invalidate(3, isPopUpFormReady = true));
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: "list" };
-      await (0, import_jsApi2.AdminStock)(
+      await (0, import_jsApi2.AdminUsersManagement)(
         // @ts-ignore
         i,
-        /** @type {import('./jsApi.GEN').AdminStockCallback} */
+        /** @type {import('./jsApi.GEN').AdminUsersManagementCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddFacility = false);
+          $invalidate(5, isSubmitAddUser = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, stocks = o.stocks);
+          $invalidate(0, users = o.users);
         }
       );
     }
@@ -14858,13 +14861,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /** @type {any}*/
         {
           pager,
-          stock: { id: row[0] },
+          user: { id: row[0] },
           cmd: "restore"
         }
       );
-      await (0, import_jsApi2.AdminStock)(
+      await (0, import_jsApi2.AdminUsersManagement)(
         i,
-        /** @type {import('./jsApi.GEN').AdminStockCallback} */
+        /** @type {import('./jsApi.GEN').AdminUsersManagementCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -14873,8 +14876,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, stocks = o.stocks);
-          notifier.showSuccess(`Stock '${row[1]}' restored !!`);
+          $invalidate(0, users = o.users);
+          notifier.showSuccess(`User '${row[1]}' restored !!`);
           OnRefresh(pager);
         }
       );
@@ -14884,13 +14887,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /** @type {any}*/
         {
           pager,
-          stock: { id: row[0] },
+          user: { id: row[0] },
           cmd: "delete"
         }
       );
-      await (0, import_jsApi2.AdminStock)(
+      await (0, import_jsApi2.AdminUsersManagement)(
         i,
-        /** @type {import('./jsApi.GEN').AdminStockCallback} */
+        /** @type {import('./jsApi.GEN').AdminUsersManagementCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -14899,28 +14902,31 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, stocks = o.stocks);
-          notifier.showSuccess(`Stock '${row[1]}' deleted !!`);
+          $invalidate(0, users = o.users);
+          notifier.showSuccess(`User '${row[1]}' deleted !!`);
           OnRefresh(pager);
         }
       );
     }
     async function OnEdit(id, payloads) {
-      const stock = {
-        id: payloads[0],
+      console.log(
         /** @type any[]*/
-        stockName: payloads[1],
-        stockAddedAt: payloads[2],
-        quantity: Number(payloads[3]),
-        priceIDR: Number(payloads[4])
+        "User ID to Edit: " + String(payloads)
+      );
+      const user2 = {
+        id,
+        email: payloads[1],
+        userName: payloads[2],
+        fullName: payloads[3],
+        role: payloads[4]
       };
       const i = (
         /** @type {any}*/
-        { pager, stock, cmd: "upsert" }
+        { pager, user: user2, cmd: "upsert" }
       );
-      await (0, import_jsApi2.AdminStock)(
+      await (0, import_jsApi2.AdminUsersManagement)(
         i,
-        /** @type {import('./jsApi.GEN').AdminStockCallback} */
+        /** @type {import('./jsApi.GEN').AdminUsersManagementCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -14929,46 +14935,46 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, stocks = o.stocks);
-          notifier.showSuccess(`Stock '${stock.stockName}' updated !!`);
+          $invalidate(0, users = o.users);
+          notifier.showSuccess(`User '${user2.fullName}' updated !!`);
           OnRefresh(pager);
         }
       );
     }
-    async function OnAddFacility(payloads) {
-      $invalidate(5, isSubmitAddFacility = true);
-      const stock = (
+    async function OnAddUser(payloads) {
+      $invalidate(5, isSubmitAddUser = true);
+      const user2 = (
         /** @type {any} */
         {
-          stockName: payloads[1],
-          stockAddedAt: payloads[2],
-          quantity: Number(payloads[3]),
-          priceIDR: Number(payloads[4])
+          email: payloads[1],
+          userName: payloads[2],
+          fullName: payloads[3],
+          role: payloads[4]
         }
       );
       const i = (
         /** @type {any} */
-        { pager, stock, cmd: "upsert" }
+        { pager, user: user2, cmd: "upsert" }
       );
-      await (0, import_jsApi2.AdminStock)(
+      await (0, import_jsApi2.AdminUsersManagement)(
         i,
-        /** @type {import('../jsApi.GEN').AdminStockCallback} */
+        /** @type {import('../jsApi.GEN').AdminUsersManagementCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(5, isSubmitAddFacility = false);
+          $invalidate(5, isSubmitAddUser = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
             return;
           }
           $invalidate(2, pager = o.pager);
-          $invalidate(0, stocks = o.stocks);
-          notifier.showSuccess(`Stock '${stock.facilityName}' created !!`);
-          popUpForms.Reset();
+          $invalidate(0, users = o.users);
+          notifier.showSuccess(`User '${user2.facilityName}' created !!`);
           OnRefresh(pager);
+          popUpForms.Reset();
+          popUpForms.Hide();
         }
       );
-      popUpForms.Hide();
     }
     function popupforms_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
@@ -14977,8 +14983,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       });
     }
     function popupforms_isSubmitted_binding(value) {
-      isSubmitAddFacility = value;
-      $invalidate(5, isSubmitAddFacility);
+      isSubmitAddUser = value;
+      $invalidate(5, isSubmitAddUser);
     }
     const click_handler = () => popUpForms.Show();
     function mastertable_FIELDS_binding(value) {
@@ -14990,21 +14996,21 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       $invalidate(2, pager);
     }
     function mastertable_MASTER_ROWS_binding(value) {
-      stocks = value;
-      $invalidate(0, stocks);
+      users = value;
+      $invalidate(0, users);
     }
     return [
-      stocks,
+      users,
       fields,
       pager,
       isPopUpFormReady,
       popUpForms,
-      isSubmitAddFacility,
+      isSubmitAddUser,
       OnRefresh,
       OnRestore,
       OnDelete,
       OnEdit,
-      OnAddFacility,
+      OnAddUser,
       popupforms_binding,
       popupforms_isSubmitted_binding,
       click_handler,
@@ -15013,16 +15019,16 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       mastertable_MASTER_ROWS_binding
     ];
   }
-  var Stock = class extends SvelteComponent {
+  var UsersManagement = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance10, create_fragment10, safe_not_equal, {});
     }
   };
-  var stock_default = Stock;
+  var usersManagement_default = UsersManagement;
 
-  // stock.svelte.ts
-  var app = new stock_default({ target: document.getElementById("app") });
+  // usersManagement.svelte.ts
+  var app = new usersManagement_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

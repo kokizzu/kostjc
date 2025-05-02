@@ -202,7 +202,7 @@ var AdminTenantsMeta = zCrud.Meta{
 
 func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

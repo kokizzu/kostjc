@@ -9,7 +9,7 @@
     RiBuildingsHome2Line, RiMapMapPin2Line, RiUserFacesUser3Line,
     RiUserFacesUserFollowLine, RiBuildingsHotelLine, RiBusinessCalendarScheduleLine,
     RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
-    RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine
+    RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine, RiUserFacesGroupLine
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { LuHandPlatter } from '../node_modules/svelte-icons-pack/dist/lu';
 
@@ -55,41 +55,47 @@
         <span>Profile</span>
       </a>
     </nav>
-    <h3 class="nav-menu-title">Admin</h3>
-    <nav class="nav-menu">
-      <a href="/admin/location" class:active={pathLv2 === 'location'}>
-        <Icon src={RiMapMapPin2Line} size="20" />
-        <span>Locations</span>
-      </a>
-      <a href="/admin/facility" class:active={pathLv2 === 'facility'}>
-        <Icon src={LuHandPlatter} size="20" />
-        <span>Facilities</span>
-      </a>
-      <a href="/admin/building" class:active={pathLv2 === 'building'}>
-        <Icon src={RiBuildingsHotelLine} size="20" />
-        <span>Buildings</span>
-      </a>
-      <a href="/admin/room" class:active={pathLv2 === 'room'}>
-        <Icon src={RiOthersDoorOpenLine} size="20" />
-        <span>Rooms</span>
-      </a>
-      <a href="/admin/booking" class:active={pathLv2 === 'booking'}>
-        <Icon src={RiBusinessCalendarScheduleLine} size="20" />
-        <span>Bookings</span>
-      </a>
-      <a href="/admin/payment" class:active={pathLv2 === 'payment'}>
-        <Icon src={RiFinanceWallet3Line} size="20" />
-        <span>Payments</span>
-      </a>
-      <a href="/admin/stock" class:active={pathLv2 === 'stock'}>
-        <Icon src={RiBusinessInboxUnarchiveLine} size="20" />
-        <span>Stocks</span>
-      </a>
-      <a href="/admin/tenants" class:active={pathLv2 === 'tenants'}>
-        <Icon src={RiUserFacesUserFollowLine} size="20" />
-        <span>Tenants</span>
-      </a>
-    </nav>
+    {#if access.admin}
+      <h3 class="nav-menu-title">Admin</h3>
+      <nav class="nav-menu">
+        <a href="/admin/location" class:active={pathLv2 === 'location'}>
+          <Icon src={RiMapMapPin2Line} size="20" />
+          <span>Locations</span>
+        </a>
+        <a href="/admin/facility" class:active={pathLv2 === 'facility'}>
+          <Icon src={LuHandPlatter} size="20" />
+          <span>Facilities</span>
+        </a>
+        <a href="/admin/building" class:active={pathLv2 === 'building'}>
+          <Icon src={RiBuildingsHotelLine} size="20" />
+          <span>Buildings</span>
+        </a>
+        <a href="/admin/room" class:active={pathLv2 === 'room'}>
+          <Icon src={RiOthersDoorOpenLine} size="20" />
+          <span>Rooms</span>
+        </a>
+        <a href="/admin/booking" class:active={pathLv2 === 'booking'}>
+          <Icon src={RiBusinessCalendarScheduleLine} size="20" />
+          <span>Bookings</span>
+        </a>
+        <a href="/admin/payment" class:active={pathLv2 === 'payment'}>
+          <Icon src={RiFinanceWallet3Line} size="20" />
+          <span>Payments</span>
+        </a>
+        <a href="/admin/stock" class:active={pathLv2 === 'stock'}>
+          <Icon src={RiBusinessInboxUnarchiveLine} size="20" />
+          <span>Stocks</span>
+        </a>
+        <a href="/admin/tenants" class:active={pathLv2 === 'tenants'}>
+          <Icon src={RiUserFacesUserFollowLine} size="20" />
+          <span>Tenants</span>
+        </a>
+        <a href="/admin/usersManagement" class:active={pathLv2 === 'usersManagement'}>
+          <Icon src={RiUserFacesGroupLine} size="20" />
+          <span>Users</span>
+        </a>
+      </nav>
+    {/if}
     <span class="separator" />
     <nav class="nav-menu">
       <button class="red" on:click={logout}>

@@ -150,6 +150,7 @@
         <span class="slider"></span>
       </label>
     {:else if type === 'combobox-arr'}
+      <label class="label" for={id}>{label}</label>
       <select bind:value={value}>
         {#each values as item}
           <option value={item}>{item}</option>

@@ -462,20 +462,20 @@
                     {/if}
                   </td>
                 {:else if f.type == 'intArr'}  
-                  <td>{row[idx] ? (
+                  <td class="intArr">{row[idx] ? (
                     Object.entries(REFS[f.name]).map(([k, v]) => `${v}`).join(', ')
                   ) : '--'}</td>
                 {:else if f.type == 'currency'}
-                  <td>{row[idx] ? formatPrice(row[idx], (f.mapping || 'IDR')) : '--'}</td>
+                  <td class="currency">{row[idx] ? formatPrice(row[idx], (f.mapping || 'IDR')) : '--'}</td>
                 {:else if f.inputType === 'datetime'}
-                  <td>{row[idx] ? datetime(row[idx]) : '--'}</td>
+                  <td class="datetime">{row[idx] ? datetime(row[idx]) : '--'}</td>
                 {:else if f.inputType === 'combobox' && REFS[f.name]}
-                  <td>{REFS[f.name][row[idx]] || '--'}</td>
+                  <td class="combobox">{REFS[f.name][row[idx]] || '--'}</td>
                 {:else if f.inputType === 'percentage'}
-                  <td>{row[idx] || '0'}%</td>
+                  <td class="percentage">{row[idx] || '0'}%</td>
                 {:else}
-                  <td>
-                    {typeof row[idx] === 'boolean' ? (row[idx] ? 'Yes' : 'No') : row[idx] || '--'}
+                  <td class={f.type}>
+                    {typeof row[idx] === 'boolean' ? (row[idx] ? 'Yes' : 'No') : (row[idx] || '--')}
                   </td>
                 {/if}
               {/each}

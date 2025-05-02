@@ -142,7 +142,7 @@ var AdminRoomMeta = zCrud.Meta{
 
 func (d *Domain) AdminRoom(in *AdminRoomIn) (out AdminRoomOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

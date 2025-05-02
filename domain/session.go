@@ -20,6 +20,7 @@ import (
 	"github.com/zeebo/xxh3"
 
 	"kostjc/conf"
+	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mAuth/wcAuth"
 )
@@ -31,6 +32,7 @@ type Session struct {
 
 	// not saved but retrieved from SUPERADMIN_EMAILS env
 	IsSuperAdmin bool
+	Role         string
 
 	Segments M.SB
 }
@@ -225,6 +227,8 @@ func (d *Domain) MustLogin(in RequestCommon, out *ResponseCommon) (res *Session)
 		return nil
 	}
 
+	sess.Role = loggedUser.Role
+
 	if !session.FindBySessionToken() {
 		out.SetError(498, ErrSessionTokenNotFound)
 		return nil
@@ -255,10 +259,10 @@ func (d *Domain) MustAdmin(in RequestCommon, out *ResponseCommon) (sess *Session
 	if sess == nil {
 		return nil
 	}
-	if !sess.IsSuperAdmin {
-		out.SetError(403, ErrSessionUserNotSuperAdmin)
+
+	if sess.Role != mAuth.RoleAdmin {
 		return nil
 	}
-	sess.IsSuperAdmin = true
+
 	return sess
 }

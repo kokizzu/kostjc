@@ -98,7 +98,7 @@ var AdminLocationMeta = zCrud.Meta{
 
 func (d *Domain) AdminLocation(in *AdminLocationIn) (out AdminLocationOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

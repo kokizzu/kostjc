@@ -107,7 +107,7 @@ var AdminStockMeta = zCrud.Meta{
 
 func (d *Domain) AdminStock(in *AdminStockIn) (out AdminStockOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

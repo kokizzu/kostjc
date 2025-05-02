@@ -100,7 +100,7 @@ var AdminFacilityMeta = zCrud.Meta{
 
 func (d *Domain) AdminFacility(in *AdminFacilityIn) (out AdminFacilityOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

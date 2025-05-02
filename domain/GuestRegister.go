@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mAuth/wcAuth"
 
@@ -62,6 +63,8 @@ func (d *Domain) GuestRegister(in *GuestRegisterIn) (out GuestRegisterOut) {
 	user.SetEncryptedPassword(in.Password, in.UnixNow())
 	user.SecretCode = id64.SID() + S.RandomCB63(1)
 	user.SetGenUniqueUsernameByEmail(in.Email, in.UnixNow())
+
+	user.SetRole(mAuth.RoleUser)
 
 	user.SetUpdatedAt(in.UnixNow())
 	user.SetCreatedAt(in.UnixNow())

@@ -15,6 +15,7 @@ var allCommands = []string{
 	domain.AdminRoomAction,
 	domain.AdminStockAction,
 	domain.AdminTenantsAction,
+	domain.AdminUsersManagementAction,
 	domain.GuestLoginAction,
 	domain.GuestRegisterAction,
 	domain.GuestResendVerificationEmailAction,

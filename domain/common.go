@@ -28,6 +28,7 @@ import (
 	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"kostjc/conf"
+	"kostjc/model/mAuth"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file common.go
@@ -366,5 +367,10 @@ func (d *Domain) segmentsFromSession(s *Session) M.SB {
 	if s.IsSuperAdmin {
 		s.Segments[AdminSegment] = true
 	}
+
+	if s.Role == mAuth.RoleAdmin {
+		s.Segments[AdminSegment] = true
+	}
+
 	return s.Segments
 }

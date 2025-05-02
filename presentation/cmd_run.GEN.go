@@ -76,6 +76,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminTenants(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminUsersManagementAction:
+		in := domain.AdminUsersManagementIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminUsersManagement(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.GuestLoginAction:
 		in := domain.GuestLoginIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

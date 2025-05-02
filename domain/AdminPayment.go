@@ -119,7 +119,7 @@ var AdminPaymentMeta = zCrud.Meta{
 
 func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

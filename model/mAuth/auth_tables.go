@@ -17,9 +17,13 @@ const (
 )
 
 const (
-	UserRoleStaff = `staff`
-	UserRoleAdmin = `admin`
+	RoleUser  = `User`
+	RoleAdmin = `Admin`
 )
+
+func IsValidRole(role string) bool {
+	return role == RoleUser || role == RoleAdmin
+}
 
 const (
 	TableUsers Tt.TableName = `users`

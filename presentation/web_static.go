@@ -5,6 +5,7 @@ import (
 	"github.com/kokizzu/gotro/M"
 
 	"kostjc/domain"
+	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/zCrud"
@@ -41,6 +42,33 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminUsersManagementAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminUsersManagementIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminUsersManagementAction)
+		if err != nil {
+			return err
+		}
+
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.AdminUsersManagement(&in)
+
+		return views.RenderUsersManagement(ctx, M.SX{
+			`title`:    `KostJC | Users Management`,
+			`user`:     user,
+			`segments`: segments,
+			`users`:    out.Users,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
 	fw.Get(`/`+domain.AdminLocationAction, func(ctx *fiber.Ctx) error {
 		var in domain.AdminLocationIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminLocationAction)
@@ -48,7 +76,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -76,7 +104,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -104,7 +132,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -140,7 +168,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -178,7 +206,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -206,7 +234,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -238,7 +266,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -274,7 +302,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -321,6 +349,11 @@ func notAdmin(ctx *fiber.Ctx, d *domain.Domain, in domain.RequestCommon) bool {
 		})
 		return true
 	}
+
+	if sess.Role != mAuth.RoleAdmin {
+		return true
+	}
+
 	return false
 }
 

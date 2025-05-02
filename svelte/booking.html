@@ -4111,6 +4111,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       exports.AdminTenants = async function AdminTenants(i, cb) {
         return await axios.post("/admin/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminUsersManagement = async function AdminUsersManagement(i, cb) {
+        return await axios.post("/admin/usersManagement", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.GuestLogin = async function GuestLogin(i, cb) {
         return await axios.post("/guest/login", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -5410,6 +5413,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var RiUserFacesUser3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"></path>' };
   var RiUserFacesUserFollowLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M14 14.252V16.3414C13.3744 16.1203 12.7013 16 12 16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM17.7929 19.9142L21.3284 16.3787L22.7426 17.7929L17.7929 22.7426L14.2574 19.2071L15.6716 17.7929L17.7929 19.9142Z"></path>' };
   var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
+  var RiUserFacesGroupLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>' };
   var RiSystemDeleteBin5Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8ZM6 10V20H18V10H6ZM9 12H11V18H9V12ZM13 12H15V18H13V12ZM7 5V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V5H22V7H2V5H7ZM9 4V5H15V4H9Z"></path>' };
   var RiSystemAddBoxLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM5 5V19H19V5H5ZM11 11V7H13V11H17V13H13V17H11V13H7V11H11Z"></path>' };
   var RiSystemFilterLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M21 4V6H20L15 13.5V22H9V13.5L4 6H3V4H21ZM6.4037 6L11 12.8944V20H13V12.8944L17.5963 6H6.4037Z"></path>' };
@@ -5425,23 +5429,20 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
 
   // _partials/SideMenu.svelte
-  function create_fragment2(ctx) {
-    let aside;
-    let div;
-    let nav0;
+  function create_if_block(ctx) {
+    let h3;
+    let t1;
+    let nav;
     let a0;
     let icon0;
-    let t0;
-    let span0;
     let t2;
+    let span0;
+    let t4;
     let a1;
     let icon1;
-    let t3;
-    let span1;
     let t5;
-    let h3;
+    let span1;
     let t7;
-    let nav1;
     let a2;
     let icon2;
     let t8;
@@ -5476,19 +5477,294 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let icon8;
     let t26;
     let span8;
-    let t28;
-    let a9;
-    let icon9;
-    let t29;
-    let span9;
-    let t31;
-    let span10;
-    let t32;
-    let nav2;
+    let current;
+    icon0 = new Icon_default({
+      props: { src: RiMapMapPin2Line, size: "20" }
+    });
+    icon1 = new Icon_default({
+      props: { src: LuHandPlatter, size: "20" }
+    });
+    icon2 = new Icon_default({
+      props: { src: RiBuildingsHotelLine, size: "20" }
+    });
+    icon3 = new Icon_default({
+      props: { src: RiOthersDoorOpenLine, size: "20" }
+    });
+    icon4 = new Icon_default({
+      props: {
+        src: RiBusinessCalendarScheduleLine,
+        size: "20"
+      }
+    });
+    icon5 = new Icon_default({
+      props: { src: RiFinanceWallet3Line, size: "20" }
+    });
+    icon6 = new Icon_default({
+      props: {
+        src: RiBusinessInboxUnarchiveLine,
+        size: "20"
+      }
+    });
+    icon7 = new Icon_default({
+      props: {
+        src: RiUserFacesUserFollowLine,
+        size: "20"
+      }
+    });
+    icon8 = new Icon_default({
+      props: { src: RiUserFacesGroupLine, size: "20" }
+    });
+    return {
+      c() {
+        h3 = element("h3");
+        h3.textContent = "Admin";
+        t1 = space();
+        nav = element("nav");
+        a0 = element("a");
+        create_component(icon0.$.fragment);
+        t2 = space();
+        span0 = element("span");
+        span0.textContent = "Locations";
+        t4 = space();
+        a1 = element("a");
+        create_component(icon1.$.fragment);
+        t5 = space();
+        span1 = element("span");
+        span1.textContent = "Facilities";
+        t7 = space();
+        a2 = element("a");
+        create_component(icon2.$.fragment);
+        t8 = space();
+        span2 = element("span");
+        span2.textContent = "Buildings";
+        t10 = space();
+        a3 = element("a");
+        create_component(icon3.$.fragment);
+        t11 = space();
+        span3 = element("span");
+        span3.textContent = "Rooms";
+        t13 = space();
+        a4 = element("a");
+        create_component(icon4.$.fragment);
+        t14 = space();
+        span4 = element("span");
+        span4.textContent = "Bookings";
+        t16 = space();
+        a5 = element("a");
+        create_component(icon5.$.fragment);
+        t17 = space();
+        span5 = element("span");
+        span5.textContent = "Payments";
+        t19 = space();
+        a6 = element("a");
+        create_component(icon6.$.fragment);
+        t20 = space();
+        span6 = element("span");
+        span6.textContent = "Stocks";
+        t22 = space();
+        a7 = element("a");
+        create_component(icon7.$.fragment);
+        t23 = space();
+        span7 = element("span");
+        span7.textContent = "Tenants";
+        t25 = space();
+        a8 = element("a");
+        create_component(icon8.$.fragment);
+        t26 = space();
+        span8 = element("span");
+        span8.textContent = "Users";
+        attr(h3, "class", "nav-menu-title svelte-2xd6p5");
+        attr(a0, "href", "/admin/location");
+        attr(a0, "class", "svelte-2xd6p5");
+        toggle_class(
+          a0,
+          "active",
+          /*pathLv2*/
+          ctx[3] === "location"
+        );
+        attr(a1, "href", "/admin/facility");
+        attr(a1, "class", "svelte-2xd6p5");
+        toggle_class(
+          a1,
+          "active",
+          /*pathLv2*/
+          ctx[3] === "facility"
+        );
+        attr(a2, "href", "/admin/building");
+        attr(a2, "class", "svelte-2xd6p5");
+        toggle_class(
+          a2,
+          "active",
+          /*pathLv2*/
+          ctx[3] === "building"
+        );
+        attr(a3, "href", "/admin/room");
+        attr(a3, "class", "svelte-2xd6p5");
+        toggle_class(
+          a3,
+          "active",
+          /*pathLv2*/
+          ctx[3] === "room"
+        );
+        attr(a4, "href", "/admin/booking");
+        attr(a4, "class", "svelte-2xd6p5");
+        toggle_class(
+          a4,
+          "active",
+          /*pathLv2*/
+          ctx[3] === "booking"
+        );
+        attr(a5, "href", "/admin/payment");
+        attr(a5, "class", "svelte-2xd6p5");
+        toggle_class(
+          a5,
+          "active",
+          /*pathLv2*/
+          ctx[3] === "payment"
+        );
+        attr(a6, "href", "/admin/stock");
+        attr(a6, "class", "svelte-2xd6p5");
+        toggle_class(
+          a6,
+          "active",
+          /*pathLv2*/
+          ctx[3] === "stock"
+        );
+        attr(a7, "href", "/admin/tenants");
+        attr(a7, "class", "svelte-2xd6p5");
+        toggle_class(
+          a7,
+          "active",
+          /*pathLv2*/
+          ctx[3] === "tenants"
+        );
+        attr(a8, "href", "/admin/usersManagement");
+        attr(a8, "class", "svelte-2xd6p5");
+        toggle_class(
+          a8,
+          "active",
+          /*pathLv2*/
+          ctx[3] === "usersManagement"
+        );
+        attr(nav, "class", "nav-menu svelte-2xd6p5");
+      },
+      m(target, anchor) {
+        insert(target, h3, anchor);
+        insert(target, t1, anchor);
+        insert(target, nav, anchor);
+        append(nav, a0);
+        mount_component(icon0, a0, null);
+        append(a0, t2);
+        append(a0, span0);
+        append(nav, t4);
+        append(nav, a1);
+        mount_component(icon1, a1, null);
+        append(a1, t5);
+        append(a1, span1);
+        append(nav, t7);
+        append(nav, a2);
+        mount_component(icon2, a2, null);
+        append(a2, t8);
+        append(a2, span2);
+        append(nav, t10);
+        append(nav, a3);
+        mount_component(icon3, a3, null);
+        append(a3, t11);
+        append(a3, span3);
+        append(nav, t13);
+        append(nav, a4);
+        mount_component(icon4, a4, null);
+        append(a4, t14);
+        append(a4, span4);
+        append(nav, t16);
+        append(nav, a5);
+        mount_component(icon5, a5, null);
+        append(a5, t17);
+        append(a5, span5);
+        append(nav, t19);
+        append(nav, a6);
+        mount_component(icon6, a6, null);
+        append(a6, t20);
+        append(a6, span6);
+        append(nav, t22);
+        append(nav, a7);
+        mount_component(icon7, a7, null);
+        append(a7, t23);
+        append(a7, span7);
+        append(nav, t25);
+        append(nav, a8);
+        mount_component(icon8, a8, null);
+        append(a8, t26);
+        append(a8, span8);
+        current = true;
+      },
+      p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon0.$.fragment, local);
+        transition_in(icon1.$.fragment, local);
+        transition_in(icon2.$.fragment, local);
+        transition_in(icon3.$.fragment, local);
+        transition_in(icon4.$.fragment, local);
+        transition_in(icon5.$.fragment, local);
+        transition_in(icon6.$.fragment, local);
+        transition_in(icon7.$.fragment, local);
+        transition_in(icon8.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon0.$.fragment, local);
+        transition_out(icon1.$.fragment, local);
+        transition_out(icon2.$.fragment, local);
+        transition_out(icon3.$.fragment, local);
+        transition_out(icon4.$.fragment, local);
+        transition_out(icon5.$.fragment, local);
+        transition_out(icon6.$.fragment, local);
+        transition_out(icon7.$.fragment, local);
+        transition_out(icon8.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(h3);
+          detach(t1);
+          detach(nav);
+        }
+        destroy_component(icon0);
+        destroy_component(icon1);
+        destroy_component(icon2);
+        destroy_component(icon3);
+        destroy_component(icon4);
+        destroy_component(icon5);
+        destroy_component(icon6);
+        destroy_component(icon7);
+        destroy_component(icon8);
+      }
+    };
+  }
+  function create_fragment2(ctx) {
+    let aside;
+    let div;
+    let nav0;
+    let a0;
+    let icon0;
+    let t0;
+    let span0;
+    let t2;
+    let a1;
+    let icon1;
+    let t3;
+    let span1;
+    let t5;
+    let t6;
+    let span2;
+    let t7;
+    let nav1;
     let button;
-    let icon10;
-    let t33;
-    let span11;
+    let icon2;
+    let t8;
+    let span3;
     let current;
     let mounted;
     let dispose;
@@ -5498,40 +5774,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     icon1 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
+    let if_block = (
+      /*access*/
+      ctx[0].admin && create_if_block(ctx)
+    );
     icon2 = new Icon_default({
-      props: { src: RiMapMapPin2Line, size: "20" }
-    });
-    icon3 = new Icon_default({
-      props: { src: LuHandPlatter, size: "20" }
-    });
-    icon4 = new Icon_default({
-      props: { src: RiBuildingsHotelLine, size: "20" }
-    });
-    icon5 = new Icon_default({
-      props: { src: RiOthersDoorOpenLine, size: "20" }
-    });
-    icon6 = new Icon_default({
-      props: {
-        src: RiBusinessCalendarScheduleLine,
-        size: "20"
-      }
-    });
-    icon7 = new Icon_default({
-      props: { src: RiFinanceWallet3Line, size: "20" }
-    });
-    icon8 = new Icon_default({
-      props: {
-        src: RiBusinessInboxUnarchiveLine,
-        size: "20"
-      }
-    });
-    icon9 = new Icon_default({
-      props: {
-        src: RiUserFacesUserFollowLine,
-        size: "20"
-      }
-    });
-    icon10 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
     return {
@@ -5551,73 +5798,24 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         span1 = element("span");
         span1.textContent = "Profile";
         t5 = space();
-        h3 = element("h3");
-        h3.textContent = "Admin";
+        if (if_block)
+          if_block.c();
+        t6 = space();
+        span2 = element("span");
         t7 = space();
         nav1 = element("nav");
-        a2 = element("a");
+        button = element("button");
         create_component(icon2.$.fragment);
         t8 = space();
-        span2 = element("span");
-        span2.textContent = "Locations";
-        t10 = space();
-        a3 = element("a");
-        create_component(icon3.$.fragment);
-        t11 = space();
         span3 = element("span");
-        span3.textContent = "Facilities";
-        t13 = space();
-        a4 = element("a");
-        create_component(icon4.$.fragment);
-        t14 = space();
-        span4 = element("span");
-        span4.textContent = "Buildings";
-        t16 = space();
-        a5 = element("a");
-        create_component(icon5.$.fragment);
-        t17 = space();
-        span5 = element("span");
-        span5.textContent = "Rooms";
-        t19 = space();
-        a6 = element("a");
-        create_component(icon6.$.fragment);
-        t20 = space();
-        span6 = element("span");
-        span6.textContent = "Bookings";
-        t22 = space();
-        a7 = element("a");
-        create_component(icon7.$.fragment);
-        t23 = space();
-        span7 = element("span");
-        span7.textContent = "Payments";
-        t25 = space();
-        a8 = element("a");
-        create_component(icon8.$.fragment);
-        t26 = space();
-        span8 = element("span");
-        span8.textContent = "Stocks";
-        t28 = space();
-        a9 = element("a");
-        create_component(icon9.$.fragment);
-        t29 = space();
-        span9 = element("span");
-        span9.textContent = "Tenants";
-        t31 = space();
-        span10 = element("span");
-        t32 = space();
-        nav2 = element("nav");
-        button = element("button");
-        create_component(icon10.$.fragment);
-        t33 = space();
-        span11 = element("span");
-        span11.textContent = "Logout";
+        span3.textContent = "Logout";
         attr(a0, "href", "/");
         attr(a0, "class", "svelte-2xd6p5");
         toggle_class(
           a0,
           "active",
           /*pathLv1*/
-          ctx[1] === ""
+          ctx[2] === ""
         );
         attr(a1, "href", "/user");
         attr(a1, "class", "svelte-2xd6p5");
@@ -5625,78 +5823,12 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           a1,
           "active",
           /*pathAll*/
-          ctx[0] === "/user"
+          ctx[1] === "/user"
         );
         attr(nav0, "class", "nav-menu svelte-2xd6p5");
-        attr(h3, "class", "nav-menu-title svelte-2xd6p5");
-        attr(a2, "href", "/admin/location");
-        attr(a2, "class", "svelte-2xd6p5");
-        toggle_class(
-          a2,
-          "active",
-          /*pathLv2*/
-          ctx[2] === "location"
-        );
-        attr(a3, "href", "/admin/facility");
-        attr(a3, "class", "svelte-2xd6p5");
-        toggle_class(
-          a3,
-          "active",
-          /*pathLv2*/
-          ctx[2] === "facility"
-        );
-        attr(a4, "href", "/admin/building");
-        attr(a4, "class", "svelte-2xd6p5");
-        toggle_class(
-          a4,
-          "active",
-          /*pathLv2*/
-          ctx[2] === "building"
-        );
-        attr(a5, "href", "/admin/room");
-        attr(a5, "class", "svelte-2xd6p5");
-        toggle_class(
-          a5,
-          "active",
-          /*pathLv2*/
-          ctx[2] === "room"
-        );
-        attr(a6, "href", "/admin/booking");
-        attr(a6, "class", "svelte-2xd6p5");
-        toggle_class(
-          a6,
-          "active",
-          /*pathLv2*/
-          ctx[2] === "booking"
-        );
-        attr(a7, "href", "/admin/payment");
-        attr(a7, "class", "svelte-2xd6p5");
-        toggle_class(
-          a7,
-          "active",
-          /*pathLv2*/
-          ctx[2] === "payment"
-        );
-        attr(a8, "href", "/admin/stock");
-        attr(a8, "class", "svelte-2xd6p5");
-        toggle_class(
-          a8,
-          "active",
-          /*pathLv2*/
-          ctx[2] === "stock"
-        );
-        attr(a9, "href", "/admin/tenants");
-        attr(a9, "class", "svelte-2xd6p5");
-        toggle_class(
-          a9,
-          "active",
-          /*pathLv2*/
-          ctx[2] === "tenants"
-        );
-        attr(nav1, "class", "nav-menu svelte-2xd6p5");
-        attr(span10, "class", "separator svelte-2xd6p5");
+        attr(span2, "class", "separator svelte-2xd6p5");
         attr(button, "class", "red svelte-2xd6p5");
-        attr(nav2, "class", "nav-menu svelte-2xd6p5");
+        attr(nav1, "class", "nav-menu svelte-2xd6p5");
         attr(div, "class", "container svelte-2xd6p5");
         attr(aside, "class", "svelte-2xd6p5");
       },
@@ -5714,96 +5846,66 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         append(a1, t3);
         append(a1, span1);
         append(div, t5);
-        append(div, h3);
+        if (if_block)
+          if_block.m(div, null);
+        append(div, t6);
+        append(div, span2);
         append(div, t7);
         append(div, nav1);
-        append(nav1, a2);
-        mount_component(icon2, a2, null);
-        append(a2, t8);
-        append(a2, span2);
-        append(nav1, t10);
-        append(nav1, a3);
-        mount_component(icon3, a3, null);
-        append(a3, t11);
-        append(a3, span3);
-        append(nav1, t13);
-        append(nav1, a4);
-        mount_component(icon4, a4, null);
-        append(a4, t14);
-        append(a4, span4);
-        append(nav1, t16);
-        append(nav1, a5);
-        mount_component(icon5, a5, null);
-        append(a5, t17);
-        append(a5, span5);
-        append(nav1, t19);
-        append(nav1, a6);
-        mount_component(icon6, a6, null);
-        append(a6, t20);
-        append(a6, span6);
-        append(nav1, t22);
-        append(nav1, a7);
-        mount_component(icon7, a7, null);
-        append(a7, t23);
-        append(a7, span7);
-        append(nav1, t25);
-        append(nav1, a8);
-        mount_component(icon8, a8, null);
-        append(a8, t26);
-        append(a8, span8);
-        append(nav1, t28);
-        append(nav1, a9);
-        mount_component(icon9, a9, null);
-        append(a9, t29);
-        append(a9, span9);
-        append(div, t31);
-        append(div, span10);
-        append(div, t32);
-        append(div, nav2);
-        append(nav2, button);
-        mount_component(icon10, button, null);
-        append(button, t33);
-        append(button, span11);
+        append(nav1, button);
+        mount_component(icon2, button, null);
+        append(button, t8);
+        append(button, span3);
         current = true;
         if (!mounted) {
           dispose = listen(
             button,
             "click",
             /*logout*/
-            ctx[3]
+            ctx[4]
           );
           mounted = true;
         }
       },
-      p: noop,
+      p(ctx2, [dirty]) {
+        if (
+          /*access*/
+          ctx2[0].admin
+        ) {
+          if (if_block) {
+            if_block.p(ctx2, dirty);
+            if (dirty & /*access*/
+            1) {
+              transition_in(if_block, 1);
+            }
+          } else {
+            if_block = create_if_block(ctx2);
+            if_block.c();
+            transition_in(if_block, 1);
+            if_block.m(div, t6);
+          }
+        } else if (if_block) {
+          group_outros();
+          transition_out(if_block, 1, 1, () => {
+            if_block = null;
+          });
+          check_outros();
+        }
+      },
       i(local) {
         if (current)
           return;
         transition_in(icon0.$.fragment, local);
         transition_in(icon1.$.fragment, local);
+        transition_in(if_block);
         transition_in(icon2.$.fragment, local);
-        transition_in(icon3.$.fragment, local);
-        transition_in(icon4.$.fragment, local);
-        transition_in(icon5.$.fragment, local);
-        transition_in(icon6.$.fragment, local);
-        transition_in(icon7.$.fragment, local);
-        transition_in(icon8.$.fragment, local);
-        transition_in(icon9.$.fragment, local);
-        transition_in(icon10.$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(icon0.$.fragment, local);
         transition_out(icon1.$.fragment, local);
+        transition_out(if_block);
         transition_out(icon2.$.fragment, local);
-        transition_out(icon3.$.fragment, local);
-        transition_out(icon4.$.fragment, local);
-        transition_out(icon5.$.fragment, local);
-        transition_out(icon6.$.fragment, local);
-        transition_out(icon7.$.fragment, local);
-        transition_out(icon8.$.fragment, local);
-        transition_out(icon9.$.fragment, local);
-        transition_out(icon10.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -5812,15 +5914,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         destroy_component(icon0);
         destroy_component(icon1);
+        if (if_block)
+          if_block.d();
         destroy_component(icon2);
-        destroy_component(icon3);
-        destroy_component(icon4);
-        destroy_component(icon5);
-        destroy_component(icon6);
-        destroy_component(icon7);
-        destroy_component(icon8);
-        destroy_component(icon9);
-        destroy_component(icon10);
         mounted = false;
         dispose();
       }
@@ -5867,14 +5963,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     $self.$set = ($props2) => {
       if ("access" in $props2)
-        $invalidate(4, access = $props2.access);
+        $invalidate(0, access = $props2.access);
     };
-    return [pathAll, pathLv1, pathLv2, logout, access];
+    return [access, pathAll, pathLv1, pathLv2, logout];
   }
   var SideMenu = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance2, create_fragment2, safe_not_equal, { access: 4 });
+      init(this, options, instance2, create_fragment2, safe_not_equal, { access: 0 });
     }
   };
   var SideMenu_default = SideMenu;
@@ -7758,6 +7854,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     };
   }
   function create_if_block_1(ctx) {
+    let label_1;
+    let t0;
+    let t1;
     let select;
     let mounted;
     let dispose;
@@ -7771,10 +7870,23 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     return {
       c() {
+        label_1 = element("label");
+        t0 = text(
+          /*label*/
+          ctx[6]
+        );
+        t1 = space();
         select = element("select");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
+        attr(label_1, "class", "label svelte-1i8qf0y");
+        attr(
+          label_1,
+          "for",
+          /*id*/
+          ctx[0]
+        );
         attr(select, "class", "svelte-1i8qf0y");
         if (
           /*value*/
@@ -7786,6 +7898,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           ));
       },
       m(target, anchor) {
+        insert(target, label_1, anchor);
+        append(label_1, t0);
+        insert(target, t1, anchor);
         insert(target, select, anchor);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -7809,6 +7924,22 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
       },
       p(ctx2, dirty) {
+        if (dirty[0] & /*label*/
+        64)
+          set_data(
+            t0,
+            /*label*/
+            ctx2[6]
+          );
+        if (dirty[0] & /*id*/
+        1) {
+          attr(
+            label_1,
+            "for",
+            /*id*/
+            ctx2[0]
+          );
+        }
         if (dirty[0] & /*values*/
         32) {
           each_value = ensure_array_like(
@@ -7844,6 +7975,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       o: noop,
       d(detaching) {
         if (detaching) {
+          detach(label_1);
+          detach(t1);
           detach(select);
         }
         destroy_each(each_blocks, detaching);
@@ -7852,7 +7985,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
     };
   }
-  function create_if_block(ctx) {
+  function create_if_block2(ctx) {
     let label0;
     let t0;
     let t1;
@@ -8723,7 +8856,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let div1_class_value;
     let current;
     const if_block_creators = [
-      create_if_block,
+      create_if_block2,
       create_if_block_1,
       create_if_block_2,
       create_if_block_4,
@@ -9261,7 +9394,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     child_ctx[11] = i;
     return child_ctx;
   }
-  function create_if_block2(ctx) {
+  function create_if_block3(ctx) {
     let div3;
     let div2;
     let header;
@@ -9584,7 +9717,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let current;
     let if_block = (
       /*isVisible*/
-      ctx[2] && create_if_block2(ctx)
+      ctx[2] && create_if_block3(ctx)
     );
     return {
       c() {
@@ -9610,7 +9743,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block2(ctx2);
+            if_block = create_if_block3(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -10868,11 +11001,15 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ] || "--"
     )) + "";
     let t;
+    let td_class_value;
     return {
       c() {
         td = element("td");
         t = text(t_value);
-        attr(td, "class", "svelte-7qntjv");
+        attr(td, "class", td_class_value = null_to_empty(
+          /*f*/
+          ctx[83].type
+        ) + " svelte-7qntjv");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -10898,6 +11035,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           ] || "--"
         )) + ""))
           set_data(t, t_value);
+        if (dirty[0] & /*FIELDS*/
+        1 && td_class_value !== (td_class_value = null_to_empty(
+          /*f*/
+          ctx2[83].type
+        ) + " svelte-7qntjv")) {
+          attr(td, "class", td_class_value);
+        }
       },
       i: noop,
       o: noop,
@@ -10924,7 +11068,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         td = element("td");
         t0 = text(t0_value);
         t1 = text("%");
-        attr(td, "class", "svelte-7qntjv");
+        attr(td, "class", "percentage svelte-7qntjv");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -10969,7 +11113,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       c() {
         td = element("td");
         t = text(t_value);
-        attr(td, "class", "svelte-7qntjv");
+        attr(td, "class", "combobox svelte-7qntjv");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -11019,7 +11163,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       c() {
         td = element("td");
         t = text(t_value);
-        attr(td, "class", "svelte-7qntjv");
+        attr(td, "class", "datetime svelte-7qntjv");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -11071,7 +11215,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       c() {
         td = element("td");
         t = text(t_value);
-        attr(td, "class", "svelte-7qntjv");
+        attr(td, "class", "currency svelte-7qntjv");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -11123,7 +11267,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       c() {
         td = element("td");
         t = text(t_value);
-        attr(td, "class", "svelte-7qntjv");
+        attr(td, "class", "intArr svelte-7qntjv");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -12201,7 +12345,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
     };
   }
-  function create_if_block3(ctx) {
+  function create_if_block4(ctx) {
     let div;
     let each_value_1 = ensure_array_like(
       /*rowsToShow*/
@@ -12511,7 +12655,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     if_block4 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
     let if_block5 = (
       /*showRowsNum*/
-      ctx[24] && create_if_block3(ctx)
+      ctx[24] && create_if_block4(ctx)
     );
     icon1 = new Icon_default({
       props: {
@@ -12942,7 +13086,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           if (if_block5) {
             if_block5.p(ctx2, dirty);
           } else {
-            if_block5 = create_if_block3(ctx2);
+            if_block5 = create_if_block4(ctx2);
             if_block5.c();
             if_block5.m(div6, t15);
           }
@@ -13786,7 +13930,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
     };
   }
-  function create_if_block4(ctx) {
+  function create_if_block5(ctx) {
     let icon;
     let current;
     icon = new Icon_default({
@@ -14012,7 +14156,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     ctx[0] && create_if_block_111(ctx);
     let if_block2 = (
       /*isSubmitted*/
-      ctx[0] && create_if_block4(ctx)
+      ctx[0] && create_if_block5(ctx)
     );
     return {
       c() {
@@ -14349,7 +14493,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
               transition_in(if_block2, 1);
             }
           } else {
-            if_block2 = create_if_block4(ctx2);
+            if_block2 = create_if_block5(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
             if_block2.m(button3, null);
@@ -14623,7 +14767,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var PopUpAddBooking_default = PopUpAddBooking;
 
   // booking.svelte
-  function create_if_block5(ctx) {
+  function create_if_block6(ctx) {
     let popupaddbooking;
     let updating_isSubmitted;
     let current;
@@ -14877,7 +15021,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let current;
     let if_block = (
       /*isPopUpFormReady*/
-      ctx[3] && create_if_block5(ctx)
+      ctx[3] && create_if_block6(ctx)
     );
     layoutmain = new main_default({
       props: {
@@ -14913,7 +15057,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block5(ctx2);
+            if_block = create_if_block6(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(t.parentNode, t);

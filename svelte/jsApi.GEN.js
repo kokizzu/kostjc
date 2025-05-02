@@ -662,6 +662,8 @@ exports.AdminPayment = async function AdminPayment( i, cb ) {
  * @property {number} room.restoredBy
  * @property {number} room.buildingId
  * @property {String} room.lastUseAt
+ * @property {String} room.roomSize
+ * @property {String} room.imageUrl
  */
 const AdminRoomIn = {
   cmd: '', // string
@@ -688,6 +690,8 @@ const AdminRoomIn = {
     restoredBy: 0, // uint64
     buildingId: 0, // uint64
     lastUseAt: '', // string
+    roomSize: '', // string
+    imageUrl: '', // string
   }, // rqProperty.Rooms
 }
 /**
@@ -715,6 +719,8 @@ const AdminRoomIn = {
  * @property {number} room.restoredBy
  * @property {number} room.buildingId
  * @property {String} room.lastUseAt
+ * @property {String} room.roomSize
+ * @property {String} room.imageUrl
  * @property {Object} rooms
  */
 const AdminRoomOut = {
@@ -749,6 +755,8 @@ const AdminRoomOut = {
     restoredBy: 0, // uint64
     buildingId: 0, // uint64
     lastUseAt: '', // string
+    roomSize: '', // string
+    imageUrl: '', // string
   }, // rqProperty.Rooms
   rooms: { // [][]any
   }, // [][]any
@@ -1055,6 +1063,143 @@ const AdminTenantsOut = {
  */
 exports.AdminTenants = async function AdminTenants( i, cb ) {
   return await axios.post( '/admin/tenants', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminUsersManagementIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} user.id
+ * @property {String} user.email
+ * @property {String} user.password
+ * @property {number} user.createdAt
+ * @property {number} user.createdBy
+ * @property {number} user.updatedAt
+ * @property {number} user.updatedBy
+ * @property {number} user.deletedAt
+ * @property {number} user.passwordSetAt
+ * @property {String} user.secretCode
+ * @property {number} user.secretCodeAt
+ * @property {number} user.verifiedAt
+ * @property {number} user.lastLoginAt
+ * @property {String} user.fullName
+ * @property {String} user.userName
+ * @property {String} user.role
+ */
+const AdminUsersManagementIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  user: { // rqAuth.Users
+    id: 0, // uint64
+    email: '', // string
+    password: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    passwordSetAt: 0, // int64
+    secretCode: '', // string
+    secretCodeAt: 0, // int64
+    verifiedAt: 0, // int64
+    lastLoginAt: 0, // int64
+    fullName: '', // string
+    userName: '', // string
+    role: '', // string
+  }, // rqAuth.Users
+}
+/**
+ * @typedef {Object} AdminUsersManagementOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} user.id
+ * @property {String} user.email
+ * @property {String} user.password
+ * @property {number} user.createdAt
+ * @property {number} user.createdBy
+ * @property {number} user.updatedAt
+ * @property {number} user.updatedBy
+ * @property {number} user.deletedAt
+ * @property {number} user.passwordSetAt
+ * @property {String} user.secretCode
+ * @property {number} user.secretCodeAt
+ * @property {number} user.verifiedAt
+ * @property {number} user.lastLoginAt
+ * @property {String} user.fullName
+ * @property {String} user.userName
+ * @property {String} user.role
+ * @property {Object} users
+ */
+const AdminUsersManagementOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  user: { // rqAuth.Users
+    id: 0, // uint64
+    email: '', // string
+    password: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    passwordSetAt: 0, // int64
+    secretCode: '', // string
+    secretCodeAt: 0, // int64
+    verifiedAt: 0, // int64
+    lastLoginAt: 0, // int64
+    fullName: '', // string
+    userName: '', // string
+    role: '', // string
+  }, // rqAuth.Users
+  users: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback AdminUsersManagementCallback
+ * @param {AdminUsersManagementOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminUsersManagementIn} i
+ * @param {AdminUsersManagementCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminUsersManagement = async function AdminUsersManagement( i, cb ) {
+  return await axios.post( '/admin/usersManagement', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
