@@ -5,6 +5,7 @@ go 1.24.1
 require (
 	github.com/ClickHouse/clickhouse-go/v2 v2.30.1
 	github.com/davecgh/go-spew v1.1.1
+	github.com/fatih/color v1.18.0
 	github.com/gabriel-vasile/mimetype v1.4.2
 	github.com/goccy/go-json v0.10.4
 	github.com/gofiber/fiber/v2 v2.50.0
@@ -17,6 +18,7 @@ require (
 	github.com/kpango/fastime v1.1.9
 	github.com/mojura/enkodo v0.5.6
 	github.com/ory/dockertest/v3 v3.11.0
+	github.com/pierrec/lz4/v4 v4.1.22
 	github.com/rs/zerolog v1.29.1
 	github.com/segmentio/fasthash v1.0.3
 	github.com/tarantool/go-tarantool v1.12.1
@@ -47,7 +49,6 @@ require (
 	github.com/docker/docker v27.5.0+incompatible // indirect
 	github.com/docker/go-connections v0.5.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
-	github.com/fatih/color v1.18.0 // indirect
 	github.com/go-faster/city v1.0.1 // indirect
 	github.com/go-faster/errors v0.7.1 // indirect
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
@@ -81,7 +82,6 @@ require (
 	github.com/orcaman/concurrent-map v1.0.0 // indirect
 	github.com/paulmach/orb v0.11.1 // indirect
 	github.com/philhofer/fwd v1.1.2 // indirect
-	github.com/pierrec/lz4/v4 v4.1.22 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rogpeppe/go-internal v1.13.1 // indirect

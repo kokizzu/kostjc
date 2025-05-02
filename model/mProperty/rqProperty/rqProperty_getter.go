@@ -4,7 +4,10 @@ import (
 	"kostjc/model/zCrud"
 	"strconv"
 
+	"github.com/kokizzu/gotro/A"
+	"github.com/kokizzu/gotro/L"
 	"github.com/kokizzu/gotro/X"
+	"github.com/tarantool/go-tarantool"
 )
 
 func (l *Locations) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud.PagerOut) (res [][]any) {
@@ -385,4 +388,214 @@ FROM ` + r.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 	})
 
 	return
+}
+
+func (b *Bookings) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (b *Bookings) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + b.SqlTableName() + `
+	LIMIT 1`
+
+	b.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (b *Bookings) Truncate() bool {
+	return b.Adapter.ExecBoxSpace(b.SpaceName()+`:truncate`, A.X{})
+}
+
+func (b *Buildings) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (b *Buildings) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + b.SqlTableName() + `
+	LIMIT 1`
+
+	b.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (b *Buildings) Truncate() bool {
+	return b.Adapter.ExecBoxSpace(b.SpaceName()+`:truncate`, A.X{})
+}
+
+func (b *Facilities) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (b *Facilities) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + b.SqlTableName() + `
+	LIMIT 1`
+
+	b.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (b *Facilities) Truncate() bool {
+	return b.Adapter.ExecBoxSpace(b.SpaceName()+`:truncate`, A.X{})
+}
+
+func (b *Locations) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (b *Locations) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + b.SqlTableName() + `
+	LIMIT 1`
+
+	b.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (b *Locations) Truncate() bool {
+	return b.Adapter.ExecBoxSpace(b.SpaceName()+`:truncate`, A.X{})
+}
+
+func (b *Payments) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (b *Payments) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + b.SqlTableName() + `
+	LIMIT 1`
+
+	b.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (b *Payments) Truncate() bool {
+	return b.Adapter.ExecBoxSpace(b.SpaceName()+`:truncate`, A.X{})
+}
+
+func (b *Rooms) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (b *Rooms) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + b.SqlTableName() + `
+	LIMIT 1`
+
+	b.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (b *Rooms) Truncate() bool {
+	return b.Adapter.ExecBoxSpace(b.SpaceName()+`:truncate`, A.X{})
+}
+
+func (b *Stocks) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (b *Stocks) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + b.SqlTableName() + `
+	LIMIT 1`
+
+	b.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (b *Stocks) Truncate() bool {
+	return b.Adapter.ExecBoxSpace(b.SpaceName()+`:truncate`, A.X{})
 }

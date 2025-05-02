@@ -3,9 +3,12 @@ package rqAuth
 import (
 	"time"
 
+	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/I"
+	"github.com/kokizzu/gotro/L"
 	"github.com/kokizzu/gotro/S"
 	"github.com/kokizzu/gotro/X"
+	"github.com/tarantool/go-tarantool"
 
 	"kostjc/model/zCrud"
 )
@@ -145,4 +148,64 @@ ORDER BY ` + t.SqlTenantName() + ` ASC`
 	})
 
 	return out
+}
+
+func (u *Users) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := u.Adapter.Select(u.SpaceName(), u.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (u *Users) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + u.SqlTableName() + `
+	LIMIT 1`
+
+	u.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (u *Users) Truncate() bool {
+	return u.Adapter.ExecBoxSpace(u.SpaceName()+`:truncate`, A.X{})
+}
+
+func (t *Tenants) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := t.Adapter.Select(t.SpaceName(), t.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (t *Tenants) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + t.SqlTableName() + `
+	LIMIT 1`
+
+	t.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (t *Tenants) Truncate() bool {
+	return t.Adapter.ExecBoxSpace(t.SpaceName()+`:truncate`, A.X{})
 }

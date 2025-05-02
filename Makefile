@@ -36,3 +36,9 @@ views:
 
 migrate:
 	go run main.go migrate
+
+backup-db:
+	go run main.go backup
+
+restore-db:
+	go run main.go restore

@@ -151,6 +151,10 @@ func main() {
 		cron.Start(log)
 	case `migrate`:
 		model.RunMigration(log, tConn, cConn)
+	case `backup`:
+		model.BackupDatabase(tConn)
+	case `restore`:
+		model.RestoreDatabase(tConn)
 	default:
 		log.Error().Str(`mode`, mode).Msg(`unknown mode`)
 	}
