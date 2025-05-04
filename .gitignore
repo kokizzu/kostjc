@@ -19,6 +19,7 @@ docker-data
 tmpdb
 AuthKey_*.p8
 upload
+svelte/bun.lockb
 
 *.lzo
 *.lz4

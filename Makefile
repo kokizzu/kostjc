@@ -8,7 +8,7 @@ setup:
 	go install golang.org/x/tools/cmd/goimports@latest
 
 local-tarantool:
-	docker exec -it kostjc-tarantool tarantoolctl connect userT:passT@127.0.0.1:3303
+	docker exec -it kostjc-tarantool tarantoolctl connect userT:passT@127.0.0.1:3301
 	# box.space -- list all tables
 	# box.execute [[ SELECT * FROM "users" LIMIT 1 ]]
 	# \set language sql
@@ -42,3 +42,10 @@ backup-db:
 
 restore-db:
 	go run main.go restore
+
+svelte:
+	pnpm i
+	pnpm watch
+
+web:
+	air web

@@ -1,0 +1,25 @@
+[Unit]
+Description=KostJC Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Restart=on-failure
+
+User=street
+Group=www-data
+
+WorkingDirectory=/home/kostjc
+
+ExecStart=/home/kostjc/start_kostjc_web.sh
+ExecStop=/usr/bin/killall kostjc.exe
+
+LimitNOFILE=2097152
+LimitNPROC=65535
+
+ProtectSystem=full
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
