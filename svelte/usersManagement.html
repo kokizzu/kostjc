@@ -4069,7 +4069,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         const formattedDate = `${year}-${month}-${date}`;
         return formattedDate;
       }
-      function dateISOFormat2(dayTo = 0) {
+      function dateISOFormat3(dayTo = 0) {
         const dt = new Date();
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -4106,7 +4106,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         utcDatetime,
         isoTime,
         isoDate,
-        dateISOFormat: dateISOFormat2,
+        dateISOFormat: dateISOFormat3,
         loadScript,
         formatPrice: formatPrice2
       };
@@ -13484,6 +13484,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
   // _components/PopUpForms.svelte
+  var import_xFormatter3 = __toESM(require_xFormatter());
   function get_each_context4(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[15] = list[i];
@@ -14389,7 +14390,24 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     const Reset = () => {
       $invalidate(7, payloads = []);
       if (FIELDS && FIELDS.length > 0) {
-        FIELDS.forEach(() => $invalidate(7, payloads = [...payloads, ""]));
+        FIELDS.forEach((f) => {
+          let initialPayload;
+          switch (f.inputType) {
+            case "combobox":
+              initialPayload = REFS[f.name] ? REFS[f.name][0] : f.ref[0] || "";
+              break;
+            case "combobox-arr":
+              initialPayload = REFS[f.name] ? REFS[f.name][0] : f.ref[0] || "";
+              break;
+            case "datetime":
+              initialPayload = (0, import_xFormatter3.dateISOFormat)(0);
+              break;
+            default:
+              initialPayload = "";
+              break;
+          }
+          $invalidate(7, payloads = [...payloads, initialPayload]);
+        });
       }
     };
     const cancel = () => {

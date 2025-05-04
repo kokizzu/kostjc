@@ -5,6 +5,7 @@
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
+  import { dateISOFormat } from './xFormatter';
 
   export let heading = 'Add product';
   export let FIELDS = /** @type Field[] */ ([]);
@@ -22,7 +23,24 @@
   export const Reset = () => {
     payloads = [];
     if (FIELDS && FIELDS.length > 0) {
-			FIELDS.forEach(() => payloads = [...payloads, '']);
+			FIELDS.forEach((f) => {
+        let initialPayload;
+        switch (f.inputType) {
+          case 'combobox':
+            initialPayload = REFS[f.name] ? REFS[f.name][0] : (f.ref[0] || '');
+            break;
+          case 'combobox-arr':
+            initialPayload = REFS[f.name] ? REFS[f.name][0] : (f.ref[0] || '');
+            break;
+          case 'datetime':
+            initialPayload = dateISOFormat(0);
+            break;
+          default:
+            initialPayload = '';
+            break;
+        }
+        payloads = [...payloads, initialPayload]
+      });
 		}
   }
   
