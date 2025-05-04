@@ -42,6 +42,7 @@ const (
 	ErrAdminTenantsRestoreFailed     = `failed to restore building`
 	ErrAdminTenantsLocationNotFound  = `location not found`
 	ErrAdminTenantsInvalidFacilities = `invalid facilities`
+	ErrAdminTenantsAlreadyExists     = `tenant already exists`
 )
 
 var AdminTenantsMeta = zCrud.Meta{
@@ -265,6 +266,10 @@ func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 		tenant.SetAll(in.Tenant, M.SB{}, M.SB{})
 
 		if tenant.Id == 0 {
+			if tenant.FindByKtpNumber() {
+				out.SetError(400, ErrAdminTenantsAlreadyExists)
+				return
+			}
 			tenant.SetCreatedAt(in.UnixNow())
 			tenant.SetCreatedBy(sess.UserId)
 		}

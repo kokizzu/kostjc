@@ -141,6 +141,7 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 		},
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,
+		Unique1:         KtpNumber,
 	},
 }
 

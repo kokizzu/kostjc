@@ -304,6 +304,25 @@ func (t *Tenants) FindById() bool { //nolint:dupl false positive
 	return false
 }
 
+// UniqueIndexKtpNumber return unique index name
+func (t *Tenants) UniqueIndexKtpNumber() string { //nolint:dupl false positive
+	return `ktpNumber`
+}
+
+// FindByKtpNumber Find one by KtpNumber
+func (t *Tenants) FindByKtpNumber() bool { //nolint:dupl false positive
+	res, err := t.Adapter.Select(t.SpaceName(), t.UniqueIndexKtpNumber(), 0, 1, tarantool.IterEq, A.X{t.KtpNumber})
+	if L.IsError(err, `Tenants.FindByKtpNumber failed: `+t.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		t.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
 // SqlSelectAllFields generate Sql select fields
 func (t *Tenants) SqlSelectAllFields() string { //nolint:dupl false positive
 	return ` "id"

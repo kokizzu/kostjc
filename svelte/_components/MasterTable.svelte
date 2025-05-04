@@ -285,15 +285,6 @@
     showPopUp = false;
     OnEdit(idToMod, payloads);
   }
-
-  /** @param {[number, number]} lngLat */
-  function OnClickMap(lngLat) {
-    payloads[IdxLongitude] = lngLat[0];
-    payloads[IdxLatitude] = lngLat[1];
-
-    Coord.lng = lngLat[0];
-    Coord.lat = lngLat[1];
-  }
 </script>
 
 {#if filterTableReady}

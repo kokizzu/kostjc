@@ -282,6 +282,27 @@ func (t *TenantsMutator) DoDeletePermanentById() bool { //nolint:dupl false posi
 //	return !L.IsError(err, `Tenants.DoUpsert failed: `+t.SpaceName()+ `\n%#v`, arr)
 // }
 
+// DoOverwriteByKtpNumber update all columns, error if not exists, not using mutations/Set*
+func (t *TenantsMutator) DoOverwriteByKtpNumber() bool { //nolint:dupl false positive
+	_, err := t.Adapter.Update(t.SpaceName(), t.UniqueIndexKtpNumber(), A.X{t.KtpNumber}, t.ToUpdateArray())
+	return !L.IsError(err, `Tenants.DoOverwriteByKtpNumber failed: `+t.SpaceName())
+}
+
+// DoUpdateByKtpNumber update only mutated fields, error if not exists, use Find* and Set* methods instead of direct assignment
+func (t *TenantsMutator) DoUpdateByKtpNumber() bool { //nolint:dupl false positive
+	if !t.HaveMutation() {
+		return true
+	}
+	_, err := t.Adapter.Update(t.SpaceName(), t.UniqueIndexKtpNumber(), A.X{t.KtpNumber}, t.mutations)
+	return !L.IsError(err, `Tenants.DoUpdateByKtpNumber failed: `+t.SpaceName())
+}
+
+// DoDeletePermanentByKtpNumber permanent delete
+func (t *TenantsMutator) DoDeletePermanentByKtpNumber() bool { //nolint:dupl false positive
+	_, err := t.Adapter.Delete(t.SpaceName(), t.UniqueIndexKtpNumber(), A.X{t.KtpNumber})
+	return !L.IsError(err, `Tenants.DoDeletePermanentByKtpNumber failed: `+t.SpaceName())
+}
+
 // DoInsert insert, error if already exists
 func (t *TenantsMutator) DoInsert() bool { //nolint:dupl false positive
 	arr := t.ToArray()

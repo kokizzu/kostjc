@@ -11632,41 +11632,41 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   // _components/MasterTable.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[74] = list[i];
+    child_ctx[73] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[77] = list[i];
+    child_ctx[76] = list[i];
     return child_ctx;
   }
   function get_each_context_22(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[80] = list[i];
+    child_ctx[79] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[83] = list[i];
-    child_ctx[85] = i;
+    child_ctx[82] = list[i];
+    child_ctx[84] = i;
     return child_ctx;
   }
   function get_each_context_4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[86] = list[i];
+    child_ctx[85] = list[i];
     return child_ctx;
   }
   function get_each_context_5(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[83] = list[i];
-    child_ctx[90] = i;
+    child_ctx[82] = list[i];
+    child_ctx[89] = i;
     return child_ctx;
   }
   function get_each_context_6(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[91] = list[i];
-    child_ctx[92] = list;
-    child_ctx[85] = i;
+    child_ctx[90] = list[i];
+    child_ctx[91] = list;
+    child_ctx[84] = i;
     return child_ctx;
   }
   function create_if_block_23(ctx) {
@@ -11904,7 +11904,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let if_block_anchor;
     let current;
     let if_block = !/*field*/
-    ctx[91].readOnly && create_if_block_20(ctx);
+    ctx[90].readOnly && create_if_block_20(ctx);
     return {
       c() {
         if (if_block)
@@ -11919,7 +11919,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       },
       p(ctx2, dirty) {
         if (!/*field*/
-        ctx2[91].readOnly) {
+        ctx2[90].readOnly) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*FIELDS*/
@@ -11969,12 +11969,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function select_block_type(ctx2, dirty) {
       if (
         /*field*/
-        ctx2[91].inputType === "combobox"
+        ctx2[90].inputType === "combobox"
       )
         return 0;
       if (
         /*field*/
-        ctx2[91].inputType === "combobox-arr"
+        ctx2[90].inputType === "combobox-arr"
       )
         return 1;
       return 2;
@@ -12039,38 +12039,38 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       ctx[51](
         value,
         /*idx*/
-        ctx[85]
+        ctx[84]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[91].name
+        ctx[90].name
       ),
       label: (
         /*field*/
-        ctx[91].label
+        ctx[90].label
       ),
       placeholder: (
         /*field*/
-        ctx[91].description
+        ctx[90].description
       ),
       type: (
         /*field*/
-        ctx[91].inputType
+        ctx[90].inputType
       )
     };
     if (
       /*payloads*/
       ctx[27][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[27][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -12089,26 +12089,26 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.id = /*field*/
-          ctx[91].name;
+          ctx[90].name;
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.label = /*field*/
-          ctx[91].label;
+          ctx[90].label;
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.placeholder = /*field*/
-          ctx[91].description;
+          ctx[90].description;
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.type = /*field*/
-          ctx[91].inputType;
+          ctx[90].inputType;
         if (!updating_value && dirty[0] & /*payloads*/
         134217728) {
           updating_value = true;
           inputbox_changes.value = /*payloads*/
           ctx[27][
             /*idx*/
-            ctx[85]
+            ctx[84]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -12137,41 +12137,41 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       ctx[50](
         value,
         /*idx*/
-        ctx[85]
+        ctx[84]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[91].name
+        ctx[90].name
       ),
       label: (
         /*field*/
-        ctx[91].label
+        ctx[90].label
       ),
       placeholder: (
         /*field*/
-        ctx[91].description
+        ctx[90].description
       ),
       type: (
         /*field*/
-        ctx[91].inputType
+        ctx[90].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[91].name
+          ctx[90].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[91].name
+            ctx[90].name
           ]
         ) : (
           /*field*/
-          ctx[91].ref
+          ctx[90].ref
         )
       )
     };
@@ -12179,13 +12179,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       /*payloads*/
       ctx[27][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[27][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -12204,35 +12204,35 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.id = /*field*/
-          ctx[91].name;
+          ctx[90].name;
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.label = /*field*/
-          ctx[91].label;
+          ctx[90].label;
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.placeholder = /*field*/
-          ctx[91].description;
+          ctx[90].description;
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.type = /*field*/
-          ctx[91].inputType;
+          ctx[90].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         9)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[91].name
+            ctx[90].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[91].name
+              ctx[90].name
             ]
           ) : (
             /*field*/
-            ctx[91].ref
+            ctx[90].ref
           );
         if (!updating_value && dirty[0] & /*payloads*/
         134217728) {
@@ -12240,7 +12240,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           inputbox_changes.value = /*payloads*/
           ctx[27][
             /*idx*/
-            ctx[85]
+            ctx[84]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -12269,41 +12269,41 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       ctx[49](
         value,
         /*idx*/
-        ctx[85]
+        ctx[84]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[91].name
+        ctx[90].name
       ),
       label: (
         /*field*/
-        ctx[91].label
+        ctx[90].label
       ),
       placeholder: (
         /*field*/
-        ctx[91].description
+        ctx[90].description
       ),
       type: (
         /*field*/
-        ctx[91].inputType
+        ctx[90].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[91].name
+          ctx[90].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[91].name
+            ctx[90].name
           ]
         ) : (
           /*field*/
-          ctx[91].ref
+          ctx[90].ref
         )
       ),
       isObject: (
@@ -12311,7 +12311,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[91].name
+          ctx[90].name
         ] ? true : false
       )
     };
@@ -12319,13 +12319,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       /*payloads*/
       ctx[27][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[27][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -12344,35 +12344,35 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.id = /*field*/
-          ctx[91].name;
+          ctx[90].name;
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.label = /*field*/
-          ctx[91].label;
+          ctx[90].label;
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.placeholder = /*field*/
-          ctx[91].description;
+          ctx[90].description;
         if (dirty[0] & /*FIELDS*/
         1)
           inputbox_changes.type = /*field*/
-          ctx[91].inputType;
+          ctx[90].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         9)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[91].name
+            ctx[90].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[91].name
+              ctx[90].name
             ]
           ) : (
             /*field*/
-            ctx[91].ref
+            ctx[90].ref
           );
         if (dirty[0] & /*REFS, FIELDS*/
         9)
@@ -12380,7 +12380,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[91].name
+            ctx[90].name
           ] ? true : false;
         if (!updating_value && dirty[0] & /*payloads*/
         134217728) {
@@ -12388,7 +12388,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           inputbox_changes.value = /*payloads*/
           ctx[27][
             /*idx*/
-            ctx[85]
+            ctx[84]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -12414,7 +12414,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let current;
     let if_block = (
       /*field*/
-      ctx[91].name !== "id" && create_if_block_19(ctx)
+      ctx[90].name !== "id" && create_if_block_19(ctx)
     );
     return {
       c() {
@@ -12431,7 +12431,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (
           /*field*/
-          ctx2[91].name !== "id"
+          ctx2[90].name !== "id"
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -12573,7 +12573,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let th;
     let t_value = (
       /*f*/
-      ctx[83].label + ""
+      ctx[82].label + ""
     );
     let t;
     let th_style_value;
@@ -12583,11 +12583,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         th = element("th");
         t = text(t_value);
         attr(th, "style", th_style_value = /*f*/
-        ctx[83].name === "ktpRegion" ? "min-width: 250px;" : "");
+        ctx[82].name === "ktpRegion" ? "min-width: 250px;" : "");
         attr(th, "class", th_class_value = /*f*/
-        (ctx[83].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[83].inputType === "datetime" ? "datetime" : "") + " " + /*f*/
-        (ctx[83].name === "staffId" ? "staff" : "") + " svelte-7qntjv");
+        (ctx[82].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[82].inputType === "datetime" ? "datetime" : "") + " " + /*f*/
+        (ctx[82].name === "staffId" ? "staff" : "") + " svelte-7qntjv");
       },
       m(target, anchor) {
         insert(target, th, anchor);
@@ -12596,18 +12596,18 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*FIELDS*/
         1 && t_value !== (t_value = /*f*/
-        ctx2[83].label + ""))
+        ctx2[82].label + ""))
           set_data(t, t_value);
         if (dirty[0] & /*FIELDS*/
         1 && th_style_value !== (th_style_value = /*f*/
-        ctx2[83].name === "ktpRegion" ? "min-width: 250px;" : "")) {
+        ctx2[82].name === "ktpRegion" ? "min-width: 250px;" : "")) {
           attr(th, "style", th_style_value);
         }
         if (dirty[0] & /*FIELDS*/
         1 && th_class_value !== (th_class_value = /*f*/
-        (ctx2[83].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx2[83].inputType === "datetime" ? "datetime" : "") + " " + /*f*/
-        (ctx2[83].name === "staffId" ? "staff" : "") + " svelte-7qntjv")) {
+        (ctx2[82].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx2[82].inputType === "datetime" ? "datetime" : "") + " " + /*f*/
+        (ctx2[82].name === "staffId" ? "staff" : "") + " svelte-7qntjv")) {
           attr(th, "class", th_class_value);
         }
       },
@@ -12643,7 +12643,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function select_block_type_1(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[83].name === "id"
+        ctx2[82].name === "id"
       )
         return create_if_block_152;
       return create_else_block_4;
@@ -12790,20 +12790,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   function create_else_block_2(ctx) {
     let td;
     let t_value = (typeof /*row*/
-    ctx[80][
+    ctx[79][
       /*idx*/
-      ctx[85]
+      ctx[84]
     ] === "boolean" ? (
       /*row*/
-      ctx[80][
+      ctx[79][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ] ? "Yes" : "No"
     ) : (
       /*row*/
-      ctx[80][
+      ctx[79][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ] || "--"
     )) + "";
     let t;
@@ -12814,7 +12814,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         t = text(t_value);
         attr(td, "class", td_class_value = null_to_empty(
           /*f*/
-          ctx[83].type
+          ctx[82].type
         ) + " svelte-7qntjv");
       },
       m(target, anchor) {
@@ -12824,27 +12824,27 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = (typeof /*row*/
-        ctx2[80][
+        ctx2[79][
           /*idx*/
-          ctx2[85]
+          ctx2[84]
         ] === "boolean" ? (
           /*row*/
-          ctx2[80][
+          ctx2[79][
             /*idx*/
-            ctx2[85]
+            ctx2[84]
           ] ? "Yes" : "No"
         ) : (
           /*row*/
-          ctx2[80][
+          ctx2[79][
             /*idx*/
-            ctx2[85]
+            ctx2[84]
           ] || "--"
         )) + ""))
           set_data(t, t_value);
         if (dirty[0] & /*FIELDS*/
         1 && td_class_value !== (td_class_value = null_to_empty(
           /*f*/
-          ctx2[83].type
+          ctx2[82].type
         ) + " svelte-7qntjv")) {
           attr(td, "class", td_class_value);
         }
@@ -12862,9 +12862,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let td;
     let t0_value = (
       /*row*/
-      (ctx[80][
+      (ctx[79][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ] || "0") + ""
     );
     let t0;
@@ -12884,9 +12884,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t0_value !== (t0_value = /*row*/
-        (ctx2[80][
+        (ctx2[79][
           /*idx*/
-          ctx2[85]
+          ctx2[84]
         ] || "0") + ""))
           set_data(t0, t0_value);
       },
@@ -12905,12 +12905,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       /*REFS*/
       (ctx[3][
         /*f*/
-        ctx[83].name
+        ctx[82].name
       ][
         /*row*/
-        ctx[80][
+        ctx[79][
           /*idx*/
-          ctx[85]
+          ctx[84]
         ]
       ] || "--") + ""
     );
@@ -12930,12 +12930,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         13 && t_value !== (t_value = /*REFS*/
         (ctx2[3][
           /*f*/
-          ctx2[83].name
+          ctx2[82].name
         ][
           /*row*/
-          ctx2[80][
+          ctx2[79][
             /*idx*/
-            ctx2[85]
+            ctx2[84]
           ]
         ] || "--") + ""))
           set_data(t, t_value);
@@ -12953,14 +12953,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let td;
     let t_value = (
       /*row*/
-      (ctx[80][
+      (ctx[79][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ] ? (0, import_xFormatter2.datetime)(
         /*row*/
-        ctx[80][
+        ctx[79][
           /*idx*/
-          ctx[85]
+          ctx[84]
         ]
       ) : "--") + ""
     );
@@ -12978,14 +12978,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = /*row*/
-        (ctx2[80][
+        (ctx2[79][
           /*idx*/
-          ctx2[85]
+          ctx2[84]
         ] ? (0, import_xFormatter2.datetime)(
           /*row*/
-          ctx2[80][
+          ctx2[79][
             /*idx*/
-            ctx2[85]
+            ctx2[84]
           ]
         ) : "--") + ""))
           set_data(t, t_value);
@@ -13003,17 +13003,17 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let td;
     let t_value = (
       /*row*/
-      (ctx[80][
+      (ctx[79][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ] ? (0, import_xFormatter2.formatPrice)(
         /*row*/
-        ctx[80][
+        ctx[79][
           /*idx*/
-          ctx[85]
+          ctx[84]
         ],
         /*f*/
-        ctx[83].mapping || "IDR"
+        ctx[82].mapping || "IDR"
       ) : "--") + ""
     );
     let t;
@@ -13030,17 +13030,17 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, FIELDS*/
         5 && t_value !== (t_value = /*row*/
-        (ctx2[80][
+        (ctx2[79][
           /*idx*/
-          ctx2[85]
+          ctx2[84]
         ] ? (0, import_xFormatter2.formatPrice)(
           /*row*/
-          ctx2[80][
+          ctx2[79][
             /*idx*/
-            ctx2[85]
+            ctx2[84]
           ],
           /*f*/
-          ctx2[83].mapping || "IDR"
+          ctx2[82].mapping || "IDR"
         ) : "--") + ""))
           set_data(t, t_value);
       },
@@ -13057,14 +13057,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let td;
     let t_value = (
       /*row*/
-      (ctx[80][
+      (ctx[79][
         /*idx*/
-        ctx[85]
+        ctx[84]
       ] ? Object.entries(
         /*REFS*/
         ctx[3][
           /*f*/
-          ctx[83].name
+          ctx[82].name
         ]
       ).map(func).join(", ") : "--") + ""
     );
@@ -13082,14 +13082,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, REFS, FIELDS*/
         13 && t_value !== (t_value = /*row*/
-        (ctx2[80][
+        (ctx2[79][
           /*idx*/
-          ctx2[85]
+          ctx2[84]
         ] ? Object.entries(
           /*REFS*/
           ctx2[3][
             /*f*/
-            ctx2[83].name
+            ctx2[82].name
           ]
         ).map(func).join(", ") : "--") + ""))
           set_data(t, t_value);
@@ -13387,7 +13387,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         /*click_handler_2*/
         ctx[53](
           /*row*/
-          ctx[80]
+          ctx[79]
         )
       );
     }
@@ -13511,11 +13511,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         /*click_handler_3*/
         ctx[54](
           /*row*/
-          ctx[80],
+          ctx[79],
           /*idx*/
-          ctx[85],
+          ctx[84],
           /*f*/
-          ctx[83]
+          ctx[82]
         )
       );
     }
@@ -13568,11 +13568,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function select_block_type_5(ctx2, dirty) {
       if (
         /*row*/
-        ctx2[80][
+        ctx2[79][
           /*deletedIndex*/
           ctx2[18]
         ] > 0 || /*row*/
-        ctx2[80][
+        ctx2[79][
           /*deletedIndex*/
           ctx2[18]
         ] === "terminated"
@@ -13650,7 +13650,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         /*click_handler_5*/
         ctx[56](
           /*row*/
-          ctx[80]
+          ctx[79]
         )
       );
     }
@@ -13711,7 +13711,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         /*click_handler_4*/
         ctx[55](
           /*row*/
-          ctx[80]
+          ctx[79]
         )
       );
     }
@@ -13846,7 +13846,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         color: "var(--gray-007)",
         src: (
           /*l*/
-          ctx[86].icon
+          ctx[85].icon
         )
       }
     });
@@ -13856,12 +13856,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         create_component(icon.$.fragment);
         attr(a, "class", "btn link svelte-7qntjv");
         attr(a, "href", a_href_value = /*l*/
-        ctx[86].link(
+        ctx[85].link(
           /*row*/
-          ctx[80]
+          ctx[79]
         ));
         attr(a, "target", a_target_value = /*l*/
-        ctx[86].isTargetBlank ? "_blank" : "");
+        ctx[85].isTargetBlank ? "_blank" : "");
       },
       m(target, anchor) {
         insert(target, a, anchor);
@@ -13873,19 +13873,19 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*LINKS*/
         2048)
           icon_changes.src = /*l*/
-          ctx2[86].icon;
+          ctx2[85].icon;
         icon.$set(icon_changes);
         if (!current || dirty[0] & /*LINKS, MASTER_ROWS*/
         2052 && a_href_value !== (a_href_value = /*l*/
-        ctx2[86].link(
+        ctx2[85].link(
           /*row*/
-          ctx2[80]
+          ctx2[79]
         ))) {
           attr(a, "href", a_href_value);
         }
         if (!current || dirty[0] & /*LINKS*/
         2048 && a_target_value !== (a_target_value = /*l*/
-        ctx2[86].isTargetBlank ? "_blank" : "")) {
+        ctx2[85].isTargetBlank ? "_blank" : "")) {
           attr(a, "target", a_target_value);
         }
       },
@@ -13925,36 +13925,36 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function select_block_type_3(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[83].name === "id"
+        ctx2[82].name === "id"
       )
         return 0;
       if (
         /*f*/
-        ctx2[83].type == "intArr"
+        ctx2[82].type == "intArr"
       )
         return 1;
       if (
         /*f*/
-        ctx2[83].type == "currency"
+        ctx2[82].type == "currency"
       )
         return 2;
       if (
         /*f*/
-        ctx2[83].inputType === "datetime"
+        ctx2[82].inputType === "datetime"
       )
         return 3;
       if (
         /*f*/
-        ctx2[83].inputType === "combobox" && /*REFS*/
+        ctx2[82].inputType === "combobox" && /*REFS*/
         ctx2[3][
           /*f*/
-          ctx2[83].name
+          ctx2[82].name
         ]
       )
         return 4;
       if (
         /*f*/
-        ctx2[83].inputType === "percentage"
+        ctx2[82].inputType === "percentage"
       )
         return 5;
       return 6;
@@ -14020,7 +14020,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       ctx[1].perPage + /*MASTER_ROWS*/
       ctx[2].indexOf(
         /*row*/
-        ctx[80]
+        ctx[79]
       ) + 1 + ""
     );
     let t0;
@@ -14053,11 +14053,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         attr(tr, "class", tr_class_value = null_to_empty(
           /*CAN_DELETE_ROW*/
           ctx[7] && /*row*/
-          (ctx[80][
+          (ctx[79][
             /*deletedIndex*/
             ctx[18]
           ] > 0 || /*row*/
-          ctx[80][
+          ctx[79][
             /*deletedIndex*/
             ctx[18]
           ] === "terminated") ? "deleted" : ""
@@ -14083,7 +14083,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ctx2[1].perPage + /*MASTER_ROWS*/
         ctx2[2].indexOf(
           /*row*/
-          ctx2[80]
+          ctx2[79]
         ) + 1 + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*LINKS, MASTER_ROWS, CAN_OPEN_LINK, deletedIndex, CAN_DELETE_ROW, CAN_RESTORE_ROW, Cell, FIELDS, CAN_EDIT_ROW, IS_CUSTOM_EDIT, OnInfo, CAN_SHOW_INFO, ACCESS, REFS*/
@@ -14116,11 +14116,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         262276 && tr_class_value !== (tr_class_value = null_to_empty(
           /*CAN_DELETE_ROW*/
           ctx2[7] && /*row*/
-          (ctx2[80][
+          (ctx2[79][
             /*deletedIndex*/
             ctx2[18]
           ] > 0 || /*row*/
-          ctx2[80][
+          ctx2[79][
             /*deletedIndex*/
             ctx2[18]
           ] === "terminated") ? "deleted" : ""
@@ -14219,7 +14219,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         /*click_handler_6*/
         ctx[57](
           /*r*/
-          ctx[77]
+          ctx[76]
         )
       );
     }
@@ -14227,7 +14227,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       c() {
         button = element("button");
         button.textContent = `${/*r*/
-        ctx[77]}`;
+        ctx[76]}`;
         attr(button, "class", "svelte-7qntjv");
       },
       m(target, anchor) {
@@ -14253,7 +14253,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let button;
     let t_value = (
       /*i*/
-      ctx[74] + ""
+      ctx[73] + ""
     );
     let t;
     let button_disabled_value;
@@ -14266,7 +14266,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         /*click_handler_9*/
         ctx[60](
           /*i*/
-          ctx[74]
+          ctx[73]
         )
       );
     }
@@ -14276,14 +14276,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         t = text(t_value);
         button.disabled = button_disabled_value = /*currentPage*/
         ctx[22] == /*i*/
-        ctx[74];
+        ctx[73];
         attr(button, "class", button_class_value = null_to_empty(
           /*currentPage*/
           ctx[22] === /*i*/
-          ctx[74] ? "btn active" : "btn"
+          ctx[73] ? "btn active" : "btn"
         ) + " svelte-7qntjv");
         attr(button, "title", button_title_value = `Go to page ${/*i*/
-        ctx[74]}`);
+        ctx[73]}`);
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -14297,25 +14297,25 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ctx = new_ctx;
         if (dirty[0] & /*paginationShow*/
         2097152 && t_value !== (t_value = /*i*/
-        ctx[74] + ""))
+        ctx[73] + ""))
           set_data(t, t_value);
         if (dirty[0] & /*currentPage, paginationShow*/
         6291456 && button_disabled_value !== (button_disabled_value = /*currentPage*/
         ctx[22] == /*i*/
-        ctx[74])) {
+        ctx[73])) {
           button.disabled = button_disabled_value;
         }
         if (dirty[0] & /*currentPage, paginationShow*/
         6291456 && button_class_value !== (button_class_value = null_to_empty(
           /*currentPage*/
           ctx[22] === /*i*/
-          ctx[74] ? "btn active" : "btn"
+          ctx[73] ? "btn active" : "btn"
         ) + " svelte-7qntjv")) {
           attr(button, "class", button_class_value);
         }
         if (dirty[0] & /*paginationShow*/
         2097152 && button_title_value !== (button_title_value = `Go to page ${/*i*/
-        ctx[74]}`)) {
+        ctx[73]}`)) {
           attr(button, "title", button_title_value);
         }
       },
@@ -14439,7 +14439,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     );
     const get_key = (ctx2) => (
       /*f*/
-      ctx2[83].name
+      ctx2[82].name
     );
     for (let i = 0; i < each_value_5.length; i += 1) {
       let child_ctx = get_each_context_5(ctx, each_value_5, i);
@@ -15239,12 +15239,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function handleSubmitEdit() {
       $invalidate(19, showPopUp = false);
       OnEdit(idToMod, payloads);
-    }
-    function OnClickMap(lngLat) {
-      $invalidate(27, payloads[IdxLongitude] = lngLat[0], payloads);
-      $invalidate(27, payloads[IdxLatitude] = lngLat[1], payloads);
-      Coord.lng = lngLat[0];
-      Coord.lat = lngLat[1];
     }
     function filtertable_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {

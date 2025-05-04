@@ -144,6 +144,7 @@
         notifier.showSuccess(`Tenant '${tenant.tenantName}' updated !!`);
 
         OnRefresh(pager);
+        popUpForms.Hide();
       }
     );
   }
@@ -194,9 +195,9 @@
         popUpForms.Reset();
 
         OnRefresh(pager);
+        popUpForms.Hide();
       }
     );
-    popUpForms.Hide();
   }
 </script>
 
