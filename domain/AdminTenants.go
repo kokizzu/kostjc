@@ -113,7 +113,7 @@ var AdminTenantsMeta = zCrud.Meta{
 			Label:       `Alamat`,
 			DataType:    zCrud.DataTypeString,
 			InputType:   zCrud.InputTypeText,
-			Description: `Jl. Jalan Raya No. 1`,
+			Description: `JL PENDIDIKAN NO 8 BLOK A NO 47`,
 			ReadOnly:    false,
 		},
 		{
@@ -125,18 +125,20 @@ var AdminTenantsMeta = zCrud.Meta{
 			Description: `001/004`,
 		},
 		{
-			Name:      mAuth.KtpKelurahanDesa,
-			Label:     `Kelurahan/Desa`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeText,
-			ReadOnly:  false,
+			Name:        mAuth.KtpKelurahanDesa,
+			Label:       `Kelurahan/Desa`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeText,
+			Description: `Dalung`,
+			ReadOnly:    false,
 		},
 		{
-			Name:      mAuth.KtpKecamatan,
-			Label:     `Kecamatan`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeText,
-			ReadOnly:  false,
+			Name:        mAuth.KtpKecamatan,
+			Label:       `Kecamatan`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeText,
+			Description: `Kuta Utara`,
+			ReadOnly:    false,
 		},
 		{
 			Name:        mAuth.KtpReligion,
@@ -249,13 +251,16 @@ func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 			}
 		}
 
-		in.Tenant.KtpAddress = S.ToUpper(in.Tenant.KtpAddress)
 		in.Tenant.KtpPlaceBirth = S.ToUpper(in.Tenant.KtpPlaceBirth)
 		in.Tenant.KtpRegion = S.ToUpper(in.Tenant.KtpRegion)
 		in.Tenant.KtpOccupation = S.ToTitle(in.Tenant.KtpOccupation)
 		in.Tenant.TenantName = S.ToTitle(in.Tenant.TenantName)
 		in.Tenant.KtpName = S.ToTitle(in.Tenant.KtpName)
 		in.Tenant.KtpGender = S.ToTitle(in.Tenant.KtpGender)
+		in.Tenant.KtpCitizenship = S.ToUpper(in.Tenant.KtpCitizenship)
+		in.Tenant.KtpAddress = S.ToUpper(in.Tenant.KtpAddress)
+		in.Tenant.KtpKelurahanDesa = S.ToTitle(in.Tenant.KtpKelurahanDesa)
+		in.Tenant.KtpKecamatan = S.ToTitle(in.Tenant.KtpKecamatan)
 
 		tenant.SetAll(in.Tenant, M.SB{}, M.SB{})
 
