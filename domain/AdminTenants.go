@@ -155,6 +155,14 @@ var AdminTenantsMeta = zCrud.Meta{
 			ReadOnly:    false,
 		},
 		{
+			Name:        mAuth.KtpOccupation,
+			Label:       `Pekerjaan`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeText,
+			Description: `Pelajar/Mahasiswa`,
+			ReadOnly:    false,
+		},
+		{
 			Name:        mAuth.KtpCitizenship,
 			Label:       `Kewarganegaraan`,
 			DataType:    zCrud.DataTypeString,
@@ -241,9 +249,13 @@ func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 			}
 		}
 
-		if in.Tenant.KtpRegion != "" {
-			in.Tenant.KtpRegion = S.ToUpper(in.Tenant.KtpRegion)
-		}
+		in.Tenant.KtpAddress = S.ToUpper(in.Tenant.KtpAddress)
+		in.Tenant.KtpPlaceBirth = S.ToUpper(in.Tenant.KtpPlaceBirth)
+		in.Tenant.KtpRegion = S.ToUpper(in.Tenant.KtpRegion)
+		in.Tenant.KtpOccupation = S.ToTitle(in.Tenant.KtpOccupation)
+		in.Tenant.TenantName = S.ToTitle(in.Tenant.TenantName)
+		in.Tenant.KtpName = S.ToTitle(in.Tenant.KtpName)
+		in.Tenant.KtpGender = S.ToTitle(in.Tenant.KtpGender)
 
 		tenant.SetAll(in.Tenant, M.SB{}, M.SB{})
 

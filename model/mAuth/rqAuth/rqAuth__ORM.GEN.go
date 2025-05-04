@@ -268,6 +268,7 @@ type Tenants struct {
 	DeletedAt        int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
 	DeletedBy        uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
 	RestoredBy       uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+	KtpOccupation    string      `json:"ktpOccupation" form:"ktpOccupation" query:"ktpOccupation" long:"ktpOccupation" msg:"ktpOccupation"`
 }
 
 // NewTenants create new ORM reader/query object
@@ -329,6 +330,7 @@ func (t *Tenants) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "deletedAt"
 	, "deletedBy"
 	, "restoredBy"
+	, "ktpOccupation"
 	`
 }
 
@@ -358,6 +360,7 @@ func (t *Tenants) SqlSelectAllUncensoredFields() string { //nolint:dupl false po
 	, "deletedAt"
 	, "deletedBy"
 	, "restoredBy"
+	, "ktpOccupation"
 	`
 }
 
@@ -388,6 +391,7 @@ func (t *Tenants) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 21, t.DeletedAt},
 		A.X{`=`, 22, t.DeletedBy},
 		A.X{`=`, 23, t.RestoredBy},
+		A.X{`=`, 24, t.KtpOccupation},
 	}
 }
 
@@ -631,6 +635,16 @@ func (t *Tenants) SqlRestoredBy() string { //nolint:dupl false positive
 	return `"restoredBy"`
 }
 
+// IdxKtpOccupation return name of the index
+func (t *Tenants) IdxKtpOccupation() int { //nolint:dupl false positive
+	return 24
+}
+
+// SqlKtpOccupation return name of the column being indexed
+func (t *Tenants) SqlKtpOccupation() string { //nolint:dupl false positive
+	return `"ktpOccupation"`
+}
+
 // ToArray receiver fields to slice
 func (t *Tenants) ToArray() A.X { //nolint:dupl false positive
 	var id any = nil
@@ -662,6 +676,7 @@ func (t *Tenants) ToArray() A.X { //nolint:dupl false positive
 		t.DeletedAt,        // 21
 		t.DeletedBy,        // 22
 		t.RestoredBy,       // 23
+		t.KtpOccupation,    // 24
 	}
 }
 
@@ -691,6 +706,7 @@ func (t *Tenants) FromArray(a A.X) *Tenants { //nolint:dupl false positive
 	t.DeletedAt = X.ToI(a[21])
 	t.DeletedBy = X.ToU(a[22])
 	t.RestoredBy = X.ToU(a[23])
+	t.KtpOccupation = X.ToS(a[24])
 	return t
 }
 
@@ -720,6 +736,7 @@ func (t *Tenants) FromUncensoredArray(a A.X) *Tenants { //nolint:dupl false posi
 	t.DeletedAt = X.ToI(a[21])
 	t.DeletedBy = X.ToU(a[22])
 	t.RestoredBy = X.ToU(a[23])
+	t.KtpOccupation = X.ToS(a[24])
 	return t
 }
 
@@ -787,6 +804,7 @@ var TenantsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`deletedAt`:        Tt.Integer,
 	`deletedBy`:        Tt.Unsigned,
 	`restoredBy`:       Tt.Unsigned,
+	`ktpOccupation`:    Tt.String,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

@@ -119,9 +119,10 @@
       ktpKecamatan: payloads[11],
       ktpReligion: payloads[12],
       ktpMaritalStatus: payloads[13],
-      ktpCitizenship: payloads[14],
-      telegramUsername: payloads[15],
-      whatsappNumber: payloads[16]
+      ktpOccupation: payloads[14],
+      ktpCitizenship: payloads[15],
+      telegramUsername: payloads[16],
+      whatsappNumber: payloads[17]
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -140,7 +141,7 @@
 
         pager = o.pager;
         tenants = o.tenants;
-        notifier.showSuccess(`Tenant '${tenant.facilityName}' updated !!`);
+        notifier.showSuccess(`Tenant '${tenant.tenantName}' updated !!`);
 
         OnRefresh(pager);
       }
@@ -164,9 +165,10 @@
       ktpKecamatan: payloads[11],
       ktpReligion: payloads[12],
       ktpMaritalStatus: payloads[13],
-      ktpCitizenship: payloads[14],
-      telegramUsername: payloads[15],
-      whatsappNumber: payloads[16]
+      ktpOccupation: payloads[14],
+      ktpCitizenship: payloads[15],
+      telegramUsername: payloads[16],
+      whatsappNumber: payloads[17]
     });
     const i = /** @type {any} */ ({
       pager,
@@ -187,7 +189,7 @@
         
         pager = o.pager;
         tenants = o.tenants;
-        notifier.showSuccess(`Tenant '${tenant.facilityName}' created !!`);
+        notifier.showSuccess(`Tenant '${tenant.tenantName}' created !!`);
 
         popUpForms.Reset();
 

@@ -44,6 +44,7 @@ module.exports = {}
  * @property {string} ktpReligion
  * @property {string} ktpMaritalStatus
  * @property {string} ktpCitizenship
+ * @property {string} ktpOccupation
  * @property {string} telegramUsername
  * @property {string} whatsappNumber
  * @property {number} createdAt
