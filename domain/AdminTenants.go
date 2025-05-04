@@ -144,9 +144,9 @@ var AdminTenantsMeta = zCrud.Meta{
 			Name:        mAuth.KtpReligion,
 			Label:       `Agama`,
 			DataType:    zCrud.DataTypeString,
-			InputType:   zCrud.InputTypeText,
+			InputType:   zCrud.InputTypeComboboxArr,
 			ReadOnly:    false,
-			Description: `Hindu`,
+			Description: `Islam`,
 		},
 		{
 			Name:        mAuth.KtpMaritalStatus,
@@ -168,8 +168,8 @@ var AdminTenantsMeta = zCrud.Meta{
 			Name:        mAuth.KtpCitizenship,
 			Label:       `Kewarganegaraan`,
 			DataType:    zCrud.DataTypeString,
-			InputType:   zCrud.InputTypeComboboxArr,
-			Description: `WNI / WNA`,
+			InputType:   zCrud.InputTypeText,
+			Description: `WNI`,
 			ReadOnly:    false,
 		},
 		{
