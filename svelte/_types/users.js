@@ -5,6 +5,7 @@
  * @property {string} fullName
  * @property {string} userName
  * @property {string} password
+ * @property {string} role
  * @property {number} createdAt
  * @property {number} createdBy
  * @property {number} updatedAt
