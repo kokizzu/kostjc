@@ -20,47 +20,47 @@ import (
 func RestoreDatabase(tConn *Tt.Adapter) {
 	fmt.Println(color.GreenString("# Restore Table Users #"))
 	if err := restoreTableUsers(tConn); err != nil {
-		L.LOG.Fatal(err)
+		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Tenants #"))
 	if err := restoreTableTenants(tConn); err != nil {
-		L.LOG.Fatal(err)
+		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Locations #"))
 	if err := restoreTableLocations(tConn); err != nil {
-		L.LOG.Fatal(err)
+		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Facilities #"))
 	if err := restoreTableFacilities(tConn); err != nil {
-		L.LOG.Fatal(err)
+		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Buildings #"))
 	if err := restoreTableBuildings(tConn); err != nil {
-		L.LOG.Fatal(err)
+		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Rooms #"))
 	if err := restoreTableRooms(tConn); err != nil {
-		L.LOG.Fatal(err)
+		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Bookings #"))
 	if err := restoreTableBookings(tConn); err != nil {
-		L.LOG.Fatal(err)
+		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Payments #"))
 	if err := restoreTablePayments(tConn); err != nil {
-		L.LOG.Fatal(err)
+		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Stocks #"))
 	if err := restoreTableStocks(tConn); err != nil {
-		L.LOG.Fatal(err)
+		L.LOG.Error(err)
 	}
 }
 
@@ -757,7 +757,7 @@ func getBackupFilesByTableName(tableName string) (files []string, err error) {
 	}
 
 	if len(files) == 0 {
-		err = errors.New("no backup files available")
+		err = errors.New("no backup files available for table " + tableName)
 		return
 	}
 
