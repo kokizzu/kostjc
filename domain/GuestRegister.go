@@ -64,7 +64,7 @@ func (d *Domain) GuestRegister(in *GuestRegisterIn) (out GuestRegisterOut) {
 	user.SecretCode = id64.SID() + S.RandomCB63(1)
 	user.SetGenUniqueUsernameByEmail(in.Email, in.UnixNow())
 
-	user.SetRole(mAuth.RoleUser)
+	user.SetRole(mAuth.RoleStaff)
 	if d.Superadmins[in.Email] {
 		user.SetRole(mAuth.RoleAdmin)
 	}

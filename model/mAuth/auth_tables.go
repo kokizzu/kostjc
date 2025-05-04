@@ -17,12 +17,14 @@ const (
 )
 
 const (
+	// Deprecated: use RoleStaff
 	RoleUser  = `User`
+	RoleStaff = `Staff`
 	RoleAdmin = `Admin`
 )
 
 func IsValidRole(role string) bool {
-	return role == RoleUser || role == RoleAdmin
+	return role == RoleStaff || role == RoleAdmin
 }
 
 const (
