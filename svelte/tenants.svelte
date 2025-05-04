@@ -205,8 +205,8 @@
     FIELDS={fields}
     REFS={{
       'ktpGender': ['Laki - Laki', 'Perempuan'],
-      'ktpMaritalStatus': ['Kawin', 'Belum Kawin'],
-      'ktpCitizenship': ['WNA', 'WNI']
+      'ktpMaritalStatus': ['Belum Kawin', 'Kawin'],
+      'ktpCitizenship': ['WNI', 'WNA']
     }}
     bind:isSubmitted={isSubmitTenant}
     OnSubmit={OnAddTenant}
@@ -223,8 +223,8 @@
       bind:MASTER_ROWS={tenants}
       REFS={{
         'ktpGender': ['Laki - Laki', 'Perempuan'],
-        'ktpMaritalStatus': ['Kawin', 'Belum Kawin'],
-        'ktpCitizenship': ['WNA', 'WNI']
+        'ktpMaritalStatus': ['Belum Kawin', 'Kawin'],
+        'ktpCitizenship': ['WNI', 'WNA']
       }}
 
       CAN_EDIT_ROW
