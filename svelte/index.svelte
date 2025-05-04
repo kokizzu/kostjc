@@ -137,7 +137,7 @@
 
 {#if Mode === ModeUser}
   <LayoutMain access={segments} user={user}>
-    <div>
+    <div class="home-container">
       <h1>Welcome {user.userName}</h1>
     </div>
   </LayoutMain>
@@ -224,6 +224,12 @@
 {/if}
 
 <style>
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
   @keyframes spin {
     from {
       transform : rotate(0deg);

@@ -179,7 +179,7 @@
     heading="Add User"
     FIELDS={fields}
     REFS={{
-      'role': ['Admin', 'User']
+      'role': ['Admin', 'Staff']
     }}
     bind:isSubmitted={isSubmitAddUser}
     OnSubmit={OnAddUser}
@@ -195,7 +195,7 @@
       bind:PAGER={pager}
       bind:MASTER_ROWS={users}
       REFS={{
-        'role': ['Admin', 'User']
+        'role': ['Admin', 'Staff']
       }}
 
       CAN_EDIT_ROW
