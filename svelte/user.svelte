@@ -142,6 +142,7 @@
 							type="email"
 							bind:value={email}
 						/>
+						<div class="pill-box">Role: {user.role}</div>
 					</div>
 					<div class="row">
 						<div class="pill-box">Registered At: {
@@ -287,6 +288,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 10px;
+		align-items: end;
 	}
 
 	.user-detail-container .user-profile .profile .profile-form .row .pill-box {

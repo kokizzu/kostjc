@@ -65,6 +65,9 @@ func (d *Domain) GuestRegister(in *GuestRegisterIn) (out GuestRegisterOut) {
 	user.SetGenUniqueUsernameByEmail(in.Email, in.UnixNow())
 
 	user.SetRole(mAuth.RoleUser)
+	if d.Superadmins[in.Email] {
+		user.SetRole(mAuth.RoleAdmin)
+	}
 
 	user.SetUpdatedAt(in.UnixNow())
 	user.SetCreatedAt(in.UnixNow())
