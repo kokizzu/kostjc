@@ -9046,6 +9046,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
       if (type === "datetime") {
         $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(0));
+        if (id == "ktpDateBirth")
+          $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(-6209.25));
       }
       if (type === "password")
         $invalidate(10, inputElm.type = type, inputElm);

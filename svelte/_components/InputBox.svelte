@@ -35,6 +35,7 @@
     }
     if (type === 'datetime') {
       value = dateISOFormat(0);
+      if (id == 'ktpDateBirth') value = dateISOFormat(-6209.25);
     }
     if (type === 'password') inputElm.type = type;
     // Boolean input must be use random id, because it's a checkbox

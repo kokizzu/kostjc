@@ -8878,6 +8878,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
       if (type === "datetime") {
         $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(0));
+        if (id == "ktpDateBirth")
+          $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(-6209.25));
       }
       if (type === "password")
         $invalidate(10, inputElm.type = type, inputElm);
@@ -14482,6 +14484,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*fields*/
         ctx[1]
       ),
+      REFS: {
+        "ktpGender": ["Laki - Laki", "Perempuan"],
+        "ktpMaritalStatus": ["Kawin", "Belum Kawin"],
+        "ktpCitizenship": ["WNA", "WNI"]
+      },
       OnSubmit: (
         /*OnAddTenant*/
         ctx[10]
@@ -14611,6 +14618,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     let mastertable_props = {
       ACCESS: segments,
+      REFS: {
+        "ktpGender": ["Laki - Laki", "Perempuan"],
+        "ktpMaritalStatus": ["Kawin", "Belum Kawin"],
+        "ktpCitizenship": ["WNA", "WNI"]
+      },
       CAN_EDIT_ROW: true,
       CAN_SEARCH_ROW: true,
       CAN_DELETE_ROW: true,

@@ -203,6 +203,11 @@
     bind:this={popUpForms}
     heading="Add Tenant"
     FIELDS={fields}
+    REFS={{
+      'ktpGender': ['Laki - Laki', 'Perempuan'],
+      'ktpMaritalStatus': ['Kawin', 'Belum Kawin'],
+      'ktpCitizenship': ['WNA', 'WNI']
+    }}
     bind:isSubmitted={isSubmitTenant}
     OnSubmit={OnAddTenant}
   />
@@ -216,6 +221,11 @@
       bind:FIELDS={fields}
       bind:PAGER={pager}
       bind:MASTER_ROWS={tenants}
+      REFS={{
+        'ktpGender': ['Laki - Laki', 'Perempuan'],
+        'ktpMaritalStatus': ['Kawin', 'Belum Kawin'],
+        'ktpCitizenship': ['WNA', 'WNI']
+      }}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
