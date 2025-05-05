@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/D/Ch"
 	"github.com/kokizzu/gotro/D/Tt"
 	"github.com/kokizzu/gotro/L"
@@ -154,7 +155,13 @@ func main() {
 	case `backup`:
 		model.BackupDatabase(tConn)
 	case `restore`:
-		model.RestoreDatabase(tConn)
+		if len(os.Args) < 3 {
+			L.LOG.Error(`must start with: restore <datetime>`)
+			return
+		}
+		dateTime := os.Args[2]
+		fmt.Println(color.BlueString(`Restoring database from: ` + dateTime))
+		model.RestoreDatabase(tConn, dateTime)
 	default:
 		log.Error().Str(`mode`, mode).Msg(`unknown mode`)
 	}

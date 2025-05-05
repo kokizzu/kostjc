@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/fatih/color"
 	"github.com/goccy/go-json"
@@ -17,55 +18,55 @@ import (
 	"github.com/pierrec/lz4/v4"
 )
 
-func RestoreDatabase(tConn *Tt.Adapter) {
+func RestoreDatabase(tConn *Tt.Adapter, dateTime string) {
 	fmt.Println(color.GreenString("# Restore Table Users #"))
-	if err := restoreTableUsers(tConn); err != nil {
+	if err := restoreTableUsers(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Tenants #"))
-	if err := restoreTableTenants(tConn); err != nil {
+	if err := restoreTableTenants(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Locations #"))
-	if err := restoreTableLocations(tConn); err != nil {
+	if err := restoreTableLocations(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Facilities #"))
-	if err := restoreTableFacilities(tConn); err != nil {
+	if err := restoreTableFacilities(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Buildings #"))
-	if err := restoreTableBuildings(tConn); err != nil {
+	if err := restoreTableBuildings(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Rooms #"))
-	if err := restoreTableRooms(tConn); err != nil {
+	if err := restoreTableRooms(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Bookings #"))
-	if err := restoreTableBookings(tConn); err != nil {
+	if err := restoreTableBookings(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Payments #"))
-	if err := restoreTablePayments(tConn); err != nil {
+	if err := restoreTablePayments(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
 
 	fmt.Println(color.GreenString("# Restore Table Stocks #"))
-	if err := restoreTableStocks(tConn); err != nil {
+	if err := restoreTableStocks(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
 }
 
-func restoreTableUsers(tConn *Tt.Adapter) error {
-	backupFiles, err := getBackupFilesByTableName(`users`)
+func restoreTableUsers(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`users`, dateTime)
 	if err != nil {
 		return err
 	}
@@ -139,8 +140,8 @@ func restoreTableUsers(tConn *Tt.Adapter) error {
 	return nil
 }
 
-func restoreTableTenants(tConn *Tt.Adapter) error {
-	backupFiles, err := getBackupFilesByTableName(`tenants`)
+func restoreTableTenants(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`tenants`, dateTime)
 	if err != nil {
 		return err
 	}
@@ -214,8 +215,8 @@ func restoreTableTenants(tConn *Tt.Adapter) error {
 	return nil
 }
 
-func restoreTableLocations(tConn *Tt.Adapter) error {
-	backupFiles, err := getBackupFilesByTableName(`locations`)
+func restoreTableLocations(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`locations`, dateTime)
 	if err != nil {
 		return err
 	}
@@ -289,8 +290,8 @@ func restoreTableLocations(tConn *Tt.Adapter) error {
 	return nil
 }
 
-func restoreTableFacilities(tConn *Tt.Adapter) error {
-	backupFiles, err := getBackupFilesByTableName(`facilities`)
+func restoreTableFacilities(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`facilities`, dateTime)
 	if err != nil {
 		return err
 	}
@@ -364,8 +365,8 @@ func restoreTableFacilities(tConn *Tt.Adapter) error {
 	return nil
 }
 
-func restoreTableBuildings(tConn *Tt.Adapter) error {
-	backupFiles, err := getBackupFilesByTableName(`buildings`)
+func restoreTableBuildings(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`buildings`, dateTime)
 	if err != nil {
 		return err
 	}
@@ -439,8 +440,8 @@ func restoreTableBuildings(tConn *Tt.Adapter) error {
 	return nil
 }
 
-func restoreTableRooms(tConn *Tt.Adapter) error {
-	backupFiles, err := getBackupFilesByTableName(`rooms`)
+func restoreTableRooms(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`rooms`, dateTime)
 	if err != nil {
 		return err
 	}
@@ -514,8 +515,8 @@ func restoreTableRooms(tConn *Tt.Adapter) error {
 	return nil
 }
 
-func restoreTableBookings(tConn *Tt.Adapter) error {
-	backupFiles, err := getBackupFilesByTableName(`bookings`)
+func restoreTableBookings(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`bookings`, dateTime)
 	if err != nil {
 		return err
 	}
@@ -589,8 +590,8 @@ func restoreTableBookings(tConn *Tt.Adapter) error {
 	return nil
 }
 
-func restoreTablePayments(tConn *Tt.Adapter) error {
-	backupFiles, err := getBackupFilesByTableName(`payments`)
+func restoreTablePayments(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`payments`, dateTime)
 	if err != nil {
 		return err
 	}
@@ -664,8 +665,8 @@ func restoreTablePayments(tConn *Tt.Adapter) error {
 	return nil
 }
 
-func restoreTableStocks(tConn *Tt.Adapter) error {
-	backupFiles, err := getBackupFilesByTableName(`stocks`)
+func restoreTableStocks(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`stocks`, dateTime)
 	if err != nil {
 		return err
 	}
@@ -739,13 +740,13 @@ func restoreTableStocks(tConn *Tt.Adapter) error {
 	return nil
 }
 
-func getBackupFilesByTableName(tableName string) (files []string, err error) {
+func getBackupFilesByTableNameByDatetime(tableName string, dateTime string) (files []string, err error) {
 	err = filepath.Walk(backupDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 
-		if !info.IsDir() && strings.HasPrefix(info.Name(), tableName+"_") {
+		if !info.IsDir() && strings.HasPrefix(info.Name(), tableName+"_"+dateTime) {
 			files = append(files, info.Name())
 		}
 
@@ -757,8 +758,13 @@ func getBackupFilesByTableName(tableName string) (files []string, err error) {
 	}
 
 	if len(files) == 0 {
-		err = errors.New("no backup files available for table " + tableName)
-		return
+		dateTimeFormattedStr := ``
+		dateTimeFormatted, err := time.Parse(backupTimeFormat, dateTime)
+		if err == nil {
+			dateTimeFormattedStr = `(` + dateTimeFormatted.Format(time.RFC1123Z) + `)`
+		}
+		err = errors.New("no backup files available for table " + tableName + " at " + dateTime + ` ` + dateTimeFormattedStr)
+		return files, err
 	}
 
 	return

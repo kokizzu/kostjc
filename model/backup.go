@@ -6,6 +6,7 @@ import (
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mProperty/rqProperty"
 	"os"
+	"time"
 
 	"github.com/fatih/color"
 	"github.com/goccy/go-json"
@@ -15,11 +16,17 @@ import (
 )
 
 const backupDir = `./backup`
+const backupTimeFormat = `20060102150405`
 
 func getBackupTableFileOutput(tableName string, offset, limit int) string {
+	datetime := time.Now().Format(backupTimeFormat)
+	host, err := os.Hostname()
+	if err != nil {
+		host = `unknown`
+	}
 	return fmt.Sprintf(
-		"%s/%s_%d_%d.jsonline.lz4",
-		backupDir, tableName, offset, limit,
+		"%s/%s_%s-%s_%d_%d.jsonline.lz4",
+		backupDir, tableName, datetime, host, offset, limit,
 	)
 }
 
@@ -30,47 +37,47 @@ func BackupDatabase(tConn *Tt.Adapter) {
 		return
 	}
 
-	fmt.Println(color.GreenString("# Backup Table Users #"))
+	fmt.Println(color.BlueString("# Backup Table Users #"))
 	if err := backupTable(tConn, rqAuth.NewUsers, `users`); err != nil {
 		L.LOG.Fatal(err)
 	}
 
-	fmt.Println(color.GreenString("# Backup Table Tenants #"))
+	fmt.Println(color.BlueString("# Backup Table Tenants #"))
 	if err := backupTable(tConn, rqAuth.NewTenants, `tenants`); err != nil {
 		L.LOG.Fatal(err)
 	}
 
-	fmt.Println(color.GreenString("# Backup Table Locations #"))
+	fmt.Println(color.BlueString("# Backup Table Locations #"))
 	if err := backupTable(tConn, rqProperty.NewLocations, `locations`); err != nil {
 		L.LOG.Fatal(err)
 	}
 
-	fmt.Println(color.GreenString("# Backup Table Facilities #"))
+	fmt.Println(color.BlueString("# Backup Table Facilities #"))
 	if err := backupTable(tConn, rqProperty.NewFacilities, `facilities`); err != nil {
 		L.LOG.Fatal(err)
 	}
 
-	fmt.Println(color.GreenString("# Backup Table Buildings #"))
+	fmt.Println(color.BlueString("# Backup Table Buildings #"))
 	if err := backupTable(tConn, rqProperty.NewBuildings, `buildings`); err != nil {
 		L.LOG.Fatal(err)
 	}
 
-	fmt.Println(color.GreenString("# Backup Table Rooms #"))
+	fmt.Println(color.BlueString("# Backup Table Rooms #"))
 	if err := backupTable(tConn, rqProperty.NewRooms, `rooms`); err != nil {
 		L.LOG.Fatal(err)
 	}
 
-	fmt.Println(color.GreenString("# Backup Table Bookings #"))
+	fmt.Println(color.BlueString("# Backup Table Bookings #"))
 	if err := backupTable(tConn, rqProperty.NewBookings, `bookings`); err != nil {
 		L.LOG.Fatal(err)
 	}
 
-	fmt.Println(color.GreenString("# Backup Table Payments #"))
+	fmt.Println(color.BlueString("# Backup Table Payments #"))
 	if err := backupTable(tConn, rqProperty.NewPayments, `payments`); err != nil {
 		L.LOG.Fatal(err)
 	}
 
-	fmt.Println(color.GreenString("# Backup Table Stocks #"))
+	fmt.Println(color.BlueString("# Backup Table Stocks #"))
 	if err := backupTable(tConn, rqProperty.NewStocks, `stocks`); err != nil {
 		L.LOG.Fatal(err)
 	}
@@ -130,6 +137,6 @@ func backupTable[T newTableFunc](conn *Tt.Adapter, newFunc func(tt *Tt.Adapter) 
 		}
 	}
 
-	// table.Truncate()
+	table.Truncate()
 	return nil
 }
