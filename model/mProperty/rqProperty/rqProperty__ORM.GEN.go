@@ -736,6 +736,7 @@ type Facilities struct {
 	DeletedBy      uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
 	RestoredBy     uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
 	FacilityType   string      `json:"facilityType" form:"facilityType" query:"facilityType" long:"facilityType" msg:"facilityType"`
+	DescriptionEN  string      `json:"descriptionEN" form:"descriptionEN" query:"descriptionEN" long:"descriptionEN" msg:"descriptionEN"`
 }
 
 // NewFacilities create new ORM reader/query object
@@ -784,6 +785,7 @@ func (f *Facilities) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "deletedBy"
 	, "restoredBy"
 	, "facilityType"
+	, "descriptionEN"
 	`
 }
 
@@ -800,6 +802,7 @@ func (f *Facilities) SqlSelectAllUncensoredFields() string { //nolint:dupl false
 	, "deletedBy"
 	, "restoredBy"
 	, "facilityType"
+	, "descriptionEN"
 	`
 }
 
@@ -817,6 +820,7 @@ func (f *Facilities) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 8, f.DeletedBy},
 		A.X{`=`, 9, f.RestoredBy},
 		A.X{`=`, 10, f.FacilityType},
+		A.X{`=`, 11, f.DescriptionEN},
 	}
 }
 
@@ -930,6 +934,16 @@ func (f *Facilities) SqlFacilityType() string { //nolint:dupl false positive
 	return `"facilityType"`
 }
 
+// IdxDescriptionEN return name of the index
+func (f *Facilities) IdxDescriptionEN() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlDescriptionEN return name of the column being indexed
+func (f *Facilities) SqlDescriptionEN() string { //nolint:dupl false positive
+	return `"descriptionEN"`
+}
+
 // ToArray receiver fields to slice
 func (f *Facilities) ToArray() A.X { //nolint:dupl false positive
 	var id any = nil
@@ -948,6 +962,7 @@ func (f *Facilities) ToArray() A.X { //nolint:dupl false positive
 		f.DeletedBy,      // 8
 		f.RestoredBy,     // 9
 		f.FacilityType,   // 10
+		f.DescriptionEN,  // 11
 	}
 }
 
@@ -964,6 +979,7 @@ func (f *Facilities) FromArray(a A.X) *Facilities { //nolint:dupl false positive
 	f.DeletedBy = X.ToU(a[8])
 	f.RestoredBy = X.ToU(a[9])
 	f.FacilityType = X.ToS(a[10])
+	f.DescriptionEN = X.ToS(a[11])
 	return f
 }
 
@@ -980,6 +996,7 @@ func (f *Facilities) FromUncensoredArray(a A.X) *Facilities { //nolint:dupl fals
 	f.DeletedBy = X.ToU(a[8])
 	f.RestoredBy = X.ToU(a[9])
 	f.FacilityType = X.ToS(a[10])
+	f.DescriptionEN = X.ToS(a[11])
 	return f
 }
 
@@ -1034,6 +1051,7 @@ var FacilitiesFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positiv
 	`deletedBy`:      Tt.Unsigned,
 	`restoredBy`:     Tt.Unsigned,
 	`facilityType`:   Tt.String,
+	`descriptionEN`:  Tt.String,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

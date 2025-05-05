@@ -33,10 +33,16 @@ const (
 const (
 	FacilityTypeRoom     = `Room`
 	FacilityTypeBuilding = `Building`
+	FacilityTypeSite     = `Site`
 )
 
 func IsValidFacilityType(facilityType string) bool {
-	return facilityType == FacilityTypeRoom || facilityType == FacilityTypeBuilding
+	switch facilityType {
+	case FacilityTypeRoom, FacilityTypeBuilding, FacilityTypeSite:
+		return true
+	default:
+		return false
+	}
 }
 
 const (
@@ -45,6 +51,7 @@ const (
 	FacilityName   = `facilityName`
 	ExtraChargeIDR = `extraChargeIDR`
 	FacilityType   = `facilityType`
+	DescriptionEN  = `descriptionEN`
 )
 
 type FacilityObj struct {
@@ -135,6 +142,7 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{DeletedBy, Tt.Unsigned},
 			{RestoredBy, Tt.Unsigned},
 			{FacilityType, Tt.String},
+			{DescriptionEN, Tt.String},
 		},
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,

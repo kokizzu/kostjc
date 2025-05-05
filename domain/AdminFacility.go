@@ -75,6 +75,14 @@ var AdminFacilityMeta = zCrud.Meta{
 			Description: `40000`,
 		},
 		{
+			Name:        mProperty.DescriptionEN,
+			Label:       `Description (english)`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeTextArea,
+			ReadOnly:    false,
+			Description: `Facility for kids`,
+		},
+		{
 			Name:      mProperty.CreatedAt,
 			Label:     `Created At`,
 			DataType:  zCrud.DataTypeInt,
@@ -151,6 +159,10 @@ func (d *Domain) AdminFacility(in *AdminFacilityIn) (out AdminFacilityOut) {
 
 		if in.Facility.ExtraChargeIDR != 0 {
 			fac.SetExtraChargeIDR(in.Facility.ExtraChargeIDR)
+		}
+
+		if in.Facility.DescriptionEN != `` {
+			fac.SetDescriptionEN(in.Facility.DescriptionEN)
 		}
 
 		if fac.Id == 0 {

@@ -109,6 +109,7 @@
       facilityName: payloads[1],
       facilityType: payloads[2],
       extraChargeIDR: Number(payloads[3]),
+      descriptionEN: payloads[4]
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -141,6 +142,7 @@
       facilityName: payloads[1],
       facilityType: payloads[2],
       extraChargeIDR: Number(payloads[3]),
+      descriptionEN: payloads[4]
     });
     const i = /** @type {any} */ ({
       pager,
@@ -177,7 +179,7 @@
     heading="Add Facility"
     FIELDS={fields}
     REFS={{
-      'facilityType': ['Room', 'Building']
+      'facilityType': ['Room', 'Building', 'Site']
     }}
     bind:isSubmitted={isSubmitAddFacility}
     OnSubmit={OnAddFacility}
@@ -193,7 +195,7 @@
       bind:PAGER={pager}
       bind:MASTER_ROWS={facilities}
       REFS={{
-        'facilityType': ['Room', 'Building']
+        'facilityType': ['Room', 'Building', 'Site']
       }}
 
       CAN_EDIT_ROW
