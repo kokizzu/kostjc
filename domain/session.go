@@ -41,6 +41,7 @@ type Session struct {
 const (
 	GuestSegment = `guest`
 	UserSegment  = `user`
+	StaffSegment = `staff`
 	AdminSegment = `admin`
 )
 

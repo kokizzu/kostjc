@@ -296,6 +296,7 @@ exports.AdminBuilding = async function AdminBuilding( i, cb ) {
  * @property {number} facility.deletedBy
  * @property {number} facility.restoredBy
  * @property {String} facility.facilityType
+ * @property {String} facility.descriptionEN
  */
 const AdminFacilityIn = {
   cmd: '', // string
@@ -319,6 +320,7 @@ const AdminFacilityIn = {
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
     facilityType: '', // string
+    descriptionEN: '', // string
   }, // rqProperty.Facilities
 }
 /**
@@ -343,6 +345,7 @@ const AdminFacilityIn = {
  * @property {number} facility.deletedBy
  * @property {number} facility.restoredBy
  * @property {String} facility.facilityType
+ * @property {String} facility.descriptionEN
  * @property {Object} facilities
  */
 const AdminFacilityOut = {
@@ -374,6 +377,7 @@ const AdminFacilityOut = {
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
     facilityType: '', // string
+    descriptionEN: '', // string
   }, // rqProperty.Facilities
   facilities: { // [][]any
   }, // [][]any
@@ -930,6 +934,7 @@ exports.AdminStock = async function AdminStock( i, cb ) {
  * @property {number} tenant.deletedAt
  * @property {number} tenant.deletedBy
  * @property {number} tenant.restoredBy
+ * @property {String} tenant.ktpOccupation
  */
 const AdminTenantsIn = {
   cmd: '', // string
@@ -966,6 +971,7 @@ const AdminTenantsIn = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    ktpOccupation: '', // string
   }, // rqAuth.Tenants
 }
 /**
@@ -1003,6 +1009,7 @@ const AdminTenantsIn = {
  * @property {number} tenant.deletedAt
  * @property {number} tenant.deletedBy
  * @property {number} tenant.restoredBy
+ * @property {String} tenant.ktpOccupation
  * @property {Object} tenants
  */
 const AdminTenantsOut = {
@@ -1047,6 +1054,7 @@ const AdminTenantsOut = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    ktpOccupation: '', // string
   }, // rqAuth.Tenants
   tenants: { // [][]any
   }, // [][]any
@@ -1433,6 +1441,142 @@ const GuestVerifyEmailOut = {
  */
 exports.GuestVerifyEmail = async function GuestVerifyEmail( i, cb ) {
   return await axios.post( '/guest/verifyEmail', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} StaffBookingIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} facilities
+ * @property {number} booking.id
+ * @property {String} booking.dateStart
+ * @property {String} booking.dateEnd
+ * @property {number} booking.basePriceIDR
+ * @property {String} booking.facilitiesObj
+ * @property {number} booking.totalPriceIDR
+ * @property {String} booking.paidAt
+ * @property {number} booking.tenantId
+ * @property {number} booking.createdAt
+ * @property {number} booking.createdBy
+ * @property {number} booking.updatedAt
+ * @property {number} booking.updatedBy
+ * @property {number} booking.deletedAt
+ * @property {number} booking.deletedBy
+ * @property {number} booking.restoredBy
+ */
+const StaffBookingIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  facilities: { // []uint64
+  }, // []uint64
+  booking: { // rqProperty.Bookings
+    id: 0, // uint64
+    dateStart: '', // string
+    dateEnd: '', // string
+    basePriceIDR: 0, // int64
+    facilitiesObj: '', // string
+    totalPriceIDR: 0, // int64
+    paidAt: '', // string
+    tenantId: 0, // uint64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Bookings
+}
+/**
+ * @typedef {Object} StaffBookingOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} booking.id
+ * @property {String} booking.dateStart
+ * @property {String} booking.dateEnd
+ * @property {number} booking.basePriceIDR
+ * @property {String} booking.facilitiesObj
+ * @property {number} booking.totalPriceIDR
+ * @property {String} booking.paidAt
+ * @property {number} booking.tenantId
+ * @property {number} booking.createdAt
+ * @property {number} booking.createdBy
+ * @property {number} booking.updatedAt
+ * @property {number} booking.updatedBy
+ * @property {number} booking.deletedAt
+ * @property {number} booking.deletedBy
+ * @property {number} booking.restoredBy
+ * @property {Object} bookings
+ */
+const StaffBookingOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  booking: { // rqProperty.Bookings
+    id: 0, // uint64
+    dateStart: '', // string
+    dateEnd: '', // string
+    basePriceIDR: 0, // int64
+    facilitiesObj: '', // string
+    totalPriceIDR: 0, // int64
+    paidAt: '', // string
+    tenantId: 0, // uint64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.Bookings
+  bookings: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback StaffBookingCallback
+ * @param {StaffBookingOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {StaffBookingIn} i
+ * @param {StaffBookingCallback} cb
+ * @returns {Promise}
+ */
+exports.StaffBooking = async function StaffBooking( i, cb ) {
+  return await axios.post( '/staff/booking', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }

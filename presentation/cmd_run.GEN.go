@@ -124,6 +124,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.GuestVerifyEmail(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.StaffBookingAction:
+		in := domain.StaffBookingIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.StaffBooking(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.UserLogoutAction:
 		in := domain.UserLogoutIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

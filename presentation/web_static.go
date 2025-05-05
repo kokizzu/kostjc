@@ -42,6 +42,42 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.StaffBookingAction, func(ctx *fiber.Ctx) error {
+		var in domain.StaffBookingIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffBookingAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		tenant := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tenant.FindTenantChoices()
+
+		fac := rqProperty.NewFacilities(d.PropOltp)
+		facilities := fac.FindAll()
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.StaffBooking(&in)
+
+		return views.RenderStaffBooking(ctx, M.SX{
+			`title`:      `KostJC | Booking Management`,
+			`user`:       user,
+			`segments`:   segments,
+			`booking`:    out.Booking,
+			`bookings`:   out.Bookings,
+			`tenants`:    tenants,
+			`facilities`: facilities,
+			`fields`:     out.Meta.Fields,
+			`pager`:      out.Pager,
+		})
+	})
+
 	fw.Get(`/`+domain.AdminUsersManagementAction, func(ctx *fiber.Ctx) error {
 		var in domain.AdminUsersManagementIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminUsersManagementAction)
@@ -59,7 +95,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.Cmd = zCrud.CmdList
 		out := d.AdminUsersManagement(&in)
 
-		return views.RenderUsersManagement(ctx, M.SX{
+		return views.RenderAdminUsersManagement(ctx, M.SX{
 			`title`:    `KostJC | Users Management`,
 			`user`:     user,
 			`segments`: segments,
@@ -86,7 +122,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.Cmd = zCrud.CmdList
 		out := d.AdminLocation(&in)
 
-		return views.RenderLocation(ctx, M.SX{
+		return views.RenderAdminLocation(ctx, M.SX{
 			`title`:     `KostJC | Location Management`,
 			`user`:      user,
 			`segments`:  segments,
@@ -114,7 +150,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.Cmd = zCrud.CmdList
 		out := d.AdminFacility(&in)
 
-		return views.RenderFacility(ctx, M.SX{
+		return views.RenderAdminFacility(ctx, M.SX{
 			`title`:      `KostJC | Facility Management`,
 			`user`:       user,
 			`segments`:   segments,
@@ -148,7 +184,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.Cmd = zCrud.CmdList
 		out := d.AdminRoom(&in)
 
-		return views.RenderRoom(ctx, M.SX{
+		return views.RenderAdminRoom(ctx, M.SX{
 			`title`:     `KostJC | Room Management`,
 			`user`:      user,
 			`segments`:  segments,
@@ -185,7 +221,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.Cmd = zCrud.CmdList
 		out := d.AdminBuilding(&in)
 
-		return views.RenderBuilding(ctx, M.SX{
+		return views.RenderAdminBuilding(ctx, M.SX{
 			`title`:             `KostJC | Building Management`,
 			`user`:              user,
 			`segments`:          segments,
@@ -216,7 +252,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.Cmd = zCrud.CmdList
 		out := d.AdminTenants(&in)
 
-		return views.RenderTenants(ctx, M.SX{
+		return views.RenderAdminTenants(ctx, M.SX{
 			`title`:    `KostJC | Tenant Management`,
 			`user`:     user,
 			`segments`: segments,
@@ -247,7 +283,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.Cmd = zCrud.CmdList
 		out := d.AdminPayment(&in)
 
-		return views.RenderPayment(ctx, M.SX{
+		return views.RenderAdminPayment(ctx, M.SX{
 			`title`:    `KostJC | Payment Management`,
 			`user`:     user,
 			`segments`: segments,
@@ -282,7 +318,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.Cmd = zCrud.CmdList
 		out := d.AdminBooking(&in)
 
-		return views.RenderBooking(ctx, M.SX{
+		return views.RenderAdminBooking(ctx, M.SX{
 			`title`:      `KostJC | Booking Management`,
 			`user`:       user,
 			`segments`:   segments,
@@ -312,7 +348,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.Cmd = zCrud.CmdList
 		out := d.AdminStock(&in)
 
-		return views.RenderStock(ctx, M.SX{
+		return views.RenderAdminStock(ctx, M.SX{
 			`title`:    `KostJC | Stock Management`,
 			`user`:     user,
 			`segments`: segments,
@@ -331,6 +367,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 func notLogin(ctx *fiber.Ctx, d *domain.Domain, in domain.RequestCommon) bool {
 	var check domain.ResponseCommon
 	sess := d.MustLogin(in, &check)
+
 	if sess == nil {
 		_ = views.RenderError(ctx, M.SX{
 			`error`: check.Error,

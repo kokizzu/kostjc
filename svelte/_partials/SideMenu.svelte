@@ -55,6 +55,15 @@
         <span>Profile</span>
       </a>
     </nav>
+    {#if !access.admin}
+      <h3 class="nav-menu-title">Staff</h3>
+      <nav class="nav-menu">
+        <a href="/staff/booking" class:active={pathLv2 === 'booking'}>
+          <Icon src={RiBusinessCalendarScheduleLine} size="20" />
+          <span>Bookings</span>
+        </a>
+      </nav>
+    {/if}
     {#if access.admin}
       <h3 class="nav-menu-title">Admin</h3>
       <nav class="nav-menu">
@@ -74,7 +83,7 @@
           <Icon src={RiOthersDoorOpenLine} size="20" />
           <span>Rooms</span>
         </a>
-        <a href="/admin/booking" class:active={pathLv2 === 'booking'}>
+        <a href="/admin/booking" class:active={(pathLv1 === 'admin') && (pathLv2 === 'booking')}>
           <Icon src={RiBusinessCalendarScheduleLine} size="20" />
           <span>Bookings</span>
         </a>

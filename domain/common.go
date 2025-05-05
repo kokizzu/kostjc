@@ -362,6 +362,7 @@ func (d *Domain) segmentsFromSession(s *Session) M.SB {
 	s.IsSuperAdmin = d.Superadmins[s.Email]
 	s.Segments = M.SB{
 		UserSegment:  true,
+		StaffSegment: true,
 		GuestSegment: true,
 	}
 	if s.IsSuperAdmin {

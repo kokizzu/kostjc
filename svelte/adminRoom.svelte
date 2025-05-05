@@ -16,8 +16,8 @@
   import { RiSystemAddBoxLine, RiDocumentFileCodeLine } from './node_modules/svelte-icons-pack/dist/ri';
   import { IoClose } from './node_modules/svelte-icons-pack/dist/io';
   import PopUpAddRoom from './_components/PopUpAddRoom.svelte';
-  import Highlight from './node_modules/svelte-highlight/Highlight.svelte';
-  import LineNumbers from  './node_modules/svelte-highlight/LineNumbers.svelte'; 
+  import Highlight from 'svelte-highlight/Highlight.svelte';
+  import LineNumbers from  'svelte-highlight/LineNumbers.svelte'; 
   import json from 'svelte-highlight/languages/json';
   import atomOneDark from 'svelte-highlight/styles/atom-one-dark';
 
