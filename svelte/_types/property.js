@@ -57,6 +57,7 @@ module.exports = {};
  * @property {number} totalPriceIDR
  * @property {string} paidAt
  * @property {string} tenantId
+ * @property {number[]} extraTenants
  * @property {number} createdAt
  * @property {string} createdBy
  * @property {number} updatedAt

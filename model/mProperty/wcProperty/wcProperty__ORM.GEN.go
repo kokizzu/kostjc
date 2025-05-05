@@ -28,6 +28,7 @@ type BookingsMutator struct {
 // NewBookingsMutator create new ORM writer/command object
 func NewBookingsMutator(adapter *Tt.Adapter) (res *BookingsMutator) {
 	res = &BookingsMutator{Bookings: rqProperty.Bookings{Adapter: adapter}}
+	res.ExtraTenants = []any{}
 	return
 }
 
@@ -86,6 +87,8 @@ func (b *BookingsMutator) DoDeletePermanentById() bool { //nolint:dupl false pos
 //		A.X{`=`, 12, b.DeletedAt},
 //		A.X{`=`, 13, b.DeletedBy},
 //		A.X{`=`, 14, b.RestoredBy},
+//		A.X{`=`, 15, b.ExtraTenants},
+//		A.X{`=`, 16, b.RoomId},
 //	})
 //	return !L.IsError(err, `Bookings.DoUpsert failed: `+b.SpaceName()+ `\n%#v`, arr)
 // }
@@ -283,6 +286,25 @@ func (b *BookingsMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false p
 	return false
 }
 
+// SetExtraTenants create mutations, should not duplicate
+func (b *BookingsMutator) SetExtraTenants(val []any) bool { //nolint:dupl false positive
+	b.mutations = append(b.mutations, A.X{`=`, 15, val})
+	b.logs = append(b.logs, A.X{`extraTenants`, b.ExtraTenants, val})
+	b.ExtraTenants = val
+	return true
+}
+
+// SetRoomId create mutations, should not duplicate
+func (b *BookingsMutator) SetRoomId(val uint64) bool { //nolint:dupl false positive
+	if val != b.RoomId {
+		b.mutations = append(b.mutations, A.X{`=`, 16, val})
+		b.logs = append(b.logs, A.X{`roomId`, b.RoomId, val})
+		b.RoomId = val
+		return true
+	}
+	return false
+}
+
 // SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
 func (b *BookingsMutator) SetAll(from rqProperty.Bookings, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
 	if excludeMap == nil { // list of fields to exclude
@@ -349,6 +371,14 @@ func (b *BookingsMutator) SetAll(from rqProperty.Bookings, excludeMap, forceMap 
 	}
 	if !excludeMap[`restoredBy`] && (forceMap[`restoredBy`] || from.RestoredBy != 0) {
 		b.RestoredBy = from.RestoredBy
+		changed = true
+	}
+	if !excludeMap[`extraTenants`] && (forceMap[`extraTenants`] || from.ExtraTenants != nil) {
+		b.ExtraTenants = from.ExtraTenants
+		changed = true
+	}
+	if !excludeMap[`roomId`] && (forceMap[`roomId`] || from.RoomId != 0) {
+		b.RoomId = from.RoomId
 		changed = true
 	}
 	return

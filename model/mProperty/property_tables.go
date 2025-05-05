@@ -89,6 +89,8 @@ const (
 	PaidAt        = `paidAt`
 	FacilitiesObj = `facilitiesObj`
 	TenantId      = `tenantId`
+	ExtraTenants  = `extraTenants`
+	RoomId        = `roomId`
 )
 
 const (
@@ -203,6 +205,8 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{DeletedAt, Tt.Integer},
 			{DeletedBy, Tt.Unsigned},
 			{RestoredBy, Tt.Unsigned},
+			{ExtraTenants, Tt.Array},
+			{RoomId, Tt.Unsigned},
 		},
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,

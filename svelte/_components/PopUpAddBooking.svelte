@@ -2,6 +2,7 @@
   /** @typedef {import('../_types/property').Booking} Booking */
   /** @typedef {import('../_types/property').Facility} Facility */
 
+
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import { RiArrowsArrowDropRightLine } from '../node_modules/svelte-icons-pack/dist/ri';
@@ -22,6 +23,7 @@
   let totalPriceIDR = 0;
   let paidAt = dateISOFormat(0);
   let tenantId = 0;
+  let extraTenantsIds = /** @type {number[]} */([]);
 
   export let OnSubmit = async function(/** @type {Booking} */ booking, /** @type {number[]} */ facilities) {
     console.log('OnSubmit :::', booking, facilities);
@@ -36,6 +38,7 @@
       totalPriceIDR,
       paidAt,
       tenantId,
+      extraTenants: extraTenantsIds
     });
 
     await OnSubmit(booking, facilitiesNums);
@@ -53,39 +56,84 @@
     paidAt = dateISOFormat(0);
     tenantId = 0;
     facilitiesToShow = [];
+    facilitiesPrice = 0;
+    extraTenantsIds = [];
   }
   
   const cancel = () => {
     isShow = false;
   }
 
+  // Facilities
+
   let facilitiesToShow = /** @type {Facility[]} */ ([]);
   let showFacilities = false;
   let selectedFacility = 'Facility....';
   let facilitiesPrice = 0;
 
-  function handleStationListClose() {
+  function handleFacilitiesClose() {
 		showFacilities = false;
-		document.body.removeEventListener('click', handleStationListClose)
+		document.body.removeEventListener('click', handleFacilitiesClose)
 	}
-	function toggleStationList() {
+	function toggleFacilities() {
 		showFacilities = !showFacilities;
-		if (showFacilities) document.body.addEventListener('click', handleStationListClose);
-		else document.body.removeEventListener('click', handleStationListClose);
+		if (showFacilities) document.body.addEventListener('click', handleFacilitiesClose);
+		else document.body.removeEventListener('click', handleFacilitiesClose);
 	}
 
-	function toFacilityShow(/** @type {Facility} */ facility) {
-    selectedFacility = facility.facilityName;
+	function choseFacility(/** @type {Facility} */ facility) {
+    selectedFacility = facility.facilityName + ' (' + facility.facilityType + ')';
     showFacilities = false;
     facilitiesPrice += facility.extraChargeIDR;
     facilitiesNums = [...facilitiesNums, Number(facility.id)];
 		facilitiesToShow = [...facilitiesToShow, facility];
+    facilities = facilities.filter(f => f.id !== facility.id);
 	}
 
 	const removeFacility = (/** @type {number} */ idx) => {
     facilitiesPrice -= facilitiesToShow[idx].extraChargeIDR;
     facilitiesNums = facilitiesNums.filter(( _, i ) => i !== idx);
+    facilities = [...facilities, facilitiesToShow[idx]];
 		facilitiesToShow = facilitiesToShow.filter(( _, i ) => i !== idx);
+	}
+
+  // Extra Tenants
+
+  /**
+   * @typedef {Object} ExtraTenant
+   * @property {number} id
+   * @property {string} name
+   */
+
+  let extraTenants = /** @type {ExtraTenant[]} */ ([]);
+  for (const [k, v] of Object.entries(tenants)) extraTenants.push({id: Number(k), name: v});
+
+  let extraTenantsToShow = /** @type {ExtraTenant[]} */ ([]);
+  let showExtraTenants = false;
+  let selectedExtraTenants = 'Tenant....';
+
+  function handleExtraTenantsClose() {
+		showExtraTenants = false;
+		document.body.removeEventListener('click', handleExtraTenantsClose)
+	}
+	function toggleExtraTenants() {
+		showExtraTenants = !showExtraTenants;
+		if (showExtraTenants) document.body.addEventListener('click', handleExtraTenantsClose);
+		else document.body.removeEventListener('click', handleExtraTenantsClose);
+	}
+
+	function choseExtraTenant(/** @type {ExtraTenant} */ extraTenant) {
+    selectedExtraTenants = extraTenant.name;
+    showExtraTenants = false;
+    extraTenantsIds = [...extraTenantsIds, Number(extraTenant.id)];
+		extraTenantsToShow = [...extraTenantsToShow, extraTenant];
+    extraTenants = extraTenants.filter(f => f.id !== extraTenant.id);
+	}
+
+	const removeExtraTenant = (/** @type {number} */ idx) => {
+    extraTenantsIds = facilitiesNums.filter(( _, i ) => i !== idx);
+    extraTenants = [...extraTenants, extraTenantsToShow[idx]];
+		extraTenantsToShow = extraTenantsToShow.filter(( _, i ) => i !== idx);
 	}
 </script>
 
@@ -119,25 +167,25 @@
         type="number"
         placeholder="0"
       />
-      <div class="facilities-form">
+      <div class="multiselect-form">
         <label class="label" for="facilities">Facilities</label>
-        <div class="facilities-selected">
+        <div class="multiselect-selected">
           {#each facilitiesToShow as fac, idx}
             <div class="facility-show">
-              <span>{fac.facilityName}</span>
+              <span>{fac.facilityName} ({fac.facilityType})</span>
               <button on:click={() => removeFacility(idx)}>
                 <Icon size="18" color="var(--sky-001)" src={IoClose}/>
               </button>
             </div>
           {/each}
         </div>
-        <div class="dropdown-facilities">
+        <div class="dropdown-multiselect">
           <div class="dropdown-item">
-            <button id="facilities" class="dropdown-btn" on:click|stopPropagation={toggleStationList}>
+            <button id="facilities" class="dropdown-btn" on:click|stopPropagation={toggleFacilities}>
               <span>{selectedFacility}</span>
               <Icon
-                className={showFacilities ? 'rotate' : 'dropdown'}
-                size="20"
+                className={showFacilities ? 'rotate-b' : 'dropdown'}
+                size="25"
                 src={RiArrowsArrowDropRightLine}
               />
             </button>
@@ -147,8 +195,8 @@
                   {#each facilities as fac}
                     <button
                       class="facility"
-                      on:click|stopPropagation={() => toFacilityShow(fac)}>
-                      <span>{fac.facilityName}</span>
+                      on:click|stopPropagation={() => choseFacility(fac)}>
+                      <span>{fac.facilityName} ({fac.facilityType})</span>
                     </button>
                   {/each}
                 {:else}
@@ -164,6 +212,7 @@
         <div class="totalprice">
           <span class="baseprice">{basePriceIDR} + </span>
           <span class="facilityprice">{facilitiesPrice}</span>
+          <span class="total"> = {basePriceIDR + facilitiesPrice}</span>
         </div>
       </div>
       <InputBox
@@ -181,6 +230,46 @@
         values={tenants}
         isObject={true}
       />
+      <div class="multiselect-form">
+        <label class="label" for="extraTenants">Extra Tenants</label>
+        <div class="multiselect-selected">
+          {#each extraTenantsToShow as ext, idx}
+            <div class="facility-show">
+              <span>{ext.name}</span>
+              <button on:click={() => removeExtraTenant(idx)}>
+                <Icon size="18" color="var(--sky-001)" src={IoClose}/>
+              </button>
+            </div>
+          {/each}
+        </div>
+        <div class="dropdown-multiselect">
+          <div class="dropdown-item">
+            <button id="extraTenants" class="dropdown-btn" on:click|stopPropagation={toggleExtraTenants}>
+              <span>{selectedExtraTenants}</span>
+              <Icon
+                className={showExtraTenants ? 'rotate-b' : 'dropdown'}
+                size="25"
+                src={RiArrowsArrowDropRightLine}
+              />
+            </button>
+            {#if showExtraTenants}
+              <div class="dropdown-list">
+                {#if extraTenants && extraTenants.length}
+                  {#each extraTenants as ext}
+                    <button
+                      class="facility"
+                      on:click|stopPropagation={() => choseExtraTenant(ext)}>
+                      <span>{ext.name}</span>
+                    </button>
+                  {/each}
+                {:else}
+                  <p>No Tenants yet, please add it in master tenants</p>
+                {/if}
+              </div>
+            {/if}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="foot">
       <div class="left">
@@ -201,6 +290,11 @@
 </div>
 
 <style>
+  :global(.rotate-b) {
+    transition: all 0.2s ease-in-out;
+    transform: rotate(90deg);
+  }
+
   @keyframes spin {
     from {
       transform: rotate(0deg);
@@ -335,13 +429,13 @@
 		background-color: var(--gray-001);
 	}
 
-  .facilities-form {
+  .multiselect-form {
     display: flex;
     flex-direction: column;
     gap: 3px;
   }
 
-  .facilities-form label {
+  .multiselect-form label {
     font-size: var(--font-base);
     margin-left: 10px;
     overflow: hidden;
@@ -351,14 +445,14 @@
     line-clamp: 1;
   }
 
-  .facilities-form .facilities-selected {
+  .multiselect-form .multiselect-selected {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 5px;
   }
 
-  .facilities-form .facilities-selected .facility-show {
+  .multiselect-form .multiselect-selected .facility-show {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -369,7 +463,7 @@
     border-radius: 5px;
   }
 
-  .facilities-form .facilities-selected .facility-show button {
+  .multiselect-form .multiselect-selected .facility-show button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -380,27 +474,27 @@
     cursor: pointer;
   }
 
-  .facilities-form .facilities-selected .facility-show button:hover {
+  .multiselect-form .multiselect-selected .facility-show button:hover {
     background-color: var(--sky-005);
   }
 
-  .dropdown-facilities {
+  .dropdown-multiselect {
 		position: relative;
 		flex-grow: 1;
 		display: flex;
   }
 
-  .dropdown-facilities {
+  .dropdown-multiselect {
 		position: relative;
 		flex-grow: 1;
 		display: flex;
 	}
 
-	.dropdown-facilities .dropdown-item {
+	.dropdown-multiselect .dropdown-item {
 		width: 100%;
 	}
 
-	.dropdown-facilities .dropdown-item .dropdown-btn {
+	.dropdown-multiselect .dropdown-item .dropdown-btn {
 		width: 100% !important;
 	}
 
@@ -435,7 +529,6 @@
 
 	.dropdown-item .dropdown-list {
 		background-color: #FFF;
-		min-height: fit-content;
 		max-height: 300px;
 		overflow-y: auto;
 		width: 100%;

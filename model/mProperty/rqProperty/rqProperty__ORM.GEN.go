@@ -36,6 +36,8 @@ type Bookings struct {
 	DeletedAt     int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
 	DeletedBy     uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
 	RestoredBy    uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+	ExtraTenants  []any       `json:"extraTenants" form:"extraTenants" query:"extraTenants" long:"extraTenants" msg:"extraTenants"`
+	RoomId        uint64      `json:"roomId,string" form:"roomId" query:"roomId" long:"roomId" msg:"roomId"`
 }
 
 // NewBookings create new ORM reader/query object
@@ -88,6 +90,8 @@ func (b *Bookings) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "deletedAt"
 	, "deletedBy"
 	, "restoredBy"
+	, "extraTenants"
+	, "roomId"
 	`
 }
 
@@ -108,6 +112,8 @@ func (b *Bookings) SqlSelectAllUncensoredFields() string { //nolint:dupl false p
 	, "deletedAt"
 	, "deletedBy"
 	, "restoredBy"
+	, "extraTenants"
+	, "roomId"
 	`
 }
 
@@ -129,6 +135,8 @@ func (b *Bookings) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 12, b.DeletedAt},
 		A.X{`=`, 13, b.DeletedBy},
 		A.X{`=`, 14, b.RestoredBy},
+		A.X{`=`, 15, b.ExtraTenants},
+		A.X{`=`, 16, b.RoomId},
 	}
 }
 
@@ -282,6 +290,26 @@ func (b *Bookings) SqlRestoredBy() string { //nolint:dupl false positive
 	return `"restoredBy"`
 }
 
+// IdxExtraTenants return name of the index
+func (b *Bookings) IdxExtraTenants() int { //nolint:dupl false positive
+	return 15
+}
+
+// SqlExtraTenants return name of the column being indexed
+func (b *Bookings) SqlExtraTenants() string { //nolint:dupl false positive
+	return `"extraTenants"`
+}
+
+// IdxRoomId return name of the index
+func (b *Bookings) IdxRoomId() int { //nolint:dupl false positive
+	return 16
+}
+
+// SqlRoomId return name of the column being indexed
+func (b *Bookings) SqlRoomId() string { //nolint:dupl false positive
+	return `"roomId"`
+}
+
 // ToArray receiver fields to slice
 func (b *Bookings) ToArray() A.X { //nolint:dupl false positive
 	var id any = nil
@@ -304,6 +332,8 @@ func (b *Bookings) ToArray() A.X { //nolint:dupl false positive
 		b.DeletedAt,     // 12
 		b.DeletedBy,     // 13
 		b.RestoredBy,    // 14
+		b.ExtraTenants,  // 15
+		b.RoomId,        // 16
 	}
 }
 
@@ -324,6 +354,8 @@ func (b *Bookings) FromArray(a A.X) *Bookings { //nolint:dupl false positive
 	b.DeletedAt = X.ToI(a[12])
 	b.DeletedBy = X.ToU(a[13])
 	b.RestoredBy = X.ToU(a[14])
+	b.ExtraTenants = X.ToArr(a[15])
+	b.RoomId = X.ToU(a[16])
 	return b
 }
 
@@ -344,6 +376,8 @@ func (b *Bookings) FromUncensoredArray(a A.X) *Bookings { //nolint:dupl false po
 	b.DeletedAt = X.ToI(a[12])
 	b.DeletedBy = X.ToU(a[13])
 	b.RestoredBy = X.ToU(a[14])
+	b.ExtraTenants = X.ToArr(a[15])
+	b.RoomId = X.ToU(a[16])
 	return b
 }
 
@@ -402,6 +436,8 @@ var BookingsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`deletedAt`:     Tt.Integer,
 	`deletedBy`:     Tt.Unsigned,
 	`restoredBy`:    Tt.Unsigned,
+	`extraTenants`:  Tt.Array,
+	`roomId`:        Tt.Unsigned,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

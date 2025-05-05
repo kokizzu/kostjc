@@ -8,7 +8,7 @@
   /** @typedef {import('./_types/property.js').Facility} Facility */
   
   import LayoutMain from './_layouts/main.svelte';
-  import MasterTable from './_components/MasterTable.svelte';
+  import MasterTable from './_components/MasterTableBooking.svelte';
   import { onMount } from 'svelte';
   import { AdminBooking } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';

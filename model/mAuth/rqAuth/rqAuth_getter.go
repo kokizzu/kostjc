@@ -132,18 +132,22 @@ func (t *Tenants) FindTenantChoices() map[uint64]string {
 	const comment = `-- Tenants) FindTenantChoices`
 
 	queryRows := comment + `
-SELECT ` + t.SqlId() + `, ` + t.SqlTenantName() + `, ` + t.SqlWhatsappNumber() + ` FROM ` + t.SqlTableName() + `
+SELECT ` + t.SqlId() + `, ` + t.SqlTenantName() + `, ` + t.SqlTelegramUsername() + `, ` + t.SqlWhatsappNumber() + ` FROM ` + t.SqlTableName() + `
 ORDER BY ` + t.SqlTenantName() + ` ASC`
 
 	out := make(map[uint64]string)
 	t.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 3 {
-			whatsappNum := ""
+		if len(row) == 4 {
+			nameToShow := X.ToS(row[1])
 			if X.ToS(row[2]) != "" {
-				whatsappNum = " (" + X.ToS(row[2]) + ")"
+				nameToShow += ` / ` + X.ToS(row[2])
 			}
-			nameWithNum := X.ToS(row[1]) + whatsappNum
-			out[X.ToU(row[0])] = nameWithNum
+
+			if X.ToS(row[3]) != "" {
+				nameToShow += ` / ` + X.ToS(row[3])
+			}
+
+			out[X.ToU(row[0])] = nameToShow
 		}
 	})
 

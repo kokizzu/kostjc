@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/goccy/go-json"
+	"github.com/kokizzu/gotro/X"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminBooking.go
@@ -38,10 +39,11 @@ type (
 const (
 	AdminBookingAction = `admin/booking`
 
-	ErrAdminBookingNotFound      = `booking not found`
-	ErrAdminBookingSaveFailed    = `failed to save booking`
-	ErrAdminBookingDeleteFailed  = `failed to delete booking`
-	ErrAdminBookingRestoreFailed = `failed to restore booking`
+	ErrAdminBookingNotFound       = `booking not found`
+	ErrAdminBookingSaveFailed     = `failed to save booking`
+	ErrAdminBookingDeleteFailed   = `failed to delete booking`
+	ErrAdminBookingRestoreFailed  = `failed to restore booking`
+	ErrAdminBookingTenantNotFound = `tenant not found`
 )
 
 var AdminBookingMeta = zCrud.Meta{
@@ -100,6 +102,13 @@ var AdminBookingMeta = zCrud.Meta{
 		{
 			Name:      mProperty.TenantId,
 			Label:     `Tenant`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  false,
+		},
+		{
+			Name:      mProperty.ExtraTenants,
+			Label:     `Extra Tenants`,
 			DataType:  zCrud.DataTypeInt,
 			InputType: zCrud.InputTypeCombobox,
 			ReadOnly:  false,
@@ -213,10 +222,29 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 		if in.Booking.TenantId > 0 {
 			tenant := rqAuth.NewTenants(d.AuthOltp)
 			tenant.Id = in.Booking.TenantId
-
-			if tenant.FindById() {
-				bk.SetTenantId(in.Booking.TenantId)
+			if !tenant.FindById() {
+				out.SetError(400, ErrAdminBookingTenantNotFound)
+				return
 			}
+
+			bk.SetTenantId(in.Booking.TenantId)
+		}
+
+		if len(in.Booking.ExtraTenants) > 0 {
+			for _, id := range in.Booking.ExtraTenants {
+				// Skip extra tenant if same as main tenant
+				if id == in.Booking.TenantId {
+					continue
+				}
+				tenant := rqAuth.NewTenants(d.AuthOltp)
+				tenant.Id = X.ToU(id)
+				if !tenant.FindById() {
+					out.SetError(400, ErrAdminBookingTenantNotFound)
+					return
+				}
+			}
+
+			bk.SetExtraTenants(in.Booking.ExtraTenants)
 		}
 
 		if bk.Id == 0 {

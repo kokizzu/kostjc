@@ -312,7 +312,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		tenants := tenant.FindTenantChoices()
 
 		fac := rqProperty.NewFacilities(d.PropOltp)
-		facilities := fac.FindAll()
+		facilities := fac.FindAllTypeRoom()
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
