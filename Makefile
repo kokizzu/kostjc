@@ -41,7 +41,7 @@ backup-db:
 	go run main.go backup
 
 restore-db:
-	go run main.go restore
+	go run main.go restore $(word 2, $(MAKECMDGOALS))
 
 svelte:
 	pnpm i
@@ -49,3 +49,6 @@ svelte:
 
 web:
 	air web
+
+%:
+	@:
