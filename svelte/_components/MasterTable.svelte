@@ -911,8 +911,16 @@
     background-color: var(--blue-transparent);
   }
 
+  .table-root .table_container table tbody tr td .actions .btn.delete:hover {
+    background-color: var(--red-transparent);
+  }
+
   :global(.table-root .table_container table tbody tr td .actions .btn:hover svg) {
     fill: var(--blue-005);
+  }
+
+  :global(.table-root .table_container table tbody tr td .actions .btn.delete:hover svg) {
+    fill: var(--red-005);
   }
 
   .table-root .pagination_container {

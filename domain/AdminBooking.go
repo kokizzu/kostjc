@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"fmt"
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
@@ -8,6 +9,7 @@ import (
 	"kostjc/model/zCrud"
 	"time"
 
+	"github.com/fatih/color"
 	"github.com/goccy/go-json"
 	"github.com/kokizzu/gotro/X"
 )
@@ -44,6 +46,7 @@ const (
 	ErrAdminBookingDeleteFailed   = `failed to delete booking`
 	ErrAdminBookingRestoreFailed  = `failed to restore booking`
 	ErrAdminBookingTenantNotFound = `tenant not found`
+	ErrAdminBookingRoomNotFound   = `room not found`
 )
 
 var AdminBookingMeta = zCrud.Meta{
@@ -109,6 +112,13 @@ var AdminBookingMeta = zCrud.Meta{
 		{
 			Name:      mProperty.ExtraTenants,
 			Label:     `Extra Tenants`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  false,
+		},
+		{
+			Name:      mProperty.RoomId,
+			Label:     `Room`,
 			DataType:  zCrud.DataTypeInt,
 			InputType: zCrud.InputTypeCombobox,
 			ReadOnly:  false,
@@ -247,6 +257,17 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 			bk.SetExtraTenants(in.Booking.ExtraTenants)
 		}
 
+		if in.Booking.RoomId != 0 {
+			room := rqProperty.NewRooms(d.PropOltp)
+			room.Id = in.Booking.RoomId
+			if !room.FindById() {
+				out.SetError(400, ErrAdminBookingRoomNotFound)
+				return
+			}
+
+			bk.SetRoomId(in.Booking.RoomId)
+		}
+
 		if bk.Id == 0 {
 			bk.SetCreatedAt(in.UnixNow())
 			bk.SetCreatedBy(sess.UserId)
@@ -267,6 +288,7 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 		fallthrough
 	case zCrud.CmdList:
 		bk := rqProperty.NewBookings(d.PropOltp)
+		fmt.Println(color.BlueString(X.ToJsonPretty(in.Pager)))
 		out.Bookings = bk.FindByPagination(
 			&AdminBookingMeta,
 			&in.Pager,

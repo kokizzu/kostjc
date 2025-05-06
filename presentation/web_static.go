@@ -314,6 +314,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		fac := rqProperty.NewFacilities(d.PropOltp)
 		facilities := fac.FindAllTypeRoom()
 
+		room := rqProperty.NewRooms(d.PropOltp)
+		rooms := room.FindRoomChoices()
+
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
 		out := d.AdminBooking(&in)
@@ -326,6 +329,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`bookings`:   out.Bookings,
 			`tenants`:    tenants,
 			`facilities`: facilities,
+			`rooms`:      rooms,
 			`fields`:     out.Meta.Fields,
 			`pager`:      out.Pager,
 		})

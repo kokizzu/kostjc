@@ -31,7 +31,7 @@ func main() {
 	// note: set instance id when there's multiple instance
 	// lexid.Config.Separator = `~THE_INSTANCE_ID`
 
-	fmt.Println(conf.PROJECT_NAME + ` ` + S.IfEmpty(VERSION, `local-dev`))
+	fmt.Println(color.GreenString(conf.PROJECT_NAME + ` ` + S.IfEmpty(VERSION, `local-dev`)))
 
 	log = conf.InitLogger()
 	conf.LoadEnv()
@@ -86,7 +86,7 @@ func main() {
 		tConn, err = tConf.Connect()
 		if tConn != nil {
 			closers = append(closers, tConn.Close)
-			fmt.Println(`tarantool connected: ` + tConf.DebugStr())
+			fmt.Println(color.BlueString("[CONNECTED]") + ` Tarantool: ` + tConf.DebugStr())
 		}
 		return err
 	})
@@ -98,7 +98,7 @@ func main() {
 		cConn, err = cConf.Connect()
 		if cConn != nil {
 			closers = append(closers, cConn.Close)
-			fmt.Println(`clickhouse connected: ` + cConf.DebugStr())
+			fmt.Println(color.BlueString("[CONNECTED]") + ` ClickHouse: ` + cConf.DebugStr())
 		}
 		return err
 	})

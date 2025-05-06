@@ -15,6 +15,7 @@
   export let isSubmitted  = /** @type {boolean} */ (false);
   export let tenants = /** @type {Record<number, string>} */ ({});
   export let facilities = /** @type {Facility[]} */ ([]);
+  export let rooms = /** @type {Record<number, string>} */ ({});
 
   let dateStart = dateISOFormat(0);
   let dateEnd = dateISOFormat(30);
@@ -24,6 +25,7 @@
   let paidAt = dateISOFormat(0);
   let tenantId = 0;
   let extraTenantsIds = /** @type {number[]} */([]);
+  let roomId = 0;
 
   export let OnSubmit = async function(/** @type {Booking} */ booking, /** @type {number[]} */ facilities) {
     console.log('OnSubmit :::', booking, facilities);
@@ -38,7 +40,8 @@
       totalPriceIDR,
       paidAt,
       tenantId,
-      extraTenants: extraTenantsIds
+      extraTenants: extraTenantsIds,
+      roomId
     });
 
     await OnSubmit(booking, facilitiesNums);
@@ -58,6 +61,7 @@
     facilitiesToShow = [];
     facilitiesPrice = 0;
     extraTenantsIds = [];
+    roomId = 0;
   }
   
   const cancel = () => {
@@ -270,6 +274,14 @@
           </div>
         </div>
       </div>
+      <InputBox
+        id="roomId"
+        label="Room"
+        bind:value={roomId}
+        type="combobox"
+        values={rooms}
+        isObject={true}
+      />
     </div>
     <div class="foot">
       <div class="left">

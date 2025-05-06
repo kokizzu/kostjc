@@ -26,6 +26,30 @@
   import { datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
 
+  export let tenants = /** @type {Record<number, string>} */ ({});
+
+  /**
+   * @description Get extra tenants
+   * @param {number[]} tenantIds
+   * @returns {string}
+   * */
+  function getExtraTenants(tenantIds) {
+    if (!tenantIds.length) return '--';
+    return tenantIds.map(tenantId => tenants[tenantId]).join(', ');
+  }
+
+  function formatFacilities(facilities) {
+    try {
+      facilities = JSON.parse(facilities);
+    } catch (e) {
+      return facilities;
+    }
+    return facilities.map(facility => 
+        `${facility.facilityName} (IDR ${facility.extraChargeIDR.toLocaleString('en-ID')})`
+      ).join(', ');
+  }
+
+
   export let FIELDS = /** @type Field[] */ ([]); // bind
   export let PAGER = /** @type PagerOut */ ({}); // bind
   export let MASTER_ROWS = /** @type any[][] */ ([]); // bind
@@ -381,12 +405,13 @@
             {:else}
               <th
                 style="
-                  {f.name === 'ktpRegion' ? 'min-width: 250px;' : ''}
+                  {f.name === 'facilitiesObj' ? 'min-width: 300px;' : ''}
+                  {f.name === 'extraTenants' ? 'min-width: 250px;' : ''}
+                  {f.name === 'tenantId' ? 'min-width: 200px;' : ''}
                 "
                 class="
 								{f.inputType === 'textarea' ? 'textarea' : ''}
 								{f.inputType === 'datetime' ? 'datetime' : ''}
-								{f.name === 'staffId' ? 'staff' : ''}
 							">{f.label}</th
               >
             {/if}
@@ -467,6 +492,10 @@
                   <td class="combobox">{REFS[f.name][row[idx]] || '--'}</td>
                 {:else if f.inputType === 'percentage'}
                   <td class="percentage">{row[idx] || '0'}%</td>
+                {:else if f.name === 'facilitiesObj'}
+                    <td class="textarea">{formatFacilities(row[idx])}</td>
+                {:else if f.name === 'extraTenants'}
+                  <td class="textarea">{getExtraTenants(row[idx])}</td>
                 {:else}
                   <td class={f.type}>
                     {typeof row[idx] === 'boolean' ? (row[idx] ? 'Yes' : 'No') : (row[idx] || '--')}
@@ -820,8 +849,7 @@
     text-wrap: nowrap;
   }
 
-  .table-root .table_container table thead tr th.textarea,
-  .table-root .table_container table thead tr th.staff {
+  .table-root .table_container table thead tr th.textarea {
     min-width: 280px !important;
   }
 
@@ -911,8 +939,16 @@
     background-color: var(--blue-transparent);
   }
 
+  .table-root .table_container table tbody tr td .actions .btn.delete:hover {
+    background-color: var(--red-transparent);
+  }
+
   :global(.table-root .table_container table tbody tr td .actions .btn:hover svg) {
     fill: var(--blue-005);
+  }
+
+  :global(.table-root .table_container table tbody tr td .actions .btn.delete:hover svg) {
+    fill: var(--red-005);
   }
 
   .table-root .pagination_container {

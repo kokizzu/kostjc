@@ -21,6 +21,7 @@
   let booking     = /** @type {Booking} */ ({/* booking */});
   let bookings    = /** @type {any[][]} */([/* bookings */]);
   let tenants     = /** @type {Record<Number, string>} */({/* tenants */});
+  let rooms       = /** @type {Record<Number, string>} */({/* rooms */});
   let facilities  = /** @type {Facility[]} */ ([/* facilities */]);
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
@@ -31,7 +32,30 @@
   } */ (null);
   let isSubmitAddBooking = /** @type boolean */ (false);
 
+  const hashSearchByTenant  = 'by-tenant';
+  const hashSearchByRoom    = 'by-room';
+
+  let hash = /** @type {string} */ (location.hash || '');
+
   onMount(() => {
+    if ( hash[ 0 ] === '#' ) hash = hash.substring( 1 );
+
+    if (hash.includes(hashSearchByTenant)) {
+      const tenantId = hash.replace(hashSearchByTenant+':', '');
+      pager.filters = {
+        tenantId: [tenantId]
+      }
+      OnRefresh(pager);
+    }
+
+    if (hash.includes(hashSearchByRoom)) {
+      const roomId = hash.replace(hashSearchByRoom+':', '');
+      pager.filters = {
+        roomId: [roomId]
+      }
+      OnRefresh(pager);
+    }
+    
     isPopUpFormReady = true
   });
 
@@ -111,9 +135,15 @@
     console.log('Booking ID to Edit: ' + String(id));
     const booking = {
       id: payloads[0],
-      buildingName: String(payloads[1]),
-      locationId: String(payloads[2]),
-      facilitiesObj: String(payloads[3]),
+      dateStart: payloads[1],
+      dateEnd: payloads[2],
+      basePriceIDR: payloads[3],
+      facilitiesObj: String(payloads[4]),
+      totalPriceIDR: payloads[5],
+      paidAt: payloads[6],
+      tenantId: payloads[7],
+      extraTenants: payloads[8],
+      roomId: payloads[9]
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -179,6 +209,7 @@
     OnSubmit={OnAddBooking}
     facilities={facilities}
     tenants={tenants}
+    rooms={rooms}
   />
 {/if}
 
@@ -188,11 +219,14 @@
     <MasterTable
       ACCESS={segments}
       REFS={{
-        'tenantId': tenants
+        'tenantId': tenants,
+        'roomId': rooms
       }}
       bind:FIELDS={fields}
       bind:PAGER={pager}
       bind:MASTER_ROWS={bookings}
+
+      tenants={tenants}
 
       CAN_EDIT_ROW={false}
       CAN_SEARCH_ROW

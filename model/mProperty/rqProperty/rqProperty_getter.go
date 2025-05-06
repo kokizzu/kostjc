@@ -57,7 +57,7 @@ SELECT ` + l.SqlSelectAllFields() + ` FROM ` + l.SqlTableName()
 func (f *Facilities) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud.PagerOut) (res [][]any) {
 	const comment = `-- Facilities) FindByPagination`
 
-	validFields := LocationsFieldTypeMap
+	validFields := FacilitiesFieldTypeMap
 	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
 
 	queryCount := comment + `
@@ -86,7 +86,7 @@ FROM ` + f.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 func (b *Buildings) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud.PagerOut) (res [][]any) {
 	const comment = `-- Buildings) FindByPagination`
 
-	validFields := LocationsFieldTypeMap
+	validFields := BuildingsFieldTypeMap
 	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
 
 	queryCount := comment + `
@@ -132,7 +132,7 @@ ORDER BY ` + l.SqlName() + ` ASC`
 func (b *Bookings) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud.PagerOut) (res [][]any) {
 	const comment = `-- Bookings) FindByPagination`
 
-	validFields := LocationsFieldTypeMap
+	validFields := BookingsFieldTypeMap
 	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
 
 	queryCount := comment + `
@@ -598,4 +598,21 @@ func (b *Stocks) CountTotalAllRows() (total uint64) {
 
 func (b *Stocks) Truncate() bool {
 	return b.Adapter.ExecBoxSpace(b.SpaceName()+`:truncate`, A.X{})
+}
+
+func (r *Rooms) FindRoomChoices() map[uint64]string {
+	const comment = `-- Rooms) FindRoomChoices`
+
+	queryRows := comment + `
+SELECT ` + r.SqlId() + `, ` + r.SqlRoomName() + ` FROM ` + r.SqlTableName() + `
+ORDER BY ` + r.SqlRoomName() + ` ASC`
+
+	out := make(map[uint64]string)
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 2 {
+			out[X.ToU(row[0])] = X.ToS(row[1])
+		}
+	})
+
+	return out
 }
