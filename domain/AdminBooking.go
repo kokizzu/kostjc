@@ -84,8 +84,8 @@ var AdminBookingMeta = zCrud.Meta{
 			Name:      mProperty.FacilitiesObj,
 			Label:     `Facilities`,
 			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeCombobox,
-			ReadOnly:  true,
+			InputType: zCrud.InputTypeTextArea,
+			ReadOnly:  false,
 		},
 		{
 			Name:      mProperty.TotalPriceIDR,
@@ -113,7 +113,7 @@ var AdminBookingMeta = zCrud.Meta{
 			Name:      mProperty.ExtraTenants,
 			Label:     `Extra Tenants`,
 			DataType:  zCrud.DataTypeInt,
-			InputType: zCrud.InputTypeCombobox,
+			InputType: zCrud.InputTypeText,
 			ReadOnly:  false,
 		},
 		{
@@ -217,6 +217,10 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 			}
 		}
 
+		if in.Booking.Id > 0 && in.Booking.FacilitiesObj != `` {
+			bk.SetFacilitiesObj(in.Booking.FacilitiesObj)
+		}
+
 		if in.Booking.BasePriceIDR > 0 {
 			bk.SetBasePriceIDR(in.Booking.BasePriceIDR)
 		}
@@ -240,20 +244,20 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 			bk.SetTenantId(in.Booking.TenantId)
 		}
 
-		if len(in.Booking.ExtraTenants) > 0 {
-			for _, id := range in.Booking.ExtraTenants {
-				// Skip extra tenant if same as main tenant
-				if id == in.Booking.TenantId {
-					continue
-				}
-				tenant := rqAuth.NewTenants(d.AuthOltp)
-				tenant.Id = X.ToU(id)
-				if !tenant.FindById() {
-					out.SetError(400, ErrAdminBookingTenantNotFound)
-					return
-				}
+		for _, id := range in.Booking.ExtraTenants {
+			// Skip extra tenant if same as main tenant
+			if id == in.Booking.TenantId {
+				continue
 			}
+			tenant := rqAuth.NewTenants(d.AuthOltp)
+			tenant.Id = X.ToU(id)
+			if !tenant.FindById() {
+				out.SetError(400, ErrAdminBookingTenantNotFound)
+				return
+			}
+		}
 
+		if in.Cmd == zCrud.CmdUpsert {
 			bk.SetExtraTenants(in.Booking.ExtraTenants)
 		}
 

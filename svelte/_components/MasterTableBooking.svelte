@@ -12,6 +12,7 @@
     RiSystemFilterLine,
     RiArrowsArrowGoBackLine,
     RiSystemInformationLine,
+    RiArrowsArrowDropRightLine
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { IoSearch, IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
@@ -81,9 +82,6 @@
   // Index of field 'deletedAt', for marker deleted rows
   let deletedIndex = -1;
 
-  // PopUp for modify rows
-  let showPopUp = false;
-
   // Pagination total, based on total pages
   let paginationTotal = 1;
   // Pagination all, based on total pages
@@ -108,17 +106,8 @@
   let totalRows = PAGER.countResult;
   // Total rows current
   let totalRowsCurrent = 0;
-  // Display map for fill latitude and longitude
-  let isCoordFieldsExist = false;
-  // Index of field latitude and longitude in payloads
-  let IdxLatitude = -1,
-    IdxLongitude = -1;
-
   // Payloads for modify rows
   let payloads = [];
-
-  // Map element binding
-  let mapElm;
 
   // Toggle show rows options
   function toggleRowsNum() {
@@ -175,13 +164,6 @@
     if (PAGER) getPaginationShow();
   }
 
-  // Coordinate for map if field lat / lng exist
-  let Coord = {
-    lng: 118.0148634,
-    lat: -2.548926,
-    zoom: 7,
-  };
-
   onMount(() => {
     // FilterTable.svelte component is rendered
     filterTable = FilterTable;
@@ -194,7 +176,6 @@
       filterColumns = [];
       FIELDS.forEach((col, idx) => {
         if (col.name === 'deletedAt') deletedIndex = idx;
-        else if (col.name === 'invitationState') deletedIndex = idx;
         filterColumns = [
           ...filterColumns,
           {
@@ -202,27 +183,7 @@
             label: col.label,
           },
         ];
-
-        if (col.name === 'lat') {
-          isCoordFieldsExist = true;
-          IdxLatitude = idx;
-        } else if (col.name === 'lng') {
-          isCoordFieldsExist = true;
-          IdxLongitude = idx;
-        }
       });
-
-      if (isCoordFieldsExist) {
-        for (let i in MASTER_ROWS) {
-          for (let j in FIELDS) {
-            if (FIELDS[j].name === 'lat') {
-              Coord.lat = MASTER_ROWS[i][j];
-            } else if (FIELDS[j].name === 'lng') {
-              Coord.lng = MASTER_ROWS[i][j];
-            }
-          }
-        }
-      }
     }
     // Calculate pagination
     getPaginationShow();
@@ -285,29 +246,96 @@
     getPaginationShow();
   }
 
+  // PopUp for modify rows
+  let showPopUpEdit = false;
+
   // Row ID to modify
   let idToMod = '';
 
-  function toggleShowPopUp(/** @type any */ id, /** @type any[]*/ row) {
+  function toggleShowPopUpEdit(/** @type any */ id, /** @type any[]*/ row) {
+    fillExtraTenants();
     payloads = [];
     if (FIELDS && FIELDS.length > 0) {
       FIELDS.forEach((f, i) => {
-        if (f.name === 'lat') {
-          Coord.lat = row[i];
-        } else if (f.name === 'lng') {
-          Coord.lng = row[i];
+        if (f.name === 'extraTenants') {
+          extraTenantsIds = row[i];
+          (extraTenantsIds || []).forEach((id) => {
+            (extraTenants || []).forEach((extraTenant) => {
+              if (extraTenant.id === id) {
+                selectedExtraTenants = extraTenant.name;
+                extraTenantsToShow = [...extraTenantsToShow, extraTenant];
+                extraTenants = extraTenants.filter(f => f.id !== extraTenant.id);
+              }
+            })
+          })
         }
         payloads = [...payloads, row[i]];
       });
     }
 
-    showPopUp = true;
+    showPopUpEdit = true;
     idToMod = id;
   }
 
   function handleSubmitEdit() {
-    showPopUp = false;
+    (FIELDS || []).forEach((f, i) => {
+      if (f.name === 'extraTenants') {
+        payloads[i] = extraTenantsIds;
+      }
+    })
     OnEdit(idToMod, payloads);
+    closePopUpEdit();
+  }
+
+  let extraTenantsIds = [];
+
+  /**
+   * @typedef {Object} ExtraTenant
+   * @property {number} id
+   * @property {string} name
+   */
+
+  let extraTenants = /** @type {ExtraTenant[]} */ ([]);
+
+  function fillExtraTenants() {
+    for (const [k, v] of Object.entries(tenants)) extraTenants.push({id: Number(k), name: v});
+  }
+
+  let extraTenantsToShow = /** @type {ExtraTenant[]} */ ([]);
+  let showExtraTenants = false;
+  let selectedExtraTenants = 'Tenant....';
+
+  function handleExtraTenantsClose() {
+		showExtraTenants = false;
+		document.body.removeEventListener('click', handleExtraTenantsClose)
+	}
+	function toggleExtraTenants() {
+		showExtraTenants = !showExtraTenants;
+		if (showExtraTenants) document.body.addEventListener('click', handleExtraTenantsClose);
+		else document.body.removeEventListener('click', handleExtraTenantsClose);
+	}
+
+	function choseExtraTenant(/** @type {ExtraTenant} */ extraTenant) {
+    selectedExtraTenants = extraTenant.name;
+    showExtraTenants = false;
+    extraTenantsIds = [...extraTenantsIds, Number(extraTenant.id)];
+		extraTenantsToShow = [...extraTenantsToShow, extraTenant];
+    extraTenants = extraTenants.filter(f => f.id !== extraTenant.id);
+	}
+
+	const removeExtraTenant = (/** @type {number} */ idx) => {
+    extraTenantsIds = extraTenantsIds.filter(( _, i ) => i !== idx);
+    extraTenants = [...extraTenants, extraTenantsToShow[idx]];
+		extraTenantsToShow = extraTenantsToShow.filter(( _, i ) => i !== idx);
+	}
+
+  function closePopUpEdit() {
+    extraTenantsIds = [];
+    extraTenants = []
+    selectedExtraTenants = 'Tenant....';
+    showExtraTenants = false;
+    extraTenantsToShow = [];
+    showPopUpEdit = false;
   }
 </script>
 
@@ -315,47 +343,86 @@
   <FilterTable bind:this={filterTable} bind:filterColumns bind:filtersMap on:click={ApplyFilter} />
 {/if}
 
-{#if showPopUp}
+{#if showPopUpEdit}
   <div class="popup_container">
     <div class="popup">
       <header>
         <h2>Edit row</h2>
-        <button on:click={() => (showPopUp = false)}>
+        <button on:click={closePopUpEdit}>
           <Icon size="22" color="var(--red-005)" src={IoClose} />
         </button>
       </header>
       <div class="forms">
         {#each (FIELDS || []) as field, idx}
-          {#if field.name !== 'id'}
-            {#if !field.readOnly}
-              {#if field.inputType === 'combobox'}
-                <InputBox
-                  id={field.name}
-                  label={field.label}
-                  placeholder={field.description}
-                  bind:value={payloads[idx]}
-                  type={field.inputType}
-                  values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
-                  isObject={REFS && REFS[field.name] ? true : false}
-                />
-              {:else if field.inputType === 'combobox-arr'}
-                <InputBox
-                  id={field.name}
-                  label={field.label}
-                  placeholder={field.description}
-                  bind:value={payloads[idx]}
-                  type={field.inputType}
-                  values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
-                />
-              {:else}
-                <InputBox
-                  id={field.name}
-                  label={field.label}
-                  placeholder={field.description}
-                  bind:value={payloads[idx]}
-                  type={field.inputType}
-                />
-              {/if}
+          {#if field.name !== 'id' && !field.readOnly}
+            {#if field.inputType === 'combobox'}
+              <InputBox
+                id={field.name}
+                label={field.label}
+                placeholder={field.description}
+                bind:value={payloads[idx]}
+                type={field.inputType}
+                values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
+                isObject={REFS && REFS[field.name] ? true : false}
+              />
+            {:else if field.inputType === 'combobox-arr'}
+              <InputBox
+                id={field.name}
+                label={field.label}
+                placeholder={field.description}
+                bind:value={payloads[idx]}
+                type={field.inputType}
+                values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
+              />
+            {:else if field.name === 'extraTenants'}
+              <div class="multiselect-form">
+                <label class="label" for="extraTenants">Extra Tenants</label>
+                <div class="multiselect-selected">
+                  {#each extraTenantsToShow as ext, idx}
+                    <div class="facility-show">
+                      <span>{ext.name}</span>
+                      <button on:click={() => removeExtraTenant(idx)}>
+                        <Icon size="18" color="var(--sky-001)" src={IoClose}/>
+                      </button>
+                    </div>
+                  {/each}
+                </div>
+                <div class="dropdown-multiselect">
+                  <div class="dropdown-item">
+                    <button id="extraTenants" class="dropdown-btn" on:click|stopPropagation={toggleExtraTenants}>
+                      <span>{selectedExtraTenants}</span>
+                      <Icon
+                        className={showExtraTenants ? 'rotate-b' : 'dropdown'}
+                        size="25"
+                        src={RiArrowsArrowDropRightLine}
+                      />
+                    </button>
+                    {#if showExtraTenants}
+                      <div class="dropdown-list">
+                        {#if extraTenants && extraTenants.length}
+                          {#each extraTenants as ext}
+                            <button
+                              class="facility"
+                              on:click|stopPropagation={() => choseExtraTenant(ext)}>
+                              <span>{ext.name}</span>
+                            </button>
+                          {/each}
+                        {:else}
+                          <p>No Tenants yet, please add it in master tenants</p>
+                        {/if}
+                      </div>
+                    {/if}
+                  </div>
+                </div>
+              </div>
+            {:else}
+              <InputBox
+                id={field.name}
+                label={field.label}
+                placeholder={field.description}
+                bind:value={payloads[idx]}
+                type={field.inputType}
+              />
             {/if}
           {/if}
         {/each}
@@ -443,7 +510,7 @@
                             <button
                               class="btn edit"
                               title="Edit"
-                              on:click={() => toggleShowPopUp(Cell(row, idx, f), row)}
+                              on:click={() => toggleShowPopUpEdit(Cell(row, idx, f), row)}
                             >
                               <Icon size="15" color="var(--gray-007)" src={RiDesignBallPenLine} />
                             </button>
@@ -451,11 +518,11 @@
                         {/if}
                         {#if CAN_DELETE_ROW || CAN_RESTORE_ROW}
                           {#if row[deletedIndex] > 0 || row[deletedIndex] === 'terminated'}
-                            <button class="btn info" title="restore" on:click={() => restoreRow(row)}>
+                            <button class="btn info" title="Restore" on:click={() => restoreRow(row)}>
                               <Icon size="15" color="var(--gray-007)" src={RiArrowsArrowGoBackLine} />
                             </button>
                           {:else}
-                            <button class="btn delete" title="delete" on:click={() => deleteRow(row)}>
+                            <button class="btn delete" title="Delete" on:click={() => deleteRow(row)}>
                               <Icon size="15" color="var(--gray-007)" src={RiSystemDeleteBin5Line} />
                             </button>
                           {/if}
@@ -1069,6 +1136,158 @@
     border: 1px solid var(--gray-004);
     cursor: not-allowed;
   }
+
+  .multiselect-form {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .multiselect-form label {
+    font-size: var(--font-base);
+    margin-left: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+
+  .multiselect-form .multiselect-selected {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .multiselect-form .multiselect-selected .facility-show {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--sky-006);
+    color: #FFF;
+    padding: 5px 5px 5px 15px;
+    border-radius: 5px;
+  }
+
+  .multiselect-form .multiselect-selected .facility-show button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 9999px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .multiselect-form .multiselect-selected .facility-show button:hover {
+    background-color: var(--sky-005);
+  }
+
+  .dropdown-multiselect {
+		position: relative;
+		flex-grow: 1;
+		display: flex;
+  }
+
+  .dropdown-multiselect {
+		position: relative;
+		flex-grow: 1;
+		display: flex;
+	}
+
+	.dropdown-multiselect .dropdown-item {
+		width: 100%;
+	}
+
+	.dropdown-multiselect .dropdown-item .dropdown-btn {
+		width: 100% !important;
+	}
+
+	.dropdown-item {
+		flex-grow: 1;
+		position: relative;
+	}
+
+	.dropdown-item .dropdown-btn {
+		width: 100%;
+		height: fit-content;
+		background-color: #FFF;
+		padding: 10px 15px;
+		border-radius: 5px;
+		display: flex;
+		flex-direction: row;
+		border: 1px solid var(--gray-003);
+		align-items: center;
+		cursor: pointer;
+		color: var(--gray-007);
+		font-weight: 600;
+	}
+
+	.dropdown-item .dropdown-btn:hover {
+		background-color: var(--gray-001);
+	}
+
+	.dropdown-item .dropdown-btn span {
+		flex-grow: 1;
+		text-align: left;
+	}
+
+	.dropdown-item .dropdown-list {
+		background-color: #FFF;
+		max-height: 300px;
+		overflow-y: auto;
+		width: 100%;
+    margin-top: 10px;
+		border: 1px solid var(--sky-004);
+		border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		top: 40px;
+		z-index: 99999;
+	}
+
+	.dropdown-item .dropdown-list::-webkit-scrollbar-thumb {
+    background-color : var(--gray-003);
+    border-radius    : 8px;
+  }
+
+  .dropdown-item .dropdown-list::-webkit-scrollbar-thumb:hover {
+    background-color : var(--gray-004);
+  }
+
+  .dropdown-item .dropdown-list::-webkit-scrollbar {
+    width : 8px;
+  }
+
+  .dropdown-item .dropdown-list::-webkit-scrollbar-track {
+    background-color : transparent;
+  }
+
+  .dropdown-item .dropdown-list::-webkit-scrollbar-button {
+    display: none;
+  }
+
+	.dropdown-item .dropdown-list .facility {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 10px;
+		padding: 10px 15px;
+		background-color: #FFF;
+		border: none;
+		color: var(--gray-007);
+		width: 100%;
+		cursor: pointer;
+	}
+
+	.dropdown-item .dropdown-list .facility:hover {
+		color: var(--sky-009);
+    background-color: #0ea5e920;
+	}
 
   @media only screen and (max-width: 768px) {
     .table-root .actions-container {

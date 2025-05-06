@@ -426,11 +426,11 @@
                         {/if}
                         {#if CAN_DELETE_ROW || CAN_RESTORE_ROW}
                           {#if row[deletedIndex] > 0 || row[deletedIndex] === 'terminated'}
-                            <button class="btn info" title="restore" on:click={() => restoreRow(row)}>
+                            <button class="btn info" title="Restore" on:click={() => restoreRow(row)}>
                               <Icon size="15" color="var(--gray-007)" src={RiArrowsArrowGoBackLine} />
                             </button>
                           {:else}
-                            <button class="btn delete" title="delete" on:click={() => deleteRow(row)}>
+                            <button class="btn delete" title="Delete" on:click={() => deleteRow(row)}>
                               <Icon size="15" color="var(--gray-007)" src={RiSystemDeleteBin5Line} />
                             </button>
                           {/if}

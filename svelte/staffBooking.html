@@ -11978,7 +11978,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         button = element("button");
         create_component(icon.$.fragment);
         attr(button, "class", "btn delete svelte-fzmu2j");
-        attr(button, "title", "delete");
+        attr(button, "title", "Delete");
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -12039,7 +12039,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         button = element("button");
         create_component(icon.$.fragment);
         attr(button, "class", "btn info svelte-fzmu2j");
-        attr(button, "title", "restore");
+        attr(button, "title", "Restore");
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -15369,7 +15369,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     const removeExtraTenant = (
       /** @type {number} */
       (idx) => {
-        extraTenantsIds = facilitiesNums.filter((_, i) => i !== idx);
+        extraTenantsIds = extraTenantsIds.filter((_, i) => i !== idx);
         $invalidate(16, extraTenants = [...extraTenants, extraTenantsToShow[idx]]);
         $invalidate(17, extraTenantsToShow = extraTenantsToShow.filter((_, i) => i !== idx));
       }

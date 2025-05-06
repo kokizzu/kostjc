@@ -135,7 +135,7 @@
 	}
 
 	const removeExtraTenant = (/** @type {number} */ idx) => {
-    extraTenantsIds = facilitiesNums.filter(( _, i ) => i !== idx);
+    extraTenantsIds = extraTenantsIds.filter(( _, i ) => i !== idx);
     extraTenants = [...extraTenants, extraTenantsToShow[idx]];
 		extraTenantsToShow = extraTenantsToShow.filter(( _, i ) => i !== idx);
 	}

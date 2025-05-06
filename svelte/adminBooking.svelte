@@ -162,7 +162,7 @@
 
         pager = o.pager;
         bookings = o.bookings;
-        notifier.showSuccess(`Booking '${booking.buildingName}' updated !!`);
+        notifier.showSuccess(`Booking #${booking.id} updated !!`);
 
         OnRefresh(pager);
       }
@@ -200,6 +200,8 @@
     );
     popUpForms.Hide();
   }
+
+  console.log(fields)
 </script>
 
 {#if isPopUpFormReady}
@@ -228,7 +230,7 @@
 
       tenants={tenants}
 
-      CAN_EDIT_ROW={false}
+      CAN_EDIT_ROW
       CAN_SEARCH_ROW
       CAN_DELETE_ROW
       CAN_RESTORE_ROW
