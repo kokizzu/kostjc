@@ -33,7 +33,7 @@
     if (type === 'combobox-arr' && !value) {
       value = values[0];
     }
-    if (type === 'datetime') {
+    if (type === 'datetime' && value == '') {
       value = dateISOFormat(0);
       if (id == 'ktpDateBirth') value = dateISOFormat(-6209.25);
     }

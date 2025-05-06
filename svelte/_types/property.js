@@ -58,6 +58,7 @@ module.exports = {};
  * @property {string} paidAt
  * @property {string} tenantId
  * @property {number[]} extraTenants
+ * @property {number} roomId
  * @property {number} createdAt
  * @property {string} createdBy
  * @property {number} updatedAt

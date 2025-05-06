@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"fmt"
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
@@ -9,7 +8,6 @@ import (
 	"kostjc/model/zCrud"
 	"time"
 
-	"github.com/fatih/color"
 	"github.com/goccy/go-json"
 	"github.com/kokizzu/gotro/X"
 )
@@ -31,10 +29,10 @@ type (
 	}
 	AdminBookingOut struct {
 		ResponseCommon
-		Pager    zCrud.PagerOut      `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-		Meta     *zCrud.Meta         `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
-		Booking  rqProperty.Bookings `json:"booking" form:"booking" query:"booking" long:"booking" msg:"booking"`
-		Bookings [][]any             `json:"bookings" form:"bookings" query:"bookings" long:"bookings" msg:"bookings"`
+		Pager    zCrud.PagerOut       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Meta     *zCrud.Meta          `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
+		Booking  *rqProperty.Bookings `json:"booking" form:"booking" query:"booking" long:"booking" msg:"booking"`
+		Bookings [][]any              `json:"bookings" form:"bookings" query:"bookings" long:"bookings" msg:"bookings"`
 	}
 )
 
@@ -163,6 +161,15 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 
 	switch in.Cmd {
 	case zCrud.CmdForm:
+		bk := rqProperty.NewBookings(d.PropOltp)
+		bk.Id = in.Booking.Id
+		if bk.Id > 0 {
+			if !bk.FindById() {
+				out.SetError(400, ErrAdminBookingNotFound)
+				return
+			}
+		}
+		out.Booking = bk
 	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
 		bk := wcProperty.NewBookingsMutator(d.PropOltp)
 		bk.Id = in.Booking.Id
@@ -292,7 +299,6 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 		fallthrough
 	case zCrud.CmdList:
 		bk := rqProperty.NewBookings(d.PropOltp)
-		fmt.Println(color.BlueString(X.ToJsonPretty(in.Pager)))
 		out.Bookings = bk.FindByPagination(
 			&AdminBookingMeta,
 			&in.Pager,

@@ -4,6 +4,7 @@
   /** @typedef {import('../_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('../_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('../_types/masters.js').ExtendedAction} ExtendedAction */
+  /** @typedef {import('../_types/property.js').Booking} Booking */
 
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import {
@@ -26,6 +27,7 @@
   import { onMount } from 'svelte';
   import { datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
+  import {AdminBooking} from '../jsApi.GEN'
 
   export let tenants = /** @type {Record<number, string>} */ ({});
 
@@ -252,7 +254,21 @@
   // Row ID to modify
   let idToMod = '';
 
-  function toggleShowPopUpEdit(/** @type any */ id, /** @type any[]*/ row) {
+  async function toggleShowPopUpEdit(/** @type any */ id, /** @type any[]*/ row) {
+    let booking = /** @type {Booking} */ ({});
+    let isErrAjax = false;
+    await AdminBooking({
+      cmd: 'form', // @ts-ignore
+      booking: {
+        id: id
+      }
+    }, function (/** @type {any} */ o) {
+      if (o.error) {
+        isErrAjax = true;
+        return;
+      }
+      booking = o.booking;
+    })
     fillExtraTenants();
     payloads = [];
     if (FIELDS && FIELDS.length > 0) {
@@ -271,6 +287,18 @@
         }
         payloads = [...payloads, row[i]];
       });
+    }
+
+    if (!isErrAjax) {
+      payloads[1] = booking.dateStart;
+      payloads[2] = booking.dateEnd;
+      payloads[3] = booking.basePriceIDR;
+      payloads[4] = booking.facilitiesObj;
+      payloads[5] = booking.totalPriceIDR;
+      payloads[6] = booking.paidAt;
+      payloads[7] = booking.tenantId;
+      payloads[8] = booking.extraTenants;
+      payloads[9] = booking.roomId;
     }
 
     showPopUpEdit = true;

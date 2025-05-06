@@ -4225,7 +4225,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           cb(data);
         };
       }
-      exports.AdminBooking = async function AdminBooking2(i, cb) {
+      exports.AdminBooking = async function AdminBooking3(i, cb) {
         return await axios.post("/admin/booking", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminBuilding = async function AdminBuilding(i, cb) {
@@ -9288,7 +9288,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       if (type === "combobox-arr" && !value) {
         $invalidate(1, value = values[0]);
       }
-      if (type === "datetime") {
+      if (type === "datetime" && value == "") {
         $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(0));
         if (id == "ktpDateBirth")
           $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(-6209.25));
@@ -10078,6 +10078,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var FilterTable_default = FilterTable;
 
   // _components/MasterTableBooking.svelte
+  var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[82] = list[i];
@@ -14169,7 +14170,26 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     let showPopUpEdit = false;
     let idToMod = "";
-    function toggleShowPopUpEdit(id, row) {
+    async function toggleShowPopUpEdit(id, row) {
+      let booking = (
+        /** @type {Booking} */
+        {}
+      );
+      let isErrAjax = false;
+      await (0, import_jsApi2.AdminBooking)(
+        {
+          cmd: "form",
+          // @ts-ignore
+          booking: { id }
+        },
+        function(o) {
+          if (o.error) {
+            isErrAjax = true;
+            return;
+          }
+          booking = o.booking;
+        }
+      );
       fillExtraTenants();
       $invalidate(26, payloads = []);
       if (FIELDS && FIELDS.length > 0) {
@@ -14188,6 +14208,17 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           }
           $invalidate(26, payloads = [...payloads, row[i]]);
         });
+      }
+      if (!isErrAjax) {
+        $invalidate(26, payloads[1] = booking.dateStart, payloads);
+        $invalidate(26, payloads[2] = booking.dateEnd, payloads);
+        $invalidate(26, payloads[3] = booking.basePriceIDR, payloads);
+        $invalidate(26, payloads[4] = booking.facilitiesObj, payloads);
+        $invalidate(26, payloads[5] = booking.totalPriceIDR, payloads);
+        $invalidate(26, payloads[6] = booking.paidAt, payloads);
+        $invalidate(26, payloads[7] = booking.tenantId, payloads);
+        $invalidate(26, payloads[8] = booking.extraTenants, payloads);
+        $invalidate(26, payloads[9] = booking.roomId, payloads);
       }
       $invalidate(27, showPopUpEdit = true);
       idToMod = id;
@@ -14464,7 +14495,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var MasterTableBooking_default = MasterTableBooking;
 
   // adminBooking.svelte
-  var import_jsApi2 = __toESM(require_jsApi_GEN());
+  var import_jsApi3 = __toESM(require_jsApi_GEN());
 
   // _components/PopUpAddBooking.svelte
   var import_xFormatter3 = __toESM(require_xFormatter());
@@ -16603,7 +16634,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     });
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: "list" };
-      await (0, import_jsApi2.AdminBooking)(
+      await (0, import_jsApi3.AdminBooking)(
         // @ts-ignore
         i,
         /** @type {import('./jsApi.GEN').AdminBookingCallback} */
@@ -16629,7 +16660,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           cmd: "restore"
         }
       );
-      await (0, import_jsApi2.AdminBooking)(
+      await (0, import_jsApi3.AdminBooking)(
         i,
         /** @type {import('./jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */
@@ -16655,7 +16686,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           cmd: "delete"
         }
       );
-      await (0, import_jsApi2.AdminBooking)(
+      await (0, import_jsApi3.AdminBooking)(
         i,
         /** @type {import('./jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */
@@ -16693,7 +16724,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /** @type {any}*/
         { pager, booking, cmd: "upsert" }
       );
-      await (0, import_jsApi2.AdminBooking)(
+      await (0, import_jsApi3.AdminBooking)(
         i,
         /** @type {import('./jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */
@@ -16725,7 +16756,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           cmd: "upsert"
         }
       );
-      await (0, import_jsApi2.AdminBooking)(
+      await (0, import_jsApi3.AdminBooking)(
         i,
         /** @type {import('../jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */

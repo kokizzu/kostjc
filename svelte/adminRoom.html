@@ -10952,7 +10952,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       if (type === "combobox-arr" && !value) {
         $invalidate(1, value = values[0]);
       }
-      if (type === "datetime") {
+      if (type === "datetime" && value == "") {
         $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(0));
         if (id == "ktpDateBirth")
           $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(-6209.25));

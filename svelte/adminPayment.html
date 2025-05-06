@@ -8993,7 +8993,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       if (type === "combobox-arr" && !value) {
         $invalidate(1, value = values[0]);
       }
-      if (type === "datetime") {
+      if (type === "datetime" && value == "") {
         $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(0));
         if (id == "ktpDateBirth")
           $invalidate(1, value = (0, import_xFormatter.dateISOFormat)(-6209.25));
