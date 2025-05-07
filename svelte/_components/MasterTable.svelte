@@ -285,6 +285,11 @@
     showPopUp = false;
     OnEdit(idToMod, payloads);
   }
+
+  function formatFacilities(facArrInt, facObjs) {
+    if (!facArrInt.length) return '--';
+    return facArrInt.map(fId => facObjs[Number(fId)]).join(', ');
+  }
 </script>
 
 {#if filterTableReady}
@@ -455,6 +460,8 @@
                       <span>--</span>
                     {/if}
                   </td>
+                {:else if f.name === 'facilities'}
+                  <td class="textarea">{formatFacilities(row[idx], REFS['facilities'])}</td>
                 {:else if f.type == 'intArr'}  
                   <td class="intArr">{row[idx] ? (
                     Object.entries(REFS[f.name]).map(([k, v]) => `${v}`).join(', ')

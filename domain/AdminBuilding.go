@@ -150,10 +150,6 @@ func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 			bld.SetLocationId(in.Building.LocationId)
 		}
 
-		if len(in.Building.Facilities) == 0 {
-			in.Building.Facilities = []any{}
-		}
-
 		for _, v := range in.Building.Facilities {
 			facId := X.ToU(v)
 			fac := rqProperty.NewFacilities(d.PropOltp)
@@ -169,7 +165,9 @@ func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 			}
 		}
 
-		bld.SetFacilities(in.Building.Facilities)
+		if in.Building.Id > 0 {
+			bld.SetFacilities(in.Building.Facilities)
+		}
 
 		if bld.Id == 0 {
 			bld.SetCreatedAt(in.UnixNow())
