@@ -59,16 +59,18 @@
 		else document.body.removeEventListener('click', handleStationListClose);
 	}
 
-	function toFacilityShow(/** @type {Facility} */ facility) {
-    selectedFacility = facility.facilityName;
+	function choseFacility(/** @type {Facility} */ facility) {
+    selectedFacility = facility.facilityName
     showFacilities = false;
     facilitiesNums = [...facilitiesNums, Number(facility.id)];
 		facilitiesToShow = [...facilitiesToShow, facility];
+    facilities = facilities.filter(f => f.id !== facility.id);
 	}
 
 	const removeFacility = (/** @type {number} */ idx) => {
     facilitiesNums = facilitiesNums.filter(( _, i ) => i !== idx);
 		facilitiesToShow = facilitiesToShow.filter(( _, i ) => i !== idx);
+    facilities = [...facilities, facilitiesToShow[idx]];
 	}
 </script>
 
@@ -124,7 +126,7 @@
                   {#each facilities as fac}
                     <button
                       class="facility"
-                      on:click|stopPropagation={() => toFacilityShow(fac)}>
+                      on:click|stopPropagation={() => choseFacility(fac)}>
                       <span>{fac.facilityName}</span>
                     </button>
                   {/each}

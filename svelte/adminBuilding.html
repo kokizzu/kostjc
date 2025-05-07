@@ -13829,8 +13829,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     function select_block_type(ctx2, dirty) {
       if (
         /*facilities*/
-        ctx2[2] && /*facilities*/
-        ctx2[2].length
+        ctx2[0] && /*facilities*/
+        ctx2[0].length
       )
         return create_if_block_33;
       return create_else_block3;
@@ -13889,7 +13889,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let each_1_anchor;
     let each_value = ensure_array_like(
       /*facilities*/
-      ctx[2]
+      ctx[0]
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
@@ -13911,11 +13911,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         insert(target, each_1_anchor, anchor);
       },
       p(ctx2, dirty) {
-        if (dirty & /*toFacilityShow, facilities*/
-        8196) {
+        if (dirty & /*choseFacility, facilities*/
+        8193) {
           each_value = ensure_array_like(
             /*facilities*/
-            ctx2[2]
+            ctx2[0]
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
@@ -13984,7 +13984,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       p(new_ctx, dirty) {
         ctx = new_ctx;
         if (dirty & /*facilities*/
-        4 && t0_value !== (t0_value = /*fac*/
+        1 && t0_value !== (t0_value = /*fac*/
         ctx[24].facilityName + ""))
           set_data(t0, t0_value);
       },
@@ -14126,7 +14126,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       type: "combobox",
       values: (
         /*locations*/
-        ctx[1]
+        ctx[2]
       )
     };
     if (
@@ -14164,10 +14164,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[8] && create_if_block_25(ctx)
     );
     let if_block1 = !/*isSubmitted*/
-    ctx[0] && create_if_block_111(ctx);
+    ctx[1] && create_if_block_111(ctx);
     let if_block2 = (
       /*isSubmitted*/
-      ctx[0] && create_if_block5(ctx)
+      ctx[1] && create_if_block5(ctx)
     );
     return {
       c() {
@@ -14239,7 +14239,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         attr(button2, "class", "cancel svelte-9ubi72");
         attr(button3, "class", "ok svelte-9ubi72");
         button3.disabled = /*isSubmitted*/
-        ctx[0];
+        ctx[1];
         attr(div6, "class", "right svelte-9ubi72");
         attr(div7, "class", "foot svelte-9ubi72");
         attr(div8, "class", "popup svelte-9ubi72");
@@ -14330,9 +14330,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         inputbox0.$set(inputbox0_changes);
         const inputbox1_changes = {};
         if (dirty & /*locations*/
-        2)
+        4)
           inputbox1_changes.values = /*locations*/
-          ctx2[1];
+          ctx2[2];
         if (!updating_value_1 && dirty & /*locationId*/
         64) {
           updating_value_1 = true;
@@ -14395,7 +14395,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           if_block0 = null;
         }
         if (!/*isSubmitted*/
-        ctx2[0]) {
+        ctx2[1]) {
           if (if_block1) {
           } else {
             if_block1 = create_if_block_111(ctx2);
@@ -14408,11 +14408,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         if (
           /*isSubmitted*/
-          ctx2[0]
+          ctx2[1]
         ) {
           if (if_block2) {
             if (dirty & /*isSubmitted*/
-            1) {
+            2) {
               transition_in(if_block2, 1);
             }
           } else {
@@ -14429,9 +14429,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           check_outros();
         }
         if (!current || dirty & /*isSubmitted*/
-        1) {
+        2) {
           button3.disabled = /*isSubmitted*/
-          ctx2[0];
+          ctx2[1];
         }
         if (!current || dirty & /*isShow*/
         16 && div9_class_value !== (div9_class_value = null_to_empty(`popup_container ${/*isShow*/
@@ -14548,17 +14548,19 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       else
         document.body.removeEventListener("click", handleStationListClose);
     }
-    function toFacilityShow(facility) {
+    function choseFacility(facility) {
       $invalidate(9, selectedFacility = facility.facilityName);
       $invalidate(8, showFacilities = false);
       facilitiesNums = [...facilitiesNums, Number(facility.id)];
       $invalidate(7, facilitiesToShow = [...facilitiesToShow, facility]);
+      $invalidate(0, facilities2 = facilities2.filter((f) => f.id !== facility.id));
     }
     const removeFacility = (
       /** @type {number} */
       (idx) => {
         facilitiesNums = facilitiesNums.filter((_, i) => i !== idx);
         $invalidate(7, facilitiesToShow = facilitiesToShow.filter((_, i) => i !== idx));
+        $invalidate(0, facilities2 = [...facilities2, facilitiesToShow[idx]]);
       }
     );
     function inputbox0_value_binding(value) {
@@ -14570,21 +14572,21 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       $invalidate(6, locationId);
     }
     const click_handler = (idx) => removeFacility(idx);
-    const click_handler_1 = (fac) => toFacilityShow(fac);
+    const click_handler_1 = (fac) => choseFacility(fac);
     $self.$set = ($props2) => {
       if ("isSubmitted" in $props2)
-        $invalidate(0, isSubmitted = $props2.isSubmitted);
+        $invalidate(1, isSubmitted = $props2.isSubmitted);
       if ("locations" in $props2)
-        $invalidate(1, locations2 = $props2.locations);
+        $invalidate(2, locations2 = $props2.locations);
       if ("facilities" in $props2)
-        $invalidate(2, facilities2 = $props2.facilities);
+        $invalidate(0, facilities2 = $props2.facilities);
       if ("OnSubmit" in $props2)
         $invalidate(15, OnSubmit = $props2.OnSubmit);
     };
     return [
+      facilities2,
       isSubmitted,
       locations2,
-      facilities2,
       Hide,
       isShow,
       buildingName,
@@ -14595,7 +14597,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       submitAdd,
       cancel,
       toggleStationList,
-      toFacilityShow,
+      choseFacility,
       removeFacility,
       OnSubmit,
       Show,
@@ -14610,9 +14612,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     constructor(options) {
       super();
       init(this, options, instance9, create_fragment9, safe_not_equal, {
-        isSubmitted: 0,
-        locations: 1,
-        facilities: 2,
+        isSubmitted: 1,
+        locations: 2,
+        facilities: 0,
         OnSubmit: 15,
         Show: 16,
         Hide: 3,
