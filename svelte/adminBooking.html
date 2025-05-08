@@ -9301,7 +9301,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         if (type === "combobox" || type === "select") {
           try {
             const valuesArr = Object.entries(values);
-            $invalidate(1, value = valuesArr[0][0]);
+            if (!value)
+              $invalidate(1, value = valuesArr[0][0]);
           } catch (error) {
           }
         }
@@ -9311,7 +9312,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           $invalidate(11, valueToShowFromObj = "");
       } else {
         if (type === "combobox" || type === "select") {
-          $invalidate(1, value = values[0]);
+          if (!value) {
+            $invalidate(1, value = values[0]);
+          }
         }
         $invalidate(11, valueToShowFromObj = value + "");
       }
@@ -14501,24 +14504,24 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var import_xFormatter3 = __toESM(require_xFormatter());
   function get_each_context4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[46] = list[i];
+    child_ctx[47] = list[i];
     return child_ctx;
   }
   function get_each_context_13(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[46] = list[i];
-    child_ctx[50] = i;
+    child_ctx[47] = list[i];
+    child_ctx[51] = i;
     return child_ctx;
   }
   function get_each_context_23(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[51] = list[i];
+    child_ctx[52] = list[i];
     return child_ctx;
   }
   function get_each_context_32(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[51] = list[i];
-    child_ctx[50] = i;
+    child_ctx[52] = list[i];
+    child_ctx[51] = i;
     return child_ctx;
   }
   function create_each_block_32(ctx) {
@@ -14526,13 +14529,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let span;
     let t0_value = (
       /*fac*/
-      ctx[51].facilityName + ""
+      ctx[52].facilityName + ""
     );
     let t0;
     let t1;
     let t2_value = (
       /*fac*/
-      ctx[51].facilityType + ""
+      ctx[52].facilityType + ""
     );
     let t2;
     let t3;
@@ -14555,7 +14558,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler*/
         ctx[34](
           /*idx*/
-          ctx[50]
+          ctx[51]
         )
       );
     }
@@ -14596,11 +14599,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         if ((!current || dirty[0] & /*facilitiesToShow*/
         4096) && t0_value !== (t0_value = /*fac*/
-        ctx[51].facilityName + ""))
+        ctx[52].facilityName + ""))
           set_data(t0, t0_value);
         if ((!current || dirty[0] & /*facilitiesToShow*/
         4096) && t2_value !== (t2_value = /*fac*/
-        ctx[51].facilityType + ""))
+        ctx[52].facilityType + ""))
           set_data(t2, t2_value);
       },
       i(local) {
@@ -14746,13 +14749,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let span;
     let t0_value = (
       /*fac*/
-      ctx[51].facilityName + ""
+      ctx[52].facilityName + ""
     );
     let t0;
     let t1;
     let t2_value = (
       /*fac*/
-      ctx[51].facilityType + ""
+      ctx[52].facilityType + ""
     );
     let t2;
     let t3;
@@ -14764,7 +14767,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_1*/
         ctx[35](
           /*fac*/
-          ctx[51]
+          ctx[52]
         )
       );
     }
@@ -14797,11 +14800,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         if (dirty[0] & /*facilities*/
         1 && t0_value !== (t0_value = /*fac*/
-        ctx[51].facilityName + ""))
+        ctx[52].facilityName + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*facilities*/
         1 && t2_value !== (t2_value = /*fac*/
-        ctx[51].facilityType + ""))
+        ctx[52].facilityType + ""))
           set_data(t2, t2_value);
       },
       d(detaching) {
@@ -14818,7 +14821,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let span;
     let t0_value = (
       /*ext*/
-      ctx[46].name + ""
+      ctx[47].name + ""
     );
     let t0;
     let t1;
@@ -14840,7 +14843,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_2*/
         ctx[38](
           /*idx*/
-          ctx[50]
+          ctx[51]
         )
       );
     }
@@ -14875,7 +14878,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         if ((!current || dirty[0] & /*extraTenantsToShow*/
         131072) && t0_value !== (t0_value = /*ext*/
-        ctx[46].name + ""))
+        ctx[47].name + ""))
           set_data(t0, t0_value);
       },
       i(local) {
@@ -15021,7 +15024,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let span;
     let t0_value = (
       /*ext*/
-      ctx[46].name + ""
+      ctx[47].name + ""
     );
     let t0;
     let t1;
@@ -15032,7 +15035,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_3*/
         ctx[39](
           /*ext*/
-          ctx[46]
+          ctx[47]
         )
       );
     }
@@ -15059,7 +15062,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         if (dirty[0] & /*extraTenants*/
         65536 && t0_value !== (t0_value = /*ext*/
-        ctx[46].name + ""))
+        ctx[47].name + ""))
           set_data(t0, t0_value);
       },
       d(detaching) {
@@ -16019,8 +16022,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
       );
       await OnSubmit(booking, facilitiesNums);
+      extraTenantsIds = [];
+      $invalidate(17, extraTenantsToShow = []);
     }
-    const Show = () => $invalidate(5, isShow = true);
+    const Show = () => {
+      $invalidate(5, isShow = true);
+      fillExtraTenants();
+    };
     const Hide = () => $invalidate(5, isShow = false);
     const Reset = () => {
       $invalidate(6, dateStart = (0, import_xFormatter3.dateISOFormat)(0));
@@ -16031,9 +16039,15 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       $invalidate(9, paidAt = (0, import_xFormatter3.dateISOFormat)(0));
       $invalidate(10, tenantId = 0);
       $invalidate(12, facilitiesToShow = []);
+      $invalidate(14, selectedFacility = "Facility....");
       $invalidate(15, facilitiesPrice = 0);
       extraTenantsIds = [];
       $invalidate(11, roomId = 0);
+      extraTenantsIds = [];
+      $invalidate(16, extraTenants = []);
+      $invalidate(19, selectedExtraTenants = "Tenant....");
+      $invalidate(18, showExtraTenants = false);
+      $invalidate(17, extraTenantsToShow = []);
     };
     const cancel = () => {
       $invalidate(5, isShow = false);
@@ -16077,8 +16091,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       /** @type {ExtraTenant[]} */
       []
     );
-    for (const [k, v] of Object.entries(tenants2))
-      extraTenants.push({ id: Number(k), name: v });
+    function fillExtraTenants() {
+      for (const [k, v] of Object.entries(tenants2))
+        extraTenants.push({ id: Number(k), name: v });
+    }
     let extraTenantsToShow = (
       /** @type {ExtraTenant[]} */
       []

@@ -10965,7 +10965,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (type === "combobox" || type === "select") {
           try {
             const valuesArr = Object.entries(values);
-            $invalidate(1, value = valuesArr[0][0]);
+            if (!value)
+              $invalidate(1, value = valuesArr[0][0]);
           } catch (error) {
           }
         }
@@ -10975,7 +10976,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           $invalidate(11, valueToShowFromObj = "");
       } else {
         if (type === "combobox" || type === "select") {
-          $invalidate(1, value = values[0]);
+          if (!value) {
+            $invalidate(1, value = values[0]);
+          }
         }
         $invalidate(11, valueToShowFromObj = value + "");
       }

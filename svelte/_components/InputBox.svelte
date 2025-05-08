@@ -44,14 +44,16 @@
       if (type === 'combobox' || type === 'select') {
         try {
           const valuesArr = Object.entries(values);
-          value = valuesArr[0][0];
+          if (!value) value = valuesArr[0][0];
         } catch (error) {}
       }
       if (values && values[value]) valueToShowFromObj = values[value];
       else valueToShowFromObj = '';
     } else {
       if (type === 'combobox' || type === 'select') {
-        value = values[0];
+        if (!value) {
+          value = values[0];
+        }
       }
       valueToShowFromObj = value+'';
     }

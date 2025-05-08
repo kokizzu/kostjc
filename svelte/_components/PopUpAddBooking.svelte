@@ -45,9 +45,14 @@
     });
 
     await OnSubmit(booking, facilitiesNums);
+    extraTenantsIds = [];
+    extraTenantsToShow = [];
   }
 
-  export const Show = () => isShow = true;
+  export const Show = () => {
+    isShow = true;
+    fillExtraTenants();
+  }
   export const Hide = () => isShow = false;
 
   export const Reset = () => {
@@ -59,9 +64,15 @@
     paidAt = dateISOFormat(0);
     tenantId = 0;
     facilitiesToShow = [];
+    selectedFacility = 'Facility....';
     facilitiesPrice = 0;
     extraTenantsIds = [];
     roomId = 0;
+    extraTenantsIds = [];
+    extraTenants = []
+    selectedExtraTenants = 'Tenant....';
+    showExtraTenants = false;
+    extraTenantsToShow = [];
   }
   
   const cancel = () => {
@@ -110,7 +121,9 @@
    */
 
   let extraTenants = /** @type {ExtraTenant[]} */ ([]);
-  for (const [k, v] of Object.entries(tenants)) extraTenants.push({id: Number(k), name: v});
+  function fillExtraTenants() {
+    for (const [k, v] of Object.entries(tenants)) extraTenants.push({id: Number(k), name: v});
+  }
 
   let extraTenantsToShow = /** @type {ExtraTenant[]} */ ([]);
   let showExtraTenants = false;

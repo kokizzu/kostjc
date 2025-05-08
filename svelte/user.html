@@ -8434,7 +8434,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         if (type === "combobox" || type === "select") {
           try {
             const valuesArr = Object.entries(values);
-            $invalidate(1, value = valuesArr[0][0]);
+            if (!value)
+              $invalidate(1, value = valuesArr[0][0]);
           } catch (error) {
           }
         }
@@ -8444,7 +8445,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           $invalidate(11, valueToShowFromObj = "");
       } else {
         if (type === "combobox" || type === "select") {
-          $invalidate(1, value = values[0]);
+          if (!value) {
+            $invalidate(1, value = values[0]);
+          }
         }
         $invalidate(11, valueToShowFromObj = value + "");
       }

@@ -19,6 +19,10 @@ local-clickhouse:
 	# SHOW TABLES -- list all tables
 	# SELECT * FROM "actionLogs" LIMIT 1;
 
+download-backup:
+	@echo "Downloading backup database from Server"
+	rsync -Wav -e 'ssh -p 22 -i ~/.ssh/$(ssh-key)' $(user)@194.233.65.174:../kostjc/backup/* ./backup
+
 modtidy:
 	sudo chmod -R a+rwx _tmpdb && go mod tidy
 
