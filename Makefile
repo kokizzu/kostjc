@@ -23,6 +23,10 @@ download-backup:
 	@echo "Downloading backup database from Server"
 	rsync -Wav -e 'ssh -p 22 -i ~/.ssh/$(ssh-key)' $(user)@194.233.65.174:../kostjc/backup/* ./backup
 
+upload-backup:
+	@echo "Uploading backup database at $(timestamp) to Server"
+	rsync -avz --progress ./backup/*$(timestamp)*.jsonline.lz4 -e 'ssh -p 22 -i ~/.ssh/$(ssh-key)' $(user)@194.233.65.174:../kostjc/backup/
+
 modtidy:
 	sudo chmod -R a+rwx _tmpdb && go mod tidy
 

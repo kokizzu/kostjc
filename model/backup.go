@@ -137,6 +137,6 @@ func backupTable[T newTableFunc](conn *Tt.Adapter, newFunc func(tt *Tt.Adapter) 
 		}
 	}
 
-	table.Truncate()
+	// table.Truncate()
 	return nil
 }
