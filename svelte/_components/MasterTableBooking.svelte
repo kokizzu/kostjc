@@ -29,8 +29,8 @@
   import { dateISOFormat, datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
   import {AdminBooking, AdminPayment} from '../jsApi.GEN'
-    import { notifier } from './xNotifier';
-    import PopUpAddPayment from './PopUpAddPayment.svelte';
+  import { notifier } from './xNotifier';
+  import PopUpAddPayment from './PopUpAddPayment.svelte';
 
   export let tenants = /** @type {Record<number, string>} */ ({});
 

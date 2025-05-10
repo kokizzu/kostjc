@@ -83,7 +83,7 @@ var AdminPaymentMeta = zCrud.Meta{
 			Name:      mProperty.PaymentStatus,
 			Label:     `Payment Status`,
 			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeText,
+			InputType: zCrud.InputTypeComboboxArr,
 			ReadOnly:  false,
 		},
 		{

@@ -14,10 +14,10 @@
   export let bookingId = 0;
   export let isBookingReadOnly = false;
   export let paymentAt = dateISOFormat(0);
-  
+
   let paidIDR = 0;
-  let paymentMethod = '';
-  let paymentStatus = '';
+  let paymentMethod = 'Cash';
+  let paymentStatus = 'Paid';
   let note = '';
 
   export let OnSubmit = async function(/** @type {Payment} */ payment) {
@@ -44,8 +44,8 @@
     bookingId = 0;
     paymentAt = dateISOFormat(0);
     paidIDR = 0;
-    paymentMethod = '';
-    paymentStatus = '';
+    paymentMethod = 'Cash';
+    paymentStatus = 'Paid';
     note = '';
   }
   

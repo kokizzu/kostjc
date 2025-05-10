@@ -9004,6 +9004,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             if (!value)
               $invalidate(1, value = valuesArr[0][0]);
           } catch (error) {
+            $invalidate(1, value = values[0] || "");
           }
         }
         if (values && values[value])

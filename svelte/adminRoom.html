@@ -10968,6 +10968,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             if (!value)
               $invalidate(1, value = valuesArr[0][0]);
           } catch (error) {
+            $invalidate(1, value = values[0] || "");
           }
         }
         if (values && values[value])

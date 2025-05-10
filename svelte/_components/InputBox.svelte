@@ -45,7 +45,9 @@
         try {
           const valuesArr = Object.entries(values);
           if (!value) value = valuesArr[0][0];
-        } catch (error) {}
+        } catch (error) {
+          value = values[0] || '';
+        }
       }
       if (values && values[value]) valueToShowFromObj = values[value];
       else valueToShowFromObj = '';

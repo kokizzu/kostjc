@@ -187,7 +187,8 @@
       bind:PAGER={pager}
       bind:MASTER_ROWS={payments}
       REFS={{
-        'bookingId': bookings
+        'bookingId': bookings,
+        'paymentStatus': ['Paid', 'Unpaid', 'Pending', 'Cancelled']
       }}
 
       CAN_EDIT_ROW

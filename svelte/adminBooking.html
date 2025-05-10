@@ -9432,6 +9432,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             if (!value)
               $invalidate(1, value = valuesArr[0][0]);
           } catch (error) {
+            $invalidate(1, value = values[0] || "");
           }
         }
         if (values && values[value])
@@ -10771,8 +10772,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let { isBookingReadOnly = false } = $props;
     let { paymentAt = (0, import_xFormatter2.dateISOFormat)(0) } = $props;
     let paidIDR = 0;
-    let paymentMethod = "";
-    let paymentStatus = "";
+    let paymentMethod = "Cash";
+    let paymentStatus = "Paid";
     let note = "";
     let { OnSubmit = async function(payment) {
       console.log("OnSubmit :::", payment);
@@ -10797,8 +10798,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       $invalidate(0, bookingId = 0);
       $invalidate(1, paymentAt = (0, import_xFormatter2.dateISOFormat)(0));
       $invalidate(7, paidIDR = 0);
-      $invalidate(8, paymentMethod = "");
-      $invalidate(9, paymentStatus = "");
+      $invalidate(8, paymentMethod = "Cash");
+      $invalidate(9, paymentStatus = "Paid");
       $invalidate(10, note = "");
     };
     const cancel = () => {
