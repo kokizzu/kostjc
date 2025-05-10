@@ -406,7 +406,7 @@ aside.svelte-2xd6p5 .container .nav-menu button.red.svelte-2xd6p5:hover {
 }
 
 /* fakecss:./_partials/Navbar.esbuild-svelte-fake-css */
-header.svelte-16vzbyx.svelte-16vzbyx {
+header.svelte-1ef2ahj.svelte-1ef2ahj {
   top: 0;
   left: 0;
   right: 0;
@@ -421,7 +421,7 @@ header.svelte-16vzbyx.svelte-16vzbyx {
   background-color: #FFF;
   z-index: 100;
 }
-header.svelte-16vzbyx .label.svelte-16vzbyx {
+header.svelte-1ef2ahj .label.svelte-1ef2ahj {
   width: fit-content;
   display: flex;
   flex-direction: row;
@@ -429,7 +429,7 @@ header.svelte-16vzbyx .label.svelte-16vzbyx {
   align-items: center;
   padding-left: 20px;
 }
-header.svelte-16vzbyx .label .logo.svelte-16vzbyx {
+header.svelte-1ef2ahj .label .logo.svelte-1ef2ahj {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -439,17 +439,32 @@ header.svelte-16vzbyx .label .logo.svelte-16vzbyx {
   text-decoration: none;
   width: calc(var(--sidemenu-width) - 20px);
 }
-header.svelte-16vzbyx .label .logo img.svelte-16vzbyx {
+header.svelte-1ef2ahj .label .logo img.svelte-1ef2ahj {
   width: 30px;
   height: auto;
 }
-header.svelte-16vzbyx .info.svelte-16vzbyx {
+header.svelte-1ef2ahj .info.svelte-1ef2ahj {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  font-size: 13px;
 }
-header.svelte-16vzbyx .info a.user.svelte-16vzbyx {
+header.svelte-1ef2ahj .info .role.svelte-1ef2ahj {
+  padding: 8px 15px;
+  border-radius: 9999px;
+  font-weight: 500;
+  cursor: pointer;
+}
+header.svelte-1ef2ahj .info .role.Staff.svelte-1ef2ahj {
+  color: var(--orange-007);
+  background-color: var(--orange-transparent);
+}
+header.svelte-1ef2ahj .info .role.Admin.svelte-1ef2ahj {
+  color: var(--green-007);
+  background-color: var(--green-transparent);
+}
+header.svelte-1ef2ahj .info a.user.svelte-1ef2ahj {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -461,7 +476,7 @@ header.svelte-16vzbyx .info a.user.svelte-16vzbyx {
   border-radius: 9999px;
   border: 1px solid var(--gray-002);
 }
-header.svelte-16vzbyx .info a.user.svelte-16vzbyx:hover {
+header.svelte-1ef2ahj .info a.user.svelte-1ef2ahj:hover {
   background-color: var(--gray-001);
 }
 
@@ -5925,10 +5940,15 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let div0;
     let t2;
     let div1;
-    let a1;
-    let span;
+    let span0;
     let t3;
+    let span0_class_value;
+    let span0_title_value;
     let t4;
+    let a1;
+    let span1;
+    let t5;
+    let t6;
     let icon;
     let current;
     icon = new Icon_default({
@@ -5938,40 +5958,70 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       c() {
         header = element("header");
         div0 = element("div");
-        div0.innerHTML = `<a href="/" class="logo svelte-16vzbyx"><img src="/assets/house.svg" alt="House" class="svelte-16vzbyx"/> <h2>KostJC</h2></a>`;
+        div0.innerHTML = `<a href="/" class="logo svelte-1ef2ahj"><img src="/assets/house.svg" alt="House" class="svelte-1ef2ahj"/> <h2>KostJC</h2></a>`;
         t2 = space();
         div1 = element("div");
-        a1 = element("a");
-        span = element("span");
+        span0 = element("span");
         t3 = text(
+          /*role*/
+          ctx[1]
+        );
+        t4 = space();
+        a1 = element("a");
+        span1 = element("span");
+        t5 = text(
           /*username*/
           ctx[0]
         );
-        t4 = space();
+        t6 = space();
         create_component(icon.$.fragment);
-        attr(div0, "class", "label svelte-16vzbyx");
+        attr(div0, "class", "label svelte-1ef2ahj");
+        attr(span0, "class", span0_class_value = "role " + /*role*/
+        ctx[1] + " svelte-1ef2ahj");
+        attr(span0, "title", span0_title_value = "You are " + /*role*/
+        ctx[1]);
         attr(a1, "href", "/user");
-        attr(a1, "class", "user svelte-16vzbyx");
-        attr(div1, "class", "info svelte-16vzbyx");
-        attr(header, "class", "svelte-16vzbyx");
+        attr(a1, "class", "user svelte-1ef2ahj");
+        attr(div1, "class", "info svelte-1ef2ahj");
+        attr(header, "class", "svelte-1ef2ahj");
       },
       m(target, anchor) {
         insert(target, header, anchor);
         append(header, div0);
         append(header, t2);
         append(header, div1);
+        append(div1, span0);
+        append(span0, t3);
+        append(div1, t4);
         append(div1, a1);
-        append(a1, span);
-        append(span, t3);
-        append(a1, t4);
+        append(a1, span1);
+        append(span1, t5);
+        append(a1, t6);
         mount_component(icon, a1, null);
         current = true;
       },
       p(ctx2, [dirty]) {
+        if (!current || dirty & /*role*/
+        2)
+          set_data(
+            t3,
+            /*role*/
+            ctx2[1]
+          );
+        if (!current || dirty & /*role*/
+        2 && span0_class_value !== (span0_class_value = "role " + /*role*/
+        ctx2[1] + " svelte-1ef2ahj")) {
+          attr(span0, "class", span0_class_value);
+        }
+        if (!current || dirty & /*role*/
+        2 && span0_title_value !== (span0_title_value = "You are " + /*role*/
+        ctx2[1])) {
+          attr(span0, "title", span0_title_value);
+        }
         if (!current || dirty & /*username*/
         1)
           set_data(
-            t3,
+            t5,
             /*username*/
             ctx2[0]
           );
@@ -5999,16 +6049,22 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       /** @type {string} */
       "unknown"
     ) } = $props;
+    let { role = (
+      /** @type {'Staff' | 'Admin' | string} */
+      "Staff"
+    ) } = $props;
     $self.$set = ($props2) => {
       if ("username" in $props2)
         $invalidate(0, username = $props2.username);
+      if ("role" in $props2)
+        $invalidate(1, role = $props2.role);
     };
-    return [username];
+    return [username, role];
   }
   var Navbar = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance3, create_fragment3, safe_not_equal, { username: 0 });
+      init(this, options, instance3, create_fragment3, safe_not_equal, { username: 0, role: 1 });
     }
   };
   var Navbar_default = Navbar;
@@ -6127,10 +6183,16 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let div0_class_value;
     let current;
     navbar = new Navbar_default({
-      props: { username: (
-        /*user*/
-        ctx[0].userName
-      ) }
+      props: {
+        username: (
+          /*user*/
+          ctx[0].userName
+        ),
+        role: (
+          /*user*/
+          ctx[0].role
+        )
+      }
     });
     sidemenu = new SideMenu_default({ props: { access: (
       /*access*/
@@ -6190,6 +6252,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         1)
           navbar_changes.username = /*user*/
           ctx2[0].userName;
+        if (dirty & /*user*/
+        1)
+          navbar_changes.role = /*user*/
+          ctx2[0].role;
         navbar.$set(navbar_changes);
         const sidemenu_changes = {};
         if (dirty & /*access*/
@@ -10735,7 +10801,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         th = element("th");
         t = text(t_value);
         attr(th, "style", th_style_value = /*f*/
-        ctx[82].name === "ktpRegion" ? "min-width: 250px;" : "");
+        (ctx[82].name === "ktpRegion" ? "min-width: 250px;" : "") + " " + /*f*/
+        (ctx[82].name === "bookingId" ? "min-width: 130px;" : ""));
         attr(th, "class", th_class_value = /*f*/
         (ctx[82].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
         (ctx[82].inputType === "datetime" ? "datetime" : "") + " " + /*f*/
@@ -10752,7 +10819,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           set_data(t, t_value);
         if (dirty[0] & /*FIELDS*/
         1 && th_style_value !== (th_style_value = /*f*/
-        ctx2[82].name === "ktpRegion" ? "min-width: 250px;" : "")) {
+        (ctx2[82].name === "ktpRegion" ? "min-width: 250px;" : "") + " " + /*f*/
+        (ctx2[82].name === "bookingId" ? "min-width: 130px;" : ""))) {
           attr(th, "style", th_style_value);
         }
         if (dirty[0] & /*FIELDS*/

@@ -387,6 +387,7 @@
               <th
                 style="
                   {f.name === 'ktpRegion' ? 'min-width: 250px;' : ''}
+                  {f.name === 'bookingId' ? 'min-width: 130px;' : ''}
                 "
                 class="
 								{f.inputType === 'textarea' ? 'textarea' : ''}

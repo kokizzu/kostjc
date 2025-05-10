@@ -14,6 +14,7 @@
   import PopUpAddPayment from './_components/PopUpAddPayment.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+    import { PaymentMethods, PaymentStatuses } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -188,7 +189,8 @@
       bind:MASTER_ROWS={payments}
       REFS={{
         'bookingId': bookings,
-        'paymentStatus': ['Paid', 'Unpaid', 'Pending', 'Cancelled']
+        'paymentStatus': PaymentStatuses,
+        'paymentMethod': PaymentMethods
       }}
 
       CAN_EDIT_ROW

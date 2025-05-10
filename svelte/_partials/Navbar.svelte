@@ -1,8 +1,9 @@
 <script>
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
-  import { RiUserFacesUserLine, RiCommunicationChatQuoteLine } from '../node_modules/svelte-icons-pack/dist/ri';
+  import { RiUserFacesUserLine } from '../node_modules/svelte-icons-pack/dist/ri';
 
   export let username = /** @type {string} */ ('unknown');
+  export let role = /** @type {'Staff' | 'Admin' | string} */ ('Staff');
 </script>
 
 <header>
@@ -13,6 +14,7 @@
     </a>
   </div>
   <div class="info">
+    <span class="role {role}" title="You are {role}">{role}</span>
     <a href="/user" class="user">
       <span>{username}</span>
       <Icon src={RiUserFacesUserLine} size="15" />
@@ -67,6 +69,24 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    font-size: 13px;
+  }
+
+  header .info .role {
+    padding: 8px 15px;
+    border-radius: 9999px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  header .info .role.Staff {
+    color: var(--orange-007);
+    background-color: var(--orange-transparent);
+  }
+
+  header .info .role.Admin {
+    color: var(--green-007);
+    background-color: var(--green-transparent);
   }
 
   header .info a.user {

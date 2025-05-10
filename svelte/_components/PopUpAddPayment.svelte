@@ -5,6 +5,7 @@
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
+    import { PaymentMethods, PaymentStatuses } from './xConstant';
   import { dateISOFormat } from './xFormatter';
 
   let isShow = /** @type {boolean} */ (false);
@@ -16,8 +17,8 @@
   export let paymentAt = dateISOFormat(0);
 
   let paidIDR = 0;
-  let paymentMethod = 'Cash';
-  let paymentStatus = 'Paid';
+  let paymentMethod = PaymentMethods[0];
+  let paymentStatus = PaymentStatuses[0];
   let note = '';
 
   export let OnSubmit = async function(/** @type {Payment} */ payment) {
@@ -44,8 +45,8 @@
     bookingId = 0;
     paymentAt = dateISOFormat(0);
     paidIDR = 0;
-    paymentMethod = 'Cash';
-    paymentStatus = 'Paid';
+    paymentMethod = PaymentMethods[0];
+    paymentStatus = PaymentStatuses[0];
     note = '';
   }
   
@@ -91,8 +92,8 @@
         id="paymentMethod"
         label="Payment Method"
         bind:value={paymentMethod}
-        type="text"
-        placeholder="Cash"
+        type="combobox-arr"
+        values={PaymentMethods}
       />
       <InputBox
         id="paymentStatus"
@@ -100,7 +101,7 @@
         bind:value={paymentStatus}
         type="combobox"
         placeholder="Paid"
-        values={['Paid', 'Unpaid', 'Pending', 'Cancelled']}
+        values={PaymentStatuses}
       />
       <InputBox
         id="note"

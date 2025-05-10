@@ -13,7 +13,7 @@
 
 <div class="root-layout">
   <div class="root-container">
-    <Navbar username={user.userName}/>
+    <Navbar username={user.userName} role={user.role}/>
     <div class="root-content { $isShrinkMenu ? 'shrink' : 'expand' }">
       <SideMenu {access} />
       <main class="content">
