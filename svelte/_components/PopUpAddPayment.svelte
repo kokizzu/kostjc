@@ -99,7 +99,7 @@
         id="paymentStatus"
         label="Payment Status"
         bind:value={paymentStatus}
-        type="combobox"
+        type="combobox-arr"
         placeholder="Paid"
         values={PaymentStatuses}
       />

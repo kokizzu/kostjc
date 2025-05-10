@@ -4563,25 +4563,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       var PaymentMethods2 = [
         "Cash",
         "QRIS",
-        "BCA",
-        "BNI",
-        "BTN",
-        "CIMB Niaga",
-        "Bank Danamon",
-        "PermataBank",
-        "BSI",
-        "Bank Jago",
-        "Bank Mandiri",
-        "BRI",
-        "Jenius (by BTPN)",
-        "OVO",
-        "LinkAja",
-        "DANA",
-        "GoPay",
-        "ShopeePay",
-        "Paytren",
-        "DokuPay",
-        "SeaBank"
+        "Transfer"
       ];
       var PaymentStatuses2 = [
         "Paid",
@@ -10548,7 +10530,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let inputbox3_props = {
       id: "paymentStatus",
       label: "Payment Status",
-      type: "combobox",
+      type: "combobox-arr",
       placeholder: "Paid",
       values: import_xConstant.PaymentStatuses
     };
