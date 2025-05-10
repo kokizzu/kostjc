@@ -43,7 +43,8 @@ func (l *Locations) FindAll() []Locations {
 	const comment = `-- Locations) FindAll`
 
 	queryRows := comment + `
-SELECT ` + l.SqlSelectAllFields() + ` FROM ` + l.SqlTableName()
+SELECT ` + l.SqlSelectAllFields() + ` FROM ` + l.SqlTableName() + `
+WHERE "deletedAt" = 0`
 
 	var rows = []Locations{}
 	l.Adapter.QuerySql(queryRows, func(row []any) {
@@ -117,6 +118,7 @@ func (l *Locations) FindLocationChoices() map[uint64]string {
 
 	queryRows := comment + `
 SELECT ` + l.SqlId() + `, ` + l.SqlName() + ` FROM ` + l.SqlTableName() + `
+WHERE "deletedAt" = 0
 ORDER BY ` + l.SqlName() + ` ASC`
 
 	out := make(map[uint64]string)
@@ -180,7 +182,8 @@ func (f *Facilities) FindAll() []Facilities {
 	const comment = `-- Facilities) FindAll`
 
 	queryRows := comment + `
-SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName()
+SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName() + `
+WHERE "deletedAt" = 0`
 
 	var rows = []Facilities{}
 	f.Adapter.QuerySql(queryRows, func(row []any) {
@@ -196,7 +199,8 @@ func (f *Facilities) FindAllTypeBuilding() []Facilities {
 
 	queryRows := comment + `
 SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName() + `
-WHERE ` + f.SqlFacilityType() + ` = 'Building'`
+WHERE ` + f.SqlFacilityType() + ` = 'Building'
+	AND "deletedAt" = 0`
 
 	var rows = []Facilities{}
 	f.Adapter.QuerySql(queryRows, func(row []any) {
@@ -212,7 +216,8 @@ func (f *Facilities) FindAllTypeRoom() []Facilities {
 
 	queryRows := comment + `
 SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName() + `
-WHERE ` + f.SqlFacilityType() + ` = 'Room'`
+WHERE ` + f.SqlFacilityType() + ` = 'Room'
+	AND "deletedAt" = 0`
 
 	var rows = []Facilities{}
 	f.Adapter.QuerySql(queryRows, func(row []any) {
@@ -252,6 +257,7 @@ func (f *Facilities) FindFacilitiesBuildingChoices() map[uint64]string {
 	queryRows := comment + `
 SELECT ` + f.SqlId() + `, ` + f.SqlFacilityName() + ` FROM ` + f.SqlTableName() + `
 WHERE ` + f.SqlFacilityType() + ` = 'Building'
+	AND "deletedAt" = 0
 ORDER BY ` + f.SqlFacilityName() + ` ASC`
 
 	out := make(map[uint64]string)
@@ -298,6 +304,7 @@ func (b *Buildings) FindBuildingChoices() map[uint64]string {
 
 	queryRows := comment + `
 SELECT ` + b.SqlId() + `, ` + b.SqlBuildingName() + ` FROM ` + b.SqlTableName() + `
+WHERE "deletedAt" = 0
 ORDER BY ` + b.SqlId() + ` ASC`
 
 	out := make(map[uint64]string)
