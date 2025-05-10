@@ -26,7 +26,7 @@
   } from '../node_modules/svelte-icons-pack/dist/cg';
   import InputBox from './InputBox.svelte';
   import { onMount } from 'svelte';
-  import { datetime, formatPrice } from './xFormatter.js';
+  import { dateISOFormat, datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
   import {AdminBooking, AdminPayment} from '../jsApi.GEN'
     import { notifier } from './xNotifier';
@@ -217,6 +217,7 @@
 
   // Apply row counts
   async function toRow(/** @type number */ perPage) {
+    PAGER.order = ['+dateStart'];
     currentRows = perPage;
     showRowsNum = false;
     await OnRefresh({ ...PAGER, perPage });
@@ -226,6 +227,7 @@
 
   // Go to page, last page, first page
   async function goToPage(/** @type number */ page) {
+    PAGER.order = ['+dateStart'];
     currentPage = page;
     await OnRefresh({ ...PAGER, page });
     // Refresh pagination view
@@ -234,6 +236,7 @@
 
   // Restore row
   async function restoreRow(/** @type any[] */ row) {
+    PAGER.order = ['+dateStart'];
     await OnRestore(row);
     // Refresh pagination view
     getPaginationShow();
@@ -241,6 +244,7 @@
 
   // Delete row
   async function deleteRow(/** @type any[] */ row) {
+    PAGER.order = ['+dateStart'];
     await OnDelete(row);
     // Refresh pagination view
     getPaginationShow();
@@ -290,14 +294,14 @@
 
     if (!isErrAjax) {
       payloads[1] = booking.roomId;
-      payloads[2] = booking.dateStart;
-      payloads[3] = booking.dateEnd;
-      payloads[4] = booking.basePriceIDR;
-      payloads[5] = booking.facilitiesObj;
-      payloads[6] = booking.totalPriceIDR;
-      payloads[7] = booking.paidAt;
-      payloads[8] = booking.tenantId;
-      payloads[9] = booking.extraTenants;
+      payloads[3] = booking.dateStart;
+      payloads[4] = booking.dateEnd;
+      payloads[5] = booking.tenantId;
+      payloads[6] = booking.basePriceIDR;
+      payloads[7] = booking.facilitiesObj;
+      payloads[8] = booking.totalPriceIDR;
+      payloads[9] = booking.paidAt;
+      payloads[10] = booking.extraTenants;
     }
 
     showPopUpEdit = true;
@@ -368,12 +372,15 @@
   let popUpAddPayment = null;
   let isSubmitAddPayment = false;
   let isPopUpAddPaymentReady = false;
+  let paymentAt = dateISOFormat(0);
 
   onMount(() => {
     isPopUpAddPaymentReady = true;
   })
 
-  function showPopUpAddPayment() {
+  function showPopUpAddPayment(row) {
+    idToMod = row[0];
+    paymentAt = row[3];
     popUpAddPayment.Show();
   }
 
@@ -398,6 +405,7 @@
 
         popUpAddPayment.Reset();
         popUpAddPayment.Hide();
+        PAGER.order = ['+dateStart'];
         OnRefresh(PAGER);
       }
     );
@@ -587,10 +595,7 @@
                         >
                           <Icon size="15" color="var(--gray-007)" src={RiDesignBallPenLine} />
                         </button>
-                        <button class="btn payment" title="Input Payment" on:click={() => {
-                          idToMod = row[0];
-                          showPopUpAddPayment();
-                        }}>
+                        <button class="btn payment" title="Input Payment" on:click={() => showPopUpAddPayment(row)}>
                           <Icon size="15" color="var(--gray-007)" src={RiFinanceBankCardLine} />
                         </button>
                         {#if row[deletedIndex] > 0 || row[deletedIndex] === 'terminated'}

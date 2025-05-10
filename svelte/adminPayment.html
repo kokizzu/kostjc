@@ -13668,7 +13668,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       type: "combobox",
       values: (
         /*bookings*/
-        ctx[2]
+        ctx[3]
       )
     };
     if (
@@ -13691,9 +13691,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       p(ctx2, dirty) {
         const inputbox_changes = {};
         if (dirty & /*bookings*/
-        4)
+        8)
           inputbox_changes.values = /*bookings*/
-          ctx2[2];
+          ctx2[3];
         if (!updating_value && dirty & /*bookingId*/
         1) {
           updating_value = true;
@@ -13777,7 +13777,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let t0;
     let t1_value = (
       /*isBookingReadOnly*/
-      ctx[3] ? `for Booking #${/*bookingId*/
+      ctx[4] ? `for Booking #${/*bookingId*/
       ctx[0]}` : ""
     );
     let t1;
@@ -13822,7 +13822,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
     });
     let if_block0 = !/*isBookingReadOnly*/
-    ctx[3] && create_if_block_26(ctx);
+    ctx[4] && create_if_block_26(ctx);
     function inputbox0_value_binding(value) {
       ctx[17](value);
     }
@@ -13834,10 +13834,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     };
     if (
       /*paymentAt*/
-      ctx[6] !== void 0
+      ctx[1] !== void 0
     ) {
       inputbox0_props.value = /*paymentAt*/
-      ctx[6];
+      ctx[1];
     }
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
@@ -13915,10 +13915,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     inputbox4 = new InputBox_default({ props: inputbox4_props });
     binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
     let if_block1 = !/*isSubmitted*/
-    ctx[1] && create_if_block_111(ctx);
+    ctx[2] && create_if_block_111(ctx);
     let if_block2 = (
       /*isSubmitted*/
-      ctx[1] && create_if_block5(ctx)
+      ctx[2] && create_if_block5(ctx)
     );
     return {
       c() {
@@ -13968,12 +13968,12 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         attr(button1, "class", "cancel svelte-tl6747");
         attr(button2, "class", "ok svelte-tl6747");
         button2.disabled = /*isSubmitted*/
-        ctx[1];
+        ctx[2];
         attr(div2, "class", "right svelte-tl6747");
         attr(div3, "class", "foot svelte-tl6747");
         attr(div4, "class", "popup svelte-tl6747");
         attr(div5, "class", div5_class_value = null_to_empty(`popup_container ${/*isShow*/
-        ctx[5] ? "show" : ""}`) + " svelte-tl6747");
+        ctx[6] ? "show" : ""}`) + " svelte-tl6747");
       },
       m(target, anchor) {
         insert(target, div5, anchor);
@@ -14019,7 +14019,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
               button0,
               "click",
               /*Hide*/
-              ctx[4]
+              ctx[5]
             ),
             listen(button1, "click", prevent_default(
               /*cancel*/
@@ -14035,16 +14035,16 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       },
       p(ctx2, [dirty]) {
         if ((!current || dirty & /*isBookingReadOnly, bookingId*/
-        9) && t1_value !== (t1_value = /*isBookingReadOnly*/
-        ctx2[3] ? `for Booking #${/*bookingId*/
+        17) && t1_value !== (t1_value = /*isBookingReadOnly*/
+        ctx2[4] ? `for Booking #${/*bookingId*/
         ctx2[0]}` : ""))
           set_data(t1, t1_value);
         if (!/*isBookingReadOnly*/
-        ctx2[3]) {
+        ctx2[4]) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
             if (dirty & /*isBookingReadOnly*/
-            8) {
+            16) {
               transition_in(if_block0, 1);
             }
           } else {
@@ -14062,10 +14062,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         const inputbox0_changes = {};
         if (!updating_value && dirty & /*paymentAt*/
-        64) {
+        2) {
           updating_value = true;
           inputbox0_changes.value = /*paymentAt*/
-          ctx2[6];
+          ctx2[1];
           add_flush_callback(() => updating_value = false);
         }
         inputbox0.$set(inputbox0_changes);
@@ -14106,7 +14106,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         inputbox4.$set(inputbox4_changes);
         if (!/*isSubmitted*/
-        ctx2[1]) {
+        ctx2[2]) {
           if (if_block1) {
           } else {
             if_block1 = create_if_block_111(ctx2);
@@ -14119,11 +14119,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         if (
           /*isSubmitted*/
-          ctx2[1]
+          ctx2[2]
         ) {
           if (if_block2) {
             if (dirty & /*isSubmitted*/
-            2) {
+            4) {
               transition_in(if_block2, 1);
             }
           } else {
@@ -14140,13 +14140,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           check_outros();
         }
         if (!current || dirty & /*isSubmitted*/
-        2) {
+        4) {
           button2.disabled = /*isSubmitted*/
-          ctx2[1];
+          ctx2[2];
         }
         if (!current || dirty & /*isShow*/
-        32 && div5_class_value !== (div5_class_value = null_to_empty(`popup_container ${/*isShow*/
-        ctx2[5] ? "show" : ""}`) + " svelte-tl6747")) {
+        64 && div5_class_value !== (div5_class_value = null_to_empty(`popup_container ${/*isShow*/
+        ctx2[6] ? "show" : ""}`) + " svelte-tl6747")) {
           attr(div5, "class", div5_class_value);
         }
       },
@@ -14210,7 +14210,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     ) } = $props;
     let { bookingId = 0 } = $props;
     let { isBookingReadOnly = false } = $props;
-    let paymentAt = (0, import_xFormatter3.dateISOFormat)(0);
+    let { paymentAt = (0, import_xFormatter3.dateISOFormat)(0) } = $props;
     let paidIDR = 0;
     let paymentMethod = "";
     let paymentStatus = "";
@@ -14232,18 +14232,18 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       );
       await OnSubmit(payment);
     }
-    const Show = () => $invalidate(5, isShow = true);
-    const Hide = () => $invalidate(5, isShow = false);
+    const Show = () => $invalidate(6, isShow = true);
+    const Hide = () => $invalidate(6, isShow = false);
     const Reset = () => {
       $invalidate(0, bookingId = 0);
-      $invalidate(6, paymentAt = (0, import_xFormatter3.dateISOFormat)(0));
+      $invalidate(1, paymentAt = (0, import_xFormatter3.dateISOFormat)(0));
       $invalidate(7, paidIDR = 0);
       $invalidate(8, paymentMethod = "");
       $invalidate(9, paymentStatus = "");
       $invalidate(10, note = "");
     };
     const cancel = () => {
-      $invalidate(5, isShow = false);
+      $invalidate(6, isShow = false);
     };
     function inputbox_value_binding(value) {
       bookingId = value;
@@ -14251,7 +14251,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     function inputbox0_value_binding(value) {
       paymentAt = value;
-      $invalidate(6, paymentAt);
+      $invalidate(1, paymentAt);
     }
     function inputbox1_value_binding(value) {
       paidIDR = value;
@@ -14271,24 +14271,26 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     $self.$set = ($props2) => {
       if ("isSubmitted" in $props2)
-        $invalidate(1, isSubmitted = $props2.isSubmitted);
+        $invalidate(2, isSubmitted = $props2.isSubmitted);
       if ("bookings" in $props2)
-        $invalidate(2, bookings2 = $props2.bookings);
+        $invalidate(3, bookings2 = $props2.bookings);
       if ("bookingId" in $props2)
         $invalidate(0, bookingId = $props2.bookingId);
       if ("isBookingReadOnly" in $props2)
-        $invalidate(3, isBookingReadOnly = $props2.isBookingReadOnly);
+        $invalidate(4, isBookingReadOnly = $props2.isBookingReadOnly);
+      if ("paymentAt" in $props2)
+        $invalidate(1, paymentAt = $props2.paymentAt);
       if ("OnSubmit" in $props2)
         $invalidate(13, OnSubmit = $props2.OnSubmit);
     };
     return [
       bookingId,
+      paymentAt,
       isSubmitted,
       bookings2,
       isBookingReadOnly,
       Hide,
       isShow,
-      paymentAt,
       paidIDR,
       paymentMethod,
       paymentStatus,
@@ -14310,13 +14312,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     constructor(options) {
       super();
       init(this, options, instance9, create_fragment9, safe_not_equal, {
-        isSubmitted: 1,
-        bookings: 2,
+        isSubmitted: 2,
+        bookings: 3,
         bookingId: 0,
-        isBookingReadOnly: 3,
+        isBookingReadOnly: 4,
+        paymentAt: 1,
         OnSubmit: 13,
         Show: 14,
-        Hide: 4,
+        Hide: 5,
         Reset: 15
       });
     }
@@ -14324,7 +14327,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       return this.$.ctx[14];
     }
     get Hide() {
-      return this.$.ctx[4];
+      return this.$.ctx[5];
     }
     get Reset() {
       return this.$.ctx[15];

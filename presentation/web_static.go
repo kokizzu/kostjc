@@ -7,6 +7,7 @@ import (
 	"kostjc/domain"
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
+	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/zCrud"
 )
@@ -319,6 +320,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
+		in.Pager.Order = []string{`+` + mProperty.DateStart}
 		out := d.AdminBooking(&in)
 
 		return views.RenderAdminBooking(ctx, M.SX{

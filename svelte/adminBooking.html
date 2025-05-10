@@ -4498,7 +4498,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         const formattedDate = `${year}-${month}-${date}`;
         return formattedDate;
       }
-      function dateISOFormat4(dayTo = 0) {
+      function dateISOFormat5(dayTo = 0) {
         const dt = new Date();
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -4535,7 +4535,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         utcDatetime,
         isoTime,
         isoDate,
-        dateISOFormat: dateISOFormat4,
+        dateISOFormat: dateISOFormat5,
         loadScript,
         formatPrice: formatPrice2
       };
@@ -10227,7 +10227,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       type: "combobox",
       values: (
         /*bookings*/
-        ctx[2]
+        ctx[3]
       )
     };
     if (
@@ -10250,9 +10250,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       p(ctx2, dirty) {
         const inputbox_changes = {};
         if (dirty & /*bookings*/
-        4)
+        8)
           inputbox_changes.values = /*bookings*/
-          ctx2[2];
+          ctx2[3];
         if (!updating_value && dirty & /*bookingId*/
         1) {
           updating_value = true;
@@ -10336,7 +10336,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let t0;
     let t1_value = (
       /*isBookingReadOnly*/
-      ctx[3] ? `for Booking #${/*bookingId*/
+      ctx[4] ? `for Booking #${/*bookingId*/
       ctx[0]}` : ""
     );
     let t1;
@@ -10381,7 +10381,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
     });
     let if_block0 = !/*isBookingReadOnly*/
-    ctx[3] && create_if_block_22(ctx);
+    ctx[4] && create_if_block_22(ctx);
     function inputbox0_value_binding(value) {
       ctx[17](value);
     }
@@ -10393,10 +10393,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     };
     if (
       /*paymentAt*/
-      ctx[6] !== void 0
+      ctx[1] !== void 0
     ) {
       inputbox0_props.value = /*paymentAt*/
-      ctx[6];
+      ctx[1];
     }
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
@@ -10474,10 +10474,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     inputbox4 = new InputBox_default({ props: inputbox4_props });
     binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
     let if_block1 = !/*isSubmitted*/
-    ctx[1] && create_if_block_18(ctx);
+    ctx[2] && create_if_block_18(ctx);
     let if_block2 = (
       /*isSubmitted*/
-      ctx[1] && create_if_block4(ctx)
+      ctx[2] && create_if_block4(ctx)
     );
     return {
       c() {
@@ -10527,12 +10527,12 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         attr(button1, "class", "cancel svelte-tl6747");
         attr(button2, "class", "ok svelte-tl6747");
         button2.disabled = /*isSubmitted*/
-        ctx[1];
+        ctx[2];
         attr(div2, "class", "right svelte-tl6747");
         attr(div3, "class", "foot svelte-tl6747");
         attr(div4, "class", "popup svelte-tl6747");
         attr(div5, "class", div5_class_value = null_to_empty(`popup_container ${/*isShow*/
-        ctx[5] ? "show" : ""}`) + " svelte-tl6747");
+        ctx[6] ? "show" : ""}`) + " svelte-tl6747");
       },
       m(target, anchor) {
         insert(target, div5, anchor);
@@ -10578,7 +10578,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
               button0,
               "click",
               /*Hide*/
-              ctx[4]
+              ctx[5]
             ),
             listen(button1, "click", prevent_default(
               /*cancel*/
@@ -10594,16 +10594,16 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       },
       p(ctx2, [dirty]) {
         if ((!current || dirty & /*isBookingReadOnly, bookingId*/
-        9) && t1_value !== (t1_value = /*isBookingReadOnly*/
-        ctx2[3] ? `for Booking #${/*bookingId*/
+        17) && t1_value !== (t1_value = /*isBookingReadOnly*/
+        ctx2[4] ? `for Booking #${/*bookingId*/
         ctx2[0]}` : ""))
           set_data(t1, t1_value);
         if (!/*isBookingReadOnly*/
-        ctx2[3]) {
+        ctx2[4]) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
             if (dirty & /*isBookingReadOnly*/
-            8) {
+            16) {
               transition_in(if_block0, 1);
             }
           } else {
@@ -10621,10 +10621,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         const inputbox0_changes = {};
         if (!updating_value && dirty & /*paymentAt*/
-        64) {
+        2) {
           updating_value = true;
           inputbox0_changes.value = /*paymentAt*/
-          ctx2[6];
+          ctx2[1];
           add_flush_callback(() => updating_value = false);
         }
         inputbox0.$set(inputbox0_changes);
@@ -10665,7 +10665,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         inputbox4.$set(inputbox4_changes);
         if (!/*isSubmitted*/
-        ctx2[1]) {
+        ctx2[2]) {
           if (if_block1) {
           } else {
             if_block1 = create_if_block_18(ctx2);
@@ -10678,11 +10678,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         if (
           /*isSubmitted*/
-          ctx2[1]
+          ctx2[2]
         ) {
           if (if_block2) {
             if (dirty & /*isSubmitted*/
-            2) {
+            4) {
               transition_in(if_block2, 1);
             }
           } else {
@@ -10699,13 +10699,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           check_outros();
         }
         if (!current || dirty & /*isSubmitted*/
-        2) {
+        4) {
           button2.disabled = /*isSubmitted*/
-          ctx2[1];
+          ctx2[2];
         }
         if (!current || dirty & /*isShow*/
-        32 && div5_class_value !== (div5_class_value = null_to_empty(`popup_container ${/*isShow*/
-        ctx2[5] ? "show" : ""}`) + " svelte-tl6747")) {
+        64 && div5_class_value !== (div5_class_value = null_to_empty(`popup_container ${/*isShow*/
+        ctx2[6] ? "show" : ""}`) + " svelte-tl6747")) {
           attr(div5, "class", div5_class_value);
         }
       },
@@ -10769,7 +10769,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     ) } = $props;
     let { bookingId = 0 } = $props;
     let { isBookingReadOnly = false } = $props;
-    let paymentAt = (0, import_xFormatter2.dateISOFormat)(0);
+    let { paymentAt = (0, import_xFormatter2.dateISOFormat)(0) } = $props;
     let paidIDR = 0;
     let paymentMethod = "";
     let paymentStatus = "";
@@ -10791,18 +10791,18 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       );
       await OnSubmit(payment);
     }
-    const Show = () => $invalidate(5, isShow = true);
-    const Hide = () => $invalidate(5, isShow = false);
+    const Show = () => $invalidate(6, isShow = true);
+    const Hide = () => $invalidate(6, isShow = false);
     const Reset = () => {
       $invalidate(0, bookingId = 0);
-      $invalidate(6, paymentAt = (0, import_xFormatter2.dateISOFormat)(0));
+      $invalidate(1, paymentAt = (0, import_xFormatter2.dateISOFormat)(0));
       $invalidate(7, paidIDR = 0);
       $invalidate(8, paymentMethod = "");
       $invalidate(9, paymentStatus = "");
       $invalidate(10, note = "");
     };
     const cancel = () => {
-      $invalidate(5, isShow = false);
+      $invalidate(6, isShow = false);
     };
     function inputbox_value_binding(value) {
       bookingId = value;
@@ -10810,7 +10810,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     function inputbox0_value_binding(value) {
       paymentAt = value;
-      $invalidate(6, paymentAt);
+      $invalidate(1, paymentAt);
     }
     function inputbox1_value_binding(value) {
       paidIDR = value;
@@ -10830,24 +10830,26 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     $self.$set = ($props2) => {
       if ("isSubmitted" in $props2)
-        $invalidate(1, isSubmitted = $props2.isSubmitted);
+        $invalidate(2, isSubmitted = $props2.isSubmitted);
       if ("bookings" in $props2)
-        $invalidate(2, bookings = $props2.bookings);
+        $invalidate(3, bookings = $props2.bookings);
       if ("bookingId" in $props2)
         $invalidate(0, bookingId = $props2.bookingId);
       if ("isBookingReadOnly" in $props2)
-        $invalidate(3, isBookingReadOnly = $props2.isBookingReadOnly);
+        $invalidate(4, isBookingReadOnly = $props2.isBookingReadOnly);
+      if ("paymentAt" in $props2)
+        $invalidate(1, paymentAt = $props2.paymentAt);
       if ("OnSubmit" in $props2)
         $invalidate(13, OnSubmit = $props2.OnSubmit);
     };
     return [
       bookingId,
+      paymentAt,
       isSubmitted,
       bookings,
       isBookingReadOnly,
       Hide,
       isShow,
-      paymentAt,
       paidIDR,
       paymentMethod,
       paymentStatus,
@@ -10869,13 +10871,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     constructor(options) {
       super();
       init(this, options, instance8, create_fragment8, safe_not_equal, {
-        isSubmitted: 1,
-        bookings: 2,
+        isSubmitted: 2,
+        bookings: 3,
         bookingId: 0,
-        isBookingReadOnly: 3,
+        isBookingReadOnly: 4,
+        paymentAt: 1,
         OnSubmit: 13,
         Show: 14,
-        Hide: 4,
+        Hide: 5,
         Reset: 15
       });
     }
@@ -10883,7 +10886,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       return this.$.ctx[14];
     }
     get Hide() {
-      return this.$.ctx[4];
+      return this.$.ctx[5];
     }
     get Reset() {
       return this.$.ctx[15];
@@ -10894,47 +10897,47 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   // _components/MasterTableBooking.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[85] = list[i];
+    child_ctx[86] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[88] = list[i];
+    child_ctx[89] = list[i];
     return child_ctx;
   }
   function get_each_context_22(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[91] = list[i];
+    child_ctx[92] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[94] = list[i];
-    child_ctx[96] = i;
+    child_ctx[95] = list[i];
+    child_ctx[97] = i;
     return child_ctx;
   }
   function get_each_context_4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[94] = list[i];
-    child_ctx[98] = i;
+    child_ctx[95] = list[i];
+    child_ctx[99] = i;
     return child_ctx;
   }
   function get_each_context_5(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[99] = list[i];
-    child_ctx[100] = list;
-    child_ctx[96] = i;
+    child_ctx[100] = list[i];
+    child_ctx[101] = list;
+    child_ctx[97] = i;
     return child_ctx;
   }
   function get_each_context_6(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[101] = list[i];
+    child_ctx[102] = list[i];
     return child_ctx;
   }
   function get_each_context_7(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[101] = list[i];
-    child_ctx[96] = i;
+    child_ctx[102] = list[i];
+    child_ctx[97] = i;
     return child_ctx;
   }
   function create_if_block_24(ctx) {
@@ -11121,7 +11124,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     });
     let each_value_5 = ensure_array_like(
       /*FIELDS*/
-      ctx[0] || []
+      ctx[1] || []
     );
     let each_blocks = [];
     for (let i = 0; i < each_value_5.length; i += 1) {
@@ -11204,11 +11207,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx2[22]}`))
           set_data(t1, t1_value);
         if (dirty[0] & /*FIELDS, REFS, payloads, extraTenants, showExtraTenants, selectedExtraTenants, extraTenantsToShow*/
-        126877705 | dirty[1] & /*choseExtraTenant, toggleExtraTenants, removeExtraTenant*/
+        126877706 | dirty[1] & /*choseExtraTenant, toggleExtraTenants, removeExtraTenant*/
         7168) {
           each_value_5 = ensure_array_like(
             /*FIELDS*/
-            ctx2[0] || []
+            ctx2[1] || []
           );
           let i;
           for (i = 0; i < each_value_5.length; i += 1) {
@@ -11273,17 +11276,17 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     function select_block_type(ctx2, dirty) {
       if (
         /*field*/
-        ctx2[99].inputType === "combobox"
+        ctx2[100].inputType === "combobox"
       )
         return 0;
       if (
         /*field*/
-        ctx2[99].inputType === "combobox-arr"
+        ctx2[100].inputType === "combobox-arr"
       )
         return 1;
       if (
         /*field*/
-        ctx2[99].name === "extraTenants"
+        ctx2[100].name === "extraTenants"
       )
         return 2;
       return 3;
@@ -11348,38 +11351,38 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[65](
         value,
         /*idx*/
-        ctx[96]
+        ctx[97]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[99].name
+        ctx[100].name
       ),
       label: (
         /*field*/
-        ctx[99].label
+        ctx[100].label
       ),
       placeholder: (
         /*field*/
-        ctx[99].description
+        ctx[100].description
       ),
       type: (
         /*field*/
-        ctx[99].inputType
+        ctx[100].inputType
       )
     };
     if (
       /*payloads*/
       ctx[20][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[20][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -11396,28 +11399,28 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         const inputbox_changes = {};
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.id = /*field*/
-          ctx[99].name;
+          ctx[100].name;
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.label = /*field*/
-          ctx[99].label;
+          ctx[100].label;
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.placeholder = /*field*/
-          ctx[99].description;
+          ctx[100].description;
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.type = /*field*/
-          ctx[99].inputType;
+          ctx[100].inputType;
         if (!updating_value && dirty[0] & /*payloads*/
         1048576) {
           updating_value = true;
           inputbox_changes.value = /*payloads*/
           ctx[20][
             /*idx*/
-            ctx[96]
+            ctx[97]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -11641,41 +11644,41 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[62](
         value,
         /*idx*/
-        ctx[96]
+        ctx[97]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[99].name
+        ctx[100].name
       ),
       label: (
         /*field*/
-        ctx[99].label
+        ctx[100].label
       ),
       placeholder: (
         /*field*/
-        ctx[99].description
+        ctx[100].description
       ),
       type: (
         /*field*/
-        ctx[99].inputType
+        ctx[100].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[99].name
+          ctx[100].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[99].name
+            ctx[100].name
           ]
         ) : (
           /*field*/
-          ctx[99].ref
+          ctx[100].ref
         )
       )
     };
@@ -11683,13 +11686,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       /*payloads*/
       ctx[20][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[20][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -11706,37 +11709,37 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         const inputbox_changes = {};
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.id = /*field*/
-          ctx[99].name;
+          ctx[100].name;
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.label = /*field*/
-          ctx[99].label;
+          ctx[100].label;
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.placeholder = /*field*/
-          ctx[99].description;
+          ctx[100].description;
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.type = /*field*/
-          ctx[99].inputType;
+          ctx[100].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
-        9)
+        10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[99].name
+            ctx[100].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[99].name
+              ctx[100].name
             ]
           ) : (
             /*field*/
-            ctx[99].ref
+            ctx[100].ref
           );
         if (!updating_value && dirty[0] & /*payloads*/
         1048576) {
@@ -11744,7 +11747,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           inputbox_changes.value = /*payloads*/
           ctx[20][
             /*idx*/
-            ctx[96]
+            ctx[97]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -11773,41 +11776,41 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[61](
         value,
         /*idx*/
-        ctx[96]
+        ctx[97]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[99].name
+        ctx[100].name
       ),
       label: (
         /*field*/
-        ctx[99].label
+        ctx[100].label
       ),
       placeholder: (
         /*field*/
-        ctx[99].description
+        ctx[100].description
       ),
       type: (
         /*field*/
-        ctx[99].inputType
+        ctx[100].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[99].name
+          ctx[100].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[99].name
+            ctx[100].name
           ]
         ) : (
           /*field*/
-          ctx[99].ref
+          ctx[100].ref
         )
       ),
       isObject: (
@@ -11815,7 +11818,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[99].name
+          ctx[100].name
         ] ? true : false
       )
     };
@@ -11823,13 +11826,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       /*payloads*/
       ctx[20][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[20][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -11846,45 +11849,45 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         const inputbox_changes = {};
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.id = /*field*/
-          ctx[99].name;
+          ctx[100].name;
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.label = /*field*/
-          ctx[99].label;
+          ctx[100].label;
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.placeholder = /*field*/
-          ctx[99].description;
+          ctx[100].description;
         if (dirty[0] & /*FIELDS*/
-        1)
+        2)
           inputbox_changes.type = /*field*/
-          ctx[99].inputType;
+          ctx[100].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
-        9)
+        10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[99].name
+            ctx[100].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[99].name
+              ctx[100].name
             ]
           ) : (
             /*field*/
-            ctx[99].ref
+            ctx[100].ref
           );
         if (dirty[0] & /*REFS, FIELDS*/
-        9)
+        10)
           inputbox_changes.isObject = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[99].name
+            ctx[100].name
           ] ? true : false;
         if (!updating_value && dirty[0] & /*payloads*/
         1048576) {
@@ -11892,7 +11895,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           inputbox_changes.value = /*payloads*/
           ctx[20][
             /*idx*/
-            ctx[96]
+            ctx[97]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -11918,7 +11921,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let span;
     let t0_value = (
       /*ext*/
-      ctx[101].name + ""
+      ctx[102].name + ""
     );
     let t0;
     let t1;
@@ -11940,7 +11943,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler*/
         ctx[63](
           /*idx*/
-          ctx[96]
+          ctx[97]
         )
       );
     }
@@ -11974,7 +11977,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         if ((!current || dirty[0] & /*extraTenantsToShow*/
         16777216) && t0_value !== (t0_value = /*ext*/
-        ctx[101].name + ""))
+        ctx[102].name + ""))
           set_data(t0, t0_value);
       },
       i(local) {
@@ -12121,7 +12124,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let span;
     let t0_value = (
       /*ext*/
-      ctx[101].name + ""
+      ctx[102].name + ""
     );
     let t0;
     let t1;
@@ -12132,7 +12135,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_1*/
         ctx[64](
           /*ext*/
-          ctx[101]
+          ctx[102]
         )
       );
     }
@@ -12159,7 +12162,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         if (dirty[0] & /*extraTenants*/
         8388608 && t0_value !== (t0_value = /*ext*/
-        ctx[101].name + ""))
+        ctx[102].name + ""))
           set_data(t0, t0_value);
       },
       d(detaching) {
@@ -12176,8 +12179,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let current;
     let if_block = (
       /*field*/
-      ctx[99].name !== "id" && !/*field*/
-      ctx[99].readOnly && create_if_block_172(ctx)
+      ctx[100].name !== "id" && !/*field*/
+      ctx[100].readOnly && create_if_block_172(ctx)
     );
     return {
       c() {
@@ -12194,13 +12197,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       p(ctx2, dirty) {
         if (
           /*field*/
-          ctx2[99].name !== "id" && !/*field*/
-          ctx2[99].readOnly
+          ctx2[100].name !== "id" && !/*field*/
+          ctx2[100].readOnly
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*FIELDS*/
-            1) {
+            2) {
               transition_in(if_block, 1);
             }
           } else {
@@ -12337,7 +12340,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let th;
     let t_value = (
       /*f*/
-      ctx[94].label + ""
+      ctx[95].label + ""
     );
     let t;
     let th_style_value;
@@ -12347,12 +12350,12 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         th = element("th");
         t = text(t_value);
         attr(th, "style", th_style_value = /*f*/
-        (ctx[94].name === "facilitiesObj" ? "min-width: 300px;" : "") + " " + /*f*/
-        (ctx[94].name === "extraTenants" ? "min-width: 250px;" : "") + " " + /*f*/
-        (ctx[94].name === "tenantId" ? "min-width: 200px;" : ""));
+        (ctx[95].name === "facilitiesObj" ? "min-width: 300px;" : "") + " " + /*f*/
+        (ctx[95].name === "extraTenants" ? "min-width: 250px;" : "") + " " + /*f*/
+        (ctx[95].name === "tenantId" ? "min-width: 200px;" : ""));
         attr(th, "class", th_class_value = /*f*/
-        (ctx[94].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[94].inputType === "datetime" ? "datetime" : "") + " svelte-1u3pk4x");
+        (ctx[95].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[95].inputType === "datetime" ? "datetime" : "") + " svelte-1u3pk4x");
       },
       m(target, anchor) {
         insert(target, th, anchor);
@@ -12360,20 +12363,20 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*FIELDS*/
-        1 && t_value !== (t_value = /*f*/
-        ctx2[94].label + ""))
+        2 && t_value !== (t_value = /*f*/
+        ctx2[95].label + ""))
           set_data(t, t_value);
         if (dirty[0] & /*FIELDS*/
-        1 && th_style_value !== (th_style_value = /*f*/
-        (ctx2[94].name === "facilitiesObj" ? "min-width: 300px;" : "") + " " + /*f*/
-        (ctx2[94].name === "extraTenants" ? "min-width: 250px;" : "") + " " + /*f*/
-        (ctx2[94].name === "tenantId" ? "min-width: 200px;" : ""))) {
+        2 && th_style_value !== (th_style_value = /*f*/
+        (ctx2[95].name === "facilitiesObj" ? "min-width: 300px;" : "") + " " + /*f*/
+        (ctx2[95].name === "extraTenants" ? "min-width: 250px;" : "") + " " + /*f*/
+        (ctx2[95].name === "tenantId" ? "min-width: 200px;" : ""))) {
           attr(th, "style", th_style_value);
         }
         if (dirty[0] & /*FIELDS*/
-        1 && th_class_value !== (th_class_value = /*f*/
-        (ctx2[94].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx2[94].inputType === "datetime" ? "datetime" : "") + " svelte-1u3pk4x")) {
+        2 && th_class_value !== (th_class_value = /*f*/
+        (ctx2[95].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx2[95].inputType === "datetime" ? "datetime" : "") + " svelte-1u3pk4x")) {
           attr(th, "class", th_class_value);
         }
       },
@@ -12409,7 +12412,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     function select_block_type_2(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[94].name === "id"
+        ctx2[95].name === "id"
       )
         return create_if_block_133;
       return create_else_block_4;
@@ -12503,8 +12506,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*MASTER_ROWS, deletedIndex, FIELDS, idToMod, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, getExtraTenants, PAGER*/
-        1077940415 | dirty[1] & /*restoreRow, deleteRow, showPopUpAddPayment, toggleShowPopUpEdit, Cell*/
+        if (dirty[0] & /*MASTER_ROWS, deletedIndex, FIELDS, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, getExtraTenants, PAGER*/
+        1073746111 | dirty[1] & /*restoreRow, deleteRow, showPopUpAddPayment, toggleShowPopUpEdit, Cell*/
         16836) {
           each_value_2 = ensure_array_like(
             /*MASTER_ROWS*/
@@ -12556,20 +12559,20 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   function create_else_block_2(ctx) {
     let td;
     let t_value = (typeof /*row*/
-    ctx[91][
+    ctx[92][
       /*idx*/
-      ctx[96]
+      ctx[97]
     ] === "boolean" ? (
       /*row*/
-      ctx[91][
+      ctx[92][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ] ? "Yes" : "No"
     ) : (
       /*row*/
-      ctx[91][
+      ctx[92][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ] || "--"
     )) + "";
     let t;
@@ -12580,7 +12583,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         t = text(t_value);
         attr(td, "class", td_class_value = null_to_empty(
           /*f*/
-          ctx[94].type
+          ctx[95].type
         ) + " svelte-1u3pk4x");
       },
       m(target, anchor) {
@@ -12590,27 +12593,27 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = (typeof /*row*/
-        ctx2[91][
+        ctx2[92][
           /*idx*/
-          ctx2[96]
+          ctx2[97]
         ] === "boolean" ? (
           /*row*/
-          ctx2[91][
+          ctx2[92][
             /*idx*/
-            ctx2[96]
+            ctx2[97]
           ] ? "Yes" : "No"
         ) : (
           /*row*/
-          ctx2[91][
+          ctx2[92][
             /*idx*/
-            ctx2[96]
+            ctx2[97]
           ] || "--"
         )) + ""))
           set_data(t, t_value);
         if (dirty[0] & /*FIELDS*/
-        1 && td_class_value !== (td_class_value = null_to_empty(
+        2 && td_class_value !== (td_class_value = null_to_empty(
           /*f*/
-          ctx2[94].type
+          ctx2[95].type
         ) + " svelte-1u3pk4x")) {
           attr(td, "class", td_class_value);
         }
@@ -12630,9 +12633,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       /*getExtraTenants*/
       ctx[30](
         /*row*/
-        ctx[91][
+        ctx[92][
           /*idx*/
-          ctx[96]
+          ctx[97]
         ]
       ) + ""
     );
@@ -12652,9 +12655,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         4 && t_value !== (t_value = /*getExtraTenants*/
         ctx2[30](
           /*row*/
-          ctx2[91][
+          ctx2[92][
             /*idx*/
-            ctx2[96]
+            ctx2[97]
           ]
         ) + ""))
           set_data(t, t_value);
@@ -12672,9 +12675,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let td;
     let t_value = formatFacilities(
       /*row*/
-      ctx[91][
+      ctx[92][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ]
     ) + "";
     let t;
@@ -12692,9 +12695,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = formatFacilities(
           /*row*/
-          ctx2[91][
+          ctx2[92][
             /*idx*/
-            ctx2[96]
+            ctx2[97]
           ]
         ) + ""))
           set_data(t, t_value);
@@ -12712,9 +12715,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let td;
     let t0_value = (
       /*row*/
-      (ctx[91][
+      (ctx[92][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ] || "0") + ""
     );
     let t0;
@@ -12734,9 +12737,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t0_value !== (t0_value = /*row*/
-        (ctx2[91][
+        (ctx2[92][
           /*idx*/
-          ctx2[96]
+          ctx2[97]
         ] || "0") + ""))
           set_data(t0, t0_value);
       },
@@ -12755,12 +12758,12 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       /*REFS*/
       (ctx[3][
         /*f*/
-        ctx[94].name
+        ctx[95].name
       ][
         /*row*/
-        ctx[91][
+        ctx[92][
           /*idx*/
-          ctx[96]
+          ctx[97]
         ]
       ] || "--") + ""
     );
@@ -12777,15 +12780,15 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*REFS, FIELDS, MASTER_ROWS*/
-        13 && t_value !== (t_value = /*REFS*/
+        14 && t_value !== (t_value = /*REFS*/
         (ctx2[3][
           /*f*/
-          ctx2[94].name
+          ctx2[95].name
         ][
           /*row*/
-          ctx2[91][
+          ctx2[92][
             /*idx*/
-            ctx2[96]
+            ctx2[97]
           ]
         ] || "--") + ""))
           set_data(t, t_value);
@@ -12803,14 +12806,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let td;
     let t_value = (
       /*row*/
-      (ctx[91][
+      (ctx[92][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ] ? (0, import_xFormatter3.datetime)(
         /*row*/
-        ctx[91][
+        ctx[92][
           /*idx*/
-          ctx[96]
+          ctx[97]
         ]
       ) : "--") + ""
     );
@@ -12828,14 +12831,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = /*row*/
-        (ctx2[91][
+        (ctx2[92][
           /*idx*/
-          ctx2[96]
+          ctx2[97]
         ] ? (0, import_xFormatter3.datetime)(
           /*row*/
-          ctx2[91][
+          ctx2[92][
             /*idx*/
-            ctx2[96]
+            ctx2[97]
           ]
         ) : "--") + ""))
           set_data(t, t_value);
@@ -12853,17 +12856,17 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let td;
     let t_value = (
       /*row*/
-      (ctx[91][
+      (ctx[92][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ] ? (0, import_xFormatter3.formatPrice)(
         /*row*/
-        ctx[91][
+        ctx[92][
           /*idx*/
-          ctx[96]
+          ctx[97]
         ],
         /*f*/
-        ctx[94].mapping || "IDR"
+        ctx[95].mapping || "IDR"
       ) : "--") + ""
     );
     let t;
@@ -12879,18 +12882,18 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, FIELDS*/
-        5 && t_value !== (t_value = /*row*/
-        (ctx2[91][
+        6 && t_value !== (t_value = /*row*/
+        (ctx2[92][
           /*idx*/
-          ctx2[96]
+          ctx2[97]
         ] ? (0, import_xFormatter3.formatPrice)(
           /*row*/
-          ctx2[91][
+          ctx2[92][
             /*idx*/
-            ctx2[96]
+            ctx2[97]
           ],
           /*f*/
-          ctx2[94].mapping || "IDR"
+          ctx2[95].mapping || "IDR"
         ) : "--") + ""))
           set_data(t, t_value);
       },
@@ -12907,14 +12910,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let td;
     let t_value = (
       /*row*/
-      (ctx[91][
+      (ctx[92][
         /*idx*/
-        ctx[96]
+        ctx[97]
       ] ? Object.entries(
         /*REFS*/
         ctx[3][
           /*f*/
-          ctx[94].name
+          ctx[95].name
         ]
       ).map(func).join(", ") : "--") + ""
     );
@@ -12931,15 +12934,15 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, REFS, FIELDS*/
-        13 && t_value !== (t_value = /*row*/
-        (ctx2[91][
+        14 && t_value !== (t_value = /*row*/
+        (ctx2[92][
           /*idx*/
-          ctx2[96]
+          ctx2[97]
         ] ? Object.entries(
           /*REFS*/
           ctx2[3][
             /*f*/
-            ctx2[94].name
+            ctx2[95].name
           ]
         ).map(func).join(", ") : "--") + ""))
           set_data(t, t_value);
@@ -13073,11 +13076,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_4*/
         ctx[68](
           /*row*/
-          ctx[91],
+          ctx[92],
           /*idx*/
-          ctx[96],
+          ctx[97],
           /*f*/
-          ctx[94]
+          ctx[95]
         )
       );
     }
@@ -13093,7 +13096,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_5*/
         ctx[69](
           /*row*/
-          ctx[91]
+          ctx[92]
         )
       );
     }
@@ -13102,11 +13105,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     function select_block_type_6(ctx2, dirty) {
       if (
         /*row*/
-        ctx2[91][
+        ctx2[92][
           /*deletedIndex*/
           ctx2[12]
         ] > 0 || /*row*/
-        ctx2[91][
+        ctx2[92][
           /*deletedIndex*/
           ctx2[12]
         ] === "terminated"
@@ -13250,7 +13253,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_3*/
         ctx[67](
           /*row*/
-          ctx[91]
+          ctx[92]
         )
       );
     }
@@ -13311,7 +13314,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_7*/
         ctx[71](
           /*row*/
-          ctx[91]
+          ctx[92]
         )
       );
     }
@@ -13372,7 +13375,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_6*/
         ctx[70](
           /*row*/
-          ctx[91]
+          ctx[92]
         )
       );
     }
@@ -13435,46 +13438,46 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     function select_block_type_4(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[94].name === "id"
+        ctx2[95].name === "id"
       )
         return 0;
       if (
         /*f*/
-        ctx2[94].type == "intArr"
+        ctx2[95].type == "intArr"
       )
         return 1;
       if (
         /*f*/
-        ctx2[94].type == "currency"
+        ctx2[95].type == "currency"
       )
         return 2;
       if (
         /*f*/
-        ctx2[94].inputType === "datetime"
+        ctx2[95].inputType === "datetime"
       )
         return 3;
       if (
         /*f*/
-        ctx2[94].inputType === "combobox" && /*REFS*/
+        ctx2[95].inputType === "combobox" && /*REFS*/
         ctx2[3][
           /*f*/
-          ctx2[94].name
+          ctx2[95].name
         ]
       )
         return 4;
       if (
         /*f*/
-        ctx2[94].inputType === "percentage"
+        ctx2[95].inputType === "percentage"
       )
         return 5;
       if (
         /*f*/
-        ctx2[94].name === "facilitiesObj"
+        ctx2[95].name === "facilitiesObj"
       )
         return 6;
       if (
         /*f*/
-        ctx2[94].name === "extraTenants"
+        ctx2[95].name === "extraTenants"
       )
         return 7;
       return 8;
@@ -13536,11 +13539,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let td;
     let t0_value = (
       /*PAGER*/
-      (ctx[1].page - 1) * /*PAGER*/
-      ctx[1].perPage + /*MASTER_ROWS*/
+      (ctx[0].page - 1) * /*PAGER*/
+      ctx[0].perPage + /*MASTER_ROWS*/
       ctx[2].indexOf(
         /*row*/
-        ctx[91]
+        ctx[92]
       ) + 1 + ""
     );
     let t0;
@@ -13550,7 +13553,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let current;
     let each_value_3 = ensure_array_like(
       /*FIELDS*/
-      ctx[0] || []
+      ctx[1] || []
     );
     let each_blocks = [];
     for (let i = 0; i < each_value_3.length; i += 1) {
@@ -13572,11 +13575,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         attr(td, "class", "num_row svelte-1u3pk4x");
         attr(tr, "class", tr_class_value = null_to_empty(
           /*row*/
-          ctx[91][
+          ctx[92][
             /*deletedIndex*/
             ctx[12]
           ] > 0 || /*row*/
-          ctx[91][
+          ctx[92][
             /*deletedIndex*/
             ctx[12]
           ] === "terminated" ? "deleted" : ""
@@ -13597,20 +13600,20 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       },
       p(ctx2, dirty) {
         if ((!current || dirty[0] & /*PAGER, MASTER_ROWS*/
-        6) && t0_value !== (t0_value = /*PAGER*/
-        (ctx2[1].page - 1) * /*PAGER*/
-        ctx2[1].perPage + /*MASTER_ROWS*/
+        5) && t0_value !== (t0_value = /*PAGER*/
+        (ctx2[0].page - 1) * /*PAGER*/
+        ctx2[0].perPage + /*MASTER_ROWS*/
         ctx2[2].indexOf(
           /*row*/
-          ctx2[91]
+          ctx2[92]
         ) + 1 + ""))
           set_data(t0, t0_value);
-        if (dirty[0] & /*MASTER_ROWS, deletedIndex, idToMod, FIELDS, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, getExtraTenants*/
-        1077940413 | dirty[1] & /*restoreRow, deleteRow, showPopUpAddPayment, toggleShowPopUpEdit, Cell*/
+        if (dirty[0] & /*MASTER_ROWS, deletedIndex, FIELDS, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, getExtraTenants*/
+        1073746110 | dirty[1] & /*restoreRow, deleteRow, showPopUpAddPayment, toggleShowPopUpEdit, Cell*/
         16836) {
           each_value_3 = ensure_array_like(
             /*FIELDS*/
-            ctx2[0] || []
+            ctx2[1] || []
           );
           let i;
           for (i = 0; i < each_value_3.length; i += 1) {
@@ -13634,11 +13637,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         if (!current || dirty[0] & /*MASTER_ROWS, deletedIndex*/
         4100 && tr_class_value !== (tr_class_value = null_to_empty(
           /*row*/
-          ctx2[91][
+          ctx2[92][
             /*deletedIndex*/
             ctx2[12]
           ] > 0 || /*row*/
-          ctx2[91][
+          ctx2[92][
             /*deletedIndex*/
             ctx2[12]
           ] === "terminated" ? "deleted" : ""
@@ -13736,7 +13739,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_8*/
         ctx[72](
           /*r*/
-          ctx[88]
+          ctx[89]
         )
       );
     }
@@ -13744,7 +13747,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       c() {
         button = element("button");
         button.textContent = `${/*r*/
-        ctx[88]}`;
+        ctx[89]}`;
         attr(button, "class", "svelte-1u3pk4x");
       },
       m(target, anchor) {
@@ -13770,7 +13773,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let button;
     let t_value = (
       /*i*/
-      ctx[85] + ""
+      ctx[86] + ""
     );
     let t;
     let button_disabled_value;
@@ -13783,7 +13786,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         /*click_handler_11*/
         ctx[75](
           /*i*/
-          ctx[85]
+          ctx[86]
         )
       );
     }
@@ -13793,14 +13796,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         t = text(t_value);
         button.disabled = button_disabled_value = /*currentPage*/
         ctx[15] == /*i*/
-        ctx[85];
+        ctx[86];
         attr(button, "class", button_class_value = null_to_empty(
           /*currentPage*/
           ctx[15] === /*i*/
-          ctx[85] ? "btn active" : "btn"
+          ctx[86] ? "btn active" : "btn"
         ) + " svelte-1u3pk4x");
         attr(button, "title", button_title_value = `Go to page ${/*i*/
-        ctx[85]}`);
+        ctx[86]}`);
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -13814,25 +13817,25 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx = new_ctx;
         if (dirty[0] & /*paginationShow*/
         16384 && t_value !== (t_value = /*i*/
-        ctx[85] + ""))
+        ctx[86] + ""))
           set_data(t, t_value);
         if (dirty[0] & /*currentPage, paginationShow*/
         49152 && button_disabled_value !== (button_disabled_value = /*currentPage*/
         ctx[15] == /*i*/
-        ctx[85])) {
+        ctx[86])) {
           button.disabled = button_disabled_value;
         }
         if (dirty[0] & /*currentPage, paginationShow*/
         49152 && button_class_value !== (button_class_value = null_to_empty(
           /*currentPage*/
           ctx[15] === /*i*/
-          ctx[85] ? "btn active" : "btn"
+          ctx[86] ? "btn active" : "btn"
         ) + " svelte-1u3pk4x")) {
           attr(button, "class", button_class_value);
         }
         if (dirty[0] & /*paginationShow*/
         16384 && button_title_value !== (button_title_value = `Go to page ${/*i*/
-        ctx[85]}`)) {
+        ctx[86]}`)) {
           attr(button, "title", button_title_value);
         }
       },
@@ -13957,11 +13960,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     );
     let each_value_4 = ensure_array_like(
       /*FIELDS*/
-      ctx[0] || []
+      ctx[1] || []
     );
     const get_key = (ctx2) => (
       /*f*/
-      ctx2[94].name
+      ctx2[95].name
     );
     for (let i = 0; i < each_value_4.length; i += 1) {
       let child_ctx = get_each_context_4(ctx, each_value_4, i);
@@ -14402,10 +14405,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           check_outros();
         }
         if (dirty[0] & /*FIELDS*/
-        1) {
+        2) {
           each_value_4 = ensure_array_like(
             /*FIELDS*/
-            ctx2[0] || []
+            ctx2[1] || []
           );
           each_blocks_1 = update_keyed_each(each_blocks_1, dirty, get_key, 1, ctx2, each_value_4, each0_lookup, tr, destroy_block, create_each_block_4, null, get_each_context_4);
         }
@@ -14733,21 +14736,25 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       getPaginationShow();
     }
     async function toRow(perPage) {
+      $invalidate(0, PAGER.order = ["+dateStart"], PAGER);
       $invalidate(16, currentRows = perPage);
       $invalidate(17, showRowsNum = false);
       await OnRefresh({ ...PAGER, perPage });
       getPaginationShow();
     }
     async function goToPage(page) {
+      $invalidate(0, PAGER.order = ["+dateStart"], PAGER);
       $invalidate(15, currentPage = page);
       await OnRefresh({ ...PAGER, page });
       getPaginationShow();
     }
     async function restoreRow(row) {
+      $invalidate(0, PAGER.order = ["+dateStart"], PAGER);
       await OnRestore(row);
       getPaginationShow();
     }
     async function deleteRow(row) {
+      $invalidate(0, PAGER.order = ["+dateStart"], PAGER);
       await OnDelete(row);
       getPaginationShow();
     }
@@ -14795,14 +14802,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
       if (!isErrAjax) {
         $invalidate(20, payloads[1] = booking.roomId, payloads);
-        $invalidate(20, payloads[2] = booking.dateStart, payloads);
-        $invalidate(20, payloads[3] = booking.dateEnd, payloads);
-        $invalidate(20, payloads[4] = booking.basePriceIDR, payloads);
-        $invalidate(20, payloads[5] = booking.facilitiesObj, payloads);
-        $invalidate(20, payloads[6] = booking.totalPriceIDR, payloads);
-        $invalidate(20, payloads[7] = booking.paidAt, payloads);
-        $invalidate(20, payloads[8] = booking.tenantId, payloads);
-        $invalidate(20, payloads[9] = booking.extraTenants, payloads);
+        $invalidate(20, payloads[3] = booking.dateStart, payloads);
+        $invalidate(20, payloads[4] = booking.dateEnd, payloads);
+        $invalidate(20, payloads[5] = booking.tenantId, payloads);
+        $invalidate(20, payloads[6] = booking.basePriceIDR, payloads);
+        $invalidate(20, payloads[7] = booking.facilitiesObj, payloads);
+        $invalidate(20, payloads[8] = booking.totalPriceIDR, payloads);
+        $invalidate(20, payloads[9] = booking.paidAt, payloads);
+        $invalidate(20, payloads[10] = booking.extraTenants, payloads);
       }
       $invalidate(21, showPopUpEdit = true);
       $invalidate(22, idToMod = id);
@@ -14868,10 +14875,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let popUpAddPayment = null;
     let isSubmitAddPayment = false;
     let isPopUpAddPaymentReady = false;
+    let paymentAt = (0, import_xFormatter3.dateISOFormat)(0);
     onMount(() => {
       $invalidate(29, isPopUpAddPaymentReady = true);
     });
-    function showPopUpAddPayment() {
+    function showPopUpAddPayment(row) {
+      $invalidate(22, idToMod = row[0]);
+      paymentAt = row[3];
       popUpAddPayment.Show();
     }
     async function submitAddPayment(payment) {
@@ -14894,6 +14904,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           notifier.showSuccess(`Payment created !!`);
           popUpAddPayment.Reset();
           popUpAddPayment.Hide();
+          $invalidate(0, PAGER.order = ["+dateStart"], PAGER);
           OnRefresh(PAGER);
         }
       );
@@ -14949,10 +14960,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     const click_handler_2 = () => filterTable.Show();
     const click_handler_3 = (row) => OnInfo(row);
     const click_handler_4 = (row, idx, f) => toggleShowPopUpEdit(Cell(row, idx, f), row);
-    const click_handler_5 = (row) => {
-      $invalidate(22, idToMod = row[0]);
-      showPopUpAddPayment();
-    };
+    const click_handler_5 = (row) => showPopUpAddPayment(row);
     const click_handler_6 = (row) => restoreRow(row);
     const click_handler_7 = (row) => deleteRow(row);
     const click_handler_8 = (r) => toRow(r);
@@ -14965,9 +14973,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       if ("tenants" in $props2)
         $invalidate(47, tenants2 = $props2.tenants);
       if ("FIELDS" in $props2)
-        $invalidate(0, FIELDS = $props2.FIELDS);
+        $invalidate(1, FIELDS = $props2.FIELDS);
       if ("PAGER" in $props2)
-        $invalidate(1, PAGER = $props2.PAGER);
+        $invalidate(0, PAGER = $props2.PAGER);
       if ("MASTER_ROWS" in $props2)
         $invalidate(2, MASTER_ROWS = $props2.MASTER_ROWS);
       if ("REFS" in $props2)
@@ -14995,7 +15003,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     };
     $self.$.update = () => {
       if ($self.$.dirty[0] & /*PAGER*/
-      2) {
+      1) {
         $: {
           if (PAGER)
             getPaginationShow();
@@ -15003,8 +15011,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
     };
     return [
-      FIELDS,
       PAGER,
+      FIELDS,
       MASTER_ROWS,
       REFS,
       CAN_SHOW_INFO,
@@ -15094,8 +15102,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         safe_not_equal,
         {
           tenants: 47,
-          FIELDS: 0,
-          PAGER: 1,
+          FIELDS: 1,
+          PAGER: 0,
           MASTER_ROWS: 2,
           REFS: 3,
           CAN_SHOW_INFO: 4,
@@ -17249,6 +17257,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       location.hash || ""
     );
     onMount(() => {
+      $invalidate(2, pager.order = ["+dateStart"], pager);
       if (hash[0] === "#")
         hash = hash.substring(1);
       if (hash.includes(hashSearchByTenant)) {
@@ -17342,14 +17351,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       const booking = {
         id: payloads[0],
         roomId: payloads[1],
-        dateStart: payloads[2],
-        dateEnd: payloads[3],
-        basePriceIDR: payloads[4],
-        facilitiesObj: String(payloads[5]),
-        totalPriceIDR: payloads[6],
-        paidAt: payloads[7],
-        tenantId: payloads[8],
-        extraTenants: payloads[9]
+        dateStart: payloads[3],
+        dateEnd: payloads[4],
+        tenantId: payloads[5],
+        basePriceIDR: payloads[6],
+        facilitiesObj: String(payloads[7]),
+        totalPriceIDR: payloads[8],
+        paidAt: payloads[9],
+        extraTenants: payloads[10]
       };
       const i = (
         /** @type {any}*/

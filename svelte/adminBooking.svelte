@@ -38,6 +38,7 @@
   let hash = /** @type {string} */ (location.hash || '');
 
   onMount(() => {
+    pager.order = ['+dateStart'];
     if ( hash[ 0 ] === '#' ) hash = hash.substring( 1 );
 
     if (hash.includes(hashSearchByTenant)) {
@@ -136,14 +137,14 @@
     const booking = {
       id: payloads[0],
       roomId: payloads[1],
-      dateStart: payloads[2],
-      dateEnd: payloads[3],
-      basePriceIDR: payloads[4],
-      facilitiesObj: String(payloads[5]),
-      totalPriceIDR: payloads[6],
-      paidAt: payloads[7],
-      tenantId: payloads[8],
-      extraTenants: payloads[9],
+      dateStart: payloads[3],
+      dateEnd: payloads[4],
+      tenantId: payloads[5],
+      basePriceIDR: payloads[6],
+      facilitiesObj: String(payloads[7]),
+      totalPriceIDR: payloads[8],
+      paidAt: payloads[9],
+      extraTenants: payloads[10],
     }
     const i = /** @type {any}*/ ({
       pager,

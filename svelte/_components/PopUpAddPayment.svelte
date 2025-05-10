@@ -13,8 +13,8 @@
   export let bookings = /** @type {Record<number, string>} */ ({});
   export let bookingId = 0;
   export let isBookingReadOnly = false;
-
-  let paymentAt = dateISOFormat(0);
+  export let paymentAt = dateISOFormat(0);
+  
   let paidIDR = 0;
   let paymentMethod = '';
   let paymentStatus = '';
