@@ -17313,6 +17313,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           $invalidate(2, pager = o.pager);
           $invalidate(0, bookings = o.bookings);
           notifier.showSuccess(`Booking '${row[1]}' restored !!`);
+          $invalidate(2, pager.order = ["+dateStart"], pager);
           OnRefresh(pager);
         }
       );
@@ -17339,6 +17340,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           $invalidate(2, pager = o.pager);
           $invalidate(0, bookings = o.bookings);
           notifier.showSuccess(`Booking '${row[1]}' deleted !!`);
+          $invalidate(2, pager.order = ["+dateStart"], pager);
           OnRefresh(pager);
         }
       );
@@ -17377,6 +17379,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           $invalidate(2, pager = o.pager);
           $invalidate(0, bookings = o.bookings);
           notifier.showSuccess(`Booking #${booking.id} updated !!`);
+          $invalidate(2, pager.order = ["+dateStart"], pager);
           OnRefresh(pager);
         }
       );
@@ -17411,12 +17414,12 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           $invalidate(0, bookings = o.bookings);
           notifier.showSuccess(`Booking created !!`);
           popUpForms.Reset();
+          $invalidate(2, pager.order = ["+dateStart"], pager);
           OnRefresh(pager);
         }
       );
       popUpForms.Hide();
     }
-    console.log(fields);
     function popupaddbooking_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         popUpForms = $value;

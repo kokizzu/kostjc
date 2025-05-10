@@ -100,6 +100,7 @@
         bookings = o.bookings;
         notifier.showSuccess(`Booking '${row[1]}' restored !!`);
 
+        pager.order = ['+dateStart'];
         OnRefresh(pager);
       }
     );
@@ -127,6 +128,7 @@
         bookings = o.bookings;
         notifier.showSuccess(`Booking '${row[1]}' deleted !!`);
 
+        pager.order = ['+dateStart'];
         OnRefresh(pager);
       }
     );
@@ -165,6 +167,7 @@
         bookings = o.bookings;
         notifier.showSuccess(`Booking #${booking.id} updated !!`);
 
+        pager.order = ['+dateStart'];
         OnRefresh(pager);
       }
     );
@@ -196,13 +199,12 @@
 
         popUpForms.Reset();
 
+        pager.order = ['+dateStart'];
         OnRefresh(pager);
       }
     );
     popUpForms.Hide();
   }
-
-  console.log(fields)
 </script>
 
 {#if isPopUpFormReady}
