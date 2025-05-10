@@ -11,8 +11,9 @@
 
   export let isSubmitted  = /** @type {boolean} */ (false);
   export let bookings = /** @type {Record<number, string>} */ ({});
+  export let bookingId = 0;
+  export let isBookingReadOnly = false;
 
-  let bookingId = 0;
   let paymentAt = dateISOFormat(0);
   let paidIDR = 0;
   let paymentMethod = '';
@@ -56,20 +57,22 @@
 <div class={`popup_container ${isShow ? 'show' : ''}`}>
   <div class="popup">
     <header class="header">
-      <h2>Add Payment</h2>
+      <h2>Add Payment {isBookingReadOnly ? `for Booking #${bookingId}` : ''}</h2>
       <button on:click={Hide}>
         <Icon size="22" color="var(--red-005)" src={IoClose}/>
       </button>
     </header>
     <div class="forms">
-      <InputBox
-        id="booking"
-        label="Booking"
-        isObject={true}
-        bind:value={bookingId}
-        type="combobox"
-        values={bookings}
-      />
+      {#if !isBookingReadOnly}
+        <InputBox
+          id="booking"
+          label="Booking"
+          isObject={true}
+          bind:value={bookingId}
+          type="combobox"
+          values={bookings}
+        />
+      {/if}
       <InputBox
         id="paymentAt"
         label="Payment At"

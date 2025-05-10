@@ -213,3 +213,7 @@ func (t *Tenants) CountTotalAllRows() (total uint64) {
 func (t *Tenants) Truncate() bool {
 	return t.Adapter.ExecBoxSpace(t.SpaceName()+`:truncate`, A.X{})
 }
+
+func (s *Sessions) Truncate() bool {
+	return s.Adapter.ExecBoxSpace(s.SpaceName()+`:truncate`, A.X{})
+}

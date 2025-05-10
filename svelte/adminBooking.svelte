@@ -135,15 +135,15 @@
     console.log('Booking ID to Edit: ' + String(id));
     const booking = {
       id: payloads[0],
-      dateStart: payloads[1],
-      dateEnd: payloads[2],
-      basePriceIDR: payloads[3],
-      facilitiesObj: String(payloads[4]),
-      totalPriceIDR: payloads[5],
-      paidAt: payloads[6],
-      tenantId: payloads[7],
-      extraTenants: payloads[8],
-      roomId: payloads[9]
+      roomId: payloads[1],
+      dateStart: payloads[2],
+      dateEnd: payloads[3],
+      basePriceIDR: payloads[4],
+      facilitiesObj: String(payloads[5]),
+      totalPriceIDR: payloads[6],
+      paidAt: payloads[7],
+      tenantId: payloads[8],
+      extraTenants: payloads[9],
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -229,11 +229,8 @@
       bind:MASTER_ROWS={bookings}
 
       tenants={tenants}
-
-      CAN_EDIT_ROW
+      
       CAN_SEARCH_ROW
-      CAN_DELETE_ROW
-      CAN_RESTORE_ROW
 
       {OnDelete}
       {OnRestore}

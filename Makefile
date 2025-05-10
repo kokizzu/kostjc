@@ -20,8 +20,8 @@ local-clickhouse:
 	# SELECT * FROM "actionLogs" LIMIT 1;
 
 download-backup:
-	@echo "Downloading backup database from Server"
-	rsync -Wav -e 'ssh -p 22 -i ~/.ssh/$(ssh-key)' $(user)@194.233.65.174:../kostjc/backup/* ./backup
+	@echo "Downloading backup database at $(timestamp) from Server"
+	rsync -Wav -e 'ssh -p 22 -i ~/.ssh/$(ssh-key)' $(user)@194.233.65.174:../kostjc/backup/*$(timestamp)*.jsonline.lz4 ./backup
 
 upload-backup:
 	@echo "Uploading backup database at $(timestamp) to Server"

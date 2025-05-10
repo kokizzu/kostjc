@@ -91,6 +91,8 @@ const (
 	TenantId      = `tenantId`
 	ExtraTenants  = `extraTenants`
 	RoomId        = `roomId`
+
+	TotalPaidIDR = `totalPaidIDR` // Read Only
 )
 
 const (

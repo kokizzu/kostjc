@@ -57,6 +57,20 @@ var AdminBookingMeta = zCrud.Meta{
 			ReadOnly:  true,
 		},
 		{
+			Name:      mProperty.RoomId,
+			Label:     `Room`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  false,
+		},
+		{
+			Name:      `totalPaidIDR`,
+			Label:     `Total Paid`,
+			DataType:  zCrud.DataTypeCurrency,
+			InputType: zCrud.InputTypeNumber,
+			ReadOnly:  true,
+		},
+		{
 			Name:      mProperty.DateStart,
 			Label:     `Date Start`,
 			DataType:  zCrud.DataTypeString,
@@ -112,13 +126,6 @@ var AdminBookingMeta = zCrud.Meta{
 			Label:     `Extra Tenants`,
 			DataType:  zCrud.DataTypeInt,
 			InputType: zCrud.InputTypeText,
-			ReadOnly:  false,
-		},
-		{
-			Name:      mProperty.RoomId,
-			Label:     `Room`,
-			DataType:  zCrud.DataTypeInt,
-			InputType: zCrud.InputTypeCombobox,
 			ReadOnly:  false,
 		},
 		{

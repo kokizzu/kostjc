@@ -147,8 +147,26 @@ LIMIT 1`
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
-SELECT ` + meta.ToSelect() + `
-FROM ` + b.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
+SELECT
+	"bookings"."id",
+	"bookings"."roomId",
+	COALESCE(SUM("payments"."paidIDR"), 0) AS "totalPaidIDR",
+	"bookings"."dateStart",
+	"bookings"."dateEnd",
+	"bookings"."basePriceIDR",
+	"bookings"."facilitiesObj",
+	"bookings"."totalPriceIDR",
+	"bookings"."paidAt",
+	"bookings"."tenantId",
+	"bookings"."extraTenants",
+	"bookings"."createdAt",
+	"bookings"."updatedAt",
+	"bookings"."deletedAt"
+FROM ` + b.SqlTableName() + `
+LEFT JOIN "payments" ON "payments"."bookingId" = "bookings"."id"
+` + whereAndSql + `
+GROUP BY "bookings"."id"
+` + orderBySql + limitOffsetSql
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
 		row[0] = X.ToS(row[0]) // ensure id is string

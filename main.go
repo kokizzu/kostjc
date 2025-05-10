@@ -162,6 +162,8 @@ func main() {
 		dateTime := os.Args[2]
 		fmt.Println(color.BlueString(`Restoring database from: ` + dateTime))
 		model.RestoreDatabase(tConn, dateTime)
+	case `truncate`:
+		model.TruncateDatabase(tConn)
 	default:
 		log.Error().Str(`mode`, mode).Msg(`unknown mode`)
 	}

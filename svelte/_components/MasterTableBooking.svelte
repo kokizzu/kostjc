@@ -13,7 +13,8 @@
     RiSystemFilterLine,
     RiArrowsArrowGoBackLine,
     RiSystemInformationLine,
-    RiArrowsArrowDropRightLine
+    RiArrowsArrowDropRightLine,
+    RiFinanceBankCardLine
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { IoSearch, IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
@@ -27,7 +28,9 @@
   import { onMount } from 'svelte';
   import { datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
-  import {AdminBooking} from '../jsApi.GEN'
+  import {AdminBooking, AdminPayment} from '../jsApi.GEN'
+    import { notifier } from './xNotifier';
+    import PopUpAddPayment from './PopUpAddPayment.svelte';
 
   export let tenants = /** @type {Record<number, string>} */ ({});
 
@@ -58,16 +61,11 @@
   export let MASTER_ROWS = /** @type any[][] */ ([]); // bind
   export let REFS = {};
 
+  export let CAN_SHOW_INFO = false;
+
   export let ACCESS = /** @type Access */ ({});
   export let ARRAY_OF_ARRAY = true;
   export let CAN_SEARCH_ROW = true;
-  export let CAN_EDIT_ROW = true;
-  export let CAN_DELETE_ROW = false;
-  export let CAN_RESTORE_ROW = false;
-  export let CAN_SHOW_INFO = false;
-  export let CAN_OPEN_LINK = false;
-  export let LINKS = /** @type ExtendedAction[] */ ([]);
-  export let IS_CUSTOM_EDIT = false;
 
   // State for loading if hit ajax
   let isAjaxSubmitted = false;
@@ -252,10 +250,11 @@
   let showPopUpEdit = false;
 
   // Row ID to modify
-  let idToMod = '';
+  let idToMod = 0;
 
   async function toggleShowPopUpEdit(/** @type any */ id, /** @type any[]*/ row) {
     let booking = /** @type {Booking} */ ({});
+    idToMod = id;
     let isErrAjax = false;
     await AdminBooking({
       cmd: 'form', // @ts-ignore
@@ -290,15 +289,15 @@
     }
 
     if (!isErrAjax) {
-      payloads[1] = booking.dateStart;
-      payloads[2] = booking.dateEnd;
-      payloads[3] = booking.basePriceIDR;
-      payloads[4] = booking.facilitiesObj;
-      payloads[5] = booking.totalPriceIDR;
-      payloads[6] = booking.paidAt;
-      payloads[7] = booking.tenantId;
-      payloads[8] = booking.extraTenants;
-      payloads[9] = booking.roomId;
+      payloads[1] = booking.roomId;
+      payloads[2] = booking.dateStart;
+      payloads[3] = booking.dateEnd;
+      payloads[4] = booking.basePriceIDR;
+      payloads[5] = booking.facilitiesObj;
+      payloads[6] = booking.totalPriceIDR;
+      payloads[7] = booking.paidAt;
+      payloads[8] = booking.tenantId;
+      payloads[9] = booking.extraTenants;
     }
 
     showPopUpEdit = true;
@@ -365,7 +364,55 @@
     extraTenantsToShow = [];
     showPopUpEdit = false;
   }
+
+  let popUpAddPayment = null;
+  let isSubmitAddPayment = false;
+  let isPopUpAddPaymentReady = false;
+
+  onMount(() => {
+    isPopUpAddPaymentReady = true;
+  })
+
+  function showPopUpAddPayment() {
+    popUpAddPayment.Show();
+  }
+
+  async function submitAddPayment(payment) {
+    isSubmitAddPayment = true;
+    const i = /** @type {any} */ ({
+      payment,
+      cmd: 'upsert'
+    });
+
+    await AdminPayment(i,
+      /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        isSubmitAddPayment = false;
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+        notifier.showSuccess(`Payment created !!`);
+
+        popUpAddPayment.Reset();
+        popUpAddPayment.Hide();
+        OnRefresh(PAGER);
+      }
+    );
+  }
 </script>
+
+{#if isPopUpAddPaymentReady}
+  <PopUpAddPayment
+    isBookingReadOnly
+    bind:bookingId={idToMod}
+    bind:this={popUpAddPayment}
+    bind:isSubmitted={isSubmitAddPayment}
+    OnSubmit={submitAddPayment}
+  />
+{/if}
 
 {#if filterTableReady}
   <FilterTable bind:this={filterTable} bind:filterColumns bind:filtersMap on:click={ApplyFilter} />
@@ -375,7 +422,7 @@
   <div class="popup_container">
     <div class="popup">
       <header>
-        <h2>Edit row</h2>
+        <h2>Edit Booking {`#${idToMod}`}</h2>
         <button on:click={closePopUpEdit}>
           <Icon size="22" color="var(--red-005)" src={IoClose} />
         </button>
@@ -517,7 +564,7 @@
         {#if MASTER_ROWS && MASTER_ROWS.length > 0}
           {#each MASTER_ROWS as row}
             <tr
-              class={CAN_DELETE_ROW && (row[deletedIndex] > 0 || row[deletedIndex] === 'terminated') ? 'deleted' : ''}
+              class={(row[deletedIndex] > 0 || row[deletedIndex] === 'terminated') ? 'deleted' : ''}
             >
               <td class="num_row">{(PAGER.page -1) * PAGER.perPage + MASTER_ROWS.indexOf(row) + 1}</td>
               {#each FIELDS || [] as f, idx}
@@ -533,42 +580,27 @@
                             <Icon size="15" color="var(--gray-007)" src={RiSystemInformationLine} />
                           </button>
                         {/if}
-                        {#if !IS_CUSTOM_EDIT}
-                          {#if CAN_EDIT_ROW}
-                            <button
-                              class="btn edit"
-                              title="Edit"
-                              on:click={() => toggleShowPopUpEdit(Cell(row, idx, f), row)}
-                            >
-                              <Icon size="15" color="var(--gray-007)" src={RiDesignBallPenLine} />
-                            </button>
-                          {/if}
-                        {/if}
-                        {#if CAN_DELETE_ROW || CAN_RESTORE_ROW}
-                          {#if row[deletedIndex] > 0 || row[deletedIndex] === 'terminated'}
-                            <button class="btn info" title="Restore" on:click={() => restoreRow(row)}>
-                              <Icon size="15" color="var(--gray-007)" src={RiArrowsArrowGoBackLine} />
-                            </button>
-                          {:else}
-                            <button class="btn delete" title="Delete" on:click={() => deleteRow(row)}>
-                              <Icon size="15" color="var(--gray-007)" src={RiSystemDeleteBin5Line} />
-                            </button>
-                          {/if}
-                        {/if}
-                        {#if CAN_OPEN_LINK}
-                          {#each (LINKS || []) as l}
-                            <a
-                              class="btn link"
-                              href={l.link(row)}
-                              target={l.isTargetBlank ? '_blank' : ''}
-                            >
-                              <Icon
-                                size="15"
-                                color="var(--gray-007)"
-                                src={l.icon}
-                              />
-                            </a>
-                          {/each}
+                        <button
+                          class="btn edit"
+                          title="Edit"
+                          on:click={() => toggleShowPopUpEdit(Cell(row, idx, f), row)}
+                        >
+                          <Icon size="15" color="var(--gray-007)" src={RiDesignBallPenLine} />
+                        </button>
+                        <button class="btn payment" title="Input Payment" on:click={() => {
+                          idToMod = row[0];
+                          showPopUpAddPayment();
+                        }}>
+                          <Icon size="15" color="var(--gray-007)" src={RiFinanceBankCardLine} />
+                        </button>
+                        {#if row[deletedIndex] > 0 || row[deletedIndex] === 'terminated'}
+                          <button class="btn info" title="Restore" on:click={() => restoreRow(row)}>
+                            <Icon size="15" color="var(--gray-007)" src={RiArrowsArrowGoBackLine} />
+                          </button>
+                        {:else}
+                          <button class="btn delete" title="Delete" on:click={() => deleteRow(row)}>
+                            <Icon size="15" color="var(--gray-007)" src={RiSystemDeleteBin5Line} />
+                          </button>
                         {/if}
                       </div>
                     {:else}
