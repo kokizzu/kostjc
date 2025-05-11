@@ -29,6 +29,25 @@
   } */ (null);
   let isSubmitTenant = /** @type boolean */ (false);
 
+  const KtpGenders = [
+    'Laki - Laki',
+    'Perempuan'
+  ];
+  const KtpMaritalStatus = [
+    'Belum Kawin',
+    'Kawin',
+    'Cerai Hidup',
+    'Cerai Mati'
+  ];
+  const KtpReligions = [
+    'Islam',
+    'Hindu',
+    'Kristen',
+    'Katholik',
+    'Buddha',
+    'Konghucu'
+  ];
+
   onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
@@ -202,25 +221,6 @@
       }
     );
   }
-
-  const KtpGenders = [
-    'Laki - Laki',
-    'Perempuan'
-  ];
-  const KtpMaritalStatus = [
-    'Belum Kawin',
-    'Kawin',
-    'Cerai Hidup',
-    'Cerai Mati'
-  ];
-  const KtpReligions = [
-    'Islam',
-    'Hindu',
-    'Kristen',
-    'Katholik',
-    'Buddha',
-    'Konghucu'
-  ];
 </script>
 
 {#if isPopUpFormReady}

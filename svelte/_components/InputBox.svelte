@@ -4,9 +4,8 @@
   import { onMount } from 'svelte';
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { AiOutlineEye, AiOutlineEyeInvisible } from '../node_modules/svelte-icons-pack/dist/ai';
-  import { RandString } from './xGenerator';
-  import { RiArrowsArrowRightSLine } from '../node_modules/svelte-icons-pack/dist/ri';
   import { dateISOFormat } from './xFormatter';
+  import Select from '../node_modules/svelte-select';
 
   export let className = '';
   export let type = /** @type {InputType | any} */ ('text');
@@ -24,15 +23,8 @@
   if (isObject) value = value+'';
   let isShowPassword = false;
   let inputElm;
-
-  let valueToShowFromObj = value+'';
-
-  const randStr = RandString(5);
   
   onMount(() => {
-    if (type === 'combobox-arr' && !value) {
-      value = values[0];
-    }
     if (type === 'datetime' && value == '') {
       value = dateISOFormat(0);
       if (id == 'ktpDateBirth') value = dateISOFormat(-6209.25);
@@ -40,25 +32,6 @@
     if (type === 'password') inputElm.type = type;
     // Boolean input must be use random id, because it's a checkbox
     if (type === 'bool') id = id + Math.random();
-    if (isObject) {
-      if (type === 'combobox' || type === 'select') {
-        try {
-          const valuesArr = Object.entries(values);
-          if (!value) value = valuesArr[0][0];
-        } catch (error) {
-          value = values[0] || '';
-        }
-      }
-      if (values && values[value]) valueToShowFromObj = values[value];
-      else valueToShowFromObj = '';
-    } else {
-      if (type === 'combobox' || type === 'select') {
-        if (!value) {
-          value = values[0];
-        }
-      }
-      valueToShowFromObj = value+'';
-    }
   });
 
   function toggleShowPassword() {
@@ -67,83 +40,25 @@
     else inputElm.type = 'password';
   }
 
-  let isShowOptions = false;
-  let currentFocus = -1;
+  let itemsArr = [];
+  let itemsArrObj = [];
 
-  function filterOptions(options) {
-    if (valueToShowFromObj === '') {
-      options.forEach((option) => {
-        option.style.display = 'block';
-      });
-      currentFocus = -1;
-      return;
-    } else {
-      options.forEach((option) => {
-        const textValue = option.textContent; // @ts-ignore
-        if (textValue.toUpperCase().indexOf(valueToShowFromObj.toUpperCase()) > -1) { // @ts-ignore
-          option.style.display = 'block';        
-        } else { // @ts-ignore
-          option.style.display = 'none'; 
-        }
-      });
+  onMount(() => {
+    if (type === 'combobox-arr') {
+      itemsArr = values;
+    } else if (type === 'combobox') {
+      for (const [key, value] of Object.entries(values)) {
+        itemsArrObj = [...itemsArrObj, {
+          value: key,
+          label: value
+        }];
+      }
     }
+  });
+
+  function handleSelect(/** @type {CustomEvent} */e) {
+    value = e.detail.value;
   }
-
-  function highlightOption(options, isIncreased) {
-    if (!options.length) return;
-
-    if (isIncreased) {
-      currentFocus++;
-    } else {
-      currentFocus--;
-    }
-
-    if (currentFocus < 0) currentFocus = options.length - 1;
-    if (currentFocus > options.length - 1) currentFocus = 0;
-
-    removeActive(options);
-
-    if(options[currentFocus] && options[currentFocus].style.display === 'none') {
-      highlightOption(options, isIncreased);
-    };
-
-    if (options[currentFocus]) {
-      options[currentFocus].classList.add('active');
-      options[currentFocus].scrollIntoView({block: 'nearest'});
-    }
-  }
-
-  function removeActive(options) {
-    if (!options.length) {
-      options = document.querySelectorAll('.option.'+randStr);
-    };
-    options.forEach(option => option.classList.remove('active'));
-  }
-
-  function handleKey(/** @type {KeyboardEvent} */e) {
-    const options = document.querySelectorAll('.option.'+randStr);
-
-    switch (e.key) {
-      case 'ArrowDown':
-        highlightOption(options, true);
-        break;
-      case 'ArrowUp':
-        highlightOption(options, false);
-        break;
-      case 'Enter':
-        if (currentFocus > -1) { // @ts-ignore
-          options[currentFocus].click();
-          removeActive(options);
-          optionClicked = false;
-        }
-        break;
-      default:
-        filterOptions(options);
-        break;
-    }
-  }
-
-  let optionClicked = false;
 </script>
 
 <div class={className}>
@@ -154,111 +69,28 @@
         <input type="checkbox" id={id} bind:checked={value}>
         <span class="slider"></span>
       </label>
-    {:else if type === 'combobox-arr'}
+    {:else if type === 'combobox-arr' || type === 'select'}
       <label class="label" for={id}>{label}</label>
-      <select bind:value={value}>
-        {#each values as item}
-          <option value={item}>{item}</option>
-        {/each}
-      </select>
-    {:else if type == 'select' || type === 'combobox'}
+      <Select
+        items={itemsArr}
+        on:select={handleSelect}
+        placeholder={placeholder}
+      />
+    {:else if type === 'combobox'}
       {#if isObject}
         <label class="label" for={id}>{label}</label>
-        <div class={`options_container ${randStr}`}>
-          <div class="input_container">
-            <input
-              type="text"
-              bind:value={valueToShowFromObj}
-              on:focus={() => isShowOptions = true}
-              on:blur|preventDefault={() => {
-                console.log('isOptionClicked', optionClicked);
-                currentFocus = -1;
-                const options = document.querySelectorAll('.option .'+randStr);
-                removeActive(options);
-                valueToShowFromObj = values[value];
-                setTimeout(() => {
-                  if (optionClicked) {
-                    isShowOptions = false;
-                  } else {
-                    setTimeout(() => {
-                      isShowOptions = false;
-                      optionClicked = false;
-                    }, 100);
-                  }
-                }, 200);
-              }}
-              on:keyup={handleKey}
-            />
-            <button class="arrow" on:click={() => isShowOptions = !isShowOptions}>
-              <Icon
-                className="icon {isShowOptions ? 'rotate' : 'dropdown'}"
-                color="var(--gray-007)"
-                src={RiArrowsArrowRightSLine}
-                size="17"
-              />
-            </button>
-          </div>
-          <div class="options_list {isShowOptions ? 'show' : 'hidden'}">
-            {#each Object.entries(values) as [k, v]}
-              <button class="option {randStr}" on:click={() => {
-                value = k;
-                valueToShowFromObj = v;
-                isShowOptions = false;
-                optionClicked = true;
-              }}>
-                {v}
-              </button>
-            {/each}
-          </div>
-        </div>
+        <Select
+          items={itemsArrObj}
+          on:select={handleSelect}
+          placeholder={placeholder}
+        />
       {:else}
         <label class="label" for={id}>{label}</label>
-        <div class="options_container {randStr}">
-          <div class="input_container">
-            <input
-              type="text"
-              bind:value={valueToShowFromObj}
-              on:focus={() => isShowOptions = true}
-              on:blur={() => {
-                currentFocus = -1;
-                const options = document.querySelectorAll('.option .'+randStr);
-                removeActive(options);
-                valueToShowFromObj = value || values[value] || values[0] || options[0].textContent; ;
-                if (isShowOptions) optionClicked = true;
-                setTimeout(() => {
-                  if (optionClicked) {
-                    isShowOptions = false;
-                  } else {
-                    setTimeout(() => {
-                      isShowOptions = false;
-                      optionClicked = false;
-                    }, 100);
-                  }
-                }, 200);
-              }}
-              on:keyup={handleKey}
-            />
-            <button class="arrow" on:click={() => isShowOptions = !isShowOptions}>
-              <Icon
-                className="icon {isShowOptions ? 'rotate' : 'dropdown'}"
-                color="var(--gray-007)"
-                src={RiArrowsArrowRightSLine}
-                size="17"
-              />
-            </button>
-          </div>
-          <div class="options_list {isShowOptions ? 'show' : 'hidden'}">
-            {#each values as v}
-              <button class="option {randStr}" on:click|preventDefault={() => {
-                value = v;
-                valueToShowFromObj = v;
-                isShowOptions = false;
-              }}>
-                {v}
-              </button>
-            {/each}
-          </div>
-        </div>
+        <Select
+          items={itemsArr}
+          on:select={handleSelect}
+          placeholder={placeholder}
+        />
       {/if}
     {:else if type === 'number'}
       <label class="label" for={id}>{label}</label>
@@ -351,8 +183,7 @@
   }
 
   .input_box input,
-  .input_box textarea,
-  .input_box select {
+  .input_box textarea {
     width: 100%;
     border: 1px solid var(--gray-003);
     border-radius: 5px;
@@ -361,8 +192,7 @@
   }
 
   .input_box input:focus,
-  .input_box textarea:focus,
-  .input_box select:focus {
+  .input_box textarea:focus {
     border-color: var(--blue-005);
     outline: 1px solid var(--blue-005);
   }
@@ -498,49 +328,8 @@
     font-weight: 700;
   }
 
-  .input_box .options_container {
-    display: block;
-    position: relative;
-    width: 100%;
-  }
-
-  .input_box .options_container .input_container {
-    position: relative;
-    width: 100%;
-  }
-
   .input_box .options_container .input_container input {
     padding-right: 30px !important;
-  }
-
-  .input_box .options_container .input_container .arrow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: transparent;
-    border-top: 2px solid transparent;
-    border-bottom: 2px solid transparent;
-    border-left: 1px solid transparent;
-    border-right: 2px solid transparent;
-    cursor: pointer;
-    padding: 8px;
-    height: 100%;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-  }
-
-  .input_box .options_container .input_container .arrow:hover {
-    background-color: var(--gray-001);
-    border-top: 2px solid var(--gray-003);
-    border-bottom: 2px solid var(--gray-003);
-    border-left: 1px solid var(--gray-003);
-    border-right: 2px solid var(--gray-003);
-    padding: 12px;
-    outline: 1px solid var(--gray-003);
   }
 
   :global(.input_box .options_container .input_container .arrow .dropdown) {
@@ -551,42 +340,4 @@
 		transition: all .2s ease-in-out;
 		transform: rotate(90deg);
 	}
-
-  .input_box .options_container .options_list {
-    margin-top: 5px;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #FFF;
-    border: 1px solid var(--gray-003);
-    border-radius: 8px;
-    height: fit-content;
-    max-height: 250px;
-    overflow-y: auto;
-    z-index: 1999;
-  }
-
-  .input_box .options_container .options_list .option {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    padding: 5px 10px;
-    cursor: pointer;
-    background-color: #FFF;
-    border: none;
-    height: fit-content;
-    width: 100%;
-    text-align: left;
-  }
-
-  .input_box .options_container .options_list .option:hover {
-    background-color: var(--gray-002);
-  }
-
-  :global(.input_box .options_container .options_list .option.active) {
-    background-color: var(--gray-002) !important;
-  }
 </style>

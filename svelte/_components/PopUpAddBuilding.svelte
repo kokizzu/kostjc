@@ -105,7 +105,7 @@
             <div class="facility-show">
               <span>{fac.facilityName}</span>
               <button on:click={() => removeFacility(idx)}>
-                <Icon size="18" color="var(--sky-001)" src={IoClose}/>
+                <Icon size="18" color="var(--blue-001)" src={IoClose}/>
               </button>
             </div>
           {/each}
@@ -320,7 +320,7 @@
     flex-direction: row;
     align-items: center;
     gap: 5px;
-    background-color: var(--sky-006);
+    background-color: var(--blue-006);
     color: #FFF;
     padding: 5px 5px 5px 15px;
     border-radius: 5px;
@@ -329,7 +329,7 @@
   .facilities-form .facilities-selected .facility-show button {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     padding: 5px;
     border-radius: 9999px;
     border: none;
@@ -338,7 +338,7 @@
   }
 
   .facilities-form .facilities-selected .facility-show button:hover {
-    background-color: var(--sky-005);
+    background-color: var(--blue-005);
   }
 
   .dropdown-facilities {
@@ -397,7 +397,7 @@
 		overflow-y: auto;
 		width: 100%;
     margin-top: 10px;
-		border: 1px solid var(--sky-004);
+		border: 1px solid var(--gray-003);
 		border-radius: 5px;
 		display: flex;
 		flex-direction: column;
@@ -441,7 +441,7 @@
 	}
 
 	.dropdown-item .dropdown-list .facility:hover {
-		color: var(--sky-009);
+		color: var(--blue-009);
     background-color: #0ea5e920;
 	}
 

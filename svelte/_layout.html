@@ -30,6 +30,7 @@
         --font-lg: 18px;
         --font-xl: 24px;
         --font-xxl: 32px;
+        --font-size: 13px; // For compatibility to other libraries
 
         /* Colors */
         --violet-000: #f5f3ff;
@@ -225,6 +226,14 @@
 
       .actions-button .btn:disabled svg {
         fill: var(--gray-007);
+      }
+
+      .svelte-select.focused {
+        border: 2px solid var(--blue-005) !important; 
+      }
+
+      .svelte-select {
+        font-size: 13px !important;
       }
 
       /* notifier */

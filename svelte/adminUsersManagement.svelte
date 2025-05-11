@@ -21,7 +21,10 @@
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
 
-  console.log('usersManagement: ', users);
+  const AdminRoles = [
+    'Admin',
+    'Staff'
+  ];
 
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
@@ -172,11 +175,6 @@
       }
     );
   }
-
-  const AdminRoles = [
-    'Admin',
-    'Staff'
-  ]
 </script>
 
 {#if isPopUpFormReady}

@@ -61,17 +61,7 @@
       {#each (FIELDS || []) as field, idx}
         {#if field.name !== 'id'}
           {#if !field.readOnly}
-            {#if field.inputType === 'combobox'}
-              <InputBox
-                id={field.name}
-                label={field.label}
-                placeholder={field.description}
-                bind:value={payloads[idx]}
-                type={field.inputType}
-                values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
-                isObject={REFS && REFS[field.name] ? true : false}
-              />
-            {:else if field.inputType === 'combobox-arr'}
+            {#if field.inputType === 'combobox' || field.inputType === 'combobox-arr'}
               <InputBox
                 id={field.name}
                 label={field.label}
