@@ -103,7 +103,6 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Tenant ID to Edit: ' + String(id));
     const tenant = {
       id: payloads[0],
       tenantName: payloads[1],

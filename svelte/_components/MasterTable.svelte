@@ -12,8 +12,12 @@
     RiSystemFilterLine,
     RiArrowsArrowGoBackLine,
     RiSystemInformationLine,
+    RiArrowsExpandUpDownFill
   } from '../node_modules/svelte-icons-pack/dist/ri';
-  import { IoSearch, IoClose } from '../node_modules/svelte-icons-pack/dist/io';
+  import {
+    IoSearch,
+    IoClose
+  } from '../node_modules/svelte-icons-pack/dist/io';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import {
     CgChevronLeft,
@@ -69,7 +73,7 @@
   // Current page describe which page is currently rendered
   let currentPage = 1;
   // State for sort, wheter is ascending or descending
-  let sortTableAsc = false;
+  let isSortTableAsc = false;
   // Total Pages
   let totalPages = 0;
   // Total rows but rounded by current rows
@@ -290,6 +294,18 @@
     if (!facArrInt.length) return '--';
     return facArrInt.map(fId => facObjs[Number(fId)]).join(', ');
   }
+
+  async function OnSort(/** @type {Field} */ field) {
+    isSortTableAsc = !isSortTableAsc
+    if (isSortTableAsc) {
+      PAGER.order = ['+' + field.name];
+    } else {
+      PAGER.order = ['-' + field.name];
+    }
+    await OnRefresh(PAGER);
+    // Refresh pagination view
+    getPaginationShow();
+  }
 </script>
 
 {#if filterTableReady}
@@ -385,16 +401,29 @@
               <th class="a_row">Actions</th>
             {:else}
               <th
+                on:click={() => {
+                  
+                }}
                 style="
                   {f.name === 'ktpRegion' ? 'min-width: 250px;' : ''}
                   {f.name === 'bookingId' ? 'min-width: 130px;' : ''}
+                  {f.name === 'whatsappNumber' ? 'min-width: 160px;' : ''}
                 "
                 class="
 								{f.inputType === 'textarea' ? 'textarea' : ''}
 								{f.inputType === 'datetime' ? 'datetime' : ''}
 								{f.name === 'staffId' ? 'staff' : ''}
-							">{f.label}</th
-              >
+							">
+                <button class="heading" on:click={() => OnSort(f)}>
+                  <span>{f.label}</span>
+                  <Icon
+                    className="sort-icon"
+                    size="13"
+                    color="var(--gray-007)"
+                    src={RiArrowsExpandUpDownFill}
+                  />
+                </button>
+              </th>
             {/if}
           {/each}
         </tr>
@@ -826,6 +855,37 @@
 		min-width: fit-content;
 		width: auto;
     text-wrap: nowrap;
+  }
+
+  .table-root .table_container table thead tr th .heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+
+  .table-root .table_container table thead tr th .heading:focus {
+    outline: none;
+    background-color: var(--gray-002);
+  }
+
+  .table-root .table_container table thead tr th .heading:hover {
+    background-color: var(--gray-002);
+  }
+
+  .table-root .table_container table thead tr th .heading:disabled {
+    color: var(--gray-008);
+    background-color: transparent;
+  }
+
+  .table-root .table_container table thead tr th .heading:disabled:hover {
+    background-color: transparent;
   }
 
   .table-root .table_container table thead tr th.textarea,

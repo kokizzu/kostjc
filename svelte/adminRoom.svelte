@@ -173,11 +173,10 @@
         notifier.showSuccess(`Room '${room.roomName}' created !!`);
 
         popUpForms.Reset();
-
         OnRefresh(pager);
+        popUpForms.Hide();
       }
     );
-    popUpForms.Hide();
   }
 
   let isShowPopUpExportRoom = false;

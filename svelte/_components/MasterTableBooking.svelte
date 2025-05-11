@@ -14,7 +14,8 @@
     RiArrowsArrowGoBackLine,
     RiSystemInformationLine,
     RiArrowsArrowDropRightLine,
-    RiFinanceBankCardLine
+    RiFinanceBankCardLine,
+    RiArrowsExpandUpDownFill
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { IoSearch, IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
@@ -91,7 +92,7 @@
   // Current page describe which page is currently rendered
   let currentPage = 1;
   // State for sort, wheter is ascending or descending
-  let sortTableAsc = false;
+  let isSortTableAsc = false;
   // Total Pages
   let totalPages = 0;
   // Total rows but rounded by current rows
@@ -217,7 +218,6 @@
 
   // Apply row counts
   async function toRow(/** @type number */ perPage) {
-    PAGER.order = ['+dateStart'];
     currentRows = perPage;
     showRowsNum = false;
     await OnRefresh({ ...PAGER, perPage });
@@ -227,7 +227,6 @@
 
   // Go to page, last page, first page
   async function goToPage(/** @type number */ page) {
-    PAGER.order = ['+dateStart'];
     currentPage = page;
     await OnRefresh({ ...PAGER, page });
     // Refresh pagination view
@@ -236,7 +235,6 @@
 
   // Restore row
   async function restoreRow(/** @type any[] */ row) {
-    PAGER.order = ['+dateStart'];
     await OnRestore(row);
     // Refresh pagination view
     getPaginationShow();
@@ -244,7 +242,6 @@
 
   // Delete row
   async function deleteRow(/** @type any[] */ row) {
-    PAGER.order = ['+dateStart'];
     await OnDelete(row);
     // Refresh pagination view
     getPaginationShow();
@@ -405,10 +402,21 @@
 
         popUpAddPayment.Reset();
         popUpAddPayment.Hide();
-        PAGER.order = ['+dateStart'];
         OnRefresh(PAGER);
       }
     );
+  }
+
+  async function OnSort(/** @type {Field} */ field) {
+    isSortTableAsc = !isSortTableAsc
+    if (isSortTableAsc) {
+      PAGER.order = ['+' + field.name];
+    } else {
+      PAGER.order = ['-' + field.name];
+    }
+    await OnRefresh(PAGER);
+    // Refresh pagination view
+    getPaginationShow();
   }
 </script>
 
@@ -562,8 +570,23 @@
                 class="
 								{f.inputType === 'textarea' ? 'textarea' : ''}
 								{f.inputType === 'datetime' ? 'datetime' : ''}
-							">{f.label}</th
-              >
+							">
+                <button
+                  class="heading"
+                  on:click={() => OnSort(f)}
+                  disabled={f.name === 'totalPaidIDR'}
+                >
+                  <span>{f.label}</span>
+                  {#if f.name !== 'totalPaidIDR'}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsExpandUpDownFill}
+                    />
+                  {/if}
+                </button>
+              </th>
             {/if}
           {/each}
         </tr>
@@ -979,6 +1002,37 @@
 		min-width: fit-content;
 		width: auto;
     text-wrap: nowrap;
+  }
+
+  .table-root .table_container table thead tr th .heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+
+  .table-root .table_container table thead tr th .heading:focus {
+    outline: none;
+    background-color: var(--gray-002);
+  }
+
+  .table-root .table_container table thead tr th .heading:hover {
+    background-color: var(--gray-002);
+  }
+
+  .table-root .table_container table thead tr th .heading:disabled {
+    color: var(--gray-008);
+    background-color: transparent;
+  }
+
+  .table-root .table_container table thead tr th .heading:disabled:hover {
+    background-color: transparent;
   }
 
   .table-root .table_container table thead tr th.textarea {

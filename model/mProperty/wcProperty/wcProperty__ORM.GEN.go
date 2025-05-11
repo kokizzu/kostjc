@@ -1617,6 +1617,27 @@ func (r *RoomsMutator) DoDeletePermanentById() bool { //nolint:dupl false positi
 //	return !L.IsError(err, `Rooms.DoUpsert failed: `+r.SpaceName()+ `\n%#v`, arr)
 // }
 
+// DoOverwriteByRoomName update all columns, error if not exists, not using mutations/Set*
+func (r *RoomsMutator) DoOverwriteByRoomName() bool { //nolint:dupl false positive
+	_, err := r.Adapter.Update(r.SpaceName(), r.UniqueIndexRoomName(), A.X{r.RoomName}, r.ToUpdateArray())
+	return !L.IsError(err, `Rooms.DoOverwriteByRoomName failed: `+r.SpaceName())
+}
+
+// DoUpdateByRoomName update only mutated fields, error if not exists, use Find* and Set* methods instead of direct assignment
+func (r *RoomsMutator) DoUpdateByRoomName() bool { //nolint:dupl false positive
+	if !r.HaveMutation() {
+		return true
+	}
+	_, err := r.Adapter.Update(r.SpaceName(), r.UniqueIndexRoomName(), A.X{r.RoomName}, r.mutations)
+	return !L.IsError(err, `Rooms.DoUpdateByRoomName failed: `+r.SpaceName())
+}
+
+// DoDeletePermanentByRoomName permanent delete
+func (r *RoomsMutator) DoDeletePermanentByRoomName() bool { //nolint:dupl false positive
+	_, err := r.Adapter.Delete(r.SpaceName(), r.UniqueIndexRoomName(), A.X{r.RoomName})
+	return !L.IsError(err, `Rooms.DoDeletePermanentByRoomName failed: `+r.SpaceName())
+}
+
 // DoInsert insert, error if already exists
 func (r *RoomsMutator) DoInsert() bool { //nolint:dupl false positive
 	arr := r.ToArray()

@@ -1832,6 +1832,25 @@ func (r *Rooms) FindById() bool { //nolint:dupl false positive
 	return false
 }
 
+// UniqueIndexRoomName return unique index name
+func (r *Rooms) UniqueIndexRoomName() string { //nolint:dupl false positive
+	return `roomName`
+}
+
+// FindByRoomName Find one by RoomName
+func (r *Rooms) FindByRoomName() bool { //nolint:dupl false positive
+	res, err := r.Adapter.Select(r.SpaceName(), r.UniqueIndexRoomName(), 0, 1, tarantool.IterEq, A.X{r.RoomName})
+	if L.IsError(err, `Rooms.FindByRoomName failed: `+r.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		r.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
 // SqlSelectAllFields generate Sql select fields
 func (r *Rooms) SqlSelectAllFields() string { //nolint:dupl false positive
 	return ` "id"

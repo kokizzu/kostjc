@@ -38,7 +38,6 @@
   let hash = /** @type {string} */ (location.hash || '');
 
   onMount(() => {
-    pager.order = ['+dateStart'];
     if ( hash[ 0 ] === '#' ) hash = hash.substring( 1 );
 
     if (hash.includes(hashSearchByTenant)) {
@@ -100,7 +99,7 @@
         bookings = o.bookings;
         notifier.showSuccess(`Booking '${row[1]}' restored !!`);
 
-        pager.order = ['+dateStart'];
+    
         OnRefresh(pager);
       }
     );
@@ -128,7 +127,7 @@
         bookings = o.bookings;
         notifier.showSuccess(`Booking '${row[1]}' deleted !!`);
 
-        pager.order = ['+dateStart'];
+    
         OnRefresh(pager);
       }
     );
@@ -167,7 +166,7 @@
         bookings = o.bookings;
         notifier.showSuccess(`Booking #${booking.id} updated !!`);
 
-        pager.order = ['+dateStart'];
+    
         OnRefresh(pager);
       }
     );
@@ -198,8 +197,6 @@
         notifier.showSuccess(`Booking created !!`);
 
         popUpForms.Reset();
-
-        pager.order = ['+dateStart'];
         OnRefresh(pager);
       }
     );

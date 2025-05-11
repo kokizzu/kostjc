@@ -45,6 +45,7 @@ const (
 	ErrAdminRoomTenantNotFound   = `tenant not found`
 	ErrAdminRoomBuildingNotFound = `building not found`
 	ErrAdminRoomInvalidSize      = `invalid room size, must be both Number x Number, e.g: 2x2`
+	ErrAdminRoomAlreadyExists    = `room already exists`
 )
 
 var AdminRoomMeta = zCrud.Meta{
@@ -229,6 +230,11 @@ func (d *Domain) AdminRoom(in *AdminRoomIn) (out AdminRoomOut) {
 		}
 
 		if room.Id == 0 {
+			if room.FindByRoomName() {
+				out.SetError(400, ErrAdminRoomAlreadyExists)
+				return
+			}
+
 			room.SetCreatedAt(in.UnixNow())
 			room.SetCreatedBy(sess.UserId)
 		}
