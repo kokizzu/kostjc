@@ -4,6 +4,7 @@
 * | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit'
 * | 'tel' | 'text' | 'time' | 'url' | 'week' | 'combobox-obj' | 'combobox-arr' | 'combobox'
 * | 'select-obj' | 'select-arr' | 'select' | 'textarea' | 'datetime' | 'percentage'
+* | 'currency' | 'multiselect'
 * } InputType
 */
 module.exports = {};

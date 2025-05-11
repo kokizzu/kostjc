@@ -168,8 +168,6 @@
         pager = o.pager;
         bookings = o.bookings;
         notifier.showSuccess(`Booking #${booking.id} updated !!`);
-
-    
         OnRefresh(pager);
       }
     );

@@ -36,6 +36,7 @@ const (
 	InputTypeNumber      InputType = `number`
 	InputTypeHidden      InputType = `hidden`
 	InputTypeDateTime    InputType = `datetime`
+	InputTypeMultiSelect InputType = `multiselect`
 
 	ValidationRequired Validation = `required`
 	ValidationMinLen   Validation = `minLen`

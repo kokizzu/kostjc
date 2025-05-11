@@ -12,7 +12,9 @@
     RiSystemFilterLine,
     RiArrowsArrowGoBackLine,
     RiSystemInformationLine,
-    RiArrowsExpandUpDownFill
+    RiArrowsExpandUpDownFill,
+    RiArrowsArrowDownSFill,
+    RiArrowsArrowUpSFill
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import {
     IoSearch,
@@ -29,6 +31,7 @@
   import { onMount } from 'svelte';
   import { datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
+    import MultiSelect from './MultiSelect.svelte';
 
   export let FIELDS = /** @type Field[] */ ([]); // bind
   export let PAGER = /** @type PagerOut */ ({}); // bind
@@ -74,6 +77,14 @@
   let currentPage = 1;
   // State for sort, wheter is ascending or descending
   let isSortTableAsc = false;
+  // State for sort field name
+  let fieldNameToSort = (
+    (PAGER.order || []).length ? PAGER.order[0]
+      .substring(1)
+      .replace('+', '')
+      .replace('-', '')
+      : ''
+  )
   // Total Pages
   let totalPages = 0;
   // Total rows but rounded by current rows
@@ -296,7 +307,8 @@
   }
 
   async function OnSort(/** @type {Field} */ field) {
-    isSortTableAsc = !isSortTableAsc
+    isSortTableAsc = !isSortTableAsc;
+    fieldNameToSort = field.name;
     if (isSortTableAsc) {
       PAGER.order = ['+' + field.name];
     } else {
@@ -343,6 +355,14 @@
                   bind:value={payloads[idx]}
                   type={field.inputType}
                   values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
+                />
+              {:else if field.inputType === 'multiselect'}
+                <MultiSelect
+                  id={field.name}
+                  label={field.label}
+                  placeholder={field.description}
+                  bind:valuesTarget={payloads[idx]}
+                  valuesSource={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
                 />
               {:else}
                 <InputBox
@@ -416,12 +436,30 @@
 							">
                 <button class="heading" on:click={() => OnSort(f)}>
                   <span>{f.label}</span>
-                  <Icon
-                    className="sort-icon"
-                    size="13"
-                    color="var(--gray-007)"
-                    src={RiArrowsExpandUpDownFill}
-                  />
+                  {#if isSortTableAsc && f.name === fieldNameToSort}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsArrowDownSFill}
+                    />
+                  {/if}
+                  {#if !isSortTableAsc && f.name === fieldNameToSort}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsArrowUpSFill}
+                    />
+                  {/if}
+                  {#if f.name !== fieldNameToSort}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsExpandUpDownFill}
+                    />
+                  {/if}
                 </button>
               </th>
             {/if}

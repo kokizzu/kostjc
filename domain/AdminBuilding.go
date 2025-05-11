@@ -70,8 +70,8 @@ var AdminBuildingMeta = zCrud.Meta{
 			Name:      mProperty.Facilities,
 			Label:     `Facilities`,
 			DataType:  zCrud.DataTypeIntArr,
-			InputType: zCrud.InputTypeCombobox,
-			ReadOnly:  true,
+			InputType: zCrud.InputTypeMultiSelect,
+			ReadOnly:  false,
 		},
 		{
 			Name:      mProperty.CreatedAt,
@@ -159,7 +159,7 @@ func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 				return
 			}
 
-			if fac.FacilityType == mProperty.FacilityTypeRoom {
+			if fac.FacilityType != mProperty.FacilityTypeBuilding {
 				out.SetError(400, ErrAdminBuildingInvalidFacilities)
 				return
 			}

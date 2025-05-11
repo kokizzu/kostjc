@@ -15,7 +15,9 @@
     RiSystemInformationLine,
     RiArrowsArrowDropRightLine,
     RiFinanceBankCardLine,
-    RiArrowsExpandUpDownFill
+    RiArrowsExpandUpDownFill,
+    RiArrowsArrowDownSFill,
+    RiArrowsArrowUpSFill
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { IoSearch, IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
@@ -46,14 +48,22 @@
   }
 
   function formatFacilities(facilities) {
+    let formattedFacilities = '';
+    let arrFacilities = [];
+
     try {
-      facilities = JSON.parse(facilities);
+      arrFacilities = JSON.parse(facilities);
     } catch (e) {
       return facilities;
     }
-    return facilities.map(facility => 
-        `${facility.facilityName} (IDR ${facility.extraChargeIDR.toLocaleString('en-ID')})`
-      ).join(', ');
+    
+    try {
+      formattedFacilities = arrFacilities.map(facility => 
+          `${facility.facilityName} (IDR ${facility.extraChargeIDR.toLocaleString('en-ID')})`
+        ).join(', ');
+    } catch (e) {
+      return formattedFacilities;
+    }
   }
 
 
@@ -93,6 +103,14 @@
   let currentPage = 1;
   // State for sort, wheter is ascending or descending
   let isSortTableAsc = false;
+  // State for sort field name
+  let fieldNameToSort = (
+    (PAGER.order || []).length ? PAGER.order[0]
+      .substring(1)
+      .replace('+', '')
+      .replace('-', '')
+      : ''
+  )
   // Total Pages
   let totalPages = 0;
   // Total rows but rounded by current rows
@@ -408,7 +426,8 @@
   }
 
   async function OnSort(/** @type {Field} */ field) {
-    isSortTableAsc = !isSortTableAsc
+    isSortTableAsc = !isSortTableAsc;
+    fieldNameToSort = field.name;
     if (isSortTableAsc) {
       PAGER.order = ['+' + field.name];
     } else {
@@ -578,12 +597,30 @@
                 >
                   <span>{f.label}</span>
                   {#if f.name !== 'totalPaidIDR'}
-                    <Icon
-                      className="sort-icon"
-                      size="13"
-                      color="var(--gray-007)"
-                      src={RiArrowsExpandUpDownFill}
-                    />
+                    {#if isSortTableAsc && f.name === fieldNameToSort}
+                      <Icon
+                        className="sort-icon"
+                        size="13"
+                        color="var(--gray-007)"
+                        src={RiArrowsArrowDownSFill}
+                      />
+                    {/if}
+                    {#if !isSortTableAsc && f.name === fieldNameToSort}
+                      <Icon
+                        className="sort-icon"
+                        size="13"
+                        color="var(--gray-007)"
+                        src={RiArrowsArrowUpSFill}
+                      />
+                    {/if}
+                    {#if f.name !== fieldNameToSort}
+                      <Icon
+                        className="sort-icon"
+                        size="13"
+                        color="var(--gray-007)"
+                        src={RiArrowsExpandUpDownFill}
+                      />
+                    {/if}
                   {/if}
                 </button>
               </th>

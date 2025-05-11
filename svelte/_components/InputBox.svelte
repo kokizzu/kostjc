@@ -75,7 +75,7 @@
 </script>
 
 <div class={className}>
-  <div class="input_box {type == 'bool' ? 'bool' : ''} {type == 'password' ? 'with_password' : ''}">
+  <div class="input-box {type == 'bool' ? 'bool' : ''} {type == 'password' ? 'with-password' : ''}">
     {#if type === 'bool' || type === 'checkbox'}
       <label class="label" for={id}>{label}</label>
       <label class="switcher" for={id}>
@@ -116,7 +116,7 @@
       <input type="date" bind:value={value} {id} {placeholder} />
     {:else if type === 'percentage'}
       <label class="label" for={id}>{label}</label>
-      <div class="input_percentage">
+      <div class="input-percentage">
         <input type="number" bind:value={value} {id} {placeholder} />
         <span>%</span>
       </div>
@@ -169,7 +169,7 @@
     display: none;
   }
 
-  .input_box {
+  .input-box {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -180,15 +180,15 @@
     gap: 5px;
   }
 
-  .input_box.with_password input{
+  .input-box.with-password input{
     padding-right: 40px !important;
   }
 
-  .input_box.bool {
+  .input-box.bool {
     width: fit-content;
   }
 
-  .input_box .label {
+  .input-box .label {
     font-size: var(--font-base);
     margin-left: 10px;
     overflow: hidden;
@@ -198,8 +198,8 @@
     line-clamp: 1;
   }
 
-  .input_box input,
-  .input_box textarea {
+  .input-box input,
+  .input-box textarea {
     width: 100%;
     border: 1px solid var(--gray-003);
     border-radius: 5px;
@@ -207,8 +207,8 @@
     padding: 10px 12px;
   }
 
-  .input_box input:focus,
-  .input_box textarea:focus {
+  .input-box input:focus,
+  .input-box textarea:focus {
     border-color: var(--blue-005);
     outline: 1px solid var(--blue-005);
   }
@@ -239,7 +239,7 @@
     border: none;
   }
 
-  .input_box textarea {
+  .input-box textarea {
     resize: vertical;
     height: 90px;
     min-height: 50px;
@@ -307,7 +307,7 @@
     border-radius: 50%;
   }
 
-  .input_box .eye {
+  .input-box .eye {
     position: absolute;
     height: fit-content;
     width: fit-content;
@@ -320,39 +320,39 @@
     cursor: pointer;
   }
 
-  .input_box .eye:focus {
+  .input-box .eye:focus {
     outline: none;
   }
 
-  :global(.input_box .eye:hover svg) {
+  :global(.input-box .eye:hover svg) {
     fill: var(--blue-005);
   }
 
-  .input_percentage {
+  .input-percentage {
     display: flex;
     position: relative;
   }
 
-  .input_percentage input {
+  .input-percentage input {
     padding-right: 30px !important;
   }
 
-  .input_percentage span {
+  .input-percentage span {
     position: absolute;
     right: 10px;
     bottom: 10px;
     font-weight: 700;
   }
 
-  .input_box .options_container .input_container input {
+  .input-box .options-container .input-container input {
     padding-right: 30px !important;
   }
 
-  :global(.input_box .options_container .input_container .arrow .dropdown) {
+  :global(.input-box .options-container .input-container .arrow .dropdown) {
 		transition: all .2s ease-in-out;
 	}
 
-	:global(.input_box .options_container .input_container .arrow .rotate) {
+	:global(.input-box .options-container .input-container .arrow .rotate) {
 		transition: all .2s ease-in-out;
 		transform: rotate(90deg);
 	}

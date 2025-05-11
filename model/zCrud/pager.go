@@ -454,7 +454,7 @@ func splitOperatorValue(str string) (op string, rhs string) {
 const maxPerPage = 1000
 
 func limit(perPage int) int {
-	const defaultPerPage = 10
+	const defaultPerPage = 200
 	if perPage <= 0 {
 		return defaultPerPage
 	}

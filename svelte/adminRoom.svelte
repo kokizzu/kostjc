@@ -145,7 +145,7 @@
 
         pager = o.pager;
         rooms = o.rooms;
-        notifier.showSuccess(`Room '${room.buildingName}' updated !!`);
+        notifier.showSuccess(`Room '${room.roomName}' updated !!`);
 
         OnRefresh(pager);
       }

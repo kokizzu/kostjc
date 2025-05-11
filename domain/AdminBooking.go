@@ -276,13 +276,18 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 		}
 
 		if in.Booking.RoomId != 0 {
-			room := rqProperty.NewRooms(d.PropOltp)
+			room := wcProperty.NewRoomsMutator(d.PropOltp)
 			room.Id = in.Booking.RoomId
 			if !room.FindById() {
 				out.SetError(400, ErrAdminBookingRoomNotFound)
 				return
 			}
-
+			room.SetCurrentTenantId(in.Booking.TenantId)
+			room.SetLastUseAt(in.Booking.DateEnd)
+			if !room.DoUpdateById() {
+				out.SetError(500, ErrAdminBookingSaveFailed)
+				return
+			}
 			bk.SetRoomId(in.Booking.RoomId)
 		}
 

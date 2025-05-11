@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from 'svelte';
   /** @typedef {import('../_types/property').Building} Building */
   /** @typedef {import('../_types/property').Facility} Facility */
 
@@ -7,6 +8,7 @@
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import { RiArrowsArrowDropRightLine } from '../node_modules/svelte-icons-pack/dist/ri';
   import InputBox from './InputBox.svelte';
+    import MultiSelect from './MultiSelect.svelte';
 
   let isShow = /** @type {boolean} */ (false);
 
@@ -45,33 +47,15 @@
     isShow = false;
   }
 
-  let facilitiesToShow = /** @type {Facility[]} */ ([]);
-  let showFacilities = false;
-  let selectedFacility = 'Facility....';
-
-  function handleStationListClose() {
-		showFacilities = false;
-		document.body.removeEventListener('click', handleStationListClose)
-	}
-	function toggleStationList() {
-		showFacilities = !showFacilities;
-		if (showFacilities) document.body.addEventListener('click', handleStationListClose);
-		else document.body.removeEventListener('click', handleStationListClose);
-	}
-
-	function choseFacility(/** @type {Facility} */ facility) {
-    selectedFacility = facility.facilityName
-    showFacilities = false;
-    facilitiesNums = [...facilitiesNums, Number(facility.id)];
-		facilitiesToShow = [...facilitiesToShow, facility];
-    facilities = facilities.filter(f => f.id !== facility.id);
-	}
-
-	const removeFacility = (/** @type {number} */ idx) => {
-    facilitiesNums = facilitiesNums.filter(( _, i ) => i !== idx);
-		facilitiesToShow = facilitiesToShow.filter(( _, i ) => i !== idx);
-    facilities = [...facilities, facilitiesToShow[idx]];
-	}
+  let facilitiesObj = {};
+  let isFacilitiesReady = false;
+  onMount(() => {
+    (facilities || []).forEach(f => {
+      facilitiesObj[f.id] = `${f.facilityName} (${f.facilityType})`
+    });
+    console.log('facilitiesObj', facilitiesObj);
+    isFacilitiesReady = true;
+  })
 </script>
 
 <div class={`popup_container ${isShow ? 'show' : ''}`}>
@@ -98,46 +82,16 @@
         type="combobox"
         values={locations}
       />
-      <div class="facilities-form">
-        <label class="label" for="facilities">Facilities</label>
-        <div class="facilities-selected">
-          {#each facilitiesToShow as fac, idx}
-            <div class="facility-show">
-              <span>{fac.facilityName}</span>
-              <button on:click={() => removeFacility(idx)}>
-                <Icon size="18" color="var(--blue-001)" src={IoClose}/>
-              </button>
-            </div>
-          {/each}
-        </div>
-        <div class="dropdown-facilities">
-          <div class="dropdown-item">
-            <button id="facilities" class="dropdown-btn" on:click|stopPropagation={toggleStationList}>
-              <span>{selectedFacility}</span>
-              <Icon
-                className={showFacilities ? 'rotate' : 'dropdown'}
-                size="20"
-                src={RiArrowsArrowDropRightLine}
-              />
-            </button>
-            {#if showFacilities}
-              <div class="dropdown-list">
-                {#if facilities && facilities.length}
-                  {#each facilities as fac}
-                    <button
-                      class="facility"
-                      on:click|stopPropagation={() => choseFacility(fac)}>
-                      <span>{fac.facilityName}</span>
-                    </button>
-                  {/each}
-                {:else}
-                  <p>No Facilities yet, please add it in master facility</p>
-                {/if}
-              </div>
-            {/if}
-          </div>
-        </div>
-      </div>
+      {#if isFacilitiesReady}
+        <MultiSelect
+          id="facilities"
+          label="Facilities"
+          placeholder="Facilities"
+          valuesSourceType="object"
+          bind:valuesTarget={facilitiesNums}
+          valuesSourceObj={facilitiesObj}
+        />
+      {/if}
     </div>
     <div class="foot">
       <div class="left">
@@ -291,163 +245,4 @@
 	.popup_container .popup .foot button.cancel:hover {
 		background-color: var(--gray-001);
 	}
-
-  .facilities-form {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .facilities-form label {
-    font-size: var(--font-base);
-    margin-left: 10px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-  }
-
-  .facilities-form .facilities-selected {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-
-  .facilities-form .facilities-selected .facility-show {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    background-color: var(--blue-006);
-    color: #FFF;
-    padding: 5px 5px 5px 15px;
-    border-radius: 5px;
-  }
-
-  .facilities-form .facilities-selected .facility-show button {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    padding: 5px;
-    border-radius: 9999px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
-
-  .facilities-form .facilities-selected .facility-show button:hover {
-    background-color: var(--blue-005);
-  }
-
-  .dropdown-facilities {
-		position: relative;
-		flex-grow: 1;
-		display: flex;
-  }
-
-  .dropdown-facilities {
-		position: relative;
-		flex-grow: 1;
-		display: flex;
-	}
-
-	.dropdown-facilities .dropdown-item {
-		width: 100%;
-	}
-
-	.dropdown-facilities .dropdown-item .dropdown-btn {
-		width: 100% !important;
-	}
-
-	.dropdown-item {
-		flex-grow: 1;
-		position: relative;
-	}
-
-	.dropdown-item .dropdown-btn {
-		width: 100%;
-		height: fit-content;
-		background-color: #FFF;
-		padding: 10px 15px;
-		border-radius: 5px;
-		display: flex;
-		flex-direction: row;
-		border: 1px solid var(--gray-003);
-		align-items: center;
-		cursor: pointer;
-		color: var(--gray-007);
-		font-weight: 600;
-	}
-
-	.dropdown-item .dropdown-btn:hover {
-		background-color: var(--gray-001);
-	}
-
-	.dropdown-item .dropdown-btn span {
-		flex-grow: 1;
-		text-align: left;
-	}
-
-	.dropdown-item .dropdown-list {
-		background-color: #FFF;
-		min-height: fit-content;
-		max-height: 300px;
-		overflow-y: auto;
-		width: 100%;
-    margin-top: 10px;
-		border: 1px solid var(--gray-003);
-		border-radius: 5px;
-		display: flex;
-		flex-direction: column;
-		position: absolute;
-		top: 40px;
-		z-index: 99999;
-	}
-
-	.dropdown-item .dropdown-list::-webkit-scrollbar-thumb {
-    background-color : var(--gray-003);
-    border-radius    : 8px;
-  }
-
-  .dropdown-item .dropdown-list::-webkit-scrollbar-thumb:hover {
-    background-color : var(--gray-004);
-  }
-
-  .dropdown-item .dropdown-list::-webkit-scrollbar {
-    width : 8px;
-  }
-
-  .dropdown-item .dropdown-list::-webkit-scrollbar-track {
-    background-color : transparent;
-  }
-
-  .dropdown-item .dropdown-list::-webkit-scrollbar-button {
-    display: none;
-  }
-
-	.dropdown-item .dropdown-list .facility {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 10px;
-		padding: 10px 15px;
-		background-color: #FFF;
-		border: none;
-		color: var(--gray-007);
-		width: 100%;
-		cursor: pointer;
-	}
-
-	.dropdown-item .dropdown-list .facility:hover {
-		color: var(--blue-009);
-    background-color: #0ea5e920;
-	}
-
-  @media only screen and (max-width : 768px) {
-    .popup_container {
-      padding: 10px;
-    }
-  }
 </style>
