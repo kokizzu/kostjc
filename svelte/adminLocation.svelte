@@ -14,6 +14,7 @@
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+    import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -33,7 +34,10 @@
   });
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
-    const i = { pager: pagerIn, cmd: 'list' };
+    const i = {
+      pager: pagerIn,
+      cmd: CmdList
+    };
     await AdminLocation( // @ts-ignore
       i, /** @type {import('./jsApi.GEN').AdminLocationCallback} */
       /** @returns {Promise<void>} */
@@ -56,7 +60,7 @@
       location: {
         id: row[0]
       },
-      cmd: 'restore'
+      cmd: CmdRestore
     });
     await AdminLocation(i,
       /** @type {import('./jsApi.GEN').AdminLocationCallback} */
@@ -83,7 +87,7 @@
       location: {
         id: row[0]
       },
-      cmd: 'delete'
+      cmd: CmdDelete
     });
     await AdminLocation(i,
       /** @type {import('./jsApi.GEN').AdminLocationCallback} */
@@ -115,7 +119,7 @@
     const i = /** @type {any}*/ ({
       pager,
       location,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
     await AdminLocation(i,
       /** @type {import('./jsApi.GEN').AdminLocationCallback} */
@@ -147,7 +151,7 @@
     const i = /** @type {any} */ ({
       pager,
       location,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
 
     await AdminLocation(i,

@@ -16,6 +16,7 @@
   import PopUpAddBuilding from './_components/PopUpAddBuilding.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+    import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -38,7 +39,10 @@
   });
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
-    const i = { pager: pagerIn, cmd: 'list' };
+    const i = {
+      pager: pagerIn,
+      cmd: CmdList
+    };
     await AdminBuilding( // @ts-ignore
       i, /** @type {import('./jsApi.GEN').AdminBuildingCallback} */
       /** @returns {Promise<void>} */
@@ -61,7 +65,7 @@
       building: {
         id: row[0]
       },
-      cmd: 'restore'
+      cmd: CmdRestore
     });
     await AdminBuilding(i,
       /** @type {import('./jsApi.GEN').AdminBuildingCallback} */
@@ -88,7 +92,7 @@
       building: {
         id: row[0]
       },
-      cmd: 'delete'
+      cmd: CmdDelete
     });
     await AdminBuilding(i,
       /** @type {import('./jsApi.GEN').AdminBuildingCallback} */
@@ -110,7 +114,6 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Building ID to Edit: ' + String(id));
     const building = {
       id: payloads[0],
       buildingName: String(payloads[1]),
@@ -120,7 +123,7 @@
     const i = /** @type {any}*/ ({
       pager,
       building,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
     await AdminBuilding(i,
       /** @type {import('./jsApi.GEN').AdminBuildingCallback} */
@@ -146,7 +149,7 @@
     const i = /** @type {any} */ ({
       pager,
       building,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
 
     await AdminBuilding(i,

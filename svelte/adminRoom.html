@@ -5976,6 +5976,24 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
   });
 
+  // _components/xConstant.js
+  var require_xConstant = __commonJS({
+    "_components/xConstant.js"(exports, module) {
+      var CmdList2 = `list`;
+      var CmdForm = `form`;
+      var CmdUpsert2 = `upsert`;
+      var CmdRestore2 = `restore`;
+      var CmdDelete2 = `delete`;
+      module.exports = {
+        CmdList: CmdList2,
+        CmdForm,
+        CmdUpsert: CmdUpsert2,
+        CmdRestore: CmdRestore2,
+        CmdDelete: CmdDelete2
+      };
+    }
+  });
+
   // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
@@ -17399,6 +17417,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   var atom_one_dark_default = atomOneDark;
 
   // adminRoom.svelte
+  var import_xConstant = __toESM(require_xConstant());
   var { document: document_1 } = globals;
   function create_if_block8(ctx) {
     let popupaddroom;
@@ -18034,7 +18053,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       $invalidate(3, isPopUpFormReady = true);
     });
     async function OnRefresh(pagerIn) {
-      const i = { pager: pagerIn, cmd: "list" };
+      const i = { pager: pagerIn, cmd: import_xConstant.CmdList };
       await (0, import_jsApi2.AdminRoom)(
         // @ts-ignore
         i,
@@ -18058,7 +18077,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         {
           pager,
           room: { id: row[0] },
-          cmd: "restore"
+          cmd: import_xConstant.CmdRestore
         }
       );
       await (0, import_jsApi2.AdminRoom)(
@@ -18084,7 +18103,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         {
           pager,
           room: { id: row[0] },
-          cmd: "delete"
+          cmd: import_xConstant.CmdDelete
         }
       );
       await (0, import_jsApi2.AdminRoom)(
@@ -18105,12 +18124,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       );
     }
     async function OnEdit(id, payloads) {
-      console.log(
-        /** @type any[]*/
-        "Room ID to Edit: " + String(id)
-      );
       const room = {
         id: payloads[0],
+        /** @type any[]*/
         roomName: String(payloads[1]),
         roomSize: String(payloads[2]),
         basePriceIDR: Number(payloads[3]),
@@ -18122,7 +18138,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       };
       const i = (
         /** @type {any}*/
-        { pager, room, cmd: "upsert" }
+        { pager, room, cmd: import_xConstant.CmdUpsert }
       );
       await (0, import_jsApi2.AdminRoom)(
         i,
@@ -18145,7 +18161,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       $invalidate(5, isSubmitAddRoom = true);
       const i = (
         /** @type {any} */
-        { pager, room, cmd: "upsert" }
+        { pager, room, cmd: import_xConstant.CmdUpsert }
       );
       await (0, import_jsApi2.AdminRoom)(
         i,

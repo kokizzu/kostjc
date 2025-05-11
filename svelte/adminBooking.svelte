@@ -15,6 +15,7 @@
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
   import PopUpAddBooking from './_components/PopUpAddBooking.svelte';
+    import { CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -60,7 +61,10 @@
   });
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
-    const i = { pager: pagerIn, cmd: 'list' };
+    const i = {
+      pager: pagerIn,
+      cmd: CmdList
+    };
     await AdminBooking( // @ts-ignore
       i, /** @type {import('./jsApi.GEN').AdminBookingCallback} */
       /** @returns {Promise<void>} */
@@ -83,7 +87,7 @@
       booking: {
         id: row[0]
       },
-      cmd: 'restore'
+      cmd: CmdRestore
     });
     await AdminBooking(i,
       /** @type {import('./jsApi.GEN').AdminBookingCallback} */
@@ -134,7 +138,6 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Booking ID to Edit: ' + String(id));
     const booking = {
       id: payloads[0],
       roomId: payloads[1],
@@ -150,7 +153,7 @@
     const i = /** @type {any}*/ ({
       pager,
       booking,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
     await AdminBooking(i,
       /** @type {import('./jsApi.GEN').AdminBookingCallback} */
@@ -178,7 +181,7 @@
       pager,
       facilities,
       booking,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
 
     await AdminBooking(i,

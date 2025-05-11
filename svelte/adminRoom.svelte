@@ -20,6 +20,7 @@
   import LineNumbers from  'svelte-highlight/LineNumbers.svelte'; 
   import json from 'svelte-highlight/languages/json';
   import atomOneDark from 'svelte-highlight/styles/atom-one-dark';
+    import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -41,7 +42,10 @@
   });
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
-    const i = { pager: pagerIn, cmd: 'list' };
+    const i = {
+      pager: pagerIn,
+      cmd: CmdList
+    };
     await AdminRoom( // @ts-ignore
       i, /** @type {import('./jsApi.GEN').AdminRoomCallback} */
       /** @returns {Promise<void>} */
@@ -64,7 +68,7 @@
       room: {
         id: row[0]
       },
-      cmd: 'restore'
+      cmd: CmdRestore
     });
     await AdminRoom(i,
       /** @type {import('./jsApi.GEN').AdminRoomCallback} */
@@ -91,7 +95,7 @@
       room: {
         id: row[0]
       },
-      cmd: 'delete'
+      cmd: CmdDelete
     });
     await AdminRoom(i,
       /** @type {import('./jsApi.GEN').AdminRoomCallback} */
@@ -113,7 +117,6 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Room ID to Edit: ' + String(id));
     const room = {
       id: payloads[0],
       roomName: String(payloads[1]),
@@ -128,7 +131,7 @@
     const i = /** @type {any}*/ ({
       pager,
       room,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
     await AdminRoom(i,
       /** @type {import('./jsApi.GEN').AdminRoomCallback} */
@@ -154,7 +157,7 @@
     const i = /** @type {any} */ ({
       pager,
       room,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
 
     await AdminRoom(i,

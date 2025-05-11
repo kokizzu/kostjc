@@ -14,6 +14,7 @@
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+    import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -31,7 +32,10 @@
   onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
-    const i = { pager: pagerIn, cmd: 'list' };
+    const i = {
+      pager: pagerIn,
+      cmd: CmdList
+    };
     await AdminStock( // @ts-ignore
       i, /** @type {import('./jsApi.GEN').AdminStockCallback} */
       /** @returns {Promise<void>} */
@@ -54,7 +58,7 @@
       stock: {
         id: row[0]
       },
-      cmd: 'restore'
+      cmd: CmdRestore
     });
     await AdminStock(i,
       /** @type {import('./jsApi.GEN').AdminStockCallback} */
@@ -81,7 +85,7 @@
       stock: {
         id: row[0]
       },
-      cmd: 'delete'
+      cmd: CmdDelete
     });
     await AdminStock(i,
       /** @type {import('./jsApi.GEN').AdminStockCallback} */
@@ -113,7 +117,7 @@
     const i = /** @type {any}*/ ({
       pager,
       stock,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
     await AdminStock(i,
       /** @type {import('./jsApi.GEN').AdminStockCallback} */
@@ -146,7 +150,7 @@
     const i = /** @type {any} */ ({
       pager,
       stock,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
 
     await AdminStock(i,

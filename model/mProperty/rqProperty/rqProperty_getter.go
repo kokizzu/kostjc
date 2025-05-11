@@ -1,9 +1,11 @@
 package rqProperty
 
 import (
+	"fmt"
 	"kostjc/model/zCrud"
 	"strconv"
 
+	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/L"
 	"github.com/kokizzu/gotro/X"
@@ -273,7 +275,7 @@ ORDER BY ` + f.SqlFacilityName() + ` ASC`
 func (p *Payments) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud.PagerOut) (res [][]any) {
 	const comment = `-- Payments) FindByPagination`
 
-	validFields := LocationsFieldTypeMap
+	validFields := PaymentsFieldTypeMap
 	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
 
 	queryCount := comment + `
@@ -290,6 +292,8 @@ LIMIT 1`
 	queryRows := comment + `
 SELECT ` + meta.ToSelect() + `
 FROM ` + p.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
+
+	fmt.Println(color.GreenString(queryRows))
 
 	p.Adapter.QuerySql(queryRows, func(row []any) {
 		row[0] = X.ToS(row[0]) // ensure id is string

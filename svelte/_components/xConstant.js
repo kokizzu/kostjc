@@ -1,16 +1,13 @@
-const PaymentMethods = [
-  'Cash',
-  'QRIS',
-  'Transfer',
-];
-
-const PaymentStatuses = [
-  'Paid',
-  'Unpaid',
-  'Refunded'
-];
-
+// API Commands
+const CmdList    = `list`
+const CmdForm    = `form`    
+const CmdUpsert  = `upsert`
+const CmdRestore = `restore`
+const CmdDelete  = `delete` 
 module.exports = {
-  PaymentMethods,
-  PaymentStatuses
+  CmdList,
+  CmdForm,
+  CmdUpsert,
+  CmdRestore,
+  CmdDelete
 }

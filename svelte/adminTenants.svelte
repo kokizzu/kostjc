@@ -14,6 +14,7 @@
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -31,7 +32,10 @@
   onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
-    const i = { pager: pagerIn, cmd: 'list' };
+    const i = {
+      pager: pagerIn,
+      cmd: CmdList
+    };
     await AdminTenants( // @ts-ignore
       i, /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
       /** @returns {Promise<void>} */
@@ -54,7 +58,7 @@
       tenant: {
         id: row[0]
       },
-      cmd: 'restore'
+      cmd: CmdRestore
     });
     await AdminTenants(i,
       /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
@@ -81,7 +85,7 @@
       tenant: {
         id: row[0]
       },
-      cmd: 'delete'
+      cmd: CmdDelete
     });
     await AdminTenants(i,
       /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
@@ -126,7 +130,7 @@
     const i = /** @type {any}*/ ({
       pager,
       tenant,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
     await AdminTenants(i,
       /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
@@ -173,7 +177,7 @@
     const i = /** @type {any} */ ({
       pager,
       tenant,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
 
     await AdminTenants(i,
@@ -198,6 +202,25 @@
       }
     );
   }
+
+  const KtpGenders = [
+    'Laki - Laki',
+    'Perempuan'
+  ];
+  const KtpMaritalStatus = [
+    'Belum Kawin',
+    'Kawin',
+    'Cerai Hidup',
+    'Cerai Mati'
+  ];
+  const KtpReligions = [
+    'Islam',
+    'Hindu',
+    'Kristen',
+    'Katholik',
+    'Buddha',
+    'Konghucu'
+  ];
 </script>
 
 {#if isPopUpFormReady}
@@ -206,9 +229,9 @@
     heading="Add Tenant"
     FIELDS={fields}
     REFS={{
-      'ktpGender': ['Laki - Laki', 'Perempuan'],
-      'ktpMaritalStatus': ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati'],
-      'ktpReligion': ['Islam', 'Hindu', 'Kristen', 'Katholik', 'Buddha', 'Konghucu']
+      'ktpGender': KtpGenders,
+      'ktpMaritalStatus': KtpMaritalStatus,
+      'ktpReligion': KtpReligions
     }}
     bind:isSubmitted={isSubmitTenant}
     OnSubmit={OnAddTenant}
@@ -224,9 +247,9 @@
       bind:PAGER={pager}
       bind:MASTER_ROWS={tenants}
       REFS={{
-        'ktpGender': ['Laki - Laki', 'Perempuan'],
-        'ktpMaritalStatus': ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati'],
-        'ktpReligion': ['Islam', 'Hindu', 'Kristen', 'Katholik', 'Buddha', 'Konghucu']
+        'ktpGender': KtpGenders,
+        'ktpMaritalStatus': KtpMaritalStatus,
+        'ktpReligion': KtpReligions
       }}
 
       CAN_EDIT_ROW

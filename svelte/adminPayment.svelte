@@ -14,7 +14,7 @@
   import PopUpAddPayment from './_components/PopUpAddPayment.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
-    import { PaymentMethods, PaymentStatuses } from './_components/xConstant';
+  import { CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -23,6 +23,17 @@
   let bookings = /** @type {Record<Number, string>} */ ({/* bookings */});
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
+
+  const PaymentMethods = [
+    'Cash',
+    'QRIS',
+    'Transfer',
+  ];
+  const PaymentStatuses = [
+    'Paid',
+    'Unpaid',
+    'Refunded'
+  ];
 
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
@@ -33,7 +44,10 @@
   onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
-    const i = { pager: pagerIn, cmd: 'list' };
+    const i = {
+      pager: pagerIn,
+      cmd: CmdList
+    };
     await AdminPayment( // @ts-ignore
       i, /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
       /** @returns {Promise<void>} */
@@ -56,7 +70,7 @@
       payment: {
         id: row[0]
       },
-      cmd: 'restore'
+      cmd: CmdRestore
     });
     await AdminPayment(i,
       /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
@@ -117,7 +131,7 @@
     const i = /** @type {any}*/ ({
       pager,
       payment,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
     await AdminPayment(i,
       /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
@@ -143,7 +157,7 @@
     const i = /** @type {any} */ ({
       pager,
       payment,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
 
     await AdminPayment(i,
@@ -162,11 +176,10 @@
         notifier.showSuccess(`Payment created !!`);
 
         popUpForms.Reset();
-
+        popUpForms.Hide();
         OnRefresh(pager);
       }
     );
-    popUpForms.Hide();
   }
 </script>
 

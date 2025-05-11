@@ -4163,6 +4163,24 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
   });
 
+  // _components/xConstant.js
+  var require_xConstant = __commonJS({
+    "_components/xConstant.js"(exports, module) {
+      var CmdList2 = `list`;
+      var CmdForm = `form`;
+      var CmdUpsert2 = `upsert`;
+      var CmdRestore2 = `restore`;
+      var CmdDelete2 = `delete`;
+      module.exports = {
+        CmdList: CmdList2,
+        CmdForm,
+        CmdUpsert: CmdUpsert2,
+        CmdRestore: CmdRestore2,
+        CmdDelete: CmdDelete2
+      };
+    }
+  });
+
   // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
@@ -14863,12 +14881,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var PopUpForms_default = PopUpForms;
 
   // adminTenants.svelte
+  var import_xConstant = __toESM(require_xConstant());
   function create_if_block6(ctx) {
     let popupforms;
     let updating_isSubmitted;
     let current;
     function popupforms_isSubmitted_binding(value) {
-      ctx[12](value);
+      ctx[15](value);
     }
     let popupforms_props = {
       heading: "Add Tenant",
@@ -14877,9 +14896,18 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx[1]
       ),
       REFS: {
-        "ktpGender": ["Laki - Laki", "Perempuan"],
-        "ktpMaritalStatus": ["Belum Kawin", "Kawin", "Cerai Hidup", "Cerai Mati"],
-        "ktpReligion": ["Islam", "Hindu", "Kristen", "Katholik", "Buddha", "Konghucu"]
+        "ktpGender": (
+          /*KtpGenders*/
+          ctx[11]
+        ),
+        "ktpMaritalStatus": (
+          /*KtpMaritalStatus*/
+          ctx[12]
+        ),
+        "ktpReligion": (
+          /*KtpReligions*/
+          ctx[13]
+        )
       },
       OnSubmit: (
         /*OnAddTenant*/
@@ -14894,7 +14922,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[5];
     }
     popupforms = new PopUpForms_default({ props: popupforms_props });
-    ctx[11](popupforms);
+    ctx[14](popupforms);
     binding_callbacks.push(() => bind(popupforms, "isSubmitted", popupforms_isSubmitted_binding));
     return {
       c() {
@@ -14930,7 +14958,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         current = false;
       },
       d(detaching) {
-        ctx[11](null);
+        ctx[14](null);
         destroy_component(popupforms, detaching);
       }
     };
@@ -14964,7 +14992,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             button,
             "click",
             /*click_handler*/
-            ctx[13]
+            ctx[16]
           );
           mounted = true;
         }
@@ -15000,20 +15028,29 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let updating_MASTER_ROWS;
     let current;
     function mastertable_FIELDS_binding(value) {
-      ctx[14](value);
+      ctx[17](value);
     }
     function mastertable_PAGER_binding(value) {
-      ctx[15](value);
+      ctx[18](value);
     }
     function mastertable_MASTER_ROWS_binding(value) {
-      ctx[16](value);
+      ctx[19](value);
     }
     let mastertable_props = {
       ACCESS: segments,
       REFS: {
-        "ktpGender": ["Laki - Laki", "Perempuan"],
-        "ktpMaritalStatus": ["Belum Kawin", "Kawin", "Cerai Hidup", "Cerai Mati"],
-        "ktpReligion": ["Islam", "Hindu", "Kristen", "Katholik", "Buddha", "Konghucu"]
+        "ktpGender": (
+          /*KtpGenders*/
+          ctx[11]
+        ),
+        "ktpMaritalStatus": (
+          /*KtpMaritalStatus*/
+          ctx[12]
+        ),
+        "ktpReligion": (
+          /*KtpReligions*/
+          ctx[13]
+        )
       },
       CAN_EDIT_ROW: true,
       CAN_SEARCH_ROW: true,
@@ -15083,7 +15120,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       p(ctx2, dirty) {
         const mastertable_changes = {};
         if (dirty & /*$scope, popUpForms*/
-        131088) {
+        1048592) {
           mastertable_changes.$scope = { dirty, ctx: ctx2 };
         }
         if (!updating_FIELDS && dirty & /*fields*/
@@ -15183,7 +15220,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         const layoutmain_changes = {};
         if (dirty & /*$scope, fields, pager, tenants, popUpForms*/
-        131095) {
+        1048599) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -15247,7 +15284,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     );
     onMount(() => $invalidate(3, isPopUpFormReady = true));
     async function OnRefresh(pagerIn) {
-      const i = { pager: pagerIn, cmd: "list" };
+      const i = { pager: pagerIn, cmd: import_xConstant.CmdList };
       await (0, import_jsApi2.AdminTenants)(
         // @ts-ignore
         i,
@@ -15271,7 +15308,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         {
           pager,
           tenant: { id: row[0] },
-          cmd: "restore"
+          cmd: import_xConstant.CmdRestore
         }
       );
       await (0, import_jsApi2.AdminTenants)(
@@ -15297,7 +15334,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         {
           pager,
           tenant: { id: row[0] },
-          cmd: "delete"
+          cmd: import_xConstant.CmdDelete
         }
       );
       await (0, import_jsApi2.AdminTenants)(
@@ -15341,7 +15378,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       };
       const i = (
         /** @type {any}*/
-        { pager, tenant, cmd: "upsert" }
+        { pager, tenant, cmd: import_xConstant.CmdUpsert }
       );
       await (0, import_jsApi2.AdminTenants)(
         i,
@@ -15387,7 +15424,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       );
       const i = (
         /** @type {any} */
-        { pager, tenant, cmd: "upsert" }
+        { pager, tenant, cmd: import_xConstant.CmdUpsert }
       );
       await (0, import_jsApi2.AdminTenants)(
         i,
@@ -15409,6 +15446,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
       );
     }
+    const KtpGenders = ["Laki - Laki", "Perempuan"];
+    const KtpMaritalStatus = ["Belum Kawin", "Kawin", "Cerai Hidup", "Cerai Mati"];
+    const KtpReligions = ["Islam", "Hindu", "Kristen", "Katholik", "Buddha", "Konghucu"];
     function popupforms_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         popUpForms = $value;
@@ -15444,6 +15484,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       OnDelete,
       OnEdit,
       OnAddTenant,
+      KtpGenders,
+      KtpMaritalStatus,
+      KtpReligions,
       popupforms_binding,
       popupforms_isSubmitted_binding,
       click_handler,

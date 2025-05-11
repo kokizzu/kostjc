@@ -4171,19 +4171,17 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   // _components/xConstant.js
   var require_xConstant = __commonJS({
     "_components/xConstant.js"(exports, module) {
-      var PaymentMethods3 = [
-        "Cash",
-        "QRIS",
-        "Transfer"
-      ];
-      var PaymentStatuses3 = [
-        "Paid",
-        "Unpaid",
-        "Refunded"
-      ];
+      var CmdList2 = `list`;
+      var CmdForm = `form`;
+      var CmdUpsert2 = `upsert`;
+      var CmdRestore2 = `restore`;
+      var CmdDelete = `delete`;
       module.exports = {
-        PaymentMethods: PaymentMethods3,
-        PaymentStatuses: PaymentStatuses3
+        CmdList: CmdList2,
+        CmdForm,
+        CmdUpsert: CmdUpsert2,
+        CmdRestore: CmdRestore2,
+        CmdDelete
       };
     }
   });
@@ -13883,14 +13881,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
   // _components/PopUpAddPayment.svelte
-  var import_xConstant = __toESM(require_xConstant());
   var import_xFormatter3 = __toESM(require_xFormatter());
   function create_if_block_26(ctx) {
     let inputbox;
     let updating_value;
     let current;
     function inputbox_value_binding(value) {
-      ctx[16](value);
+      ctx[18](value);
     }
     let inputbox_props = {
       id: "booking",
@@ -14055,7 +14052,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let if_block0 = !/*isBookingReadOnly*/
     ctx[4] && create_if_block_26(ctx);
     function inputbox0_value_binding(value) {
-      ctx[17](value);
+      ctx[19](value);
     }
     let inputbox0_props = {
       id: "paymentAt",
@@ -14073,7 +14070,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
     function inputbox1_value_binding(value) {
-      ctx[18](value);
+      ctx[20](value);
     }
     let inputbox1_props = {
       id: "paidIDR",
@@ -14091,13 +14088,16 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     inputbox1 = new InputBox_default({ props: inputbox1_props });
     binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
     function inputbox2_value_binding(value) {
-      ctx[19](value);
+      ctx[21](value);
     }
     let inputbox2_props = {
       id: "paymentMethod",
       label: "Payment Method",
       type: "combobox-arr",
-      values: import_xConstant.PaymentMethods
+      values: (
+        /*PaymentMethods*/
+        ctx[11]
+      )
     };
     if (
       /*paymentMethod*/
@@ -14109,14 +14109,17 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     inputbox2 = new InputBox_default({ props: inputbox2_props });
     binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
     function inputbox3_value_binding(value) {
-      ctx[20](value);
+      ctx[22](value);
     }
     let inputbox3_props = {
       id: "paymentStatus",
       label: "Payment Status",
       type: "combobox-arr",
       placeholder: "Paid",
-      values: import_xConstant.PaymentStatuses
+      values: (
+        /*PaymentStatuses*/
+        ctx[12]
+      )
     };
     if (
       /*paymentStatus*/
@@ -14128,7 +14131,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     inputbox3 = new InputBox_default({ props: inputbox3_props });
     binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
     function inputbox4_value_binding(value) {
-      ctx[21](value);
+      ctx[23](value);
     }
     let inputbox4_props = {
       id: "note",
@@ -14254,11 +14257,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             ),
             listen(button1, "click", prevent_default(
               /*cancel*/
-              ctx[12]
+              ctx[14]
             )),
             listen(button2, "click", prevent_default(
               /*submitAdd*/
-              ctx[11]
+              ctx[13]
             ))
           ];
           mounted = true;
@@ -14442,9 +14445,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let { bookingId = 0 } = $props;
     let { isBookingReadOnly = false } = $props;
     let { paymentAt = (0, import_xFormatter3.dateISOFormat)(0) } = $props;
+    const PaymentMethods = ["Cash", "QRIS", "Transfer"];
+    const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
     let paidIDR = 0;
-    let paymentMethod = import_xConstant.PaymentMethods[0];
-    let paymentStatus = import_xConstant.PaymentStatuses[0];
+    let paymentMethod = PaymentMethods[0];
+    let paymentStatus = PaymentStatuses[0];
     let note = "";
     let { OnSubmit = async function(payment) {
       console.log("OnSubmit :::", payment);
@@ -14469,8 +14474,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       $invalidate(0, bookingId = 0);
       $invalidate(1, paymentAt = (0, import_xFormatter3.dateISOFormat)(0));
       $invalidate(7, paidIDR = 0);
-      $invalidate(8, paymentMethod = import_xConstant.PaymentMethods[0]);
-      $invalidate(9, paymentStatus = import_xConstant.PaymentStatuses[0]);
+      $invalidate(8, paymentMethod = PaymentMethods[0]);
+      $invalidate(9, paymentStatus = PaymentStatuses[0]);
       $invalidate(10, note = "");
     };
     const cancel = () => {
@@ -14512,7 +14517,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       if ("paymentAt" in $props2)
         $invalidate(1, paymentAt = $props2.paymentAt);
       if ("OnSubmit" in $props2)
-        $invalidate(13, OnSubmit = $props2.OnSubmit);
+        $invalidate(15, OnSubmit = $props2.OnSubmit);
     };
     return [
       bookingId,
@@ -14526,6 +14531,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       paymentMethod,
       paymentStatus,
       note,
+      PaymentMethods,
+      PaymentStatuses,
       submitAdd,
       cancel,
       OnSubmit,
@@ -14548,38 +14555,38 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         bookingId: 0,
         isBookingReadOnly: 4,
         paymentAt: 1,
-        OnSubmit: 13,
-        Show: 14,
+        OnSubmit: 15,
+        Show: 16,
         Hide: 5,
-        Reset: 15
+        Reset: 17
       });
     }
     get Show() {
-      return this.$.ctx[14];
+      return this.$.ctx[16];
     }
     get Hide() {
       return this.$.ctx[5];
     }
     get Reset() {
-      return this.$.ctx[15];
+      return this.$.ctx[17];
     }
   };
   var PopUpAddPayment_default = PopUpAddPayment;
 
   // adminPayment.svelte
-  var import_xConstant2 = __toESM(require_xConstant());
+  var import_xConstant = __toESM(require_xConstant());
   function create_if_block6(ctx) {
     let popupaddpayment;
     let updating_isSubmitted;
     let current;
     function popupaddpayment_isSubmitted_binding(value) {
-      ctx[12](value);
+      ctx[14](value);
     }
     let popupaddpayment_props = {
       bookings,
       OnSubmit: (
         /*OnAddPayment*/
-        ctx[10]
+        ctx[12]
       )
     };
     if (
@@ -14590,7 +14597,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       ctx[5];
     }
     popupaddpayment = new PopUpAddPayment_default({ props: popupaddpayment_props });
-    ctx[11](popupaddpayment);
+    ctx[13](popupaddpayment);
     binding_callbacks.push(() => bind(popupaddpayment, "isSubmitted", popupaddpayment_isSubmitted_binding));
     return {
       c() {
@@ -14622,7 +14629,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         current = false;
       },
       d(detaching) {
-        ctx[11](null);
+        ctx[13](null);
         destroy_component(popupaddpayment, detaching);
       }
     };
@@ -14656,7 +14663,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
             button,
             "click",
             /*click_handler*/
-            ctx[13]
+            ctx[15]
           );
           mounted = true;
         }
@@ -14692,20 +14699,26 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let updating_MASTER_ROWS;
     let current;
     function mastertable_FIELDS_binding(value) {
-      ctx[14](value);
+      ctx[16](value);
     }
     function mastertable_PAGER_binding(value) {
-      ctx[15](value);
+      ctx[17](value);
     }
     function mastertable_MASTER_ROWS_binding(value) {
-      ctx[16](value);
+      ctx[18](value);
     }
     let mastertable_props = {
       ACCESS: segments,
       REFS: {
         "bookingId": bookings,
-        "paymentStatus": import_xConstant2.PaymentStatuses,
-        "paymentMethod": import_xConstant2.PaymentMethods
+        "paymentStatus": (
+          /*PaymentStatuses*/
+          ctx[7]
+        ),
+        "paymentMethod": (
+          /*PaymentMethods*/
+          ctx[6]
+        )
       },
       CAN_EDIT_ROW: true,
       CAN_SEARCH_ROW: true,
@@ -14713,19 +14726,19 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       CAN_RESTORE_ROW: true,
       OnDelete: (
         /*OnDelete*/
-        ctx[8]
+        ctx[10]
       ),
       OnRestore: (
         /*OnRestore*/
-        ctx[7]
+        ctx[9]
       ),
       OnRefresh: (
         /*OnRefresh*/
-        ctx[6]
+        ctx[8]
       ),
       OnEdit: (
         /*OnEdit*/
-        ctx[9]
+        ctx[11]
       ),
       $slots: { default: [create_default_slot_1] },
       $scope: { ctx }
@@ -14775,7 +14788,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       p(ctx2, dirty) {
         const mastertable_changes = {};
         if (dirty & /*$scope, popUpForms*/
-        131088) {
+        524304) {
           mastertable_changes.$scope = { dirty, ctx: ctx2 };
         }
         if (!updating_FIELDS && dirty & /*fields*/
@@ -14875,7 +14888,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         const layoutmain_changes = {};
         if (dirty & /*$scope, fields, pager, payments, popUpForms*/
-        131095) {
+        524311) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -14927,6 +14940,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       /** @type {PagerOut} */
       {/* pager */}
     );
+    const PaymentMethods = ["Cash", "QRIS", "Transfer"];
+    const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
     let isPopUpFormReady = (
       /** @type boolean */
       false
@@ -14943,7 +14958,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     );
     onMount(() => $invalidate(3, isPopUpFormReady = true));
     async function OnRefresh(pagerIn) {
-      const i = { pager: pagerIn, cmd: "list" };
+      const i = { pager: pagerIn, cmd: import_xConstant.CmdList };
       await (0, import_jsApi2.AdminPayment)(
         // @ts-ignore
         i,
@@ -14967,7 +14982,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         {
           pager,
           payment: { id: row[0] },
-          cmd: "restore"
+          cmd: import_xConstant.CmdRestore
         }
       );
       await (0, import_jsApi2.AdminPayment)(
@@ -15026,7 +15041,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       };
       const i = (
         /** @type {any}*/
-        { pager, payment, cmd: "upsert" }
+        { pager, payment, cmd: import_xConstant.CmdUpsert }
       );
       await (0, import_jsApi2.AdminPayment)(
         i,
@@ -15049,7 +15064,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       $invalidate(5, isSubmitAddPayment = true);
       const i = (
         /** @type {any} */
-        { pager, payment, cmd: "upsert" }
+        { pager, payment, cmd: import_xConstant.CmdUpsert }
       );
       await (0, import_jsApi2.AdminPayment)(
         i,
@@ -15066,10 +15081,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           $invalidate(0, payments = o.payments);
           notifier.showSuccess(`Payment created !!`);
           popUpForms.Reset();
+          popUpForms.Hide();
           OnRefresh(pager);
         }
       );
-      popUpForms.Hide();
     }
     function popupaddpayment_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
@@ -15101,6 +15116,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       isPopUpFormReady,
       popUpForms,
       isSubmitAddPayment,
+      PaymentMethods,
+      PaymentStatuses,
       OnRefresh,
       OnRestore,
       OnDelete,

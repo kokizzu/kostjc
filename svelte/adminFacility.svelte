@@ -14,13 +14,14 @@
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+    import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
-  let user      = /** @type {User} */ ({/* user */});
-  let segments  = /** @type {Access} */ ({/* segments */});
-  let facility  = /** @type {Facility} */ ({/* facility */});
-  let facilities = /** @type {any[][]} */([/* facilities */]);
-  let fields    = /** @type {Field[]} */ ([/* fields */]);
-  let pager     = /** @type {PagerOut} */ ({/* pager */});
+  let user        = /** @type {User} */ ({/* user */});
+  let segments    = /** @type {Access} */ ({/* segments */});
+  let facility    = /** @type {Facility} */ ({/* facility */});
+  let facilities  = /** @type {any[][]} */([/* facilities */]);
+  let fields      = /** @type {Field[]} */ ([/* fields */]);
+  let pager       = /** @type {PagerOut} */ ({/* pager */});
 
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
@@ -31,7 +32,10 @@
   onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
-    const i = { pager: pagerIn, cmd: 'list' };
+    const i = {
+      pager: pagerIn,
+      cmd: CmdList
+    };
     await AdminFacility( // @ts-ignore
       i, /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
       /** @returns {Promise<void>} */
@@ -54,7 +58,7 @@
       facility: {
         id: row[0]
       },
-      cmd: 'restore'
+      cmd: CmdRestore
     });
     await AdminFacility(i,
       /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
@@ -81,7 +85,7 @@
       facility: {
         id: row[0]
       },
-      cmd: 'delete'
+      cmd: CmdDelete
     });
     await AdminFacility(i,
       /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
@@ -114,7 +118,7 @@
     const i = /** @type {any}*/ ({
       pager,
       facility,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
     await AdminFacility(i,
       /** @type {import('./jsApi.GEN').AdminFacilityCallback} */
@@ -147,7 +151,7 @@
     const i = /** @type {any} */ ({
       pager,
       facility,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
 
     await AdminFacility(i,
@@ -171,6 +175,12 @@
       }
     );
   }
+
+  const FacilityTypes = [
+    'Room',
+    'Building',
+    'Site'
+  ]
 </script>
 
 {#if isPopUpFormReady}
@@ -179,7 +189,7 @@
     heading="Add Facility"
     FIELDS={fields}
     REFS={{
-      'facilityType': ['Room', 'Building', 'Site']
+      'facilityType': FacilityTypes
     }}
     bind:isSubmitted={isSubmitAddFacility}
     OnSubmit={OnAddFacility}
@@ -195,7 +205,7 @@
       bind:PAGER={pager}
       bind:MASTER_ROWS={facilities}
       REFS={{
-        'facilityType': ['Room', 'Building', 'Site']
+        'facilityType': FacilityTypes
       }}
 
       CAN_EDIT_ROW

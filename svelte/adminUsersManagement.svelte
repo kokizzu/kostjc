@@ -13,6 +13,7 @@
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import { CmdDelete, CmdList, CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -31,7 +32,7 @@
   onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
-    const i = { pager: pagerIn, cmd: 'list' };
+    const i = { pager: pagerIn, cmd: CmdList };
     await AdminUsersManagement( // @ts-ignore
       i, /** @type {import('./jsApi.GEN').AdminUsersManagementCallback} */
       /** @returns {Promise<void>} */
@@ -81,7 +82,7 @@
       user: {
         id: row[0]
       },
-      cmd: 'delete'
+      cmd: CmdDelete
     });
     await AdminUsersManagement(i,
       /** @type {import('./jsApi.GEN').AdminUsersManagementCallback} */
@@ -114,7 +115,7 @@
     const i = /** @type {any}*/ ({
       pager,
       user,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
     await AdminUsersManagement(i,
       /** @type {import('./jsApi.GEN').AdminUsersManagementCallback} */
@@ -147,7 +148,7 @@
     const i = /** @type {any} */ ({
       pager,
       user,
-      cmd: 'upsert'
+      cmd: CmdUpsert
     });
 
     await AdminUsersManagement(i,
@@ -171,6 +172,11 @@
       }
     );
   }
+
+  const AdminRoles = [
+    'Admin',
+    'Staff'
+  ]
 </script>
 
 {#if isPopUpFormReady}
@@ -179,7 +185,7 @@
     heading="Add User"
     FIELDS={fields}
     REFS={{
-      'role': ['Admin', 'Staff']
+      'role': AdminRoles
     }}
     bind:isSubmitted={isSubmitAddUser}
     OnSubmit={OnAddUser}
@@ -195,7 +201,7 @@
       bind:PAGER={pager}
       bind:MASTER_ROWS={users}
       REFS={{
-        'role': ['Admin', 'Staff']
+        'role': AdminRoles
       }}
 
       CAN_EDIT_ROW

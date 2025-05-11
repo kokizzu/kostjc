@@ -5,7 +5,6 @@
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
-    import { PaymentMethods, PaymentStatuses } from './xConstant';
   import { dateISOFormat } from './xFormatter';
 
   let isShow = /** @type {boolean} */ (false);
@@ -15,6 +14,17 @@
   export let bookingId = 0;
   export let isBookingReadOnly = false;
   export let paymentAt = dateISOFormat(0);
+
+  const PaymentMethods = [
+    'Cash',
+    'QRIS',
+    'Transfer',
+  ];
+  const PaymentStatuses = [
+    'Paid',
+    'Unpaid',
+    'Refunded'
+  ];
 
   let paidIDR = 0;
   let paymentMethod = PaymentMethods[0];

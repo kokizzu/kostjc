@@ -4163,6 +4163,24 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
   });
 
+  // _components/xConstant.js
+  var require_xConstant = __commonJS({
+    "_components/xConstant.js"(exports, module) {
+      var CmdList2 = `list`;
+      var CmdForm = `form`;
+      var CmdUpsert2 = `upsert`;
+      var CmdRestore2 = `restore`;
+      var CmdDelete2 = `delete`;
+      module.exports = {
+        CmdList: CmdList2,
+        CmdForm,
+        CmdUpsert: CmdUpsert2,
+        CmdRestore: CmdRestore2,
+        CmdDelete: CmdDelete2
+      };
+    }
+  });
+
   // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
@@ -14863,6 +14881,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var PopUpForms_default = PopUpForms;
 
   // adminStock.svelte
+  var import_xConstant = __toESM(require_xConstant());
   function create_if_block6(ctx) {
     let popupforms;
     let updating_isSubmitted;
@@ -15237,7 +15256,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     );
     onMount(() => $invalidate(3, isPopUpFormReady = true));
     async function OnRefresh(pagerIn) {
-      const i = { pager: pagerIn, cmd: "list" };
+      const i = { pager: pagerIn, cmd: import_xConstant.CmdList };
       await (0, import_jsApi2.AdminStock)(
         // @ts-ignore
         i,
@@ -15261,7 +15280,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         {
           pager,
           stock: { id: row[0] },
-          cmd: "restore"
+          cmd: import_xConstant.CmdRestore
         }
       );
       await (0, import_jsApi2.AdminStock)(
@@ -15287,7 +15306,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         {
           pager,
           stock: { id: row[0] },
-          cmd: "delete"
+          cmd: import_xConstant.CmdDelete
         }
       );
       await (0, import_jsApi2.AdminStock)(
@@ -15318,7 +15337,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       };
       const i = (
         /** @type {any}*/
-        { pager, stock, cmd: "upsert" }
+        { pager, stock, cmd: import_xConstant.CmdUpsert }
       );
       await (0, import_jsApi2.AdminStock)(
         i,
@@ -15350,7 +15369,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       );
       const i = (
         /** @type {any} */
-        { pager, stock, cmd: "upsert" }
+        { pager, stock, cmd: import_xConstant.CmdUpsert }
       );
       await (0, import_jsApi2.AdminStock)(
         i,
