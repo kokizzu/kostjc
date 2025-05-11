@@ -43,15 +43,28 @@
   let itemsArr = [];
   let itemsArrObj = [];
 
+  let svelteSelectValue;
+
   onMount(() => {
     if (type === 'combobox-arr') {
       itemsArr = values;
+      for (const v of values) {
+        if (v == value) {
+          svelteSelectValue = v;
+        }
+      }
     } else if (type === 'combobox') {
-      for (const [key, value] of Object.entries(values)) {
+      for (const [k, v] of Object.entries(values)) {
         itemsArrObj = [...itemsArrObj, {
-          value: key,
-          label: value
+          value: k,
+          label: v
         }];
+        if (k == value) {
+          svelteSelectValue = {
+            value: k,
+            label: v
+          };
+        }
       }
     }
   });
@@ -73,6 +86,7 @@
       <label class="label" for={id}>{label}</label>
       <Select
         items={itemsArr}
+        bind:value={svelteSelectValue}
         on:select={handleSelect}
         placeholder={placeholder}
       />
@@ -81,6 +95,7 @@
         <label class="label" for={id}>{label}</label>
         <Select
           items={itemsArrObj}
+          bind:value={svelteSelectValue}
           on:select={handleSelect}
           placeholder={placeholder}
         />
@@ -88,6 +103,7 @@
         <label class="label" for={id}>{label}</label>
         <Select
           items={itemsArr}
+          bind:value={svelteSelectValue}
           on:select={handleSelect}
           placeholder={placeholder}
         />
