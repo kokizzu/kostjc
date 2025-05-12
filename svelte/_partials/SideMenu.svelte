@@ -9,7 +9,8 @@
     RiBuildingsHome2Line, RiMapMapPin2Line, RiUserFacesUser3Line,
     RiUserFacesUserFollowLine, RiBuildingsHotelLine, RiBusinessCalendarScheduleLine,
     RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
-    RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine, RiUserFacesGroupLine
+    RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine, RiUserFacesGroupLine,
+    RiDocumentFileChartLine
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { LuHandPlatter } from '../node_modules/svelte-icons-pack/dist/lu';
 
@@ -49,6 +50,10 @@
       <a href="/" class:active={pathLv1 === ''}>
         <Icon src={RiBuildingsHome2Line} size="20" />
         <span>Home</span>
+      </a>
+      <a href="/user/report" class:active={pathAll === '/user/report'}>
+        <Icon src={RiDocumentFileChartLine} size="20" />
+        <span>Reports</span>
       </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />

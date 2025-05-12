@@ -24,6 +24,7 @@ var allCommands = []string{
 	domain.StaffBookingAction,
 	domain.UserLogoutAction,
 	domain.UserProfileAction,
+	domain.UserReportAction,
 	domain.UserSessionKillAction,
 	domain.UserSessionsActiveAction,
 	domain.UserUpdateProfileAction,

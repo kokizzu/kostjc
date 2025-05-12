@@ -4654,6 +4654,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       exports.UserProfile = async function UserProfile(i, cb) {
         return await axios.post("/user/profile", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.UserReport = async function UserReport(i, cb) {
+        return await axios.post("/user/report", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.UserSessionKill = async function UserSessionKill(i, cb) {
         return await axios.post("/user/sessionKill", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -5995,6 +5998,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   var RiBusinessCalendarScheduleLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M7 3V1H9V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V9H20V5H17V7H15V5H9V7H7V5H4V19H10V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7ZM17 12C14.7909 12 13 13.7909 13 16C13 18.2091 14.7909 20 17 20C19.2091 20 21 18.2091 21 16C21 13.7909 19.2091 12 17 12ZM11 16C11 12.6863 13.6863 10 17 10C20.3137 10 23 12.6863 23 16C23 19.3137 20.3137 22 17 22C13.6863 22 11 19.3137 11 16ZM16 13V16.4142L18.2929 18.7071L19.7071 17.2929L18 15.5858V13H16Z"></path>' };
   var RiBusinessInboxUnarchiveLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 3L22 7V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V7.00353L4 3H20ZM20 9H4V19H20V9ZM12 10L16 14H13V18H11V14H8L12 10ZM18.764 5H5.236L4.237 7H19.764L18.764 5Z"></path>' };
   var RiOthersDoorOpenLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M1.99805 21.0001V19.0001L3.99805 18.9999V4.83465C3.99805 4.35136 4.34367 3.93723 4.81916 3.85078L14.2907 2.12868C14.6167 2.0694 14.9291 2.28564 14.9884 2.61167C14.9948 2.64708 14.998 2.68301 14.998 2.719V3.9999L18.998 4.00007C19.5503 4.00007 19.998 4.44779 19.998 5.00007V18.9999L21.998 19.0001V21.0001H17.998V6.00007L14.998 5.9999V21.0001H1.99805ZM12.998 4.3965L5.99805 5.66923V19.0001H12.998V4.3965ZM11.998 11.0001V13.0001H9.99805V11.0001H11.998Z"></path>' };
+  var RiDocumentFileChartLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M11 7H13V17H11V7ZM15 11H17V17H15V11ZM7 13H9V17H7V13ZM15 4H5V20H19V8H15V4ZM3 2.9918C3 2.44405 3.44749 2 3.9985 2H16L20.9997 7L21 20.9925C21 21.5489 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918Z"></path>' };
   var RiUserFacesUser3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"></path>' };
   var RiUserFacesUserFollowLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M14 14.252V16.3414C13.3744 16.1203 12.7013 16 12 16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM17.7929 19.9142L21.3284 16.3787L22.7426 17.7929L17.7929 22.7426L14.2574 19.2071L15.6716 17.7929L17.7929 19.9142Z"></path>' };
   var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
@@ -6414,15 +6418,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t3;
     let span1;
     let t5;
+    let a2;
+    let icon2;
     let t6;
-    let t7;
     let span2;
     let t8;
+    let t9;
+    let t10;
+    let span3;
+    let t11;
     let nav1;
     let button;
-    let icon2;
-    let t9;
-    let span3;
+    let icon3;
+    let t12;
+    let span4;
     let current;
     let mounted;
     let dispose;
@@ -6430,6 +6439,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       props: { src: RiBuildingsHome2Line, size: "20" }
     });
     icon1 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon2 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block0 = !/*access*/
@@ -6438,7 +6450,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*access*/
       ctx[0].admin && create_if_block(ctx)
     );
-    icon2 = new Icon_default({
+    icon3 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
     return {
@@ -6456,22 +6468,28 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon1.$.fragment);
         t3 = space();
         span1 = element("span");
-        span1.textContent = "Profile";
+        span1.textContent = "Reports";
         t5 = space();
+        a2 = element("a");
+        create_component(icon2.$.fragment);
+        t6 = space();
+        span2 = element("span");
+        span2.textContent = "Profile";
+        t8 = space();
         if (if_block0)
           if_block0.c();
-        t6 = space();
+        t9 = space();
         if (if_block1)
           if_block1.c();
-        t7 = space();
-        span2 = element("span");
-        t8 = space();
+        t10 = space();
+        span3 = element("span");
+        t11 = space();
         nav1 = element("nav");
         button = element("button");
-        create_component(icon2.$.fragment);
-        t9 = space();
-        span3 = element("span");
-        span3.textContent = "Logout";
+        create_component(icon3.$.fragment);
+        t12 = space();
+        span4 = element("span");
+        span4.textContent = "Logout";
         attr(a0, "href", "/");
         attr(a0, "class", "svelte-2xd6p5");
         toggle_class(
@@ -6480,16 +6498,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv1*/
           ctx[2] === ""
         );
-        attr(a1, "href", "/user");
+        attr(a1, "href", "/user/report");
         attr(a1, "class", "svelte-2xd6p5");
         toggle_class(
           a1,
           "active",
           /*pathAll*/
+          ctx[1] === "/user/report"
+        );
+        attr(a2, "href", "/user");
+        attr(a2, "class", "svelte-2xd6p5");
+        toggle_class(
+          a2,
+          "active",
+          /*pathAll*/
           ctx[1] === "/user"
         );
         attr(nav0, "class", "nav-menu svelte-2xd6p5");
-        attr(span2, "class", "separator svelte-2xd6p5");
+        attr(span3, "class", "separator svelte-2xd6p5");
         attr(button, "class", "red svelte-2xd6p5");
         attr(nav1, "class", "nav-menu svelte-2xd6p5");
         attr(div, "class", "container svelte-2xd6p5");
@@ -6508,20 +6534,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon1, a1, null);
         append(a1, t3);
         append(a1, span1);
-        append(div, t5);
+        append(nav0, t5);
+        append(nav0, a2);
+        mount_component(icon2, a2, null);
+        append(a2, t6);
+        append(a2, span2);
+        append(div, t8);
         if (if_block0)
           if_block0.m(div, null);
-        append(div, t6);
+        append(div, t9);
         if (if_block1)
           if_block1.m(div, null);
-        append(div, t7);
-        append(div, span2);
-        append(div, t8);
+        append(div, t10);
+        append(div, span3);
+        append(div, t11);
         append(div, nav1);
         append(nav1, button);
-        mount_component(icon2, button, null);
-        append(button, t9);
-        append(button, span3);
+        mount_component(icon3, button, null);
+        append(button, t12);
+        append(button, span4);
         current = true;
         if (!mounted) {
           dispose = listen(
@@ -6546,7 +6577,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block0 = create_if_block_1(ctx2);
             if_block0.c();
             transition_in(if_block0, 1);
-            if_block0.m(div, t6);
+            if_block0.m(div, t9);
           }
         } else if (if_block0) {
           group_outros();
@@ -6569,7 +6600,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block1 = create_if_block(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
-            if_block1.m(div, t7);
+            if_block1.m(div, t10);
           }
         } else if (if_block1) {
           group_outros();
@@ -6584,17 +6615,19 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return;
         transition_in(icon0.$.fragment, local);
         transition_in(icon1.$.fragment, local);
+        transition_in(icon2.$.fragment, local);
         transition_in(if_block0);
         transition_in(if_block1);
-        transition_in(icon2.$.fragment, local);
+        transition_in(icon3.$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(icon0.$.fragment, local);
         transition_out(icon1.$.fragment, local);
+        transition_out(icon2.$.fragment, local);
         transition_out(if_block0);
         transition_out(if_block1);
-        transition_out(icon2.$.fragment, local);
+        transition_out(icon3.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -6603,11 +6636,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         destroy_component(icon0);
         destroy_component(icon1);
+        destroy_component(icon2);
         if (if_block0)
           if_block0.d();
         if (if_block1)
           if_block1.d();
-        destroy_component(icon2);
+        destroy_component(icon3);
         mounted = false;
         dispose();
       }

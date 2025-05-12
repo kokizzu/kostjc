@@ -5,7 +5,6 @@
   /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/property.js').Room} Room */
-
   
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
@@ -20,13 +19,13 @@
   import LineNumbers from  'svelte-highlight/LineNumbers.svelte'; 
   import json from 'svelte-highlight/languages/json';
   import atomOneDark from 'svelte-highlight/styles/atom-one-dark';
-    import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
+  import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
-  let room  = /** @type {Room} */ ({/* room */});
-  let rooms = /** @type {any[][]} */([/* rooms */]);
-  let tenants = /** @type {Record<Number, string>} */({/* tenants */});
+  let room      = /** @type {Room} */ ({/* room */});
+  let rooms     = /** @type {any[][]} */([/* rooms */]);
+  let tenants   = /** @type {Record<Number, string>} */({/* tenants */});
   let buildings = /** @type {Record<Number, string>} */({/* buildings */});
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});

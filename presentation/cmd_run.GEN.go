@@ -148,6 +148,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.UserProfile(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.UserReportAction:
+		in := domain.UserReportIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.UserReport(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.UserSessionKillAction:
 		in := domain.UserSessionKillIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

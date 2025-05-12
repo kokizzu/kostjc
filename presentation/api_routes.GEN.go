@@ -180,6 +180,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// UserReport
+	fw.Post("/"+domain.UserReportAction, func(c *fiber.Ctx) error {
+		in := domain.UserReportIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.UserReportAction); err != nil {
+			return nil
+		}
+		out := d.UserReport(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// UserSessionKill
 	fw.Post("/"+domain.UserSessionKillAction, func(c *fiber.Ctx) error {
 		in := domain.UserSessionKillIn{}
