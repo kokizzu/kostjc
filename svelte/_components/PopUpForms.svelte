@@ -10,6 +10,7 @@
   export let heading = 'Add product';
   export let FIELDS = /** @type Field[] */ ([]);
   export let REFS = {};
+  export let INITIAL_VALUES = {};
   export let isSubmitted = false;
 
   let isShow = false;
@@ -38,6 +39,9 @@
           default:
             initialPayload = '';
             break;
+        }
+        if (INITIAL_VALUES[f.name]) {
+          initialPayload = INITIAL_VALUES[f.name];
         }
         payloads = [...payloads, initialPayload]
       });

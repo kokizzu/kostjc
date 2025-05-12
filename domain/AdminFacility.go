@@ -63,7 +63,7 @@ var AdminFacilityMeta = zCrud.Meta{
 			DataType:    zCrud.DataTypeString,
 			InputType:   zCrud.InputTypeComboboxArr,
 			ReadOnly:    false,
-			Description: `Room/Building`,
+			Description: `Room/Building/Site`,
 		},
 		{
 			Name:        mProperty.ExtraChargeIDR,

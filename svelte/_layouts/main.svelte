@@ -52,7 +52,6 @@
     max-width: 100%;
     margin-top: var(--navbar-height);
     margin-left: var(--sidemenu-width);
-    margin-right: 30px;
     margin-bottom: 0;
     overflow: hidden;
   }

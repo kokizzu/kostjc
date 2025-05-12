@@ -491,6 +491,25 @@ func (b *Buildings) FindById() bool { //nolint:dupl false positive
 	return false
 }
 
+// UniqueIndexBuildingName return unique index name
+func (b *Buildings) UniqueIndexBuildingName() string { //nolint:dupl false positive
+	return `buildingName`
+}
+
+// FindByBuildingName Find one by BuildingName
+func (b *Buildings) FindByBuildingName() bool { //nolint:dupl false positive
+	res, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexBuildingName(), 0, 1, tarantool.IterEq, A.X{b.BuildingName})
+	if L.IsError(err, `Buildings.FindByBuildingName failed: `+b.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		b.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
 // SqlSelectAllFields generate Sql select fields
 func (b *Buildings) SqlSelectAllFields() string { //nolint:dupl false positive
 	return ` "id"

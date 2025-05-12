@@ -273,6 +273,7 @@
   <div class="master-room">
     <h2>Room Management</h2>
     <MasterTable
+      NAME="Room"
       ACCESS={segments}
       REFS={{
         'currentTenantId': tenants,

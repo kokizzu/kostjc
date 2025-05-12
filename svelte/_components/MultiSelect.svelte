@@ -12,16 +12,32 @@
   export let placeholder = '';
 
   function handleSelect(/** @type {CustomEvent} */e) {
+    console.log('handleSelect:',e.detail)
     valuesTarget = [...valuesTarget, e.detail.value];
   }
 
+  function handleClear(/** @type {CustomEvent} */e) {
+    console.log('handleClear:',e.detail)
+    valuesTarget.filter((v) => v != e.detail.value);
+  }
+
   let valuesSourceArrayObject = [];
+  let valuesTargetArrayObject = [];
   onMount(() => {
     for (const [k, v] of Object.entries(valuesSourceObj)) {
       valuesSourceArrayObject.push({
         value: k,
         label: v
       });
+    }
+    if (valuesSourceType === 'object') {
+      for (const kv of valuesSourceArrayObject) {
+        for (const vt of valuesTarget) {
+          if (kv.value == vt) {
+            valuesTargetArrayObject = [...valuesTargetArrayObject, kv];
+          }
+        }
+      }
     }
   })
 </script>
@@ -42,8 +58,9 @@
       <Select
         multiple
         items={valuesSourceArrayObject}
+        bind:value={valuesTargetArrayObject}
         on:select={handleSelect}
-        on:clear={() => (valuesTarget = [])}
+        on:clear={handleClear}
         placeholder={placeholder}
       />
     {/if}

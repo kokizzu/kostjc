@@ -200,6 +200,7 @@
   <div class="master-facility">
     <h2>Facility Management</h2>
     <MasterTable
+      NAME="Facility"
       ACCESS={segments}
       bind:FIELDS={fields}
       bind:PAGER={pager}

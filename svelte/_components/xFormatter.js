@@ -116,6 +116,15 @@ function formatPrice(price, currency) {
   }
 }
 
+/**
+ * @description Convert array of any to array of numbers
+ * @param {any[]} arr 
+ * @returns {number[]}
+ */
+function arrToArrNum(arr) {
+  return arr.map(Number);
+}
+
 module.exports = {
   datetime: datetime,
   localeDatetime: localeDatetime,
@@ -124,5 +133,6 @@ module.exports = {
   isoDate: isoDate,
   dateISOFormat: dateISOFormat,
   loadScript: loadScript,
-  formatPrice: formatPrice
+  formatPrice: formatPrice,
+  arrToArrNum: arrToArrNum
 };

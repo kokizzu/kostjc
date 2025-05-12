@@ -194,6 +194,7 @@
   <div class="master-user">
     <h2>User Management</h2>
     <MasterTable
+      NAME="User"
       ACCESS={segments}
       bind:FIELDS={fields}
       bind:PAGER={pager}

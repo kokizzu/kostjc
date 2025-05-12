@@ -15,6 +15,7 @@
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
   import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
+    import { dateISOFormat } from './_components/xFormatter';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -228,6 +229,9 @@
     bind:this={popUpForms}
     heading="Add Tenant"
     FIELDS={fields}
+    INITIAL_VALUES={{
+      'ktpDateBirth': dateISOFormat(6205)
+    }}
     REFS={{
       'ktpGender': KtpGenders,
       'ktpMaritalStatus': KtpMaritalStatus,
@@ -242,6 +246,7 @@
   <div class="master-tenants">
     <h2>Tenant Management</h2>
     <MasterTable
+      NAME="Tenant"
       ACCESS={segments}
       bind:FIELDS={fields}
       bind:PAGER={pager}
@@ -250,6 +255,10 @@
         'ktpGender': KtpGenders,
         'ktpMaritalStatus': KtpMaritalStatus,
         'ktpReligion': KtpReligions
+      }}
+      COL_WIDTHS={{
+        'tenantName': 250,
+        'ktpRegion': 300
       }}
 
       CAN_EDIT_ROW

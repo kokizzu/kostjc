@@ -191,6 +191,7 @@
   <div class="master-stock">
     <h2>Master Stock</h2>
     <MasterTable
+      NAME="Stock"
       ACCESS={segments}
       bind:FIELDS={fields}
       bind:PAGER={pager}

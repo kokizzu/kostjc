@@ -191,6 +191,7 @@
   <div class="master-location">
     <h2>Location Management</h2>
     <MasterTable
+      NAME="Location"
       ACCESS={segments}
       bind:FIELDS={fields}
       bind:PAGER={pager}

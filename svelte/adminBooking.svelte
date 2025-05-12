@@ -220,6 +220,7 @@
   <div class="master-booking">
     <h2>Booking Management</h2>
     <MasterTable
+      NAME="Booking"
       ACCESS={segments}
       REFS={{
         'tenantId': tenants,

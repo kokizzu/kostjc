@@ -196,6 +196,7 @@
   <div class="master-payment">
     <h2>Payment Management</h2>
     <MasterTable
+      NAME="Payment"
       ACCESS={segments}
       bind:FIELDS={fields}
       bind:PAGER={pager}

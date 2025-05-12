@@ -113,12 +113,12 @@
     );
   }
 
-  async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
+  async function OnEdit(/** @type {any} */ id, /** @type {any[]}*/ payloads) {
     const building = {
       id: payloads[0],
       buildingName: String(payloads[1]),
-      locationId: String(payloads[2]),
-      facilitiesObj: String(payloads[3]),
+      locationId: payloads[2],
+      facilities: payloads[3],
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -168,11 +168,10 @@
         notifier.showSuccess(`Building '${building.buildingName}' created !!`);
 
         popUpForms.Reset();
-
+        popUpForms.Hide();
         OnRefresh(pager);
       }
     );
-    popUpForms.Hide();
   }
 </script>
 
@@ -190,10 +189,15 @@
   <div class="master-building">
     <h2>Building Management</h2>
     <MasterTable
+      NAME='Building'
       ACCESS={segments}
       REFS={{
         'locationId': locations,
         'facilities': facilitiesChoices
+      }}
+      UNSORTED_ROWS={['facilities']}
+      COL_WIDTHS={{
+        'facilities': 200
       }}
       bind:FIELDS={fields}
       bind:PAGER={pager}

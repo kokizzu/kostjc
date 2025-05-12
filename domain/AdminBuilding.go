@@ -41,6 +41,7 @@ const (
 	ErrAdminBuildingRestoreFailed     = `failed to restore building`
 	ErrAdminBuildingLocationNotFound  = `location not found`
 	ErrAdminBuildingInvalidFacilities = `invalid facilities`
+	ErrAdminBuildingNameExists        = `building name already exists`
 )
 
 var AdminBuildingMeta = zCrud.Meta{
@@ -165,11 +166,15 @@ func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 			}
 		}
 
-		if in.Building.Id > 0 {
+		if len(in.Building.Facilities) > 0 {
 			bld.SetFacilities(in.Building.Facilities)
 		}
 
 		if bld.Id == 0 {
+			if bld.FindByBuildingName() {
+				out.SetError(400, ErrAdminBuildingNameExists)
+				return
+			}
 			bld.SetCreatedAt(in.UnixNow())
 			bld.SetCreatedBy(sess.UserId)
 		}

@@ -72,11 +72,15 @@
   export let MASTER_ROWS = /** @type any[][] */ ([]); // bind
   export let REFS = {};
 
+  export let NAME = '';
   export let CAN_SHOW_INFO = false;
-
   export let ACCESS = /** @type Access */ ({});
   export let ARRAY_OF_ARRAY = true;
   export let CAN_SEARCH_ROW = true;
+  /**
+ * @type {Record<string, number>}
+ */
+  export let COL_WIDTHS = {}
 
   // State for loading if hit ajax
   let isAjaxSubmitted = false;
@@ -457,7 +461,7 @@
   <div class="popup_container">
     <div class="popup">
       <header>
-        <h2>Edit Booking {`#${idToMod}`}</h2>
+        <h2>Edit {NAME ? NAME : 'row'} {`#${idToMod}`}</h2>
         <button on:click={closePopUpEdit}>
           <Icon size="22" color="var(--red-005)" src={IoClose} />
         </button>
@@ -581,11 +585,7 @@
               <th class="a_row">Actions</th>
             {:else}
               <th
-                style="
-                  {f.name === 'facilitiesObj' ? 'min-width: 300px;' : ''}
-                  {f.name === 'extraTenants' ? 'min-width: 250px;' : ''}
-                  {f.name === 'tenantId' ? 'min-width: 200px;' : ''}
-                "
+                style="{COL_WIDTHS[f.name] ? `min-width: ${COL_WIDTHS[f.name]}px;` : ''}"
                 class="
 								{f.inputType === 'textarea' ? 'textarea' : ''}
 								{f.inputType === 'datetime' ? 'datetime' : ''}
@@ -1086,12 +1086,14 @@
 
   .table-root .table_container table thead tr th.no {
     width: 30px;
+    cursor: default;
   }
 
   .table-root .table_container table thead tr th.a_row {
     max-width: fit-content;
     min-width: fit-content;
     width: fit-content;
+    cursor: default;
   }
 
   .table-root .table_container table thead tr th:last-child {

@@ -455,6 +455,27 @@ func (b *BuildingsMutator) DoDeletePermanentById() bool { //nolint:dupl false po
 //	return !L.IsError(err, `Buildings.DoUpsert failed: `+b.SpaceName()+ `\n%#v`, arr)
 // }
 
+// DoOverwriteByBuildingName update all columns, error if not exists, not using mutations/Set*
+func (b *BuildingsMutator) DoOverwriteByBuildingName() bool { //nolint:dupl false positive
+	_, err := b.Adapter.Update(b.SpaceName(), b.UniqueIndexBuildingName(), A.X{b.BuildingName}, b.ToUpdateArray())
+	return !L.IsError(err, `Buildings.DoOverwriteByBuildingName failed: `+b.SpaceName())
+}
+
+// DoUpdateByBuildingName update only mutated fields, error if not exists, use Find* and Set* methods instead of direct assignment
+func (b *BuildingsMutator) DoUpdateByBuildingName() bool { //nolint:dupl false positive
+	if !b.HaveMutation() {
+		return true
+	}
+	_, err := b.Adapter.Update(b.SpaceName(), b.UniqueIndexBuildingName(), A.X{b.BuildingName}, b.mutations)
+	return !L.IsError(err, `Buildings.DoUpdateByBuildingName failed: `+b.SpaceName())
+}
+
+// DoDeletePermanentByBuildingName permanent delete
+func (b *BuildingsMutator) DoDeletePermanentByBuildingName() bool { //nolint:dupl false positive
+	_, err := b.Adapter.Delete(b.SpaceName(), b.UniqueIndexBuildingName(), A.X{b.BuildingName})
+	return !L.IsError(err, `Buildings.DoDeletePermanentByBuildingName failed: `+b.SpaceName())
+}
+
 // DoInsert insert, error if already exists
 func (b *BuildingsMutator) DoInsert() bool { //nolint:dupl false positive
 	arr := b.ToArray()

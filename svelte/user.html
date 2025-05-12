@@ -233,6 +233,7 @@
 
       .svelte-select {
         font-size: 13px !important;
+        cursor: pointer;
       }
 
       /* notifier */
@@ -516,7 +517,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
 }
 
 /* fakecss:./_layouts/main.esbuild-svelte-fake-css */
-.root-layout.svelte-xs9m2g.svelte-xs9m2g {
+.root-layout.svelte-1paq3kv.svelte-1paq3kv {
   display: block;
   top: 0;
   bottom: 0;
@@ -525,12 +526,12 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   height: 100vh;
   width: 100vw;
 }
-.root-layout.svelte-xs9m2g .root-container.svelte-xs9m2g {
+.root-layout.svelte-1paq3kv .root-container.svelte-1paq3kv {
   height: 100%;
   width: 100%;
   display: flex;
 }
-.root-layout.svelte-xs9m2g .root-container .root-content.svelte-xs9m2g {
+.root-layout.svelte-1paq3kv .root-container .root-content.svelte-1paq3kv {
   display: flex;
   flex-direction: column;
   -webkit-box-orient: vertical;
@@ -541,11 +542,10 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   max-width: 100%;
   margin-top: var(--navbar-height);
   margin-left: var(--sidemenu-width);
-  margin-right: 30px;
   margin-bottom: 0;
   overflow: hidden;
 }
-.root-layout.svelte-xs9m2g .root-container .root-content .content.svelte-xs9m2g {
+.root-layout.svelte-1paq3kv .root-container .root-content .content.svelte-1paq3kv {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -3958,6 +3958,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return `${currency} ${price}`;
         }
       }
+      function arrToArrNum(arr) {
+        return arr.map(Number);
+      }
       module.exports = {
         datetime: datetime2,
         localeDatetime,
@@ -3966,7 +3969,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         isoDate,
         dateISOFormat: dateISOFormat2,
         loadScript,
-        formatPrice
+        formatPrice,
+        arrToArrNum
       };
     }
   });
@@ -6026,11 +6030,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           default_slot.c();
         t2 = space();
         create_component(footer.$.fragment);
-        attr(main, "class", "content svelte-xs9m2g");
+        attr(main, "class", "content svelte-1paq3kv");
         attr(div0, "class", div0_class_value = "root-content " + /*$isShrinkMenu*/
-        (ctx[2] ? "shrink" : "expand") + " svelte-xs9m2g");
-        attr(div1, "class", "root-container svelte-xs9m2g");
-        attr(div2, "class", "root-layout svelte-xs9m2g");
+        (ctx[2] ? "shrink" : "expand") + " svelte-1paq3kv");
+        attr(div1, "class", "root-container svelte-1paq3kv");
+        attr(div2, "class", "root-layout svelte-1paq3kv");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -6090,7 +6094,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (!current || dirty & /*$isShrinkMenu*/
         4 && div0_class_value !== (div0_class_value = "root-content " + /*$isShrinkMenu*/
-        (ctx2[2] ? "shrink" : "expand") + " svelte-xs9m2g")) {
+        (ctx2[2] ? "shrink" : "expand") + " svelte-1paq3kv")) {
           attr(div0, "class", div0_class_value);
         }
       },

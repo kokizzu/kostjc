@@ -31,13 +31,14 @@
   import { onMount } from 'svelte';
   import { datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
-    import MultiSelect from './MultiSelect.svelte';
+  import MultiSelect from './MultiSelect.svelte';
 
   export let FIELDS = /** @type Field[] */ ([]); // bind
   export let PAGER = /** @type PagerOut */ ({}); // bind
   export let MASTER_ROWS = /** @type any[][] */ ([]); // bind
   export let REFS = {};
 
+  export let NAME = ''
   export let ACCESS = /** @type Access */ ({});
   export let ARRAY_OF_ARRAY = true;
   export let CAN_SEARCH_ROW = true;
@@ -48,6 +49,12 @@
   export let CAN_OPEN_LINK = false;
   export let LINKS = /** @type ExtendedAction[] */ ([]);
   export let IS_CUSTOM_EDIT = false;
+  export let UNSORTED_ROWS = [];
+
+  /**
+   * @type {Record<string, number>}
+   */
+  export let COL_WIDTHS = {}
 
   // State for loading if hit ajax
   let isAjaxSubmitted = false;
@@ -76,7 +83,7 @@
   // Current page describe which page is currently rendered
   let currentPage = 1;
   // State for sort, wheter is ascending or descending
-  let isSortTableAsc = false;
+  let isSortTableAsc = true;
   // State for sort field name
   let fieldNameToSort = (
     (PAGER.order || []).length ? PAGER.order[0]
@@ -99,17 +106,8 @@
   let totalRows = PAGER.countResult;
   // Total rows current
   let totalRowsCurrent = 0;
-  // Display map for fill latitude and longitude
-  let isCoordFieldsExist = false;
-  // Index of field latitude and longitude in payloads
-  let IdxLatitude = -1,
-    IdxLongitude = -1;
-
   // Payloads for modify rows
   let payloads = [];
-
-  // Map element binding
-  let mapElm;
 
   // Toggle show rows options
   function toggleRowsNum() {
@@ -166,13 +164,6 @@
     if (PAGER) getPaginationShow();
   }
 
-  // Coordinate for map if field lat / lng exist
-  let Coord = {
-    lng: 118.0148634,
-    lat: -2.548926,
-    zoom: 7,
-  };
-
   onMount(() => {
     // FilterTable.svelte component is rendered
     filterTable = FilterTable;
@@ -185,7 +176,6 @@
       filterColumns = [];
       FIELDS.forEach((col, idx) => {
         if (col.name === 'deletedAt') deletedIndex = idx;
-        else if (col.name === 'invitationState') deletedIndex = idx;
         filterColumns = [
           ...filterColumns,
           {
@@ -193,27 +183,7 @@
             label: col.label,
           },
         ];
-
-        if (col.name === 'lat') {
-          isCoordFieldsExist = true;
-          IdxLatitude = idx;
-        } else if (col.name === 'lng') {
-          isCoordFieldsExist = true;
-          IdxLongitude = idx;
-        }
       });
-
-      if (isCoordFieldsExist) {
-        for (let i in MASTER_ROWS) {
-          for (let j in FIELDS) {
-            if (FIELDS[j].name === 'lat') {
-              Coord.lat = MASTER_ROWS[i][j];
-            } else if (FIELDS[j].name === 'lng') {
-              Coord.lng = MASTER_ROWS[i][j];
-            }
-          }
-        }
-      }
     }
     // Calculate pagination
     getPaginationShow();
@@ -283,22 +253,19 @@
     payloads = [];
     if (FIELDS && FIELDS.length > 0) {
       FIELDS.forEach((f, i) => {
-        if (f.name === 'lat') {
-          Coord.lat = row[i];
-        } else if (f.name === 'lng') {
-          Coord.lng = row[i];
-        }
         payloads = [...payloads, row[i]];
       });
     }
+
+    console.log('payloads:', payloads);
 
     showPopUp = true;
     idToMod = id;
   }
 
   function handleSubmitEdit() {
-    showPopUp = false;
     OnEdit(idToMod, payloads);
+    showPopUp = false;
   }
 
   function formatFacilities(facArrInt, facObjs) {
@@ -328,7 +295,7 @@
   <div class="popup_container">
     <div class="popup">
       <header>
-        <h2>Edit row</h2>
+        <h2>Edit {NAME ? NAME : 'row'} {`#${idToMod}`}</h2>
         <button on:click={() => (showPopUp = false)}>
           <Icon size="22" color="var(--red-005)" src={IoClose} />
         </button>
@@ -362,7 +329,8 @@
                   label={field.label}
                   placeholder={field.description}
                   bind:valuesTarget={payloads[idx]}
-                  valuesSource={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
+                  valuesSourceType="object"
+                  valuesSourceObj={REFS[field.name]}
                 />
               {:else}
                 <InputBox
@@ -421,44 +389,38 @@
               <th class="a_row">Actions</th>
             {:else}
               <th
-                on:click={() => {
-                  
-                }}
-                style="
-                  {f.name === 'ktpRegion' ? 'min-width: 250px;' : ''}
-                  {f.name === 'bookingId' ? 'min-width: 130px;' : ''}
-                  {f.name === 'whatsappNumber' ? 'min-width: 160px;' : ''}
-                "
+                style="{COL_WIDTHS[f.name] ? `min-width: ${COL_WIDTHS[f.name]}px;` : ''}"
                 class="
-								{f.inputType === 'textarea' ? 'textarea' : ''}
-								{f.inputType === 'datetime' ? 'datetime' : ''}
-								{f.name === 'staffId' ? 'staff' : ''}
-							">
-                <button class="heading" on:click={() => OnSort(f)}>
+                  {f.inputType === 'textarea' ? 'textarea' : ''}
+                  {f.inputType === 'datetime' ? 'datetime' : ''}
+                ">
+                <button class="heading" on:click={() => OnSort(f)} disabled={UNSORTED_ROWS.includes(f.name)}>
                   <span>{f.label}</span>
-                  {#if isSortTableAsc && f.name === fieldNameToSort}
-                    <Icon
-                      className="sort-icon"
-                      size="13"
-                      color="var(--gray-007)"
-                      src={RiArrowsArrowDownSFill}
-                    />
-                  {/if}
-                  {#if !isSortTableAsc && f.name === fieldNameToSort}
-                    <Icon
-                      className="sort-icon"
-                      size="13"
-                      color="var(--gray-007)"
-                      src={RiArrowsArrowUpSFill}
-                    />
-                  {/if}
-                  {#if f.name !== fieldNameToSort}
-                    <Icon
-                      className="sort-icon"
-                      size="13"
-                      color="var(--gray-007)"
-                      src={RiArrowsExpandUpDownFill}
-                    />
+                  {#if !UNSORTED_ROWS.includes(f.name)}
+                    {#if isSortTableAsc && f.name === fieldNameToSort}
+                      <Icon
+                        className="sort-icon"
+                        size="13"
+                        color="var(--gray-007)"
+                        src={RiArrowsArrowDownSFill}
+                      />
+                    {/if}
+                    {#if !isSortTableAsc && f.name === fieldNameToSort}
+                      <Icon
+                        className="sort-icon"
+                        size="13"
+                        color="var(--gray-007)"
+                        src={RiArrowsArrowUpSFill}
+                      />
+                    {/if}
+                    {#if f.name !== fieldNameToSort}
+                      <Icon
+                        className="sort-icon"
+                        size="13"
+                        color="var(--gray-007)"
+                        src={RiArrowsExpandUpDownFill}
+                      />
+                    {/if}
                   {/if}
                 </button>
               </th>
@@ -469,9 +431,7 @@
       <tbody>
         {#if MASTER_ROWS && MASTER_ROWS.length > 0}
           {#each MASTER_ROWS as row}
-            <tr
-              class={CAN_DELETE_ROW && (row[deletedIndex] > 0 || row[deletedIndex] === 'terminated') ? 'deleted' : ''}
-            >
+            <tr class={CAN_DELETE_ROW && (row[deletedIndex] > 0 || row[deletedIndex] === 'terminated') ? 'deleted' : ''}>
               <td class="num_row">{(PAGER.page -1) * PAGER.perPage + MASTER_ROWS.indexOf(row) + 1}</td>
               {#each FIELDS || [] as f, idx}
                 {#if f.name === 'id'}
@@ -910,7 +870,6 @@
 
   .table-root .table_container table thead tr th .heading:focus {
     outline: none;
-    background-color: var(--gray-002);
   }
 
   .table-root .table_container table thead tr th .heading:hover {
@@ -920,14 +879,14 @@
   .table-root .table_container table thead tr th .heading:disabled {
     color: var(--gray-008);
     background-color: transparent;
+    cursor: default;
   }
 
   .table-root .table_container table thead tr th .heading:disabled:hover {
     background-color: transparent;
   }
 
-  .table-root .table_container table thead tr th.textarea,
-  .table-root .table_container table thead tr th.staff {
+  .table-root .table_container table thead tr th.textarea {
     min-width: 280px !important;
   }
 
@@ -941,12 +900,14 @@
 
   .table-root .table_container table thead tr th.no {
     width: 30px;
+    cursor: default;
   }
 
   .table-root .table_container table thead tr th.a_row {
     max-width: fit-content;
     min-width: fit-content;
     width: fit-content;
+    cursor: default;
   }
 
   .table-root .table_container table thead tr th:last-child {

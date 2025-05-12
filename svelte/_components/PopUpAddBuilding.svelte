@@ -9,6 +9,7 @@
   import { RiArrowsArrowDropRightLine } from '../node_modules/svelte-icons-pack/dist/ri';
   import InputBox from './InputBox.svelte';
     import MultiSelect from './MultiSelect.svelte';
+    import { arrToArrNum } from './xFormatter';
 
   let isShow = /** @type {boolean} */ (false);
 
@@ -25,10 +26,11 @@
   }
 
   async function submitAdd() {
+    const facilitiesArrNums = arrToArrNum(facilitiesNums);
     const building = /** @type {Building|any} */ ({
       buildingName: buildingName,
       locationId: locationId,
-      facilities: facilitiesNums
+      facilities: facilitiesArrNums
     });
 
     await OnSubmit(building);
@@ -53,7 +55,6 @@
     (facilities || []).forEach(f => {
       facilitiesObj[f.id] = `${f.facilityName} (${f.facilityType})`
     });
-    console.log('facilitiesObj', facilitiesObj);
     isFacilitiesReady = true;
   })
 </script>
