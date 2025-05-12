@@ -39,6 +39,7 @@
   let hash = /** @type {string} */ (location.hash || '');
 
   onMount(() => {
+    console.log('Facilities', facilities);
     if ( hash[ 0 ] === '#' ) hash = hash.substring( 1 );
 
     if (hash.includes(hashSearchByTenant)) {
@@ -198,10 +199,10 @@
         notifier.showSuccess(`Booking created !!`);
 
         popUpForms.Reset();
+        popUpForms.Hide();
         OnRefresh(pager);
       }
     );
-    popUpForms.Hide();
   }
 </script>
 
@@ -229,6 +230,10 @@
       bind:FIELDS={fields}
       bind:PAGER={pager}
       bind:MASTER_ROWS={bookings}
+      COL_WIDTHS={{
+        'tenantId': 200,
+        'extraTenants': 300
+      }}
 
       tenants={tenants}
       

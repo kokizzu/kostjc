@@ -60,7 +60,7 @@
   }
 </script>
 
-<div class={`popup_container ${isShow ? 'show' : ''}`}>
+<div class={`popup-container ${isShow ? 'show' : ''}`}>
   <div class="popup">
     <header class="header">
       <h2>Add Room</h2>
@@ -160,7 +160,7 @@
     animation: spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
 
-  .popup_container {
+  .popup-container {
     display: none;
 		position: fixed;
 		width: 100%;
@@ -177,11 +177,11 @@
     overflow: auto;
 	}
 
-  .popup_container.show {
+  .popup-container.show {
     display: flex;
   }
 
-	.popup_container .popup {
+	.popup-container .popup {
 		border-radius: 8px;
 		background-color: #FFF;
 		height: fit-content;
@@ -190,7 +190,7 @@
 		flex-direction: column;
 	}
 
-  .popup_container .popup header {
+  .popup-container .popup header {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -199,11 +199,11 @@
 		border-bottom: 1px solid var(--gray-004);
 	}
 
-	.popup_container .popup header h2 {
+	.popup-container .popup header h2 {
 		margin: 0;
 	}
 
-	.popup_container .popup header button {
+	.popup-container .popup header button {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -214,22 +214,22 @@
 		cursor: pointer;
 	}
 
-	.popup_container .popup header button:hover {
+	.popup-container .popup header button:hover {
 		background-color: #ef444420;
 	}
 
-	.popup_container .popup header button:active {
+	.popup-container .popup header button:active {
 		background-color: #ef444430;
 	}
 
-	.popup_container .popup .forms {
+	.popup-container .popup .forms {
 		padding: 20px;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
 	}
 
-	.popup_container .popup .foot {
+	.popup-container .popup .foot {
 		display: flex;
 		flex-direction: row;
     justify-content: space-between;
@@ -239,14 +239,14 @@
 		border-top: 1px solid var(--gray-004);
 	}
 
-  .popup_container .popup .foot .right {
+  .popup-container .popup .foot .right {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
   }
 
-	.popup_container .popup .foot button {
+	.popup-container .popup .foot button {
 		padding: 8px 18px;
 		border-radius: 9999px;
 		border: none;
@@ -255,29 +255,29 @@
 		font-weight: 600;
 	}
 
-	.popup_container .popup .foot button.ok {
+	.popup-container .popup .foot button.ok {
 		background-color: var(--green-006);
     display: flex;
     justify-content: center;
     align-items: center;
 	}
 
-	.popup_container .popup .foot button.ok:hover {
+	.popup-container .popup .foot button.ok:hover {
 		background-color: var(--green-005);
 	}
 
-	.popup_container .popup .foot button.ok:disabled {
+	.popup-container .popup .foot button.ok:disabled {
 		cursor: not-allowed;
 		background-color: var(--gray-003);
 		color: var(--gray-007);
 	}
 
-	.popup_container .popup .foot button.cancel {
+	.popup-container .popup .foot button.cancel {
 		background-color: transparent;
     color: var(--gray-007);
 	}
 
-	.popup_container .popup .foot button.cancel:hover {
+	.popup-container .popup .foot button.cancel:hover {
 		background-color: var(--gray-001);
 	}
 
@@ -288,7 +288,7 @@
   }
 
   @media only screen and (max-width : 768px) {
-    .popup_container {
+    .popup-container {
       padding: 10px;
     }
   }

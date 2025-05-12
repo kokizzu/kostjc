@@ -5,7 +5,6 @@ import (
 	"kostjc/model/zCrud"
 	"strconv"
 
-	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/L"
 	"github.com/kokizzu/gotro/X"
@@ -184,8 +183,7 @@ func (f *Facilities) FindAll() []Facilities {
 	const comment = `-- Facilities) FindAll`
 
 	queryRows := comment + `
-SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName() + `
-WHERE "deletedAt" = 0`
+SELECT + ` + f.SqlSelectAllFields() + ` FROM ` + f.SqlTableName()
 
 	var rows = []Facilities{}
 	f.Adapter.QuerySql(queryRows, func(row []any) {
@@ -293,8 +291,6 @@ LIMIT 1`
 SELECT ` + meta.ToSelect() + `
 FROM ` + p.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 
-	fmt.Println(color.GreenString(queryRows))
-
 	p.Adapter.QuerySql(queryRows, func(row []any) {
 		row[0] = X.ToS(row[0]) // ensure id is string
 		res = append(res, row)
@@ -325,14 +321,32 @@ func (b *Bookings) FindBookingChoices() map[uint64]string {
 	const comment = `-- Bookings) FindBookingChoices`
 
 	queryRows := comment + `
-SELECT ` + b.SqlId() + `, ` + b.SqlTotalPriceIDR() + ` FROM ` + b.SqlTableName() + `
-ORDER BY ` + b.SqlId() + ` ASC`
+SELECT
+	"bookings"."id",
+	"bookings"."totalPriceIDR",
+	COALESCE("rooms"."roomName", ''),
+	"bookings"."dateStart",
+	COALESCE("tenants"."tenantName", '')
+FROM "bookings"
+LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
+LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
+ORDER BY "bookings"."id" ASC`
 
 	out := make(map[uint64]string)
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 2 {
-			idWithPrice := `#` + X.ToS(row[0]) + ` - ` + formatCurrency(X.ToI(row[1]), `IDR`)
-			out[X.ToU(row[0])] = idWithPrice
+		fmt.Println(`Row:`, row)
+		if len(row) == 5 {
+			id := `#` + X.ToS(row[0])
+			totalPriceIdr := formatCurrency(X.ToI(row[1]), `IDR`)
+			roomName := X.ToS(row[2])
+			dateStart := X.ToS(row[3])
+			tenantName := X.ToS(row[4])
+
+			formattedBooking := fmt.Sprintf(
+				"%s - %s - %s - %s - %s",
+				id, totalPriceIdr, roomName, dateStart, tenantName,
+			)
+			out[X.ToU(row[0])] = formattedBooking
 		}
 	})
 

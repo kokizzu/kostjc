@@ -207,6 +207,11 @@
     padding: 10px 12px;
   }
 
+  .input-box input:hover,
+  .input-box textarea:hover {
+    border: 1px solid var(--gray-005);
+  }
+
   .input-box input:focus,
   .input-box textarea:focus {
     border-color: var(--blue-005);

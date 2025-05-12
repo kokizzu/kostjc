@@ -284,6 +284,8 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 			}
 			room.SetCurrentTenantId(in.Booking.TenantId)
 			room.SetLastUseAt(in.Booking.DateEnd)
+			room.SetUpdatedAt(in.UnixNow())
+			room.SetUpdatedBy(sess.UserId)
 			if !room.DoUpdateById() {
 				out.SetError(500, ErrAdminBookingSaveFailed)
 				return

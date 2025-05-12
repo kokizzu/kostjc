@@ -206,6 +206,9 @@
         'paymentStatus': PaymentStatuses,
         'paymentMethod': PaymentMethods
       }}
+      COL_WIDTHS={{
+        'bookingId': 370,
+      }}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW

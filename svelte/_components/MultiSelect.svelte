@@ -1,5 +1,7 @@
 <script>
-    import { onMount } from 'svelte';
+  // NOTE: valuesSourceType = 'array' is not yet implemented
+
+  import { onMount } from 'svelte';
   import Select from '../node_modules/svelte-select';
 
   export let className = '';

@@ -292,7 +292,7 @@
 {/if}
 
 {#if showPopUp}
-  <div class="popup_container">
+  <div class="popup-container">
     <div class="popup">
       <header>
         <h2>Edit {NAME ? NAME : 'row'} {`#${idToMod}`}</h2>
@@ -583,7 +583,7 @@
 </div>
 
 <style>
-  .popup_container {
+  .popup-container {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -600,7 +600,7 @@
     overflow: auto;
   }
 
-  .popup_container .popup {
+  .popup-container .popup {
     border-radius: 8px;
     background-color: #fff;
     height: fit-content;
@@ -609,7 +609,7 @@
     flex-direction: column;
   }
 
-  .popup_container .popup header {
+  .popup-container .popup header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -618,11 +618,11 @@
     border-bottom: 1px solid var(--gray-004);
   }
 
-  .popup_container .popup header h2 {
+  .popup-container .popup header h2 {
     margin: 0;
   }
 
-  .popup_container .popup header button {
+  .popup-container .popup header button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -633,18 +633,18 @@
     cursor: pointer;
   }
 
-  .popup_container .popup header button:hover {
+  .popup-container .popup header button:hover {
     background-color: #ef444420;
   }
 
-  .popup_container .popup .forms {
+  .popup-container .popup .forms {
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  .popup_container .popup .foot {
+  .popup-container .popup .foot {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -654,7 +654,7 @@
     border-top: 1px solid var(--gray-004);
   }
 
-  .popup_container .popup .foot button {
+  .popup-container .popup .foot button {
     padding: 8px 13px;
     border-radius: 9999px;
     border: none;
@@ -666,7 +666,7 @@
     align-items: center;
   }
 
-  .popup_container .popup .foot button.ok {
+  .popup-container .popup .foot button.ok {
     background-color: var(--green-006);
     border: 1px solid var(--green-006);
     display: flex;
@@ -674,7 +674,7 @@
     align-items: center;
   }
 
-  .popup_container .popup .foot button.ok:hover {
+  .popup-container .popup .foot button.ok:hover {
     background-color: var(--green-005);
   }
 
@@ -866,6 +866,7 @@
     cursor: pointer;
     text-transform: capitalize;
     font-weight: 600;
+    color: var(--gray-008);
   }
 
   .table-root .table_container table thead tr th .heading:focus {
