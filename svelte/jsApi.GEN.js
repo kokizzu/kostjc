@@ -1694,8 +1694,12 @@ exports.UserProfile = async function UserProfile( i, cb ) {
 
 /**
  * @typedef {Object} UserReportIn
+ * @property {String} monthStart
+ * @property {String} monthEnd
  */
 const UserReportIn = {
+  monthStart: '', // string
+  monthEnd: '', // string
 }
 /**
  * @typedef {Object} UserReportOut
@@ -1716,6 +1720,8 @@ const UserReportIn = {
  * @property {String} user.userName
  * @property {String} user.role
  * @property {Object} segments
+ * @property {Array<String>} roomNames
+ * @property {Object} bookings
  */
 const UserReportOut = {
   user: { // rqAuth.Users
@@ -1738,6 +1744,9 @@ const UserReportOut = {
   }, // rqAuth.Users
   segments: { // M.SB
   }, // M.SB
+  roomNames: [], // []string
+  bookings: { // []rqProperty.BookingDetail
+  }, // []rqProperty.BookingDetail
 }
 /**
  * @callback UserReportCallback

@@ -2,6 +2,7 @@ package domain
 
 import (
 	"kostjc/model/mAuth/rqAuth"
+	"kostjc/model/mProperty/rqProperty"
 
 	"github.com/kokizzu/gotro/M"
 )
@@ -15,14 +16,16 @@ import (
 type (
 	UserReportIn struct {
 		RequestCommon
-		StartMonth string `json:"startMonth" form:"startMonth" query:"startMonth" long:"startMonth" msg:"startMonth"`
-		EndMonth   string `json:"endMonth" form:"endMonth" query:"endMonth" long:"endMonth" msg:"endMonth"`
+		MonthStart string `json:"monthStart" form:"monthStart" query:"monthStart" long:"monthStart" msg:"monthStart"`
+		MonthEnd   string `json:"monthEnd" form:"monthEnd" query:"monthEnd" long:"monthEnd" msg:"monthEnd"`
 	}
 	UserReportOut struct {
 		ResponseCommon
 		User *rqAuth.Users `json:"user" form:"user" query:"user" long:"user" msg:"user"`
 
-		Segments M.SB `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
+		Segments  M.SB                       `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
+		RoomNames []string                   `json:"roomNames" form:"roomNames" query:"roomNames" long:"roomNames" msg:"roomNames"`
+		Bookings  []rqProperty.BookingDetail `json:"bookingsPerQuartal" form:"bookingsPerQuartal" query:"bookingsPerQuartal" long:"bookingsPerQuartal" msg:"bookingsPerQuartal"`
 	}
 )
 
@@ -38,6 +41,12 @@ func (d *Domain) UserReport(in *UserReportIn) (out UserReportOut) {
 	if sess == nil {
 		return
 	}
+
+	room := rqProperty.NewRooms(d.PropOltp)
+	out.RoomNames = room.FindRoomNames()
+
+	booking := rqProperty.NewBookings(d.PropOltp)
+	out.Bookings = booking.FindBookingsPerQuartal(in.MonthStart, in.MonthEnd)
 
 	return
 }

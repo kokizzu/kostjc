@@ -6,7 +6,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/L"
 	"github.com/kokizzu/gotro/S"
@@ -663,6 +662,22 @@ ORDER BY ` + r.SqlRoomName() + ` ASC`
 	return out
 }
 
+func (r *Rooms) FindRoomNames() (out []string) {
+	const comment = `-- Rooms) FindRoomNames`
+
+	queryRows := comment + `
+SELECT ` + r.SqlRoomName() + ` FROM ` + r.SqlTableName() + `
+ORDER BY ` + r.SqlRoomName() + ` ASC`
+
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 1 {
+			out = append(out, X.ToS(row[0]))
+		}
+	})
+
+	return
+}
+
 const DateFormatYYYYMM = "2006-01"
 
 func isValidYearMonth(yearMonth string) bool {
@@ -684,13 +699,22 @@ type RoomBooking struct {
 	Bookings []BookingDetail `json:"bookings"`
 }
 
-func (r *Rooms) FindBookingsPerQuartal(monthStart, monthEnd string) []RoomBooking {
-	const comment = `-- Rooms) FindBookingsPerQuartal`
+func getEndOfMonth(ym string) string {
+	t, _ := time.Parse(DateFormatYYYYMM, ym)
+	endOfMonth := t.AddDate(0, 1, 0).AddDate(0, 0, -1)
+	return endOfMonth.Format(time.DateOnly)
+}
+
+func (b *Bookings) FindBookingsPerQuartal(monthStart, monthEnd string) (out []BookingDetail) {
+	const comment = `-- Bookings) FindBookingsPerQuartal`
 
 	if !(isValidYearMonth(monthStart) || isValidYearMonth(monthEnd)) {
 		monthStart = time.Now().Format(DateFormatYYYYMM)
 		monthEnd = time.Now().AddDate(0, 4, 0).Format(DateFormatYYYYMM)
 	}
+
+	monthEnd = getEndOfMonth(monthEnd)
+	monthStart += "-01"
 
 	queryRows := comment + `
 SELECT 
@@ -704,16 +728,16 @@ FROM "bookings"
 LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
 LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
 LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
-WHERE "bookings"."dateStart" >= ` + S.Z(monthStart) + `
-	AND "bookings"."dateStart" <= ` + S.Z(monthEnd) + `
+WHERE
+	(
+    "bookings"."dateStart" BETWEEN ` + S.Z(monthStart) + ` AND ` + S.Z(monthEnd) + `
+    OR
+    "bookings"."dateEnd" BETWEEN ` + S.Z(monthStart) + ` AND ` + S.Z(monthEnd) + `
+  )
 GROUP BY "rooms"."roomName", "tenants"."tenantName", "bookings"."dateStart", "bookings"."dateEnd", "bookings"."totalPriceIDR"
 ORDER BY "rooms"."roomName" ASC`
 
-	fmt.Println(color.GreenString(queryRows))
-
-	var bookingDetails []BookingDetail
-
-	r.Adapter.QuerySql(queryRows, func(row []any) {
+	b.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) == 6 {
 			roomName := X.ToS(row[0])
 			tenantName := X.ToS(row[1])
@@ -722,7 +746,7 @@ ORDER BY "rooms"."roomName" ASC`
 			totalPaidIdr := X.ToI(row[4])
 			totalPriceIdr := X.ToI(row[5])
 
-			bookingDetails = append(bookingDetails, BookingDetail{
+			out = append(out, BookingDetail{
 				RoomName:   roomName,
 				TenantName: tenantName,
 				DateStart:  dateStart,
@@ -733,22 +757,13 @@ ORDER BY "rooms"."roomName" ASC`
 		}
 	})
 
-	fmt.Println(color.GreenString(X.ToJsonPretty(bookingDetails)))
-
-	roomBookings, err := GroupBookingsToQuarter(bookingDetails, monthStart, monthEnd)
-	if err != nil {
-		return []RoomBooking{}
-	}
-
-	return roomBookings
+	return
 }
 
-// Parse string like "2025-05" to time.Time (first day of that month)
 func parseMonth(monthStr string) (time.Time, error) {
 	return time.Parse("2006-01", monthStr)
 }
 
-// Get number of months between two dates (inclusive)
 func monthsInRange(start, end time.Time) []time.Time {
 	var months []time.Time
 	for t := start; !t.After(end); t = t.AddDate(0, 1, 0) {
@@ -757,10 +772,7 @@ func monthsInRange(start, end time.Time) []time.Time {
 	return months
 }
 
-func GroupBookingsToQuarter(
-	bookings []BookingDetail,
-	monthStartStr, monthEndStr string,
-) ([]RoomBooking, error) {
+func GroupBookingsToQuarter(bookings []BookingDetail, monthStartStr, monthEndStr string) ([]RoomBooking, error) {
 	monthStart, err := parseMonth(monthStartStr)
 	if err != nil {
 		return nil, err
@@ -770,29 +782,30 @@ func GroupBookingsToQuarter(
 		return nil, err
 	}
 
-	// Build map[roomName] -> []BookingDetail (fixed 4 length)
-	roomMap := map[string][]BookingDetail{}
 	monthSlots := monthsInRange(monthStart, monthEnd)
+	roomMap := make(map[string][]BookingDetail)
 
 	for _, b := range bookings {
-		startDate, err := time.Parse("2006-01-02", b.DateStart)
-		if err != nil {
-			continue // skip invalid
+		startDate, err1 := time.Parse(time.DateOnly, b.DateStart)
+		endDate, err2 := time.Parse(time.DateOnly, b.DateEnd)
+		if err1 != nil || err2 != nil {
+			continue
 		}
 
-		// Compute index
 		for i, m := range monthSlots {
-			if startDate.Year() == m.Year() && startDate.Month() == m.Month() {
+			monthStart := m
+			monthEnd := m.AddDate(0, 1, 0).Add(-time.Nanosecond) // end of month
+			if (startDate.Before(monthEnd) || startDate.Equal(monthEnd)) &&
+				(endDate.After(monthStart) || endDate.Equal(monthStart)) {
 				if _, exists := roomMap[b.RoomName]; !exists {
 					roomMap[b.RoomName] = make([]BookingDetail, len(monthSlots))
 				}
 				roomMap[b.RoomName][i] = b
-				break
 			}
 		}
 	}
 
-	// Convert map to slice
+	// Build result
 	var result []RoomBooking
 	for room, bookings := range roomMap {
 		result = append(result, RoomBooking{
@@ -800,6 +813,5 @@ func GroupBookingsToQuarter(
 			Bookings: bookings,
 		})
 	}
-
 	return result, nil
 }

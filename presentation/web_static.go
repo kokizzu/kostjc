@@ -1,6 +1,8 @@
 package presentation
 
 import (
+	"time"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/kokizzu/gotro/M"
 
@@ -44,18 +46,28 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	})
 
 	fw.Get(`/`+domain.UserReportAction, func(ctx *fiber.Ctx) error {
-		in, user, segments := userInfoFromContext(ctx, d)
+		var in domain.UserReportIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserReportAction)
+		if err != nil {
+			return err
+		}
+
 		if notLogin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
-		room := rqProperty.NewRooms(d.PropOltp)
-		bookingsPerQuartal := room.FindBookingsPerQuartal(`2025-03`, `2025-06`)
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.MonthStart = time.Now().Format(rqProperty.DateFormatYYYYMM)
+		in.MonthEnd = time.Now().AddDate(0, 3, 0).Format(rqProperty.DateFormatYYYYMM)
+		out := d.UserReport(&in)
+
 		return views.RenderUserReport(ctx, M.SX{
 			`title`:              `KostJC | User Report`,
 			`user`:               user,
 			`segments`:           segments,
-			`bookingsPerQuartal`: bookingsPerQuartal,
+			`bookingsPerQuartal`: out.Bookings,
+			`roomNames`:          out.RoomNames,
 		})
 	})
 

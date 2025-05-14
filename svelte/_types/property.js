@@ -136,10 +136,3 @@ module.exports = {};
  * @property {number} totalPrice - Total price of the booking
  */
 module.exports = {};
-
-/**
- * @typedef {Object} RoomBooking
- * @property {string} roomName - Name of the room
- * @property {BookingDetail[]} bookings - List of bookings for the room (exactly 4 elements, one per month in quarter)
- */
-module.exports = {};
