@@ -125,3 +125,21 @@ module.exports = {};
  * @property {string} lastUseAt
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} BookingDetail
+ * @property {string} roomName - Name of the room
+ * @property {string} tenantName - Name of the tenant
+ * @property {string} dateStart - Booking start date (YYYY-MM-DD)
+ * @property {string} dateEnd - Booking end date (YYYY-MM-DD)
+ * @property {number} amountPaid - Amount paid by tenant
+ * @property {number} totalPrice - Total price of the booking
+ */
+module.exports = {};
+
+/**
+ * @typedef {Object} RoomBooking
+ * @property {string} roomName - Name of the room
+ * @property {BookingDetail[]} bookings - List of bookings for the room (exactly 4 elements, one per month in quarter)
+ */
+module.exports = {};

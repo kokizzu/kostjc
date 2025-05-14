@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"kostjc/model/zCrud"
 	"strconv"
+	"time"
 
+	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/L"
+	"github.com/kokizzu/gotro/S"
 	"github.com/kokizzu/gotro/X"
 	"github.com/tarantool/go-tarantool"
 )
@@ -658,4 +661,145 @@ ORDER BY ` + r.SqlRoomName() + ` ASC`
 	})
 
 	return out
+}
+
+const DateFormatYYYYMM = "2006-01"
+
+func isValidYearMonth(yearMonth string) bool {
+	_, err := time.Parse(DateFormatYYYYMM, yearMonth)
+	return err == nil
+}
+
+type BookingDetail struct {
+	RoomName   string `json:"roomName"`
+	TenantName string `json:"tenantName"`
+	DateStart  string `json:"dateStart"`
+	DateEnd    string `json:"dateEnd"`
+	AmountPaid int64  `json:"amountPaid"`
+	TotalPrice int64  `json:"totalPrice"`
+}
+
+type RoomBooking struct {
+	RoomName string          `json:"roomName"`
+	Bookings []BookingDetail `json:"bookings"`
+}
+
+func (r *Rooms) FindBookingsPerQuartal(monthStart, monthEnd string) []RoomBooking {
+	const comment = `-- Rooms) FindBookingsPerQuartal`
+
+	if !(isValidYearMonth(monthStart) || isValidYearMonth(monthEnd)) {
+		monthStart = time.Now().Format(DateFormatYYYYMM)
+		monthEnd = time.Now().AddDate(0, 4, 0).Format(DateFormatYYYYMM)
+	}
+
+	queryRows := comment + `
+SELECT 
+  "rooms"."roomName",
+  COALESCE("tenants"."tenantName", '') AS "tenantName",
+  COALESCE("bookings"."dateStart", '') AS "dateStart",
+  COALESCE("bookings"."dateEnd", '') AS "dateEnd",
+  COALESCE(SUM("payments"."paidIDR"), 0) AS "totalPaidIDR",
+  "bookings"."totalPriceIDR"
+FROM "bookings"
+LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
+LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
+LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
+WHERE "bookings"."dateStart" >= ` + S.Z(monthStart) + `
+	AND "bookings"."dateStart" <= ` + S.Z(monthEnd) + `
+GROUP BY "rooms"."roomName", "tenants"."tenantName", "bookings"."dateStart", "bookings"."dateEnd", "bookings"."totalPriceIDR"
+ORDER BY "rooms"."roomName" ASC`
+
+	fmt.Println(color.GreenString(queryRows))
+
+	var bookingDetails []BookingDetail
+
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 6 {
+			roomName := X.ToS(row[0])
+			tenantName := X.ToS(row[1])
+			dateStart := X.ToS(row[2])
+			dateEnd := X.ToS(row[3])
+			totalPaidIdr := X.ToI(row[4])
+			totalPriceIdr := X.ToI(row[5])
+
+			bookingDetails = append(bookingDetails, BookingDetail{
+				RoomName:   roomName,
+				TenantName: tenantName,
+				DateStart:  dateStart,
+				DateEnd:    dateEnd,
+				AmountPaid: totalPaidIdr,
+				TotalPrice: totalPriceIdr,
+			})
+		}
+	})
+
+	fmt.Println(color.GreenString(X.ToJsonPretty(bookingDetails)))
+
+	roomBookings, err := GroupBookingsToQuarter(bookingDetails, monthStart, monthEnd)
+	if err != nil {
+		return []RoomBooking{}
+	}
+
+	return roomBookings
+}
+
+// Parse string like "2025-05" to time.Time (first day of that month)
+func parseMonth(monthStr string) (time.Time, error) {
+	return time.Parse("2006-01", monthStr)
+}
+
+// Get number of months between two dates (inclusive)
+func monthsInRange(start, end time.Time) []time.Time {
+	var months []time.Time
+	for t := start; !t.After(end); t = t.AddDate(0, 1, 0) {
+		months = append(months, t)
+	}
+	return months
+}
+
+func GroupBookingsToQuarter(
+	bookings []BookingDetail,
+	monthStartStr, monthEndStr string,
+) ([]RoomBooking, error) {
+	monthStart, err := parseMonth(monthStartStr)
+	if err != nil {
+		return nil, err
+	}
+	monthEnd, err := parseMonth(monthEndStr)
+	if err != nil {
+		return nil, err
+	}
+
+	// Build map[roomName] -> []BookingDetail (fixed 4 length)
+	roomMap := map[string][]BookingDetail{}
+	monthSlots := monthsInRange(monthStart, monthEnd)
+
+	for _, b := range bookings {
+		startDate, err := time.Parse("2006-01-02", b.DateStart)
+		if err != nil {
+			continue // skip invalid
+		}
+
+		// Compute index
+		for i, m := range monthSlots {
+			if startDate.Year() == m.Year() && startDate.Month() == m.Month() {
+				if _, exists := roomMap[b.RoomName]; !exists {
+					roomMap[b.RoomName] = make([]BookingDetail, len(monthSlots))
+				}
+				roomMap[b.RoomName][i] = b
+				break
+			}
+		}
+	}
+
+	// Convert map to slice
+	var result []RoomBooking
+	for room, bookings := range roomMap {
+		result = append(result, RoomBooking{
+			RoomName: room,
+			Bookings: bookings,
+		})
+	}
+
+	return result, nil
 }

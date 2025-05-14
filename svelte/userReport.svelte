@@ -1,11 +1,13 @@
 <script>
   /** @typedef {import('./_types/masters.js').Access} Access */
   /** @typedef {import('./_types/users.js').User} User */
+  /** @typedef {import('./_types/property.js').RoomBooking} RoomBooking */
 
   import LayoutMain from './_layouts/main.svelte';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
+  let bookingsPerQuartal = /** @type {RoomBooking[]} */ ([/* bookingsPerQuartal*/]);
 </script>
 
 <LayoutMain access={segments} user={user}>
@@ -32,37 +34,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>Room A1</th>
-          <td>
-            <div class="cell">
-              <span>Ahmad Habibi</span> 
-              <span>10 Mei s/d 10 Juni</span> 
-              <span>400/1000</span>
-            </div>
-          </td>
-          <td>
-            <div class="cell">
-              <span>Ahmad Habibi</span> 
-              <span>10 Mei s/d 10 Juni</span> 
-              <span>400/1000</span>
-            </div>
-          </td>
-          <td>
-            <div class="cell unpaid">
-              <span>Ahmad Habibi</span> 
-              <span>10 Mei s/d 10 Juni</span> 
-              <span>400/1000</span>
-            </div>
-          </td>
-          <td>
-            <div class="cell">
-              <span>Ahmad Habibi</span> 
-              <span>10 Mei s/d 10 Juni</span> 
-              <span>400/1000</span>
-            </div>
-          </td>
-        </tr>
+        {#each bookingsPerQuartal as rb}
+          <tr>
+            <th>Room {rb.roomName}</th>
+            {#each rb.bookings as bd}
+              <td>
+                <div class="cell {bd.amountPaid == bd.totalPrice ? '' :'unpaid'}">
+                  {#if bd.tenantName}
+                    <span>{bd.tenantName}</span> 
+                    <span>{bd.dateStart} s/d {bd.dateEnd}</span> 
+                    <span>{bd.amountPaid}/{bd.totalPrice}</span>
+                  {/if}
+                </div>
+              </td>
+            {/each}
+          </tr>
+        {/each}
       </tbody>
     </table>
   </div>

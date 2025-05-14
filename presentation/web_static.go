@@ -49,10 +49,13 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return ctx.Redirect(`/`, 302)
 		}
 
+		room := rqProperty.NewRooms(d.PropOltp)
+		bookingsPerQuartal := room.FindBookingsPerQuartal(`2025-03`, `2025-06`)
 		return views.RenderUserReport(ctx, M.SX{
-			`title`:    `KostJC | User Report`,
-			`user`:     user,
-			`segments`: segments,
+			`title`:              `KostJC | User Report`,
+			`user`:               user,
+			`segments`:           segments,
+			`bookingsPerQuartal`: bookingsPerQuartal,
 		})
 	})
 

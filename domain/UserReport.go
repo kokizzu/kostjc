@@ -15,6 +15,8 @@ import (
 type (
 	UserReportIn struct {
 		RequestCommon
+		StartMonth string `json:"startMonth" form:"startMonth" query:"startMonth" long:"startMonth" msg:"startMonth"`
+		EndMonth   string `json:"endMonth" form:"endMonth" query:"endMonth" long:"endMonth" msg:"endMonth"`
 	}
 	UserReportOut struct {
 		ResponseCommon
