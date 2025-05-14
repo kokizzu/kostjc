@@ -557,49 +557,53 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
 }
 
 /* fakecss:./userReport.esbuild-svelte-fake-css */
-.report-container.svelte-1uebl42.svelte-1uebl42 {
+.report-container.svelte-1gb2780.svelte-1gb2780 {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-table.svelte-1uebl42.svelte-1uebl42 {
+table.svelte-1gb2780.svelte-1gb2780 {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-1uebl42 thead tr th.svelte-1uebl42 {
+table.svelte-1gb2780 thead tr th.svelte-1gb2780 {
   text-align: left;
   padding: 8px 12px;
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-1uebl42 tbody tr td.svelte-1uebl42 {
+table.svelte-1gb2780 tbody tr.svelte-1gb2780 {
+  border-top: 1px solid var(--gray-002);
+  border-bottom: 1px solid var(--gray-004);
+}
+table.svelte-1gb2780 tbody tr td.svelte-1gb2780 {
   padding: 8px 12px;
 }
-table.svelte-1uebl42 tbody tr td .cells.svelte-1uebl42 {
+table.svelte-1gb2780 tbody tr td .cells.svelte-1gb2780 {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-table.svelte-1uebl42 tbody tr td .cell.svelte-1uebl42 {
+table.svelte-1gb2780 tbody tr td .cell.svelte-1gb2780 {
   display: flex;
   flex-direction: column;
   gap: 2px;
   font-size: 12px;
 }
-table.svelte-1uebl42 tbody tr td .cell.unpaid.svelte-1uebl42 {
+table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   padding: 5px 8px;
   background-color: var(--red-transparent);
   border-radius: 5px;
   color: var(--red-006);
 }
-.header.svelte-1uebl42.svelte-1uebl42 {
+.header.svelte-1gb2780.svelte-1gb2780 {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
   margin-bottom: 32px;
 }
-.btn.svelte-1uebl42.svelte-1uebl42 {
+.btn.svelte-1gb2780.svelte-1gb2780 {
   background-color: var(--gray-002);
   border: none;
   border-radius: 9999px;
@@ -610,11 +614,11 @@ table.svelte-1uebl42 tbody tr td .cell.unpaid.svelte-1uebl42 {
   color: var(--gray-008);
   padding: 8px;
 }
-.btn.svelte-1uebl42.svelte-1uebl42:hover {
+.btn.svelte-1gb2780.svelte-1gb2780:hover {
   background-color: var(--blue-transparent);
   color: var(--blue-006);
 }
-.header-text.svelte-1uebl42.svelte-1uebl42 {
+.header-text.svelte-1gb2780.svelte-1gb2780 {
   font-weight: 600;
   font-size: 18px;
   user-select: none;
@@ -5289,7 +5293,7 @@ table.svelte-1uebl42 tbody tr td .cell.unpaid.svelte-1uebl42 {
       c() {
         th = element("th");
         t = text(t_value);
-        attr(th, "class", "svelte-1uebl42");
+        attr(th, "class", "svelte-1gb2780");
       },
       m(target, anchor) {
         insert(target, th, anchor);
@@ -5324,7 +5328,7 @@ table.svelte-1uebl42 tbody tr td .cell.unpaid.svelte-1uebl42 {
           if_block.c();
         attr(div, "class", div_class_value = "cell " + /*booking*/
         (ctx[17].amountPaid >= /*booking*/
-        ctx[17].totalPrice ? "" : "unpaid") + " svelte-1uebl42");
+        ctx[17].totalPrice ? "" : "unpaid") + " svelte-1gb2780");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -5350,7 +5354,7 @@ table.svelte-1uebl42 tbody tr td .cell.unpaid.svelte-1uebl42 {
         if (dirty & /*bookingsPerQuartal*/
         1 && div_class_value !== (div_class_value = "cell " + /*booking*/
         (ctx2[17].amountPaid >= /*booking*/
-        ctx2[17].totalPrice ? "" : "unpaid") + " svelte-1uebl42")) {
+        ctx2[17].totalPrice ? "" : "unpaid") + " svelte-1gb2780")) {
           attr(div, "class", div_class_value);
         }
       },
@@ -5533,8 +5537,8 @@ table.svelte-1uebl42 tbody tr td .cell.unpaid.svelte-1uebl42 {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cells svelte-1uebl42");
-        attr(td, "class", "svelte-1uebl42");
+        attr(div, "class", "cells svelte-1gb2780");
+        attr(td, "class", "svelte-1gb2780");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -5607,7 +5611,8 @@ table.svelte-1uebl42 tbody tr td .cell.unpaid.svelte-1uebl42 {
           each_blocks[i].c();
         }
         t3 = space();
-        attr(th, "class", "svelte-1uebl42");
+        attr(th, "class", "svelte-1gb2780");
+        attr(tr, "class", "svelte-1gb2780");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -5742,17 +5747,18 @@ table.svelte-1uebl42 tbody tr td .cell.unpaid.svelte-1uebl42 {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(button0, "class", "btn svelte-1uebl42");
+        attr(button0, "class", "btn svelte-1gb2780");
         attr(button0, "aria-label", "Previous");
-        attr(span, "class", "header-text svelte-1uebl42");
-        attr(button1, "class", "btn svelte-1uebl42");
+        attr(span, "class", "header-text svelte-1gb2780");
+        attr(button1, "class", "btn svelte-1gb2780");
         attr(button1, "aria-label", "Next");
-        attr(header, "class", "header svelte-1uebl42");
+        attr(header, "class", "header svelte-1gb2780");
         attr(header, "aria-label", "Date range navigation");
         attr(div0, "class", "actions");
-        attr(th, "class", "svelte-1uebl42");
-        attr(table, "class", "svelte-1uebl42");
-        attr(div1, "class", "report-container svelte-1uebl42");
+        attr(th, "class", "svelte-1gb2780");
+        attr(tr, "class", "svelte-1gb2780");
+        attr(table, "class", "svelte-1gb2780");
+        attr(div1, "class", "report-container svelte-1gb2780");
       },
       m(target, anchor) {
         insert(target, div1, anchor);

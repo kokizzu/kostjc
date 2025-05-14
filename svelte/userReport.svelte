@@ -165,6 +165,11 @@
     border-bottom: 1px solid var(--gray-004)
   }
 
+  table tbody tr {
+    border-top: 1px solid var(--gray-002);
+    border-bottom: 1px solid var(--gray-004);
+  }
+
   table tbody tr td {
     padding: 8px 12px;
   }
