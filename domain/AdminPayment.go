@@ -171,9 +171,7 @@ func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 			pym.SetPaymentAt(in.Payment.PaymentAt)
 		}
 
-		if in.Payment.PaidIDR > 0 {
-			pym.SetPaidIDR(in.Payment.PaidIDR)
-		}
+		pym.SetPaidIDR(in.Payment.PaidIDR)
 
 		if in.Payment.PaymentMethod != `` {
 			pym.SetPaymentMethod(in.Payment.PaymentMethod)
