@@ -128,11 +128,12 @@ module.exports = {};
 
 /**
  * @typedef {Object} BookingDetail
- * @property {string} roomName - Name of the room
- * @property {string} tenantName - Name of the tenant
- * @property {string} dateStart - Booking start date (YYYY-MM-DD)
- * @property {string} dateEnd - Booking end date (YYYY-MM-DD)
- * @property {number} amountPaid - Amount paid by tenant
- * @property {number} totalPrice - Total price of the booking
+ * @property {string} roomName
+ * @property {string} tenantName
+ * @property {string} dateStart
+ * @property {string} dateEnd
+ * @property {number} amountPaid
+ * @property {number} totalPrice
+ * @property {number} deletedAt 
  */
 module.exports = {};

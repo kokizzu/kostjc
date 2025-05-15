@@ -251,11 +251,10 @@
     max-height: 300px;
   }
   
-  /* The switch - the box around the slider */
   .switcher {
     position: relative;
     display: inline-block;
-    width: 50px;
+    width: 43px;
     height: 24px;
     margin-left: 0 !important;
   }
@@ -273,7 +272,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--gray-005);
+    background-color: var(--gray-004);
     -webkit-transition: .2s;
     transition: .2s;
   }
@@ -291,17 +290,17 @@
   }
 
   .switcher input:checked + .slider {
-    background-color: var(--sky-006) !important;
+    background-color: var(--blue-006) !important;
   }
 
   .switcher input:focus + .slider {
-    box-shadow: 0 0 1px var(--sky-006) !important;
+    box-shadow: 0 0 1px var(--blue-006) !important;
   }
 
   .switcher input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(19px);
+    -ms-transform: translateX(19px);
+    transform: translateX(19px);
   }
   
   .switcher .slider {

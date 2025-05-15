@@ -196,6 +196,14 @@
         border-color: var(--gray-002);
       }
 
+      .text-red {
+        color: var(--red-005);
+      }
+
+      .text-orange {
+        color: var(--orange-005);
+      }
+
       .actions-button .btn {
         border: none;
         color: var(--gray-008);
@@ -341,7 +349,66 @@
 <main id="app"></main><script>document.getElementById('app').innerHTML=''</script><!---->
 
 
-<style>/* fakecss:./_partials/SideMenu.esbuild-svelte-fake-css */
+<style>/* fakecss:./_components/Switcher.esbuild-svelte-fake-css */
+.switcher-container.svelte-1jzxdgf.svelte-1jzxdgf.svelte-1jzxdgf {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+.switcher.svelte-1jzxdgf.svelte-1jzxdgf.svelte-1jzxdgf {
+  position: relative;
+  display: inline-block;
+  width: 43px;
+  height: 24px;
+  margin-left: 0 !important;
+}
+.switcher.svelte-1jzxdgf input.svelte-1jzxdgf.svelte-1jzxdgf {
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.switcher.svelte-1jzxdgf .slider.svelte-1jzxdgf.svelte-1jzxdgf {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-004);
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.switcher.svelte-1jzxdgf .slider.svelte-1jzxdgf.svelte-1jzxdgf:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.switcher.svelte-1jzxdgf input.svelte-1jzxdgf:checked + .slider.svelte-1jzxdgf {
+  background-color: var(--blue-006) !important;
+}
+.switcher.svelte-1jzxdgf input.svelte-1jzxdgf:focus + .slider.svelte-1jzxdgf {
+  box-shadow: 0 0 1px var(--blue-006) !important;
+}
+.switcher.svelte-1jzxdgf input.svelte-1jzxdgf:checked + .slider.svelte-1jzxdgf:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+}
+.switcher.svelte-1jzxdgf .slider.svelte-1jzxdgf.svelte-1jzxdgf {
+  border-radius: 34px;
+}
+.switcher.svelte-1jzxdgf .slider.svelte-1jzxdgf.svelte-1jzxdgf:before {
+  border-radius: 50%;
+}
+
+/* fakecss:./_partials/SideMenu.esbuild-svelte-fake-css */
 aside.svelte-2xd6p5.svelte-2xd6p5 {
   position: fixed;
   top: var(--navbar-height);
@@ -557,53 +624,26 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
 }
 
 /* fakecss:./userReport.esbuild-svelte-fake-css */
-.report-container.svelte-1gb2780.svelte-1gb2780 {
+.report-container.svelte-3j6b9k.svelte-3j6b9k {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-table.svelte-1gb2780.svelte-1gb2780 {
-  width: 100%;
-  border-collapse: collapse;
-}
-table.svelte-1gb2780 thead tr th.svelte-1gb2780 {
-  text-align: left;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--gray-004);
-}
-table.svelte-1gb2780 tbody tr.svelte-1gb2780 {
-  border-top: 1px solid var(--gray-002);
-  border-bottom: 1px solid var(--gray-004);
-}
-table.svelte-1gb2780 tbody tr td.svelte-1gb2780 {
-  padding: 8px 12px;
-}
-table.svelte-1gb2780 tbody tr td .cells.svelte-1gb2780 {
+.report-container.svelte-3j6b9k .actions.svelte-3j6b9k {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-table.svelte-1gb2780 tbody tr td .cell.svelte-1gb2780 {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 12px;
-}
-table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
-  padding: 5px 8px;
-  background-color: var(--red-transparent);
-  border-radius: 5px;
-  color: var(--red-006);
-}
-.header.svelte-1gb2780.svelte-1gb2780 {
+.report-container.svelte-3j6b9k .actions .quartal-shifter.svelte-3j6b9k {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
-  margin-bottom: 32px;
 }
-.btn.svelte-1gb2780.svelte-1gb2780 {
+.report-container.svelte-3j6b9k .actions .quartal-shifter .btn.svelte-3j6b9k {
   background-color: var(--gray-002);
   border: none;
   border-radius: 9999px;
@@ -614,14 +654,56 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   color: var(--gray-008);
   padding: 8px;
 }
-.btn.svelte-1gb2780.svelte-1gb2780:hover {
+.report-container.svelte-3j6b9k .actions .quartal-shifter .btn.svelte-3j6b9k:hover {
   background-color: var(--blue-transparent);
   color: var(--blue-006);
 }
-.header-text.svelte-1gb2780.svelte-1gb2780 {
+.report-container.svelte-3j6b9k .actions .quartal-shifter .month-text.svelte-3j6b9k {
   font-weight: 600;
   font-size: 18px;
   user-select: none;
+}
+.report-container.svelte-3j6b9k .actions .filters.svelte-3j6b9k {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+table.svelte-3j6b9k.svelte-3j6b9k {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.svelte-3j6b9k thead tr th.svelte-3j6b9k {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--gray-004);
+}
+table.svelte-3j6b9k tbody tr.svelte-3j6b9k {
+  border-top: 1px solid var(--gray-002);
+  border-bottom: 1px solid var(--gray-004);
+}
+table.svelte-3j6b9k tbody tr td.svelte-3j6b9k {
+  padding: 8px 12px;
+}
+table.svelte-3j6b9k tbody tr td .cells.svelte-3j6b9k {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+table.svelte-3j6b9k tbody tr td .cell.svelte-3j6b9k {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 12px;
+}
+table.svelte-3j6b9k tbody tr td .date-not-expired.svelte-3j6b9k {
+  color: var(--orange-006);
+  padding: 2px 3px;
+  border-radius: 4px;
+  background-color: var(--orange-transparent);
+}
+table.svelte-3j6b9k tbody tr td .hidden.svelte-3j6b9k {
+  display: none;
 }
 </style>
 <script>(() => {
@@ -655,7 +737,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   var require_axios = __commonJS({
     "node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
       "use strict";
-      function bind(fn, thisArg) {
+      function bind2(fn, thisArg) {
         return function wrap() {
           return fn.apply(thisArg, arguments);
         };
@@ -776,7 +858,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       var extend = (a, b, thisArg, { allOwnKeys } = {}) => {
         forEach(b, (val, key) => {
           if (thisArg && isFunction(val)) {
-            a[key] = bind(val, thisArg);
+            a[key] = bind2(val, thisArg);
           } else {
             a[key] = val;
           }
@@ -3026,13 +3108,13 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance7 = bind(Axios$1.prototype.request, context);
-        utils$1.extend(instance7, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance7, context, null, { allOwnKeys: true });
-        instance7.create = function create(instanceConfig) {
+        const instance8 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance8, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance8, context, null, { allOwnKeys: true });
+        instance8.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance7;
+        return instance8;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -3230,6 +3312,9 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     }
     return -1;
   }
+  function null_to_empty(value) {
+    return value == null ? "" : value;
+  }
 
   // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/globals.js
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
@@ -3391,6 +3476,9 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   }
   function add_render_callback(fn) {
     render_callbacks.push(fn);
+  }
+  function add_flush_callback(fn) {
+    flush_callbacks.push(fn);
   }
   var seen_callbacks = /* @__PURE__ */ new Set();
   var flushidx = 0;
@@ -3566,6 +3654,13 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
 
   // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/Component.js
+  function bind(component, name, callback) {
+    const index = component.$.props[name];
+    if (index !== void 0) {
+      component.$.bound[index] = callback;
+      callback(component.$.ctx[index]);
+    }
+  }
   function create_component(block) {
     block && block.c();
   }
@@ -3601,7 +3696,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance7, create_fragment7, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance8, create_fragment8, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -3627,7 +3722,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance7 ? instance7(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance8 ? instance8(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -3640,7 +3735,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment7 ? create_fragment7($.ctx) : false;
+    $.fragment = create_fragment8 ? create_fragment8($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -3909,6 +4004,164 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
+  // _components/Switcher.svelte
+  function create_fragment(ctx) {
+    let div;
+    let label0;
+    let input;
+    let t0;
+    let span;
+    let t1;
+    let label1;
+    let t2;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        div = element("div");
+        label0 = element("label");
+        input = element("input");
+        t0 = space();
+        span = element("span");
+        t1 = space();
+        label1 = element("label");
+        t2 = text(
+          /*label*/
+          ctx[2]
+        );
+        attr(input, "type", "checkbox");
+        attr(
+          input,
+          "id",
+          /*id*/
+          ctx[1]
+        );
+        attr(input, "class", "svelte-1jzxdgf");
+        attr(span, "class", "slider svelte-1jzxdgf");
+        attr(label0, "class", "switcher svelte-1jzxdgf");
+        attr(
+          label0,
+          "for",
+          /*id*/
+          ctx[1]
+        );
+        attr(
+          label1,
+          "for",
+          /*id*/
+          ctx[1]
+        );
+        attr(label1, "class", "label");
+        attr(div, "class", "switcher-container svelte-1jzxdgf");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, label0);
+        append(label0, input);
+        input.checked = /*value*/
+        ctx[0];
+        append(label0, t0);
+        append(label0, span);
+        append(div, t1);
+        append(div, label1);
+        append(label1, t2);
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "change",
+            /*input_change_handler*/
+            ctx[3]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (dirty & /*id*/
+        2) {
+          attr(
+            input,
+            "id",
+            /*id*/
+            ctx2[1]
+          );
+        }
+        if (dirty & /*value*/
+        1) {
+          input.checked = /*value*/
+          ctx2[0];
+        }
+        if (dirty & /*id*/
+        2) {
+          attr(
+            label0,
+            "for",
+            /*id*/
+            ctx2[1]
+          );
+        }
+        if (dirty & /*label*/
+        4)
+          set_data(
+            t2,
+            /*label*/
+            ctx2[2]
+          );
+        if (dirty & /*id*/
+        2) {
+          attr(
+            label1,
+            "for",
+            /*id*/
+            ctx2[1]
+          );
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function instance($self, $props, $invalidate) {
+    let { id = (
+      /** @type {string} */
+      ""
+    ) } = $props;
+    let { value = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    let { label = (
+      /** @type {string} */
+      "Show / Hide"
+    ) } = $props;
+    function input_change_handler() {
+      value = this.checked;
+      $invalidate(0, value);
+    }
+    $self.$set = ($props2) => {
+      if ("id" in $props2)
+        $invalidate(1, id = $props2.id);
+      if ("value" in $props2)
+        $invalidate(0, value = $props2.value);
+      if ("label" in $props2)
+        $invalidate(2, label = $props2.label);
+    };
+    return [value, id, label, input_change_handler];
+  }
+  var Switcher = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance, create_fragment, safe_not_equal, { id: 1, value: 0, label: 2 });
+    }
+  };
+  var Switcher_default = Switcher;
+
   // _components/xNotifier.js
   var Notifier = function() {
     let a = {
@@ -3986,7 +4239,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   var import_jsApi = __toESM(require_jsApi_GEN());
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/Icon.svelte
-  function create_fragment(ctx) {
+  function create_fragment2(ctx) {
     let svg;
     let svg_style_value;
     let svg_levels = [
@@ -4082,7 +4335,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       }
     };
   }
-  function instance($self, $props, $invalidate) {
+  function instance2($self, $props, $invalidate) {
     let { src } = $props;
     let { size = "1em" } = $props;
     let { viewBox = void 0 } = $props;
@@ -4132,7 +4385,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   var Icon = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance, create_fragment, safe_not_equal, {
+      init(this, options, instance2, create_fragment2, safe_not_equal, {
         src: 0,
         size: 1,
         viewBox: 2,
@@ -4548,7 +4801,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       }
     };
   }
-  function create_fragment2(ctx) {
+  function create_fragment3(ctx) {
     let aside;
     let div;
     let nav0;
@@ -4791,7 +5044,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       }
     };
   }
-  function instance2($self, $props, $invalidate) {
+  function instance3($self, $props, $invalidate) {
     let { access = (
       /** @type {Access} */
       {}
@@ -4839,13 +5092,13 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   var SideMenu = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance2, create_fragment2, safe_not_equal, { access: 0 });
+      init(this, options, instance3, create_fragment3, safe_not_equal, { access: 0 });
     }
   };
   var SideMenu_default = SideMenu;
 
   // _partials/Navbar.svelte
-  function create_fragment3(ctx) {
+  function create_fragment4(ctx) {
     let header;
     let div0;
     let t2;
@@ -4954,7 +5207,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       }
     };
   }
-  function instance3($self, $props, $invalidate) {
+  function instance4($self, $props, $invalidate) {
     let { username = (
       /** @type {string} */
       "unknown"
@@ -4974,13 +5227,13 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   var Navbar = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance3, create_fragment3, safe_not_equal, { username: 0, role: 1 });
+      init(this, options, instance4, create_fragment4, safe_not_equal, { username: 0, role: 1 });
     }
   };
   var Navbar_default = Navbar;
 
   // _partials/Footer.svelte
-  function create_fragment4(ctx) {
+  function create_fragment5(ctx) {
     let footer;
     let p;
     let t2;
@@ -5013,7 +5266,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       }
     };
   }
-  function instance4($self) {
+  function instance5($self) {
     const year = (
       /** @type {number} */
       new Date().getFullYear()
@@ -5023,7 +5276,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   var Footer = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance4, create_fragment4, safe_not_equal, {});
+      init(this, options, instance5, create_fragment5, safe_not_equal, {});
     }
   };
   var Footer_default = Footer;
@@ -5079,7 +5332,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   );
 
   // _layouts/main.svelte
-  function create_fragment5(ctx) {
+  function create_fragment6(ctx) {
     let div2;
     let div1;
     let navbar;
@@ -5230,7 +5483,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       }
     };
   }
-  function instance5($self, $props, $invalidate) {
+  function instance6($self, $props, $invalidate) {
     let $isShrinkMenu;
     component_subscribe($self, isShrinkMenu, ($value) => $invalidate(2, $isShrinkMenu = $value));
     let { $slots: slots = {}, $scope } = $props;
@@ -5255,7 +5508,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   var Main = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance5, create_fragment5, safe_not_equal, { user: 0, access: 1 });
+      init(this, options, instance6, create_fragment6, safe_not_equal, { user: 0, access: 1 });
     }
   };
   var main_default = Main;
@@ -5264,46 +5517,46 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[11] = list[i];
+    child_ctx[25] = list[i];
     return child_ctx;
   }
   function get_each_context_1(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[14] = list[i];
+    child_ctx[28] = list[i];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[17] = list[i];
+    child_ctx[31] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[14] = list[i];
+    child_ctx[28] = list[i];
     return child_ctx;
   }
   function create_each_block_3(ctx) {
     let th;
     let t_value = formatMonthYear(
       /*quartal*/
-      ctx[14]
+      ctx[28]
     ) + "";
     let t;
     return {
       c() {
         th = element("th");
         t = text(t_value);
-        attr(th, "class", "svelte-1gb2780");
+        attr(th, "class", "svelte-3j6b9k");
       },
       m(target, anchor) {
         insert(target, th, anchor);
         append(th, t);
       },
       p(ctx2, dirty) {
-        if (dirty & /*quartals*/
+        if (dirty[0] & /*quartals*/
         8 && t_value !== (t_value = formatMonthYear(
           /*quartal*/
-          ctx2[14]
+          ctx2[28]
         ) + ""))
           set_data(t, t_value);
       },
@@ -5316,19 +5569,16 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   }
   function create_if_block2(ctx) {
     let div;
-    let div_class_value;
     let if_block = (
       /*booking*/
-      ctx[17].tenantName && create_if_block_12(ctx)
+      ctx[31].tenantName && create_if_block_12(ctx)
     );
     return {
       c() {
         div = element("div");
         if (if_block)
           if_block.c();
-        attr(div, "class", div_class_value = "cell " + /*booking*/
-        (ctx[17].amountPaid >= /*booking*/
-        ctx[17].totalPrice ? "" : "unpaid") + " svelte-1gb2780");
+        attr(div, "class", "cell svelte-3j6b9k");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -5338,7 +5588,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       p(ctx2, dirty) {
         if (
           /*booking*/
-          ctx2[17].tenantName
+          ctx2[31].tenantName
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -5350,12 +5600,6 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
         } else if (if_block) {
           if_block.d(1);
           if_block = null;
-        }
-        if (dirty & /*bookingsPerQuartal*/
-        1 && div_class_value !== (div_class_value = "cell " + /*booking*/
-        (ctx2[17].amountPaid >= /*booking*/
-        ctx2[17].totalPrice ? "" : "unpaid") + " svelte-1gb2780")) {
-          attr(div, "class", div_class_value);
         }
       },
       d(detaching) {
@@ -5371,93 +5615,132 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     let span0;
     let t0_value = (
       /*booking*/
-      ctx[17].tenantName + ""
+      ctx[31].tenantName + ""
     );
     let t0;
     let t1;
+    let span4;
     let span1;
     let t2_value = (
       /*booking*/
-      ctx[17].dateStart + ""
+      ctx[31].dateStart + ""
     );
     let t2;
     let t3;
-    let t4_value = (
-      /*booking*/
-      ctx[17].dateEnd + ""
-    );
-    let t4;
-    let t5;
     let span2;
+    let t5;
+    let span3;
     let t6_value = (
       /*booking*/
-      ctx[17].amountPaid + ""
+      ctx[31].dateEnd + ""
     );
     let t6;
+    let span3_class_value;
     let t7;
+    let span5;
     let t8_value = (
       /*booking*/
-      ctx[17].totalPrice + ""
+      ctx[31].amountPaid + ""
     );
     let t8;
+    let t9;
+    let t10_value = (
+      /*booking*/
+      ctx[31].totalPrice + ""
+    );
+    let t10;
+    let span5_class_value;
     return {
       c() {
         span0 = element("span");
         t0 = text(t0_value);
         t1 = space();
+        span4 = element("span");
         span1 = element("span");
         t2 = text(t2_value);
-        t3 = text(" s/d ");
-        t4 = text(t4_value);
-        t5 = space();
+        t3 = space();
         span2 = element("span");
+        span2.textContent = "s/d";
+        t5 = space();
+        span3 = element("span");
         t6 = text(t6_value);
-        t7 = text("/");
+        t7 = space();
+        span5 = element("span");
         t8 = text(t8_value);
+        t9 = text("/");
+        t10 = text(t10_value);
+        attr(span3, "class", span3_class_value = null_to_empty(isDateInPast(
+          /*booking*/
+          ctx[31].dateEnd
+        ) ? "date-not-expired" : "") + " svelte-3j6b9k");
+        attr(span5, "class", span5_class_value = /*booking*/
+        (ctx[31].amountPaid >= /*booking*/
+        ctx[31].totalPrice ? "" : "text-red") + " " + /*showPaid*/
+        (ctx[9] && /*booking*/
+        ctx[31].amountPaid > 0 ? "" : "hidden") + " svelte-3j6b9k");
       },
       m(target, anchor) {
         insert(target, span0, anchor);
         append(span0, t0);
         insert(target, t1, anchor);
-        insert(target, span1, anchor);
+        insert(target, span4, anchor);
+        append(span4, span1);
         append(span1, t2);
-        append(span1, t3);
-        append(span1, t4);
-        insert(target, t5, anchor);
-        insert(target, span2, anchor);
-        append(span2, t6);
-        append(span2, t7);
-        append(span2, t8);
+        append(span4, t3);
+        append(span4, span2);
+        append(span4, t5);
+        append(span4, span3);
+        append(span3, t6);
+        insert(target, t7, anchor);
+        insert(target, span5, anchor);
+        append(span5, t8);
+        append(span5, t9);
+        append(span5, t10);
       },
       p(ctx2, dirty) {
-        if (dirty & /*bookingsPerQuartal*/
+        if (dirty[0] & /*bookingsPerQuartal*/
         1 && t0_value !== (t0_value = /*booking*/
-        ctx2[17].tenantName + ""))
+        ctx2[31].tenantName + ""))
           set_data(t0, t0_value);
-        if (dirty & /*bookingsPerQuartal*/
+        if (dirty[0] & /*bookingsPerQuartal*/
         1 && t2_value !== (t2_value = /*booking*/
-        ctx2[17].dateStart + ""))
+        ctx2[31].dateStart + ""))
           set_data(t2, t2_value);
-        if (dirty & /*bookingsPerQuartal*/
-        1 && t4_value !== (t4_value = /*booking*/
-        ctx2[17].dateEnd + ""))
-          set_data(t4, t4_value);
-        if (dirty & /*bookingsPerQuartal*/
+        if (dirty[0] & /*bookingsPerQuartal*/
         1 && t6_value !== (t6_value = /*booking*/
-        ctx2[17].amountPaid + ""))
+        ctx2[31].dateEnd + ""))
           set_data(t6, t6_value);
-        if (dirty & /*bookingsPerQuartal*/
+        if (dirty[0] & /*bookingsPerQuartal*/
+        1 && span3_class_value !== (span3_class_value = null_to_empty(isDateInPast(
+          /*booking*/
+          ctx2[31].dateEnd
+        ) ? "date-not-expired" : "") + " svelte-3j6b9k")) {
+          attr(span3, "class", span3_class_value);
+        }
+        if (dirty[0] & /*bookingsPerQuartal*/
         1 && t8_value !== (t8_value = /*booking*/
-        ctx2[17].totalPrice + ""))
+        ctx2[31].amountPaid + ""))
           set_data(t8, t8_value);
+        if (dirty[0] & /*bookingsPerQuartal*/
+        1 && t10_value !== (t10_value = /*booking*/
+        ctx2[31].totalPrice + ""))
+          set_data(t10, t10_value);
+        if (dirty[0] & /*bookingsPerQuartal, showPaid*/
+        513 && span5_class_value !== (span5_class_value = /*booking*/
+        (ctx2[31].amountPaid >= /*booking*/
+        ctx2[31].totalPrice ? "" : "text-red") + " " + /*showPaid*/
+        (ctx2[9] && /*booking*/
+        ctx2[31].amountPaid > 0 ? "" : "hidden") + " svelte-3j6b9k")) {
+          attr(span5, "class", span5_class_value);
+        }
       },
       d(detaching) {
         if (detaching) {
           detach(span0);
           detach(t1);
-          detach(span1);
-          detach(t5);
-          detach(span2);
+          detach(span4);
+          detach(t7);
+          detach(span5);
         }
       }
     };
@@ -5465,12 +5748,12 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   function create_each_block_2(ctx) {
     let show_if = (
       /*booking*/
-      ctx[17].roomName == /*room*/
-      ctx[11] && isBookingInThatMonth(
+      ctx[31].roomName == /*room*/
+      ctx[25] && isBookingInThatMonth(
         /*booking*/
-        ctx[17],
+        ctx[31],
         /*quartal*/
-        ctx[14]
+        ctx[28]
       )
     );
     let if_block_anchor;
@@ -5487,15 +5770,15 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
         insert(target, if_block_anchor, anchor);
       },
       p(ctx2, dirty) {
-        if (dirty & /*bookingsPerQuartal, roomNames, quartals*/
+        if (dirty[0] & /*bookingsPerQuartal, roomNames, quartals*/
         11)
           show_if = /*booking*/
-          ctx2[17].roomName == /*room*/
-          ctx2[11] && isBookingInThatMonth(
+          ctx2[31].roomName == /*room*/
+          ctx2[25] && isBookingInThatMonth(
             /*booking*/
-            ctx2[17],
+            ctx2[31],
             /*quartal*/
-            ctx2[14]
+            ctx2[28]
           );
         if (show_if) {
           if (if_block) {
@@ -5537,8 +5820,8 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cells svelte-1gb2780");
-        attr(td, "class", "svelte-1gb2780");
+        attr(div, "class", "cells svelte-3j6b9k");
+        attr(td, "class", "svelte-3j6b9k");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -5550,8 +5833,8 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*bookingsPerQuartal, roomNames, isBookingInThatMonth, quartals*/
-        11) {
+        if (dirty[0] & /*bookingsPerQuartal, showPaid, roomNames, quartals*/
+        523) {
           each_value_2 = ensure_array_like(
             /*bookingsPerQuartal*/
             ctx2[0] || []
@@ -5587,7 +5870,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     let t0;
     let t1_value = (
       /*room*/
-      ctx[11] + ""
+      ctx[25] + ""
     );
     let t1;
     let t2;
@@ -5611,8 +5894,8 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
           each_blocks[i].c();
         }
         t3 = space();
-        attr(th, "class", "svelte-1gb2780");
-        attr(tr, "class", "svelte-1gb2780");
+        attr(th, "class", "svelte-3j6b9k");
+        attr(tr, "class", "svelte-3j6b9k");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -5628,12 +5911,12 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
         append(tr, t3);
       },
       p(ctx2, dirty) {
-        if (dirty & /*roomNames*/
+        if (dirty[0] & /*roomNames*/
         2 && t1_value !== (t1_value = /*room*/
-        ctx2[11] + ""))
+        ctx2[25] + ""))
           set_data(t1, t1_value);
-        if (dirty & /*bookingsPerQuartal, roomNames, isBookingInThatMonth, quartals*/
-        11) {
+        if (dirty[0] & /*bookingsPerQuartal, showPaid, roomNames, quartals*/
+        523) {
           each_value_1 = ensure_array_like(
             /*quartals*/
             ctx2[3] || []
@@ -5664,9 +5947,9 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     };
   }
   function create_default_slot(ctx) {
-    let div1;
+    let div3;
+    let div2;
     let div0;
-    let header;
     let button0;
     let icon0;
     let t0;
@@ -5686,12 +5969,34 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     let button1;
     let icon1;
     let t5;
+    let div1;
+    let switcher0;
+    let updating_value;
+    let t6;
+    let switcher1;
+    let updating_value_1;
+    let t7;
+    let switcher2;
+    let updating_value_2;
+    let t8;
+    let switcher3;
+    let updating_value_3;
+    let t9;
+    let switcher4;
+    let updating_value_4;
+    let t10;
+    let switcher5;
+    let updating_value_5;
+    let t11;
+    let switcher6;
+    let updating_value_6;
+    let t12;
     let table;
     let thead;
     let tr;
     let th;
-    let t6;
-    let t7;
+    let t13;
+    let t14;
     let tbody;
     let current;
     let mounted;
@@ -5702,6 +6007,109 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     icon1 = new Icon_default({
       props: { size: "20", src: RiArrowsArrowRightSLine }
     });
+    function switcher0_value_binding(value) {
+      ctx[15](value);
+    }
+    let switcher0_props = {
+      id: "show-refunded",
+      label: "Show Refunded"
+    };
+    if (
+      /*showRefunded*/
+      ctx[5] !== void 0
+    ) {
+      switcher0_props.value = /*showRefunded*/
+      ctx[5];
+    }
+    switcher0 = new Switcher_default({ props: switcher0_props });
+    binding_callbacks.push(() => bind(switcher0, "value", switcher0_value_binding));
+    function switcher1_value_binding(value) {
+      ctx[16](value);
+    }
+    let switcher1_props = { id: "show-tenant", label: "Show Tenant" };
+    if (
+      /*showTenant*/
+      ctx[6] !== void 0
+    ) {
+      switcher1_props.value = /*showTenant*/
+      ctx[6];
+    }
+    switcher1 = new Switcher_default({ props: switcher1_props });
+    binding_callbacks.push(() => bind(switcher1, "value", switcher1_value_binding));
+    function switcher2_value_binding(value) {
+      ctx[17](value);
+    }
+    let switcher2_props = {
+      id: "show-date-start",
+      label: "Show Date Start"
+    };
+    if (
+      /*showDateStart*/
+      ctx[7] !== void 0
+    ) {
+      switcher2_props.value = /*showDateStart*/
+      ctx[7];
+    }
+    switcher2 = new Switcher_default({ props: switcher2_props });
+    binding_callbacks.push(() => bind(switcher2, "value", switcher2_value_binding));
+    function switcher3_value_binding(value) {
+      ctx[18](value);
+    }
+    let switcher3_props = {
+      id: "show-date-end",
+      label: "Show Date End"
+    };
+    if (
+      /*showDateEnd*/
+      ctx[8] !== void 0
+    ) {
+      switcher3_props.value = /*showDateEnd*/
+      ctx[8];
+    }
+    switcher3 = new Switcher_default({ props: switcher3_props });
+    binding_callbacks.push(() => bind(switcher3, "value", switcher3_value_binding));
+    function switcher4_value_binding(value) {
+      ctx[19](value);
+    }
+    let switcher4_props = { id: "show-paid", label: "Show Paid" };
+    if (
+      /*showPaid*/
+      ctx[9] !== void 0
+    ) {
+      switcher4_props.value = /*showPaid*/
+      ctx[9];
+    }
+    switcher4 = new Switcher_default({ props: switcher4_props });
+    binding_callbacks.push(() => bind(switcher4, "value", switcher4_value_binding));
+    function switcher5_value_binding(value) {
+      ctx[20](value);
+    }
+    let switcher5_props = { id: "show-price", label: "Show Price" };
+    if (
+      /*showPrice*/
+      ctx[10] !== void 0
+    ) {
+      switcher5_props.value = /*showPrice*/
+      ctx[10];
+    }
+    switcher5 = new Switcher_default({ props: switcher5_props });
+    binding_callbacks.push(() => bind(switcher5, "value", switcher5_value_binding));
+    function switcher6_value_binding(value) {
+      ctx[21](value);
+    }
+    let switcher6_props = {
+      id: "show-only-not-paid",
+      label: "Show Only Not Paid"
+    };
+    if (
+      /*showOnlyNotPaid*/
+      ctx[11] !== void 0
+    ) {
+      switcher6_props.value = /*showOnlyNotPaid*/
+      ctx[11];
+    }
+    switcher6 = new Switcher_default({ props: switcher6_props });
+    binding_callbacks.push(() => bind(switcher6, "value", switcher6_value_binding));
     let each_value_3 = ensure_array_like(
       /*quartals*/
       ctx[3] || []
@@ -5720,9 +6128,9 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
     }
     return {
       c() {
-        div1 = element("div");
+        div3 = element("div");
+        div2 = element("div");
         div0 = element("div");
-        header = element("header");
         button0 = element("button");
         create_component(icon0.$.fragment);
         t0 = space();
@@ -5734,58 +6142,88 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
         button1 = element("button");
         create_component(icon1.$.fragment);
         t5 = space();
+        div1 = element("div");
+        create_component(switcher0.$.fragment);
+        t6 = space();
+        create_component(switcher1.$.fragment);
+        t7 = space();
+        create_component(switcher2.$.fragment);
+        t8 = space();
+        create_component(switcher3.$.fragment);
+        t9 = space();
+        create_component(switcher4.$.fragment);
+        t10 = space();
+        create_component(switcher5.$.fragment);
+        t11 = space();
+        create_component(switcher6.$.fragment);
+        t12 = space();
         table = element("table");
         thead = element("thead");
         tr = element("tr");
         th = element("th");
-        t6 = space();
+        t13 = space();
         for (let i = 0; i < each_blocks_1.length; i += 1) {
           each_blocks_1[i].c();
         }
-        t7 = space();
+        t14 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(button0, "class", "btn svelte-1gb2780");
+        attr(button0, "class", "btn svelte-3j6b9k");
         attr(button0, "aria-label", "Previous");
-        attr(span, "class", "header-text svelte-1gb2780");
-        attr(button1, "class", "btn svelte-1gb2780");
+        attr(span, "class", "month-text svelte-3j6b9k");
+        attr(button1, "class", "btn svelte-3j6b9k");
         attr(button1, "aria-label", "Next");
-        attr(header, "class", "header svelte-1gb2780");
-        attr(header, "aria-label", "Date range navigation");
-        attr(div0, "class", "actions");
-        attr(th, "class", "svelte-1gb2780");
-        attr(tr, "class", "svelte-1gb2780");
-        attr(table, "class", "svelte-1gb2780");
-        attr(div1, "class", "report-container svelte-1gb2780");
+        attr(div0, "class", "quartal-shifter svelte-3j6b9k");
+        attr(div1, "class", "filters svelte-3j6b9k");
+        attr(div2, "class", "actions svelte-3j6b9k");
+        attr(th, "class", "svelte-3j6b9k");
+        attr(tr, "class", "svelte-3j6b9k");
+        attr(table, "class", "svelte-3j6b9k");
+        attr(div3, "class", "report-container svelte-3j6b9k");
       },
       m(target, anchor) {
-        insert(target, div1, anchor);
-        append(div1, div0);
-        append(div0, header);
-        append(header, button0);
+        insert(target, div3, anchor);
+        append(div3, div2);
+        append(div2, div0);
+        append(div0, button0);
         mount_component(icon0, button0, null);
-        append(header, t0);
-        append(header, span);
+        append(div0, t0);
+        append(div0, span);
         append(span, t1);
         append(span, t2);
         append(span, t3);
-        append(header, t4);
-        append(header, button1);
+        append(div0, t4);
+        append(div0, button1);
         mount_component(icon1, button1, null);
-        append(div1, t5);
-        append(div1, table);
+        append(div2, t5);
+        append(div2, div1);
+        mount_component(switcher0, div1, null);
+        append(div1, t6);
+        mount_component(switcher1, div1, null);
+        append(div1, t7);
+        mount_component(switcher2, div1, null);
+        append(div1, t8);
+        mount_component(switcher3, div1, null);
+        append(div1, t9);
+        mount_component(switcher4, div1, null);
+        append(div1, t10);
+        mount_component(switcher5, div1, null);
+        append(div1, t11);
+        mount_component(switcher6, div1, null);
+        append(div3, t12);
+        append(div3, table);
         append(table, thead);
         append(thead, tr);
         append(tr, th);
-        append(tr, t6);
+        append(tr, t13);
         for (let i = 0; i < each_blocks_1.length; i += 1) {
           if (each_blocks_1[i]) {
             each_blocks_1[i].m(tr, null);
           }
         }
-        append(table, t7);
+        append(table, t14);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -5799,32 +6237,95 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
               button0,
               "click",
               /*click_handler*/
-              ctx[6]
+              ctx[13]
             ),
             listen(
               button1,
               "click",
               /*click_handler_1*/
-              ctx[7]
+              ctx[14]
             )
           ];
           mounted = true;
         }
       },
       p(ctx2, dirty) {
-        if ((!current || dirty & /*monthStart*/
+        if ((!current || dirty[0] & /*monthStart*/
         4) && t1_value !== (t1_value = formatMonthYear(
           /*monthStart*/
           ctx2[2]
         ) + ""))
           set_data(t1, t1_value);
-        if ((!current || dirty & /*monthEnd*/
+        if ((!current || dirty[0] & /*monthEnd*/
         16) && t3_value !== (t3_value = formatMonthYear(
           /*monthEnd*/
           ctx2[4]
         ) + ""))
           set_data(t3, t3_value);
-        if (dirty & /*formatMonthYear, quartals*/
+        const switcher0_changes = {};
+        if (!updating_value && dirty[0] & /*showRefunded*/
+        32) {
+          updating_value = true;
+          switcher0_changes.value = /*showRefunded*/
+          ctx2[5];
+          add_flush_callback(() => updating_value = false);
+        }
+        switcher0.$set(switcher0_changes);
+        const switcher1_changes = {};
+        if (!updating_value_1 && dirty[0] & /*showTenant*/
+        64) {
+          updating_value_1 = true;
+          switcher1_changes.value = /*showTenant*/
+          ctx2[6];
+          add_flush_callback(() => updating_value_1 = false);
+        }
+        switcher1.$set(switcher1_changes);
+        const switcher2_changes = {};
+        if (!updating_value_2 && dirty[0] & /*showDateStart*/
+        128) {
+          updating_value_2 = true;
+          switcher2_changes.value = /*showDateStart*/
+          ctx2[7];
+          add_flush_callback(() => updating_value_2 = false);
+        }
+        switcher2.$set(switcher2_changes);
+        const switcher3_changes = {};
+        if (!updating_value_3 && dirty[0] & /*showDateEnd*/
+        256) {
+          updating_value_3 = true;
+          switcher3_changes.value = /*showDateEnd*/
+          ctx2[8];
+          add_flush_callback(() => updating_value_3 = false);
+        }
+        switcher3.$set(switcher3_changes);
+        const switcher4_changes = {};
+        if (!updating_value_4 && dirty[0] & /*showPaid*/
+        512) {
+          updating_value_4 = true;
+          switcher4_changes.value = /*showPaid*/
+          ctx2[9];
+          add_flush_callback(() => updating_value_4 = false);
+        }
+        switcher4.$set(switcher4_changes);
+        const switcher5_changes = {};
+        if (!updating_value_5 && dirty[0] & /*showPrice*/
+        1024) {
+          updating_value_5 = true;
+          switcher5_changes.value = /*showPrice*/
+          ctx2[10];
+          add_flush_callback(() => updating_value_5 = false);
+        }
+        switcher5.$set(switcher5_changes);
+        const switcher6_changes = {};
+        if (!updating_value_6 && dirty[0] & /*showOnlyNotPaid*/
+        2048) {
+          updating_value_6 = true;
+          switcher6_changes.value = /*showOnlyNotPaid*/
+          ctx2[11];
+          add_flush_callback(() => updating_value_6 = false);
+        }
+        switcher6.$set(switcher6_changes);
+        if (dirty[0] & /*quartals*/
         8) {
           each_value_3 = ensure_array_like(
             /*quartals*/
@@ -5846,8 +6347,8 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
           }
           each_blocks_1.length = each_value_3.length;
         }
-        if (dirty & /*quartals, bookingsPerQuartal, roomNames, isBookingInThatMonth*/
-        11) {
+        if (dirty[0] & /*quartals, bookingsPerQuartal, showPaid, roomNames*/
+        523) {
           each_value = ensure_array_like(
             /*roomNames*/
             ctx2[1] || []
@@ -5874,19 +6375,40 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
           return;
         transition_in(icon0.$.fragment, local);
         transition_in(icon1.$.fragment, local);
+        transition_in(switcher0.$.fragment, local);
+        transition_in(switcher1.$.fragment, local);
+        transition_in(switcher2.$.fragment, local);
+        transition_in(switcher3.$.fragment, local);
+        transition_in(switcher4.$.fragment, local);
+        transition_in(switcher5.$.fragment, local);
+        transition_in(switcher6.$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(icon0.$.fragment, local);
         transition_out(icon1.$.fragment, local);
+        transition_out(switcher0.$.fragment, local);
+        transition_out(switcher1.$.fragment, local);
+        transition_out(switcher2.$.fragment, local);
+        transition_out(switcher3.$.fragment, local);
+        transition_out(switcher4.$.fragment, local);
+        transition_out(switcher5.$.fragment, local);
+        transition_out(switcher6.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
-          detach(div1);
+          detach(div3);
         }
         destroy_component(icon0);
         destroy_component(icon1);
+        destroy_component(switcher0);
+        destroy_component(switcher1);
+        destroy_component(switcher2);
+        destroy_component(switcher3);
+        destroy_component(switcher4);
+        destroy_component(switcher5);
+        destroy_component(switcher6);
         destroy_each(each_blocks_1, detaching);
         destroy_each(each_blocks, detaching);
         mounted = false;
@@ -5894,7 +6416,7 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       }
     };
   }
-  function create_fragment6(ctx) {
+  function create_fragment7(ctx) {
     let layoutmain;
     let current;
     layoutmain = new main_default({
@@ -5913,10 +6435,11 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
         mount_component(layoutmain, target, anchor);
         current = true;
       },
-      p(ctx2, [dirty]) {
+      p(ctx2, dirty) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, roomNames, quartals, bookingsPerQuartal, monthEnd, monthStart*/
-        4194335) {
+        if (dirty[0] & /*roomNames, quartals, bookingsPerQuartal, showPaid, showOnlyNotPaid, showPrice, showDateEnd, showDateStart, showTenant, showRefunded, monthEnd, monthStart*/
+        4095 | dirty[1] & /*$scope*/
+        32) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -5978,7 +6501,14 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
   function isBookingInThatMonth(booking, yearMonth) {
     return booking.dateStart.includes(yearMonth) || booking.dateEnd.includes(yearMonth);
   }
-  function instance6($self, $props, $invalidate) {
+  function isDateInPast(dateStr) {
+    const inputDate = new Date(dateStr);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    inputDate.setHours(0, 0, 0, 0);
+    return inputDate < today;
+  }
+  function instance7($self, $props, $invalidate) {
     let bookingsPerQuartal = (
       /** @type {BookingDetail[]} */
       [/* bookingsPerQuartal*/]
@@ -6017,23 +6547,72 @@ table.svelte-1gb2780 tbody tr td .cell.unpaid.svelte-1gb2780 {
       $invalidate(2, monthStart = quartals[0]);
       await refreshBookings();
     }
+    let showRefunded = false;
+    let showTenant = false;
+    let showDateStart = false;
+    let showDateEnd = false;
+    let showPaid = false;
+    let showPrice = false;
+    let showOnlyNotPaid = false;
     const click_handler = () => shiftMonth(-1);
     const click_handler_1 = () => shiftMonth(1);
+    function switcher0_value_binding(value) {
+      showRefunded = value;
+      $invalidate(5, showRefunded);
+    }
+    function switcher1_value_binding(value) {
+      showTenant = value;
+      $invalidate(6, showTenant);
+    }
+    function switcher2_value_binding(value) {
+      showDateStart = value;
+      $invalidate(7, showDateStart);
+    }
+    function switcher3_value_binding(value) {
+      showDateEnd = value;
+      $invalidate(8, showDateEnd);
+    }
+    function switcher4_value_binding(value) {
+      showPaid = value;
+      $invalidate(9, showPaid);
+    }
+    function switcher5_value_binding(value) {
+      showPrice = value;
+      $invalidate(10, showPrice);
+    }
+    function switcher6_value_binding(value) {
+      showOnlyNotPaid = value;
+      $invalidate(11, showOnlyNotPaid);
+    }
     return [
       bookingsPerQuartal,
       roomNames,
       monthStart,
       quartals,
       monthEnd,
+      showRefunded,
+      showTenant,
+      showDateStart,
+      showDateEnd,
+      showPaid,
+      showPrice,
+      showOnlyNotPaid,
       shiftMonth,
       click_handler,
-      click_handler_1
+      click_handler_1,
+      switcher0_value_binding,
+      switcher1_value_binding,
+      switcher2_value_binding,
+      switcher3_value_binding,
+      switcher4_value_binding,
+      switcher5_value_binding,
+      switcher6_value_binding
     ];
   }
   var UserReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance6, create_fragment6, safe_not_equal, {});
+      init(this, options, instance7, create_fragment7, safe_not_equal, {}, null, [-1, -1]);
     }
   };
   var userReport_default = UserReport_1;

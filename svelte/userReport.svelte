@@ -1,5 +1,6 @@
 <script>
-    import { notifier } from './_components/xNotifier';
+    import Switcher from './_components/Switcher.svelte';
+import { notifier } from './_components/xNotifier';
   /** @typedef {import('./_types/masters.js').Access} Access */
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/property.js').BookingDetail} BookingDetail */
@@ -94,20 +95,78 @@
   function isBookingInThatMonth(booking, yearMonth) {
     return (booking.dateStart).includes(yearMonth) || (booking.dateEnd).includes(yearMonth);
   }
+  
+  /**
+   * @description Is date in past
+   * @param {string} dateStr
+   * @returns {boolean}
+   */
+  function isDateInPast(dateStr) {
+    const inputDate = new Date(dateStr);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    inputDate.setHours(0, 0, 0, 0);
+    return inputDate < today;
+  }
+
+  let showRefunded    = false;
+  let showTenant      = false;
+  let showDateStart   = false;
+  let showDateEnd     = false;
+  let showPaid        = false;
+  let showPrice       = false;
+  let showOnlyNotPaid = false;
 </script>
 
 <LayoutMain access={segments} user={user}>
   <div class="report-container">
     <div class="actions">
-      <header class="header" aria-label="Date range navigation">
+      <div class="quartal-shifter">
         <button on:click={() => shiftMonth(-1)} class="btn" aria-label="Previous">
           <Icon size="20" src={RiArrowsArrowLeftSLine} />
         </button>
-        <span class="header-text">{formatMonthYear(monthStart)} - {formatMonthYear(monthEnd)}</span>
+        <span class="month-text">{formatMonthYear(monthStart)} - {formatMonthYear(monthEnd)}</span>
         <button on:click={() => shiftMonth(1)} class="btn" aria-label="Next">
           <Icon size="20" src={RiArrowsArrowRightSLine} />
         </button>
-      </header>
+      </div>
+      <div class="filters">
+        <Switcher
+          id="show-refunded"
+          label="Show Refunded"
+          bind:value={showRefunded}
+        />
+        <Switcher
+          id="show-tenant"
+          label="Show Tenant"
+          bind:value={showTenant}
+        />
+        <Switcher
+          id="show-date-start"
+          label="Show Date Start"
+          bind:value={showDateStart}
+        />
+        <Switcher
+          id="show-date-end"
+          label="Show Date End"
+          bind:value={showDateEnd}
+        />
+        <Switcher
+          id="show-paid"
+          label="Show Paid"
+          bind:value={showPaid}
+        />
+        <Switcher
+          id="show-price"
+          label="Show Price"
+          bind:value={showPrice}
+        />
+        <Switcher
+          id="show-only-not-paid"
+          label="Show Only Not Paid"
+          bind:value={showOnlyNotPaid}
+        />
+      </div>
     </div>
     <table>
       <thead>
@@ -127,11 +186,24 @@
                 <div class="cells">
                   {#each (bookingsPerQuartal || []) as booking}
                     {#if booking.roomName == room && isBookingInThatMonth(booking, quartal)}
-                      <div class="cell {booking.amountPaid >= booking.totalPrice ? '' :'unpaid'}">
+                      <div class="cell">
                         {#if booking.tenantName}
                           <span>{booking.tenantName}</span> 
-                          <span>{booking.dateStart} s/d {booking.dateEnd}</span> 
-                          <span>{booking.amountPaid}/{booking.totalPrice}</span>
+                          <span>
+                            <span>{booking.dateStart}</span>
+                            <span>s/d</span>
+                            <span class="{isDateInPast(booking.dateEnd) ? 'date-not-expired' : ''}">
+                              {booking.dateEnd}
+                            </span>
+                          </span> 
+                          <span
+                            class="
+                            {booking.amountPaid >= booking.totalPrice ? "" : "text-red"}
+                            {showPaid && booking.amountPaid > 0 ? '' : 'hidden'}
+                            "
+                          >
+                            {booking.amountPaid}/{booking.totalPrice}
+                          </span>
                         {/if}
                       </div>
                     {/if}
@@ -152,6 +224,51 @@
     flex-direction: column;
     gap: 30px;
     padding: 20px;
+  }
+
+  .report-container .actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .report-container .actions .quartal-shifter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .report-container .actions .quartal-shifter .btn {
+    background-color: var(--gray-002);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray-008);
+    padding: 8px;
+  }
+
+  .report-container .actions .quartal-shifter .btn:hover {
+    background-color: var(--blue-transparent);
+    color: var(--blue-006);
+  }
+
+  .report-container .actions .quartal-shifter .month-text {
+    font-weight: 600;
+    font-size: 18px;
+    user-select: none;
+  }
+
+  .report-container .actions .filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   table {
@@ -177,48 +294,24 @@
   table tbody tr td .cells {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
   }
 
   table tbody tr td .cell {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 1px;
     font-size: 12px;
   }
 
-  table tbody tr td .cell.unpaid {
-    padding: 5px 8px;
-    background-color: var(--red-transparent);
-    border-radius: 5px;
-    color: var(--red-006);
+  table tbody tr td .date-not-expired {
+    color: var(--orange-006);
+    padding: 2px 3px;
+    border-radius: 4px;
+    background-color: var(--orange-transparent);
   }
 
-  .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  .btn {
-    background-color: var(--gray-002);
-    border: none;
-    border-radius: 9999px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--gray-008);
-    padding: 8px;
-  }
-  .btn:hover {
-    background-color: var(--blue-transparent);
-    color: var(--blue-006);
-  }
-  .header-text {
-    font-weight: 600;
-    font-size: 18px;
-    user-select: none;
+  table tbody tr td .hidden {
+    display: none;
   }
 </style>

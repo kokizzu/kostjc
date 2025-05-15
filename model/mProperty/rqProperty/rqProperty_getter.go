@@ -667,6 +667,7 @@ func (r *Rooms) FindRoomNames() (out []string) {
 
 	queryRows := comment + `
 SELECT ` + r.SqlRoomName() + ` FROM ` + r.SqlTableName() + `
+WHERE "deletedAt" = 0
 ORDER BY ` + r.SqlRoomName() + ` ASC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
@@ -692,6 +693,7 @@ type BookingDetail struct {
 	DateEnd    string `json:"dateEnd"`
 	AmountPaid int64  `json:"amountPaid"`
 	TotalPrice int64  `json:"totalPrice"`
+	DeletedAt  int64  `json:"deletedAt"`
 }
 
 type RoomBooking struct {
@@ -723,7 +725,8 @@ SELECT
   COALESCE("bookings"."dateStart", '') AS "dateStart",
   COALESCE("bookings"."dateEnd", '') AS "dateEnd",
   COALESCE(SUM("payments"."paidIDR"), 0) AS "totalPaidIDR",
-  "bookings"."totalPriceIDR"
+  "bookings"."totalPriceIDR",
+	"bookings"."deletedAt"
 FROM "bookings"
 LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
 LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
@@ -738,13 +741,14 @@ GROUP BY "rooms"."roomName", "tenants"."tenantName", "bookings"."dateStart", "bo
 ORDER BY "rooms"."roomName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 6 {
+		if len(row) == 7 {
 			roomName := X.ToS(row[0])
 			tenantName := X.ToS(row[1])
 			dateStart := X.ToS(row[2])
 			dateEnd := X.ToS(row[3])
 			totalPaidIdr := X.ToI(row[4])
 			totalPriceIdr := X.ToI(row[5])
+			deletedAt := X.ToI(row[6])
 
 			out = append(out, BookingDetail{
 				RoomName:   roomName,
@@ -753,6 +757,7 @@ ORDER BY "rooms"."roomName" ASC`
 				DateEnd:    dateEnd,
 				AmountPaid: totalPaidIdr,
 				TotalPrice: totalPriceIdr,
+				DeletedAt:  deletedAt,
 			})
 		}
 	})
