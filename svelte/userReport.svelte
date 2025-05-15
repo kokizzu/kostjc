@@ -109,12 +109,12 @@ import { notifier } from './_components/xNotifier';
     return inputDate < today;
   }
 
-  let showRefunded    = false;
-  let showTenant      = false;
-  let showDateStart   = false;
-  let showDateEnd     = false;
-  let showPaid        = false;
-  let showPrice       = false;
+  let showRefunded    = true;
+  let showTenant      = true;
+  let showDateStart   = true;
+  let showDateEnd     = true;
+  let showPaid        = true;
+  let showPrice       = true;
   let showOnlyNotPaid = false;
 </script>
 
@@ -186,23 +186,30 @@ import { notifier } from './_components/xNotifier';
                 <div class="cells">
                   {#each (bookingsPerQuartal || []) as booking}
                     {#if booking.roomName == room && isBookingInThatMonth(booking, quartal)}
-                      <div class="cell">
+                      <div
+                        class="cell
+                        {booking.deletedAt > 0 ? 'refunded' : ''}
+                        {showOnlyNotPaid && booking.amountPaid >= booking.totalPrice ? 'hidden' : ''}
+                        {!showRefunded && booking.deletedAt > 0 ? 'hidden' : ''}
+                        "
+                      >
                         {#if booking.tenantName}
-                          <span>{booking.tenantName}</span> 
+                          <span class="{showTenant ? '' : 'hidden'}">{booking.tenantName}</span> 
                           <span>
-                            <span>{booking.dateStart}</span>
-                            <span>s/d</span>
-                            <span class="{isDateInPast(booking.dateEnd) ? 'date-not-expired' : ''}">
+                            <span class="{showDateStart ? '' : 'hidden'}">{booking.dateStart}</span>
+                            <span> s/d </span>
+                            <span
+                              class="
+                              {isDateInPast(booking.dateEnd) ? 'date-not-expired' : ''}
+                              {showDateEnd ? '' : 'hidden'}
+                            ">
                               {booking.dateEnd}
                             </span>
                           </span> 
-                          <span
-                            class="
-                            {booking.amountPaid >= booking.totalPrice ? "" : "text-red"}
-                            {showPaid && booking.amountPaid > 0 ? '' : 'hidden'}
-                            "
-                          >
-                            {booking.amountPaid}/{booking.totalPrice}
+                          <span class="{(booking.amountPaid >= booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
+                            <span class="{showPaid ? '' : 'hidden'}">{booking.amountPaid}</span>
+                            <span>/</span>
+                            <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
                           </span>
                         {/if}
                       </div>
@@ -311,7 +318,14 @@ import { notifier } from './_components/xNotifier';
     background-color: var(--orange-transparent);
   }
 
-  table tbody tr td .hidden {
-    display: none;
+  table tbody tr td .cell.refunded {
+    color: var(--violet-006) !important;
+    padding: 4px 6px;
+    border-radius: 4px;
+    background-color: var(--violet-transparent);
+  }
+
+  .hidden {
+    display: none !important;
   }
 </style>
