@@ -114,11 +114,12 @@
   }
 
   async function OnEdit(/** @type {any} */ id, /** @type {any[]}*/ payloads) {
+    let facilitiesNums = payloads[3].map((f) => Number(f));
     const building = {
       id: payloads[0],
       buildingName: String(payloads[1]),
       locationId: payloads[2],
-      facilities: payloads[3],
+      facilities: facilitiesNums,
     }
     const i = /** @type {any}*/ ({
       pager,

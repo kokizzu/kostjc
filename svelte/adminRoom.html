@@ -17398,8 +17398,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       $invalidate(0, valuesTarget = [...valuesTarget, e.detail.value]);
     }
     function handleClear(e) {
-      console.log("handleClear:", e.detail);
-      valuesTarget.filter((v) => v != e.detail.value);
+      const index = valuesTarget.indexOf(Number(e.detail.value));
+      if (index !== -1) {
+        valuesTarget.splice(index, 1);
+      }
     }
     let valuesSourceArrayObject = [];
     let valuesTargetArrayObject = [];
@@ -18043,10 +18045,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       valuesSourceType: "object",
       valuesSourceObj: (
         /*REFS*/
+        ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
           ctx[93].name
-        ]
+        ] ? (
+          /*REFS*/
+          ctx[3][
+            /*field*/
+            ctx[93].name
+          ]
+        ) : (
+          /*field*/
+          ctx[93].ref
+        )
       )
     };
     if (
@@ -18090,10 +18102,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           multiselect_changes.valuesSourceObj = /*REFS*/
+          ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
             ctx[93].name
-          ];
+          ] ? (
+            /*REFS*/
+            ctx[3][
+              /*field*/
+              ctx[93].name
+            ]
+          ) : (
+            /*field*/
+            ctx[93].ref
+          );
         if (!updating_valuesTarget && dirty[1] & /*payloads*/
         2) {
           updating_valuesTarget = true;
@@ -21642,7 +21664,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           $invalidate(32, payloads = [...payloads, row[i]]);
         });
       }
-      console.log("payloads:", payloads);
       $invalidate(22, showPopUp = true);
       $invalidate(33, idToMod = id);
     }
@@ -24226,7 +24247,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           $invalidate(2, pager = o.pager);
           $invalidate(0, rooms = o.rooms);
           notifier.showSuccess(`Room '${room.roomName}' created !!`);
-          popUpForms.Reset();
           OnRefresh(pager);
           popUpForms.Hide();
         }

@@ -257,8 +257,6 @@
       });
     }
 
-    console.log('payloads:', payloads);
-
     showPopUp = true;
     idToMod = id;
   }
@@ -330,7 +328,7 @@
                   placeholder={field.description}
                   bind:valuesTarget={payloads[idx]}
                   valuesSourceType="object"
-                  valuesSourceObj={REFS[field.name]}
+                  valuesSourceObj={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
                 />
               {:else}
                 <InputBox

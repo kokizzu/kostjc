@@ -19,8 +19,10 @@
   }
 
   function handleClear(/** @type {CustomEvent} */e) {
-    console.log('handleClear:',e.detail)
-    valuesTarget.filter((v) => v != e.detail.value);
+    const index = valuesTarget.indexOf(Number(e.detail.value));
+    if (index !== -1) {
+      valuesTarget.splice(index, 1);
+    }
   }
 
   let valuesSourceArrayObject = [];

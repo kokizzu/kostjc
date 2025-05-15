@@ -174,7 +174,6 @@
         rooms = o.rooms;
         notifier.showSuccess(`Room '${room.roomName}' created !!`);
 
-        popUpForms.Reset();
         OnRefresh(pager);
         popUpForms.Hide();
       }

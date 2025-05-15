@@ -39,7 +39,6 @@
   let hash = /** @type {string} */ (location.hash || '');
 
   onMount(() => {
-    console.log('Facilities', facilities);
     if ( hash[ 0 ] === '#' ) hash = hash.substring( 1 );
 
     if (hash.includes(hashSearchByTenant)) {
@@ -140,7 +139,7 @@
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
     const booking = {
-      id: payloads[0],
+      id: id,
       roomId: payloads[1],
       dateStart: payloads[3],
       dateEnd: payloads[4],
@@ -225,6 +224,7 @@
       ACCESS={segments}
       REFS={{
         'tenantId': tenants,
+        'extraTenants': tenants,
         'roomId': rooms
       }}
       bind:FIELDS={fields}

@@ -107,7 +107,6 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('Facility ID to Edit: ' + String(payloads));
     const facility = {
       id: id,
       facilityName: payloads[1],

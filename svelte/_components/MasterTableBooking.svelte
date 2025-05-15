@@ -34,6 +34,7 @@
   import {AdminBooking, AdminPayment} from '../jsApi.GEN'
   import { notifier } from './xNotifier';
   import PopUpAddPayment from './PopUpAddPayment.svelte';
+    import MultiSelect from './MultiSelect.svelte';
 
   export let tenants = /** @type {Record<number, string>} */ ({});
 
@@ -64,10 +65,6 @@
     } catch (e) {
       return formattedFacilities;
     }
-
-    console.log('ArrFacilities', arrFacilities);
-    console.log('formattedFacilities', formattedFacilities);
-
     return formattedFacilities;
   }
 
@@ -296,25 +293,7 @@
       }
       booking = o.booking;
     })
-    fillExtraTenants();
     payloads = [];
-    if (FIELDS && FIELDS.length > 0) {
-      FIELDS.forEach((f, i) => {
-        if (f.name === 'extraTenants') {
-          extraTenantsIds = row[i];
-          (extraTenantsIds || []).forEach((id) => {
-            (extraTenants || []).forEach((extraTenant) => {
-              if (extraTenant.id === id) {
-                selectedExtraTenants = extraTenant.name;
-                extraTenantsToShow = [...extraTenantsToShow, extraTenant];
-                extraTenants = extraTenants.filter(f => f.id !== extraTenant.id);
-              }
-            })
-          })
-        }
-        payloads = [...payloads, row[i]];
-      });
-    }
 
     if (!isErrAjax) {
       payloads[1] = booking.roomId;
@@ -333,63 +312,11 @@
   }
 
   function handleSubmitEdit() {
-    (FIELDS || []).forEach((f, i) => {
-      if (f.name === 'extraTenants') {
-        payloads[i] = extraTenantsIds;
-      }
-    })
     OnEdit(idToMod, payloads);
     closePopUpEdit();
   }
 
-  let extraTenantsIds = [];
-
-  /**
-   * @typedef {Object} ExtraTenant
-   * @property {number} id
-   * @property {string} name
-   */
-
-  let extraTenants = /** @type {ExtraTenant[]} */ ([]);
-
-  function fillExtraTenants() {
-    for (const [k, v] of Object.entries(tenants)) extraTenants.push({id: Number(k), name: v});
-  }
-
-  let extraTenantsToShow = /** @type {ExtraTenant[]} */ ([]);
-  let showExtraTenants = false;
-  let selectedExtraTenants = 'Tenant....';
-
-  function handleExtraTenantsClose() {
-		showExtraTenants = false;
-		document.body.removeEventListener('click', handleExtraTenantsClose)
-	}
-	function toggleExtraTenants() {
-		showExtraTenants = !showExtraTenants;
-		if (showExtraTenants) document.body.addEventListener('click', handleExtraTenantsClose);
-		else document.body.removeEventListener('click', handleExtraTenantsClose);
-	}
-
-	function choseExtraTenant(/** @type {ExtraTenant} */ extraTenant) {
-    selectedExtraTenants = extraTenant.name;
-    showExtraTenants = false;
-    extraTenantsIds = [...extraTenantsIds, Number(extraTenant.id)];
-		extraTenantsToShow = [...extraTenantsToShow, extraTenant];
-    extraTenants = extraTenants.filter(f => f.id !== extraTenant.id);
-	}
-
-	const removeExtraTenant = (/** @type {number} */ idx) => {
-    extraTenantsIds = extraTenantsIds.filter(( _, i ) => i !== idx);
-    extraTenants = [...extraTenants, extraTenantsToShow[idx]];
-		extraTenantsToShow = extraTenantsToShow.filter(( _, i ) => i !== idx);
-	}
-
   function closePopUpEdit() {
-    extraTenantsIds = [];
-    extraTenants = []
-    selectedExtraTenants = 'Tenant....';
-    showExtraTenants = false;
-    extraTenantsToShow = [];
     showPopUpEdit = false;
   }
 
@@ -492,6 +419,15 @@
                 bind:value={payloads[idx]}
                 type={field.inputType}
                 values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
+              />
+            {:else if field.inputType === 'multiselect'}
+              <MultiSelect
+                id={field.name}
+                label={field.label}
+                placeholder={field.description}
+                bind:valuesTarget={payloads[idx]}
+                valuesSourceType="object"
+                valuesSourceObj={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
               />
             {:else}
               <InputBox
@@ -636,10 +572,6 @@
                       <span>--</span>
                     {/if}
                   </td>
-                {:else if f.type == 'intArr'}  
-                  <td class="intArr">{row[idx] ? (
-                    Object.entries(REFS[f.name]).map(([k, v]) => `${v}`).join(', ')
-                  ) : '--'}</td>
                 {:else if f.type == 'currency'}
                   <td class="currency">{row[idx] ? formatPrice(row[idx], (f.mapping || 'IDR')) : '--'}</td>
                 {:else if f.inputType === 'datetime'}
@@ -651,7 +583,7 @@
                 {:else if f.name === 'facilitiesObj'}
                     <td class="textarea">{formatFacilities(row[idx])}</td>
                 {:else if f.name === 'extraTenants'}
-                  <td class="textarea">{getExtraTenants(row[idx])}</td>
+                  <td>{getExtraTenants(row[idx])}</td>
                 {:else}
                   <td class={f.type}>
                     {typeof row[idx] === 'boolean' ? (row[idx] ? 'Yes' : 'No') : (row[idx] || '--')}

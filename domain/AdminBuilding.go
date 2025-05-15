@@ -166,9 +166,7 @@ func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 			}
 		}
 
-		if len(in.Building.Facilities) > 0 {
-			bld.SetFacilities(in.Building.Facilities)
-		}
+		bld.SetFacilities(in.Building.Facilities)
 
 		if bld.Id == 0 {
 			if bld.FindByBuildingName() {

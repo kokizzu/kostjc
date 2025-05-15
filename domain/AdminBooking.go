@@ -124,8 +124,8 @@ var AdminBookingMeta = zCrud.Meta{
 		{
 			Name:      mProperty.ExtraTenants,
 			Label:     `Extra Tenants`,
-			DataType:  zCrud.DataTypeInt,
-			InputType: zCrud.InputTypeText,
+			DataType:  zCrud.DataTypeIntArr,
+			InputType: zCrud.InputTypeMultiSelect,
 			ReadOnly:  false,
 		},
 		{

@@ -107,7 +107,6 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
-    console.log('User ID to Edit: ' + String(payloads));
     const user = {
       id: id,
       email: payloads[1],
