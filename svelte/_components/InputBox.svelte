@@ -290,11 +290,11 @@
   }
 
   .switcher input:checked + .slider {
-    background-color: var(--blue-006) !important;
+    background-color: var(--blue-005) !important;
   }
 
   .switcher input:focus + .slider {
-    box-shadow: 0 0 1px var(--blue-006) !important;
+    box-shadow: 0 0 1px var(--blue-005) !important;
   }
 
   .switcher input:checked + .slider:before {

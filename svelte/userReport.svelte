@@ -8,7 +8,11 @@ import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
   import { UserReport } from './jsApi.GEN';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
-  import { RiArrowsArrowRightSLine, RiArrowsArrowLeftSLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import {
+    RiArrowsArrowRightSLine, RiArrowsArrowLeftSLine,
+    RiSystemExternalLinkLine, RiFinanceWallet3Line,
+    RiSystemEyeLine, RiDesignBallPenLine
+  } from './node_modules/svelte-icons-pack/dist/ri';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -116,6 +120,12 @@ import { notifier } from './_components/xNotifier';
   let showPaid        = true;
   let showPrice       = true;
   let showOnlyNotPaid = false;
+
+  // TODO:
+  // - tombol extend booking
+  // - tombol input payment
+  // - tombol see payments
+  // - tombol edit booking
 </script>
 
 <LayoutMain access={segments} user={user}>
@@ -211,6 +221,34 @@ import { notifier } from './_components/xNotifier';
                             <span>/</span>
                             <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
                           </span>
+                          {#if booking.deletedAt == 0}
+                            <div class="actions">
+                              <button class="btn" title="Extend Booking">
+                                <Icon
+                                  src={RiSystemExternalLinkLine}
+                                  size="17"
+                                />
+                              </button>
+                              <button class="btn" title="Input Payment">
+                                <Icon
+                                  src={RiFinanceWallet3Line}
+                                  size="17"
+                                />
+                              </button>
+                              <button class="btn" title="See Payments">
+                                <Icon
+                                  src={RiSystemEyeLine}
+                                  size="17"
+                                />
+                              </button>
+                              <button class="btn" title="Edit Booking">
+                                <Icon
+                                  src={RiDesignBallPenLine}
+                                  size="17"
+                                />
+                              </button>
+                            </div>
+                          {/if}
                         {/if}
                       </div>
                     {/if}
@@ -309,6 +347,46 @@ import { notifier } from './_components/xNotifier';
     flex-direction: column;
     gap: 1px;
     font-size: 12px;
+    position: relative;
+    padding: 2px 3px;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  table tbody tr td .cell .actions {
+    display: none;
+    flex-direction: row;
+    gap: 3px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: var(--blue-005);
+    width: 100%;
+    height: 100%;
+  }
+
+  table tbody tr td .cell:hover .actions {
+    display: flex;
+  }
+
+  table tbody tr td .cell .actions .btn {
+    border: none;
+    color: #fff;
+    background-color: transparent;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+  }
+
+  table tbody tr td .cell .actions .btn:hover {
+    background-color: #FFFFFF30;
   }
 
   table tbody tr td .date-not-expired {
