@@ -4,6 +4,7 @@
   /** @typedef {import('../_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('../_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('../_types/masters.js').ExtendedAction} ExtendedAction */
+  /** @typedef {import('../_types/masters.js').ExtendedActionButton} ExtendedActionButton */
 
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import {
@@ -50,6 +51,7 @@
   export let LINKS = /** @type ExtendedAction[] */ ([]);
   export let IS_CUSTOM_EDIT = false;
   export let UNSORTED_ROWS = [];
+  export let EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([]);
 
   /**
    * @type {Record<string, number>}
@@ -469,6 +471,7 @@
                         {#if CAN_OPEN_LINK}
                           {#each (LINKS || []) as l}
                             <a
+                              title="{l.tooltip}"
                               class="btn link"
                               href={l.link(row)}
                               target={l.isTargetBlank ? '_blank' : ''}
@@ -479,6 +482,21 @@
                                 src={l.icon}
                               />
                             </a>
+                          {/each}
+                        {/if}
+                        {#if (EXTENDED_BUTTONS || []).length > 0}
+                          {#each (EXTENDED_BUTTONS || []) as b}
+                            <button
+                              class="btn"
+                              title="{b.tooltip}"
+                              on:click={() => b.action(row)}
+                            >
+                              <Icon
+                                size="15"
+                                color="var(--gray-007)"
+                                src={b.icon}
+                              />
+                            </button>
                           {/each}
                         {/if}
                       </div>

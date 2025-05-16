@@ -17479,77 +17479,82 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   // _components/MasterTable.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[76] = list[i];
+    child_ctx[78] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[79] = list[i];
+    child_ctx[81] = list[i];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[82] = list[i];
+    child_ctx[84] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[85] = list[i];
-    child_ctx[87] = i;
+    child_ctx[87] = list[i];
+    child_ctx[89] = i;
     return child_ctx;
   }
   function get_each_context_4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[88] = list[i];
+    child_ctx[90] = list[i];
     return child_ctx;
   }
   function get_each_context_5(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[85] = list[i];
-    child_ctx[92] = i;
+    child_ctx[93] = list[i];
     return child_ctx;
   }
   function get_each_context_6(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[93] = list[i];
-    child_ctx[94] = list;
-    child_ctx[87] = i;
+    child_ctx[87] = list[i];
+    child_ctx[97] = i;
     return child_ctx;
   }
-  function create_if_block_29(ctx) {
+  function get_each_context_7(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[98] = list[i];
+    child_ctx[99] = list;
+    child_ctx[89] = i;
+    return child_ctx;
+  }
+  function create_if_block_30(ctx) {
     let filtertable;
     let updating_filterColumns;
     let updating_filtersMap;
     let current;
     function filtertable_filterColumns_binding(value) {
-      ctx[53](value);
+      ctx[54](value);
     }
     function filtertable_filtersMap_binding(value) {
-      ctx[54](value);
+      ctx[55](value);
     }
     let filtertable_props = {};
     if (
       /*filterColumns*/
-      ctx[19] !== void 0
+      ctx[20] !== void 0
     ) {
       filtertable_props.filterColumns = /*filterColumns*/
-      ctx[19];
+      ctx[20];
     }
     if (
       /*filtersMap*/
-      ctx[20] !== void 0
+      ctx[21] !== void 0
     ) {
       filtertable_props.filtersMap = /*filtersMap*/
-      ctx[20];
+      ctx[21];
     }
     filtertable = new FilterTable_default({ props: filtertable_props });
-    ctx[52](filtertable);
+    ctx[53](filtertable);
     binding_callbacks.push(() => bind(filtertable, "filterColumns", filtertable_filterColumns_binding));
     binding_callbacks.push(() => bind(filtertable, "filtersMap", filtertable_filtersMap_binding));
     filtertable.$on(
       "click",
       /*ApplyFilter*/
-      ctx[37]
+      ctx[38]
     );
     return {
       c() {
@@ -17562,17 +17567,17 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         const filtertable_changes = {};
         if (!updating_filterColumns && dirty[0] & /*filterColumns*/
-        524288) {
+        1048576) {
           updating_filterColumns = true;
           filtertable_changes.filterColumns = /*filterColumns*/
-          ctx2[19];
+          ctx2[20];
           add_flush_callback(() => updating_filterColumns = false);
         }
         if (!updating_filtersMap && dirty[0] & /*filtersMap*/
-        1048576) {
+        2097152) {
           updating_filtersMap = true;
           filtertable_changes.filtersMap = /*filtersMap*/
-          ctx2[20];
+          ctx2[21];
           add_flush_callback(() => updating_filtersMap = false);
         }
         filtertable.$set(filtertable_changes);
@@ -17588,12 +17593,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         current = false;
       },
       d(detaching) {
-        ctx[52](null);
+        ctx[53](null);
         destroy_component(filtertable, detaching);
       }
     };
   }
-  function create_if_block_23(ctx) {
+  function create_if_block_24(ctx) {
     let div3;
     let div2;
     let header;
@@ -17609,7 +17614,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let t1;
     let t2;
     let t3_value = `#${/*idToMod*/
-    ctx[33]}`;
+    ctx[34]}`;
     let t3;
     let t4;
     let button0;
@@ -17629,13 +17634,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         src: IoClose
       }
     });
-    let each_value_6 = ensure_array_like(
+    let each_value_7 = ensure_array_like(
       /*FIELDS*/
       ctx[1] || []
     );
     let each_blocks = [];
-    for (let i = 0; i < each_value_6.length; i += 1) {
-      each_blocks[i] = create_each_block_6(get_each_context_6(ctx, each_value_6, i));
+    for (let i = 0; i < each_value_7.length; i += 1) {
+      each_blocks[i] = create_each_block_7(get_each_context_7(ctx, each_value_7, i));
     }
     const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
       each_blocks[i] = null;
@@ -17700,13 +17705,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               button0,
               "click",
               /*click_handler*/
-              ctx[55]
+              ctx[56]
             ),
             listen(
               button1,
               "click",
               /*handleSubmitEdit*/
-              ctx[43]
+              ctx[44]
             )
           ];
           mounted = true;
@@ -17721,31 +17726,31 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ) : "row") + ""))
           set_data(t1, t1_value);
         if ((!current || dirty[1] & /*idToMod*/
-        4) && t3_value !== (t3_value = `#${/*idToMod*/
-        ctx2[33]}`))
+        8) && t3_value !== (t3_value = `#${/*idToMod*/
+        ctx2[34]}`))
           set_data(t3, t3_value);
         if (dirty[0] & /*FIELDS, REFS*/
         10 | dirty[1] & /*payloads*/
-        2) {
-          each_value_6 = ensure_array_like(
+        4) {
+          each_value_7 = ensure_array_like(
             /*FIELDS*/
             ctx2[1] || []
           );
           let i;
-          for (i = 0; i < each_value_6.length; i += 1) {
-            const child_ctx = get_each_context_6(ctx2, each_value_6, i);
+          for (i = 0; i < each_value_7.length; i += 1) {
+            const child_ctx = get_each_context_7(ctx2, each_value_7, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
               transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block_6(child_ctx);
+              each_blocks[i] = create_each_block_7(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
               each_blocks[i].m(div0, null);
             }
           }
           group_outros();
-          for (i = each_value_6.length; i < each_blocks.length; i += 1) {
+          for (i = each_value_7.length; i < each_blocks.length; i += 1) {
             out(i);
           }
           check_outros();
@@ -17755,7 +17760,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (current)
           return;
         transition_in(icon.$.fragment, local);
-        for (let i = 0; i < each_value_6.length; i += 1) {
+        for (let i = 0; i < each_value_7.length; i += 1) {
           transition_in(each_blocks[i]);
         }
         current = true;
@@ -17779,11 +17784,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_24(ctx) {
+  function create_if_block_25(ctx) {
     let if_block_anchor;
     let current;
     let if_block = !/*field*/
-    ctx[93].readOnly && create_if_block_25(ctx);
+    ctx[98].readOnly && create_if_block_26(ctx);
     return {
       c() {
         if (if_block)
@@ -17798,7 +17803,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       },
       p(ctx2, dirty) {
         if (!/*field*/
-        ctx2[93].readOnly) {
+        ctx2[98].readOnly) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*FIELDS*/
@@ -17806,7 +17811,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_25(ctx2);
+            if_block = create_if_block_26(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -17838,32 +17843,32 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_25(ctx) {
+  function create_if_block_26(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
     let current;
     const if_block_creators = [
-      create_if_block_26,
       create_if_block_27,
       create_if_block_28,
+      create_if_block_29,
       create_else_block_5
     ];
     const if_blocks = [];
     function select_block_type(ctx2, dirty) {
       if (
         /*field*/
-        ctx2[93].inputType === "combobox"
+        ctx2[98].inputType === "combobox"
       )
         return 0;
       if (
         /*field*/
-        ctx2[93].inputType === "combobox-arr"
+        ctx2[98].inputType === "combobox-arr"
       )
         return 1;
       if (
         /*field*/
-        ctx2[93].inputType === "multiselect"
+        ctx2[98].inputType === "multiselect"
       )
         return 2;
       return 3;
@@ -17925,41 +17930,41 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let updating_value;
     let current;
     function inputbox_value_binding_2(value) {
-      ctx[59](
+      ctx[60](
         value,
         /*idx*/
-        ctx[87]
+        ctx[89]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[93].name
+        ctx[98].name
       ),
       label: (
         /*field*/
-        ctx[93].label
+        ctx[98].label
       ),
       placeholder: (
         /*field*/
-        ctx[93].description
+        ctx[98].description
       ),
       type: (
         /*field*/
-        ctx[93].inputType
+        ctx[98].inputType
       )
     };
     if (
       /*payloads*/
-      ctx[32][
+      ctx[33][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
-      ctx[32][
+      ctx[33][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -17978,26 +17983,26 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[93].name;
+          ctx[98].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[93].label;
+          ctx[98].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[93].description;
+          ctx[98].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[93].inputType;
+          ctx[98].inputType;
         if (!updating_value && dirty[1] & /*payloads*/
-        2) {
+        4) {
           updating_value = true;
           inputbox_changes.value = /*payloads*/
-          ctx[32][
+          ctx[33][
             /*idx*/
-            ctx[87]
+            ctx[89]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -18018,29 +18023,29 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_28(ctx) {
+  function create_if_block_29(ctx) {
     let multiselect;
     let updating_valuesTarget;
     let current;
     function multiselect_valuesTarget_binding(value) {
-      ctx[58](
+      ctx[59](
         value,
         /*idx*/
-        ctx[87]
+        ctx[89]
       );
     }
     let multiselect_props = {
       id: (
         /*field*/
-        ctx[93].name
+        ctx[98].name
       ),
       label: (
         /*field*/
-        ctx[93].label
+        ctx[98].label
       ),
       placeholder: (
         /*field*/
-        ctx[93].description
+        ctx[98].description
       ),
       valuesSourceType: "object",
       valuesSourceObj: (
@@ -18048,30 +18053,30 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[93].name
+          ctx[98].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[93].name
+            ctx[98].name
           ]
         ) : (
           /*field*/
-          ctx[93].ref
+          ctx[98].ref
         )
       )
     };
     if (
       /*payloads*/
-      ctx[32][
+      ctx[33][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] !== void 0
     ) {
       multiselect_props.valuesTarget = /*payloads*/
-      ctx[32][
+      ctx[33][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ];
     }
     multiselect = new MultiSelect_default({ props: multiselect_props });
@@ -18090,39 +18095,39 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.id = /*field*/
-          ctx[93].name;
+          ctx[98].name;
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.label = /*field*/
-          ctx[93].label;
+          ctx[98].label;
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.placeholder = /*field*/
-          ctx[93].description;
+          ctx[98].description;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           multiselect_changes.valuesSourceObj = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[93].name
+            ctx[98].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[93].name
+              ctx[98].name
             ]
           ) : (
             /*field*/
-            ctx[93].ref
+            ctx[98].ref
           );
         if (!updating_valuesTarget && dirty[1] & /*payloads*/
-        2) {
+        4) {
           updating_valuesTarget = true;
           multiselect_changes.valuesTarget = /*payloads*/
-          ctx[32][
+          ctx[33][
             /*idx*/
-            ctx[87]
+            ctx[89]
           ];
           add_flush_callback(() => updating_valuesTarget = false);
         }
@@ -18143,63 +18148,63 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_27(ctx) {
+  function create_if_block_28(ctx) {
     let inputbox;
     let updating_value;
     let current;
     function inputbox_value_binding_1(value) {
-      ctx[57](
+      ctx[58](
         value,
         /*idx*/
-        ctx[87]
+        ctx[89]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[93].name
+        ctx[98].name
       ),
       label: (
         /*field*/
-        ctx[93].label
+        ctx[98].label
       ),
       placeholder: (
         /*field*/
-        ctx[93].description
+        ctx[98].description
       ),
       type: (
         /*field*/
-        ctx[93].inputType
+        ctx[98].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[93].name
+          ctx[98].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[93].name
+            ctx[98].name
           ]
         ) : (
           /*field*/
-          ctx[93].ref
+          ctx[98].ref
         )
       )
     };
     if (
       /*payloads*/
-      ctx[32][
+      ctx[33][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
-      ctx[32][
+      ctx[33][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -18218,43 +18223,43 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[93].name;
+          ctx[98].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[93].label;
+          ctx[98].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[93].description;
+          ctx[98].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[93].inputType;
+          ctx[98].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[93].name
+            ctx[98].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[93].name
+              ctx[98].name
             ]
           ) : (
             /*field*/
-            ctx[93].ref
+            ctx[98].ref
           );
         if (!updating_value && dirty[1] & /*payloads*/
-        2) {
+        4) {
           updating_value = true;
           inputbox_changes.value = /*payloads*/
-          ctx[32][
+          ctx[33][
             /*idx*/
-            ctx[87]
+            ctx[89]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -18275,49 +18280,49 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_26(ctx) {
+  function create_if_block_27(ctx) {
     let inputbox;
     let updating_value;
     let current;
     function inputbox_value_binding(value) {
-      ctx[56](
+      ctx[57](
         value,
         /*idx*/
-        ctx[87]
+        ctx[89]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[93].name
+        ctx[98].name
       ),
       label: (
         /*field*/
-        ctx[93].label
+        ctx[98].label
       ),
       placeholder: (
         /*field*/
-        ctx[93].description
+        ctx[98].description
       ),
       type: (
         /*field*/
-        ctx[93].inputType
+        ctx[98].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[93].name
+          ctx[98].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[93].name
+            ctx[98].name
           ]
         ) : (
           /*field*/
-          ctx[93].ref
+          ctx[98].ref
         )
       ),
       isObject: (
@@ -18325,21 +18330,21 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[93].name
+          ctx[98].name
         ] ? true : false
       )
     };
     if (
       /*payloads*/
-      ctx[32][
+      ctx[33][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
-      ctx[32][
+      ctx[33][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -18358,35 +18363,35 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[93].name;
+          ctx[98].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[93].label;
+          ctx[98].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[93].description;
+          ctx[98].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[93].inputType;
+          ctx[98].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[93].name
+            ctx[98].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[93].name
+              ctx[98].name
             ]
           ) : (
             /*field*/
-            ctx[93].ref
+            ctx[98].ref
           );
         if (dirty[0] & /*REFS, FIELDS*/
         10)
@@ -18394,15 +18399,15 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[93].name
+            ctx[98].name
           ] ? true : false;
         if (!updating_value && dirty[1] & /*payloads*/
-        2) {
+        4) {
           updating_value = true;
           inputbox_changes.value = /*payloads*/
-          ctx[32][
+          ctx[33][
             /*idx*/
-            ctx[87]
+            ctx[89]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -18423,12 +18428,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_each_block_6(ctx) {
+  function create_each_block_7(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
       /*field*/
-      ctx[93].name !== "id" && create_if_block_24(ctx)
+      ctx[98].name !== "id" && create_if_block_25(ctx)
     );
     return {
       c() {
@@ -18445,7 +18450,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (
           /*field*/
-          ctx2[93].name !== "id"
+          ctx2[98].name !== "id"
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -18454,7 +18459,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_24(ctx2);
+            if_block = create_if_block_25(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -18486,7 +18491,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_222(ctx) {
+  function create_if_block_23(ctx) {
     let div;
     let icon;
     let current;
@@ -18527,7 +18532,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_21(ctx) {
+  function create_if_block_222(ctx) {
     let div;
     let button;
     let icon;
@@ -18589,14 +18594,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let span;
     let t0_value = (
       /*f*/
-      ctx[85].label + ""
+      ctx[87].label + ""
     );
     let t0;
     let t1;
     let show_if = !/*UNSORTED_ROWS*/
     ctx[14].includes(
       /*f*/
-      ctx[85].name
+      ctx[87].name
     );
     let button_disabled_value;
     let t2;
@@ -18605,13 +18610,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let current;
     let mounted;
     let dispose;
-    let if_block = show_if && create_if_block_172(ctx);
+    let if_block = show_if && create_if_block_182(ctx);
     function click_handler_2() {
       return (
         /*click_handler_2*/
-        ctx[61](
+        ctx[62](
           /*f*/
-          ctx[85]
+          ctx[87]
         )
       );
     }
@@ -18629,20 +18634,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         button.disabled = button_disabled_value = /*UNSORTED_ROWS*/
         ctx[14].includes(
           /*f*/
-          ctx[85].name
+          ctx[87].name
         );
         attr(th, "style", th_style_value = /*COL_WIDTHS*/
-        ctx[15][
+        ctx[16][
           /*f*/
-          ctx[85].name
+          ctx[87].name
         ] ? `min-width: ${/*COL_WIDTHS*/
-        ctx[15][
+        ctx[16][
           /*f*/
-          ctx[85].name
+          ctx[87].name
         ]}px;` : "");
         attr(th, "class", th_class_value = /*f*/
-        (ctx[85].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[85].inputType === "datetime" ? "datetime" : "") + " svelte-ddx7xj");
+        (ctx[87].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[87].inputType === "datetime" ? "datetime" : "") + " svelte-ddx7xj");
       },
       m(target, anchor) {
         insert(target, th, anchor);
@@ -18663,14 +18668,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ctx = new_ctx;
         if ((!current || dirty[0] & /*FIELDS*/
         2) && t0_value !== (t0_value = /*f*/
-        ctx[85].label + ""))
+        ctx[87].label + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*UNSORTED_ROWS, FIELDS*/
         16386)
           show_if = !/*UNSORTED_ROWS*/
           ctx[14].includes(
             /*f*/
-            ctx[85].name
+            ctx[87].name
           );
         if (show_if) {
           if (if_block) {
@@ -18680,7 +18685,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_172(ctx);
+            if_block = create_if_block_182(ctx);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(button, null);
@@ -18696,26 +18701,26 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         16386 && button_disabled_value !== (button_disabled_value = /*UNSORTED_ROWS*/
         ctx[14].includes(
           /*f*/
-          ctx[85].name
+          ctx[87].name
         ))) {
           button.disabled = button_disabled_value;
         }
         if (!current || dirty[0] & /*COL_WIDTHS, FIELDS*/
-        32770 && th_style_value !== (th_style_value = /*COL_WIDTHS*/
-        ctx[15][
+        65538 && th_style_value !== (th_style_value = /*COL_WIDTHS*/
+        ctx[16][
           /*f*/
-          ctx[85].name
+          ctx[87].name
         ] ? `min-width: ${/*COL_WIDTHS*/
-        ctx[15][
+        ctx[16][
           /*f*/
-          ctx[85].name
+          ctx[87].name
         ]}px;` : "")) {
           attr(th, "style", th_style_value);
         }
         if (!current || dirty[0] & /*FIELDS*/
         2 && th_class_value !== (th_class_value = /*f*/
-        (ctx[85].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[85].inputType === "datetime" ? "datetime" : "") + " svelte-ddx7xj")) {
+        (ctx[87].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[87].inputType === "datetime" ? "datetime" : "") + " svelte-ddx7xj")) {
           attr(th, "class", th_class_value);
         }
       },
@@ -18740,7 +18745,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_162(ctx) {
+  function create_if_block_172(ctx) {
     let th;
     return {
       c() {
@@ -18761,25 +18766,25 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_172(ctx) {
+  function create_if_block_182(ctx) {
     let t0;
     let t1;
     let if_block2_anchor;
     let current;
     let if_block0 = (
       /*isSortTableAsc*/
-      ctx[26] && /*f*/
-      ctx[85].name === /*fieldNameToSort*/
-      ctx[27] && create_if_block_20(ctx)
+      ctx[27] && /*f*/
+      ctx[87].name === /*fieldNameToSort*/
+      ctx[28] && create_if_block_21(ctx)
     );
     let if_block1 = !/*isSortTableAsc*/
-    ctx[26] && /*f*/
-    ctx[85].name === /*fieldNameToSort*/
-    ctx[27] && create_if_block_19(ctx);
+    ctx[27] && /*f*/
+    ctx[87].name === /*fieldNameToSort*/
+    ctx[28] && create_if_block_20(ctx);
     let if_block2 = (
       /*f*/
-      ctx[85].name !== /*fieldNameToSort*/
-      ctx[27] && create_if_block_182(ctx)
+      ctx[87].name !== /*fieldNameToSort*/
+      ctx[28] && create_if_block_19(ctx)
     );
     return {
       c() {
@@ -18808,17 +18813,17 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (
           /*isSortTableAsc*/
-          ctx2[26] && /*f*/
-          ctx2[85].name === /*fieldNameToSort*/
-          ctx2[27]
+          ctx2[27] && /*f*/
+          ctx2[87].name === /*fieldNameToSort*/
+          ctx2[28]
         ) {
           if (if_block0) {
             if (dirty[0] & /*isSortTableAsc, FIELDS, fieldNameToSort*/
-            201326594) {
+            402653186) {
               transition_in(if_block0, 1);
             }
           } else {
-            if_block0 = create_if_block_20(ctx2);
+            if_block0 = create_if_block_21(ctx2);
             if_block0.c();
             transition_in(if_block0, 1);
             if_block0.m(t0.parentNode, t0);
@@ -18831,16 +18836,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           check_outros();
         }
         if (!/*isSortTableAsc*/
-        ctx2[26] && /*f*/
-        ctx2[85].name === /*fieldNameToSort*/
-        ctx2[27]) {
+        ctx2[27] && /*f*/
+        ctx2[87].name === /*fieldNameToSort*/
+        ctx2[28]) {
           if (if_block1) {
             if (dirty[0] & /*isSortTableAsc, FIELDS, fieldNameToSort*/
-            201326594) {
+            402653186) {
               transition_in(if_block1, 1);
             }
           } else {
-            if_block1 = create_if_block_19(ctx2);
+            if_block1 = create_if_block_20(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
             if_block1.m(t1.parentNode, t1);
@@ -18854,16 +18859,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         if (
           /*f*/
-          ctx2[85].name !== /*fieldNameToSort*/
-          ctx2[27]
+          ctx2[87].name !== /*fieldNameToSort*/
+          ctx2[28]
         ) {
           if (if_block2) {
             if (dirty[0] & /*FIELDS, fieldNameToSort*/
-            134217730) {
+            268435458) {
               transition_in(if_block2, 1);
             }
           } else {
-            if_block2 = create_if_block_182(ctx2);
+            if_block2 = create_if_block_19(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
             if_block2.m(if_block2_anchor.parentNode, if_block2_anchor);
@@ -18905,7 +18910,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_20(ctx) {
+  function create_if_block_21(ctx) {
     let icon;
     let current;
     icon = new Icon_default({
@@ -18939,7 +18944,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_19(ctx) {
+  function create_if_block_20(ctx) {
     let icon;
     let current;
     icon = new Icon_default({
@@ -18973,7 +18978,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_182(ctx) {
+  function create_if_block_19(ctx) {
     let icon;
     let current;
     icon = new Icon_default({
@@ -19007,18 +19012,18 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_each_block_5(key_1, ctx) {
+  function create_each_block_6(key_1, ctx) {
     let first;
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
     let current;
-    const if_block_creators = [create_if_block_162, create_else_block_4];
+    const if_block_creators = [create_if_block_172, create_else_block_4];
     const if_blocks = [];
     function select_block_type_1(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[85].name === "id"
+        ctx2[87].name === "id"
       )
         return 0;
       return 1;
@@ -19133,9 +19138,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*CAN_DELETE_ROW, MASTER_ROWS, deletedIndex, FIELDS, LINKS, CAN_OPEN_LINK, CAN_RESTORE_ROW, CAN_EDIT_ROW, IS_CUSTOM_EDIT, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, PAGER*/
-        2178991 | dirty[1] & /*restoreRow, deleteRow, toggleShowPopUp, Cell*/
-        3616) {
+        if (dirty[0] & /*CAN_DELETE_ROW, MASTER_ROWS, deletedIndex, FIELDS, EXTENDED_BUTTONS, LINKS, CAN_OPEN_LINK, CAN_RESTORE_ROW, CAN_EDIT_ROW, IS_CUSTOM_EDIT, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, PAGER*/
+        4374447 | dirty[1] & /*restoreRow, deleteRow, toggleShowPopUp, Cell*/
+        7232) {
           each_value_2 = ensure_array_like(
             /*MASTER_ROWS*/
             ctx2[2]
@@ -19186,20 +19191,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   function create_else_block_2(ctx) {
     let td;
     let t_value = (typeof /*row*/
-    ctx[82][
+    ctx[84][
       /*idx*/
-      ctx[87]
+      ctx[89]
     ] === "boolean" ? (
       /*row*/
-      ctx[82][
+      ctx[84][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] ? "Yes" : "No"
     ) : (
       /*row*/
-      ctx[82][
+      ctx[84][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] || "--"
     )) + "";
     let t;
@@ -19210,7 +19215,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         t = text(t_value);
         attr(td, "class", td_class_value = null_to_empty(
           /*f*/
-          ctx[85].type
+          ctx[87].type
         ) + " svelte-ddx7xj");
       },
       m(target, anchor) {
@@ -19220,27 +19225,27 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = (typeof /*row*/
-        ctx2[82][
+        ctx2[84][
           /*idx*/
-          ctx2[87]
+          ctx2[89]
         ] === "boolean" ? (
           /*row*/
-          ctx2[82][
+          ctx2[84][
             /*idx*/
-            ctx2[87]
+            ctx2[89]
           ] ? "Yes" : "No"
         ) : (
           /*row*/
-          ctx2[82][
+          ctx2[84][
             /*idx*/
-            ctx2[87]
+            ctx2[89]
           ] || "--"
         )) + ""))
           set_data(t, t_value);
         if (dirty[0] & /*FIELDS*/
         2 && td_class_value !== (td_class_value = null_to_empty(
           /*f*/
-          ctx2[85].type
+          ctx2[87].type
         ) + " svelte-ddx7xj")) {
           attr(td, "class", td_class_value);
         }
@@ -19254,13 +19259,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_153(ctx) {
+  function create_if_block_162(ctx) {
     let td;
     let t0_value = (
       /*row*/
-      (ctx[82][
+      (ctx[84][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] || "0") + ""
     );
     let t0;
@@ -19280,9 +19285,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t0_value !== (t0_value = /*row*/
-        (ctx2[82][
+        (ctx2[84][
           /*idx*/
-          ctx2[87]
+          ctx2[89]
         ] || "0") + ""))
           set_data(t0, t0_value);
       },
@@ -19295,18 +19300,18 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_143(ctx) {
+  function create_if_block_153(ctx) {
     let td;
     let t_value = (
       /*REFS*/
       (ctx[3][
         /*f*/
-        ctx[85].name
+        ctx[87].name
       ][
         /*row*/
-        ctx[82][
+        ctx[84][
           /*idx*/
-          ctx[87]
+          ctx[89]
         ]
       ] || "--") + ""
     );
@@ -19326,12 +19331,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         14 && t_value !== (t_value = /*REFS*/
         (ctx2[3][
           /*f*/
-          ctx2[85].name
+          ctx2[87].name
         ][
           /*row*/
-          ctx2[82][
+          ctx2[84][
             /*idx*/
-            ctx2[87]
+            ctx2[89]
           ]
         ] || "--") + ""))
           set_data(t, t_value);
@@ -19345,18 +19350,18 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_133(ctx) {
+  function create_if_block_143(ctx) {
     let td;
     let t_value = (
       /*row*/
-      (ctx[82][
+      (ctx[84][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] ? (0, import_xFormatter2.datetime)(
         /*row*/
-        ctx[82][
+        ctx[84][
           /*idx*/
-          ctx[87]
+          ctx[89]
         ]
       ) : "--") + ""
     );
@@ -19374,14 +19379,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = /*row*/
-        (ctx2[82][
+        (ctx2[84][
           /*idx*/
-          ctx2[87]
+          ctx2[89]
         ] ? (0, import_xFormatter2.datetime)(
           /*row*/
-          ctx2[82][
+          ctx2[84][
             /*idx*/
-            ctx2[87]
+            ctx2[89]
           ]
         ) : "--") + ""))
           set_data(t, t_value);
@@ -19395,21 +19400,21 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_123(ctx) {
+  function create_if_block_133(ctx) {
     let td;
     let t_value = (
       /*row*/
-      (ctx[82][
+      (ctx[84][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] ? (0, import_xFormatter2.formatPrice)(
         /*row*/
-        ctx[82][
+        ctx[84][
           /*idx*/
-          ctx[87]
+          ctx[89]
         ],
         /*f*/
-        ctx[85].mapping || "IDR"
+        ctx[87].mapping || "IDR"
       ) : "--") + ""
     );
     let t;
@@ -19426,17 +19431,17 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, FIELDS*/
         6 && t_value !== (t_value = /*row*/
-        (ctx2[82][
+        (ctx2[84][
           /*idx*/
-          ctx2[87]
+          ctx2[89]
         ] ? (0, import_xFormatter2.formatPrice)(
           /*row*/
-          ctx2[82][
+          ctx2[84][
             /*idx*/
-            ctx2[87]
+            ctx2[89]
           ],
           /*f*/
-          ctx2[85].mapping || "IDR"
+          ctx2[87].mapping || "IDR"
         ) : "--") + ""))
           set_data(t, t_value);
       },
@@ -19449,18 +19454,18 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_113(ctx) {
+  function create_if_block_123(ctx) {
     let td;
     let t_value = (
       /*row*/
-      (ctx[82][
+      (ctx[84][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ] ? Object.entries(
         /*REFS*/
         ctx[3][
           /*f*/
-          ctx[85].name
+          ctx[87].name
         ]
       ).map(func).join(", ") : "--") + ""
     );
@@ -19478,14 +19483,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, REFS, FIELDS*/
         14 && t_value !== (t_value = /*row*/
-        (ctx2[82][
+        (ctx2[84][
           /*idx*/
-          ctx2[87]
+          ctx2[89]
         ] ? Object.entries(
           /*REFS*/
           ctx2[3][
             /*f*/
-            ctx2[85].name
+            ctx2[87].name
           ]
         ).map(func).join(", ") : "--") + ""))
           set_data(t, t_value);
@@ -19499,13 +19504,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_103(ctx) {
+  function create_if_block_113(ctx) {
     let td;
     let t_value = formatFacilities(
       /*row*/
-      ctx[82][
+      ctx[84][
         /*idx*/
-        ctx[87]
+        ctx[89]
       ],
       /*REFS*/
       ctx[3]["facilities"]
@@ -19525,9 +19530,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         if (dirty[0] & /*MASTER_ROWS, REFS*/
         12 && t_value !== (t_value = formatFacilities(
           /*row*/
-          ctx2[82][
+          ctx2[84][
             /*idx*/
-            ctx2[87]
+            ctx2[89]
           ],
           /*REFS*/
           ctx2[3]["facilities"]
@@ -19638,21 +19643,26 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let t0;
     let t1;
     let t2;
+    let t3;
     let current;
     let if_block0 = (
       /*CAN_SHOW_INFO*/
-      ctx[10] && create_if_block_93(ctx)
+      ctx[10] && create_if_block_103(ctx)
     );
     let if_block1 = !/*IS_CUSTOM_EDIT*/
-    ctx[13] && create_if_block_73(ctx);
+    ctx[13] && create_if_block_83(ctx);
     let if_block2 = (
       /*CAN_DELETE_ROW*/
       (ctx[8] || /*CAN_RESTORE_ROW*/
-      ctx[9]) && create_if_block_53(ctx)
+      ctx[9]) && create_if_block_63(ctx)
     );
     let if_block3 = (
       /*CAN_OPEN_LINK*/
-      ctx[11] && create_if_block_43(ctx)
+      ctx[11] && create_if_block_53(ctx)
+    );
+    let if_block4 = (
+      /*EXTENDED_BUTTONS*/
+      (ctx[15] || []).length > 0 && create_if_block_43(ctx)
     );
     return {
       c() {
@@ -19668,6 +19678,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         t2 = space();
         if (if_block3)
           if_block3.c();
+        t3 = space();
+        if (if_block4)
+          if_block4.c();
         attr(div, "class", "actions svelte-ddx7xj");
       },
       m(target, anchor) {
@@ -19683,6 +19696,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         append(div, t2);
         if (if_block3)
           if_block3.m(div, null);
+        append(div, t3);
+        if (if_block4)
+          if_block4.m(div, null);
         current = true;
       },
       p(ctx2, dirty) {
@@ -19697,7 +19713,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               transition_in(if_block0, 1);
             }
           } else {
-            if_block0 = create_if_block_93(ctx2);
+            if_block0 = create_if_block_103(ctx2);
             if_block0.c();
             transition_in(if_block0, 1);
             if_block0.m(div, t0);
@@ -19718,7 +19734,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               transition_in(if_block1, 1);
             }
           } else {
-            if_block1 = create_if_block_73(ctx2);
+            if_block1 = create_if_block_83(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
             if_block1.m(div, t1);
@@ -19742,7 +19758,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               transition_in(if_block2, 1);
             }
           } else {
-            if_block2 = create_if_block_53(ctx2);
+            if_block2 = create_if_block_63(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
             if_block2.m(div, t2);
@@ -19765,15 +19781,38 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               transition_in(if_block3, 1);
             }
           } else {
-            if_block3 = create_if_block_43(ctx2);
+            if_block3 = create_if_block_53(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
-            if_block3.m(div, null);
+            if_block3.m(div, t3);
           }
         } else if (if_block3) {
           group_outros();
           transition_out(if_block3, 1, 1, () => {
             if_block3 = null;
+          });
+          check_outros();
+        }
+        if (
+          /*EXTENDED_BUTTONS*/
+          (ctx2[15] || []).length > 0
+        ) {
+          if (if_block4) {
+            if_block4.p(ctx2, dirty);
+            if (dirty[0] & /*EXTENDED_BUTTONS*/
+            32768) {
+              transition_in(if_block4, 1);
+            }
+          } else {
+            if_block4 = create_if_block_43(ctx2);
+            if_block4.c();
+            transition_in(if_block4, 1);
+            if_block4.m(div, null);
+          }
+        } else if (if_block4) {
+          group_outros();
+          transition_out(if_block4, 1, 1, () => {
+            if_block4 = null;
           });
           check_outros();
         }
@@ -19785,6 +19824,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_in(if_block1);
         transition_in(if_block2);
         transition_in(if_block3);
+        transition_in(if_block4);
         current = true;
       },
       o(local) {
@@ -19792,6 +19832,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_out(if_block1);
         transition_out(if_block2);
         transition_out(if_block3);
+        transition_out(if_block4);
         current = false;
       },
       d(detaching) {
@@ -19806,10 +19847,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           if_block2.d();
         if (if_block3)
           if_block3.d();
+        if (if_block4)
+          if_block4.d();
       }
     };
   }
-  function create_if_block_93(ctx) {
+  function create_if_block_103(ctx) {
     let button;
     let icon;
     let current;
@@ -19825,9 +19868,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function click_handler_3() {
       return (
         /*click_handler_3*/
-        ctx[62](
+        ctx[63](
           /*row*/
-          ctx[82]
+          ctx[84]
         )
       );
     }
@@ -19870,12 +19913,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_73(ctx) {
+  function create_if_block_83(ctx) {
     let if_block_anchor;
     let current;
     let if_block = (
       /*CAN_EDIT_ROW*/
-      ctx[7] && create_if_block_83(ctx)
+      ctx[7] && create_if_block_93(ctx)
     );
     return {
       c() {
@@ -19901,7 +19944,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_83(ctx2);
+            if_block = create_if_block_93(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -19933,7 +19976,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_83(ctx) {
+  function create_if_block_93(ctx) {
     let button;
     let icon;
     let current;
@@ -19949,13 +19992,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function click_handler_4() {
       return (
         /*click_handler_4*/
-        ctx[63](
+        ctx[64](
           /*row*/
-          ctx[82],
+          ctx[84],
           /*idx*/
-          ctx[87],
+          ctx[89],
           /*f*/
-          ctx[85]
+          ctx[87]
         )
       );
     }
@@ -19998,23 +20041,23 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_53(ctx) {
+  function create_if_block_63(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
     let current;
-    const if_block_creators = [create_if_block_63, create_else_block3];
+    const if_block_creators = [create_if_block_73, create_else_block3];
     const if_blocks = [];
     function select_block_type_5(ctx2, dirty) {
       if (
         /*row*/
-        ctx2[82][
+        ctx2[84][
           /*deletedIndex*/
-          ctx2[21]
+          ctx2[22]
         ] > 0 || /*row*/
-        ctx2[82][
+        ctx2[84][
           /*deletedIndex*/
-          ctx2[21]
+          ctx2[22]
         ] === "terminated"
       )
         return 0;
@@ -20088,9 +20131,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function click_handler_6() {
       return (
         /*click_handler_6*/
-        ctx[65](
+        ctx[66](
           /*row*/
-          ctx[82]
+          ctx[84]
         )
       );
     }
@@ -20133,7 +20176,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_63(ctx) {
+  function create_if_block_73(ctx) {
     let button;
     let icon;
     let current;
@@ -20149,9 +20192,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function click_handler_5() {
       return (
         /*click_handler_5*/
-        ctx[64](
+        ctx[65](
           /*row*/
-          ctx[82]
+          ctx[84]
         )
       );
     }
@@ -20194,12 +20237,176 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
+  function create_if_block_53(ctx) {
+    let each_1_anchor;
+    let current;
+    let each_value_5 = ensure_array_like(
+      /*LINKS*/
+      ctx[12] || []
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value_5.length; i += 1) {
+      each_blocks[i] = create_each_block_5(get_each_context_5(ctx, each_value_5, i));
+    }
+    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
+      each_blocks[i] = null;
+    });
+    return {
+      c() {
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        each_1_anchor = empty();
+      },
+      m(target, anchor) {
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(target, anchor);
+          }
+        }
+        insert(target, each_1_anchor, anchor);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*LINKS, MASTER_ROWS*/
+        4100) {
+          each_value_5 = ensure_array_like(
+            /*LINKS*/
+            ctx2[12] || []
+          );
+          let i;
+          for (i = 0; i < each_value_5.length; i += 1) {
+            const child_ctx = get_each_context_5(ctx2, each_value_5, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+              transition_in(each_blocks[i], 1);
+            } else {
+              each_blocks[i] = create_each_block_5(child_ctx);
+              each_blocks[i].c();
+              transition_in(each_blocks[i], 1);
+              each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+            }
+          }
+          group_outros();
+          for (i = each_value_5.length; i < each_blocks.length; i += 1) {
+            out(i);
+          }
+          check_outros();
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        for (let i = 0; i < each_value_5.length; i += 1) {
+          transition_in(each_blocks[i]);
+        }
+        current = true;
+      },
+      o(local) {
+        each_blocks = each_blocks.filter(Boolean);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          transition_out(each_blocks[i]);
+        }
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(each_1_anchor);
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function create_each_block_5(ctx) {
+    let a;
+    let icon;
+    let t;
+    let a_title_value;
+    let a_href_value;
+    let a_target_value;
+    let current;
+    icon = new Icon_default({
+      props: {
+        size: "15",
+        color: "var(--gray-007)",
+        src: (
+          /*l*/
+          ctx[93].icon
+        )
+      }
+    });
+    return {
+      c() {
+        a = element("a");
+        create_component(icon.$.fragment);
+        t = space();
+        attr(a, "title", a_title_value = /*l*/
+        ctx[93].tooltip);
+        attr(a, "class", "btn link svelte-ddx7xj");
+        attr(a, "href", a_href_value = /*l*/
+        ctx[93].link(
+          /*row*/
+          ctx[84]
+        ));
+        attr(a, "target", a_target_value = /*l*/
+        ctx[93].isTargetBlank ? "_blank" : "");
+      },
+      m(target, anchor) {
+        insert(target, a, anchor);
+        mount_component(icon, a, null);
+        append(a, t);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        const icon_changes = {};
+        if (dirty[0] & /*LINKS*/
+        4096)
+          icon_changes.src = /*l*/
+          ctx2[93].icon;
+        icon.$set(icon_changes);
+        if (!current || dirty[0] & /*LINKS*/
+        4096 && a_title_value !== (a_title_value = /*l*/
+        ctx2[93].tooltip)) {
+          attr(a, "title", a_title_value);
+        }
+        if (!current || dirty[0] & /*LINKS, MASTER_ROWS*/
+        4100 && a_href_value !== (a_href_value = /*l*/
+        ctx2[93].link(
+          /*row*/
+          ctx2[84]
+        ))) {
+          attr(a, "href", a_href_value);
+        }
+        if (!current || dirty[0] & /*LINKS*/
+        4096 && a_target_value !== (a_target_value = /*l*/
+        ctx2[93].isTargetBlank ? "_blank" : "")) {
+          attr(a, "target", a_target_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(a);
+        }
+        destroy_component(icon);
+      }
+    };
+  }
   function create_if_block_43(ctx) {
     let each_1_anchor;
     let current;
     let each_value_4 = ensure_array_like(
-      /*LINKS*/
-      ctx[12] || []
+      /*EXTENDED_BUTTONS*/
+      ctx[15] || []
     );
     let each_blocks = [];
     for (let i = 0; i < each_value_4.length; i += 1) {
@@ -20225,11 +20432,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*LINKS, MASTER_ROWS*/
-        4100) {
+        if (dirty[0] & /*EXTENDED_BUTTONS, MASTER_ROWS*/
+        32772) {
           each_value_4 = ensure_array_like(
-            /*LINKS*/
-            ctx2[12] || []
+            /*EXTENDED_BUTTONS*/
+            ctx2[15] || []
           );
           let i;
           for (i = 0; i < each_value_4.length; i += 1) {
@@ -20275,58 +20482,62 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     };
   }
   function create_each_block_4(ctx) {
-    let a;
+    let button;
     let icon;
-    let a_href_value;
-    let a_target_value;
+    let button_title_value;
     let current;
+    let mounted;
+    let dispose;
     icon = new Icon_default({
       props: {
         size: "15",
         color: "var(--gray-007)",
         src: (
-          /*l*/
-          ctx[88].icon
+          /*b*/
+          ctx[90].icon
         )
       }
     });
+    function click_handler_7() {
+      return (
+        /*click_handler_7*/
+        ctx[67](
+          /*b*/
+          ctx[90],
+          /*row*/
+          ctx[84]
+        )
+      );
+    }
     return {
       c() {
-        a = element("a");
+        button = element("button");
         create_component(icon.$.fragment);
-        attr(a, "class", "btn link svelte-ddx7xj");
-        attr(a, "href", a_href_value = /*l*/
-        ctx[88].link(
-          /*row*/
-          ctx[82]
-        ));
-        attr(a, "target", a_target_value = /*l*/
-        ctx[88].isTargetBlank ? "_blank" : "");
+        attr(button, "class", "btn svelte-ddx7xj");
+        attr(button, "title", button_title_value = /*b*/
+        ctx[90].tooltip);
       },
       m(target, anchor) {
-        insert(target, a, anchor);
-        mount_component(icon, a, null);
+        insert(target, button, anchor);
+        mount_component(icon, button, null);
         current = true;
-      },
-      p(ctx2, dirty) {
-        const icon_changes = {};
-        if (dirty[0] & /*LINKS*/
-        4096)
-          icon_changes.src = /*l*/
-          ctx2[88].icon;
-        icon.$set(icon_changes);
-        if (!current || dirty[0] & /*LINKS, MASTER_ROWS*/
-        4100 && a_href_value !== (a_href_value = /*l*/
-        ctx2[88].link(
-          /*row*/
-          ctx2[82]
-        ))) {
-          attr(a, "href", a_href_value);
+        if (!mounted) {
+          dispose = listen(button, "click", click_handler_7);
+          mounted = true;
         }
-        if (!current || dirty[0] & /*LINKS*/
-        4096 && a_target_value !== (a_target_value = /*l*/
-        ctx2[88].isTargetBlank ? "_blank" : "")) {
-          attr(a, "target", a_target_value);
+      },
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+        const icon_changes = {};
+        if (dirty[0] & /*EXTENDED_BUTTONS*/
+        32768)
+          icon_changes.src = /*b*/
+          ctx[90].icon;
+        icon.$set(icon_changes);
+        if (!current || dirty[0] & /*EXTENDED_BUTTONS*/
+        32768 && button_title_value !== (button_title_value = /*b*/
+        ctx[90].tooltip)) {
+          attr(button, "title", button_title_value);
         }
       },
       i(local) {
@@ -20341,9 +20552,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       },
       d(detaching) {
         if (detaching) {
-          detach(a);
+          detach(button);
         }
         destroy_component(icon);
+        mounted = false;
+        dispose();
       }
     };
   }
@@ -20354,53 +20567,53 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let current;
     const if_block_creators = [
       create_if_block_210,
-      create_if_block_103,
       create_if_block_113,
       create_if_block_123,
       create_if_block_133,
       create_if_block_143,
       create_if_block_153,
+      create_if_block_162,
       create_else_block_2
     ];
     const if_blocks = [];
     function select_block_type_3(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[85].name === "id"
+        ctx2[87].name === "id"
       )
         return 0;
       if (
         /*f*/
-        ctx2[85].name === "facilities"
+        ctx2[87].name === "facilities"
       )
         return 1;
       if (
         /*f*/
-        ctx2[85].type == "intArr"
+        ctx2[87].type == "intArr"
       )
         return 2;
       if (
         /*f*/
-        ctx2[85].type == "currency"
+        ctx2[87].type == "currency"
       )
         return 3;
       if (
         /*f*/
-        ctx2[85].inputType === "datetime"
+        ctx2[87].inputType === "datetime"
       )
         return 4;
       if (
         /*f*/
-        ctx2[85].inputType === "combobox" && /*REFS*/
+        ctx2[87].inputType === "combobox" && /*REFS*/
         ctx2[3][
           /*f*/
-          ctx2[85].name
+          ctx2[87].name
         ]
       )
         return 5;
       if (
         /*f*/
-        ctx2[85].inputType === "percentage"
+        ctx2[87].inputType === "percentage"
       )
         return 6;
       return 7;
@@ -20466,7 +20679,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       ctx[0].perPage + /*MASTER_ROWS*/
       ctx[2].indexOf(
         /*row*/
-        ctx[82]
+        ctx[84]
       ) + 1 + ""
     );
     let t0;
@@ -20499,13 +20712,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         attr(tr, "class", tr_class_value = null_to_empty(
           /*CAN_DELETE_ROW*/
           ctx[8] && /*row*/
-          (ctx[82][
+          (ctx[84][
             /*deletedIndex*/
-            ctx[21]
+            ctx[22]
           ] > 0 || /*row*/
-          ctx[82][
+          ctx[84][
             /*deletedIndex*/
-            ctx[21]
+            ctx[22]
           ] === "terminated") ? "deleted" : ""
         ) + " svelte-ddx7xj");
       },
@@ -20529,12 +20742,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ctx2[0].perPage + /*MASTER_ROWS*/
         ctx2[2].indexOf(
           /*row*/
-          ctx2[82]
+          ctx2[84]
         ) + 1 + ""))
           set_data(t0, t0_value);
-        if (dirty[0] & /*LINKS, MASTER_ROWS, CAN_OPEN_LINK, deletedIndex, CAN_DELETE_ROW, CAN_RESTORE_ROW, FIELDS, CAN_EDIT_ROW, IS_CUSTOM_EDIT, OnInfo, CAN_SHOW_INFO, ACCESS, REFS*/
-        2178990 | dirty[1] & /*restoreRow, deleteRow, toggleShowPopUp, Cell*/
-        3616) {
+        if (dirty[0] & /*EXTENDED_BUTTONS, MASTER_ROWS, LINKS, CAN_OPEN_LINK, deletedIndex, CAN_DELETE_ROW, CAN_RESTORE_ROW, FIELDS, CAN_EDIT_ROW, IS_CUSTOM_EDIT, OnInfo, CAN_SHOW_INFO, ACCESS, REFS*/
+        4374446 | dirty[1] & /*restoreRow, deleteRow, toggleShowPopUp, Cell*/
+        7232) {
           each_value_3 = ensure_array_like(
             /*FIELDS*/
             ctx2[1] || []
@@ -20559,16 +20772,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           check_outros();
         }
         if (!current || dirty[0] & /*CAN_DELETE_ROW, MASTER_ROWS, deletedIndex*/
-        2097412 && tr_class_value !== (tr_class_value = null_to_empty(
+        4194564 && tr_class_value !== (tr_class_value = null_to_empty(
           /*CAN_DELETE_ROW*/
           ctx2[8] && /*row*/
-          (ctx2[82][
+          (ctx2[84][
             /*deletedIndex*/
-            ctx2[21]
+            ctx2[22]
           ] > 0 || /*row*/
-          ctx2[82][
+          ctx2[84][
             /*deletedIndex*/
-            ctx2[21]
+            ctx2[22]
           ] === "terminated") ? "deleted" : ""
         ) + " svelte-ddx7xj")) {
           attr(tr, "class", tr_class_value);
@@ -20601,7 +20814,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let div;
     let each_value_1 = ensure_array_like(
       /*rowsToShow*/
-      ctx[34]
+      ctx[35]
     );
     let each_blocks = [];
     for (let i = 0; i < each_value_1.length; i += 1) {
@@ -20625,10 +20838,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       },
       p(ctx2, dirty) {
         if (dirty[1] & /*toRow, rowsToShow*/
-        136) {
+        272) {
           each_value_1 = ensure_array_like(
             /*rowsToShow*/
-            ctx2[34]
+            ctx2[35]
           );
           let i;
           for (i = 0; i < each_value_1.length; i += 1) {
@@ -20659,12 +20872,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let button;
     let mounted;
     let dispose;
-    function click_handler_7() {
+    function click_handler_8() {
       return (
-        /*click_handler_7*/
-        ctx[66](
+        /*click_handler_8*/
+        ctx[68](
           /*r*/
-          ctx[79]
+          ctx[81]
         )
       );
     }
@@ -20672,13 +20885,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       c() {
         button = element("button");
         button.textContent = `${/*r*/
-        ctx[79]}`;
+        ctx[81]}`;
         attr(button, "class", "svelte-ddx7xj");
       },
       m(target, anchor) {
         insert(target, button, anchor);
         if (!mounted) {
-          dispose = listen(button, "click", click_handler_7);
+          dispose = listen(button, "click", click_handler_8);
           mounted = true;
         }
       },
@@ -20698,7 +20911,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let button;
     let t_value = (
       /*i*/
-      ctx[76] + ""
+      ctx[78] + ""
     );
     let t;
     let button_disabled_value;
@@ -20706,12 +20919,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let button_title_value;
     let mounted;
     let dispose;
-    function click_handler_10() {
+    function click_handler_11() {
       return (
-        /*click_handler_10*/
-        ctx[69](
+        /*click_handler_11*/
+        ctx[71](
           /*i*/
-          ctx[76]
+          ctx[78]
         )
       );
     }
@@ -20720,47 +20933,47 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         button = element("button");
         t = text(t_value);
         button.disabled = button_disabled_value = /*currentPage*/
-        ctx[25] == /*i*/
-        ctx[76];
+        ctx[26] == /*i*/
+        ctx[78];
         attr(button, "class", button_class_value = null_to_empty(
           /*currentPage*/
-          ctx[25] === /*i*/
-          ctx[76] ? "btn active" : "btn"
+          ctx[26] === /*i*/
+          ctx[78] ? "btn active" : "btn"
         ) + " svelte-ddx7xj");
         attr(button, "title", button_title_value = `Go to page ${/*i*/
-        ctx[76]}`);
+        ctx[78]}`);
       },
       m(target, anchor) {
         insert(target, button, anchor);
         append(button, t);
         if (!mounted) {
-          dispose = listen(button, "click", click_handler_10);
+          dispose = listen(button, "click", click_handler_11);
           mounted = true;
         }
       },
       p(new_ctx, dirty) {
         ctx = new_ctx;
         if (dirty[0] & /*paginationShow*/
-        16777216 && t_value !== (t_value = /*i*/
-        ctx[76] + ""))
+        33554432 && t_value !== (t_value = /*i*/
+        ctx[78] + ""))
           set_data(t, t_value);
         if (dirty[0] & /*currentPage, paginationShow*/
-        50331648 && button_disabled_value !== (button_disabled_value = /*currentPage*/
-        ctx[25] == /*i*/
-        ctx[76])) {
+        100663296 && button_disabled_value !== (button_disabled_value = /*currentPage*/
+        ctx[26] == /*i*/
+        ctx[78])) {
           button.disabled = button_disabled_value;
         }
         if (dirty[0] & /*currentPage, paginationShow*/
-        50331648 && button_class_value !== (button_class_value = null_to_empty(
+        100663296 && button_class_value !== (button_class_value = null_to_empty(
           /*currentPage*/
-          ctx[25] === /*i*/
-          ctx[76] ? "btn active" : "btn"
+          ctx[26] === /*i*/
+          ctx[78] ? "btn active" : "btn"
         ) + " svelte-ddx7xj")) {
           attr(button, "class", button_class_value);
         }
         if (dirty[0] & /*paginationShow*/
-        16777216 && button_title_value !== (button_title_value = `Go to page ${/*i*/
-        ctx[76]}`)) {
+        33554432 && button_title_value !== (button_title_value = `Go to page ${/*i*/
+        ctx[78]}`)) {
           attr(button, "title", button_title_value);
         }
       },
@@ -20849,11 +21062,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let dispose;
     let if_block0 = (
       /*filterTableReady*/
-      ctx[18] && create_if_block_29(ctx)
+      ctx[19] && create_if_block_30(ctx)
     );
     let if_block1 = (
       /*showPopUp*/
-      ctx[22] && create_if_block_23(ctx)
+      ctx[23] && create_if_block_24(ctx)
     );
     icon0 = new Icon_default({
       props: {
@@ -20864,32 +21077,32 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     });
     const default_slot_template = (
       /*#slots*/
-      ctx[51].default
+      ctx[52].default
     );
     const default_slot = create_slot(
       default_slot_template,
       ctx,
       /*$scope*/
-      ctx[50],
+      ctx[51],
       null
     );
-    let if_block2 = isAjaxSubmitted && create_if_block_222(ctx);
+    let if_block2 = isAjaxSubmitted && create_if_block_23(ctx);
     let if_block3 = (
       /*CAN_SEARCH_ROW*/
-      ctx[6] && create_if_block_21(ctx)
+      ctx[6] && create_if_block_222(ctx)
     );
-    let each_value_5 = ensure_array_like(
+    let each_value_6 = ensure_array_like(
       /*FIELDS*/
       ctx[1] || []
     );
     const get_key = (ctx2) => (
       /*f*/
-      ctx2[85].name
+      ctx2[87].name
     );
-    for (let i = 0; i < each_value_5.length; i += 1) {
-      let child_ctx = get_each_context_5(ctx, each_value_5, i);
+    for (let i = 0; i < each_value_6.length; i += 1) {
+      let child_ctx = get_each_context_6(ctx, each_value_6, i);
       let key = get_key(child_ctx);
-      each0_lookup.set(key, each_blocks_1[i] = create_each_block_5(key, child_ctx));
+      each0_lookup.set(key, each_blocks_1[i] = create_each_block_6(key, child_ctx));
     }
     const if_block_creators = [create_if_block_110, create_else_block_3];
     const if_blocks = [];
@@ -20906,13 +21119,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     if_block4 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
     let if_block5 = (
       /*showRowsNum*/
-      ctx[29] && create_if_block6(ctx)
+      ctx[30] && create_if_block6(ctx)
     );
     icon1 = new Icon_default({
       props: {
         className: (
           /*showRowsNum*/
-          ctx[29] ? "rotate_right" : "dropdown"
+          ctx[30] ? "rotate_right" : "dropdown"
         ),
         size: "13",
         src: CgChevronRight
@@ -20926,7 +21139,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     });
     let each_value = ensure_array_like(
       /*paginationShow*/
-      ctx[24]
+      ctx[25]
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
@@ -20987,7 +21200,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         span0 = element("span");
         t12 = text(
           /*totalRowsCurrent*/
-          ctx[31]
+          ctx[32]
         );
         t13 = text(" /");
         t14 = space();
@@ -20999,7 +21212,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         span1 = element("span");
         t16 = text(
           /*currentRows*/
-          ctx[28]
+          ctx[29]
         );
         t17 = space();
         create_component(icon1.$.fragment);
@@ -21013,7 +21226,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         span2 = element("span");
         t22 = text(
           /*totalRows*/
-          ctx[30]
+          ctx[31]
         );
         t23 = space();
         div9 = element("div");
@@ -21052,21 +21265,21 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         attr(span2, "class", "text-blue svelte-ddx7xj");
         attr(p2, "class", "svelte-ddx7xj");
         button2.disabled = button2_disabled_value = /*currentPage*/
-        ctx[25] == 1;
+        ctx[26] == 1;
         attr(button2, "class", "btn to svelte-ddx7xj");
         attr(button2, "title", "Go to first page");
         button3.disabled = button3_disabled_value = /*currentPage*/
-        ctx[25] == 1;
+        ctx[26] == 1;
         attr(button3, "class", "btn to svelte-ddx7xj");
         attr(button3, "title", "Go to previous page");
         button4.disabled = button4_disabled_value = /*currentPage*/
-        ctx[25] == /*paginationTotal*/
-        ctx[23];
+        ctx[26] == /*paginationTotal*/
+        ctx[24];
         attr(button4, "class", "btn to svelte-ddx7xj");
         attr(button4, "title", "Go to next page");
         button5.disabled = button5_disabled_value = /*currentPage*/
-        ctx[25] == /*paginationTotal*/
-        ctx[23];
+        ctx[26] == /*paginationTotal*/
+        ctx[24];
         attr(button5, "class", "btn to svelte-ddx7xj");
         attr(button5, "title", "Go to last page");
         attr(div9, "class", "pagination svelte-ddx7xj");
@@ -21167,37 +21380,37 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               button0,
               "click",
               /*click_handler_1*/
-              ctx[60]
+              ctx[61]
             ),
             listen(
               button1,
               "click",
               /*toggleRowsNum*/
-              ctx[35]
+              ctx[36]
             ),
             listen(
               button2,
               "click",
-              /*click_handler_8*/
-              ctx[67]
+              /*click_handler_9*/
+              ctx[69]
             ),
             listen(
               button3,
               "click",
-              /*click_handler_9*/
-              ctx[68]
+              /*click_handler_10*/
+              ctx[70]
             ),
             listen(
               button4,
               "click",
-              /*click_handler_11*/
-              ctx[70]
+              /*click_handler_12*/
+              ctx[72]
             ),
             listen(
               button5,
               "click",
-              /*click_handler_12*/
-              ctx[71]
+              /*click_handler_13*/
+              ctx[73]
             )
           ];
           mounted = true;
@@ -21206,16 +21419,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       p(ctx2, dirty) {
         if (
           /*filterTableReady*/
-          ctx2[18]
+          ctx2[19]
         ) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
             if (dirty[0] & /*filterTableReady*/
-            262144) {
+            524288) {
               transition_in(if_block0, 1);
             }
           } else {
-            if_block0 = create_if_block_29(ctx2);
+            if_block0 = create_if_block_30(ctx2);
             if_block0.c();
             transition_in(if_block0, 1);
             if_block0.m(t0.parentNode, t0);
@@ -21229,16 +21442,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         if (
           /*showPopUp*/
-          ctx2[22]
+          ctx2[23]
         ) {
           if (if_block1) {
             if_block1.p(ctx2, dirty);
             if (dirty[0] & /*showPopUp*/
-            4194304) {
+            8388608) {
               transition_in(if_block1, 1);
             }
           } else {
-            if_block1 = create_if_block_23(ctx2);
+            if_block1 = create_if_block_24(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
             if_block1.m(t1.parentNode, t1);
@@ -21252,20 +21465,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         if (default_slot) {
           if (default_slot.p && (!current || dirty[1] & /*$scope*/
-          524288)) {
+          1048576)) {
             update_slot_base(
               default_slot,
               default_slot_template,
               ctx2,
               /*$scope*/
-              ctx2[50],
+              ctx2[51],
               !current ? get_all_dirty_from_scope(
                 /*$scope*/
-                ctx2[50]
+                ctx2[51]
               ) : get_slot_changes(
                 default_slot_template,
                 /*$scope*/
-                ctx2[50],
+                ctx2[51],
                 dirty,
                 null
               ),
@@ -21283,7 +21496,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               transition_in(if_block3, 1);
             }
           } else {
-            if_block3 = create_if_block_21(ctx2);
+            if_block3 = create_if_block_222(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
             if_block3.m(div2, null);
@@ -21296,14 +21509,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           check_outros();
         }
         if (dirty[0] & /*FIELDS, COL_WIDTHS, UNSORTED_ROWS, fieldNameToSort, isSortTableAsc*/
-        201375746 | dirty[1] & /*OnSort*/
-        8192) {
-          each_value_5 = ensure_array_like(
+        402735106 | dirty[1] & /*OnSort*/
+        16384) {
+          each_value_6 = ensure_array_like(
             /*FIELDS*/
             ctx2[1] || []
           );
           group_outros();
-          each_blocks_1 = update_keyed_each(each_blocks_1, dirty, get_key, 1, ctx2, each_value_5, each0_lookup, tr, outro_and_destroy_block, create_each_block_5, null, get_each_context_5);
+          each_blocks_1 = update_keyed_each(each_blocks_1, dirty, get_key, 1, ctx2, each_value_6, each0_lookup, tr, outro_and_destroy_block, create_each_block_6, null, get_each_context_6);
           check_outros();
         }
         let previous_block_index = current_block_type_index;
@@ -21327,15 +21540,15 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           if_block4.m(tbody, null);
         }
         if (!current || dirty[1] & /*totalRowsCurrent*/
-        1)
+        2)
           set_data(
             t12,
             /*totalRowsCurrent*/
-            ctx2[31]
+            ctx2[32]
           );
         if (
           /*showRowsNum*/
-          ctx2[29]
+          ctx2[30]
         ) {
           if (if_block5) {
             if_block5.p(ctx2, dirty);
@@ -21349,41 +21562,41 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           if_block5 = null;
         }
         if (!current || dirty[0] & /*currentRows*/
-        268435456)
+        536870912)
           set_data(
             t16,
             /*currentRows*/
-            ctx2[28]
+            ctx2[29]
           );
         const icon1_changes = {};
         if (dirty[0] & /*showRowsNum*/
-        536870912)
-          icon1_changes.className = /*showRowsNum*/
-          ctx2[29] ? "rotate_right" : "dropdown";
-        icon1.$set(icon1_changes);
-        if (!current || dirty[0] & /*totalRows*/
         1073741824)
+          icon1_changes.className = /*showRowsNum*/
+          ctx2[30] ? "rotate_right" : "dropdown";
+        icon1.$set(icon1_changes);
+        if (!current || dirty[1] & /*totalRows*/
+        1)
           set_data(
             t22,
             /*totalRows*/
-            ctx2[30]
+            ctx2[31]
           );
         if (!current || dirty[0] & /*currentPage*/
-        33554432 && button2_disabled_value !== (button2_disabled_value = /*currentPage*/
-        ctx2[25] == 1)) {
+        67108864 && button2_disabled_value !== (button2_disabled_value = /*currentPage*/
+        ctx2[26] == 1)) {
           button2.disabled = button2_disabled_value;
         }
         if (!current || dirty[0] & /*currentPage*/
-        33554432 && button3_disabled_value !== (button3_disabled_value = /*currentPage*/
-        ctx2[25] == 1)) {
+        67108864 && button3_disabled_value !== (button3_disabled_value = /*currentPage*/
+        ctx2[26] == 1)) {
           button3.disabled = button3_disabled_value;
         }
         if (dirty[0] & /*currentPage, paginationShow*/
-        50331648 | dirty[1] & /*goToPage*/
-        256) {
+        100663296 | dirty[1] & /*goToPage*/
+        512) {
           each_value = ensure_array_like(
             /*paginationShow*/
-            ctx2[24]
+            ctx2[25]
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
@@ -21402,15 +21615,15 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           each_blocks.length = each_value.length;
         }
         if (!current || dirty[0] & /*currentPage, paginationTotal*/
-        41943040 && button4_disabled_value !== (button4_disabled_value = /*currentPage*/
-        ctx2[25] == /*paginationTotal*/
-        ctx2[23])) {
+        83886080 && button4_disabled_value !== (button4_disabled_value = /*currentPage*/
+        ctx2[26] == /*paginationTotal*/
+        ctx2[24])) {
           button4.disabled = button4_disabled_value;
         }
         if (!current || dirty[0] & /*currentPage, paginationTotal*/
-        41943040 && button5_disabled_value !== (button5_disabled_value = /*currentPage*/
-        ctx2[25] == /*paginationTotal*/
-        ctx2[23])) {
+        83886080 && button5_disabled_value !== (button5_disabled_value = /*currentPage*/
+        ctx2[26] == /*paginationTotal*/
+        ctx2[24])) {
           button5.disabled = button5_disabled_value;
         }
       },
@@ -21423,7 +21636,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_in(default_slot, local);
         transition_in(if_block2);
         transition_in(if_block3);
-        for (let i = 0; i < each_value_5.length; i += 1) {
+        for (let i = 0; i < each_value_6.length; i += 1) {
           transition_in(each_blocks_1[i]);
         }
         transition_in(if_block4);
@@ -21526,6 +21739,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     ) } = $props;
     let { IS_CUSTOM_EDIT = false } = $props;
     let { UNSORTED_ROWS = [] } = $props;
+    let { EXTENDED_BUTTONS = (
+      /** @type {ExtendedActionButton[]} */
+      []
+    ) } = $props;
     let { COL_WIDTHS = {} } = $props;
     let filterTable = null;
     let filterTableReady = false;
@@ -21554,22 +21771,22 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let totalRowsCurrent = 0;
     let payloads = [];
     function toggleRowsNum() {
-      $invalidate(29, showRowsNum = !showRowsNum);
+      $invalidate(30, showRowsNum = !showRowsNum);
     }
     function getPaginationShow() {
-      $invalidate(30, totalRows = PAGER.countResult);
+      $invalidate(31, totalRows = PAGER.countResult);
       totalPages = PAGER.pages;
-      $invalidate(25, currentPage = PAGER.page);
+      $invalidate(26, currentPage = PAGER.page);
       if (MASTER_ROWS && MASTER_ROWS.length) {
-        $invalidate(31, totalRowsCurrent = MASTER_ROWS.length);
+        $invalidate(32, totalRowsCurrent = MASTER_ROWS.length);
       } else {
-        $invalidate(31, totalRowsCurrent = 0);
+        $invalidate(32, totalRowsCurrent = 0);
       }
       totalRound = Math.ceil(totalRows / currentRows) * currentRows;
-      $invalidate(23, paginationTotal = totalRound / currentRows);
+      $invalidate(24, paginationTotal = totalRound / currentRows);
       paginationsAll = [];
       if (currentRows > PAGER.countResult)
-        $invalidate(23, paginationTotal = 1);
+        $invalidate(24, paginationTotal = 1);
       for (let i = 0; i < paginationTotal; i++) {
         paginationsAll = [...paginationsAll, i + 1];
       }
@@ -21585,7 +21802,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       } else {
         start = currentPage - 3, end = currentPage + 2;
       }
-      $invalidate(24, paginationShow = paginationsAll.slice(start, end));
+      $invalidate(25, paginationShow = paginationsAll.slice(start, end));
     }
     function Cell(row, i, field) {
       if (ARRAY_OF_ARRAY)
@@ -21593,20 +21810,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       return row[field.name] || "";
     }
     onMount(() => {
-      $invalidate(17, filterTable = FilterTable_default);
-      $invalidate(18, filterTableReady = true);
+      $invalidate(18, filterTable = FilterTable_default);
+      $invalidate(19, filterTableReady = true);
       totalPages = PAGER.pages;
       if (FIELDS && FIELDS.length > 0) {
-        $invalidate(19, filterColumns = []);
+        $invalidate(20, filterColumns = []);
         FIELDS.forEach((col, idx) => {
           if (col.name === "deletedAt")
-            $invalidate(21, deletedIndex = idx);
-          $invalidate(19, filterColumns = [...filterColumns, { key: col.name, label: col.label }]);
+            $invalidate(22, deletedIndex = idx);
+          $invalidate(20, filterColumns = [...filterColumns, { key: col.name, label: col.label }]);
         });
       }
       getPaginationShow();
       if (FIELDS && FIELDS.length > 0) {
-        FIELDS.forEach(() => $invalidate(32, payloads = [...payloads, ""]));
+        FIELDS.forEach(() => $invalidate(33, payloads = [...payloads, ""]));
       }
     });
     let { OnRestore = async function(row) {
@@ -21634,13 +21851,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       getPaginationShow();
     }
     async function toRow(perPage) {
-      $invalidate(28, currentRows = perPage);
-      $invalidate(29, showRowsNum = false);
+      $invalidate(29, currentRows = perPage);
+      $invalidate(30, showRowsNum = false);
       await OnRefresh({ ...PAGER, perPage });
       getPaginationShow();
     }
     async function goToPage(page) {
-      $invalidate(25, currentPage = page);
+      $invalidate(26, currentPage = page);
       await OnRefresh({ ...PAGER, page });
       getPaginationShow();
     }
@@ -21656,24 +21873,24 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function toggleShowPopUp(id, row) {
       $invalidate(
         /** @type any[]*/
-        32,
+        33,
         payloads = []
       );
       if (FIELDS && FIELDS.length > 0) {
         FIELDS.forEach((f, i) => {
-          $invalidate(32, payloads = [...payloads, row[i]]);
+          $invalidate(33, payloads = [...payloads, row[i]]);
         });
       }
-      $invalidate(22, showPopUp = true);
-      $invalidate(33, idToMod = id);
+      $invalidate(23, showPopUp = true);
+      $invalidate(34, idToMod = id);
     }
     function handleSubmitEdit() {
       OnEdit(idToMod, payloads);
-      $invalidate(22, showPopUp = false);
+      $invalidate(23, showPopUp = false);
     }
     async function OnSort(field) {
-      $invalidate(26, isSortTableAsc = !isSortTableAsc);
-      $invalidate(27, fieldNameToSort = field.name);
+      $invalidate(27, isSortTableAsc = !isSortTableAsc);
+      $invalidate(28, fieldNameToSort = field.name);
       if (isSortTableAsc) {
         $invalidate(0, PAGER.order = ["+" + field.name], PAGER);
       } else {
@@ -21685,40 +21902,40 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     function filtertable_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         filterTable = $value;
-        $invalidate(17, filterTable);
+        $invalidate(18, filterTable);
       });
     }
     function filtertable_filterColumns_binding(value) {
       filterColumns = value;
-      $invalidate(19, filterColumns);
+      $invalidate(20, filterColumns);
     }
     function filtertable_filtersMap_binding(value) {
       filtersMap = value;
-      $invalidate(20, filtersMap);
+      $invalidate(21, filtersMap);
     }
-    const click_handler = () => $invalidate(22, showPopUp = false);
+    const click_handler = () => $invalidate(23, showPopUp = false);
     function inputbox_value_binding(value, idx) {
       if ($self.$.not_equal(payloads[idx], value)) {
         payloads[idx] = value;
-        $invalidate(32, payloads);
+        $invalidate(33, payloads);
       }
     }
     function inputbox_value_binding_1(value, idx) {
       if ($self.$.not_equal(payloads[idx], value)) {
         payloads[idx] = value;
-        $invalidate(32, payloads);
+        $invalidate(33, payloads);
       }
     }
     function multiselect_valuesTarget_binding(value, idx) {
       if ($self.$.not_equal(payloads[idx], value)) {
         payloads[idx] = value;
-        $invalidate(32, payloads);
+        $invalidate(33, payloads);
       }
     }
     function inputbox_value_binding_2(value, idx) {
       if ($self.$.not_equal(payloads[idx], value)) {
         payloads[idx] = value;
-        $invalidate(32, payloads);
+        $invalidate(33, payloads);
       }
     }
     const click_handler_1 = () => filterTable.Show();
@@ -21727,12 +21944,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     const click_handler_4 = (row, idx, f) => toggleShowPopUp(Cell(row, idx, f), row);
     const click_handler_5 = (row) => restoreRow(row);
     const click_handler_6 = (row) => deleteRow(row);
-    const click_handler_7 = (r) => toRow(r);
-    const click_handler_8 = () => goToPage(1);
-    const click_handler_9 = () => goToPage(currentPage - 1);
-    const click_handler_10 = (i) => goToPage(i);
-    const click_handler_11 = () => goToPage(currentPage + 1);
-    const click_handler_12 = () => goToPage(paginationTotal);
+    const click_handler_7 = (b, row) => b.action(row);
+    const click_handler_8 = (r) => toRow(r);
+    const click_handler_9 = () => goToPage(1);
+    const click_handler_10 = () => goToPage(currentPage - 1);
+    const click_handler_11 = (i) => goToPage(i);
+    const click_handler_12 = () => goToPage(currentPage + 1);
+    const click_handler_13 = () => goToPage(paginationTotal);
     $self.$set = ($props2) => {
       if ("FIELDS" in $props2)
         $invalidate(1, FIELDS = $props2.FIELDS);
@@ -21747,7 +21965,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       if ("ACCESS" in $props2)
         $invalidate(5, ACCESS = $props2.ACCESS);
       if ("ARRAY_OF_ARRAY" in $props2)
-        $invalidate(45, ARRAY_OF_ARRAY = $props2.ARRAY_OF_ARRAY);
+        $invalidate(46, ARRAY_OF_ARRAY = $props2.ARRAY_OF_ARRAY);
       if ("CAN_SEARCH_ROW" in $props2)
         $invalidate(6, CAN_SEARCH_ROW = $props2.CAN_SEARCH_ROW);
       if ("CAN_EDIT_ROW" in $props2)
@@ -21766,20 +21984,22 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         $invalidate(13, IS_CUSTOM_EDIT = $props2.IS_CUSTOM_EDIT);
       if ("UNSORTED_ROWS" in $props2)
         $invalidate(14, UNSORTED_ROWS = $props2.UNSORTED_ROWS);
+      if ("EXTENDED_BUTTONS" in $props2)
+        $invalidate(15, EXTENDED_BUTTONS = $props2.EXTENDED_BUTTONS);
       if ("COL_WIDTHS" in $props2)
-        $invalidate(15, COL_WIDTHS = $props2.COL_WIDTHS);
+        $invalidate(16, COL_WIDTHS = $props2.COL_WIDTHS);
       if ("OnRestore" in $props2)
-        $invalidate(46, OnRestore = $props2.OnRestore);
+        $invalidate(47, OnRestore = $props2.OnRestore);
       if ("OnDelete" in $props2)
-        $invalidate(47, OnDelete = $props2.OnDelete);
+        $invalidate(48, OnDelete = $props2.OnDelete);
       if ("OnEdit" in $props2)
-        $invalidate(48, OnEdit = $props2.OnEdit);
+        $invalidate(49, OnEdit = $props2.OnEdit);
       if ("OnRefresh" in $props2)
-        $invalidate(49, OnRefresh = $props2.OnRefresh);
+        $invalidate(50, OnRefresh = $props2.OnRefresh);
       if ("OnInfo" in $props2)
-        $invalidate(16, OnInfo = $props2.OnInfo);
+        $invalidate(17, OnInfo = $props2.OnInfo);
       if ("$scope" in $props2)
-        $invalidate(50, $scope = $props2.$scope);
+        $invalidate(51, $scope = $props2.$scope);
     };
     $self.$.update = () => {
       if ($self.$.dirty[0] & /*PAGER*/
@@ -21806,6 +22026,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       LINKS,
       IS_CUSTOM_EDIT,
       UNSORTED_ROWS,
+      EXTENDED_BUTTONS,
       COL_WIDTHS,
       OnInfo,
       filterTable,
@@ -21862,7 +22083,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       click_handler_9,
       click_handler_10,
       click_handler_11,
-      click_handler_12
+      click_handler_12,
+      click_handler_13
     ];
   }
   var MasterTable = class extends SvelteComponent {
@@ -21881,7 +22103,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           REFS: 3,
           NAME: 4,
           ACCESS: 5,
-          ARRAY_OF_ARRAY: 45,
+          ARRAY_OF_ARRAY: 46,
           CAN_SEARCH_ROW: 6,
           CAN_EDIT_ROW: 7,
           CAN_DELETE_ROW: 8,
@@ -21891,12 +22113,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           LINKS: 12,
           IS_CUSTOM_EDIT: 13,
           UNSORTED_ROWS: 14,
-          COL_WIDTHS: 15,
-          OnRestore: 46,
-          OnDelete: 47,
-          OnEdit: 48,
-          OnRefresh: 49,
-          OnInfo: 16
+          EXTENDED_BUTTONS: 15,
+          COL_WIDTHS: 16,
+          OnRestore: 47,
+          OnDelete: 48,
+          OnEdit: 49,
+          OnRefresh: 50,
+          OnInfo: 17
         },
         null,
         [-1, -1, -1, -1]

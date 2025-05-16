@@ -28,7 +28,7 @@
   let pager       = /** @type {PagerOut} */ ({/* pager */});
 
   let isPopUpFormReady = /** @type boolean */ (false);
-  let popUpForms = /** @type {
+  let popUpAddBooking = /** @type {
     import('svelte').SvelteComponent | HTMLElement| PopUpAddBooking |any
   } */ (null);
   let isSubmitAddBooking = /** @type boolean */ (false);
@@ -197,8 +197,9 @@
         bookings = o.bookings;
         notifier.showSuccess(`Booking created !!`);
 
-        popUpForms.Reset();
-        popUpForms.Hide();
+        popUpAddBooking.Reset();
+        popUpAddBooking.Hide();
+        console.log('PAGER:', pager);
         OnRefresh(pager);
       }
     );
@@ -207,7 +208,7 @@
 
 {#if isPopUpFormReady}
   <PopUpAddBooking
-    bind:this={popUpForms}
+    bind:this={popUpAddBooking}
     bind:isSubmitted={isSubmitAddBooking}
     OnSubmit={OnAddBooking}
     facilities={facilities}
@@ -246,7 +247,7 @@
     >
     <button
       class="btn"
-      on:click={() => popUpForms.Show()}
+      on:click={() => popUpAddBooking.Show()}
       title="add booking"
     >
       <Icon

@@ -39,6 +39,9 @@ FROM ` + l.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 		res = append(res, row)
 	})
 
+	out.Order = in.Order
+	out.Filters = in.Filters
+
 	return
 }
 
@@ -84,6 +87,9 @@ FROM ` + f.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 		res = append(res, row)
 	})
 
+	out.Order = in.Order
+	out.Filters = in.Filters
+
 	return
 }
 
@@ -112,6 +118,9 @@ FROM ` + b.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 		row[0] = X.ToS(row[0]) // ensure id is string
 		res = append(res, row)
 	})
+
+	out.Order = in.Order
+	out.Filters = in.Filters
 
 	return
 }
@@ -177,6 +186,9 @@ GROUP BY "bookings"."id"
 		row[0] = X.ToS(row[0]) // ensure id is string
 		res = append(res, row)
 	})
+
+	out.Order = in.Order
+	out.Filters = in.Filters
 
 	return
 }
@@ -298,6 +310,9 @@ FROM ` + p.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 		res = append(res, row)
 	})
 
+	out.Order = in.Order
+	out.Filters = in.Filters
+
 	return
 }
 
@@ -404,6 +419,9 @@ FROM ` + s.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 		res = append(res, row)
 	})
 
+	out.Order = in.Order
+	out.Filters = in.Filters
+
 	return
 }
 
@@ -431,6 +449,8 @@ FROM ` + r.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 		row[0] = X.ToS(row[0]) // ensure id is string
 		res = append(res, row)
 	})
+	out.Order = in.Order
+	out.Filters = in.Filters
 
 	return
 }

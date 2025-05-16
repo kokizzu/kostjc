@@ -3,6 +3,7 @@
   /** @typedef {import('./_types/masters.js').Field} Field */
   /** @typedef {import('./_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
+  /** @typedef {import('./_types/masters.js').ExtendedActionButton} ExtendedActionButton */
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/property.js').Payment} Payment */
   
@@ -13,8 +14,9 @@
   import { notifier } from './_components/xNotifier';
   import PopUpAddPayment from './_components/PopUpAddPayment.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
-  import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import { RiSystemAddBoxLine, RiBusinessCalendarScheduleLine } from './node_modules/svelte-icons-pack/dist/ri';
   import { CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
+  import axios from 'axios';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -181,6 +183,27 @@
       }
     );
   }
+
+  /** @type {ExtendedActionButton[]} */
+  const EXTENDED_BUTTONS = [
+    {
+      icon: RiBusinessCalendarScheduleLine,
+      action: async function(/** @type {any} */ row) {
+        try {
+          const res = await axios.post('/admin/booking', {
+            cmd: 'form',
+            booking: {
+              id: row[1]+''
+            }
+          });
+          window.location.href = '/admin/booking#by-tenant:'+res.data.booking.tenantId;
+        } catch (err) {
+          console.error(err);
+        }
+      },
+      tooltip: 'Show Booking',
+    }
+  ]
 </script>
 
 {#if isPopUpFormReady}
@@ -209,11 +232,13 @@
       COL_WIDTHS={{
         'bookingId': 370,
       }}
+      {EXTENDED_BUTTONS}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
       CAN_DELETE_ROW
       CAN_RESTORE_ROW
+      CAN_OPEN_LINK
 
       {OnDelete}
       {OnRestore}

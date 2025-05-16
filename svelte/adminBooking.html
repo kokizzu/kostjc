@@ -16412,36 +16412,36 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   // _components/MasterTableBooking.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[81] = list[i];
+    child_ctx[82] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[84] = list[i];
+    child_ctx[85] = list[i];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[87] = list[i];
+    child_ctx[88] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[90] = list[i];
-    child_ctx[92] = i;
+    child_ctx[91] = list[i];
+    child_ctx[93] = i;
     return child_ctx;
   }
   function get_each_context_4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[90] = list[i];
-    child_ctx[94] = i;
+    child_ctx[91] = list[i];
+    child_ctx[95] = i;
     return child_ctx;
   }
   function get_each_context_5(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[95] = list[i];
-    child_ctx[96] = list;
-    child_ctx[92] = i;
+    child_ctx[96] = list[i];
+    child_ctx[97] = list;
+    child_ctx[93] = i;
     return child_ctx;
   }
   function create_if_block_25(ctx) {
@@ -16450,16 +16450,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_isSubmitted;
     let current;
     function popupaddpayment_bookingId_binding(value) {
-      ctx[53](value);
+      ctx[54](value);
     }
     function popupaddpayment_isSubmitted_binding(value) {
-      ctx[55](value);
+      ctx[56](value);
     }
     let popupaddpayment_props = {
       isBookingReadOnly: true,
       OnSubmit: (
         /*submitAddPayment*/
-        ctx[43]
+        ctx[44]
       )
     };
     if (
@@ -16471,14 +16471,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
     if (
       /*isSubmitAddPayment*/
-      ctx[28] !== void 0
+      ctx[29] !== void 0
     ) {
       popupaddpayment_props.isSubmitted = /*isSubmitAddPayment*/
-      ctx[28];
+      ctx[29];
     }
     popupaddpayment = new PopUpAddPayment_default({ props: popupaddpayment_props });
     binding_callbacks.push(() => bind(popupaddpayment, "bookingId", popupaddpayment_bookingId_binding));
-    ctx[54](popupaddpayment);
+    ctx[55](popupaddpayment);
     binding_callbacks.push(() => bind(popupaddpayment, "isSubmitted", popupaddpayment_isSubmitted_binding));
     return {
       c() {
@@ -16498,10 +16498,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           add_flush_callback(() => updating_bookingId = false);
         }
         if (!updating_isSubmitted && dirty[0] & /*isSubmitAddPayment*/
-        268435456) {
+        536870912) {
           updating_isSubmitted = true;
           popupaddpayment_changes.isSubmitted = /*isSubmitAddPayment*/
-          ctx2[28];
+          ctx2[29];
           add_flush_callback(() => updating_isSubmitted = false);
         }
         popupaddpayment.$set(popupaddpayment_changes);
@@ -16517,7 +16517,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         current = false;
       },
       d(detaching) {
-        ctx[54](null);
+        ctx[55](null);
         destroy_component(popupaddpayment, detaching);
       }
     };
@@ -16528,10 +16528,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_filtersMap;
     let current;
     function filtertable_filterColumns_binding(value) {
-      ctx[57](value);
+      ctx[58](value);
     }
     function filtertable_filtersMap_binding(value) {
-      ctx[58](value);
+      ctx[59](value);
     }
     let filtertable_props = {};
     if (
@@ -16549,13 +16549,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       ctx[13];
     }
     filtertable = new FilterTable_default({ props: filtertable_props });
-    ctx[56](filtertable);
+    ctx[57](filtertable);
     binding_callbacks.push(() => bind(filtertable, "filterColumns", filtertable_filterColumns_binding));
     binding_callbacks.push(() => bind(filtertable, "filtersMap", filtertable_filtersMap_binding));
     filtertable.$on(
       "click",
       /*ApplyFilter*/
-      ctx[34]
+      ctx[35]
     );
     return {
       c() {
@@ -16594,7 +16594,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         current = false;
       },
       d(detaching) {
-        ctx[56](null);
+        ctx[57](null);
         destroy_component(filtertable, detaching);
       }
     };
@@ -16618,11 +16618,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     ctx[26]}`;
     let t3;
     let t4;
+    let t5_value = (
+      /*isRowDeleted*/
+      ctx[27] ? "(Deleted)" : ""
+    );
+    let t5;
+    let t6;
     let button0;
     let icon;
-    let t5;
+    let t7;
     let div0;
-    let t6;
+    let t8;
     let div1;
     let button1;
     let current;
@@ -16657,14 +16663,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t2 = space();
         t3 = text(t3_value);
         t4 = space();
+        t5 = text(t5_value);
+        t6 = space();
         button0 = element("button");
         create_component(icon.$.fragment);
-        t5 = space();
+        t7 = space();
         div0 = element("div");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        t6 = space();
+        t8 = space();
         div1 = element("div");
         button1 = element("button");
         button1.textContent = "Submit";
@@ -16686,17 +16694,19 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         append(h2, t1);
         append(h2, t2);
         append(h2, t3);
-        append(header, t4);
+        append(h2, t4);
+        append(h2, t5);
+        append(header, t6);
         append(header, button0);
         mount_component(icon, button0, null);
-        append(div2, t5);
+        append(div2, t7);
         append(div2, div0);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
             each_blocks[i].m(div0, null);
           }
         }
-        append(div2, t6);
+        append(div2, t8);
         append(div2, div1);
         append(div1, button1);
         current = true;
@@ -16706,13 +16716,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button0,
               "click",
               /*closePopUpEdit*/
-              ctx[41]
+              ctx[42]
             ),
             listen(
               button1,
               "click",
               /*handleSubmitEdit*/
-              ctx[40]
+              ctx[41]
             )
           ];
           mounted = true;
@@ -16730,6 +16740,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         67108864) && t3_value !== (t3_value = `#${/*idToMod*/
         ctx2[26]}`))
           set_data(t3, t3_value);
+        if ((!current || dirty[0] & /*isRowDeleted*/
+        134217728) && t5_value !== (t5_value = /*isRowDeleted*/
+        ctx2[27] ? "(Deleted)" : ""))
+          set_data(t5, t5_value);
         if (dirty[0] & /*FIELDS, REFS, payloads*/
         16777226) {
           each_value_5 = ensure_array_like(
@@ -16799,17 +16813,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type(ctx2, dirty) {
       if (
         /*field*/
-        ctx2[95].inputType === "combobox"
+        ctx2[96].inputType === "combobox"
       )
         return 0;
       if (
         /*field*/
-        ctx2[95].inputType === "combobox-arr"
+        ctx2[96].inputType === "combobox-arr"
       )
         return 1;
       if (
         /*field*/
-        ctx2[95].inputType === "multiselect"
+        ctx2[96].inputType === "multiselect"
       )
         return 2;
       return 3;
@@ -16871,41 +16885,41 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding_2(value) {
-      ctx[62](
+      ctx[63](
         value,
         /*idx*/
-        ctx[92]
+        ctx[93]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[95].name
+        ctx[96].name
       ),
       label: (
         /*field*/
-        ctx[95].label
+        ctx[96].label
       ),
       placeholder: (
         /*field*/
-        ctx[95].description
+        ctx[96].description
       ),
       type: (
         /*field*/
-        ctx[95].inputType
+        ctx[96].inputType
       )
     };
     if (
       /*payloads*/
       ctx[24][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[24][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -16924,26 +16938,26 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[95].name;
+          ctx[96].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[95].label;
+          ctx[96].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[95].description;
+          ctx[96].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[95].inputType;
+          ctx[96].inputType;
         if (!updating_value && dirty[0] & /*payloads*/
         16777216) {
           updating_value = true;
           inputbox_changes.value = /*payloads*/
           ctx[24][
             /*idx*/
-            ctx[92]
+            ctx[93]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -16969,24 +16983,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_valuesTarget;
     let current;
     function multiselect_valuesTarget_binding(value) {
-      ctx[61](
+      ctx[62](
         value,
         /*idx*/
-        ctx[92]
+        ctx[93]
       );
     }
     let multiselect_props = {
       id: (
         /*field*/
-        ctx[95].name
+        ctx[96].name
       ),
       label: (
         /*field*/
-        ctx[95].label
+        ctx[96].label
       ),
       placeholder: (
         /*field*/
-        ctx[95].description
+        ctx[96].description
       ),
       valuesSourceType: "object",
       valuesSourceObj: (
@@ -16994,16 +17008,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[95].name
+          ctx[96].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[95].name
+            ctx[96].name
           ]
         ) : (
           /*field*/
-          ctx[95].ref
+          ctx[96].ref
         )
       )
     };
@@ -17011,13 +17025,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[24][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ] !== void 0
     ) {
       multiselect_props.valuesTarget = /*payloads*/
       ctx[24][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ];
     }
     multiselect = new MultiSelect_default({ props: multiselect_props });
@@ -17036,31 +17050,31 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.id = /*field*/
-          ctx[95].name;
+          ctx[96].name;
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.label = /*field*/
-          ctx[95].label;
+          ctx[96].label;
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.placeholder = /*field*/
-          ctx[95].description;
+          ctx[96].description;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           multiselect_changes.valuesSourceObj = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[95].name
+            ctx[96].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[95].name
+              ctx[96].name
             ]
           ) : (
             /*field*/
-            ctx[95].ref
+            ctx[96].ref
           );
         if (!updating_valuesTarget && dirty[0] & /*payloads*/
         16777216) {
@@ -17068,7 +17082,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           multiselect_changes.valuesTarget = /*payloads*/
           ctx[24][
             /*idx*/
-            ctx[92]
+            ctx[93]
           ];
           add_flush_callback(() => updating_valuesTarget = false);
         }
@@ -17094,44 +17108,44 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding_1(value) {
-      ctx[60](
+      ctx[61](
         value,
         /*idx*/
-        ctx[92]
+        ctx[93]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[95].name
+        ctx[96].name
       ),
       label: (
         /*field*/
-        ctx[95].label
+        ctx[96].label
       ),
       placeholder: (
         /*field*/
-        ctx[95].description
+        ctx[96].description
       ),
       type: (
         /*field*/
-        ctx[95].inputType
+        ctx[96].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[95].name
+          ctx[96].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[95].name
+            ctx[96].name
           ]
         ) : (
           /*field*/
-          ctx[95].ref
+          ctx[96].ref
         )
       )
     };
@@ -17139,13 +17153,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[24][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[24][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -17164,35 +17178,35 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[95].name;
+          ctx[96].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[95].label;
+          ctx[96].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[95].description;
+          ctx[96].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[95].inputType;
+          ctx[96].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[95].name
+            ctx[96].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[95].name
+              ctx[96].name
             ]
           ) : (
             /*field*/
-            ctx[95].ref
+            ctx[96].ref
           );
         if (!updating_value && dirty[0] & /*payloads*/
         16777216) {
@@ -17200,7 +17214,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           inputbox_changes.value = /*payloads*/
           ctx[24][
             /*idx*/
-            ctx[92]
+            ctx[93]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -17226,44 +17240,44 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding(value) {
-      ctx[59](
+      ctx[60](
         value,
         /*idx*/
-        ctx[92]
+        ctx[93]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[95].name
+        ctx[96].name
       ),
       label: (
         /*field*/
-        ctx[95].label
+        ctx[96].label
       ),
       placeholder: (
         /*field*/
-        ctx[95].description
+        ctx[96].description
       ),
       type: (
         /*field*/
-        ctx[95].inputType
+        ctx[96].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[95].name
+          ctx[96].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[95].name
+            ctx[96].name
           ]
         ) : (
           /*field*/
-          ctx[95].ref
+          ctx[96].ref
         )
       ),
       isObject: (
@@ -17271,7 +17285,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[95].name
+          ctx[96].name
         ] ? true : false
       )
     };
@@ -17279,13 +17293,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[24][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[24][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -17304,35 +17318,35 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[95].name;
+          ctx[96].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[95].label;
+          ctx[96].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[95].description;
+          ctx[96].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[95].inputType;
+          ctx[96].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[95].name
+            ctx[96].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[95].name
+              ctx[96].name
             ]
           ) : (
             /*field*/
-            ctx[95].ref
+            ctx[96].ref
           );
         if (dirty[0] & /*REFS, FIELDS*/
         10)
@@ -17340,7 +17354,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[95].name
+            ctx[96].name
           ] ? true : false;
         if (!updating_value && dirty[0] & /*payloads*/
         16777216) {
@@ -17348,7 +17362,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           inputbox_changes.value = /*payloads*/
           ctx[24][
             /*idx*/
-            ctx[92]
+            ctx[93]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -17374,8 +17388,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let current;
     let if_block = (
       /*field*/
-      ctx[95].name !== "id" && !/*field*/
-      ctx[95].readOnly && create_if_block_20(ctx)
+      ctx[96].name !== "id" && !/*field*/
+      ctx[96].readOnly && create_if_block_20(ctx)
     );
     return {
       c() {
@@ -17392,8 +17406,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (
           /*field*/
-          ctx2[95].name !== "id" && !/*field*/
-          ctx2[95].readOnly
+          ctx2[96].name !== "id" && !/*field*/
+          ctx2[96].readOnly
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -17537,7 +17551,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let span;
     let t0_value = (
       /*f*/
-      ctx[90].label + ""
+      ctx[91].label + ""
     );
     let t0;
     let t1;
@@ -17550,14 +17564,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let dispose;
     let if_block = (
       /*f*/
-      ctx[90].name !== "totalPaidIDR" && create_if_block_133(ctx)
+      ctx[91].name !== "totalPaidIDR" && create_if_block_133(ctx)
     );
     function click_handler_1() {
       return (
         /*click_handler_1*/
-        ctx[64](
+        ctx[65](
           /*f*/
-          ctx[90]
+          ctx[91]
         )
       );
     }
@@ -17573,19 +17587,19 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t2 = space();
         attr(button, "class", "heading svelte-ddx7xj");
         button.disabled = button_disabled_value = /*f*/
-        ctx[90].name === "totalPaidIDR";
+        ctx[91].name === "totalPaidIDR";
         attr(th, "style", th_style_value = /*COL_WIDTHS*/
         ctx[8][
           /*f*/
-          ctx[90].name
+          ctx[91].name
         ] ? `min-width: ${/*COL_WIDTHS*/
         ctx[8][
           /*f*/
-          ctx[90].name
+          ctx[91].name
         ]}px;` : "");
         attr(th, "class", th_class_value = /*f*/
-        (ctx[90].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[90].inputType === "datetime" ? "datetime" : "") + " svelte-ddx7xj");
+        (ctx[91].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[91].inputType === "datetime" ? "datetime" : "") + " svelte-ddx7xj");
       },
       m(target, anchor) {
         insert(target, th, anchor);
@@ -17606,11 +17620,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx = new_ctx;
         if ((!current || dirty[0] & /*FIELDS*/
         2) && t0_value !== (t0_value = /*f*/
-        ctx[90].label + ""))
+        ctx[91].label + ""))
           set_data(t0, t0_value);
         if (
           /*f*/
-          ctx[90].name !== "totalPaidIDR"
+          ctx[91].name !== "totalPaidIDR"
         ) {
           if (if_block) {
             if_block.p(ctx, dirty);
@@ -17633,25 +17647,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (!current || dirty[0] & /*FIELDS*/
         2 && button_disabled_value !== (button_disabled_value = /*f*/
-        ctx[90].name === "totalPaidIDR")) {
+        ctx[91].name === "totalPaidIDR")) {
           button.disabled = button_disabled_value;
         }
         if (!current || dirty[0] & /*COL_WIDTHS, FIELDS*/
         258 && th_style_value !== (th_style_value = /*COL_WIDTHS*/
         ctx[8][
           /*f*/
-          ctx[90].name
+          ctx[91].name
         ] ? `min-width: ${/*COL_WIDTHS*/
         ctx[8][
           /*f*/
-          ctx[90].name
+          ctx[91].name
         ]}px;` : "")) {
           attr(th, "style", th_style_value);
         }
         if (!current || dirty[0] & /*FIELDS*/
         2 && th_class_value !== (th_class_value = /*f*/
-        (ctx[90].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[90].inputType === "datetime" ? "datetime" : "") + " svelte-ddx7xj")) {
+        (ctx[91].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[91].inputType === "datetime" ? "datetime" : "") + " svelte-ddx7xj")) {
           attr(th, "class", th_class_value);
         }
       },
@@ -17705,16 +17719,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let if_block0 = (
       /*isSortTableAsc*/
       ctx[18] && /*f*/
-      ctx[90].name === /*fieldNameToSort*/
+      ctx[91].name === /*fieldNameToSort*/
       ctx[19] && create_if_block_162(ctx)
     );
     let if_block1 = !/*isSortTableAsc*/
     ctx[18] && /*f*/
-    ctx[90].name === /*fieldNameToSort*/
+    ctx[91].name === /*fieldNameToSort*/
     ctx[19] && create_if_block_153(ctx);
     let if_block2 = (
       /*f*/
-      ctx[90].name !== /*fieldNameToSort*/
+      ctx[91].name !== /*fieldNameToSort*/
       ctx[19] && create_if_block_143(ctx)
     );
     return {
@@ -17745,7 +17759,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (
           /*isSortTableAsc*/
           ctx2[18] && /*f*/
-          ctx2[90].name === /*fieldNameToSort*/
+          ctx2[91].name === /*fieldNameToSort*/
           ctx2[19]
         ) {
           if (if_block0) {
@@ -17768,7 +17782,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (!/*isSortTableAsc*/
         ctx2[18] && /*f*/
-        ctx2[90].name === /*fieldNameToSort*/
+        ctx2[91].name === /*fieldNameToSort*/
         ctx2[19]) {
           if (if_block1) {
             if (dirty[0] & /*isSortTableAsc, FIELDS, fieldNameToSort*/
@@ -17790,7 +17804,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (
           /*f*/
-          ctx2[90].name !== /*fieldNameToSort*/
+          ctx2[91].name !== /*fieldNameToSort*/
           ctx2[19]
         ) {
           if (if_block2) {
@@ -17954,7 +17968,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type_1(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[90].name === "id"
+        ctx2[91].name === "id"
       )
         return 0;
       return 1;
@@ -18069,9 +18083,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*MASTER_ROWS, deletedIndex, FIELDS, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, getExtraTenants, PAGER*/
-        1073758831 | dirty[1] & /*restoreRow, deleteRow, showPopUpAddPayment, toggleShowPopUpEdit, Cell*/
-        2500) {
+        if (dirty[0] & /*MASTER_ROWS, deletedIndex, FIELDS, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, PAGER*/
+        17007 | dirty[1] & /*restoreRow, deleteRow, showPopUpAddPayment, toggleShowPopUpEdit, Cell, getExtraTenants*/
+        5001) {
           each_value_2 = ensure_array_like(
             /*MASTER_ROWS*/
             ctx2[2]
@@ -18122,20 +18136,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   function create_else_block_2(ctx) {
     let td;
     let t_value = (typeof /*row*/
-    ctx[87][
+    ctx[88][
       /*idx*/
-      ctx[92]
+      ctx[93]
     ] === "boolean" ? (
       /*row*/
-      ctx[87][
+      ctx[88][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ] ? "Yes" : "No"
     ) : (
       /*row*/
-      ctx[87][
+      ctx[88][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ] || "--"
     )) + "";
     let t;
@@ -18146,7 +18160,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t = text(t_value);
         attr(td, "class", td_class_value = null_to_empty(
           /*f*/
-          ctx[90].type
+          ctx[91].type
         ) + " svelte-ddx7xj");
       },
       m(target, anchor) {
@@ -18156,27 +18170,27 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = (typeof /*row*/
-        ctx2[87][
+        ctx2[88][
           /*idx*/
-          ctx2[92]
+          ctx2[93]
         ] === "boolean" ? (
           /*row*/
-          ctx2[87][
+          ctx2[88][
             /*idx*/
-            ctx2[92]
+            ctx2[93]
           ] ? "Yes" : "No"
         ) : (
           /*row*/
-          ctx2[87][
+          ctx2[88][
             /*idx*/
-            ctx2[92]
+            ctx2[93]
           ] || "--"
         )) + ""))
           set_data(t, t_value);
         if (dirty[0] & /*FIELDS*/
         2 && td_class_value !== (td_class_value = null_to_empty(
           /*f*/
-          ctx2[90].type
+          ctx2[91].type
         ) + " svelte-ddx7xj")) {
           attr(td, "class", td_class_value);
         }
@@ -18194,11 +18208,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = (
       /*getExtraTenants*/
-      ctx[30](
+      ctx[31](
         /*row*/
-        ctx[87][
+        ctx[88][
           /*idx*/
-          ctx[92]
+          ctx[93]
         ]
       ) + ""
     );
@@ -18216,11 +18230,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = /*getExtraTenants*/
-        ctx2[30](
+        ctx2[31](
           /*row*/
-          ctx2[87][
+          ctx2[88][
             /*idx*/
-            ctx2[92]
+            ctx2[93]
           ]
         ) + ""))
           set_data(t, t_value);
@@ -18238,9 +18252,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = formatFacilities(
       /*row*/
-      ctx[87][
+      ctx[88][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ]
     ) + "";
     let t;
@@ -18258,9 +18272,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = formatFacilities(
           /*row*/
-          ctx2[87][
+          ctx2[88][
             /*idx*/
-            ctx2[92]
+            ctx2[93]
           ]
         ) + ""))
           set_data(t, t_value);
@@ -18278,9 +18292,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t0_value = (
       /*row*/
-      (ctx[87][
+      (ctx[88][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ] || "0") + ""
     );
     let t0;
@@ -18300,9 +18314,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t0_value !== (t0_value = /*row*/
-        (ctx2[87][
+        (ctx2[88][
           /*idx*/
-          ctx2[92]
+          ctx2[93]
         ] || "0") + ""))
           set_data(t0, t0_value);
       },
@@ -18321,12 +18335,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*REFS*/
       (ctx[3][
         /*f*/
-        ctx[90].name
+        ctx[91].name
       ][
         /*row*/
-        ctx[87][
+        ctx[88][
           /*idx*/
-          ctx[92]
+          ctx[93]
         ]
       ] || "--") + ""
     );
@@ -18346,12 +18360,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         14 && t_value !== (t_value = /*REFS*/
         (ctx2[3][
           /*f*/
-          ctx2[90].name
+          ctx2[91].name
         ][
           /*row*/
-          ctx2[87][
+          ctx2[88][
             /*idx*/
-            ctx2[92]
+            ctx2[93]
           ]
         ] || "--") + ""))
           set_data(t, t_value);
@@ -18369,14 +18383,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = (
       /*row*/
-      (ctx[87][
+      (ctx[88][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ] ? (0, import_xFormatter3.datetime)(
         /*row*/
-        ctx[87][
+        ctx[88][
           /*idx*/
-          ctx[92]
+          ctx[93]
         ]
       ) : "--") + ""
     );
@@ -18394,14 +18408,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = /*row*/
-        (ctx2[87][
+        (ctx2[88][
           /*idx*/
-          ctx2[92]
+          ctx2[93]
         ] ? (0, import_xFormatter3.datetime)(
           /*row*/
-          ctx2[87][
+          ctx2[88][
             /*idx*/
-            ctx2[92]
+            ctx2[93]
           ]
         ) : "--") + ""))
           set_data(t, t_value);
@@ -18419,17 +18433,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = (
       /*row*/
-      (ctx[87][
+      (ctx[88][
         /*idx*/
-        ctx[92]
+        ctx[93]
       ] ? (0, import_xFormatter3.formatPrice)(
         /*row*/
-        ctx[87][
+        ctx[88][
           /*idx*/
-          ctx[92]
+          ctx[93]
         ],
         /*f*/
-        ctx[90].mapping || "IDR"
+        ctx[91].mapping || "IDR"
       ) : "--") + ""
     );
     let t;
@@ -18446,17 +18460,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, FIELDS*/
         6 && t_value !== (t_value = /*row*/
-        (ctx2[87][
+        (ctx2[88][
           /*idx*/
-          ctx2[92]
+          ctx2[93]
         ] ? (0, import_xFormatter3.formatPrice)(
           /*row*/
-          ctx2[87][
+          ctx2[88][
             /*idx*/
-            ctx2[92]
+            ctx2[93]
           ],
           /*f*/
-          ctx2[90].mapping || "IDR"
+          ctx2[91].mapping || "IDR"
         ) : "--") + ""))
           set_data(t, t_value);
       },
@@ -18587,13 +18601,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_3() {
       return (
         /*click_handler_3*/
-        ctx[66](
+        ctx[67](
           /*row*/
-          ctx[87],
+          ctx[88],
           /*idx*/
-          ctx[92],
+          ctx[93],
           /*f*/
-          ctx[90]
+          ctx[91]
         )
       );
     }
@@ -18607,9 +18621,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_4() {
       return (
         /*click_handler_4*/
-        ctx[67](
+        ctx[68](
           /*row*/
-          ctx[87]
+          ctx[88]
         )
       );
     }
@@ -18618,11 +18632,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type_5(ctx2, dirty) {
       if (
         /*row*/
-        ctx2[87][
+        ctx2[88][
           /*deletedIndex*/
           ctx2[14]
         ] > 0 || /*row*/
-        ctx2[87][
+        ctx2[88][
           /*deletedIndex*/
           ctx2[14]
         ] === "terminated"
@@ -18764,9 +18778,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_2() {
       return (
         /*click_handler_2*/
-        ctx[65](
+        ctx[66](
           /*row*/
-          ctx[87]
+          ctx[88]
         )
       );
     }
@@ -18825,9 +18839,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_6() {
       return (
         /*click_handler_6*/
-        ctx[69](
+        ctx[70](
           /*row*/
-          ctx[87]
+          ctx[88]
         )
       );
     }
@@ -18886,9 +18900,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_5() {
       return (
         /*click_handler_5*/
-        ctx[68](
+        ctx[69](
           /*row*/
-          ctx[87]
+          ctx[88]
         )
       );
     }
@@ -18950,41 +18964,41 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type_3(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[90].name === "id"
+        ctx2[91].name === "id"
       )
         return 0;
       if (
         /*f*/
-        ctx2[90].type == "currency"
+        ctx2[91].type == "currency"
       )
         return 1;
       if (
         /*f*/
-        ctx2[90].inputType === "datetime"
+        ctx2[91].inputType === "datetime"
       )
         return 2;
       if (
         /*f*/
-        ctx2[90].inputType === "combobox" && /*REFS*/
+        ctx2[91].inputType === "combobox" && /*REFS*/
         ctx2[3][
           /*f*/
-          ctx2[90].name
+          ctx2[91].name
         ]
       )
         return 3;
       if (
         /*f*/
-        ctx2[90].inputType === "percentage"
+        ctx2[91].inputType === "percentage"
       )
         return 4;
       if (
         /*f*/
-        ctx2[90].name === "facilitiesObj"
+        ctx2[91].name === "facilitiesObj"
       )
         return 5;
       if (
         /*f*/
-        ctx2[90].name === "extraTenants"
+        ctx2[91].name === "extraTenants"
       )
         return 6;
       return 7;
@@ -19050,7 +19064,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       ctx[0].perPage + /*MASTER_ROWS*/
       ctx[2].indexOf(
         /*row*/
-        ctx[87]
+        ctx[88]
       ) + 1 + ""
     );
     let t0;
@@ -19082,11 +19096,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(td, "class", "num_row svelte-ddx7xj");
         attr(tr, "class", tr_class_value = null_to_empty(
           /*row*/
-          ctx[87][
+          ctx[88][
             /*deletedIndex*/
             ctx[14]
           ] > 0 || /*row*/
-          ctx[87][
+          ctx[88][
             /*deletedIndex*/
             ctx[14]
           ] === "terminated" ? "deleted" : ""
@@ -19112,12 +19126,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx2[0].perPage + /*MASTER_ROWS*/
         ctx2[2].indexOf(
           /*row*/
-          ctx2[87]
+          ctx2[88]
         ) + 1 + ""))
           set_data(t0, t0_value);
-        if (dirty[0] & /*MASTER_ROWS, deletedIndex, FIELDS, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, getExtraTenants*/
-        1073758830 | dirty[1] & /*restoreRow, deleteRow, showPopUpAddPayment, toggleShowPopUpEdit, Cell*/
-        2500) {
+        if (dirty[0] & /*MASTER_ROWS, deletedIndex, FIELDS, OnInfo, CAN_SHOW_INFO, ACCESS, REFS*/
+        17006 | dirty[1] & /*restoreRow, deleteRow, showPopUpAddPayment, toggleShowPopUpEdit, Cell, getExtraTenants*/
+        5001) {
           each_value_3 = ensure_array_like(
             /*FIELDS*/
             ctx2[1] || []
@@ -19144,11 +19158,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (!current || dirty[0] & /*MASTER_ROWS, deletedIndex*/
         16388 && tr_class_value !== (tr_class_value = null_to_empty(
           /*row*/
-          ctx2[87][
+          ctx2[88][
             /*deletedIndex*/
             ctx2[14]
           ] > 0 || /*row*/
-          ctx2[87][
+          ctx2[88][
             /*deletedIndex*/
             ctx2[14]
           ] === "terminated" ? "deleted" : ""
@@ -19183,7 +19197,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let div;
     let each_value_1 = ensure_array_like(
       /*rowsToShow*/
-      ctx[31]
+      ctx[32]
     );
     let each_blocks = [];
     for (let i = 0; i < each_value_1.length; i += 1) {
@@ -19207,10 +19221,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         if (dirty[1] & /*toRow, rowsToShow*/
-        17) {
+        34) {
           each_value_1 = ensure_array_like(
             /*rowsToShow*/
-            ctx2[31]
+            ctx2[32]
           );
           let i;
           for (i = 0; i < each_value_1.length; i += 1) {
@@ -19244,9 +19258,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_7() {
       return (
         /*click_handler_7*/
-        ctx[70](
+        ctx[71](
           /*r*/
-          ctx[84]
+          ctx[85]
         )
       );
     }
@@ -19254,7 +19268,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       c() {
         button = element("button");
         button.textContent = `${/*r*/
-        ctx[84]}`;
+        ctx[85]}`;
         attr(button, "class", "svelte-ddx7xj");
       },
       m(target, anchor) {
@@ -19280,7 +19294,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let button;
     let t_value = (
       /*i*/
-      ctx[81] + ""
+      ctx[82] + ""
     );
     let t;
     let button_disabled_value;
@@ -19291,9 +19305,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_10() {
       return (
         /*click_handler_10*/
-        ctx[73](
+        ctx[74](
           /*i*/
-          ctx[81]
+          ctx[82]
         )
       );
     }
@@ -19303,14 +19317,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t = text(t_value);
         button.disabled = button_disabled_value = /*currentPage*/
         ctx[17] == /*i*/
-        ctx[81];
+        ctx[82];
         attr(button, "class", button_class_value = null_to_empty(
           /*currentPage*/
           ctx[17] === /*i*/
-          ctx[81] ? "btn active" : "btn"
+          ctx[82] ? "btn active" : "btn"
         ) + " svelte-ddx7xj");
         attr(button, "title", button_title_value = `Go to page ${/*i*/
-        ctx[81]}`);
+        ctx[82]}`);
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -19324,25 +19338,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx = new_ctx;
         if (dirty[0] & /*paginationShow*/
         65536 && t_value !== (t_value = /*i*/
-        ctx[81] + ""))
+        ctx[82] + ""))
           set_data(t, t_value);
         if (dirty[0] & /*currentPage, paginationShow*/
         196608 && button_disabled_value !== (button_disabled_value = /*currentPage*/
         ctx[17] == /*i*/
-        ctx[81])) {
+        ctx[82])) {
           button.disabled = button_disabled_value;
         }
         if (dirty[0] & /*currentPage, paginationShow*/
         196608 && button_class_value !== (button_class_value = null_to_empty(
           /*currentPage*/
           ctx[17] === /*i*/
-          ctx[81] ? "btn active" : "btn"
+          ctx[82] ? "btn active" : "btn"
         ) + " svelte-ddx7xj")) {
           attr(button, "class", button_class_value);
         }
         if (dirty[0] & /*paginationShow*/
         65536 && button_title_value !== (button_title_value = `Go to page ${/*i*/
-        ctx[81]}`)) {
+        ctx[82]}`)) {
           attr(button, "title", button_title_value);
         }
       },
@@ -19432,7 +19446,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let dispose;
     let if_block0 = (
       /*isPopUpAddPaymentReady*/
-      ctx[29] && create_if_block_25(ctx)
+      ctx[30] && create_if_block_25(ctx)
     );
     let if_block1 = (
       /*filterTableReady*/
@@ -19451,13 +19465,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     const default_slot_template = (
       /*#slots*/
-      ctx[52].default
+      ctx[53].default
     );
     const default_slot = create_slot(
       default_slot_template,
       ctx,
       /*$scope*/
-      ctx[51],
+      ctx[52],
       null
     );
     let if_block3 = isAjaxSubmitted && create_if_block_182(ctx);
@@ -19471,7 +19485,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     );
     const get_key = (ctx2) => (
       /*f*/
-      ctx2[90].name
+      ctx2[91].name
     );
     for (let i = 0; i < each_value_4.length; i += 1) {
       let child_ctx = get_each_context_4(ctx, each_value_4, i);
@@ -19760,37 +19774,37 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button0,
               "click",
               /*click_handler*/
-              ctx[63]
+              ctx[64]
             ),
             listen(
               button1,
               "click",
               /*toggleRowsNum*/
-              ctx[32]
+              ctx[33]
             ),
             listen(
               button2,
               "click",
               /*click_handler_8*/
-              ctx[71]
+              ctx[72]
             ),
             listen(
               button3,
               "click",
               /*click_handler_9*/
-              ctx[72]
+              ctx[73]
             ),
             listen(
               button4,
               "click",
               /*click_handler_11*/
-              ctx[74]
+              ctx[75]
             ),
             listen(
               button5,
               "click",
               /*click_handler_12*/
-              ctx[75]
+              ctx[76]
             )
           ];
           mounted = true;
@@ -19799,12 +19813,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (
           /*isPopUpAddPaymentReady*/
-          ctx2[29]
+          ctx2[30]
         ) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
             if (dirty[0] & /*isPopUpAddPaymentReady*/
-            536870912) {
+            1073741824) {
               transition_in(if_block0, 1);
             }
           } else {
@@ -19868,20 +19882,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (default_slot) {
           if (default_slot.p && (!current || dirty[1] & /*$scope*/
-          1048576)) {
+          2097152)) {
             update_slot_base(
               default_slot,
               default_slot_template,
               ctx2,
               /*$scope*/
-              ctx2[51],
+              ctx2[52],
               !current ? get_all_dirty_from_scope(
                 /*$scope*/
-                ctx2[51]
+                ctx2[52]
               ) : get_slot_changes(
                 default_slot_template,
                 /*$scope*/
-                ctx2[51],
+                ctx2[52],
                 dirty,
                 null
               ),
@@ -19913,7 +19927,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (dirty[0] & /*FIELDS, COL_WIDTHS, fieldNameToSort, isSortTableAsc*/
         786690 | dirty[1] & /*OnSort*/
-        8192) {
+        16384) {
           each_value_4 = ensure_array_like(
             /*FIELDS*/
             ctx2[1] || []
@@ -19996,7 +20010,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (dirty[0] & /*currentPage, paginationShow*/
         196608 | dirty[1] & /*goToPage*/
-        32) {
+        64) {
           each_value = ensure_array_like(
             /*paginationShow*/
             ctx2[16]
@@ -20117,7 +20131,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       return facilities2;
     }
     try {
-      formattedFacilities = arrFacilities.map((facility) => `${facility.facilityName} (IDR ${facility.extraChargeIDR.toLocaleString("en-ID")})`).join(", ");
+      formattedFacilities = arrFacilities.map((facility) => `${facility.facilityName} (IDR ${facility.extraChargeIDR || 0})`).join(", ");
     } catch (e) {
       return formattedFacilities;
     }
@@ -20171,7 +20185,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       []
     );
     let currentPage = 1;
-    let isSortTableAsc = false;
+    let isSortTableAsc = true;
     let fieldNameToSort = (PAGER.order || []).length ? PAGER.order[0].substring(1).replace("+", "").replace("-", "") : "";
     let totalPages = 0;
     let totalRound = 0;
@@ -20282,12 +20296,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
     let showPopUpEdit = false;
     let idToMod = 0;
+    let isRowDeleted = false;
     async function toggleShowPopUpEdit(id, row) {
       let booking = (
         /** @type {Booking} */
         {}
       );
       $invalidate(26, idToMod = id);
+      for (let i = 0; i < (FIELDS || []).length; i++) {
+        if (FIELDS[i].name === "deletedAt") {
+          if (row[i] > 0) {
+            $invalidate(27, isRowDeleted = true);
+          }
+          break;
+        }
+      }
       let isErrAjax = false;
       await (0, import_jsApi2.AdminBooking)(
         {
@@ -20330,7 +20353,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let isPopUpAddPaymentReady = false;
     let paymentAt = (0, import_xFormatter3.dateISOFormat)(0);
     onMount(() => {
-      $invalidate(29, isPopUpAddPaymentReady = true);
+      $invalidate(30, isPopUpAddPaymentReady = true);
     });
     function showPopUpAddPayment(row) {
       $invalidate(26, idToMod = row[0]);
@@ -20338,7 +20361,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       popUpAddPayment.Show();
     }
     async function submitAddPayment(payment) {
-      $invalidate(28, isSubmitAddPayment = true);
+      $invalidate(29, isSubmitAddPayment = true);
       const i = (
         /** @type {any} */
         { payment, cmd: "upsert" }
@@ -20348,7 +20371,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(28, isSubmitAddPayment = false);
+          $invalidate(29, isSubmitAddPayment = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
@@ -20379,12 +20402,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function popupaddpayment_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         popUpAddPayment = $value;
-        $invalidate(27, popUpAddPayment);
+        $invalidate(28, popUpAddPayment);
       });
     }
     function popupaddpayment_isSubmitted_binding(value) {
       isSubmitAddPayment = value;
-      $invalidate(28, isSubmitAddPayment);
+      $invalidate(29, isSubmitAddPayment);
     }
     function filtertable_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
@@ -20439,7 +20462,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     const click_handler_12 = () => goToPage(paginationTotal);
     $self.$set = ($props2) => {
       if ("tenants" in $props2)
-        $invalidate(45, tenants2 = $props2.tenants);
+        $invalidate(46, tenants2 = $props2.tenants);
       if ("FIELDS" in $props2)
         $invalidate(1, FIELDS = $props2.FIELDS);
       if ("PAGER" in $props2)
@@ -20455,23 +20478,23 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("ACCESS" in $props2)
         $invalidate(6, ACCESS = $props2.ACCESS);
       if ("ARRAY_OF_ARRAY" in $props2)
-        $invalidate(46, ARRAY_OF_ARRAY = $props2.ARRAY_OF_ARRAY);
+        $invalidate(47, ARRAY_OF_ARRAY = $props2.ARRAY_OF_ARRAY);
       if ("CAN_SEARCH_ROW" in $props2)
         $invalidate(7, CAN_SEARCH_ROW = $props2.CAN_SEARCH_ROW);
       if ("COL_WIDTHS" in $props2)
         $invalidate(8, COL_WIDTHS = $props2.COL_WIDTHS);
       if ("OnRestore" in $props2)
-        $invalidate(47, OnRestore = $props2.OnRestore);
+        $invalidate(48, OnRestore = $props2.OnRestore);
       if ("OnDelete" in $props2)
-        $invalidate(48, OnDelete = $props2.OnDelete);
+        $invalidate(49, OnDelete = $props2.OnDelete);
       if ("OnEdit" in $props2)
-        $invalidate(49, OnEdit = $props2.OnEdit);
+        $invalidate(50, OnEdit = $props2.OnEdit);
       if ("OnRefresh" in $props2)
-        $invalidate(50, OnRefresh = $props2.OnRefresh);
+        $invalidate(51, OnRefresh = $props2.OnRefresh);
       if ("OnInfo" in $props2)
         $invalidate(9, OnInfo = $props2.OnInfo);
       if ("$scope" in $props2)
-        $invalidate(51, $scope = $props2.$scope);
+        $invalidate(52, $scope = $props2.$scope);
     };
     $self.$.update = () => {
       if ($self.$.dirty[0] & /*PAGER*/
@@ -20510,6 +20533,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       payloads,
       showPopUpEdit,
       idToMod,
+      isRowDeleted,
       popUpAddPayment,
       isSubmitAddPayment,
       isPopUpAddPaymentReady,
@@ -20571,7 +20595,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_fragment14,
         safe_not_equal,
         {
-          tenants: 45,
+          tenants: 46,
           FIELDS: 1,
           PAGER: 0,
           MASTER_ROWS: 2,
@@ -20579,13 +20603,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           NAME: 4,
           CAN_SHOW_INFO: 5,
           ACCESS: 6,
-          ARRAY_OF_ARRAY: 46,
+          ARRAY_OF_ARRAY: 47,
           CAN_SEARCH_ROW: 7,
           COL_WIDTHS: 8,
-          OnRestore: 47,
-          OnDelete: 48,
-          OnEdit: 49,
-          OnRefresh: 50,
+          OnRestore: 48,
+          OnDelete: 49,
+          OnEdit: 50,
+          OnRefresh: 51,
           OnInfo: 9
         },
         null,
@@ -21446,7 +21470,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           if (facilitiesNums) {
             facilitiesNums.forEach((id) => {
               const f = facilities2.find((f2) => f2.id === id);
-              $invalidate(13, facilitiesPrice += f.extraChargeIDR);
+              if (f) {
+                $invalidate(13, facilitiesPrice += f.extraChargeIDR || 0);
+              }
             });
           }
         }
@@ -21721,7 +21747,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         const mastertable_changes = {};
-        if (dirty & /*$scope, popUpForms*/
+        if (dirty & /*$scope, popUpAddBooking*/
         262160) {
           mastertable_changes.$scope = { dirty, ctx: ctx2 };
         }
@@ -21821,7 +21847,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           check_outros();
         }
         const layoutmain_changes = {};
-        if (dirty & /*$scope, fields, pager, bookings, popUpForms*/
+        if (dirty & /*$scope, fields, pager, bookings, popUpAddBooking*/
         262167) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
@@ -21888,7 +21914,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /** @type boolean */
       false
     );
-    let popUpForms = (
+    let popUpAddBooking = (
       /** @type {
         import('svelte').SvelteComponent | HTMLElement| PopUpAddBooking |any
       } */
@@ -22052,23 +22078,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           $invalidate(2, pager = o.pager);
           $invalidate(0, bookings = o.bookings);
           notifier.showSuccess(`Booking created !!`);
-          popUpForms.Reset();
-          popUpForms.Hide();
+          popUpAddBooking.Reset();
+          popUpAddBooking.Hide();
+          console.log("PAGER:", pager);
           OnRefresh(pager);
         }
       );
     }
     function popupaddbooking_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
-        popUpForms = $value;
-        $invalidate(4, popUpForms);
+        popUpAddBooking = $value;
+        $invalidate(4, popUpAddBooking);
       });
     }
     function popupaddbooking_isSubmitted_binding(value) {
       isSubmitAddBooking = value;
       $invalidate(5, isSubmitAddBooking);
     }
-    const click_handler = () => popUpForms.Show();
+    const click_handler = () => popUpAddBooking.Show();
     function mastertable_FIELDS_binding(value) {
       fields = value;
       $invalidate(1, fields);
@@ -22086,7 +22113,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       fields,
       pager,
       isPopUpFormReady,
-      popUpForms,
+      popUpAddBooking,
       isSubmitAddBooking,
       OnRefresh,
       OnRestore,

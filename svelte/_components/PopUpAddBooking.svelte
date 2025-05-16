@@ -36,7 +36,9 @@
     if (facilitiesNums) {
       facilitiesNums.forEach((id) => {
         const f = facilities.find((f) => f.id === id);
-        facilitiesPrice += f.extraChargeIDR;
+        if (f) {
+          facilitiesPrice += (f.extraChargeIDR || 0);
+        }
       })
     }
   }

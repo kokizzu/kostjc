@@ -28,7 +28,7 @@ module.exports = {};
 * @property {number} perPage
 * @property {number} pages
 * @property {number} countResult
-* @property {Record<string, string[]>} filters
+* @property {Record<string, any[]>} filters
 * @property {string[]} order
 */
 module.exports = {};
@@ -90,6 +90,14 @@ module.exports = {};
  * @property {import("svelte-icons-pack").IconType} icon
  * @property {boolean} isTargetBlank - if true, open link in new window
  * @property {(row: any) => string} link
+ * @property {string} tooltip
+ */
+module.exports = {}
+
+/**
+ * @typedef {Object} ExtendedActionButton
+ * @property {import("svelte-icons-pack").IconType} icon
+ * @property {(row: any) => void} action
  * @property {string} tooltip
  */
 module.exports = {}

@@ -13,7 +13,6 @@
     RiSystemFilterLine,
     RiArrowsArrowGoBackLine,
     RiSystemInformationLine,
-    RiArrowsArrowDropRightLine,
     RiFinanceBankCardLine,
     RiArrowsExpandUpDownFill,
     RiArrowsArrowDownSFill,
@@ -60,7 +59,7 @@
     
     try {
       formattedFacilities = arrFacilities.map(facility => 
-          `${facility.facilityName} (IDR ${facility.extraChargeIDR.toLocaleString('en-ID')})`
+          `${facility.facilityName} (IDR ${facility.extraChargeIDR || 0})`
         ).join(', ');
     } catch (e) {
       return formattedFacilities;
@@ -108,7 +107,7 @@
   // Current page describe which page is currently rendered
   let currentPage = 1;
   // State for sort, wheter is ascending or descending
-  let isSortTableAsc = false;
+  let isSortTableAsc = true;
   // State for sort field name
   let fieldNameToSort = (
     (PAGER.order || []).length ? PAGER.order[0]
@@ -276,10 +275,19 @@
 
   // Row ID to modify
   let idToMod = 0;
+  let isRowDeleted = false;
 
   async function toggleShowPopUpEdit(/** @type any */ id, /** @type any[]*/ row) {
     let booking = /** @type {Booking} */ ({});
     idToMod = id;
+    for (let i = 0; i < (FIELDS || []).length; i++) {
+      if (FIELDS[i].name === 'deletedAt') {
+        if (row[i] > 0) {
+          isRowDeleted = true;
+        }
+        break;
+      }
+    }
     let isErrAjax = false;
     await AdminBooking({
       cmd: 'form', // @ts-ignore
@@ -393,7 +401,7 @@
   <div class="popup-container">
     <div class="popup">
       <header>
-        <h2>Edit {NAME ? NAME : 'row'} {`#${idToMod}`}</h2>
+        <h2>Edit {NAME ? NAME : 'row'} {`#${idToMod}`} {isRowDeleted ?'(Deleted)': ''}</h2>
         <button on:click={closePopUpEdit}>
           <Icon size="22" color="var(--red-005)" src={IoClose} />
         </button>
