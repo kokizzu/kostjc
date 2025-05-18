@@ -195,8 +195,9 @@ func (d *Domain) AdminRoom(in *AdminRoomIn) (out AdminRoomOut) {
 				out.SetError(400, ErrAdminRoomTenantNotFound)
 				return
 			}
-			room.SetCurrentTenantId(in.Room.CurrentTenantId)
 		}
+
+		room.SetCurrentTenantId(in.Room.CurrentTenantId)
 
 		if in.Room.BuildingId != 0 {
 			building := rqProperty.NewBuildings(d.PropOltp)

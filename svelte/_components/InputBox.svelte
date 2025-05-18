@@ -72,6 +72,10 @@
   function handleSelect(/** @type {CustomEvent} */e) {
     value = e.detail.value;
   }
+
+  function handleClear(/** @type {CustomEvent} */e) {
+    value = '';
+  }
 </script>
 
 <div class={className}>
@@ -88,6 +92,7 @@
         items={itemsArr}
         bind:value={svelteSelectValue}
         on:select={handleSelect}
+        on:clear={handleClear}
         placeholder={placeholder}
       />
     {:else if type === 'combobox'}
@@ -97,6 +102,7 @@
           items={itemsArrObj}
           bind:value={svelteSelectValue}
           on:select={handleSelect}
+          on:clear={handleClear}
           placeholder={placeholder}
         />
       {:else}
@@ -105,6 +111,7 @@
           items={itemsArr}
           bind:value={svelteSelectValue}
           on:select={handleSelect}
+          on:clear={handleClear}
           placeholder={placeholder}
         />
       {/if}

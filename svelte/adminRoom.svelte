@@ -121,7 +121,7 @@
       roomName: String(payloads[1]),
       roomSize: String(payloads[2]),
       basePriceIDR: Number(payloads[3]),
-      currentTenantId: payloads[4],
+      currentTenantId: payloads[4] || '0',
       buildingId: payloads[5],
       firstUseAt: String(payloads[6]),
       lastUseAt: String(payloads[7]),

@@ -12295,7 +12295,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_9*/
-            ctx[31]
+            ctx[32]
           );
           mounted = true;
         }
@@ -12418,7 +12418,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_8*/
-            ctx[30]
+            ctx[31]
           );
           mounted = true;
         }
@@ -12530,7 +12530,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*value*/
           ctx[1]
         );
-        ctx[29](input);
+        ctx[30](input);
         insert(target, t2, anchor);
         if (if_block)
           if_block.m(target, anchor);
@@ -12541,7 +12541,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_7*/
-            ctx[28]
+            ctx[29]
           );
           mounted = true;
         }
@@ -12632,7 +12632,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           detach(t2);
           detach(if_block_anchor);
         }
-        ctx[29](null);
+        ctx[30](null);
         if (if_block)
           if_block.d(detaching);
         mounted = false;
@@ -12693,7 +12693,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_6*/
-            ctx[27]
+            ctx[28]
           );
           mounted = true;
         }
@@ -12814,7 +12814,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_5*/
-            ctx[26]
+            ctx[27]
           );
           mounted = true;
         }
@@ -12945,7 +12945,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_4*/
-            ctx[25]
+            ctx[26]
           );
           mounted = true;
         }
@@ -13069,7 +13069,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             textarea,
             "input",
             /*textarea_input_handler*/
-            ctx[24]
+            ctx[25]
           );
           mounted = true;
         }
@@ -13190,7 +13190,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_3*/
-            ctx[23]
+            ctx[24]
           );
           mounted = true;
         }
@@ -13327,7 +13327,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_2*/
-            ctx[22]
+            ctx[23]
           );
           mounted = true;
         }
@@ -13443,7 +13443,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_1*/
-            ctx[21]
+            ctx[22]
           );
           mounted = true;
         }
@@ -13564,7 +13564,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler*/
-            ctx[20]
+            ctx[21]
           );
           mounted = true;
         }
@@ -13711,7 +13711,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function select_value_binding(value) {
-      ctx[17](value);
+      ctx[18](value);
     }
     let select_props = {
       items: (
@@ -13736,6 +13736,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       "select",
       /*handleSelect*/
       ctx[14]
+    );
+    select.$on(
+      "clear",
+      /*handleClear*/
+      ctx[15]
     );
     return {
       c() {
@@ -13876,7 +13881,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "change",
             /*input_change_handler*/
-            ctx[16]
+            ctx[17]
           );
           mounted = true;
         }
@@ -14118,7 +14123,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function select_value_binding_2(value) {
-      ctx[19](value);
+      ctx[20](value);
     }
     let select_props = {
       items: (
@@ -14143,6 +14148,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       "select",
       /*handleSelect*/
       ctx[14]
+    );
+    select.$on(
+      "clear",
+      /*handleClear*/
+      ctx[15]
     );
     return {
       c() {
@@ -14230,7 +14240,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function select_value_binding_1(value) {
-      ctx[18](value);
+      ctx[19](value);
     }
     let select_props = {
       items: (
@@ -14255,6 +14265,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       "select",
       /*handleSelect*/
       ctx[14]
+    );
+    select.$on(
+      "clear",
+      /*handleClear*/
+      ctx[15]
     );
     return {
       c() {
@@ -14566,6 +14581,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function handleSelect(e) {
       $invalidate(1, value = e.detail.value);
     }
+    function handleClear(e) {
+      $invalidate(1, value = "");
+    }
     function input_change_handler() {
       value = this.checked;
       $invalidate(1, value);
@@ -14644,7 +14662,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("autocomplete" in $props2)
         $invalidate(4, autocomplete = $props2.autocomplete);
       if ("values" in $props2)
-        $invalidate(15, values = $props2.values);
+        $invalidate(16, values = $props2.values);
       if ("label" in $props2)
         $invalidate(5, label = $props2.label);
       if ("placeholder" in $props2)
@@ -14668,6 +14686,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       svelteSelectValue,
       toggleShowPassword,
       handleSelect,
+      handleClear,
       values,
       input_change_handler,
       select_value_binding,
@@ -14702,7 +14721,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           id: 0,
           value: 1,
           autocomplete: 4,
-          values: 15,
+          values: 16,
           label: 5,
           placeholder: 6,
           isObject: 7
