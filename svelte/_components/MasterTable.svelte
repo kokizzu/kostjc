@@ -839,7 +839,7 @@
   .table-root .table_container {
     overflow-x: auto;
     scrollbar-color: var(--gray-003) transparent;
-    scrollbar-width: thin;
+    scrollbar-width: calc(100% - 20px);
   }
 
   .table-root .table_container table {
