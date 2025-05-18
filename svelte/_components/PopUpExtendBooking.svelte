@@ -19,8 +19,8 @@
   export let tenants = /** @type {Record<number, string>} */ ({});
   export let facilities = /** @type {Facility[]} */ ([]);
 
-  let dateStart = dateISOFormat(0);
-  let dateEnd = dateISOFormat(30);
+  export let dateStart = dateISOFormat(0);
+  export let dateEnd = dateISOFormat(30);
   let basePriceIDR = 0;
   let facilitiesNums = /** @type {number[]} */([]);
   let totalPriceIDR = 0;

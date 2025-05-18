@@ -88,6 +88,17 @@ function dateISOFormat(/** @type number */ dayTo = 0) {
   return `${year}-${month}-${date}`;
 }
 
+function dateISOFormatFromYYYYMMDD(/** @type {string} */ dateStr, /** @type {number} */ dayTo = 0) {
+  const dt = new Date(dateStr);
+  dt.setDate(dt.getDate() + dayTo);
+
+  const date = String(dt.getDate()).padStart(2, '0');
+  const month = String(dt.getMonth() + 1).padStart(2, '0');
+  const year = dt.getFullYear();
+
+  return `${year}-${month}-${date}`;
+}
+
 function loadScript(/** @type {string} */ url, /** @type {Function} */ callback) {
   let script = /** @type {HTMLScriptElement} */ (document.createElement('script'));
   script.type = 'text/javascript';
@@ -132,6 +143,7 @@ module.exports = {
   isoTime: isoTime,
   isoDate: isoDate,
   dateISOFormat: dateISOFormat,
+  dateISOFormatFromYYYYMMDD: dateISOFormatFromYYYYMMDD,
   loadScript: loadScript,
   formatPrice: formatPrice,
   arrToArrNum: arrToArrNum

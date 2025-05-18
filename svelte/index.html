@@ -3862,6 +3862,14 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         const year = dt.getFullYear();
         return `${year}-${month}-${date}`;
       }
+      function dateISOFormatFromYYYYMMDD(dateStr, dayTo = 0) {
+        const dt = new Date(dateStr);
+        dt.setDate(dt.getDate() + dayTo);
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = String(dt.getMonth() + 1).padStart(2, "0");
+        const year = dt.getFullYear();
+        return `${year}-${month}-${date}`;
+      }
       function loadScript(url, callback) {
         let script = (
           /** @type {HTMLScriptElement} */
@@ -3895,6 +3903,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         isoTime,
         isoDate,
         dateISOFormat: dateISOFormat2,
+        dateISOFormatFromYYYYMMDD,
         loadScript,
         formatPrice,
         arrToArrNum

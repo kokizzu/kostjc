@@ -4708,6 +4708,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         const year = dt.getFullYear();
         return `${year}-${month}-${date}`;
       }
+      function dateISOFormatFromYYYYMMDD(dateStr, dayTo = 0) {
+        const dt = new Date(dateStr);
+        dt.setDate(dt.getDate() + dayTo);
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = String(dt.getMonth() + 1).padStart(2, "0");
+        const year = dt.getFullYear();
+        return `${year}-${month}-${date}`;
+      }
       function loadScript(url, callback) {
         let script = (
           /** @type {HTMLScriptElement} */
@@ -4741,6 +4749,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         isoTime,
         isoDate,
         dateISOFormat: dateISOFormat3,
+        dateISOFormatFromYYYYMMDD,
         loadScript,
         formatPrice: formatPrice2,
         arrToArrNum

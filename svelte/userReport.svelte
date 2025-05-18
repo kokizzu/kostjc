@@ -17,7 +17,7 @@
   import Switcher from './_components/Switcher.svelte';
   import { notifier } from './_components/xNotifier';
   import { onMount } from 'svelte';
-  import { formatPrice } from './_components/xFormatter';
+  import { dateISOFormatFromYYYYMMDD, formatPrice } from './_components/xFormatter';
     import { CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
@@ -141,6 +141,9 @@
   let bookingToExtend = /** @type {BookingDetail} */ ({});
   let isSubmitExtendBooking = false;
 
+  let dateStart = '';
+  let dateEnd = '';
+
   async function SubmitExtendBooking(/** @type {Booking} */ booking, /** @type {number[]} */ facilities) {
     isSubmitExtendBooking = true;
     booking.tenantId = bookingToExtend.tenantId+'';
@@ -171,6 +174,8 @@
   }
   function onExtendBooking(/** @type {BookingDetail} */ booking) {
     bookingToExtend = booking;
+    dateStart = booking.dateEnd;
+    dateEnd = dateISOFormatFromYYYYMMDD(booking.dateEnd, 30);
     popupExtendBooking.Show();
   }
 </script>
@@ -180,6 +185,8 @@
     bind:this={popupExtendBooking}
     bind:isSubmitted={isSubmitExtendBooking}
     bind:bookingToExtend
+    bind:dateStart
+    bind:dateEnd
     facilities={facilities}
     tenants={tenants}
     OnSubmit={SubmitExtendBooking}
