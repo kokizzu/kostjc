@@ -707,7 +707,9 @@ func isValidYearMonth(yearMonth string) bool {
 }
 
 type BookingDetail struct {
+	RoomId     uint64 `json:"roomId"`
 	RoomName   string `json:"roomName"`
+	TenantId   uint64 `json:"tenantId"`
 	TenantName string `json:"tenantName"`
 	DateStart  string `json:"dateStart"`
 	DateEnd    string `json:"dateEnd"`
@@ -740,7 +742,9 @@ func (b *Bookings) FindBookingsPerQuartal(monthStart, monthEnd string) (out []Bo
 
 	queryRows := comment + `
 SELECT 
+	"rooms"."id" AS "roomId",
   "rooms"."roomName",
+	"bookings"."tenantId",
   COALESCE("tenants"."tenantName", '') AS "tenantName",
   COALESCE("bookings"."dateStart", '') AS "dateStart",
   COALESCE("bookings"."dateEnd", '') AS "dateEnd",
@@ -761,17 +765,21 @@ GROUP BY "rooms"."roomName", "tenants"."tenantName", "bookings"."dateStart", "bo
 ORDER BY "rooms"."roomName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 7 {
-			roomName := X.ToS(row[0])
-			tenantName := X.ToS(row[1])
-			dateStart := X.ToS(row[2])
-			dateEnd := X.ToS(row[3])
-			totalPaidIdr := X.ToI(row[4])
-			totalPriceIdr := X.ToI(row[5])
-			deletedAt := X.ToI(row[6])
+		if len(row) == 9 {
+			roomId := X.ToU(row[0])
+			roomName := X.ToS(row[1])
+			tenantId := X.ToU(row[2])
+			tenantName := X.ToS(row[3])
+			dateStart := X.ToS(row[4])
+			dateEnd := X.ToS(row[5])
+			totalPaidIdr := X.ToI(row[6])
+			totalPriceIdr := X.ToI(row[7])
+			deletedAt := X.ToI(row[8])
 
 			out = append(out, BookingDetail{
+				RoomId:     roomId,
 				RoomName:   roomName,
+				TenantId:   tenantId,
 				TenantName: tenantName,
 				DateStart:  dateStart,
 				DateEnd:    dateEnd,

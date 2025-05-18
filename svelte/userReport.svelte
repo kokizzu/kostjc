@@ -1,23 +1,31 @@
 <script>
-    import Switcher from './_components/Switcher.svelte';
-import { notifier } from './_components/xNotifier';
   /** @typedef {import('./_types/masters.js').Access} Access */
   /** @typedef {import('./_types/users.js').User} User */
+  /** @typedef {import('./_types/property.js').Booking} Booking */
   /** @typedef {import('./_types/property.js').BookingDetail} BookingDetail */
+  /** @typedef {import('./_types/property.js').Facility} Facility */
 
   import LayoutMain from './_layouts/main.svelte';
-  import { UserReport } from './jsApi.GEN';
+  import { AdminBooking, UserReport } from './jsApi.GEN';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import {
     RiArrowsArrowRightSLine, RiArrowsArrowLeftSLine,
     RiSystemExternalLinkLine, RiFinanceWallet3Line,
     RiSystemEyeLine, RiDesignBallPenLine
   } from './node_modules/svelte-icons-pack/dist/ri';
+  import PopUpExtendBooking from './_components/PopUpExtendBooking.svelte';
+  import Switcher from './_components/Switcher.svelte';
+  import { notifier } from './_components/xNotifier';
+  import { onMount } from 'svelte';
+  import { formatPrice } from './_components/xFormatter';
+    import { CmdUpsert } from './_components/xConstant';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
   let bookingsPerQuartal = /** @type {BookingDetail[]} */ ([/* bookingsPerQuartal*/]);
   let roomNames = /** @type {string[]} */ ([/* roomNames */]);
+  let tenants     = /** @type {Record<Number, string>} */({/* tenants */});
+  let facilities  = /** @type {Facility[]} */ ([/* facilities */]);
 
   async function refreshBookings() {
     await UserReport(// @ts-ignore
@@ -122,11 +130,61 @@ import { notifier } from './_components/xNotifier';
   let showOnlyNotPaid = false;
 
   // TODO:
-  // - tombol extend booking
-  // - tombol input payment
-  // - tombol see payments
-  // - tombol edit booking
+  // - popup input payment
+  // - popup see payments
+  // - popup edit booking
+
+  let isPopUpFormReady = false;
+  onMount(() => isPopUpFormReady = true);
+
+  let popupExtendBooking = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpExtendBooking | any} */ (null);
+  let bookingToExtend = /** @type {BookingDetail} */ ({});
+  let isSubmitExtendBooking = false;
+
+  async function SubmitExtendBooking(/** @type {Booking} */ booking, /** @type {number[]} */ facilities) {
+    isSubmitExtendBooking = true;
+    booking.tenantId = bookingToExtend.tenantId+'';
+    booking.roomId = String(bookingToExtend.roomId);
+    const i = /** @type {any} */ ({
+      facilities: facilities,
+      booking: booking,
+      cmd: CmdUpsert
+    });
+    await AdminBooking(i,
+      /** @type {import('../jsApi.GEN').AdminBookingCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        isSubmitExtendBooking = false;
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+        
+        notifier.showSuccess(`Booking extended !!`);
+
+        popupExtendBooking.Reset();
+        popupExtendBooking.Hide();
+        refreshBookings();
+      }
+    );
+  }
+  function onExtendBooking(/** @type {BookingDetail} */ booking) {
+    bookingToExtend = booking;
+    popupExtendBooking.Show();
+  }
 </script>
+
+{#if isPopUpFormReady}
+  <PopUpExtendBooking
+    bind:this={popupExtendBooking}
+    bind:isSubmitted={isSubmitExtendBooking}
+    bind:bookingToExtend
+    facilities={facilities}
+    tenants={tenants}
+    OnSubmit={SubmitExtendBooking}
+  />
+{/if}
 
 <LayoutMain access={segments} user={user}>
   <div class="report-container">
@@ -223,7 +281,7 @@ import { notifier } from './_components/xNotifier';
                           </span>
                           {#if booking.deletedAt == 0}
                             <div class="actions">
-                              <button class="btn" title="Extend Booking">
+                              <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking)}>
                                 <Icon
                                   src={RiSystemExternalLinkLine}
                                   size="17"

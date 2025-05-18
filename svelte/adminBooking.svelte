@@ -15,7 +15,7 @@
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
   import PopUpAddBooking from './_components/PopUpAddBooking.svelte';
-    import { CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
+  import { CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});

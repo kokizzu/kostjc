@@ -58,7 +58,7 @@ module.exports = {};
  * @property {string} paidAt
  * @property {string} tenantId
  * @property {number[]} extraTenants
- * @property {number} roomId
+ * @property {number|string} roomId
  * @property {number} createdAt
  * @property {string} createdBy
  * @property {number} updatedAt
@@ -128,7 +128,9 @@ module.exports = {};
 
 /**
  * @typedef {Object} BookingDetail
+ * @property {number} roomId
  * @property {string} roomName
+ * @property {number} tenantId
  * @property {string} tenantName
  * @property {string} dateStart
  * @property {string} dateEnd

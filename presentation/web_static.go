@@ -58,6 +58,12 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 
+		tenant := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tenant.FindTenantChoices()
+
+		fac := rqProperty.NewFacilities(d.PropOltp)
+		facilities := fac.FindAllTypeRoom()
+
 		in.MonthStart = time.Now().Format(rqProperty.DateFormatYYYYMM)
 		in.MonthEnd = time.Now().AddDate(0, 3, 0).Format(rqProperty.DateFormatYYYYMM)
 		out := d.UserReport(&in)
@@ -68,6 +74,8 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`segments`:           segments,
 			`bookingsPerQuartal`: out.Bookings,
 			`roomNames`:          out.RoomNames,
+			`tenants`:            tenants,
+			`facilities`:         facilities,
 		})
 	})
 
