@@ -379,7 +379,7 @@
       {/if}
     </div>
   </div>
-  <div class="table_container">
+  <div class="table-container">
     <table>
       <thead>
         <tr>
@@ -836,13 +836,13 @@
     gap: 5px;
   }
 
-  .table-root .table_container {
+  .table-root .table-container {
     overflow-x: auto;
     scrollbar-color: var(--gray-003) transparent;
     scrollbar-width: calc(100% - 20px);
   }
 
-  .table-root .table_container table {
+  .table-root .table-container table {
     width: 100%;
     background: #fff;
     border-top: 1px solid var(--gray-003);
@@ -855,12 +855,12 @@
     font-size: var(--font-base);
   }
 
-  .table-root .table_container table thead {
+  .table-root .table-container table thead {
     box-shadow: none;
     border-bottom: 1px solid var(--gray-003);
   }
 
-  .table-root .table_container table thead tr th {
+  .table-root .table-container table thead tr th {
     padding: 12px;
 		background-color: var(--gray-001);
 		text-transform: capitalize;
@@ -871,7 +871,7 @@
     text-wrap: nowrap;
   }
 
-  .table-root .table_container table thead tr th .heading {
+  .table-root .table-container table thead tr th .heading {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -885,102 +885,102 @@
     color: var(--gray-008);
   }
 
-  .table-root .table_container table thead tr th .heading:focus {
+  .table-root .table-container table thead tr th .heading:focus {
     outline: none;
   }
 
-  .table-root .table_container table thead tr th .heading:hover {
+  .table-root .table-container table thead tr th .heading:hover {
     background-color: var(--gray-002);
   }
 
-  .table-root .table_container table thead tr th .heading:disabled {
+  .table-root .table-container table thead tr th .heading:disabled {
     color: var(--gray-008);
     background-color: transparent;
     cursor: default;
   }
 
-  .table-root .table_container table thead tr th .heading:disabled:hover {
+  .table-root .table-container table thead tr th .heading:disabled:hover {
     background-color: transparent;
   }
 
-  .table-root .table_container table thead tr th.textarea {
+  .table-root .table-container table thead tr th.textarea {
     min-width: 280px !important;
   }
 
-  .table-root .table_container table thead tr th.datetime {
+  .table-root .table-container table thead tr th.datetime {
     min-width: 140px !important;
   }
 
-  .table-root .table_container table tbody tr.deleted {
+  .table-root .table-container table tbody tr.deleted {
     color: var(--red-005);
   }
 
-  .table-root .table_container table thead tr th.no {
+  .table-root .table-container table thead tr th.no {
     width: 30px;
     cursor: default;
   }
 
-  .table-root .table_container table thead tr th.a_row {
+  .table-root .table-container table thead tr th.a_row {
     max-width: fit-content;
     min-width: fit-content;
     width: fit-content;
     cursor: default;
   }
 
-  .table-root .table_container table thead tr th:last-child {
+  .table-root .table-container table thead tr th:last-child {
     border-right: none;
   }
 
-  .table-root .table_container table tbody tr td {
+  .table-root .table-container table tbody tr td {
     padding: 8px 12px;
   }
 
-	.table-root .table_container table tbody tr td {
+	.table-root .table-container table tbody tr td {
     padding: 8px 12px;
 		border-right: 1px solid var(--gray-004);
 		border-bottom: 1px solid var(--gray-004);
   }
 
-	.table-root .table_container table tbody tr:last-child td,
-	.table-root .table_container table tbody tr:last-child th {
+	.table-root .table-container table tbody tr:last-child td,
+	.table-root .table-container table tbody tr:last-child th {
 		border-bottom: none !important;
 	}
 
-  .table-root .table_container table tbody tr:last-child td:last-child {
+  .table-root .table-container table tbody tr:last-child td:last-child {
     border-right: none !important;
   }
 
-	.table-root .table_container table tbody tr td.num_row {
+	.table-root .table-container table tbody tr td.num_row {
 		border-right: 1px solid var(--gray-003);
 		font-weight: 600;
 		text-align: center;
 	}
 
-  .table-root .table_container table tbody tr:last-child td,
-  .table-root .table_container table tbody tr:last-child th {
+  .table-root .table-container table tbody tr:last-child td,
+  .table-root .table-container table tbody tr:last-child th {
     border-bottom: none !important;
   }
 
-  .table-root .table_container table tbody tr:last-child td:last-child {
+  .table-root .table-container table tbody tr:last-child td:last-child {
     border-right: none !important;
   }
 
-  .table-root .table_container table tbody tr td:last-child {
+  .table-root .table-container table tbody tr td:last-child {
     border-right: none !important;
   }
 
-  .table-root .table_container table tbody tr th {
+  .table-root .table-container table tbody tr th {
     text-align: center;
     border-right: 1px solid var(--gray-004);
     border-bottom: 1px solid var(--gray-004);
   }
 
-  .table-root .table_container table tbody tr td .actions {
+  .table-root .table-container table tbody tr td .actions {
     display: flex;
     flex-direction: row;
   }
 
-  .table-root .table_container table tbody tr td .actions .btn {
+  .table-root .table-container table tbody tr td .actions .btn {
     border: none;
     padding: 6px;
     border-radius: 8px;
@@ -991,19 +991,19 @@
     align-items: center;
   }
 
-  .table-root .table_container table tbody tr td .actions .btn:hover {
+  .table-root .table-container table tbody tr td .actions .btn:hover {
     background-color: var(--blue-transparent);
   }
 
-  .table-root .table_container table tbody tr td .actions .btn.delete:hover {
+  .table-root .table-container table tbody tr td .actions .btn.delete:hover {
     background-color: var(--red-transparent);
   }
 
-  :global(.table-root .table_container table tbody tr td .actions .btn:hover svg) {
+  :global(.table-root .table-container table tbody tr td .actions .btn:hover svg) {
     fill: var(--blue-005);
   }
 
-  :global(.table-root .table_container table tbody tr td .actions .btn.delete:hover svg) {
+  :global(.table-root .table-container table tbody tr td .actions .btn.delete:hover svg) {
     fill: var(--red-005);
   }
 
@@ -1136,7 +1136,7 @@
       flex-wrap: wrap;
     }
 
-    .table-root .table_container {
+    .table-root .table-container {
       overflow-x: scroll;
     }
 

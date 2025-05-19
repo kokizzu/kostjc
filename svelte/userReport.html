@@ -1357,27 +1357,186 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   border-radius: 50%;
 }
 
+/* fakecss:./_components/PopUpShowBookingPayments.esbuild-svelte-fake-css */
+.rotate-b {
+  transition: all 0.2s ease-in-out;
+  transform: rotate(90deg);
+}
+@keyframes svelte-194afwz-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+.spin {
+  animation: svelte-194afwz-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.popup-container.svelte-194afwz.svelte-194afwz {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+  background-color: rgba(0 0 0 / 40%);
+  backdrop-filter: blur(1px);
+  justify-content: center;
+  padding: 50px;
+  overflow: auto;
+}
+.popup-container.show.svelte-194afwz.svelte-194afwz {
+  display: flex;
+}
+.popup-container.svelte-194afwz .popup.svelte-194afwz {
+  border-radius: 8px;
+  background-color: #FFF;
+  height: fit-content;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.popup-container.svelte-194afwz .popup header.svelte-194afwz {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--gray-004);
+}
+.popup-container.svelte-194afwz .popup header h2.svelte-194afwz {
+  margin: 0;
+}
+.popup-container.svelte-194afwz .popup header button.svelte-194afwz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.popup-container.svelte-194afwz .popup header button.svelte-194afwz:hover {
+  background-color: #ef444420;
+}
+.popup-container.svelte-194afwz .popup header button.svelte-194afwz:active {
+  background-color: #ef444430;
+}
+.popup-container.svelte-194afwz .popup .forms.svelte-194afwz {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.table-root.svelte-194afwz.svelte-194afwz {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-left: 1px solid var(--gray-003);
+  border-right: 1px solid var(--gray-003);
+  border-bottom: 1px solid var(--gray-003);
+  padding: 0;
+  font-size: var(--font-base);
+}
+.table-root.svelte-194afwz .table-container.svelte-194afwz {
+  overflow-x: auto;
+  scrollbar-color: var(--gray-003) transparent;
+  scrollbar-width: calc(100% - 20px);
+}
+.table-root.svelte-194afwz .table-container table.svelte-194afwz {
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid var(--gray-003);
+  border-bottom: 1px solid var(--gray-003);
+  box-shadow: none;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: var(--font-base);
+}
+.table-root.svelte-194afwz .table-container table thead.svelte-194afwz {
+  box-shadow: none;
+  border-bottom: 1px solid var(--gray-003);
+}
+.table-root.svelte-194afwz .table-container table thead tr th.svelte-194afwz {
+  padding: 12px;
+  background-color: var(--gray-001);
+  text-transform: capitalize;
+  border-right: 1px solid var(--gray-004);
+  border-bottom: 1px solid var(--gray-003);
+  min-width: fit-content;
+  width: auto;
+  text-wrap: nowrap;
+}
+.table-root.svelte-194afwz .table-container table thead tr th.svelte-194afwz:last-child {
+  border-right: none;
+}
+.table-root.svelte-194afwz .table-container table tbody tr td.svelte-194afwz {
+  padding: 8px 12px;
+}
+.table-root.svelte-194afwz .table-container table tbody tr td.svelte-194afwz {
+  padding: 8px 12px;
+  border-right: 1px solid var(--gray-004);
+  border-bottom: 1px solid var(--gray-004);
+}
+.table-root.svelte-194afwz .table-container table tbody tr:last-child td.svelte-194afwz,
+.table-root.svelte-194afwz .table-container table tbody tr:last-child th.svelte-194afwz {
+  border-bottom: none !important;
+}
+.table-root.svelte-194afwz .table-container table tbody tr:last-child td.svelte-194afwz:last-child {
+  border-right: none !important;
+}
+.table-root.svelte-194afwz .table-container table tbody tr td.num-row.svelte-194afwz {
+  border-right: 1px solid var(--gray-003);
+  font-weight: 600;
+  text-align: center;
+}
+.table-root.svelte-194afwz .table-container table tbody tr:last-child td.svelte-194afwz,
+.table-root.svelte-194afwz .table-container table tbody tr:last-child th.svelte-194afwz {
+  border-bottom: none !important;
+}
+.table-root.svelte-194afwz .table-container table tbody tr:last-child td.svelte-194afwz:last-child {
+  border-right: none !important;
+}
+.table-root.svelte-194afwz .table-container table tbody tr td.svelte-194afwz:last-child {
+  border-right: none !important;
+}
+.table-root.svelte-194afwz .table-container table tbody tr th.svelte-194afwz {
+  text-align: center;
+  border-right: 1px solid var(--gray-004);
+  border-bottom: 1px solid var(--gray-004);
+}
+.table-root.svelte-194afwz .table-container table thead tr th.textarea.svelte-194afwz {
+  min-width: 280px !important;
+}
+
 /* fakecss:./userReport.esbuild-svelte-fake-css */
-.report-container.svelte-vqsxh7.svelte-vqsxh7.svelte-vqsxh7 {
+.report-container.svelte-1uhyam5.svelte-1uhyam5.svelte-1uhyam5 {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.report-container.svelte-vqsxh7 .actions.svelte-vqsxh7.svelte-vqsxh7 {
+.report-container.svelte-1uhyam5 .actions.svelte-1uhyam5.svelte-1uhyam5 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
-.report-container.svelte-vqsxh7 .actions .quartal-shifter.svelte-vqsxh7.svelte-vqsxh7 {
+.report-container.svelte-1uhyam5 .actions .quartal-shifter.svelte-1uhyam5.svelte-1uhyam5 {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
 }
-.report-container.svelte-vqsxh7 .actions .quartal-shifter .btn.svelte-vqsxh7.svelte-vqsxh7 {
+.report-container.svelte-1uhyam5 .actions .quartal-shifter .btn.svelte-1uhyam5.svelte-1uhyam5 {
   background-color: var(--gray-002);
   border: none;
   border-radius: 9999px;
@@ -1388,43 +1547,43 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   color: var(--gray-008);
   padding: 8px;
 }
-.report-container.svelte-vqsxh7 .actions .quartal-shifter .btn.svelte-vqsxh7.svelte-vqsxh7:hover {
+.report-container.svelte-1uhyam5 .actions .quartal-shifter .btn.svelte-1uhyam5.svelte-1uhyam5:hover {
   background-color: var(--blue-transparent);
   color: var(--blue-006);
 }
-.report-container.svelte-vqsxh7 .actions .quartal-shifter .month-text.svelte-vqsxh7.svelte-vqsxh7 {
+.report-container.svelte-1uhyam5 .actions .quartal-shifter .month-text.svelte-1uhyam5.svelte-1uhyam5 {
   font-weight: 600;
   font-size: 18px;
   user-select: none;
 }
-.report-container.svelte-vqsxh7 .actions .filters.svelte-vqsxh7.svelte-vqsxh7 {
+.report-container.svelte-1uhyam5 .actions .filters.svelte-1uhyam5.svelte-1uhyam5 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
 }
-table.svelte-vqsxh7.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5.svelte-1uhyam5.svelte-1uhyam5 {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-vqsxh7 thead tr th.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5 thead tr th.svelte-1uhyam5.svelte-1uhyam5 {
   text-align: left;
   padding: 8px 12px;
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-vqsxh7 tbody tr.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5 tbody tr.svelte-1uhyam5.svelte-1uhyam5 {
   border-top: 1px solid var(--gray-002);
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-vqsxh7 tbody tr td.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5 tbody tr td.svelte-1uhyam5.svelte-1uhyam5 {
   padding: 8px 12px;
 }
-table.svelte-vqsxh7 tbody tr td .cells.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5 tbody tr td .cells.svelte-1uhyam5.svelte-1uhyam5 {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-table.svelte-vqsxh7 tbody tr td .cell.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5 tbody tr td .cell.svelte-1uhyam5.svelte-1uhyam5 {
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -1435,23 +1594,24 @@ table.svelte-vqsxh7 tbody tr td .cell.svelte-vqsxh7.svelte-vqsxh7 {
   overflow: hidden;
   cursor: pointer;
 }
-table.svelte-vqsxh7 tbody tr td .cell .actions.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5 tbody tr td .cell .actions.svelte-1uhyam5.svelte-1uhyam5 {
   display: none;
   flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
   gap: 3px;
   position: absolute;
   right: 0;
   top: 0;
-  background-color: var(--blue-005);
+  background-color: var(--blue-transparent);
   width: 100%;
   height: 100%;
 }
-table.svelte-vqsxh7 tbody tr td .cell:hover .actions.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5 tbody tr td .cell:hover .actions.svelte-1uhyam5.svelte-1uhyam5 {
   display: flex;
 }
-table.svelte-vqsxh7 tbody tr td .cell .actions.svelte-vqsxh7 .btn.svelte-vqsxh7 {
+table.svelte-1uhyam5 tbody tr td .cell .actions.svelte-1uhyam5 .btn.svelte-1uhyam5 {
   border: none;
-  color: #fff;
   background-color: transparent;
   width: fit-content;
   padding: 5px;
@@ -1463,22 +1623,22 @@ table.svelte-vqsxh7 tbody tr td .cell .actions.svelte-vqsxh7 .btn.svelte-vqsxh7 
   gap: 3px;
   cursor: pointer;
 }
-table.svelte-vqsxh7 tbody tr td .cell .actions.svelte-vqsxh7 .btn.svelte-vqsxh7:hover {
-  background-color: #FFFFFF30;
+table.svelte-1uhyam5 tbody tr td .cell .actions.svelte-1uhyam5 .btn.svelte-1uhyam5:hover {
+  background-color: var(--gray-006);
 }
-table.svelte-vqsxh7 tbody tr td .date-not-expired.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5 tbody tr td .date-not-expired.svelte-1uhyam5.svelte-1uhyam5 {
   color: var(--orange-006);
   padding: 2px 3px;
   border-radius: 4px;
   background-color: var(--orange-transparent);
 }
-table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
+table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
   color: var(--violet-006) !important;
   padding: 4px 6px;
   border-radius: 4px;
   background-color: var(--violet-transparent);
 }
-.hidden.svelte-vqsxh7.svelte-vqsxh7.svelte-vqsxh7 {
+.hidden.svelte-1uhyam5.svelte-1uhyam5.svelte-1uhyam5 {
   display: none !important;
 }
 </style>
@@ -3884,13 +4044,13 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance12 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance12, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance12, context, null, { allOwnKeys: true });
-        instance12.create = function create(instanceConfig) {
+        const instance13 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance13, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance13, context, null, { allOwnKeys: true });
+        instance13.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance12;
+        return instance13;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -3948,7 +4108,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       exports.AdminLocation = async function AdminLocation(i, cb) {
         return await axios.post("/admin/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminPayment = async function AdminPayment(i, cb) {
+      exports.AdminPayment = async function AdminPayment2(i, cb) {
         return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminRoom = async function AdminRoom(i, cb) {
@@ -4111,7 +4271,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         script.onload = () => callback();
         document.getElementsByTagName("head")[0].appendChild(script);
       }
-      function formatPrice3(price, currency) {
+      function formatPrice4(price, currency) {
         try {
           return new Intl.NumberFormat("en-US", {
             style: "currency",
@@ -4136,7 +4296,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         dateISOFormat: dateISOFormat3,
         dateISOFormatFromYYYYMMDD: dateISOFormatFromYYYYMMDD2,
         loadScript,
-        formatPrice: formatPrice3,
+        formatPrice: formatPrice4,
         arrToArrNum: arrToArrNum2
       };
     }
@@ -4146,13 +4306,13 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
   var require_xConstant = __commonJS({
     "_components/xConstant.js"(exports, module) {
       var CmdList = `list`;
-      var CmdForm = `form`;
+      var CmdForm2 = `form`;
       var CmdUpsert2 = `upsert`;
       var CmdRestore = `restore`;
       var CmdDelete = `delete`;
       module.exports = {
         CmdList,
-        CmdForm,
+        CmdForm: CmdForm2,
         CmdUpsert: CmdUpsert2,
         CmdRestore,
         CmdDelete
@@ -4713,7 +4873,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance12, create_fragment15, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance13, create_fragment16, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -4739,7 +4899,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance12 ? instance12(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance13 ? instance13(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -4752,7 +4912,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment15 ? create_fragment15($.ctx) : false;
+    $.fragment = create_fragment16 ? create_fragment16($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -15726,26 +15886,429 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
   var Switcher_default = Switcher;
 
   // userReport.svelte
-  var import_xFormatter3 = __toESM(require_xFormatter());
+  var import_xFormatter4 = __toESM(require_xFormatter());
   var import_xConstant = __toESM(require_xConstant());
+
+  // _components/PopUpShowBookingPayments.svelte
+  var import_xFormatter3 = __toESM(require_xFormatter());
   function get_each_context2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[39] = list[i];
+    child_ctx[6] = list[i];
+    child_ctx[8] = i;
+    return child_ctx;
+  }
+  function create_each_block2(ctx) {
+    let tr;
+    let td0;
+    let t1;
+    let td1;
+    let t2;
+    let t3_value = (
+      /*py*/
+      ctx[6].id + ""
+    );
+    let t3;
+    let t4;
+    let td2;
+    let t5_value = (
+      /*py*/
+      ctx[6].paymentAt + ""
+    );
+    let t5;
+    let t6;
+    let td3;
+    let t7_value = (0, import_xFormatter3.formatPrice)(
+      /*py*/
+      ctx[6].paidIDR,
+      "IDR"
+    ) + "";
+    let t7;
+    let t8;
+    let td4;
+    let t9_value = (
+      /*py*/
+      ctx[6].paymentMethod + ""
+    );
+    let t9;
+    let t10;
+    let td5;
+    let t11_value = (
+      /*py*/
+      ctx[6].paymentStatus + ""
+    );
+    let t11;
+    let t12;
+    let td6;
+    let t13_value = (
+      /*py*/
+      ctx[6].note + ""
+    );
+    let t13;
+    return {
+      c() {
+        tr = element("tr");
+        td0 = element("td");
+        td0.textContent = `${/*idx*/
+        ctx[8] + 1}`;
+        t1 = space();
+        td1 = element("td");
+        t2 = text("#");
+        t3 = text(t3_value);
+        t4 = space();
+        td2 = element("td");
+        t5 = text(t5_value);
+        t6 = space();
+        td3 = element("td");
+        t7 = text(t7_value);
+        t8 = space();
+        td4 = element("td");
+        t9 = text(t9_value);
+        t10 = space();
+        td5 = element("td");
+        t11 = text(t11_value);
+        t12 = space();
+        td6 = element("td");
+        t13 = text(t13_value);
+        attr(td0, "class", "num-row svelte-194afwz");
+        attr(td1, "class", "svelte-194afwz");
+        attr(td2, "class", "svelte-194afwz");
+        attr(td3, "class", "svelte-194afwz");
+        attr(td4, "class", "svelte-194afwz");
+        attr(td5, "class", "svelte-194afwz");
+        attr(td6, "class", "svelte-194afwz");
+      },
+      m(target, anchor) {
+        insert(target, tr, anchor);
+        append(tr, td0);
+        append(tr, t1);
+        append(tr, td1);
+        append(td1, t2);
+        append(td1, t3);
+        append(tr, t4);
+        append(tr, td2);
+        append(td2, t5);
+        append(tr, t6);
+        append(tr, td3);
+        append(td3, t7);
+        append(tr, t8);
+        append(tr, td4);
+        append(td4, t9);
+        append(tr, t10);
+        append(tr, td5);
+        append(td5, t11);
+        append(tr, t12);
+        append(tr, td6);
+        append(td6, t13);
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*payments*/
+        2 && t3_value !== (t3_value = /*py*/
+        ctx2[6].id + ""))
+          set_data(t3, t3_value);
+        if (dirty & /*payments*/
+        2 && t5_value !== (t5_value = /*py*/
+        ctx2[6].paymentAt + ""))
+          set_data(t5, t5_value);
+        if (dirty & /*payments*/
+        2 && t7_value !== (t7_value = (0, import_xFormatter3.formatPrice)(
+          /*py*/
+          ctx2[6].paidIDR,
+          "IDR"
+        ) + ""))
+          set_data(t7, t7_value);
+        if (dirty & /*payments*/
+        2 && t9_value !== (t9_value = /*py*/
+        ctx2[6].paymentMethod + ""))
+          set_data(t9, t9_value);
+        if (dirty & /*payments*/
+        2 && t11_value !== (t11_value = /*py*/
+        ctx2[6].paymentStatus + ""))
+          set_data(t11, t11_value);
+        if (dirty & /*payments*/
+        2 && t13_value !== (t13_value = /*py*/
+        ctx2[6].note + ""))
+          set_data(t13, t13_value);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(tr);
+        }
+      }
+    };
+  }
+  function create_if_block6(ctx) {
+    let tr;
+    return {
+      c() {
+        tr = element("tr");
+        tr.innerHTML = `<td class="num-row svelte-194afwz">0</td> <td colspan="6" class="svelte-194afwz">no-data</td>`;
+      },
+      m(target, anchor) {
+        insert(target, tr, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(tr);
+        }
+      }
+    };
+  }
+  function create_fragment14(ctx) {
+    let div4;
+    let div3;
+    let header;
+    let h2;
+    let t0;
+    let t1_value = `#${/*bookingId*/
+    ctx[0]}`;
+    let t1;
+    let t2;
+    let button;
+    let icon;
+    let t3;
+    let div2;
+    let div1;
+    let div0;
+    let table;
+    let thead;
+    let t17;
+    let tbody;
+    let t18;
+    let div4_class_value;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        size: "22",
+        color: "var(--red-005)",
+        src: IoClose
+      }
+    });
+    let each_value = ensure_array_like(
+      /*payments*/
+      ctx[1] || []
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
+    }
+    let if_block = (
+      /*payments*/
+      (ctx[1] || []).length === 0 && create_if_block6(ctx)
+    );
+    return {
+      c() {
+        div4 = element("div");
+        div3 = element("div");
+        header = element("header");
+        h2 = element("h2");
+        t0 = text("Payments for Booking ");
+        t1 = text(t1_value);
+        t2 = space();
+        button = element("button");
+        create_component(icon.$.fragment);
+        t3 = space();
+        div2 = element("div");
+        div1 = element("div");
+        div0 = element("div");
+        table = element("table");
+        thead = element("thead");
+        thead.innerHTML = `<tr><th class="svelte-194afwz">No</th> <th class="svelte-194afwz">ID</th> <th class="svelte-194afwz">Payment At</th> <th class="svelte-194afwz">Total Paid</th> <th class="svelte-194afwz">Payment Method</th> <th class="svelte-194afwz">Payment Status</th> <th class="textarea svelte-194afwz">Note</th></tr>`;
+        t17 = space();
+        tbody = element("tbody");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        t18 = space();
+        if (if_block)
+          if_block.c();
+        attr(h2, "class", "svelte-194afwz");
+        attr(button, "class", "svelte-194afwz");
+        attr(header, "class", "header svelte-194afwz");
+        attr(thead, "class", "svelte-194afwz");
+        attr(table, "class", "svelte-194afwz");
+        attr(div0, "class", "table-container svelte-194afwz");
+        attr(div1, "class", "table-root svelte-194afwz");
+        attr(div2, "class", "forms svelte-194afwz");
+        attr(div3, "class", "popup svelte-194afwz");
+        attr(div4, "class", div4_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx[3] ? "show" : ""}`) + " svelte-194afwz");
+      },
+      m(target, anchor) {
+        insert(target, div4, anchor);
+        append(div4, div3);
+        append(div3, header);
+        append(header, h2);
+        append(h2, t0);
+        append(h2, t1);
+        append(header, t2);
+        append(header, button);
+        mount_component(icon, button, null);
+        append(div3, t3);
+        append(div3, div2);
+        append(div2, div1);
+        append(div1, div0);
+        append(div0, table);
+        append(table, thead);
+        append(table, t17);
+        append(table, tbody);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(tbody, null);
+          }
+        }
+        append(tbody, t18);
+        if (if_block)
+          if_block.m(tbody, null);
+        current = true;
+        if (!mounted) {
+          dispose = listen(
+            button,
+            "click",
+            /*Hide*/
+            ctx[2]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if ((!current || dirty & /*bookingId*/
+        1) && t1_value !== (t1_value = `#${/*bookingId*/
+        ctx2[0]}`))
+          set_data(t1, t1_value);
+        if (dirty & /*payments*/
+        2) {
+          each_value = ensure_array_like(
+            /*payments*/
+            ctx2[1] || []
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context2(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block2(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(tbody, t18);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value.length;
+        }
+        if (
+          /*payments*/
+          (ctx2[1] || []).length === 0
+        ) {
+          if (if_block) {
+          } else {
+            if_block = create_if_block6(ctx2);
+            if_block.c();
+            if_block.m(tbody, null);
+          }
+        } else if (if_block) {
+          if_block.d(1);
+          if_block = null;
+        }
+        if (!current || dirty & /*isShow*/
+        8 && div4_class_value !== (div4_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[3] ? "show" : ""}`) + " svelte-194afwz")) {
+          attr(div4, "class", div4_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div4);
+        }
+        destroy_component(icon);
+        destroy_each(each_blocks, detaching);
+        if (if_block)
+          if_block.d();
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function instance11($self, $props, $invalidate) {
+    let isShow = (
+      /** @type {boolean} */
+      false
+    );
+    let { bookingId = (
+      /** @type {number} */
+      0
+    ) } = $props;
+    let { payments = (
+      /** @type {Payment[]} */
+      []
+    ) } = $props;
+    const Show = () => $invalidate(3, isShow = true);
+    const Hide = () => $invalidate(3, isShow = false);
+    const Reset = () => {
+    };
+    $self.$set = ($props2) => {
+      if ("bookingId" in $props2)
+        $invalidate(0, bookingId = $props2.bookingId);
+      if ("payments" in $props2)
+        $invalidate(1, payments = $props2.payments);
+    };
+    return [bookingId, payments, Hide, isShow, Show, Reset];
+  }
+  var PopUpShowBookingPayments = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance11, create_fragment14, safe_not_equal, {
+        bookingId: 0,
+        payments: 1,
+        Show: 4,
+        Hide: 2,
+        Reset: 5
+      });
+    }
+    get Show() {
+      return this.$.ctx[4];
+    }
+    get Hide() {
+      return this.$.ctx[2];
+    }
+    get Reset() {
+      return this.$.ctx[5];
+    }
+  };
+  var PopUpShowBookingPayments_default = PopUpShowBookingPayments;
+
+  // userReport.svelte
+  function get_each_context3(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[47] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[42] = list[i];
+    child_ctx[50] = list[i];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[45] = list[i];
+    child_ctx[53] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[42] = list[i];
+    child_ctx[50] = list[i];
     return child_ctx;
   }
   function create_if_block_33(ctx) {
@@ -15754,25 +16317,29 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     let updating_bookingToExtend;
     let updating_dateStart;
     let updating_dateEnd;
+    let t;
+    let popupshowbookingpayments;
+    let updating_bookingId;
+    let updating_payments;
     let current;
     function popupextendbooking_isSubmitted_binding(value) {
-      ctx[22](value);
+      ctx[26](value);
     }
     function popupextendbooking_bookingToExtend_binding(value) {
-      ctx[23](value);
+      ctx[27](value);
     }
     function popupextendbooking_dateStart_binding(value) {
-      ctx[24](value);
+      ctx[28](value);
     }
     function popupextendbooking_dateEnd_binding(value) {
-      ctx[25](value);
+      ctx[29](value);
     }
     let popupextendbooking_props = {
       facilities,
       tenants,
       OnSubmit: (
         /*SubmitExtendBooking*/
-        ctx[19]
+        ctx[22]
       )
     };
     if (
@@ -15804,17 +16371,46 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       ctx[17];
     }
     popupextendbooking = new PopUpExtendBooking_default({ props: popupextendbooking_props });
-    ctx[21](popupextendbooking);
+    ctx[25](popupextendbooking);
     binding_callbacks.push(() => bind(popupextendbooking, "isSubmitted", popupextendbooking_isSubmitted_binding));
     binding_callbacks.push(() => bind(popupextendbooking, "bookingToExtend", popupextendbooking_bookingToExtend_binding));
     binding_callbacks.push(() => bind(popupextendbooking, "dateStart", popupextendbooking_dateStart_binding));
     binding_callbacks.push(() => bind(popupextendbooking, "dateEnd", popupextendbooking_dateEnd_binding));
+    function popupshowbookingpayments_bookingId_binding(value) {
+      ctx[30](value);
+    }
+    function popupshowbookingpayments_payments_binding(value) {
+      ctx[31](value);
+    }
+    let popupshowbookingpayments_props = {};
+    if (
+      /*bookingIdToShowPayment*/
+      ctx[19] !== void 0
+    ) {
+      popupshowbookingpayments_props.bookingId = /*bookingIdToShowPayment*/
+      ctx[19];
+    }
+    if (
+      /*paymentsForBooking*/
+      ctx[20] !== void 0
+    ) {
+      popupshowbookingpayments_props.payments = /*paymentsForBooking*/
+      ctx[20];
+    }
+    popupshowbookingpayments = new PopUpShowBookingPayments_default({ props: popupshowbookingpayments_props });
+    binding_callbacks.push(() => bind(popupshowbookingpayments, "bookingId", popupshowbookingpayments_bookingId_binding));
+    binding_callbacks.push(() => bind(popupshowbookingpayments, "payments", popupshowbookingpayments_payments_binding));
+    ctx[32](popupshowbookingpayments);
     return {
       c() {
         create_component(popupextendbooking.$.fragment);
+        t = space();
+        create_component(popupshowbookingpayments.$.fragment);
       },
       m(target, anchor) {
         mount_component(popupextendbooking, target, anchor);
+        insert(target, t, anchor);
+        mount_component(popupshowbookingpayments, target, anchor);
         current = true;
       },
       p(ctx2, dirty) {
@@ -15848,20 +16444,43 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
           add_flush_callback(() => updating_dateEnd = false);
         }
         popupextendbooking.$set(popupextendbooking_changes);
+        const popupshowbookingpayments_changes = {};
+        if (!updating_bookingId && dirty[0] & /*bookingIdToShowPayment*/
+        524288) {
+          updating_bookingId = true;
+          popupshowbookingpayments_changes.bookingId = /*bookingIdToShowPayment*/
+          ctx2[19];
+          add_flush_callback(() => updating_bookingId = false);
+        }
+        if (!updating_payments && dirty[0] & /*paymentsForBooking*/
+        1048576) {
+          updating_payments = true;
+          popupshowbookingpayments_changes.payments = /*paymentsForBooking*/
+          ctx2[20];
+          add_flush_callback(() => updating_payments = false);
+        }
+        popupshowbookingpayments.$set(popupshowbookingpayments_changes);
       },
       i(local) {
         if (current)
           return;
         transition_in(popupextendbooking.$.fragment, local);
+        transition_in(popupshowbookingpayments.$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(popupextendbooking.$.fragment, local);
+        transition_out(popupshowbookingpayments.$.fragment, local);
         current = false;
       },
       d(detaching) {
-        ctx[21](null);
+        if (detaching) {
+          detach(t);
+        }
+        ctx[25](null);
         destroy_component(popupextendbooking, detaching);
+        ctx[32](null);
+        destroy_component(popupshowbookingpayments, detaching);
       }
     };
   }
@@ -15869,14 +16488,14 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     let th;
     let t_value = formatMonthYear(
       /*quartal*/
-      ctx[42]
+      ctx[50]
     ) + "";
     let t;
     return {
       c() {
         th = element("th");
         t = text(t_value);
-        attr(th, "class", "svelte-vqsxh7");
+        attr(th, "class", "svelte-1uhyam5");
       },
       m(target, anchor) {
         insert(target, th, anchor);
@@ -15886,7 +16505,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         if (dirty[0] & /*quartals*/
         8 && t_value !== (t_value = formatMonthYear(
           /*quartal*/
-          ctx2[42]
+          ctx2[50]
         ) + ""))
           set_data(t, t_value);
       },
@@ -15897,13 +16516,13 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       }
     };
   }
-  function create_if_block6(ctx) {
+  function create_if_block7(ctx) {
     let div;
     let div_class_value;
     let current;
     let if_block = (
       /*booking*/
-      ctx[45].tenantName && create_if_block_19(ctx)
+      ctx[53].tenantName && create_if_block_19(ctx)
     );
     return {
       c() {
@@ -15911,12 +16530,12 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         if (if_block)
           if_block.c();
         attr(div, "class", div_class_value = "cell " + /*booking*/
-        (ctx[45].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
+        (ctx[53].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
         (ctx[11] && /*booking*/
-        ctx[45].amountPaid >= /*booking*/
-        ctx[45].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
+        ctx[53].amountPaid >= /*booking*/
+        ctx[53].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
         ctx[5] && /*booking*/
-        ctx[45].deletedAt > 0 ? "hidden" : "") + " svelte-vqsxh7");
+        ctx[53].deletedAt > 0 ? "hidden" : "") + " svelte-1uhyam5");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -15927,7 +16546,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       p(ctx2, dirty) {
         if (
           /*booking*/
-          ctx2[45].tenantName
+          ctx2[53].tenantName
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -15950,12 +16569,12 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         }
         if (!current || dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded*/
         2081 && div_class_value !== (div_class_value = "cell " + /*booking*/
-        (ctx2[45].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
+        (ctx2[53].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
         (ctx2[11] && /*booking*/
-        ctx2[45].amountPaid >= /*booking*/
-        ctx2[45].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
+        ctx2[53].amountPaid >= /*booking*/
+        ctx2[53].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
         ctx2[5] && /*booking*/
-        ctx2[45].deletedAt > 0 ? "hidden" : "") + " svelte-vqsxh7")) {
+        ctx2[53].deletedAt > 0 ? "hidden" : "") + " svelte-1uhyam5")) {
           attr(div, "class", div_class_value);
         }
       },
@@ -15982,7 +16601,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     let span0;
     let t0_value = (
       /*booking*/
-      ctx[45].tenantName + ""
+      ctx[53].tenantName + ""
     );
     let t0;
     let span0_class_value;
@@ -15991,7 +16610,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     let span1;
     let t2_value = (
       /*booking*/
-      ctx[45].dateStart + ""
+      ctx[53].dateStart + ""
     );
     let t2;
     let span1_class_value;
@@ -16001,7 +16620,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     let span3;
     let t6_value = (
       /*booking*/
-      ctx[45].dateEnd + ""
+      ctx[53].dateEnd + ""
     );
     let t6;
     let span3_class_value;
@@ -16010,7 +16629,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     let span5;
     let t8_value = (
       /*booking*/
-      ctx[45].amountPaid + ""
+      ctx[53].amountPaid + ""
     );
     let t8;
     let span5_class_value;
@@ -16020,7 +16639,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     let span7;
     let t12_value = (
       /*booking*/
-      ctx[45].totalPrice + ""
+      ctx[53].totalPrice + ""
     );
     let t12;
     let span7_class_value;
@@ -16030,7 +16649,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     let current;
     let if_block = (
       /*booking*/
-      ctx[45].deletedAt == 0 && create_if_block_24(ctx)
+      ctx[53].deletedAt == 0 && create_if_block_24(ctx)
     );
     return {
       c() {
@@ -16063,30 +16682,30 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         attr(span0, "class", span0_class_value = null_to_empty(
           /*showTenant*/
           ctx[6] ? "" : "hidden"
-        ) + " svelte-vqsxh7");
+        ) + " svelte-1uhyam5");
         attr(span1, "class", span1_class_value = null_to_empty(
           /*showDateStart*/
           ctx[7] ? "" : "hidden"
-        ) + " svelte-vqsxh7");
+        ) + " svelte-1uhyam5");
         attr(span3, "class", span3_class_value = (isDateInPast(
           /*booking*/
-          ctx[45].dateEnd
+          ctx[53].dateEnd
         ) ? "date-not-expired" : "") + " " + /*showDateEnd*/
-        (ctx[8] ? "" : "hidden") + " svelte-vqsxh7");
+        (ctx[8] ? "" : "hidden") + " svelte-1uhyam5");
         attr(span5, "class", span5_class_value = null_to_empty(
           /*showPaid*/
           ctx[9] ? "" : "hidden"
-        ) + " svelte-vqsxh7");
+        ) + " svelte-1uhyam5");
         attr(span7, "class", span7_class_value = null_to_empty(
           /*showPrice*/
           ctx[10] ? "" : "hidden"
-        ) + " svelte-vqsxh7");
+        ) + " svelte-1uhyam5");
         attr(span8, "class", span8_class_value = null_to_empty(
           /*booking*/
-          ctx[45].amountPaid >= /*booking*/
-          ctx[45].totalPrice ? "" : `${/*booking*/
-          ctx[45].deletedAt == 0 ? "text-red" : ""}`
-        ) + " svelte-vqsxh7");
+          ctx[53].amountPaid >= /*booking*/
+          ctx[53].totalPrice ? "" : `${/*booking*/
+          ctx[53].deletedAt == 0 ? "text-red" : ""}`
+        ) + " svelte-1uhyam5");
       },
       m(target, anchor) {
         insert(target, span0, anchor);
@@ -16118,72 +16737,72 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       p(ctx2, dirty) {
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t0_value !== (t0_value = /*booking*/
-        ctx2[45].tenantName + ""))
+        ctx2[53].tenantName + ""))
           set_data(t0, t0_value);
         if (!current || dirty[0] & /*showTenant*/
         64 && span0_class_value !== (span0_class_value = null_to_empty(
           /*showTenant*/
           ctx2[6] ? "" : "hidden"
-        ) + " svelte-vqsxh7")) {
+        ) + " svelte-1uhyam5")) {
           attr(span0, "class", span0_class_value);
         }
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t2_value !== (t2_value = /*booking*/
-        ctx2[45].dateStart + ""))
+        ctx2[53].dateStart + ""))
           set_data(t2, t2_value);
         if (!current || dirty[0] & /*showDateStart*/
         128 && span1_class_value !== (span1_class_value = null_to_empty(
           /*showDateStart*/
           ctx2[7] ? "" : "hidden"
-        ) + " svelte-vqsxh7")) {
+        ) + " svelte-1uhyam5")) {
           attr(span1, "class", span1_class_value);
         }
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t6_value !== (t6_value = /*booking*/
-        ctx2[45].dateEnd + ""))
+        ctx2[53].dateEnd + ""))
           set_data(t6, t6_value);
         if (!current || dirty[0] & /*bookingsPerQuartal, showDateEnd*/
         257 && span3_class_value !== (span3_class_value = (isDateInPast(
           /*booking*/
-          ctx2[45].dateEnd
+          ctx2[53].dateEnd
         ) ? "date-not-expired" : "") + " " + /*showDateEnd*/
-        (ctx2[8] ? "" : "hidden") + " svelte-vqsxh7")) {
+        (ctx2[8] ? "" : "hidden") + " svelte-1uhyam5")) {
           attr(span3, "class", span3_class_value);
         }
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t8_value !== (t8_value = /*booking*/
-        ctx2[45].amountPaid + ""))
+        ctx2[53].amountPaid + ""))
           set_data(t8, t8_value);
         if (!current || dirty[0] & /*showPaid*/
         512 && span5_class_value !== (span5_class_value = null_to_empty(
           /*showPaid*/
           ctx2[9] ? "" : "hidden"
-        ) + " svelte-vqsxh7")) {
+        ) + " svelte-1uhyam5")) {
           attr(span5, "class", span5_class_value);
         }
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t12_value !== (t12_value = /*booking*/
-        ctx2[45].totalPrice + ""))
+        ctx2[53].totalPrice + ""))
           set_data(t12, t12_value);
         if (!current || dirty[0] & /*showPrice*/
         1024 && span7_class_value !== (span7_class_value = null_to_empty(
           /*showPrice*/
           ctx2[10] ? "" : "hidden"
-        ) + " svelte-vqsxh7")) {
+        ) + " svelte-1uhyam5")) {
           attr(span7, "class", span7_class_value);
         }
         if (!current || dirty[0] & /*bookingsPerQuartal*/
         1 && span8_class_value !== (span8_class_value = null_to_empty(
           /*booking*/
-          ctx2[45].amountPaid >= /*booking*/
-          ctx2[45].totalPrice ? "" : `${/*booking*/
-          ctx2[45].deletedAt == 0 ? "text-red" : ""}`
-        ) + " svelte-vqsxh7")) {
+          ctx2[53].amountPaid >= /*booking*/
+          ctx2[53].totalPrice ? "" : `${/*booking*/
+          ctx2[53].deletedAt == 0 ? "text-red" : ""}`
+        ) + " svelte-1uhyam5")) {
           attr(span8, "class", span8_class_value);
         }
         if (
           /*booking*/
-          ctx2[45].deletedAt == 0
+          ctx2[53].deletedAt == 0
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -16255,9 +16874,9 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     function click_handler_2() {
       return (
         /*click_handler_2*/
-        ctx[35](
+        ctx[42](
           /*booking*/
-          ctx[45]
+          ctx[53]
         )
       );
     }
@@ -16267,6 +16886,15 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     icon2 = new Icon_default({
       props: { src: RiSystemEyeLine, size: "17" }
     });
+    function click_handler_3() {
+      return (
+        /*click_handler_3*/
+        ctx[43](
+          /*booking*/
+          ctx[53]
+        )
+      );
+    }
     icon3 = new Icon_default({
       props: { src: RiDesignBallPenLine, size: "17" }
     });
@@ -16284,15 +16912,15 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         t2 = space();
         button3 = element("button");
         create_component(icon3.$.fragment);
-        attr(button0, "class", "btn svelte-vqsxh7");
+        attr(button0, "class", "btn svelte-1uhyam5");
         attr(button0, "title", "Extend Booking");
-        attr(button1, "class", "btn svelte-vqsxh7");
+        attr(button1, "class", "btn svelte-1uhyam5");
         attr(button1, "title", "Input Payment");
-        attr(button2, "class", "btn svelte-vqsxh7");
-        attr(button2, "title", "See Payments");
-        attr(button3, "class", "btn svelte-vqsxh7");
+        attr(button2, "class", "btn svelte-1uhyam5");
+        attr(button2, "title", "Show Payments");
+        attr(button3, "class", "btn svelte-1uhyam5");
         attr(button3, "title", "Edit Booking");
-        attr(div, "class", "actions svelte-vqsxh7");
+        attr(div, "class", "actions svelte-1uhyam5");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16309,7 +16937,10 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         mount_component(icon3, button3, null);
         current = true;
         if (!mounted) {
-          dispose = listen(button0, "click", click_handler_2);
+          dispose = [
+            listen(button0, "click", click_handler_2),
+            listen(button2, "click", click_handler_3)
+          ];
           mounted = true;
         }
       },
@@ -16341,24 +16972,24 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         destroy_component(icon2);
         destroy_component(icon3);
         mounted = false;
-        dispose();
+        run_all(dispose);
       }
     };
   }
   function create_each_block_2(ctx) {
     let show_if = (
       /*booking*/
-      ctx[45].roomName == /*room*/
-      ctx[39] && isBookingInThatMonth(
+      ctx[53].roomName == /*room*/
+      ctx[47] && isBookingInThatMonth(
         /*booking*/
-        ctx[45],
+        ctx[53],
         /*quartal*/
-        ctx[42]
+        ctx[50]
       )
     );
     let if_block_anchor;
     let current;
-    let if_block = show_if && create_if_block6(ctx);
+    let if_block = show_if && create_if_block7(ctx);
     return {
       c() {
         if (if_block)
@@ -16375,12 +17006,12 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         if (dirty[0] & /*bookingsPerQuartal, roomNames, quartals*/
         11)
           show_if = /*booking*/
-          ctx2[45].roomName == /*room*/
-          ctx2[39] && isBookingInThatMonth(
+          ctx2[53].roomName == /*room*/
+          ctx2[47] && isBookingInThatMonth(
             /*booking*/
-            ctx2[45],
+            ctx2[53],
             /*quartal*/
-            ctx2[42]
+            ctx2[50]
           );
         if (show_if) {
           if (if_block) {
@@ -16390,7 +17021,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block6(ctx2);
+            if_block = create_if_block7(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -16444,8 +17075,8 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cells svelte-vqsxh7");
-        attr(td, "class", "svelte-vqsxh7");
+        attr(div, "class", "cells svelte-1uhyam5");
+        attr(td, "class", "svelte-1uhyam5");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -16458,8 +17089,8 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
-        1052651) {
+        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
+        25169899) {
           each_value_2 = ensure_array_like(
             /*bookingsPerQuartal*/
             ctx2[0] || []
@@ -16507,13 +17138,13 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       }
     };
   }
-  function create_each_block2(ctx) {
+  function create_each_block3(ctx) {
     let tr;
     let th;
     let t0;
     let t1_value = (
       /*room*/
-      ctx[39] + ""
+      ctx[47] + ""
     );
     let t1;
     let t2;
@@ -16541,8 +17172,8 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
           each_blocks[i].c();
         }
         t3 = space();
-        attr(th, "class", "svelte-vqsxh7");
-        attr(tr, "class", "svelte-vqsxh7");
+        attr(th, "class", "svelte-1uhyam5");
+        attr(tr, "class", "svelte-1uhyam5");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -16561,10 +17192,10 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       p(ctx2, dirty) {
         if ((!current || dirty[0] & /*roomNames*/
         2) && t1_value !== (t1_value = /*room*/
-        ctx2[39] + ""))
+        ctx2[47] + ""))
           set_data(t1, t1_value);
-        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
-        1052651) {
+        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
+        25169899) {
           each_value_1 = ensure_array_like(
             /*quartals*/
             ctx2[3] || []
@@ -16674,7 +17305,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       props: { size: "20", src: RiArrowsArrowRightSLine }
     });
     function switcher0_value_binding(value) {
-      ctx[28](value);
+      ctx[35](value);
     }
     let switcher0_props = {
       id: "show-refunded",
@@ -16690,7 +17321,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     switcher0 = new Switcher_default({ props: switcher0_props });
     binding_callbacks.push(() => bind(switcher0, "value", switcher0_value_binding));
     function switcher1_value_binding(value) {
-      ctx[29](value);
+      ctx[36](value);
     }
     let switcher1_props = { id: "show-tenant", label: "Show Tenant" };
     if (
@@ -16703,7 +17334,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     switcher1 = new Switcher_default({ props: switcher1_props });
     binding_callbacks.push(() => bind(switcher1, "value", switcher1_value_binding));
     function switcher2_value_binding(value) {
-      ctx[30](value);
+      ctx[37](value);
     }
     let switcher2_props = {
       id: "show-date-start",
@@ -16719,7 +17350,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     switcher2 = new Switcher_default({ props: switcher2_props });
     binding_callbacks.push(() => bind(switcher2, "value", switcher2_value_binding));
     function switcher3_value_binding(value) {
-      ctx[31](value);
+      ctx[38](value);
     }
     let switcher3_props = {
       id: "show-date-end",
@@ -16735,7 +17366,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     switcher3 = new Switcher_default({ props: switcher3_props });
     binding_callbacks.push(() => bind(switcher3, "value", switcher3_value_binding));
     function switcher4_value_binding(value) {
-      ctx[32](value);
+      ctx[39](value);
     }
     let switcher4_props = { id: "show-paid", label: "Show Paid" };
     if (
@@ -16748,7 +17379,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     switcher4 = new Switcher_default({ props: switcher4_props });
     binding_callbacks.push(() => bind(switcher4, "value", switcher4_value_binding));
     function switcher5_value_binding(value) {
-      ctx[33](value);
+      ctx[40](value);
     }
     let switcher5_props = { id: "show-price", label: "Show Price" };
     if (
@@ -16761,7 +17392,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     switcher5 = new Switcher_default({ props: switcher5_props });
     binding_callbacks.push(() => bind(switcher5, "value", switcher5_value_binding));
     function switcher6_value_binding(value) {
-      ctx[34](value);
+      ctx[41](value);
     }
     let switcher6_props = {
       id: "show-only-not-paid",
@@ -16790,7 +17421,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
+      each_blocks[i] = create_each_block3(get_each_context3(ctx, each_value, i));
     }
     const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
       each_blocks[i] = null;
@@ -16839,18 +17470,18 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(button0, "class", "btn svelte-vqsxh7");
+        attr(button0, "class", "btn svelte-1uhyam5");
         attr(button0, "aria-label", "Previous");
-        attr(span, "class", "month-text svelte-vqsxh7");
-        attr(button1, "class", "btn svelte-vqsxh7");
+        attr(span, "class", "month-text svelte-1uhyam5");
+        attr(button1, "class", "btn svelte-1uhyam5");
         attr(button1, "aria-label", "Next");
-        attr(div0, "class", "quartal-shifter svelte-vqsxh7");
-        attr(div1, "class", "filters svelte-vqsxh7");
-        attr(div2, "class", "actions svelte-vqsxh7");
-        attr(th, "class", "svelte-vqsxh7");
-        attr(tr, "class", "svelte-vqsxh7");
-        attr(table, "class", "svelte-vqsxh7");
-        attr(div3, "class", "report-container svelte-vqsxh7");
+        attr(div0, "class", "quartal-shifter svelte-1uhyam5");
+        attr(div1, "class", "filters svelte-1uhyam5");
+        attr(div2, "class", "actions svelte-1uhyam5");
+        attr(th, "class", "svelte-1uhyam5");
+        attr(tr, "class", "svelte-1uhyam5");
+        attr(table, "class", "svelte-1uhyam5");
+        attr(div3, "class", "report-container svelte-1uhyam5");
       },
       m(target, anchor) {
         insert(target, div3, anchor);
@@ -16906,13 +17537,13 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
               button0,
               "click",
               /*click_handler*/
-              ctx[26]
+              ctx[33]
             ),
             listen(
               button1,
               "click",
               /*click_handler_1*/
-              ctx[27]
+              ctx[34]
             )
           ];
           mounted = true;
@@ -17016,20 +17647,20 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
           }
           each_blocks_1.length = each_value_3.length;
         }
-        if (dirty[0] & /*quartals, bookingsPerQuartal, showOnlyNotPaid, showRefunded, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames*/
-        1052651) {
+        if (dirty[0] & /*quartals, bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames*/
+        25169899) {
           each_value = ensure_array_like(
             /*roomNames*/
             ctx2[1] || []
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context2(ctx2, each_value, i);
+            const child_ctx = get_each_context3(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
               transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block2(child_ctx);
+              each_blocks[i] = create_each_block3(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
               each_blocks[i].m(tbody, null);
@@ -17095,7 +17726,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       }
     };
   }
-  function create_fragment14(ctx) {
+  function create_fragment15(ctx) {
     let t;
     let layoutmain;
     let current;
@@ -17152,7 +17783,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
         const layoutmain_changes = {};
         if (dirty[0] & /*roomNames, quartals, bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPrice, showPaid, showDateEnd, showDateStart, showTenant, monthEnd, monthStart*/
         4095 | dirty[1] & /*$scope*/
-        524288) {
+        134217728) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -17236,7 +17867,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     inputDate.setHours(0, 0, 0, 0);
     return inputDate < today;
   }
-  function instance11($self, $props, $invalidate) {
+  function instance12($self, $props, $invalidate) {
     let bookingsPerQuartal = (
       /** @type {BookingDetail[]} */
       [/* bookingsPerQuartal*/]
@@ -17328,8 +17959,38 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     function onExtendBooking(booking) {
       $invalidate(14, bookingToExtend = booking);
       $invalidate(16, dateStart = booking.dateEnd);
-      $invalidate(17, dateEnd = (0, import_xFormatter3.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 30));
+      $invalidate(17, dateEnd = (0, import_xFormatter4.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 30));
       popupExtendBooking.Show();
+    }
+    let popUpShowPayments = (
+      /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpShowBookingPayments | any} */
+      null
+    );
+    let bookingIdToShowPayment = (
+      /** @type {number} */
+      0
+    );
+    let paymentsForBooking = (
+      /** @type {Payment[]} */
+      []
+    );
+    async function showPaymentsForBooking(bookingId) {
+      $invalidate(19, bookingIdToShowPayment = bookingId);
+      await (0, import_jsApi2.AdminPayment)(
+        { cmd: import_xConstant.CmdForm, bookingId },
+        /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          $invalidate(20, paymentsForBooking = o.paymentsByBooking);
+          console.log(paymentsForBooking);
+        }
+      );
+      popUpShowPayments.Show();
     }
     function popupextendbooking_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
@@ -17352,6 +18013,20 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
     function popupextendbooking_dateEnd_binding(value) {
       dateEnd = value;
       $invalidate(17, dateEnd);
+    }
+    function popupshowbookingpayments_bookingId_binding(value) {
+      bookingIdToShowPayment = value;
+      $invalidate(19, bookingIdToShowPayment);
+    }
+    function popupshowbookingpayments_payments_binding(value) {
+      paymentsForBooking = value;
+      $invalidate(20, paymentsForBooking);
+    }
+    function popupshowbookingpayments_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        popUpShowPayments = $value;
+        $invalidate(18, popUpShowPayments);
+      });
     }
     const click_handler = () => shiftMonth(-1);
     const click_handler_1 = () => shiftMonth(1);
@@ -17384,6 +18059,7 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       $invalidate(11, showOnlyNotPaid);
     }
     const click_handler_2 = (booking) => onExtendBooking(booking);
+    const click_handler_3 = (booking) => showPaymentsForBooking(booking.id);
     return [
       bookingsPerQuartal,
       roomNames,
@@ -17403,14 +18079,21 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       isSubmitExtendBooking,
       dateStart,
       dateEnd,
+      popUpShowPayments,
+      bookingIdToShowPayment,
+      paymentsForBooking,
       shiftMonth,
       SubmitExtendBooking,
       onExtendBooking,
+      showPaymentsForBooking,
       popupextendbooking_binding,
       popupextendbooking_isSubmitted_binding,
       popupextendbooking_bookingToExtend_binding,
       popupextendbooking_dateStart_binding,
       popupextendbooking_dateEnd_binding,
+      popupshowbookingpayments_bookingId_binding,
+      popupshowbookingpayments_payments_binding,
+      popupshowbookingpayments_binding,
       click_handler,
       click_handler_1,
       switcher0_value_binding,
@@ -17420,13 +18103,14 @@ table.svelte-vqsxh7 tbody tr td .cell.refunded.svelte-vqsxh7.svelte-vqsxh7 {
       switcher4_value_binding,
       switcher5_value_binding,
       switcher6_value_binding,
-      click_handler_2
+      click_handler_2,
+      click_handler_3
     ];
   }
   var UserReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance11, create_fragment14, safe_not_equal, {}, null, [-1, -1]);
+      init(this, options, instance12, create_fragment15, safe_not_equal, {}, null, [-1, -1]);
     }
   };
   var userReport_default = UserReport_1;

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/kokizzu/gotro/A"
+	"github.com/kokizzu/gotro/I"
 	"github.com/kokizzu/gotro/L"
 	"github.com/kokizzu/gotro/S"
 	"github.com/kokizzu/gotro/X"
@@ -711,6 +712,7 @@ func isValidYearMonth(yearMonth string) bool {
 }
 
 type BookingDetail struct {
+	Id         uint64 `json:"id"`
 	RoomId     uint64 `json:"roomId"`
 	RoomName   string `json:"roomName"`
 	TenantId   uint64 `json:"tenantId"`
@@ -746,6 +748,7 @@ func (b *Bookings) FindBookingsPerQuartal(monthStart, monthEnd string) (out []Bo
 
 	queryRows := comment + `
 SELECT 
+	"bookings"."id" AS "id",
 	"rooms"."id" AS "roomId",
   "rooms"."roomName",
 	"bookings"."tenantId",
@@ -769,18 +772,20 @@ GROUP BY "rooms"."roomName", "tenants"."tenantName", "bookings"."dateStart", "bo
 ORDER BY "rooms"."roomName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 9 {
-			roomId := X.ToU(row[0])
-			roomName := X.ToS(row[1])
-			tenantId := X.ToU(row[2])
-			tenantName := X.ToS(row[3])
-			dateStart := X.ToS(row[4])
-			dateEnd := X.ToS(row[5])
-			totalPaidIdr := X.ToI(row[6])
-			totalPriceIdr := X.ToI(row[7])
-			deletedAt := X.ToI(row[8])
+		if len(row) == 10 {
+			id := X.ToU(row[0])
+			roomId := X.ToU(row[1])
+			roomName := X.ToS(row[2])
+			tenantId := X.ToU(row[3])
+			tenantName := X.ToS(row[4])
+			dateStart := X.ToS(row[5])
+			dateEnd := X.ToS(row[6])
+			totalPaidIdr := X.ToI(row[7])
+			totalPriceIdr := X.ToI(row[8])
+			deletedAt := X.ToI(row[9])
 
 			out = append(out, BookingDetail{
+				Id:         id,
 				RoomId:     roomId,
 				RoomName:   roomName,
 				TenantId:   tenantId,
@@ -851,4 +856,20 @@ func GroupBookingsToQuarter(bookings []BookingDetail, monthStartStr, monthEndStr
 		})
 	}
 	return result, nil
+}
+
+func (p *Payments) FindByBookingId(bookingId uint64) (rows []Payments) {
+	const comment = `-- Payments) FindByBookingId`
+
+	query := `SELECT ` + p.SqlSelectAllFields() + `
+FROM ` + p.SqlTableName() + `
+WHERE ` + p.SqlBookingId() + ` = ` + I.UToS(bookingId) + `
+AND ` + p.SqlDeletedAt() + ` = 0`
+
+	p.Adapter.QuerySql(query, func(row []any) {
+		p.FromArray(row)
+		rows = append(rows, *p)
+	})
+
+	return
 }

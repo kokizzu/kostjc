@@ -4,9 +4,10 @@
   /** @typedef {import('./_types/property.js').Booking} Booking */
   /** @typedef {import('./_types/property.js').BookingDetail} BookingDetail */
   /** @typedef {import('./_types/property.js').Facility} Facility */
+  /** @typedef {import('./_types/property.js').Payment} Payment */
 
   import LayoutMain from './_layouts/main.svelte';
-  import { AdminBooking, UserReport } from './jsApi.GEN';
+  import { AdminBooking, AdminPayment, UserReport } from './jsApi.GEN';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import {
     RiArrowsArrowRightSLine, RiArrowsArrowLeftSLine,
@@ -18,7 +19,8 @@
   import { notifier } from './_components/xNotifier';
   import { onMount } from 'svelte';
   import { dateISOFormatFromYYYYMMDD, formatPrice } from './_components/xFormatter';
-    import { CmdUpsert } from './_components/xConstant';
+    import { CmdForm, CmdUpsert } from './_components/xConstant';
+    import PopUpShowBookingPayments from './_components/PopUpShowBookingPayments.svelte';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -178,6 +180,31 @@
     dateEnd = dateISOFormatFromYYYYMMDD(booking.dateEnd, 30);
     popupExtendBooking.Show();
   }
+
+  let popUpShowPayments = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpShowBookingPayments | any} */ (null);
+  let bookingIdToShowPayment = /** @type {number} */ (0);
+  let paymentsForBooking = /** @type {Payment[]} */ ([]);
+
+  async function showPaymentsForBooking(/** @type {number} */ bookingId) {
+    bookingIdToShowPayment = bookingId;  // @ts-ignore
+    await AdminPayment({
+      cmd: CmdForm,
+      bookingId: bookingId
+    }, /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+    /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+      if (o.error) {
+        console.log(o);
+        notifier.showError(o.error);
+        return
+      }
+
+      paymentsForBooking = o.paymentsByBooking;
+      console.log(paymentsForBooking);
+    });
+
+    popUpShowPayments.Show();
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -190,6 +217,12 @@
     facilities={facilities}
     tenants={tenants}
     OnSubmit={SubmitExtendBooking}
+  />
+
+  <PopUpShowBookingPayments
+    bind:bookingId={bookingIdToShowPayment}
+    bind:payments={paymentsForBooking}
+    bind:this={popUpShowPayments}
   />
 {/if}
 
@@ -300,7 +333,7 @@
                                   size="17"
                                 />
                               </button>
-                              <button class="btn" title="See Payments">
+                              <button class="btn" title="Show Payments" on:click={() => showPaymentsForBooking(booking.id)}>
                                 <Icon
                                   src={RiSystemEyeLine}
                                   size="17"
@@ -422,11 +455,13 @@
   table tbody tr td .cell .actions {
     display: none;
     flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
     gap: 3px;
     position: absolute;
     right: 0;
     top: 0;
-    background-color: var(--blue-005);
+    background-color: var(--blue-transparent);
     width: 100%;
     height: 100%;
   }
@@ -437,7 +472,7 @@
 
   table tbody tr td .cell .actions .btn {
     border: none;
-    color: #fff;
+    /* color: #fff; */
     background-color: transparent;
     width: fit-content;
     padding: 5px;
@@ -451,7 +486,8 @@
   }
 
   table tbody tr td .cell .actions .btn:hover {
-    background-color: #FFFFFF30;
+    /* background-color: #FFFFFF30; */
+    background-color: var(--gray-006);
   }
 
   table tbody tr td .date-not-expired {

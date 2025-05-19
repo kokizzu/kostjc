@@ -1,11 +1,15 @@
 package domain
 
 import (
+	"fmt"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
 	"time"
+
+	"github.com/fatih/color"
+	"github.com/kokizzu/gotro/X"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminPayment.go
@@ -17,17 +21,19 @@ import (
 type (
 	AdminPaymentIn struct {
 		RequestCommon
-		Cmd      string              `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
-		WithMeta bool                `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
-		Pager    zCrud.PagerIn       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-		Payment  rqProperty.Payments `json:"payment" form:"payment" query:"payment" long:"payment" msg:"payment"`
+		Cmd       string              `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
+		WithMeta  bool                `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
+		Pager     zCrud.PagerIn       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Payment   rqProperty.Payments `json:"payment" form:"payment" query:"payment" long:"payment" msg:"payment"`
+		BookingId uint64              `json:"bookingId" form:"bookingId" query:"bookingId" long:"bookingId" msg:"bookingId"`
 	}
 	AdminPaymentOut struct {
 		ResponseCommon
-		Pager    zCrud.PagerOut      `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-		Meta     *zCrud.Meta         `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
-		Payment  rqProperty.Payments `json:"payment" form:"payment" query:"payment" long:"payment" msg:"payment"`
-		Payments [][]any             `json:"payments" form:"payments" query:"payments" long:"payments" msg:"payments"`
+		Pager             zCrud.PagerOut        `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Meta              *zCrud.Meta           `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
+		Payment           rqProperty.Payments   `json:"payment" form:"payment" query:"payment" long:"payment" msg:"payment"`
+		Payments          [][]any               `json:"payments" form:"payments" query:"payments" long:"payments" msg:"payments"`
+		PaymentsByBooking []rqProperty.Payments `json:"paymentsByBooking" form:"paymentsByBooking" query:"paymentsByBooking" long:"paymentsByBooking" msg:"paymentsByBooking"`
 	}
 )
 
@@ -119,7 +125,7 @@ var AdminPaymentMeta = zCrud.Meta{
 
 func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}
@@ -133,6 +139,13 @@ func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 
 	switch in.Cmd {
 	case zCrud.CmdForm:
+		if in.BookingId > 0 {
+			payment := rqProperty.NewPayments(d.PropOltp)
+			paymentsByBooking := payment.FindByBookingId(in.BookingId)
+			fmt.Println(color.GreenString(X.ToJsonPretty(paymentsByBooking)))
+			out.PaymentsByBooking = paymentsByBooking
+			return
+		}
 	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
 		pym := wcProperty.NewPaymentsMutator(d.PropOltp)
 		pym.Id = in.Payment.Id

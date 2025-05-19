@@ -128,6 +128,7 @@ module.exports = {};
 
 /**
  * @typedef {Object} BookingDetail
+ * @property {number} id
  * @property {number} roomId
  * @property {string} roomName
  * @property {number} tenantId
