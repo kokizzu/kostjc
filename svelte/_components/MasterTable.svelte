@@ -383,10 +383,10 @@
     <table>
       <thead>
         <tr>
-          <th class="no">No</th>
+          <th class="no sticky">No</th>
           {#each FIELDS || [] as f, _ (f.name)}
             {#if f.name === 'id'}
-              <th class="a_row">Actions</th>
+              <th class="a-row">Actions</th>
             {:else}
               <th
                 style="{COL_WIDTHS[f.name] ? `min-width: ${COL_WIDTHS[f.name]}px;` : ''}"
@@ -432,10 +432,10 @@
         {#if MASTER_ROWS && MASTER_ROWS.length > 0}
           {#each MASTER_ROWS as row}
             <tr class={CAN_DELETE_ROW && (row[deletedIndex] > 0 || row[deletedIndex] === 'terminated') ? 'deleted' : ''}>
-              <td class="num_row">{(PAGER.page -1) * PAGER.perPage + MASTER_ROWS.indexOf(row) + 1}</td>
+              <td class="num-row sticky">{(PAGER.page -1) * PAGER.perPage + MASTER_ROWS.indexOf(row) + 1}</td>
               {#each FIELDS || [] as f, idx}
                 {#if f.name === 'id'}
-                  <td class="a_row">
+                  <td class="a-row">
                     {#if ACCESS.admin
                       || ACCESS.staff
                       || ACCESS.user
@@ -528,7 +528,7 @@
           {/each}
         {:else}
           <tr>
-            <td class="num_row">0</td>
+            <td class="num-row">0</td>
             <td>no-data</td>
           </tr>
         {/if}
@@ -851,8 +851,15 @@
     text-align: left;
     border-collapse: separate;
     border-spacing: 0;
-    overflow: hidden;
     font-size: var(--font-base);
+    position: relative;
+  }
+
+  .table-root .table-container table .sticky {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    background-color: var(--gray-001);
   }
 
   .table-root .table-container table thead {
@@ -869,6 +876,8 @@
 		min-width: fit-content;
 		width: auto;
     text-wrap: nowrap;
+    position: relative;
+    z-index: 1;
   }
 
   .table-root .table-container table thead tr th .heading {
@@ -920,7 +929,7 @@
     cursor: default;
   }
 
-  .table-root .table-container table thead tr th.a_row {
+  .table-root .table-container table thead tr th.a-row {
     max-width: fit-content;
     min-width: fit-content;
     width: fit-content;
@@ -950,7 +959,7 @@
     border-right: none !important;
   }
 
-	.table-root .table-container table tbody tr td.num_row {
+	.table-root .table-container table tbody tr td.num-row {
 		border-right: 1px solid var(--gray-003);
 		font-weight: 600;
 		text-align: center;
