@@ -160,6 +160,10 @@ LIMIT 1`
 	orderBySql := out.OrderBySqlTt(in.Order, validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
+	if S.Contains(orderBySql, `ORDER BY "id"`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "id"`, `ORDER BY "bookings"."id"`)
+	}
+
 	queryRows := comment + `
 SELECT
 	"bookings"."id",

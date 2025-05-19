@@ -491,6 +491,38 @@
           {#each FIELDS || [] as f, _ (f.name)}
             {#if f.name === 'id'}
               <th class="a_row">Actions</th>
+              <th>
+                <button
+                  class="heading"
+                  on:click={() => OnSort(f)}
+                >
+                  <span>ID</span>
+                  {#if isSortTableAsc && f.name === fieldNameToSort}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsArrowDownSFill}
+                    />
+                  {/if}
+                  {#if !isSortTableAsc && f.name === fieldNameToSort}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsArrowUpSFill}
+                    />
+                  {/if}
+                  {#if f.name !== fieldNameToSort}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsExpandUpDownFill}
+                    />
+                  {/if}
+                </button>
+              </th>
             {:else}
               <th
                 style="{COL_WIDTHS[f.name] ? `min-width: ${COL_WIDTHS[f.name]}px;` : ''}"
@@ -580,6 +612,7 @@
                       <span>--</span>
                     {/if}
                   </td>
+                  <td>#{row[idx] || '--'}</td>
                 {:else if f.type == 'currency'}
                   <td class="currency">{row[idx] ? formatPrice(row[idx], (f.mapping || 'IDR')) : '--'}</td>
                 {:else if f.inputType === 'datetime'}
