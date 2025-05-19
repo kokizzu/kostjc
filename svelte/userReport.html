@@ -1516,6 +1516,133 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   min-width: 280px !important;
 }
 
+/* fakecss:./_components/PopUpAddPayment.esbuild-svelte-fake-css */
+@keyframes svelte-1518e4v-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin {
+  animation: svelte-1518e4v-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.popup-container.svelte-1518e4v.svelte-1518e4v {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+  background-color: rgba(0 0 0 / 40%);
+  backdrop-filter: blur(1px);
+  justify-content: center;
+  padding: 50px;
+  overflow: auto;
+}
+.popup-container.show.svelte-1518e4v.svelte-1518e4v {
+  display: flex;
+}
+.popup-container.svelte-1518e4v .popup.svelte-1518e4v {
+  border-radius: 8px;
+  background-color: #FFF;
+  height: fit-content;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.popup-container.svelte-1518e4v .popup header.svelte-1518e4v {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--gray-004);
+}
+.popup-container.svelte-1518e4v .popup header h2.svelte-1518e4v {
+  margin: 0;
+}
+.popup-container.svelte-1518e4v .popup header button.svelte-1518e4v {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.popup-container.svelte-1518e4v .popup header button.svelte-1518e4v:hover {
+  background-color: #ef444420;
+}
+.popup-container.svelte-1518e4v .popup header button.svelte-1518e4v:active {
+  background-color: #ef444430;
+}
+.popup-container.svelte-1518e4v .popup .forms.svelte-1518e4v {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.popup-container.svelte-1518e4v .popup .foot.svelte-1518e4v {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  padding: 15px 20px;
+  border-top: 1px solid var(--gray-004);
+}
+.popup-container.svelte-1518e4v .popup .foot .right.svelte-1518e4v {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.popup-container.svelte-1518e4v .popup .foot button.svelte-1518e4v {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: none;
+  color: #FFF;
+  cursor: pointer;
+  font-weight: 600;
+}
+.popup-container.svelte-1518e4v .popup .foot button.ok.svelte-1518e4v {
+  background-color: var(--green-006);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-container.svelte-1518e4v .popup .foot button.ok.svelte-1518e4v:hover {
+  background-color: var(--green-005);
+}
+.popup-container.svelte-1518e4v .popup .foot button.ok.svelte-1518e4v:disabled {
+  cursor: not-allowed;
+  background-color: var(--gray-003);
+  color: var(--gray-007);
+}
+.popup-container.svelte-1518e4v .popup .foot button.cancel.svelte-1518e4v {
+  background-color: transparent;
+  color: var(--gray-007);
+}
+.popup-container.svelte-1518e4v .popup .foot button.cancel.svelte-1518e4v:hover {
+  background-color: var(--gray-001);
+}
+.facilities-form.svelte-1518e4v.svelte-1518e4v {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+@media only screen and (max-width : 768px) {
+  .popup-container.svelte-1518e4v.svelte-1518e4v {
+    padding: 10px;
+  }
+}
+
 /* fakecss:./userReport.esbuild-svelte-fake-css */
 .report-container.svelte-1uhyam5.svelte-1uhyam5.svelte-1uhyam5 {
   display: flex;
@@ -4044,13 +4171,13 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance13 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance13, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance13, context, null, { allOwnKeys: true });
-        instance13.create = function create(instanceConfig) {
+        const instance14 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance14, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance14, context, null, { allOwnKeys: true });
+        instance14.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance13;
+        return instance14;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -4245,7 +4372,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         const formattedDate = `${year}-${month}-${date}`;
         return formattedDate;
       }
-      function dateISOFormat3(dayTo = 0) {
+      function dateISOFormat4(dayTo = 0) {
         const dt = new Date();
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -4271,7 +4398,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         script.onload = () => callback();
         document.getElementsByTagName("head")[0].appendChild(script);
       }
-      function formatPrice4(price, currency) {
+      function formatPrice3(price, currency) {
         try {
           return new Intl.NumberFormat("en-US", {
             style: "currency",
@@ -4293,10 +4420,10 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         utcDatetime,
         isoTime,
         isoDate,
-        dateISOFormat: dateISOFormat3,
+        dateISOFormat: dateISOFormat4,
         dateISOFormatFromYYYYMMDD: dateISOFormatFromYYYYMMDD2,
         loadScript,
-        formatPrice: formatPrice4,
+        formatPrice: formatPrice3,
         arrToArrNum: arrToArrNum2
       };
     }
@@ -4873,7 +5000,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance13, create_fragment16, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance14, create_fragment17, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -4899,7 +5026,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance13 ? instance13(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance14 ? instance14(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -4912,7 +5039,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment16 ? create_fragment16($.ctx) : false;
+    $.fragment = create_fragment17 ? create_fragment17($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -15886,7 +16013,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
   var Switcher_default = Switcher;
 
   // userReport.svelte
-  var import_xFormatter4 = __toESM(require_xFormatter());
+  var import_xFormatter5 = __toESM(require_xFormatter());
   var import_xConstant = __toESM(require_xConstant());
 
   // _components/PopUpShowBookingPayments.svelte
@@ -16290,25 +16417,718 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
   };
   var PopUpShowBookingPayments_default = PopUpShowBookingPayments;
 
+  // _components/PopUpAddPayment.svelte
+  var import_xFormatter4 = __toESM(require_xFormatter());
+  function create_if_block_24(ctx) {
+    let inputbox;
+    let updating_value;
+    let current;
+    function inputbox_value_binding(value) {
+      ctx[18](value);
+    }
+    let inputbox_props = {
+      id: "booking",
+      label: "Booking",
+      isObject: true,
+      type: "combobox",
+      values: (
+        /*bookings*/
+        ctx[3]
+      )
+    };
+    if (
+      /*bookingId*/
+      ctx[0] !== void 0
+    ) {
+      inputbox_props.value = /*bookingId*/
+      ctx[0];
+    }
+    inputbox = new InputBox_default({ props: inputbox_props });
+    binding_callbacks.push(() => bind(inputbox, "value", inputbox_value_binding));
+    return {
+      c() {
+        create_component(inputbox.$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(inputbox, target, anchor);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        const inputbox_changes = {};
+        if (dirty & /*bookings*/
+        8)
+          inputbox_changes.values = /*bookings*/
+          ctx2[3];
+        if (!updating_value && dirty & /*bookingId*/
+        1) {
+          updating_value = true;
+          inputbox_changes.value = /*bookingId*/
+          ctx2[0];
+          add_flush_callback(() => updating_value = false);
+        }
+        inputbox.$set(inputbox_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(inputbox.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(inputbox.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(inputbox, detaching);
+      }
+    };
+  }
+  function create_if_block_19(ctx) {
+    let span;
+    return {
+      c() {
+        span = element("span");
+        span.textContent = "Submit";
+      },
+      m(target, anchor) {
+        insert(target, span, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(span);
+        }
+      }
+    };
+  }
+  function create_if_block7(ctx) {
+    let icon;
+    let current;
+    icon = new Icon_default({
+      props: {
+        className: "spin",
+        color: "#FFF",
+        size: "14",
+        src: FiLoader
+      }
+    });
+    return {
+      c() {
+        create_component(icon.$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(icon, target, anchor);
+        current = true;
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(icon, detaching);
+      }
+    };
+  }
+  function create_fragment15(ctx) {
+    let div5;
+    let div4;
+    let header;
+    let h2;
+    let t0;
+    let t1_value = (
+      /*isBookingReadOnly*/
+      ctx[4] ? `for Booking #${/*bookingId*/
+      ctx[0]}` : ""
+    );
+    let t1;
+    let t2;
+    let button0;
+    let icon;
+    let t3;
+    let div0;
+    let t4;
+    let inputbox0;
+    let updating_value;
+    let t5;
+    let inputbox1;
+    let updating_value_1;
+    let t6;
+    let inputbox2;
+    let updating_value_2;
+    let t7;
+    let inputbox3;
+    let updating_value_3;
+    let t8;
+    let inputbox4;
+    let updating_value_4;
+    let t9;
+    let div3;
+    let div1;
+    let t10;
+    let div2;
+    let button1;
+    let t12;
+    let button2;
+    let t13;
+    let div5_class_value;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        size: "22",
+        color: "var(--red-005)",
+        src: IoClose
+      }
+    });
+    let if_block0 = !/*isBookingReadOnly*/
+    ctx[4] && create_if_block_24(ctx);
+    function inputbox0_value_binding(value) {
+      ctx[19](value);
+    }
+    let inputbox0_props = {
+      id: "paymentAt",
+      label: "Payment At",
+      type: "datetime",
+      placeholder: "YYYY-MM-DD"
+    };
+    if (
+      /*paymentAt*/
+      ctx[1] !== void 0
+    ) {
+      inputbox0_props.value = /*paymentAt*/
+      ctx[1];
+    }
+    inputbox0 = new InputBox_default({ props: inputbox0_props });
+    binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
+    function inputbox1_value_binding(value) {
+      ctx[20](value);
+    }
+    let inputbox1_props = {
+      id: "paidIDR",
+      label: "Total Paid",
+      type: "number",
+      placeholder: "0"
+    };
+    if (
+      /*paidIDR*/
+      ctx[7] !== void 0
+    ) {
+      inputbox1_props.value = /*paidIDR*/
+      ctx[7];
+    }
+    inputbox1 = new InputBox_default({ props: inputbox1_props });
+    binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
+    function inputbox2_value_binding(value) {
+      ctx[21](value);
+    }
+    let inputbox2_props = {
+      id: "paymentMethod",
+      label: "Payment Method",
+      type: "combobox-arr",
+      values: (
+        /*PaymentMethods*/
+        ctx[11]
+      )
+    };
+    if (
+      /*paymentMethod*/
+      ctx[8] !== void 0
+    ) {
+      inputbox2_props.value = /*paymentMethod*/
+      ctx[8];
+    }
+    inputbox2 = new InputBox_default({ props: inputbox2_props });
+    binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
+    function inputbox3_value_binding(value) {
+      ctx[22](value);
+    }
+    let inputbox3_props = {
+      id: "paymentStatus",
+      label: "Payment Status",
+      type: "combobox-arr",
+      placeholder: "Paid",
+      values: (
+        /*PaymentStatuses*/
+        ctx[12]
+      )
+    };
+    if (
+      /*paymentStatus*/
+      ctx[9] !== void 0
+    ) {
+      inputbox3_props.value = /*paymentStatus*/
+      ctx[9];
+    }
+    inputbox3 = new InputBox_default({ props: inputbox3_props });
+    binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
+    function inputbox4_value_binding(value) {
+      ctx[23](value);
+    }
+    let inputbox4_props = {
+      id: "note",
+      label: "Note",
+      type: "textarea",
+      placeholder: "Note"
+    };
+    if (
+      /*note*/
+      ctx[10] !== void 0
+    ) {
+      inputbox4_props.value = /*note*/
+      ctx[10];
+    }
+    inputbox4 = new InputBox_default({ props: inputbox4_props });
+    binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
+    let if_block1 = !/*isSubmitted*/
+    ctx[2] && create_if_block_19(ctx);
+    let if_block2 = (
+      /*isSubmitted*/
+      ctx[2] && create_if_block7(ctx)
+    );
+    return {
+      c() {
+        div5 = element("div");
+        div4 = element("div");
+        header = element("header");
+        h2 = element("h2");
+        t0 = text("Add Payment ");
+        t1 = text(t1_value);
+        t2 = space();
+        button0 = element("button");
+        create_component(icon.$.fragment);
+        t3 = space();
+        div0 = element("div");
+        if (if_block0)
+          if_block0.c();
+        t4 = space();
+        create_component(inputbox0.$.fragment);
+        t5 = space();
+        create_component(inputbox1.$.fragment);
+        t6 = space();
+        create_component(inputbox2.$.fragment);
+        t7 = space();
+        create_component(inputbox3.$.fragment);
+        t8 = space();
+        create_component(inputbox4.$.fragment);
+        t9 = space();
+        div3 = element("div");
+        div1 = element("div");
+        div1.innerHTML = ``;
+        t10 = space();
+        div2 = element("div");
+        button1 = element("button");
+        button1.textContent = "Cancel";
+        t12 = space();
+        button2 = element("button");
+        if (if_block1)
+          if_block1.c();
+        t13 = space();
+        if (if_block2)
+          if_block2.c();
+        attr(h2, "class", "svelte-1518e4v");
+        attr(button0, "class", "svelte-1518e4v");
+        attr(header, "class", "header svelte-1518e4v");
+        attr(div0, "class", "forms svelte-1518e4v");
+        attr(div1, "class", "left");
+        attr(button1, "class", "cancel svelte-1518e4v");
+        attr(button2, "class", "ok svelte-1518e4v");
+        button2.disabled = /*isSubmitted*/
+        ctx[2];
+        attr(div2, "class", "right svelte-1518e4v");
+        attr(div3, "class", "foot svelte-1518e4v");
+        attr(div4, "class", "popup svelte-1518e4v");
+        attr(div5, "class", div5_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx[6] ? "show" : ""}`) + " svelte-1518e4v");
+      },
+      m(target, anchor) {
+        insert(target, div5, anchor);
+        append(div5, div4);
+        append(div4, header);
+        append(header, h2);
+        append(h2, t0);
+        append(h2, t1);
+        append(header, t2);
+        append(header, button0);
+        mount_component(icon, button0, null);
+        append(div4, t3);
+        append(div4, div0);
+        if (if_block0)
+          if_block0.m(div0, null);
+        append(div0, t4);
+        mount_component(inputbox0, div0, null);
+        append(div0, t5);
+        mount_component(inputbox1, div0, null);
+        append(div0, t6);
+        mount_component(inputbox2, div0, null);
+        append(div0, t7);
+        mount_component(inputbox3, div0, null);
+        append(div0, t8);
+        mount_component(inputbox4, div0, null);
+        append(div4, t9);
+        append(div4, div3);
+        append(div3, div1);
+        append(div3, t10);
+        append(div3, div2);
+        append(div2, button1);
+        append(div2, t12);
+        append(div2, button2);
+        if (if_block1)
+          if_block1.m(button2, null);
+        append(button2, t13);
+        if (if_block2)
+          if_block2.m(button2, null);
+        current = true;
+        if (!mounted) {
+          dispose = [
+            listen(
+              button0,
+              "click",
+              /*Hide*/
+              ctx[5]
+            ),
+            listen(button1, "click", prevent_default(
+              /*cancel*/
+              ctx[14]
+            )),
+            listen(button2, "click", prevent_default(
+              /*submitAdd*/
+              ctx[13]
+            ))
+          ];
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if ((!current || dirty & /*isBookingReadOnly, bookingId*/
+        17) && t1_value !== (t1_value = /*isBookingReadOnly*/
+        ctx2[4] ? `for Booking #${/*bookingId*/
+        ctx2[0]}` : ""))
+          set_data(t1, t1_value);
+        if (!/*isBookingReadOnly*/
+        ctx2[4]) {
+          if (if_block0) {
+            if_block0.p(ctx2, dirty);
+            if (dirty & /*isBookingReadOnly*/
+            16) {
+              transition_in(if_block0, 1);
+            }
+          } else {
+            if_block0 = create_if_block_24(ctx2);
+            if_block0.c();
+            transition_in(if_block0, 1);
+            if_block0.m(div0, t4);
+          }
+        } else if (if_block0) {
+          group_outros();
+          transition_out(if_block0, 1, 1, () => {
+            if_block0 = null;
+          });
+          check_outros();
+        }
+        const inputbox0_changes = {};
+        if (!updating_value && dirty & /*paymentAt*/
+        2) {
+          updating_value = true;
+          inputbox0_changes.value = /*paymentAt*/
+          ctx2[1];
+          add_flush_callback(() => updating_value = false);
+        }
+        inputbox0.$set(inputbox0_changes);
+        const inputbox1_changes = {};
+        if (!updating_value_1 && dirty & /*paidIDR*/
+        128) {
+          updating_value_1 = true;
+          inputbox1_changes.value = /*paidIDR*/
+          ctx2[7];
+          add_flush_callback(() => updating_value_1 = false);
+        }
+        inputbox1.$set(inputbox1_changes);
+        const inputbox2_changes = {};
+        if (!updating_value_2 && dirty & /*paymentMethod*/
+        256) {
+          updating_value_2 = true;
+          inputbox2_changes.value = /*paymentMethod*/
+          ctx2[8];
+          add_flush_callback(() => updating_value_2 = false);
+        }
+        inputbox2.$set(inputbox2_changes);
+        const inputbox3_changes = {};
+        if (!updating_value_3 && dirty & /*paymentStatus*/
+        512) {
+          updating_value_3 = true;
+          inputbox3_changes.value = /*paymentStatus*/
+          ctx2[9];
+          add_flush_callback(() => updating_value_3 = false);
+        }
+        inputbox3.$set(inputbox3_changes);
+        const inputbox4_changes = {};
+        if (!updating_value_4 && dirty & /*note*/
+        1024) {
+          updating_value_4 = true;
+          inputbox4_changes.value = /*note*/
+          ctx2[10];
+          add_flush_callback(() => updating_value_4 = false);
+        }
+        inputbox4.$set(inputbox4_changes);
+        if (!/*isSubmitted*/
+        ctx2[2]) {
+          if (if_block1) {
+          } else {
+            if_block1 = create_if_block_19(ctx2);
+            if_block1.c();
+            if_block1.m(button2, t13);
+          }
+        } else if (if_block1) {
+          if_block1.d(1);
+          if_block1 = null;
+        }
+        if (
+          /*isSubmitted*/
+          ctx2[2]
+        ) {
+          if (if_block2) {
+            if (dirty & /*isSubmitted*/
+            4) {
+              transition_in(if_block2, 1);
+            }
+          } else {
+            if_block2 = create_if_block7(ctx2);
+            if_block2.c();
+            transition_in(if_block2, 1);
+            if_block2.m(button2, null);
+          }
+        } else if (if_block2) {
+          group_outros();
+          transition_out(if_block2, 1, 1, () => {
+            if_block2 = null;
+          });
+          check_outros();
+        }
+        if (!current || dirty & /*isSubmitted*/
+        4) {
+          button2.disabled = /*isSubmitted*/
+          ctx2[2];
+        }
+        if (!current || dirty & /*isShow*/
+        64 && div5_class_value !== (div5_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[6] ? "show" : ""}`) + " svelte-1518e4v")) {
+          attr(div5, "class", div5_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        transition_in(if_block0);
+        transition_in(inputbox0.$.fragment, local);
+        transition_in(inputbox1.$.fragment, local);
+        transition_in(inputbox2.$.fragment, local);
+        transition_in(inputbox3.$.fragment, local);
+        transition_in(inputbox4.$.fragment, local);
+        transition_in(if_block2);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        transition_out(if_block0);
+        transition_out(inputbox0.$.fragment, local);
+        transition_out(inputbox1.$.fragment, local);
+        transition_out(inputbox2.$.fragment, local);
+        transition_out(inputbox3.$.fragment, local);
+        transition_out(inputbox4.$.fragment, local);
+        transition_out(if_block2);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div5);
+        }
+        destroy_component(icon);
+        if (if_block0)
+          if_block0.d();
+        destroy_component(inputbox0);
+        destroy_component(inputbox1);
+        destroy_component(inputbox2);
+        destroy_component(inputbox3);
+        destroy_component(inputbox4);
+        if (if_block1)
+          if_block1.d();
+        if (if_block2)
+          if_block2.d();
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function instance12($self, $props, $invalidate) {
+    let isShow = (
+      /** @type {boolean} */
+      false
+    );
+    let { isSubmitted = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    let { bookings = (
+      /** @type {Record<number, string>} */
+      {}
+    ) } = $props;
+    let { bookingId = 0 } = $props;
+    let { isBookingReadOnly = false } = $props;
+    let { paymentAt = (0, import_xFormatter4.dateISOFormat)(0) } = $props;
+    const PaymentMethods = ["Cash", "QRIS", "Transfer"];
+    const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
+    let paidIDR = 0;
+    let paymentMethod = PaymentMethods[0];
+    let paymentStatus = PaymentStatuses[0];
+    let note = "";
+    let { OnSubmit = async function(payment) {
+      console.log("OnSubmit :::", payment);
+    } } = $props;
+    async function submitAdd() {
+      const payment = (
+        /** @type {Payment|any} */
+        {
+          bookingId,
+          paymentAt,
+          paidIDR,
+          paymentMethod,
+          paymentStatus,
+          note
+        }
+      );
+      await OnSubmit(payment);
+    }
+    const Show = () => $invalidate(6, isShow = true);
+    const Hide = () => $invalidate(6, isShow = false);
+    const Reset = () => {
+      $invalidate(0, bookingId = 0);
+      $invalidate(1, paymentAt = (0, import_xFormatter4.dateISOFormat)(0));
+      $invalidate(7, paidIDR = 0);
+      $invalidate(8, paymentMethod = PaymentMethods[0]);
+      $invalidate(9, paymentStatus = PaymentStatuses[0]);
+      $invalidate(10, note = "");
+    };
+    const cancel = () => {
+      $invalidate(6, isShow = false);
+    };
+    function inputbox_value_binding(value) {
+      bookingId = value;
+      $invalidate(0, bookingId);
+    }
+    function inputbox0_value_binding(value) {
+      paymentAt = value;
+      $invalidate(1, paymentAt);
+    }
+    function inputbox1_value_binding(value) {
+      paidIDR = value;
+      $invalidate(7, paidIDR);
+    }
+    function inputbox2_value_binding(value) {
+      paymentMethod = value;
+      $invalidate(8, paymentMethod);
+    }
+    function inputbox3_value_binding(value) {
+      paymentStatus = value;
+      $invalidate(9, paymentStatus);
+    }
+    function inputbox4_value_binding(value) {
+      note = value;
+      $invalidate(10, note);
+    }
+    $self.$set = ($props2) => {
+      if ("isSubmitted" in $props2)
+        $invalidate(2, isSubmitted = $props2.isSubmitted);
+      if ("bookings" in $props2)
+        $invalidate(3, bookings = $props2.bookings);
+      if ("bookingId" in $props2)
+        $invalidate(0, bookingId = $props2.bookingId);
+      if ("isBookingReadOnly" in $props2)
+        $invalidate(4, isBookingReadOnly = $props2.isBookingReadOnly);
+      if ("paymentAt" in $props2)
+        $invalidate(1, paymentAt = $props2.paymentAt);
+      if ("OnSubmit" in $props2)
+        $invalidate(15, OnSubmit = $props2.OnSubmit);
+    };
+    return [
+      bookingId,
+      paymentAt,
+      isSubmitted,
+      bookings,
+      isBookingReadOnly,
+      Hide,
+      isShow,
+      paidIDR,
+      paymentMethod,
+      paymentStatus,
+      note,
+      PaymentMethods,
+      PaymentStatuses,
+      submitAdd,
+      cancel,
+      OnSubmit,
+      Show,
+      Reset,
+      inputbox_value_binding,
+      inputbox0_value_binding,
+      inputbox1_value_binding,
+      inputbox2_value_binding,
+      inputbox3_value_binding,
+      inputbox4_value_binding
+    ];
+  }
+  var PopUpAddPayment = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance12, create_fragment15, safe_not_equal, {
+        isSubmitted: 2,
+        bookings: 3,
+        bookingId: 0,
+        isBookingReadOnly: 4,
+        paymentAt: 1,
+        OnSubmit: 15,
+        Show: 16,
+        Hide: 5,
+        Reset: 17
+      });
+    }
+    get Show() {
+      return this.$.ctx[16];
+    }
+    get Hide() {
+      return this.$.ctx[5];
+    }
+    get Reset() {
+      return this.$.ctx[17];
+    }
+  };
+  var PopUpAddPayment_default = PopUpAddPayment;
+
   // userReport.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[47] = list[i];
+    child_ctx[56] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[50] = list[i];
+    child_ctx[59] = list[i];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[53] = list[i];
+    child_ctx[62] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[50] = list[i];
+    child_ctx[59] = list[i];
     return child_ctx;
   }
   function create_if_block_33(ctx) {
@@ -16317,29 +17137,33 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     let updating_bookingToExtend;
     let updating_dateStart;
     let updating_dateEnd;
-    let t;
+    let t0;
     let popupshowbookingpayments;
     let updating_bookingId;
     let updating_payments;
+    let t1;
+    let popupaddpayment;
+    let updating_bookingId_1;
+    let updating_isSubmitted_1;
     let current;
     function popupextendbooking_isSubmitted_binding(value) {
-      ctx[26](value);
+      ctx[31](value);
     }
     function popupextendbooking_bookingToExtend_binding(value) {
-      ctx[27](value);
+      ctx[32](value);
     }
     function popupextendbooking_dateStart_binding(value) {
-      ctx[28](value);
+      ctx[33](value);
     }
     function popupextendbooking_dateEnd_binding(value) {
-      ctx[29](value);
+      ctx[34](value);
     }
     let popupextendbooking_props = {
       facilities,
       tenants,
       OnSubmit: (
         /*SubmitExtendBooking*/
-        ctx[22]
+        ctx[25]
       )
     };
     if (
@@ -16371,16 +17195,16 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       ctx[17];
     }
     popupextendbooking = new PopUpExtendBooking_default({ props: popupextendbooking_props });
-    ctx[25](popupextendbooking);
+    ctx[30](popupextendbooking);
     binding_callbacks.push(() => bind(popupextendbooking, "isSubmitted", popupextendbooking_isSubmitted_binding));
     binding_callbacks.push(() => bind(popupextendbooking, "bookingToExtend", popupextendbooking_bookingToExtend_binding));
     binding_callbacks.push(() => bind(popupextendbooking, "dateStart", popupextendbooking_dateStart_binding));
     binding_callbacks.push(() => bind(popupextendbooking, "dateEnd", popupextendbooking_dateEnd_binding));
     function popupshowbookingpayments_bookingId_binding(value) {
-      ctx[30](value);
+      ctx[35](value);
     }
     function popupshowbookingpayments_payments_binding(value) {
-      ctx[31](value);
+      ctx[36](value);
     }
     let popupshowbookingpayments_props = {};
     if (
@@ -16400,17 +17224,52 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     popupshowbookingpayments = new PopUpShowBookingPayments_default({ props: popupshowbookingpayments_props });
     binding_callbacks.push(() => bind(popupshowbookingpayments, "bookingId", popupshowbookingpayments_bookingId_binding));
     binding_callbacks.push(() => bind(popupshowbookingpayments, "payments", popupshowbookingpayments_payments_binding));
-    ctx[32](popupshowbookingpayments);
+    ctx[37](popupshowbookingpayments);
+    function popupaddpayment_bookingId_binding(value) {
+      ctx[38](value);
+    }
+    function popupaddpayment_isSubmitted_binding(value) {
+      ctx[40](value);
+    }
+    let popupaddpayment_props = {
+      isBookingReadOnly: true,
+      OnSubmit: (
+        /*submitAddPayment*/
+        ctx[29]
+      )
+    };
+    if (
+      /*bookingIdToPay*/
+      ctx[22] !== void 0
+    ) {
+      popupaddpayment_props.bookingId = /*bookingIdToPay*/
+      ctx[22];
+    }
+    if (
+      /*isSubmitAddPayment*/
+      ctx[23] !== void 0
+    ) {
+      popupaddpayment_props.isSubmitted = /*isSubmitAddPayment*/
+      ctx[23];
+    }
+    popupaddpayment = new PopUpAddPayment_default({ props: popupaddpayment_props });
+    binding_callbacks.push(() => bind(popupaddpayment, "bookingId", popupaddpayment_bookingId_binding));
+    ctx[39](popupaddpayment);
+    binding_callbacks.push(() => bind(popupaddpayment, "isSubmitted", popupaddpayment_isSubmitted_binding));
     return {
       c() {
         create_component(popupextendbooking.$.fragment);
-        t = space();
+        t0 = space();
         create_component(popupshowbookingpayments.$.fragment);
+        t1 = space();
+        create_component(popupaddpayment.$.fragment);
       },
       m(target, anchor) {
         mount_component(popupextendbooking, target, anchor);
-        insert(target, t, anchor);
+        insert(target, t0, anchor);
         mount_component(popupshowbookingpayments, target, anchor);
+        insert(target, t1, anchor);
+        mount_component(popupaddpayment, target, anchor);
         current = true;
       },
       p(ctx2, dirty) {
@@ -16460,27 +17319,48 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           add_flush_callback(() => updating_payments = false);
         }
         popupshowbookingpayments.$set(popupshowbookingpayments_changes);
+        const popupaddpayment_changes = {};
+        if (!updating_bookingId_1 && dirty[0] & /*bookingIdToPay*/
+        4194304) {
+          updating_bookingId_1 = true;
+          popupaddpayment_changes.bookingId = /*bookingIdToPay*/
+          ctx2[22];
+          add_flush_callback(() => updating_bookingId_1 = false);
+        }
+        if (!updating_isSubmitted_1 && dirty[0] & /*isSubmitAddPayment*/
+        8388608) {
+          updating_isSubmitted_1 = true;
+          popupaddpayment_changes.isSubmitted = /*isSubmitAddPayment*/
+          ctx2[23];
+          add_flush_callback(() => updating_isSubmitted_1 = false);
+        }
+        popupaddpayment.$set(popupaddpayment_changes);
       },
       i(local) {
         if (current)
           return;
         transition_in(popupextendbooking.$.fragment, local);
         transition_in(popupshowbookingpayments.$.fragment, local);
+        transition_in(popupaddpayment.$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(popupextendbooking.$.fragment, local);
         transition_out(popupshowbookingpayments.$.fragment, local);
+        transition_out(popupaddpayment.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
-          detach(t);
+          detach(t0);
+          detach(t1);
         }
-        ctx[25](null);
+        ctx[30](null);
         destroy_component(popupextendbooking, detaching);
-        ctx[32](null);
+        ctx[37](null);
         destroy_component(popupshowbookingpayments, detaching);
+        ctx[39](null);
+        destroy_component(popupaddpayment, detaching);
       }
     };
   }
@@ -16488,7 +17368,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     let th;
     let t_value = formatMonthYear(
       /*quartal*/
-      ctx[50]
+      ctx[59]
     ) + "";
     let t;
     return {
@@ -16505,7 +17385,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         if (dirty[0] & /*quartals*/
         8 && t_value !== (t_value = formatMonthYear(
           /*quartal*/
-          ctx2[50]
+          ctx2[59]
         ) + ""))
           set_data(t, t_value);
       },
@@ -16516,13 +17396,13 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_if_block7(ctx) {
+  function create_if_block8(ctx) {
     let div;
     let div_class_value;
     let current;
     let if_block = (
       /*booking*/
-      ctx[53].tenantName && create_if_block_19(ctx)
+      ctx[62].tenantName && create_if_block_110(ctx)
     );
     return {
       c() {
@@ -16530,12 +17410,12 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         if (if_block)
           if_block.c();
         attr(div, "class", div_class_value = "cell " + /*booking*/
-        (ctx[53].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
+        (ctx[62].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
         (ctx[11] && /*booking*/
-        ctx[53].amountPaid >= /*booking*/
-        ctx[53].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
+        ctx[62].amountPaid >= /*booking*/
+        ctx[62].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
         ctx[5] && /*booking*/
-        ctx[53].deletedAt > 0 ? "hidden" : "") + " svelte-1uhyam5");
+        ctx[62].deletedAt > 0 ? "hidden" : "") + " svelte-1uhyam5");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16546,7 +17426,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       p(ctx2, dirty) {
         if (
           /*booking*/
-          ctx2[53].tenantName
+          ctx2[62].tenantName
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -16555,7 +17435,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_19(ctx2);
+            if_block = create_if_block_110(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(div, null);
@@ -16569,12 +17449,12 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         }
         if (!current || dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded*/
         2081 && div_class_value !== (div_class_value = "cell " + /*booking*/
-        (ctx2[53].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
+        (ctx2[62].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
         (ctx2[11] && /*booking*/
-        ctx2[53].amountPaid >= /*booking*/
-        ctx2[53].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
+        ctx2[62].amountPaid >= /*booking*/
+        ctx2[62].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
         ctx2[5] && /*booking*/
-        ctx2[53].deletedAt > 0 ? "hidden" : "") + " svelte-1uhyam5")) {
+        ctx2[62].deletedAt > 0 ? "hidden" : "") + " svelte-1uhyam5")) {
           attr(div, "class", div_class_value);
         }
       },
@@ -16597,11 +17477,11 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_if_block_19(ctx) {
+  function create_if_block_110(ctx) {
     let span0;
     let t0_value = (
       /*booking*/
-      ctx[53].tenantName + ""
+      ctx[62].tenantName + ""
     );
     let t0;
     let span0_class_value;
@@ -16610,7 +17490,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     let span1;
     let t2_value = (
       /*booking*/
-      ctx[53].dateStart + ""
+      ctx[62].dateStart + ""
     );
     let t2;
     let span1_class_value;
@@ -16620,7 +17500,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     let span3;
     let t6_value = (
       /*booking*/
-      ctx[53].dateEnd + ""
+      ctx[62].dateEnd + ""
     );
     let t6;
     let span3_class_value;
@@ -16629,7 +17509,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     let span5;
     let t8_value = (
       /*booking*/
-      ctx[53].amountPaid + ""
+      ctx[62].amountPaid + ""
     );
     let t8;
     let span5_class_value;
@@ -16639,7 +17519,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     let span7;
     let t12_value = (
       /*booking*/
-      ctx[53].totalPrice + ""
+      ctx[62].totalPrice + ""
     );
     let t12;
     let span7_class_value;
@@ -16649,7 +17529,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     let current;
     let if_block = (
       /*booking*/
-      ctx[53].deletedAt == 0 && create_if_block_24(ctx)
+      ctx[62].deletedAt == 0 && create_if_block_25(ctx)
     );
     return {
       c() {
@@ -16689,7 +17569,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         ) + " svelte-1uhyam5");
         attr(span3, "class", span3_class_value = (isDateInPast(
           /*booking*/
-          ctx[53].dateEnd
+          ctx[62].dateEnd
         ) ? "date-not-expired" : "") + " " + /*showDateEnd*/
         (ctx[8] ? "" : "hidden") + " svelte-1uhyam5");
         attr(span5, "class", span5_class_value = null_to_empty(
@@ -16702,9 +17582,9 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         ) + " svelte-1uhyam5");
         attr(span8, "class", span8_class_value = null_to_empty(
           /*booking*/
-          ctx[53].amountPaid >= /*booking*/
-          ctx[53].totalPrice ? "" : `${/*booking*/
-          ctx[53].deletedAt == 0 ? "text-red" : ""}`
+          ctx[62].amountPaid >= /*booking*/
+          ctx[62].totalPrice ? "" : `${/*booking*/
+          ctx[62].deletedAt == 0 ? "text-red" : ""}`
         ) + " svelte-1uhyam5");
       },
       m(target, anchor) {
@@ -16737,7 +17617,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       p(ctx2, dirty) {
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t0_value !== (t0_value = /*booking*/
-        ctx2[53].tenantName + ""))
+        ctx2[62].tenantName + ""))
           set_data(t0, t0_value);
         if (!current || dirty[0] & /*showTenant*/
         64 && span0_class_value !== (span0_class_value = null_to_empty(
@@ -16748,7 +17628,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         }
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t2_value !== (t2_value = /*booking*/
-        ctx2[53].dateStart + ""))
+        ctx2[62].dateStart + ""))
           set_data(t2, t2_value);
         if (!current || dirty[0] & /*showDateStart*/
         128 && span1_class_value !== (span1_class_value = null_to_empty(
@@ -16759,19 +17639,19 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         }
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t6_value !== (t6_value = /*booking*/
-        ctx2[53].dateEnd + ""))
+        ctx2[62].dateEnd + ""))
           set_data(t6, t6_value);
         if (!current || dirty[0] & /*bookingsPerQuartal, showDateEnd*/
         257 && span3_class_value !== (span3_class_value = (isDateInPast(
           /*booking*/
-          ctx2[53].dateEnd
+          ctx2[62].dateEnd
         ) ? "date-not-expired" : "") + " " + /*showDateEnd*/
         (ctx2[8] ? "" : "hidden") + " svelte-1uhyam5")) {
           attr(span3, "class", span3_class_value);
         }
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t8_value !== (t8_value = /*booking*/
-        ctx2[53].amountPaid + ""))
+        ctx2[62].amountPaid + ""))
           set_data(t8, t8_value);
         if (!current || dirty[0] & /*showPaid*/
         512 && span5_class_value !== (span5_class_value = null_to_empty(
@@ -16782,7 +17662,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         }
         if ((!current || dirty[0] & /*bookingsPerQuartal*/
         1) && t12_value !== (t12_value = /*booking*/
-        ctx2[53].totalPrice + ""))
+        ctx2[62].totalPrice + ""))
           set_data(t12, t12_value);
         if (!current || dirty[0] & /*showPrice*/
         1024 && span7_class_value !== (span7_class_value = null_to_empty(
@@ -16794,15 +17674,15 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         if (!current || dirty[0] & /*bookingsPerQuartal*/
         1 && span8_class_value !== (span8_class_value = null_to_empty(
           /*booking*/
-          ctx2[53].amountPaid >= /*booking*/
-          ctx2[53].totalPrice ? "" : `${/*booking*/
-          ctx2[53].deletedAt == 0 ? "text-red" : ""}`
+          ctx2[62].amountPaid >= /*booking*/
+          ctx2[62].totalPrice ? "" : `${/*booking*/
+          ctx2[62].deletedAt == 0 ? "text-red" : ""}`
         ) + " svelte-1uhyam5")) {
           attr(span8, "class", span8_class_value);
         }
         if (
           /*booking*/
-          ctx2[53].deletedAt == 0
+          ctx2[62].deletedAt == 0
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -16811,7 +17691,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_24(ctx2);
+            if_block = create_if_block_25(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -16849,7 +17729,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_if_block_24(ctx) {
+  function create_if_block_25(ctx) {
     let div;
     let button0;
     let icon0;
@@ -16874,24 +17754,33 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     function click_handler_2() {
       return (
         /*click_handler_2*/
-        ctx[42](
+        ctx[50](
           /*booking*/
-          ctx[53]
+          ctx[62]
         )
       );
     }
     icon1 = new Icon_default({
       props: { src: RiFinanceWallet3Line, size: "17" }
     });
-    icon2 = new Icon_default({
-      props: { src: RiSystemEyeLine, size: "17" }
-    });
     function click_handler_3() {
       return (
         /*click_handler_3*/
-        ctx[43](
+        ctx[51](
           /*booking*/
-          ctx[53]
+          ctx[62]
+        )
+      );
+    }
+    icon2 = new Icon_default({
+      props: { src: RiSystemEyeLine, size: "17" }
+    });
+    function click_handler_4() {
+      return (
+        /*click_handler_4*/
+        ctx[52](
+          /*booking*/
+          ctx[62]
         )
       );
     }
@@ -16939,7 +17828,8 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         if (!mounted) {
           dispose = [
             listen(button0, "click", click_handler_2),
-            listen(button2, "click", click_handler_3)
+            listen(button1, "click", click_handler_3),
+            listen(button2, "click", click_handler_4)
           ];
           mounted = true;
         }
@@ -16979,17 +17869,17 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
   function create_each_block_2(ctx) {
     let show_if = (
       /*booking*/
-      ctx[53].roomName == /*room*/
-      ctx[47] && isBookingInThatMonth(
+      ctx[62].roomName == /*room*/
+      ctx[56] && isBookingInThatMonth(
         /*booking*/
-        ctx[53],
+        ctx[62],
         /*quartal*/
-        ctx[50]
+        ctx[59]
       )
     );
     let if_block_anchor;
     let current;
-    let if_block = show_if && create_if_block7(ctx);
+    let if_block = show_if && create_if_block8(ctx);
     return {
       c() {
         if (if_block)
@@ -17006,12 +17896,12 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         if (dirty[0] & /*bookingsPerQuartal, roomNames, quartals*/
         11)
           show_if = /*booking*/
-          ctx2[53].roomName == /*room*/
-          ctx2[47] && isBookingInThatMonth(
+          ctx2[62].roomName == /*room*/
+          ctx2[56] && isBookingInThatMonth(
             /*booking*/
-            ctx2[53],
+            ctx2[62],
             /*quartal*/
-            ctx2[50]
+            ctx2[59]
           );
         if (show_if) {
           if (if_block) {
@@ -17021,7 +17911,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block7(ctx2);
+            if_block = create_if_block8(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -17089,8 +17979,8 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
-        25169899) {
+        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
+        469766123) {
           each_value_2 = ensure_array_like(
             /*bookingsPerQuartal*/
             ctx2[0] || []
@@ -17144,7 +18034,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     let t0;
     let t1_value = (
       /*room*/
-      ctx[47] + ""
+      ctx[56] + ""
     );
     let t1;
     let t2;
@@ -17192,10 +18082,10 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       p(ctx2, dirty) {
         if ((!current || dirty[0] & /*roomNames*/
         2) && t1_value !== (t1_value = /*room*/
-        ctx2[47] + ""))
+        ctx2[56] + ""))
           set_data(t1, t1_value);
-        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
-        25169899) {
+        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
+        469766123) {
           each_value_1 = ensure_array_like(
             /*quartals*/
             ctx2[3] || []
@@ -17305,7 +18195,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       props: { size: "20", src: RiArrowsArrowRightSLine }
     });
     function switcher0_value_binding(value) {
-      ctx[35](value);
+      ctx[43](value);
     }
     let switcher0_props = {
       id: "show-refunded",
@@ -17321,7 +18211,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     switcher0 = new Switcher_default({ props: switcher0_props });
     binding_callbacks.push(() => bind(switcher0, "value", switcher0_value_binding));
     function switcher1_value_binding(value) {
-      ctx[36](value);
+      ctx[44](value);
     }
     let switcher1_props = { id: "show-tenant", label: "Show Tenant" };
     if (
@@ -17334,7 +18224,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     switcher1 = new Switcher_default({ props: switcher1_props });
     binding_callbacks.push(() => bind(switcher1, "value", switcher1_value_binding));
     function switcher2_value_binding(value) {
-      ctx[37](value);
+      ctx[45](value);
     }
     let switcher2_props = {
       id: "show-date-start",
@@ -17350,7 +18240,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     switcher2 = new Switcher_default({ props: switcher2_props });
     binding_callbacks.push(() => bind(switcher2, "value", switcher2_value_binding));
     function switcher3_value_binding(value) {
-      ctx[38](value);
+      ctx[46](value);
     }
     let switcher3_props = {
       id: "show-date-end",
@@ -17366,7 +18256,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     switcher3 = new Switcher_default({ props: switcher3_props });
     binding_callbacks.push(() => bind(switcher3, "value", switcher3_value_binding));
     function switcher4_value_binding(value) {
-      ctx[39](value);
+      ctx[47](value);
     }
     let switcher4_props = { id: "show-paid", label: "Show Paid" };
     if (
@@ -17379,7 +18269,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     switcher4 = new Switcher_default({ props: switcher4_props });
     binding_callbacks.push(() => bind(switcher4, "value", switcher4_value_binding));
     function switcher5_value_binding(value) {
-      ctx[40](value);
+      ctx[48](value);
     }
     let switcher5_props = { id: "show-price", label: "Show Price" };
     if (
@@ -17392,7 +18282,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     switcher5 = new Switcher_default({ props: switcher5_props });
     binding_callbacks.push(() => bind(switcher5, "value", switcher5_value_binding));
     function switcher6_value_binding(value) {
-      ctx[41](value);
+      ctx[49](value);
     }
     let switcher6_props = {
       id: "show-only-not-paid",
@@ -17537,13 +18427,13 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
               button0,
               "click",
               /*click_handler*/
-              ctx[33]
+              ctx[41]
             ),
             listen(
               button1,
               "click",
               /*click_handler_1*/
-              ctx[34]
+              ctx[42]
             )
           ];
           mounted = true;
@@ -17647,8 +18537,8 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           }
           each_blocks_1.length = each_value_3.length;
         }
-        if (dirty[0] & /*quartals, bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames*/
-        25169899) {
+        if (dirty[0] & /*quartals, bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames*/
+        469766123) {
           each_value = ensure_array_like(
             /*roomNames*/
             ctx2[1] || []
@@ -17726,7 +18616,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_fragment15(ctx) {
+  function create_fragment16(ctx) {
     let t;
     let layoutmain;
     let current;
@@ -17782,8 +18672,8 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         }
         const layoutmain_changes = {};
         if (dirty[0] & /*roomNames, quartals, bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPrice, showPaid, showDateEnd, showDateStart, showTenant, monthEnd, monthStart*/
-        4095 | dirty[1] & /*$scope*/
-        134217728) {
+        4095 | dirty[2] & /*$scope*/
+        32) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -17867,7 +18757,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     inputDate.setHours(0, 0, 0, 0);
     return inputDate < today;
   }
-  function instance12($self, $props, $invalidate) {
+  function instance13($self, $props, $invalidate) {
     let bookingsPerQuartal = (
       /** @type {BookingDetail[]} */
       [/* bookingsPerQuartal*/]
@@ -17959,7 +18849,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     function onExtendBooking(booking) {
       $invalidate(14, bookingToExtend = booking);
       $invalidate(16, dateStart = booking.dateEnd);
-      $invalidate(17, dateEnd = (0, import_xFormatter4.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 30));
+      $invalidate(17, dateEnd = (0, import_xFormatter5.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 30));
       popupExtendBooking.Show();
     }
     let popUpShowPayments = (
@@ -17991,6 +18881,38 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         }
       );
       popUpShowPayments.Show();
+    }
+    let popUpAddPayment = null;
+    let bookingIdToPay = 0;
+    let isSubmitAddPayment = false;
+    function showInputPayment(bookingId) {
+      $invalidate(22, bookingIdToPay = bookingId);
+      popUpAddPayment.Show();
+    }
+    async function submitAddPayment(payment) {
+      $invalidate(23, isSubmitAddPayment = true);
+      payment.bookingId = bookingIdToPay + "";
+      const i = (
+        /** @type {any} */
+        { payment, cmd: "upsert" }
+      );
+      await (0, import_jsApi2.AdminPayment)(
+        i,
+        /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          $invalidate(23, isSubmitAddPayment = false);
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          notifier.showSuccess(`Payment created for booking #${bookingIdToPay} !!`);
+          popUpAddPayment.Reset();
+          popUpAddPayment.Hide();
+          refreshBookings();
+        }
+      );
     }
     function popupextendbooking_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
@@ -18028,6 +18950,20 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         $invalidate(18, popUpShowPayments);
       });
     }
+    function popupaddpayment_bookingId_binding(value) {
+      bookingIdToPay = value;
+      $invalidate(22, bookingIdToPay);
+    }
+    function popupaddpayment_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        popUpAddPayment = $value;
+        $invalidate(21, popUpAddPayment);
+      });
+    }
+    function popupaddpayment_isSubmitted_binding(value) {
+      isSubmitAddPayment = value;
+      $invalidate(23, isSubmitAddPayment);
+    }
     const click_handler = () => shiftMonth(-1);
     const click_handler_1 = () => shiftMonth(1);
     function switcher0_value_binding(value) {
@@ -18059,7 +18995,8 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       $invalidate(11, showOnlyNotPaid);
     }
     const click_handler_2 = (booking) => onExtendBooking(booking);
-    const click_handler_3 = (booking) => showPaymentsForBooking(booking.id);
+    const click_handler_3 = (booking) => showInputPayment(booking.id);
+    const click_handler_4 = (booking) => showPaymentsForBooking(booking.id);
     return [
       bookingsPerQuartal,
       roomNames,
@@ -18082,10 +19019,15 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       popUpShowPayments,
       bookingIdToShowPayment,
       paymentsForBooking,
+      popUpAddPayment,
+      bookingIdToPay,
+      isSubmitAddPayment,
       shiftMonth,
       SubmitExtendBooking,
       onExtendBooking,
       showPaymentsForBooking,
+      showInputPayment,
+      submitAddPayment,
       popupextendbooking_binding,
       popupextendbooking_isSubmitted_binding,
       popupextendbooking_bookingToExtend_binding,
@@ -18094,6 +19036,9 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       popupshowbookingpayments_bookingId_binding,
       popupshowbookingpayments_payments_binding,
       popupshowbookingpayments_binding,
+      popupaddpayment_bookingId_binding,
+      popupaddpayment_binding,
+      popupaddpayment_isSubmitted_binding,
       click_handler,
       click_handler_1,
       switcher0_value_binding,
@@ -18104,13 +19049,14 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       switcher5_value_binding,
       switcher6_value_binding,
       click_handler_2,
-      click_handler_3
+      click_handler_3,
+      click_handler_4
     ];
   }
   var UserReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance12, create_fragment15, safe_not_equal, {}, null, [-1, -1]);
+      init(this, options, instance13, create_fragment16, safe_not_equal, {}, null, [-1, -1, -1]);
     }
   };
   var userReport_default = UserReport_1;

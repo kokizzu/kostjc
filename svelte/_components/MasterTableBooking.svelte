@@ -33,7 +33,7 @@
   import {AdminBooking, AdminPayment} from '../jsApi.GEN'
   import { notifier } from './xNotifier';
   import PopUpAddPayment from './PopUpAddPayment.svelte';
-    import MultiSelect from './MultiSelect.svelte';
+  import MultiSelect from './MultiSelect.svelte';
 
   export let tenants = /** @type {Record<number, string>} */ ({});
 

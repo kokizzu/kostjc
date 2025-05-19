@@ -3,7 +3,7 @@
 
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
-    import { formatPrice } from './xFormatter';
+	import { formatPrice } from './xFormatter';
 
   let isShow = /** @type {boolean} */ (false);
 

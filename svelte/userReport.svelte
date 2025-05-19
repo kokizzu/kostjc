@@ -18,9 +18,10 @@
   import Switcher from './_components/Switcher.svelte';
   import { notifier } from './_components/xNotifier';
   import { onMount } from 'svelte';
-  import { dateISOFormatFromYYYYMMDD, formatPrice } from './_components/xFormatter';
-    import { CmdForm, CmdUpsert } from './_components/xConstant';
-    import PopUpShowBookingPayments from './_components/PopUpShowBookingPayments.svelte';
+  import { dateISOFormatFromYYYYMMDD } from './_components/xFormatter';
+  import { CmdForm, CmdUpsert } from './_components/xConstant';
+  import PopUpShowBookingPayments from './_components/PopUpShowBookingPayments.svelte';
+  import PopUpAddPayment from './_components/PopUpAddPayment.svelte';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -174,6 +175,7 @@
       }
     );
   }
+
   function onExtendBooking(/** @type {BookingDetail} */ booking) {
     bookingToExtend = booking;
     dateStart = booking.dateEnd;
@@ -205,6 +207,41 @@
 
     popUpShowPayments.Show();
   }
+
+  let popUpAddPayment = null;
+  let bookingIdToPay = 0;
+  let isSubmitAddPayment = false;
+
+  function showInputPayment(/** @type {number} */ bookingId) {
+    bookingIdToPay = bookingId;
+    popUpAddPayment.Show();
+  }
+
+  async function submitAddPayment(/** @type {Payment} */ payment) {
+    isSubmitAddPayment = true;
+    payment.bookingId = bookingIdToPay+'';
+    const i = /** @type {any} */ ({
+      payment,
+      cmd: 'upsert'
+    });
+    await AdminPayment(i,
+      /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        isSubmitAddPayment = false;
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+        notifier.showSuccess(`Payment created for booking #${bookingIdToPay} !!`);
+
+        popUpAddPayment.Reset();
+        popUpAddPayment.Hide();
+        refreshBookings();
+      }
+    );
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -223,6 +260,14 @@
     bind:bookingId={bookingIdToShowPayment}
     bind:payments={paymentsForBooking}
     bind:this={popUpShowPayments}
+  />
+
+  <PopUpAddPayment
+    isBookingReadOnly
+    bind:bookingId={bookingIdToPay}
+    bind:this={popUpAddPayment}
+    bind:isSubmitted={isSubmitAddPayment}
+    OnSubmit={submitAddPayment}
   />
 {/if}
 
@@ -327,7 +372,7 @@
                                   size="17"
                                 />
                               </button>
-                              <button class="btn" title="Input Payment">
+                              <button class="btn" title="Input Payment" on:click={() => showInputPayment(booking.id)}>
                                 <Icon
                                   src={RiFinanceWallet3Line}
                                   size="17"

@@ -1,15 +1,11 @@
 package domain
 
 import (
-	"fmt"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
 	"time"
-
-	"github.com/fatih/color"
-	"github.com/kokizzu/gotro/X"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminPayment.go
@@ -142,7 +138,6 @@ func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 		if in.BookingId > 0 {
 			payment := rqProperty.NewPayments(d.PropOltp)
 			paymentsByBooking := payment.FindByBookingId(in.BookingId)
-			fmt.Println(color.GreenString(X.ToJsonPretty(paymentsByBooking)))
 			out.PaymentsByBooking = paymentsByBooking
 			return
 		}
