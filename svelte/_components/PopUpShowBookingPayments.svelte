@@ -3,7 +3,13 @@
 
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
-	import { formatPrice } from './xFormatter';
+	import { RiDesignBallPenLine } from '../node_modules/svelte-icons-pack/dist/ri';
+	import { dateISOFormat, formatPrice } from './xFormatter';
+	import PopUpEditPayment from './PopUpEditPayment.svelte';
+    import { onMount } from 'svelte';
+    import { AdminPayment } from '../jsApi.GEN';
+    import { CmdForm, CmdUpsert } from './xConstant';
+    import { notifier } from './xNotifier';
 
   let isShow = /** @type {boolean} */ (false);
 
@@ -12,10 +18,93 @@
 
   export const Show = () => isShow = true;
   export const Hide = () => isShow = false;
+  export const Reset = () => {}
 
-  export const Reset = () => {
-  }
+	let popUpEditPayment = null;
+	let isPopUpEditPaymentReady = false;
+	let isSubmitEditPayment = false;
+
+	let editPaymentId;
+	let editPaymentAt = dateISOFormat(0);
+  let editTotalPaidIDR = 0;
+  let editPaymentMethod = 'Cash';
+  let editPaymentStatus = 'Paid';
+  let editNote = '';
+
+	onMount(() => {
+		isPopUpEditPaymentReady = true;
+	});
+
+	function onPopUpEditPayment(/** @type {Payment} */ payment) {
+		console.log(payment);
+		editPaymentId = payment.id;
+		editPaymentAt =  payment.paymentAt;
+		editTotalPaidIDR = payment.paidIDR;
+		editPaymentMethod = payment.paymentMethod;
+		console.log('Payment method', editPaymentMethod);
+		editPaymentStatus = payment.paymentStatus;
+		console.log('Payment status', editPaymentStatus);
+		editNote = payment.note;
+		popUpEditPayment.Show();
+	}
+
+	async function refreshPayments() { // @ts-ignore
+		await AdminPayment({ 
+      cmd: CmdForm,
+      bookingId: bookingId
+    }, /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+    /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+      if (o.error) {
+        console.log(o);
+        notifier.showError(o.error);
+        return
+      }
+
+      payments = o.paymentsByBooking;
+    });
+	}
+
+	async function OnEditPayment(/** @type {Payment} */ payment) {
+		payment.id = editPaymentId;
+		const i = /** @type {any}*/ ({
+      payment,
+      cmd: CmdUpsert
+    });
+    await AdminPayment(i,
+      /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+				refreshPayments();
+
+        notifier.showSuccess(`Payment #${payment.id} updated !!`);
+				popUpEditPayment.Hide()
+      }
+    );
+
+		isSubmitEditPayment = false;
+	}
 </script>
+
+{#if isPopUpEditPaymentReady}
+	<PopUpEditPayment 
+		bind:this={popUpEditPayment}
+		bind:paymentId={editPaymentId}
+		bind:isSubmitted={isSubmitEditPayment}
+		bind:paymentAt={editPaymentAt}
+		bind:totalPaidIDR={editTotalPaidIDR}
+		bind:paymentMethod={editPaymentMethod}
+		bind:paymentStatus={editPaymentStatus}
+		bind:note={editNote}
+		OnSubmit={OnEditPayment}
+	/>
+{/if}
 
 <div class={`popup-container ${isShow ? 'show' : ''}`}>
   <div class="popup">
@@ -31,7 +120,8 @@
 					<table>
 						<thead>
 							<tr>
-								<th>No</th>
+								<th style="width: 40px;">No</th>
+								<th class="a-row" style="width: 70px;">Actions</th>
 								<th>ID</th>
 								<th>Payment At</th>
 								<th>Total Paid</th>
@@ -44,6 +134,21 @@
 							{#each (payments || []) as py, idx}
 								<tr>
 									<td class="num-row">{idx + 1}</td>
+									<td class="a-row">
+										<div class="actions">
+											<button
+												class="btn edit"
+												title="Edit"
+												on:click={() => onPopUpEditPayment(py)}
+											>
+												<Icon
+													size="15"
+													color="var(--gray-007)"
+													src={RiDesignBallPenLine}
+												/>
+											</button>
+										</div>
+									</td>
 									<td>#{py.id}</td>
 									<td>{py.paymentAt}</td>
 									<td>{formatPrice(py.paidIDR, 'IDR')}</td>
@@ -110,7 +215,7 @@
 		border-radius: 8px;
 		background-color: #FFF;
 		height: fit-content;
-		width: 600px;
+		width: 80%;
 		display: flex;
 		flex-direction: column;
 	}
@@ -160,7 +265,6 @@
     background-color: #fff;
     border-left: 1px solid var(--gray-003);
 		border-right: 1px solid var(--gray-003);
-		border-bottom: 1px solid var(--gray-003);
     padding: 0;
     font-size: var(--font-base);
   }
@@ -212,6 +316,30 @@
     padding: 8px 12px;
 		border-right: 1px solid var(--gray-004);
 		border-bottom: 1px solid var(--gray-004);
+  }
+
+	.table-root .table-container table tbody tr td .actions {
+    display: flex;
+    flex-direction: row;
+  }
+
+	.table-root .table-container table tbody tr td .actions .btn {
+    border: none;
+    padding: 6px;
+    border-radius: 8px;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+	:global(.table-root .table-container table tbody tr td .actions .btn:hover svg) {
+    fill: var(--blue-005);
+  }
+
+  .table-root .table-container table tbody tr td .actions .btn:hover {
+    background-color: var(--blue-transparent);
   }
 
 	.table-root .table-container table tbody tr:last-child td,

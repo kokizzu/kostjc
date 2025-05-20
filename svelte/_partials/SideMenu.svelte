@@ -126,11 +126,14 @@
     top: var(--navbar-height);
     left: 0;
     bottom: 0;
-    height: 100%;
     width: var(--sidemenu-width);
     border-right: 1px solid var(--gray-002);
     background-color: #FFF;
     font-size: var(--font-md);
+    overflow-y: auto;
+    scrollbar-color: var(--gray-003) transparent;
+    scrollbar-width: calc(100% - 20px);
+    padding: 10px 0 20px 0;
   }
 
   aside .separator {
@@ -141,7 +144,6 @@
   }
 
   aside .container {
-    padding: 10px 0;
     display: flex;
     flex-direction: column;
     gap: 10px;

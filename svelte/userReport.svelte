@@ -81,7 +81,7 @@
   }
 
   const now = new Date();
-  const initialStart = new Date(now.getFullYear(), now.getMonth());
+  const initialStart = new Date(now.getFullYear(), now.getMonth()-2);
   let monthStart = formatYM(initialStart);
   let quartals = getQuartalsFromStart(monthStart);
   let monthEnd = quartals[3];
@@ -167,7 +167,7 @@
           return
         }
         
-        notifier.showSuccess(`Booking extended !!`);
+        notifier.showSuccess(`Booking #${booking.id} extended !!`);
 
         popupExtendBooking.Reset();
         popupExtendBooking.Hide();
@@ -178,7 +178,7 @@
 
   function onExtendBooking(/** @type {BookingDetail} */ booking) {
     bookingToExtend = booking;
-    dateStart = booking.dateEnd;
+    dateStart = dateISOFormatFromYYYYMMDD(booking.dateEnd, 1);
     dateEnd = dateISOFormatFromYYYYMMDD(booking.dateEnd, 30);
     popupExtendBooking.Show();
   }
@@ -364,34 +364,32 @@
                             <span>/</span>
                             <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
                           </span>
-                          {#if booking.deletedAt == 0}
-                            <div class="actions">
-                              <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking)}>
-                                <Icon
-                                  src={RiSystemExternalLinkLine}
-                                  size="17"
-                                />
-                              </button>
-                              <button class="btn" title="Input Payment" on:click={() => showInputPayment(booking.id)}>
-                                <Icon
-                                  src={RiFinanceWallet3Line}
-                                  size="17"
-                                />
-                              </button>
-                              <button class="btn" title="Show Payments" on:click={() => showPaymentsForBooking(booking.id)}>
-                                <Icon
-                                  src={RiSystemEyeLine}
-                                  size="17"
-                                />
-                              </button>
-                              <button class="btn" title="Edit Booking">
-                                <Icon
-                                  src={RiDesignBallPenLine}
-                                  size="17"
-                                />
-                              </button>
-                            </div>
-                          {/if}
+                          <div class="actions">
+                            <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking)}>
+                              <Icon
+                                src={RiSystemExternalLinkLine}
+                                size="17"
+                              />
+                            </button>
+                            <button class="btn" title="Input Payment" on:click={() => showInputPayment(booking.id)}>
+                              <Icon
+                                src={RiFinanceWallet3Line}
+                                size="17"
+                              />
+                            </button>
+                            <button class="btn" title="Show Payments" on:click={() => showPaymentsForBooking(booking.id)}>
+                              <Icon
+                                src={RiSystemEyeLine}
+                                size="17"
+                              />
+                            </button>
+                            <button class="btn" title="Edit Booking">
+                              <Icon
+                                src={RiDesignBallPenLine}
+                                size="17"
+                              />
+                            </button>
+                          </div>
                         {/if}
                       </div>
                     {/if}

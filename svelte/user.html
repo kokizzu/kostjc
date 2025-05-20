@@ -350,25 +350,27 @@
 
 
 <style>/* fakecss:./_partials/SideMenu.esbuild-svelte-fake-css */
-aside.svelte-2xd6p5.svelte-2xd6p5 {
+aside.svelte-1h4x6vo.svelte-1h4x6vo {
   position: fixed;
   top: var(--navbar-height);
   left: 0;
   bottom: 0;
-  height: 100%;
   width: var(--sidemenu-width);
   border-right: 1px solid var(--gray-002);
   background-color: #FFF;
   font-size: var(--font-md);
+  overflow-y: auto;
+  scrollbar-color: var(--gray-003) transparent;
+  scrollbar-width: calc(100% - 20px);
+  padding: 10px 0 20px 0;
 }
-aside.svelte-2xd6p5 .separator.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .separator.svelte-1h4x6vo {
   width: 100%;
   margin: auto;
   height: 1px;
   background-color: var(--gray-002);
 }
-aside.svelte-2xd6p5 .container.svelte-2xd6p5 {
-  padding: 10px 0;
+aside.svelte-1h4x6vo .container.svelte-1h4x6vo {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -376,7 +378,7 @@ aside.svelte-2xd6p5 .container.svelte-2xd6p5 {
   width: 100%;
   margin: 0;
 }
-aside.svelte-2xd6p5 .container .nav-menu-title.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .container .nav-menu-title.svelte-1h4x6vo {
   margin: 0;
   padding: 10px 25px 10px 70px;
   border-bottom: 1px solid var(--gray-002);
@@ -384,7 +386,7 @@ aside.svelte-2xd6p5 .container .nav-menu-title.svelte-2xd6p5 {
   text-transform: uppercase;
   font-size: 13px;
 }
-aside.svelte-2xd6p5 .container .nav-menu.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .container .nav-menu.svelte-1h4x6vo {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -394,8 +396,8 @@ aside.svelte-2xd6p5 .container .nav-menu.svelte-2xd6p5 {
   margin: 0;
   padding: 0 10px 0 50px;
 }
-aside.svelte-2xd6p5 .container .nav-menu a.svelte-2xd6p5,
-aside.svelte-2xd6p5 .container .nav-menu button.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .container .nav-menu a.svelte-1h4x6vo,
+aside.svelte-1h4x6vo .container .nav-menu button.svelte-1h4x6vo {
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -410,15 +412,15 @@ aside.svelte-2xd6p5 .container .nav-menu button.svelte-2xd6p5 {
   background-color: transparent;
   font-size: var(--font-lg);
 }
-aside.svelte-2xd6p5 .container .nav-menu a.svelte-2xd6p5:hover,
-aside.svelte-2xd6p5 .container .nav-menu button.svelte-2xd6p5:hover {
+aside.svelte-1h4x6vo .container .nav-menu a.svelte-1h4x6vo:hover,
+aside.svelte-1h4x6vo .container .nav-menu button.svelte-1h4x6vo:hover {
   background-color: var(--gray-001);
 }
-aside.svelte-2xd6p5 .container .nav-menu a.active.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .container .nav-menu a.active.svelte-1h4x6vo {
   background-color: var(--blue-transparent);
   color: var(--blue-007);
 }
-aside.svelte-2xd6p5 .container .nav-menu button.red.svelte-2xd6p5:hover {
+aside.svelte-1h4x6vo .container .nav-menu button.red.svelte-1h4x6vo:hover {
   background-color: var(--red-transparent);
   color: var(--red-007);
 }
@@ -5142,16 +5144,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t2 = space();
         span = element("span");
         span.textContent = "Bookings";
-        attr(h3, "class", "nav-menu-title svelte-2xd6p5");
+        attr(h3, "class", "nav-menu-title svelte-1h4x6vo");
         attr(a, "href", "/staff/booking");
-        attr(a, "class", "svelte-2xd6p5");
+        attr(a, "class", "svelte-1h4x6vo");
         toggle_class(
           a,
           "active",
           /*pathLv2*/
           ctx[3] === "booking"
         );
-        attr(nav, "class", "nav-menu svelte-2xd6p5");
+        attr(nav, "class", "nav-menu svelte-1h4x6vo");
       },
       m(target, anchor) {
         insert(target, h3, anchor);
@@ -5328,9 +5330,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t26 = space();
         span8 = element("span");
         span8.textContent = "Users";
-        attr(h3, "class", "nav-menu-title svelte-2xd6p5");
+        attr(h3, "class", "nav-menu-title svelte-1h4x6vo");
         attr(a0, "href", "/admin/location");
-        attr(a0, "class", "svelte-2xd6p5");
+        attr(a0, "class", "svelte-1h4x6vo");
         toggle_class(
           a0,
           "active",
@@ -5338,7 +5340,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] === "location"
         );
         attr(a1, "href", "/admin/facility");
-        attr(a1, "class", "svelte-2xd6p5");
+        attr(a1, "class", "svelte-1h4x6vo");
         toggle_class(
           a1,
           "active",
@@ -5346,7 +5348,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] === "facility"
         );
         attr(a2, "href", "/admin/building");
-        attr(a2, "class", "svelte-2xd6p5");
+        attr(a2, "class", "svelte-1h4x6vo");
         toggle_class(
           a2,
           "active",
@@ -5354,7 +5356,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] === "building"
         );
         attr(a3, "href", "/admin/room");
-        attr(a3, "class", "svelte-2xd6p5");
+        attr(a3, "class", "svelte-1h4x6vo");
         toggle_class(
           a3,
           "active",
@@ -5362,7 +5364,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] === "room"
         );
         attr(a4, "href", "/admin/booking");
-        attr(a4, "class", "svelte-2xd6p5");
+        attr(a4, "class", "svelte-1h4x6vo");
         toggle_class(
           a4,
           "active",
@@ -5371,7 +5373,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] === "booking"
         );
         attr(a5, "href", "/admin/payment");
-        attr(a5, "class", "svelte-2xd6p5");
+        attr(a5, "class", "svelte-1h4x6vo");
         toggle_class(
           a5,
           "active",
@@ -5379,7 +5381,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] === "payment"
         );
         attr(a6, "href", "/admin/stock");
-        attr(a6, "class", "svelte-2xd6p5");
+        attr(a6, "class", "svelte-1h4x6vo");
         toggle_class(
           a6,
           "active",
@@ -5387,7 +5389,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] === "stock"
         );
         attr(a7, "href", "/admin/tenants");
-        attr(a7, "class", "svelte-2xd6p5");
+        attr(a7, "class", "svelte-1h4x6vo");
         toggle_class(
           a7,
           "active",
@@ -5395,14 +5397,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] === "tenants"
         );
         attr(a8, "href", "/admin/usersManagement");
-        attr(a8, "class", "svelte-2xd6p5");
+        attr(a8, "class", "svelte-1h4x6vo");
         toggle_class(
           a8,
           "active",
           /*pathLv2*/
           ctx[3] === "usersManagement"
         );
-        attr(nav, "class", "nav-menu svelte-2xd6p5");
+        attr(nav, "class", "nav-menu svelte-1h4x6vo");
       },
       m(target, anchor) {
         insert(target, h3, anchor);
@@ -5586,7 +5588,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         span4 = element("span");
         span4.textContent = "Logout";
         attr(a0, "href", "/");
-        attr(a0, "class", "svelte-2xd6p5");
+        attr(a0, "class", "svelte-1h4x6vo");
         toggle_class(
           a0,
           "active",
@@ -5594,7 +5596,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[2] === ""
         );
         attr(a1, "href", "/user/report");
-        attr(a1, "class", "svelte-2xd6p5");
+        attr(a1, "class", "svelte-1h4x6vo");
         toggle_class(
           a1,
           "active",
@@ -5602,19 +5604,19 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[1] === "/user/report"
         );
         attr(a2, "href", "/user");
-        attr(a2, "class", "svelte-2xd6p5");
+        attr(a2, "class", "svelte-1h4x6vo");
         toggle_class(
           a2,
           "active",
           /*pathAll*/
           ctx[1] === "/user"
         );
-        attr(nav0, "class", "nav-menu svelte-2xd6p5");
-        attr(span3, "class", "separator svelte-2xd6p5");
-        attr(button, "class", "red svelte-2xd6p5");
-        attr(nav1, "class", "nav-menu svelte-2xd6p5");
-        attr(div, "class", "container svelte-2xd6p5");
-        attr(aside, "class", "svelte-2xd6p5");
+        attr(nav0, "class", "nav-menu svelte-1h4x6vo");
+        attr(span3, "class", "separator svelte-1h4x6vo");
+        attr(button, "class", "red svelte-1h4x6vo");
+        attr(nav1, "class", "nav-menu svelte-1h4x6vo");
+        attr(div, "class", "container svelte-1h4x6vo");
+        attr(aside, "class", "svelte-1h4x6vo");
       },
       m(target, anchor) {
         insert(target, aside, anchor);

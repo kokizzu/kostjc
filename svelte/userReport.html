@@ -350,25 +350,27 @@
 
 
 <style>/* fakecss:./_partials/SideMenu.esbuild-svelte-fake-css */
-aside.svelte-2xd6p5.svelte-2xd6p5 {
+aside.svelte-1h4x6vo.svelte-1h4x6vo {
   position: fixed;
   top: var(--navbar-height);
   left: 0;
   bottom: 0;
-  height: 100%;
   width: var(--sidemenu-width);
   border-right: 1px solid var(--gray-002);
   background-color: #FFF;
   font-size: var(--font-md);
+  overflow-y: auto;
+  scrollbar-color: var(--gray-003) transparent;
+  scrollbar-width: calc(100% - 20px);
+  padding: 10px 0 20px 0;
 }
-aside.svelte-2xd6p5 .separator.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .separator.svelte-1h4x6vo {
   width: 100%;
   margin: auto;
   height: 1px;
   background-color: var(--gray-002);
 }
-aside.svelte-2xd6p5 .container.svelte-2xd6p5 {
-  padding: 10px 0;
+aside.svelte-1h4x6vo .container.svelte-1h4x6vo {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -376,7 +378,7 @@ aside.svelte-2xd6p5 .container.svelte-2xd6p5 {
   width: 100%;
   margin: 0;
 }
-aside.svelte-2xd6p5 .container .nav-menu-title.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .container .nav-menu-title.svelte-1h4x6vo {
   margin: 0;
   padding: 10px 25px 10px 70px;
   border-bottom: 1px solid var(--gray-002);
@@ -384,7 +386,7 @@ aside.svelte-2xd6p5 .container .nav-menu-title.svelte-2xd6p5 {
   text-transform: uppercase;
   font-size: 13px;
 }
-aside.svelte-2xd6p5 .container .nav-menu.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .container .nav-menu.svelte-1h4x6vo {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -394,8 +396,8 @@ aside.svelte-2xd6p5 .container .nav-menu.svelte-2xd6p5 {
   margin: 0;
   padding: 0 10px 0 50px;
 }
-aside.svelte-2xd6p5 .container .nav-menu a.svelte-2xd6p5,
-aside.svelte-2xd6p5 .container .nav-menu button.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .container .nav-menu a.svelte-1h4x6vo,
+aside.svelte-1h4x6vo .container .nav-menu button.svelte-1h4x6vo {
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -410,15 +412,15 @@ aside.svelte-2xd6p5 .container .nav-menu button.svelte-2xd6p5 {
   background-color: transparent;
   font-size: var(--font-lg);
 }
-aside.svelte-2xd6p5 .container .nav-menu a.svelte-2xd6p5:hover,
-aside.svelte-2xd6p5 .container .nav-menu button.svelte-2xd6p5:hover {
+aside.svelte-1h4x6vo .container .nav-menu a.svelte-1h4x6vo:hover,
+aside.svelte-1h4x6vo .container .nav-menu button.svelte-1h4x6vo:hover {
   background-color: var(--gray-001);
 }
-aside.svelte-2xd6p5 .container .nav-menu a.active.svelte-2xd6p5 {
+aside.svelte-1h4x6vo .container .nav-menu a.active.svelte-1h4x6vo {
   background-color: var(--blue-transparent);
   color: var(--blue-007);
 }
-aside.svelte-2xd6p5 .container .nav-menu button.red.svelte-2xd6p5:hover {
+aside.svelte-1h4x6vo .container .nav-menu button.red.svelte-1h4x6vo:hover {
   background-color: var(--red-transparent);
   color: var(--red-007);
 }
@@ -1357,12 +1359,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   border-radius: 50%;
 }
 
-/* fakecss:./_components/PopUpShowBookingPayments.esbuild-svelte-fake-css */
+/* fakecss:./_components/PopUpEditPayment.esbuild-svelte-fake-css */
 .rotate-b {
   transition: all 0.2s ease-in-out;
   transform: rotate(90deg);
 }
-@keyframes svelte-194afwz-spin {
+@keyframes svelte-10w39jc-spin {
   from {
     transform: rotate(0deg);
   }
@@ -1371,9 +1373,140 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   }
 }
 .spin {
-  animation: svelte-194afwz-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: svelte-10w39jc-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
-.popup-container.svelte-194afwz.svelte-194afwz {
+.popup-container.svelte-10w39jc.svelte-10w39jc {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2001;
+  background-color: rgba(0 0 0 / 40%);
+  backdrop-filter: blur(1px);
+  justify-content: center;
+  padding: 50px;
+  overflow: auto;
+}
+.popup-container.show.svelte-10w39jc.svelte-10w39jc {
+  display: flex;
+}
+.popup-container.svelte-10w39jc .popup.svelte-10w39jc {
+  border-radius: 8px;
+  background-color: #FFF;
+  height: fit-content;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.popup-container.svelte-10w39jc .popup header.svelte-10w39jc {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--gray-004);
+}
+.popup-container.svelte-10w39jc .popup header h2.svelte-10w39jc {
+  margin: 0;
+}
+.popup-container.svelte-10w39jc .popup header button.svelte-10w39jc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.popup-container.svelte-10w39jc .popup header button.svelte-10w39jc:hover {
+  background-color: #ef444420;
+}
+.popup-container.svelte-10w39jc .popup header button.svelte-10w39jc:active {
+  background-color: #ef444430;
+}
+.popup-container.svelte-10w39jc .popup .forms.svelte-10w39jc {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.popup-container.svelte-10w39jc .popup .foot.svelte-10w39jc {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  padding: 15px 20px;
+  border-top: 1px solid var(--gray-004);
+}
+.popup-container.svelte-10w39jc .popup .foot .right.svelte-10w39jc {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.popup-container.svelte-10w39jc .popup .foot button.svelte-10w39jc {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: none;
+  color: #FFF;
+  cursor: pointer;
+  font-weight: 600;
+}
+.popup-container.svelte-10w39jc .popup .foot button.ok.svelte-10w39jc {
+  background-color: var(--green-006);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-container.svelte-10w39jc .popup .foot button.ok.svelte-10w39jc:hover {
+  background-color: var(--green-005);
+}
+.popup-container.svelte-10w39jc .popup .foot button.ok.svelte-10w39jc:disabled {
+  cursor: not-allowed;
+  background-color: var(--gray-003);
+  color: var(--gray-007);
+}
+.popup-container.svelte-10w39jc .popup .foot button.cancel.svelte-10w39jc {
+  background-color: transparent;
+  color: var(--gray-007);
+}
+.popup-container.svelte-10w39jc .popup .foot button.cancel.svelte-10w39jc:hover {
+  background-color: var(--gray-001);
+}
+.input-totalprice.svelte-10w39jc.svelte-10w39jc {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--gray-007);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* fakecss:./_components/PopUpShowBookingPayments.esbuild-svelte-fake-css */
+.rotate-b {
+  transition: all 0.2s ease-in-out;
+  transform: rotate(90deg);
+}
+@keyframes svelte-c6xytd-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+.spin {
+  animation: svelte-c6xytd-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.popup-container.svelte-c6xytd.svelte-c6xytd {
   display: none;
   position: fixed;
   width: 100%;
@@ -1389,18 +1522,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   padding: 50px;
   overflow: auto;
 }
-.popup-container.show.svelte-194afwz.svelte-194afwz {
+.popup-container.show.svelte-c6xytd.svelte-c6xytd {
   display: flex;
 }
-.popup-container.svelte-194afwz .popup.svelte-194afwz {
+.popup-container.svelte-c6xytd .popup.svelte-c6xytd {
   border-radius: 8px;
   background-color: #FFF;
   height: fit-content;
-  width: 600px;
+  width: 80%;
   display: flex;
   flex-direction: column;
 }
-.popup-container.svelte-194afwz .popup header.svelte-194afwz {
+.popup-container.svelte-c6xytd .popup header.svelte-c6xytd {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -1408,10 +1541,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   padding: 15px 20px;
   border-bottom: 1px solid var(--gray-004);
 }
-.popup-container.svelte-194afwz .popup header h2.svelte-194afwz {
+.popup-container.svelte-c6xytd .popup header h2.svelte-c6xytd {
   margin: 0;
 }
-.popup-container.svelte-194afwz .popup header button.svelte-194afwz {
+.popup-container.svelte-c6xytd .popup header button.svelte-c6xytd {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1421,34 +1554,33 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   background-color: transparent;
   cursor: pointer;
 }
-.popup-container.svelte-194afwz .popup header button.svelte-194afwz:hover {
+.popup-container.svelte-c6xytd .popup header button.svelte-c6xytd:hover {
   background-color: #ef444420;
 }
-.popup-container.svelte-194afwz .popup header button.svelte-194afwz:active {
+.popup-container.svelte-c6xytd .popup header button.svelte-c6xytd:active {
   background-color: #ef444430;
 }
-.popup-container.svelte-194afwz .popup .forms.svelte-194afwz {
+.popup-container.svelte-c6xytd .popup .forms.svelte-c6xytd {
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.table-root.svelte-194afwz.svelte-194afwz {
+.table-root.svelte-c6xytd.svelte-c6xytd {
   display: flex;
   flex-direction: column;
   background-color: #fff;
   border-left: 1px solid var(--gray-003);
   border-right: 1px solid var(--gray-003);
-  border-bottom: 1px solid var(--gray-003);
   padding: 0;
   font-size: var(--font-base);
 }
-.table-root.svelte-194afwz .table-container.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container.svelte-c6xytd {
   overflow-x: auto;
   scrollbar-color: var(--gray-003) transparent;
   scrollbar-width: calc(100% - 20px);
 }
-.table-root.svelte-194afwz .table-container table.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table.svelte-c6xytd {
   width: 100%;
   background: #fff;
   border-top: 1px solid var(--gray-003);
@@ -1460,11 +1592,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   overflow: hidden;
   font-size: var(--font-base);
 }
-.table-root.svelte-194afwz .table-container table thead.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table thead.svelte-c6xytd {
   box-shadow: none;
   border-bottom: 1px solid var(--gray-003);
 }
-.table-root.svelte-194afwz .table-container table thead tr th.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table thead tr th.svelte-c6xytd {
   padding: 12px;
   background-color: var(--gray-001);
   text-transform: capitalize;
@@ -1474,45 +1606,65 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   width: auto;
   text-wrap: nowrap;
 }
-.table-root.svelte-194afwz .table-container table thead tr th.svelte-194afwz:last-child {
+.table-root.svelte-c6xytd .table-container table thead tr th.svelte-c6xytd:last-child {
   border-right: none;
 }
-.table-root.svelte-194afwz .table-container table tbody tr td.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table tbody tr td.svelte-c6xytd {
   padding: 8px 12px;
 }
-.table-root.svelte-194afwz .table-container table tbody tr td.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table tbody tr td.svelte-c6xytd {
   padding: 8px 12px;
   border-right: 1px solid var(--gray-004);
   border-bottom: 1px solid var(--gray-004);
 }
-.table-root.svelte-194afwz .table-container table tbody tr:last-child td.svelte-194afwz,
-.table-root.svelte-194afwz .table-container table tbody tr:last-child th.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table tbody tr td .actions.svelte-c6xytd {
+  display: flex;
+  flex-direction: row;
+}
+.table-root.svelte-c6xytd .table-container table tbody tr td .actions .btn.svelte-c6xytd {
+  border: none;
+  padding: 6px;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.table-root .table-container table tbody tr td .actions .btn:hover svg {
+  fill: var(--blue-005);
+}
+.table-root.svelte-c6xytd .table-container table tbody tr td .actions .btn.svelte-c6xytd:hover {
+  background-color: var(--blue-transparent);
+}
+.table-root.svelte-c6xytd .table-container table tbody tr:last-child td.svelte-c6xytd,
+.table-root.svelte-c6xytd .table-container table tbody tr:last-child th.svelte-c6xytd {
   border-bottom: none !important;
 }
-.table-root.svelte-194afwz .table-container table tbody tr:last-child td.svelte-194afwz:last-child {
+.table-root.svelte-c6xytd .table-container table tbody tr:last-child td.svelte-c6xytd:last-child {
   border-right: none !important;
 }
-.table-root.svelte-194afwz .table-container table tbody tr td.num-row.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table tbody tr td.num-row.svelte-c6xytd {
   border-right: 1px solid var(--gray-003);
   font-weight: 600;
   text-align: center;
 }
-.table-root.svelte-194afwz .table-container table tbody tr:last-child td.svelte-194afwz,
-.table-root.svelte-194afwz .table-container table tbody tr:last-child th.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table tbody tr:last-child td.svelte-c6xytd,
+.table-root.svelte-c6xytd .table-container table tbody tr:last-child th.svelte-c6xytd {
   border-bottom: none !important;
 }
-.table-root.svelte-194afwz .table-container table tbody tr:last-child td.svelte-194afwz:last-child {
+.table-root.svelte-c6xytd .table-container table tbody tr:last-child td.svelte-c6xytd:last-child {
   border-right: none !important;
 }
-.table-root.svelte-194afwz .table-container table tbody tr td.svelte-194afwz:last-child {
+.table-root.svelte-c6xytd .table-container table tbody tr td.svelte-c6xytd:last-child {
   border-right: none !important;
 }
-.table-root.svelte-194afwz .table-container table tbody tr th.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table tbody tr th.svelte-c6xytd {
   text-align: center;
   border-right: 1px solid var(--gray-004);
   border-bottom: 1px solid var(--gray-004);
 }
-.table-root.svelte-194afwz .table-container table thead tr th.textarea.svelte-194afwz {
+.table-root.svelte-c6xytd .table-container table thead tr th.textarea.svelte-c6xytd {
   min-width: 280px !important;
 }
 
@@ -4171,13 +4323,13 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance14 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance14, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance14, context, null, { allOwnKeys: true });
-        instance14.create = function create(instanceConfig) {
+        const instance15 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance15, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance15, context, null, { allOwnKeys: true });
+        instance15.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance14;
+        return instance15;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -4235,7 +4387,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       exports.AdminLocation = async function AdminLocation(i, cb) {
         return await axios.post("/admin/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminPayment = async function AdminPayment2(i, cb) {
+      exports.AdminPayment = async function AdminPayment3(i, cb) {
         return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminRoom = async function AdminRoom(i, cb) {
@@ -4372,7 +4524,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         const formattedDate = `${year}-${month}-${date}`;
         return formattedDate;
       }
-      function dateISOFormat4(dayTo = 0) {
+      function dateISOFormat6(dayTo = 0) {
         const dt = new Date();
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -4420,7 +4572,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         utcDatetime,
         isoTime,
         isoDate,
-        dateISOFormat: dateISOFormat4,
+        dateISOFormat: dateISOFormat6,
         dateISOFormatFromYYYYMMDD: dateISOFormatFromYYYYMMDD2,
         loadScript,
         formatPrice: formatPrice3,
@@ -4433,14 +4585,14 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
   var require_xConstant = __commonJS({
     "_components/xConstant.js"(exports, module) {
       var CmdList = `list`;
-      var CmdForm2 = `form`;
-      var CmdUpsert2 = `upsert`;
+      var CmdForm3 = `form`;
+      var CmdUpsert3 = `upsert`;
       var CmdRestore = `restore`;
       var CmdDelete = `delete`;
       module.exports = {
         CmdList,
-        CmdForm: CmdForm2,
-        CmdUpsert: CmdUpsert2,
+        CmdForm: CmdForm3,
+        CmdUpsert: CmdUpsert3,
         CmdRestore,
         CmdDelete
       };
@@ -5000,7 +5152,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance14, create_fragment17, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance15, create_fragment18, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -5026,7 +5178,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance14 ? instance14(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance15 ? instance15(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -5039,7 +5191,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment17 ? create_fragment17($.ctx) : false;
+    $.fragment = create_fragment18 ? create_fragment18($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -5593,16 +5745,16 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         t2 = space();
         span = element("span");
         span.textContent = "Bookings";
-        attr(h3, "class", "nav-menu-title svelte-2xd6p5");
+        attr(h3, "class", "nav-menu-title svelte-1h4x6vo");
         attr(a, "href", "/staff/booking");
-        attr(a, "class", "svelte-2xd6p5");
+        attr(a, "class", "svelte-1h4x6vo");
         toggle_class(
           a,
           "active",
           /*pathLv2*/
           ctx[3] === "booking"
         );
-        attr(nav, "class", "nav-menu svelte-2xd6p5");
+        attr(nav, "class", "nav-menu svelte-1h4x6vo");
       },
       m(target, anchor) {
         insert(target, h3, anchor);
@@ -5779,9 +5931,9 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         t26 = space();
         span8 = element("span");
         span8.textContent = "Users";
-        attr(h3, "class", "nav-menu-title svelte-2xd6p5");
+        attr(h3, "class", "nav-menu-title svelte-1h4x6vo");
         attr(a0, "href", "/admin/location");
-        attr(a0, "class", "svelte-2xd6p5");
+        attr(a0, "class", "svelte-1h4x6vo");
         toggle_class(
           a0,
           "active",
@@ -5789,7 +5941,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[3] === "location"
         );
         attr(a1, "href", "/admin/facility");
-        attr(a1, "class", "svelte-2xd6p5");
+        attr(a1, "class", "svelte-1h4x6vo");
         toggle_class(
           a1,
           "active",
@@ -5797,7 +5949,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[3] === "facility"
         );
         attr(a2, "href", "/admin/building");
-        attr(a2, "class", "svelte-2xd6p5");
+        attr(a2, "class", "svelte-1h4x6vo");
         toggle_class(
           a2,
           "active",
@@ -5805,7 +5957,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[3] === "building"
         );
         attr(a3, "href", "/admin/room");
-        attr(a3, "class", "svelte-2xd6p5");
+        attr(a3, "class", "svelte-1h4x6vo");
         toggle_class(
           a3,
           "active",
@@ -5813,7 +5965,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[3] === "room"
         );
         attr(a4, "href", "/admin/booking");
-        attr(a4, "class", "svelte-2xd6p5");
+        attr(a4, "class", "svelte-1h4x6vo");
         toggle_class(
           a4,
           "active",
@@ -5822,7 +5974,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[3] === "booking"
         );
         attr(a5, "href", "/admin/payment");
-        attr(a5, "class", "svelte-2xd6p5");
+        attr(a5, "class", "svelte-1h4x6vo");
         toggle_class(
           a5,
           "active",
@@ -5830,7 +5982,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[3] === "payment"
         );
         attr(a6, "href", "/admin/stock");
-        attr(a6, "class", "svelte-2xd6p5");
+        attr(a6, "class", "svelte-1h4x6vo");
         toggle_class(
           a6,
           "active",
@@ -5838,7 +5990,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[3] === "stock"
         );
         attr(a7, "href", "/admin/tenants");
-        attr(a7, "class", "svelte-2xd6p5");
+        attr(a7, "class", "svelte-1h4x6vo");
         toggle_class(
           a7,
           "active",
@@ -5846,14 +5998,14 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[3] === "tenants"
         );
         attr(a8, "href", "/admin/usersManagement");
-        attr(a8, "class", "svelte-2xd6p5");
+        attr(a8, "class", "svelte-1h4x6vo");
         toggle_class(
           a8,
           "active",
           /*pathLv2*/
           ctx[3] === "usersManagement"
         );
-        attr(nav, "class", "nav-menu svelte-2xd6p5");
+        attr(nav, "class", "nav-menu svelte-1h4x6vo");
       },
       m(target, anchor) {
         insert(target, h3, anchor);
@@ -6037,7 +6189,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         span4 = element("span");
         span4.textContent = "Logout";
         attr(a0, "href", "/");
-        attr(a0, "class", "svelte-2xd6p5");
+        attr(a0, "class", "svelte-1h4x6vo");
         toggle_class(
           a0,
           "active",
@@ -6045,7 +6197,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[2] === ""
         );
         attr(a1, "href", "/user/report");
-        attr(a1, "class", "svelte-2xd6p5");
+        attr(a1, "class", "svelte-1h4x6vo");
         toggle_class(
           a1,
           "active",
@@ -6053,19 +6205,19 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
           ctx[1] === "/user/report"
         );
         attr(a2, "href", "/user");
-        attr(a2, "class", "svelte-2xd6p5");
+        attr(a2, "class", "svelte-1h4x6vo");
         toggle_class(
           a2,
           "active",
           /*pathAll*/
           ctx[1] === "/user"
         );
-        attr(nav0, "class", "nav-menu svelte-2xd6p5");
-        attr(span3, "class", "separator svelte-2xd6p5");
-        attr(button, "class", "red svelte-2xd6p5");
-        attr(nav1, "class", "nav-menu svelte-2xd6p5");
-        attr(div, "class", "container svelte-2xd6p5");
-        attr(aside, "class", "svelte-2xd6p5");
+        attr(nav0, "class", "nav-menu svelte-1h4x6vo");
+        attr(span3, "class", "separator svelte-1h4x6vo");
+        attr(button, "class", "red svelte-1h4x6vo");
+        attr(nav1, "class", "nav-menu svelte-1h4x6vo");
+        attr(div, "class", "container svelte-1h4x6vo");
+        attr(aside, "class", "svelte-1h4x6vo");
       },
       m(target, anchor) {
         insert(target, aside, anchor);
@@ -6663,7 +6815,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
   var main_default = Main;
 
   // userReport.svelte
-  var import_jsApi2 = __toESM(require_jsApi_GEN());
+  var import_jsApi3 = __toESM(require_jsApi_GEN());
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/fi/index.js
   var FiLoader = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>' };
@@ -16013,195 +16165,103 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
   var Switcher_default = Switcher;
 
   // userReport.svelte
-  var import_xFormatter5 = __toESM(require_xFormatter());
-  var import_xConstant = __toESM(require_xConstant());
+  var import_xFormatter6 = __toESM(require_xFormatter());
+  var import_xConstant2 = __toESM(require_xConstant());
 
   // _components/PopUpShowBookingPayments.svelte
+  var import_xFormatter4 = __toESM(require_xFormatter());
+
+  // _components/PopUpEditPayment.svelte
   var import_xFormatter3 = __toESM(require_xFormatter());
-  function get_each_context2(ctx, list, i) {
-    const child_ctx = ctx.slice();
-    child_ctx[6] = list[i];
-    child_ctx[8] = i;
-    return child_ctx;
-  }
-  function create_each_block2(ctx) {
-    let tr;
-    let td0;
-    let t1;
-    let td1;
-    let t2;
-    let t3_value = (
-      /*py*/
-      ctx[6].id + ""
-    );
-    let t3;
-    let t4;
-    let td2;
-    let t5_value = (
-      /*py*/
-      ctx[6].paymentAt + ""
-    );
-    let t5;
-    let t6;
-    let td3;
-    let t7_value = (0, import_xFormatter3.formatPrice)(
-      /*py*/
-      ctx[6].paidIDR,
-      "IDR"
-    ) + "";
-    let t7;
-    let t8;
-    let td4;
-    let t9_value = (
-      /*py*/
-      ctx[6].paymentMethod + ""
-    );
-    let t9;
-    let t10;
-    let td5;
-    let t11_value = (
-      /*py*/
-      ctx[6].paymentStatus + ""
-    );
-    let t11;
-    let t12;
-    let td6;
-    let t13_value = (
-      /*py*/
-      ctx[6].note + ""
-    );
-    let t13;
+  function create_if_block_19(ctx) {
+    let span;
     return {
       c() {
-        tr = element("tr");
-        td0 = element("td");
-        td0.textContent = `${/*idx*/
-        ctx[8] + 1}`;
-        t1 = space();
-        td1 = element("td");
-        t2 = text("#");
-        t3 = text(t3_value);
-        t4 = space();
-        td2 = element("td");
-        t5 = text(t5_value);
-        t6 = space();
-        td3 = element("td");
-        t7 = text(t7_value);
-        t8 = space();
-        td4 = element("td");
-        t9 = text(t9_value);
-        t10 = space();
-        td5 = element("td");
-        t11 = text(t11_value);
-        t12 = space();
-        td6 = element("td");
-        t13 = text(t13_value);
-        attr(td0, "class", "num-row svelte-194afwz");
-        attr(td1, "class", "svelte-194afwz");
-        attr(td2, "class", "svelte-194afwz");
-        attr(td3, "class", "svelte-194afwz");
-        attr(td4, "class", "svelte-194afwz");
-        attr(td5, "class", "svelte-194afwz");
-        attr(td6, "class", "svelte-194afwz");
+        span = element("span");
+        span.textContent = "Submit";
       },
       m(target, anchor) {
-        insert(target, tr, anchor);
-        append(tr, td0);
-        append(tr, t1);
-        append(tr, td1);
-        append(td1, t2);
-        append(td1, t3);
-        append(tr, t4);
-        append(tr, td2);
-        append(td2, t5);
-        append(tr, t6);
-        append(tr, td3);
-        append(td3, t7);
-        append(tr, t8);
-        append(tr, td4);
-        append(td4, t9);
-        append(tr, t10);
-        append(tr, td5);
-        append(td5, t11);
-        append(tr, t12);
-        append(tr, td6);
-        append(td6, t13);
-      },
-      p(ctx2, dirty) {
-        if (dirty & /*payments*/
-        2 && t3_value !== (t3_value = /*py*/
-        ctx2[6].id + ""))
-          set_data(t3, t3_value);
-        if (dirty & /*payments*/
-        2 && t5_value !== (t5_value = /*py*/
-        ctx2[6].paymentAt + ""))
-          set_data(t5, t5_value);
-        if (dirty & /*payments*/
-        2 && t7_value !== (t7_value = (0, import_xFormatter3.formatPrice)(
-          /*py*/
-          ctx2[6].paidIDR,
-          "IDR"
-        ) + ""))
-          set_data(t7, t7_value);
-        if (dirty & /*payments*/
-        2 && t9_value !== (t9_value = /*py*/
-        ctx2[6].paymentMethod + ""))
-          set_data(t9, t9_value);
-        if (dirty & /*payments*/
-        2 && t11_value !== (t11_value = /*py*/
-        ctx2[6].paymentStatus + ""))
-          set_data(t11, t11_value);
-        if (dirty & /*payments*/
-        2 && t13_value !== (t13_value = /*py*/
-        ctx2[6].note + ""))
-          set_data(t13, t13_value);
+        insert(target, span, anchor);
       },
       d(detaching) {
         if (detaching) {
-          detach(tr);
+          detach(span);
         }
       }
     };
   }
   function create_if_block6(ctx) {
-    let tr;
+    let icon;
+    let current;
+    icon = new Icon_default({
+      props: {
+        className: "spin",
+        color: "#FFF",
+        size: "14",
+        src: FiLoader
+      }
+    });
     return {
       c() {
-        tr = element("tr");
-        tr.innerHTML = `<td class="num-row svelte-194afwz">0</td> <td colspan="6" class="svelte-194afwz">no-data</td>`;
+        create_component(icon.$.fragment);
       },
       m(target, anchor) {
-        insert(target, tr, anchor);
+        mount_component(icon, target, anchor);
+        current = true;
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
       },
       d(detaching) {
-        if (detaching) {
-          detach(tr);
-        }
+        destroy_component(icon, detaching);
       }
     };
   }
   function create_fragment14(ctx) {
+    let div5;
     let div4;
-    let div3;
     let header;
     let h2;
     let t0;
-    let t1_value = `#${/*bookingId*/
-    ctx[0]}`;
+    let t1_value = `#${/*paymentId*/
+    ctx[6]}`;
     let t1;
     let t2;
-    let button;
+    let button0;
     let icon;
     let t3;
-    let div2;
-    let div1;
     let div0;
-    let table;
-    let thead;
-    let t17;
-    let tbody;
-    let t18;
-    let div4_class_value;
+    let inputbox0;
+    let updating_value;
+    let t4;
+    let inputbox1;
+    let updating_value_1;
+    let t5;
+    let inputbox2;
+    let updating_value_2;
+    let t6;
+    let inputbox3;
+    let updating_value_3;
+    let t7;
+    let inputbox4;
+    let updating_value_4;
+    let t8;
+    let div3;
+    let div1;
+    let t9;
+    let div2;
+    let button1;
+    let t11;
+    let button2;
+    let t12;
+    let div5_class_value;
     let current;
     let mounted;
     let dispose;
@@ -16212,139 +16272,825 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         src: IoClose
       }
     });
-    let each_value = ensure_array_like(
-      /*payments*/
-      ctx[1] || []
-    );
-    let each_blocks = [];
-    for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
+    function inputbox0_value_binding(value) {
+      ctx[15](value);
     }
-    let if_block = (
-      /*payments*/
-      (ctx[1] || []).length === 0 && create_if_block6(ctx)
+    let inputbox0_props = {
+      id: "paymentAt",
+      label: "Payment At",
+      type: "datetime"
+    };
+    if (
+      /*paymentAt*/
+      ctx[1] !== void 0
+    ) {
+      inputbox0_props.value = /*paymentAt*/
+      ctx[1];
+    }
+    inputbox0 = new InputBox_default({ props: inputbox0_props });
+    binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
+    function inputbox1_value_binding(value) {
+      ctx[16](value);
+    }
+    let inputbox1_props = {
+      id: "totalPaidIDR",
+      label: "Total Paid",
+      type: "number"
+    };
+    if (
+      /*totalPaidIDR*/
+      ctx[2] !== void 0
+    ) {
+      inputbox1_props.value = /*totalPaidIDR*/
+      ctx[2];
+    }
+    inputbox1 = new InputBox_default({ props: inputbox1_props });
+    binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
+    function inputbox2_value_binding(value) {
+      ctx[17](value);
+    }
+    let inputbox2_props = {
+      id: "paymentMethod",
+      label: "Payment Method",
+      values: (
+        /*PaymentMethods*/
+        ctx[9]
+      ),
+      type: "combobox-arr"
+    };
+    if (
+      /*paymentMethod*/
+      ctx[3] !== void 0
+    ) {
+      inputbox2_props.value = /*paymentMethod*/
+      ctx[3];
+    }
+    inputbox2 = new InputBox_default({ props: inputbox2_props });
+    binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
+    function inputbox3_value_binding(value) {
+      ctx[18](value);
+    }
+    let inputbox3_props = {
+      id: "paymentStatus",
+      label: "Payment Status",
+      values: (
+        /*PaymentStatuses*/
+        ctx[10]
+      ),
+      type: "combobox-arr"
+    };
+    if (
+      /*paymentStatus*/
+      ctx[4] !== void 0
+    ) {
+      inputbox3_props.value = /*paymentStatus*/
+      ctx[4];
+    }
+    inputbox3 = new InputBox_default({ props: inputbox3_props });
+    binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
+    function inputbox4_value_binding(value) {
+      ctx[19](value);
+    }
+    let inputbox4_props = {
+      id: "note",
+      label: "Note",
+      type: "textarea"
+    };
+    if (
+      /*note*/
+      ctx[5] !== void 0
+    ) {
+      inputbox4_props.value = /*note*/
+      ctx[5];
+    }
+    inputbox4 = new InputBox_default({ props: inputbox4_props });
+    binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
+    let if_block0 = !/*isSubmitted*/
+    ctx[0] && create_if_block_19(ctx);
+    let if_block1 = (
+      /*isSubmitted*/
+      ctx[0] && create_if_block6(ctx)
     );
     return {
       c() {
+        div5 = element("div");
         div4 = element("div");
-        div3 = element("div");
         header = element("header");
         h2 = element("h2");
-        t0 = text("Payments for Booking ");
+        t0 = text("Edit Payment ");
         t1 = text(t1_value);
         t2 = space();
-        button = element("button");
+        button0 = element("button");
         create_component(icon.$.fragment);
         t3 = space();
-        div2 = element("div");
-        div1 = element("div");
         div0 = element("div");
-        table = element("table");
-        thead = element("thead");
-        thead.innerHTML = `<tr><th class="svelte-194afwz">No</th> <th class="svelte-194afwz">ID</th> <th class="svelte-194afwz">Payment At</th> <th class="svelte-194afwz">Total Paid</th> <th class="svelte-194afwz">Payment Method</th> <th class="svelte-194afwz">Payment Status</th> <th class="textarea svelte-194afwz">Note</th></tr>`;
-        t17 = space();
-        tbody = element("tbody");
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          each_blocks[i].c();
-        }
-        t18 = space();
-        if (if_block)
-          if_block.c();
-        attr(h2, "class", "svelte-194afwz");
-        attr(button, "class", "svelte-194afwz");
-        attr(header, "class", "header svelte-194afwz");
-        attr(thead, "class", "svelte-194afwz");
-        attr(table, "class", "svelte-194afwz");
-        attr(div0, "class", "table-container svelte-194afwz");
-        attr(div1, "class", "table-root svelte-194afwz");
-        attr(div2, "class", "forms svelte-194afwz");
-        attr(div3, "class", "popup svelte-194afwz");
-        attr(div4, "class", div4_class_value = null_to_empty(`popup-container ${/*isShow*/
-        ctx[3] ? "show" : ""}`) + " svelte-194afwz");
+        create_component(inputbox0.$.fragment);
+        t4 = space();
+        create_component(inputbox1.$.fragment);
+        t5 = space();
+        create_component(inputbox2.$.fragment);
+        t6 = space();
+        create_component(inputbox3.$.fragment);
+        t7 = space();
+        create_component(inputbox4.$.fragment);
+        t8 = space();
+        div3 = element("div");
+        div1 = element("div");
+        div1.innerHTML = ``;
+        t9 = space();
+        div2 = element("div");
+        button1 = element("button");
+        button1.textContent = "Cancel";
+        t11 = space();
+        button2 = element("button");
+        if (if_block0)
+          if_block0.c();
+        t12 = space();
+        if (if_block1)
+          if_block1.c();
+        attr(h2, "class", "svelte-10w39jc");
+        attr(button0, "class", "svelte-10w39jc");
+        attr(header, "class", "header svelte-10w39jc");
+        attr(div0, "class", "forms svelte-10w39jc");
+        attr(div1, "class", "left");
+        attr(button1, "class", "cancel svelte-10w39jc");
+        attr(button2, "class", "ok svelte-10w39jc");
+        button2.disabled = /*isSubmitted*/
+        ctx[0];
+        attr(div2, "class", "right svelte-10w39jc");
+        attr(div3, "class", "foot svelte-10w39jc");
+        attr(div4, "class", "popup svelte-10w39jc");
+        attr(div5, "class", div5_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx[8] ? "show" : ""}`) + " svelte-10w39jc");
       },
       m(target, anchor) {
-        insert(target, div4, anchor);
-        append(div4, div3);
-        append(div3, header);
+        insert(target, div5, anchor);
+        append(div5, div4);
+        append(div4, header);
         append(header, h2);
         append(h2, t0);
         append(h2, t1);
         append(header, t2);
-        append(header, button);
-        mount_component(icon, button, null);
-        append(div3, t3);
+        append(header, button0);
+        mount_component(icon, button0, null);
+        append(div4, t3);
+        append(div4, div0);
+        mount_component(inputbox0, div0, null);
+        append(div0, t4);
+        mount_component(inputbox1, div0, null);
+        append(div0, t5);
+        mount_component(inputbox2, div0, null);
+        append(div0, t6);
+        mount_component(inputbox3, div0, null);
+        append(div0, t7);
+        mount_component(inputbox4, div0, null);
+        append(div4, t8);
+        append(div4, div3);
+        append(div3, div1);
+        append(div3, t9);
         append(div3, div2);
-        append(div2, div1);
-        append(div1, div0);
-        append(div0, table);
-        append(table, thead);
-        append(table, t17);
-        append(table, tbody);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          if (each_blocks[i]) {
-            each_blocks[i].m(tbody, null);
-          }
-        }
-        append(tbody, t18);
-        if (if_block)
-          if_block.m(tbody, null);
+        append(div2, button1);
+        append(div2, t11);
+        append(div2, button2);
+        if (if_block0)
+          if_block0.m(button2, null);
+        append(button2, t12);
+        if (if_block1)
+          if_block1.m(button2, null);
         current = true;
         if (!mounted) {
-          dispose = listen(
-            button,
-            "click",
-            /*Hide*/
-            ctx[2]
-          );
+          dispose = [
+            listen(
+              button0,
+              "click",
+              /*Hide*/
+              ctx[7]
+            ),
+            listen(button1, "click", prevent_default(
+              /*cancel*/
+              ctx[11]
+            )),
+            listen(button2, "click", prevent_default(
+              /*handleSubmit*/
+              ctx[12]
+            ))
+          ];
           mounted = true;
         }
       },
       p(ctx2, [dirty]) {
-        if ((!current || dirty & /*bookingId*/
-        1) && t1_value !== (t1_value = `#${/*bookingId*/
-        ctx2[0]}`))
+        if ((!current || dirty & /*paymentId*/
+        64) && t1_value !== (t1_value = `#${/*paymentId*/
+        ctx2[6]}`))
           set_data(t1, t1_value);
-        if (dirty & /*payments*/
+        const inputbox0_changes = {};
+        if (!updating_value && dirty & /*paymentAt*/
         2) {
-          each_value = ensure_array_like(
-            /*payments*/
-            ctx2[1] || []
-          );
-          let i;
-          for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context2(ctx2, each_value, i);
-            if (each_blocks[i]) {
-              each_blocks[i].p(child_ctx, dirty);
-            } else {
-              each_blocks[i] = create_each_block2(child_ctx);
-              each_blocks[i].c();
-              each_blocks[i].m(tbody, t18);
-            }
+          updating_value = true;
+          inputbox0_changes.value = /*paymentAt*/
+          ctx2[1];
+          add_flush_callback(() => updating_value = false);
+        }
+        inputbox0.$set(inputbox0_changes);
+        const inputbox1_changes = {};
+        if (!updating_value_1 && dirty & /*totalPaidIDR*/
+        4) {
+          updating_value_1 = true;
+          inputbox1_changes.value = /*totalPaidIDR*/
+          ctx2[2];
+          add_flush_callback(() => updating_value_1 = false);
+        }
+        inputbox1.$set(inputbox1_changes);
+        const inputbox2_changes = {};
+        if (!updating_value_2 && dirty & /*paymentMethod*/
+        8) {
+          updating_value_2 = true;
+          inputbox2_changes.value = /*paymentMethod*/
+          ctx2[3];
+          add_flush_callback(() => updating_value_2 = false);
+        }
+        inputbox2.$set(inputbox2_changes);
+        const inputbox3_changes = {};
+        if (!updating_value_3 && dirty & /*paymentStatus*/
+        16) {
+          updating_value_3 = true;
+          inputbox3_changes.value = /*paymentStatus*/
+          ctx2[4];
+          add_flush_callback(() => updating_value_3 = false);
+        }
+        inputbox3.$set(inputbox3_changes);
+        const inputbox4_changes = {};
+        if (!updating_value_4 && dirty & /*note*/
+        32) {
+          updating_value_4 = true;
+          inputbox4_changes.value = /*note*/
+          ctx2[5];
+          add_flush_callback(() => updating_value_4 = false);
+        }
+        inputbox4.$set(inputbox4_changes);
+        if (!/*isSubmitted*/
+        ctx2[0]) {
+          if (if_block0) {
+          } else {
+            if_block0 = create_if_block_19(ctx2);
+            if_block0.c();
+            if_block0.m(button2, t12);
           }
-          for (; i < each_blocks.length; i += 1) {
-            each_blocks[i].d(1);
-          }
-          each_blocks.length = each_value.length;
+        } else if (if_block0) {
+          if_block0.d(1);
+          if_block0 = null;
         }
         if (
-          /*payments*/
-          (ctx2[1] || []).length === 0
+          /*isSubmitted*/
+          ctx2[0]
         ) {
-          if (if_block) {
+          if (if_block1) {
+            if (dirty & /*isSubmitted*/
+            1) {
+              transition_in(if_block1, 1);
+            }
           } else {
-            if_block = create_if_block6(ctx2);
-            if_block.c();
-            if_block.m(tbody, null);
+            if_block1 = create_if_block6(ctx2);
+            if_block1.c();
+            transition_in(if_block1, 1);
+            if_block1.m(button2, null);
           }
-        } else if (if_block) {
-          if_block.d(1);
-          if_block = null;
+        } else if (if_block1) {
+          group_outros();
+          transition_out(if_block1, 1, 1, () => {
+            if_block1 = null;
+          });
+          check_outros();
+        }
+        if (!current || dirty & /*isSubmitted*/
+        1) {
+          button2.disabled = /*isSubmitted*/
+          ctx2[0];
         }
         if (!current || dirty & /*isShow*/
-        8 && div4_class_value !== (div4_class_value = null_to_empty(`popup-container ${/*isShow*/
-        ctx2[3] ? "show" : ""}`) + " svelte-194afwz")) {
-          attr(div4, "class", div4_class_value);
+        256 && div5_class_value !== (div5_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[8] ? "show" : ""}`) + " svelte-10w39jc")) {
+          attr(div5, "class", div5_class_value);
         }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        transition_in(inputbox0.$.fragment, local);
+        transition_in(inputbox1.$.fragment, local);
+        transition_in(inputbox2.$.fragment, local);
+        transition_in(inputbox3.$.fragment, local);
+        transition_in(inputbox4.$.fragment, local);
+        transition_in(if_block1);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        transition_out(inputbox0.$.fragment, local);
+        transition_out(inputbox1.$.fragment, local);
+        transition_out(inputbox2.$.fragment, local);
+        transition_out(inputbox3.$.fragment, local);
+        transition_out(inputbox4.$.fragment, local);
+        transition_out(if_block1);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div5);
+        }
+        destroy_component(icon);
+        destroy_component(inputbox0);
+        destroy_component(inputbox1);
+        destroy_component(inputbox2);
+        destroy_component(inputbox3);
+        destroy_component(inputbox4);
+        if (if_block0)
+          if_block0.d();
+        if (if_block1)
+          if_block1.d();
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function instance11($self, $props, $invalidate) {
+    let isShow = (
+      /** @type {boolean} */
+      false
+    );
+    const PaymentMethods = ["Cash", "QRIS", "Transfer"];
+    const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
+    let { isSubmitted = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    let { paymentId = 0 } = $props;
+    let { paymentAt = (0, import_xFormatter3.dateISOFormat)(0) } = $props;
+    let { totalPaidIDR = 0 } = $props;
+    let { paymentMethod = "" } = $props;
+    let { paymentStatus = "" } = $props;
+    let { note = "" } = $props;
+    let { OnSubmit = async function(payment) {
+      console.log("OnSubmit :::", payment);
+    } } = $props;
+    const Show = () => $invalidate(8, isShow = true);
+    const Hide = () => $invalidate(8, isShow = false);
+    const cancel = () => $invalidate(8, isShow = false);
+    function handleSubmit() {
+      $invalidate(0, isSubmitted = true);
+      const py = (
+        /** @type {Payment|any} */
+        {
+          paymentAt,
+          paidIDR: totalPaidIDR,
+          paymentMethod,
+          paymentStatus,
+          note
+        }
+      );
+      OnSubmit(py);
+    }
+    function inputbox0_value_binding(value) {
+      paymentAt = value;
+      $invalidate(1, paymentAt);
+    }
+    function inputbox1_value_binding(value) {
+      totalPaidIDR = value;
+      $invalidate(2, totalPaidIDR);
+    }
+    function inputbox2_value_binding(value) {
+      paymentMethod = value;
+      $invalidate(3, paymentMethod);
+    }
+    function inputbox3_value_binding(value) {
+      paymentStatus = value;
+      $invalidate(4, paymentStatus);
+    }
+    function inputbox4_value_binding(value) {
+      note = value;
+      $invalidate(5, note);
+    }
+    $self.$set = ($props2) => {
+      if ("isSubmitted" in $props2)
+        $invalidate(0, isSubmitted = $props2.isSubmitted);
+      if ("paymentId" in $props2)
+        $invalidate(6, paymentId = $props2.paymentId);
+      if ("paymentAt" in $props2)
+        $invalidate(1, paymentAt = $props2.paymentAt);
+      if ("totalPaidIDR" in $props2)
+        $invalidate(2, totalPaidIDR = $props2.totalPaidIDR);
+      if ("paymentMethod" in $props2)
+        $invalidate(3, paymentMethod = $props2.paymentMethod);
+      if ("paymentStatus" in $props2)
+        $invalidate(4, paymentStatus = $props2.paymentStatus);
+      if ("note" in $props2)
+        $invalidate(5, note = $props2.note);
+      if ("OnSubmit" in $props2)
+        $invalidate(13, OnSubmit = $props2.OnSubmit);
+    };
+    return [
+      isSubmitted,
+      paymentAt,
+      totalPaidIDR,
+      paymentMethod,
+      paymentStatus,
+      note,
+      paymentId,
+      Hide,
+      isShow,
+      PaymentMethods,
+      PaymentStatuses,
+      cancel,
+      handleSubmit,
+      OnSubmit,
+      Show,
+      inputbox0_value_binding,
+      inputbox1_value_binding,
+      inputbox2_value_binding,
+      inputbox3_value_binding,
+      inputbox4_value_binding
+    ];
+  }
+  var PopUpEditPayment = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance11, create_fragment14, safe_not_equal, {
+        isSubmitted: 0,
+        paymentId: 6,
+        paymentAt: 1,
+        totalPaidIDR: 2,
+        paymentMethod: 3,
+        paymentStatus: 4,
+        note: 5,
+        OnSubmit: 13,
+        Show: 14,
+        Hide: 7
+      });
+    }
+    get Show() {
+      return this.$.ctx[14];
+    }
+    get Hide() {
+      return this.$.ctx[7];
+    }
+  };
+  var PopUpEditPayment_default = PopUpEditPayment;
+
+  // _components/PopUpShowBookingPayments.svelte
+  var import_jsApi2 = __toESM(require_jsApi_GEN());
+  var import_xConstant = __toESM(require_xConstant());
+  function get_each_context2(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[27] = list[i];
+    child_ctx[29] = i;
+    return child_ctx;
+  }
+  function create_if_block_110(ctx) {
+    let popupeditpayment;
+    let updating_paymentId;
+    let updating_isSubmitted;
+    let updating_paymentAt;
+    let updating_totalPaidIDR;
+    let updating_paymentMethod;
+    let updating_paymentStatus;
+    let updating_note;
+    let current;
+    function popupeditpayment_paymentId_binding(value) {
+      ctx[18](value);
+    }
+    function popupeditpayment_isSubmitted_binding(value) {
+      ctx[19](value);
+    }
+    function popupeditpayment_paymentAt_binding(value) {
+      ctx[20](value);
+    }
+    function popupeditpayment_totalPaidIDR_binding(value) {
+      ctx[21](value);
+    }
+    function popupeditpayment_paymentMethod_binding(value) {
+      ctx[22](value);
+    }
+    function popupeditpayment_paymentStatus_binding(value) {
+      ctx[23](value);
+    }
+    function popupeditpayment_note_binding(value) {
+      ctx[24](value);
+    }
+    let popupeditpayment_props = { OnSubmit: (
+      /*OnEditPayment*/
+      ctx[14]
+    ) };
+    if (
+      /*editPaymentId*/
+      ctx[7] !== void 0
+    ) {
+      popupeditpayment_props.paymentId = /*editPaymentId*/
+      ctx[7];
+    }
+    if (
+      /*isSubmitEditPayment*/
+      ctx[6] !== void 0
+    ) {
+      popupeditpayment_props.isSubmitted = /*isSubmitEditPayment*/
+      ctx[6];
+    }
+    if (
+      /*editPaymentAt*/
+      ctx[8] !== void 0
+    ) {
+      popupeditpayment_props.paymentAt = /*editPaymentAt*/
+      ctx[8];
+    }
+    if (
+      /*editTotalPaidIDR*/
+      ctx[9] !== void 0
+    ) {
+      popupeditpayment_props.totalPaidIDR = /*editTotalPaidIDR*/
+      ctx[9];
+    }
+    if (
+      /*editPaymentMethod*/
+      ctx[10] !== void 0
+    ) {
+      popupeditpayment_props.paymentMethod = /*editPaymentMethod*/
+      ctx[10];
+    }
+    if (
+      /*editPaymentStatus*/
+      ctx[11] !== void 0
+    ) {
+      popupeditpayment_props.paymentStatus = /*editPaymentStatus*/
+      ctx[11];
+    }
+    if (
+      /*editNote*/
+      ctx[12] !== void 0
+    ) {
+      popupeditpayment_props.note = /*editNote*/
+      ctx[12];
+    }
+    popupeditpayment = new PopUpEditPayment_default({ props: popupeditpayment_props });
+    ctx[17](popupeditpayment);
+    binding_callbacks.push(() => bind(popupeditpayment, "paymentId", popupeditpayment_paymentId_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "isSubmitted", popupeditpayment_isSubmitted_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "paymentAt", popupeditpayment_paymentAt_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "totalPaidIDR", popupeditpayment_totalPaidIDR_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "paymentMethod", popupeditpayment_paymentMethod_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "paymentStatus", popupeditpayment_paymentStatus_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "note", popupeditpayment_note_binding));
+    return {
+      c() {
+        create_component(popupeditpayment.$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(popupeditpayment, target, anchor);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        const popupeditpayment_changes = {};
+        if (!updating_paymentId && dirty & /*editPaymentId*/
+        128) {
+          updating_paymentId = true;
+          popupeditpayment_changes.paymentId = /*editPaymentId*/
+          ctx2[7];
+          add_flush_callback(() => updating_paymentId = false);
+        }
+        if (!updating_isSubmitted && dirty & /*isSubmitEditPayment*/
+        64) {
+          updating_isSubmitted = true;
+          popupeditpayment_changes.isSubmitted = /*isSubmitEditPayment*/
+          ctx2[6];
+          add_flush_callback(() => updating_isSubmitted = false);
+        }
+        if (!updating_paymentAt && dirty & /*editPaymentAt*/
+        256) {
+          updating_paymentAt = true;
+          popupeditpayment_changes.paymentAt = /*editPaymentAt*/
+          ctx2[8];
+          add_flush_callback(() => updating_paymentAt = false);
+        }
+        if (!updating_totalPaidIDR && dirty & /*editTotalPaidIDR*/
+        512) {
+          updating_totalPaidIDR = true;
+          popupeditpayment_changes.totalPaidIDR = /*editTotalPaidIDR*/
+          ctx2[9];
+          add_flush_callback(() => updating_totalPaidIDR = false);
+        }
+        if (!updating_paymentMethod && dirty & /*editPaymentMethod*/
+        1024) {
+          updating_paymentMethod = true;
+          popupeditpayment_changes.paymentMethod = /*editPaymentMethod*/
+          ctx2[10];
+          add_flush_callback(() => updating_paymentMethod = false);
+        }
+        if (!updating_paymentStatus && dirty & /*editPaymentStatus*/
+        2048) {
+          updating_paymentStatus = true;
+          popupeditpayment_changes.paymentStatus = /*editPaymentStatus*/
+          ctx2[11];
+          add_flush_callback(() => updating_paymentStatus = false);
+        }
+        if (!updating_note && dirty & /*editNote*/
+        4096) {
+          updating_note = true;
+          popupeditpayment_changes.note = /*editNote*/
+          ctx2[12];
+          add_flush_callback(() => updating_note = false);
+        }
+        popupeditpayment.$set(popupeditpayment_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(popupeditpayment.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(popupeditpayment.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        ctx[17](null);
+        destroy_component(popupeditpayment, detaching);
+      }
+    };
+  }
+  function create_each_block2(ctx) {
+    let tr;
+    let td0;
+    let t1;
+    let td1;
+    let div;
+    let button;
+    let icon;
+    let t2;
+    let td2;
+    let t3;
+    let t4_value = (
+      /*py*/
+      ctx[27].id + ""
+    );
+    let t4;
+    let t5;
+    let td3;
+    let t6_value = (
+      /*py*/
+      ctx[27].paymentAt + ""
+    );
+    let t6;
+    let t7;
+    let td4;
+    let t8_value = (0, import_xFormatter4.formatPrice)(
+      /*py*/
+      ctx[27].paidIDR,
+      "IDR"
+    ) + "";
+    let t8;
+    let t9;
+    let td5;
+    let t10_value = (
+      /*py*/
+      ctx[27].paymentMethod + ""
+    );
+    let t10;
+    let t11;
+    let td6;
+    let t12_value = (
+      /*py*/
+      ctx[27].paymentStatus + ""
+    );
+    let t12;
+    let t13;
+    let td7;
+    let t14_value = (
+      /*py*/
+      ctx[27].note + ""
+    );
+    let t14;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        size: "15",
+        color: "var(--gray-007)",
+        src: RiDesignBallPenLine
+      }
+    });
+    function click_handler() {
+      return (
+        /*click_handler*/
+        ctx[25](
+          /*py*/
+          ctx[27]
+        )
+      );
+    }
+    return {
+      c() {
+        tr = element("tr");
+        td0 = element("td");
+        td0.textContent = `${/*idx*/
+        ctx[29] + 1}`;
+        t1 = space();
+        td1 = element("td");
+        div = element("div");
+        button = element("button");
+        create_component(icon.$.fragment);
+        t2 = space();
+        td2 = element("td");
+        t3 = text("#");
+        t4 = text(t4_value);
+        t5 = space();
+        td3 = element("td");
+        t6 = text(t6_value);
+        t7 = space();
+        td4 = element("td");
+        t8 = text(t8_value);
+        t9 = space();
+        td5 = element("td");
+        t10 = text(t10_value);
+        t11 = space();
+        td6 = element("td");
+        t12 = text(t12_value);
+        t13 = space();
+        td7 = element("td");
+        t14 = text(t14_value);
+        attr(td0, "class", "num-row svelte-c6xytd");
+        attr(button, "class", "btn edit svelte-c6xytd");
+        attr(button, "title", "Edit");
+        attr(div, "class", "actions svelte-c6xytd");
+        attr(td1, "class", "a-row svelte-c6xytd");
+        attr(td2, "class", "svelte-c6xytd");
+        attr(td3, "class", "svelte-c6xytd");
+        attr(td4, "class", "svelte-c6xytd");
+        attr(td5, "class", "svelte-c6xytd");
+        attr(td6, "class", "svelte-c6xytd");
+        attr(td7, "class", "svelte-c6xytd");
+      },
+      m(target, anchor) {
+        insert(target, tr, anchor);
+        append(tr, td0);
+        append(tr, t1);
+        append(tr, td1);
+        append(td1, div);
+        append(div, button);
+        mount_component(icon, button, null);
+        append(tr, t2);
+        append(tr, td2);
+        append(td2, t3);
+        append(td2, t4);
+        append(tr, t5);
+        append(tr, td3);
+        append(td3, t6);
+        append(tr, t7);
+        append(tr, td4);
+        append(td4, t8);
+        append(tr, t9);
+        append(tr, td5);
+        append(td5, t10);
+        append(tr, t11);
+        append(tr, td6);
+        append(td6, t12);
+        append(tr, t13);
+        append(tr, td7);
+        append(td7, t14);
+        current = true;
+        if (!mounted) {
+          dispose = listen(button, "click", click_handler);
+          mounted = true;
+        }
+      },
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+        if ((!current || dirty & /*payments*/
+        1) && t4_value !== (t4_value = /*py*/
+        ctx[27].id + ""))
+          set_data(t4, t4_value);
+        if ((!current || dirty & /*payments*/
+        1) && t6_value !== (t6_value = /*py*/
+        ctx[27].paymentAt + ""))
+          set_data(t6, t6_value);
+        if ((!current || dirty & /*payments*/
+        1) && t8_value !== (t8_value = (0, import_xFormatter4.formatPrice)(
+          /*py*/
+          ctx[27].paidIDR,
+          "IDR"
+        ) + ""))
+          set_data(t8, t8_value);
+        if ((!current || dirty & /*payments*/
+        1) && t10_value !== (t10_value = /*py*/
+        ctx[27].paymentMethod + ""))
+          set_data(t10, t10_value);
+        if ((!current || dirty & /*payments*/
+        1) && t12_value !== (t12_value = /*py*/
+        ctx[27].paymentStatus + ""))
+          set_data(t12, t12_value);
+        if ((!current || dirty & /*payments*/
+        1) && t14_value !== (t14_value = /*py*/
+        ctx[27].note + ""))
+          set_data(t14, t14_value);
       },
       i(local) {
         if (current)
@@ -16358,18 +17104,273 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       },
       d(detaching) {
         if (detaching) {
-          detach(div4);
+          detach(tr);
         }
         destroy_component(icon);
-        destroy_each(each_blocks, detaching);
-        if (if_block)
-          if_block.d();
         mounted = false;
         dispose();
       }
     };
   }
-  function instance11($self, $props, $invalidate) {
+  function create_if_block7(ctx) {
+    let tr;
+    return {
+      c() {
+        tr = element("tr");
+        tr.innerHTML = `<td class="num-row svelte-c6xytd">0</td> <td colspan="6" class="svelte-c6xytd">no-data</td>`;
+      },
+      m(target, anchor) {
+        insert(target, tr, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(tr);
+        }
+      }
+    };
+  }
+  function create_fragment15(ctx) {
+    let t0;
+    let div4;
+    let div3;
+    let header;
+    let h2;
+    let t1;
+    let t2_value = `#${/*bookingId*/
+    ctx[1]}`;
+    let t2;
+    let t3;
+    let button;
+    let icon;
+    let t4;
+    let div2;
+    let div1;
+    let div0;
+    let table;
+    let thead;
+    let t20;
+    let tbody;
+    let t21;
+    let div4_class_value;
+    let current;
+    let mounted;
+    let dispose;
+    let if_block0 = (
+      /*isPopUpEditPaymentReady*/
+      ctx[5] && create_if_block_110(ctx)
+    );
+    icon = new Icon_default({
+      props: {
+        size: "22",
+        color: "var(--red-005)",
+        src: IoClose
+      }
+    });
+    let each_value = ensure_array_like(
+      /*payments*/
+      ctx[0] || []
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
+    }
+    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
+      each_blocks[i] = null;
+    });
+    let if_block1 = (
+      /*payments*/
+      (ctx[0] || []).length === 0 && create_if_block7(ctx)
+    );
+    return {
+      c() {
+        if (if_block0)
+          if_block0.c();
+        t0 = space();
+        div4 = element("div");
+        div3 = element("div");
+        header = element("header");
+        h2 = element("h2");
+        t1 = text("Payments for Booking ");
+        t2 = text(t2_value);
+        t3 = space();
+        button = element("button");
+        create_component(icon.$.fragment);
+        t4 = space();
+        div2 = element("div");
+        div1 = element("div");
+        div0 = element("div");
+        table = element("table");
+        thead = element("thead");
+        thead.innerHTML = `<tr><th style="width: 40px;" class="svelte-c6xytd">No</th> <th class="a-row svelte-c6xytd" style="width: 70px;">Actions</th> <th class="svelte-c6xytd">ID</th> <th class="svelte-c6xytd">Payment At</th> <th class="svelte-c6xytd">Total Paid</th> <th class="svelte-c6xytd">Payment Method</th> <th class="svelte-c6xytd">Payment Status</th> <th class="textarea svelte-c6xytd">Note</th></tr>`;
+        t20 = space();
+        tbody = element("tbody");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        t21 = space();
+        if (if_block1)
+          if_block1.c();
+        attr(h2, "class", "svelte-c6xytd");
+        attr(button, "class", "svelte-c6xytd");
+        attr(header, "class", "header svelte-c6xytd");
+        attr(thead, "class", "svelte-c6xytd");
+        attr(table, "class", "svelte-c6xytd");
+        attr(div0, "class", "table-container svelte-c6xytd");
+        attr(div1, "class", "table-root svelte-c6xytd");
+        attr(div2, "class", "forms svelte-c6xytd");
+        attr(div3, "class", "popup svelte-c6xytd");
+        attr(div4, "class", div4_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx[3] ? "show" : ""}`) + " svelte-c6xytd");
+      },
+      m(target, anchor) {
+        if (if_block0)
+          if_block0.m(target, anchor);
+        insert(target, t0, anchor);
+        insert(target, div4, anchor);
+        append(div4, div3);
+        append(div3, header);
+        append(header, h2);
+        append(h2, t1);
+        append(h2, t2);
+        append(header, t3);
+        append(header, button);
+        mount_component(icon, button, null);
+        append(div3, t4);
+        append(div3, div2);
+        append(div2, div1);
+        append(div1, div0);
+        append(div0, table);
+        append(table, thead);
+        append(table, t20);
+        append(table, tbody);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(tbody, null);
+          }
+        }
+        append(tbody, t21);
+        if (if_block1)
+          if_block1.m(tbody, null);
+        current = true;
+        if (!mounted) {
+          dispose = listen(
+            button,
+            "click",
+            /*Hide*/
+            ctx[2]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (
+          /*isPopUpEditPaymentReady*/
+          ctx2[5]
+        ) {
+          if (if_block0) {
+            if_block0.p(ctx2, dirty);
+            if (dirty & /*isPopUpEditPaymentReady*/
+            32) {
+              transition_in(if_block0, 1);
+            }
+          } else {
+            if_block0 = create_if_block_110(ctx2);
+            if_block0.c();
+            transition_in(if_block0, 1);
+            if_block0.m(t0.parentNode, t0);
+          }
+        } else if (if_block0) {
+          group_outros();
+          transition_out(if_block0, 1, 1, () => {
+            if_block0 = null;
+          });
+          check_outros();
+        }
+        if ((!current || dirty & /*bookingId*/
+        2) && t2_value !== (t2_value = `#${/*bookingId*/
+        ctx2[1]}`))
+          set_data(t2, t2_value);
+        if (dirty & /*payments, onPopUpEditPayment*/
+        8193) {
+          each_value = ensure_array_like(
+            /*payments*/
+            ctx2[0] || []
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context2(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+              transition_in(each_blocks[i], 1);
+            } else {
+              each_blocks[i] = create_each_block2(child_ctx);
+              each_blocks[i].c();
+              transition_in(each_blocks[i], 1);
+              each_blocks[i].m(tbody, t21);
+            }
+          }
+          group_outros();
+          for (i = each_value.length; i < each_blocks.length; i += 1) {
+            out(i);
+          }
+          check_outros();
+        }
+        if (
+          /*payments*/
+          (ctx2[0] || []).length === 0
+        ) {
+          if (if_block1) {
+          } else {
+            if_block1 = create_if_block7(ctx2);
+            if_block1.c();
+            if_block1.m(tbody, null);
+          }
+        } else if (if_block1) {
+          if_block1.d(1);
+          if_block1 = null;
+        }
+        if (!current || dirty & /*isShow*/
+        8 && div4_class_value !== (div4_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[3] ? "show" : ""}`) + " svelte-c6xytd")) {
+          attr(div4, "class", div4_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(if_block0);
+        transition_in(icon.$.fragment, local);
+        for (let i = 0; i < each_value.length; i += 1) {
+          transition_in(each_blocks[i]);
+        }
+        current = true;
+      },
+      o(local) {
+        transition_out(if_block0);
+        transition_out(icon.$.fragment, local);
+        each_blocks = each_blocks.filter(Boolean);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          transition_out(each_blocks[i]);
+        }
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(t0);
+          detach(div4);
+        }
+        if (if_block0)
+          if_block0.d(detaching);
+        destroy_component(icon);
+        destroy_each(each_blocks, detaching);
+        if (if_block1)
+          if_block1.d();
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function instance12($self, $props, $invalidate) {
     let isShow = (
       /** @type {boolean} */
       false
@@ -16386,39 +17387,163 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     const Hide = () => $invalidate(3, isShow = false);
     const Reset = () => {
     };
+    let popUpEditPayment = null;
+    let isPopUpEditPaymentReady = false;
+    let isSubmitEditPayment = false;
+    let editPaymentId;
+    let editPaymentAt = (0, import_xFormatter4.dateISOFormat)(0);
+    let editTotalPaidIDR = 0;
+    let editPaymentMethod = "Cash";
+    let editPaymentStatus = "Paid";
+    let editNote = "";
+    onMount(() => {
+      $invalidate(5, isPopUpEditPaymentReady = true);
+    });
+    function onPopUpEditPayment(payment) {
+      console.log(payment);
+      $invalidate(7, editPaymentId = payment.id);
+      $invalidate(8, editPaymentAt = payment.paymentAt);
+      $invalidate(9, editTotalPaidIDR = payment.paidIDR);
+      $invalidate(10, editPaymentMethod = payment.paymentMethod);
+      console.log("Payment method", editPaymentMethod);
+      $invalidate(11, editPaymentStatus = payment.paymentStatus);
+      console.log("Payment status", editPaymentStatus);
+      $invalidate(12, editNote = payment.note);
+      popUpEditPayment.Show();
+    }
+    async function refreshPayments() {
+      await (0, import_jsApi2.AdminPayment)(
+        { cmd: import_xConstant.CmdForm, bookingId },
+        /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          $invalidate(0, payments = o.paymentsByBooking);
+        }
+      );
+    }
+    async function OnEditPayment(payment) {
+      payment.id = editPaymentId;
+      const i = (
+        /** @type {any}*/
+        { payment, cmd: import_xConstant.CmdUpsert }
+      );
+      await (0, import_jsApi2.AdminPayment)(
+        i,
+        /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          refreshPayments();
+          notifier.showSuccess(`Payment #${payment.id} updated !!`);
+          popUpEditPayment.Hide();
+        }
+      );
+      $invalidate(6, isSubmitEditPayment = false);
+    }
+    function popupeditpayment_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        popUpEditPayment = $value;
+        $invalidate(4, popUpEditPayment);
+      });
+    }
+    function popupeditpayment_paymentId_binding(value) {
+      editPaymentId = value;
+      $invalidate(7, editPaymentId);
+    }
+    function popupeditpayment_isSubmitted_binding(value) {
+      isSubmitEditPayment = value;
+      $invalidate(6, isSubmitEditPayment);
+    }
+    function popupeditpayment_paymentAt_binding(value) {
+      editPaymentAt = value;
+      $invalidate(8, editPaymentAt);
+    }
+    function popupeditpayment_totalPaidIDR_binding(value) {
+      editTotalPaidIDR = value;
+      $invalidate(9, editTotalPaidIDR);
+    }
+    function popupeditpayment_paymentMethod_binding(value) {
+      editPaymentMethod = value;
+      $invalidate(10, editPaymentMethod);
+    }
+    function popupeditpayment_paymentStatus_binding(value) {
+      editPaymentStatus = value;
+      $invalidate(11, editPaymentStatus);
+    }
+    function popupeditpayment_note_binding(value) {
+      editNote = value;
+      $invalidate(12, editNote);
+    }
+    const click_handler = (py) => onPopUpEditPayment(py);
     $self.$set = ($props2) => {
       if ("bookingId" in $props2)
-        $invalidate(0, bookingId = $props2.bookingId);
+        $invalidate(1, bookingId = $props2.bookingId);
       if ("payments" in $props2)
-        $invalidate(1, payments = $props2.payments);
+        $invalidate(0, payments = $props2.payments);
     };
-    return [bookingId, payments, Hide, isShow, Show, Reset];
+    return [
+      payments,
+      bookingId,
+      Hide,
+      isShow,
+      popUpEditPayment,
+      isPopUpEditPaymentReady,
+      isSubmitEditPayment,
+      editPaymentId,
+      editPaymentAt,
+      editTotalPaidIDR,
+      editPaymentMethod,
+      editPaymentStatus,
+      editNote,
+      onPopUpEditPayment,
+      OnEditPayment,
+      Show,
+      Reset,
+      popupeditpayment_binding,
+      popupeditpayment_paymentId_binding,
+      popupeditpayment_isSubmitted_binding,
+      popupeditpayment_paymentAt_binding,
+      popupeditpayment_totalPaidIDR_binding,
+      popupeditpayment_paymentMethod_binding,
+      popupeditpayment_paymentStatus_binding,
+      popupeditpayment_note_binding,
+      click_handler
+    ];
   }
   var PopUpShowBookingPayments = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance11, create_fragment14, safe_not_equal, {
-        bookingId: 0,
-        payments: 1,
-        Show: 4,
+      init(this, options, instance12, create_fragment15, safe_not_equal, {
+        bookingId: 1,
+        payments: 0,
+        Show: 15,
         Hide: 2,
-        Reset: 5
+        Reset: 16
       });
     }
     get Show() {
-      return this.$.ctx[4];
+      return this.$.ctx[15];
     }
     get Hide() {
       return this.$.ctx[2];
     }
     get Reset() {
-      return this.$.ctx[5];
+      return this.$.ctx[16];
     }
   };
   var PopUpShowBookingPayments_default = PopUpShowBookingPayments;
 
   // _components/PopUpAddPayment.svelte
-  var import_xFormatter4 = __toESM(require_xFormatter());
+  var import_xFormatter5 = __toESM(require_xFormatter());
   function create_if_block_24(ctx) {
     let inputbox;
     let updating_value;
@@ -16483,7 +17608,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_if_block_19(ctx) {
+  function create_if_block_111(ctx) {
     let span;
     return {
       c() {
@@ -16500,7 +17625,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_if_block7(ctx) {
+  function create_if_block8(ctx) {
     let icon;
     let current;
     icon = new Icon_default({
@@ -16534,7 +17659,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_fragment15(ctx) {
+  function create_fragment16(ctx) {
     let div5;
     let div4;
     let header;
@@ -16686,10 +17811,10 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     inputbox4 = new InputBox_default({ props: inputbox4_props });
     binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
     let if_block1 = !/*isSubmitted*/
-    ctx[2] && create_if_block_19(ctx);
+    ctx[2] && create_if_block_111(ctx);
     let if_block2 = (
       /*isSubmitted*/
-      ctx[2] && create_if_block7(ctx)
+      ctx[2] && create_if_block8(ctx)
     );
     return {
       c() {
@@ -16880,7 +18005,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         ctx2[2]) {
           if (if_block1) {
           } else {
-            if_block1 = create_if_block_19(ctx2);
+            if_block1 = create_if_block_111(ctx2);
             if_block1.c();
             if_block1.m(button2, t13);
           }
@@ -16898,7 +18023,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
               transition_in(if_block2, 1);
             }
           } else {
-            if_block2 = create_if_block7(ctx2);
+            if_block2 = create_if_block8(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
             if_block2.m(button2, null);
@@ -16966,7 +18091,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function instance12($self, $props, $invalidate) {
+  function instance13($self, $props, $invalidate) {
     let isShow = (
       /** @type {boolean} */
       false
@@ -16981,7 +18106,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     ) } = $props;
     let { bookingId = 0 } = $props;
     let { isBookingReadOnly = false } = $props;
-    let { paymentAt = (0, import_xFormatter4.dateISOFormat)(0) } = $props;
+    let { paymentAt = (0, import_xFormatter5.dateISOFormat)(0) } = $props;
     const PaymentMethods = ["Cash", "QRIS", "Transfer"];
     const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
     let paidIDR = 0;
@@ -17009,7 +18134,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     const Hide = () => $invalidate(6, isShow = false);
     const Reset = () => {
       $invalidate(0, bookingId = 0);
-      $invalidate(1, paymentAt = (0, import_xFormatter4.dateISOFormat)(0));
+      $invalidate(1, paymentAt = (0, import_xFormatter5.dateISOFormat)(0));
       $invalidate(7, paidIDR = 0);
       $invalidate(8, paymentMethod = PaymentMethods[0]);
       $invalidate(9, paymentStatus = PaymentStatuses[0]);
@@ -17086,7 +18211,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
   var PopUpAddPayment = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance12, create_fragment15, safe_not_equal, {
+      init(this, options, instance13, create_fragment16, safe_not_equal, {
         isSubmitted: 2,
         bookings: 3,
         bookingId: 0,
@@ -17131,7 +18256,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     child_ctx[59] = list[i];
     return child_ctx;
   }
-  function create_if_block_33(ctx) {
+  function create_if_block_25(ctx) {
     let popupextendbooking;
     let updating_isSubmitted;
     let updating_bookingToExtend;
@@ -17396,13 +18521,13 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_if_block8(ctx) {
+  function create_if_block9(ctx) {
     let div;
     let div_class_value;
     let current;
     let if_block = (
       /*booking*/
-      ctx[62].tenantName && create_if_block_110(ctx)
+      ctx[62].tenantName && create_if_block_113(ctx)
     );
     return {
       c() {
@@ -17435,7 +18560,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_110(ctx2);
+            if_block = create_if_block_113(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(div, null);
@@ -17477,7 +18602,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_if_block_110(ctx) {
+  function create_if_block_113(ctx) {
     let span0;
     let t0_value = (
       /*booking*/
@@ -17525,221 +18650,16 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     let span7_class_value;
     let span8_class_value;
     let t13;
-    let if_block_anchor;
-    let current;
-    let if_block = (
-      /*booking*/
-      ctx[62].deletedAt == 0 && create_if_block_25(ctx)
-    );
-    return {
-      c() {
-        span0 = element("span");
-        t0 = text(t0_value);
-        t1 = space();
-        span4 = element("span");
-        span1 = element("span");
-        t2 = text(t2_value);
-        t3 = space();
-        span2 = element("span");
-        span2.textContent = "s/d";
-        t5 = space();
-        span3 = element("span");
-        t6 = text(t6_value);
-        t7 = space();
-        span8 = element("span");
-        span5 = element("span");
-        t8 = text(t8_value);
-        t9 = space();
-        span6 = element("span");
-        span6.textContent = "/";
-        t11 = space();
-        span7 = element("span");
-        t12 = text(t12_value);
-        t13 = space();
-        if (if_block)
-          if_block.c();
-        if_block_anchor = empty();
-        attr(span0, "class", span0_class_value = null_to_empty(
-          /*showTenant*/
-          ctx[6] ? "" : "hidden"
-        ) + " svelte-1uhyam5");
-        attr(span1, "class", span1_class_value = null_to_empty(
-          /*showDateStart*/
-          ctx[7] ? "" : "hidden"
-        ) + " svelte-1uhyam5");
-        attr(span3, "class", span3_class_value = (isDateInPast(
-          /*booking*/
-          ctx[62].dateEnd
-        ) ? "date-not-expired" : "") + " " + /*showDateEnd*/
-        (ctx[8] ? "" : "hidden") + " svelte-1uhyam5");
-        attr(span5, "class", span5_class_value = null_to_empty(
-          /*showPaid*/
-          ctx[9] ? "" : "hidden"
-        ) + " svelte-1uhyam5");
-        attr(span7, "class", span7_class_value = null_to_empty(
-          /*showPrice*/
-          ctx[10] ? "" : "hidden"
-        ) + " svelte-1uhyam5");
-        attr(span8, "class", span8_class_value = null_to_empty(
-          /*booking*/
-          ctx[62].amountPaid >= /*booking*/
-          ctx[62].totalPrice ? "" : `${/*booking*/
-          ctx[62].deletedAt == 0 ? "text-red" : ""}`
-        ) + " svelte-1uhyam5");
-      },
-      m(target, anchor) {
-        insert(target, span0, anchor);
-        append(span0, t0);
-        insert(target, t1, anchor);
-        insert(target, span4, anchor);
-        append(span4, span1);
-        append(span1, t2);
-        append(span4, t3);
-        append(span4, span2);
-        append(span4, t5);
-        append(span4, span3);
-        append(span3, t6);
-        insert(target, t7, anchor);
-        insert(target, span8, anchor);
-        append(span8, span5);
-        append(span5, t8);
-        append(span8, t9);
-        append(span8, span6);
-        append(span8, t11);
-        append(span8, span7);
-        append(span7, t12);
-        insert(target, t13, anchor);
-        if (if_block)
-          if_block.m(target, anchor);
-        insert(target, if_block_anchor, anchor);
-        current = true;
-      },
-      p(ctx2, dirty) {
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t0_value !== (t0_value = /*booking*/
-        ctx2[62].tenantName + ""))
-          set_data(t0, t0_value);
-        if (!current || dirty[0] & /*showTenant*/
-        64 && span0_class_value !== (span0_class_value = null_to_empty(
-          /*showTenant*/
-          ctx2[6] ? "" : "hidden"
-        ) + " svelte-1uhyam5")) {
-          attr(span0, "class", span0_class_value);
-        }
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t2_value !== (t2_value = /*booking*/
-        ctx2[62].dateStart + ""))
-          set_data(t2, t2_value);
-        if (!current || dirty[0] & /*showDateStart*/
-        128 && span1_class_value !== (span1_class_value = null_to_empty(
-          /*showDateStart*/
-          ctx2[7] ? "" : "hidden"
-        ) + " svelte-1uhyam5")) {
-          attr(span1, "class", span1_class_value);
-        }
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t6_value !== (t6_value = /*booking*/
-        ctx2[62].dateEnd + ""))
-          set_data(t6, t6_value);
-        if (!current || dirty[0] & /*bookingsPerQuartal, showDateEnd*/
-        257 && span3_class_value !== (span3_class_value = (isDateInPast(
-          /*booking*/
-          ctx2[62].dateEnd
-        ) ? "date-not-expired" : "") + " " + /*showDateEnd*/
-        (ctx2[8] ? "" : "hidden") + " svelte-1uhyam5")) {
-          attr(span3, "class", span3_class_value);
-        }
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t8_value !== (t8_value = /*booking*/
-        ctx2[62].amountPaid + ""))
-          set_data(t8, t8_value);
-        if (!current || dirty[0] & /*showPaid*/
-        512 && span5_class_value !== (span5_class_value = null_to_empty(
-          /*showPaid*/
-          ctx2[9] ? "" : "hidden"
-        ) + " svelte-1uhyam5")) {
-          attr(span5, "class", span5_class_value);
-        }
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t12_value !== (t12_value = /*booking*/
-        ctx2[62].totalPrice + ""))
-          set_data(t12, t12_value);
-        if (!current || dirty[0] & /*showPrice*/
-        1024 && span7_class_value !== (span7_class_value = null_to_empty(
-          /*showPrice*/
-          ctx2[10] ? "" : "hidden"
-        ) + " svelte-1uhyam5")) {
-          attr(span7, "class", span7_class_value);
-        }
-        if (!current || dirty[0] & /*bookingsPerQuartal*/
-        1 && span8_class_value !== (span8_class_value = null_to_empty(
-          /*booking*/
-          ctx2[62].amountPaid >= /*booking*/
-          ctx2[62].totalPrice ? "" : `${/*booking*/
-          ctx2[62].deletedAt == 0 ? "text-red" : ""}`
-        ) + " svelte-1uhyam5")) {
-          attr(span8, "class", span8_class_value);
-        }
-        if (
-          /*booking*/
-          ctx2[62].deletedAt == 0
-        ) {
-          if (if_block) {
-            if_block.p(ctx2, dirty);
-            if (dirty[0] & /*bookingsPerQuartal*/
-            1) {
-              transition_in(if_block, 1);
-            }
-          } else {
-            if_block = create_if_block_25(ctx2);
-            if_block.c();
-            transition_in(if_block, 1);
-            if_block.m(if_block_anchor.parentNode, if_block_anchor);
-          }
-        } else if (if_block) {
-          group_outros();
-          transition_out(if_block, 1, 1, () => {
-            if_block = null;
-          });
-          check_outros();
-        }
-      },
-      i(local) {
-        if (current)
-          return;
-        transition_in(if_block);
-        current = true;
-      },
-      o(local) {
-        transition_out(if_block);
-        current = false;
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(span0);
-          detach(t1);
-          detach(span4);
-          detach(t7);
-          detach(span8);
-          detach(t13);
-          detach(if_block_anchor);
-        }
-        if (if_block)
-          if_block.d(detaching);
-      }
-    };
-  }
-  function create_if_block_25(ctx) {
     let div;
     let button0;
     let icon0;
-    let t0;
+    let t14;
     let button1;
     let icon1;
-    let t1;
+    let t15;
     let button2;
     let icon2;
-    let t2;
+    let t16;
     let button3;
     let icon3;
     let current;
@@ -17789,18 +18709,68 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     });
     return {
       c() {
+        span0 = element("span");
+        t0 = text(t0_value);
+        t1 = space();
+        span4 = element("span");
+        span1 = element("span");
+        t2 = text(t2_value);
+        t3 = space();
+        span2 = element("span");
+        span2.textContent = "s/d";
+        t5 = space();
+        span3 = element("span");
+        t6 = text(t6_value);
+        t7 = space();
+        span8 = element("span");
+        span5 = element("span");
+        t8 = text(t8_value);
+        t9 = space();
+        span6 = element("span");
+        span6.textContent = "/";
+        t11 = space();
+        span7 = element("span");
+        t12 = text(t12_value);
+        t13 = space();
         div = element("div");
         button0 = element("button");
         create_component(icon0.$.fragment);
-        t0 = space();
+        t14 = space();
         button1 = element("button");
         create_component(icon1.$.fragment);
-        t1 = space();
+        t15 = space();
         button2 = element("button");
         create_component(icon2.$.fragment);
-        t2 = space();
+        t16 = space();
         button3 = element("button");
         create_component(icon3.$.fragment);
+        attr(span0, "class", span0_class_value = null_to_empty(
+          /*showTenant*/
+          ctx[6] ? "" : "hidden"
+        ) + " svelte-1uhyam5");
+        attr(span1, "class", span1_class_value = null_to_empty(
+          /*showDateStart*/
+          ctx[7] ? "" : "hidden"
+        ) + " svelte-1uhyam5");
+        attr(span3, "class", span3_class_value = (isDateInPast(
+          /*booking*/
+          ctx[62].dateEnd
+        ) ? "date-not-expired" : "") + " " + /*showDateEnd*/
+        (ctx[8] ? "" : "hidden") + " svelte-1uhyam5");
+        attr(span5, "class", span5_class_value = null_to_empty(
+          /*showPaid*/
+          ctx[9] ? "" : "hidden"
+        ) + " svelte-1uhyam5");
+        attr(span7, "class", span7_class_value = null_to_empty(
+          /*showPrice*/
+          ctx[10] ? "" : "hidden"
+        ) + " svelte-1uhyam5");
+        attr(span8, "class", span8_class_value = null_to_empty(
+          /*booking*/
+          ctx[62].amountPaid >= /*booking*/
+          ctx[62].totalPrice ? "" : `${/*booking*/
+          ctx[62].deletedAt == 0 ? "text-red" : ""}`
+        ) + " svelte-1uhyam5");
         attr(button0, "class", "btn svelte-1uhyam5");
         attr(button0, "title", "Extend Booking");
         attr(button1, "class", "btn svelte-1uhyam5");
@@ -17812,16 +18782,37 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         attr(div, "class", "actions svelte-1uhyam5");
       },
       m(target, anchor) {
+        insert(target, span0, anchor);
+        append(span0, t0);
+        insert(target, t1, anchor);
+        insert(target, span4, anchor);
+        append(span4, span1);
+        append(span1, t2);
+        append(span4, t3);
+        append(span4, span2);
+        append(span4, t5);
+        append(span4, span3);
+        append(span3, t6);
+        insert(target, t7, anchor);
+        insert(target, span8, anchor);
+        append(span8, span5);
+        append(span5, t8);
+        append(span8, t9);
+        append(span8, span6);
+        append(span8, t11);
+        append(span8, span7);
+        append(span7, t12);
+        insert(target, t13, anchor);
         insert(target, div, anchor);
         append(div, button0);
         mount_component(icon0, button0, null);
-        append(div, t0);
+        append(div, t14);
         append(div, button1);
         mount_component(icon1, button1, null);
-        append(div, t1);
+        append(div, t15);
         append(div, button2);
         mount_component(icon2, button2, null);
-        append(div, t2);
+        append(div, t16);
         append(div, button3);
         mount_component(icon3, button3, null);
         current = true;
@@ -17836,6 +18827,71 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       },
       p(new_ctx, dirty) {
         ctx = new_ctx;
+        if ((!current || dirty[0] & /*bookingsPerQuartal*/
+        1) && t0_value !== (t0_value = /*booking*/
+        ctx[62].tenantName + ""))
+          set_data(t0, t0_value);
+        if (!current || dirty[0] & /*showTenant*/
+        64 && span0_class_value !== (span0_class_value = null_to_empty(
+          /*showTenant*/
+          ctx[6] ? "" : "hidden"
+        ) + " svelte-1uhyam5")) {
+          attr(span0, "class", span0_class_value);
+        }
+        if ((!current || dirty[0] & /*bookingsPerQuartal*/
+        1) && t2_value !== (t2_value = /*booking*/
+        ctx[62].dateStart + ""))
+          set_data(t2, t2_value);
+        if (!current || dirty[0] & /*showDateStart*/
+        128 && span1_class_value !== (span1_class_value = null_to_empty(
+          /*showDateStart*/
+          ctx[7] ? "" : "hidden"
+        ) + " svelte-1uhyam5")) {
+          attr(span1, "class", span1_class_value);
+        }
+        if ((!current || dirty[0] & /*bookingsPerQuartal*/
+        1) && t6_value !== (t6_value = /*booking*/
+        ctx[62].dateEnd + ""))
+          set_data(t6, t6_value);
+        if (!current || dirty[0] & /*bookingsPerQuartal, showDateEnd*/
+        257 && span3_class_value !== (span3_class_value = (isDateInPast(
+          /*booking*/
+          ctx[62].dateEnd
+        ) ? "date-not-expired" : "") + " " + /*showDateEnd*/
+        (ctx[8] ? "" : "hidden") + " svelte-1uhyam5")) {
+          attr(span3, "class", span3_class_value);
+        }
+        if ((!current || dirty[0] & /*bookingsPerQuartal*/
+        1) && t8_value !== (t8_value = /*booking*/
+        ctx[62].amountPaid + ""))
+          set_data(t8, t8_value);
+        if (!current || dirty[0] & /*showPaid*/
+        512 && span5_class_value !== (span5_class_value = null_to_empty(
+          /*showPaid*/
+          ctx[9] ? "" : "hidden"
+        ) + " svelte-1uhyam5")) {
+          attr(span5, "class", span5_class_value);
+        }
+        if ((!current || dirty[0] & /*bookingsPerQuartal*/
+        1) && t12_value !== (t12_value = /*booking*/
+        ctx[62].totalPrice + ""))
+          set_data(t12, t12_value);
+        if (!current || dirty[0] & /*showPrice*/
+        1024 && span7_class_value !== (span7_class_value = null_to_empty(
+          /*showPrice*/
+          ctx[10] ? "" : "hidden"
+        ) + " svelte-1uhyam5")) {
+          attr(span7, "class", span7_class_value);
+        }
+        if (!current || dirty[0] & /*bookingsPerQuartal*/
+        1 && span8_class_value !== (span8_class_value = null_to_empty(
+          /*booking*/
+          ctx[62].amountPaid >= /*booking*/
+          ctx[62].totalPrice ? "" : `${/*booking*/
+          ctx[62].deletedAt == 0 ? "text-red" : ""}`
+        ) + " svelte-1uhyam5")) {
+          attr(span8, "class", span8_class_value);
+        }
       },
       i(local) {
         if (current)
@@ -17855,6 +18911,12 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       },
       d(detaching) {
         if (detaching) {
+          detach(span0);
+          detach(t1);
+          detach(span4);
+          detach(t7);
+          detach(span8);
+          detach(t13);
           detach(div);
         }
         destroy_component(icon0);
@@ -17879,7 +18941,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     );
     let if_block_anchor;
     let current;
-    let if_block = show_if && create_if_block8(ctx);
+    let if_block = show_if && create_if_block9(ctx);
     return {
       c() {
         if (if_block)
@@ -17911,7 +18973,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block8(ctx2);
+            if_block = create_if_block9(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -18616,13 +19678,13 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       }
     };
   }
-  function create_fragment16(ctx) {
+  function create_fragment17(ctx) {
     let t;
     let layoutmain;
     let current;
     let if_block = (
       /*isPopUpFormReady*/
-      ctx[12] && create_if_block_33(ctx)
+      ctx[12] && create_if_block_25(ctx)
     );
     layoutmain = new main_default({
       props: {
@@ -18658,7 +19720,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_33(ctx2);
+            if_block = create_if_block_25(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(t.parentNode, t);
@@ -18757,7 +19819,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     inputDate.setHours(0, 0, 0, 0);
     return inputDate < today;
   }
-  function instance13($self, $props, $invalidate) {
+  function instance14($self, $props, $invalidate) {
     let bookingsPerQuartal = (
       /** @type {BookingDetail[]} */
       [/* bookingsPerQuartal*/]
@@ -18767,7 +19829,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       [/* roomNames */]
     );
     async function refreshBookings() {
-      await (0, import_jsApi2.UserReport)(
+      await (0, import_jsApi3.UserReport)(
         // @ts-ignore
         { monthStart, monthEnd },
         /** @type {import('./jsApi.GEN').UserReportCallback} */
@@ -18784,7 +19846,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       );
     }
     const now2 = new Date();
-    const initialStart = new Date(now2.getFullYear(), now2.getMonth());
+    const initialStart = new Date(now2.getFullYear(), now2.getMonth() - 2);
     let monthStart = formatYM(initialStart);
     let quartals = getQuartalsFromStart(monthStart);
     let monthEnd = quartals[3];
@@ -18826,9 +19888,9 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
       booking.roomId = String(bookingToExtend.roomId);
       const i = (
         /** @type {any} */
-        { facilities: facilities2, booking, cmd: import_xConstant.CmdUpsert }
+        { facilities: facilities2, booking, cmd: import_xConstant2.CmdUpsert }
       );
-      await (0, import_jsApi2.AdminBooking)(
+      await (0, import_jsApi3.AdminBooking)(
         i,
         /** @type {import('../jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */
@@ -18839,7 +19901,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
             notifier.showError(o.error);
             return;
           }
-          notifier.showSuccess(`Booking extended !!`);
+          notifier.showSuccess(`Booking #${booking.id} extended !!`);
           popupExtendBooking.Reset();
           popupExtendBooking.Hide();
           refreshBookings();
@@ -18848,8 +19910,8 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     }
     function onExtendBooking(booking) {
       $invalidate(14, bookingToExtend = booking);
-      $invalidate(16, dateStart = booking.dateEnd);
-      $invalidate(17, dateEnd = (0, import_xFormatter5.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 30));
+      $invalidate(16, dateStart = (0, import_xFormatter6.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 1));
+      $invalidate(17, dateEnd = (0, import_xFormatter6.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 30));
       popupExtendBooking.Show();
     }
     let popUpShowPayments = (
@@ -18866,8 +19928,8 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
     );
     async function showPaymentsForBooking(bookingId) {
       $invalidate(19, bookingIdToShowPayment = bookingId);
-      await (0, import_jsApi2.AdminPayment)(
-        { cmd: import_xConstant.CmdForm, bookingId },
+      await (0, import_jsApi3.AdminPayment)(
+        { cmd: import_xConstant2.CmdForm, bookingId },
         /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
         /** @returns {Promise<void>} */
         function(o) {
@@ -18896,7 +19958,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
         /** @type {any} */
         { payment, cmd: "upsert" }
       );
-      await (0, import_jsApi2.AdminPayment)(
+      await (0, import_jsApi3.AdminPayment)(
         i,
         /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
         /** @returns {Promise<void>} */
@@ -19056,7 +20118,7 @@ table.svelte-1uhyam5 tbody tr td .cell.refunded.svelte-1uhyam5.svelte-1uhyam5 {
   var UserReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance13, create_fragment16, safe_not_equal, {}, null, [-1, -1, -1]);
+      init(this, options, instance14, create_fragment17, safe_not_equal, {}, null, [-1, -1, -1]);
     }
   };
   var userReport_default = UserReport_1;
