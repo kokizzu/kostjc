@@ -53,7 +53,11 @@
       </a>
       <a href="/user/report" class:active={pathAll === '/user/report'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
-        <span>Reports</span>
+        <span>Occupancy Report</span>
+      </a>
+      <a href="/user/missingReport" class:active={pathAll === '/user/missingReport'}>
+        <Icon src={RiDocumentFileChartLine} size="20" />
+        <span>Missing Data Report</span>
       </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />

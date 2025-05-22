@@ -373,8 +373,8 @@
                           <span> s/d </span>
                           <span
                             class="
-                            {booking.isNearEnding && !booking.isExtended ? 'date-warning' : ''}
-                            {!booking.isExtended && !booking.isNearEnding ? 'date-alert' : ''}
+                            {!booking.isNearEnding && !booking.isExtended ? 'date-warning' : ''}
+                            {!booking.isExtended && booking.isNearEnding ? 'date-alert' : ''}
                             {showDateEnd ? '' : 'hidden'}
                           ">
                             {booking.dateEnd}

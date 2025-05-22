@@ -850,7 +850,7 @@ func updateFlags(bookings []BookingDetail) []BookingDetail {
 			if other.DeletedAt != 0 || other.Id == current.Id {
 				continue
 			}
-			if other.RoomId == current.RoomId && other.TenantId == current.TenantId {
+			if other.RoomId == current.RoomId {
 				otherStart, err := time.Parse(time.DateOnly, other.DateStart)
 				if err != nil {
 					continue
@@ -883,7 +883,7 @@ func updateFlags(bookings []BookingDetail) []BookingDetail {
 		if !hasFutureBookingSameRoom {
 			if dateEnd.Before(now) {
 				current.IsNearEnding = true // Sudah habis dan tidak diperpanjang
-			} else if (dateEnd.Equal(now) || dateEnd.After(now)) && dateEnd.Before(sevenDaysLater.Add(24*time.Hour)) {
+			} else if dateEnd.Before(sevenDaysLater.Add(24 * time.Hour)) {
 				current.IsNearEnding = true // Akan habis <= 7 hari
 			}
 		}
