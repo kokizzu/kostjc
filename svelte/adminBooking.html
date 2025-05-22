@@ -17599,10 +17599,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let current;
     let mounted;
     let dispose;
-    let if_block = (
-      /*f*/
-      ctx[92].name !== "totalPaidIDR" && create_if_block_162(ctx)
-    );
+    let if_block = !/*f*/
+    (ctx[92].name == "totalPaidIDR" || /*f*/
+    ctx[92].name == "extraTenants") && create_if_block_162(ctx);
     function click_handler_2() {
       return (
         /*click_handler_2*/
@@ -17624,7 +17623,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t2 = space();
         attr(button, "class", "heading svelte-1mzp53n");
         button.disabled = button_disabled_value = /*f*/
-        ctx[92].name === "totalPaidIDR";
+        ctx[92].name === "totalPaidIDR" || /*f*/
+        ctx[92].name === "extraTenants";
         attr(th, "style", th_style_value = /*COL_WIDTHS*/
         ctx[8][
           /*f*/
@@ -17659,10 +17659,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         2) && t0_value !== (t0_value = /*f*/
         ctx[92].label + ""))
           set_data(t0, t0_value);
-        if (
-          /*f*/
-          ctx[92].name !== "totalPaidIDR"
-        ) {
+        if (!/*f*/
+        (ctx[92].name == "totalPaidIDR" || /*f*/
+        ctx[92].name == "extraTenants")) {
           if (if_block) {
             if_block.p(ctx, dirty);
             if (dirty[0] & /*FIELDS*/
@@ -17684,7 +17683,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (!current || dirty[0] & /*FIELDS*/
         2 && button_disabled_value !== (button_disabled_value = /*f*/
-        ctx[92].name === "totalPaidIDR")) {
+        ctx[92].name === "totalPaidIDR" || /*f*/
+        ctx[92].name === "extraTenants")) {
           button.disabled = button_disabled_value;
         }
         if (!current || dirty[0] & /*COL_WIDTHS, FIELDS*/

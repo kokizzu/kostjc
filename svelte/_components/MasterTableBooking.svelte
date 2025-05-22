@@ -533,10 +533,10 @@
                 <button
                   class="heading"
                   on:click={() => OnSort(f)}
-                  disabled={f.name === 'totalPaidIDR'}
+                  disabled={f.name === 'totalPaidIDR' || f.name === 'extraTenants'}
                 >
                   <span>{f.label}</span>
-                  {#if f.name !== 'totalPaidIDR'}
+                  {#if !(f.name == 'totalPaidIDR' || f.name == 'extraTenants')}
                     {#if isSortTableAsc && f.name === fieldNameToSort}
                       <Icon
                         className="sort-icon"

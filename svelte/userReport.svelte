@@ -353,7 +353,8 @@
                             <span> s/d </span>
                             <span
                               class="
-                              {isDateInPast(booking.dateEnd) ? 'date-not-expired' : ''}
+                              {booking.isNearEnding && !booking.isExtended ? 'date-warning' : ''}
+                              {!booking.isExtended && !booking.isNearEnding ? 'date-alert' : ''}
                               {showDateEnd ? '' : 'hidden'}
                             ">
                               {booking.dateEnd}
@@ -533,11 +534,18 @@
     background-color: var(--gray-006);
   }
 
-  table tbody tr td .date-not-expired {
-    color: var(--orange-006);
+  table tbody tr td .date-warning {
+    color: var(--yellow-006);
     padding: 2px 3px;
     border-radius: 4px;
-    background-color: var(--orange-transparent);
+    background-color: var(--yellow-transparent);
+  }
+
+  table tbody tr td .date-alert {
+    color: var(--red-006);
+    padding: 2px 3px;
+    border-radius: 4px;
+    background-color: var(--red-transparent);
   }
 
   table tbody tr td .cell.refunded {

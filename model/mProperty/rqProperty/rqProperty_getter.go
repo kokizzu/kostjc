@@ -165,6 +165,30 @@ LIMIT 1`
 		orderBySql = S.Replace(orderBySql, `ORDER BY "id"`, `ORDER BY "bookings"."id"`)
 	}
 
+	if S.Contains(orderBySql, `ORDER BY "createdAt"`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "createdAt"`, `ORDER BY "bookings"."createdAt"`)
+	}
+
+	if S.Contains(orderBySql, `ORDER BY "updatedAt"`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "updatedAt"`, `ORDER BY "bookings"."updatedAt"`)
+	}
+
+	if S.Contains(orderBySql, `ORDER BY "deletedAt"`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "deletedAt"`, `ORDER BY "bookings"."deletedAt"`)
+	}
+
+	if S.Contains(orderBySql, `ORDER BY "extraTenants" DESC`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "extraTenants" DESC`, ``)
+	}
+
+	if S.Contains(orderBySql, `ORDER BY "extraTenants" ASC`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "extraTenants" ASC`, ``)
+	}
+
+	if S.Contains(orderBySql, `ORDER BY "extraTenants"`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "extraTenants"`, ``)
+	}
+
 	queryRows := comment + `
 SELECT
 	"bookings"."id",
@@ -712,16 +736,18 @@ func isValidYearMonth(yearMonth string) bool {
 }
 
 type BookingDetail struct {
-	Id         uint64 `json:"id"`
-	RoomId     uint64 `json:"roomId"`
-	RoomName   string `json:"roomName"`
-	TenantId   uint64 `json:"tenantId"`
-	TenantName string `json:"tenantName"`
-	DateStart  string `json:"dateStart"`
-	DateEnd    string `json:"dateEnd"`
-	AmountPaid int64  `json:"amountPaid"`
-	TotalPrice int64  `json:"totalPrice"`
-	DeletedAt  int64  `json:"deletedAt"`
+	Id           uint64 `json:"id"`
+	RoomId       uint64 `json:"roomId"`
+	RoomName     string `json:"roomName"`
+	TenantId     uint64 `json:"tenantId"`
+	TenantName   string `json:"tenantName"`
+	DateStart    string `json:"dateStart"`
+	DateEnd      string `json:"dateEnd"`
+	AmountPaid   int64  `json:"amountPaid"`
+	TotalPrice   int64  `json:"totalPrice"`
+	DeletedAt    int64  `json:"deletedAt"`
+	IsNearEnding bool   `json:"isNearEnding"`
+	IsExtended   bool   `json:"isExtended"`
 }
 
 type RoomBooking struct {
@@ -799,7 +825,71 @@ ORDER BY "rooms"."roomName" ASC`
 		}
 	})
 
+	out = updateFlags(out)
+
 	return
+}
+
+func updateFlags(bookings []BookingDetail) []BookingDetail {
+	now := time.Now()
+	sevenDaysLater := now.AddDate(0, 0, 7)
+
+	for i := range bookings {
+		current := &bookings[i]
+		if current.DeletedAt != 0 {
+			continue
+		}
+
+		dateEnd, err := time.Parse(time.DateOnly, current.DateEnd)
+		if err != nil {
+			continue
+		}
+
+		// ============ IS EXTENDED ============
+		for _, other := range bookings {
+			if other.DeletedAt != 0 || other.Id == current.Id {
+				continue
+			}
+			if other.RoomId == current.RoomId && other.TenantId == current.TenantId {
+				otherStart, err := time.Parse(time.DateOnly, other.DateStart)
+				if err != nil {
+					continue
+				}
+				if otherStart.After(dateEnd) {
+					current.IsExtended = true
+					break
+				}
+			}
+		}
+
+		// ============ IS NEAR ENDING ============
+		hasFutureBookingSameRoom := false
+		for _, other := range bookings {
+			if other.DeletedAt != 0 || other.Id == current.Id {
+				continue
+			}
+			if other.RoomId == current.RoomId {
+				otherStart, err := time.Parse(time.DateOnly, other.DateStart)
+				if err != nil {
+					continue
+				}
+				if otherStart.After(now) {
+					hasFutureBookingSameRoom = true
+					break
+				}
+			}
+		}
+
+		if !hasFutureBookingSameRoom {
+			if dateEnd.Before(now) {
+				current.IsNearEnding = true // Sudah habis dan tidak diperpanjang
+			} else if (dateEnd.Equal(now) || dateEnd.After(now)) && dateEnd.Before(sevenDaysLater.Add(24*time.Hour)) {
+				current.IsNearEnding = true // Akan habis <= 7 hari
+			}
+		}
+	}
+
+	return bookings
 }
 
 func parseMonth(monthStr string) (time.Time, error) {

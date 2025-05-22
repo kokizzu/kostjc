@@ -160,6 +160,10 @@ func main() {
 			return
 		}
 		dateTime := os.Args[2]
+
+		fmt.Println(color.BlueString(`Truncate database`))
+		model.TruncateDatabase(tConn)
+
 		fmt.Println(color.BlueString(`Restoring database from: ` + dateTime))
 		model.RestoreDatabase(tConn, dateTime)
 	case `truncate`:

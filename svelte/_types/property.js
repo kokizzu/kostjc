@@ -137,6 +137,8 @@ module.exports = {};
  * @property {string} dateEnd
  * @property {number} amountPaid
  * @property {number} totalPrice
- * @property {number} deletedAt 
+ * @property {number} deletedAt
+ * @property {boolean} isNearEnding
+ * @property {boolean} isExtended
  */
 module.exports = {};
