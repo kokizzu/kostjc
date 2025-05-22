@@ -18226,25 +18226,25 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
   // userReport.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[56] = list[i];
+    child_ctx[57] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[59] = list[i];
+    child_ctx[60] = list[i];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[62] = list[i];
+    child_ctx[63] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[59] = list[i];
+    child_ctx[60] = list[i];
     return child_ctx;
   }
-  function create_if_block_25(ctx) {
+  function create_if_block_111(ctx) {
     let popupextendbooking;
     let updating_isSubmitted;
     let updating_bookingToExtend;
@@ -18276,36 +18276,36 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       tenants,
       OnSubmit: (
         /*SubmitExtendBooking*/
-        ctx[25]
+        ctx[24]
       )
     };
     if (
       /*isSubmitExtendBooking*/
-      ctx[15] !== void 0
-    ) {
-      popupextendbooking_props.isSubmitted = /*isSubmitExtendBooking*/
-      ctx[15];
-    }
-    if (
-      /*bookingToExtend*/
       ctx[14] !== void 0
     ) {
-      popupextendbooking_props.bookingToExtend = /*bookingToExtend*/
+      popupextendbooking_props.isSubmitted = /*isSubmitExtendBooking*/
       ctx[14];
     }
     if (
+      /*bookingToExtend*/
+      ctx[13] !== void 0
+    ) {
+      popupextendbooking_props.bookingToExtend = /*bookingToExtend*/
+      ctx[13];
+    }
+    if (
       /*dateStart*/
-      ctx[16] !== void 0
+      ctx[15] !== void 0
     ) {
       popupextendbooking_props.dateStart = /*dateStart*/
-      ctx[16];
+      ctx[15];
     }
     if (
       /*dateEnd*/
-      ctx[17] !== void 0
+      ctx[16] !== void 0
     ) {
       popupextendbooking_props.dateEnd = /*dateEnd*/
-      ctx[17];
+      ctx[16];
     }
     popupextendbooking = new PopUpExtendBooking_default({ props: popupextendbooking_props });
     ctx[30](popupextendbooking);
@@ -18322,17 +18322,17 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let popupshowbookingpayments_props = {};
     if (
       /*bookingIdToShowPayment*/
-      ctx[19] !== void 0
+      ctx[18] !== void 0
     ) {
       popupshowbookingpayments_props.bookingId = /*bookingIdToShowPayment*/
-      ctx[19];
+      ctx[18];
     }
     if (
       /*paymentsForBooking*/
-      ctx[20] !== void 0
+      ctx[19] !== void 0
     ) {
       popupshowbookingpayments_props.payments = /*paymentsForBooking*/
-      ctx[20];
+      ctx[19];
     }
     popupshowbookingpayments = new PopUpShowBookingPayments_default({ props: popupshowbookingpayments_props });
     binding_callbacks.push(() => bind(popupshowbookingpayments, "bookingId", popupshowbookingpayments_bookingId_binding));
@@ -18348,22 +18348,22 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       isBookingReadOnly: true,
       OnSubmit: (
         /*submitAddPayment*/
-        ctx[29]
+        ctx[28]
       )
     };
     if (
       /*bookingIdToPay*/
-      ctx[22] !== void 0
+      ctx[21] !== void 0
     ) {
       popupaddpayment_props.bookingId = /*bookingIdToPay*/
-      ctx[22];
+      ctx[21];
     }
     if (
       /*isSubmitAddPayment*/
-      ctx[23] !== void 0
+      ctx[22] !== void 0
     ) {
       popupaddpayment_props.isSubmitted = /*isSubmitAddPayment*/
-      ctx[23];
+      ctx[22];
     }
     popupaddpayment = new PopUpAddPayment_default({ props: popupaddpayment_props });
     binding_callbacks.push(() => bind(popupaddpayment, "bookingId", popupaddpayment_bookingId_binding));
@@ -18388,63 +18388,63 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       p(ctx2, dirty) {
         const popupextendbooking_changes = {};
         if (!updating_isSubmitted && dirty[0] & /*isSubmitExtendBooking*/
-        32768) {
+        16384) {
           updating_isSubmitted = true;
           popupextendbooking_changes.isSubmitted = /*isSubmitExtendBooking*/
-          ctx2[15];
+          ctx2[14];
           add_flush_callback(() => updating_isSubmitted = false);
         }
         if (!updating_bookingToExtend && dirty[0] & /*bookingToExtend*/
-        16384) {
+        8192) {
           updating_bookingToExtend = true;
           popupextendbooking_changes.bookingToExtend = /*bookingToExtend*/
-          ctx2[14];
+          ctx2[13];
           add_flush_callback(() => updating_bookingToExtend = false);
         }
         if (!updating_dateStart && dirty[0] & /*dateStart*/
-        65536) {
+        32768) {
           updating_dateStart = true;
           popupextendbooking_changes.dateStart = /*dateStart*/
-          ctx2[16];
+          ctx2[15];
           add_flush_callback(() => updating_dateStart = false);
         }
         if (!updating_dateEnd && dirty[0] & /*dateEnd*/
-        131072) {
+        65536) {
           updating_dateEnd = true;
           popupextendbooking_changes.dateEnd = /*dateEnd*/
-          ctx2[17];
+          ctx2[16];
           add_flush_callback(() => updating_dateEnd = false);
         }
         popupextendbooking.$set(popupextendbooking_changes);
         const popupshowbookingpayments_changes = {};
         if (!updating_bookingId && dirty[0] & /*bookingIdToShowPayment*/
-        524288) {
+        262144) {
           updating_bookingId = true;
           popupshowbookingpayments_changes.bookingId = /*bookingIdToShowPayment*/
-          ctx2[19];
+          ctx2[18];
           add_flush_callback(() => updating_bookingId = false);
         }
         if (!updating_payments && dirty[0] & /*paymentsForBooking*/
-        1048576) {
+        524288) {
           updating_payments = true;
           popupshowbookingpayments_changes.payments = /*paymentsForBooking*/
-          ctx2[20];
+          ctx2[19];
           add_flush_callback(() => updating_payments = false);
         }
         popupshowbookingpayments.$set(popupshowbookingpayments_changes);
         const popupaddpayment_changes = {};
         if (!updating_bookingId_1 && dirty[0] & /*bookingIdToPay*/
-        4194304) {
+        2097152) {
           updating_bookingId_1 = true;
           popupaddpayment_changes.bookingId = /*bookingIdToPay*/
-          ctx2[22];
+          ctx2[21];
           add_flush_callback(() => updating_bookingId_1 = false);
         }
         if (!updating_isSubmitted_1 && dirty[0] & /*isSubmitAddPayment*/
-        8388608) {
+        4194304) {
           updating_isSubmitted_1 = true;
           popupaddpayment_changes.isSubmitted = /*isSubmitAddPayment*/
-          ctx2[23];
+          ctx2[22];
           add_flush_callback(() => updating_isSubmitted_1 = false);
         }
         popupaddpayment.$set(popupaddpayment_changes);
@@ -18481,7 +18481,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let th;
     let t_value = formatMonthYear(
       /*quartal*/
-      ctx[59]
+      ctx[60]
     ) + "";
     let t;
     return {
@@ -18496,9 +18496,9 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*quartals*/
-        8 && t_value !== (t_value = formatMonthYear(
+        4 && t_value !== (t_value = formatMonthYear(
           /*quartal*/
-          ctx2[59]
+          ctx2[60]
         ) + ""))
           set_data(t, t_value);
       },
@@ -18510,91 +18510,10 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     };
   }
   function create_if_block9(ctx) {
-    let div;
-    let div_class_value;
-    let current;
-    let if_block = (
-      /*booking*/
-      ctx[62].tenantName && create_if_block_111(ctx)
-    );
-    return {
-      c() {
-        div = element("div");
-        if (if_block)
-          if_block.c();
-        attr(div, "class", div_class_value = "cell " + /*booking*/
-        (ctx[62].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
-        (ctx[11] && /*booking*/
-        ctx[62].amountPaid >= /*booking*/
-        ctx[62].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
-        ctx[5] && /*booking*/
-        ctx[62].deletedAt > 0 ? "hidden" : "") + " svelte-1iwhudx");
-      },
-      m(target, anchor) {
-        insert(target, div, anchor);
-        if (if_block)
-          if_block.m(div, null);
-        current = true;
-      },
-      p(ctx2, dirty) {
-        if (
-          /*booking*/
-          ctx2[62].tenantName
-        ) {
-          if (if_block) {
-            if_block.p(ctx2, dirty);
-            if (dirty[0] & /*bookingsPerQuartal*/
-            1) {
-              transition_in(if_block, 1);
-            }
-          } else {
-            if_block = create_if_block_111(ctx2);
-            if_block.c();
-            transition_in(if_block, 1);
-            if_block.m(div, null);
-          }
-        } else if (if_block) {
-          group_outros();
-          transition_out(if_block, 1, 1, () => {
-            if_block = null;
-          });
-          check_outros();
-        }
-        if (!current || dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded*/
-        2081 && div_class_value !== (div_class_value = "cell " + /*booking*/
-        (ctx2[62].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
-        (ctx2[11] && /*booking*/
-        ctx2[62].amountPaid >= /*booking*/
-        ctx2[62].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
-        ctx2[5] && /*booking*/
-        ctx2[62].deletedAt > 0 ? "hidden" : "") + " svelte-1iwhudx")) {
-          attr(div, "class", div_class_value);
-        }
-      },
-      i(local) {
-        if (current)
-          return;
-        transition_in(if_block);
-        current = true;
-      },
-      o(local) {
-        transition_out(if_block);
-        current = false;
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-        if (if_block)
-          if_block.d();
-      }
-    };
-  }
-  function create_if_block_111(ctx) {
     let span0;
     let t0_value = (
       /*booking*/
-      ctx[62].tenantName + ""
+      ctx[63].tenantName + ""
     );
     let t0;
     let span0_class_value;
@@ -18603,7 +18522,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let span1;
     let t2_value = (
       /*booking*/
-      ctx[62].dateStart + ""
+      ctx[63].dateStart + ""
     );
     let t2;
     let span1_class_value;
@@ -18613,7 +18532,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let span3;
     let t6_value = (
       /*booking*/
-      ctx[62].dateEnd + ""
+      ctx[63].dateEnd + ""
     );
     let t6;
     let span3_class_value;
@@ -18622,7 +18541,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let span5;
     let t8_value = (
       /*booking*/
-      ctx[62].amountPaid + ""
+      ctx[63].amountPaid + ""
     );
     let t8;
     let span5_class_value;
@@ -18632,7 +18551,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let span7;
     let t12_value = (
       /*booking*/
-      ctx[62].totalPrice + ""
+      ctx[63].totalPrice + ""
     );
     let t12;
     let span7_class_value;
@@ -18664,7 +18583,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         /*click_handler_2*/
         ctx[50](
           /*booking*/
-          ctx[62]
+          ctx[63]
         )
       );
     }
@@ -18676,7 +18595,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         /*click_handler_3*/
         ctx[51](
           /*booking*/
-          ctx[62]
+          ctx[63]
         )
       );
     }
@@ -18688,7 +18607,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         /*click_handler_4*/
         ctx[52](
           /*booking*/
-          ctx[62]
+          ctx[63]
         )
       );
     }
@@ -18734,31 +18653,31 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         create_component(icon3.$.fragment);
         attr(span0, "class", span0_class_value = null_to_empty(
           /*showTenant*/
-          ctx[6] ? "" : "hidden"
+          ctx[5] ? "" : "hidden"
         ) + " svelte-1iwhudx");
         attr(span1, "class", span1_class_value = null_to_empty(
           /*showDateStart*/
-          ctx[7] ? "" : "hidden"
+          ctx[6] ? "" : "hidden"
         ) + " svelte-1iwhudx");
         attr(span3, "class", span3_class_value = /*booking*/
-        (ctx[62].isNearEnding && !/*booking*/
-        ctx[62].isExtended ? "date-warning" : "") + " " + (!/*booking*/
-        ctx[62].isExtended && !/*booking*/
-        ctx[62].isNearEnding ? "date-alert" : "") + " " + /*showDateEnd*/
-        (ctx[8] ? "" : "hidden") + " svelte-1iwhudx");
+        (ctx[63].isNearEnding && !/*booking*/
+        ctx[63].isExtended ? "date-warning" : "") + " " + (!/*booking*/
+        ctx[63].isExtended && !/*booking*/
+        ctx[63].isNearEnding ? "date-alert" : "") + " " + /*showDateEnd*/
+        (ctx[7] ? "" : "hidden") + " svelte-1iwhudx");
         attr(span5, "class", span5_class_value = null_to_empty(
           /*showPaid*/
-          ctx[9] ? "" : "hidden"
+          ctx[8] ? "" : "hidden"
         ) + " svelte-1iwhudx");
         attr(span7, "class", span7_class_value = null_to_empty(
           /*showPrice*/
-          ctx[10] ? "" : "hidden"
+          ctx[9] ? "" : "hidden"
         ) + " svelte-1iwhudx");
         attr(span8, "class", span8_class_value = null_to_empty(
           /*booking*/
-          ctx[62].amountPaid >= /*booking*/
-          ctx[62].totalPrice ? "" : `${/*booking*/
-          ctx[62].deletedAt == 0 ? "text-red" : ""}`
+          ctx[63].amountPaid >= /*booking*/
+          ctx[63].totalPrice ? "" : `${/*booking*/
+          ctx[63].deletedAt == 0 ? "text-red" : ""}`
         ) + " svelte-1iwhudx");
         attr(button0, "class", "btn svelte-1iwhudx");
         attr(button0, "title", "Extend Booking");
@@ -18816,69 +18735,69 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       },
       p(new_ctx, dirty) {
         ctx = new_ctx;
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t0_value !== (t0_value = /*booking*/
-        ctx[62].tenantName + ""))
+        if ((!current || dirty[0] & /*roomNames, quartals*/
+        5) && t0_value !== (t0_value = /*booking*/
+        ctx[63].tenantName + ""))
           set_data(t0, t0_value);
         if (!current || dirty[0] & /*showTenant*/
-        64 && span0_class_value !== (span0_class_value = null_to_empty(
+        32 && span0_class_value !== (span0_class_value = null_to_empty(
           /*showTenant*/
-          ctx[6] ? "" : "hidden"
+          ctx[5] ? "" : "hidden"
         ) + " svelte-1iwhudx")) {
           attr(span0, "class", span0_class_value);
         }
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t2_value !== (t2_value = /*booking*/
-        ctx[62].dateStart + ""))
+        if ((!current || dirty[0] & /*roomNames, quartals*/
+        5) && t2_value !== (t2_value = /*booking*/
+        ctx[63].dateStart + ""))
           set_data(t2, t2_value);
         if (!current || dirty[0] & /*showDateStart*/
-        128 && span1_class_value !== (span1_class_value = null_to_empty(
+        64 && span1_class_value !== (span1_class_value = null_to_empty(
           /*showDateStart*/
-          ctx[7] ? "" : "hidden"
+          ctx[6] ? "" : "hidden"
         ) + " svelte-1iwhudx")) {
           attr(span1, "class", span1_class_value);
         }
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t6_value !== (t6_value = /*booking*/
-        ctx[62].dateEnd + ""))
+        if ((!current || dirty[0] & /*roomNames, quartals*/
+        5) && t6_value !== (t6_value = /*booking*/
+        ctx[63].dateEnd + ""))
           set_data(t6, t6_value);
-        if (!current || dirty[0] & /*bookingsPerQuartal, showDateEnd*/
-        257 && span3_class_value !== (span3_class_value = /*booking*/
-        (ctx[62].isNearEnding && !/*booking*/
-        ctx[62].isExtended ? "date-warning" : "") + " " + (!/*booking*/
-        ctx[62].isExtended && !/*booking*/
-        ctx[62].isNearEnding ? "date-alert" : "") + " " + /*showDateEnd*/
-        (ctx[8] ? "" : "hidden") + " svelte-1iwhudx")) {
+        if (!current || dirty[0] & /*roomNames, quartals, showDateEnd*/
+        133 && span3_class_value !== (span3_class_value = /*booking*/
+        (ctx[63].isNearEnding && !/*booking*/
+        ctx[63].isExtended ? "date-warning" : "") + " " + (!/*booking*/
+        ctx[63].isExtended && !/*booking*/
+        ctx[63].isNearEnding ? "date-alert" : "") + " " + /*showDateEnd*/
+        (ctx[7] ? "" : "hidden") + " svelte-1iwhudx")) {
           attr(span3, "class", span3_class_value);
         }
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t8_value !== (t8_value = /*booking*/
-        ctx[62].amountPaid + ""))
+        if ((!current || dirty[0] & /*roomNames, quartals*/
+        5) && t8_value !== (t8_value = /*booking*/
+        ctx[63].amountPaid + ""))
           set_data(t8, t8_value);
         if (!current || dirty[0] & /*showPaid*/
-        512 && span5_class_value !== (span5_class_value = null_to_empty(
+        256 && span5_class_value !== (span5_class_value = null_to_empty(
           /*showPaid*/
-          ctx[9] ? "" : "hidden"
+          ctx[8] ? "" : "hidden"
         ) + " svelte-1iwhudx")) {
           attr(span5, "class", span5_class_value);
         }
-        if ((!current || dirty[0] & /*bookingsPerQuartal*/
-        1) && t12_value !== (t12_value = /*booking*/
-        ctx[62].totalPrice + ""))
+        if ((!current || dirty[0] & /*roomNames, quartals*/
+        5) && t12_value !== (t12_value = /*booking*/
+        ctx[63].totalPrice + ""))
           set_data(t12, t12_value);
         if (!current || dirty[0] & /*showPrice*/
-        1024 && span7_class_value !== (span7_class_value = null_to_empty(
+        512 && span7_class_value !== (span7_class_value = null_to_empty(
           /*showPrice*/
-          ctx[10] ? "" : "hidden"
+          ctx[9] ? "" : "hidden"
         ) + " svelte-1iwhudx")) {
           attr(span7, "class", span7_class_value);
         }
-        if (!current || dirty[0] & /*bookingsPerQuartal*/
-        1 && span8_class_value !== (span8_class_value = null_to_empty(
+        if (!current || dirty[0] & /*roomNames, quartals*/
+        5 && span8_class_value !== (span8_class_value = null_to_empty(
           /*booking*/
-          ctx[62].amountPaid >= /*booking*/
-          ctx[62].totalPrice ? "" : `${/*booking*/
-          ctx[62].deletedAt == 0 ? "text-red" : ""}`
+          ctx[63].amountPaid >= /*booking*/
+          ctx[63].totalPrice ? "" : `${/*booking*/
+          ctx[63].deletedAt == 0 ? "text-red" : ""}`
         ) + " svelte-1iwhudx")) {
           attr(span8, "class", span8_class_value);
         }
@@ -18919,54 +18838,48 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     };
   }
   function create_each_block_2(ctx) {
-    let show_if = (
-      /*booking*/
-      ctx[62].roomName == /*room*/
-      ctx[56] && isBookingInThatMonth(
-        /*booking*/
-        ctx[62],
-        /*quartal*/
-        ctx[59]
-      )
-    );
-    let if_block_anchor;
+    let div;
+    let div_class_value;
     let current;
-    let if_block = show_if && create_if_block9(ctx);
+    let if_block = (
+      /*booking*/
+      ctx[63].tenantName && create_if_block9(ctx)
+    );
     return {
       c() {
+        div = element("div");
         if (if_block)
           if_block.c();
-        if_block_anchor = empty();
+        attr(div, "class", div_class_value = "cell " + /*booking*/
+        (ctx[63].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
+        (ctx[10] && /*booking*/
+        ctx[63].amountPaid >= /*booking*/
+        ctx[63].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
+        ctx[4] && /*booking*/
+        ctx[63].deletedAt > 0 ? "hidden" : "") + " svelte-1iwhudx");
       },
       m(target, anchor) {
+        insert(target, div, anchor);
         if (if_block)
-          if_block.m(target, anchor);
-        insert(target, if_block_anchor, anchor);
+          if_block.m(div, null);
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*bookingsPerQuartal, roomNames, quartals*/
-        11)
-          show_if = /*booking*/
-          ctx2[62].roomName == /*room*/
-          ctx2[56] && isBookingInThatMonth(
-            /*booking*/
-            ctx2[62],
-            /*quartal*/
-            ctx2[59]
-          );
-        if (show_if) {
+        if (
+          /*booking*/
+          ctx2[63].tenantName
+        ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
-            if (dirty[0] & /*bookingsPerQuartal, roomNames, quartals*/
-            11) {
+            if (dirty[0] & /*roomNames, quartals*/
+            5) {
               transition_in(if_block, 1);
             }
           } else {
             if_block = create_if_block9(ctx2);
             if_block.c();
             transition_in(if_block, 1);
-            if_block.m(if_block_anchor.parentNode, if_block_anchor);
+            if_block.m(div, null);
           }
         } else if (if_block) {
           group_outros();
@@ -18974,6 +18887,16 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
             if_block = null;
           });
           check_outros();
+        }
+        if (!current || dirty[0] & /*roomNames, quartals, showOnlyNotPaid, showRefunded*/
+        1045 && div_class_value !== (div_class_value = "cell " + /*booking*/
+        (ctx2[63].deletedAt > 0 ? "refunded" : "") + " " + /*showOnlyNotPaid*/
+        (ctx2[10] && /*booking*/
+        ctx2[63].amountPaid >= /*booking*/
+        ctx2[63].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
+        ctx2[4] && /*booking*/
+        ctx2[63].deletedAt > 0 ? "hidden" : "") + " svelte-1iwhudx")) {
+          attr(div, "class", div_class_value);
         }
       },
       i(local) {
@@ -18988,10 +18911,10 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       },
       d(detaching) {
         if (detaching) {
-          detach(if_block_anchor);
+          detach(div);
         }
         if (if_block)
-          if_block.d(detaching);
+          if_block.d();
       }
     };
   }
@@ -19000,8 +18923,13 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let div;
     let current;
     let each_value_2 = ensure_array_like(
-      /*bookingsPerQuartal*/
-      ctx[0] || []
+      /*reOrderBookingPerQuartal*/
+      ctx[29](
+        /*room*/
+        ctx[57],
+        /*quartal*/
+        ctx[60]
+      )
     );
     let each_blocks = [];
     for (let i = 0; i < each_value_2.length; i += 1) {
@@ -19031,11 +18959,16 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
-        469766123) {
+        if (dirty[0] & /*reOrderBookingPerQuartal, roomNames, quartals, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant*/
+        771753973) {
           each_value_2 = ensure_array_like(
-            /*bookingsPerQuartal*/
-            ctx2[0] || []
+            /*reOrderBookingPerQuartal*/
+            ctx2[29](
+              /*room*/
+              ctx2[57],
+              /*quartal*/
+              ctx2[60]
+            )
           );
           let i;
           for (i = 0; i < each_value_2.length; i += 1) {
@@ -19086,7 +19019,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let t0;
     let t1_value = (
       /*room*/
-      ctx[56] + ""
+      ctx[57] + ""
     );
     let t1;
     let t2;
@@ -19094,7 +19027,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let current;
     let each_value_1 = ensure_array_like(
       /*quartals*/
-      ctx[3] || []
+      ctx[2] || []
     );
     let each_blocks = [];
     for (let i = 0; i < each_value_1.length; i += 1) {
@@ -19133,14 +19066,14 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       },
       p(ctx2, dirty) {
         if ((!current || dirty[0] & /*roomNames*/
-        2) && t1_value !== (t1_value = /*room*/
-        ctx2[56] + ""))
+        1) && t1_value !== (t1_value = /*room*/
+        ctx2[57] + ""))
           set_data(t1, t1_value);
-        if (dirty[0] & /*bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames, quartals*/
-        469766123) {
+        if (dirty[0] & /*reOrderBookingPerQuartal, roomNames, quartals, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant*/
+        771753973) {
           each_value_1 = ensure_array_like(
             /*quartals*/
-            ctx2[3] || []
+            ctx2[2] || []
           );
           let i;
           for (i = 0; i < each_value_1.length; i += 1) {
@@ -19195,13 +19128,13 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let span;
     let t1_value = formatMonthYear(
       /*monthStart*/
-      ctx[2]
+      ctx[1]
     ) + "";
     let t1;
     let t2;
     let t3_value = formatMonthYear(
       /*monthEnd*/
-      ctx[4]
+      ctx[3]
     ) + "";
     let t3;
     let t4;
@@ -19255,10 +19188,10 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     };
     if (
       /*showRefunded*/
-      ctx[5] !== void 0
+      ctx[4] !== void 0
     ) {
       switcher0_props.value = /*showRefunded*/
-      ctx[5];
+      ctx[4];
     }
     switcher0 = new Switcher_default({ props: switcher0_props });
     binding_callbacks.push(() => bind(switcher0, "value", switcher0_value_binding));
@@ -19268,10 +19201,10 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let switcher1_props = { id: "show-tenant", label: "Show Tenant" };
     if (
       /*showTenant*/
-      ctx[6] !== void 0
+      ctx[5] !== void 0
     ) {
       switcher1_props.value = /*showTenant*/
-      ctx[6];
+      ctx[5];
     }
     switcher1 = new Switcher_default({ props: switcher1_props });
     binding_callbacks.push(() => bind(switcher1, "value", switcher1_value_binding));
@@ -19284,10 +19217,10 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     };
     if (
       /*showDateStart*/
-      ctx[7] !== void 0
+      ctx[6] !== void 0
     ) {
       switcher2_props.value = /*showDateStart*/
-      ctx[7];
+      ctx[6];
     }
     switcher2 = new Switcher_default({ props: switcher2_props });
     binding_callbacks.push(() => bind(switcher2, "value", switcher2_value_binding));
@@ -19300,10 +19233,10 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     };
     if (
       /*showDateEnd*/
-      ctx[8] !== void 0
+      ctx[7] !== void 0
     ) {
       switcher3_props.value = /*showDateEnd*/
-      ctx[8];
+      ctx[7];
     }
     switcher3 = new Switcher_default({ props: switcher3_props });
     binding_callbacks.push(() => bind(switcher3, "value", switcher3_value_binding));
@@ -19313,10 +19246,10 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let switcher4_props = { id: "show-paid", label: "Show Paid" };
     if (
       /*showPaid*/
-      ctx[9] !== void 0
+      ctx[8] !== void 0
     ) {
       switcher4_props.value = /*showPaid*/
-      ctx[9];
+      ctx[8];
     }
     switcher4 = new Switcher_default({ props: switcher4_props });
     binding_callbacks.push(() => bind(switcher4, "value", switcher4_value_binding));
@@ -19326,10 +19259,10 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let switcher5_props = { id: "show-price", label: "Show Price" };
     if (
       /*showPrice*/
-      ctx[10] !== void 0
+      ctx[9] !== void 0
     ) {
       switcher5_props.value = /*showPrice*/
-      ctx[10];
+      ctx[9];
     }
     switcher5 = new Switcher_default({ props: switcher5_props });
     binding_callbacks.push(() => bind(switcher5, "value", switcher5_value_binding));
@@ -19342,16 +19275,16 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     };
     if (
       /*showOnlyNotPaid*/
-      ctx[11] !== void 0
+      ctx[10] !== void 0
     ) {
       switcher6_props.value = /*showOnlyNotPaid*/
-      ctx[11];
+      ctx[10];
     }
     switcher6 = new Switcher_default({ props: switcher6_props });
     binding_callbacks.push(() => bind(switcher6, "value", switcher6_value_binding));
     let each_value_3 = ensure_array_like(
       /*quartals*/
-      ctx[3] || []
+      ctx[2] || []
     );
     let each_blocks_1 = [];
     for (let i = 0; i < each_value_3.length; i += 1) {
@@ -19359,7 +19292,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     }
     let each_value = ensure_array_like(
       /*roomNames*/
-      ctx[1] || []
+      ctx[0] || []
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
@@ -19493,85 +19426,85 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       },
       p(ctx2, dirty) {
         if ((!current || dirty[0] & /*monthStart*/
-        4) && t1_value !== (t1_value = formatMonthYear(
+        2) && t1_value !== (t1_value = formatMonthYear(
           /*monthStart*/
-          ctx2[2]
+          ctx2[1]
         ) + ""))
           set_data(t1, t1_value);
         if ((!current || dirty[0] & /*monthEnd*/
-        16) && t3_value !== (t3_value = formatMonthYear(
+        8) && t3_value !== (t3_value = formatMonthYear(
           /*monthEnd*/
-          ctx2[4]
+          ctx2[3]
         ) + ""))
           set_data(t3, t3_value);
         const switcher0_changes = {};
         if (!updating_value && dirty[0] & /*showRefunded*/
-        32) {
+        16) {
           updating_value = true;
           switcher0_changes.value = /*showRefunded*/
-          ctx2[5];
+          ctx2[4];
           add_flush_callback(() => updating_value = false);
         }
         switcher0.$set(switcher0_changes);
         const switcher1_changes = {};
         if (!updating_value_1 && dirty[0] & /*showTenant*/
-        64) {
+        32) {
           updating_value_1 = true;
           switcher1_changes.value = /*showTenant*/
-          ctx2[6];
+          ctx2[5];
           add_flush_callback(() => updating_value_1 = false);
         }
         switcher1.$set(switcher1_changes);
         const switcher2_changes = {};
         if (!updating_value_2 && dirty[0] & /*showDateStart*/
-        128) {
+        64) {
           updating_value_2 = true;
           switcher2_changes.value = /*showDateStart*/
-          ctx2[7];
+          ctx2[6];
           add_flush_callback(() => updating_value_2 = false);
         }
         switcher2.$set(switcher2_changes);
         const switcher3_changes = {};
         if (!updating_value_3 && dirty[0] & /*showDateEnd*/
-        256) {
+        128) {
           updating_value_3 = true;
           switcher3_changes.value = /*showDateEnd*/
-          ctx2[8];
+          ctx2[7];
           add_flush_callback(() => updating_value_3 = false);
         }
         switcher3.$set(switcher3_changes);
         const switcher4_changes = {};
         if (!updating_value_4 && dirty[0] & /*showPaid*/
-        512) {
+        256) {
           updating_value_4 = true;
           switcher4_changes.value = /*showPaid*/
-          ctx2[9];
+          ctx2[8];
           add_flush_callback(() => updating_value_4 = false);
         }
         switcher4.$set(switcher4_changes);
         const switcher5_changes = {};
         if (!updating_value_5 && dirty[0] & /*showPrice*/
-        1024) {
+        512) {
           updating_value_5 = true;
           switcher5_changes.value = /*showPrice*/
-          ctx2[10];
+          ctx2[9];
           add_flush_callback(() => updating_value_5 = false);
         }
         switcher5.$set(switcher5_changes);
         const switcher6_changes = {};
         if (!updating_value_6 && dirty[0] & /*showOnlyNotPaid*/
-        2048) {
+        1024) {
           updating_value_6 = true;
           switcher6_changes.value = /*showOnlyNotPaid*/
-          ctx2[11];
+          ctx2[10];
           add_flush_callback(() => updating_value_6 = false);
         }
         switcher6.$set(switcher6_changes);
         if (dirty[0] & /*quartals*/
-        8) {
+        4) {
           each_value_3 = ensure_array_like(
             /*quartals*/
-            ctx2[3] || []
+            ctx2[2] || []
           );
           let i;
           for (i = 0; i < each_value_3.length; i += 1) {
@@ -19589,11 +19522,11 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
           }
           each_blocks_1.length = each_value_3.length;
         }
-        if (dirty[0] & /*quartals, bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant, roomNames*/
-        469766123) {
+        if (dirty[0] & /*quartals, reOrderBookingPerQuartal, roomNames, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant*/
+        771753973) {
           each_value = ensure_array_like(
             /*roomNames*/
-            ctx2[1] || []
+            ctx2[0] || []
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
@@ -19674,7 +19607,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let current;
     let if_block = (
       /*isPopUpFormReady*/
-      ctx[12] && create_if_block_25(ctx)
+      ctx[11] && create_if_block_111(ctx)
     );
     layoutmain = new main_default({
       props: {
@@ -19701,16 +19634,16 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       p(ctx2, dirty) {
         if (
           /*isPopUpFormReady*/
-          ctx2[12]
+          ctx2[11]
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*isPopUpFormReady*/
-            4096) {
+            2048) {
               transition_in(if_block, 1);
             }
           } else {
-            if_block = create_if_block_25(ctx2);
+            if_block = create_if_block_111(ctx2);
             if_block.c();
             transition_in(if_block, 1);
             if_block.m(t.parentNode, t);
@@ -19723,9 +19656,9 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
           check_outros();
         }
         const layoutmain_changes = {};
-        if (dirty[0] & /*roomNames, quartals, bookingsPerQuartal, showOnlyNotPaid, showRefunded, showPrice, showPaid, showDateEnd, showDateStart, showTenant, monthEnd, monthStart*/
-        4095 | dirty[2] & /*$scope*/
-        32) {
+        if (dirty[0] & /*roomNames, quartals, showOnlyNotPaid, showRefunded, showPrice, showPaid, showDateEnd, showDateStart, showTenant, monthEnd, monthStart*/
+        2047 | dirty[2] & /*$scope*/
+        64) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -19823,8 +19756,8 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
             notifier.showError(o.error);
             return;
           }
-          $invalidate(0, bookingsPerQuartal = o.bookingsPerQuartal);
-          $invalidate(1, roomNames = o.roomNames);
+          bookingsPerQuartal = o.bookingsPerQuartal;
+          $invalidate(0, roomNames = o.roomNames);
         }
       );
     }
@@ -19836,9 +19769,9 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     async function shiftMonth(direction) {
       const end = parseYM(monthEnd);
       end.setMonth(end.getMonth() + direction);
-      $invalidate(4, monthEnd = formatYM(end));
-      $invalidate(3, quartals = getQuartalsFromEnd(monthEnd));
-      $invalidate(2, monthStart = quartals[0]);
+      $invalidate(3, monthEnd = formatYM(end));
+      $invalidate(2, quartals = getQuartalsFromEnd(monthEnd));
+      $invalidate(1, monthStart = quartals[0]);
       await refreshBookings();
     }
     let showRefunded = true;
@@ -19849,7 +19782,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let showPrice = true;
     let showOnlyNotPaid = false;
     let isPopUpFormReady = false;
-    onMount(() => $invalidate(12, isPopUpFormReady = true));
+    onMount(() => $invalidate(11, isPopUpFormReady = true));
     let popupExtendBooking = (
       /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpExtendBooking | any} */
       null
@@ -19864,7 +19797,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     async function SubmitExtendBooking(booking, facilities2) {
       $invalidate(
         /** @type {number[]} */
-        15,
+        14,
         isSubmitExtendBooking = true
       );
       booking.tenantId = bookingToExtend.tenantId + "";
@@ -19878,7 +19811,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         /** @type {import('../jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(15, isSubmitExtendBooking = false);
+          $invalidate(14, isSubmitExtendBooking = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
@@ -19892,9 +19825,9 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       );
     }
     function onExtendBooking(booking) {
-      $invalidate(14, bookingToExtend = booking);
-      $invalidate(16, dateStart = (0, import_xFormatter6.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 1));
-      $invalidate(17, dateEnd = (0, import_xFormatter6.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 30));
+      $invalidate(13, bookingToExtend = booking);
+      $invalidate(15, dateStart = (0, import_xFormatter6.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 1));
+      $invalidate(16, dateEnd = (0, import_xFormatter6.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 30));
       popupExtendBooking.Show();
     }
     let popUpShowPayments = (
@@ -19910,7 +19843,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       []
     );
     async function showPaymentsForBooking(bookingId) {
-      $invalidate(19, bookingIdToShowPayment = bookingId);
+      $invalidate(18, bookingIdToShowPayment = bookingId);
       await (0, import_jsApi3.AdminPayment)(
         { cmd: import_xConstant2.CmdForm, bookingId },
         /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
@@ -19921,7 +19854,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
             notifier.showError(o.error);
             return;
           }
-          $invalidate(20, paymentsForBooking = o.paymentsByBooking);
+          $invalidate(19, paymentsForBooking = o.paymentsByBooking);
           console.log(paymentsForBooking);
         }
       );
@@ -19931,11 +19864,11 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
     let bookingIdToPay = 0;
     let isSubmitAddPayment = false;
     function showInputPayment(bookingId) {
-      $invalidate(22, bookingIdToPay = bookingId);
+      $invalidate(21, bookingIdToPay = bookingId);
       popUpAddPayment.Show();
     }
     async function submitAddPayment(payment) {
-      $invalidate(23, isSubmitAddPayment = true);
+      $invalidate(22, isSubmitAddPayment = true);
       payment.bookingId = bookingIdToPay + "";
       const i = (
         /** @type {any} */
@@ -19946,7 +19879,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
         /** @returns {Promise<void>} */
         function(o) {
-          $invalidate(23, isSubmitAddPayment = false);
+          $invalidate(22, isSubmitAddPayment = false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error);
@@ -19959,91 +19892,105 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         }
       );
     }
+    function reOrderBookingPerQuartal(roomName, quartal) {
+      let result = (
+        /** @type {BookingDetail[]} */
+        []
+      );
+      (bookingsPerQuartal || []).forEach((booking) => {
+        if (booking.roomName === roomName && isBookingInThatMonth(booking, quartal)) {
+          result.push(booking);
+        }
+      });
+      result.sort((a, b) => {
+        return new Date(a.dateStart).getTime() - new Date(b.dateStart).getTime();
+      });
+      return result;
+    }
     function popupextendbooking_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         popupExtendBooking = $value;
-        $invalidate(13, popupExtendBooking);
+        $invalidate(12, popupExtendBooking);
       });
     }
     function popupextendbooking_isSubmitted_binding(value) {
       isSubmitExtendBooking = value;
-      $invalidate(15, isSubmitExtendBooking);
+      $invalidate(14, isSubmitExtendBooking);
     }
     function popupextendbooking_bookingToExtend_binding(value) {
       bookingToExtend = value;
-      $invalidate(14, bookingToExtend);
+      $invalidate(13, bookingToExtend);
     }
     function popupextendbooking_dateStart_binding(value) {
       dateStart = value;
-      $invalidate(16, dateStart);
+      $invalidate(15, dateStart);
     }
     function popupextendbooking_dateEnd_binding(value) {
       dateEnd = value;
-      $invalidate(17, dateEnd);
+      $invalidate(16, dateEnd);
     }
     function popupshowbookingpayments_bookingId_binding(value) {
       bookingIdToShowPayment = value;
-      $invalidate(19, bookingIdToShowPayment);
+      $invalidate(18, bookingIdToShowPayment);
     }
     function popupshowbookingpayments_payments_binding(value) {
       paymentsForBooking = value;
-      $invalidate(20, paymentsForBooking);
+      $invalidate(19, paymentsForBooking);
     }
     function popupshowbookingpayments_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         popUpShowPayments = $value;
-        $invalidate(18, popUpShowPayments);
+        $invalidate(17, popUpShowPayments);
       });
     }
     function popupaddpayment_bookingId_binding(value) {
       bookingIdToPay = value;
-      $invalidate(22, bookingIdToPay);
+      $invalidate(21, bookingIdToPay);
     }
     function popupaddpayment_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         popUpAddPayment = $value;
-        $invalidate(21, popUpAddPayment);
+        $invalidate(20, popUpAddPayment);
       });
     }
     function popupaddpayment_isSubmitted_binding(value) {
       isSubmitAddPayment = value;
-      $invalidate(23, isSubmitAddPayment);
+      $invalidate(22, isSubmitAddPayment);
     }
     const click_handler = () => shiftMonth(-1);
     const click_handler_1 = () => shiftMonth(1);
     function switcher0_value_binding(value) {
       showRefunded = value;
-      $invalidate(5, showRefunded);
+      $invalidate(4, showRefunded);
     }
     function switcher1_value_binding(value) {
       showTenant = value;
-      $invalidate(6, showTenant);
+      $invalidate(5, showTenant);
     }
     function switcher2_value_binding(value) {
       showDateStart = value;
-      $invalidate(7, showDateStart);
+      $invalidate(6, showDateStart);
     }
     function switcher3_value_binding(value) {
       showDateEnd = value;
-      $invalidate(8, showDateEnd);
+      $invalidate(7, showDateEnd);
     }
     function switcher4_value_binding(value) {
       showPaid = value;
-      $invalidate(9, showPaid);
+      $invalidate(8, showPaid);
     }
     function switcher5_value_binding(value) {
       showPrice = value;
-      $invalidate(10, showPrice);
+      $invalidate(9, showPrice);
     }
     function switcher6_value_binding(value) {
       showOnlyNotPaid = value;
-      $invalidate(11, showOnlyNotPaid);
+      $invalidate(10, showOnlyNotPaid);
     }
     const click_handler_2 = (booking) => onExtendBooking(booking);
     const click_handler_3 = (booking) => showInputPayment(booking.id);
     const click_handler_4 = (booking) => showPaymentsForBooking(booking.id);
     return [
-      bookingsPerQuartal,
       roomNames,
       monthStart,
       quartals,
@@ -20073,6 +20020,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       showPaymentsForBooking,
       showInputPayment,
       submitAddPayment,
+      reOrderBookingPerQuartal,
       popupextendbooking_binding,
       popupextendbooking_isSubmitted_binding,
       popupextendbooking_bookingToExtend_binding,

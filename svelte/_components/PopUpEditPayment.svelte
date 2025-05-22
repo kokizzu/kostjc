@@ -6,7 +6,6 @@
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
   import { dateISOFormat } from './xFormatter';
-  import { onMount } from 'svelte';
   import Select from '../node_modules/svelte-select';
 
   export let isShow = /** @type {boolean} */ (false);

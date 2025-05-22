@@ -133,9 +133,9 @@
   let showOnlyNotPaid = false;
 
   // TODO:
-  // - popup input payment
-  // - popup see payments
-  // - popup edit booking
+  // - edit booking
+  // - add suffix * in room if it has extra tenants
+  // - edit tenant in booking
 
   let isPopUpFormReady = false;
   onMount(() => isPopUpFormReady = true);
@@ -242,6 +242,27 @@
       }
     );
   }
+
+  /**
+   * @description Reorder bookings in a month, make sure the newest booking is in the end
+   * @param {string} roomName
+   * @param {string} quartal
+   * @returns {BookingDetail[]}
+   */
+  function reOrderBookingPerQuartal(roomName, quartal) {
+    let result = /** @type {BookingDetail[]} */ ([]);
+    (bookingsPerQuartal || []).forEach((booking) => {
+      if (booking.roomName === roomName && isBookingInThatMonth(booking, quartal)) {
+        result.push(booking);
+      }
+    });
+
+    result.sort((a, b) => {
+      return new Date(a.dateStart).getTime() - new Date(b.dateStart).getTime();
+    });
+
+    return result;
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -337,63 +358,61 @@
             {#each (quartals || []) as quartal}
               <td>
                 <div class="cells">
-                  {#each (bookingsPerQuartal || []) as booking}
-                    {#if booking.roomName == room && isBookingInThatMonth(booking, quartal)}
-                      <div
-                        class="cell
-                        {booking.deletedAt > 0 ? 'refunded' : ''}
-                        {showOnlyNotPaid && booking.amountPaid >= booking.totalPrice ? 'hidden' : ''}
-                        {!showRefunded && booking.deletedAt > 0 ? 'hidden' : ''}
-                        "
-                      >
-                        {#if booking.tenantName}
-                          <span class="{showTenant ? '' : 'hidden'}">{booking.tenantName}</span> 
-                          <span>
-                            <span class="{showDateStart ? '' : 'hidden'}">{booking.dateStart}</span>
-                            <span> s/d </span>
-                            <span
-                              class="
-                              {booking.isNearEnding && !booking.isExtended ? 'date-warning' : ''}
-                              {!booking.isExtended && !booking.isNearEnding ? 'date-alert' : ''}
-                              {showDateEnd ? '' : 'hidden'}
-                            ">
-                              {booking.dateEnd}
-                            </span>
-                          </span> 
-                          <span class="{(booking.amountPaid >= booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
-                            <span class="{showPaid ? '' : 'hidden'}">{booking.amountPaid}</span>
-                            <span>/</span>
-                            <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
+                  {#each reOrderBookingPerQuartal(room, quartal) as booking}
+                    <div
+                      class="cell
+                      {booking.deletedAt > 0 ? 'refunded' : ''}
+                      {showOnlyNotPaid && booking.amountPaid >= booking.totalPrice ? 'hidden' : ''}
+                      {!showRefunded && booking.deletedAt > 0 ? 'hidden' : ''}
+                      "
+                    >
+                      {#if booking.tenantName}
+                        <span class="{showTenant ? '' : 'hidden'}">{booking.tenantName}</span> 
+                        <span>
+                          <span class="{showDateStart ? '' : 'hidden'}">{booking.dateStart}</span>
+                          <span> s/d </span>
+                          <span
+                            class="
+                            {booking.isNearEnding && !booking.isExtended ? 'date-warning' : ''}
+                            {!booking.isExtended && !booking.isNearEnding ? 'date-alert' : ''}
+                            {showDateEnd ? '' : 'hidden'}
+                          ">
+                            {booking.dateEnd}
                           </span>
-                          <div class="actions">
-                            <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking)}>
-                              <Icon
-                                src={RiSystemExternalLinkLine}
-                                size="17"
-                              />
-                            </button>
-                            <button class="btn" title="Input Payment" on:click={() => showInputPayment(booking.id)}>
-                              <Icon
-                                src={RiFinanceWallet3Line}
-                                size="17"
-                              />
-                            </button>
-                            <button class="btn" title="Show Payments" on:click={() => showPaymentsForBooking(booking.id)}>
-                              <Icon
-                                src={RiSystemEyeLine}
-                                size="17"
-                              />
-                            </button>
-                            <button class="btn" title="Edit Booking">
-                              <Icon
-                                src={RiDesignBallPenLine}
-                                size="17"
-                              />
-                            </button>
-                          </div>
-                        {/if}
-                      </div>
-                    {/if}
+                        </span>
+                        <span class="{(booking.amountPaid >= booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
+                          <span class="{showPaid ? '' : 'hidden'}">{booking.amountPaid}</span>
+                          <span>/</span>
+                          <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
+                        </span>
+                        <div class="actions">
+                          <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking)}>
+                            <Icon
+                              src={RiSystemExternalLinkLine}
+                              size="17"
+                            />
+                          </button>
+                          <button class="btn" title="Input Payment" on:click={() => showInputPayment(booking.id)}>
+                            <Icon
+                              src={RiFinanceWallet3Line}
+                              size="17"
+                            />
+                          </button>
+                          <button class="btn" title="Show Payments" on:click={() => showPaymentsForBooking(booking.id)}>
+                            <Icon
+                              src={RiSystemEyeLine}
+                              size="17"
+                            />
+                          </button>
+                          <button class="btn" title="Edit Booking">
+                            <Icon
+                              src={RiDesignBallPenLine}
+                              size="17"
+                            />
+                          </button>
+                        </div>
+                      {/if}
+                    </div>
                   {/each}
                 </div>
               </td>
