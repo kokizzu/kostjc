@@ -6,8 +6,10 @@
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
   import { dateISOFormat } from './xFormatter';
+  import { onMount } from 'svelte';
+  import Select from '../node_modules/svelte-select';
 
-  let isShow = /** @type {boolean} */ (false);
+  export let isShow = /** @type {boolean} */ (false);
 
   const PaymentMethods = [
     'Cash',
@@ -25,15 +27,19 @@
   export let paymentId = 0;
   export let paymentAt = dateISOFormat(0);
   export let totalPaidIDR = 0;
-  export let paymentMethod = '';
-  export let paymentStatus = '';
+  let paymentMethod = '';
+  let paymentStatus = '';
   export let note = '';
 
   export let OnSubmit = async function(/** @type {Payment} */ payment) {
     console.log('OnSubmit :::', payment);
   }
 
-  export const Show = () => isShow = true;
+  export const Show = (pyMeyhod, pyStatus) => {
+    isShow = true;
+    paymentMethod = pyMeyhod;
+    paymentStatus = pyStatus;
+  }
   export const Hide = () => isShow = false;
   
   const cancel = () => isShow = false;
@@ -48,6 +54,22 @@
       note: note
     })
     OnSubmit(py);
+  }
+
+  function handleSelectPyMethod(/** @type {CustomEvent} */e) {
+    paymentMethod = e.detail.value;
+  }
+
+  function handleClearPyMethod(/** @type {CustomEvent} */e) {
+    paymentMethod = '';
+  }
+
+  function handleSelectPyStatus(/** @type {CustomEvent} */e) {
+    paymentStatus = e.detail.value;
+  }
+
+  function handleClearPyStatus(/** @type {CustomEvent} */e) {
+    paymentStatus = '';
   }
 </script>
 
@@ -72,20 +94,24 @@
         bind:value={totalPaidIDR}
         type="number"
       />
-      <InputBox
-        id="paymentMethod"
-        label="Payment Method"
-        bind:value={paymentMethod}
-        values={PaymentMethods}
-        type="combobox-arr"
-      />
-      <InputBox
-        id="paymentStatus"
-        label="Payment Status"
-        bind:value={paymentStatus}
-        values={PaymentStatuses}
-        type="combobox-arr"
-      />
+      <div class="input-box">
+        <label class="label" for="paymentStatus">Payment Status</label>
+        <Select
+          items={PaymentStatuses}
+          bind:value={paymentStatus}
+          on:select={handleSelectPyStatus}
+          on:clear={handleClearPyStatus}
+        />
+      </div>
+      <div class="input-box">
+        <label class="label" for="paymentMethod">Payment Method</label>
+        <Select
+          items={PaymentMethods}
+          bind:value={paymentMethod}
+          on:select={handleSelectPyMethod}
+          on:clear={handleClearPyMethod}
+        />
+      </div>
       <InputBox
         id="note"
         label="Note"
@@ -260,5 +286,26 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+  }
+
+  .input-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: var(--gray-007);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .input-box .label {
+    font-size: var(--font-base);
+    margin-left: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
   }
 </style>

@@ -75,8 +75,8 @@ module.exports = {};
  * @property {string} bookingId
  * @property {string} paymentAt
  * @property {number} paidIDR
- * @property {string} paymentMethod
- * @property {string} paymentStatus
+ * @property {string|any} paymentMethod  // use string|any because multiselect
+ * @property {string|any} paymentStatus  // use string|any because multiselect
  * @property {string} note
  * @property {number} createdAt
  * @property {string} createdBy

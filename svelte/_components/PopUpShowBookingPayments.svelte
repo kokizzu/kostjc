@@ -21,31 +21,24 @@
   export const Reset = () => {}
 
 	let popUpEditPayment = null;
-	let isPopUpEditPaymentReady = false;
+	let isShowPopUpEditPayment = false;
 	let isSubmitEditPayment = false;
 
 	let editPaymentId;
 	let editPaymentAt = dateISOFormat(0);
   let editTotalPaidIDR = 0;
-  let editPaymentMethod = 'Cash';
-  let editPaymentStatus = 'Paid';
   let editNote = '';
-
-	onMount(() => {
-		isPopUpEditPaymentReady = true;
-	});
 
 	function onPopUpEditPayment(/** @type {Payment} */ payment) {
 		console.log(payment);
 		editPaymentId = payment.id;
 		editPaymentAt =  payment.paymentAt;
 		editTotalPaidIDR = payment.paidIDR;
-		editPaymentMethod = payment.paymentMethod;
-		console.log('Payment method', editPaymentMethod);
-		editPaymentStatus = payment.paymentStatus;
-		console.log('Payment status', editPaymentStatus);
 		editNote = payment.note;
-		popUpEditPayment.Show();
+		popUpEditPayment.Show(
+			payment.paymentMethod,
+			payment.paymentStatus
+		);
 	}
 
 	async function refreshPayments() { // @ts-ignore
@@ -67,6 +60,8 @@
 
 	async function OnEditPayment(/** @type {Payment} */ payment) {
 		payment.id = editPaymentId;
+		payment.paymentMethod = payment.paymentMethod.value;
+		payment.paymentStatus = payment.paymentStatus.value;
 		const i = /** @type {any}*/ ({
       payment,
       cmd: CmdUpsert
@@ -92,19 +87,16 @@
 	}
 </script>
 
-{#if isPopUpEditPaymentReady}
-	<PopUpEditPayment 
-		bind:this={popUpEditPayment}
-		bind:paymentId={editPaymentId}
-		bind:isSubmitted={isSubmitEditPayment}
-		bind:paymentAt={editPaymentAt}
-		bind:totalPaidIDR={editTotalPaidIDR}
-		bind:paymentMethod={editPaymentMethod}
-		bind:paymentStatus={editPaymentStatus}
-		bind:note={editNote}
-		OnSubmit={OnEditPayment}
-	/>
-{/if}
+<PopUpEditPayment 
+	bind:isShow={isShowPopUpEditPayment}
+	bind:this={popUpEditPayment}
+	bind:paymentId={editPaymentId}
+	bind:isSubmitted={isSubmitEditPayment}
+	bind:paymentAt={editPaymentAt}
+	bind:totalPaidIDR={editTotalPaidIDR}
+	bind:note={editNote}
+	OnSubmit={OnEditPayment}
+/>
 
 <div class={`popup-container ${isShow ? 'show' : ''}`}>
   <div class="popup">
