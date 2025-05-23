@@ -380,7 +380,7 @@
                             {booking.dateEnd}
                           </span>
                         </span>
-                        <span class="{(booking.amountPaid >= booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
+                        <span class="{(booking.amountPaid === booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
                           <span class="{showPaid ? '' : 'hidden'}">{booking.amountPaid}</span>
                           <span>/</span>
                           <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
@@ -482,14 +482,20 @@
     border-collapse: collapse;
   }
 
+  table thead {
+    position: sticky;
+    top: 0;
+    background-color: var(--gray-002);
+    z-index: 10;
+    border: none;
+  }
+
   table thead tr th {
     text-align: left;
     padding: 8px 12px;
-    border-bottom: 1px solid var(--gray-004)
   }
 
   table tbody tr {
-    border-top: 1px solid var(--gray-002);
     border-bottom: 1px solid var(--gray-004);
   }
 

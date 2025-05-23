@@ -68,7 +68,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		in.MonthEnd = time.Now().AddDate(0, 3, 0).Format(rqProperty.DateFormatYYYYMM)
 		out := d.UserReport(&in)
 
-		return views.RenderUserReport(ctx, M.SX{
+		return views.RenderUserOccupancyReport(ctx, M.SX{
 			`title`:              `KostJC | User Report`,
 			`user`:               user,
 			`segments`:           segments,

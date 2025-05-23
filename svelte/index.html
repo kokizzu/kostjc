@@ -3759,7 +3759,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         return await axios.post("/user/profile", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserReport = async function UserReport(i, cb) {
-        return await axios.post("/user/report", i).then(wrapOk(cb)).catch(wrapErr(cb));
+        return await axios.post("/user/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserSessionKill = async function UserSessionKill(i, cb) {
         return await axios.post("/user/sessionKill", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -13466,13 +13466,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           /*pathLv1*/
           ctx[2] === ""
         );
-        attr(a1, "href", "/user/report");
+        attr(a1, "href", "/user/occupancyReport");
         attr(a1, "class", "svelte-1h4x6vo");
         toggle_class(
           a1,
           "active",
           /*pathAll*/
-          ctx[1] === "/user/report"
+          ctx[1] === "/user/occupancyReport"
         );
         attr(a2, "href", "/user/missingReport");
         attr(a2, "class", "svelte-1h4x6vo");

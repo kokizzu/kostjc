@@ -30,7 +30,7 @@ type (
 )
 
 const (
-	UserReportAction = `user/report`
+	UserReportAction = `user/occupancyReport`
 
 	ErrUserReportNotFound = `user not found`
 )

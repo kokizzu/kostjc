@@ -51,7 +51,7 @@
         <Icon src={RiBuildingsHome2Line} size="20" />
         <span>Home</span>
       </a>
-      <a href="/user/report" class:active={pathAll === '/user/report'}>
+      <a href="/user/occupancyReport" class:active={pathAll === '/user/occupancyReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Occupancy Report</span>
       </a>

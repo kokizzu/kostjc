@@ -1814,27 +1814,27 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   }
 }
 
-/* fakecss:./userReport.esbuild-svelte-fake-css */
-.report-container.svelte-1iwhudx.svelte-1iwhudx.svelte-1iwhudx {
+/* fakecss:./userOccupancyReport.esbuild-svelte-fake-css */
+.report-container.svelte-o0oyus.svelte-o0oyus.svelte-o0oyus {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.report-container.svelte-1iwhudx .actions.svelte-1iwhudx.svelte-1iwhudx {
+.report-container.svelte-o0oyus .actions.svelte-o0oyus.svelte-o0oyus {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
-.report-container.svelte-1iwhudx .actions .quartal-shifter.svelte-1iwhudx.svelte-1iwhudx {
+.report-container.svelte-o0oyus .actions .quartal-shifter.svelte-o0oyus.svelte-o0oyus {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
 }
-.report-container.svelte-1iwhudx .actions .quartal-shifter .btn.svelte-1iwhudx.svelte-1iwhudx {
+.report-container.svelte-o0oyus .actions .quartal-shifter .btn.svelte-o0oyus.svelte-o0oyus {
   background-color: var(--gray-002);
   border: none;
   border-radius: 9999px;
@@ -1845,43 +1845,48 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   color: var(--gray-008);
   padding: 8px;
 }
-.report-container.svelte-1iwhudx .actions .quartal-shifter .btn.svelte-1iwhudx.svelte-1iwhudx:hover {
+.report-container.svelte-o0oyus .actions .quartal-shifter .btn.svelte-o0oyus.svelte-o0oyus:hover {
   background-color: var(--blue-transparent);
   color: var(--blue-006);
 }
-.report-container.svelte-1iwhudx .actions .quartal-shifter .month-text.svelte-1iwhudx.svelte-1iwhudx {
+.report-container.svelte-o0oyus .actions .quartal-shifter .month-text.svelte-o0oyus.svelte-o0oyus {
   font-weight: 600;
   font-size: 18px;
   user-select: none;
 }
-.report-container.svelte-1iwhudx .actions .filters.svelte-1iwhudx.svelte-1iwhudx {
+.report-container.svelte-o0oyus .actions .filters.svelte-o0oyus.svelte-o0oyus {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
 }
-table.svelte-1iwhudx.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus.svelte-o0oyus.svelte-o0oyus {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-1iwhudx thead tr th.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus thead.svelte-o0oyus.svelte-o0oyus {
+  position: sticky;
+  top: 0;
+  background-color: var(--gray-002);
+  z-index: 10;
+  border: none;
+}
+table.svelte-o0oyus thead tr th.svelte-o0oyus.svelte-o0oyus {
   text-align: left;
   padding: 8px 12px;
+}
+table.svelte-o0oyus tbody tr.svelte-o0oyus.svelte-o0oyus {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-1iwhudx tbody tr.svelte-1iwhudx.svelte-1iwhudx {
-  border-top: 1px solid var(--gray-002);
-  border-bottom: 1px solid var(--gray-004);
-}
-table.svelte-1iwhudx tbody tr td.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus tbody tr td.svelte-o0oyus.svelte-o0oyus {
   padding: 8px 12px;
 }
-table.svelte-1iwhudx tbody tr td .cells.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus tbody tr td .cells.svelte-o0oyus.svelte-o0oyus {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-table.svelte-1iwhudx tbody tr td .cell.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus tbody tr td .cell.svelte-o0oyus.svelte-o0oyus {
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -1892,7 +1897,7 @@ table.svelte-1iwhudx tbody tr td .cell.svelte-1iwhudx.svelte-1iwhudx {
   overflow: hidden;
   cursor: pointer;
 }
-table.svelte-1iwhudx tbody tr td .cell .actions.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus tbody tr td .cell .actions.svelte-o0oyus.svelte-o0oyus {
   display: none;
   flex-direction: row;
   justify-content: flex-end;
@@ -1905,10 +1910,10 @@ table.svelte-1iwhudx tbody tr td .cell .actions.svelte-1iwhudx.svelte-1iwhudx {
   width: 100%;
   height: 100%;
 }
-table.svelte-1iwhudx tbody tr td .cell:hover .actions.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus tbody tr td .cell:hover .actions.svelte-o0oyus.svelte-o0oyus {
   display: flex;
 }
-table.svelte-1iwhudx tbody tr td .cell .actions.svelte-1iwhudx .btn.svelte-1iwhudx {
+table.svelte-o0oyus tbody tr td .cell .actions.svelte-o0oyus .btn.svelte-o0oyus {
   border: none;
   background-color: transparent;
   width: fit-content;
@@ -1921,28 +1926,28 @@ table.svelte-1iwhudx tbody tr td .cell .actions.svelte-1iwhudx .btn.svelte-1iwhu
   gap: 3px;
   cursor: pointer;
 }
-table.svelte-1iwhudx tbody tr td .cell .actions.svelte-1iwhudx .btn.svelte-1iwhudx:hover {
+table.svelte-o0oyus tbody tr td .cell .actions.svelte-o0oyus .btn.svelte-o0oyus:hover {
   background-color: var(--gray-006);
 }
-table.svelte-1iwhudx tbody tr td .date-warning.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus tbody tr td .date-warning.svelte-o0oyus.svelte-o0oyus {
   color: var(--yellow-006);
   padding: 2px 3px;
   border-radius: 4px;
   background-color: var(--yellow-transparent);
 }
-table.svelte-1iwhudx tbody tr td .date-alert.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus tbody tr td .date-alert.svelte-o0oyus.svelte-o0oyus {
   color: var(--red-006);
   padding: 2px 3px;
   border-radius: 4px;
   background-color: var(--red-transparent);
 }
-table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
+table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
   color: var(--violet-006) !important;
   padding: 4px 6px;
   border-radius: 4px;
   background-color: var(--violet-transparent);
 }
-.hidden.svelte-1iwhudx.svelte-1iwhudx.svelte-1iwhudx {
+.hidden.svelte-o0oyus.svelte-o0oyus.svelte-o0oyus {
   display: none !important;
 }
 </style>
@@ -4452,7 +4457,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         return await axios.post("/user/profile", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserReport = async function UserReport2(i, cb) {
-        return await axios.post("/user/report", i).then(wrapOk(cb)).catch(wrapErr(cb));
+        return await axios.post("/user/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserSessionKill = async function UserSessionKill(i, cb) {
         return await axios.post("/user/sessionKill", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -6235,13 +6240,13 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
           /*pathLv1*/
           ctx[2] === ""
         );
-        attr(a1, "href", "/user/report");
+        attr(a1, "href", "/user/occupancyReport");
         attr(a1, "class", "svelte-1h4x6vo");
         toggle_class(
           a1,
           "active",
           /*pathAll*/
-          ctx[1] === "/user/report"
+          ctx[1] === "/user/occupancyReport"
         );
         attr(a2, "href", "/user/missingReport");
         attr(a2, "class", "svelte-1h4x6vo");
@@ -6869,7 +6874,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
   };
   var main_default = Main;
 
-  // userReport.svelte
+  // userOccupancyReport.svelte
   var import_jsApi3 = __toESM(require_jsApi_GEN());
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/fi/index.js
@@ -16219,7 +16224,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
   };
   var Switcher_default = Switcher;
 
-  // userReport.svelte
+  // userOccupancyReport.svelte
   var import_xFormatter6 = __toESM(require_xFormatter());
   var import_xConstant2 = __toESM(require_xConstant());
 
@@ -18253,7 +18258,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
   };
   var PopUpAddPayment_default = PopUpAddPayment;
 
-  // userReport.svelte
+  // userOccupancyReport.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[57] = list[i];
@@ -18518,7 +18523,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       c() {
         th = element("th");
         t = text(t_value);
-        attr(th, "class", "svelte-1iwhudx");
+        attr(th, "class", "svelte-o0oyus");
       },
       m(target, anchor) {
         insert(target, th, anchor);
@@ -18684,40 +18689,40 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         attr(span0, "class", span0_class_value = null_to_empty(
           /*showTenant*/
           ctx[5] ? "" : "hidden"
-        ) + " svelte-1iwhudx");
+        ) + " svelte-o0oyus");
         attr(span1, "class", span1_class_value = null_to_empty(
           /*showDateStart*/
           ctx[6] ? "" : "hidden"
-        ) + " svelte-1iwhudx");
+        ) + " svelte-o0oyus");
         attr(span3, "class", span3_class_value = (!/*booking*/
         ctx[63].isNearEnding && !/*booking*/
         ctx[63].isExtended ? "date-warning" : "") + " " + (!/*booking*/
         ctx[63].isExtended && /*booking*/
         ctx[63].isNearEnding ? "date-alert" : "") + " " + /*showDateEnd*/
-        (ctx[7] ? "" : "hidden") + " svelte-1iwhudx");
+        (ctx[7] ? "" : "hidden") + " svelte-o0oyus");
         attr(span5, "class", span5_class_value = null_to_empty(
           /*showPaid*/
           ctx[8] ? "" : "hidden"
-        ) + " svelte-1iwhudx");
+        ) + " svelte-o0oyus");
         attr(span7, "class", span7_class_value = null_to_empty(
           /*showPrice*/
           ctx[9] ? "" : "hidden"
-        ) + " svelte-1iwhudx");
+        ) + " svelte-o0oyus");
         attr(span8, "class", span8_class_value = null_to_empty(
           /*booking*/
-          ctx[63].amountPaid >= /*booking*/
+          ctx[63].amountPaid === /*booking*/
           ctx[63].totalPrice ? "" : `${/*booking*/
           ctx[63].deletedAt == 0 ? "text-red" : ""}`
-        ) + " svelte-1iwhudx");
-        attr(button0, "class", "btn svelte-1iwhudx");
+        ) + " svelte-o0oyus");
+        attr(button0, "class", "btn svelte-o0oyus");
         attr(button0, "title", "Extend Booking");
-        attr(button1, "class", "btn svelte-1iwhudx");
+        attr(button1, "class", "btn svelte-o0oyus");
         attr(button1, "title", "Input Payment");
-        attr(button2, "class", "btn svelte-1iwhudx");
+        attr(button2, "class", "btn svelte-o0oyus");
         attr(button2, "title", "Show Payments");
-        attr(button3, "class", "btn svelte-1iwhudx");
+        attr(button3, "class", "btn svelte-o0oyus");
         attr(button3, "title", "Edit Booking");
-        attr(div, "class", "actions svelte-1iwhudx");
+        attr(div, "class", "actions svelte-o0oyus");
       },
       m(target, anchor) {
         insert(target, span0, anchor);
@@ -18773,7 +18778,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         32 && span0_class_value !== (span0_class_value = null_to_empty(
           /*showTenant*/
           ctx[5] ? "" : "hidden"
-        ) + " svelte-1iwhudx")) {
+        ) + " svelte-o0oyus")) {
           attr(span0, "class", span0_class_value);
         }
         if ((!current || dirty[0] & /*roomNames, quartals*/
@@ -18784,7 +18789,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         64 && span1_class_value !== (span1_class_value = null_to_empty(
           /*showDateStart*/
           ctx[6] ? "" : "hidden"
-        ) + " svelte-1iwhudx")) {
+        ) + " svelte-o0oyus")) {
           attr(span1, "class", span1_class_value);
         }
         if ((!current || dirty[0] & /*roomNames, quartals*/
@@ -18797,7 +18802,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         ctx[63].isExtended ? "date-warning" : "") + " " + (!/*booking*/
         ctx[63].isExtended && /*booking*/
         ctx[63].isNearEnding ? "date-alert" : "") + " " + /*showDateEnd*/
-        (ctx[7] ? "" : "hidden") + " svelte-1iwhudx")) {
+        (ctx[7] ? "" : "hidden") + " svelte-o0oyus")) {
           attr(span3, "class", span3_class_value);
         }
         if ((!current || dirty[0] & /*roomNames, quartals*/
@@ -18808,7 +18813,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         256 && span5_class_value !== (span5_class_value = null_to_empty(
           /*showPaid*/
           ctx[8] ? "" : "hidden"
-        ) + " svelte-1iwhudx")) {
+        ) + " svelte-o0oyus")) {
           attr(span5, "class", span5_class_value);
         }
         if ((!current || dirty[0] & /*roomNames, quartals*/
@@ -18819,16 +18824,16 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         512 && span7_class_value !== (span7_class_value = null_to_empty(
           /*showPrice*/
           ctx[9] ? "" : "hidden"
-        ) + " svelte-1iwhudx")) {
+        ) + " svelte-o0oyus")) {
           attr(span7, "class", span7_class_value);
         }
         if (!current || dirty[0] & /*roomNames, quartals*/
         5 && span8_class_value !== (span8_class_value = null_to_empty(
           /*booking*/
-          ctx[63].amountPaid >= /*booking*/
+          ctx[63].amountPaid === /*booking*/
           ctx[63].totalPrice ? "" : `${/*booking*/
           ctx[63].deletedAt == 0 ? "text-red" : ""}`
-        ) + " svelte-1iwhudx")) {
+        ) + " svelte-o0oyus")) {
           attr(span8, "class", span8_class_value);
         }
       },
@@ -18886,7 +18891,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         ctx[63].amountPaid >= /*booking*/
         ctx[63].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
         ctx[4] && /*booking*/
-        ctx[63].deletedAt > 0 ? "hidden" : "") + " svelte-1iwhudx");
+        ctx[63].deletedAt > 0 ? "hidden" : "") + " svelte-o0oyus");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -18925,7 +18930,7 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         ctx2[63].amountPaid >= /*booking*/
         ctx2[63].totalPrice ? "hidden" : "") + " " + (!/*showRefunded*/
         ctx2[4] && /*booking*/
-        ctx2[63].deletedAt > 0 ? "hidden" : "") + " svelte-1iwhudx")) {
+        ctx2[63].deletedAt > 0 ? "hidden" : "") + " svelte-o0oyus")) {
           attr(div, "class", div_class_value);
         }
       },
@@ -18975,8 +18980,8 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cells svelte-1iwhudx");
-        attr(td, "class", "svelte-1iwhudx");
+        attr(div, "class", "cells svelte-o0oyus");
+        attr(td, "class", "svelte-o0oyus");
       },
       m(target, anchor) {
         insert(target, td, anchor);
@@ -19077,8 +19082,8 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
           each_blocks[i].c();
         }
         t3 = space();
-        attr(th, "class", "svelte-1iwhudx");
-        attr(tr, "class", "svelte-1iwhudx");
+        attr(th, "class", "svelte-o0oyus");
+        attr(tr, "class", "svelte-o0oyus");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -19375,18 +19380,19 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(button0, "class", "btn svelte-1iwhudx");
+        attr(button0, "class", "btn svelte-o0oyus");
         attr(button0, "aria-label", "Previous");
-        attr(span, "class", "month-text svelte-1iwhudx");
-        attr(button1, "class", "btn svelte-1iwhudx");
+        attr(span, "class", "month-text svelte-o0oyus");
+        attr(button1, "class", "btn svelte-o0oyus");
         attr(button1, "aria-label", "Next");
-        attr(div0, "class", "quartal-shifter svelte-1iwhudx");
-        attr(div1, "class", "filters svelte-1iwhudx");
-        attr(div2, "class", "actions svelte-1iwhudx");
-        attr(th, "class", "svelte-1iwhudx");
-        attr(tr, "class", "svelte-1iwhudx");
-        attr(table, "class", "svelte-1iwhudx");
-        attr(div3, "class", "report-container svelte-1iwhudx");
+        attr(div0, "class", "quartal-shifter svelte-o0oyus");
+        attr(div1, "class", "filters svelte-o0oyus");
+        attr(div2, "class", "actions svelte-o0oyus");
+        attr(th, "class", "svelte-o0oyus");
+        attr(tr, "class", "svelte-o0oyus");
+        attr(thead, "class", "svelte-o0oyus");
+        attr(table, "class", "svelte-o0oyus");
+        attr(div3, "class", "report-container svelte-o0oyus");
       },
       m(target, anchor) {
         insert(target, div3, anchor);
@@ -20076,16 +20082,16 @@ table.svelte-1iwhudx tbody tr td .cell.refunded.svelte-1iwhudx.svelte-1iwhudx {
       click_handler_4
     ];
   }
-  var UserReport_1 = class extends SvelteComponent {
+  var UserOccupancyReport = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance14, create_fragment17, safe_not_equal, {}, null, [-1, -1, -1]);
     }
   };
-  var userReport_default = UserReport_1;
+  var userOccupancyReport_default = UserOccupancyReport;
 
-  // userReport.svelte.ts
-  var app = new userReport_default({ target: document.getElementById("app") });
+  // userOccupancyReport.svelte.ts
+  var app = new userOccupancyReport_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

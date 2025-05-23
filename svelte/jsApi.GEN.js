@@ -547,6 +547,7 @@ exports.AdminLocation = async function AdminLocation( i, cb ) {
  * @property {number} payment.deletedAt
  * @property {number} payment.deletedBy
  * @property {number} payment.restoredBy
+ * @property {number} bookingId
  */
 const AdminPaymentIn = {
   cmd: '', // string
@@ -574,6 +575,7 @@ const AdminPaymentIn = {
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
   }, // rqProperty.Payments
+  bookingId: 0, // uint64
 }
 /**
  * @typedef {Object} AdminPaymentOut
@@ -601,6 +603,7 @@ const AdminPaymentIn = {
  * @property {number} payment.deletedBy
  * @property {number} payment.restoredBy
  * @property {Object} payments
+ * @property {Object} paymentsByBooking
  */
 const AdminPaymentOut = {
   pager: { // zCrud.PagerOut
@@ -637,6 +640,8 @@ const AdminPaymentOut = {
   }, // rqProperty.Payments
   payments: { // [][]any
   }, // [][]any
+  paymentsByBooking: { // []rqProperty.Payments
+  }, // []rqProperty.Payments
 }
 /**
  * @callback AdminPaymentCallback
@@ -1759,7 +1764,7 @@ const UserReportOut = {
  * @returns {Promise}
  */
 exports.UserReport = async function UserReport( i, cb ) {
-  return await axios.post( '/user/report', i ).
+  return await axios.post( '/user/occupancyReport', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
