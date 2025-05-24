@@ -160,6 +160,26 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// StaffMissingDataReport
+	fw.Post("/"+domain.StaffMissingDataReportAction, func(c *fiber.Ctx) error {
+		in := domain.StaffMissingDataReportIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.StaffMissingDataReportAction); err != nil {
+			return nil
+		}
+		out := d.StaffMissingDataReport(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// StaffOccupancyReport
+	fw.Post("/"+domain.StaffOccupancyReportAction, func(c *fiber.Ctx) error {
+		in := domain.StaffOccupancyReportIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.StaffOccupancyReportAction); err != nil {
+			return nil
+		}
+		out := d.StaffOccupancyReport(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// UserLogout
 	fw.Post("/"+domain.UserLogoutAction, func(c *fiber.Ctx) error {
 		in := domain.UserLogoutIn{}
@@ -177,16 +197,6 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 			return nil
 		}
 		out := d.UserProfile(&in)
-		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
-	})
-
-	// UserReport
-	fw.Post("/"+domain.UserReportAction, func(c *fiber.Ctx) error {
-		in := domain.UserReportIn{}
-		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.UserReportAction); err != nil {
-			return nil
-		}
-		out := d.UserReport(&in)
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 

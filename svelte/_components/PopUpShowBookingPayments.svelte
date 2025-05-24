@@ -19,6 +19,7 @@
   export const Show = () => isShow = true;
   export const Hide = () => isShow = false;
   export const Reset = () => {}
+	export let Refresh = async () => {}
 
 	let popUpEditPayment = null;
 	let isShowPopUpEditPayment = false;
@@ -77,6 +78,7 @@
         }
 
 				refreshPayments();
+				Refresh();
 
         notifier.showSuccess(`Payment #${payment.id} updated !!`);
 				popUpEditPayment.Hide()

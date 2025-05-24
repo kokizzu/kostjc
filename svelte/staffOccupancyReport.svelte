@@ -7,7 +7,7 @@
   /** @typedef {import('./_types/property.js').Payment} Payment */
 
   import LayoutMain from './_layouts/main.svelte';
-  import { AdminBooking, AdminPayment, UserReport } from './jsApi.GEN';
+  import { AdminBooking, AdminPayment, StaffOccupancyReport } from './jsApi.GEN';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import {
     RiArrowsArrowRightSLine, RiArrowsArrowLeftSLine,
@@ -31,8 +31,8 @@
   let facilities  = /** @type {Facility[]} */ ([/* facilities */]);
 
   async function refreshBookings() {
-    await UserReport(// @ts-ignore
-      { monthStart, monthEnd }, /** @type {import('./jsApi.GEN').UserReportCallback} */
+    await StaffOccupancyReport(// @ts-ignore
+      { monthStart, monthEnd }, /** @type {import('./jsApi.GEN').StaffOccupancyReportCallback} */
       /** @returns {Promise<void>} */
         function(/** @type any */ o) {
         if (o.error) {
@@ -47,18 +47,18 @@
     );
   }
 
-  function formatYM(date) {
+  function formatYM(/** @type {Date} */ date) {
     const y = date.getFullYear();
     const m = String(date.getMonth() + 1).padStart(2, '0');
     return `${y}-${m}`;
   }
 
-  function parseYM(ym) {
+  function parseYM(/** @type {string} */ ym) {
     const [y, m] = ym.split('-').map(Number);
     return new Date(y, m - 1);
   }
 
-  function getQuartalsFromEnd(endDateStr) {
+  function getQuartalsFromEnd(/** @type {string} */ endDateStr) {
     const endDate = parseYM(endDateStr);
     const result = [];
 
@@ -70,7 +70,7 @@
     return result;
   }
 
-  function getQuartalsFromStart(startYM) {
+  function getQuartalsFromStart(/** @type {string} */ startYM) {
     const [year, month] = startYM.split('-').map(Number);
     const result = [];
     for (let i = 0; i < 4; i++) {
@@ -96,7 +96,7 @@
     await refreshBookings();
   }
 
-  function formatMonthYear(ym) {
+  function formatMonthYear(/** @type {string} */ ym) {
     const date = new Date(ym + "-01");
     return date.toLocaleString('default', { month: 'long', year: 'numeric' });
   }
@@ -110,19 +110,7 @@
   function isBookingInThatMonth(booking, yearMonth) {
     return (booking.dateStart).includes(yearMonth) || (booking.dateEnd).includes(yearMonth);
   }
-  
-  /**
-   * @description Is date in past
-   * @param {string} dateStr
-   * @returns {boolean}
-   */
-  function isDateInPast(dateStr) {
-    const inputDate = new Date(dateStr);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    inputDate.setHours(0, 0, 0, 0);
-    return inputDate < today;
-  }
+
 
   let showRefunded    = true;
   let showTenant      = true;
@@ -131,11 +119,6 @@
   let showPaid        = true;
   let showPrice       = true;
   let showOnlyNotPaid = false;
-
-  // TODO:
-  // - edit booking
-  // - add suffix * in room if it has extra tenants
-  // - edit tenant in booking
 
   let isPopUpFormReady = false;
   onMount(() => isPopUpFormReady = true);
@@ -281,6 +264,7 @@
     bind:bookingId={bookingIdToShowPayment}
     bind:payments={paymentsForBooking}
     bind:this={popUpShowPayments}
+    Refresh={refreshBookings}
   />
 
   <PopUpAddPayment

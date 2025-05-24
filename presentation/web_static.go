@@ -45,9 +45,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.UserReportAction, func(ctx *fiber.Ctx) error {
-		var in domain.UserReportIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.UserReportAction)
+	fw.Get(`/`+domain.StaffOccupancyReportAction, func(ctx *fiber.Ctx) error {
+		var in domain.StaffOccupancyReportIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffOccupancyReportAction)
 		if err != nil {
 			return err
 		}
@@ -66,16 +66,38 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		in.MonthStart = time.Now().Format(rqProperty.DateFormatYYYYMM)
 		in.MonthEnd = time.Now().AddDate(0, 3, 0).Format(rqProperty.DateFormatYYYYMM)
-		out := d.UserReport(&in)
+		out := d.StaffOccupancyReport(&in)
 
-		return views.RenderUserOccupancyReport(ctx, M.SX{
-			`title`:              `KostJC | User Report`,
+		return views.RenderStaffOccupancyReport(ctx, M.SX{
+			`title`:              `KostJC | Occupancy Report`,
 			`user`:               user,
 			`segments`:           segments,
 			`bookingsPerQuartal`: out.Bookings,
 			`roomNames`:          out.RoomNames,
 			`tenants`:            tenants,
 			`facilities`:         facilities,
+		})
+	})
+
+	fw.Get(`/`+domain.StaffMissingDataReportAction, func(ctx *fiber.Ctx) error {
+		var in domain.StaffMissingDataReportIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffMissingDataReportAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		// out := d.StaffMissingDataReport(&in)
+
+		return views.RenderStaffMissingDataReport(ctx, M.SX{
+			`title`:    `KostJC | Missing Data Report`,
+			`user`:     user,
+			`segments`: segments,
 		})
 	})
 

@@ -3840,14 +3840,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       exports.StaffBooking = async function StaffBooking(i, cb) {
         return await axios.post("/staff/booking", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.StaffMissingDataReport = async function StaffMissingDataReport(i, cb) {
+        return await axios.post("/staff/missingDataReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.StaffOccupancyReport = async function StaffOccupancyReport(i, cb) {
+        return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.UserLogout = async function UserLogout2(i, cb) {
         return await axios.post("/user/logout", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserProfile = async function UserProfile(i, cb) {
         return await axios.post("/user/profile", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.UserReport = async function UserReport(i, cb) {
-        return await axios.post("/user/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserSessionKill = async function UserSessionKill2(i, cb) {
         return await axios.post("/user/sessionKill", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -5609,21 +5612,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv1*/
           ctx[2] === ""
         );
-        attr(a1, "href", "/user/occupancyReport");
+        attr(a1, "href", "/staff/occupancyReport");
         attr(a1, "class", "svelte-1h4x6vo");
         toggle_class(
           a1,
           "active",
           /*pathAll*/
-          ctx[1] === "/user/occupancyReport"
+          ctx[1] === "/staff/occupancyReport"
         );
-        attr(a2, "href", "/user/missingReport");
+        attr(a2, "href", "/staff/missingDataReport");
         attr(a2, "class", "svelte-1h4x6vo");
         toggle_class(
           a2,
           "active",
           /*pathAll*/
-          ctx[1] === "/user/missingReport"
+          ctx[1] === "/staff/missingDataReport"
         );
         attr(a3, "href", "/user");
         attr(a3, "class", "svelte-1h4x6vo");

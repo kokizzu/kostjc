@@ -132,6 +132,22 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.StaffBooking(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.StaffMissingDataReportAction:
+		in := domain.StaffMissingDataReportIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.StaffMissingDataReport(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.StaffOccupancyReportAction:
+		in := domain.StaffOccupancyReportIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.StaffOccupancyReport(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.UserLogoutAction:
 		in := domain.UserLogoutIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -146,14 +162,6 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 			return
 		}
 		out := b.UserProfile(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.UserReportAction:
-		in := domain.UserReportIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.UserReport(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.UserSessionKillAction:

@@ -1814,7 +1814,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   }
 }
 
-/* fakecss:./userOccupancyReport.esbuild-svelte-fake-css */
+/* fakecss:./staffOccupancyReport.esbuild-svelte-fake-css */
 .report-container.svelte-o0oyus.svelte-o0oyus.svelte-o0oyus {
   display: flex;
   flex-direction: column;
@@ -4450,14 +4450,17 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
       exports.StaffBooking = async function StaffBooking(i, cb) {
         return await axios.post("/staff/booking", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.StaffMissingDataReport = async function StaffMissingDataReport(i, cb) {
+        return await axios.post("/staff/missingDataReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.StaffOccupancyReport = async function StaffOccupancyReport2(i, cb) {
+        return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.UserLogout = async function UserLogout2(i, cb) {
         return await axios.post("/user/logout", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserProfile = async function UserProfile(i, cb) {
         return await axios.post("/user/profile", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.UserReport = async function UserReport2(i, cb) {
-        return await axios.post("/user/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserSessionKill = async function UserSessionKill(i, cb) {
         return await axios.post("/user/sessionKill", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -6240,21 +6243,21 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
           /*pathLv1*/
           ctx[2] === ""
         );
-        attr(a1, "href", "/user/occupancyReport");
+        attr(a1, "href", "/staff/occupancyReport");
         attr(a1, "class", "svelte-1h4x6vo");
         toggle_class(
           a1,
           "active",
           /*pathAll*/
-          ctx[1] === "/user/occupancyReport"
+          ctx[1] === "/staff/occupancyReport"
         );
-        attr(a2, "href", "/user/missingReport");
+        attr(a2, "href", "/staff/missingDataReport");
         attr(a2, "class", "svelte-1h4x6vo");
         toggle_class(
           a2,
           "active",
           /*pathAll*/
-          ctx[1] === "/user/missingReport"
+          ctx[1] === "/staff/missingDataReport"
         );
         attr(a3, "href", "/user");
         attr(a3, "class", "svelte-1h4x6vo");
@@ -6874,7 +6877,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
   };
   var main_default = Main;
 
-  // userOccupancyReport.svelte
+  // staffOccupancyReport.svelte
   var import_jsApi3 = __toESM(require_jsApi_GEN());
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/fi/index.js
@@ -16224,7 +16227,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
   };
   var Switcher_default = Switcher;
 
-  // userOccupancyReport.svelte
+  // staffOccupancyReport.svelte
   var import_xFormatter6 = __toESM(require_xFormatter());
   var import_xConstant2 = __toESM(require_xConstant());
 
@@ -16855,8 +16858,8 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
   var import_xConstant = __toESM(require_xConstant());
   function get_each_context2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[24] = list[i];
-    child_ctx[26] = i;
+    child_ctx[25] = list[i];
+    child_ctx[27] = i;
     return child_ctx;
   }
   function create_each_block2(ctx) {
@@ -16872,21 +16875,21 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     let t3;
     let t4_value = (
       /*py*/
-      ctx[24].id + ""
+      ctx[25].id + ""
     );
     let t4;
     let t5;
     let td3;
     let t6_value = (
       /*py*/
-      ctx[24].paymentAt + ""
+      ctx[25].paymentAt + ""
     );
     let t6;
     let t7;
     let td4;
     let t8_value = (0, import_xFormatter4.formatPrice)(
       /*py*/
-      ctx[24].paidIDR,
+      ctx[25].paidIDR,
       "IDR"
     ) + "";
     let t8;
@@ -16894,21 +16897,21 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     let td5;
     let t10_value = (
       /*py*/
-      ctx[24].paymentMethod + ""
+      ctx[25].paymentMethod + ""
     );
     let t10;
     let t11;
     let td6;
     let t12_value = (
       /*py*/
-      ctx[24].paymentStatus + ""
+      ctx[25].paymentStatus + ""
     );
     let t12;
     let t13;
     let td7;
     let t14_value = (
       /*py*/
-      ctx[24].note + ""
+      ctx[25].note + ""
     );
     let t14;
     let current;
@@ -16924,9 +16927,9 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     function click_handler() {
       return (
         /*click_handler*/
-        ctx[22](
+        ctx[23](
           /*py*/
-          ctx[24]
+          ctx[25]
         )
       );
     }
@@ -16935,7 +16938,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
         tr = element("tr");
         td0 = element("td");
         td0.textContent = `${/*idx*/
-        ctx[26] + 1}`;
+        ctx[27] + 1}`;
         t1 = space();
         td1 = element("td");
         div = element("div");
@@ -17009,30 +17012,30 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
         ctx = new_ctx;
         if ((!current || dirty & /*payments*/
         1) && t4_value !== (t4_value = /*py*/
-        ctx[24].id + ""))
+        ctx[25].id + ""))
           set_data(t4, t4_value);
         if ((!current || dirty & /*payments*/
         1) && t6_value !== (t6_value = /*py*/
-        ctx[24].paymentAt + ""))
+        ctx[25].paymentAt + ""))
           set_data(t6, t6_value);
         if ((!current || dirty & /*payments*/
         1) && t8_value !== (t8_value = (0, import_xFormatter4.formatPrice)(
           /*py*/
-          ctx[24].paidIDR,
+          ctx[25].paidIDR,
           "IDR"
         ) + ""))
           set_data(t8, t8_value);
         if ((!current || dirty & /*payments*/
         1) && t10_value !== (t10_value = /*py*/
-        ctx[24].paymentMethod + ""))
+        ctx[25].paymentMethod + ""))
           set_data(t10, t10_value);
         if ((!current || dirty & /*payments*/
         1) && t12_value !== (t12_value = /*py*/
-        ctx[24].paymentStatus + ""))
+        ctx[25].paymentStatus + ""))
           set_data(t12, t12_value);
         if ((!current || dirty & /*payments*/
         1) && t14_value !== (t14_value = /*py*/
-        ctx[24].note + ""))
+        ctx[25].note + ""))
           set_data(t14, t14_value);
       },
       i(local) {
@@ -17106,22 +17109,22 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     let mounted;
     let dispose;
     function popupeditpayment_isShow_binding(value) {
-      ctx[15](value);
+      ctx[16](value);
     }
     function popupeditpayment_paymentId_binding(value) {
-      ctx[17](value);
-    }
-    function popupeditpayment_isSubmitted_binding(value) {
       ctx[18](value);
     }
-    function popupeditpayment_paymentAt_binding(value) {
+    function popupeditpayment_isSubmitted_binding(value) {
       ctx[19](value);
     }
-    function popupeditpayment_totalPaidIDR_binding(value) {
+    function popupeditpayment_paymentAt_binding(value) {
       ctx[20](value);
     }
-    function popupeditpayment_note_binding(value) {
+    function popupeditpayment_totalPaidIDR_binding(value) {
       ctx[21](value);
+    }
+    function popupeditpayment_note_binding(value) {
+      ctx[22](value);
     }
     let popupeditpayment_props = { OnSubmit: (
       /*OnEditPayment*/
@@ -17171,7 +17174,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     }
     popupeditpayment = new PopUpEditPayment_default({ props: popupeditpayment_props });
     binding_callbacks.push(() => bind(popupeditpayment, "isShow", popupeditpayment_isShow_binding));
-    ctx[16](popupeditpayment);
+    ctx[17](popupeditpayment);
     binding_callbacks.push(() => bind(popupeditpayment, "paymentId", popupeditpayment_paymentId_binding));
     binding_callbacks.push(() => bind(popupeditpayment, "isSubmitted", popupeditpayment_isSubmitted_binding));
     binding_callbacks.push(() => bind(popupeditpayment, "paymentAt", popupeditpayment_paymentAt_binding));
@@ -17396,7 +17399,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
           detach(t0);
           detach(div4);
         }
-        ctx[16](null);
+        ctx[17](null);
         destroy_component(popupeditpayment, detaching);
         destroy_component(icon);
         destroy_each(each_blocks, detaching);
@@ -17424,6 +17427,8 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     const Hide = () => $invalidate(3, isShow = false);
     const Reset = () => {
     };
+    let { Refresh = async () => {
+    } } = $props;
     let popUpEditPayment = null;
     let isShowPopUpEditPayment = false;
     let isSubmitEditPayment = false;
@@ -17473,6 +17478,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
             return;
           }
           refreshPayments();
+          Refresh();
           notifier.showSuccess(`Payment #${payment.id} updated !!`);
           popUpEditPayment.Hide();
         }
@@ -17515,6 +17521,8 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
         $invalidate(1, bookingId = $props2.bookingId);
       if ("payments" in $props2)
         $invalidate(0, payments = $props2.payments);
+      if ("Refresh" in $props2)
+        $invalidate(15, Refresh = $props2.Refresh);
     };
     return [
       payments,
@@ -17532,6 +17540,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
       OnEditPayment,
       Show,
       Reset,
+      Refresh,
       popupeditpayment_isShow_binding,
       popupeditpayment_binding,
       popupeditpayment_paymentId_binding,
@@ -17550,7 +17559,8 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
         payments: 0,
         Show: 13,
         Hide: 2,
-        Reset: 14
+        Reset: 14,
+        Refresh: 15
       });
     }
     get Show() {
@@ -18258,7 +18268,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
   };
   var PopUpAddPayment_default = PopUpAddPayment;
 
-  // userOccupancyReport.svelte
+  // staffOccupancyReport.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[57] = list[i];
@@ -18295,23 +18305,23 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     let updating_isSubmitted_1;
     let current;
     function popupextendbooking_isSubmitted_binding(value) {
-      ctx[31](value);
-    }
-    function popupextendbooking_bookingToExtend_binding(value) {
       ctx[32](value);
     }
-    function popupextendbooking_dateStart_binding(value) {
+    function popupextendbooking_bookingToExtend_binding(value) {
       ctx[33](value);
     }
-    function popupextendbooking_dateEnd_binding(value) {
+    function popupextendbooking_dateStart_binding(value) {
       ctx[34](value);
+    }
+    function popupextendbooking_dateEnd_binding(value) {
+      ctx[35](value);
     }
     let popupextendbooking_props = {
       facilities,
       tenants,
       OnSubmit: (
         /*SubmitExtendBooking*/
-        ctx[24]
+        ctx[25]
       )
     };
     if (
@@ -18343,18 +18353,21 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
       ctx[16];
     }
     popupextendbooking = new PopUpExtendBooking_default({ props: popupextendbooking_props });
-    ctx[30](popupextendbooking);
+    ctx[31](popupextendbooking);
     binding_callbacks.push(() => bind(popupextendbooking, "isSubmitted", popupextendbooking_isSubmitted_binding));
     binding_callbacks.push(() => bind(popupextendbooking, "bookingToExtend", popupextendbooking_bookingToExtend_binding));
     binding_callbacks.push(() => bind(popupextendbooking, "dateStart", popupextendbooking_dateStart_binding));
     binding_callbacks.push(() => bind(popupextendbooking, "dateEnd", popupextendbooking_dateEnd_binding));
     function popupshowbookingpayments_bookingId_binding(value) {
-      ctx[35](value);
-    }
-    function popupshowbookingpayments_payments_binding(value) {
       ctx[36](value);
     }
-    let popupshowbookingpayments_props = {};
+    function popupshowbookingpayments_payments_binding(value) {
+      ctx[37](value);
+    }
+    let popupshowbookingpayments_props = { Refresh: (
+      /*refreshBookings*/
+      ctx[23]
+    ) };
     if (
       /*bookingIdToShowPayment*/
       ctx[18] !== void 0
@@ -18372,18 +18385,18 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     popupshowbookingpayments = new PopUpShowBookingPayments_default({ props: popupshowbookingpayments_props });
     binding_callbacks.push(() => bind(popupshowbookingpayments, "bookingId", popupshowbookingpayments_bookingId_binding));
     binding_callbacks.push(() => bind(popupshowbookingpayments, "payments", popupshowbookingpayments_payments_binding));
-    ctx[37](popupshowbookingpayments);
+    ctx[38](popupshowbookingpayments);
     function popupaddpayment_bookingId_binding(value) {
-      ctx[38](value);
+      ctx[39](value);
     }
     function popupaddpayment_isSubmitted_binding(value) {
-      ctx[40](value);
+      ctx[41](value);
     }
     let popupaddpayment_props = {
       isBookingReadOnly: true,
       OnSubmit: (
         /*submitAddPayment*/
-        ctx[28]
+        ctx[29]
       )
     };
     if (
@@ -18402,7 +18415,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     }
     popupaddpayment = new PopUpAddPayment_default({ props: popupaddpayment_props });
     binding_callbacks.push(() => bind(popupaddpayment, "bookingId", popupaddpayment_bookingId_binding));
-    ctx[39](popupaddpayment);
+    ctx[40](popupaddpayment);
     binding_callbacks.push(() => bind(popupaddpayment, "isSubmitted", popupaddpayment_isSubmitted_binding));
     return {
       c() {
@@ -18503,11 +18516,11 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
           detach(t0);
           detach(t1);
         }
-        ctx[30](null);
+        ctx[31](null);
         destroy_component(popupextendbooking, detaching);
-        ctx[37](null);
+        ctx[38](null);
         destroy_component(popupshowbookingpayments, detaching);
-        ctx[39](null);
+        ctx[40](null);
         destroy_component(popupaddpayment, detaching);
       }
     };
@@ -18616,7 +18629,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     function click_handler_2() {
       return (
         /*click_handler_2*/
-        ctx[50](
+        ctx[51](
           /*booking*/
           ctx[63]
         )
@@ -18628,7 +18641,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     function click_handler_3() {
       return (
         /*click_handler_3*/
-        ctx[51](
+        ctx[52](
           /*booking*/
           ctx[63]
         )
@@ -18640,7 +18653,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     function click_handler_4() {
       return (
         /*click_handler_4*/
-        ctx[52](
+        ctx[53](
           /*booking*/
           ctx[63]
         )
@@ -18959,7 +18972,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     let current;
     let each_value_2 = ensure_array_like(
       /*reOrderBookingPerQuartal*/
-      ctx[29](
+      ctx[30](
         /*room*/
         ctx[57],
         /*quartal*/
@@ -18995,10 +19008,10 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*reOrderBookingPerQuartal, roomNames, quartals, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant*/
-        771753973) {
+        1543505909) {
           each_value_2 = ensure_array_like(
             /*reOrderBookingPerQuartal*/
-            ctx2[29](
+            ctx2[30](
               /*room*/
               ctx2[57],
               /*quartal*/
@@ -19105,7 +19118,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
         ctx2[57] + ""))
           set_data(t1, t1_value);
         if (dirty[0] & /*reOrderBookingPerQuartal, roomNames, quartals, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant*/
-        771753973) {
+        1543505909) {
           each_value_1 = ensure_array_like(
             /*quartals*/
             ctx2[2] || []
@@ -19215,7 +19228,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
       props: { size: "20", src: RiArrowsArrowRightSLine }
     });
     function switcher0_value_binding(value) {
-      ctx[43](value);
+      ctx[44](value);
     }
     let switcher0_props = {
       id: "show-refunded",
@@ -19231,7 +19244,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     switcher0 = new Switcher_default({ props: switcher0_props });
     binding_callbacks.push(() => bind(switcher0, "value", switcher0_value_binding));
     function switcher1_value_binding(value) {
-      ctx[44](value);
+      ctx[45](value);
     }
     let switcher1_props = { id: "show-tenant", label: "Show Tenant" };
     if (
@@ -19244,7 +19257,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     switcher1 = new Switcher_default({ props: switcher1_props });
     binding_callbacks.push(() => bind(switcher1, "value", switcher1_value_binding));
     function switcher2_value_binding(value) {
-      ctx[45](value);
+      ctx[46](value);
     }
     let switcher2_props = {
       id: "show-date-start",
@@ -19260,7 +19273,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     switcher2 = new Switcher_default({ props: switcher2_props });
     binding_callbacks.push(() => bind(switcher2, "value", switcher2_value_binding));
     function switcher3_value_binding(value) {
-      ctx[46](value);
+      ctx[47](value);
     }
     let switcher3_props = {
       id: "show-date-end",
@@ -19276,7 +19289,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     switcher3 = new Switcher_default({ props: switcher3_props });
     binding_callbacks.push(() => bind(switcher3, "value", switcher3_value_binding));
     function switcher4_value_binding(value) {
-      ctx[47](value);
+      ctx[48](value);
     }
     let switcher4_props = { id: "show-paid", label: "Show Paid" };
     if (
@@ -19289,7 +19302,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     switcher4 = new Switcher_default({ props: switcher4_props });
     binding_callbacks.push(() => bind(switcher4, "value", switcher4_value_binding));
     function switcher5_value_binding(value) {
-      ctx[48](value);
+      ctx[49](value);
     }
     let switcher5_props = { id: "show-price", label: "Show Price" };
     if (
@@ -19302,7 +19315,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
     switcher5 = new Switcher_default({ props: switcher5_props });
     binding_callbacks.push(() => bind(switcher5, "value", switcher5_value_binding));
     function switcher6_value_binding(value) {
-      ctx[49](value);
+      ctx[50](value);
     }
     let switcher6_props = {
       id: "show-only-not-paid",
@@ -19448,13 +19461,13 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
               button0,
               "click",
               /*click_handler*/
-              ctx[41]
+              ctx[42]
             ),
             listen(
               button1,
               "click",
               /*click_handler_1*/
-              ctx[42]
+              ctx[43]
             )
           ];
           mounted = true;
@@ -19559,7 +19572,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
           each_blocks_1.length = each_value_3.length;
         }
         if (dirty[0] & /*quartals, reOrderBookingPerQuartal, roomNames, showOnlyNotPaid, showRefunded, showPaymentsForBooking, showInputPayment, onExtendBooking, showPrice, showPaid, showDateEnd, showDateStart, showTenant*/
-        771753973) {
+        1543505909) {
           each_value = ensure_array_like(
             /*roomNames*/
             ctx2[0] || []
@@ -19781,10 +19794,10 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
       [/* roomNames */]
     );
     async function refreshBookings() {
-      await (0, import_jsApi3.UserReport)(
+      await (0, import_jsApi3.StaffOccupancyReport)(
         // @ts-ignore
         { monthStart, monthEnd },
-        /** @type {import('./jsApi.GEN').UserReportCallback} */
+        /** @type {import('./jsApi.GEN').StaffOccupancyReportCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -20050,6 +20063,7 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
       popUpAddPayment,
       bookingIdToPay,
       isSubmitAddPayment,
+      refreshBookings,
       shiftMonth,
       SubmitExtendBooking,
       onExtendBooking,
@@ -20082,16 +20096,16 @@ table.svelte-o0oyus tbody tr td .cell.refunded.svelte-o0oyus.svelte-o0oyus {
       click_handler_4
     ];
   }
-  var UserOccupancyReport = class extends SvelteComponent {
+  var StaffOccupancyReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance14, create_fragment17, safe_not_equal, {}, null, [-1, -1, -1]);
     }
   };
-  var userOccupancyReport_default = UserOccupancyReport;
+  var staffOccupancyReport_default = StaffOccupancyReport_1;
 
-  // userOccupancyReport.svelte.ts
-  var app = new userOccupancyReport_default({ target: document.getElementById("app") });
+  // staffOccupancyReport.svelte.ts
+  var app = new staffOccupancyReport_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

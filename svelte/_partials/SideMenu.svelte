@@ -51,11 +51,11 @@
         <Icon src={RiBuildingsHome2Line} size="20" />
         <span>Home</span>
       </a>
-      <a href="/user/occupancyReport" class:active={pathAll === '/user/occupancyReport'}>
+      <a href="/staff/occupancyReport" class:active={pathAll === '/staff/occupancyReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Occupancy Report</span>
       </a>
-      <a href="/user/missingReport" class:active={pathAll === '/user/missingReport'}>
+      <a href="/staff/missingDataReport" class:active={pathAll === '/staff/missingDataReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Missing Data Report</span>
       </a>
