@@ -22,6 +22,7 @@
   import { CmdForm, CmdUpsert } from './_components/xConstant';
   import PopUpShowBookingPayments from './_components/PopUpShowBookingPayments.svelte';
   import PopUpAddPayment from './_components/PopUpAddPayment.svelte';
+    import PopUpEditBooking from './_components/PopUpEditBooking.svelte';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -246,6 +247,21 @@
 
     return result;
   }
+
+  let popUpEditBooking = null;
+  let bookingIdToEdit = 0;
+
+  /**
+   * @description Show edit booking form
+   * @param {BookingDetail} booking
+   */
+  async function showEditBooking(booking) {
+    bookingIdToEdit = booking.id;
+    console.log('id: ', bookingIdToEdit);
+    popUpEditBooking.Show();
+    console.log(booking);
+    popUpEditBooking.GetBookingById(bookingIdToEdit);
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -273,6 +289,11 @@
     bind:this={popUpAddPayment}
     bind:isSubmitted={isSubmitAddPayment}
     OnSubmit={submitAddPayment}
+  />
+
+  <PopUpEditBooking
+    bind:this={popUpEditBooking}
+    bind:bookingId={bookingIdToEdit}
   />
 {/if}
 
@@ -388,7 +409,7 @@
                               size="17"
                             />
                           </button>
-                          <button class="btn" title="Edit Booking">
+                          <button class="btn" title="Edit Booking" on:click={() => showEditBooking(booking)}>
                             <Icon
                               src={RiDesignBallPenLine}
                               size="17"

@@ -6,9 +6,12 @@
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
   import Select from '../node_modules/svelte-select';
+  import { AdminBooking } from '../jsApi.GEN';
 
   export let isShow = /** @type {boolean} */ (false);
   export let isSubmitted  = /** @type {boolean} */ (false);
+  export let tenants = /** @type {Record<number, string>} */ ({});
+  export let rooms = /** @type {Record<number, string>} */ ({});
 
   export let bookingId = /** @type {number} */ (0);
 
@@ -16,7 +19,44 @@
     console.log('OnSubmit :::', booking);
   }
 
+  let roomId;
+  let dateStart;
+  let dateEnd;
+  let tenantId;
+  let basePriceIDR;
+  let facilitiesObj;
+  let totalPriceIDR;
+  let paidAt;
+  let extraTenants;
+
   export const Show = () => isShow = true;
+
+  export async function GetBookingById(id) {
+    console.log('GetBookingById id: ', id);
+    await AdminBooking({
+      cmd: 'form', // @ts-ignore
+      booking: {
+        id: id+''
+      }
+    }, function (/** @type {any} */ o) {
+      if (o.error) {
+        return;
+      }
+      const booking = o.booking;
+
+      roomId = booking.roomId;
+      dateStart = booking.dateStart;
+      dateEnd = booking.dateEnd;
+      tenantId = booking.tenantId;
+      basePriceIDR = booking.basePriceIDR;
+      facilitiesObj = booking.facilitiesObj;
+      totalPriceIDR = booking.totalPriceIDR;
+      paidAt = booking.paidAt;
+      extraTenants = booking.extraTenants;
+
+      console.log('Res: ',o);
+    })
+  }
   export const Hide = () => isShow = false;
   
   const cancel = () => isShow = false;
@@ -36,7 +76,32 @@
       </button>
     </header>
     <div class="forms">
-      <p>Bakekok</p>
+      <InputBox
+        bind:value={roomId}
+        id="roomId"
+        label="Room"
+        type="combobox"
+        values={rooms}
+      />
+      <InputBox
+        bind:value={dateStart}
+        id="dateStart"
+        label="Date Start"
+        type="date"
+      />
+      <InputBox
+        bind:value={dateEnd}
+        id="dateEnd"
+        label="Date End"
+        type="date"
+      />
+      <InputBox
+        bind:value={tenantId}
+        id="tenantId"
+        label="Tenant"
+        type="combobox"
+        values={tenants}
+      />
     </div>
     <div class="foot">
       <div class="left">
