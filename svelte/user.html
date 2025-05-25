@@ -13971,7 +13971,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
     let itemsArr = [];
     let itemsArrObj = [];
-    let svelteSelectValue;
+    let svelteSelectValue = (
+      /** @type {SvelteSelectValue} */
+      { label: "", value: "" }
+    );
     onMount(() => {
       if (type === "combobox-arr") {
         $invalidate(10, itemsArr = values);
@@ -13980,6 +13983,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             $invalidate(12, svelteSelectValue = v);
           }
         }
+        let typeofValue = typeof value;
+        itemsArr.sort((a, b) => {
+          switch (typeofValue) {
+            case "string":
+              return a.localeCompare(b);
+            case "number":
+              return a - b;
+          }
+        });
       } else if (type === "combobox") {
         for (const [k, v] of Object.entries(values)) {
           $invalidate(11, itemsArrObj = [...itemsArrObj, { value: k, label: v }]);
@@ -13987,6 +13999,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             $invalidate(12, svelteSelectValue = { value: k, label: v });
           }
         }
+        itemsArrObj.sort((a, b) => a.label.localeCompare(b.label));
       }
     });
     function handleSelect(e) {

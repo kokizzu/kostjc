@@ -14761,7 +14761,10 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
     }
     let itemsArr = [];
     let itemsArrObj = [];
-    let svelteSelectValue;
+    let svelteSelectValue = (
+      /** @type {SvelteSelectValue} */
+      { label: "", value: "" }
+    );
     onMount(() => {
       if (type === "combobox-arr") {
         $invalidate(10, itemsArr = values);
@@ -14770,6 +14773,15 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
             $invalidate(12, svelteSelectValue = v);
           }
         }
+        let typeofValue = typeof value;
+        itemsArr.sort((a, b) => {
+          switch (typeofValue) {
+            case "string":
+              return a.localeCompare(b);
+            case "number":
+              return a - b;
+          }
+        });
       } else if (type === "combobox") {
         for (const [k, v] of Object.entries(values)) {
           $invalidate(11, itemsArrObj = [...itemsArrObj, { value: k, label: v }]);
@@ -14777,6 +14789,7 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
             $invalidate(12, svelteSelectValue = { value: k, label: v });
           }
         }
+        itemsArrObj.sort((a, b) => a.label.localeCompare(b.label));
       }
     });
     function handleSelect(e) {
@@ -15248,7 +15261,10 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
         valuesTarget.splice(index, 1);
       }
     }
-    let valuesSourceArrayObject = [];
+    let valuesSourceArrayObject = (
+      /** @type {SvelteSelectValue[]} */
+      []
+    );
     let valuesTargetArrayObject = [];
     onMount(() => {
       for (const [k, v] of Object.entries(valuesSourceObj)) {
@@ -15262,6 +15278,7 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
             }
           }
         }
+        valuesSourceArrayObject.sort((a, b) => a.label.localeCompare(b.label));
       }
     });
     const clear_handler = () => $invalidate(0, valuesTarget = []);

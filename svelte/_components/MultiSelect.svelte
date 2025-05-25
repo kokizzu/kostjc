@@ -25,7 +25,12 @@
     }
   }
 
-  let valuesSourceArrayObject = [];
+  /**
+   * @typedef {Object} SvelteSelectValue
+   * @prop {any} value
+   * @prop {any} label
+   */
+  let valuesSourceArrayObject = /** @type {SvelteSelectValue[]} */ ([]);
   let valuesTargetArrayObject = [];
   onMount(() => {
     for (const [k, v] of Object.entries(valuesSourceObj)) {
@@ -42,6 +47,8 @@
           }
         }
       }
+
+      valuesSourceArrayObject.sort((a, b) => a.label.localeCompare(b.label));
     }
   })
 </script>

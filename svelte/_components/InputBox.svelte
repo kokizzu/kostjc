@@ -43,7 +43,16 @@
   let itemsArr = [];
   let itemsArrObj = [];
 
-  let svelteSelectValue;
+
+  /**
+   * @typedef {Object} SvelteSelectValue
+   * @prop {any} value
+   * @prop {any} label
+   */
+  let svelteSelectValue = /** @type {SvelteSelectValue} */ ({
+    label: '',
+    value: ''
+  });
 
   onMount(() => {
     if (type === 'combobox-arr') {
@@ -53,6 +62,16 @@
           svelteSelectValue = v;
         }
       }
+
+      let typeofValue = typeof value;
+      itemsArr.sort((a, b) => {
+        switch (typeofValue) {
+          case 'string':
+            return a.localeCompare(b);
+          case 'number':
+            return a - b;
+        }
+      })
     } else if (type === 'combobox') {
       for (const [k, v] of Object.entries(values)) {
         itemsArrObj = [...itemsArrObj, {
@@ -66,6 +85,8 @@
           };
         }
       }
+
+      itemsArrObj.sort((a, b) => a.label.localeCompare(b.label));
     }
   });
 

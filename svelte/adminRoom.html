@@ -16542,7 +16542,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
     let itemsArr = [];
     let itemsArrObj = [];
-    let svelteSelectValue;
+    let svelteSelectValue = (
+      /** @type {SvelteSelectValue} */
+      { label: "", value: "" }
+    );
     onMount(() => {
       if (type === "combobox-arr") {
         $invalidate(10, itemsArr = values);
@@ -16551,6 +16554,15 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             $invalidate(12, svelteSelectValue = v);
           }
         }
+        let typeofValue = typeof value;
+        itemsArr.sort((a, b) => {
+          switch (typeofValue) {
+            case "string":
+              return a.localeCompare(b);
+            case "number":
+              return a - b;
+          }
+        });
       } else if (type === "combobox") {
         for (const [k, v] of Object.entries(values)) {
           $invalidate(11, itemsArrObj = [...itemsArrObj, { value: k, label: v }]);
@@ -16558,6 +16570,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             $invalidate(12, svelteSelectValue = { value: k, label: v });
           }
         }
+        itemsArrObj.sort((a, b) => a.label.localeCompare(b.label));
       }
     });
     function handleSelect(e) {
@@ -17474,7 +17487,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         valuesTarget.splice(index, 1);
       }
     }
-    let valuesSourceArrayObject = [];
+    let valuesSourceArrayObject = (
+      /** @type {SvelteSelectValue[]} */
+      []
+    );
     let valuesTargetArrayObject = [];
     onMount(() => {
       for (const [k, v] of Object.entries(valuesSourceObj)) {
@@ -17488,6 +17504,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             }
           }
         }
+        valuesSourceArrayObject.sort((a, b) => a.label.localeCompare(b.label));
       }
     });
     const clear_handler = () => $invalidate(0, valuesTarget = []);
