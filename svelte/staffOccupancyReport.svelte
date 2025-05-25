@@ -22,13 +22,14 @@
   import { CmdForm, CmdUpsert } from './_components/xConstant';
   import PopUpShowBookingPayments from './_components/PopUpShowBookingPayments.svelte';
   import PopUpAddPayment from './_components/PopUpAddPayment.svelte';
-    import PopUpEditBooking from './_components/PopUpEditBooking.svelte';
+  import PopUpEditBooking from './_components/PopUpEditBooking.svelte';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
   let bookingsPerQuartal = /** @type {BookingDetail[]} */ ([/* bookingsPerQuartal*/]);
   let roomNames = /** @type {string[]} */ ([/* roomNames */]);
   let tenants     = /** @type {Record<Number, string>} */({/* tenants */});
+  let rooms       = /** @type {Record<Number, string>} */({/* rooms */});
   let facilities  = /** @type {Facility[]} */ ([/* facilities */]);
 
   async function refreshBookings() {
@@ -250,6 +251,7 @@
 
   let popUpEditBooking = null;
   let bookingIdToEdit = 0;
+  let isSubmitEditBooking = false;
 
   /**
    * @description Show edit booking form
@@ -261,6 +263,29 @@
     popUpEditBooking.Show();
     console.log(booking);
     popUpEditBooking.GetBookingById(bookingIdToEdit);
+  }
+
+  async function SubmitEditBooking(/** @type {Booking} */ booking) {
+    const i = /** @type {any}*/ ({
+      booking,
+      cmd: CmdUpsert
+    });
+    await AdminBooking(i,
+      /** @type {import('./jsApi.GEN').AdminBookingCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        notifier.showSuccess(`Booking #${booking.id} updated !!`);
+        refreshBookings();
+        popUpEditBooking.Hide();
+      }
+    );
+    isSubmitEditBooking = false;
   }
 </script>
 
@@ -294,6 +319,10 @@
   <PopUpEditBooking
     bind:this={popUpEditBooking}
     bind:bookingId={bookingIdToEdit}
+    bind:isSubmitted={isSubmitEditBooking}
+    tenants={tenants}
+    rooms={rooms}
+    OnSubmit={SubmitEditBooking}
   />
 {/if}
 
@@ -363,7 +392,7 @@
             {#each (quartals || []) as quartal}
               <td>
                 <div class="cells">
-                  {#each reOrderBookingPerQuartal(room, quartal) as booking}
+                  {#each reOrderBookingPerQuartal(room.replace(' *', ''), quartal) as booking}
                     <div
                       class="cell
                       {booking.deletedAt > 0 ? 'refunded' : ''}
@@ -385,7 +414,7 @@
                             {booking.dateEnd}
                           </span>
                         </span>
-                        <span class="{(booking.amountPaid === booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
+                        <span class="{(booking.amountPaid == booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
                           <span class="{showPaid ? '' : 'hidden'}">{booking.amountPaid}</span>
                           <span>/</span>
                           <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
@@ -535,6 +564,7 @@
     position: absolute;
     right: 0;
     top: 0;
+    padding: 0 5px 5px 0;
     background-color: var(--blue-transparent);
     width: 100%;
     height: 100%;
@@ -560,8 +590,11 @@
   }
 
   table tbody tr td .cell .actions .btn:hover {
-    /* background-color: #FFFFFF30; */
-    background-color: var(--gray-006);
+    background-color: var(--blue-transparent);
+  }
+
+  :global(table tbody tr td .cell .actions .btn:hover svg) {
+    fill: var(--blue-006);
   }
 
   table tbody tr td .date-warning {

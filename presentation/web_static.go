@@ -64,6 +64,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		fac := rqProperty.NewFacilities(d.PropOltp)
 		facilities := fac.FindAllTypeRoom()
 
+		room := rqProperty.NewRooms(d.PropOltp)
+		rooms := room.FindRoomChoices()
+
 		in.MonthStart = time.Now().Format(rqProperty.DateFormatYYYYMM)
 		in.MonthEnd = time.Now().AddDate(0, 3, 0).Format(rqProperty.DateFormatYYYYMM)
 		out := d.StaffOccupancyReport(&in)
@@ -74,6 +77,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`segments`:           segments,
 			`bookingsPerQuartal`: out.Bookings,
 			`roomNames`:          out.RoomNames,
+			`rooms`:              rooms,
 			`tenants`:            tenants,
 			`facilities`:         facilities,
 		})

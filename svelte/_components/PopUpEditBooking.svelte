@@ -7,6 +7,8 @@
   import InputBox from './InputBox.svelte';
   import Select from '../node_modules/svelte-select';
   import { AdminBooking } from '../jsApi.GEN';
+  import MultiSelect from './MultiSelect.svelte';
+    import { onMount } from 'svelte';
 
   export let isShow = /** @type {boolean} */ (false);
   export let isSubmitted  = /** @type {boolean} */ (false);
@@ -19,10 +21,10 @@
     console.log('OnSubmit :::', booking);
   }
 
-  let roomId;
+  let roomId = 0;
   let dateStart;
   let dateEnd;
-  let tenantId;
+  let tenantId = 0;
   let basePriceIDR;
   let facilitiesObj;
   let totalPriceIDR;
@@ -31,8 +33,12 @@
 
   export const Show = () => isShow = true;
 
+  /**
+   * @description 
+   * @param {number} id
+   * @returns {Promise<void>}
+   */
   export async function GetBookingById(id) {
-    console.log('GetBookingById id: ', id);
     await AdminBooking({
       cmd: 'form', // @ts-ignore
       booking: {
@@ -54,6 +60,8 @@
       paidAt = booking.paidAt;
       extraTenants = booking.extraTenants;
 
+      reStructureSvelteValues(tenantId, roomId);
+
       console.log('Res: ',o);
     })
   }
@@ -61,10 +69,103 @@
   
   const cancel = () => isShow = false;
   
-  function handleSubmit() {
+  async function handleSubmit() {
     isSubmitted = true;
-    OnSubmit();
+    // @ts-ignore
+    const booking = /** @type {Booking} */ ({
+      id: bookingId+'',
+      roomId: roomId,
+      dateStart: dateStart,
+      dateEnd: dateEnd,
+      tenantId: tenantId,
+      basePriceIDR: basePriceIDR,
+      facilitiesObj: facilitiesObj,
+      totalPriceIDR: totalPriceIDR,
+      paidAt: paidAt,
+      extraTenants: extraTenants
+    });
+    await OnSubmit(booking);
   }
+
+  let itemsArrObjTenant = /** @type {Record<string|number, string>[]} */ ([]);
+  /**
+   * @typedef {Object} SvelteSelectValue
+   * @prop {any} value
+   * @prop {any} label
+   */
+   let svelteSelectValueTenant = /** @type {SvelteSelectValue} */ ({
+    label: '',
+    value: ''
+  });
+
+  function handleSelectTenant(/** @type {CustomEvent} */e) {
+    tenantId = e.detail.value;
+  }
+
+  function handleClearTenant(/** @type {CustomEvent} */e) {
+    tenantId = 0;
+  }
+
+  let itemsArrObjRoom = /** @type {Record<string|number, string>[]} */ ([]);
+  let svelteSelectValueRoom = /** @type {SvelteSelectValue} */ ({
+    label: '',
+    value: ''
+  });
+
+  function handleSelectRoom(/** @type {CustomEvent} */e) {
+    roomId = e.detail.value;
+  }
+
+  function handleClearRoom(/** @type {CustomEvent} */e) {
+    roomId = 0;
+  }
+
+  /**
+   * @description make sure it can use svelte-select 
+   * @param {number} tenantId
+   * @param {number} roomId
+   */
+  function reStructureSvelteValues(tenantId, roomId) {
+    for (const [k, v] of Object.entries(rooms)) {
+      itemsArrObjRoom = [...itemsArrObjRoom, {
+        value: k,
+        label: v
+      }];
+      if (String(k) == String(roomId)) {
+        svelteSelectValueRoom = {
+          value: k,
+          label: v
+        };
+      }
+    }
+    for (const [k, v] of Object.entries(tenants)) {
+      itemsArrObjTenant = [...itemsArrObjTenant, {
+        value: k,
+        label: v
+      }];
+      if (String(k) == String(tenantId)) {
+        svelteSelectValueTenant = {
+          value: k,
+          label: v
+        };
+      }
+    }
+  }
+
+  onMount(() => {
+    for (const [k, v] of Object.entries(tenants)) {
+      itemsArrObjTenant = [...itemsArrObjTenant, {
+        value: k,
+        label: v
+      }];
+    }
+    for (const [k, v] of Object.entries(rooms)) {
+      itemsArrObjRoom = [...itemsArrObjRoom, {
+        value: k,
+        label: v
+      }];
+    }
+  })
 </script>
 
 <div class={`popup-container ${isShow ? 'show' : ''}`}>
@@ -76,13 +177,15 @@
       </button>
     </header>
     <div class="forms">
-      <InputBox
-        bind:value={roomId}
-        id="roomId"
-        label="Room"
-        type="combobox"
-        values={rooms}
-      />
+      <div class="input-box">
+        <label class="label" for="paymentMethod">Room</label>
+        <Select
+          items={itemsArrObjRoom}
+          bind:value={svelteSelectValueRoom}
+          on:select={handleSelectRoom}
+          on:clear={handleClearRoom}
+        />
+      </div>
       <InputBox
         bind:value={dateStart}
         id="dateStart"
@@ -95,12 +198,46 @@
         label="Date End"
         type="date"
       />
+      <div class="input-box">
+        <label class="label" for="paymentMethod">Tenant</label>
+        <Select
+          items={itemsArrObjTenant}
+          bind:value={svelteSelectValueTenant}
+          on:select={handleSelectTenant}
+          on:clear={handleClearTenant}
+        />
+      </div>
       <InputBox
-        bind:value={tenantId}
-        id="tenantId"
-        label="Tenant"
-        type="combobox"
-        values={tenants}
+        bind:value={basePriceIDR}
+        id="basePriceIDR"
+        label="Base Price"
+        type="number"
+      />
+      <InputBox
+        bind:value={facilitiesObj}
+        id="facilitiesObj"
+        label="Facilities"
+        type="textarea"
+      />
+      <InputBox
+        bind:value={totalPriceIDR}
+        id="totalPriceIDR"
+        label="Total Price"
+        type="number"
+      />
+      <InputBox
+        bind:value={paidAt}
+        id="paidAt"
+        label="Paid At"
+        type="date"
+      />
+      <MultiSelect
+        id="extraTenants"
+        label="Extra Tenants"
+        placeholder="Extra Tenants"
+        bind:valuesTarget={extraTenants}
+        valuesSourceObj={tenants}
+        valuesSourceType="object"
       />
     </div>
     <div class="foot">

@@ -3,6 +3,7 @@ package rqProperty
 import (
 	"fmt"
 	"kostjc/model/zCrud"
+	"sort"
 	"strconv"
 	"time"
 
@@ -719,11 +720,45 @@ SELECT ` + r.SqlRoomName() + ` FROM ` + r.SqlTableName() + `
 WHERE "deletedAt" = 0
 ORDER BY ` + r.SqlRoomName() + ` ASC`
 
+	extTenantsMap := make(map[string]bool)
+
 	r.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) == 1 {
-			out = append(out, X.ToS(row[0]))
+			roomName := X.ToS(row[0])
+			extTenantsMap[roomName] = false
 		}
 	})
+
+	queryExtraTenants := `SELECT
+		"rooms"."roomName",
+		"bookings"."extraTenants"
+	FROM "bookings"
+	LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
+	WHERE "rooms"."currentTenantId" = "bookings"."tenantId"`
+
+	roomExtraTenants := make(map[string]string)
+	r.Adapter.QuerySql(queryExtraTenants, func(row []any) {
+		if len(row) == 2 {
+			roomName := X.ToS(row[0])
+			roomExtraTenants[roomName] = X.ToS(row[1])
+		}
+	})
+
+	for roomName, extTenants := range roomExtraTenants {
+		if extTenants != `[]` {
+			extTenantsMap[roomName] = true
+		}
+	}
+
+	for roomName, hasExtraTenants := range extTenantsMap {
+		toRoomName := roomName
+		if hasExtraTenants {
+			toRoomName += ` *`
+		}
+		out = append(out, toRoomName)
+	}
+
+	sort.Strings(out)
 
 	return
 }
