@@ -10,7 +10,10 @@
     RiUserFacesUserFollowLine, RiBuildingsHotelLine, RiBusinessCalendarScheduleLine,
     RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
     RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine, RiUserFacesGroupLine,
-    RiDocumentFileChartLine
+    RiDocumentFileChartLine,
+
+    RiSystemMenu2Line
+
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { LuHandPlatter } from '../node_modules/svelte-icons-pack/dist/lu';
 
@@ -76,6 +79,10 @@
     {#if access.admin}
       <h3 class="nav-menu-title">Admin</h3>
       <nav class="nav-menu">
+        <a href="/admin/menu" class:active={pathLv2 === 'menu'}>
+          <Icon src={RiSystemMenu2Line} size="20" />
+          <span>Menu</span>
+        </a>
         <a href="/admin/location" class:active={pathLv2 === 'location'}>
           <Icon src={RiMapMapPin2Line} size="20" />
           <span>Locations</span>

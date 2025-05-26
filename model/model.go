@@ -7,6 +7,7 @@ import (
 	"github.com/rs/zerolog"
 
 	"kostjc/model/mAuth/wcAuth"
+	"kostjc/model/mCafe"
 	"kostjc/model/mProperty"
 
 	"kostjc/model/mAuth"
@@ -32,6 +33,7 @@ func RunMigration(logger *zerolog.Logger, authOltp *Tt.Adapter, authOlap *Ch.Ada
 	m.AuthOltp.MigrateTables(mAuth.TarantoolTables)
 	m.AuthOlap.MigrateTables(mAuth.ClickhouseTables)
 	m.PropOltp.MigrateTables(mProperty.TarantoolTables)
+	m.PropOltp.MigrateTables(mCafe.TarantoolTables)
 }
 
 // VerifyTables function to check whether tables are there or not
