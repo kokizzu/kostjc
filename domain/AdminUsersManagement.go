@@ -160,6 +160,14 @@ func (d *Domain) AdminUsersManagement(in *AdminUsersManagementIn) (out AdminUser
 			usr.SetRole(in.User.Role)
 		}
 
+		if in.User.Id > 0 && in.User.Password != `` {
+			if len(in.User.Password) >= minPassLength {
+				usr.SetSecretCode(``)
+				usr.SetSecretCodeAt(0)
+				usr.SetEncryptedPassword(in.User.Password, in.UnixNow())
+			}
+		}
+
 		if usr.Id == 0 {
 			usr.SetCreatedAt(in.UnixNow())
 			usr.SetCreatedBy(sess.UserId)

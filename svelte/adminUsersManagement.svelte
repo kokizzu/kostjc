@@ -3,7 +3,9 @@
   /** @typedef {import('./_types/masters.js').Field} Field */
   /** @typedef {import('./_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
+  /** @typedef {import('./_types/masters.js').ExtendedActionButton} ExtendedActionButton */
   /** @typedef {import('./_types/users.js').User} User */
+
   
   import LayoutMain from './_layouts/main.svelte';
   import MasterTable from './_components/MasterTable.svelte';
@@ -12,8 +14,9 @@
   import { notifier } from './_components/xNotifier';
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
-  import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import { RiSystemAddBoxLine, RiSystemLockLine } from './node_modules/svelte-icons-pack/dist/ri';
   import { CmdDelete, CmdList, CmdUpsert } from './_components/xConstant';
+    import PopUpUpdatePassword from './_components/PopUpUpdatePassword.svelte';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -72,7 +75,7 @@
 
         pager = o.pager;
         users = o.users;
-        notifier.showSuccess(`User '${row[1]}' restored !!`);
+        notifier.showSuccess(`User #${row[0]} restored !!`);
 
         OnRefresh(pager);
       }
@@ -99,7 +102,7 @@
 
         pager = o.pager;
         users = o.users;
-        notifier.showSuccess(`User '${row[1]}' deleted !!`);
+        notifier.showSuccess(`User #${row[0]} deleted !!`);
 
         OnRefresh(pager);
       }
@@ -131,7 +134,7 @@
 
         pager = o.pager;
         users = o.users;
-        notifier.showSuccess(`User '${user.fullName}' updated !!`);
+        notifier.showSuccess(`User #${user.id} updated !!`);
 
         OnRefresh(pager);
       }
@@ -166,7 +169,7 @@
         
         pager = o.pager;
         users = o.users;
-        notifier.showSuccess(`User '${user.facilityName}' created !!`);
+        notifier.showSuccess(`User created !!`);
         
         OnRefresh(pager);
         popUpForms.Reset();
@@ -174,6 +177,44 @@
       }
     );
   }
+
+  let popUpUpdatePassword = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpForms |any} */ (null);
+  let userIdToUpdatePass = /** @type {number} */ (0);
+  let isSubmitUpdatePass = /** @type {boolean} */ (false);
+
+  async function OnUpdatePassword(/** @type {User} */ user) {
+    isSubmitUpdatePass = true;
+    await AdminUsersManagement({ // @ts-ignore
+      pager: pager,
+      user: user,
+      cmd: CmdUpsert
+    }, /** @type {import('./jsApi.GEN').AdminUsersManagementCallback} */
+    /** @returns {Promise<void>} */
+    function(/** @type any */ o) {
+      isSubmitAddUser = false;
+      if (o.error) {
+        console.log(o);
+        notifier.showError(o.error);
+        return
+      }
+      pager = o.pager;
+      users = o.users;
+      notifier.showSuccess(`User #${user.id} password updated !!`);
+      popUpUpdatePassword.Reset();
+      popUpUpdatePassword.Hide();
+    })
+  }
+
+  const EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([
+    {
+      icon: RiSystemLockLine,
+      tooltip: 'Update Password',
+      action: (/** @type any[] */ row) => {
+        userIdToUpdatePass = row[0];
+        popUpUpdatePassword.Show();
+      }
+    }
+  ]);
 </script>
 
 {#if isPopUpFormReady}
@@ -186,6 +227,13 @@
     }}
     bind:isSubmitted={isSubmitAddUser}
     OnSubmit={OnAddUser}
+  />
+
+  <PopUpUpdatePassword
+    bind:this={popUpUpdatePassword}
+    bind:userId={userIdToUpdatePass}
+    bind:isSubmitted={isSubmitUpdatePass}
+    OnSubmit={OnUpdatePassword}
   />
 {/if}
 
@@ -201,6 +249,7 @@
       REFS={{
         'role': AdminRoles
       }}
+      {EXTENDED_BUTTONS}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
