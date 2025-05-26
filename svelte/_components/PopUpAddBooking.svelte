@@ -23,9 +23,9 @@
   let facilitiesNums = /** @type {number[]} */([]);
   let totalPriceIDR = 0;
   let paidAt = dateISOFormat(0);
-  let tenantId = 0;
+  let tenantId = null;
   let extraTenantsIds = /** @type {number[]} */([]);
-  let roomId = 0;
+  let roomId = null;
 
   export let OnSubmit = async function(/** @type {Booking} */ booking, /** @type {number[]} */ facilities) {
     console.log('OnSubmit :::', booking, facilities);

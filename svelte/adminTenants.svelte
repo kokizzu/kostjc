@@ -230,7 +230,7 @@
     heading="Add Tenant"
     FIELDS={fields}
     INITIAL_VALUES={{
-      'ktpDateBirth': dateISOFormat(6205)
+      'ktpDateBirth': dateISOFormat(-6205)
     }}
     REFS={{
       'ktpGender': KtpGenders,

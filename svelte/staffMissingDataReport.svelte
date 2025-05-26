@@ -2,20 +2,83 @@
     import { onMount } from 'svelte';
   /** @typedef {import('./_types/masters.js').Access} Access */
   /** @typedef {import('./_types/users.js').User} User */
+  /** @typedef {import('./_types/users.js').Tenant} Tenant */
   /** @typedef {import('./_types/property.js').MissingTenantData} MissingTenantData */
 
   import LayoutMain from './_layouts/main.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiDesignBallPenLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import PopUpEditMissingTenant from './_components/PopUpEditMissingTenant.svelte';
+    import { AdminTenants, StaffMissingDataReport } from './jsApi.GEN';
+    import { CmdUpsert } from './_components/xConstant';
+    import { notifier } from './_components/xNotifier';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
   let missingData = /** @type {MissingTenantData[]} */ ([/* missingData */]);
 
+  async function RefreshData() {
+    await StaffMissingDataReport({},
+    /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
+    /** @returns {Promise<void>} */
+    function(/** @type {any} */ o) {
+      if (o.error) {
+        console.log(o);
+        notifier.showError(o.error || 'something went wrong');
+        return
+      }
+
+      missingData = o.missingData;
+
+      return
+    })
+  }
+
+  let popUpEditMissingTenant = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpEditMissingTenant | any} */ (null);
+  let isSubmitEditMissingTenant = /** @type {boolean} */ (false);
+  let isPopUpFormReady = /** @type {boolean} */ (false);
+
+  async function  showPopUpEditTenant(/** @type {number} */ tenantId) {
+    popUpEditMissingTenant.Show();
+    popUpEditMissingTenant.GetTenantById(tenantId);
+  }
+
+  async function submitEditMissingTenant(/** @type {Tenant} */ tenant) {
+    isSubmitEditMissingTenant = true;
+    tenant.id = tenant.id+'';
+    await AdminTenants({ // @ts-ignore
+      tenant: tenant,
+      cmd: CmdUpsert
+    }, 
+    /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+    /** @returns {Promise<void>} */
+    function(/** @type any */ o) {
+      isSubmitEditMissingTenant = false;
+      if (o.error) {
+        console.log(o);
+        notifier.showError(o.error || `failed to update tenant #${tenant.id}`);
+        return
+      }
+
+      notifier.showSuccess(`Tenant '${tenant.tenantName}' updated !!`);
+
+      popUpEditMissingTenant.Hide();
+      RefreshData();
+    });
+  }
+
   onMount(() => {
-    console.log('Missing Data: ', missingData);
-  })
+    isPopUpFormReady = true;
+  });
 </script>
+
+{#if isPopUpFormReady}
+  <PopUpEditMissingTenant
+    bind:this={popUpEditMissingTenant}
+    bind:isSubmitted={isSubmitEditMissingTenant}
+    OnSubmit={submitEditMissingTenant}
+  />
+{/if}
 
 <LayoutMain access={segments} user={user}>
   <div class="report-container">
@@ -37,6 +100,7 @@
                 <button
                   class="btn"
                   title="Edit"
+                  on:click={() => showPopUpEditTenant(data.tenantId)}
                 >
                   <Icon
                     size="15"

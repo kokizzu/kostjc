@@ -259,9 +259,7 @@
    */
   async function showEditBooking(booking) {
     bookingIdToEdit = booking.id;
-    console.log('id: ', bookingIdToEdit);
     popUpEditBooking.Show();
-    console.log(booking);
     popUpEditBooking.GetBookingById(bookingIdToEdit);
   }
 
