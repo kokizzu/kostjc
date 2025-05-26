@@ -1755,6 +1755,7 @@ const StaffMissingDataReportIn = {
  * @property {String} user.userName
  * @property {String} user.role
  * @property {Object} segments
+ * @property {Object} missingData
  */
 const StaffMissingDataReportOut = {
   user: { // rqAuth.Users
@@ -1777,6 +1778,8 @@ const StaffMissingDataReportOut = {
   }, // rqAuth.Users
   segments: { // M.SB
   }, // M.SB
+  missingData: { // []rqProperty.RoomMissingTenantData
+  }, // []rqProperty.RoomMissingTenantData
 }
 /**
  * @callback StaffMissingDataReportCallback

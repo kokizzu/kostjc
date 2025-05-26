@@ -998,3 +998,47 @@ AND ` + p.SqlDeletedAt() + ` = 0`
 
 	return
 }
+
+type RoomMissingTenantData struct {
+	RoomId                 uint64 `json:"roomId"`
+	RoomName               string `json:"roomName"`
+	TenantId               uint64 `json:"tenantId"`
+	TenantName             string `json:"tenantName"`
+	TenantTelegramUsername string `json:"tenantTelegramUsername"`
+	TenantWhatsappNumber   string `json:"tenantWhatsappNumber"`
+}
+
+func (r *Rooms) FindMissingTenantsData() (out []RoomMissingTenantData) {
+	const comment = `-- Rooms) FindMissingTenantsData`
+
+	queryRows := comment + `
+SELECT 
+  "rooms"."id",
+  "rooms"."roomName",
+  "tenants"."id",
+  "tenants"."tenantName",
+  "tenants"."telegramUsername",
+  "tenants"."whatsappNumber"
+FROM "rooms"
+LEFT JOIN "tenants"
+	ON "rooms"."currentTenantId" = "tenants"."id"
+WHERE "tenants"."telegramUsername" = ''
+	OR "tenants"."whatsappNumber" = ''
+ORDER BY "rooms"."updatedAt"`
+
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) != 6 {
+			return
+		}
+		out = append(out, RoomMissingTenantData{
+			RoomId:                 X.ToU(row[0]),
+			RoomName:               X.ToS(row[1]),
+			TenantId:               X.ToU(row[2]),
+			TenantName:             X.ToS(row[3]),
+			TenantTelegramUsername: X.ToS(row[4]),
+			TenantWhatsappNumber:   X.ToS(row[5]),
+		})
+	})
+
+	return
+}

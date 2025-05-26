@@ -2,6 +2,7 @@ package domain
 
 import (
 	"kostjc/model/mAuth/rqAuth"
+	"kostjc/model/mProperty/rqProperty"
 
 	"github.com/kokizzu/gotro/M"
 )
@@ -20,14 +21,13 @@ type (
 		ResponseCommon
 		User *rqAuth.Users `json:"user" form:"user" query:"user" long:"user" msg:"user"`
 
-		Segments M.SB `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
+		Segments    M.SB                               `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
+		MissingData []rqProperty.RoomMissingTenantData `json:"missingData" form:"missingData" query:"missingData" long:"missingData" msg:"missingData"`
 	}
 )
 
 const (
 	StaffMissingDataReportAction = `staff/missingDataReport`
-
-	ErrStaffMissingDataReportNotFound = `user not found`
 )
 
 func (d *Domain) StaffMissingDataReport(in *StaffMissingDataReportIn) (out StaffMissingDataReportOut) {
@@ -36,6 +36,9 @@ func (d *Domain) StaffMissingDataReport(in *StaffMissingDataReportIn) (out Staff
 	if sess == nil {
 		return
 	}
+
+	room := rqProperty.NewRooms(d.PropOltp)
+	out.MissingData = room.FindMissingTenantsData()
 
 	return
 }
