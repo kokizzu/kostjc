@@ -6,7 +6,6 @@
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
-  import { dateISOFormat } from './xFormatter';
 
   let isShow = /** @type {boolean} */ (false);
 
@@ -94,6 +93,7 @@
       ktpDateBirth = tenant.ktpDateBirth;
       ktpGender = tenant.ktpGender;
       ktpRtRw = tenant.ktpRtRw;
+      ktpAddress = tenant.ktpAddress;
       ktpKelurahanDesa = tenant.ktpKelurahanDesa;
       ktpKecamatan = tenant.ktpKecamatan;
       ktpReligion = tenant.ktpReligion;
@@ -127,7 +127,7 @@
 <div class={`popup-container ${isShow ? 'show' : ''}`}>
   <div class="popup">
     <header class="header">
-      <h2>Edit Tenant #{tenantId}</h2>
+      <h2>Edit Tenant {`#${tenantId}`}</h2>
       <button on:click={Hide}>
         <Icon size="22" color="var(--red-005)" src={IoClose}/>
       </button>
