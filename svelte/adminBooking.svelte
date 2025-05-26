@@ -19,7 +19,6 @@
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
-  let booking     = /** @type {Booking} */ ({/* booking */});
   let bookings    = /** @type {any[][]} */([/* bookings */]);
   let tenants     = /** @type {Record<Number, string>} */({/* tenants */});
   let rooms       = /** @type {Record<Number, string>} */({/* rooms */});

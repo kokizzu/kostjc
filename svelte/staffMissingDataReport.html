@@ -14004,6 +14004,7 @@ table tbody tr td .actions .btn:hover svg {
           }
         });
       } else if (type === "combobox") {
+        $invalidate(11, itemsArrObj = []);
         if (!value || value === null || value === 0 || value === "" || value === void 0 || value === "null" || value === "undefined" || value === "0") {
           const firstObjKey = Object.keys(values)[0];
           $invalidate(12, svelteSelectValue = {
@@ -14013,11 +14014,13 @@ table tbody tr td .actions .btn:hover svg {
         }
         for (const [k, v] of Object.entries(values)) {
           $invalidate(11, itemsArrObj = [...itemsArrObj, { value: k, label: v }]);
-          if (k == value) {
+          if (k === value) {
             $invalidate(12, svelteSelectValue = { value: k, label: v });
           }
         }
-        itemsArrObj.sort((a, b) => a.label.localeCompare(b.label));
+        itemsArrObj.sort((a, b) => {
+          return String(a.label).localeCompare(String(b.label));
+        });
       }
     }
     onMount(() => {

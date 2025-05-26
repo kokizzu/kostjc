@@ -78,6 +78,7 @@
         }
       })
     } else if (type === 'combobox') {
+      itemsArrObj = [];
       if (!value
         || value === null
         || value === 0
@@ -98,7 +99,7 @@
           value: k,
           label: v
         }];
-        if (k == value) {
+        if (k === value) {
           svelteSelectValue = {
             value: k,
             label: v
@@ -106,7 +107,9 @@
         }
       }
 
-      itemsArrObj.sort((a, b) => a.label.localeCompare(b.label));
+      itemsArrObj.sort((a, b) => {
+        return String(a.label).localeCompare(String(b.label))
+      });
     }
   }
 
