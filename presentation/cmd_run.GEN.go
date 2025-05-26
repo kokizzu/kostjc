@@ -44,6 +44,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminLocation(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminMenuAction:
+		in := domain.AdminMenuIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminMenu(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.AdminPaymentAction:
 		in := domain.AdminPaymentIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

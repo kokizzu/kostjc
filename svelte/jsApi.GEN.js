@@ -526,6 +526,131 @@ exports.AdminLocation = async function AdminLocation( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminMenuIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} menu.id
+ * @property {String} menu.name
+ * @property {number} menu.hppIDR
+ * @property {number} menu.salePriceIDR
+ * @property {String} menu.detail
+ * @property {String} menu.imageUrl
+ * @property {number} menu.createdAt
+ * @property {number} menu.createdBy
+ * @property {number} menu.updatedAt
+ * @property {number} menu.updatedBy
+ * @property {number} menu.deletedAt
+ * @property {number} menu.deletedBy
+ * @property {number} menu.restoredBy
+ */
+const AdminMenuIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  menu: { // rqCafe.Menus
+    id: 0, // uint64
+    name: '', // string
+    hppIDR: 0, // int64
+    salePriceIDR: 0, // int64
+    detail: '', // string
+    imageUrl: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.Menus
+}
+/**
+ * @typedef {Object} AdminMenuOut
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} menu.id
+ * @property {String} menu.name
+ * @property {number} menu.hppIDR
+ * @property {number} menu.salePriceIDR
+ * @property {String} menu.detail
+ * @property {String} menu.imageUrl
+ * @property {number} menu.createdAt
+ * @property {number} menu.createdBy
+ * @property {number} menu.updatedAt
+ * @property {number} menu.updatedBy
+ * @property {number} menu.deletedAt
+ * @property {number} menu.deletedBy
+ * @property {number} menu.restoredBy
+ * @property {Object} menus
+ */
+const AdminMenuOut = {
+  pager: { // zCrud.PagerOut
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  menu: { // rqCafe.Menus
+    id: 0, // uint64
+    name: '', // string
+    hppIDR: 0, // int64
+    salePriceIDR: 0, // int64
+    detail: '', // string
+    imageUrl: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.Menus
+  menus: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback AdminMenuCallback
+ * @param {AdminMenuOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminMenuIn} i
+ * @param {AdminMenuCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminMenu = async function AdminMenu( i, cb ) {
+  return await axios.post( '/admin/menu', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminPaymentIn
  * @property {String} cmd
  * @property {Object} withMeta

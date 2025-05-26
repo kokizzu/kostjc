@@ -427,6 +427,34 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminMenuAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminMenuIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminMenuAction)
+		if err != nil {
+			return err
+		}
+
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.AdminMenu(&in)
+
+		return views.RenderAdminMenu(ctx, M.SX{
+			`title`:    `KostJC | Menu Management`,
+			`user`:     user,
+			`segments`: segments,
+			`menu`:     out.Menu,
+			`menus`:    out.Menus,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {
 		return views.RenderDebug(ctx, M.SX{})
 	})
