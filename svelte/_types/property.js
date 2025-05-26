@@ -142,3 +142,14 @@ module.exports = {};
  * @property {boolean} isExtended
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} MissingTenantData
+ * @property {number} roomId
+ * @property {string} roomName
+ * @property {number} tenantId
+ * @property {string} tenantName
+ * @property {string} tenantTelegramUsername
+ * @property {string} tenantWhatsappNumber
+ */
+module.exports = {};

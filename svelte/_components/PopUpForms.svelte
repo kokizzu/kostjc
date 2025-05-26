@@ -16,41 +16,47 @@
   let isShow = false;
   let payloads = [];
 
-  export let OnSubmit = async function(/** @type any[] */ payloads) {}  
+  export let OnSubmit = async function(/** @type {any[]} */ payloads) {
+    console.log('OnSubmit :::', payloads);
+  }  
 
-  export const Show = () => isShow = true;
+  export const Show = () => {
+    isShow = true;
+    if (FIELDS && FIELDS.length > 0) {
+      FIELDS.forEach((f) => {
+        if (INITIAL_VALUES[f.name]) {
+          payloads = [...payloads, INITIAL_VALUES[f.name]];
+        } else {
+          let initialPayload;
+          switch (f.inputType) {
+            case 'combobox':
+              initialPayload = REFS[f.name] ? REFS[f.name][0] : (f.ref[0] || '');
+              break;
+            case 'combobox-arr':
+              initialPayload = REFS[f.name] ? REFS[f.name][0] : (f.ref[0] || '');
+              break;
+            case 'datetime':
+              initialPayload = dateISOFormat(0);
+              break;
+            default:
+              initialPayload = '';
+              break;
+          }
+          payloads = [...payloads, initialPayload]
+        }
+      });
+		}
+  }
   export const Hide = () => isShow = false;
 
   export const Reset = () => {
     payloads = [];
-    if (FIELDS && FIELDS.length > 0) {
-			FIELDS.forEach((f) => {
-        let initialPayload;
-        switch (f.inputType) {
-          case 'combobox':
-            initialPayload = REFS[f.name] ? REFS[f.name][0] : (f.ref[0] || '');
-            break;
-          case 'combobox-arr':
-            initialPayload = REFS[f.name] ? REFS[f.name][0] : (f.ref[0] || '');
-            break;
-          case 'datetime':
-            initialPayload = dateISOFormat(0);
-            break;
-          default:
-            initialPayload = '';
-            break;
-        }
-        if (INITIAL_VALUES[f.name]) {
-          initialPayload = INITIAL_VALUES[f.name];
-        }
-        payloads = [...payloads, initialPayload]
-      });
-		}
   }
   
   const cancel = () => {
     isShow = false;
   }
+  
 </script>
 
 <div class={`popup-container ${isShow ? 'show' : ''}`}>

@@ -96,12 +96,13 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 
-		// out := d.StaffMissingDataReport(&in)
+		out := d.StaffMissingDataReport(&in)
 
 		return views.RenderStaffMissingDataReport(ctx, M.SX{
-			`title`:    `KostJC | Missing Data Report`,
-			`user`:     user,
-			`segments`: segments,
+			`title`:       `KostJC | Missing Data Report`,
+			`user`:        user,
+			`segments`:    segments,
+			`missingData`: out.MissingData,
 		})
 	})
 

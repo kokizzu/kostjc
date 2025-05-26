@@ -8,7 +8,7 @@
   import Select from '../node_modules/svelte-select';
   import { AdminBooking } from '../jsApi.GEN';
   import MultiSelect from './MultiSelect.svelte';
-    import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
 
   export let isShow = /** @type {boolean} */ (false);
   export let isSubmitted  = /** @type {boolean} */ (false);

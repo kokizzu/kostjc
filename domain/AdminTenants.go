@@ -26,20 +26,20 @@ type (
 	}
 	AdminTenantsOut struct {
 		ResponseCommon
-		Pager   zCrud.PagerOut `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-		Meta    *zCrud.Meta    `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
-		Tenant  rqAuth.Tenants `json:"tenant" form:"tenant" query:"tenant" long:"tenant" msg:"tenant"`
-		Tenants [][]any        `json:"tenants" form:"tenants" query:"tenants" long:"tenants" msg:"tenants"`
+		Pager   zCrud.PagerOut  `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Meta    *zCrud.Meta     `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
+		Tenant  *rqAuth.Tenants `json:"tenant" form:"tenant" query:"tenant" long:"tenant" msg:"tenant"`
+		Tenants [][]any         `json:"tenants" form:"tenants" query:"tenants" long:"tenants" msg:"tenants"`
 	}
 )
 
 const (
 	AdminTenantsAction = `admin/tenants`
 
-	ErrAdminTenantsNotFound          = `building not found`
-	ErrAdminTenantsSaveFailed        = `failed to save building`
-	ErrAdminTenantsDeleteFailed      = `failed to delete building`
-	ErrAdminTenantsRestoreFailed     = `failed to restore building`
+	ErrAdminTenantsNotFound          = `tenant not found`
+	ErrAdminTenantsSaveFailed        = `failed to save tenant`
+	ErrAdminTenantsDeleteFailed      = `failed to delete tenant`
+	ErrAdminTenantsRestoreFailed     = `failed to restore tenant`
 	ErrAdminTenantsLocationNotFound  = `location not found`
 	ErrAdminTenantsInvalidFacilities = `invalid facilities`
 	ErrAdminTenantsAlreadyExists     = `tenant already exists`
@@ -229,6 +229,15 @@ func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 
 	switch in.Cmd {
 	case zCrud.CmdForm:
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tnt.Id = in.Tenant.Id
+		if tnt.Id > 0 {
+			if !tnt.FindById() {
+				out.SetError(400, ErrAdminTenantsNotFound)
+				return
+			}
+		}
+		out.Tenant = tnt
 	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
 		tenant := wcAuth.NewTenantsMutator(d.AuthOltp)
 		tenant.Id = in.Tenant.Id
@@ -252,6 +261,7 @@ func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 			}
 		}
 
+		// Ini semua biar mirip di KTP
 		in.Tenant.KtpPlaceBirth = S.ToUpper(in.Tenant.KtpPlaceBirth)
 		in.Tenant.KtpRegion = S.ToUpper(in.Tenant.KtpRegion)
 		in.Tenant.KtpOccupation = S.ToTitle(in.Tenant.KtpOccupation)
