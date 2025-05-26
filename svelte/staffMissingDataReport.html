@@ -565,6 +565,32 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   margin: 0;
   font-size: var(--font-base);
 }
+
+/* fakecss:./staffMissingDataReport.esbuild-svelte-fake-css */
+.report-container.svelte-16hjfvl.svelte-16hjfvl {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+}
+table.svelte-16hjfvl.svelte-16hjfvl {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.svelte-16hjfvl thead.svelte-16hjfvl {
+  position: sticky;
+  top: 0;
+  background-color: var(--gray-002);
+  z-index: 10;
+  border: none;
+}
+table.svelte-16hjfvl thead tr th.svelte-16hjfvl {
+  text-align: left;
+  padding: 8px 12px;
+}
+table.svelte-16hjfvl tbody tr.svelte-16hjfvl {
+  border-bottom: 1px solid var(--gray-004);
+}
 </style>
 <script>(() => {
   var __create = Object.create;
@@ -5225,8 +5251,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     return {
       c() {
         div = element("div");
-        div.innerHTML = `<h1>Missing data report</h1>`;
-        attr(div, "class", "report-container");
+        div.innerHTML = `<table class="svelte-16hjfvl"><thead class="svelte-16hjfvl"><tr class="svelte-16hjfvl"><th class="svelte-16hjfvl">Room</th> <th class="svelte-16hjfvl">Tenant Name</th> <th class="svelte-16hjfvl">Telegram</th> <th class="svelte-16hjfvl">WhatsApp</th></tr></thead> <tbody></tbody></table>`;
+        attr(div, "class", "report-container svelte-16hjfvl");
       },
       m(target, anchor) {
         insert(target, div, anchor);
