@@ -110,9 +110,8 @@
    * @returns {boolean}
    */
   function isBookingInThatMonth(booking, yearMonth) {
-    return (booking.dateStart).includes(yearMonth) || (booking.dateEnd).includes(yearMonth);
+    return (yearMonth >= (booking.dateStart).slice(0, 7)) && (yearMonth <= (booking.dateEnd).slice(0, 7));
   }
-
 
   let showRefunded    = true;
   let showTenant      = true;

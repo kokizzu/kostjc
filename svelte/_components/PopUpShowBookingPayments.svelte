@@ -3,13 +3,12 @@
 
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
-	import { RiDesignBallPenLine } from '../node_modules/svelte-icons-pack/dist/ri';
+	import { RiDesignBallPenLine, RiArrowsArrowGoBackLine, RiSystemDeleteBin5Line } from '../node_modules/svelte-icons-pack/dist/ri';
 	import { dateISOFormat, formatPrice } from './xFormatter';
 	import PopUpEditPayment from './PopUpEditPayment.svelte';
-    import { onMount } from 'svelte';
-    import { AdminPayment } from '../jsApi.GEN';
-    import { CmdForm, CmdUpsert } from './xConstant';
-    import { notifier } from './xNotifier';
+	import { AdminPayment } from '../jsApi.GEN';
+	import { CmdDelete, CmdForm, CmdRestore, CmdUpsert } from './xConstant';
+	import { notifier } from './xNotifier';
 
   let isShow = /** @type {boolean} */ (false);
 
@@ -31,7 +30,6 @@
   let editNote = '';
 
 	function onPopUpEditPayment(/** @type {Payment} */ payment) {
-		console.log(payment);
 		editPaymentId = payment.id;
 		editPaymentAt =  payment.paymentAt;
 		editTotalPaidIDR = payment.paidIDR;
@@ -87,6 +85,54 @@
 
 		isSubmitEditPayment = false;
 	}
+
+	async function OnDeletePayment(/** @type {Payment} */ payment) {
+		payment.id = payment.id+'';
+		const i = /** @type {any}*/ ({
+			payment,
+			cmd: CmdDelete
+		});
+		await AdminPayment(i,
+			/** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+			/** @returns {Promise<void>} */
+			function(/** @type any */ o) {
+				if (o.error) {
+					console.log(o);
+					notifier.showError(o.error);
+					return
+				}
+
+				refreshPayments();
+				Refresh();
+
+				notifier.showSuccess(`Payment #${payment.id} deleted !!`);
+			}
+		);
+	}
+
+	async function OnRestorePayment(/** @type {Payment} */ payment) {
+		payment.id = payment.id+'';
+		const i = /** @type {any}*/ ({
+			payment,
+			cmd: CmdRestore
+		});
+		await AdminPayment(i,
+			/** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+			/** @returns {Promise<void>} */
+			function(/** @type any */ o) {
+				if (o.error) {
+					console.log(o);
+					notifier.showError(o.error);
+					return
+				}
+
+				refreshPayments();
+				Refresh();
+
+				notifier.showSuccess(`Payment #${payment.id} restored !!`);
+			}
+		);
+	}
 </script>
 
 <PopUpEditPayment 
@@ -126,7 +172,7 @@
 						</thead>
 						<tbody>
 							{#each (payments || []) as py, idx}
-								<tr>
+								<tr class={py.deletedAt > 0 ? 'deleted' : ''}>
 									<td class="num-row">{idx + 1}</td>
 									<td class="a-row">
 										<div class="actions">
@@ -141,6 +187,31 @@
 													src={RiDesignBallPenLine}
 												/>
 											</button>
+											{#if py.deletedAt > 0}
+												<button
+													class="btn"
+													title="Restore"
+													on:click={() => OnRestorePayment(py)}
+												>
+													<Icon
+														size="15"
+														color="var(--gray-007)"
+														src={RiArrowsArrowGoBackLine}
+													/>
+												</button>
+											{:else}
+												<button
+													class="btn delete"
+													title="Delete"
+													on:click={() => OnDeletePayment(py)}
+												>
+													<Icon
+														size="15"
+														color="var(--gray-007)"
+														src={RiSystemDeleteBin5Line}
+													/>
+												</button>
+											{/if}
 										</div>
 									</td>
 									<td>#{py.id}</td>
@@ -306,6 +377,10 @@
     padding: 8px 12px;
   }
 
+	.table-root .table-container table tbody tr.deleted {
+    color: var(--red-005);
+  }
+
 	.table-root .table-container table tbody tr td {
     padding: 8px 12px;
 		border-right: 1px solid var(--gray-004);
@@ -334,6 +409,14 @@
 
   .table-root .table-container table tbody tr td .actions .btn:hover {
     background-color: var(--blue-transparent);
+  }
+
+	.table-root .table-container table tbody tr td .actions .btn.delete:hover {
+    background-color: var(--red-transparent);
+  }
+
+	:global(.table-root .table-container table tbody tr td .actions .btn.delete:hover svg) {
+    fill: var(--red-005);
   }
 
 	.table-root .table-container table tbody tr:last-child td,

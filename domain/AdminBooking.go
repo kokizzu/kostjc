@@ -235,13 +235,8 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 			bk.SetFacilitiesObj(in.Booking.FacilitiesObj)
 		}
 
-		if in.Booking.BasePriceIDR > 0 {
-			bk.SetBasePriceIDR(in.Booking.BasePriceIDR)
-		}
-
-		if in.Booking.TotalPriceIDR > 0 {
-			bk.SetTotalPriceIDR(in.Booking.TotalPriceIDR)
-		}
+		bk.SetBasePriceIDR(in.Booking.BasePriceIDR)
+		bk.SetTotalPriceIDR(in.Booking.TotalPriceIDR)
 
 		if mProperty.IsValidDate(in.Booking.PaidAt, time.DateOnly) {
 			bk.SetPaidAt(in.Booking.PaidAt)

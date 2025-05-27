@@ -284,6 +284,8 @@
       if (FIELDS[i].name === 'deletedAt') {
         if (row[i] > 0) {
           isRowDeleted = true;
+        } else {
+          isRowDeleted = false;
         }
         break;
       }
