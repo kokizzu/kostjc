@@ -20988,7 +20988,7 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
     return date.toLocaleString("default", { month: "long", year: "numeric" });
   }
   function isBookingInThatMonth(booking, yearMonth) {
-    return booking.dateStart.includes(yearMonth) || booking.dateEnd.includes(yearMonth);
+    return yearMonth >= booking.dateStart.slice(0, 7) && yearMonth <= booking.dateEnd.slice(0, 7);
   }
   function instance15($self, $props, $invalidate) {
     let bookingsPerQuartal = (

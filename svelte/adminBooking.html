@@ -20751,6 +20751,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (FIELDS[i].name === "deletedAt") {
           if (row[i] > 0) {
             $invalidate(27, isRowDeleted = true);
+          } else {
+            $invalidate(27, isRowDeleted = false);
           }
           break;
         }
