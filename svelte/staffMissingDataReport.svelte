@@ -90,6 +90,7 @@
           <th>Tenant Name</th>
           <th>Telegram</th>
           <th>WhatsApp</th>
+          <th>Last Use At</th>
         </tr>
       </thead>
       <tbody>
@@ -114,6 +115,7 @@
             <td>{data.tenantName || '--'}</td>
             <td>{data.tenantTelegramUsername || '--'}</td>
             <td>{data.tenantWhatsappNumber || '--'}</td>
+            <td>{data.lastUseAt || '--'}</td>
           </tr>
         {/each}
       </tbody>

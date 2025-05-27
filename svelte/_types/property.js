@@ -151,5 +151,6 @@ module.exports = {};
  * @property {string} tenantName
  * @property {string} tenantTelegramUsername
  * @property {string} tenantWhatsappNumber
+ * @property {string} lastUseAt
  */
 module.exports = {};

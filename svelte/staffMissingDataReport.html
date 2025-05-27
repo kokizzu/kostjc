@@ -15495,6 +15495,13 @@ table tbody tr td .actions .btn:hover svg {
     );
     let t7;
     let t8;
+    let td5;
+    let t9_value = (
+      /*data*/
+      (ctx[10].lastUseAt || "--") + ""
+    );
+    let t9;
+    let t10;
     let current;
     let mounted;
     let dispose;
@@ -15534,6 +15541,9 @@ table tbody tr td .actions .btn:hover svg {
         td4 = element("td");
         t7 = text(t7_value);
         t8 = space();
+        td5 = element("td");
+        t9 = text(t9_value);
+        t10 = space();
         attr(button, "class", "btn svelte-jwlm42");
         attr(button, "title", "Edit");
         attr(div, "class", "actions svelte-jwlm42");
@@ -15542,6 +15552,7 @@ table tbody tr td .actions .btn:hover svg {
         attr(td2, "class", "svelte-jwlm42");
         attr(td3, "class", "svelte-jwlm42");
         attr(td4, "class", "svelte-jwlm42");
+        attr(td5, "class", "svelte-jwlm42");
         attr(tr, "class", "svelte-jwlm42");
       },
       m(target, anchor) {
@@ -15563,6 +15574,9 @@ table tbody tr td .actions .btn:hover svg {
         append(tr, td4);
         append(td4, t7);
         append(tr, t8);
+        append(tr, td5);
+        append(td5, t9);
+        append(tr, t10);
         current = true;
         if (!mounted) {
           dispose = listen(button, "click", click_handler);
@@ -15587,6 +15601,10 @@ table tbody tr td .actions .btn:hover svg {
         1) && t7_value !== (t7_value = /*data*/
         (ctx[10].tenantWhatsappNumber || "--") + ""))
           set_data(t7, t7_value);
+        if ((!current || dirty & /*missingData*/
+        1) && t9_value !== (t9_value = /*data*/
+        (ctx[10].lastUseAt || "--") + ""))
+          set_data(t9, t9_value);
       },
       i(local) {
         if (current)
@@ -15612,7 +15630,7 @@ table tbody tr td .actions .btn:hover svg {
     let div;
     let table;
     let thead;
-    let t9;
+    let t11;
     let tbody;
     let current;
     let each_value = ensure_array_like(
@@ -15631,8 +15649,8 @@ table tbody tr td .actions .btn:hover svg {
         div = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-jwlm42"><th class="svelte-jwlm42">Actions</th> <th class="svelte-jwlm42">Room</th> <th class="svelte-jwlm42">Tenant Name</th> <th class="svelte-jwlm42">Telegram</th> <th class="svelte-jwlm42">WhatsApp</th></tr>`;
-        t9 = space();
+        thead.innerHTML = `<tr class="svelte-jwlm42"><th class="svelte-jwlm42">Actions</th> <th class="svelte-jwlm42">Room</th> <th class="svelte-jwlm42">Tenant Name</th> <th class="svelte-jwlm42">Telegram</th> <th class="svelte-jwlm42">WhatsApp</th> <th class="svelte-jwlm42">Last Use At</th></tr>`;
+        t11 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
@@ -15645,7 +15663,7 @@ table tbody tr td .actions .btn:hover svg {
         insert(target, div, anchor);
         append(div, table);
         append(table, thead);
-        append(table, t9);
+        append(table, t11);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
