@@ -816,7 +816,13 @@ SELECT
   COALESCE("tenants"."tenantName", '') AS "tenantName",
   COALESCE("bookings"."dateStart", '') AS "dateStart",
   COALESCE("bookings"."dateEnd", '') AS "dateEnd",
-  COALESCE(SUM("payments"."paidIDR"), 0) AS "totalPaidIDR",
+  COALESCE(
+		SUM(CASE
+			WHEN "payments"."deletedAt" = 0
+			THEN "payments"."paidIDR"
+			ELSE 0 END
+		),
+	0) AS "totalPaidIDR",
   "bookings"."totalPriceIDR",
 	"bookings"."deletedAt"
 FROM "bookings"
@@ -988,8 +994,7 @@ func (p *Payments) FindByBookingId(bookingId uint64) (rows []Payments) {
 
 	query := `SELECT ` + p.SqlSelectAllFields() + `
 FROM ` + p.SqlTableName() + `
-WHERE ` + p.SqlBookingId() + ` = ` + I.UToS(bookingId) + `
-AND ` + p.SqlDeletedAt() + ` = 0`
+WHERE ` + p.SqlBookingId() + ` = ` + I.UToS(bookingId)
 
 	p.Adapter.QuerySql(query, func(row []any) {
 		p.FromArray(row)
