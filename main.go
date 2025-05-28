@@ -6,6 +6,8 @@ import (
 	"os"
 	"time"
 
+	"kostjc/model/mAuth/wcAuth"
+
 	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/D/Ch"
 	"github.com/kokizzu/gotro/D/Tt"
@@ -168,6 +170,23 @@ func main() {
 		model.RestoreDatabase(tConn, dateTime)
 	case `truncate`:
 		model.TruncateDatabase(tConn)
+	case `resetpass`:
+		if len(os.Args) < 4 {
+			L.LOG.Error(`must have argument: email and password`)
+			return
+		}
+		usr := wcAuth.NewUsersMutator(tConn)
+		usr.Email = os.Args[2]
+		if !usr.FindByEmail() {
+			L.LOG.Error(`cannot find user with email: ` + os.Args[2])
+			return
+		}
+		usr.SetEncryptedPassword(os.Args[3], time.Now().Unix())
+		if !usr.DoUpdateById() {
+			L.LOG.Error(`cannot update password for email: ` + os.Args[2])
+			return
+		}
+		L.LOG.Infof(`reset password success`)
 	default:
 		log.Error().Str(`mode`, mode).Msg(`unknown mode`)
 	}

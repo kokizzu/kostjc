@@ -128,7 +128,7 @@
         onHashChange();
 
         window.document.location = '/';
-      }, 1500 );
+      }, 1000 );
     } );
   }
 </script>
