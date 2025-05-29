@@ -140,6 +140,7 @@ module.exports = {};
  * @property {number} deletedAt
  * @property {boolean} isNearEnding
  * @property {boolean} isExtended
+ * @property {any[]} extraTenants
  */
 module.exports = {};
 

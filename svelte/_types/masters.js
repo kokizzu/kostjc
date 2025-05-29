@@ -101,3 +101,13 @@ module.exports = {}
  * @property {string} tooltip
  */
 module.exports = {}
+
+/**
+ * @template T
+ * @typedef {Object} RadioOption
+ * @prop {T} value
+ * @prop {string} label
+ * @prop {string} name
+ * @prop {string} id
+ */
+module.exports = {}

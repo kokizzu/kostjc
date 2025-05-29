@@ -1241,39 +1241,104 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   }
 }
 
+/* fakecss:./_components/Radio.esbuild-svelte-fake-css */
+.switcher-container.svelte-r2nbop.svelte-r2nbop.svelte-r2nbop {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+.switcher.svelte-r2nbop.svelte-r2nbop.svelte-r2nbop {
+  position: relative;
+  display: inline-block;
+  width: 43px;
+  height: 24px;
+  margin-left: 0 !important;
+}
+.switcher.svelte-r2nbop input.svelte-r2nbop.svelte-r2nbop {
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.switcher.svelte-r2nbop .slider.svelte-r2nbop.svelte-r2nbop {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-004);
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.switcher.svelte-r2nbop .slider.svelte-r2nbop.svelte-r2nbop:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.switcher.svelte-r2nbop input.svelte-r2nbop:checked + .slider.svelte-r2nbop {
+  background-color: var(--blue-005) !important;
+}
+.switcher.svelte-r2nbop input.svelte-r2nbop:focus + .slider.svelte-r2nbop {
+  box-shadow: 0 0 1px var(--blue-005) !important;
+}
+.switcher.svelte-r2nbop input.svelte-r2nbop:checked + .slider.svelte-r2nbop:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+}
+.switcher.svelte-r2nbop .slider.svelte-r2nbop.svelte-r2nbop {
+  border-radius: 34px;
+}
+.switcher.svelte-r2nbop .slider.svelte-r2nbop.svelte-r2nbop:before {
+  border-radius: 50%;
+}
+
 /* fakecss:./staffMissingDataReport.esbuild-svelte-fake-css */
-.report-container.svelte-jwlm42.svelte-jwlm42 {
+.report-container.svelte-xap96w.svelte-xap96w {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-table.svelte-jwlm42.svelte-jwlm42 {
+.filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+table.svelte-xap96w.svelte-xap96w {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-jwlm42 thead.svelte-jwlm42 {
+table.svelte-xap96w thead.svelte-xap96w {
   position: sticky;
   top: 0;
   background-color: var(--gray-002);
   z-index: 10;
   border: none;
 }
-table.svelte-jwlm42 thead tr th.svelte-jwlm42 {
+table.svelte-xap96w thead tr th.svelte-xap96w {
   text-align: left;
   padding: 8px 12px;
 }
-table.svelte-jwlm42 tbody tr.svelte-jwlm42 {
+table.svelte-xap96w tbody tr.svelte-xap96w {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-jwlm42 tbody tr td.svelte-jwlm42 {
+table.svelte-xap96w tbody tr td.svelte-xap96w {
   padding: 8px 12px;
 }
-table.svelte-jwlm42 tbody tr td .actions.svelte-jwlm42 {
+table.svelte-xap96w tbody tr td .actions.svelte-xap96w {
   display: flex;
   flex-direction: row;
 }
-table.svelte-jwlm42 tbody tr td .actions .btn.svelte-jwlm42 {
+table.svelte-xap96w tbody tr td .actions .btn.svelte-xap96w {
   border: none;
   padding: 6px;
   border-radius: 8px;
@@ -1283,7 +1348,7 @@ table.svelte-jwlm42 tbody tr td .actions .btn.svelte-jwlm42 {
   justify-content: center;
   align-items: center;
 }
-table.svelte-jwlm42 tbody tr td .actions .btn.svelte-jwlm42:hover {
+table.svelte-xap96w tbody tr td .actions .btn.svelte-xap96w:hover {
   background-color: var(--blue-transparent);
 }
 table tbody tr td .actions .btn:hover svg {
@@ -3692,13 +3757,13 @@ table tbody tr td .actions .btn:hover svg {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance10 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance10, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance10, context, null, { allOwnKeys: true });
-        instance10.create = function create(instanceConfig) {
+        const instance11 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance11, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance11, context, null, { allOwnKeys: true });
+        instance11.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance10;
+        return instance11;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -4210,6 +4275,20 @@ table tbody tr td .actions .btn:hover svg {
       attr(node, key, attributes[key]);
     }
   }
+  function init_binding_group(group) {
+    let _inputs;
+    return {
+      /* push */
+      p(...inputs) {
+        _inputs = inputs;
+        _inputs.forEach((input) => group.push(input));
+      },
+      /* remove */
+      r() {
+        _inputs.forEach((input) => group.splice(group.indexOf(input), 1));
+      }
+    };
+  }
   function to_number(value) {
     return value === "" ? null : +value;
   }
@@ -4527,7 +4606,7 @@ table tbody tr td .actions .btn:hover svg {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance10, create_fragment13, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance11, create_fragment14, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -4553,7 +4632,7 @@ table tbody tr td .actions .btn:hover svg {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance10 ? instance10(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance11 ? instance11(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -4566,7 +4645,7 @@ table tbody tr td .actions .btn:hover svg {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment13 ? create_fragment13($.ctx) : false;
+    $.fragment = create_fragment14 ? create_fragment14($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -15397,9 +15476,248 @@ table tbody tr td .actions .btn:hover svg {
   // staffMissingDataReport.svelte
   var import_jsApi3 = __toESM(require_jsApi_GEN());
   var import_xConstant = __toESM(require_xConstant());
+
+  // _components/Radio.svelte
   function get_each_context2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[10] = list[i];
+    child_ctx[5] = list[i];
+    return child_ctx;
+  }
+  function create_each_block2(ctx) {
+    let div;
+    let label0;
+    let input;
+    let input_id_value;
+    let input_name_value;
+    let input_value_value;
+    let value_has_changed = false;
+    let t0;
+    let span;
+    let label0_for_value;
+    let t1;
+    let label1;
+    let t2_value = (
+      /*option*/
+      ctx[5].label + ""
+    );
+    let t2;
+    let label1_for_value;
+    let t3;
+    let binding_group;
+    let mounted;
+    let dispose;
+    binding_group = init_binding_group(
+      /*$binding_groups*/
+      ctx[4][0]
+    );
+    return {
+      c() {
+        div = element("div");
+        label0 = element("label");
+        input = element("input");
+        t0 = space();
+        span = element("span");
+        t1 = space();
+        label1 = element("label");
+        t2 = text(t2_value);
+        t3 = space();
+        attr(input, "type", "radio");
+        attr(input, "id", input_id_value = /*option*/
+        ctx[5].id);
+        attr(input, "name", input_name_value = /*option*/
+        ctx[5].name);
+        input.__value = input_value_value = /*option*/
+        ctx[5].value;
+        set_input_value(input, input.__value);
+        attr(input, "class", "svelte-r2nbop");
+        attr(span, "class", "slider svelte-r2nbop");
+        attr(label0, "class", "switcher svelte-r2nbop");
+        attr(label0, "for", label0_for_value = /*option*/
+        ctx[5].id);
+        attr(label1, "for", label1_for_value = /*option*/
+        ctx[5].id);
+        attr(label1, "class", "label");
+        attr(div, "class", "switcher-container svelte-r2nbop");
+        binding_group.p(input);
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, label0);
+        append(label0, input);
+        input.checked = input.__value === /*selected*/
+        ctx[0];
+        append(label0, t0);
+        append(label0, span);
+        append(div, t1);
+        append(div, label1);
+        append(label1, t2);
+        append(div, t3);
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "change",
+            /*input_change_handler*/
+            ctx[3]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*options*/
+        2 && input_id_value !== (input_id_value = /*option*/
+        ctx2[5].id)) {
+          attr(input, "id", input_id_value);
+        }
+        if (dirty & /*options*/
+        2 && input_name_value !== (input_name_value = /*option*/
+        ctx2[5].name)) {
+          attr(input, "name", input_name_value);
+        }
+        if (dirty & /*options*/
+        2 && input_value_value !== (input_value_value = /*option*/
+        ctx2[5].value)) {
+          input.__value = input_value_value;
+          set_input_value(input, input.__value);
+          value_has_changed = true;
+        }
+        if (value_has_changed || dirty & /*selected, options*/
+        3) {
+          input.checked = input.__value === /*selected*/
+          ctx2[0];
+        }
+        if (dirty & /*options*/
+        2 && label0_for_value !== (label0_for_value = /*option*/
+        ctx2[5].id)) {
+          attr(label0, "for", label0_for_value);
+        }
+        if (dirty & /*options*/
+        2 && t2_value !== (t2_value = /*option*/
+        ctx2[5].label + ""))
+          set_data(t2, t2_value);
+        if (dirty & /*options*/
+        2 && label1_for_value !== (label1_for_value = /*option*/
+        ctx2[5].id)) {
+          attr(label1, "for", label1_for_value);
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        binding_group.r();
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_fragment12(ctx) {
+    let div;
+    let div_class_value;
+    let each_value = ensure_array_like(
+      /*options*/
+      ctx[1]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
+    }
+    return {
+      c() {
+        div = element("div");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(div, "class", div_class_value = null_to_empty(
+          /*className*/
+          ctx[2]
+        ) + " svelte-r2nbop");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div, null);
+          }
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (dirty & /*options, selected*/
+        3) {
+          each_value = ensure_array_like(
+            /*options*/
+            ctx2[1]
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context2(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block2(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value.length;
+        }
+        if (dirty & /*className*/
+        4 && div_class_value !== (div_class_value = null_to_empty(
+          /*className*/
+          ctx2[2]
+        ) + " svelte-r2nbop")) {
+          attr(div, "class", div_class_value);
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function instance9($self, $props, $invalidate) {
+    let { selected = (
+      /** @type {string} */
+      ""
+    ) } = $props;
+    let { options = (
+      /** @type {RadioOption[]} */
+      []
+    ) } = $props;
+    let { className = "" } = $props;
+    const $binding_groups = [[]];
+    function input_change_handler() {
+      selected = this.__value;
+      $invalidate(0, selected);
+    }
+    $self.$set = ($props2) => {
+      if ("selected" in $props2)
+        $invalidate(0, selected = $props2.selected);
+      if ("options" in $props2)
+        $invalidate(1, options = $props2.options);
+      if ("className" in $props2)
+        $invalidate(2, className = $props2.className);
+    };
+    return [selected, options, className, input_change_handler, $binding_groups];
+  }
+  var Radio = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance9, create_fragment12, safe_not_equal, { selected: 0, options: 1, className: 2 });
+    }
+  };
+  var Radio_default = Radio;
+
+  // staffMissingDataReport.svelte
+  function get_each_context3(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[15] = list[i];
     return child_ctx;
   }
   function create_if_block5(ctx) {
@@ -15407,12 +15725,12 @@ table tbody tr td .actions .btn:hover svg {
     let updating_isSubmitted;
     let current;
     function popupeditmissingtenant_isSubmitted_binding(value) {
-      ctx[7](value);
+      ctx[9](value);
     }
     let popupeditmissingtenant_props = {
       OnSubmit: (
         /*submitEditMissingTenant*/
-        ctx[5]
+        ctx[6]
       )
     };
     if (
@@ -15423,7 +15741,7 @@ table tbody tr td .actions .btn:hover svg {
       ctx[2];
     }
     popupeditmissingtenant = new PopUpEditMissingTenant_default({ props: popupeditmissingtenant_props });
-    ctx[6](popupeditmissingtenant);
+    ctx[8](popupeditmissingtenant);
     binding_callbacks.push(() => bind(popupeditmissingtenant, "isSubmitted", popupeditmissingtenant_isSubmitted_binding));
     return {
       c() {
@@ -15455,12 +15773,12 @@ table tbody tr td .actions .btn:hover svg {
         current = false;
       },
       d(detaching) {
-        ctx[6](null);
+        ctx[8](null);
         destroy_component(popupeditmissingtenant, detaching);
       }
     };
   }
-  function create_each_block2(ctx) {
+  function create_each_block3(ctx) {
     let tr;
     let td0;
     let div;
@@ -15470,35 +15788,35 @@ table tbody tr td .actions .btn:hover svg {
     let td1;
     let t1_value = (
       /*data*/
-      ctx[10].roomName + ""
+      ctx[15].roomName + ""
     );
     let t1;
     let t2;
     let td2;
     let t3_value = (
       /*data*/
-      (ctx[10].tenantName || "--") + ""
+      (ctx[15].tenantName || "--") + ""
     );
     let t3;
     let t4;
     let td3;
     let t5_value = (
       /*data*/
-      (ctx[10].tenantTelegramUsername || "--") + ""
+      (ctx[15].tenantTelegramUsername || "--") + ""
     );
     let t5;
     let t6;
     let td4;
     let t7_value = (
       /*data*/
-      (ctx[10].tenantWhatsappNumber || "--") + ""
+      (ctx[15].tenantWhatsappNumber || "--") + ""
     );
     let t7;
     let t8;
     let td5;
     let t9_value = (
       /*data*/
-      (ctx[10].lastUseAt || "--") + ""
+      (ctx[15].lastUseAt || "--") + ""
     );
     let t9;
     let t10;
@@ -15515,9 +15833,9 @@ table tbody tr td .actions .btn:hover svg {
     function click_handler() {
       return (
         /*click_handler*/
-        ctx[8](
+        ctx[11](
           /*data*/
-          ctx[10]
+          ctx[15]
         )
       );
     }
@@ -15544,16 +15862,16 @@ table tbody tr td .actions .btn:hover svg {
         td5 = element("td");
         t9 = text(t9_value);
         t10 = space();
-        attr(button, "class", "btn svelte-jwlm42");
+        attr(button, "class", "btn svelte-xap96w");
         attr(button, "title", "Edit");
-        attr(div, "class", "actions svelte-jwlm42");
-        attr(td0, "class", "svelte-jwlm42");
-        attr(td1, "class", "svelte-jwlm42");
-        attr(td2, "class", "svelte-jwlm42");
-        attr(td3, "class", "svelte-jwlm42");
-        attr(td4, "class", "svelte-jwlm42");
-        attr(td5, "class", "svelte-jwlm42");
-        attr(tr, "class", "svelte-jwlm42");
+        attr(div, "class", "actions svelte-xap96w");
+        attr(td0, "class", "svelte-xap96w");
+        attr(td1, "class", "svelte-xap96w");
+        attr(td2, "class", "svelte-xap96w");
+        attr(td3, "class", "svelte-xap96w");
+        attr(td4, "class", "svelte-xap96w");
+        attr(td5, "class", "svelte-xap96w");
+        attr(tr, "class", "svelte-xap96w");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -15585,25 +15903,25 @@ table tbody tr td .actions .btn:hover svg {
       },
       p(new_ctx, dirty) {
         ctx = new_ctx;
-        if ((!current || dirty & /*missingData*/
-        1) && t1_value !== (t1_value = /*data*/
-        ctx[10].roomName + ""))
+        if ((!current || dirty & /*missingDataFiltered*/
+        16) && t1_value !== (t1_value = /*data*/
+        ctx[15].roomName + ""))
           set_data(t1, t1_value);
-        if ((!current || dirty & /*missingData*/
-        1) && t3_value !== (t3_value = /*data*/
-        (ctx[10].tenantName || "--") + ""))
+        if ((!current || dirty & /*missingDataFiltered*/
+        16) && t3_value !== (t3_value = /*data*/
+        (ctx[15].tenantName || "--") + ""))
           set_data(t3, t3_value);
-        if ((!current || dirty & /*missingData*/
-        1) && t5_value !== (t5_value = /*data*/
-        (ctx[10].tenantTelegramUsername || "--") + ""))
+        if ((!current || dirty & /*missingDataFiltered*/
+        16) && t5_value !== (t5_value = /*data*/
+        (ctx[15].tenantTelegramUsername || "--") + ""))
           set_data(t5, t5_value);
-        if ((!current || dirty & /*missingData*/
-        1) && t7_value !== (t7_value = /*data*/
-        (ctx[10].tenantWhatsappNumber || "--") + ""))
+        if ((!current || dirty & /*missingDataFiltered*/
+        16) && t7_value !== (t7_value = /*data*/
+        (ctx[15].tenantWhatsappNumber || "--") + ""))
           set_data(t7, t7_value);
-        if ((!current || dirty & /*missingData*/
-        1) && t9_value !== (t9_value = /*data*/
-        (ctx[10].lastUseAt || "--") + ""))
+        if ((!current || dirty & /*missingDataFiltered*/
+        16) && t9_value !== (t9_value = /*data*/
+        (ctx[15].lastUseAt || "--") + ""))
           set_data(t9, t9_value);
       },
       i(local) {
@@ -15628,18 +15946,40 @@ table tbody tr td .actions .btn:hover svg {
   }
   function create_default_slot(ctx) {
     let div;
+    let radio;
+    let updating_selected;
+    let t0;
     let table;
     let thead;
-    let t11;
+    let t12;
     let tbody;
     let current;
+    function radio_selected_binding(value) {
+      ctx[10](value);
+    }
+    let radio_props = {
+      className: "filters",
+      options: (
+        /*filterOptions*/
+        ctx[7]
+      )
+    };
+    if (
+      /*selectedFilter*/
+      ctx[0] !== void 0
+    ) {
+      radio_props.selected = /*selectedFilter*/
+      ctx[0];
+    }
+    radio = new Radio_default({ props: radio_props });
+    binding_callbacks.push(() => bind(radio, "selected", radio_selected_binding));
     let each_value = ensure_array_like(
-      /*missingData*/
-      ctx[0] || []
+      /*missingDataFiltered*/
+      ctx[4] || []
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
+      each_blocks[i] = create_each_block3(get_each_context3(ctx, each_value, i));
     }
     const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
       each_blocks[i] = null;
@@ -15647,23 +15987,27 @@ table tbody tr td .actions .btn:hover svg {
     return {
       c() {
         div = element("div");
+        create_component(radio.$.fragment);
+        t0 = space();
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-jwlm42"><th class="svelte-jwlm42">Actions</th> <th class="svelte-jwlm42">Room</th> <th class="svelte-jwlm42">Tenant Name</th> <th class="svelte-jwlm42">Telegram</th> <th class="svelte-jwlm42">WhatsApp</th> <th class="svelte-jwlm42">Last Use At</th></tr>`;
-        t11 = space();
+        thead.innerHTML = `<tr class="svelte-xap96w"><th class="svelte-xap96w">Actions</th> <th class="svelte-xap96w">Room</th> <th class="svelte-xap96w">Tenant Name</th> <th class="svelte-xap96w">Telegram</th> <th class="svelte-xap96w">WhatsApp</th> <th class="svelte-xap96w">Last Use At</th></tr>`;
+        t12 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(thead, "class", "svelte-jwlm42");
-        attr(table, "class", "svelte-jwlm42");
-        attr(div, "class", "report-container svelte-jwlm42");
+        attr(thead, "class", "svelte-xap96w");
+        attr(table, "class", "svelte-xap96w");
+        attr(div, "class", "report-container svelte-xap96w");
       },
       m(target, anchor) {
         insert(target, div, anchor);
+        mount_component(radio, div, null);
+        append(div, t0);
         append(div, table);
         append(table, thead);
-        append(table, t11);
+        append(table, t12);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -15673,20 +16017,29 @@ table tbody tr td .actions .btn:hover svg {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty & /*missingData, showPopUpEditTenant*/
-        17) {
+        const radio_changes = {};
+        if (!updating_selected && dirty & /*selectedFilter*/
+        1) {
+          updating_selected = true;
+          radio_changes.selected = /*selectedFilter*/
+          ctx2[0];
+          add_flush_callback(() => updating_selected = false);
+        }
+        radio.$set(radio_changes);
+        if (dirty & /*missingDataFiltered, showPopUpEditTenant*/
+        48) {
           each_value = ensure_array_like(
-            /*missingData*/
-            ctx2[0] || []
+            /*missingDataFiltered*/
+            ctx2[4] || []
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context2(ctx2, each_value, i);
+            const child_ctx = get_each_context3(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
               transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block2(child_ctx);
+              each_blocks[i] = create_each_block3(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
               each_blocks[i].m(tbody, null);
@@ -15702,12 +16055,14 @@ table tbody tr td .actions .btn:hover svg {
       i(local) {
         if (current)
           return;
+        transition_in(radio.$.fragment, local);
         for (let i = 0; i < each_value.length; i += 1) {
           transition_in(each_blocks[i]);
         }
         current = true;
       },
       o(local) {
+        transition_out(radio.$.fragment, local);
         each_blocks = each_blocks.filter(Boolean);
         for (let i = 0; i < each_blocks.length; i += 1) {
           transition_out(each_blocks[i]);
@@ -15718,11 +16073,12 @@ table tbody tr td .actions .btn:hover svg {
         if (detaching) {
           detach(div);
         }
+        destroy_component(radio);
         destroy_each(each_blocks, detaching);
       }
     };
   }
-  function create_fragment12(ctx) {
+  function create_fragment13(ctx) {
     let t;
     let layoutmain;
     let current;
@@ -15777,8 +16133,8 @@ table tbody tr td .actions .btn:hover svg {
           check_outros();
         }
         const layoutmain_changes = {};
-        if (dirty & /*$scope, missingData*/
-        8193) {
+        if (dirty & /*$scope, missingDataFiltered, selectedFilter*/
+        262161) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -15813,7 +16169,11 @@ table tbody tr td .actions .btn:hover svg {
     /** @type {Access} */
     {/* segments */}
   );
-  function instance9($self, $props, $invalidate) {
+  var filterName = (
+    /** @type {string} */
+    "show-filter"
+  );
+  function instance10($self, $props, $invalidate) {
     let missingData = (
       /** @type {MissingTenantData[]} */
       [/* missingData */]
@@ -15829,7 +16189,7 @@ table tbody tr td .actions .btn:hover svg {
             notifier.showError(o.error || "something went wrong");
             return;
           }
-          $invalidate(0, missingData = o.missingData);
+          missingData = o.missingData;
           return;
         }
       );
@@ -15874,8 +16234,88 @@ table tbody tr td .actions .btn:hover svg {
         }
       );
     }
+    let selectedFilter = (
+      /** @type {FilterValues} */
+      "showAll"
+    );
+    const filterOptions = (
+      /** @type {RadioOption[]} */
+      [
+        {
+          id: "showMissingAny",
+          name: filterName,
+          value: "showMissingAny",
+          label: "Show Missing Any"
+        },
+        {
+          id: "showOnlyMissingTelegram",
+          name: filterName,
+          value: "showOnlyMissingTelegram",
+          label: "Show Only Missing Telegram"
+        },
+        {
+          id: "showOnlyMissingWhatsapp",
+          name: filterName,
+          value: "showOnlyMissingWhatsapp",
+          label: "Show Only Missing Whatsapp"
+        },
+        {
+          id: "showOnlyCompleted",
+          name: filterName,
+          value: "showOnlyCompleted",
+          label: "Show Only Completed"
+        },
+        {
+          id: "showAll",
+          name: filterName,
+          value: "showAll",
+          label: "Show All"
+        }
+      ]
+    );
+    let missingDataFiltered = (
+      /** @type {MissingTenantData[]} */
+      []
+    );
+    function restrucureMissingData() {
+      $invalidate(4, missingDataFiltered = []);
+      console.log("missingDataFiltered [BEFORE]", missingDataFiltered);
+      for (const dt of missingData || []) {
+        switch (selectedFilter) {
+          case "showAll": {
+            $invalidate(4, missingDataFiltered = [...missingDataFiltered, dt]);
+            break;
+          }
+          case "showMissingAny": {
+            if (!dt.tenantTelegramUsername || !dt.tenantWhatsappNumber) {
+              $invalidate(4, missingDataFiltered = [...missingDataFiltered, dt]);
+            }
+            break;
+          }
+          case "showOnlyCompleted": {
+            if (dt.tenantTelegramUsername != "" && dt.tenantWhatsappNumber != "") {
+              $invalidate(4, missingDataFiltered = [...missingDataFiltered, dt]);
+            }
+            break;
+          }
+          case "showOnlyMissingTelegram": {
+            if (!dt.tenantTelegramUsername) {
+              $invalidate(4, missingDataFiltered = [...missingDataFiltered, dt]);
+            }
+            break;
+          }
+          case "showOnlyMissingWhatsapp": {
+            if (!dt.tenantWhatsappNumber) {
+              $invalidate(4, missingDataFiltered = [...missingDataFiltered, dt]);
+            }
+            break;
+          }
+        }
+      }
+    }
     onMount(() => {
       $invalidate(3, isPopUpFormReady = true);
+      restrucureMissingData();
     });
     function popupeditmissingtenant_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
@@ -15887,23 +16327,39 @@ table tbody tr td .actions .btn:hover svg {
       isSubmitEditMissingTenant = value;
       $invalidate(2, isSubmitEditMissingTenant);
     }
+    function radio_selected_binding(value) {
+      selectedFilter = value;
+      $invalidate(0, selectedFilter);
+    }
     const click_handler = (data) => showPopUpEditTenant(data.tenantId);
+    $self.$.update = () => {
+      if ($self.$.dirty & /*selectedFilter*/
+      1) {
+        $:
+          if (selectedFilter) {
+            restrucureMissingData();
+          }
+      }
+    };
     return [
-      missingData,
+      selectedFilter,
       popUpEditMissingTenant,
       isSubmitEditMissingTenant,
       isPopUpFormReady,
+      missingDataFiltered,
       showPopUpEditTenant,
       submitEditMissingTenant,
+      filterOptions,
       popupeditmissingtenant_binding,
       popupeditmissingtenant_isSubmitted_binding,
+      radio_selected_binding,
       click_handler
     ];
   }
   var StaffMissingDataReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance9, create_fragment12, safe_not_equal, {});
+      init(this, options, instance10, create_fragment13, safe_not_equal, {});
     }
   };
   var staffMissingDataReport_default = StaffMissingDataReport_1;

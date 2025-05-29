@@ -1,5 +1,4 @@
 <script>
-    import { onMount } from 'svelte';
   /** @typedef {import('./_types/masters.js').Access} Access */
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/users.js').Tenant} Tenant */
@@ -9,9 +8,11 @@
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiDesignBallPenLine } from './node_modules/svelte-icons-pack/dist/ri';
   import PopUpEditMissingTenant from './_components/PopUpEditMissingTenant.svelte';
-    import { AdminTenants, StaffMissingDataReport } from './jsApi.GEN';
-    import { CmdUpsert } from './_components/xConstant';
-    import { notifier } from './_components/xNotifier';
+  import { AdminTenants, StaffMissingDataReport } from './jsApi.GEN';
+  import { CmdUpsert } from './_components/xConstant';
+  import { notifier } from './_components/xNotifier';
+  import Radio from './_components/Radio.svelte';
+  import { onMount } from 'svelte';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -66,9 +67,91 @@
       RefreshData();
     });
   }
+  
+  /** @typedef {'showMissingAny' | 'showOnlyMissingTelegram' | 'showOnlyMissingWhatsapp' | 'showOnlyCompleted' | 'showAll'} FilterValues */
+  /** @typedef {import('./_types/masters.js').RadioOption<FilterValues>} RadioOption<FilterValues> */
+
+  let selectedFilter = /** @type {FilterValues} */ ('showAll');
+  const filterName = /** @type {string} */ ('show-filter');
+  const filterOptions = /** @type {RadioOption[]} */ ([
+    {
+      id: 'showMissingAny',
+      name: filterName,
+      value: 'showMissingAny',
+      label: 'Show Missing Any'
+    },
+    {
+      id: 'showOnlyMissingTelegram',
+      name: filterName,
+      value: 'showOnlyMissingTelegram',
+      label: 'Show Only Missing Telegram'
+    },
+    {
+      id: 'showOnlyMissingWhatsapp',
+      name: filterName,
+      value: 'showOnlyMissingWhatsapp',
+      label: 'Show Only Missing Whatsapp'
+    },
+    {
+      id: 'showOnlyCompleted',
+      name: filterName,
+      value: 'showOnlyCompleted',
+      label: 'Show Only Completed'
+    },
+    {
+      id: 'showAll',
+      name: filterName,
+      value: 'showAll',
+      label: 'Show All'
+    }
+  ]);
+
+  let missingDataFiltered = /** @type {MissingTenantData[]} */ ([]);
+
+  function restrucureMissingData() {
+    missingDataFiltered = [];
+    console.log('missingDataFiltered [BEFORE]', missingDataFiltered);
+    for (const dt of (missingData || [])) {
+      switch (selectedFilter) {
+        case 'showAll': {
+          missingDataFiltered = [...missingDataFiltered, dt];
+          break;
+        }
+        case 'showMissingAny': {
+          if (!dt.tenantTelegramUsername || !dt.tenantWhatsappNumber) {
+            missingDataFiltered = [...missingDataFiltered, dt];
+          }
+          break;
+        }
+        case 'showOnlyCompleted': {
+          if (dt.tenantTelegramUsername != '' && dt.tenantWhatsappNumber != '') {
+            missingDataFiltered = [...missingDataFiltered, dt];
+          }
+          break;
+        }
+        case 'showOnlyMissingTelegram': {
+          if (!dt.tenantTelegramUsername) {
+            missingDataFiltered = [...missingDataFiltered, dt];
+          }
+          break;
+        }
+        case 'showOnlyMissingWhatsapp': {
+          if (!dt.tenantWhatsappNumber) {
+            missingDataFiltered = [...missingDataFiltered, dt];
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  $: if (selectedFilter) {
+    restrucureMissingData();
+  }
 
   onMount(() => {
     isPopUpFormReady = true;
+    restrucureMissingData();
   });
 </script>
 
@@ -82,6 +165,11 @@
 
 <LayoutMain access={segments} user={user}>
   <div class="report-container">
+    <Radio
+      className="filters"
+      options={filterOptions}
+      bind:selected={selectedFilter}
+    />
     <table>
       <thead>
         <tr>
@@ -94,7 +182,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each (missingData || []) as data}
+        {#each (missingDataFiltered || []) as data}
           <tr>
             <td>
               <div class="actions">
@@ -129,6 +217,13 @@
     flex-direction: column;
     gap: 30px;
     padding: 20px;
+  }
+
+  :global(.filters) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   table {

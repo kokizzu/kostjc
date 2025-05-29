@@ -3,7 +3,6 @@ package rqProperty
 import (
 	"fmt"
 	"kostjc/model/zCrud"
-	"sort"
 	"strconv"
 	"time"
 
@@ -720,45 +719,12 @@ SELECT ` + r.SqlRoomName() + ` FROM ` + r.SqlTableName() + `
 WHERE "deletedAt" = 0
 ORDER BY ` + r.SqlRoomName() + ` ASC`
 
-	extTenantsMap := make(map[string]bool)
-
 	r.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) == 1 {
 			roomName := X.ToS(row[0])
-			extTenantsMap[roomName] = false
+			out = append(out, roomName)
 		}
 	})
-
-	queryExtraTenants := `SELECT
-		"rooms"."roomName",
-		"bookings"."extraTenants"
-	FROM "bookings"
-	LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
-	WHERE "rooms"."currentTenantId" = "bookings"."tenantId"`
-
-	roomExtraTenants := make(map[string]string)
-	r.Adapter.QuerySql(queryExtraTenants, func(row []any) {
-		if len(row) == 2 {
-			roomName := X.ToS(row[0])
-			roomExtraTenants[roomName] = X.ToS(row[1])
-		}
-	})
-
-	for roomName, extTenants := range roomExtraTenants {
-		if extTenants != `[]` {
-			extTenantsMap[roomName] = true
-		}
-	}
-
-	for roomName, hasExtraTenants := range extTenantsMap {
-		toRoomName := roomName
-		if hasExtraTenants {
-			toRoomName += ` *`
-		}
-		out = append(out, toRoomName)
-	}
-
-	sort.Strings(out)
 
 	return
 }
@@ -783,6 +749,7 @@ type BookingDetail struct {
 	DeletedAt    int64  `json:"deletedAt"`
 	IsNearEnding bool   `json:"isNearEnding"`
 	IsExtended   bool   `json:"isExtended"`
+	ExtraTenants []any  `json:"extraTenants"`
 }
 
 type RoomBooking struct {
@@ -824,7 +791,8 @@ SELECT
 		),
 	0) AS "totalPaidIDR",
   "bookings"."totalPriceIDR",
-	"bookings"."deletedAt"
+	"bookings"."deletedAt",
+	"bookings"."extraTenants"
 FROM "bookings"
 LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
 LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
@@ -839,7 +807,7 @@ GROUP BY "rooms"."roomName", "tenants"."tenantName", "bookings"."dateStart", "bo
 ORDER BY "rooms"."roomName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 10 {
+		if len(row) == 11 {
 			id := X.ToU(row[0])
 			roomId := X.ToU(row[1])
 			roomName := X.ToS(row[2])
@@ -850,18 +818,20 @@ ORDER BY "rooms"."roomName" ASC`
 			totalPaidIdr := X.ToI(row[7])
 			totalPriceIdr := X.ToI(row[8])
 			deletedAt := X.ToI(row[9])
+			extraTenants := X.ToArr(row[10])
 
 			out = append(out, BookingDetail{
-				Id:         id,
-				RoomId:     roomId,
-				RoomName:   roomName,
-				TenantId:   tenantId,
-				TenantName: tenantName,
-				DateStart:  dateStart,
-				DateEnd:    dateEnd,
-				AmountPaid: totalPaidIdr,
-				TotalPrice: totalPriceIdr,
-				DeletedAt:  deletedAt,
+				Id:           id,
+				RoomId:       roomId,
+				RoomName:     roomName,
+				TenantId:     tenantId,
+				TenantName:   tenantName,
+				DateStart:    dateStart,
+				DateEnd:      dateEnd,
+				AmountPaid:   totalPaidIdr,
+				TotalPrice:   totalPriceIdr,
+				DeletedAt:    deletedAt,
+				ExtraTenants: extraTenants,
 			})
 		}
 	})

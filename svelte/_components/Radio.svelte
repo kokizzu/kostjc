@@ -1,16 +1,27 @@
 <script>
-  export let id = /** @type {string} */ ('');
-  export let value = /** @type {boolean} */ (false);
-  export let label = /** @type {string} */ ('Show / Hide');
-  export let name = /** @type {string} */ ('');
+  /** @typedef {import('../_types/masters').RadioOption<any>} RadioOption */
+  
+  export let selected = /** @type {string} */ ('');
+  export let options = /** @type {RadioOption[]} */ ([]);
+  export let className = '';
 </script>
 
-<div class="switcher-container">
-  <label class="switcher" for={id}>
-    <input type="checkbox" id={id} bind:checked={value} {name}>
-    <span class="slider"></span>
-  </label>
-  <label for="{id}" class="label">{label}</label>
+<div class="{className}">
+  {#each options as option}
+    <div class="switcher-container">
+      <label class="switcher" for={option.id}>
+        <input
+          type="radio"
+          id={option.id}
+          name={option.name}
+          bind:group={selected}
+          value={option.value}
+        />
+        <span class="slider"></span>
+      </label>
+      <label for="{option.id}" class="label">{option.label}</label>
+    </div>
+  {/each}
 </div>
 
 <style>
