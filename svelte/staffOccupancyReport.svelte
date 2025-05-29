@@ -88,7 +88,7 @@
   let quartals = getQuartalsFromStart(monthStart);
   let monthEnd = quartals[3];
 
-  async function shiftMonth(direction) {
+  async function shiftMonth(/** @type {number} */ direction) {
     const end = parseYM(monthEnd);
     end.setMonth(end.getMonth() + direction);
     monthEnd = formatYM(end);
@@ -389,7 +389,7 @@
             {#each (quartals || []) as quartal}
               <td>
                 <div class="cells">
-                  {#each reOrderBookingPerQuartal(room.replace(' *', ''), quartal) as booking}
+                  {#each reOrderBookingPerQuartal(room, quartal) as booking}
                     <div
                       class="cell
                       {booking.deletedAt > 0 ? 'refunded' : ''}
@@ -398,7 +398,7 @@
                       "
                     >
                       {#if booking.tenantName}
-                        <span class="{showTenant ? '' : 'hidden'}">{booking.tenantName}</span> 
+                        <span class="{showTenant ? '' : 'hidden'}">{booking.tenantName} {(booking.extraTenants || []).length ? '*' : ''}</span> 
                         <span>
                           <span class="{showDateStart ? '' : 'hidden'}">{booking.dateStart}</span>
                           <span> s/d </span>
