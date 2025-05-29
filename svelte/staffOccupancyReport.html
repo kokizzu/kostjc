@@ -16345,6 +16345,12 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
           /*id*/
           ctx[1]
         );
+        attr(
+          input,
+          "name",
+          /*name*/
+          ctx[3]
+        );
         attr(input, "class", "svelte-r2nbop");
         attr(span, "class", "slider svelte-r2nbop");
         attr(label0, "class", "switcher svelte-r2nbop");
@@ -16379,7 +16385,7 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
             input,
             "change",
             /*input_change_handler*/
-            ctx[3]
+            ctx[4]
           );
           mounted = true;
         }
@@ -16392,6 +16398,15 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
             "id",
             /*id*/
             ctx2[1]
+          );
+        }
+        if (dirty & /*name*/
+        8) {
+          attr(
+            input,
+            "name",
+            /*name*/
+            ctx2[3]
           );
         }
         if (dirty & /*value*/
@@ -16449,6 +16464,10 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
       /** @type {string} */
       "Show / Hide"
     ) } = $props;
+    let { name = (
+      /** @type {string} */
+      ""
+    ) } = $props;
     function input_change_handler() {
       value = this.checked;
       $invalidate(0, value);
@@ -16460,13 +16479,15 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
         $invalidate(0, value = $props2.value);
       if ("label" in $props2)
         $invalidate(2, label = $props2.label);
+      if ("name" in $props2)
+        $invalidate(3, name = $props2.name);
     };
-    return [value, id, label, input_change_handler];
+    return [value, id, label, name, input_change_handler];
   }
   var Switcher = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance10, create_fragment13, safe_not_equal, { id: 1, value: 0, label: 2 });
+      init(this, options, instance10, create_fragment13, safe_not_equal, { id: 1, value: 0, label: 2, name: 3 });
     }
   };
   var Switcher_default = Switcher;
