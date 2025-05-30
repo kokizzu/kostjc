@@ -1024,3 +1024,82 @@ ORDER BY "rooms"."updatedAt"`
 
 	return
 }
+
+type TenantNearbyBirthday struct {
+	KtpNumber  string `json:"ktpNumber"`
+	TenantName string `json:"tenantName"`
+	BirthDay   string `json:"birthDay"`
+	Age        int    `json:"age"`
+	RoomName   string `json:"roomName"`
+}
+
+func (r *Rooms) FindTenantsNearbyBirthdays() []TenantNearbyBirthday {
+	const comment = `-- Rooms) FindTenantsNearbyBirthdays`
+
+	queryRows := comment + `
+SELECT
+	"tenants"."ktpNumber",
+  "tenants"."tenantName",
+  "tenants"."ktpDateBirth",
+  "rooms"."roomName"
+FROM "rooms"
+LEFT JOIN "tenants" ON "rooms"."currentTenantId" = "tenants"."id"
+WHERE "rooms"."deletedAt" = 0`
+
+	mapTenants := make(map[string]bool)
+	resp := []TenantNearbyBirthday{}
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) != 4 {
+			return
+		}
+
+		ktpNumber := X.ToS(row[0])
+		if mapTenants[ktpNumber] {
+			return
+		}
+		birthDay := X.ToS(row[2])
+		resp = append(resp, TenantNearbyBirthday{
+			KtpNumber:  ktpNumber,
+			TenantName: X.ToS(row[1]),
+			BirthDay:   birthDay,
+			RoomName:   X.ToS(row[3]),
+			Age:        getAgeByBirthday(birthDay),
+		})
+
+		mapTenants[ktpNumber] = true
+	})
+
+	now := time.Now()
+	sevenDaysAgo := now.AddDate(0, 0, -7).Format("01-02")
+	sevenDaysLater := now.AddDate(0, 0, 7).Format("01-02")
+
+	out := []TenantNearbyBirthday{}
+	for _, v := range resp {
+		birthDate, err := time.Parse(time.DateOnly, v.BirthDay)
+		if err != nil {
+			continue
+		}
+		birthMMDD := birthDate.Format("01-02")
+
+		if birthMMDD >= sevenDaysAgo && birthMMDD <= sevenDaysLater {
+			out = append(out, v)
+		}
+	}
+
+	return out
+}
+
+func getAgeByBirthday(birthday string) int {
+	birthDate, err := time.Parse(time.DateOnly, birthday)
+	if err != nil {
+		return 0
+	}
+
+	now := time.Now()
+	age := now.Year() - birthDate.Year()
+	if now.YearDay() < birthDate.YearDay() {
+		age--
+	}
+
+	return age
+}

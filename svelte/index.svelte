@@ -9,6 +9,7 @@
   import { FaSolidCircleNotch } from './node_modules/svelte-icons-pack/dist/fa';
   import InputBox from './_components/InputBox.svelte';
   import LayoutMain from './_layouts/main.svelte';
+    import BirthDayAgenda from './_partials/home/BirthDayAgenda.svelte';
 
   let title = '#{title}';
   let user  = /** @type {User} */ ({/* user */});
@@ -138,7 +139,7 @@
 {#if Mode === ModeUser}
   <LayoutMain access={segments} user={user}>
     <div class="home-container">
-      <h1>Welcome {user.userName}</h1>
+      <BirthDayAgenda />
     </div>
   </LayoutMain>
 {:else}

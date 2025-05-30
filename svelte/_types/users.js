@@ -57,3 +57,13 @@ module.exports = {}
  * @property {string} restoredBy
  */
 module.exports = {}
+
+/**
+ * @typedef {Object} TenantNearbyBirthday
+ * @property {string} ktpNumber
+ * @property {string} tenantName
+ * @property {string} birthDay
+ * @property {number} age
+ * @property {string} roomName
+ */
+module.exports = {}
