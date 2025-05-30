@@ -15,6 +15,7 @@ var viewList = map[string]string{
 	`AdminLocation`:          `../svelte/adminLocation.html`,          // ../svelte/adminLocation.svelte
 	`AdminPayment`:           `../svelte/adminPayment.html`,           // ../svelte/adminPayment.svelte
 	`AdminRoom`:              `../svelte/adminRoom.html`,              // ../svelte/adminRoom.svelte
+	`AdminSale`:              `../svelte/adminSale.html`,              // ../svelte/adminSale.svelte
 	`AdminStock`:             `../svelte/adminStock.html`,             // ../svelte/adminStock.svelte
 	`AdminTenants`:           `../svelte/adminTenants.html`,           // ../svelte/adminTenants.svelte
 	`AdminUsersManagement`:   `../svelte/adminUsersManagement.html`,   // ../svelte/adminUsersManagement.svelte
@@ -60,6 +61,11 @@ func (v *Views) RenderAdminPayment(c *fiber.Ctx, m M.SX) error {
 func (v *Views) RenderAdminRoom(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`AdminRoom`].Str(m))
+}
+
+func (v *Views) RenderAdminSale(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminSale`].Str(m))
 }
 
 func (v *Views) RenderAdminStock(c *fiber.Ctx, m M.SX) error {

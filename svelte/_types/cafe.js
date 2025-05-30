@@ -15,3 +15,23 @@
  * @property {string} restoredBy
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} Sale
+ * @property {string|number} id
+ * @property {string} cashier
+ * @property {string} who
+ * @property {string} salesDate
+ * @property {string} paidAt
+ * @property {string | any} paidWith
+ * @property {string} note
+ * @property {number} totalPriceIDR
+ * @property {number} createdAt
+ * @property {string} createdBy
+ * @property {number} updatedAt
+ * @property {string} updatedBy
+ * @property {number} deletedAt
+ * @property {string} deletedBy
+ * @property {string} restoredBy
+ */
+module.exports = {};
