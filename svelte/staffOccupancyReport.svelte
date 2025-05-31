@@ -151,7 +151,7 @@
           return
         }
         
-        notifier.showSuccess(`Booking #${booking.id} extended !!`);
+        notifier.showSuccess(`Booking extended to '${booking.dateEnd}'`);
 
         popupExtendBooking.Reset();
         popupExtendBooking.Hide();
