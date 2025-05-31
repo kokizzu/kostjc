@@ -60,7 +60,7 @@ module.exports = {}
 
 /**
  * @typedef {Object} TenantNearbyBirthday
- * @property {string} ktpNumber
+ * @property {number|string} tenantId
  * @property {string} tenantName
  * @property {string} birthDay
  * @property {number} age

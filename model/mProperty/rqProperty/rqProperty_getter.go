@@ -1026,7 +1026,7 @@ ORDER BY "rooms"."updatedAt"`
 }
 
 type TenantNearbyBirthday struct {
-	KtpNumber  string `json:"ktpNumber"`
+	TenantId   uint64 `json:"tenantId"`
 	TenantName string `json:"tenantName"`
 	BirthDay   string `json:"birthDay"`
 	Age        int    `json:"age"`
@@ -1038,7 +1038,7 @@ func (r *Rooms) FindTenantsNearbyBirthdays() []TenantNearbyBirthday {
 
 	queryRows := comment + `
 SELECT
-	"tenants"."ktpNumber",
+	"tenants"."id",
   "tenants"."tenantName",
   "tenants"."ktpDateBirth",
   "rooms"."roomName"
@@ -1046,27 +1046,26 @@ FROM "rooms"
 LEFT JOIN "tenants" ON "rooms"."currentTenantId" = "tenants"."id"
 WHERE "rooms"."deletedAt" = 0`
 
-	mapTenants := make(map[string]bool)
+	mapTenants := make(map[any]bool)
 	resp := []TenantNearbyBirthday{}
 	r.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) != 4 {
 			return
 		}
-
-		ktpNumber := X.ToS(row[0])
-		if mapTenants[ktpNumber] {
+		tenantId := X.ToU(row[0])
+		if mapTenants[tenantId] {
 			return
 		}
 		birthDay := X.ToS(row[2])
 		resp = append(resp, TenantNearbyBirthday{
-			KtpNumber:  ktpNumber,
+			TenantId:   tenantId,
 			TenantName: X.ToS(row[1]),
 			BirthDay:   birthDay,
 			RoomName:   X.ToS(row[3]),
 			Age:        getAgeByBirthday(birthDay),
 		})
 
-		mapTenants[ktpNumber] = true
+		mapTenants[tenantId] = true
 	})
 
 	now := time.Now()
