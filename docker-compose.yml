@@ -26,7 +26,6 @@ services:
     environment:
       CLICKHOUSE_USER: "userC"
       CLICKHOUSE_PASSWORD: "passC"
-      CLICHOUSE_DB: "dbC"
     ulimits:
       nofile:
         soft: 262144

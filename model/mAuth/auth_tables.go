@@ -167,14 +167,6 @@ const (
 	RefId = `refId`
 )
 
-const (
-	TableBeforeJson Ch.TableName = `beforeJson`
-	TableAfterJson  Ch.TableName = `afterJson`
-
-	DataJson = `dataJson`
-	Table    = `table`
-)
-
 var ClickhouseTables = map[Ch.TableName]*Ch.TableProp{
 	TableActionLogs: {
 		Fields: []Ch.Field{
@@ -194,25 +186,5 @@ var ClickhouseTables = map[Ch.TableName]*Ch.TableProp{
 			{RefId, Ch.UInt64},
 		},
 		Orders: []string{CreatedAt, RequestId, ActorId, Action},
-	},
-	TableBeforeJson: {
-		Fields: []Ch.Field{
-			{CreatedAt, Ch.DateTime},
-			{ActorId, Ch.UInt64},
-			{Action, Ch.String},
-			{DataJson, Ch.String},
-			{Table, Ch.String},
-		},
-		Orders: []string{CreatedAt, ActorId, Action},
-	},
-	TableAfterJson: {
-		Fields: []Ch.Field{
-			{CreatedAt, Ch.DateTime},
-			{ActorId, Ch.UInt64},
-			{Action, Ch.String},
-			{DataJson, Ch.String},
-			{Table, Ch.String},
-		},
-		Orders: []string{CreatedAt, ActorId, Action},
 	},
 }
