@@ -21383,7 +21383,7 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
             notifier.showError(o.error);
             return;
           }
-          notifier.showSuccess(`Booking #${booking.id} extended !!`);
+          notifier.showSuccess(`Booking extended to '${booking.dateEnd}'`);
           popupExtendBooking.Reset();
           popupExtendBooking.Hide();
           refreshBookings();

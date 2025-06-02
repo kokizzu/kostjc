@@ -19,10 +19,14 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	fw.Get(`/`, func(ctx *fiber.Ctx) error {
 		_, user, segments := userInfoFromContext(ctx, d)
 
+		room := rqProperty.NewRooms(d.PropOltp)
+		tenantsNearbyBirthdays := room.FindTenantsNearbyBirthdays()
+
 		return views.RenderIndex(ctx, M.SX{
-			`title`:    `KostJC | Home`,
-			`user`:     user,
-			`segments`: segments,
+			`title`:                  `KostJC | Home`,
+			`user`:                   user,
+			`segments`:               segments,
+			`tenantsNearbyBirthdays`: tenantsNearbyBirthdays,
 		})
 	})
 
