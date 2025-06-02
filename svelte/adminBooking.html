@@ -21886,7 +21886,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       );
       facilitiesIds = (0, import_xFormatter4.arrToArrNum)(facilitiesIds);
       await OnSubmit(booking, facilitiesIds);
-      $invalidate(10, extraTenantsIds = []);
     }
     const Show = () => $invalidate(4, isShow = true);
     const Hide = () => $invalidate(4, isShow = false);
@@ -21900,7 +21899,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       $invalidate(9, tenantId = 0);
       $invalidate(10, extraTenantsIds = []);
       $invalidate(11, roomId = 0);
-      $invalidate(10, extraTenantsIds = []);
+      $invalidate(14, velueSvelteSelectFacilities = []);
+      $invalidate(12, facilitiesPrice = 0);
     };
     const cancel = () => $invalidate(4, isShow = false);
     let valuesSvelteSelectFacilities = (
@@ -22598,7 +22598,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           notifier.showSuccess(`Booking created !!`);
           popUpAddBooking.Reset();
           popUpAddBooking.Hide();
-          console.log("PAGER:", pager);
           OnRefresh(pager);
         }
       );

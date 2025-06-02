@@ -49,7 +49,6 @@
 
     facilitiesIds = arrToArrNum(facilitiesIds);
     await OnSubmit(booking, facilitiesIds);
-    extraTenantsIds = [];
   }
 
   export const Show = () => isShow = true;
@@ -65,7 +64,8 @@
     tenantId = 0;
     extraTenantsIds = [];
     roomId = 0;
-    extraTenantsIds = [];
+    velueSvelteSelectFacilities = [];
+    facilitiesPrice = 0;
   }
   
   const cancel = () => isShow = false;
