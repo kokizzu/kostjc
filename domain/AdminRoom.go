@@ -4,11 +4,13 @@ import (
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
+	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
 	"strings"
 	"time"
 
+	"github.com/goccy/go-json"
 	"github.com/kokizzu/gotro/S"
 )
 
@@ -160,11 +162,16 @@ func (d *Domain) AdminRoom(in *AdminRoomIn) (out AdminRoomOut) {
 	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
 		room := wcProperty.NewRoomsMutator(d.PropOltp)
 		room.Id = in.Room.Id
+
+		isEdited := false
+		beforeJson := []byte(``)
 		if room.Id > 0 {
+			isEdited = true
 			if !room.FindById() {
 				out.SetError(400, ErrAdminRoomNotFound)
 				return
 			}
+			beforeJson, _ = json.Marshal(room)
 
 			if in.Cmd == zCrud.CmdDelete {
 				if room.DeletedAt == 0 {
@@ -246,6 +253,22 @@ func (d *Domain) AdminRoom(in *AdminRoomIn) (out AdminRoomOut) {
 		if !room.DoUpsert() {
 			out.SetError(500, ErrAdminRoomSaveFailed)
 			return
+		}
+
+		if isEdited {
+			afterJson, _ := json.Marshal(room)
+			row := saProperty.RoomLogs{
+				CreatedAt:  in.TimeNow(),
+				ActorId:    sess.UserId,
+				BeforeJson: string(beforeJson),
+				AfterJson:  string(afterJson),
+			}
+			d.roomLogs.Insert([]any{
+				row.CreatedAt,
+				row.ActorId,
+				row.BeforeJson,
+				row.AfterJson,
+			})
 		}
 
 		if in.Pager.Page == 0 {

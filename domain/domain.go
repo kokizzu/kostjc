@@ -13,6 +13,8 @@ import (
 	"kostjc/conf"
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/saAuth"
+	"kostjc/model/mProperty"
+	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/xMailer"
 )
 
@@ -21,13 +23,21 @@ type Domain struct {
 	AuthOlap *Ch.Adapter
 
 	PropOltp *Tt.Adapter
+	PropOlap *Ch.Adapter
 
 	Mailer xMailer.Mailer
 
 	IsBgSvc bool // long-running program
 
 	// timed buffer
-	authLogs *chBuffer.TimedBuffer
+	authLogs     *chBuffer.TimedBuffer
+	locationLogs *chBuffer.TimedBuffer
+	facilityLogs *chBuffer.TimedBuffer
+	buildingLogs *chBuffer.TimedBuffer
+	roomLogs     *chBuffer.TimedBuffer
+	bookingLogs  *chBuffer.TimedBuffer
+	paymentLogs  *chBuffer.TimedBuffer
+	stockLogs    *chBuffer.TimedBuffer
 
 	// logger
 	Log *zerolog.Logger
@@ -50,6 +60,13 @@ func (d *Domain) runSubtask(subTask func()) {
 
 func (d *Domain) InitTimedBuffer() {
 	d.authLogs = chBuffer.NewTimedBuffer(d.AuthOlap.DB, 100_000, 1*time.Second, saAuth.Preparators[mAuth.TableActionLogs])
+	d.locationLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableLocationLogs])
+	d.facilityLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableFacilityLogs])
+	d.buildingLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableBuildingLogs])
+	d.roomLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableRoomLogs])
+	d.bookingLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableBookingLogs])
+	d.paymentLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TablePaymentLogs])
+	d.stockLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableStockLogs])
 }
 
 func (d *Domain) WaitTimedBufferFinalFlush() {

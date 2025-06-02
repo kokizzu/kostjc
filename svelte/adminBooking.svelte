@@ -198,7 +198,6 @@
 
         popUpAddBooking.Reset();
         popUpAddBooking.Hide();
-        console.log('PAGER:', pager);
         OnRefresh(pager);
       }
     );

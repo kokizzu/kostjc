@@ -3,8 +3,11 @@ package domain
 import (
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
+	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
+
+	"github.com/goccy/go-json"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminLocation.go
@@ -115,11 +118,16 @@ func (d *Domain) AdminLocation(in *AdminLocationIn) (out AdminLocationOut) {
 	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
 		loc := wcProperty.NewLocationsMutator(d.PropOltp)
 		loc.Id = in.Location.Id
+
+		isEdited := false
+		beforeJson := []byte(``)
 		if loc.Id > 0 {
+			isEdited = true
 			if !loc.FindById() {
 				out.SetError(400, ErrAdminLocationNotFound)
 				return
 			}
+			beforeJson, _ = json.Marshal(loc)
 
 			if in.Cmd == zCrud.CmdDelete {
 				if loc.DeletedAt == 0 {
@@ -158,6 +166,22 @@ func (d *Domain) AdminLocation(in *AdminLocationIn) (out AdminLocationOut) {
 		if !loc.DoUpsert() {
 			out.SetError(500, ErrAdminLocationSaveFailed)
 			return
+		}
+
+		if isEdited {
+			afterJson, _ := json.Marshal(loc)
+			row := saProperty.LocationLogs{
+				CreatedAt:  in.TimeNow(),
+				ActorId:    sess.UserId,
+				BeforeJson: string(beforeJson),
+				AfterJson:  string(afterJson),
+			}
+			d.locationLogs.Insert([]any{
+				row.CreatedAt,
+				row.ActorId,
+				row.BeforeJson,
+				row.AfterJson,
+			})
 		}
 
 		if in.Pager.Page == 0 {
