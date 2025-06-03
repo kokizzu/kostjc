@@ -87,7 +87,7 @@
         </a>
         <a href="/admin/sale" class:active={pathLv2 === 'sale'}>
           <Icon src={RiFinanceCashLine} size="20" />
-          <span>Sale</span>
+          <span>Sales</span>
         </a>
         <a href="/admin/location" class:active={pathLv2 === 'location'}>
           <Icon src={RiMapMapPin2Line} size="20" />
