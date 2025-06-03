@@ -391,22 +391,28 @@ var MenusFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 
 // Sales DAO reader/query struct
 type Sales struct {
-	Adapter       *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
-	Id            uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
-	Cashier       string      `json:"cashier" form:"cashier" query:"cashier" long:"cashier" msg:"cashier"`
-	Who           string      `json:"who" form:"who" query:"who" long:"who" msg:"who"`
-	SalesDate     string      `json:"salesDate" form:"salesDate" query:"salesDate" long:"salesDate" msg:"salesDate"`
-	PaidAt        string      `json:"paidAt" form:"paidAt" query:"paidAt" long:"paidAt" msg:"paidAt"`
-	PaidWith      string      `json:"paidWith" form:"paidWith" query:"paidWith" long:"paidWith" msg:"paidWith"`
-	Note          string      `json:"note" form:"note" query:"note" long:"note" msg:"note"`
-	TotalPriceIDR int64       `json:"totalPriceIDR" form:"totalPriceIDR" query:"totalPriceIDR" long:"totalPriceIDR" msg:"totalPriceIDR"`
-	CreatedAt     int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
-	CreatedBy     uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
-	UpdatedAt     int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
-	UpdatedBy     uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
-	DeletedAt     int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
-	DeletedBy     uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
-	RestoredBy    uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+	Adapter            *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id                 uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	Cashier            string      `json:"cashier" form:"cashier" query:"cashier" long:"cashier" msg:"cashier"`
+	TenantId           uint64      `json:"tenantId,string" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
+	BuyerName          string      `json:"buyerName" form:"buyerName" query:"buyerName" long:"buyerName" msg:"buyerName"`
+	SalesDate          string      `json:"salesDate" form:"salesDate" query:"salesDate" long:"salesDate" msg:"salesDate"`
+	PaidAt             string      `json:"paidAt" form:"paidAt" query:"paidAt" long:"paidAt" msg:"paidAt"`
+	Note               string      `json:"note" form:"note" query:"note" long:"note" msg:"note"`
+	UtensilsTaken      string      `json:"utensilsTaken" form:"utensilsTaken" query:"utensilsTaken" long:"utensilsTaken" msg:"utensilsTaken"`
+	UtensilsReturnedAt string      `json:"utensilsReturnedAt" form:"utensilsReturnedAt" query:"utensilsReturnedAt" long:"utensilsReturnedAt" msg:"utensilsReturnedAt"`
+	QrisIDR            int64       `json:"qrisIDR" form:"qrisIDR" query:"qrisIDR" long:"qrisIDR" msg:"qrisIDR"`
+	CashIDR            int64       `json:"cashIDR" form:"cashIDR" query:"cashIDR" long:"cashIDR" msg:"cashIDR"`
+	DebtIDR            int64       `json:"debtIDR" form:"debtIDR" query:"debtIDR" long:"debtIDR" msg:"debtIDR"`
+	TopupIDR           int64       `json:"topupIDR" form:"topupIDR" query:"topupIDR" long:"topupIDR" msg:"topupIDR"`
+	TotalPriceIDR      int64       `json:"totalPriceIDR" form:"totalPriceIDR" query:"totalPriceIDR" long:"totalPriceIDR" msg:"totalPriceIDR"`
+	CreatedAt          int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy          uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt          int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy          uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt          int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy          uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy         uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
 }
 
 // NewSales create new ORM reader/query object
@@ -446,11 +452,17 @@ func (s *Sales) FindById() bool { //nolint:dupl false positive
 func (s *Sales) SqlSelectAllFields() string { //nolint:dupl false positive
 	return ` "id"
 	, "cashier"
-	, "who"
+	, "tenantId"
+	, "buyerName"
 	, "salesDate"
 	, "paidAt"
-	, "paidWith"
 	, "note"
+	, "utensilsTaken"
+	, "utensilsReturnedAt"
+	, "qrisIDR"
+	, "cashIDR"
+	, "debtIDR"
+	, "topupIDR"
 	, "totalPriceIDR"
 	, "createdAt"
 	, "createdBy"
@@ -466,11 +478,17 @@ func (s *Sales) SqlSelectAllFields() string { //nolint:dupl false positive
 func (s *Sales) SqlSelectAllUncensoredFields() string { //nolint:dupl false positive
 	return ` "id"
 	, "cashier"
-	, "who"
+	, "tenantId"
+	, "buyerName"
 	, "salesDate"
 	, "paidAt"
-	, "paidWith"
 	, "note"
+	, "utensilsTaken"
+	, "utensilsReturnedAt"
+	, "qrisIDR"
+	, "cashIDR"
+	, "debtIDR"
+	, "topupIDR"
 	, "totalPriceIDR"
 	, "createdAt"
 	, "createdBy"
@@ -487,19 +505,25 @@ func (s *Sales) ToUpdateArray() A.X { //nolint:dupl false positive
 	return A.X{
 		A.X{`=`, 0, s.Id},
 		A.X{`=`, 1, s.Cashier},
-		A.X{`=`, 2, s.Who},
-		A.X{`=`, 3, s.SalesDate},
-		A.X{`=`, 4, s.PaidAt},
-		A.X{`=`, 5, s.PaidWith},
+		A.X{`=`, 2, s.TenantId},
+		A.X{`=`, 3, s.BuyerName},
+		A.X{`=`, 4, s.SalesDate},
+		A.X{`=`, 5, s.PaidAt},
 		A.X{`=`, 6, s.Note},
-		A.X{`=`, 7, s.TotalPriceIDR},
-		A.X{`=`, 8, s.CreatedAt},
-		A.X{`=`, 9, s.CreatedBy},
-		A.X{`=`, 10, s.UpdatedAt},
-		A.X{`=`, 11, s.UpdatedBy},
-		A.X{`=`, 12, s.DeletedAt},
-		A.X{`=`, 13, s.DeletedBy},
-		A.X{`=`, 14, s.RestoredBy},
+		A.X{`=`, 7, s.UtensilsTaken},
+		A.X{`=`, 8, s.UtensilsReturnedAt},
+		A.X{`=`, 9, s.QrisIDR},
+		A.X{`=`, 10, s.CashIDR},
+		A.X{`=`, 11, s.DebtIDR},
+		A.X{`=`, 12, s.TopupIDR},
+		A.X{`=`, 13, s.TotalPriceIDR},
+		A.X{`=`, 14, s.CreatedAt},
+		A.X{`=`, 15, s.CreatedBy},
+		A.X{`=`, 16, s.UpdatedAt},
+		A.X{`=`, 17, s.UpdatedBy},
+		A.X{`=`, 18, s.DeletedAt},
+		A.X{`=`, 19, s.DeletedBy},
+		A.X{`=`, 20, s.RestoredBy},
 	}
 }
 
@@ -523,19 +547,29 @@ func (s *Sales) SqlCashier() string { //nolint:dupl false positive
 	return `"cashier"`
 }
 
-// IdxWho return name of the index
-func (s *Sales) IdxWho() int { //nolint:dupl false positive
+// IdxTenantId return name of the index
+func (s *Sales) IdxTenantId() int { //nolint:dupl false positive
 	return 2
 }
 
-// SqlWho return name of the column being indexed
-func (s *Sales) SqlWho() string { //nolint:dupl false positive
-	return `"who"`
+// SqlTenantId return name of the column being indexed
+func (s *Sales) SqlTenantId() string { //nolint:dupl false positive
+	return `"tenantId"`
+}
+
+// IdxBuyerName return name of the index
+func (s *Sales) IdxBuyerName() int { //nolint:dupl false positive
+	return 3
+}
+
+// SqlBuyerName return name of the column being indexed
+func (s *Sales) SqlBuyerName() string { //nolint:dupl false positive
+	return `"buyerName"`
 }
 
 // IdxSalesDate return name of the index
 func (s *Sales) IdxSalesDate() int { //nolint:dupl false positive
-	return 3
+	return 4
 }
 
 // SqlSalesDate return name of the column being indexed
@@ -545,22 +579,12 @@ func (s *Sales) SqlSalesDate() string { //nolint:dupl false positive
 
 // IdxPaidAt return name of the index
 func (s *Sales) IdxPaidAt() int { //nolint:dupl false positive
-	return 4
+	return 5
 }
 
 // SqlPaidAt return name of the column being indexed
 func (s *Sales) SqlPaidAt() string { //nolint:dupl false positive
 	return `"paidAt"`
-}
-
-// IdxPaidWith return name of the index
-func (s *Sales) IdxPaidWith() int { //nolint:dupl false positive
-	return 5
-}
-
-// SqlPaidWith return name of the column being indexed
-func (s *Sales) SqlPaidWith() string { //nolint:dupl false positive
-	return `"paidWith"`
 }
 
 // IdxNote return name of the index
@@ -573,9 +597,69 @@ func (s *Sales) SqlNote() string { //nolint:dupl false positive
 	return `"note"`
 }
 
+// IdxUtensilsTaken return name of the index
+func (s *Sales) IdxUtensilsTaken() int { //nolint:dupl false positive
+	return 7
+}
+
+// SqlUtensilsTaken return name of the column being indexed
+func (s *Sales) SqlUtensilsTaken() string { //nolint:dupl false positive
+	return `"utensilsTaken"`
+}
+
+// IdxUtensilsReturnedAt return name of the index
+func (s *Sales) IdxUtensilsReturnedAt() int { //nolint:dupl false positive
+	return 8
+}
+
+// SqlUtensilsReturnedAt return name of the column being indexed
+func (s *Sales) SqlUtensilsReturnedAt() string { //nolint:dupl false positive
+	return `"utensilsReturnedAt"`
+}
+
+// IdxQrisIDR return name of the index
+func (s *Sales) IdxQrisIDR() int { //nolint:dupl false positive
+	return 9
+}
+
+// SqlQrisIDR return name of the column being indexed
+func (s *Sales) SqlQrisIDR() string { //nolint:dupl false positive
+	return `"qrisIDR"`
+}
+
+// IdxCashIDR return name of the index
+func (s *Sales) IdxCashIDR() int { //nolint:dupl false positive
+	return 10
+}
+
+// SqlCashIDR return name of the column being indexed
+func (s *Sales) SqlCashIDR() string { //nolint:dupl false positive
+	return `"cashIDR"`
+}
+
+// IdxDebtIDR return name of the index
+func (s *Sales) IdxDebtIDR() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlDebtIDR return name of the column being indexed
+func (s *Sales) SqlDebtIDR() string { //nolint:dupl false positive
+	return `"debtIDR"`
+}
+
+// IdxTopupIDR return name of the index
+func (s *Sales) IdxTopupIDR() int { //nolint:dupl false positive
+	return 12
+}
+
+// SqlTopupIDR return name of the column being indexed
+func (s *Sales) SqlTopupIDR() string { //nolint:dupl false positive
+	return `"topupIDR"`
+}
+
 // IdxTotalPriceIDR return name of the index
 func (s *Sales) IdxTotalPriceIDR() int { //nolint:dupl false positive
-	return 7
+	return 13
 }
 
 // SqlTotalPriceIDR return name of the column being indexed
@@ -585,7 +669,7 @@ func (s *Sales) SqlTotalPriceIDR() string { //nolint:dupl false positive
 
 // IdxCreatedAt return name of the index
 func (s *Sales) IdxCreatedAt() int { //nolint:dupl false positive
-	return 8
+	return 14
 }
 
 // SqlCreatedAt return name of the column being indexed
@@ -595,7 +679,7 @@ func (s *Sales) SqlCreatedAt() string { //nolint:dupl false positive
 
 // IdxCreatedBy return name of the index
 func (s *Sales) IdxCreatedBy() int { //nolint:dupl false positive
-	return 9
+	return 15
 }
 
 // SqlCreatedBy return name of the column being indexed
@@ -605,7 +689,7 @@ func (s *Sales) SqlCreatedBy() string { //nolint:dupl false positive
 
 // IdxUpdatedAt return name of the index
 func (s *Sales) IdxUpdatedAt() int { //nolint:dupl false positive
-	return 10
+	return 16
 }
 
 // SqlUpdatedAt return name of the column being indexed
@@ -615,7 +699,7 @@ func (s *Sales) SqlUpdatedAt() string { //nolint:dupl false positive
 
 // IdxUpdatedBy return name of the index
 func (s *Sales) IdxUpdatedBy() int { //nolint:dupl false positive
-	return 11
+	return 17
 }
 
 // SqlUpdatedBy return name of the column being indexed
@@ -625,7 +709,7 @@ func (s *Sales) SqlUpdatedBy() string { //nolint:dupl false positive
 
 // IdxDeletedAt return name of the index
 func (s *Sales) IdxDeletedAt() int { //nolint:dupl false positive
-	return 12
+	return 18
 }
 
 // SqlDeletedAt return name of the column being indexed
@@ -635,7 +719,7 @@ func (s *Sales) SqlDeletedAt() string { //nolint:dupl false positive
 
 // IdxDeletedBy return name of the index
 func (s *Sales) IdxDeletedBy() int { //nolint:dupl false positive
-	return 13
+	return 19
 }
 
 // SqlDeletedBy return name of the column being indexed
@@ -645,7 +729,7 @@ func (s *Sales) SqlDeletedBy() string { //nolint:dupl false positive
 
 // IdxRestoredBy return name of the index
 func (s *Sales) IdxRestoredBy() int { //nolint:dupl false positive
-	return 14
+	return 20
 }
 
 // SqlRestoredBy return name of the column being indexed
@@ -661,20 +745,26 @@ func (s *Sales) ToArray() A.X { //nolint:dupl false positive
 	}
 	return A.X{
 		id,
-		s.Cashier,       // 1
-		s.Who,           // 2
-		s.SalesDate,     // 3
-		s.PaidAt,        // 4
-		s.PaidWith,      // 5
-		s.Note,          // 6
-		s.TotalPriceIDR, // 7
-		s.CreatedAt,     // 8
-		s.CreatedBy,     // 9
-		s.UpdatedAt,     // 10
-		s.UpdatedBy,     // 11
-		s.DeletedAt,     // 12
-		s.DeletedBy,     // 13
-		s.RestoredBy,    // 14
+		s.Cashier,            // 1
+		s.TenantId,           // 2
+		s.BuyerName,          // 3
+		s.SalesDate,          // 4
+		s.PaidAt,             // 5
+		s.Note,               // 6
+		s.UtensilsTaken,      // 7
+		s.UtensilsReturnedAt, // 8
+		s.QrisIDR,            // 9
+		s.CashIDR,            // 10
+		s.DebtIDR,            // 11
+		s.TopupIDR,           // 12
+		s.TotalPriceIDR,      // 13
+		s.CreatedAt,          // 14
+		s.CreatedBy,          // 15
+		s.UpdatedAt,          // 16
+		s.UpdatedBy,          // 17
+		s.DeletedAt,          // 18
+		s.DeletedBy,          // 19
+		s.RestoredBy,         // 20
 	}
 }
 
@@ -682,19 +772,25 @@ func (s *Sales) ToArray() A.X { //nolint:dupl false positive
 func (s *Sales) FromArray(a A.X) *Sales { //nolint:dupl false positive
 	s.Id = X.ToU(a[0])
 	s.Cashier = X.ToS(a[1])
-	s.Who = X.ToS(a[2])
-	s.SalesDate = X.ToS(a[3])
-	s.PaidAt = X.ToS(a[4])
-	s.PaidWith = X.ToS(a[5])
+	s.TenantId = X.ToU(a[2])
+	s.BuyerName = X.ToS(a[3])
+	s.SalesDate = X.ToS(a[4])
+	s.PaidAt = X.ToS(a[5])
 	s.Note = X.ToS(a[6])
-	s.TotalPriceIDR = X.ToI(a[7])
-	s.CreatedAt = X.ToI(a[8])
-	s.CreatedBy = X.ToU(a[9])
-	s.UpdatedAt = X.ToI(a[10])
-	s.UpdatedBy = X.ToU(a[11])
-	s.DeletedAt = X.ToI(a[12])
-	s.DeletedBy = X.ToU(a[13])
-	s.RestoredBy = X.ToU(a[14])
+	s.UtensilsTaken = X.ToS(a[7])
+	s.UtensilsReturnedAt = X.ToS(a[8])
+	s.QrisIDR = X.ToI(a[9])
+	s.CashIDR = X.ToI(a[10])
+	s.DebtIDR = X.ToI(a[11])
+	s.TopupIDR = X.ToI(a[12])
+	s.TotalPriceIDR = X.ToI(a[13])
+	s.CreatedAt = X.ToI(a[14])
+	s.CreatedBy = X.ToU(a[15])
+	s.UpdatedAt = X.ToI(a[16])
+	s.UpdatedBy = X.ToU(a[17])
+	s.DeletedAt = X.ToI(a[18])
+	s.DeletedBy = X.ToU(a[19])
+	s.RestoredBy = X.ToU(a[20])
 	return s
 }
 
@@ -702,19 +798,25 @@ func (s *Sales) FromArray(a A.X) *Sales { //nolint:dupl false positive
 func (s *Sales) FromUncensoredArray(a A.X) *Sales { //nolint:dupl false positive
 	s.Id = X.ToU(a[0])
 	s.Cashier = X.ToS(a[1])
-	s.Who = X.ToS(a[2])
-	s.SalesDate = X.ToS(a[3])
-	s.PaidAt = X.ToS(a[4])
-	s.PaidWith = X.ToS(a[5])
+	s.TenantId = X.ToU(a[2])
+	s.BuyerName = X.ToS(a[3])
+	s.SalesDate = X.ToS(a[4])
+	s.PaidAt = X.ToS(a[5])
 	s.Note = X.ToS(a[6])
-	s.TotalPriceIDR = X.ToI(a[7])
-	s.CreatedAt = X.ToI(a[8])
-	s.CreatedBy = X.ToU(a[9])
-	s.UpdatedAt = X.ToI(a[10])
-	s.UpdatedBy = X.ToU(a[11])
-	s.DeletedAt = X.ToI(a[12])
-	s.DeletedBy = X.ToU(a[13])
-	s.RestoredBy = X.ToU(a[14])
+	s.UtensilsTaken = X.ToS(a[7])
+	s.UtensilsReturnedAt = X.ToS(a[8])
+	s.QrisIDR = X.ToI(a[9])
+	s.CashIDR = X.ToI(a[10])
+	s.DebtIDR = X.ToI(a[11])
+	s.TopupIDR = X.ToI(a[12])
+	s.TotalPriceIDR = X.ToI(a[13])
+	s.CreatedAt = X.ToI(a[14])
+	s.CreatedBy = X.ToU(a[15])
+	s.UpdatedAt = X.ToI(a[16])
+	s.UpdatedBy = X.ToU(a[17])
+	s.DeletedAt = X.ToI(a[18])
+	s.DeletedBy = X.ToU(a[19])
+	s.RestoredBy = X.ToU(a[20])
 	return s
 }
 
@@ -758,21 +860,27 @@ func (s *Sales) Total() int64 { //nolint:dupl false positive
 
 // SalesFieldTypeMap returns key value of field name and key
 var SalesFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
-	`id`:            Tt.Unsigned,
-	`cashier`:       Tt.String,
-	`who`:           Tt.String,
-	`salesDate`:     Tt.String,
-	`paidAt`:        Tt.String,
-	`paidWith`:      Tt.String,
-	`note`:          Tt.String,
-	`totalPriceIDR`: Tt.Integer,
-	`createdAt`:     Tt.Integer,
-	`createdBy`:     Tt.Unsigned,
-	`updatedAt`:     Tt.Integer,
-	`updatedBy`:     Tt.Unsigned,
-	`deletedAt`:     Tt.Integer,
-	`deletedBy`:     Tt.Unsigned,
-	`restoredBy`:    Tt.Unsigned,
+	`id`:                 Tt.Unsigned,
+	`cashier`:            Tt.String,
+	`tenantId`:           Tt.Unsigned,
+	`buyerName`:          Tt.String,
+	`salesDate`:          Tt.String,
+	`paidAt`:             Tt.String,
+	`note`:               Tt.String,
+	`utensilsTaken`:      Tt.String,
+	`utensilsReturnedAt`: Tt.String,
+	`qrisIDR`:            Tt.Integer,
+	`cashIDR`:            Tt.Integer,
+	`debtIDR`:            Tt.Integer,
+	`topupIDR`:           Tt.Integer,
+	`totalPriceIDR`:      Tt.Integer,
+	`createdAt`:          Tt.Integer,
+	`createdBy`:          Tt.Unsigned,
+	`updatedAt`:          Tt.Integer,
+	`updatedBy`:          Tt.Unsigned,
+	`deletedAt`:          Tt.Integer,
+	`deletedBy`:          Tt.Unsigned,
+	`restoredBy`:         Tt.Unsigned,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mCafe"
 	"kostjc/model/mCafe/rqCafe"
 	"kostjc/model/mCafe/wcCafe"
@@ -21,6 +22,7 @@ type (
 		WithMeta bool          `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
 		Pager    zCrud.PagerIn `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		Sale     rqCafe.Sales  `json:"sale" form:"sale" query:"sale" long:"sale" msg:"sale"`
+		TenantID uint64        `json:"tenantId" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
 	}
 	AdminSaleOut struct {
 		ResponseCommon
@@ -34,11 +36,12 @@ type (
 const (
 	AdminSaleAction = `admin/sale`
 
-	ErrAdminSaleNotFound      = `Sale not found`
-	ErrAdminSaleSaveFailed    = `failed to save sale`
-	ErrAdminSaleDeleteFailed  = `failed to delete sale`
-	ErrAdminSaleRestoreFailed = `failed to restore sale`
-	ErrAdminSaleAlreadyExists = `Sale already exists`
+	ErrAdminSaleNotFound         = `Sale not found`
+	ErrAdminSaleTenantIdNotFound = `tenant id not found for this sale`
+	ErrAdminSaleSaveFailed       = `failed to save sale`
+	ErrAdminSaleDeleteFailed     = `failed to delete sale`
+	ErrAdminSaleRestoreFailed    = `failed to restore sale`
+	ErrAdminSaleAlreadyExists    = `Sale already exists`
 )
 
 var AdminSaleMeta = zCrud.Meta{
@@ -58,8 +61,15 @@ var AdminSaleMeta = zCrud.Meta{
 			ReadOnly:  false,
 		},
 		{
-			Name:      mCafe.Who,
-			Label:     `Who`,
+			Name:      mCafe.TenantId,
+			Label:     `Tenant`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  false,
+		},
+		{
+			Name:      mCafe.BuyerName,
+			Label:     `Buyer Name`,
 			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeText,
 			ReadOnly:  false,
@@ -70,7 +80,6 @@ var AdminSaleMeta = zCrud.Meta{
 			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeDateTime,
 			ReadOnly:  false,
-			Mapping:   `IDR`,
 		},
 		{
 			Name:      mCafe.PaidAt,
@@ -80,18 +89,57 @@ var AdminSaleMeta = zCrud.Meta{
 			ReadOnly:  false,
 		},
 		{
-			Name:      mCafe.PaidWith,
-			Label:     `Paid With`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeComboboxArr,
-			ReadOnly:  false,
-		},
-		{
 			Name:      mCafe.Note,
 			Label:     `Note`,
 			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeTextArea,
 			ReadOnly:  false,
+		},
+		{
+			Name:      mCafe.UtensilsTaken,
+			Label:     `Utensils Taken`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeText,
+			ReadOnly:  false,
+		},
+		{
+			Name:      mCafe.UtensilsReturnedAt,
+			Label:     `Utensils Returned At`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeDateTime,
+			ReadOnly:  false,
+		},
+		{
+			Name:      mCafe.QrisIDR,
+			Label:     `QRIS IDR`,
+			DataType:  zCrud.DataTypeCurrency,
+			InputType: zCrud.InputTypeNumber,
+			ReadOnly:  false,
+			Mapping:   `IDR`,
+		},
+		{
+			Name:      mCafe.CashIDR,
+			Label:     `Cash IDR`,
+			DataType:  zCrud.DataTypeCurrency,
+			InputType: zCrud.InputTypeNumber,
+			ReadOnly:  false,
+			Mapping:   `IDR`,
+		},
+		{
+			Name:      mCafe.DebtIDR,
+			Label:     `Debt IDR`,
+			DataType:  zCrud.DataTypeCurrency,
+			InputType: zCrud.InputTypeNumber,
+			ReadOnly:  false,
+			Mapping:   `IDR`,
+		},
+		{
+			Name:      mCafe.TopupIDR,
+			Label:     `Topup IDR`,
+			DataType:  zCrud.DataTypeCurrency,
+			InputType: zCrud.InputTypeNumber,
+			ReadOnly:  false,
+			Mapping:   `IDR`,
 		},
 		{
 			Name:      mCafe.TotalPriceIDR,
@@ -164,12 +212,23 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 			}
 		}
 
+		if in.Sale.TenantId > 0 {
+			bkd := rqAuth.NewTenants(d.PropOltp)
+			bkd.Id = in.Sale.TenantId
+			if !bkd.FindById() {
+				out.SetError(400, ErrAdminSaleTenantIdNotFound)
+				return
+			}
+
+			sale.SetTenantId(in.Sale.TenantId)
+		}
+
 		if in.Sale.Cashier != `` {
 			sale.SetCashier(in.Sale.Cashier)
 		}
 
-		if in.Sale.Who != `` {
-			sale.SetWho(in.Sale.Who)
+		if in.Sale.BuyerName != `` {
+			sale.SetBuyerName(in.Sale.BuyerName)
 		}
 
 		if mCafe.IsValidDate(in.Sale.SalesDate, time.DateOnly) {
@@ -180,15 +239,33 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 			sale.SetPaidAt(in.Sale.PaidAt)
 		}
 
-		if in.Sale.PaidWith != `` {
-			sale.SetPaidWith(in.Sale.PaidWith)
-		}
-
 		if in.Sale.Note != `` {
 			sale.SetNote(in.Sale.Note)
 		}
 
-		sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
+		if in.Sale.UtensilsTaken != `` {
+			sale.SetUtensilsTaken(in.Sale.UtensilsTaken)
+		}
+
+		if mCafe.IsValidDate(in.Sale.UtensilsReturnedAt, time.DateOnly) {
+			sale.SetUtensilsReturnedAt(in.Sale.UtensilsReturnedAt)
+		}
+
+		if in.Sale.QrisIDR != 0 {
+			sale.SetQrisIDR(in.Sale.QrisIDR)
+		}
+		if in.Sale.CashIDR != 0 {
+			sale.SetCashIDR(in.Sale.CashIDR)
+		}
+		if in.Sale.DebtIDR != 0 {
+			sale.SetDebtIDR(in.Sale.DebtIDR)
+		}
+		if in.Sale.TopupIDR != 0 {
+			sale.SetTopupIDR(in.Sale.TopupIDR)
+		}
+		if in.Sale.TotalPriceIDR != 0 {
+			sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
+		}
 
 		if sale.Id == 0 {
 			sale.SetCreatedAt(in.UnixNow())

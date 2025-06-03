@@ -473,6 +473,11 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 
+		rqTenants := rqAuth.NewTenants(d.PropOltp)
+		tenants := rqTenants.FindTenantChoices()
+
+		tenants[0] = "Bukan tenant"
+
 		in.WithMeta = true
 		in.Cmd = zCrud.CmdList
 		out := d.AdminSale(&in)
@@ -481,6 +486,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`title`:    `KostJC | Sale Management`,
 			`user`:     user,
 			`segments`: segments,
+			`tenants`:  tenants,
 			`sale`:     out.Sale,
 			`sales`:    out.Sales,
 			`fields`:   out.Meta.Fields,

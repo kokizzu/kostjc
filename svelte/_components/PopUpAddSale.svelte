@@ -10,36 +10,44 @@
   let isShow = /** @type {boolean} */ (false);
 
   export let isSubmitted  = /** @type {boolean} */ (false);
-
-  const PaymentMethods = [
-    'Cash',
-    'QRIS',
-    'Transfer',
-  ];
-
+  export let tenants = /** @type {Record<number, string>} */ ({});
 
   let cashier = '';
-  let who = '';
+  let tenantId = 0;
+  let buyerName = '';
   let salesDate = dateISOFormat(0);
-  let paidAt = dateISOFormat(0)
-  let paidWith = PaymentMethods[0];
+  let paidAt = dateISOFormat(0);
   let note = '';
+  let utensilsTaken = '';
+  let utensilsReturnedAt = dateISOFormat(0);
+  let qrisIDR = 0;
+  let cashIDR = 0;
+  let debtIDR = 0;
+  let topupIDR = 0;
   let totalPriceIDR = 0;
+
+
 
   export let OnSubmit = async function(/** @type {Sale} */ sale) {
     console.log('OnSubmit :::', sale);
   }
 
   async function submitAdd() {
-    const sale = /** @type {Sale|any} */ ({
+      const sale = /** @type {Sale|any} */ ({
       cashier: cashier,
-      who: who,
+      tenantId: tenantId, 
+      buyerName: buyerName,
       salesDate: salesDate,
       paidAt: paidAt,
-      paidWith: paidWith,
       note: note,
-      totalPriceIDR: totalPriceIDR,
+      utensilsTaken: utensilsTaken,
+      utensilsReturnedAt: utensilsReturnedAt,
+      qrisIDR: qrisIDR,
+      cashIDR: cashIDR,
+      debtIDR: debtIDR,
+      topupIDR: topupIDR,
     });
+
 
     await OnSubmit(sale);
   }
@@ -48,13 +56,19 @@
   export const Hide = () => isShow = false;
 
   export const Reset = () => {
-    cashier = ''
-    who = '';
-    salesDate = dateISOFormat(0);
-    paidAt = dateISOFormat(0)
-    paidWith = PaymentMethods[0];
-    note = '';
-    totalPriceIDR = 0;
+  cashier = '';
+  tenantId = 0;
+  buyerName = '';
+  salesDate = dateISOFormat(0);
+  paidAt = dateISOFormat(0);
+  note = '';
+  utensilsTaken = '';
+  utensilsReturnedAt = dateISOFormat(0);
+  qrisIDR = 0;
+  cashIDR = 0;
+  debtIDR = 0;
+  topupIDR = 0;
+  totalPriceIDR = 0;
   }
   
   const cancel = () => {
@@ -79,9 +93,17 @@
         placeholder="Cashier Name"
       />
       <InputBox
-        id="who"
-        label="Who"
-        bind:value={who}
+          id="tenantId"
+          label="Tenant"
+          isObject={true}
+          bind:value={tenantId}
+          type="combobox"
+          values={tenants}
+        />
+      <InputBox
+        id="buyerName"
+        label="Buyer Name"
+        bind:value={buyerName}
         type="text"
         placeholder="Jamal"
       />
@@ -100,18 +122,53 @@
         placeholder="YYYY-MM-DD"
       />
       <InputBox
-        id="paidWith"
-        label="Paid With"
-        bind:value={paidWith}
-        type="combobox-arr"
-        values={PaymentMethods}
-      />
-      <InputBox
       id="note"
       label="Note"
       bind:value={note}
       type="textarea"
       placeholder="Note"
+      />
+      <InputBox
+        id="utensilsTaken"
+        label="Utensils Taken"
+        bind:value={utensilsTaken}
+        type="text"
+        placeholder="Piring 1, mangkok 1"
+      />
+      <InputBox
+        id="utensilsReturnedAt"
+        label="Utensils Returned At"
+        bind:value={utensilsReturnedAt}
+        type="datetime"
+        placeholder="YYYY-MM-DD"
+      />
+      <InputBox
+        id="qrisIDR"
+        label="QRIS IDR"
+        bind:value={qrisIDR}
+        type="number"
+        placeholder="0"
+      />
+      <InputBox
+        id="cashIDR"
+        label="Cash IDR"
+        bind:value={cashIDR}
+        type="number"
+        placeholder="0"
+      />
+      <InputBox
+        id="debtIDR"
+        label="Debt IDR"
+        bind:value={debtIDR}
+        type="number"
+        placeholder="0"
+      />
+      <InputBox
+        id="topupIDR"
+        label="Top Up IDR"
+        bind:value={topupIDR}
+        type="number"
+        placeholder="0"
       />
       <InputBox
         id="totalPriceIDR"

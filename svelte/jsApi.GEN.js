@@ -931,11 +931,17 @@ exports.AdminRoom = async function AdminRoom( i, cb ) {
  * @property {Array<String>} pager.order
  * @property {number} sale.id
  * @property {String} sale.cashier
- * @property {String} sale.who
+ * @property {number} sale.tenantId
+ * @property {String} sale.buyerName
  * @property {String} sale.salesDate
  * @property {String} sale.paidAt
- * @property {String} sale.paidWith
  * @property {String} sale.note
+ * @property {String} sale.utensilsTaken
+ * @property {String} sale.utensilsReturnedAt
+ * @property {number} sale.qrisIDR
+ * @property {number} sale.cashIDR
+ * @property {number} sale.debtIDR
+ * @property {number} sale.topupIDR
  * @property {number} sale.totalPriceIDR
  * @property {number} sale.createdAt
  * @property {number} sale.createdBy
@@ -944,6 +950,7 @@ exports.AdminRoom = async function AdminRoom( i, cb ) {
  * @property {number} sale.deletedAt
  * @property {number} sale.deletedBy
  * @property {number} sale.restoredBy
+ * @property {number} tenantID
  */
 const AdminSaleIn = {
   cmd: '', // string
@@ -958,11 +965,17 @@ const AdminSaleIn = {
   sale: { // rqCafe.Sales
     id: 0, // uint64
     cashier: '', // string
-    who: '', // string
+    tenantId: 0, // uint64
+    buyerName: '', // string
     salesDate: '', // string
     paidAt: '', // string
-    paidWith: '', // string
     note: '', // string
+    utensilsTaken: '', // string
+    utensilsReturnedAt: '', // string
+    qrisIDR: 0, // int64
+    cashIDR: 0, // int64
+    debtIDR: 0, // int64
+    topupIDR: 0, // int64
     totalPriceIDR: 0, // int64
     createdAt: 0, // int64
     createdBy: 0, // uint64
@@ -972,6 +985,7 @@ const AdminSaleIn = {
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
   }, // rqCafe.Sales
+  tenantID: 0, // uint64
 }
 /**
  * @typedef {Object} AdminSaleOut
@@ -986,11 +1000,17 @@ const AdminSaleIn = {
  * @property {String} meta.cachedSelect
  * @property {number} sale.id
  * @property {String} sale.cashier
- * @property {String} sale.who
+ * @property {number} sale.tenantId
+ * @property {String} sale.buyerName
  * @property {String} sale.salesDate
  * @property {String} sale.paidAt
- * @property {String} sale.paidWith
  * @property {String} sale.note
+ * @property {String} sale.utensilsTaken
+ * @property {String} sale.utensilsReturnedAt
+ * @property {number} sale.qrisIDR
+ * @property {number} sale.cashIDR
+ * @property {number} sale.debtIDR
+ * @property {number} sale.topupIDR
  * @property {number} sale.totalPriceIDR
  * @property {number} sale.createdAt
  * @property {number} sale.createdBy
@@ -1021,11 +1041,17 @@ const AdminSaleOut = {
   sale: { // rqCafe.Sales
     id: 0, // uint64
     cashier: '', // string
-    who: '', // string
+    tenantId: 0, // uint64
+    buyerName: '', // string
     salesDate: '', // string
     paidAt: '', // string
-    paidWith: '', // string
     note: '', // string
+    utensilsTaken: '', // string
+    utensilsReturnedAt: '', // string
+    qrisIDR: 0, // int64
+    cashIDR: 0, // int64
+    debtIDR: 0, // int64
+    topupIDR: 0, // int64
     totalPriceIDR: 0, // int64
     createdAt: 0, // int64
     createdBy: 0, // uint64

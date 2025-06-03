@@ -35,13 +35,19 @@ const (
 const (
 	TableSales Tt.TableName = `sales`
 
-	Cashier       = `cashier`
-	Who           = `who`
-	SalesDate     = `salesDate`
-	PaidAt        = `paidAt`
-	PaidWith      = `paidWith`
-	Note          = `note`
-	TotalPriceIDR = `totalPriceIDR`
+	Cashier            = `cashier`
+	TenantId           = `tenantId`
+	BuyerName          = `buyerName`
+	SalesDate          = `salesDate`
+	PaidAt             = `paidAt`
+	Note               = `note`
+	UtensilsTaken      = `utensilsTaken`
+	UtensilsReturnedAt = `utensilsReturnedAt`
+	QrisIDR            = `qrisIDR`
+	CashIDR            = `cashIDR`
+	DebtIDR            = `debtIDR`
+	TopupIDR           = `topupIDR`
+	TotalPriceIDR      = `totalPriceIDR`
 )
 
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
@@ -69,11 +75,17 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 		Fields: []Tt.Field{
 			{Id, Tt.Unsigned},
 			{Cashier, Tt.String},
-			{Who, Tt.String},
+			{TenantId, Tt.Unsigned},
+			{BuyerName, Tt.String},
 			{SalesDate, Tt.String},
 			{PaidAt, Tt.String},
-			{PaidWith, Tt.String},
 			{Note, Tt.String},
+			{UtensilsTaken, Tt.String},
+			{UtensilsReturnedAt, Tt.String},
+			{QrisIDR, Tt.Integer},
+			{CashIDR, Tt.Integer},
+			{DebtIDR, Tt.Integer},
+			{TopupIDR, Tt.Integer},
 			{TotalPriceIDR, Tt.Integer},
 			{CreatedAt, Tt.Integer},
 			{CreatedBy, Tt.Unsigned},

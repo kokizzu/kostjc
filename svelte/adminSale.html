@@ -20476,14 +20476,32 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let inputbox6;
     let updating_value_6;
     let t9;
+    let inputbox7;
+    let updating_value_7;
+    let t10;
+    let inputbox8;
+    let updating_value_8;
+    let t11;
+    let inputbox9;
+    let updating_value_9;
+    let t12;
+    let inputbox10;
+    let updating_value_10;
+    let t13;
+    let inputbox11;
+    let updating_value_11;
+    let t14;
+    let inputbox12;
+    let updating_value_12;
+    let t15;
     let div3;
     let div1;
-    let t10;
+    let t16;
     let div2;
     let button1;
-    let t12;
+    let t18;
     let button2;
-    let t13;
+    let t19;
     let div5_class_value;
     let current;
     let mounted;
@@ -20496,7 +20514,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
     });
     function inputbox0_value_binding(value) {
-      ctx[16](value);
+      ctx[22](value);
     }
     let inputbox0_props = {
       id: "cashier",
@@ -20506,35 +20524,57 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*cashier*/
-      ctx[3] !== void 0
+      ctx[4] !== void 0
     ) {
       inputbox0_props.value = /*cashier*/
-      ctx[3];
+      ctx[4];
     }
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
     function inputbox1_value_binding(value) {
-      ctx[17](value);
+      ctx[23](value);
     }
     let inputbox1_props = {
-      id: "who",
-      label: "Who",
-      type: "text",
-      placeholder: "Jamal"
+      id: "tenantId",
+      label: "Tenant",
+      isObject: true,
+      type: "combobox",
+      values: (
+        /*tenants*/
+        ctx[1]
+      )
     };
     if (
-      /*who*/
-      ctx[4] !== void 0
+      /*tenantId*/
+      ctx[5] !== void 0
     ) {
-      inputbox1_props.value = /*who*/
-      ctx[4];
+      inputbox1_props.value = /*tenantId*/
+      ctx[5];
     }
     inputbox1 = new InputBox_default({ props: inputbox1_props });
     binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
     function inputbox2_value_binding(value) {
-      ctx[18](value);
+      ctx[24](value);
     }
     let inputbox2_props = {
+      id: "buyerName",
+      label: "Buyer Name",
+      type: "text",
+      placeholder: "Jamal"
+    };
+    if (
+      /*buyerName*/
+      ctx[6] !== void 0
+    ) {
+      inputbox2_props.value = /*buyerName*/
+      ctx[6];
+    }
+    inputbox2 = new InputBox_default({ props: inputbox2_props });
+    binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
+    function inputbox3_value_binding(value) {
+      ctx[25](value);
+    }
+    let inputbox3_props = {
       id: "salesDate",
       label: "Sales Date",
       type: "datetime",
@@ -20542,17 +20582,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*salesDate*/
-      ctx[5] !== void 0
+      ctx[7] !== void 0
     ) {
-      inputbox2_props.value = /*salesDate*/
-      ctx[5];
+      inputbox3_props.value = /*salesDate*/
+      ctx[7];
     }
-    inputbox2 = new InputBox_default({ props: inputbox2_props });
-    binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
-    function inputbox3_value_binding(value) {
-      ctx[19](value);
+    inputbox3 = new InputBox_default({ props: inputbox3_props });
+    binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
+    function inputbox4_value_binding(value) {
+      ctx[26](value);
     }
-    let inputbox3_props = {
+    let inputbox4_props = {
       id: "paidAt",
       label: "Paid At",
       type: "datetime",
@@ -20560,36 +20600,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*paidAt*/
-      ctx[6] !== void 0
+      ctx[8] !== void 0
     ) {
-      inputbox3_props.value = /*paidAt*/
-      ctx[6];
-    }
-    inputbox3 = new InputBox_default({ props: inputbox3_props });
-    binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
-    function inputbox4_value_binding(value) {
-      ctx[20](value);
-    }
-    let inputbox4_props = {
-      id: "paidWith",
-      label: "Paid With",
-      type: "combobox-arr",
-      values: (
-        /*PaymentMethods*/
-        ctx[10]
-      )
-    };
-    if (
-      /*paidWith*/
-      ctx[7] !== void 0
-    ) {
-      inputbox4_props.value = /*paidWith*/
-      ctx[7];
+      inputbox4_props.value = /*paidAt*/
+      ctx[8];
     }
     inputbox4 = new InputBox_default({ props: inputbox4_props });
     binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
     function inputbox5_value_binding(value) {
-      ctx[21](value);
+      ctx[27](value);
     }
     let inputbox5_props = {
       id: "note",
@@ -20599,17 +20618,125 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*note*/
-      ctx[8] !== void 0
+      ctx[9] !== void 0
     ) {
       inputbox5_props.value = /*note*/
-      ctx[8];
+      ctx[9];
     }
     inputbox5 = new InputBox_default({ props: inputbox5_props });
     binding_callbacks.push(() => bind(inputbox5, "value", inputbox5_value_binding));
     function inputbox6_value_binding(value) {
-      ctx[22](value);
+      ctx[28](value);
     }
     let inputbox6_props = {
+      id: "utensilsTaken",
+      label: "Utensils Taken",
+      type: "text",
+      placeholder: "Piring 1, mangkok 1"
+    };
+    if (
+      /*utensilsTaken*/
+      ctx[10] !== void 0
+    ) {
+      inputbox6_props.value = /*utensilsTaken*/
+      ctx[10];
+    }
+    inputbox6 = new InputBox_default({ props: inputbox6_props });
+    binding_callbacks.push(() => bind(inputbox6, "value", inputbox6_value_binding));
+    function inputbox7_value_binding(value) {
+      ctx[29](value);
+    }
+    let inputbox7_props = {
+      id: "utensilsReturnedAt",
+      label: "Utensils Returned At",
+      type: "datetime",
+      placeholder: "YYYY-MM-DD"
+    };
+    if (
+      /*utensilsReturnedAt*/
+      ctx[11] !== void 0
+    ) {
+      inputbox7_props.value = /*utensilsReturnedAt*/
+      ctx[11];
+    }
+    inputbox7 = new InputBox_default({ props: inputbox7_props });
+    binding_callbacks.push(() => bind(inputbox7, "value", inputbox7_value_binding));
+    function inputbox8_value_binding(value) {
+      ctx[30](value);
+    }
+    let inputbox8_props = {
+      id: "qrisIDR",
+      label: "QRIS IDR",
+      type: "number",
+      placeholder: "0"
+    };
+    if (
+      /*qrisIDR*/
+      ctx[12] !== void 0
+    ) {
+      inputbox8_props.value = /*qrisIDR*/
+      ctx[12];
+    }
+    inputbox8 = new InputBox_default({ props: inputbox8_props });
+    binding_callbacks.push(() => bind(inputbox8, "value", inputbox8_value_binding));
+    function inputbox9_value_binding(value) {
+      ctx[31](value);
+    }
+    let inputbox9_props = {
+      id: "cashIDR",
+      label: "Cash IDR",
+      type: "number",
+      placeholder: "0"
+    };
+    if (
+      /*cashIDR*/
+      ctx[13] !== void 0
+    ) {
+      inputbox9_props.value = /*cashIDR*/
+      ctx[13];
+    }
+    inputbox9 = new InputBox_default({ props: inputbox9_props });
+    binding_callbacks.push(() => bind(inputbox9, "value", inputbox9_value_binding));
+    function inputbox10_value_binding(value) {
+      ctx[32](value);
+    }
+    let inputbox10_props = {
+      id: "debtIDR",
+      label: "Debt IDR",
+      type: "number",
+      placeholder: "0"
+    };
+    if (
+      /*debtIDR*/
+      ctx[14] !== void 0
+    ) {
+      inputbox10_props.value = /*debtIDR*/
+      ctx[14];
+    }
+    inputbox10 = new InputBox_default({ props: inputbox10_props });
+    binding_callbacks.push(() => bind(inputbox10, "value", inputbox10_value_binding));
+    function inputbox11_value_binding(value) {
+      ctx[33](value);
+    }
+    let inputbox11_props = {
+      id: "topupIDR",
+      label: "Top Up IDR",
+      type: "number",
+      placeholder: "0"
+    };
+    if (
+      /*topupIDR*/
+      ctx[15] !== void 0
+    ) {
+      inputbox11_props.value = /*topupIDR*/
+      ctx[15];
+    }
+    inputbox11 = new InputBox_default({ props: inputbox11_props });
+    binding_callbacks.push(() => bind(inputbox11, "value", inputbox11_value_binding));
+    function inputbox12_value_binding(value) {
+      ctx[34](value);
+    }
+    let inputbox12_props = {
       id: "totalPriceIDR",
       label: "Total Price IDR",
       type: "number",
@@ -20617,13 +20744,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*totalPriceIDR*/
-      ctx[9] !== void 0
+      ctx[16] !== void 0
     ) {
-      inputbox6_props.value = /*totalPriceIDR*/
-      ctx[9];
+      inputbox12_props.value = /*totalPriceIDR*/
+      ctx[16];
     }
-    inputbox6 = new InputBox_default({ props: inputbox6_props });
-    binding_callbacks.push(() => bind(inputbox6, "value", inputbox6_value_binding));
+    inputbox12 = new InputBox_default({ props: inputbox12_props });
+    binding_callbacks.push(() => bind(inputbox12, "value", inputbox12_value_binding));
     let if_block0 = !/*isSubmitted*/
     ctx[0] && create_if_block_111(ctx);
     let if_block1 = (
@@ -20656,18 +20783,30 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t8 = space();
         create_component(inputbox6.$.fragment);
         t9 = space();
+        create_component(inputbox7.$.fragment);
+        t10 = space();
+        create_component(inputbox8.$.fragment);
+        t11 = space();
+        create_component(inputbox9.$.fragment);
+        t12 = space();
+        create_component(inputbox10.$.fragment);
+        t13 = space();
+        create_component(inputbox11.$.fragment);
+        t14 = space();
+        create_component(inputbox12.$.fragment);
+        t15 = space();
         div3 = element("div");
         div1 = element("div");
         div1.innerHTML = ``;
-        t10 = space();
+        t16 = space();
         div2 = element("div");
         button1 = element("button");
         button1.textContent = "Cancel";
-        t12 = space();
+        t18 = space();
         button2 = element("button");
         if (if_block0)
           if_block0.c();
-        t13 = space();
+        t19 = space();
         if (if_block1)
           if_block1.c();
         attr(h2, "class", "svelte-1518e4v");
@@ -20683,7 +20822,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(div3, "class", "foot svelte-1518e4v");
         attr(div4, "class", "popup svelte-1518e4v");
         attr(div5, "class", div5_class_value = null_to_empty(`popup-container ${/*isShow*/
-        ctx[2] ? "show" : ""}`) + " svelte-1518e4v");
+        ctx[3] ? "show" : ""}`) + " svelte-1518e4v");
       },
       m(target, anchor) {
         insert(target, div5, anchor);
@@ -20708,17 +20847,29 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(inputbox5, div0, null);
         append(div0, t8);
         mount_component(inputbox6, div0, null);
-        append(div4, t9);
+        append(div0, t9);
+        mount_component(inputbox7, div0, null);
+        append(div0, t10);
+        mount_component(inputbox8, div0, null);
+        append(div0, t11);
+        mount_component(inputbox9, div0, null);
+        append(div0, t12);
+        mount_component(inputbox10, div0, null);
+        append(div0, t13);
+        mount_component(inputbox11, div0, null);
+        append(div0, t14);
+        mount_component(inputbox12, div0, null);
+        append(div4, t15);
         append(div4, div3);
         append(div3, div1);
-        append(div3, t10);
+        append(div3, t16);
         append(div3, div2);
         append(div2, button1);
-        append(div2, t12);
+        append(div2, t18);
         append(div2, button2);
         if (if_block0)
           if_block0.m(button2, null);
-        append(button2, t13);
+        append(button2, t19);
         if (if_block1)
           if_block1.m(button2, null);
         current = true;
@@ -20728,91 +20879,149 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button0,
               "click",
               /*Hide*/
-              ctx[1]
+              ctx[2]
             ),
             listen(button1, "click", prevent_default(
               /*cancel*/
-              ctx[12]
+              ctx[18]
             )),
             listen(button2, "click", prevent_default(
               /*submitAdd*/
-              ctx[11]
+              ctx[17]
             ))
           ];
           mounted = true;
         }
       },
-      p(ctx2, [dirty]) {
+      p(ctx2, dirty) {
         const inputbox0_changes = {};
-        if (!updating_value && dirty & /*cashier*/
-        8) {
+        if (!updating_value && dirty[0] & /*cashier*/
+        16) {
           updating_value = true;
           inputbox0_changes.value = /*cashier*/
-          ctx2[3];
+          ctx2[4];
           add_flush_callback(() => updating_value = false);
         }
         inputbox0.$set(inputbox0_changes);
         const inputbox1_changes = {};
-        if (!updating_value_1 && dirty & /*who*/
-        16) {
+        if (dirty[0] & /*tenants*/
+        2)
+          inputbox1_changes.values = /*tenants*/
+          ctx2[1];
+        if (!updating_value_1 && dirty[0] & /*tenantId*/
+        32) {
           updating_value_1 = true;
-          inputbox1_changes.value = /*who*/
-          ctx2[4];
+          inputbox1_changes.value = /*tenantId*/
+          ctx2[5];
           add_flush_callback(() => updating_value_1 = false);
         }
         inputbox1.$set(inputbox1_changes);
         const inputbox2_changes = {};
-        if (!updating_value_2 && dirty & /*salesDate*/
-        32) {
+        if (!updating_value_2 && dirty[0] & /*buyerName*/
+        64) {
           updating_value_2 = true;
-          inputbox2_changes.value = /*salesDate*/
-          ctx2[5];
+          inputbox2_changes.value = /*buyerName*/
+          ctx2[6];
           add_flush_callback(() => updating_value_2 = false);
         }
         inputbox2.$set(inputbox2_changes);
         const inputbox3_changes = {};
-        if (!updating_value_3 && dirty & /*paidAt*/
-        64) {
+        if (!updating_value_3 && dirty[0] & /*salesDate*/
+        128) {
           updating_value_3 = true;
-          inputbox3_changes.value = /*paidAt*/
-          ctx2[6];
+          inputbox3_changes.value = /*salesDate*/
+          ctx2[7];
           add_flush_callback(() => updating_value_3 = false);
         }
         inputbox3.$set(inputbox3_changes);
         const inputbox4_changes = {};
-        if (!updating_value_4 && dirty & /*paidWith*/
-        128) {
+        if (!updating_value_4 && dirty[0] & /*paidAt*/
+        256) {
           updating_value_4 = true;
-          inputbox4_changes.value = /*paidWith*/
-          ctx2[7];
+          inputbox4_changes.value = /*paidAt*/
+          ctx2[8];
           add_flush_callback(() => updating_value_4 = false);
         }
         inputbox4.$set(inputbox4_changes);
         const inputbox5_changes = {};
-        if (!updating_value_5 && dirty & /*note*/
-        256) {
+        if (!updating_value_5 && dirty[0] & /*note*/
+        512) {
           updating_value_5 = true;
           inputbox5_changes.value = /*note*/
-          ctx2[8];
+          ctx2[9];
           add_flush_callback(() => updating_value_5 = false);
         }
         inputbox5.$set(inputbox5_changes);
         const inputbox6_changes = {};
-        if (!updating_value_6 && dirty & /*totalPriceIDR*/
-        512) {
+        if (!updating_value_6 && dirty[0] & /*utensilsTaken*/
+        1024) {
           updating_value_6 = true;
-          inputbox6_changes.value = /*totalPriceIDR*/
-          ctx2[9];
+          inputbox6_changes.value = /*utensilsTaken*/
+          ctx2[10];
           add_flush_callback(() => updating_value_6 = false);
         }
         inputbox6.$set(inputbox6_changes);
+        const inputbox7_changes = {};
+        if (!updating_value_7 && dirty[0] & /*utensilsReturnedAt*/
+        2048) {
+          updating_value_7 = true;
+          inputbox7_changes.value = /*utensilsReturnedAt*/
+          ctx2[11];
+          add_flush_callback(() => updating_value_7 = false);
+        }
+        inputbox7.$set(inputbox7_changes);
+        const inputbox8_changes = {};
+        if (!updating_value_8 && dirty[0] & /*qrisIDR*/
+        4096) {
+          updating_value_8 = true;
+          inputbox8_changes.value = /*qrisIDR*/
+          ctx2[12];
+          add_flush_callback(() => updating_value_8 = false);
+        }
+        inputbox8.$set(inputbox8_changes);
+        const inputbox9_changes = {};
+        if (!updating_value_9 && dirty[0] & /*cashIDR*/
+        8192) {
+          updating_value_9 = true;
+          inputbox9_changes.value = /*cashIDR*/
+          ctx2[13];
+          add_flush_callback(() => updating_value_9 = false);
+        }
+        inputbox9.$set(inputbox9_changes);
+        const inputbox10_changes = {};
+        if (!updating_value_10 && dirty[0] & /*debtIDR*/
+        16384) {
+          updating_value_10 = true;
+          inputbox10_changes.value = /*debtIDR*/
+          ctx2[14];
+          add_flush_callback(() => updating_value_10 = false);
+        }
+        inputbox10.$set(inputbox10_changes);
+        const inputbox11_changes = {};
+        if (!updating_value_11 && dirty[0] & /*topupIDR*/
+        32768) {
+          updating_value_11 = true;
+          inputbox11_changes.value = /*topupIDR*/
+          ctx2[15];
+          add_flush_callback(() => updating_value_11 = false);
+        }
+        inputbox11.$set(inputbox11_changes);
+        const inputbox12_changes = {};
+        if (!updating_value_12 && dirty[0] & /*totalPriceIDR*/
+        65536) {
+          updating_value_12 = true;
+          inputbox12_changes.value = /*totalPriceIDR*/
+          ctx2[16];
+          add_flush_callback(() => updating_value_12 = false);
+        }
+        inputbox12.$set(inputbox12_changes);
         if (!/*isSubmitted*/
         ctx2[0]) {
           if (if_block0) {
           } else {
             if_block0 = create_if_block_111(ctx2);
             if_block0.c();
-            if_block0.m(button2, t13);
+            if_block0.m(button2, t19);
           }
         } else if (if_block0) {
           if_block0.d(1);
@@ -20823,7 +21032,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx2[0]
         ) {
           if (if_block1) {
-            if (dirty & /*isSubmitted*/
+            if (dirty[0] & /*isSubmitted*/
             1) {
               transition_in(if_block1, 1);
             }
@@ -20840,14 +21049,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           });
           check_outros();
         }
-        if (!current || dirty & /*isSubmitted*/
+        if (!current || dirty[0] & /*isSubmitted*/
         1) {
           button2.disabled = /*isSubmitted*/
           ctx2[0];
         }
-        if (!current || dirty & /*isShow*/
-        4 && div5_class_value !== (div5_class_value = null_to_empty(`popup-container ${/*isShow*/
-        ctx2[2] ? "show" : ""}`) + " svelte-1518e4v")) {
+        if (!current || dirty[0] & /*isShow*/
+        8 && div5_class_value !== (div5_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[3] ? "show" : ""}`) + " svelte-1518e4v")) {
           attr(div5, "class", div5_class_value);
         }
       },
@@ -20862,6 +21071,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_in(inputbox4.$.fragment, local);
         transition_in(inputbox5.$.fragment, local);
         transition_in(inputbox6.$.fragment, local);
+        transition_in(inputbox7.$.fragment, local);
+        transition_in(inputbox8.$.fragment, local);
+        transition_in(inputbox9.$.fragment, local);
+        transition_in(inputbox10.$.fragment, local);
+        transition_in(inputbox11.$.fragment, local);
+        transition_in(inputbox12.$.fragment, local);
         transition_in(if_block1);
         current = true;
       },
@@ -20874,6 +21089,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_out(inputbox4.$.fragment, local);
         transition_out(inputbox5.$.fragment, local);
         transition_out(inputbox6.$.fragment, local);
+        transition_out(inputbox7.$.fragment, local);
+        transition_out(inputbox8.$.fragment, local);
+        transition_out(inputbox9.$.fragment, local);
+        transition_out(inputbox10.$.fragment, local);
+        transition_out(inputbox11.$.fragment, local);
+        transition_out(inputbox12.$.fragment, local);
         transition_out(if_block1);
         current = false;
       },
@@ -20889,6 +21110,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         destroy_component(inputbox4);
         destroy_component(inputbox5);
         destroy_component(inputbox6);
+        destroy_component(inputbox7);
+        destroy_component(inputbox8);
+        destroy_component(inputbox9);
+        destroy_component(inputbox10);
+        destroy_component(inputbox11);
+        destroy_component(inputbox12);
         if (if_block0)
           if_block0.d();
         if (if_block1)
@@ -20907,13 +21134,22 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /** @type {boolean} */
       false
     ) } = $props;
-    const PaymentMethods = ["Cash", "QRIS", "Transfer"];
+    let { tenants: tenants2 = (
+      /** @type {Record<number, string>} */
+      {}
+    ) } = $props;
     let cashier = "";
-    let who = "";
+    let tenantId = 0;
+    let buyerName = "";
     let salesDate = (0, import_xFormatter3.dateISOFormat)(0);
     let paidAt = (0, import_xFormatter3.dateISOFormat)(0);
-    let paidWith = PaymentMethods[0];
     let note = "";
+    let utensilsTaken = "";
+    let utensilsReturnedAt = (0, import_xFormatter3.dateISOFormat)(0);
+    let qrisIDR = 0;
+    let cashIDR = 0;
+    let debtIDR = 0;
+    let topupIDR = 0;
     let totalPriceIDR = 0;
     let { OnSubmit = async function(sale) {
       console.log("OnSubmit :::", sale);
@@ -20923,76 +21159,119 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         /** @type {Sale|any} */
         {
           cashier,
-          who,
+          tenantId,
+          buyerName,
           salesDate,
           paidAt,
-          paidWith,
           note,
-          totalPriceIDR
+          utensilsTaken,
+          utensilsReturnedAt,
+          qrisIDR,
+          cashIDR,
+          debtIDR,
+          topupIDR
         }
       );
       await OnSubmit(sale);
     }
-    const Show = () => $invalidate(2, isShow = true);
-    const Hide = () => $invalidate(2, isShow = false);
+    const Show = () => $invalidate(3, isShow = true);
+    const Hide = () => $invalidate(3, isShow = false);
     const Reset = () => {
-      $invalidate(3, cashier = "");
-      $invalidate(4, who = "");
-      $invalidate(5, salesDate = (0, import_xFormatter3.dateISOFormat)(0));
-      $invalidate(6, paidAt = (0, import_xFormatter3.dateISOFormat)(0));
-      $invalidate(7, paidWith = PaymentMethods[0]);
-      $invalidate(8, note = "");
-      $invalidate(9, totalPriceIDR = 0);
+      $invalidate(4, cashier = "");
+      $invalidate(5, tenantId = 0);
+      $invalidate(6, buyerName = "");
+      $invalidate(7, salesDate = (0, import_xFormatter3.dateISOFormat)(0));
+      $invalidate(8, paidAt = (0, import_xFormatter3.dateISOFormat)(0));
+      $invalidate(9, note = "");
+      $invalidate(10, utensilsTaken = "");
+      $invalidate(11, utensilsReturnedAt = (0, import_xFormatter3.dateISOFormat)(0));
+      $invalidate(12, qrisIDR = 0);
+      $invalidate(13, cashIDR = 0);
+      $invalidate(14, debtIDR = 0);
+      $invalidate(15, topupIDR = 0);
+      $invalidate(16, totalPriceIDR = 0);
     };
     const cancel = () => {
-      $invalidate(2, isShow = false);
+      $invalidate(3, isShow = false);
     };
     function inputbox0_value_binding(value) {
       cashier = value;
-      $invalidate(3, cashier);
+      $invalidate(4, cashier);
     }
     function inputbox1_value_binding(value) {
-      who = value;
-      $invalidate(4, who);
+      tenantId = value;
+      $invalidate(5, tenantId);
     }
     function inputbox2_value_binding(value) {
-      salesDate = value;
-      $invalidate(5, salesDate);
+      buyerName = value;
+      $invalidate(6, buyerName);
     }
     function inputbox3_value_binding(value) {
-      paidAt = value;
-      $invalidate(6, paidAt);
+      salesDate = value;
+      $invalidate(7, salesDate);
     }
     function inputbox4_value_binding(value) {
-      paidWith = value;
-      $invalidate(7, paidWith);
+      paidAt = value;
+      $invalidate(8, paidAt);
     }
     function inputbox5_value_binding(value) {
       note = value;
-      $invalidate(8, note);
+      $invalidate(9, note);
     }
     function inputbox6_value_binding(value) {
+      utensilsTaken = value;
+      $invalidate(10, utensilsTaken);
+    }
+    function inputbox7_value_binding(value) {
+      utensilsReturnedAt = value;
+      $invalidate(11, utensilsReturnedAt);
+    }
+    function inputbox8_value_binding(value) {
+      qrisIDR = value;
+      $invalidate(12, qrisIDR);
+    }
+    function inputbox9_value_binding(value) {
+      cashIDR = value;
+      $invalidate(13, cashIDR);
+    }
+    function inputbox10_value_binding(value) {
+      debtIDR = value;
+      $invalidate(14, debtIDR);
+    }
+    function inputbox11_value_binding(value) {
+      topupIDR = value;
+      $invalidate(15, topupIDR);
+    }
+    function inputbox12_value_binding(value) {
       totalPriceIDR = value;
-      $invalidate(9, totalPriceIDR);
+      $invalidate(16, totalPriceIDR);
     }
     $self.$set = ($props2) => {
       if ("isSubmitted" in $props2)
         $invalidate(0, isSubmitted = $props2.isSubmitted);
+      if ("tenants" in $props2)
+        $invalidate(1, tenants2 = $props2.tenants);
       if ("OnSubmit" in $props2)
-        $invalidate(13, OnSubmit = $props2.OnSubmit);
+        $invalidate(19, OnSubmit = $props2.OnSubmit);
     };
     return [
       isSubmitted,
+      tenants2,
       Hide,
       isShow,
       cashier,
-      who,
+      tenantId,
+      buyerName,
       salesDate,
       paidAt,
-      paidWith,
       note,
+      utensilsTaken,
+      utensilsReturnedAt,
+      qrisIDR,
+      cashIDR,
+      debtIDR,
+      topupIDR,
       totalPriceIDR,
-      PaymentMethods,
       submitAdd,
       cancel,
       OnSubmit,
@@ -21004,28 +21283,44 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       inputbox3_value_binding,
       inputbox4_value_binding,
       inputbox5_value_binding,
-      inputbox6_value_binding
+      inputbox6_value_binding,
+      inputbox7_value_binding,
+      inputbox8_value_binding,
+      inputbox9_value_binding,
+      inputbox10_value_binding,
+      inputbox11_value_binding,
+      inputbox12_value_binding
     ];
   }
   var PopUpAddSale = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance11, create_fragment14, safe_not_equal, {
-        isSubmitted: 0,
-        OnSubmit: 13,
-        Show: 14,
-        Hide: 1,
-        Reset: 15
-      });
+      init(
+        this,
+        options,
+        instance11,
+        create_fragment14,
+        safe_not_equal,
+        {
+          isSubmitted: 0,
+          tenants: 1,
+          OnSubmit: 19,
+          Show: 20,
+          Hide: 2,
+          Reset: 21
+        },
+        null,
+        [-1, -1]
+      );
     }
     get Show() {
-      return this.$.ctx[14];
+      return this.$.ctx[20];
     }
     get Hide() {
-      return this.$.ctx[1];
+      return this.$.ctx[2];
     }
     get Reset() {
-      return this.$.ctx[15];
+      return this.$.ctx[21];
     }
   };
   var PopUpAddSale_default = PopUpAddSale;
@@ -21037,11 +21332,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_isSubmitted;
     let current;
     function popupaddsale_isSubmitted_binding(value) {
-      ctx[13](value);
+      ctx[12](value);
     }
-    let popupaddsale_props = { OnSubmit: (
+    let popupaddsale_props = { tenants, OnSubmit: (
       /*OnAddSale*/
-      ctx[11]
+      ctx[10]
     ) };
     if (
       /*isSubmitAddSale*/
@@ -21051,7 +21346,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       ctx[5];
     }
     popupaddsale = new PopUpAddSale_default({ props: popupaddsale_props });
-    ctx[12](popupaddsale);
+    ctx[11](popupaddsale);
     binding_callbacks.push(() => bind(popupaddsale, "isSubmitted", popupaddsale_isSubmitted_binding));
     return {
       c() {
@@ -21083,7 +21378,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         current = false;
       },
       d(detaching) {
-        ctx[12](null);
+        ctx[11](null);
         destroy_component(popupaddsale, detaching);
       }
     };
@@ -21117,7 +21412,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             button,
             "click",
             /*click_handler*/
-            ctx[14]
+            ctx[13]
           );
           mounted = true;
         }
@@ -21153,21 +21448,19 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_MASTER_ROWS;
     let current;
     function mastertable_FIELDS_binding(value) {
-      ctx[15](value);
+      ctx[14](value);
     }
     function mastertable_PAGER_binding(value) {
-      ctx[16](value);
+      ctx[15](value);
     }
     function mastertable_MASTER_ROWS_binding(value) {
-      ctx[17](value);
+      ctx[16](value);
     }
     let mastertable_props = {
       NAME: "Sales",
       ACCESS: segments,
-      REFS: { "paidWith": (
-        /*PaymentMethods*/
-        ctx[6]
-      ) },
+      REFS: { "tenantId": tenants },
+      COL_WIDTHS: { "tenantId": 370 },
       CAN_EDIT_ROW: true,
       CAN_SEARCH_ROW: true,
       CAN_DELETE_ROW: true,
@@ -21175,19 +21468,19 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       CAN_OPEN_LINK: true,
       OnDelete: (
         /*OnDelete*/
-        ctx[9]
+        ctx[8]
       ),
       OnRestore: (
         /*OnRestore*/
-        ctx[8]
+        ctx[7]
       ),
       OnRefresh: (
         /*OnRefresh*/
-        ctx[7]
+        ctx[6]
       ),
       OnEdit: (
         /*OnEdit*/
-        ctx[10]
+        ctx[9]
       ),
       $slots: { default: [create_default_slot_1] },
       $scope: { ctx }
@@ -21237,7 +21530,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         const mastertable_changes = {};
         if (dirty & /*$scope, popUpForms*/
-        262160) {
+        131088) {
           mastertable_changes.$scope = { dirty, ctx: ctx2 };
         }
         if (!updating_FIELDS && dirty & /*fields*/
@@ -21337,7 +21630,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         const layoutmain_changes = {};
         if (dirty & /*$scope, fields, pager, sales, popUpForms*/
-        262167) {
+        131095) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -21372,6 +21665,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     /** @type {Access} */
     {/* segments */}
   );
+  var tenants = (
+    /** @type {Record<Number, string>} */
+    {/* tenants */}
+  );
   function instance12($self, $props, $invalidate) {
     let sales = (
       /** @type {any[][]} */
@@ -21385,7 +21682,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /** @type {PagerOut} */
       {/* pager */}
     );
-    const PaymentMethods = ["Cash", "QRIS", "Transfer"];
     let isPopUpFormReady = (
       /** @type boolean */
       false
@@ -21477,12 +21773,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         id: payloads[0],
         /** @type {any[]} */
         cashier: String(payloads[1]),
-        who: String(payloads[2]),
-        salesDate: String(payloads[3]),
-        paidAt: String(payloads[4]),
-        paidWith: String(payloads[5]),
+        tenantId: String(payloads[2]),
+        buyerName: String(payloads[3]),
+        salesDate: String(payloads[4]),
+        paidAt: String(payloads[5]),
         note: String(payloads[6]),
-        totalPriceIDR: Number(payloads[7])
+        utensilsTaken: String(payloads[7]),
+        utensilsReturnedAt: String(payloads[8]),
+        qrisIDR: Number(payloads[9]),
+        cashIDR: Number(payloads[10]),
+        debtIDR: Number(payloads[11]),
+        topupIDR: Number(payloads[12]),
+        totalPriceIDR: Number(payloads[13])
       };
       const i = (
         /** @type {any}*/
@@ -21561,7 +21863,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       isPopUpFormReady,
       popUpForms,
       isSubmitAddSale,
-      PaymentMethods,
       OnRefresh,
       OnRestore,
       OnDelete,

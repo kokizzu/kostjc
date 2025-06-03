@@ -3,6 +3,7 @@
   /** @typedef {import('./_types/masters.js').Field} Field */
   /** @typedef {import('./_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
+   /** @typedef {import('./_types/masters.js').ExtendedActionButton} ExtendedActionButton */
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/cafe.js').Sale} Sale */
   
@@ -27,13 +28,7 @@
   let sales = /** @type {any[][]} */([/* sales */]);
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
-
-  const PaymentMethods = [
-    'Cash',
-    'QRIS',
-    'Transfer',
-  ];
-
+  let tenants = /** @type {Record<Number, string>} */ ({/* tenants */});
 
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
@@ -122,12 +117,18 @@
     const sale = {
       id: payloads[0],
       cashier: String(payloads[1]),
-      who: String(payloads[2]),
-      salesDate: String(payloads[3]),
-      paidAt: String(payloads[4]),
-      paidWith: String(payloads[5]),
+      tenantId: String(payloads[2]),
+      buyerName: String(payloads[3]),
+      salesDate: String(payloads[4]),
+      paidAt: String(payloads[5]),
       note: String(payloads[6]),
-      totalPriceIDR: Number(payloads[7]),
+      utensilsTaken: String(payloads[7]),
+      utensilsReturnedAt: String(payloads[8]),
+      qrisIDR: Number(payloads[9]),
+      cashIDR: Number(payloads[10]),
+      debtIDR: Number(payloads[11]),
+      topupIDR: Number(payloads[12]),
+      totalPriceIDR: Number(payloads[13]),
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -189,6 +190,7 @@
   <PopUpAddSale
     bind:this={popUpForms}
     bind:isSubmitted={isSubmitAddSale}
+    tenants={tenants}
     OnSubmit={OnAddSale}
   />
 {/if}
@@ -203,7 +205,11 @@
       bind:PAGER={pager}
       bind:MASTER_ROWS={sales}
       REFS={{
-        'paidWith': PaymentMethods,
+        'tenantId': tenants,
+      }}
+
+      COL_WIDTHS={{
+        'tenantId': 370,
       }}
 
       CAN_EDIT_ROW
