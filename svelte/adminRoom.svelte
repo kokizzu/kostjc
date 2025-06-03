@@ -280,6 +280,7 @@
       bind:FIELDS={fields}
       bind:PAGER={pager}
       bind:MASTER_ROWS={rooms}
+      FIELD_TO_SEARCH="roomName"
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW

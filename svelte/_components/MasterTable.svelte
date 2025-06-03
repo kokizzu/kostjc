@@ -52,6 +52,7 @@
   export let IS_CUSTOM_EDIT = false;
   export let UNSORTED_ROWS = [];
   export let EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([]);
+  export let FIELD_TO_SEARCH = '';
 
   /**
    * @type {Record<string, number>}
@@ -285,6 +286,14 @@
     // Refresh pagination view
     getPaginationShow();
   }
+
+  let searchValue = /** @type {string} */ ('');
+  async function handleSearch() {
+    PAGER.filters = {
+      [FIELD_TO_SEARCH]: [searchValue]
+    }
+    await OnRefresh(PAGER);
+  }
 </script>
 
 {#if filterTableReady}
@@ -371,10 +380,17 @@
     <div class="right">
       {#if CAN_SEARCH_ROW}
         <div class="search-handler">
-          <button class="search-btn" title="Search">
+          <button class="search-btn" title="Search" on:click={handleSearch}>
             <Icon color="var(--gray-007)" size="16" src={IoSearch} />
           </button>
-          <input placeholder="Search..." type="text" name="searchRow" id="searchRow" class="search" />
+          <input
+            placeholder="Search..."
+            type="text"
+            name="searchRow"
+            id="searchRow"
+            class="search"
+            bind:value={searchValue}
+          />
         </div>
       {/if}
     </div>

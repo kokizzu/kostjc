@@ -15,7 +15,7 @@
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
   import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
-    import { dateISOFormat } from './_components/xFormatter';
+  import { dateISOFormat } from './_components/xFormatter';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -260,6 +260,7 @@
         'tenantName': 250,
         'ktpRegion': 300
       }}
+      FIELD_TO_SEARCH="tenantName"
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
