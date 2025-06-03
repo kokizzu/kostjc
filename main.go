@@ -116,6 +116,7 @@ func main() {
 		AuthOltp: tConn,
 		AuthOlap: cConn,
 		PropOltp: tConn,
+		PropOlap: cConn,
 		Mailer:   mailer,
 		IsBgSvc:  false,
 		Log:      log,

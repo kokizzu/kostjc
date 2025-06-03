@@ -3,9 +3,12 @@ package domain
 import (
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
+	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
 	"time"
+
+	"github.com/goccy/go-json"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminStock.go
@@ -124,11 +127,16 @@ func (d *Domain) AdminStock(in *AdminStockIn) (out AdminStockOut) {
 	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
 		stck := wcProperty.NewStocksMutator(d.PropOltp)
 		stck.Id = in.Stock.Id
+
+		isEdited := false
+		beforeJson := []byte(``)
 		if stck.Id > 0 {
+			isEdited = true
 			if !stck.FindById() {
 				out.SetError(400, ErrAdminStockNotFound)
 				return
 			}
+			beforeJson, _ = json.Marshal(stck)
 
 			if in.Cmd == zCrud.CmdDelete {
 				if stck.DeletedAt == 0 {
@@ -171,6 +179,22 @@ func (d *Domain) AdminStock(in *AdminStockIn) (out AdminStockOut) {
 		if !stck.DoUpsert() {
 			out.SetError(500, ErrAdminStockSaveFailed)
 			return
+		}
+
+		if isEdited {
+			afterJson, _ := json.Marshal(stck)
+			row := saProperty.StockLogs{
+				CreatedAt:  in.TimeNow(),
+				ActorId:    sess.UserId,
+				BeforeJson: string(beforeJson),
+				AfterJson:  string(afterJson),
+			}
+			d.stockLogs.Insert([]any{
+				row.CreatedAt,
+				row.ActorId,
+				row.BeforeJson,
+				row.AfterJson,
+			})
 		}
 
 		if in.Pager.Page == 0 {

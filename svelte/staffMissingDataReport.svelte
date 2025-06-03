@@ -30,6 +30,7 @@
       }
 
       missingData = o.missingData;
+      restrucureMissingData();
 
       return
     })

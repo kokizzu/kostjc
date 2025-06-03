@@ -3,9 +3,12 @@ package domain
 import (
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
+	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
 	"time"
+
+	"github.com/goccy/go-json"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminPayment.go
@@ -144,11 +147,16 @@ func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
 		pym := wcProperty.NewPaymentsMutator(d.PropOltp)
 		pym.Id = in.Payment.Id
+
+		isEdited := false
+		beforeJson := []byte(``)
 		if pym.Id > 0 {
+			isEdited = true
 			if !pym.FindById() {
 				out.SetError(400, ErrAdminPaymentNotFound)
 				return
 			}
+			beforeJson, _ = json.Marshal(pym)
 
 			if in.Cmd == zCrud.CmdDelete {
 				if pym.DeletedAt == 0 {
@@ -204,6 +212,22 @@ func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 		if !pym.DoUpsert() {
 			out.SetError(500, ErrAdminPaymentSaveFailed)
 			return
+		}
+
+		if isEdited {
+			afterJson, _ := json.Marshal(pym)
+			row := saProperty.PaymentLogs{
+				CreatedAt:  in.TimeNow(),
+				ActorId:    sess.UserId,
+				BeforeJson: string(beforeJson),
+				AfterJson:  string(afterJson),
+			}
+			d.paymentLogs.Insert([]any{
+				row.CreatedAt,
+				row.ActorId,
+				row.BeforeJson,
+				row.AfterJson,
+			})
 		}
 
 		if in.Pager.Page == 0 {

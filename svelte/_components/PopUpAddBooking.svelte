@@ -9,6 +9,7 @@
   import { arrToArrNum, dateISOFormat } from './xFormatter';
   import MultiSelect from './MultiSelect.svelte';
   import { onMount } from 'svelte';
+  import Select from '../node_modules/svelte-select';
 
   let isShow = /** @type {boolean} */ (false);
 
@@ -20,7 +21,7 @@
   let dateStart = dateISOFormat(0);
   let dateEnd = dateISOFormat(30);
   let basePriceIDR = 0;
-  let facilitiesNums = /** @type {number[]} */([]);
+  let facilitiesIds = /** @type {number[]} */([]);
   let totalPriceIDR = 0;
   let paidAt = dateISOFormat(0);
   let tenantId = null;
@@ -32,16 +33,6 @@
   }
 
   let facilitiesPrice = 0;
-  $: {
-    if (facilitiesNums) {
-      facilitiesNums.forEach((id) => {
-        const f = facilities.find((f) => f.id === id);
-        if (f) {
-          facilitiesPrice += (f.extraChargeIDR || 0);
-        }
-      })
-    }
-  }
 
   async function submitAdd() {
     totalPriceIDR = basePriceIDR + facilitiesPrice;
@@ -56,9 +47,8 @@
       roomId
     });
 
-    facilitiesNums = arrToArrNum(facilitiesNums);
-    await OnSubmit(booking, facilitiesNums);
-    extraTenantsIds = [];
+    facilitiesIds = arrToArrNum(facilitiesIds);
+    await OnSubmit(booking, facilitiesIds);
   }
 
   export const Show = () => isShow = true;
@@ -68,25 +58,58 @@
     dateStart = dateISOFormat(0);
     dateEnd = dateISOFormat(30);
     basePriceIDR = 0;
-    facilitiesNums = [];
+    facilitiesIds = [];
     totalPriceIDR = 0;
     paidAt = dateISOFormat(0);
     tenantId = 0;
     extraTenantsIds = [];
     roomId = 0;
-    extraTenantsIds = [];
+    velueSvelteSelectFacilities = [];
+    facilitiesPrice = 0;
   }
   
   const cancel = () => isShow = false;
 
-  let facilitiesObj = {};
+  /**
+   * @typedef {Object} SvelteSelectValue
+   * @prop {any} value
+   * @prop {any} label
+   */
+  let valuesSvelteSelectFacilities = /** @type {SvelteSelectValue[]} */ ([]);
+  let velueSvelteSelectFacilities = [];
   let isFacilitiesReady = false;
-  onMount(() => {
+
+  function handleSelectFacilities(/** @type {CustomEvent} */e) {
+    console.log('handleSelectFacilities:',e.detail)
+    facilitiesIds = [...facilitiesIds, e.detail.value];
     facilities.forEach((f) => {
-      facilitiesObj[f.id] = `${f.facilityName} (${f.facilityType})`;
+      if (f.id === e.detail.value) {
+        facilitiesPrice += f.extraChargeIDR || 0;
+      }
+    })
+  }
+
+  function handleClearFacilities(/** @type {CustomEvent} */e) {
+    const index = facilitiesIds.indexOf(Number(e.detail.value));
+    if (index !== -1) {
+      facilitiesIds.splice(index, 1);
+    }
+    facilities.forEach((f) => {
+      if (f.id === e.detail.value) {
+        facilitiesPrice -= f.extraChargeIDR || 0;
+      }
+    })
+  }
+
+  onMount(() => {
+    (facilities || []).forEach((f) => {
+      valuesSvelteSelectFacilities = [...valuesSvelteSelectFacilities, {
+        value: f.id,
+        label: `${f.facilityName} ${f.facilityType ? `(${f.facilityType})` : ''}`
+      }]
     });
     isFacilitiesReady = true;
-  })
+  });
 </script>
 
 <div class={`popup-container ${isShow ? 'show' : ''}`}>
@@ -120,13 +143,17 @@
         placeholder="0"
       />
       {#if isFacilitiesReady}
-        <MultiSelect
-          id="facilities"
-          label="Facilities"
-          bind:valuesTarget={facilitiesNums}
-          valuesSourceObj={facilitiesObj}
-          valuesSourceType="object"
+      <div class="input-box">
+        <label class="label" for="facilities">Facilities</label>
+        <Select
+          multiple
+          items={valuesSvelteSelectFacilities}
+          bind:value={velueSvelteSelectFacilities}
+          on:select={handleSelectFacilities}
+          on:clear={handleClearFacilities}
+          placeholder="Facilities"
         />
+      </div>
       {/if}
       <div class="input-totalprice">
         <label class="label" for="totalPriceIDR">Total Price</label>
@@ -356,6 +383,27 @@
     flex-direction: row;
     align-items: center;
     gap: 5px;
+  }
+
+  .input-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: var(--gray-007);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .input-box .label {
+    font-size: var(--font-base);
+    margin-left: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
   }
 
   @media only screen and (max-width : 768px) {
