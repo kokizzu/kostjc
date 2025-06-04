@@ -40,12 +40,13 @@ type (
 const (
 	AdminBookingAction = `admin/booking`
 
-	ErrAdminBookingNotFound       = `booking not found`
-	ErrAdminBookingSaveFailed     = `failed to save booking`
-	ErrAdminBookingDeleteFailed   = `failed to delete booking`
-	ErrAdminBookingRestoreFailed  = `failed to restore booking`
-	ErrAdminBookingTenantNotFound = `tenant not found`
-	ErrAdminBookingRoomNotFound   = `room not found`
+	ErrAdminBookingNotFound                    = `booking not found`
+	ErrAdminBookingSaveFailed                  = `failed to save booking`
+	ErrAdminBookingDeleteFailed                = `failed to delete booking`
+	ErrAdminBookingRestoreFailed               = `failed to restore booking`
+	ErrAdminBookingTenantNotFound              = `tenant not found`
+	ErrAdminBookingRoomNotFound                = `room not found`
+	ErrAdminBookingExtraTenantCannotMainTenant = `tenant cannot be added to extra tenants`
 )
 
 var AdminBookingMeta = zCrud.Meta{
@@ -260,9 +261,9 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 		}
 
 		for _, id := range in.Booking.ExtraTenants {
-			// Skip extra tenant if same as main tenant
 			if id == in.Booking.TenantId {
-				continue
+				out.SetError(400, ErrAdminBookingExtraTenantCannotMainTenant)
+				return
 			}
 			tenant := rqAuth.NewTenants(d.AuthOltp)
 			tenant.Id = X.ToU(id)
