@@ -375,3 +375,40 @@ func (d *Domain) segmentsFromSession(s *Session) M.SB {
 
 	return s.Segments
 }
+
+type insertPropertyLogFunc interface {
+	Insert([]interface{}) bool
+}
+
+func InsertPropertyLog(
+	refId uint64,
+	insertFunc insertPropertyLogFunc,
+	responseCommon ResponseCommon,
+	createdAt time.Time,
+	actorId uint64,
+	data any,
+) func() {
+	beforeJson, _ := json.Marshal(data)
+	return func() {
+		if responseCommon.HasError() {
+			return
+		}
+
+		if refId == 0 {
+			return
+		}
+
+		afterJson, _ := json.Marshal(data)
+
+		if string(beforeJson) == string(afterJson) {
+			return
+		}
+
+		insertFunc.Insert([]any{
+			createdAt,
+			actorId,
+			beforeJson,
+			afterJson,
+		})
+	}
+}

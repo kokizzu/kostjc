@@ -4,7 +4,6 @@ import (
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
-	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
 	"time"
@@ -183,15 +182,11 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 		bk := wcProperty.NewBookingsMutator(d.PropOltp)
 		bk.Id = in.Booking.Id
 
-		isEdited := false
-		beforeJson := []byte(``)
 		if bk.Id > 0 {
-			isEdited = true
 			if !bk.FindById() {
 				out.SetError(400, ErrAdminBookingNotFound)
 				return
 			}
-			beforeJson, _ = json.Marshal(bk)
 
 			if in.Cmd == zCrud.CmdDelete {
 				if bk.DeletedAt == 0 {
@@ -207,6 +202,8 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 				}
 			}
 		}
+
+		defer InsertPropertyLog(bk.Id, d.bookingLogs, out.ResponseCommon, in.TimeNow(), sess.UserId, bk)()
 
 		if mProperty.IsValidDate(in.Booking.DateStart, time.DateOnly) {
 			bk.SetDateStart(in.Booking.DateStart)
@@ -306,22 +303,6 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 		if !bk.DoUpsert() {
 			out.SetError(500, ErrAdminBookingSaveFailed)
 			return
-		}
-
-		if isEdited {
-			afterJson, _ := json.Marshal(bk)
-			row := saProperty.BookingLogs{
-				CreatedAt:  in.TimeNow(),
-				ActorId:    sess.UserId,
-				BeforeJson: string(beforeJson),
-				AfterJson:  string(afterJson),
-			}
-			d.bookingLogs.Insert([]any{
-				row.CreatedAt,
-				row.ActorId,
-				row.BeforeJson,
-				row.AfterJson,
-			})
 		}
 
 		if in.Pager.Page == 0 {

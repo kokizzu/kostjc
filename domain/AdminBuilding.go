@@ -3,11 +3,9 @@ package domain
 import (
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
-	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
 
-	"github.com/goccy/go-json"
 	"github.com/kokizzu/gotro/X"
 )
 
@@ -120,15 +118,11 @@ func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 		bld := wcProperty.NewBuildingsMutator(d.PropOltp)
 		bld.Id = in.Building.Id
 
-		isEdited := false
-		beforeJson := []byte(``)
 		if bld.Id > 0 {
-			isEdited = true
 			if !bld.FindById() {
 				out.SetError(400, ErrAdminBuildingNotFound)
 				return
 			}
-			beforeJson, _ = json.Marshal(bld)
 
 			if in.Cmd == zCrud.CmdDelete {
 				if bld.DeletedAt == 0 {
@@ -143,6 +137,8 @@ func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 				}
 			}
 		}
+
+		defer InsertPropertyLog(bld.Id, d.buildingLogs, out.ResponseCommon, in.TimeNow(), sess.UserId, bld)()
 
 		if in.Building.BuildingName != "" {
 			bld.SetBuildingName(in.Building.BuildingName)
@@ -190,22 +186,6 @@ func (d *Domain) AdminBuilding(in *AdminBuildingIn) (out AdminBuildingOut) {
 		if !bld.DoUpsert() {
 			out.SetError(500, ErrAdminBuildingSaveFailed)
 			return
-		}
-
-		if isEdited {
-			afterJson, _ := json.Marshal(bld)
-			row := saProperty.BuildingLogs{
-				CreatedAt:  in.TimeNow(),
-				ActorId:    sess.UserId,
-				BeforeJson: string(beforeJson),
-				AfterJson:  string(afterJson),
-			}
-			d.buildingLogs.Insert([]any{
-				row.CreatedAt,
-				row.ActorId,
-				row.BeforeJson,
-				row.AfterJson,
-			})
 		}
 
 		if in.Pager.Page == 0 {
