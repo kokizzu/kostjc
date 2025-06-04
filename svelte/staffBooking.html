@@ -20221,7 +20221,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       ""
     );
     async function handleSearch() {
-      $invalidate(0, PAGER.filters = { [FIELD_TO_SEARCH]: [searchValue] }, PAGER);
+      $invalidate(0, PAGER.search = searchValue, PAGER);
+      $invalidate(0, PAGER.searchBy = FIELD_TO_SEARCH, PAGER);
       await OnRefresh(PAGER);
     }
     function filtertable_binding($value) {

@@ -18,7 +18,12 @@ func (l *Locations) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *z
 	const comment = `-- Locations) FindByPagination`
 
 	validFields := LocationsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -66,7 +71,12 @@ func (f *Facilities) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *
 	const comment = `-- Facilities) FindByPagination`
 
 	validFields := FacilitiesFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -98,7 +108,12 @@ func (b *Buildings) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *z
 	const comment = `-- Buildings) FindByPagination`
 
 	validFields := BuildingsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -148,7 +163,12 @@ func (b *Bookings) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zC
 	const comment = `-- Bookings) FindByPagination`
 
 	validFields := BookingsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -317,7 +337,12 @@ func (p *Payments) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zC
 	const comment = `-- Payments) FindByPagination`
 
 	validFields := PaymentsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -426,7 +451,12 @@ func (s *Stocks) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCru
 	const comment = `-- Stocks) FindByPagination`
 
 	validFields := LocationsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -458,7 +488,12 @@ func (r *Rooms) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud
 	const comment = `-- Rooms) FindByPagination`
 
 	validFields := RoomsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)

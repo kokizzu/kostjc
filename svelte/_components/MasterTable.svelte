@@ -289,9 +289,8 @@
 
   let searchValue = /** @type {string} */ ('');
   async function handleSearch() {
-    PAGER.filters = {
-      [FIELD_TO_SEARCH]: [searchValue]
-    }
+    PAGER.search = searchValue;
+    PAGER.searchBy = FIELD_TO_SEARCH;
     await OnRefresh(PAGER);
   }
 </script>

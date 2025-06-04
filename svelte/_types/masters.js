@@ -24,6 +24,8 @@ module.exports = {};
 
 /**
 * @typedef {Object} PagerOut
+* @property {string} search
+* @property {string} searchBy
 * @property {number} page
 * @property {number} perPage
 * @property {number} pages
@@ -35,6 +37,8 @@ module.exports = {};
 
 /**
 * @typedef {Object} PagerIn
+* @property {string} search
+* @property {string} searchBy
 * @property {number} page
 * @property {number} perPage
 * @property {Record<string, string[]>} filters
