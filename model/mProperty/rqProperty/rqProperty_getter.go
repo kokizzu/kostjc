@@ -997,7 +997,8 @@ func GroupBookingsToQuarter(bookings []BookingDetail, monthStartStr, monthEndStr
 func (p *Payments) FindByBookingId(bookingId uint64) (rows []Payments) {
 	const comment = `-- Payments) FindByBookingId`
 
-	query := `SELECT ` + p.SqlSelectAllFields() + `
+	query := comment + `
+SELECT ` + p.SqlSelectAllFields() + `
 FROM ` + p.SqlTableName() + `
 WHERE ` + p.SqlBookingId() + ` = ` + I.UToS(bookingId)
 
@@ -1136,4 +1137,26 @@ func getAgeByBirthday(birthday string) int {
 	}
 
 	return age
+}
+
+func (r *Rooms) FindAvailableRooms() (out []string) {
+	const comment = `-- Rooms) FindAvailableRooms`
+
+	now := time.Now()
+	sevenDaysAgo := now.AddDate(0, 0, -7).Format(time.DateOnly)
+	sevenDaysLater := now.AddDate(0, 0, 7).Format(time.DateOnly)
+
+	queryRows := comment + `
+SELECT ` + r.SqlRoomName() + ` FROM ` + r.SqlTableName() + `
+WHERE ` + r.SqlLastUseAt() + ` >= ` + sevenDaysAgo + `
+	AND ` + r.SqlLastUseAt() + ` <= ` + sevenDaysLater
+
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 1 {
+			roomName := X.ToS(row[0])
+			out = append(out, roomName)
+		}
+	})
+
+	return
 }
