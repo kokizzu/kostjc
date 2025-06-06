@@ -15333,7 +15333,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[8]
+      ctx[9]
     );
     select.$on(
       "clear",
@@ -15386,7 +15386,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       multiple: true,
       items: (
         /*valuesSourceArrayObject*/
-        ctx[10]
+        ctx[7]
       ),
       placeholder: (
         /*placeholder*/
@@ -15395,22 +15395,22 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*valuesTargetArrayObject*/
-      ctx[7] !== void 0
+      ctx[8] !== void 0
     ) {
       select_props.value = /*valuesTargetArrayObject*/
-      ctx[7];
+      ctx[8];
     }
     select = new Select_default({ props: select_props });
     binding_callbacks.push(() => bind(select, "value", select_value_binding));
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[8]
+      ctx[9]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[9]
+      ctx[10]
     );
     return {
       c() {
@@ -15422,15 +15422,19 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         const select_changes = {};
+        if (dirty & /*valuesSourceArrayObject*/
+        128)
+          select_changes.items = /*valuesSourceArrayObject*/
+          ctx2[7];
         if (dirty & /*placeholder*/
         64)
           select_changes.placeholder = /*placeholder*/
           ctx2[6];
         if (!updating_value && dirty & /*valuesTargetArrayObject*/
-        128) {
+        256) {
           updating_value = true;
           select_changes.value = /*valuesTargetArrayObject*/
-          ctx2[7];
+          ctx2[8];
           add_flush_callback(() => updating_value = false);
         }
         select.$set(select_changes);
@@ -15629,7 +15633,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       []
     );
     let valuesTargetArrayObject = [];
-    onMount(() => {
+    function reStructureSvelteValues() {
+      $invalidate(7, valuesSourceArrayObject = []);
+      $invalidate(8, valuesTargetArrayObject = []);
       for (const [k, v] of Object.entries(valuesSourceObj)) {
         valuesSourceArrayObject.push({ value: k, label: v });
       }
@@ -15637,17 +15643,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         for (const kv of valuesSourceArrayObject) {
           for (const vt of valuesTarget) {
             if (kv.value == vt) {
-              $invalidate(7, valuesTargetArrayObject = [...valuesTargetArrayObject, kv]);
+              $invalidate(8, valuesTargetArrayObject = [...valuesTargetArrayObject, kv]);
             }
           }
         }
         valuesSourceArrayObject.sort((a, b) => a.label.localeCompare(b.label));
       }
+    }
+    onMount(() => {
+      reStructureSvelteValues();
     });
     const clear_handler = () => $invalidate(0, valuesTarget = []);
     function select_value_binding(value) {
       valuesTargetArrayObject = value;
-      $invalidate(7, valuesTargetArrayObject);
+      $invalidate(8, valuesTargetArrayObject);
     }
     $self.$set = ($props2) => {
       if ("className" in $props2)
@@ -15667,6 +15676,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("placeholder" in $props2)
         $invalidate(6, placeholder = $props2.placeholder);
     };
+    $self.$.update = () => {
+      if ($self.$.dirty & /*valuesTarget*/
+      1) {
+        $:
+          if (valuesTarget) {
+            reStructureSvelteValues();
+          }
+      }
+    };
     return [
       valuesTarget,
       className,
@@ -15675,10 +15693,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       id,
       label,
       placeholder,
+      valuesSourceArrayObject,
       valuesTargetArrayObject,
       handleSelect,
       handleClear,
-      valuesSourceArrayObject,
       valuesSourceObj,
       clear_handler,
       select_value_binding
@@ -15704,46 +15722,46 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   // _components/MasterTable.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[82] = list[i];
+    child_ctx[83] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[85] = list[i];
+    child_ctx[86] = list[i];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[88] = list[i];
+    child_ctx[89] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[91] = list[i];
-    child_ctx[93] = i;
+    child_ctx[92] = list[i];
+    child_ctx[94] = i;
     return child_ctx;
   }
   function get_each_context_4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[94] = list[i];
+    child_ctx[95] = list[i];
     return child_ctx;
   }
   function get_each_context_5(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[97] = list[i];
+    child_ctx[98] = list[i];
     return child_ctx;
   }
   function get_each_context_6(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[91] = list[i];
-    child_ctx[101] = i;
+    child_ctx[92] = list[i];
+    child_ctx[102] = i;
     return child_ctx;
   }
   function get_each_context_7(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[102] = list[i];
-    child_ctx[103] = list;
-    child_ctx[93] = i;
+    child_ctx[103] = list[i];
+    child_ctx[104] = list;
+    child_ctx[94] = i;
     return child_ctx;
   }
   function create_if_block_30(ctx) {
@@ -15752,10 +15770,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_filtersMap;
     let current;
     function filtertable_filterColumns_binding(value) {
-      ctx[57](value);
+      ctx[58](value);
     }
     function filtertable_filtersMap_binding(value) {
-      ctx[58](value);
+      ctx[59](value);
     }
     let filtertable_props = {};
     if (
@@ -15773,7 +15791,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       ctx[21];
     }
     filtertable = new FilterTable_default({ props: filtertable_props });
-    ctx[56](filtertable);
+    ctx[57](filtertable);
     binding_callbacks.push(() => bind(filtertable, "filterColumns", filtertable_filterColumns_binding));
     binding_callbacks.push(() => bind(filtertable, "filtersMap", filtertable_filtersMap_binding));
     filtertable.$on(
@@ -15818,7 +15836,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         current = false;
       },
       d(detaching) {
-        ctx[56](null);
+        ctx[57](null);
         destroy_component(filtertable, detaching);
       }
     };
@@ -15930,7 +15948,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button0,
               "click",
               /*click_handler*/
-              ctx[59]
+              ctx[60]
             ),
             listen(
               button1,
@@ -16013,7 +16031,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let if_block_anchor;
     let current;
     let if_block = !/*field*/
-    ctx[102].readOnly && create_if_block_26(ctx);
+    ctx[103].readOnly && create_if_block_26(ctx);
     return {
       c() {
         if (if_block)
@@ -16028,7 +16046,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         if (!/*field*/
-        ctx2[102].readOnly) {
+        ctx2[103].readOnly) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*FIELDS*/
@@ -16083,17 +16101,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type(ctx2, dirty) {
       if (
         /*field*/
-        ctx2[102].inputType === "combobox"
+        ctx2[103].inputType === "combobox"
       )
         return 0;
       if (
         /*field*/
-        ctx2[102].inputType === "combobox-arr"
+        ctx2[103].inputType === "combobox-arr"
       )
         return 1;
       if (
         /*field*/
-        ctx2[102].inputType === "multiselect"
+        ctx2[103].inputType === "multiselect"
       )
         return 2;
       return 3;
@@ -16155,41 +16173,41 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding_2(value) {
-      ctx[63](
+      ctx[64](
         value,
         /*idx*/
-        ctx[93]
+        ctx[94]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[102].name
+        ctx[103].name
       ),
       label: (
         /*field*/
-        ctx[102].label
+        ctx[103].label
       ),
       placeholder: (
         /*field*/
-        ctx[102].description
+        ctx[103].description
       ),
       type: (
         /*field*/
-        ctx[102].inputType
+        ctx[103].inputType
       )
     };
     if (
       /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -16208,26 +16226,26 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[102].name;
+          ctx[103].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[102].label;
+          ctx[103].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[102].description;
+          ctx[103].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[102].inputType;
+          ctx[103].inputType;
         if (!updating_value && dirty[1] & /*payloads*/
         4) {
           updating_value = true;
           inputbox_changes.value = /*payloads*/
           ctx[33][
             /*idx*/
-            ctx[93]
+            ctx[94]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -16253,24 +16271,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_valuesTarget;
     let current;
     function multiselect_valuesTarget_binding(value) {
-      ctx[62](
+      ctx[63](
         value,
         /*idx*/
-        ctx[93]
+        ctx[94]
       );
     }
     let multiselect_props = {
       id: (
         /*field*/
-        ctx[102].name
+        ctx[103].name
       ),
       label: (
         /*field*/
-        ctx[102].label
+        ctx[103].label
       ),
       placeholder: (
         /*field*/
-        ctx[102].description
+        ctx[103].description
       ),
       valuesSourceType: "object",
       valuesSourceObj: (
@@ -16278,16 +16296,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[102].name
+          ctx[103].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[102].name
+            ctx[103].name
           ]
         ) : (
           /*field*/
-          ctx[102].ref
+          ctx[103].ref
         )
       )
     };
@@ -16295,13 +16313,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] !== void 0
     ) {
       multiselect_props.valuesTarget = /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ];
     }
     multiselect = new MultiSelect_default({ props: multiselect_props });
@@ -16320,31 +16338,31 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.id = /*field*/
-          ctx[102].name;
+          ctx[103].name;
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.label = /*field*/
-          ctx[102].label;
+          ctx[103].label;
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.placeholder = /*field*/
-          ctx[102].description;
+          ctx[103].description;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           multiselect_changes.valuesSourceObj = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[102].name
+            ctx[103].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[102].name
+              ctx[103].name
             ]
           ) : (
             /*field*/
-            ctx[102].ref
+            ctx[103].ref
           );
         if (!updating_valuesTarget && dirty[1] & /*payloads*/
         4) {
@@ -16352,7 +16370,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           multiselect_changes.valuesTarget = /*payloads*/
           ctx[33][
             /*idx*/
-            ctx[93]
+            ctx[94]
           ];
           add_flush_callback(() => updating_valuesTarget = false);
         }
@@ -16378,44 +16396,44 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding_1(value) {
-      ctx[61](
+      ctx[62](
         value,
         /*idx*/
-        ctx[93]
+        ctx[94]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[102].name
+        ctx[103].name
       ),
       label: (
         /*field*/
-        ctx[102].label
+        ctx[103].label
       ),
       placeholder: (
         /*field*/
-        ctx[102].description
+        ctx[103].description
       ),
       type: (
         /*field*/
-        ctx[102].inputType
+        ctx[103].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[102].name
+          ctx[103].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[102].name
+            ctx[103].name
           ]
         ) : (
           /*field*/
-          ctx[102].ref
+          ctx[103].ref
         )
       )
     };
@@ -16423,13 +16441,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -16448,35 +16466,35 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[102].name;
+          ctx[103].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[102].label;
+          ctx[103].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[102].description;
+          ctx[103].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[102].inputType;
+          ctx[103].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[102].name
+            ctx[103].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[102].name
+              ctx[103].name
             ]
           ) : (
             /*field*/
-            ctx[102].ref
+            ctx[103].ref
           );
         if (!updating_value && dirty[1] & /*payloads*/
         4) {
@@ -16484,7 +16502,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           inputbox_changes.value = /*payloads*/
           ctx[33][
             /*idx*/
-            ctx[93]
+            ctx[94]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -16510,44 +16528,44 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding(value) {
-      ctx[60](
+      ctx[61](
         value,
         /*idx*/
-        ctx[93]
+        ctx[94]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[102].name
+        ctx[103].name
       ),
       label: (
         /*field*/
-        ctx[102].label
+        ctx[103].label
       ),
       placeholder: (
         /*field*/
-        ctx[102].description
+        ctx[103].description
       ),
       type: (
         /*field*/
-        ctx[102].inputType
+        ctx[103].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[102].name
+          ctx[103].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[102].name
+            ctx[103].name
           ]
         ) : (
           /*field*/
-          ctx[102].ref
+          ctx[103].ref
         )
       ),
       isObject: (
@@ -16555,7 +16573,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[102].name
+          ctx[103].name
         ] ? true : false
       )
     };
@@ -16563,13 +16581,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -16588,35 +16606,35 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[102].name;
+          ctx[103].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[102].label;
+          ctx[103].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[102].description;
+          ctx[103].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[102].inputType;
+          ctx[103].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[102].name
+            ctx[103].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[102].name
+              ctx[103].name
             ]
           ) : (
             /*field*/
-            ctx[102].ref
+            ctx[103].ref
           );
         if (dirty[0] & /*REFS, FIELDS*/
         10)
@@ -16624,7 +16642,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[102].name
+            ctx[103].name
           ] ? true : false;
         if (!updating_value && dirty[1] & /*payloads*/
         4) {
@@ -16632,7 +16650,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           inputbox_changes.value = /*payloads*/
           ctx[33][
             /*idx*/
-            ctx[93]
+            ctx[94]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -16658,7 +16676,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let current;
     let if_block = (
       /*field*/
-      ctx[102].name !== "id" && create_if_block_25(ctx)
+      ctx[103].name !== "id" && create_if_block_25(ctx)
     );
     return {
       c() {
@@ -16675,7 +16693,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (
           /*field*/
-          ctx2[102].name !== "id"
+          ctx2[103].name !== "id"
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -16813,7 +16831,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               input,
               "input",
               /*input_input_handler*/
-              ctx[65]
+              ctx[66]
+            ),
+            listen(
+              input,
+              "keydown",
+              /*handleSearchOnEnter*/
+              ctx[48]
             )
           ];
           mounted = true;
@@ -16856,14 +16880,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let span;
     let t0_value = (
       /*f*/
-      ctx[91].label + ""
+      ctx[92].label + ""
     );
     let t0;
     let t1;
     let show_if = !/*UNSORTED_ROWS*/
     ctx[14].includes(
       /*f*/
-      ctx[91].name
+      ctx[92].name
     );
     let button_disabled_value;
     let t2;
@@ -16876,9 +16900,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_2() {
       return (
         /*click_handler_2*/
-        ctx[66](
+        ctx[67](
           /*f*/
-          ctx[91]
+          ctx[92]
         )
       );
     }
@@ -16896,20 +16920,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         button.disabled = button_disabled_value = /*UNSORTED_ROWS*/
         ctx[14].includes(
           /*f*/
-          ctx[91].name
+          ctx[92].name
         );
         attr(th, "style", th_style_value = /*COL_WIDTHS*/
         ctx[16][
           /*f*/
-          ctx[91].name
+          ctx[92].name
         ] ? `min-width: ${/*COL_WIDTHS*/
         ctx[16][
           /*f*/
-          ctx[91].name
+          ctx[92].name
         ]}px;` : "");
         attr(th, "class", th_class_value = /*f*/
-        (ctx[91].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[91].inputType === "datetime" ? "datetime" : "") + " svelte-1ogvazv");
+        (ctx[92].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[92].inputType === "datetime" ? "datetime" : "") + " svelte-1ogvazv");
       },
       m(target, anchor) {
         insert(target, th, anchor);
@@ -16930,14 +16954,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx = new_ctx;
         if ((!current || dirty[0] & /*FIELDS*/
         2) && t0_value !== (t0_value = /*f*/
-        ctx[91].label + ""))
+        ctx[92].label + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*UNSORTED_ROWS, FIELDS*/
         16386)
           show_if = !/*UNSORTED_ROWS*/
           ctx[14].includes(
             /*f*/
-            ctx[91].name
+            ctx[92].name
           );
         if (show_if) {
           if (if_block) {
@@ -16963,7 +16987,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         16386 && button_disabled_value !== (button_disabled_value = /*UNSORTED_ROWS*/
         ctx[14].includes(
           /*f*/
-          ctx[91].name
+          ctx[92].name
         ))) {
           button.disabled = button_disabled_value;
         }
@@ -16971,18 +16995,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         65538 && th_style_value !== (th_style_value = /*COL_WIDTHS*/
         ctx[16][
           /*f*/
-          ctx[91].name
+          ctx[92].name
         ] ? `min-width: ${/*COL_WIDTHS*/
         ctx[16][
           /*f*/
-          ctx[91].name
+          ctx[92].name
         ]}px;` : "")) {
           attr(th, "style", th_style_value);
         }
         if (!current || dirty[0] & /*FIELDS*/
         2 && th_class_value !== (th_class_value = /*f*/
-        (ctx[91].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[91].inputType === "datetime" ? "datetime" : "") + " svelte-1ogvazv")) {
+        (ctx[92].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[92].inputType === "datetime" ? "datetime" : "") + " svelte-1ogvazv")) {
           attr(th, "class", th_class_value);
         }
       },
@@ -17036,16 +17060,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let if_block0 = (
       /*isSortTableAsc*/
       ctx[27] && /*f*/
-      ctx[91].name === /*fieldNameToSort*/
+      ctx[92].name === /*fieldNameToSort*/
       ctx[28] && create_if_block_21(ctx)
     );
     let if_block1 = !/*isSortTableAsc*/
     ctx[27] && /*f*/
-    ctx[91].name === /*fieldNameToSort*/
+    ctx[92].name === /*fieldNameToSort*/
     ctx[28] && create_if_block_20(ctx);
     let if_block2 = (
       /*f*/
-      ctx[91].name !== /*fieldNameToSort*/
+      ctx[92].name !== /*fieldNameToSort*/
       ctx[28] && create_if_block_19(ctx)
     );
     return {
@@ -17076,7 +17100,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (
           /*isSortTableAsc*/
           ctx2[27] && /*f*/
-          ctx2[91].name === /*fieldNameToSort*/
+          ctx2[92].name === /*fieldNameToSort*/
           ctx2[28]
         ) {
           if (if_block0) {
@@ -17099,7 +17123,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (!/*isSortTableAsc*/
         ctx2[27] && /*f*/
-        ctx2[91].name === /*fieldNameToSort*/
+        ctx2[92].name === /*fieldNameToSort*/
         ctx2[28]) {
           if (if_block1) {
             if (dirty[0] & /*isSortTableAsc, FIELDS, fieldNameToSort*/
@@ -17121,7 +17145,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (
           /*f*/
-          ctx2[91].name !== /*fieldNameToSort*/
+          ctx2[92].name !== /*fieldNameToSort*/
           ctx2[28]
         ) {
           if (if_block2) {
@@ -17285,7 +17309,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type_1(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[91].name === "id"
+        ctx2[92].name === "id"
       )
         return 0;
       return 1;
@@ -17453,20 +17477,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   function create_else_block_2(ctx) {
     let td;
     let t_value = (typeof /*row*/
-    ctx[88][
+    ctx[89][
       /*idx*/
-      ctx[93]
+      ctx[94]
     ] === "boolean" ? (
       /*row*/
-      ctx[88][
+      ctx[89][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] ? "Yes" : "No"
     ) : (
       /*row*/
-      ctx[88][
+      ctx[89][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] || "--"
     )) + "";
     let t;
@@ -17477,7 +17501,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t = text(t_value);
         attr(td, "class", td_class_value = null_to_empty(
           /*f*/
-          ctx[91].type
+          ctx[92].type
         ) + " svelte-1ogvazv");
       },
       m(target, anchor) {
@@ -17487,27 +17511,27 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = (typeof /*row*/
-        ctx2[88][
+        ctx2[89][
           /*idx*/
-          ctx2[93]
+          ctx2[94]
         ] === "boolean" ? (
           /*row*/
-          ctx2[88][
+          ctx2[89][
             /*idx*/
-            ctx2[93]
+            ctx2[94]
           ] ? "Yes" : "No"
         ) : (
           /*row*/
-          ctx2[88][
+          ctx2[89][
             /*idx*/
-            ctx2[93]
+            ctx2[94]
           ] || "--"
         )) + ""))
           set_data(t, t_value);
         if (dirty[0] & /*FIELDS*/
         2 && td_class_value !== (td_class_value = null_to_empty(
           /*f*/
-          ctx2[91].type
+          ctx2[92].type
         ) + " svelte-1ogvazv")) {
           attr(td, "class", td_class_value);
         }
@@ -17525,9 +17549,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t0_value = (
       /*row*/
-      (ctx[88][
+      (ctx[89][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] || "0") + ""
     );
     let t0;
@@ -17547,9 +17571,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t0_value !== (t0_value = /*row*/
-        (ctx2[88][
+        (ctx2[89][
           /*idx*/
-          ctx2[93]
+          ctx2[94]
         ] || "0") + ""))
           set_data(t0, t0_value);
       },
@@ -17568,12 +17592,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*REFS*/
       (ctx[3][
         /*f*/
-        ctx[91].name
+        ctx[92].name
       ][
         /*row*/
-        ctx[88][
+        ctx[89][
           /*idx*/
-          ctx[93]
+          ctx[94]
         ]
       ] || "--") + ""
     );
@@ -17593,12 +17617,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         14 && t_value !== (t_value = /*REFS*/
         (ctx2[3][
           /*f*/
-          ctx2[91].name
+          ctx2[92].name
         ][
           /*row*/
-          ctx2[88][
+          ctx2[89][
             /*idx*/
-            ctx2[93]
+            ctx2[94]
           ]
         ] || "--") + ""))
           set_data(t, t_value);
@@ -17616,14 +17640,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = (
       /*row*/
-      (ctx[88][
+      (ctx[89][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] ? (0, import_xFormatter2.datetime)(
         /*row*/
-        ctx[88][
+        ctx[89][
           /*idx*/
-          ctx[93]
+          ctx[94]
         ]
       ) : "--") + ""
     );
@@ -17641,14 +17665,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = /*row*/
-        (ctx2[88][
+        (ctx2[89][
           /*idx*/
-          ctx2[93]
+          ctx2[94]
         ] ? (0, import_xFormatter2.datetime)(
           /*row*/
-          ctx2[88][
+          ctx2[89][
             /*idx*/
-            ctx2[93]
+            ctx2[94]
           ]
         ) : "--") + ""))
           set_data(t, t_value);
@@ -17666,17 +17690,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = (
       /*row*/
-      (ctx[88][
+      (ctx[89][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] ? (0, import_xFormatter2.formatPrice)(
         /*row*/
-        ctx[88][
+        ctx[89][
           /*idx*/
-          ctx[93]
+          ctx[94]
         ],
         /*f*/
-        ctx[91].mapping || "IDR"
+        ctx[92].mapping || "IDR"
       ) : "--") + ""
     );
     let t;
@@ -17693,17 +17717,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, FIELDS*/
         6 && t_value !== (t_value = /*row*/
-        (ctx2[88][
+        (ctx2[89][
           /*idx*/
-          ctx2[93]
+          ctx2[94]
         ] ? (0, import_xFormatter2.formatPrice)(
           /*row*/
-          ctx2[88][
+          ctx2[89][
             /*idx*/
-            ctx2[93]
+            ctx2[94]
           ],
           /*f*/
-          ctx2[91].mapping || "IDR"
+          ctx2[92].mapping || "IDR"
         ) : "--") + ""))
           set_data(t, t_value);
       },
@@ -17720,14 +17744,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = (
       /*row*/
-      (ctx[88][
+      (ctx[89][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ] ? Object.entries(
         /*REFS*/
         ctx[3][
           /*f*/
-          ctx[91].name
+          ctx[92].name
         ]
       ).map(func).join(", ") : "--") + ""
     );
@@ -17745,14 +17769,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, REFS, FIELDS*/
         14 && t_value !== (t_value = /*row*/
-        (ctx2[88][
+        (ctx2[89][
           /*idx*/
-          ctx2[93]
+          ctx2[94]
         ] ? Object.entries(
           /*REFS*/
           ctx2[3][
             /*f*/
-            ctx2[91].name
+            ctx2[92].name
           ]
         ).map(func).join(", ") : "--") + ""))
           set_data(t, t_value);
@@ -17770,9 +17794,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = formatFacilities(
       /*row*/
-      ctx[88][
+      ctx[89][
         /*idx*/
-        ctx[93]
+        ctx[94]
       ],
       /*REFS*/
       ctx[3]["facilities"]
@@ -17792,9 +17816,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*MASTER_ROWS, REFS*/
         12 && t_value !== (t_value = formatFacilities(
           /*row*/
-          ctx2[88][
+          ctx2[89][
             /*idx*/
-            ctx2[93]
+            ctx2[94]
           ],
           /*REFS*/
           ctx2[3]["facilities"]
@@ -18130,9 +18154,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_3() {
       return (
         /*click_handler_3*/
-        ctx[67](
+        ctx[68](
           /*row*/
-          ctx[88]
+          ctx[89]
         )
       );
     }
@@ -18254,13 +18278,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_4() {
       return (
         /*click_handler_4*/
-        ctx[68](
+        ctx[69](
           /*row*/
-          ctx[88],
+          ctx[89],
           /*idx*/
-          ctx[93],
+          ctx[94],
           /*f*/
-          ctx[91]
+          ctx[92]
         )
       );
     }
@@ -18313,11 +18337,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type_5(ctx2, dirty) {
       if (
         /*row*/
-        ctx2[88][
+        ctx2[89][
           /*deletedIndex*/
           ctx2[22]
         ] > 0 || /*row*/
-        ctx2[88][
+        ctx2[89][
           /*deletedIndex*/
           ctx2[22]
         ] === "terminated"
@@ -18393,9 +18417,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_6() {
       return (
         /*click_handler_6*/
-        ctx[70](
+        ctx[71](
           /*row*/
-          ctx[88]
+          ctx[89]
         )
       );
     }
@@ -18454,9 +18478,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_5() {
       return (
         /*click_handler_5*/
-        ctx[69](
+        ctx[70](
           /*row*/
-          ctx[88]
+          ctx[89]
         )
       );
     }
@@ -18593,7 +18617,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         color: "var(--gray-007)",
         src: (
           /*l*/
-          ctx[97].icon
+          ctx[98].icon
         )
       }
     });
@@ -18603,15 +18627,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon.$.fragment);
         t = space();
         attr(a, "title", a_title_value = /*l*/
-        ctx[97].tooltip);
+        ctx[98].tooltip);
         attr(a, "class", "btn link svelte-1ogvazv");
         attr(a, "href", a_href_value = /*l*/
-        ctx[97].link(
+        ctx[98].link(
           /*row*/
-          ctx[88]
+          ctx[89]
         ));
         attr(a, "target", a_target_value = /*l*/
-        ctx[97].isTargetBlank ? "_blank" : "");
+        ctx[98].isTargetBlank ? "_blank" : "");
       },
       m(target, anchor) {
         insert(target, a, anchor);
@@ -18624,24 +18648,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*LINKS*/
         4096)
           icon_changes.src = /*l*/
-          ctx2[97].icon;
+          ctx2[98].icon;
         icon.$set(icon_changes);
         if (!current || dirty[0] & /*LINKS*/
         4096 && a_title_value !== (a_title_value = /*l*/
-        ctx2[97].tooltip)) {
+        ctx2[98].tooltip)) {
           attr(a, "title", a_title_value);
         }
         if (!current || dirty[0] & /*LINKS, MASTER_ROWS*/
         4100 && a_href_value !== (a_href_value = /*l*/
-        ctx2[97].link(
+        ctx2[98].link(
           /*row*/
-          ctx2[88]
+          ctx2[89]
         ))) {
           attr(a, "href", a_href_value);
         }
         if (!current || dirty[0] & /*LINKS*/
         4096 && a_target_value !== (a_target_value = /*l*/
-        ctx2[97].isTargetBlank ? "_blank" : "")) {
+        ctx2[98].isTargetBlank ? "_blank" : "")) {
           attr(a, "target", a_target_value);
         }
       },
@@ -18756,18 +18780,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         color: "var(--gray-007)",
         src: (
           /*b*/
-          ctx[94].icon
+          ctx[95].icon
         )
       }
     });
     function click_handler_7() {
       return (
         /*click_handler_7*/
-        ctx[71](
+        ctx[72](
           /*b*/
-          ctx[94],
+          ctx[95],
           /*row*/
-          ctx[88]
+          ctx[89]
         )
       );
     }
@@ -18777,7 +18801,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon.$.fragment);
         attr(button, "class", "btn svelte-1ogvazv");
         attr(button, "title", button_title_value = /*b*/
-        ctx[94].tooltip);
+        ctx[95].tooltip);
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -18794,11 +18818,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*EXTENDED_BUTTONS*/
         32768)
           icon_changes.src = /*b*/
-          ctx[94].icon;
+          ctx[95].icon;
         icon.$set(icon_changes);
         if (!current || dirty[0] & /*EXTENDED_BUTTONS*/
         32768 && button_title_value !== (button_title_value = /*b*/
-        ctx[94].tooltip)) {
+        ctx[95].tooltip)) {
           attr(button, "title", button_title_value);
         }
       },
@@ -18841,41 +18865,41 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type_3(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[91].name === "id"
+        ctx2[92].name === "id"
       )
         return 0;
       if (
         /*f*/
-        ctx2[91].name === "facilities"
+        ctx2[92].name === "facilities"
       )
         return 1;
       if (
         /*f*/
-        ctx2[91].type == "intArr"
+        ctx2[92].type == "intArr"
       )
         return 2;
       if (
         /*f*/
-        ctx2[91].type == "currency"
+        ctx2[92].type == "currency"
       )
         return 3;
       if (
         /*f*/
-        ctx2[91].inputType === "datetime"
+        ctx2[92].inputType === "datetime"
       )
         return 4;
       if (
         /*f*/
-        ctx2[91].inputType === "combobox" && /*REFS*/
+        ctx2[92].inputType === "combobox" && /*REFS*/
         ctx2[3][
           /*f*/
-          ctx2[91].name
+          ctx2[92].name
         ]
       )
         return 5;
       if (
         /*f*/
-        ctx2[91].inputType === "percentage"
+        ctx2[92].inputType === "percentage"
       )
         return 6;
       return 7;
@@ -18941,7 +18965,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       ctx[0].perPage + /*MASTER_ROWS*/
       ctx[2].indexOf(
         /*row*/
-        ctx[88]
+        ctx[89]
       ) + 1 + ""
     );
     let t0;
@@ -18974,11 +18998,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(tr, "class", tr_class_value = null_to_empty(
           /*CAN_DELETE_ROW*/
           ctx[8] && /*row*/
-          (ctx[88][
+          (ctx[89][
             /*deletedIndex*/
             ctx[22]
           ] > 0 || /*row*/
-          ctx[88][
+          ctx[89][
             /*deletedIndex*/
             ctx[22]
           ] === "terminated") ? "deleted" : ""
@@ -19004,7 +19028,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx2[0].perPage + /*MASTER_ROWS*/
         ctx2[2].indexOf(
           /*row*/
-          ctx2[88]
+          ctx2[89]
         ) + 1 + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*EXTENDED_BUTTONS, MASTER_ROWS, LINKS, CAN_OPEN_LINK, deletedIndex, CAN_DELETE_ROW, CAN_RESTORE_ROW, FIELDS, CAN_EDIT_ROW, IS_CUSTOM_EDIT, OnInfo, CAN_SHOW_INFO, ACCESS, REFS*/
@@ -19037,11 +19061,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         4194564 && tr_class_value !== (tr_class_value = null_to_empty(
           /*CAN_DELETE_ROW*/
           ctx2[8] && /*row*/
-          (ctx2[88][
+          (ctx2[89][
             /*deletedIndex*/
             ctx2[22]
           ] > 0 || /*row*/
-          ctx2[88][
+          ctx2[89][
             /*deletedIndex*/
             ctx2[22]
           ] === "terminated") ? "deleted" : ""
@@ -19137,9 +19161,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_8() {
       return (
         /*click_handler_8*/
-        ctx[72](
+        ctx[73](
           /*r*/
-          ctx[85]
+          ctx[86]
         )
       );
     }
@@ -19147,7 +19171,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       c() {
         button = element("button");
         button.textContent = `${/*r*/
-        ctx[85]}`;
+        ctx[86]}`;
         attr(button, "class", "svelte-1ogvazv");
       },
       m(target, anchor) {
@@ -19173,7 +19197,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let button;
     let t_value = (
       /*i*/
-      ctx[82] + ""
+      ctx[83] + ""
     );
     let t;
     let button_disabled_value;
@@ -19184,9 +19208,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_11() {
       return (
         /*click_handler_11*/
-        ctx[75](
+        ctx[76](
           /*i*/
-          ctx[82]
+          ctx[83]
         )
       );
     }
@@ -19196,14 +19220,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t = text(t_value);
         button.disabled = button_disabled_value = /*currentPage*/
         ctx[26] == /*i*/
-        ctx[82];
+        ctx[83];
         attr(button, "class", button_class_value = null_to_empty(
           /*currentPage*/
           ctx[26] === /*i*/
-          ctx[82] ? "btn active" : "btn"
+          ctx[83] ? "btn active" : "btn"
         ) + " svelte-1ogvazv");
         attr(button, "title", button_title_value = `Go to page ${/*i*/
-        ctx[82]}`);
+        ctx[83]}`);
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -19217,25 +19241,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx = new_ctx;
         if (dirty[0] & /*paginationShow*/
         33554432 && t_value !== (t_value = /*i*/
-        ctx[82] + ""))
+        ctx[83] + ""))
           set_data(t, t_value);
         if (dirty[0] & /*currentPage, paginationShow*/
         100663296 && button_disabled_value !== (button_disabled_value = /*currentPage*/
         ctx[26] == /*i*/
-        ctx[82])) {
+        ctx[83])) {
           button.disabled = button_disabled_value;
         }
         if (dirty[0] & /*currentPage, paginationShow*/
         100663296 && button_class_value !== (button_class_value = null_to_empty(
           /*currentPage*/
           ctx[26] === /*i*/
-          ctx[82] ? "btn active" : "btn"
+          ctx[83] ? "btn active" : "btn"
         ) + " svelte-1ogvazv")) {
           attr(button, "class", button_class_value);
         }
         if (dirty[0] & /*paginationShow*/
         33554432 && button_title_value !== (button_title_value = `Go to page ${/*i*/
-        ctx[82]}`)) {
+        ctx[83]}`)) {
           attr(button, "title", button_title_value);
         }
       },
@@ -19339,13 +19363,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     const default_slot_template = (
       /*#slots*/
-      ctx[55].default
+      ctx[56].default
     );
     const default_slot = create_slot(
       default_slot_template,
       ctx,
       /*$scope*/
-      ctx[54],
+      ctx[55],
       null
     );
     let if_block2 = isAjaxSubmitted && create_if_block_23(ctx);
@@ -19359,7 +19383,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     );
     const get_key = (ctx2) => (
       /*f*/
-      ctx2[91].name
+      ctx2[92].name
     );
     for (let i = 0; i < each_value_6.length; i += 1) {
       let child_ctx = get_each_context_6(ctx, each_value_6, i);
@@ -19642,7 +19666,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button0,
               "click",
               /*click_handler_1*/
-              ctx[64]
+              ctx[65]
             ),
             listen(
               button1,
@@ -19654,25 +19678,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button2,
               "click",
               /*click_handler_9*/
-              ctx[73]
+              ctx[74]
             ),
             listen(
               button3,
               "click",
               /*click_handler_10*/
-              ctx[74]
+              ctx[75]
             ),
             listen(
               button4,
               "click",
               /*click_handler_12*/
-              ctx[76]
+              ctx[77]
             ),
             listen(
               button5,
               "click",
               /*click_handler_13*/
-              ctx[77]
+              ctx[78]
             )
           ];
           mounted = true;
@@ -19727,20 +19751,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (default_slot) {
           if (default_slot.p && (!current || dirty[1] & /*$scope*/
-          8388608)) {
+          16777216)) {
             update_slot_base(
               default_slot,
               default_slot_template,
               ctx2,
               /*$scope*/
-              ctx2[54],
+              ctx2[55],
               !current ? get_all_dirty_from_scope(
                 /*$scope*/
-                ctx2[54]
+                ctx2[55]
               ) : get_slot_changes(
                 default_slot_template,
                 /*$scope*/
-                ctx2[54],
+                ctx2[55],
                 dirty,
                 null
               ),
@@ -20172,6 +20196,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       $invalidate(0, PAGER.searchBy = FIELD_TO_SEARCH, PAGER);
       await OnRefresh(PAGER);
     }
+    async function handleSearchOnEnter(event) {
+      if (event.key === "Enter") {
+        await handleSearch();
+      }
+    }
     function filtertable_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         filterTable = $value;
@@ -20242,7 +20271,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("ACCESS" in $props2)
         $invalidate(5, ACCESS = $props2.ACCESS);
       if ("ARRAY_OF_ARRAY" in $props2)
-        $invalidate(48, ARRAY_OF_ARRAY = $props2.ARRAY_OF_ARRAY);
+        $invalidate(49, ARRAY_OF_ARRAY = $props2.ARRAY_OF_ARRAY);
       if ("CAN_SEARCH_ROW" in $props2)
         $invalidate(6, CAN_SEARCH_ROW = $props2.CAN_SEARCH_ROW);
       if ("CAN_EDIT_ROW" in $props2)
@@ -20264,21 +20293,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("EXTENDED_BUTTONS" in $props2)
         $invalidate(15, EXTENDED_BUTTONS = $props2.EXTENDED_BUTTONS);
       if ("FIELD_TO_SEARCH" in $props2)
-        $invalidate(49, FIELD_TO_SEARCH = $props2.FIELD_TO_SEARCH);
+        $invalidate(50, FIELD_TO_SEARCH = $props2.FIELD_TO_SEARCH);
       if ("COL_WIDTHS" in $props2)
         $invalidate(16, COL_WIDTHS = $props2.COL_WIDTHS);
       if ("OnRestore" in $props2)
-        $invalidate(50, OnRestore = $props2.OnRestore);
+        $invalidate(51, OnRestore = $props2.OnRestore);
       if ("OnDelete" in $props2)
-        $invalidate(51, OnDelete = $props2.OnDelete);
+        $invalidate(52, OnDelete = $props2.OnDelete);
       if ("OnEdit" in $props2)
-        $invalidate(52, OnEdit = $props2.OnEdit);
+        $invalidate(53, OnEdit = $props2.OnEdit);
       if ("OnRefresh" in $props2)
-        $invalidate(53, OnRefresh = $props2.OnRefresh);
+        $invalidate(54, OnRefresh = $props2.OnRefresh);
       if ("OnInfo" in $props2)
         $invalidate(17, OnInfo = $props2.OnInfo);
       if ("$scope" in $props2)
-        $invalidate(54, $scope = $props2.$scope);
+        $invalidate(55, $scope = $props2.$scope);
     };
     $self.$.update = () => {
       if ($self.$.dirty[0] & /*PAGER*/
@@ -20338,6 +20367,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       handleSubmitEdit,
       OnSort,
       handleSearch,
+      handleSearchOnEnter,
       ARRAY_OF_ARRAY,
       FIELD_TO_SEARCH,
       OnRestore,
@@ -20386,7 +20416,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           REFS: 3,
           NAME: 4,
           ACCESS: 5,
-          ARRAY_OF_ARRAY: 48,
+          ARRAY_OF_ARRAY: 49,
           CAN_SEARCH_ROW: 6,
           CAN_EDIT_ROW: 7,
           CAN_DELETE_ROW: 8,
@@ -20397,12 +20427,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           IS_CUSTOM_EDIT: 13,
           UNSORTED_ROWS: 14,
           EXTENDED_BUTTONS: 15,
-          FIELD_TO_SEARCH: 49,
+          FIELD_TO_SEARCH: 50,
           COL_WIDTHS: 16,
-          OnRestore: 50,
-          OnDelete: 51,
-          OnEdit: 52,
-          OnRefresh: 53,
+          OnRestore: 51,
+          OnDelete: 52,
+          OnEdit: 53,
+          OnRefresh: 54,
           OnInfo: 17
         },
         null,

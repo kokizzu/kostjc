@@ -122,7 +122,10 @@
   let showOnlyNotPaid = false;
 
   let isPopUpFormReady = false;
-  onMount(() => isPopUpFormReady = true);
+  onMount(async () => {
+    isPopUpFormReady = true;
+    await refreshBookings();
+  });
 
   let popupExtendBooking = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpExtendBooking | any} */ (null);
   let bookingToExtend = /** @type {BookingDetail} */ ({});

@@ -293,6 +293,12 @@
     PAGER.searchBy = FIELD_TO_SEARCH;
     await OnRefresh(PAGER);
   }
+
+  async function handleSearchOnEnter(/** @type {KeyboardEvent} */ event) {
+    if (event.key === 'Enter') {
+      await handleSearch();
+    }
+  }
 </script>
 
 {#if filterTableReady}
@@ -389,6 +395,7 @@
             id="searchRow"
             class="search"
             bind:value={searchValue}
+            on:keydown={handleSearchOnEnter}
           />
         </div>
       {/if}

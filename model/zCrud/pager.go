@@ -499,5 +499,5 @@ func (p *PagerOut) SearchBySqlTt(search, searchBy string, fieldToType map[string
 		return ``
 	}
 
-	return `WHERE "` + searchBy + `" LIKE '%` + search + `%'`
+	return `WHERE "` + searchBy + `" LIKE ` + S.ZLIKE(search)
 }
