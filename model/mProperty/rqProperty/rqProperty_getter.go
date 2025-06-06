@@ -1139,22 +1139,46 @@ func getAgeByBirthday(birthday string) int {
 	return age
 }
 
-func (r *Rooms) FindAvailableRooms() (out []string) {
+type AvailableRoom struct {
+	RoomName       string `json:"roomName"`
+	AvailableAt    string `json:"availableAt"`
+	IsAvailableNow bool   `json:"isAvailableNow"`
+}
+
+func (r *Rooms) FindAvailableRooms() (out []AvailableRoom) {
 	const comment = `-- Rooms) FindAvailableRooms`
 
 	now := time.Now()
+	dateTimeNow := now.Format(time.DateOnly)
 	sevenDaysAgo := now.AddDate(0, 0, -7).Format(time.DateOnly)
 	sevenDaysLater := now.AddDate(0, 0, 7).Format(time.DateOnly)
 
 	queryRows := comment + `
-SELECT ` + r.SqlRoomName() + ` FROM ` + r.SqlTableName() + `
-WHERE ` + r.SqlLastUseAt() + ` >= ` + sevenDaysAgo + `
-	AND ` + r.SqlLastUseAt() + ` <= ` + sevenDaysLater
+SELECT
+	` + r.SqlRoomName() + `,
+	` + r.SqlLastUseAt() + `,
+	CASE
+		WHEN ` + r.SqlLastUseAt() + ` <= '` + dateTimeNow + `'
+		THEN 'TRUE'
+	ELSE 'FALSE' END
+FROM ` + r.SqlTableName() + `
+WHERE
+	(` + r.SqlLastUseAt() + ` >= '` + sevenDaysAgo + `'
+		AND ` + r.SqlLastUseAt() + ` <= '` + sevenDaysLater + `'
+	)
+	OR ` + r.SqlCurrentTenantId() + ` = 0
+ORDER BY ` + r.SqlRoomName() + ` ASC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 1 {
+		if len(row) == 3 {
 			roomName := X.ToS(row[0])
-			out = append(out, roomName)
+			availableAt := X.ToS(row[1])
+			isAvailableNow := X.ToBool(row[2])
+			out = append(out, AvailableRoom{
+				RoomName:       roomName,
+				AvailableAt:    availableAt,
+				IsAvailableNow: isAvailableNow,
+			})
 		}
 	})
 
