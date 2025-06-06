@@ -462,6 +462,40 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminSaleAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminSaleIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSaleAction)
+		if err != nil {
+			return err
+		}
+
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		rqTenants := rqAuth.NewTenants(d.PropOltp)
+		tenants := rqTenants.FindTenantChoices()
+
+		tenants[0] = "Bukan tenant"
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.AdminSale(&in)
+
+		return views.RenderAdminSale(ctx, M.SX{
+			`title`:    `KostJC | Sale Management`,
+			`user`:     user,
+			`segments`: segments,
+			`tenants`:  tenants,
+			`sale`:     out.Sale,
+			`sales`:    out.Sales,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {
 		return views.RenderDebug(ctx, M.SX{})
 	})
