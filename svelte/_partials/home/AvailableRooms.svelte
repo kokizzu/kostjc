@@ -19,7 +19,7 @@
 </script>
 
 <section class="empty-rooms">
-  <h1>Empty Rooms</h1>
+  <h1>Available Rooms</h1>
   {#if rooms && rooms.length > 0}
     <div class="cards">
       {#each (rooms || []) as r}
