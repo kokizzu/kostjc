@@ -9,6 +9,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"regexp"
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
@@ -380,6 +381,8 @@ type insertPropertyLogFunc interface {
 	Insert([]interface{}) bool
 }
 
+var rgxReplaceUpdatedAt = regexp.MustCompile(`"updatedAt":\d+`)
+
 func InsertPropertyLog(
 	refId uint64,
 	insertFunc insertPropertyLogFunc,
@@ -400,7 +403,9 @@ func InsertPropertyLog(
 
 		afterJson, _ := json.Marshal(data)
 
-		if string(beforeJson) == string(afterJson) {
+		tempBeforeJson := rgxReplaceUpdatedAt.ReplaceAllString(string(beforeJson), `"updatedAt":0`)
+		tempAfterJson := rgxReplaceUpdatedAt.ReplaceAllString(string(afterJson), `"updatedAt":0`)
+		if tempBeforeJson == tempAfterJson {
 			return
 		}
 
