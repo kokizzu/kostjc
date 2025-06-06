@@ -16209,7 +16209,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[8]
+      ctx[9]
     );
     select.$on(
       "clear",
@@ -16262,7 +16262,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       multiple: true,
       items: (
         /*valuesSourceArrayObject*/
-        ctx[10]
+        ctx[7]
       ),
       placeholder: (
         /*placeholder*/
@@ -16271,22 +16271,22 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*valuesTargetArrayObject*/
-      ctx[7] !== void 0
+      ctx[8] !== void 0
     ) {
       select_props.value = /*valuesTargetArrayObject*/
-      ctx[7];
+      ctx[8];
     }
     select = new Select_default({ props: select_props });
     binding_callbacks.push(() => bind(select, "value", select_value_binding));
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[8]
+      ctx[9]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[9]
+      ctx[10]
     );
     return {
       c() {
@@ -16298,15 +16298,19 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         const select_changes = {};
+        if (dirty & /*valuesSourceArrayObject*/
+        128)
+          select_changes.items = /*valuesSourceArrayObject*/
+          ctx2[7];
         if (dirty & /*placeholder*/
         64)
           select_changes.placeholder = /*placeholder*/
           ctx2[6];
         if (!updating_value && dirty & /*valuesTargetArrayObject*/
-        128) {
+        256) {
           updating_value = true;
           select_changes.value = /*valuesTargetArrayObject*/
-          ctx2[7];
+          ctx2[8];
           add_flush_callback(() => updating_value = false);
         }
         select.$set(select_changes);
@@ -16505,7 +16509,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       []
     );
     let valuesTargetArrayObject = [];
-    onMount(() => {
+    function reStructureSvelteValues() {
+      $invalidate(7, valuesSourceArrayObject = []);
+      $invalidate(8, valuesTargetArrayObject = []);
       for (const [k, v] of Object.entries(valuesSourceObj)) {
         valuesSourceArrayObject.push({ value: k, label: v });
       }
@@ -16513,17 +16519,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         for (const kv of valuesSourceArrayObject) {
           for (const vt of valuesTarget) {
             if (kv.value == vt) {
-              $invalidate(7, valuesTargetArrayObject = [...valuesTargetArrayObject, kv]);
+              $invalidate(8, valuesTargetArrayObject = [...valuesTargetArrayObject, kv]);
             }
           }
         }
         valuesSourceArrayObject.sort((a, b) => a.label.localeCompare(b.label));
       }
+    }
+    onMount(() => {
+      reStructureSvelteValues();
     });
     const clear_handler = () => $invalidate(0, valuesTarget = []);
     function select_value_binding(value) {
       valuesTargetArrayObject = value;
-      $invalidate(7, valuesTargetArrayObject);
+      $invalidate(8, valuesTargetArrayObject);
     }
     $self.$set = ($props2) => {
       if ("className" in $props2)
@@ -16543,6 +16552,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("placeholder" in $props2)
         $invalidate(6, placeholder = $props2.placeholder);
     };
+    $self.$.update = () => {
+      if ($self.$.dirty & /*valuesTarget*/
+      1) {
+        $:
+          if (valuesTarget) {
+            reStructureSvelteValues();
+          }
+      }
+    };
     return [
       valuesTarget,
       className,
@@ -16551,10 +16569,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       id,
       label,
       placeholder,
+      valuesSourceArrayObject,
       valuesTargetArrayObject,
       handleSelect,
       handleClear,
-      valuesSourceArrayObject,
       valuesSourceObj,
       clear_handler,
       select_value_binding

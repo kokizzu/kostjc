@@ -20,6 +20,9 @@ import (
 //go:generate farify doublequote --file pager.go
 
 type PagerIn struct {
+	Search   string `json:"search" form:"search" query:"search" long:"search" msg:"search"`
+	SearchBy string `json:"searchBy" form:"searchBy" query:"searchBy" long:"searchBy" msg:"searchBy"`
+
 	Page    int `json:"page" form:"page" query:"page" long:"page" msg:"page"`
 	PerPage int `json:"perPage" form:"perPage" query:"perPage" long:"perPage" msg:"perPage"`
 
@@ -31,6 +34,9 @@ type PagerIn struct {
 }
 
 type PagerOut struct {
+	Search   string `json:"search" form:"search" query:"search" long:"search" msg:"search"`
+	SearchBy string `json:"searchBy" form:"searchBy" query:"searchBy" long:"searchBy" msg:"searchBy"`
+
 	Page    int `json:"page" form:"page" query:"page" long:"page" msg:"page"`
 	PerPage int `json:"perPage" form:"perPage" query:"perPage" long:"perPage" msg:"perPage"`
 
@@ -485,4 +491,13 @@ func (p *PagerOut) CalculatePages(page, perPage, count int) {
 	if count > 0 {
 		p.Pages = (p.PerPage - 1 + count) / p.PerPage
 	}
+}
+
+func (p *PagerOut) SearchBySqlTt(search, searchBy string, fieldToType map[string]Tt.DataType) string {
+	_, isValidField := fieldToType[searchBy]
+	if !isValidField {
+		return ``
+	}
+
+	return `WHERE "` + searchBy + `" LIKE ` + S.ZLIKE(search)
 }

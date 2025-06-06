@@ -32,7 +32,10 @@
    */
   let valuesSourceArrayObject = /** @type {SvelteSelectValue[]} */ ([]);
   let valuesTargetArrayObject = [];
-  onMount(() => {
+
+  function reStructureSvelteValues() {
+    valuesSourceArrayObject = [];
+    valuesTargetArrayObject = [];
     for (const [k, v] of Object.entries(valuesSourceObj)) {
       valuesSourceArrayObject.push({
         value: k,
@@ -50,7 +53,15 @@
 
       valuesSourceArrayObject.sort((a, b) => a.label.localeCompare(b.label));
     }
-  })
+  }
+
+  onMount(() => {
+    reStructureSvelteValues();  
+  });
+
+  $: if (valuesTarget) {
+    reStructureSvelteValues();
+  }
 </script>
 
 <div class={className}>

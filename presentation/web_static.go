@@ -21,12 +21,14 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		room := rqProperty.NewRooms(d.PropOltp)
 		tenantsNearbyBirthdays := room.FindTenantsNearbyBirthdays()
+		availableRooms := room.FindAvailableRooms()
 
 		return views.RenderIndex(ctx, M.SX{
 			`title`:                  `KostJC | Home`,
 			`user`:                   user,
 			`segments`:               segments,
 			`tenantsNearbyBirthdays`: tenantsNearbyBirthdays,
+			`availableRooms`:         availableRooms,
 		})
 	})
 
