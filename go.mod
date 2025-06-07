@@ -21,6 +21,7 @@ require (
 	github.com/pierrec/lz4/v4 v4.1.22
 	github.com/rs/zerolog v1.29.1
 	github.com/segmentio/fasthash v1.0.3
+	github.com/stretchr/testify v1.10.0
 	github.com/tarantool/go-tarantool v1.12.1
 	github.com/vburenin/nsync v0.0.0-20160822015540-9a75d1c80410
 	github.com/wneessen/go-mail v0.3.9
@@ -90,7 +91,6 @@ require (
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spacemonkeygo/spacelog v0.0.0-20180420211403-2296661a0572 // indirect
-	github.com/stretchr/testify v1.10.0 // indirect
 	github.com/tarantool/go-openssl v1.1.0 // indirect
 	github.com/tinylib/msgp v1.1.8 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

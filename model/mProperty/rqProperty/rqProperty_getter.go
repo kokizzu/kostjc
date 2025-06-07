@@ -1163,10 +1163,12 @@ SELECT
 	ELSE 'FALSE' END
 FROM ` + r.SqlTableName() + `
 WHERE
-	(` + r.SqlLastUseAt() + ` >= '` + sevenDaysAgo + `'
-		AND ` + r.SqlLastUseAt() + ` <= '` + sevenDaysLater + `'
-	)
-	OR ` + r.SqlCurrentTenantId() + ` = 0
+	(
+		(` + r.SqlLastUseAt() + ` > '` + sevenDaysAgo + `'
+			AND ` + r.SqlLastUseAt() + ` < '` + sevenDaysLater + `'
+		)
+		OR ` + r.SqlCurrentTenantId() + ` = 0
+	) AND ` + r.SqlDeletedAt() + ` = 0
 ORDER BY ` + r.SqlRoomName() + ` ASC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {

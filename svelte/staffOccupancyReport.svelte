@@ -49,6 +49,27 @@
     );
   }
 
+  /**
+   * @description Returns the relative day label based on the given date string (YYYY-MM-DD)
+   * @param {string} dateStr - The date string in format YYYY-MM-DD
+   * @returns {string} - The relative label like 'H', 'H-1', 'H+3', etc.
+   */
+  function getRelativeDayLabel(dateStr) {
+    const inputDate = new Date(dateStr);
+    const currentDate = new Date();
+
+    // Zero out time for both dates to only compare by day
+    inputDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
+    const diffInMs = inputDate.getTime() - currentDate.getTime();
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+    if (diffInDays === 0) return 'H';
+    if (diffInDays > 0) return `H+${diffInDays}`;
+    return `H${diffInDays}`; // e.g. 'H-1', 'H-2'
+  }
+
   function formatYM(/** @type {Date} */ date) {
     const y = date.getFullYear();
     const m = String(date.getMonth() + 1).padStart(2, '0');
@@ -120,6 +141,7 @@
   let showPaid        = true;
   let showPrice       = true;
   let showOnlyNotPaid = false;
+  let showHDaysSince  = true;
 
   let isPopUpFormReady = false;
   onMount(async () => {
@@ -374,6 +396,11 @@
           label="Show Only Not Paid"
           bind:value={showOnlyNotPaid}
         />
+        <Switcher
+          id="show-h-days-since"
+          label="Show H Days Since"
+          bind:value={showHDaysSince}
+        />
       </div>
     </div>
     <table>
@@ -411,7 +438,7 @@
                             {!booking.isExtended && booking.isNearEnding ? 'date-alert' : ''}
                             {showDateEnd ? '' : 'hidden'}
                           ">
-                            {booking.dateEnd}
+                            {booking.dateEnd} {!booking.isExtended && booking.isNearEnding && showHDaysSince ? `(${getRelativeDayLabel(booking.dateEnd)})` : ''}
                           </span>
                         </span>
                         <span class="{(booking.amountPaid == booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
