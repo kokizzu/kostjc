@@ -20231,9 +20231,15 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
         ) + " svelte-7am3bg");
         attr(span3, "class", span3_class_value = (!/*booking*/
         ctx[74].isNearEnding && !/*booking*/
-        ctx[74].isExtended ? "date-warning" : "") + " " + (!/*booking*/
+        ctx[74].isExtended ? `${!isDateToCharge(
+          /*booking*/
+          ctx[74].dateStart
+        ) ? "date-warning" : "date-alert"}` : "") + " " + (!/*booking*/
         ctx[74].isExtended && /*booking*/
-        ctx[74].isNearEnding ? "date-alert" : "") + " " + /*showDateEnd*/
+        ctx[74].isNearEnding ? `${isDateToCharge(
+          /*booking*/
+          ctx[74].dateStart
+        ) ? "date-alert" : "date-warning"}` : "") + " " + /*showDateEnd*/
         (ctx[7] ? "" : "hidden") + " svelte-7am3bg");
         attr(span5, "class", span5_class_value = null_to_empty(
           /*showPaid*/
@@ -20352,9 +20358,15 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
         if (!current || dirty[0] & /*roomNames, quartals, showDateEnd*/
         133 && span3_class_value !== (span3_class_value = (!/*booking*/
         ctx[74].isNearEnding && !/*booking*/
-        ctx[74].isExtended ? "date-warning" : "") + " " + (!/*booking*/
+        ctx[74].isExtended ? `${!isDateToCharge(
+          /*booking*/
+          ctx[74].dateStart
+        ) ? "date-warning" : "date-alert"}` : "") + " " + (!/*booking*/
         ctx[74].isExtended && /*booking*/
-        ctx[74].isNearEnding ? "date-alert" : "") + " " + /*showDateEnd*/
+        ctx[74].isNearEnding ? `${isDateToCharge(
+          /*booking*/
+          ctx[74].dateStart
+        ) ? "date-alert" : "date-warning"}` : "") + " " + /*showDateEnd*/
         (ctx[7] ? "" : "hidden") + " svelte-7am3bg")) {
           attr(span3, "class", span3_class_value);
         }
@@ -21378,6 +21390,16 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
   }
   function isBookingInThatMonth(booking, yearMonth) {
     return yearMonth >= booking.dateStart.slice(0, 7) && yearMonth <= booking.dateEnd.slice(0, 7);
+  }
+  function isDateToCharge(dateStart) {
+    const inputDate = new Date(dateStart);
+    const today = new Date();
+    const plus3Days = new Date();
+    plus3Days.setDate(today.getDate() + 3);
+    const inputDay = inputDate.getDate();
+    const todayDay = today.getDate();
+    const plus3Day = plus3Days.getDate();
+    return inputDay > todayDay && inputDay > plus3Day;
   }
   function instance15($self, $props, $invalidate) {
     let bookingsPerQuartal = (

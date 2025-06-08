@@ -309,6 +309,23 @@
     );
     isSubmitEditBooking = false;
   }
+
+  /**
+   * @param {string} dateStart - Date string in YYYY-MM-DD format
+   * @returns {boolean}
+   */
+  function isDateToCharge(dateStart) {
+    const inputDate = new Date(dateStart);
+    const today = new Date();
+    const plus3Days = new Date();
+    plus3Days.setDate(today.getDate() + 3);
+
+    const inputDay = inputDate.getDate();
+    const todayDay = today.getDate();
+    const plus3Day = plus3Days.getDate();
+
+    return inputDay > todayDay && inputDay > plus3Day;
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -434,8 +451,14 @@
                           <span> s/d </span>
                           <span
                             class="
-                            {!booking.isNearEnding && !booking.isExtended ? 'date-warning' : ''}
-                            {!booking.isExtended && booking.isNearEnding ? 'date-alert' : ''}
+                            {!booking.isNearEnding && !booking.isExtended
+                              ? `${!isDateToCharge(booking.dateStart) ? 'date-warning' : 'date-alert'}`
+                              : ''
+                            }
+                            {!booking.isExtended && booking.isNearEnding
+                              ? `${isDateToCharge(booking.dateStart) ? 'date-alert' : 'date-warning'}`
+                              : ''
+                            }
                             {showDateEnd ? '' : 'hidden'}
                           ">
                             {booking.dateEnd} {!booking.isExtended && booking.isNearEnding && showHDaysSince ? `(${getRelativeDayLabel(booking.dateEnd)})` : ''}
