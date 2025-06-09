@@ -9,6 +9,7 @@ import (
 	"kostjc/domain"
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
+	"kostjc/model/mCafe/rqCafe"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/zCrud"
@@ -478,6 +479,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		rqTenants := rqAuth.NewTenants(d.PropOltp)
 		tenants := rqTenants.FindTenantChoices()
 
+		men := rqCafe.NewMenus(d.PropOltp)
+		menus := men.FindMenusSalesChoices()
+
 		tenants[0] = "Bukan tenant"
 
 		in.WithMeta = true
@@ -489,6 +493,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`user`:     user,
 			`segments`: segments,
 			`tenants`:  tenants,
+			`menus`:    menus,
 			`sale`:     out.Sale,
 			`sales`:    out.Sales,
 			`fields`:   out.Meta.Fields,

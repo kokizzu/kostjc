@@ -7,6 +7,8 @@ import (
 	"kostjc/model/mCafe/wcCafe"
 	"kostjc/model/zCrud"
 	"time"
+
+	"github.com/kokizzu/gotro/X"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminSales.go
@@ -39,6 +41,7 @@ const (
 	ErrAdminSaleNotFound         = `Sale not found`
 	ErrAdminSaleTenantIdNotFound = `tenant id not found for this sale`
 	ErrAdminSaleSaveFailed       = `failed to save sale`
+	ErrAdminSaleInvalidMenu      = `invalid menu`
 	ErrAdminSaleDeleteFailed     = `failed to delete sale`
 	ErrAdminSaleRestoreFailed    = `failed to restore sale`
 	ErrAdminSaleAlreadyExists    = `Sale already exists`
@@ -75,38 +78,10 @@ var AdminSaleMeta = zCrud.Meta{
 			ReadOnly:  false,
 		},
 		{
-			Name:      mCafe.SalesDate,
-			Label:     `Sales Date`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeDateTime,
-			ReadOnly:  false,
-		},
-		{
-			Name:      mCafe.PaidAt,
-			Label:     `Paid At`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeDateTime,
-			ReadOnly:  false,
-		},
-		{
-			Name:      mCafe.Note,
-			Label:     `Note`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeTextArea,
-			ReadOnly:  false,
-		},
-		{
-			Name:      mCafe.UtensilsTaken,
-			Label:     `Utensils Taken`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeText,
-			ReadOnly:  false,
-		},
-		{
-			Name:      mCafe.UtensilsReturnedAt,
-			Label:     `Utensils Returned At`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeDateTime,
+			Name:      mCafe.MenuIds,
+			Label:     `Menus`,
+			DataType:  zCrud.DataTypeIntArr,
+			InputType: zCrud.InputTypeMultiSelect,
 			ReadOnly:  false,
 		},
 		{
@@ -148,6 +123,27 @@ var AdminSaleMeta = zCrud.Meta{
 			InputType: zCrud.InputTypeNumber,
 			ReadOnly:  false,
 			Mapping:   `IDR`,
+		},
+		{
+			Name:      mCafe.SalesDate,
+			Label:     `Sales Date`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeDateTime,
+			ReadOnly:  false,
+		},
+		{
+			Name:      mCafe.PaidAt,
+			Label:     `Paid At`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeDateTime,
+			ReadOnly:  false,
+		},
+		{
+			Name:      mCafe.Note,
+			Label:     `Note`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeTextArea,
+			ReadOnly:  false,
 		},
 		{
 			Name:      mCafe.CreatedAt,
@@ -201,6 +197,7 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 			if in.Cmd == zCrud.CmdDelete {
 				if sale.DeletedAt == 0 {
 					sale.SetDeletedAt(in.UnixNow())
+					sale.SetDeletedBy(sess.UserId)
 				}
 			}
 
@@ -223,6 +220,19 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 			sale.SetTenantId(in.Sale.TenantId)
 		}
 
+		for _, id := range in.Sale.MenuIds {
+			men := rqCafe.NewMenus(d.PropOltp)
+			men.Id = X.ToU(id)
+			if !men.FindById() {
+				out.SetError(400, ErrAdminSaleInvalidMenu)
+				return
+			}
+		}
+
+		if in.Cmd == zCrud.CmdUpsert {
+			sale.SetMenuIds(in.Sale.MenuIds)
+		}
+
 		if in.Sale.Cashier != `` {
 			sale.SetCashier(in.Sale.Cashier)
 		}
@@ -241,14 +251,6 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 
 		if in.Sale.Note != `` {
 			sale.SetNote(in.Sale.Note)
-		}
-
-		if in.Sale.UtensilsTaken != `` {
-			sale.SetUtensilsTaken(in.Sale.UtensilsTaken)
-		}
-
-		if mCafe.IsValidDate(in.Sale.UtensilsReturnedAt, time.DateOnly) {
-			sale.SetUtensilsReturnedAt(in.Sale.UtensilsReturnedAt)
 		}
 
 		if in.Sale.QrisIDR != 0 {

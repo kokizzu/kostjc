@@ -20,18 +20,17 @@ module.exports = {};
  * @typedef {Object} Sale
  * @property {string|number} id
  * @property {string} cashier
- * @property {string} tenantId
+ * @property {string|number} tenantId
  * @property {string} buyerName
- * @property {string} salesDate
- * @property {string} paidAt
- * @property {string} note
- * @property {string} utensilsTaken
- * @property {string} utensilsReturnedAt
+ * @property {number[]} menuIds
  * @property {number} qrisIDR
  * @property {number} cashIDR
  * @property {number} debtIDR
  * @property {number} topupIDR
  * @property {number} totalPriceIDR
+ * @property {string} salesDate
+ * @property {string} paidAt
+ * @property {string} note
  * @property {number} createdAt
  * @property {string} createdBy
  * @property {number} updatedAt

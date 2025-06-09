@@ -6,6 +6,7 @@
    /** @typedef {import('./_types/masters.js').ExtendedActionButton} ExtendedActionButton */
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/cafe.js').Sale} Sale */
+  /** @typedef {import('./_types/cafe.js').Menu} Menu */
   
   import { onMount } from 'svelte';
 
@@ -19,7 +20,8 @@
   import { AdminSale } from './jsApi.GEN';
 
   import { Icon } from './node_modules/svelte-icons-pack/dist';
-  import { RiSystemAddBoxLine, RiBusinessCalendarScheduleLine } from './node_modules/svelte-icons-pack/dist/ri';
+  
+  import { RiSystemAddBoxLine} from './node_modules/svelte-icons-pack/dist/ri';
 
 
   let user      = /** @type {User} */ ({/* user */});
@@ -29,6 +31,7 @@
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
   let tenants = /** @type {Record<Number, string>} */ ({/* tenants */});
+  let menus     = /** @type {Record<Number, string>} */({/* menus */});
 
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
@@ -113,23 +116,23 @@
     );
   }
 
+  // @ts-ignore
   async function OnEdit(/** @type {any} */ id, /** @type {any[]} */ payloads) {
     const sale = {
-      id: payloads[0],
-      cashier: String(payloads[1]),
-      tenantId: String(payloads[2]),
-      buyerName: String(payloads[3]),
-      salesDate: String(payloads[4]),
-      paidAt: String(payloads[5]),
-      note: String(payloads[6]),
-      utensilsTaken: String(payloads[7]),
-      utensilsReturnedAt: String(payloads[8]),
-      qrisIDR: Number(payloads[9]),
-      cashIDR: Number(payloads[10]),
-      debtIDR: Number(payloads[11]),
-      topupIDR: Number(payloads[12]),
-      totalPriceIDR: Number(payloads[13]),
-    }
+    id: payloads[0],
+    cashier: String(payloads[1]),
+    tenantId: String(payloads[2]),
+    buyerName: String(payloads[3]),
+    menuIds: payloads[4],
+    qrisIDR: Number(payloads[5]),
+    cashIDR: Number(payloads[6]),
+    debtIDR: Number(payloads[7]),
+    topupIDR: Number(payloads[8]),
+    totalPriceIDR: Number(payloads[9]),
+    salesDate: String(payloads[10]),
+    paidAt: String(payloads[11]),
+    note: String(payloads[12]),
+  }
     const i = /** @type {any}*/ ({
       pager,
       sale,
@@ -191,6 +194,7 @@
     bind:this={popUpForms}
     bind:isSubmitted={isSubmitAddSale}
     tenants={tenants}
+    menus={menus}
     OnSubmit={OnAddSale}
   />
 {/if}
@@ -201,22 +205,24 @@
     <MasterTable
       NAME="Sales"
       ACCESS={segments}
-      bind:FIELDS={fields}
-      bind:PAGER={pager}
-      bind:MASTER_ROWS={sales}
       REFS={{
         'tenantId': tenants,
+        'menuIds': menus,
       }}
 
       COL_WIDTHS={{
-        'tenantId': 370,
+        'tenantId': 300,
+        'menuIds': 300
       }}
 
+      bind:FIELDS={fields}
+      bind:PAGER={pager}
+      bind:MASTER_ROWS={sales}
+      
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
       CAN_DELETE_ROW
       CAN_RESTORE_ROW
-      CAN_OPEN_LINK
 
       {OnDelete}
       {OnRestore}

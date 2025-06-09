@@ -355,6 +355,7 @@ type SalesMutator struct {
 // NewSalesMutator create new ORM writer/command object
 func NewSalesMutator(adapter *Tt.Adapter) (res *SalesMutator) {
 	res = &SalesMutator{Sales: rqCafe.Sales{Adapter: adapter}}
+	res.MenuIds = []any{}
 	return
 }
 
@@ -402,23 +403,22 @@ func (s *SalesMutator) DoDeletePermanentById() bool { //nolint:dupl false positi
 //		A.X{`=`, 1, s.Cashier},
 //		A.X{`=`, 2, s.TenantId},
 //		A.X{`=`, 3, s.BuyerName},
-//		A.X{`=`, 4, s.SalesDate},
-//		A.X{`=`, 5, s.PaidAt},
-//		A.X{`=`, 6, s.Note},
-//		A.X{`=`, 7, s.UtensilsTaken},
-//		A.X{`=`, 8, s.UtensilsReturnedAt},
-//		A.X{`=`, 9, s.QrisIDR},
-//		A.X{`=`, 10, s.CashIDR},
-//		A.X{`=`, 11, s.DebtIDR},
-//		A.X{`=`, 12, s.TopupIDR},
-//		A.X{`=`, 13, s.TotalPriceIDR},
-//		A.X{`=`, 14, s.CreatedAt},
-//		A.X{`=`, 15, s.CreatedBy},
-//		A.X{`=`, 16, s.UpdatedAt},
-//		A.X{`=`, 17, s.UpdatedBy},
-//		A.X{`=`, 18, s.DeletedAt},
-//		A.X{`=`, 19, s.DeletedBy},
-//		A.X{`=`, 20, s.RestoredBy},
+//		A.X{`=`, 4, s.MenuIds},
+//		A.X{`=`, 5, s.QrisIDR},
+//		A.X{`=`, 6, s.CashIDR},
+//		A.X{`=`, 7, s.DebtIDR},
+//		A.X{`=`, 8, s.TopupIDR},
+//		A.X{`=`, 9, s.TotalPriceIDR},
+//		A.X{`=`, 10, s.SalesDate},
+//		A.X{`=`, 11, s.PaidAt},
+//		A.X{`=`, 12, s.Note},
+//		A.X{`=`, 13, s.CreatedAt},
+//		A.X{`=`, 14, s.CreatedBy},
+//		A.X{`=`, 15, s.UpdatedAt},
+//		A.X{`=`, 16, s.UpdatedBy},
+//		A.X{`=`, 17, s.DeletedAt},
+//		A.X{`=`, 18, s.DeletedBy},
+//		A.X{`=`, 19, s.RestoredBy},
 //	})
 //	return !L.IsError(err, `Sales.DoUpsert failed: `+s.SpaceName()+ `\n%#v`, arr)
 // }
@@ -495,65 +495,18 @@ func (s *SalesMutator) SetBuyerName(val string) bool { //nolint:dupl false posit
 	return false
 }
 
-// SetSalesDate create mutations, should not duplicate
-func (s *SalesMutator) SetSalesDate(val string) bool { //nolint:dupl false positive
-	if val != s.SalesDate {
-		s.mutations = append(s.mutations, A.X{`=`, 4, val})
-		s.logs = append(s.logs, A.X{`salesDate`, s.SalesDate, val})
-		s.SalesDate = val
-		return true
-	}
-	return false
-}
-
-// SetPaidAt create mutations, should not duplicate
-func (s *SalesMutator) SetPaidAt(val string) bool { //nolint:dupl false positive
-	if val != s.PaidAt {
-		s.mutations = append(s.mutations, A.X{`=`, 5, val})
-		s.logs = append(s.logs, A.X{`paidAt`, s.PaidAt, val})
-		s.PaidAt = val
-		return true
-	}
-	return false
-}
-
-// SetNote create mutations, should not duplicate
-func (s *SalesMutator) SetNote(val string) bool { //nolint:dupl false positive
-	if val != s.Note {
-		s.mutations = append(s.mutations, A.X{`=`, 6, val})
-		s.logs = append(s.logs, A.X{`note`, s.Note, val})
-		s.Note = val
-		return true
-	}
-	return false
-}
-
-// SetUtensilsTaken create mutations, should not duplicate
-func (s *SalesMutator) SetUtensilsTaken(val string) bool { //nolint:dupl false positive
-	if val != s.UtensilsTaken {
-		s.mutations = append(s.mutations, A.X{`=`, 7, val})
-		s.logs = append(s.logs, A.X{`utensilsTaken`, s.UtensilsTaken, val})
-		s.UtensilsTaken = val
-		return true
-	}
-	return false
-}
-
-// SetUtensilsReturnedAt create mutations, should not duplicate
-func (s *SalesMutator) SetUtensilsReturnedAt(val string) bool { //nolint:dupl false positive
-	if val != s.UtensilsReturnedAt {
-		s.mutations = append(s.mutations, A.X{`=`, 8, val})
-		s.logs = append(s.logs, A.X{`utensilsReturnedAt`, s.UtensilsReturnedAt, val})
-		s.UtensilsReturnedAt = val
-		return true
-	}
-	return false
+// SetMenuIds create mutations, should not duplicate
+func (s *SalesMutator) SetMenuIds(val []any) bool { //nolint:dupl false positive
+	s.mutations = append(s.mutations, A.X{`=`, 4, val})
+	s.logs = append(s.logs, A.X{`menuIds`, s.MenuIds, val})
+	s.MenuIds = val
+	return true
 }
 
 // SetQrisIDR create mutations, should not duplicate
 func (s *SalesMutator) SetQrisIDR(val int64) bool { //nolint:dupl false positive
 	if val != s.QrisIDR {
-		s.mutations = append(s.mutations, A.X{`=`, 9, val})
+		s.mutations = append(s.mutations, A.X{`=`, 5, val})
 		s.logs = append(s.logs, A.X{`qrisIDR`, s.QrisIDR, val})
 		s.QrisIDR = val
 		return true
@@ -564,7 +517,7 @@ func (s *SalesMutator) SetQrisIDR(val int64) bool { //nolint:dupl false positive
 // SetCashIDR create mutations, should not duplicate
 func (s *SalesMutator) SetCashIDR(val int64) bool { //nolint:dupl false positive
 	if val != s.CashIDR {
-		s.mutations = append(s.mutations, A.X{`=`, 10, val})
+		s.mutations = append(s.mutations, A.X{`=`, 6, val})
 		s.logs = append(s.logs, A.X{`cashIDR`, s.CashIDR, val})
 		s.CashIDR = val
 		return true
@@ -575,7 +528,7 @@ func (s *SalesMutator) SetCashIDR(val int64) bool { //nolint:dupl false positive
 // SetDebtIDR create mutations, should not duplicate
 func (s *SalesMutator) SetDebtIDR(val int64) bool { //nolint:dupl false positive
 	if val != s.DebtIDR {
-		s.mutations = append(s.mutations, A.X{`=`, 11, val})
+		s.mutations = append(s.mutations, A.X{`=`, 7, val})
 		s.logs = append(s.logs, A.X{`debtIDR`, s.DebtIDR, val})
 		s.DebtIDR = val
 		return true
@@ -586,7 +539,7 @@ func (s *SalesMutator) SetDebtIDR(val int64) bool { //nolint:dupl false positive
 // SetTopupIDR create mutations, should not duplicate
 func (s *SalesMutator) SetTopupIDR(val int64) bool { //nolint:dupl false positive
 	if val != s.TopupIDR {
-		s.mutations = append(s.mutations, A.X{`=`, 12, val})
+		s.mutations = append(s.mutations, A.X{`=`, 8, val})
 		s.logs = append(s.logs, A.X{`topupIDR`, s.TopupIDR, val})
 		s.TopupIDR = val
 		return true
@@ -597,9 +550,42 @@ func (s *SalesMutator) SetTopupIDR(val int64) bool { //nolint:dupl false positiv
 // SetTotalPriceIDR create mutations, should not duplicate
 func (s *SalesMutator) SetTotalPriceIDR(val int64) bool { //nolint:dupl false positive
 	if val != s.TotalPriceIDR {
-		s.mutations = append(s.mutations, A.X{`=`, 13, val})
+		s.mutations = append(s.mutations, A.X{`=`, 9, val})
 		s.logs = append(s.logs, A.X{`totalPriceIDR`, s.TotalPriceIDR, val})
 		s.TotalPriceIDR = val
+		return true
+	}
+	return false
+}
+
+// SetSalesDate create mutations, should not duplicate
+func (s *SalesMutator) SetSalesDate(val string) bool { //nolint:dupl false positive
+	if val != s.SalesDate {
+		s.mutations = append(s.mutations, A.X{`=`, 10, val})
+		s.logs = append(s.logs, A.X{`salesDate`, s.SalesDate, val})
+		s.SalesDate = val
+		return true
+	}
+	return false
+}
+
+// SetPaidAt create mutations, should not duplicate
+func (s *SalesMutator) SetPaidAt(val string) bool { //nolint:dupl false positive
+	if val != s.PaidAt {
+		s.mutations = append(s.mutations, A.X{`=`, 11, val})
+		s.logs = append(s.logs, A.X{`paidAt`, s.PaidAt, val})
+		s.PaidAt = val
+		return true
+	}
+	return false
+}
+
+// SetNote create mutations, should not duplicate
+func (s *SalesMutator) SetNote(val string) bool { //nolint:dupl false positive
+	if val != s.Note {
+		s.mutations = append(s.mutations, A.X{`=`, 12, val})
+		s.logs = append(s.logs, A.X{`note`, s.Note, val})
+		s.Note = val
 		return true
 	}
 	return false
@@ -608,7 +594,7 @@ func (s *SalesMutator) SetTotalPriceIDR(val int64) bool { //nolint:dupl false po
 // SetCreatedAt create mutations, should not duplicate
 func (s *SalesMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positive
 	if val != s.CreatedAt {
-		s.mutations = append(s.mutations, A.X{`=`, 14, val})
+		s.mutations = append(s.mutations, A.X{`=`, 13, val})
 		s.logs = append(s.logs, A.X{`createdAt`, s.CreatedAt, val})
 		s.CreatedAt = val
 		return true
@@ -619,7 +605,7 @@ func (s *SalesMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positi
 // SetCreatedBy create mutations, should not duplicate
 func (s *SalesMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false positive
 	if val != s.CreatedBy {
-		s.mutations = append(s.mutations, A.X{`=`, 15, val})
+		s.mutations = append(s.mutations, A.X{`=`, 14, val})
 		s.logs = append(s.logs, A.X{`createdBy`, s.CreatedBy, val})
 		s.CreatedBy = val
 		return true
@@ -630,7 +616,7 @@ func (s *SalesMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false posit
 // SetUpdatedAt create mutations, should not duplicate
 func (s *SalesMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positive
 	if val != s.UpdatedAt {
-		s.mutations = append(s.mutations, A.X{`=`, 16, val})
+		s.mutations = append(s.mutations, A.X{`=`, 15, val})
 		s.logs = append(s.logs, A.X{`updatedAt`, s.UpdatedAt, val})
 		s.UpdatedAt = val
 		return true
@@ -641,7 +627,7 @@ func (s *SalesMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positi
 // SetUpdatedBy create mutations, should not duplicate
 func (s *SalesMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false positive
 	if val != s.UpdatedBy {
-		s.mutations = append(s.mutations, A.X{`=`, 17, val})
+		s.mutations = append(s.mutations, A.X{`=`, 16, val})
 		s.logs = append(s.logs, A.X{`updatedBy`, s.UpdatedBy, val})
 		s.UpdatedBy = val
 		return true
@@ -652,7 +638,7 @@ func (s *SalesMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false posit
 // SetDeletedAt create mutations, should not duplicate
 func (s *SalesMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positive
 	if val != s.DeletedAt {
-		s.mutations = append(s.mutations, A.X{`=`, 18, val})
+		s.mutations = append(s.mutations, A.X{`=`, 17, val})
 		s.logs = append(s.logs, A.X{`deletedAt`, s.DeletedAt, val})
 		s.DeletedAt = val
 		return true
@@ -663,7 +649,7 @@ func (s *SalesMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positi
 // SetDeletedBy create mutations, should not duplicate
 func (s *SalesMutator) SetDeletedBy(val uint64) bool { //nolint:dupl false positive
 	if val != s.DeletedBy {
-		s.mutations = append(s.mutations, A.X{`=`, 19, val})
+		s.mutations = append(s.mutations, A.X{`=`, 18, val})
 		s.logs = append(s.logs, A.X{`deletedBy`, s.DeletedBy, val})
 		s.DeletedBy = val
 		return true
@@ -674,7 +660,7 @@ func (s *SalesMutator) SetDeletedBy(val uint64) bool { //nolint:dupl false posit
 // SetRestoredBy create mutations, should not duplicate
 func (s *SalesMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false positive
 	if val != s.RestoredBy {
-		s.mutations = append(s.mutations, A.X{`=`, 20, val})
+		s.mutations = append(s.mutations, A.X{`=`, 19, val})
 		s.logs = append(s.logs, A.X{`restoredBy`, s.RestoredBy, val})
 		s.RestoredBy = val
 		return true
@@ -706,24 +692,8 @@ func (s *SalesMutator) SetAll(from rqCafe.Sales, excludeMap, forceMap M.SB) (cha
 		s.BuyerName = S.Trim(from.BuyerName)
 		changed = true
 	}
-	if !excludeMap[`salesDate`] && (forceMap[`salesDate`] || from.SalesDate != ``) {
-		s.SalesDate = S.Trim(from.SalesDate)
-		changed = true
-	}
-	if !excludeMap[`paidAt`] && (forceMap[`paidAt`] || from.PaidAt != ``) {
-		s.PaidAt = S.Trim(from.PaidAt)
-		changed = true
-	}
-	if !excludeMap[`note`] && (forceMap[`note`] || from.Note != ``) {
-		s.Note = S.Trim(from.Note)
-		changed = true
-	}
-	if !excludeMap[`utensilsTaken`] && (forceMap[`utensilsTaken`] || from.UtensilsTaken != ``) {
-		s.UtensilsTaken = S.Trim(from.UtensilsTaken)
-		changed = true
-	}
-	if !excludeMap[`utensilsReturnedAt`] && (forceMap[`utensilsReturnedAt`] || from.UtensilsReturnedAt != ``) {
-		s.UtensilsReturnedAt = S.Trim(from.UtensilsReturnedAt)
+	if !excludeMap[`menuIds`] && (forceMap[`menuIds`] || from.MenuIds != nil) {
+		s.MenuIds = from.MenuIds
 		changed = true
 	}
 	if !excludeMap[`qrisIDR`] && (forceMap[`qrisIDR`] || from.QrisIDR != 0) {
@@ -744,6 +714,18 @@ func (s *SalesMutator) SetAll(from rqCafe.Sales, excludeMap, forceMap M.SB) (cha
 	}
 	if !excludeMap[`totalPriceIDR`] && (forceMap[`totalPriceIDR`] || from.TotalPriceIDR != 0) {
 		s.TotalPriceIDR = from.TotalPriceIDR
+		changed = true
+	}
+	if !excludeMap[`salesDate`] && (forceMap[`salesDate`] || from.SalesDate != ``) {
+		s.SalesDate = S.Trim(from.SalesDate)
+		changed = true
+	}
+	if !excludeMap[`paidAt`] && (forceMap[`paidAt`] || from.PaidAt != ``) {
+		s.PaidAt = S.Trim(from.PaidAt)
+		changed = true
+	}
+	if !excludeMap[`note`] && (forceMap[`note`] || from.Note != ``) {
+		s.Note = S.Trim(from.Note)
 		changed = true
 	}
 	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {

@@ -1,16 +1,20 @@
 <script>
   /** @typedef {import('../_types/cafe').Sale} Sale */
+  /** @typedef {import('../_types/cafe').Menu} Menu */
 
-		import { Icon } from '../node_modules/svelte-icons-pack/dist';
+  import { onMount } from 'svelte';
+	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
-  import { dateISOFormat } from './xFormatter';
+  import { dateISOFormat, arrToArrNum } from './xFormatter';
+  import MultiSelect from './MultiSelect.svelte';
 
   let isShow = /** @type {boolean} */ (false);
 
   export let isSubmitted  = /** @type {boolean} */ (false);
   export let tenants = /** @type {Record<number, string>} */ ({});
+  export let menus = /** @type {Record<number, string>} */ ({});
 
   let cashier = '';
   let tenantId = 0;
@@ -18,15 +22,12 @@
   let salesDate = dateISOFormat(0);
   let paidAt = dateISOFormat(0);
   let note = '';
-  let utensilsTaken = '';
-  let utensilsReturnedAt = dateISOFormat(0);
   let qrisIDR = 0;
   let cashIDR = 0;
   let debtIDR = 0;
   let topupIDR = 0;
   let totalPriceIDR = 0;
-
-
+  let menuIds = /** @type {number[]} */([]);
 
   export let OnSubmit = async function(/** @type {Sale} */ sale) {
     console.log('OnSubmit :::', sale);
@@ -37,11 +38,10 @@
       cashier: cashier,
       tenantId: tenantId, 
       buyerName: buyerName,
+      menuIds: menuIds,
       salesDate: salesDate,
       paidAt: paidAt,
       note: note,
-      utensilsTaken: utensilsTaken,
-      utensilsReturnedAt: utensilsReturnedAt,
       qrisIDR: qrisIDR,
       cashIDR: cashIDR,
       debtIDR: debtIDR,
@@ -58,12 +58,11 @@
   export const Reset = () => {
   cashier = '';
   tenantId = 0;
+  menuIds = [];
   buyerName = '';
   salesDate = dateISOFormat(0);
   paidAt = dateISOFormat(0);
   note = '';
-  utensilsTaken = '';
-  utensilsReturnedAt = dateISOFormat(0);
   qrisIDR = 0;
   cashIDR = 0;
   debtIDR = 0;
@@ -107,6 +106,49 @@
         type="text"
         placeholder="Jamal"
       />
+      <MultiSelect
+        id="menuIds"
+        label="Menus"
+        placeholder="Menus"
+        valuesSourceType="object"
+        bind:valuesTarget={menuIds}
+        valuesSourceObj={menus}
+      />
+      <InputBox
+      id="qrisIDR"
+      label="QRIS IDR"
+      bind:value={qrisIDR}
+      type="number"
+      placeholder="0"
+      />
+      <InputBox
+      id="cashIDR"
+      label="Cash IDR"
+      bind:value={cashIDR}
+      type="number"
+      placeholder="0"
+      />
+      <InputBox
+      id="debtIDR"
+      label="Debt IDR"
+      bind:value={debtIDR}
+      type="number"
+      placeholder="0"
+      />
+      <InputBox
+      id="topupIDR"
+      label="Top Up IDR"
+      bind:value={topupIDR}
+      type="number"
+      placeholder="0"
+      />
+      <InputBox
+      id="totalPriceIDR"
+      label="Total Price IDR"
+      bind:value={totalPriceIDR}
+      type="number"
+      placeholder="0"
+      />
       <InputBox
         id="salesDate"
         label="Sales Date"
@@ -127,55 +169,6 @@
       bind:value={note}
       type="textarea"
       placeholder="Note"
-      />
-      <InputBox
-        id="utensilsTaken"
-        label="Utensils Taken"
-        bind:value={utensilsTaken}
-        type="text"
-        placeholder="Piring 1, mangkok 1"
-      />
-      <InputBox
-        id="utensilsReturnedAt"
-        label="Utensils Returned At"
-        bind:value={utensilsReturnedAt}
-        type="datetime"
-        placeholder="YYYY-MM-DD"
-      />
-      <InputBox
-        id="qrisIDR"
-        label="QRIS IDR"
-        bind:value={qrisIDR}
-        type="number"
-        placeholder="0"
-      />
-      <InputBox
-        id="cashIDR"
-        label="Cash IDR"
-        bind:value={cashIDR}
-        type="number"
-        placeholder="0"
-      />
-      <InputBox
-        id="debtIDR"
-        label="Debt IDR"
-        bind:value={debtIDR}
-        type="number"
-        placeholder="0"
-      />
-      <InputBox
-        id="topupIDR"
-        label="Top Up IDR"
-        bind:value={topupIDR}
-        type="number"
-        placeholder="0"
-      />
-      <InputBox
-        id="totalPriceIDR"
-        label="Total Price IDR"
-        bind:value={totalPriceIDR}
-        type="number"
-        placeholder="0"
       />
     </div>
     <div class="foot">

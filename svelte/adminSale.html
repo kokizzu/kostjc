@@ -4517,7 +4517,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return `${currency} ${price}`;
         }
       }
-      function arrToArrNum(arr) {
+      function arrToArrNum2(arr) {
         return arr.map(Number);
       }
       module.exports = {
@@ -4530,7 +4530,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         dateISOFormatFromYYYYMMDD,
         loadScript,
         formatPrice: formatPrice2,
-        arrToArrNum
+        arrToArrNum: arrToArrNum2
       };
     }
   });
@@ -5953,7 +5953,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon1.$.fragment);
         t5 = space();
         span1 = element("span");
-        span1.textContent = "Sale";
+        span1.textContent = "Sales";
         t7 = space();
         a2 = element("a");
         create_component(icon2.$.fragment);
@@ -15369,7 +15369,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[8]
+      ctx[9]
     );
     select.$on(
       "clear",
@@ -15422,7 +15422,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       multiple: true,
       items: (
         /*valuesSourceArrayObject*/
-        ctx[10]
+        ctx[7]
       ),
       placeholder: (
         /*placeholder*/
@@ -15431,22 +15431,22 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*valuesTargetArrayObject*/
-      ctx[7] !== void 0
+      ctx[8] !== void 0
     ) {
       select_props.value = /*valuesTargetArrayObject*/
-      ctx[7];
+      ctx[8];
     }
     select = new Select_default({ props: select_props });
     binding_callbacks.push(() => bind(select, "value", select_value_binding));
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[8]
+      ctx[9]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[9]
+      ctx[10]
     );
     return {
       c() {
@@ -15458,15 +15458,19 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         const select_changes = {};
+        if (dirty & /*valuesSourceArrayObject*/
+        128)
+          select_changes.items = /*valuesSourceArrayObject*/
+          ctx2[7];
         if (dirty & /*placeholder*/
         64)
           select_changes.placeholder = /*placeholder*/
           ctx2[6];
         if (!updating_value && dirty & /*valuesTargetArrayObject*/
-        128) {
+        256) {
           updating_value = true;
           select_changes.value = /*valuesTargetArrayObject*/
-          ctx2[7];
+          ctx2[8];
           add_flush_callback(() => updating_value = false);
         }
         select.$set(select_changes);
@@ -15665,7 +15669,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       []
     );
     let valuesTargetArrayObject = [];
-    onMount(() => {
+    function reStructureSvelteValues() {
+      $invalidate(7, valuesSourceArrayObject = []);
+      $invalidate(8, valuesTargetArrayObject = []);
       for (const [k, v] of Object.entries(valuesSourceObj)) {
         valuesSourceArrayObject.push({ value: k, label: v });
       }
@@ -15673,17 +15679,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         for (const kv of valuesSourceArrayObject) {
           for (const vt of valuesTarget) {
             if (kv.value == vt) {
-              $invalidate(7, valuesTargetArrayObject = [...valuesTargetArrayObject, kv]);
+              $invalidate(8, valuesTargetArrayObject = [...valuesTargetArrayObject, kv]);
             }
           }
         }
         valuesSourceArrayObject.sort((a, b) => a.label.localeCompare(b.label));
       }
+    }
+    onMount(() => {
+      reStructureSvelteValues();
     });
     const clear_handler = () => $invalidate(0, valuesTarget = []);
     function select_value_binding(value) {
       valuesTargetArrayObject = value;
-      $invalidate(7, valuesTargetArrayObject);
+      $invalidate(8, valuesTargetArrayObject);
     }
     $self.$set = ($props2) => {
       if ("className" in $props2)
@@ -15703,6 +15712,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("placeholder" in $props2)
         $invalidate(6, placeholder = $props2.placeholder);
     };
+    $self.$.update = () => {
+      if ($self.$.dirty & /*valuesTarget*/
+      1) {
+        $:
+          if (valuesTarget) {
+            reStructureSvelteValues();
+          }
+      }
+    };
     return [
       valuesTarget,
       className,
@@ -15711,10 +15729,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       id,
       label,
       placeholder,
+      valuesSourceArrayObject,
       valuesTargetArrayObject,
       handleSelect,
       handleClear,
-      valuesSourceArrayObject,
       valuesSourceObj,
       clear_handler,
       select_value_binding
@@ -15740,46 +15758,46 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   // _components/MasterTable.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[78] = list[i];
+    child_ctx[84] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[81] = list[i];
+    child_ctx[87] = list[i];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[84] = list[i];
+    child_ctx[90] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[87] = list[i];
-    child_ctx[89] = i;
+    child_ctx[93] = list[i];
+    child_ctx[95] = i;
     return child_ctx;
   }
   function get_each_context_4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[90] = list[i];
+    child_ctx[96] = list[i];
     return child_ctx;
   }
   function get_each_context_5(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[93] = list[i];
+    child_ctx[99] = list[i];
     return child_ctx;
   }
   function get_each_context_6(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[87] = list[i];
-    child_ctx[97] = i;
+    child_ctx[93] = list[i];
+    child_ctx[103] = i;
     return child_ctx;
   }
   function get_each_context_7(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[98] = list[i];
-    child_ctx[99] = list;
-    child_ctx[89] = i;
+    child_ctx[104] = list[i];
+    child_ctx[105] = list;
+    child_ctx[95] = i;
     return child_ctx;
   }
   function create_if_block_30(ctx) {
@@ -15788,10 +15806,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_filtersMap;
     let current;
     function filtertable_filterColumns_binding(value) {
-      ctx[54](value);
+      ctx[58](value);
     }
     function filtertable_filtersMap_binding(value) {
-      ctx[55](value);
+      ctx[59](value);
     }
     let filtertable_props = {};
     if (
@@ -15809,13 +15827,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       ctx[21];
     }
     filtertable = new FilterTable_default({ props: filtertable_props });
-    ctx[53](filtertable);
+    ctx[57](filtertable);
     binding_callbacks.push(() => bind(filtertable, "filterColumns", filtertable_filterColumns_binding));
     binding_callbacks.push(() => bind(filtertable, "filtersMap", filtertable_filtersMap_binding));
     filtertable.$on(
       "click",
       /*ApplyFilter*/
-      ctx[38]
+      ctx[39]
     );
     return {
       c() {
@@ -15854,7 +15872,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         current = false;
       },
       d(detaching) {
-        ctx[53](null);
+        ctx[57](null);
         destroy_component(filtertable, detaching);
       }
     };
@@ -15966,13 +15984,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button0,
               "click",
               /*click_handler*/
-              ctx[56]
+              ctx[60]
             ),
             listen(
               button1,
               "click",
               /*handleSubmitEdit*/
-              ctx[44]
+              ctx[45]
             )
           ];
           mounted = true;
@@ -16049,7 +16067,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let if_block_anchor;
     let current;
     let if_block = !/*field*/
-    ctx[98].readOnly && create_if_block_26(ctx);
+    ctx[104].readOnly && create_if_block_26(ctx);
     return {
       c() {
         if (if_block)
@@ -16064,7 +16082,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         if (!/*field*/
-        ctx2[98].readOnly) {
+        ctx2[104].readOnly) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty[0] & /*FIELDS*/
@@ -16119,17 +16137,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type(ctx2, dirty) {
       if (
         /*field*/
-        ctx2[98].inputType === "combobox"
+        ctx2[104].inputType === "combobox"
       )
         return 0;
       if (
         /*field*/
-        ctx2[98].inputType === "combobox-arr"
+        ctx2[104].inputType === "combobox-arr"
       )
         return 1;
       if (
         /*field*/
-        ctx2[98].inputType === "multiselect"
+        ctx2[104].inputType === "multiselect"
       )
         return 2;
       return 3;
@@ -16191,41 +16209,41 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding_2(value) {
-      ctx[60](
+      ctx[64](
         value,
         /*idx*/
-        ctx[89]
+        ctx[95]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[98].name
+        ctx[104].name
       ),
       label: (
         /*field*/
-        ctx[98].label
+        ctx[104].label
       ),
       placeholder: (
         /*field*/
-        ctx[98].description
+        ctx[104].description
       ),
       type: (
         /*field*/
-        ctx[98].inputType
+        ctx[104].inputType
       )
     };
     if (
       /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -16244,26 +16262,26 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[98].name;
+          ctx[104].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[98].label;
+          ctx[104].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[98].description;
+          ctx[104].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[98].inputType;
+          ctx[104].inputType;
         if (!updating_value && dirty[1] & /*payloads*/
         4) {
           updating_value = true;
           inputbox_changes.value = /*payloads*/
           ctx[33][
             /*idx*/
-            ctx[89]
+            ctx[95]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -16289,24 +16307,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_valuesTarget;
     let current;
     function multiselect_valuesTarget_binding(value) {
-      ctx[59](
+      ctx[63](
         value,
         /*idx*/
-        ctx[89]
+        ctx[95]
       );
     }
     let multiselect_props = {
       id: (
         /*field*/
-        ctx[98].name
+        ctx[104].name
       ),
       label: (
         /*field*/
-        ctx[98].label
+        ctx[104].label
       ),
       placeholder: (
         /*field*/
-        ctx[98].description
+        ctx[104].description
       ),
       valuesSourceType: "object",
       valuesSourceObj: (
@@ -16314,16 +16332,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[98].name
+          ctx[104].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[98].name
+            ctx[104].name
           ]
         ) : (
           /*field*/
-          ctx[98].ref
+          ctx[104].ref
         )
       )
     };
@@ -16331,13 +16349,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ] !== void 0
     ) {
       multiselect_props.valuesTarget = /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ];
     }
     multiselect = new MultiSelect_default({ props: multiselect_props });
@@ -16356,31 +16374,31 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.id = /*field*/
-          ctx[98].name;
+          ctx[104].name;
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.label = /*field*/
-          ctx[98].label;
+          ctx[104].label;
         if (dirty[0] & /*FIELDS*/
         2)
           multiselect_changes.placeholder = /*field*/
-          ctx[98].description;
+          ctx[104].description;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           multiselect_changes.valuesSourceObj = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[98].name
+            ctx[104].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[98].name
+              ctx[104].name
             ]
           ) : (
             /*field*/
-            ctx[98].ref
+            ctx[104].ref
           );
         if (!updating_valuesTarget && dirty[1] & /*payloads*/
         4) {
@@ -16388,7 +16406,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           multiselect_changes.valuesTarget = /*payloads*/
           ctx[33][
             /*idx*/
-            ctx[89]
+            ctx[95]
           ];
           add_flush_callback(() => updating_valuesTarget = false);
         }
@@ -16414,44 +16432,44 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding_1(value) {
-      ctx[58](
+      ctx[62](
         value,
         /*idx*/
-        ctx[89]
+        ctx[95]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[98].name
+        ctx[104].name
       ),
       label: (
         /*field*/
-        ctx[98].label
+        ctx[104].label
       ),
       placeholder: (
         /*field*/
-        ctx[98].description
+        ctx[104].description
       ),
       type: (
         /*field*/
-        ctx[98].inputType
+        ctx[104].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[98].name
+          ctx[104].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[98].name
+            ctx[104].name
           ]
         ) : (
           /*field*/
-          ctx[98].ref
+          ctx[104].ref
         )
       )
     };
@@ -16459,13 +16477,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -16484,35 +16502,35 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[98].name;
+          ctx[104].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[98].label;
+          ctx[104].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[98].description;
+          ctx[104].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[98].inputType;
+          ctx[104].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[98].name
+            ctx[104].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[98].name
+              ctx[104].name
             ]
           ) : (
             /*field*/
-            ctx[98].ref
+            ctx[104].ref
           );
         if (!updating_value && dirty[1] & /*payloads*/
         4) {
@@ -16520,7 +16538,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           inputbox_changes.value = /*payloads*/
           ctx[33][
             /*idx*/
-            ctx[89]
+            ctx[95]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -16546,44 +16564,44 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding(value) {
-      ctx[57](
+      ctx[61](
         value,
         /*idx*/
-        ctx[89]
+        ctx[95]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[98].name
+        ctx[104].name
       ),
       label: (
         /*field*/
-        ctx[98].label
+        ctx[104].label
       ),
       placeholder: (
         /*field*/
-        ctx[98].description
+        ctx[104].description
       ),
       type: (
         /*field*/
-        ctx[98].inputType
+        ctx[104].inputType
       ),
       values: (
         /*REFS*/
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[98].name
+          ctx[104].name
         ] ? (
           /*REFS*/
           ctx[3][
             /*field*/
-            ctx[98].name
+            ctx[104].name
           ]
         ) : (
           /*field*/
-          ctx[98].ref
+          ctx[104].ref
         )
       ),
       isObject: (
@@ -16591,7 +16609,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx[3] && /*REFS*/
         ctx[3][
           /*field*/
-          ctx[98].name
+          ctx[104].name
         ] ? true : false
       )
     };
@@ -16599,13 +16617,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[33][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -16624,35 +16642,35 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[98].name;
+          ctx[104].name;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[98].label;
+          ctx[104].label;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[98].description;
+          ctx[104].description;
         if (dirty[0] & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[98].inputType;
+          ctx[104].inputType;
         if (dirty[0] & /*REFS, FIELDS*/
         10)
           inputbox_changes.values = /*REFS*/
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[98].name
+            ctx[104].name
           ] ? (
             /*REFS*/
             ctx[3][
               /*field*/
-              ctx[98].name
+              ctx[104].name
             ]
           ) : (
             /*field*/
-            ctx[98].ref
+            ctx[104].ref
           );
         if (dirty[0] & /*REFS, FIELDS*/
         10)
@@ -16660,7 +16678,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] && /*REFS*/
           ctx[3][
             /*field*/
-            ctx[98].name
+            ctx[104].name
           ] ? true : false;
         if (!updating_value && dirty[1] & /*payloads*/
         4) {
@@ -16668,7 +16686,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           inputbox_changes.value = /*payloads*/
           ctx[33][
             /*idx*/
-            ctx[89]
+            ctx[95]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -16694,7 +16712,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let current;
     let if_block = (
       /*field*/
-      ctx[98].name !== "id" && create_if_block_25(ctx)
+      ctx[104].name !== "id" && create_if_block_25(ctx)
     );
     return {
       c() {
@@ -16711,7 +16729,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (
           /*field*/
-          ctx2[98].name !== "id"
+          ctx2[104].name !== "id"
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -16800,6 +16818,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t;
     let input;
     let current;
+    let mounted;
+    let dispose;
     icon = new Icon_default({
       props: {
         color: "var(--gray-007)",
@@ -16829,7 +16849,46 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon, button, null);
         append(div, t);
         append(div, input);
+        set_input_value(
+          input,
+          /*searchValue*/
+          ctx[35]
+        );
         current = true;
+        if (!mounted) {
+          dispose = [
+            listen(
+              button,
+              "click",
+              /*handleSearch*/
+              ctx[47]
+            ),
+            listen(
+              input,
+              "input",
+              /*input_input_handler*/
+              ctx[66]
+            ),
+            listen(
+              input,
+              "keydown",
+              /*handleSearchOnEnter*/
+              ctx[48]
+            )
+          ];
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty[1] & /*searchValue*/
+        16 && input.value !== /*searchValue*/
+        ctx2[35]) {
+          set_input_value(
+            input,
+            /*searchValue*/
+            ctx2[35]
+          );
+        }
       },
       i(local) {
         if (current)
@@ -16846,6 +16905,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           detach(div);
         }
         destroy_component(icon);
+        mounted = false;
+        run_all(dispose);
       }
     };
   }
@@ -16855,14 +16916,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let span;
     let t0_value = (
       /*f*/
-      ctx[87].label + ""
+      ctx[93].label + ""
     );
     let t0;
     let t1;
     let show_if = !/*UNSORTED_ROWS*/
     ctx[14].includes(
       /*f*/
-      ctx[87].name
+      ctx[93].name
     );
     let button_disabled_value;
     let t2;
@@ -16875,9 +16936,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_2() {
       return (
         /*click_handler_2*/
-        ctx[62](
+        ctx[67](
           /*f*/
-          ctx[87]
+          ctx[93]
         )
       );
     }
@@ -16895,20 +16956,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         button.disabled = button_disabled_value = /*UNSORTED_ROWS*/
         ctx[14].includes(
           /*f*/
-          ctx[87].name
+          ctx[93].name
         );
         attr(th, "style", th_style_value = /*COL_WIDTHS*/
         ctx[16][
           /*f*/
-          ctx[87].name
+          ctx[93].name
         ] ? `min-width: ${/*COL_WIDTHS*/
         ctx[16][
           /*f*/
-          ctx[87].name
+          ctx[93].name
         ]}px;` : "");
         attr(th, "class", th_class_value = /*f*/
-        (ctx[87].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[87].inputType === "datetime" ? "datetime" : "") + " svelte-1ogvazv");
+        (ctx[93].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[93].inputType === "datetime" ? "datetime" : "") + " svelte-1ogvazv");
       },
       m(target, anchor) {
         insert(target, th, anchor);
@@ -16929,14 +16990,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx = new_ctx;
         if ((!current || dirty[0] & /*FIELDS*/
         2) && t0_value !== (t0_value = /*f*/
-        ctx[87].label + ""))
+        ctx[93].label + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*UNSORTED_ROWS, FIELDS*/
         16386)
           show_if = !/*UNSORTED_ROWS*/
           ctx[14].includes(
             /*f*/
-            ctx[87].name
+            ctx[93].name
           );
         if (show_if) {
           if (if_block) {
@@ -16962,7 +17023,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         16386 && button_disabled_value !== (button_disabled_value = /*UNSORTED_ROWS*/
         ctx[14].includes(
           /*f*/
-          ctx[87].name
+          ctx[93].name
         ))) {
           button.disabled = button_disabled_value;
         }
@@ -16970,18 +17031,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         65538 && th_style_value !== (th_style_value = /*COL_WIDTHS*/
         ctx[16][
           /*f*/
-          ctx[87].name
+          ctx[93].name
         ] ? `min-width: ${/*COL_WIDTHS*/
         ctx[16][
           /*f*/
-          ctx[87].name
+          ctx[93].name
         ]}px;` : "")) {
           attr(th, "style", th_style_value);
         }
         if (!current || dirty[0] & /*FIELDS*/
         2 && th_class_value !== (th_class_value = /*f*/
-        (ctx[87].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
-        (ctx[87].inputType === "datetime" ? "datetime" : "") + " svelte-1ogvazv")) {
+        (ctx[93].inputType === "textarea" ? "textarea" : "") + " " + /*f*/
+        (ctx[93].inputType === "datetime" ? "datetime" : "") + " svelte-1ogvazv")) {
           attr(th, "class", th_class_value);
         }
       },
@@ -17035,16 +17096,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let if_block0 = (
       /*isSortTableAsc*/
       ctx[27] && /*f*/
-      ctx[87].name === /*fieldNameToSort*/
+      ctx[93].name === /*fieldNameToSort*/
       ctx[28] && create_if_block_21(ctx)
     );
     let if_block1 = !/*isSortTableAsc*/
     ctx[27] && /*f*/
-    ctx[87].name === /*fieldNameToSort*/
+    ctx[93].name === /*fieldNameToSort*/
     ctx[28] && create_if_block_20(ctx);
     let if_block2 = (
       /*f*/
-      ctx[87].name !== /*fieldNameToSort*/
+      ctx[93].name !== /*fieldNameToSort*/
       ctx[28] && create_if_block_19(ctx)
     );
     return {
@@ -17075,7 +17136,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (
           /*isSortTableAsc*/
           ctx2[27] && /*f*/
-          ctx2[87].name === /*fieldNameToSort*/
+          ctx2[93].name === /*fieldNameToSort*/
           ctx2[28]
         ) {
           if (if_block0) {
@@ -17098,7 +17159,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (!/*isSortTableAsc*/
         ctx2[27] && /*f*/
-        ctx2[87].name === /*fieldNameToSort*/
+        ctx2[93].name === /*fieldNameToSort*/
         ctx2[28]) {
           if (if_block1) {
             if (dirty[0] & /*isSortTableAsc, FIELDS, fieldNameToSort*/
@@ -17120,7 +17181,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (
           /*f*/
-          ctx2[87].name !== /*fieldNameToSort*/
+          ctx2[93].name !== /*fieldNameToSort*/
           ctx2[28]
         ) {
           if (if_block2) {
@@ -17284,7 +17345,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type_1(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[87].name === "id"
+        ctx2[93].name === "id"
       )
         return 0;
       return 1;
@@ -17401,7 +17462,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*CAN_DELETE_ROW, MASTER_ROWS, deletedIndex, FIELDS, EXTENDED_BUTTONS, LINKS, CAN_OPEN_LINK, CAN_RESTORE_ROW, CAN_EDIT_ROW, IS_CUSTOM_EDIT, OnInfo, CAN_SHOW_INFO, ACCESS, REFS, PAGER*/
         4374447 | dirty[1] & /*restoreRow, deleteRow, toggleShowPopUp, Cell*/
-        7232) {
+        14464) {
           each_value_2 = ensure_array_like(
             /*MASTER_ROWS*/
             ctx2[2]
@@ -17452,20 +17513,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   function create_else_block_2(ctx) {
     let td;
     let t_value = (typeof /*row*/
-    ctx[84][
+    ctx[90][
       /*idx*/
-      ctx[89]
+      ctx[95]
     ] === "boolean" ? (
       /*row*/
-      ctx[84][
+      ctx[90][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ] ? "Yes" : "No"
     ) : (
       /*row*/
-      ctx[84][
+      ctx[90][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ] || "--"
     )) + "";
     let t;
@@ -17476,7 +17537,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t = text(t_value);
         attr(td, "class", td_class_value = null_to_empty(
           /*f*/
-          ctx[87].type
+          ctx[93].type
         ) + " svelte-1ogvazv");
       },
       m(target, anchor) {
@@ -17486,27 +17547,27 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = (typeof /*row*/
-        ctx2[84][
+        ctx2[90][
           /*idx*/
-          ctx2[89]
+          ctx2[95]
         ] === "boolean" ? (
           /*row*/
-          ctx2[84][
+          ctx2[90][
             /*idx*/
-            ctx2[89]
+            ctx2[95]
           ] ? "Yes" : "No"
         ) : (
           /*row*/
-          ctx2[84][
+          ctx2[90][
             /*idx*/
-            ctx2[89]
+            ctx2[95]
           ] || "--"
         )) + ""))
           set_data(t, t_value);
         if (dirty[0] & /*FIELDS*/
         2 && td_class_value !== (td_class_value = null_to_empty(
           /*f*/
-          ctx2[87].type
+          ctx2[93].type
         ) + " svelte-1ogvazv")) {
           attr(td, "class", td_class_value);
         }
@@ -17524,9 +17585,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t0_value = (
       /*row*/
-      (ctx[84][
+      (ctx[90][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ] || "0") + ""
     );
     let t0;
@@ -17546,9 +17607,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t0_value !== (t0_value = /*row*/
-        (ctx2[84][
+        (ctx2[90][
           /*idx*/
-          ctx2[89]
+          ctx2[95]
         ] || "0") + ""))
           set_data(t0, t0_value);
       },
@@ -17567,12 +17628,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*REFS*/
       (ctx[3][
         /*f*/
-        ctx[87].name
+        ctx[93].name
       ][
         /*row*/
-        ctx[84][
+        ctx[90][
           /*idx*/
-          ctx[89]
+          ctx[95]
         ]
       ] || "--") + ""
     );
@@ -17592,12 +17653,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         14 && t_value !== (t_value = /*REFS*/
         (ctx2[3][
           /*f*/
-          ctx2[87].name
+          ctx2[93].name
         ][
           /*row*/
-          ctx2[84][
+          ctx2[90][
             /*idx*/
-            ctx2[89]
+            ctx2[95]
           ]
         ] || "--") + ""))
           set_data(t, t_value);
@@ -17615,14 +17676,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = (
       /*row*/
-      (ctx[84][
+      (ctx[90][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ] ? (0, import_xFormatter2.datetime)(
         /*row*/
-        ctx[84][
+        ctx[90][
           /*idx*/
-          ctx[89]
+          ctx[95]
         ]
       ) : "--") + ""
     );
@@ -17640,14 +17701,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS*/
         4 && t_value !== (t_value = /*row*/
-        (ctx2[84][
+        (ctx2[90][
           /*idx*/
-          ctx2[89]
+          ctx2[95]
         ] ? (0, import_xFormatter2.datetime)(
           /*row*/
-          ctx2[84][
+          ctx2[90][
             /*idx*/
-            ctx2[89]
+            ctx2[95]
           ]
         ) : "--") + ""))
           set_data(t, t_value);
@@ -17665,17 +17726,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = (
       /*row*/
-      (ctx[84][
+      (ctx[90][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ] ? (0, import_xFormatter2.formatPrice)(
         /*row*/
-        ctx[84][
+        ctx[90][
           /*idx*/
-          ctx[89]
+          ctx[95]
         ],
         /*f*/
-        ctx[87].mapping || "IDR"
+        ctx[93].mapping || "IDR"
       ) : "--") + ""
     );
     let t;
@@ -17692,17 +17753,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (dirty[0] & /*MASTER_ROWS, FIELDS*/
         6 && t_value !== (t_value = /*row*/
-        (ctx2[84][
+        (ctx2[90][
           /*idx*/
-          ctx2[89]
+          ctx2[95]
         ] ? (0, import_xFormatter2.formatPrice)(
           /*row*/
-          ctx2[84][
+          ctx2[90][
             /*idx*/
-            ctx2[89]
+            ctx2[95]
           ],
           /*f*/
-          ctx2[87].mapping || "IDR"
+          ctx2[93].mapping || "IDR"
         ) : "--") + ""))
           set_data(t, t_value);
       },
@@ -17719,18 +17780,32 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = (
       /*row*/
-      (ctx[84][
+      (ctx[90][
         /*idx*/
-        ctx[89]
-      ] ? Object.entries(
-        /*REFS*/
-        ctx[3][
-          /*f*/
-          ctx[87].name
-        ]
-      ).map(func).join(", ") : "--") + ""
+        ctx[95]
+      ] && /*row*/
+      ctx[90][
+        /*idx*/
+        ctx[95]
+      ].length > 0 ? (
+        /*row*/
+        ctx[90][
+          /*idx*/
+          ctx[95]
+        ].map(func).join(", ")
+      ) : "--") + ""
     );
     let t;
+    function func(...args) {
+      return (
+        /*func*/
+        ctx[73](
+          /*f*/
+          ctx[93],
+          ...args
+        )
+      );
+    }
     return {
       c() {
         td = element("td");
@@ -17741,19 +17816,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         insert(target, td, anchor);
         append(td, t);
       },
-      p(ctx2, dirty) {
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
         if (dirty[0] & /*MASTER_ROWS, REFS, FIELDS*/
         14 && t_value !== (t_value = /*row*/
-        (ctx2[84][
+        (ctx[90][
           /*idx*/
-          ctx2[89]
-        ] ? Object.entries(
-          /*REFS*/
-          ctx2[3][
-            /*f*/
-            ctx2[87].name
-          ]
-        ).map(func).join(", ") : "--") + ""))
+          ctx[95]
+        ] && /*row*/
+        ctx[90][
+          /*idx*/
+          ctx[95]
+        ].length > 0 ? (
+          /*row*/
+          ctx[90][
+            /*idx*/
+            ctx[95]
+          ].map(func).join(", ")
+        ) : "--") + ""))
           set_data(t, t_value);
       },
       i: noop,
@@ -17769,9 +17849,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let td;
     let t_value = formatFacilities(
       /*row*/
-      ctx[84][
+      ctx[90][
         /*idx*/
-        ctx[89]
+        ctx[95]
       ],
       /*REFS*/
       ctx[3]["facilities"]
@@ -17791,9 +17871,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*MASTER_ROWS, REFS*/
         12 && t_value !== (t_value = formatFacilities(
           /*row*/
-          ctx2[84][
+          ctx2[90][
             /*idx*/
-            ctx2[89]
+            ctx2[95]
           ],
           /*REFS*/
           ctx2[3]["facilities"]
@@ -18129,9 +18209,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_3() {
       return (
         /*click_handler_3*/
-        ctx[63](
+        ctx[68](
           /*row*/
-          ctx[84]
+          ctx[90]
         )
       );
     }
@@ -18253,13 +18333,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_4() {
       return (
         /*click_handler_4*/
-        ctx[64](
+        ctx[69](
           /*row*/
-          ctx[84],
+          ctx[90],
           /*idx*/
-          ctx[89],
+          ctx[95],
           /*f*/
-          ctx[87]
+          ctx[93]
         )
       );
     }
@@ -18312,11 +18392,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type_5(ctx2, dirty) {
       if (
         /*row*/
-        ctx2[84][
+        ctx2[90][
           /*deletedIndex*/
           ctx2[22]
         ] > 0 || /*row*/
-        ctx2[84][
+        ctx2[90][
           /*deletedIndex*/
           ctx2[22]
         ] === "terminated"
@@ -18392,9 +18472,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_6() {
       return (
         /*click_handler_6*/
-        ctx[66](
+        ctx[71](
           /*row*/
-          ctx[84]
+          ctx[90]
         )
       );
     }
@@ -18453,9 +18533,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_5() {
       return (
         /*click_handler_5*/
-        ctx[65](
+        ctx[70](
           /*row*/
-          ctx[84]
+          ctx[90]
         )
       );
     }
@@ -18592,7 +18672,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         color: "var(--gray-007)",
         src: (
           /*l*/
-          ctx[93].icon
+          ctx[99].icon
         )
       }
     });
@@ -18602,15 +18682,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon.$.fragment);
         t = space();
         attr(a, "title", a_title_value = /*l*/
-        ctx[93].tooltip);
+        ctx[99].tooltip);
         attr(a, "class", "btn link svelte-1ogvazv");
         attr(a, "href", a_href_value = /*l*/
-        ctx[93].link(
+        ctx[99].link(
           /*row*/
-          ctx[84]
+          ctx[90]
         ));
         attr(a, "target", a_target_value = /*l*/
-        ctx[93].isTargetBlank ? "_blank" : "");
+        ctx[99].isTargetBlank ? "_blank" : "");
       },
       m(target, anchor) {
         insert(target, a, anchor);
@@ -18623,24 +18703,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*LINKS*/
         4096)
           icon_changes.src = /*l*/
-          ctx2[93].icon;
+          ctx2[99].icon;
         icon.$set(icon_changes);
         if (!current || dirty[0] & /*LINKS*/
         4096 && a_title_value !== (a_title_value = /*l*/
-        ctx2[93].tooltip)) {
+        ctx2[99].tooltip)) {
           attr(a, "title", a_title_value);
         }
         if (!current || dirty[0] & /*LINKS, MASTER_ROWS*/
         4100 && a_href_value !== (a_href_value = /*l*/
-        ctx2[93].link(
+        ctx2[99].link(
           /*row*/
-          ctx2[84]
+          ctx2[90]
         ))) {
           attr(a, "href", a_href_value);
         }
         if (!current || dirty[0] & /*LINKS*/
         4096 && a_target_value !== (a_target_value = /*l*/
-        ctx2[93].isTargetBlank ? "_blank" : "")) {
+        ctx2[99].isTargetBlank ? "_blank" : "")) {
           attr(a, "target", a_target_value);
         }
       },
@@ -18755,18 +18835,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         color: "var(--gray-007)",
         src: (
           /*b*/
-          ctx[90].icon
+          ctx[96].icon
         )
       }
     });
     function click_handler_7() {
       return (
         /*click_handler_7*/
-        ctx[67](
+        ctx[72](
           /*b*/
-          ctx[90],
+          ctx[96],
           /*row*/
-          ctx[84]
+          ctx[90]
         )
       );
     }
@@ -18776,7 +18856,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon.$.fragment);
         attr(button, "class", "btn svelte-1ogvazv");
         attr(button, "title", button_title_value = /*b*/
-        ctx[90].tooltip);
+        ctx[96].tooltip);
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -18793,11 +18873,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty[0] & /*EXTENDED_BUTTONS*/
         32768)
           icon_changes.src = /*b*/
-          ctx[90].icon;
+          ctx[96].icon;
         icon.$set(icon_changes);
         if (!current || dirty[0] & /*EXTENDED_BUTTONS*/
         32768 && button_title_value !== (button_title_value = /*b*/
-        ctx[90].tooltip)) {
+        ctx[96].tooltip)) {
           attr(button, "title", button_title_value);
         }
       },
@@ -18840,41 +18920,41 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type_3(ctx2, dirty) {
       if (
         /*f*/
-        ctx2[87].name === "id"
+        ctx2[93].name === "id"
       )
         return 0;
       if (
         /*f*/
-        ctx2[87].name === "facilities"
+        ctx2[93].name === "facilities"
       )
         return 1;
       if (
         /*f*/
-        ctx2[87].type == "intArr"
+        ctx2[93].type == "intArr"
       )
         return 2;
       if (
         /*f*/
-        ctx2[87].type == "currency"
+        ctx2[93].type == "currency"
       )
         return 3;
       if (
         /*f*/
-        ctx2[87].inputType === "datetime"
+        ctx2[93].inputType === "datetime"
       )
         return 4;
       if (
         /*f*/
-        ctx2[87].inputType === "combobox" && /*REFS*/
+        ctx2[93].inputType === "combobox" && /*REFS*/
         ctx2[3][
           /*f*/
-          ctx2[87].name
+          ctx2[93].name
         ]
       )
         return 5;
       if (
         /*f*/
-        ctx2[87].inputType === "percentage"
+        ctx2[93].inputType === "percentage"
       )
         return 6;
       return 7;
@@ -18940,7 +19020,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       ctx[0].perPage + /*MASTER_ROWS*/
       ctx[2].indexOf(
         /*row*/
-        ctx[84]
+        ctx[90]
       ) + 1 + ""
     );
     let t0;
@@ -18973,11 +19053,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(tr, "class", tr_class_value = null_to_empty(
           /*CAN_DELETE_ROW*/
           ctx[8] && /*row*/
-          (ctx[84][
+          (ctx[90][
             /*deletedIndex*/
             ctx[22]
           ] > 0 || /*row*/
-          ctx[84][
+          ctx[90][
             /*deletedIndex*/
             ctx[22]
           ] === "terminated") ? "deleted" : ""
@@ -19003,12 +19083,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx2[0].perPage + /*MASTER_ROWS*/
         ctx2[2].indexOf(
           /*row*/
-          ctx2[84]
+          ctx2[90]
         ) + 1 + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*EXTENDED_BUTTONS, MASTER_ROWS, LINKS, CAN_OPEN_LINK, deletedIndex, CAN_DELETE_ROW, CAN_RESTORE_ROW, FIELDS, CAN_EDIT_ROW, IS_CUSTOM_EDIT, OnInfo, CAN_SHOW_INFO, ACCESS, REFS*/
         4374446 | dirty[1] & /*restoreRow, deleteRow, toggleShowPopUp, Cell*/
-        7232) {
+        14464) {
           each_value_3 = ensure_array_like(
             /*FIELDS*/
             ctx2[1] || []
@@ -19036,11 +19116,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         4194564 && tr_class_value !== (tr_class_value = null_to_empty(
           /*CAN_DELETE_ROW*/
           ctx2[8] && /*row*/
-          (ctx2[84][
+          (ctx2[90][
             /*deletedIndex*/
             ctx2[22]
           ] > 0 || /*row*/
-          ctx2[84][
+          ctx2[90][
             /*deletedIndex*/
             ctx2[22]
           ] === "terminated") ? "deleted" : ""
@@ -19075,7 +19155,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let div;
     let each_value_1 = ensure_array_like(
       /*rowsToShow*/
-      ctx[35]
+      ctx[36]
     );
     let each_blocks = [];
     for (let i = 0; i < each_value_1.length; i += 1) {
@@ -19099,10 +19179,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         if (dirty[1] & /*toRow, rowsToShow*/
-        272) {
+        544) {
           each_value_1 = ensure_array_like(
             /*rowsToShow*/
-            ctx2[35]
+            ctx2[36]
           );
           let i;
           for (i = 0; i < each_value_1.length; i += 1) {
@@ -19136,9 +19216,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_8() {
       return (
         /*click_handler_8*/
-        ctx[68](
+        ctx[74](
           /*r*/
-          ctx[81]
+          ctx[87]
         )
       );
     }
@@ -19146,7 +19226,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       c() {
         button = element("button");
         button.textContent = `${/*r*/
-        ctx[81]}`;
+        ctx[87]}`;
         attr(button, "class", "svelte-1ogvazv");
       },
       m(target, anchor) {
@@ -19172,7 +19252,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let button;
     let t_value = (
       /*i*/
-      ctx[78] + ""
+      ctx[84] + ""
     );
     let t;
     let button_disabled_value;
@@ -19183,9 +19263,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler_11() {
       return (
         /*click_handler_11*/
-        ctx[71](
+        ctx[77](
           /*i*/
-          ctx[78]
+          ctx[84]
         )
       );
     }
@@ -19195,14 +19275,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t = text(t_value);
         button.disabled = button_disabled_value = /*currentPage*/
         ctx[26] == /*i*/
-        ctx[78];
+        ctx[84];
         attr(button, "class", button_class_value = null_to_empty(
           /*currentPage*/
           ctx[26] === /*i*/
-          ctx[78] ? "btn active" : "btn"
+          ctx[84] ? "btn active" : "btn"
         ) + " svelte-1ogvazv");
         attr(button, "title", button_title_value = `Go to page ${/*i*/
-        ctx[78]}`);
+        ctx[84]}`);
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -19216,25 +19296,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx = new_ctx;
         if (dirty[0] & /*paginationShow*/
         33554432 && t_value !== (t_value = /*i*/
-        ctx[78] + ""))
+        ctx[84] + ""))
           set_data(t, t_value);
         if (dirty[0] & /*currentPage, paginationShow*/
         100663296 && button_disabled_value !== (button_disabled_value = /*currentPage*/
         ctx[26] == /*i*/
-        ctx[78])) {
+        ctx[84])) {
           button.disabled = button_disabled_value;
         }
         if (dirty[0] & /*currentPage, paginationShow*/
         100663296 && button_class_value !== (button_class_value = null_to_empty(
           /*currentPage*/
           ctx[26] === /*i*/
-          ctx[78] ? "btn active" : "btn"
+          ctx[84] ? "btn active" : "btn"
         ) + " svelte-1ogvazv")) {
           attr(button, "class", button_class_value);
         }
         if (dirty[0] & /*paginationShow*/
         33554432 && button_title_value !== (button_title_value = `Go to page ${/*i*/
-        ctx[78]}`)) {
+        ctx[84]}`)) {
           attr(button, "title", button_title_value);
         }
       },
@@ -19338,13 +19418,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     const default_slot_template = (
       /*#slots*/
-      ctx[52].default
+      ctx[56].default
     );
     const default_slot = create_slot(
       default_slot_template,
       ctx,
       /*$scope*/
-      ctx[51],
+      ctx[55],
       null
     );
     let if_block2 = isAjaxSubmitted && create_if_block_23(ctx);
@@ -19358,7 +19438,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     );
     const get_key = (ctx2) => (
       /*f*/
-      ctx2[87].name
+      ctx2[93].name
     );
     for (let i = 0; i < each_value_6.length; i += 1) {
       let child_ctx = get_each_context_6(ctx, each_value_6, i);
@@ -19641,37 +19721,37 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button0,
               "click",
               /*click_handler_1*/
-              ctx[61]
+              ctx[65]
             ),
             listen(
               button1,
               "click",
               /*toggleRowsNum*/
-              ctx[36]
+              ctx[37]
             ),
             listen(
               button2,
               "click",
               /*click_handler_9*/
-              ctx[69]
+              ctx[75]
             ),
             listen(
               button3,
               "click",
               /*click_handler_10*/
-              ctx[70]
+              ctx[76]
             ),
             listen(
               button4,
               "click",
               /*click_handler_12*/
-              ctx[72]
+              ctx[78]
             ),
             listen(
               button5,
               "click",
               /*click_handler_13*/
-              ctx[73]
+              ctx[79]
             )
           ];
           mounted = true;
@@ -19726,20 +19806,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (default_slot) {
           if (default_slot.p && (!current || dirty[1] & /*$scope*/
-          1048576)) {
+          16777216)) {
             update_slot_base(
               default_slot,
               default_slot_template,
               ctx2,
               /*$scope*/
-              ctx2[51],
+              ctx2[55],
               !current ? get_all_dirty_from_scope(
                 /*$scope*/
-                ctx2[51]
+                ctx2[55]
               ) : get_slot_changes(
                 default_slot_template,
                 /*$scope*/
-                ctx2[51],
+                ctx2[55],
                 dirty,
                 null
               ),
@@ -19752,6 +19832,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx2[6]
         ) {
           if (if_block3) {
+            if_block3.p(ctx2, dirty);
             if (dirty[0] & /*CAN_SEARCH_ROW*/
             64) {
               transition_in(if_block3, 1);
@@ -19771,7 +19852,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (dirty[0] & /*FIELDS, COL_WIDTHS, UNSORTED_ROWS, fieldNameToSort, isSortTableAsc*/
         402735106 | dirty[1] & /*OnSort*/
-        16384) {
+        32768) {
           each_value_6 = ensure_array_like(
             /*FIELDS*/
             ctx2[1] || []
@@ -19854,7 +19935,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (dirty[0] & /*currentPage, paginationShow*/
         100663296 | dirty[1] & /*goToPage*/
-        512) {
+        1024) {
           each_value = ensure_array_like(
             /*paginationShow*/
             ctx2[25]
@@ -19966,7 +20047,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       return "--";
     return facArrInt.map((fId) => facObjs[Number(fId)]).join(", ");
   }
-  var func = ([k, v]) => `${v}`;
   function instance10($self, $props, $invalidate) {
     let { $slots: slots = {}, $scope } = $props;
     let { FIELDS = (
@@ -20004,6 +20084,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /** @type {ExtendedActionButton[]} */
       []
     ) } = $props;
+    let { FIELD_TO_SEARCH = "" } = $props;
     let { COL_WIDTHS = {} } = $props;
     let filterTable = null;
     let filterTableReady = false;
@@ -20160,6 +20241,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       await OnRefresh(PAGER);
       getPaginationShow();
     }
+    let searchValue = (
+      /** @type {string} */
+      ""
+    );
+    async function handleSearch() {
+      $invalidate(0, PAGER.search = searchValue, PAGER);
+      $invalidate(0, PAGER.searchBy = FIELD_TO_SEARCH, PAGER);
+      await OnRefresh(PAGER);
+    }
+    async function handleSearchOnEnter(event) {
+      if (event.key === "Enter") {
+        await handleSearch();
+      }
+    }
     function filtertable_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         filterTable = $value;
@@ -20200,12 +20295,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
     }
     const click_handler_1 = () => filterTable.Show();
+    function input_input_handler() {
+      searchValue = this.value;
+      $invalidate(35, searchValue);
+    }
     const click_handler_2 = (f) => OnSort(f);
     const click_handler_3 = (row) => OnInfo(row);
     const click_handler_4 = (row, idx, f) => toggleShowPopUp(Cell(row, idx, f), row);
     const click_handler_5 = (row) => restoreRow(row);
     const click_handler_6 = (row) => deleteRow(row);
     const click_handler_7 = (b, row) => b.action(row);
+    const func = (f, id) => REFS[f.name][id];
     const click_handler_8 = (r) => toRow(r);
     const click_handler_9 = () => goToPage(1);
     const click_handler_10 = () => goToPage(currentPage - 1);
@@ -20226,7 +20326,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("ACCESS" in $props2)
         $invalidate(5, ACCESS = $props2.ACCESS);
       if ("ARRAY_OF_ARRAY" in $props2)
-        $invalidate(46, ARRAY_OF_ARRAY = $props2.ARRAY_OF_ARRAY);
+        $invalidate(49, ARRAY_OF_ARRAY = $props2.ARRAY_OF_ARRAY);
       if ("CAN_SEARCH_ROW" in $props2)
         $invalidate(6, CAN_SEARCH_ROW = $props2.CAN_SEARCH_ROW);
       if ("CAN_EDIT_ROW" in $props2)
@@ -20247,20 +20347,22 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         $invalidate(14, UNSORTED_ROWS = $props2.UNSORTED_ROWS);
       if ("EXTENDED_BUTTONS" in $props2)
         $invalidate(15, EXTENDED_BUTTONS = $props2.EXTENDED_BUTTONS);
+      if ("FIELD_TO_SEARCH" in $props2)
+        $invalidate(50, FIELD_TO_SEARCH = $props2.FIELD_TO_SEARCH);
       if ("COL_WIDTHS" in $props2)
         $invalidate(16, COL_WIDTHS = $props2.COL_WIDTHS);
       if ("OnRestore" in $props2)
-        $invalidate(47, OnRestore = $props2.OnRestore);
+        $invalidate(51, OnRestore = $props2.OnRestore);
       if ("OnDelete" in $props2)
-        $invalidate(48, OnDelete = $props2.OnDelete);
+        $invalidate(52, OnDelete = $props2.OnDelete);
       if ("OnEdit" in $props2)
-        $invalidate(49, OnEdit = $props2.OnEdit);
+        $invalidate(53, OnEdit = $props2.OnEdit);
       if ("OnRefresh" in $props2)
-        $invalidate(50, OnRefresh = $props2.OnRefresh);
+        $invalidate(54, OnRefresh = $props2.OnRefresh);
       if ("OnInfo" in $props2)
         $invalidate(17, OnInfo = $props2.OnInfo);
       if ("$scope" in $props2)
-        $invalidate(51, $scope = $props2.$scope);
+        $invalidate(55, $scope = $props2.$scope);
     };
     $self.$.update = () => {
       if ($self.$.dirty[0] & /*PAGER*/
@@ -20307,6 +20409,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       totalRowsCurrent,
       payloads,
       idToMod,
+      searchValue,
       rowsToShow,
       toggleRowsNum,
       Cell,
@@ -20318,7 +20421,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       toggleShowPopUp,
       handleSubmitEdit,
       OnSort,
+      handleSearch,
+      handleSearchOnEnter,
       ARRAY_OF_ARRAY,
+      FIELD_TO_SEARCH,
       OnRestore,
       OnDelete,
       OnEdit,
@@ -20334,12 +20440,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       multiselect_valuesTarget_binding,
       inputbox_value_binding_2,
       click_handler_1,
+      input_input_handler,
       click_handler_2,
       click_handler_3,
       click_handler_4,
       click_handler_5,
       click_handler_6,
       click_handler_7,
+      func,
       click_handler_8,
       click_handler_9,
       click_handler_10,
@@ -20364,7 +20472,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           REFS: 3,
           NAME: 4,
           ACCESS: 5,
-          ARRAY_OF_ARRAY: 46,
+          ARRAY_OF_ARRAY: 49,
           CAN_SEARCH_ROW: 6,
           CAN_EDIT_ROW: 7,
           CAN_DELETE_ROW: 8,
@@ -20375,11 +20483,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           IS_CUSTOM_EDIT: 13,
           UNSORTED_ROWS: 14,
           EXTENDED_BUTTONS: 15,
+          FIELD_TO_SEARCH: 50,
           COL_WIDTHS: 16,
-          OnRestore: 47,
-          OnDelete: 48,
-          OnEdit: 49,
-          OnRefresh: 50,
+          OnRestore: 51,
+          OnDelete: 52,
+          OnEdit: 53,
+          OnRefresh: 54,
           OnInfo: 17
         },
         null,
@@ -20464,44 +20573,41 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let inputbox2;
     let updating_value_2;
     let t5;
+    let multiselect;
+    let updating_valuesTarget;
+    let t6;
     let inputbox3;
     let updating_value_3;
-    let t6;
+    let t7;
     let inputbox4;
     let updating_value_4;
-    let t7;
+    let t8;
     let inputbox5;
     let updating_value_5;
-    let t8;
+    let t9;
     let inputbox6;
     let updating_value_6;
-    let t9;
+    let t10;
     let inputbox7;
     let updating_value_7;
-    let t10;
+    let t11;
     let inputbox8;
     let updating_value_8;
-    let t11;
+    let t12;
     let inputbox9;
     let updating_value_9;
-    let t12;
+    let t13;
     let inputbox10;
     let updating_value_10;
-    let t13;
-    let inputbox11;
-    let updating_value_11;
     let t14;
-    let inputbox12;
-    let updating_value_12;
-    let t15;
     let div3;
     let div1;
-    let t16;
+    let t15;
     let div2;
     let button1;
-    let t18;
+    let t17;
     let button2;
-    let t19;
+    let t18;
     let div5_class_value;
     let current;
     let mounted;
@@ -20524,10 +20630,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*cashier*/
-      ctx[4] !== void 0
+      ctx[5] !== void 0
     ) {
       inputbox0_props.value = /*cashier*/
-      ctx[4];
+      ctx[5];
     }
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
@@ -20546,10 +20652,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*tenantId*/
-      ctx[5] !== void 0
+      ctx[6] !== void 0
     ) {
       inputbox1_props.value = /*tenantId*/
-      ctx[5];
+      ctx[6];
     }
     inputbox1 = new InputBox_default({ props: inputbox1_props });
     binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
@@ -20564,107 +20670,39 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*buyerName*/
-      ctx[6] !== void 0
+      ctx[7] !== void 0
     ) {
       inputbox2_props.value = /*buyerName*/
-      ctx[6];
+      ctx[7];
     }
     inputbox2 = new InputBox_default({ props: inputbox2_props });
     binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
-    function inputbox3_value_binding(value) {
+    function multiselect_valuesTarget_binding(value) {
       ctx[25](value);
     }
-    let inputbox3_props = {
-      id: "salesDate",
-      label: "Sales Date",
-      type: "datetime",
-      placeholder: "YYYY-MM-DD"
+    let multiselect_props = {
+      id: "menuIds",
+      label: "Menus",
+      placeholder: "Menus",
+      valuesSourceType: "object",
+      valuesSourceObj: (
+        /*menus*/
+        ctx[2]
+      )
     };
     if (
-      /*salesDate*/
-      ctx[7] !== void 0
+      /*menuIds*/
+      ctx[16] !== void 0
     ) {
-      inputbox3_props.value = /*salesDate*/
-      ctx[7];
+      multiselect_props.valuesTarget = /*menuIds*/
+      ctx[16];
     }
-    inputbox3 = new InputBox_default({ props: inputbox3_props });
-    binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
-    function inputbox4_value_binding(value) {
+    multiselect = new MultiSelect_default({ props: multiselect_props });
+    binding_callbacks.push(() => bind(multiselect, "valuesTarget", multiselect_valuesTarget_binding));
+    function inputbox3_value_binding(value) {
       ctx[26](value);
     }
-    let inputbox4_props = {
-      id: "paidAt",
-      label: "Paid At",
-      type: "datetime",
-      placeholder: "YYYY-MM-DD"
-    };
-    if (
-      /*paidAt*/
-      ctx[8] !== void 0
-    ) {
-      inputbox4_props.value = /*paidAt*/
-      ctx[8];
-    }
-    inputbox4 = new InputBox_default({ props: inputbox4_props });
-    binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
-    function inputbox5_value_binding(value) {
-      ctx[27](value);
-    }
-    let inputbox5_props = {
-      id: "note",
-      label: "Note",
-      type: "textarea",
-      placeholder: "Note"
-    };
-    if (
-      /*note*/
-      ctx[9] !== void 0
-    ) {
-      inputbox5_props.value = /*note*/
-      ctx[9];
-    }
-    inputbox5 = new InputBox_default({ props: inputbox5_props });
-    binding_callbacks.push(() => bind(inputbox5, "value", inputbox5_value_binding));
-    function inputbox6_value_binding(value) {
-      ctx[28](value);
-    }
-    let inputbox6_props = {
-      id: "utensilsTaken",
-      label: "Utensils Taken",
-      type: "text",
-      placeholder: "Piring 1, mangkok 1"
-    };
-    if (
-      /*utensilsTaken*/
-      ctx[10] !== void 0
-    ) {
-      inputbox6_props.value = /*utensilsTaken*/
-      ctx[10];
-    }
-    inputbox6 = new InputBox_default({ props: inputbox6_props });
-    binding_callbacks.push(() => bind(inputbox6, "value", inputbox6_value_binding));
-    function inputbox7_value_binding(value) {
-      ctx[29](value);
-    }
-    let inputbox7_props = {
-      id: "utensilsReturnedAt",
-      label: "Utensils Returned At",
-      type: "datetime",
-      placeholder: "YYYY-MM-DD"
-    };
-    if (
-      /*utensilsReturnedAt*/
-      ctx[11] !== void 0
-    ) {
-      inputbox7_props.value = /*utensilsReturnedAt*/
-      ctx[11];
-    }
-    inputbox7 = new InputBox_default({ props: inputbox7_props });
-    binding_callbacks.push(() => bind(inputbox7, "value", inputbox7_value_binding));
-    function inputbox8_value_binding(value) {
-      ctx[30](value);
-    }
-    let inputbox8_props = {
+    let inputbox3_props = {
       id: "qrisIDR",
       label: "QRIS IDR",
       type: "number",
@@ -20672,17 +20710,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*qrisIDR*/
-      ctx[12] !== void 0
+      ctx[11] !== void 0
     ) {
-      inputbox8_props.value = /*qrisIDR*/
-      ctx[12];
+      inputbox3_props.value = /*qrisIDR*/
+      ctx[11];
     }
-    inputbox8 = new InputBox_default({ props: inputbox8_props });
-    binding_callbacks.push(() => bind(inputbox8, "value", inputbox8_value_binding));
-    function inputbox9_value_binding(value) {
-      ctx[31](value);
+    inputbox3 = new InputBox_default({ props: inputbox3_props });
+    binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
+    function inputbox4_value_binding(value) {
+      ctx[27](value);
     }
-    let inputbox9_props = {
+    let inputbox4_props = {
       id: "cashIDR",
       label: "Cash IDR",
       type: "number",
@@ -20690,17 +20728,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*cashIDR*/
-      ctx[13] !== void 0
+      ctx[12] !== void 0
     ) {
-      inputbox9_props.value = /*cashIDR*/
-      ctx[13];
+      inputbox4_props.value = /*cashIDR*/
+      ctx[12];
     }
-    inputbox9 = new InputBox_default({ props: inputbox9_props });
-    binding_callbacks.push(() => bind(inputbox9, "value", inputbox9_value_binding));
-    function inputbox10_value_binding(value) {
-      ctx[32](value);
+    inputbox4 = new InputBox_default({ props: inputbox4_props });
+    binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
+    function inputbox5_value_binding(value) {
+      ctx[28](value);
     }
-    let inputbox10_props = {
+    let inputbox5_props = {
       id: "debtIDR",
       label: "Debt IDR",
       type: "number",
@@ -20708,17 +20746,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*debtIDR*/
-      ctx[14] !== void 0
+      ctx[13] !== void 0
     ) {
-      inputbox10_props.value = /*debtIDR*/
-      ctx[14];
+      inputbox5_props.value = /*debtIDR*/
+      ctx[13];
     }
-    inputbox10 = new InputBox_default({ props: inputbox10_props });
-    binding_callbacks.push(() => bind(inputbox10, "value", inputbox10_value_binding));
-    function inputbox11_value_binding(value) {
-      ctx[33](value);
+    inputbox5 = new InputBox_default({ props: inputbox5_props });
+    binding_callbacks.push(() => bind(inputbox5, "value", inputbox5_value_binding));
+    function inputbox6_value_binding(value) {
+      ctx[29](value);
     }
-    let inputbox11_props = {
+    let inputbox6_props = {
       id: "topupIDR",
       label: "Top Up IDR",
       type: "number",
@@ -20726,17 +20764,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*topupIDR*/
-      ctx[15] !== void 0
+      ctx[14] !== void 0
     ) {
-      inputbox11_props.value = /*topupIDR*/
-      ctx[15];
+      inputbox6_props.value = /*topupIDR*/
+      ctx[14];
     }
-    inputbox11 = new InputBox_default({ props: inputbox11_props });
-    binding_callbacks.push(() => bind(inputbox11, "value", inputbox11_value_binding));
-    function inputbox12_value_binding(value) {
-      ctx[34](value);
+    inputbox6 = new InputBox_default({ props: inputbox6_props });
+    binding_callbacks.push(() => bind(inputbox6, "value", inputbox6_value_binding));
+    function inputbox7_value_binding(value) {
+      ctx[30](value);
     }
-    let inputbox12_props = {
+    let inputbox7_props = {
       id: "totalPriceIDR",
       label: "Total Price IDR",
       type: "number",
@@ -20744,13 +20782,67 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
     if (
       /*totalPriceIDR*/
-      ctx[16] !== void 0
+      ctx[15] !== void 0
     ) {
-      inputbox12_props.value = /*totalPriceIDR*/
-      ctx[16];
+      inputbox7_props.value = /*totalPriceIDR*/
+      ctx[15];
     }
-    inputbox12 = new InputBox_default({ props: inputbox12_props });
-    binding_callbacks.push(() => bind(inputbox12, "value", inputbox12_value_binding));
+    inputbox7 = new InputBox_default({ props: inputbox7_props });
+    binding_callbacks.push(() => bind(inputbox7, "value", inputbox7_value_binding));
+    function inputbox8_value_binding(value) {
+      ctx[31](value);
+    }
+    let inputbox8_props = {
+      id: "salesDate",
+      label: "Sales Date",
+      type: "datetime",
+      placeholder: "YYYY-MM-DD"
+    };
+    if (
+      /*salesDate*/
+      ctx[8] !== void 0
+    ) {
+      inputbox8_props.value = /*salesDate*/
+      ctx[8];
+    }
+    inputbox8 = new InputBox_default({ props: inputbox8_props });
+    binding_callbacks.push(() => bind(inputbox8, "value", inputbox8_value_binding));
+    function inputbox9_value_binding(value) {
+      ctx[32](value);
+    }
+    let inputbox9_props = {
+      id: "paidAt",
+      label: "Paid At",
+      type: "datetime",
+      placeholder: "YYYY-MM-DD"
+    };
+    if (
+      /*paidAt*/
+      ctx[9] !== void 0
+    ) {
+      inputbox9_props.value = /*paidAt*/
+      ctx[9];
+    }
+    inputbox9 = new InputBox_default({ props: inputbox9_props });
+    binding_callbacks.push(() => bind(inputbox9, "value", inputbox9_value_binding));
+    function inputbox10_value_binding(value) {
+      ctx[33](value);
+    }
+    let inputbox10_props = {
+      id: "note",
+      label: "Note",
+      type: "textarea",
+      placeholder: "Note"
+    };
+    if (
+      /*note*/
+      ctx[10] !== void 0
+    ) {
+      inputbox10_props.value = /*note*/
+      ctx[10];
+    }
+    inputbox10 = new InputBox_default({ props: inputbox10_props });
+    binding_callbacks.push(() => bind(inputbox10, "value", inputbox10_value_binding));
     let if_block0 = !/*isSubmitted*/
     ctx[0] && create_if_block_111(ctx);
     let if_block1 = (
@@ -20775,38 +20867,36 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t4 = space();
         create_component(inputbox2.$.fragment);
         t5 = space();
-        create_component(inputbox3.$.fragment);
+        create_component(multiselect.$.fragment);
         t6 = space();
-        create_component(inputbox4.$.fragment);
+        create_component(inputbox3.$.fragment);
         t7 = space();
-        create_component(inputbox5.$.fragment);
+        create_component(inputbox4.$.fragment);
         t8 = space();
-        create_component(inputbox6.$.fragment);
+        create_component(inputbox5.$.fragment);
         t9 = space();
-        create_component(inputbox7.$.fragment);
+        create_component(inputbox6.$.fragment);
         t10 = space();
-        create_component(inputbox8.$.fragment);
+        create_component(inputbox7.$.fragment);
         t11 = space();
-        create_component(inputbox9.$.fragment);
+        create_component(inputbox8.$.fragment);
         t12 = space();
-        create_component(inputbox10.$.fragment);
+        create_component(inputbox9.$.fragment);
         t13 = space();
-        create_component(inputbox11.$.fragment);
+        create_component(inputbox10.$.fragment);
         t14 = space();
-        create_component(inputbox12.$.fragment);
-        t15 = space();
         div3 = element("div");
         div1 = element("div");
         div1.innerHTML = ``;
-        t16 = space();
+        t15 = space();
         div2 = element("div");
         button1 = element("button");
         button1.textContent = "Cancel";
-        t18 = space();
+        t17 = space();
         button2 = element("button");
         if (if_block0)
           if_block0.c();
-        t19 = space();
+        t18 = space();
         if (if_block1)
           if_block1.c();
         attr(h2, "class", "svelte-1518e4v");
@@ -20822,7 +20912,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(div3, "class", "foot svelte-1518e4v");
         attr(div4, "class", "popup svelte-1518e4v");
         attr(div5, "class", div5_class_value = null_to_empty(`popup-container ${/*isShow*/
-        ctx[3] ? "show" : ""}`) + " svelte-1518e4v");
+        ctx[4] ? "show" : ""}`) + " svelte-1518e4v");
       },
       m(target, anchor) {
         insert(target, div5, anchor);
@@ -20840,36 +20930,34 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         append(div0, t4);
         mount_component(inputbox2, div0, null);
         append(div0, t5);
-        mount_component(inputbox3, div0, null);
+        mount_component(multiselect, div0, null);
         append(div0, t6);
-        mount_component(inputbox4, div0, null);
+        mount_component(inputbox3, div0, null);
         append(div0, t7);
-        mount_component(inputbox5, div0, null);
+        mount_component(inputbox4, div0, null);
         append(div0, t8);
-        mount_component(inputbox6, div0, null);
+        mount_component(inputbox5, div0, null);
         append(div0, t9);
-        mount_component(inputbox7, div0, null);
+        mount_component(inputbox6, div0, null);
         append(div0, t10);
-        mount_component(inputbox8, div0, null);
+        mount_component(inputbox7, div0, null);
         append(div0, t11);
-        mount_component(inputbox9, div0, null);
+        mount_component(inputbox8, div0, null);
         append(div0, t12);
-        mount_component(inputbox10, div0, null);
+        mount_component(inputbox9, div0, null);
         append(div0, t13);
-        mount_component(inputbox11, div0, null);
-        append(div0, t14);
-        mount_component(inputbox12, div0, null);
-        append(div4, t15);
+        mount_component(inputbox10, div0, null);
+        append(div4, t14);
         append(div4, div3);
         append(div3, div1);
-        append(div3, t16);
+        append(div3, t15);
         append(div3, div2);
         append(div2, button1);
-        append(div2, t18);
+        append(div2, t17);
         append(div2, button2);
         if (if_block0)
           if_block0.m(button2, null);
-        append(button2, t19);
+        append(button2, t18);
         if (if_block1)
           if_block1.m(button2, null);
         current = true;
@@ -20879,7 +20967,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button0,
               "click",
               /*Hide*/
-              ctx[2]
+              ctx[3]
             ),
             listen(button1, "click", prevent_default(
               /*cancel*/
@@ -20896,10 +20984,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         const inputbox0_changes = {};
         if (!updating_value && dirty[0] & /*cashier*/
-        16) {
+        32) {
           updating_value = true;
           inputbox0_changes.value = /*cashier*/
-          ctx2[4];
+          ctx2[5];
           add_flush_callback(() => updating_value = false);
         }
         inputbox0.$set(inputbox0_changes);
@@ -20909,119 +20997,114 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           inputbox1_changes.values = /*tenants*/
           ctx2[1];
         if (!updating_value_1 && dirty[0] & /*tenantId*/
-        32) {
+        64) {
           updating_value_1 = true;
           inputbox1_changes.value = /*tenantId*/
-          ctx2[5];
+          ctx2[6];
           add_flush_callback(() => updating_value_1 = false);
         }
         inputbox1.$set(inputbox1_changes);
         const inputbox2_changes = {};
         if (!updating_value_2 && dirty[0] & /*buyerName*/
-        64) {
+        128) {
           updating_value_2 = true;
           inputbox2_changes.value = /*buyerName*/
-          ctx2[6];
+          ctx2[7];
           add_flush_callback(() => updating_value_2 = false);
         }
         inputbox2.$set(inputbox2_changes);
+        const multiselect_changes = {};
+        if (dirty[0] & /*menus*/
+        4)
+          multiselect_changes.valuesSourceObj = /*menus*/
+          ctx2[2];
+        if (!updating_valuesTarget && dirty[0] & /*menuIds*/
+        65536) {
+          updating_valuesTarget = true;
+          multiselect_changes.valuesTarget = /*menuIds*/
+          ctx2[16];
+          add_flush_callback(() => updating_valuesTarget = false);
+        }
+        multiselect.$set(multiselect_changes);
         const inputbox3_changes = {};
-        if (!updating_value_3 && dirty[0] & /*salesDate*/
-        128) {
+        if (!updating_value_3 && dirty[0] & /*qrisIDR*/
+        2048) {
           updating_value_3 = true;
-          inputbox3_changes.value = /*salesDate*/
-          ctx2[7];
+          inputbox3_changes.value = /*qrisIDR*/
+          ctx2[11];
           add_flush_callback(() => updating_value_3 = false);
         }
         inputbox3.$set(inputbox3_changes);
         const inputbox4_changes = {};
-        if (!updating_value_4 && dirty[0] & /*paidAt*/
-        256) {
+        if (!updating_value_4 && dirty[0] & /*cashIDR*/
+        4096) {
           updating_value_4 = true;
-          inputbox4_changes.value = /*paidAt*/
-          ctx2[8];
+          inputbox4_changes.value = /*cashIDR*/
+          ctx2[12];
           add_flush_callback(() => updating_value_4 = false);
         }
         inputbox4.$set(inputbox4_changes);
         const inputbox5_changes = {};
-        if (!updating_value_5 && dirty[0] & /*note*/
-        512) {
+        if (!updating_value_5 && dirty[0] & /*debtIDR*/
+        8192) {
           updating_value_5 = true;
-          inputbox5_changes.value = /*note*/
-          ctx2[9];
+          inputbox5_changes.value = /*debtIDR*/
+          ctx2[13];
           add_flush_callback(() => updating_value_5 = false);
         }
         inputbox5.$set(inputbox5_changes);
         const inputbox6_changes = {};
-        if (!updating_value_6 && dirty[0] & /*utensilsTaken*/
-        1024) {
+        if (!updating_value_6 && dirty[0] & /*topupIDR*/
+        16384) {
           updating_value_6 = true;
-          inputbox6_changes.value = /*utensilsTaken*/
-          ctx2[10];
+          inputbox6_changes.value = /*topupIDR*/
+          ctx2[14];
           add_flush_callback(() => updating_value_6 = false);
         }
         inputbox6.$set(inputbox6_changes);
         const inputbox7_changes = {};
-        if (!updating_value_7 && dirty[0] & /*utensilsReturnedAt*/
-        2048) {
+        if (!updating_value_7 && dirty[0] & /*totalPriceIDR*/
+        32768) {
           updating_value_7 = true;
-          inputbox7_changes.value = /*utensilsReturnedAt*/
-          ctx2[11];
+          inputbox7_changes.value = /*totalPriceIDR*/
+          ctx2[15];
           add_flush_callback(() => updating_value_7 = false);
         }
         inputbox7.$set(inputbox7_changes);
         const inputbox8_changes = {};
-        if (!updating_value_8 && dirty[0] & /*qrisIDR*/
-        4096) {
+        if (!updating_value_8 && dirty[0] & /*salesDate*/
+        256) {
           updating_value_8 = true;
-          inputbox8_changes.value = /*qrisIDR*/
-          ctx2[12];
+          inputbox8_changes.value = /*salesDate*/
+          ctx2[8];
           add_flush_callback(() => updating_value_8 = false);
         }
         inputbox8.$set(inputbox8_changes);
         const inputbox9_changes = {};
-        if (!updating_value_9 && dirty[0] & /*cashIDR*/
-        8192) {
+        if (!updating_value_9 && dirty[0] & /*paidAt*/
+        512) {
           updating_value_9 = true;
-          inputbox9_changes.value = /*cashIDR*/
-          ctx2[13];
+          inputbox9_changes.value = /*paidAt*/
+          ctx2[9];
           add_flush_callback(() => updating_value_9 = false);
         }
         inputbox9.$set(inputbox9_changes);
         const inputbox10_changes = {};
-        if (!updating_value_10 && dirty[0] & /*debtIDR*/
-        16384) {
+        if (!updating_value_10 && dirty[0] & /*note*/
+        1024) {
           updating_value_10 = true;
-          inputbox10_changes.value = /*debtIDR*/
-          ctx2[14];
+          inputbox10_changes.value = /*note*/
+          ctx2[10];
           add_flush_callback(() => updating_value_10 = false);
         }
         inputbox10.$set(inputbox10_changes);
-        const inputbox11_changes = {};
-        if (!updating_value_11 && dirty[0] & /*topupIDR*/
-        32768) {
-          updating_value_11 = true;
-          inputbox11_changes.value = /*topupIDR*/
-          ctx2[15];
-          add_flush_callback(() => updating_value_11 = false);
-        }
-        inputbox11.$set(inputbox11_changes);
-        const inputbox12_changes = {};
-        if (!updating_value_12 && dirty[0] & /*totalPriceIDR*/
-        65536) {
-          updating_value_12 = true;
-          inputbox12_changes.value = /*totalPriceIDR*/
-          ctx2[16];
-          add_flush_callback(() => updating_value_12 = false);
-        }
-        inputbox12.$set(inputbox12_changes);
         if (!/*isSubmitted*/
         ctx2[0]) {
           if (if_block0) {
           } else {
             if_block0 = create_if_block_111(ctx2);
             if_block0.c();
-            if_block0.m(button2, t19);
+            if_block0.m(button2, t18);
           }
         } else if (if_block0) {
           if_block0.d(1);
@@ -21055,8 +21138,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx2[0];
         }
         if (!current || dirty[0] & /*isShow*/
-        8 && div5_class_value !== (div5_class_value = null_to_empty(`popup-container ${/*isShow*/
-        ctx2[3] ? "show" : ""}`) + " svelte-1518e4v")) {
+        16 && div5_class_value !== (div5_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[4] ? "show" : ""}`) + " svelte-1518e4v")) {
           attr(div5, "class", div5_class_value);
         }
       },
@@ -21067,6 +21150,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_in(inputbox0.$.fragment, local);
         transition_in(inputbox1.$.fragment, local);
         transition_in(inputbox2.$.fragment, local);
+        transition_in(multiselect.$.fragment, local);
         transition_in(inputbox3.$.fragment, local);
         transition_in(inputbox4.$.fragment, local);
         transition_in(inputbox5.$.fragment, local);
@@ -21075,8 +21159,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_in(inputbox8.$.fragment, local);
         transition_in(inputbox9.$.fragment, local);
         transition_in(inputbox10.$.fragment, local);
-        transition_in(inputbox11.$.fragment, local);
-        transition_in(inputbox12.$.fragment, local);
         transition_in(if_block1);
         current = true;
       },
@@ -21085,6 +21167,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_out(inputbox0.$.fragment, local);
         transition_out(inputbox1.$.fragment, local);
         transition_out(inputbox2.$.fragment, local);
+        transition_out(multiselect.$.fragment, local);
         transition_out(inputbox3.$.fragment, local);
         transition_out(inputbox4.$.fragment, local);
         transition_out(inputbox5.$.fragment, local);
@@ -21093,8 +21176,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_out(inputbox8.$.fragment, local);
         transition_out(inputbox9.$.fragment, local);
         transition_out(inputbox10.$.fragment, local);
-        transition_out(inputbox11.$.fragment, local);
-        transition_out(inputbox12.$.fragment, local);
         transition_out(if_block1);
         current = false;
       },
@@ -21106,6 +21187,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         destroy_component(inputbox0);
         destroy_component(inputbox1);
         destroy_component(inputbox2);
+        destroy_component(multiselect);
         destroy_component(inputbox3);
         destroy_component(inputbox4);
         destroy_component(inputbox5);
@@ -21114,8 +21196,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         destroy_component(inputbox8);
         destroy_component(inputbox9);
         destroy_component(inputbox10);
-        destroy_component(inputbox11);
-        destroy_component(inputbox12);
         if (if_block0)
           if_block0.d();
         if (if_block1)
@@ -21138,19 +21218,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /** @type {Record<number, string>} */
       {}
     ) } = $props;
+    let { menus: menus2 = (
+      /** @type {Record<number, string>} */
+      {}
+    ) } = $props;
     let cashier = "";
     let tenantId = 0;
     let buyerName = "";
     let salesDate = (0, import_xFormatter3.dateISOFormat)(0);
     let paidAt = (0, import_xFormatter3.dateISOFormat)(0);
     let note = "";
-    let utensilsTaken = "";
-    let utensilsReturnedAt = (0, import_xFormatter3.dateISOFormat)(0);
     let qrisIDR = 0;
     let cashIDR = 0;
     let debtIDR = 0;
     let topupIDR = 0;
     let totalPriceIDR = 0;
+    let menuIds = (
+      /** @type {number[]} */
+      []
+    );
     let { OnSubmit = async function(sale) {
       console.log("OnSubmit :::", sale);
     } } = $props;
@@ -21161,11 +21247,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           cashier,
           tenantId,
           buyerName,
+          menuIds,
           salesDate,
           paidAt,
           note,
-          utensilsTaken,
-          utensilsReturnedAt,
           qrisIDR,
           cashIDR,
           debtIDR,
@@ -21174,89 +21259,87 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       );
       await OnSubmit(sale);
     }
-    const Show = () => $invalidate(3, isShow = true);
-    const Hide = () => $invalidate(3, isShow = false);
+    const Show = () => $invalidate(4, isShow = true);
+    const Hide = () => $invalidate(4, isShow = false);
     const Reset = () => {
-      $invalidate(4, cashier = "");
-      $invalidate(5, tenantId = 0);
-      $invalidate(6, buyerName = "");
-      $invalidate(7, salesDate = (0, import_xFormatter3.dateISOFormat)(0));
-      $invalidate(8, paidAt = (0, import_xFormatter3.dateISOFormat)(0));
-      $invalidate(9, note = "");
-      $invalidate(10, utensilsTaken = "");
-      $invalidate(11, utensilsReturnedAt = (0, import_xFormatter3.dateISOFormat)(0));
-      $invalidate(12, qrisIDR = 0);
-      $invalidate(13, cashIDR = 0);
-      $invalidate(14, debtIDR = 0);
-      $invalidate(15, topupIDR = 0);
-      $invalidate(16, totalPriceIDR = 0);
+      $invalidate(5, cashier = "");
+      $invalidate(6, tenantId = 0);
+      $invalidate(16, menuIds = []);
+      $invalidate(7, buyerName = "");
+      $invalidate(8, salesDate = (0, import_xFormatter3.dateISOFormat)(0));
+      $invalidate(9, paidAt = (0, import_xFormatter3.dateISOFormat)(0));
+      $invalidate(10, note = "");
+      $invalidate(11, qrisIDR = 0);
+      $invalidate(12, cashIDR = 0);
+      $invalidate(13, debtIDR = 0);
+      $invalidate(14, topupIDR = 0);
+      $invalidate(15, totalPriceIDR = 0);
     };
     const cancel = () => {
-      $invalidate(3, isShow = false);
+      $invalidate(4, isShow = false);
     };
     function inputbox0_value_binding(value) {
       cashier = value;
-      $invalidate(4, cashier);
+      $invalidate(5, cashier);
     }
     function inputbox1_value_binding(value) {
       tenantId = value;
-      $invalidate(5, tenantId);
+      $invalidate(6, tenantId);
     }
     function inputbox2_value_binding(value) {
       buyerName = value;
-      $invalidate(6, buyerName);
+      $invalidate(7, buyerName);
+    }
+    function multiselect_valuesTarget_binding(value) {
+      menuIds = value;
+      $invalidate(16, menuIds);
     }
     function inputbox3_value_binding(value) {
-      salesDate = value;
-      $invalidate(7, salesDate);
+      qrisIDR = value;
+      $invalidate(11, qrisIDR);
     }
     function inputbox4_value_binding(value) {
-      paidAt = value;
-      $invalidate(8, paidAt);
+      cashIDR = value;
+      $invalidate(12, cashIDR);
     }
     function inputbox5_value_binding(value) {
-      note = value;
-      $invalidate(9, note);
+      debtIDR = value;
+      $invalidate(13, debtIDR);
     }
     function inputbox6_value_binding(value) {
-      utensilsTaken = value;
-      $invalidate(10, utensilsTaken);
+      topupIDR = value;
+      $invalidate(14, topupIDR);
     }
     function inputbox7_value_binding(value) {
-      utensilsReturnedAt = value;
-      $invalidate(11, utensilsReturnedAt);
+      totalPriceIDR = value;
+      $invalidate(15, totalPriceIDR);
     }
     function inputbox8_value_binding(value) {
-      qrisIDR = value;
-      $invalidate(12, qrisIDR);
+      salesDate = value;
+      $invalidate(8, salesDate);
     }
     function inputbox9_value_binding(value) {
-      cashIDR = value;
-      $invalidate(13, cashIDR);
+      paidAt = value;
+      $invalidate(9, paidAt);
     }
     function inputbox10_value_binding(value) {
-      debtIDR = value;
-      $invalidate(14, debtIDR);
-    }
-    function inputbox11_value_binding(value) {
-      topupIDR = value;
-      $invalidate(15, topupIDR);
-    }
-    function inputbox12_value_binding(value) {
-      totalPriceIDR = value;
-      $invalidate(16, totalPriceIDR);
+      note = value;
+      $invalidate(10, note);
     }
     $self.$set = ($props2) => {
       if ("isSubmitted" in $props2)
         $invalidate(0, isSubmitted = $props2.isSubmitted);
       if ("tenants" in $props2)
         $invalidate(1, tenants2 = $props2.tenants);
+      if ("menus" in $props2)
+        $invalidate(2, menus2 = $props2.menus);
       if ("OnSubmit" in $props2)
         $invalidate(19, OnSubmit = $props2.OnSubmit);
     };
     return [
       isSubmitted,
       tenants2,
+      menus2,
       Hide,
       isShow,
       cashier,
@@ -21265,13 +21348,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       salesDate,
       paidAt,
       note,
-      utensilsTaken,
-      utensilsReturnedAt,
       qrisIDR,
       cashIDR,
       debtIDR,
       topupIDR,
       totalPriceIDR,
+      menuIds,
       submitAdd,
       cancel,
       OnSubmit,
@@ -21280,6 +21362,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       inputbox0_value_binding,
       inputbox1_value_binding,
       inputbox2_value_binding,
+      multiselect_valuesTarget_binding,
       inputbox3_value_binding,
       inputbox4_value_binding,
       inputbox5_value_binding,
@@ -21287,9 +21370,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       inputbox7_value_binding,
       inputbox8_value_binding,
       inputbox9_value_binding,
-      inputbox10_value_binding,
-      inputbox11_value_binding,
-      inputbox12_value_binding
+      inputbox10_value_binding
     ];
   }
   var PopUpAddSale = class extends SvelteComponent {
@@ -21304,9 +21385,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         {
           isSubmitted: 0,
           tenants: 1,
+          menus: 2,
           OnSubmit: 19,
           Show: 20,
-          Hide: 2,
+          Hide: 3,
           Reset: 21
         },
         null,
@@ -21317,7 +21399,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       return this.$.ctx[20];
     }
     get Hide() {
-      return this.$.ctx[2];
+      return this.$.ctx[3];
     }
     get Reset() {
       return this.$.ctx[21];
@@ -21334,10 +21416,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function popupaddsale_isSubmitted_binding(value) {
       ctx[12](value);
     }
-    let popupaddsale_props = { tenants, OnSubmit: (
-      /*OnAddSale*/
-      ctx[10]
-    ) };
+    let popupaddsale_props = {
+      tenants,
+      menus,
+      OnSubmit: (
+        /*OnAddSale*/
+        ctx[10]
+      )
+    };
     if (
       /*isSubmitAddSale*/
       ctx[5] !== void 0
@@ -21459,13 +21545,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let mastertable_props = {
       NAME: "Sales",
       ACCESS: segments,
-      REFS: { "tenantId": tenants },
-      COL_WIDTHS: { "tenantId": 370 },
+      REFS: { "tenantId": tenants, "menuIds": menus },
+      COL_WIDTHS: { "tenantId": 300, "menuIds": 300 },
       CAN_EDIT_ROW: true,
       CAN_SEARCH_ROW: true,
       CAN_DELETE_ROW: true,
       CAN_RESTORE_ROW: true,
-      CAN_OPEN_LINK: true,
       OnDelete: (
         /*OnDelete*/
         ctx[8]
@@ -21669,6 +21754,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     /** @type {Record<Number, string>} */
     {/* tenants */}
   );
+  var menus = (
+    /** @type {Record<Number, string>} */
+    {/* menus */}
+  );
   function instance12($self, $props, $invalidate) {
     let sales = (
       /** @type {any[][]} */
@@ -21775,16 +21864,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         cashier: String(payloads[1]),
         tenantId: String(payloads[2]),
         buyerName: String(payloads[3]),
-        salesDate: String(payloads[4]),
-        paidAt: String(payloads[5]),
-        note: String(payloads[6]),
-        utensilsTaken: String(payloads[7]),
-        utensilsReturnedAt: String(payloads[8]),
-        qrisIDR: Number(payloads[9]),
-        cashIDR: Number(payloads[10]),
-        debtIDR: Number(payloads[11]),
-        topupIDR: Number(payloads[12]),
-        totalPriceIDR: Number(payloads[13])
+        menuIds: payloads[4],
+        qrisIDR: Number(payloads[5]),
+        cashIDR: Number(payloads[6]),
+        debtIDR: Number(payloads[7]),
+        topupIDR: Number(payloads[8]),
+        totalPriceIDR: Number(payloads[9]),
+        salesDate: String(payloads[10]),
+        paidAt: String(payloads[11]),
+        note: String(payloads[12])
       };
       const i = (
         /** @type {any}*/

@@ -981,6 +981,8 @@ exports.AdminRoom = async function AdminRoom( i, cb ) {
  * @typedef {Object} AdminSaleIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -989,16 +991,15 @@ exports.AdminRoom = async function AdminRoom( i, cb ) {
  * @property {String} sale.cashier
  * @property {number} sale.tenantId
  * @property {String} sale.buyerName
- * @property {String} sale.salesDate
- * @property {String} sale.paidAt
- * @property {String} sale.note
- * @property {String} sale.utensilsTaken
- * @property {String} sale.utensilsReturnedAt
+ * @property {Object} sale.menuIds
  * @property {number} sale.qrisIDR
  * @property {number} sale.cashIDR
  * @property {number} sale.debtIDR
  * @property {number} sale.topupIDR
  * @property {number} sale.totalPriceIDR
+ * @property {String} sale.salesDate
+ * @property {String} sale.paidAt
+ * @property {String} sale.note
  * @property {number} sale.createdAt
  * @property {number} sale.createdBy
  * @property {number} sale.updatedAt
@@ -1012,6 +1013,8 @@ const AdminSaleIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -1023,16 +1026,16 @@ const AdminSaleIn = {
     cashier: '', // string
     tenantId: 0, // uint64
     buyerName: '', // string
-    salesDate: '', // string
-    paidAt: '', // string
-    note: '', // string
-    utensilsTaken: '', // string
-    utensilsReturnedAt: '', // string
+    menuIds: { // []any
+    }, // []any
     qrisIDR: 0, // int64
     cashIDR: 0, // int64
     debtIDR: 0, // int64
     topupIDR: 0, // int64
     totalPriceIDR: 0, // int64
+    salesDate: '', // string
+    paidAt: '', // string
+    note: '', // string
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64
@@ -1045,6 +1048,8 @@ const AdminSaleIn = {
 }
 /**
  * @typedef {Object} AdminSaleOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -1058,16 +1063,15 @@ const AdminSaleIn = {
  * @property {String} sale.cashier
  * @property {number} sale.tenantId
  * @property {String} sale.buyerName
- * @property {String} sale.salesDate
- * @property {String} sale.paidAt
- * @property {String} sale.note
- * @property {String} sale.utensilsTaken
- * @property {String} sale.utensilsReturnedAt
+ * @property {Object} sale.menuIds
  * @property {number} sale.qrisIDR
  * @property {number} sale.cashIDR
  * @property {number} sale.debtIDR
  * @property {number} sale.topupIDR
  * @property {number} sale.totalPriceIDR
+ * @property {String} sale.salesDate
+ * @property {String} sale.paidAt
+ * @property {String} sale.note
  * @property {number} sale.createdAt
  * @property {number} sale.createdBy
  * @property {number} sale.updatedAt
@@ -1079,6 +1083,8 @@ const AdminSaleIn = {
  */
 const AdminSaleOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -1099,16 +1105,16 @@ const AdminSaleOut = {
     cashier: '', // string
     tenantId: 0, // uint64
     buyerName: '', // string
-    salesDate: '', // string
-    paidAt: '', // string
-    note: '', // string
-    utensilsTaken: '', // string
-    utensilsReturnedAt: '', // string
+    menuIds: { // []any
+    }, // []any
     qrisIDR: 0, // int64
     cashIDR: 0, // int64
     debtIDR: 0, // int64
     topupIDR: 0, // int64
     totalPriceIDR: 0, // int64
+    salesDate: '', // string
+    paidAt: '', // string
+    note: '', // string
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64
