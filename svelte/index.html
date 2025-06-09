@@ -1216,6 +1216,47 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   z-index: 20;
 }
 
+/* fakecss:./_partials/home/UnpaidBookingTenants.esbuild-svelte-fake-css */
+.empty-unpaidBookingTenants.svelte-8g2hq7.svelte-8g2hq7 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.empty-unpaidBookingTenants.svelte-8g2hq7 h1.svelte-8g2hq7 {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-xl);
+}
+.empty-unpaidBookingTenants.svelte-8g2hq7 .cards.svelte-8g2hq7 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+.empty-unpaidBookingTenants.svelte-8g2hq7 .cards .card.svelte-8g2hq7 {
+  background-color: var(--gray-001);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.empty-unpaidBookingTenants.svelte-8g2hq7 .cards .card h3.svelte-8g2hq7 {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-lg);
+  z-index: 20;
+}
+.empty-unpaidBookingTenants.svelte-8g2hq7 .cards .card .desc.svelte-8g2hq7 {
+  padding-top: 10px;
+  border-top: 1px solid var(--gray-004);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 20;
+}
+
 /* fakecss:./index.esbuild-svelte-fake-css */
 .home-container.svelte-s4k1th.svelte-s4k1th {
   display: flex;
@@ -4588,7 +4629,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance9, create_fragment14, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance9, create_fragment15, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -4627,7 +4668,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment14 ? create_fragment14($.ctx) : false;
+    $.fragment = create_fragment15 ? create_fragment15($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -14641,9 +14682,186 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   };
   var AvailableRooms_default = AvailableRooms;
 
+  // _partials/home/UnpaidBookingTenants.svelte
+  function get_each_context4(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[0] = list[i];
+    return child_ctx;
+  }
+  function create_else_block5(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        div.innerHTML = `<p>No Unpaid Bookings</p>`;
+        attr(div, "class", "no-data");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block6(ctx) {
+    let div;
+    let each_value = ensure_array_like(unpaidBookingTenants || []);
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block4(get_each_context4(ctx, each_value, i));
+    }
+    return {
+      c() {
+        div = element("div");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(div, "class", "cards svelte-8g2hq7");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div, null);
+          }
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*unpaidBookingTenants*/
+        0) {
+          each_value = ensure_array_like(unpaidBookingTenants || []);
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context4(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block4(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value.length;
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function create_each_block4(ctx) {
+    let div1;
+    let h3;
+    let t1;
+    let div0;
+    let span0;
+    let t4;
+    let span1;
+    let t8;
+    return {
+      c() {
+        div1 = element("div");
+        h3 = element("h3");
+        h3.textContent = `${/*ub*/
+        ctx[0].tenantName}`;
+        t1 = space();
+        div0 = element("div");
+        span0 = element("span");
+        span0.textContent = `Room ${/*ub*/
+        ctx[0].roomName}`;
+        t4 = space();
+        span1 = element("span");
+        span1.textContent = `${/*ub*/
+        ctx[0].totalPaid}/${/*ub*/
+        ctx[0].totalPrice}`;
+        t8 = space();
+        attr(h3, "class", "svelte-8g2hq7");
+        attr(div0, "class", "desc svelte-8g2hq7");
+        attr(div1, "class", "card svelte-8g2hq7");
+      },
+      m(target, anchor) {
+        insert(target, div1, anchor);
+        append(div1, h3);
+        append(div1, t1);
+        append(div1, div0);
+        append(div0, span0);
+        append(div0, t4);
+        append(div0, span1);
+        append(div1, t8);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div1);
+        }
+      }
+    };
+  }
+  function create_fragment13(ctx) {
+    let section;
+    let h1;
+    let t1;
+    function select_block_type(ctx2, dirty) {
+      if (unpaidBookingTenants && unpaidBookingTenants.length > 0)
+        return create_if_block6;
+      return create_else_block5;
+    }
+    let current_block_type = select_block_type(ctx, -1);
+    let if_block = current_block_type(ctx);
+    return {
+      c() {
+        section = element("section");
+        h1 = element("h1");
+        h1.textContent = "Unpaid Bookings";
+        t1 = space();
+        if_block.c();
+        attr(h1, "class", "svelte-8g2hq7");
+        attr(section, "class", "empty-unpaidBookingTenants svelte-8g2hq7");
+      },
+      m(target, anchor) {
+        insert(target, section, anchor);
+        append(section, h1);
+        append(section, t1);
+        if_block.m(section, null);
+      },
+      p(ctx2, [dirty]) {
+        if_block.p(ctx2, dirty);
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(section);
+        }
+        if_block.d();
+      }
+    };
+  }
+  var unpaidBookingTenants = (
+    /** @type {UnpaidBookingTenant[]} */
+    [/* unpaidBookingTenants */]
+  );
+  var UnpaidBookingTenants = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, null, create_fragment13, safe_not_equal, {});
+    }
+  };
+  var UnpaidBookingTenants_default = UnpaidBookingTenants;
+
   // index.svelte
   var { window: window_1 } = globals;
-  function create_else_block5(ctx) {
+  function create_else_block6(ctx) {
     let section;
     let div5;
     let div0;
@@ -15004,7 +15222,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
       }
     };
   }
-  function create_if_block6(ctx) {
+  function create_if_block7(ctx) {
     let layoutmain;
     let current;
     layoutmain = new main_default({
@@ -15643,24 +15861,31 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   function create_default_slot(ctx) {
     let div;
     let birthdayagenda;
-    let t;
+    let t0;
     let availablerooms;
+    let t1;
+    let unpaidbookingtenants;
     let current;
     birthdayagenda = new BirthDayAgenda_default({});
     availablerooms = new AvailableRooms_default({});
+    unpaidbookingtenants = new UnpaidBookingTenants_default({});
     return {
       c() {
         div = element("div");
         create_component(birthdayagenda.$.fragment);
-        t = space();
+        t0 = space();
         create_component(availablerooms.$.fragment);
+        t1 = space();
+        create_component(unpaidbookingtenants.$.fragment);
         attr(div, "class", "home-container svelte-s4k1th");
       },
       m(target, anchor) {
         insert(target, div, anchor);
         mount_component(birthdayagenda, div, null);
-        append(div, t);
+        append(div, t0);
         mount_component(availablerooms, div, null);
+        append(div, t1);
+        mount_component(unpaidbookingtenants, div, null);
         current = true;
       },
       p: noop,
@@ -15669,11 +15894,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
           return;
         transition_in(birthdayagenda.$.fragment, local);
         transition_in(availablerooms.$.fragment, local);
+        transition_in(unpaidbookingtenants.$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(birthdayagenda.$.fragment, local);
         transition_out(availablerooms.$.fragment, local);
+        transition_out(unpaidbookingtenants.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -15682,17 +15909,18 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
         destroy_component(birthdayagenda);
         destroy_component(availablerooms);
+        destroy_component(unpaidbookingtenants);
       }
     };
   }
-  function create_fragment13(ctx) {
+  function create_fragment14(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
     let current;
     let mounted;
     let dispose;
-    const if_block_creators = [create_if_block6, create_else_block5];
+    const if_block_creators = [create_if_block7, create_else_block6];
     const if_blocks = [];
     function select_block_type(ctx2, dirty) {
       if (
@@ -15922,7 +16150,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   var Index = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance8, create_fragment13, safe_not_equal, {});
+      init(this, options, instance8, create_fragment14, safe_not_equal, {});
     }
   };
   var svelte_default = Index;
