@@ -26,6 +26,8 @@ function wrapOk( cb ) {
  * @typedef {Object} AdminBookingIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -53,6 +55,8 @@ const AdminBookingIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -84,6 +88,8 @@ const AdminBookingIn = {
 }
 /**
  * @typedef {Object} AdminBookingOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -114,6 +120,8 @@ const AdminBookingIn = {
  */
 const AdminBookingOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -172,6 +180,8 @@ exports.AdminBooking = async function AdminBooking( i, cb ) {
  * @typedef {Object} AdminBuildingIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -192,6 +202,8 @@ const AdminBuildingIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -215,6 +227,8 @@ const AdminBuildingIn = {
 }
 /**
  * @typedef {Object} AdminBuildingOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -239,6 +253,8 @@ const AdminBuildingIn = {
  */
 const AdminBuildingOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -291,6 +307,8 @@ exports.AdminBuilding = async function AdminBuilding( i, cb ) {
  * @typedef {Object} AdminFacilityIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -312,6 +330,8 @@ const AdminFacilityIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -335,6 +355,8 @@ const AdminFacilityIn = {
 }
 /**
  * @typedef {Object} AdminFacilityOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -360,6 +382,8 @@ const AdminFacilityIn = {
  */
 const AdminFacilityOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -412,6 +436,8 @@ exports.AdminFacility = async function AdminFacility( i, cb ) {
  * @typedef {Object} AdminLocationIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -432,6 +458,8 @@ const AdminLocationIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -454,6 +482,8 @@ const AdminLocationIn = {
 }
 /**
  * @typedef {Object} AdminLocationOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -478,6 +508,8 @@ const AdminLocationIn = {
  */
 const AdminLocationOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -529,6 +561,8 @@ exports.AdminLocation = async function AdminLocation( i, cb ) {
  * @typedef {Object} AdminMenuIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -551,6 +585,8 @@ const AdminMenuIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -575,6 +611,8 @@ const AdminMenuIn = {
 }
 /**
  * @typedef {Object} AdminMenuOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -601,6 +639,8 @@ const AdminMenuIn = {
  */
 const AdminMenuOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -654,6 +694,8 @@ exports.AdminMenu = async function AdminMenu( i, cb ) {
  * @typedef {Object} AdminPaymentIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -678,6 +720,8 @@ const AdminPaymentIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -704,6 +748,8 @@ const AdminPaymentIn = {
 }
 /**
  * @typedef {Object} AdminPaymentOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -732,6 +778,8 @@ const AdminPaymentIn = {
  */
 const AdminPaymentOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -788,6 +836,8 @@ exports.AdminPayment = async function AdminPayment( i, cb ) {
  * @typedef {Object} AdminRoomIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -813,6 +863,8 @@ const AdminRoomIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -840,6 +892,8 @@ const AdminRoomIn = {
 }
 /**
  * @typedef {Object} AdminRoomOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -869,6 +923,8 @@ const AdminRoomIn = {
  */
 const AdminRoomOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -1084,6 +1140,8 @@ exports.AdminSale = async function AdminSale( i, cb ) {
  * @typedef {Object} AdminStockIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -1105,6 +1163,8 @@ const AdminStockIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -1128,6 +1188,8 @@ const AdminStockIn = {
 }
 /**
  * @typedef {Object} AdminStockOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -1153,6 +1215,8 @@ const AdminStockIn = {
  */
 const AdminStockOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -1205,6 +1269,8 @@ exports.AdminStock = async function AdminStock( i, cb ) {
  * @typedef {Object} AdminTenantsIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -1239,6 +1305,8 @@ const AdminTenantsIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -1275,6 +1343,8 @@ const AdminTenantsIn = {
 }
 /**
  * @typedef {Object} AdminTenantsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -1313,6 +1383,8 @@ const AdminTenantsIn = {
  */
 const AdminTenantsOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -1378,6 +1450,8 @@ exports.AdminTenants = async function AdminTenants( i, cb ) {
  * @typedef {Object} AdminUsersManagementIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -1403,6 +1477,8 @@ const AdminUsersManagementIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -1430,6 +1506,8 @@ const AdminUsersManagementIn = {
 }
 /**
  * @typedef {Object} AdminUsersManagementOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -1459,6 +1537,8 @@ const AdminUsersManagementIn = {
  */
 const AdminUsersManagementOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int
@@ -1748,6 +1828,8 @@ exports.GuestVerifyEmail = async function GuestVerifyEmail( i, cb ) {
  * @typedef {Object} StaffBookingIn
  * @property {String} cmd
  * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {Object} pager.filters
@@ -1775,6 +1857,8 @@ const StaffBookingIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     filters: { // map[string][]string
@@ -1806,6 +1890,8 @@ const StaffBookingIn = {
 }
 /**
  * @typedef {Object} StaffBookingOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
  * @property {number} pager.page
  * @property {number} pager.perPage
  * @property {number} pager.pages
@@ -1836,6 +1922,8 @@ const StaffBookingIn = {
  */
 const StaffBookingOut = {
   pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
     page: 0, // int
     perPage: 0, // int
     pages: 0, // int

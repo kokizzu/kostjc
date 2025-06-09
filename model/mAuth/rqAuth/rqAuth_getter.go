@@ -58,7 +58,12 @@ func (u *Users) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud
 	const comment = `-- Users) FindByPagination`
 
 	validFields := UsersFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -103,7 +108,12 @@ func (t *Tenants) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCr
 	const comment = `-- Locations) FindByPagination`
 
 	validFields := TenantsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)

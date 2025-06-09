@@ -18,7 +18,12 @@ func (l *Locations) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *z
 	const comment = `-- Locations) FindByPagination`
 
 	validFields := LocationsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -66,7 +71,12 @@ func (f *Facilities) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *
 	const comment = `-- Facilities) FindByPagination`
 
 	validFields := FacilitiesFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -98,7 +108,12 @@ func (b *Buildings) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *z
 	const comment = `-- Buildings) FindByPagination`
 
 	validFields := BuildingsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -148,7 +163,12 @@ func (b *Bookings) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zC
 	const comment = `-- Bookings) FindByPagination`
 
 	validFields := BookingsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -317,7 +337,12 @@ func (p *Payments) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zC
 	const comment = `-- Payments) FindByPagination`
 
 	validFields := PaymentsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -426,7 +451,12 @@ func (s *Stocks) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCru
 	const comment = `-- Stocks) FindByPagination`
 
 	validFields := LocationsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -458,7 +488,12 @@ func (r *Rooms) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud
 	const comment = `-- Rooms) FindByPagination`
 
 	validFields := RoomsFieldTypeMap
-	whereAndSql := out.WhereAndSqlTt(in.Filters, validFields)
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
 
 	queryCount := comment + `
 SELECT COUNT(1)
@@ -962,7 +997,8 @@ func GroupBookingsToQuarter(bookings []BookingDetail, monthStartStr, monthEndStr
 func (p *Payments) FindByBookingId(bookingId uint64) (rows []Payments) {
 	const comment = `-- Payments) FindByBookingId`
 
-	query := `SELECT ` + p.SqlSelectAllFields() + `
+	query := comment + `
+SELECT ` + p.SqlSelectAllFields() + `
 FROM ` + p.SqlTableName() + `
 WHERE ` + p.SqlBookingId() + ` = ` + I.UToS(bookingId)
 
@@ -1101,4 +1137,50 @@ func getAgeByBirthday(birthday string) int {
 	}
 
 	return age
+}
+
+type AvailableRoom struct {
+	RoomName       string `json:"roomName"`
+	AvailableAt    string `json:"availableAt"`
+	IsAvailableNow bool   `json:"isAvailableNow"`
+}
+
+func (r *Rooms) FindAvailableRooms() (out []AvailableRoom) {
+	const comment = `-- Rooms) FindAvailableRooms`
+
+	now := time.Now()
+	dateTimeNow := now.Format(time.DateOnly)
+	sevenDaysAgo := now.AddDate(0, 0, -7).Format(time.DateOnly)
+	sevenDaysLater := now.AddDate(0, 0, 7).Format(time.DateOnly)
+
+	queryRows := comment + `
+SELECT
+	` + r.SqlRoomName() + `,
+	` + r.SqlLastUseAt() + `,
+	CASE
+		WHEN ` + r.SqlLastUseAt() + ` <= '` + dateTimeNow + `'
+		THEN 'TRUE'
+	ELSE 'FALSE' END
+FROM ` + r.SqlTableName() + `
+WHERE
+	(` + r.SqlLastUseAt() + ` >= '` + sevenDaysAgo + `'
+		AND ` + r.SqlLastUseAt() + ` <= '` + sevenDaysLater + `'
+	)
+	OR ` + r.SqlCurrentTenantId() + ` = 0
+ORDER BY ` + r.SqlRoomName() + ` ASC`
+
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 3 {
+			roomName := X.ToS(row[0])
+			availableAt := X.ToS(row[1])
+			isAvailableNow := X.ToBool(row[2])
+			out = append(out, AvailableRoom{
+				RoomName:       roomName,
+				AvailableAt:    availableAt,
+				IsAvailableNow: isAvailableNow,
+			})
+		}
+	})
+
+	return
 }

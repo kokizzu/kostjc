@@ -8,7 +8,7 @@
   import Select from '../node_modules/svelte-select';
   import { AdminBooking } from '../jsApi.GEN';
   import MultiSelect from './MultiSelect.svelte';
-  import { onMount } from 'svelte';
+    import { dateISOFormat } from './xFormatter';
 
   export let isShow = /** @type {boolean} */ (false);
   export let isSubmitted  = /** @type {boolean} */ (false);
@@ -65,9 +65,27 @@
       console.log('Res: ',o);
     })
   }
-  export const Hide = () => isShow = false;
+  export const Hide = () => {
+    isShow = false;
+    reset();
+  }
+
+  function reset() {
+    roomId = 0;
+    dateStart = dateISOFormat(0);
+    dateEnd = dateISOFormat(30);
+    tenantId = 0;
+    basePriceIDR = 0;
+    facilitiesObj = {};
+    totalPriceIDR = 0
+    paidAt = dateISOFormat(0);
+    extraTenants = [];
+  }
   
-  const cancel = () => isShow = false;
+  const cancel = () => {
+    isShow = false;
+    reset();
+  }
   
   async function handleSubmit() {
     isSubmitted = true;
@@ -152,20 +170,9 @@
     }
   }
 
-  onMount(() => {
-    for (const [k, v] of Object.entries(tenants)) {
-      itemsArrObjTenant = [...itemsArrObjTenant, {
-        value: k,
-        label: v
-      }];
-    }
-    for (const [k, v] of Object.entries(rooms)) {
-      itemsArrObjRoom = [...itemsArrObjRoom, {
-        value: k,
-        label: v
-      }];
-    }
-  })
+  $: if (extraTenants) {
+    reStructureSvelteValues(tenantId, roomId);
+  }
 </script>
 
 <div class={`popup-container ${isShow ? 'show' : ''}`}>
