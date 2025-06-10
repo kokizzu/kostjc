@@ -85,6 +85,14 @@ var AdminSaleMeta = zCrud.Meta{
 			ReadOnly:  false,
 		},
 		{
+			Name:      mCafe.TransferIDR,
+			Label:     `Transfer IDR`,
+			DataType:  zCrud.DataTypeCurrency,
+			InputType: zCrud.InputTypeNumber,
+			ReadOnly:  false,
+			Mapping:   `IDR`,
+		},
+		{
 			Name:      mCafe.QrisIDR,
 			Label:     `QRIS IDR`,
 			DataType:  zCrud.DataTypeCurrency,
@@ -111,6 +119,14 @@ var AdminSaleMeta = zCrud.Meta{
 		{
 			Name:      mCafe.TopupIDR,
 			Label:     `Topup IDR`,
+			DataType:  zCrud.DataTypeCurrency,
+			InputType: zCrud.InputTypeNumber,
+			ReadOnly:  false,
+			Mapping:   `IDR`,
+		},
+		{
+			Name:      mCafe.Donation,
+			Label:     `Donation`,
 			DataType:  zCrud.DataTypeCurrency,
 			InputType: zCrud.InputTypeNumber,
 			ReadOnly:  false,
@@ -267,6 +283,12 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 		}
 		if in.Sale.TotalPriceIDR != 0 {
 			sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
+		}
+		if in.Sale.Donation != 0 {
+			sale.SetDonation(in.Sale.Donation)
+		}
+		if in.Sale.TransferIDR != 0 {
+			sale.SetTransferIDR(in.Sale.TransferIDR)
 		}
 
 		if sale.Id == 0 {

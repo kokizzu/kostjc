@@ -22,10 +22,12 @@
   let salesDate = dateISOFormat(0);
   let paidAt = dateISOFormat(0);
   let note = '';
+  let transferIDR = 0;
   let qrisIDR = 0;
   let cashIDR = 0;
   let debtIDR = 0;
   let topupIDR = 0;
+  let donation = 0;
   let totalPriceIDR = 0;
   let menuIds = /** @type {number[]} */([]);
 
@@ -46,6 +48,8 @@
       cashIDR: cashIDR,
       debtIDR: debtIDR,
       topupIDR: topupIDR,
+      transferIDR: transferIDR,
+      donation: donation,
     });
 
 
@@ -63,10 +67,12 @@
   salesDate = dateISOFormat(0);
   paidAt = dateISOFormat(0);
   note = '';
+  transferIDR = 0;
   qrisIDR = 0;
   cashIDR = 0;
   debtIDR = 0;
   topupIDR = 0;
+  donation = 0;
   totalPriceIDR = 0;
   }
   
@@ -115,6 +121,13 @@
         valuesSourceObj={menus}
       />
       <InputBox
+      id="transferIDR"
+      label="Transfer IDR"
+      bind:value={transferIDR}
+      type="number"
+      placeholder="0"
+      />
+      <InputBox
       id="qrisIDR"
       label="QRIS IDR"
       bind:value={qrisIDR}
@@ -139,6 +152,13 @@
       id="topupIDR"
       label="Top Up IDR"
       bind:value={topupIDR}
+      type="number"
+      placeholder="0"
+      />
+      <InputBox
+      id="donation"
+      label="Donation"
+      bind:value={donation}
       type="number"
       placeholder="0"
       />

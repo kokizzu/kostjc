@@ -1000,6 +1000,8 @@ exports.AdminRoom = async function AdminRoom( i, cb ) {
  * @property {String} sale.salesDate
  * @property {String} sale.paidAt
  * @property {String} sale.note
+ * @property {number} sale.donation
+ * @property {number} sale.transferIDR
  * @property {number} sale.createdAt
  * @property {number} sale.createdBy
  * @property {number} sale.updatedAt
@@ -1036,6 +1038,8 @@ const AdminSaleIn = {
     salesDate: '', // string
     paidAt: '', // string
     note: '', // string
+    donation: 0, // int64
+    transferIDR: 0, // int64
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64
@@ -1072,6 +1076,8 @@ const AdminSaleIn = {
  * @property {String} sale.salesDate
  * @property {String} sale.paidAt
  * @property {String} sale.note
+ * @property {number} sale.donation
+ * @property {number} sale.transferIDR
  * @property {number} sale.createdAt
  * @property {number} sale.createdBy
  * @property {number} sale.updatedAt
@@ -1115,6 +1121,8 @@ const AdminSaleOut = {
     salesDate: '', // string
     paidAt: '', // string
     note: '', // string
+    donation: 0, // int64
+    transferIDR: 0, // int64
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64

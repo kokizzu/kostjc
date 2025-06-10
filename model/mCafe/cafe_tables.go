@@ -47,6 +47,8 @@ const (
 	SalesDate     = `salesDate`
 	PaidAt        = `paidAt`
 	Note          = `note`
+	Donation      = `donation`
+	TransferIDR   = `transferIDR`
 )
 
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
@@ -85,6 +87,8 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{SalesDate, Tt.String},
 			{PaidAt, Tt.String},
 			{Note, Tt.String},
+			{Donation, Tt.Integer},
+			{TransferIDR, Tt.Integer},
 			{CreatedAt, Tt.Integer},
 			{CreatedBy, Tt.Unsigned},
 			{UpdatedAt, Tt.Integer},

@@ -23,11 +23,13 @@ module.exports = {};
  * @property {string|number} tenantId
  * @property {string} buyerName
  * @property {number[]} menuIds
+ * @property {number} transferIDR
  * @property {number} qrisIDR
  * @property {number} cashIDR
  * @property {number} debtIDR
  * @property {number} topupIDR
  * @property {number} totalPriceIDR
+ * @property {number} donation
  * @property {string} salesDate
  * @property {string} paidAt
  * @property {string} note
