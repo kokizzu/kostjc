@@ -8,12 +8,18 @@ import (
 
 var allCommands = []string{
 	domain.AdminBookingAction,
+	domain.AdminBookingLogsAction,
 	domain.AdminBuildingAction,
+	domain.AdminBuildingLogsAction,
 	domain.AdminFacilityAction,
+	domain.AdminFacilityLogsAction,
 	domain.AdminLocationAction,
+	domain.AdminLocationLogsAction,
 	domain.AdminMenuAction,
 	domain.AdminPaymentAction,
+	domain.AdminPaymentLogsAction,
 	domain.AdminRoomAction,
+	domain.AdminRoomLogsAction,
 	domain.AdminStockAction,
 	domain.AdminTenantsAction,
 	domain.AdminUsersManagementAction,

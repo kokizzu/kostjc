@@ -17001,7 +17001,7 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
       /** @type {boolean} */
       false
     ) } = $props;
-    const PaymentMethods = ["Cash", "QRIS", "Transfer"];
+    const PaymentMethods = ["Cash", "QRIS", "Transfer", "Donation"];
     const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
     let { isSubmitted = (
       /** @type {boolean} */
@@ -18657,7 +18657,7 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
     let { bookingId = 0 } = $props;
     let { isBookingReadOnly = false } = $props;
     let { paymentAt = (0, import_xFormatter5.dateISOFormat)(0) } = $props;
-    const PaymentMethods = ["Cash", "QRIS", "Transfer"];
+    const PaymentMethods = ["Cash", "QRIS", "Transfer", "Donation"];
     const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
     let paidIDR = 0;
     let paymentMethod = PaymentMethods[0];

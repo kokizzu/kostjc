@@ -14,6 +14,7 @@
     'Cash',
     'QRIS',
     'Transfer',
+    'Donation'
   ];
   const PaymentStatuses = [
     'Paid',

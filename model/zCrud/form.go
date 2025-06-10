@@ -25,6 +25,7 @@ const (
 	DataTypeIntArr   DataType = `intArr`
 	DataTypeMapping  DataType = `mapping`
 	DataTypeCurrency DataType = `currency`
+	DataTypeJSON     DataType = `json`
 
 	InputTypeText        InputType = `text`
 	InputTypeTextArea    InputType = `textarea`

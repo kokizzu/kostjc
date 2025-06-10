@@ -16061,7 +16061,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let { bookingId = 0 } = $props;
     let { isBookingReadOnly = false } = $props;
     let { paymentAt = (0, import_xFormatter2.dateISOFormat)(0) } = $props;
-    const PaymentMethods = ["Cash", "QRIS", "Transfer"];
+    const PaymentMethods = ["Cash", "QRIS", "Transfer", "Donation"];
     const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
     let paidIDR = 0;
     let paymentMethod = PaymentMethods[0];
