@@ -529,9 +529,9 @@
                 {:else if f.name === 'facilities'}
                   <td class="textarea">{formatFacilities(row[idx], REFS['facilities'])}</td>
                 {:else if f.type == 'intArr'}  
-                  <td class="intArr">{row[idx] ? (
-                    Object.entries(REFS[f.name]).map(([k, v]) => `${v}`).join(', ')
-                  ) : '--'}</td>
+                  <td class="intArr">{row[idx] && row[idx].length > 0 ? (
+                  row[idx].map(id => REFS[f.name][id]).join(', ')
+                ) : '--'}</td>
                 {:else if f.type == 'currency'}
                   <td class="currency">{row[idx] ? formatPrice(row[idx], (f.mapping || 'IDR')) : '--'}</td>
                 {:else if f.inputType === 'datetime'}

@@ -8,7 +8,7 @@
   import { datetime } from './xFormatter'; 
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import {
-    RiSystemRefreshLine, RiSystemFilterLine, RiDesignPencilLine,
+    RiDesignPencilLine,
     RiArrowsArrowRightSLine, RiArrowsArrowRightDoubleFill,
     RiArrowsArrowLeftSLine, RiArrowsArrowLeftDoubleFill
   } from '../node_modules/svelte-icons-pack/dist/ri';
@@ -143,27 +143,6 @@
                             color="var(--gray-008)"
                           />
                         </button>
-                        {#each extraActions as action}
-                          {#if action.link}
-                            <a href={action.link(row)} class="btn" target="_blank" title={action.label || ''}>
-                              <Icon
-                                src={action.icon}
-                                size="17"
-                                color="var(--gray-008)"
-                              />
-                            </a>
-                          {:else}
-                            <button class="btn" title={action.label || ""}
-                              on:click={() => action.onClick(row)}
-                            >
-                              <Icon
-                                src={action.icon}
-                                size="17"
-                                color="var(--gray-008)"
-                              />
-                            </button>
-                          {/if}
-                        {/each}
                       </div>
                     </td>
                   {/if}
@@ -274,22 +253,6 @@
     margin: 0;
   }
 
-  .table-root .actions-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    background-color: #fff;
-  }
-
-  .table-root .actions-container .left {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-  }
-
   .table-root .actions-container .left .debug .btn {
     border: none;
     background-color: var(--violet-006);
@@ -311,13 +274,6 @@
 
   :global(.table-root .actions-container .right .search_handler .search_btn:hover svg) {
     fill: var(--violet-005);
-  }
-
-  .table-root .actions-container .actions-button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
   }
 
   .table-root .table-container {

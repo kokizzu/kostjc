@@ -10,8 +10,7 @@
     RiUserFacesUserFollowLine, RiBuildingsHotelLine, RiBusinessCalendarScheduleLine,
     RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
     RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine, RiUserFacesGroupLine,
-    RiDocumentFileChartLine, RiSystemMenu2Line, RiBusinessBarChartBoxLine
-
+    RiDocumentFileChartLine, RiSystemMenu2Line, RiFinanceCashLine, RiBusinessBarChartBoxLine
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { LuHandPlatter } from '../node_modules/svelte-icons-pack/dist/lu';
 
@@ -81,6 +80,10 @@
           <Icon src={RiSystemMenu2Line} size="20" />
           <span>Menu</span>
         </a>
+        <a href="/admin/sale" class:active={pathLv2 === 'sale'}>
+          <Icon src={RiFinanceCashLine} size="20" />
+          <span>Sales</span>
+        </a>
         <a href="/admin/location" class:active={pathLv2 === 'location'}>
           <Icon src={RiMapMapPin2Line} size="20" />
           <span>Locations</span>
@@ -117,7 +120,7 @@
           <Icon src={RiUserFacesGroupLine} size="20" />
           <span>Users</span>
         </a>
-        <a href="/admin/bookingLogs" class:active={pathLv2.includes('Logs')}>
+        <a href="/admin/bookingLogs" class:active={String(pathLv2).includes('Logs')||false}>
           <Icon src={RiBusinessBarChartBoxLine} size="20" />
           <span>Logs</span>
         </a>

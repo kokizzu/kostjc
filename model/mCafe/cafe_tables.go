@@ -1,6 +1,15 @@
 package mCafe
 
-import "github.com/kokizzu/gotro/D/Tt"
+import (
+	"time"
+
+	"github.com/kokizzu/gotro/D/Tt"
+)
+
+func IsValidDate(dateStr, format string) bool {
+	_, err := time.Parse(format, dateStr)
+	return err == nil
+}
 
 const (
 	Id         = `id`
@@ -23,6 +32,25 @@ const (
 	ImageUrl     = `imageUrl`
 )
 
+const (
+	TableSales Tt.TableName = `sales`
+
+	Cashier       = `cashier`
+	TenantId      = `tenantId`
+	BuyerName     = `buyerName`
+	MenuIds       = `menuIds`
+	QrisIDR       = `qrisIDR`
+	CashIDR       = `cashIDR`
+	DebtIDR       = `debtIDR`
+	TopupIDR      = `topupIDR`
+	TotalPriceIDR = `totalPriceIDR`
+	SalesDate     = `salesDate`
+	PaidAt        = `paidAt`
+	Note          = `note`
+	Donation      = `donation`
+	TransferIDR   = `transferIDR`
+)
+
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 	TableMenus: {
 		Fields: []Tt.Field{
@@ -43,5 +71,33 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,
 		Unique1:         Name,
+	},
+	TableSales: {
+		Fields: []Tt.Field{
+			{Id, Tt.Unsigned},
+			{Cashier, Tt.String},
+			{TenantId, Tt.Unsigned},
+			{BuyerName, Tt.String},
+			{MenuIds, Tt.Array},
+			{QrisIDR, Tt.Integer},
+			{CashIDR, Tt.Integer},
+			{DebtIDR, Tt.Integer},
+			{TopupIDR, Tt.Integer},
+			{TotalPriceIDR, Tt.Integer},
+			{SalesDate, Tt.String},
+			{PaidAt, Tt.String},
+			{Note, Tt.String},
+			{Donation, Tt.Integer},
+			{TransferIDR, Tt.Integer},
+			{CreatedAt, Tt.Integer},
+			{CreatedBy, Tt.Unsigned},
+			{UpdatedAt, Tt.Integer},
+			{UpdatedBy, Tt.Unsigned},
+			{DeletedAt, Tt.Integer},
+			{DeletedBy, Tt.Unsigned},
+			{RestoredBy, Tt.Unsigned},
+		},
+		AutoIncrementId: true,
+		Engine:          Tt.Memtx,
 	},
 }

@@ -9,6 +9,7 @@ import (
 	"kostjc/domain"
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
+	"kostjc/model/mCafe/rqCafe"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/zCrud"
@@ -461,6 +462,44 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`segments`: segments,
 			`menu`:     out.Menu,
 			`menus`:    out.Menus,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminSaleAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminSaleIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSaleAction)
+		if err != nil {
+			return err
+		}
+
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		rqTenants := rqAuth.NewTenants(d.PropOltp)
+		tenants := rqTenants.FindTenantChoices()
+
+		men := rqCafe.NewMenus(d.PropOltp)
+		menus := men.FindMenusSalesChoices()
+
+		tenants[0] = "Bukan tenant"
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.AdminSale(&in)
+
+		return views.RenderAdminSale(ctx, M.SX{
+			`title`:    `KostJC | Sale Management`,
+			`user`:     user,
+			`segments`: segments,
+			`tenants`:  tenants,
+			`menus`:    menus,
+			`sale`:     out.Sale,
+			`sales`:    out.Sales,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 		})

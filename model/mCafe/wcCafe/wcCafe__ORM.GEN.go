@@ -344,3 +344,451 @@ func (m *MenusMutator) SetAll(from rqCafe.Menus, excludeMap, forceMap M.SB) (cha
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
+// SalesMutator DAO writer/command struct
+type SalesMutator struct {
+	rqCafe.Sales
+	mutations []A.X
+	logs      []A.X
+}
+
+// NewSalesMutator create new ORM writer/command object
+func NewSalesMutator(adapter *Tt.Adapter) (res *SalesMutator) {
+	res = &SalesMutator{Sales: rqCafe.Sales{Adapter: adapter}}
+	res.MenuIds = []any{}
+	return
+}
+
+// Logs get array of logs [field, old, new]
+func (s *SalesMutator) Logs() []A.X { //nolint:dupl false positive
+	return s.logs
+}
+
+// HaveMutation check whether Set* methods ever called
+func (s *SalesMutator) HaveMutation() bool { //nolint:dupl false positive
+	return len(s.mutations) > 0
+}
+
+// ClearMutations clear all previously called Set* methods
+func (s *SalesMutator) ClearMutations() { //nolint:dupl false positive
+	s.mutations = []A.X{}
+	s.logs = []A.X{}
+}
+
+// DoOverwriteById update all columns, error if not exists, not using mutations/Set*
+func (s *SalesMutator) DoOverwriteById() bool { //nolint:dupl false positive
+	_, err := s.Adapter.Update(s.SpaceName(), s.UniqueIndexId(), A.X{s.Id}, s.ToUpdateArray())
+	return !L.IsError(err, `Sales.DoOverwriteById failed: `+s.SpaceName())
+}
+
+// DoUpdateById update only mutated fields, error if not exists, use Find* and Set* methods instead of direct assignment
+func (s *SalesMutator) DoUpdateById() bool { //nolint:dupl false positive
+	if !s.HaveMutation() {
+		return true
+	}
+	_, err := s.Adapter.Update(s.SpaceName(), s.UniqueIndexId(), A.X{s.Id}, s.mutations)
+	return !L.IsError(err, `Sales.DoUpdateById failed: `+s.SpaceName())
+}
+
+// DoDeletePermanentById permanent delete
+func (s *SalesMutator) DoDeletePermanentById() bool { //nolint:dupl false positive
+	_, err := s.Adapter.Delete(s.SpaceName(), s.UniqueIndexId(), A.X{s.Id})
+	return !L.IsError(err, `Sales.DoDeletePermanentById failed: `+s.SpaceName())
+}
+
+// func (s *SalesMutator) DoUpsert() bool { //nolint:dupl false positive
+//	arr := s.ToArray()
+//	_, err := s.Adapter.Upsert(s.SpaceName(), arr, A.X{
+//		A.X{`=`, 0, s.Id},
+//		A.X{`=`, 1, s.Cashier},
+//		A.X{`=`, 2, s.TenantId},
+//		A.X{`=`, 3, s.BuyerName},
+//		A.X{`=`, 4, s.MenuIds},
+//		A.X{`=`, 5, s.QrisIDR},
+//		A.X{`=`, 6, s.CashIDR},
+//		A.X{`=`, 7, s.DebtIDR},
+//		A.X{`=`, 8, s.TopupIDR},
+//		A.X{`=`, 9, s.TotalPriceIDR},
+//		A.X{`=`, 10, s.SalesDate},
+//		A.X{`=`, 11, s.PaidAt},
+//		A.X{`=`, 12, s.Note},
+//		A.X{`=`, 13, s.Donation},
+//		A.X{`=`, 14, s.TransferIDR},
+//		A.X{`=`, 15, s.CreatedAt},
+//		A.X{`=`, 16, s.CreatedBy},
+//		A.X{`=`, 17, s.UpdatedAt},
+//		A.X{`=`, 18, s.UpdatedBy},
+//		A.X{`=`, 19, s.DeletedAt},
+//		A.X{`=`, 20, s.DeletedBy},
+//		A.X{`=`, 21, s.RestoredBy},
+//	})
+//	return !L.IsError(err, `Sales.DoUpsert failed: `+s.SpaceName()+ `\n%#v`, arr)
+// }
+
+// DoInsert insert, error if already exists
+func (s *SalesMutator) DoInsert() bool { //nolint:dupl false positive
+	arr := s.ToArray()
+	row, err := s.Adapter.Insert(s.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			s.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `Sales.DoInsert failed: `+s.SpaceName()+`\n%#v`, arr)
+}
+
+// DoUpsert upsert, insert or overwrite, will error only when there's unique secondary key being violated
+// replace = upsert, only error when there's unique secondary key
+// previous name: DoReplace
+func (s *SalesMutator) DoUpsert() bool { //nolint:dupl false positive
+	arr := s.ToArray()
+	row, err := s.Adapter.Replace(s.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			s.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `Sales.DoUpsert failed: `+s.SpaceName()+`\n%#v`, arr)
+}
+
+// SetId create mutations, should not duplicate
+func (s *SalesMutator) SetId(val uint64) bool { //nolint:dupl false positive
+	if val != s.Id {
+		s.mutations = append(s.mutations, A.X{`=`, 0, val})
+		s.logs = append(s.logs, A.X{`id`, s.Id, val})
+		s.Id = val
+		return true
+	}
+	return false
+}
+
+// SetCashier create mutations, should not duplicate
+func (s *SalesMutator) SetCashier(val string) bool { //nolint:dupl false positive
+	if val != s.Cashier {
+		s.mutations = append(s.mutations, A.X{`=`, 1, val})
+		s.logs = append(s.logs, A.X{`cashier`, s.Cashier, val})
+		s.Cashier = val
+		return true
+	}
+	return false
+}
+
+// SetTenantId create mutations, should not duplicate
+func (s *SalesMutator) SetTenantId(val uint64) bool { //nolint:dupl false positive
+	if val != s.TenantId {
+		s.mutations = append(s.mutations, A.X{`=`, 2, val})
+		s.logs = append(s.logs, A.X{`tenantId`, s.TenantId, val})
+		s.TenantId = val
+		return true
+	}
+	return false
+}
+
+// SetBuyerName create mutations, should not duplicate
+func (s *SalesMutator) SetBuyerName(val string) bool { //nolint:dupl false positive
+	if val != s.BuyerName {
+		s.mutations = append(s.mutations, A.X{`=`, 3, val})
+		s.logs = append(s.logs, A.X{`buyerName`, s.BuyerName, val})
+		s.BuyerName = val
+		return true
+	}
+	return false
+}
+
+// SetMenuIds create mutations, should not duplicate
+func (s *SalesMutator) SetMenuIds(val []any) bool { //nolint:dupl false positive
+	s.mutations = append(s.mutations, A.X{`=`, 4, val})
+	s.logs = append(s.logs, A.X{`menuIds`, s.MenuIds, val})
+	s.MenuIds = val
+	return true
+}
+
+// SetQrisIDR create mutations, should not duplicate
+func (s *SalesMutator) SetQrisIDR(val int64) bool { //nolint:dupl false positive
+	if val != s.QrisIDR {
+		s.mutations = append(s.mutations, A.X{`=`, 5, val})
+		s.logs = append(s.logs, A.X{`qrisIDR`, s.QrisIDR, val})
+		s.QrisIDR = val
+		return true
+	}
+	return false
+}
+
+// SetCashIDR create mutations, should not duplicate
+func (s *SalesMutator) SetCashIDR(val int64) bool { //nolint:dupl false positive
+	if val != s.CashIDR {
+		s.mutations = append(s.mutations, A.X{`=`, 6, val})
+		s.logs = append(s.logs, A.X{`cashIDR`, s.CashIDR, val})
+		s.CashIDR = val
+		return true
+	}
+	return false
+}
+
+// SetDebtIDR create mutations, should not duplicate
+func (s *SalesMutator) SetDebtIDR(val int64) bool { //nolint:dupl false positive
+	if val != s.DebtIDR {
+		s.mutations = append(s.mutations, A.X{`=`, 7, val})
+		s.logs = append(s.logs, A.X{`debtIDR`, s.DebtIDR, val})
+		s.DebtIDR = val
+		return true
+	}
+	return false
+}
+
+// SetTopupIDR create mutations, should not duplicate
+func (s *SalesMutator) SetTopupIDR(val int64) bool { //nolint:dupl false positive
+	if val != s.TopupIDR {
+		s.mutations = append(s.mutations, A.X{`=`, 8, val})
+		s.logs = append(s.logs, A.X{`topupIDR`, s.TopupIDR, val})
+		s.TopupIDR = val
+		return true
+	}
+	return false
+}
+
+// SetTotalPriceIDR create mutations, should not duplicate
+func (s *SalesMutator) SetTotalPriceIDR(val int64) bool { //nolint:dupl false positive
+	if val != s.TotalPriceIDR {
+		s.mutations = append(s.mutations, A.X{`=`, 9, val})
+		s.logs = append(s.logs, A.X{`totalPriceIDR`, s.TotalPriceIDR, val})
+		s.TotalPriceIDR = val
+		return true
+	}
+	return false
+}
+
+// SetSalesDate create mutations, should not duplicate
+func (s *SalesMutator) SetSalesDate(val string) bool { //nolint:dupl false positive
+	if val != s.SalesDate {
+		s.mutations = append(s.mutations, A.X{`=`, 10, val})
+		s.logs = append(s.logs, A.X{`salesDate`, s.SalesDate, val})
+		s.SalesDate = val
+		return true
+	}
+	return false
+}
+
+// SetPaidAt create mutations, should not duplicate
+func (s *SalesMutator) SetPaidAt(val string) bool { //nolint:dupl false positive
+	if val != s.PaidAt {
+		s.mutations = append(s.mutations, A.X{`=`, 11, val})
+		s.logs = append(s.logs, A.X{`paidAt`, s.PaidAt, val})
+		s.PaidAt = val
+		return true
+	}
+	return false
+}
+
+// SetNote create mutations, should not duplicate
+func (s *SalesMutator) SetNote(val string) bool { //nolint:dupl false positive
+	if val != s.Note {
+		s.mutations = append(s.mutations, A.X{`=`, 12, val})
+		s.logs = append(s.logs, A.X{`note`, s.Note, val})
+		s.Note = val
+		return true
+	}
+	return false
+}
+
+// SetDonation create mutations, should not duplicate
+func (s *SalesMutator) SetDonation(val int64) bool { //nolint:dupl false positive
+	if val != s.Donation {
+		s.mutations = append(s.mutations, A.X{`=`, 13, val})
+		s.logs = append(s.logs, A.X{`donation`, s.Donation, val})
+		s.Donation = val
+		return true
+	}
+	return false
+}
+
+// SetTransferIDR create mutations, should not duplicate
+func (s *SalesMutator) SetTransferIDR(val int64) bool { //nolint:dupl false positive
+	if val != s.TransferIDR {
+		s.mutations = append(s.mutations, A.X{`=`, 14, val})
+		s.logs = append(s.logs, A.X{`transferIDR`, s.TransferIDR, val})
+		s.TransferIDR = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedAt create mutations, should not duplicate
+func (s *SalesMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positive
+	if val != s.CreatedAt {
+		s.mutations = append(s.mutations, A.X{`=`, 15, val})
+		s.logs = append(s.logs, A.X{`createdAt`, s.CreatedAt, val})
+		s.CreatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedBy create mutations, should not duplicate
+func (s *SalesMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != s.CreatedBy {
+		s.mutations = append(s.mutations, A.X{`=`, 16, val})
+		s.logs = append(s.logs, A.X{`createdBy`, s.CreatedBy, val})
+		s.CreatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedAt create mutations, should not duplicate
+func (s *SalesMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positive
+	if val != s.UpdatedAt {
+		s.mutations = append(s.mutations, A.X{`=`, 17, val})
+		s.logs = append(s.logs, A.X{`updatedAt`, s.UpdatedAt, val})
+		s.UpdatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedBy create mutations, should not duplicate
+func (s *SalesMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != s.UpdatedBy {
+		s.mutations = append(s.mutations, A.X{`=`, 18, val})
+		s.logs = append(s.logs, A.X{`updatedBy`, s.UpdatedBy, val})
+		s.UpdatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedAt create mutations, should not duplicate
+func (s *SalesMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positive
+	if val != s.DeletedAt {
+		s.mutations = append(s.mutations, A.X{`=`, 19, val})
+		s.logs = append(s.logs, A.X{`deletedAt`, s.DeletedAt, val})
+		s.DeletedAt = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedBy create mutations, should not duplicate
+func (s *SalesMutator) SetDeletedBy(val uint64) bool { //nolint:dupl false positive
+	if val != s.DeletedBy {
+		s.mutations = append(s.mutations, A.X{`=`, 20, val})
+		s.logs = append(s.logs, A.X{`deletedBy`, s.DeletedBy, val})
+		s.DeletedBy = val
+		return true
+	}
+	return false
+}
+
+// SetRestoredBy create mutations, should not duplicate
+func (s *SalesMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false positive
+	if val != s.RestoredBy {
+		s.mutations = append(s.mutations, A.X{`=`, 21, val})
+		s.logs = append(s.logs, A.X{`restoredBy`, s.RestoredBy, val})
+		s.RestoredBy = val
+		return true
+	}
+	return false
+}
+
+// SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
+func (s *SalesMutator) SetAll(from rqCafe.Sales, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
+	if excludeMap == nil { // list of fields to exclude
+		excludeMap = M.SB{}
+	}
+	if forceMap == nil { // list of fields to force overwrite
+		forceMap = M.SB{}
+	}
+	if !excludeMap[`id`] && (forceMap[`id`] || from.Id != 0) {
+		s.Id = from.Id
+		changed = true
+	}
+	if !excludeMap[`cashier`] && (forceMap[`cashier`] || from.Cashier != ``) {
+		s.Cashier = S.Trim(from.Cashier)
+		changed = true
+	}
+	if !excludeMap[`tenantId`] && (forceMap[`tenantId`] || from.TenantId != 0) {
+		s.TenantId = from.TenantId
+		changed = true
+	}
+	if !excludeMap[`buyerName`] && (forceMap[`buyerName`] || from.BuyerName != ``) {
+		s.BuyerName = S.Trim(from.BuyerName)
+		changed = true
+	}
+	if !excludeMap[`menuIds`] && (forceMap[`menuIds`] || from.MenuIds != nil) {
+		s.MenuIds = from.MenuIds
+		changed = true
+	}
+	if !excludeMap[`qrisIDR`] && (forceMap[`qrisIDR`] || from.QrisIDR != 0) {
+		s.QrisIDR = from.QrisIDR
+		changed = true
+	}
+	if !excludeMap[`cashIDR`] && (forceMap[`cashIDR`] || from.CashIDR != 0) {
+		s.CashIDR = from.CashIDR
+		changed = true
+	}
+	if !excludeMap[`debtIDR`] && (forceMap[`debtIDR`] || from.DebtIDR != 0) {
+		s.DebtIDR = from.DebtIDR
+		changed = true
+	}
+	if !excludeMap[`topupIDR`] && (forceMap[`topupIDR`] || from.TopupIDR != 0) {
+		s.TopupIDR = from.TopupIDR
+		changed = true
+	}
+	if !excludeMap[`totalPriceIDR`] && (forceMap[`totalPriceIDR`] || from.TotalPriceIDR != 0) {
+		s.TotalPriceIDR = from.TotalPriceIDR
+		changed = true
+	}
+	if !excludeMap[`salesDate`] && (forceMap[`salesDate`] || from.SalesDate != ``) {
+		s.SalesDate = S.Trim(from.SalesDate)
+		changed = true
+	}
+	if !excludeMap[`paidAt`] && (forceMap[`paidAt`] || from.PaidAt != ``) {
+		s.PaidAt = S.Trim(from.PaidAt)
+		changed = true
+	}
+	if !excludeMap[`note`] && (forceMap[`note`] || from.Note != ``) {
+		s.Note = S.Trim(from.Note)
+		changed = true
+	}
+	if !excludeMap[`donation`] && (forceMap[`donation`] || from.Donation != 0) {
+		s.Donation = from.Donation
+		changed = true
+	}
+	if !excludeMap[`transferIDR`] && (forceMap[`transferIDR`] || from.TransferIDR != 0) {
+		s.TransferIDR = from.TransferIDR
+		changed = true
+	}
+	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {
+		s.CreatedAt = from.CreatedAt
+		changed = true
+	}
+	if !excludeMap[`createdBy`] && (forceMap[`createdBy`] || from.CreatedBy != 0) {
+		s.CreatedBy = from.CreatedBy
+		changed = true
+	}
+	if !excludeMap[`updatedAt`] && (forceMap[`updatedAt`] || from.UpdatedAt != 0) {
+		s.UpdatedAt = from.UpdatedAt
+		changed = true
+	}
+	if !excludeMap[`updatedBy`] && (forceMap[`updatedBy`] || from.UpdatedBy != 0) {
+		s.UpdatedBy = from.UpdatedBy
+		changed = true
+	}
+	if !excludeMap[`deletedAt`] && (forceMap[`deletedAt`] || from.DeletedAt != 0) {
+		s.DeletedAt = from.DeletedAt
+		changed = true
+	}
+	if !excludeMap[`deletedBy`] && (forceMap[`deletedBy`] || from.DeletedBy != 0) {
+		s.DeletedBy = from.DeletedBy
+		changed = true
+	}
+	if !excludeMap[`restoredBy`] && (forceMap[`restoredBy`] || from.RestoredBy != 0) {
+		s.RestoredBy = from.RestoredBy
+		changed = true
+	}
+	return
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
