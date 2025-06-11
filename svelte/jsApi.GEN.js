@@ -978,6 +978,179 @@ exports.AdminRoom = async function AdminRoom( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminSaleIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} sale.id
+ * @property {String} sale.cashier
+ * @property {number} sale.tenantId
+ * @property {String} sale.buyerName
+ * @property {Object} sale.menuIds
+ * @property {number} sale.qrisIDR
+ * @property {number} sale.cashIDR
+ * @property {number} sale.debtIDR
+ * @property {number} sale.topupIDR
+ * @property {number} sale.totalPriceIDR
+ * @property {String} sale.salesDate
+ * @property {String} sale.paidAt
+ * @property {String} sale.note
+ * @property {number} sale.donation
+ * @property {number} sale.transferIDR
+ * @property {number} sale.createdAt
+ * @property {number} sale.createdBy
+ * @property {number} sale.updatedAt
+ * @property {number} sale.updatedBy
+ * @property {number} sale.deletedAt
+ * @property {number} sale.deletedBy
+ * @property {number} sale.restoredBy
+ * @property {number} tenantID
+ */
+const AdminSaleIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  sale: { // rqCafe.Sales
+    id: 0, // uint64
+    cashier: '', // string
+    tenantId: 0, // uint64
+    buyerName: '', // string
+    menuIds: { // []any
+    }, // []any
+    qrisIDR: 0, // int64
+    cashIDR: 0, // int64
+    debtIDR: 0, // int64
+    topupIDR: 0, // int64
+    totalPriceIDR: 0, // int64
+    salesDate: '', // string
+    paidAt: '', // string
+    note: '', // string
+    donation: 0, // int64
+    transferIDR: 0, // int64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.Sales
+  tenantID: 0, // uint64
+}
+/**
+ * @typedef {Object} AdminSaleOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} sale.id
+ * @property {String} sale.cashier
+ * @property {number} sale.tenantId
+ * @property {String} sale.buyerName
+ * @property {Object} sale.menuIds
+ * @property {number} sale.qrisIDR
+ * @property {number} sale.cashIDR
+ * @property {number} sale.debtIDR
+ * @property {number} sale.topupIDR
+ * @property {number} sale.totalPriceIDR
+ * @property {String} sale.salesDate
+ * @property {String} sale.paidAt
+ * @property {String} sale.note
+ * @property {number} sale.donation
+ * @property {number} sale.transferIDR
+ * @property {number} sale.createdAt
+ * @property {number} sale.createdBy
+ * @property {number} sale.updatedAt
+ * @property {number} sale.updatedBy
+ * @property {number} sale.deletedAt
+ * @property {number} sale.deletedBy
+ * @property {number} sale.restoredBy
+ * @property {Object} sales
+ */
+const AdminSaleOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  sale: { // rqCafe.Sales
+    id: 0, // uint64
+    cashier: '', // string
+    tenantId: 0, // uint64
+    buyerName: '', // string
+    menuIds: { // []any
+    }, // []any
+    qrisIDR: 0, // int64
+    cashIDR: 0, // int64
+    debtIDR: 0, // int64
+    topupIDR: 0, // int64
+    totalPriceIDR: 0, // int64
+    salesDate: '', // string
+    paidAt: '', // string
+    note: '', // string
+    donation: 0, // int64
+    transferIDR: 0, // int64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.Sales
+  sales: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback AdminSaleCallback
+ * @param {AdminSaleOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminSaleIn} i
+ * @param {AdminSaleCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminSale = async function AdminSale( i, cb ) {
+  return await axios.post( '/admin/sale', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminStockIn
  * @property {String} cmd
  * @property {Object} withMeta

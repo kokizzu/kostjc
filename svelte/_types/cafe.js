@@ -15,3 +15,30 @@
  * @property {string} restoredBy
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} Sale
+ * @property {string|number} id
+ * @property {string} cashier
+ * @property {string|number} tenantId
+ * @property {string} buyerName
+ * @property {number[]} menuIds
+ * @property {number} transferIDR
+ * @property {number} qrisIDR
+ * @property {number} cashIDR
+ * @property {number} debtIDR
+ * @property {number} topupIDR
+ * @property {number} totalPriceIDR
+ * @property {number} donation
+ * @property {string} salesDate
+ * @property {string} paidAt
+ * @property {string} note
+ * @property {number} createdAt
+ * @property {string} createdBy
+ * @property {number} updatedAt
+ * @property {string} updatedBy
+ * @property {number} deletedAt
+ * @property {string} deletedBy
+ * @property {string} restoredBy
+ */
+module.exports = {};
