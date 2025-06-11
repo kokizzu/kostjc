@@ -11,6 +11,7 @@
   import LayoutMain from './_layouts/main.svelte';
   import BirthDayAgenda from './_partials/home/BirthDayAgenda.svelte';
   import AvailableRooms from './_partials/home/AvailableRooms.svelte';
+    import UnpaidBookingTenants from './_partials/home/UnpaidBookingTenants.svelte';
 
   let title = '#{title}';
   let user  = /** @type {User} */ ({/* user */});
@@ -142,6 +143,7 @@
     <div class="home-container">
       <BirthDayAgenda />
       <AvailableRooms />
+      <UnpaidBookingTenants />
     </div>
   </LayoutMain>
 {:else}

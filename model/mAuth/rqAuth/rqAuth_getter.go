@@ -227,3 +227,27 @@ func (t *Tenants) Truncate() bool {
 func (s *Sessions) Truncate() bool {
 	return s.Adapter.ExecBoxSpace(s.SpaceName()+`:truncate`, A.X{})
 }
+
+func (u *Users) FindUserChoices() map[uint64]string {
+	const comment = `-- Users) FindUserChoices`
+
+	queryRows := comment + `
+SELECT ` + u.SqlId() + `, ` + u.SqlFullName() + `, ` + u.SqlUserName() + `
+ORDER BY ` + u.SqlId() + ` ASC`
+
+	out := make(map[uint64]string)
+	u.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) != 3 {
+			return
+		}
+
+		nameToShow := X.ToS(row[1])
+		if nameToShow == "" {
+			nameToShow = X.ToS(row[2])
+		}
+
+		out[X.ToU(row[0])] = nameToShow
+	})
+
+	return out
+}

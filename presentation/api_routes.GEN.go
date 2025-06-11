@@ -20,6 +20,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// AdminBookingLogs
+	fw.Post("/"+domain.AdminBookingLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminBookingLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminBookingLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminBookingLogs(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// AdminBuilding
 	fw.Post("/"+domain.AdminBuildingAction, func(c *fiber.Ctx) error {
 		in := domain.AdminBuildingIn{}
@@ -27,6 +37,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 			return nil
 		}
 		out := d.AdminBuilding(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// AdminBuildingLogs
+	fw.Post("/"+domain.AdminBuildingLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminBuildingLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminBuildingLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminBuildingLogs(&in)
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
@@ -40,6 +60,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// AdminFacilityLogs
+	fw.Post("/"+domain.AdminFacilityLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminFacilityLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminFacilityLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminFacilityLogs(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// AdminLocation
 	fw.Post("/"+domain.AdminLocationAction, func(c *fiber.Ctx) error {
 		in := domain.AdminLocationIn{}
@@ -47,6 +77,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 			return nil
 		}
 		out := d.AdminLocation(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// AdminLocationLogs
+	fw.Post("/"+domain.AdminLocationLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminLocationLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminLocationLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminLocationLogs(&in)
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
@@ -70,6 +110,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// AdminPaymentLogs
+	fw.Post("/"+domain.AdminPaymentLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminPaymentLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminPaymentLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminPaymentLogs(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// AdminRoom
 	fw.Post("/"+domain.AdminRoomAction, func(c *fiber.Ctx) error {
 		in := domain.AdminRoomIn{}
@@ -77,6 +127,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 			return nil
 		}
 		out := d.AdminRoom(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// AdminRoomLogs
+	fw.Post("/"+domain.AdminRoomLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminRoomLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminRoomLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminRoomLogs(&in)
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
@@ -97,6 +157,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 			return nil
 		}
 		out := d.AdminStock(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// AdminStockLogs
+	fw.Post("/"+domain.AdminStockLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminStockLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminStockLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminStockLogs(&in)
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 

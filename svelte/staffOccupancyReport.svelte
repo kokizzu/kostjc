@@ -49,6 +49,27 @@
     );
   }
 
+  /**
+   * @description Returns the relative day label based on the given date string (YYYY-MM-DD)
+   * @param {string} dateStr - The date string in format YYYY-MM-DD
+   * @returns {string} - The relative label like 'H', 'H-1', 'H+3', etc.
+   */
+  function getRelativeDayLabel(dateStr) {
+    const inputDate = new Date(dateStr);
+    const currentDate = new Date();
+
+    // Zero out time for both dates to only compare by day
+    inputDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
+    const diffInMs = inputDate.getTime() - currentDate.getTime();
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+    if (diffInDays === 0) return 'H';
+    if (diffInDays > 0) return `H+${diffInDays}`;
+    return `H${diffInDays}`; // e.g. 'H-1', 'H-2'
+  }
+
   function formatYM(/** @type {Date} */ date) {
     const y = date.getFullYear();
     const m = String(date.getMonth() + 1).padStart(2, '0');
@@ -120,6 +141,7 @@
   let showPaid        = true;
   let showPrice       = true;
   let showOnlyNotPaid = false;
+  let showHDaysSince  = true;
 
   let isPopUpFormReady = false;
   onMount(async () => {
@@ -287,6 +309,23 @@
     );
     isSubmitEditBooking = false;
   }
+
+  /**
+   * @param {string} dateStart - Date string in YYYY-MM-DD format
+   * @returns {boolean}
+   */
+  function isDateToCharge(dateStart) {
+    const inputDate = new Date(dateStart);
+    const today = new Date();
+    const plus3Days = new Date();
+    plus3Days.setDate(today.getDate() + 3);
+
+    const inputDay = inputDate.getDate();
+    const todayDay = today.getDate();
+    const plus3Day = plus3Days.getDate();
+
+    return inputDay > todayDay && inputDay > plus3Day;
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -374,6 +413,11 @@
           label="Show Only Not Paid"
           bind:value={showOnlyNotPaid}
         />
+        <Switcher
+          id="show-h-days-since"
+          label="Show H Days Since"
+          bind:value={showHDaysSince}
+        />
       </div>
     </div>
     <table>
@@ -407,11 +451,17 @@
                           <span> s/d </span>
                           <span
                             class="
-                            {!booking.isNearEnding && !booking.isExtended ? 'date-warning' : ''}
-                            {!booking.isExtended && booking.isNearEnding ? 'date-alert' : ''}
+                            {!booking.isNearEnding && !booking.isExtended
+                              ? `${!isDateToCharge(booking.dateStart) ? 'date-warning' : 'date-alert'}`
+                              : ''
+                            }
+                            {!booking.isExtended && booking.isNearEnding
+                              ? `${isDateToCharge(booking.dateStart) ? 'date-alert' : 'date-warning'}`
+                              : ''
+                            }
                             {showDateEnd ? '' : 'hidden'}
                           ">
-                            {booking.dateEnd}
+                            {booking.dateEnd} {!booking.isExtended && booking.isNearEnding && showHDaysSince ? `(${getRelativeDayLabel(booking.dateEnd)})` : ''}
                           </span>
                         </span>
                         <span class="{(booking.amountPaid == booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">

@@ -9,6 +9,13 @@ import (
 
 var viewList = map[string]string{
 	`AdminMenu`:              `../svelte/AdminMenu.html`,              // ../svelte/AdminMenu.svelte
+	`AdminBookingLogs`:       `../svelte/admin/bookingLogs.html`,      // ../svelte/admin/bookingLogs.svelte
+	`AdminBuildingLogs`:      `../svelte/admin/buildingLogs.html`,     // ../svelte/admin/buildingLogs.svelte
+	`AdminFacilityLogs`:      `../svelte/admin/facilityLogs.html`,     // ../svelte/admin/facilityLogs.svelte
+	`AdminLocationLogs`:      `../svelte/admin/locationLogs.html`,     // ../svelte/admin/locationLogs.svelte
+	`AdminPaymentLogs`:       `../svelte/admin/paymentLogs.html`,      // ../svelte/admin/paymentLogs.svelte
+	`AdminRoomLogs`:          `../svelte/admin/roomLogs.html`,         // ../svelte/admin/roomLogs.svelte
+	`AdminStockLogs`:         `../svelte/admin/stockLogs.html`,        // ../svelte/admin/stockLogs.svelte
 	`AdminBooking`:           `../svelte/adminBooking.html`,           // ../svelte/adminBooking.svelte
 	`AdminBuilding`:          `../svelte/adminBuilding.html`,          // ../svelte/adminBuilding.svelte
 	`AdminFacility`:          `../svelte/adminFacility.html`,          // ../svelte/adminFacility.svelte
@@ -31,6 +38,41 @@ var viewList = map[string]string{
 func (v *Views) RenderAdminMenu(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`AdminMenu`].Str(m))
+}
+
+func (v *Views) RenderAdminBookingLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminBookingLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminBuildingLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminBuildingLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminFacilityLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminFacilityLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminLocationLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminLocationLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminPaymentLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminPaymentLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminRoomLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminRoomLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminStockLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminStockLogs`].Str(m))
 }
 
 func (v *Views) RenderAdminBooking(c *fiber.Ctx, m M.SX) error {

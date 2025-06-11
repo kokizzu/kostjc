@@ -24,12 +24,16 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		tenantsNearbyBirthdays := room.FindTenantsNearbyBirthdays()
 		availableRooms := room.FindAvailableRooms()
 
+		booking := rqProperty.NewBookings(d.PropOltp)
+		unpaidBookingTenants := booking.FindUnpaidBookingTenants()
+
 		return views.RenderIndex(ctx, M.SX{
 			`title`:                  `KostJC | Home`,
 			`user`:                   user,
 			`segments`:               segments,
 			`tenantsNearbyBirthdays`: tenantsNearbyBirthdays,
 			`availableRooms`:         availableRooms,
+			`unpaidBookingTenants`:   unpaidBookingTenants,
 		})
 	})
 
@@ -496,6 +500,165 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`menus`:    menus,
 			`sale`:     out.Sale,
 			`sales`:    out.Sales,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminBookingLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminBookingLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminBookingLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminBookingLogs(&in)
+		return views.RenderAdminBookingLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    `Booking Log`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminBuildingLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminBuildingLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminBuildingLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminBuildingLogs(&in)
+		return views.RenderAdminBuildingLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    `Booking Log`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+			`users`:    users,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminFacilityLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminFacilityLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminFacilityLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminFacilityLogs(&in)
+		return views.RenderAdminFacilityLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    `Booking Log`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminLocationLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminLocationLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminLocationLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminLocationLogs(&in)
+		return views.RenderAdminLocationLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    `Booking Log`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminPaymentLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminPaymentLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminPaymentLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminPaymentLogs(&in)
+		return views.RenderAdminPaymentLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    `Booking Log`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminRoomLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminRoomLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminRoomLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminRoomLogs(&in)
+		return views.RenderAdminRoomLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    `Booking Log`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminStockLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminStockLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminStockLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminStockLogs(&in)
+		return views.RenderAdminStockLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    `Booking Log`,
+			`segments`: segments,
+			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 		})

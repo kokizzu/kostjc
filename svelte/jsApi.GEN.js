@@ -177,6 +177,81 @@ exports.AdminBooking = async function AdminBooking( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminBookingLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminBookingLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminBookingLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminBookingLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saProperty.BookingLogs
+  }, // []saProperty.BookingLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminBookingLogsCallback
+ * @param {AdminBookingLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminBookingLogsIn} i
+ * @param {AdminBookingLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminBookingLogs = async function AdminBookingLogs( i, cb ) {
+  return await axios.post( '/admin/bookingLogs', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminBuildingIn
  * @property {String} cmd
  * @property {Object} withMeta
@@ -299,6 +374,81 @@ const AdminBuildingOut = {
  */
 exports.AdminBuilding = async function AdminBuilding( i, cb ) {
   return await axios.post( '/admin/building', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminBuildingLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminBuildingLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminBuildingLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminBuildingLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saProperty.BuildingLogs
+  }, // []saProperty.BuildingLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminBuildingLogsCallback
+ * @param {AdminBuildingLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminBuildingLogsIn} i
+ * @param {AdminBuildingLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminBuildingLogs = async function AdminBuildingLogs( i, cb ) {
+  return await axios.post( '/admin/buildingLogs', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
@@ -433,6 +583,81 @@ exports.AdminFacility = async function AdminFacility( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminFacilityLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminFacilityLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminFacilityLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminFacilityLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saProperty.FacilityLogs
+  }, // []saProperty.FacilityLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminFacilityLogsCallback
+ * @param {AdminFacilityLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminFacilityLogsIn} i
+ * @param {AdminFacilityLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminFacilityLogs = async function AdminFacilityLogs( i, cb ) {
+  return await axios.post( '/admin/facilityLogs', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminLocationIn
  * @property {String} cmd
  * @property {Object} withMeta
@@ -553,6 +778,81 @@ const AdminLocationOut = {
  */
 exports.AdminLocation = async function AdminLocation( i, cb ) {
   return await axios.post( '/admin/location', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminLocationLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminLocationLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminLocationLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminLocationLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saProperty.LocationLogs
+  }, // []saProperty.LocationLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminLocationLogsCallback
+ * @param {AdminLocationLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminLocationLogsIn} i
+ * @param {AdminLocationLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminLocationLogs = async function AdminLocationLogs( i, cb ) {
+  return await axios.post( '/admin/locationLogs', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
@@ -833,6 +1133,81 @@ exports.AdminPayment = async function AdminPayment( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminPaymentLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminPaymentLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminPaymentLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminPaymentLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saProperty.PaymentLogs
+  }, // []saProperty.PaymentLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminPaymentLogsCallback
+ * @param {AdminPaymentLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminPaymentLogsIn} i
+ * @param {AdminPaymentLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminPaymentLogs = async function AdminPaymentLogs( i, cb ) {
+  return await axios.post( '/admin/paymentLogs', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminRoomIn
  * @property {String} cmd
  * @property {Object} withMeta
@@ -973,6 +1348,81 @@ const AdminRoomOut = {
  */
 exports.AdminRoom = async function AdminRoom( i, cb ) {
   return await axios.post( '/admin/room', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminRoomLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminRoomLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminRoomLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminRoomLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saProperty.RoomLogs
+  }, // []saProperty.RoomLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminRoomLogsCallback
+ * @param {AdminRoomLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminRoomLogsIn} i
+ * @param {AdminRoomLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminRoomLogs = async function AdminRoomLogs( i, cb ) {
+  return await axios.post( '/admin/roomLogs', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
@@ -1275,6 +1725,81 @@ const AdminStockOut = {
  */
 exports.AdminStock = async function AdminStock( i, cb ) {
   return await axios.post( '/admin/stock', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminStockLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminStockLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminStockLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminStockLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saProperty.StockLogs
+  }, // []saProperty.StockLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminStockLogsCallback
+ * @param {AdminStockLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminStockLogsIn} i
+ * @param {AdminStockLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminStockLogs = async function AdminStockLogs( i, cb ) {
+  return await axios.post( '/admin/stockLogs', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
