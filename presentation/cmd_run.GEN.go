@@ -124,6 +124,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminStock(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminStockLogsAction:
+		in := domain.AdminStockLogsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminStockLogs(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.AdminTenantsAction:
 		in := domain.AdminTenantsIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

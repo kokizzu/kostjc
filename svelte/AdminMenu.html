@@ -4564,14 +4564,26 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminBooking = async function AdminBooking(i, cb) {
         return await axios.post("/admin/booking", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminBookingLogs = async function AdminBookingLogs(i, cb) {
+        return await axios.post("/admin/bookingLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminBuilding = async function AdminBuilding(i, cb) {
         return await axios.post("/admin/building", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminBuildingLogs = async function AdminBuildingLogs(i, cb) {
+        return await axios.post("/admin/buildingLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminFacility = async function AdminFacility(i, cb) {
         return await axios.post("/admin/facility", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminFacilityLogs = async function AdminFacilityLogs(i, cb) {
+        return await axios.post("/admin/facilityLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminLocation = async function AdminLocation(i, cb) {
         return await axios.post("/admin/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminLocationLogs = async function AdminLocationLogs(i, cb) {
+        return await axios.post("/admin/locationLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminMenu = async function AdminMenu2(i, cb) {
         return await axios.post("/admin/menu", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -4579,11 +4591,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminPayment = async function AdminPayment(i, cb) {
         return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminPaymentLogs = async function AdminPaymentLogs(i, cb) {
+        return await axios.post("/admin/paymentLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminRoom = async function AdminRoom(i, cb) {
         return await axios.post("/admin/room", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminRoomLogs = async function AdminRoomLogs(i, cb) {
+        return await axios.post("/admin/roomLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminStock = async function AdminStock(i, cb) {
         return await axios.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminStockLogs = async function AdminStockLogs(i, cb) {
+        return await axios.post("/admin/stockLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminTenants = async function AdminTenants(i, cb) {
         return await axios.post("/admin/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -7661,6 +7682,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   var RiDesignBallPenLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M17.8492 11.6983L17.1421 10.9912L7.24264 20.8907H3V16.648L14.3137 5.33432L19.9706 10.9912C20.3611 11.3817 20.3611 12.0149 19.9706 12.4054L12.8995 19.4765L11.4853 18.0622L17.8492 11.6983ZM15.7279 9.57696L14.3137 8.16274L5 17.4765V18.8907H6.41421L15.7279 9.57696ZM18.5563 2.50589L21.3848 5.33432C21.7753 5.72484 21.7753 6.35801 21.3848 6.74853L19.9706 8.16274L15.7279 3.9201L17.1421 2.50589C17.5327 2.11537 18.1658 2.11537 18.5563 2.50589Z"></path>' };
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
+  var RiBusinessBarChartBoxLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM4 5V19H20V5H4ZM7 13H9V17H7V13ZM11 7H13V17H11V7ZM15 10H17V17H15V10Z"></path>' };
   var RiBusinessCalendarScheduleLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M7 3V1H9V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V9H20V5H17V7H15V5H9V7H7V5H4V19H10V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7ZM17 12C14.7909 12 13 13.7909 13 16C13 18.2091 14.7909 20 17 20C19.2091 20 21 18.2091 21 16C21 13.7909 19.2091 12 17 12ZM11 16C11 12.6863 13.6863 10 17 10C20.3137 10 23 12.6863 23 16C23 19.3137 20.3137 22 17 22C13.6863 22 11 19.3137 11 16ZM16 13V16.4142L18.2929 18.7071L19.7071 17.2929L18 15.5858V13H16Z"></path>' };
   var RiBusinessInboxUnarchiveLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 3L22 7V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V7.00353L4 3H20ZM20 9H4V19H20V9ZM12 10L16 14H13V18H11V14H8L12 10ZM18.764 5H5.236L4.237 7H19.764L18.764 5Z"></path>' };
   var RiOthersDoorOpenLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M1.99805 21.0001V19.0001L3.99805 18.9999V4.83465C3.99805 4.35136 4.34367 3.93723 4.81916 3.85078L14.2907 2.12868C14.6167 2.0694 14.9291 2.28564 14.9884 2.61167C14.9948 2.64708 14.998 2.68301 14.998 2.719V3.9999L18.998 4.00007C19.5503 4.00007 19.998 4.44779 19.998 5.00007V18.9999L21.998 19.0001V21.0001H17.998V6.00007L14.998 5.9999V21.0001H1.99805ZM12.998 4.3965L5.99805 5.66923V19.0001H12.998V4.3965ZM11.998 11.0001V13.0001H9.99805V11.0001H11.998Z"></path>' };
@@ -7808,6 +7830,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let icon9;
     let t29;
     let span9;
+    let t31;
+    let a10;
+    let icon10;
+    let t32;
+    let span10;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -7847,6 +7874,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     });
     icon9 = new Icon_default({
       props: { src: RiUserFacesGroupLine, size: "20" }
+    });
+    icon10 = new Icon_default({
+      props: {
+        src: RiBusinessBarChartBoxLine,
+        size: "20"
+      }
     });
     return {
       c() {
@@ -7913,6 +7946,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         t29 = space();
         span9 = element("span");
         span9.textContent = "Users";
+        t31 = space();
+        a10 = element("a");
+        create_component(icon10.$.fragment);
+        t32 = space();
+        span10 = element("span");
+        span10.textContent = "Logs";
         attr(h3, "class", "nav-menu-title svelte-1h4x6vo");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1h4x6vo");
@@ -7995,6 +8034,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           /*pathLv2*/
           ctx[3] === "usersManagement"
         );
+        attr(a10, "href", "/admin/bookingLogs");
+        attr(a10, "class", "svelte-1h4x6vo");
+        toggle_class(
+          a10,
+          "active",
+          /*pathLv2*/
+          ctx[3].includes("Logs")
+        );
         attr(nav, "class", "nav-menu svelte-1h4x6vo");
       },
       m(target, anchor) {
@@ -8050,6 +8097,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         mount_component(icon9, a9, null);
         append(a9, t29);
         append(a9, span9);
+        append(nav, t31);
+        append(nav, a10);
+        mount_component(icon10, a10, null);
+        append(a10, t32);
+        append(a10, span10);
         current = true;
       },
       p: noop,
@@ -8066,6 +8118,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_in(icon7.$.fragment, local);
         transition_in(icon8.$.fragment, local);
         transition_in(icon9.$.fragment, local);
+        transition_in(icon10.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -8079,6 +8132,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_out(icon7.$.fragment, local);
         transition_out(icon8.$.fragment, local);
         transition_out(icon9.$.fragment, local);
+        transition_out(icon10.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -8097,6 +8151,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         destroy_component(icon7);
         destroy_component(icon8);
         destroy_component(icon9);
+        destroy_component(icon10);
       }
     };
   }
