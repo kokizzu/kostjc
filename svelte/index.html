@@ -14826,7 +14826,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*unpaidBookingTenants*/
+        if (dirty & /*getRelativeDayLabel, unpaidBookingTenants*/
         0) {
           each_value = ensure_array_like(unpaidBookingTenants || []);
           let i;
@@ -14863,6 +14863,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let t4;
     let span1;
     let t8;
+    let span2;
+    let t13;
     return {
       c() {
         div1 = element("div");
@@ -14880,6 +14882,13 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         ctx[0].totalPaid}/${/*ub*/
         ctx[0].totalPrice}`;
         t8 = space();
+        span2 = element("span");
+        span2.textContent = `${/*ub*/
+        ctx[0].dateStart} (${getRelativeDayLabel(
+          /*ub*/
+          ctx[0].dateStart
+        )})`;
+        t13 = space();
         attr(h3, "class", "svelte-8g2hq7");
         attr(div0, "class", "desc svelte-8g2hq7");
         attr(div1, "class", "card svelte-8g2hq7");
@@ -14892,7 +14901,9 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
         append(div0, span0);
         append(div0, t4);
         append(div0, span1);
-        append(div1, t8);
+        append(div0, t8);
+        append(div0, span2);
+        append(div1, t13);
       },
       p: noop,
       d(detaching) {
@@ -14946,6 +14957,19 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     /** @type {UnpaidBookingTenant[]} */
     [/* unpaidBookingTenants */]
   );
+  function getRelativeDayLabel(dateStr) {
+    const inputDate = new Date(dateStr);
+    const currentDate = new Date();
+    inputDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+    const msInDay = 1e3 * 60 * 60 * 24;
+    const diffDays = Math.round((currentDate - inputDate) / msInDay);
+    if (diffDays === 0)
+      return "H";
+    if (diffDays > 0)
+      return `H+${diffDays}`;
+    return `H${diffDays}`;
+  }
   var UnpaidBookingTenants = class extends SvelteComponent {
     constructor(options) {
       super();

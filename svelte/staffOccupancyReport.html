@@ -21444,13 +21444,13 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
     const currentDate = new Date();
     inputDate.setHours(0, 0, 0, 0);
     currentDate.setHours(0, 0, 0, 0);
-    const diffInMs = inputDate.getTime() - currentDate.getTime();
-    const diffInDays = Math.floor(diffInMs / (1e3 * 60 * 60 * 24));
-    if (diffInDays === 0)
+    const msInDay = 1e3 * 60 * 60 * 24;
+    const diffDays = Math.round((currentDate - inputDate) / msInDay);
+    if (diffDays === 0)
       return "H";
-    if (diffInDays > 0)
-      return `H+${diffInDays}`;
-    return `H${diffInDays}`;
+    if (diffDays > 0)
+      return `H+${diffDays}`;
+    return `H${diffDays}`;
   }
   function formatYM(date) {
     const y = date.getFullYear();

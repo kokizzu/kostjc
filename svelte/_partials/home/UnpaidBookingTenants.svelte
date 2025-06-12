@@ -5,8 +5,30 @@
    * @property {string} roomName
    * @property {number} totalPaid
    * @property {number} totalPrice
+   * @property {string} dateStart
    */
    const unpaidBookingTenants = /** @type {UnpaidBookingTenant[]} */ ([/* unpaidBookingTenants */]);
+
+  /**
+   * @description Returns the relative day label based on the given date string (YYYY-MM-DD)
+   * @param {string} dateStr - The date string in format YYYY-MM-DD
+   * @returns {string} - The relative label like 'H', 'H-1', 'H+3', etc.
+   */
+  function getRelativeDayLabel(dateStr) {
+    const inputDate = new Date(dateStr);
+    const currentDate = new Date();
+    
+    inputDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
+    const msInDay = 1000 * 60 * 60 * 24; // @ts-ignore
+    const diffDays = Math.round((currentDate - inputDate) / msInDay);
+
+    if (diffDays === 0) return 'H';
+    if (diffDays > 0) return `H+${diffDays}`;
+    
+    return `H${diffDays}`;
+  }
 </script>
 
 <section class="empty-unpaidBookingTenants">
@@ -19,6 +41,7 @@
           <div class="desc">
             <span>Room {ub.roomName}</span>
             <span>{ub.totalPaid}/{ub.totalPrice}</span>
+            <span>{ub.dateStart} ({getRelativeDayLabel(ub.dateStart)})</span>
           </div>
         </div>
       {/each}

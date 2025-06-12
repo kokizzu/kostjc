@@ -1192,6 +1192,7 @@ type UnpaidBookingTenant struct {
 	RoomName   string `json:"roomName"`
 	TotalPaid  int64  `json:"totalPaid"`
 	TotalPrice int64  `json:"totalPrice"`
+	DateStart  string `json:"dateStart"`
 }
 
 func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
@@ -1199,45 +1200,48 @@ func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
 
 	queryRows := comment + `
 SELECT
-    "tenants"."tenantName",
-    "rooms"."roomName",
-    COALESCE("payments"."paidIDR", 0) AS "totalPaidIDR",
-    "bookings"."totalPriceIDR"
+	"tenants"."tenantName",
+	"rooms"."roomName",
+	COALESCE("payments"."paidIDR", 0) AS "totalPaidIDR",
+	"bookings"."totalPriceIDR",
+	"bookings"."dateStart"
 FROM "bookings"
 JOIN (
-    SELECT
-        "bookings"."roomId" AS "roomId",
-        MAX("bookings"."dateEnd") AS "maxBookingDate"
-    FROM "bookings"
-    GROUP BY "bookings"."roomId"
+	SELECT
+		"bookings"."roomId" AS "roomId",
+		MAX("bookings"."dateEnd") AS "maxBookingDate"
+	FROM "bookings"
+	GROUP BY "bookings"."roomId"
 ) "latest"
-    ON "bookings"."roomId" = "latest"."roomId"
-        AND "bookings"."dateEnd" = "latest"."maxBookingDate"
+	ON "bookings"."roomId" = "latest"."roomId"
+		AND "bookings"."dateEnd" = "latest"."maxBookingDate"
 LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
 LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
 LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
 WHERE "bookings"."deletedAt" = 0
-    AND "totalPaidIDR" != "bookings"."totalPriceIDR"
-    AND "payments"."deletedAt" = 0
-    AND "rooms"."deletedAt" = 0
-    AND "tenants"."deletedAt" = 0
+	AND "totalPaidIDR" != "bookings"."totalPriceIDR"
+	AND "payments"."deletedAt" = 0
+	AND "rooms"."deletedAt" = 0
+	AND "tenants"."deletedAt" = 0
 GROUP BY
-    "rooms"."roomName",
-    "tenants"."tenantName",
-    "bookings"."totalPriceIDR"
+	"rooms"."roomName",
+	"tenants"."tenantName",
+	"bookings"."totalPriceIDR"
 ORDER BY "rooms"."roomName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 4 {
+		if len(row) == 5 {
 			tenantName := X.ToS(row[0])
 			roomName := X.ToS(row[1])
 			totalPaid := X.ToI(row[2])
 			totalPrice := X.ToI(row[3])
+			dateStart := X.ToS(row[4])
 			out = append(out, UnpaidBookingTenant{
 				TenantName: tenantName,
 				RoomName:   roomName,
 				TotalPaid:  totalPaid,
 				TotalPrice: totalPrice,
+				DateStart:  dateStart,
 			})
 		}
 	})

@@ -57,17 +57,17 @@
   function getRelativeDayLabel(dateStr) {
     const inputDate = new Date(dateStr);
     const currentDate = new Date();
-
-    // Zero out time for both dates to only compare by day
+    
     inputDate.setHours(0, 0, 0, 0);
     currentDate.setHours(0, 0, 0, 0);
 
-    const diffInMs = inputDate.getTime() - currentDate.getTime();
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    const msInDay = 1000 * 60 * 60 * 24; // @ts-ignore
+    const diffDays = Math.round((currentDate - inputDate) / msInDay);
 
-    if (diffInDays === 0) return 'H';
-    if (diffInDays > 0) return `H+${diffInDays}`;
-    return `H${diffInDays}`; // e.g. 'H-1', 'H-2'
+    if (diffDays === 0) return 'H';
+    if (diffDays > 0) return `H+${diffDays}`;
+    
+    return `H${diffDays}`;
   }
 
   function formatYM(/** @type {Date} */ date) {
