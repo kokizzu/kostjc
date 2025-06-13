@@ -1150,7 +1150,6 @@ func (r *Rooms) FindAvailableRooms() (out []AvailableRoom) {
 
 	now := time.Now()
 	dateTimeNow := now.Format(time.DateOnly)
-	sevenDaysAgo := now.AddDate(0, 0, -7).Format(time.DateOnly)
 	sevenDaysLater := now.AddDate(0, 0, 7).Format(time.DateOnly)
 
 	queryRows := comment + `
@@ -1164,9 +1163,7 @@ SELECT
 FROM ` + r.SqlTableName() + `
 WHERE
 	(
-		(` + r.SqlLastUseAt() + ` > '` + sevenDaysAgo + `'
-			AND ` + r.SqlLastUseAt() + ` < '` + sevenDaysLater + `'
-		)
+		` + r.SqlLastUseAt() + ` < '` + sevenDaysLater + `'
 		OR ` + r.SqlCurrentTenantId() + ` = 0
 	) AND ` + r.SqlDeletedAt() + ` = 0
 ORDER BY ` + r.SqlRoomName() + ` ASC`
@@ -1202,7 +1199,7 @@ func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
 SELECT
 	"tenants"."tenantName",
 	"rooms"."roomName",
-	COALESCE("payments"."paidIDR", 0) AS "totalPaidIDR",
+	COALESCE(SUM("payments"."paidIDR"), 0) AS "totalPaidIDR",
 	"bookings"."totalPriceIDR",
 	"bookings"."dateStart"
 FROM "bookings"
@@ -1219,7 +1216,6 @@ LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
 LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
 LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
 WHERE "bookings"."deletedAt" = 0
-	AND "totalPaidIDR" != "bookings"."totalPriceIDR"
 	AND "payments"."deletedAt" = 0
 	AND "rooms"."deletedAt" = 0
 	AND "tenants"."deletedAt" = 0
@@ -1227,6 +1223,7 @@ GROUP BY
 	"rooms"."roomName",
 	"tenants"."tenantName",
 	"bookings"."totalPriceIDR"
+HAVING COALESCE(SUM("payments"."paidIDR"), 0) <> "bookings"."totalPriceIDR"
 ORDER BY "rooms"."roomName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
