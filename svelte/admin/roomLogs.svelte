@@ -18,6 +18,7 @@
   let logs    = /** @type {any[][]} */([/* logs */]);
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
+  let users     = /** @type {Record<number, string>} */({/* users */});
 
   async function refreshTableView(/** @type PagerIn */ pagerIn) {
     const i = {
@@ -47,6 +48,10 @@
       {fields}
       onRefreshTableView={refreshTableView}
       rows={logs}
+      {users}
+      COL_WIDTHS={{
+        'actorId': 200
+      }}
     />
   </div>
 </LayoutMain>

@@ -233,6 +233,7 @@ func (u *Users) FindUserChoices() map[uint64]string {
 
 	queryRows := comment + `
 SELECT ` + u.SqlId() + `, ` + u.SqlFullName() + `, ` + u.SqlUserName() + `
+FROM ` + u.SqlTableName() + `
 ORDER BY ` + u.SqlId() + ` ASC`
 
 	out := make(map[uint64]string)

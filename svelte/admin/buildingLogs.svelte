@@ -16,7 +16,7 @@
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
   let logs    = /** @type {any[][]} */([/* logs */]);
-  let users     = /** @type {Record<Number, string>} */({/* users */});
+  let users     = /** @type {Record<number, string>} */({/* users */});
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
 
@@ -48,6 +48,7 @@
       {fields}
       onRefreshTableView={refreshTableView}
       rows={logs}
+      {users}
     />
   </div>
 </LayoutMain>

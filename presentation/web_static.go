@@ -514,6 +514,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminBookingLogs(&in)
@@ -524,6 +527,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
+			`users`:    users,
 		})
 	})
 
@@ -563,6 +567,10 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminFacilityLogs(&in)
@@ -573,6 +581,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
+			`users`:    users,
 		})
 	})
 
@@ -585,6 +594,10 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminLocationLogs(&in)
@@ -595,6 +608,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
+			`users`:    users,
 		})
 	})
 
@@ -607,6 +621,10 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminPaymentLogs(&in)
@@ -617,6 +635,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
+			`users`:    users,
 		})
 	})
 
@@ -629,6 +648,10 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminRoomLogs(&in)
@@ -639,6 +662,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
+			`users`:    users,
 		})
 	})
 
@@ -651,6 +675,10 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminStockLogs(&in)
@@ -661,6 +689,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
+			`users`:    users,
 		})
 	})
 

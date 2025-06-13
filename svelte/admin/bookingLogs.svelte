@@ -12,12 +12,15 @@
   import { AdminBookingLogs } from '../jsApi.GEN';
   import { notifier } from '../_components/xNotifier';
   import LogsSubMenu from '../_partials/LogsSubMenu.svelte';
+  import { Icon } from '../node_modules/svelte-icons-pack/dist';
+  import { RiEditorSplitCellsHorizontal } from '../node_modules/svelte-icons-pack/dist/ri';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
   let logs    = /** @type {any[][]} */([/* logs */]);
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
+  let users     = /** @type {Record<number, string>} */({/* users */});
 
   async function refreshTableView(/** @type PagerIn */ pagerIn) {
     const i = {
@@ -47,6 +50,10 @@
       {fields}
       onRefreshTableView={refreshTableView}
       rows={logs}
+      {users}
+      COL_WIDTHS={{
+        'actorId': 200
+      }}
     />
   </div>
 </LayoutMain>

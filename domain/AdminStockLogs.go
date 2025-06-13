@@ -38,7 +38,7 @@ var (
 		Fields: []zCrud.Field{
 			{
 				Name:      mProperty.CreatedAt,
-				Label:     `Created At`,
+				Label:     `Datetime`,
 				ReadOnly:  true,
 				DataType:  zCrud.DataTypeString,
 				InputType: zCrud.InputTypeDateTime,

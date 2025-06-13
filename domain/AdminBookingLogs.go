@@ -37,8 +37,15 @@ var (
 	AdminBookingLogsMeta = zCrud.Meta{
 		Fields: []zCrud.Field{
 			{
+				Name:      mProperty.Id,
+				Label:     `Id`,
+				ReadOnly:  true,
+				DataType:  zCrud.DataTypeInt,
+				InputType: zCrud.InputTypeHidden,
+			},
+			{
 				Name:      mProperty.CreatedAt,
-				Label:     `Created At`,
+				Label:     `Datetime`,
 				ReadOnly:  true,
 				DataType:  zCrud.DataTypeString,
 				InputType: zCrud.InputTypeDateTime,
