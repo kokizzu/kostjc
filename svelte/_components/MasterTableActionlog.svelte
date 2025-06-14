@@ -21,7 +21,6 @@
   export let fields       = /** @type {Field[]} */ ([]);
   export let rows         = /** @type {any[] | Record<string, any>[]} */ ([]);
   export let pager        = /** @type {PagerOut} */ ({});
-  export let extraActions = /** @type {ExtendedAction[]} */ ([]);
   export let users        = /** @type {Record<number, string>} */ ({});
   export let EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([]);
 
@@ -67,64 +66,22 @@
 
   onMount( () => {
     isPopupReady = true;
-    console.log( 'onMount.TableView' );
-    console.log( 'fields=', fields );
-    console.log( 'rows=', rows );
-    console.log( 'pager=', pager );
-    console.log( 'extraActions=', extraActions );
-    console.log('Users=', users);
-    
     for( let z = 0; z < fields.length; z++ ) {
       let field = fields[ z ];
       if( field.name==='deletedAt' ) {
         deletedAtIdx = z;
       }
-
-      // empty all filter at beginning
-      filtersMap[ field.name ] = '';
     }
-
-    oldFilterStr = JSON.stringify( filtersMap );
   } );
   
-  let oldFilterStr = '{}';
-  let newFilterStr = '';
-
-  $: newFilterStr = JSON.stringify( filtersMap );
-  
-  let filtersMap = /** @type {Record<string, string>} */ ({});
-  
-  // @deprecated
-  // function filterKeyDown(/** @type {KeyboardEvent} */ event ) {
-  //   if( event.key === 'Enter' ) applyFilter();
-  // }
-  
-  function applyFilter() {
-    let filters = /** @type {Record<string, string[]>}*/ ({});
-    for( let key in filtersMap ) {
-      let value = filtersMap[ key ];
-      if( value ) {
-        filters[ key ] = value.split( '|' );
-      }
-    }
-
-    onRefreshTableView( {
-      page: pager.page,
-      perPage: pager.perPage,
-      order: pager.order,
-      filters: filters,
-      search: '',
-      searchBy: ''
-    } );
-
-    oldFilterStr = newFilterStr;
-  }
   
   function gotoPage(/** @type {number} */ page ) {
     onRefreshTableView({ ...pager, page });
   }
   
   function changePerPage(/** @type {number} */ perPage ) {
+    showRowsNum = false;
+    currentRows = perPage;
     onRefreshTableView({ ...pager, perPage});
   }
   
@@ -147,11 +104,11 @@
   let headingPopUp = TitleHeadingDataBefore;
   let isShowPopUpShowData = false;
 
-  let dataObjJson;
+  let dataObjJson = '';
 
   function showDataBefore(/** @type {any} */ row ) {
     const toData = (row || {});
-    let toDataJsonStr = {};
+    let toDataJsonStr = toData.beforeJson;
     if (typeof toData.beforeJson === 'string') {
       toDataJsonStr = JSON.parse( toData.beforeJson || '{}' );
     }
@@ -160,9 +117,10 @@
     headingPopUp = TitleHeadingDataBefore;
     isShowPopUpShowData = true;
   }
+
   function showDataAfter(/** @type {any} */ row ) {
     const toData = (row || {});
-    let toDataJsonStr = {};
+    let toDataJsonStr = toData.afterJson;
     if (typeof toData.afterJson === 'string') {
       toDataJsonStr = JSON.parse( toData.afterJson || '{}' );
     }
@@ -276,12 +234,12 @@
       </tbody>
     </table>
   </div>
-  <div class="pagination_container">
+  <div class="pagination-container">
     <div class="filter">
       <div class="showing">
         <p>Showing <span class="text-blue">{(rows || []).length}</span> /</p>
       </div>
-      <div class="row_to_show">
+      <div class="row-to-show">
         {#if showRowsNum}
           <div class="rows">
             {#each rowsToShow as r}
@@ -478,7 +436,6 @@
     border: 1px solid var(--gray-003);
     padding: 0 0 20px 0;
     font-size: var(--font-base);
-    overflow: hidden;
   }
 
   .table-root .text-blue {
@@ -670,7 +627,7 @@
     fill: var(--red-005);
   }
 
-  .table-root .pagination_container {
+  .table-root .pagination-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -678,20 +635,20 @@
     padding: 15px 15px 0 15px;
   }
 
-  .table-root .pagination_container .filter {
+  .table-root .pagination-container .filter {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
   }
 
-  .table-root .pagination_container .filter .row_to_show {
+  .table-root .pagination-container .filter .row-to-show {
     position: relative;
     width: fit-content;
     height: fit-content;
   }
 
-  .table-root .pagination_container .filter .row_to_show .btn {
+  .table-root .pagination-container .filter .row-to-show .btn {
     border: none;
     background-color: var(--blue-transparent);
     color: var(--blue-005);
@@ -708,11 +665,11 @@
     cursor: pointer;
   }
 
-  .table-root .pagination_container .filter .row_to_show .btn:hover {
+  .table-root .pagination-container .filter .row-to-show .btn:hover {
     background-color: var(--blue-002);
   }
 
-  .table-root .pagination_container .filter .row_to_show .rows {
+  .table-root .pagination-container .filter .row-to-show .rows {
     display: flex;
     flex-direction: column-reverse;
     position: absolute;
@@ -723,7 +680,7 @@
     background-color: #fff;
   }
 
-  .table-root .pagination_container .filter .row_to_show .rows button {
+  .table-root .pagination-container .filter .row-to-show .rows button {
     border: none;
     background-color: transparent;
     padding: 5px;
@@ -731,12 +688,12 @@
     color: var(--gray-007);
   }
 
-  .table-root .pagination_container .filter .row_to_show .rows button:hover {
+  .table-root .pagination-container .filter .row-to-show .rows button:hover {
     background-color: var(--blue-transparent);
     color: var(--blue-007);
   }
 
-  .table-root .pagination_container .pagination {
+  .table-root .pagination-container .pagination {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -744,7 +701,7 @@
     overflow: hidden;
   }
 
-  .table-root .pagination_container .pagination .btn {
+  .table-root .pagination-container .pagination .btn {
     border: none;
     background-color: transparent;
     display: flex;
@@ -759,22 +716,22 @@
     border: 1px solid transparent;
   }
 
-  .table-root .pagination_container .pagination .btn:hover {
+  .table-root .pagination-container .pagination .btn:hover {
     border: 1px solid var(--gray-004);
   }
 
-  .table-root .pagination_container .pagination .btn.to {
+  .table-root .pagination-container .pagination .btn.to {
     background-color: var(--blue-006);
     color: #fff;
     font-weight: 600;
     border: none;
   }
 
-  .table-root .pagination_container .pagination .btn.to:hover {
+  .table-root .pagination-container .pagination .btn.to:hover {
     background-color: var(--blue-005);
   }
 
-  .table-root .pagination_container .pagination .btn.to:disabled {
+  .table-root .pagination-container .pagination .btn.to:disabled {
     background-color: var(--gray-002);
     color: var(--gray-006);
     font-weight: 600;
