@@ -26,7 +26,7 @@
         <div class="card">
           <h3>Room {r.roomName}</h3>
           <div class="desc">
-            <span>{@html r.isAvailableNow
+            <span>{@html r.isAvailableNow || r.availableAt == ''
               ? 'Available Now'
               : 'Available on <b>' + formatDateLong(r.availableAt)+'</b>'
             }</span>

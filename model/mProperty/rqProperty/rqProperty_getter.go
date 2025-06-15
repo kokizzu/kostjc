@@ -3,6 +3,7 @@ package rqProperty
 import (
 	"fmt"
 	"kostjc/model/zCrud"
+	"sort"
 	"strconv"
 	"time"
 
@@ -1121,6 +1122,20 @@ WHERE "rooms"."deletedAt" = 0`
 		}
 	}
 
+	sort.Slice(out, func(i, j int) bool {
+		ti, _ := time.Parse(time.DateOnly, out[i].BirthDay)
+		tj, _ := time.Parse(time.DateOnly, out[j].BirthDay)
+
+		mi, di := ti.Month(), ti.Day()
+		mj, dj := tj.Month(), tj.Day()
+
+		if mi == mj {
+			return di < dj
+		}
+
+		return mi < mj
+	})
+
 	return out
 }
 
@@ -1154,22 +1169,26 @@ func (r *Rooms) FindAvailableRooms() (out []AvailableRoom) {
 
 	queryRows := comment + `
 SELECT
-	` + r.SqlRoomName() + `,
-	` + r.SqlLastUseAt() + `,
+	"rooms"."roomName",
+	"bookings"."dateEnd",
 	CASE
-		WHEN ` + r.SqlLastUseAt() + ` <= '` + dateTimeNow + `'
+		WHEN "bookings"."dateEnd" <= '` + dateTimeNow + `'
 		THEN 'TRUE'
-	ELSE 'FALSE' END
-FROM ` + r.SqlTableName() + `
+	ELSE 'FALSE' END,
+	MAX("bookings"."dateEnd")
+FROM "rooms"
+LEFT JOIN "bookings" ON "rooms"."id" = "bookings"."roomId"
 WHERE
 	(
-		` + r.SqlLastUseAt() + ` < '` + sevenDaysLater + `'
-		OR ` + r.SqlCurrentTenantId() + ` = 0
-	) AND ` + r.SqlDeletedAt() + ` = 0
-ORDER BY ` + r.SqlRoomName() + ` ASC`
+		"bookings"."id" IS NULL
+		OR "bookings"."dateEnd" < '` + sevenDaysLater + `'
+		OR "rooms"."currentTenantId" = 0
+	) AND "rooms"."deletedAt" = 0
+GROUP BY "rooms"."roomName"
+ORDER BY "rooms"."roomName" ASC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 3 {
+		if len(row) == 4 {
 			roomName := X.ToS(row[0])
 			availableAt := X.ToS(row[1])
 			isAvailableNow := X.ToBool(row[2])

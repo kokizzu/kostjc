@@ -14679,7 +14679,8 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
     let span;
     let raw_value = (
       /*r*/
-      ctx[0].isAvailableNow ? "Available Now" : "Available on <b>" + formatDateLong2(
+      ctx[0].isAvailableNow || /*r*/
+      ctx[0].availableAt == "" ? "Available Now" : "Available on <b>" + formatDateLong2(
         /*r*/
         ctx[0].availableAt
       ) + "</b>"
