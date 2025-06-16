@@ -84,6 +84,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminMenu(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminMenuLogsAction:
+		in := domain.AdminMenuLogsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminMenuLogs(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.AdminPaymentAction:
 		in := domain.AdminPaymentIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -122,6 +130,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 			return
 		}
 		out := b.AdminSale(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminSaleLogsAction:
+		in := domain.AdminSaleLogsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminSaleLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.AdminStockAction:

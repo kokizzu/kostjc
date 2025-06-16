@@ -13,6 +13,8 @@ import (
 	"kostjc/conf"
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/saAuth"
+	"kostjc/model/mCafe"
+	"kostjc/model/mCafe/saCafe"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/xMailer"
@@ -38,6 +40,8 @@ type Domain struct {
 	bookingLogs  *chBuffer.TimedBuffer
 	paymentLogs  *chBuffer.TimedBuffer
 	stockLogs    *chBuffer.TimedBuffer
+	menuLogs     *chBuffer.TimedBuffer
+	saleLogs     *chBuffer.TimedBuffer
 
 	// logger
 	Log *zerolog.Logger
@@ -67,6 +71,8 @@ func (d *Domain) InitTimedBuffer() {
 	d.bookingLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableBookingLogs])
 	d.paymentLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TablePaymentLogs])
 	d.stockLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableStockLogs])
+	d.menuLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableMenuLogs])
+	d.saleLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableSaleLogs])
 }
 
 func (d *Domain) WaitTimedBufferFinalFlush() {

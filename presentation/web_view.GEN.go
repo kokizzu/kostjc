@@ -13,8 +13,10 @@ var viewList = map[string]string{
 	`AdminBuildingLogs`:      `../svelte/admin/buildingLogs.html`,     // ../svelte/admin/buildingLogs.svelte
 	`AdminFacilityLogs`:      `../svelte/admin/facilityLogs.html`,     // ../svelte/admin/facilityLogs.svelte
 	`AdminLocationLogs`:      `../svelte/admin/locationLogs.html`,     // ../svelte/admin/locationLogs.svelte
+	`AdminMenuLogs`:          `../svelte/admin/menuLogs.html`,         // ../svelte/admin/menuLogs.svelte
 	`AdminPaymentLogs`:       `../svelte/admin/paymentLogs.html`,      // ../svelte/admin/paymentLogs.svelte
 	`AdminRoomLogs`:          `../svelte/admin/roomLogs.html`,         // ../svelte/admin/roomLogs.svelte
+	`AdminSaleLogs`:          `../svelte/admin/saleLogs.html`,         // ../svelte/admin/saleLogs.svelte
 	`AdminStockLogs`:         `../svelte/admin/stockLogs.html`,        // ../svelte/admin/stockLogs.svelte
 	`AdminBooking`:           `../svelte/adminBooking.html`,           // ../svelte/adminBooking.svelte
 	`AdminBuilding`:          `../svelte/adminBuilding.html`,          // ../svelte/adminBuilding.svelte
@@ -60,6 +62,11 @@ func (v *Views) RenderAdminLocationLogs(c *fiber.Ctx, m M.SX) error {
 	return c.SendString(v.cache[`AdminLocationLogs`].Str(m))
 }
 
+func (v *Views) RenderAdminMenuLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminMenuLogs`].Str(m))
+}
+
 func (v *Views) RenderAdminPaymentLogs(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`AdminPaymentLogs`].Str(m))
@@ -68,6 +75,11 @@ func (v *Views) RenderAdminPaymentLogs(c *fiber.Ctx, m M.SX) error {
 func (v *Views) RenderAdminRoomLogs(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`AdminRoomLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminSaleLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminSaleLogs`].Str(m))
 }
 
 func (v *Views) RenderAdminStockLogs(c *fiber.Ctx, m M.SX) error {

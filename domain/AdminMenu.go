@@ -152,6 +152,8 @@ func (d *Domain) AdminMenu(in *AdminMenuIn) (out AdminMenuOut) {
 			}
 		}
 
+		defer InsertCafeLog(menu.Id, d.menuLogs, out.ResponseCommon, in.TimeNow(), sess.UserId, menu)()
+
 		if in.Menu.Name != `` {
 			menu.SetName(in.Menu.Name)
 		}

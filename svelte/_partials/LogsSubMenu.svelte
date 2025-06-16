@@ -32,6 +32,14 @@
 			<span class="title">Stock</span>
 			<span class="block"></span>
 		</a>
+		<a href="/admin/saleLogs" class:active={segment2==='saleLogs'}>
+			<span class="title">Sale</span>
+			<span class="block"></span>
+		</a>
+		<a href="/admin/menuLogs" class:active={segment2==='menuLogs'}>
+			<span class="title">Menu</span>
+			<span class="block"></span>
+		</a>
 	</nav>
 </div>
 
