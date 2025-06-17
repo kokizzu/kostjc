@@ -3,6 +3,7 @@ package mCafe
 import (
 	"time"
 
+	"github.com/kokizzu/gotro/D/Ch"
 	"github.com/kokizzu/gotro/D/Tt"
 )
 
@@ -99,5 +100,37 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 		},
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,
+	},
+}
+
+const (
+	TableMenuLogs Ch.TableName = `menuLogs`
+	TableSaleLogs Ch.TableName = `saleLogs`
+)
+
+const (
+	ActorId    = `actorId`
+	BeforeJSON = `beforeJson`
+	AfterJSON  = `afterJson`
+)
+
+var ClickhouseTables = map[Ch.TableName]*Ch.TableProp{
+	TableMenuLogs: {
+		Fields: []Ch.Field{
+			{CreatedAt, Ch.DateTime},
+			{ActorId, Ch.UInt64},
+			{BeforeJSON, Ch.String},
+			{AfterJSON, Ch.String},
+		},
+		Orders: []string{CreatedAt, ActorId},
+	},
+	TableSaleLogs: {
+		Fields: []Ch.Field{
+			{CreatedAt, Ch.DateTime},
+			{ActorId, Ch.UInt64},
+			{BeforeJSON, Ch.String},
+			{AfterJSON, Ch.String},
+		},
+		Orders: []string{CreatedAt, ActorId},
 	},
 }

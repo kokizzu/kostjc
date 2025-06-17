@@ -693,6 +693,60 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminMenuLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminMenuLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminMenuLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminMenuLogs(&in)
+		return views.RenderAdminMenuLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    `Menu Log`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+			`users`:    users,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminSaleLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminSaleLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSaleLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminSaleLogs(&in)
+		return views.RenderAdminSaleLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    `Sale Log`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+			`users`:    users,
+		})
+	})
+
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {
 		return views.RenderDebug(ctx, M.SX{})
 	})

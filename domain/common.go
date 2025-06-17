@@ -417,3 +417,38 @@ func InsertPropertyLog(
 		})
 	}
 }
+
+func InsertCafeLog(
+	refId uint64,
+	insertFunc insertPropertyLogFunc,
+	responseCommon ResponseCommon,
+	createdAt time.Time,
+	actorId uint64,
+	data any,
+) func() {
+	beforeJson, _ := json.Marshal(data)
+	return func() {
+		if responseCommon.HasError() {
+			return
+		}
+
+		if refId == 0 {
+			return
+		}
+
+		afterJson, _ := json.Marshal(data)
+
+		tempBeforeJson := rgxReplaceUpdatedAt.ReplaceAllString(string(beforeJson), `"updatedAt":0`)
+		tempAfterJson := rgxReplaceUpdatedAt.ReplaceAllString(string(afterJson), `"updatedAt":0`)
+		if tempBeforeJson == tempAfterJson {
+			return
+		}
+
+		insertFunc.Insert([]any{
+			createdAt,
+			actorId,
+			beforeJson,
+			afterJson,
+		})
+	}
+}

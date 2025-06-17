@@ -225,6 +225,8 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 			}
 		}
 
+		defer InsertCafeLog(sale.Id, d.saleLogs, out.ResponseCommon, in.TimeNow(), sess.UserId, sale)()
+
 		if in.Sale.TenantId > 0 {
 			bkd := rqAuth.NewTenants(d.PropOltp)
 			bkd.Id = in.Sale.TenantId

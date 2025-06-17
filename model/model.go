@@ -33,6 +33,7 @@ func RunMigration(logger *zerolog.Logger, oltpConn *Tt.Adapter, olapConn *Ch.Ada
 	m.OltpConn.MigrateTables(mProperty.TarantoolTables)
 	m.OlapConn.MigrateTables(mProperty.ClickhouseTables)
 	m.OltpConn.MigrateTables(mCafe.TarantoolTables)
+	m.OlapConn.MigrateTables(mCafe.ClickhouseTables)
 }
 
 // VerifyTables function to check whether tables are there or not
@@ -46,4 +47,5 @@ func VerifyTables(
 	Tt.CheckTarantoolTables(oltpConn, mProperty.TarantoolTables)
 	Ch.CheckClickhouseTables(olapConn, mProperty.ClickhouseTables)
 	Tt.CheckTarantoolTables(oltpConn, mCafe.TarantoolTables)
+	Ch.CheckClickhouseTables(olapConn, mCafe.ClickhouseTables)
 }
