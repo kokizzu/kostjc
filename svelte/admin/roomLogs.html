@@ -3637,6 +3637,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminMenu = async function AdminMenu(i, cb) {
         return await axios.post("/admin/menu", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminMenuLogs = async function AdminMenuLogs(i, cb) {
+        return await axios.post("/admin/menuLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminPayment = async function AdminPayment(i, cb) {
         return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -3651,6 +3654,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       };
       exports.AdminSale = async function AdminSale(i, cb) {
         return await axios.post("/admin/sale", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminSaleLogs = async function AdminSaleLogs(i, cb) {
+        return await axios.post("/admin/saleLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminStock = async function AdminStock(i, cb) {
         return await axios.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -10592,6 +10598,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let a5;
     let t17;
     let a6;
+    let t20;
+    let a7;
+    let t23;
+    let a8;
     return {
       c() {
         div = element("div");
@@ -10616,6 +10626,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         t17 = space();
         a6 = element("a");
         a6.innerHTML = `<span class="title svelte-1fszk5i">Stock</span> <span class="block svelte-1fszk5i"></span>`;
+        t20 = space();
+        a7 = element("a");
+        a7.innerHTML = `<span class="title svelte-1fszk5i">Sale</span> <span class="block svelte-1fszk5i"></span>`;
+        t23 = space();
+        a8 = element("a");
+        a8.innerHTML = `<span class="title svelte-1fszk5i">Menu</span> <span class="block svelte-1fszk5i"></span>`;
         attr(a0, "href", "/admin/bookingLogs");
         attr(a0, "class", "svelte-1fszk5i");
         toggle_class(
@@ -10672,6 +10688,22 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           /*segment2*/
           ctx[0] === "stockLogs"
         );
+        attr(a7, "href", "/admin/saleLogs");
+        attr(a7, "class", "svelte-1fszk5i");
+        toggle_class(
+          a7,
+          "active",
+          /*segment2*/
+          ctx[0] === "saleLogs"
+        );
+        attr(a8, "href", "/admin/menuLogs");
+        attr(a8, "class", "svelte-1fszk5i");
+        toggle_class(
+          a8,
+          "active",
+          /*segment2*/
+          ctx[0] === "menuLogs"
+        );
         attr(nav, "class", "svelte-1fszk5i");
         attr(div, "class", "admin-submenu svelte-1fszk5i");
       },
@@ -10691,6 +10723,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         append(nav, a5);
         append(nav, t17);
         append(nav, a6);
+        append(nav, t20);
+        append(nav, a7);
+        append(nav, t23);
+        append(nav, a8);
       },
       p: noop,
       i: noop,

@@ -1148,8 +1148,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   font-weight: 600;
 }
 
-/* fakecss:./admin/stockLogs.esbuild-svelte-fake-css */
-.logs-container.svelte-9g9cdz {
+/* fakecss:./admin/saleLogs.esbuild-svelte-fake-css */
+.logs-container.svelte-1ed4gr5 {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -3655,13 +3655,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminSale = async function AdminSale(i, cb) {
         return await axios.post("/admin/sale", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminSaleLogs = async function AdminSaleLogs(i, cb) {
+      exports.AdminSaleLogs = async function AdminSaleLogs2(i, cb) {
         return await axios.post("/admin/saleLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminStock = async function AdminStock(i, cb) {
         return await axios.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminStockLogs = async function AdminStockLogs2(i, cb) {
+      exports.AdminStockLogs = async function AdminStockLogs(i, cb) {
         return await axios.post("/admin/stockLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminTenants = async function AdminTenants(i, cb) {
@@ -10578,7 +10578,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var MasterTableActionlog_default = MasterTableActionlog;
 
-  // admin/stockLogs.svelte
+  // admin/saleLogs.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
   // _partials/LogsSubMenu.svelte
@@ -11081,7 +11081,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var PopUpCompareJson_default = PopUpCompareJson;
 
-  // admin/stockLogs.svelte
+  // admin/saleLogs.svelte
   function create_if_block5(ctx) {
     let popupcomparejson;
     let updating_beforeJson;
@@ -11198,7 +11198,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         create_component(logssubmenu.$.fragment);
         t = space();
         create_component(mastertableactionlog.$.fragment);
-        attr(div, "class", "logs-container svelte-9g9cdz");
+        attr(div, "class", "logs-container svelte-1ed4gr5");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -11334,13 +11334,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     /** @type {Access} */
     {/* segments */}
   );
-  var fields = (
-    /** @type {Field[]} */
-    [/* fields */]
-  );
   var users = (
     /** @type {Record<number, string>} */
     {/* users */}
+  );
+  var fields = (
+    /** @type {Field[]} */
+    [/* fields */]
   );
   function instance12($self, $props, $invalidate) {
     let logs = (
@@ -11353,10 +11353,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     );
     async function refreshTableView(pagerIn) {
       const i = { pager: pagerIn };
-      await (0, import_jsApi2.AdminStockLogs)(
+      await (0, import_jsApi2.AdminSaleLogs)(
         // @ts-ignore
         i,
-        /** @type {import('../jsApi.GEN').AdminStockLogsCallback} */
+        /** @type {import('../jsApi.GEN').AdminSaleLogsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -11369,7 +11369,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
       );
     }
-    let isPopUpReady = false;
+    let isPopUpReady = true;
     onMount(() => {
       $invalidate(2, isPopUpReady = true);
     });
@@ -11434,16 +11434,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       mastertableactionlog_pager_binding
     ];
   }
-  var StockLogs = class extends SvelteComponent {
+  var SaleLogs = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance12, create_fragment12, safe_not_equal, {});
     }
   };
-  var stockLogs_default = StockLogs;
+  var saleLogs_default = SaleLogs;
 
-  // admin/stockLogs.svelte.ts
-  var app = new stockLogs_default({ target: document.getElementById("app") });
+  // admin/saleLogs.svelte.ts
+  var app = new saleLogs_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

@@ -1168,27 +1168,38 @@ func (r *Rooms) FindAvailableRooms() (out []AvailableRoom) {
 	sevenDaysLater := now.AddDate(0, 0, 7).Format(time.DateOnly)
 
 	queryRows := comment + `
+WITH "all_rooms" AS (
+	SELECT
+		"rooms"."roomName" AS "roomName",
+		"bookings"."dateEnd" AS "dateEnd",
+		MAX("bookings"."dateEnd") AS "maxDateEnd",
+		"rooms"."lastUseAt" AS "lastUseAt",
+		"rooms"."currentTenantId" AS "currentTenantId",
+		"rooms"."deletedAt" AS "deletedAt"
+	FROM "rooms"
+	LEFT JOIN "bookings" ON "rooms"."id" = "bookings"."roomId"
+	GROUP BY "rooms"."roomName"
+)
+
 SELECT
-	"rooms"."roomName",
-	"bookings"."dateEnd",
+	"roomName",
+	"dateEnd",
 	CASE
-		WHEN "bookings"."dateEnd" <= '` + dateTimeNow + `'
+		WHEN "dateEnd" <= '` + dateTimeNow + `'
 		THEN 'TRUE'
-	ELSE 'FALSE' END,
-	MAX("bookings"."dateEnd")
-FROM "rooms"
-LEFT JOIN "bookings" ON "rooms"."id" = "bookings"."roomId"
+	ELSE 'FALSE' END AS "isAvailable"
+FROM "all_rooms"
 WHERE
 	(
-		"bookings"."id" IS NULL
-		OR "bookings"."dateEnd" < '` + sevenDaysLater + `'
-		OR "rooms"."currentTenantId" = 0
-	) AND "rooms"."deletedAt" = 0
-GROUP BY "rooms"."roomName"
-ORDER BY "rooms"."roomName" ASC`
+		"dateEnd" <= '` + sevenDaysLater + `'
+		OR "dateEnd" IS NULL
+		OR "currentTenantId" = 0
+	)
+	AND "deletedAt" = 0
+ORDER BY "roomName" ASC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 4 {
+		if len(row) == 3 {
 			roomName := X.ToS(row[0])
 			availableAt := X.ToS(row[1])
 			isAvailableNow := X.ToBool(row[2])

@@ -4366,6 +4366,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       exports.AdminMenu = async function AdminMenu(i, cb) {
         return await axios2.post("/admin/menu", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminMenuLogs = async function AdminMenuLogs(i, cb) {
+        return await axios2.post("/admin/menuLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminPayment = async function AdminPayment2(i, cb) {
         return await axios2.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -4380,6 +4383,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       };
       exports.AdminSale = async function AdminSale(i, cb) {
         return await axios2.post("/admin/sale", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminSaleLogs = async function AdminSaleLogs(i, cb) {
+        return await axios2.post("/admin/saleLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminStock = async function AdminStock(i, cb) {
         return await axios2.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
