@@ -33,7 +33,6 @@
   });
 
   onMount(() => {
-    console.log('Value: ', value);
     switch (type) {
       case 'combobox-arr': {
         itemsArr = values;

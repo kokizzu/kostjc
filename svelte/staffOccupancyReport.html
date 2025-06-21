@@ -19654,12 +19654,14 @@ table.svelte-7am3bg tbody tr td .cell.refunded.svelte-7am3bg.svelte-7am3bg {
       $invalidate(26, roomId = 0);
     }
     function reStructureSvelteValues(tenantId2, roomId2) {
+      $invalidate(14, itemsArrObjRoom = []);
       for (const [k, v] of Object.entries(rooms2)) {
         $invalidate(14, itemsArrObjRoom = [...itemsArrObjRoom, { value: k, label: v }]);
         if (String(k) == String(roomId2)) {
           $invalidate(15, svelteSelectValueRoom = { value: k, label: v });
         }
       }
+      $invalidate(12, itemsArrObjTenant = []);
       for (const [k, v] of Object.entries(tenants2)) {
         $invalidate(12, itemsArrObjTenant = [...itemsArrObjTenant, { value: k, label: v }]);
         if (String(k) == String(tenantId2)) {

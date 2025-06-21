@@ -144,6 +144,7 @@
    * @param {number} roomId
    */
   function reStructureSvelteValues(tenantId, roomId) {
+    itemsArrObjRoom = [];
     for (const [k, v] of Object.entries(rooms)) {
       itemsArrObjRoom = [...itemsArrObjRoom, {
         value: k,
@@ -156,6 +157,8 @@
         };
       }
     }
+
+    itemsArrObjTenant = [];
     for (const [k, v] of Object.entries(tenants)) {
       itemsArrObjTenant = [...itemsArrObjTenant, {
         value: k,
