@@ -174,6 +174,7 @@
 
   async function OnAddBooking(/** @type {Booking} */ booking, /** @type {number[]} */ facilities) {
     isSubmitAddBooking = true;
+    booking.tenantId = booking.tenantId+'';
     const i = /** @type {any} */ ({
       pager,
       facilities,
