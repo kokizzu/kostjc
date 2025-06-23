@@ -1,6 +1,8 @@
 <script>
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { RiUserFacesUserLine } from '../node_modules/svelte-icons-pack/dist/ri';
+  import { BsList } from '../node_modules/svelte-icons-pack/dist/bs';
+  import { isOpenSideMenu } from '../_components/xState.js';
 
   export let username = /** @type {string} */ ('unknown');
   export let role = /** @type {'Staff' | 'Admin' | string} */ ('Staff');
@@ -8,6 +10,15 @@
 
 <header>
   <div class="label">
+    <button
+      type="button"
+      on:click={() => $isOpenSideMenu = !$isOpenSideMenu}
+      class="hamburger">
+      <Icon
+        src={BsList}
+        size="25"
+      />
+    </button>
     <a href="/" class="logo">
       <img src="/assets/house.svg" alt="House" />
       <h2>KostJC</h2>
@@ -43,7 +54,7 @@
     width: fit-content;
     display: flex;
     flex-direction: row;
-    gap: 0;
+    gap: 10px;
     align-items: center;
     padding-left: 20px;
   }
@@ -104,5 +115,35 @@
 
   header .info a.user:hover {
     background-color: var(--gray-001);
+  }
+
+  header .label button.hamburger {
+    display: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  @media only screen and (max-width : 768px) {
+    header {
+      padding: 0 20px;
+    }
+
+    header .label {
+      padding: 0;
+    }
+
+    header .label .logo {
+      width: fit-content;
+    }
+
+    header .label button.hamburger{
+      display: block;
+    }
+
+    header .info a.user {
+      display: none;
+    }
   }
 </style>

@@ -350,7 +350,7 @@
 
 
 <style>/* fakecss:./_partials/SideMenu.esbuild-svelte-fake-css */
-aside.svelte-1h4x6vo.svelte-1h4x6vo {
+aside.side-menu-desktop.svelte-1fwsz8h.svelte-1fwsz8h {
   position: fixed;
   top: var(--navbar-height);
   left: 0;
@@ -364,13 +364,13 @@ aside.svelte-1h4x6vo.svelte-1h4x6vo {
   scrollbar-width: calc(100% - 20px);
   padding: 10px 0 20px 0;
 }
-aside.svelte-1h4x6vo .separator.svelte-1h4x6vo {
+aside.svelte-1fwsz8h .separator.svelte-1fwsz8h {
   width: 100%;
   margin: auto;
   height: 1px;
   background-color: var(--gray-002);
 }
-aside.svelte-1h4x6vo .container.svelte-1h4x6vo {
+aside.svelte-1fwsz8h .container.svelte-1fwsz8h {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -378,7 +378,7 @@ aside.svelte-1h4x6vo .container.svelte-1h4x6vo {
   width: 100%;
   margin: 0;
 }
-aside.svelte-1h4x6vo .container .nav-menu-title.svelte-1h4x6vo {
+aside.svelte-1fwsz8h .container .nav-menu-title.svelte-1fwsz8h {
   margin: 0;
   padding: 10px 25px 10px 70px;
   border-bottom: 1px solid var(--gray-002);
@@ -386,7 +386,7 @@ aside.svelte-1h4x6vo .container .nav-menu-title.svelte-1h4x6vo {
   text-transform: uppercase;
   font-size: 13px;
 }
-aside.svelte-1h4x6vo .container .nav-menu.svelte-1h4x6vo {
+aside.svelte-1fwsz8h .container .nav-menu.svelte-1fwsz8h {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -396,8 +396,8 @@ aside.svelte-1h4x6vo .container .nav-menu.svelte-1h4x6vo {
   margin: 0;
   padding: 0 10px 0 50px;
 }
-aside.svelte-1h4x6vo .container .nav-menu a.svelte-1h4x6vo,
-aside.svelte-1h4x6vo .container .nav-menu button.svelte-1h4x6vo {
+aside.svelte-1fwsz8h .container .nav-menu a.svelte-1fwsz8h,
+aside.svelte-1fwsz8h .container .nav-menu button.svelte-1fwsz8h {
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -412,21 +412,66 @@ aside.svelte-1h4x6vo .container .nav-menu button.svelte-1h4x6vo {
   background-color: transparent;
   font-size: var(--font-lg);
 }
-aside.svelte-1h4x6vo .container .nav-menu a.svelte-1h4x6vo:hover,
-aside.svelte-1h4x6vo .container .nav-menu button.svelte-1h4x6vo:hover {
+aside.svelte-1fwsz8h .container .nav-menu a.svelte-1fwsz8h:hover,
+aside.svelte-1fwsz8h .container .nav-menu button.svelte-1fwsz8h:hover {
   background-color: var(--gray-001);
 }
-aside.svelte-1h4x6vo .container .nav-menu a.active.svelte-1h4x6vo {
+aside.svelte-1fwsz8h .container .nav-menu a.active.svelte-1fwsz8h {
   background-color: var(--blue-transparent);
   color: var(--blue-007);
 }
-aside.svelte-1h4x6vo .container .nav-menu button.red.svelte-1h4x6vo:hover {
+aside.svelte-1fwsz8h .container .nav-menu button.red.svelte-1fwsz8h:hover {
   background-color: var(--red-transparent);
   color: var(--red-007);
 }
+.backdrop.svelte-1fwsz8h.svelte-1fwsz8h {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+  height: 100dvh;
+}
+.backdrop.open.svelte-1fwsz8h.svelte-1fwsz8h {
+  display: block;
+}
+aside.side-menu-mobile.svelte-1fwsz8h.svelte-1fwsz8h {
+  left: -100%;
+  width: 70%;
+  position: fixed;
+  height: 100dvh;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: #FFF;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow-y: auto;
+}
+aside.side-menu-mobile.open.svelte-1fwsz8h.svelte-1fwsz8h {
+  transition: left 0.3s ease-in-out;
+  left: 0;
+}
+@media only screen and (max-width : 768px) {
+  aside.side-menu-desktop.svelte-1fwsz8h.svelte-1fwsz8h {
+    display: none;
+  }
+  aside.svelte-1fwsz8h .container.svelte-1fwsz8h {
+    padding: 20px 0;
+  }
+  aside.svelte-1fwsz8h .container .nav-menu.svelte-1fwsz8h {
+    padding: 0 10px;
+  }
+  aside.svelte-1fwsz8h .container .nav-menu-title.svelte-1fwsz8h {
+    padding: 10px 25px;
+  }
+}
 
 /* fakecss:./_partials/Navbar.esbuild-svelte-fake-css */
-header.svelte-1ef2ahj.svelte-1ef2ahj {
+header.svelte-e25ewh.svelte-e25ewh {
   top: 0;
   left: 0;
   right: 0;
@@ -441,15 +486,15 @@ header.svelte-1ef2ahj.svelte-1ef2ahj {
   background-color: #FFF;
   z-index: 100;
 }
-header.svelte-1ef2ahj .label.svelte-1ef2ahj {
+header.svelte-e25ewh .label.svelte-e25ewh {
   width: fit-content;
   display: flex;
   flex-direction: row;
-  gap: 0;
+  gap: 10px;
   align-items: center;
   padding-left: 20px;
 }
-header.svelte-1ef2ahj .label .logo.svelte-1ef2ahj {
+header.svelte-e25ewh .label .logo.svelte-e25ewh {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -459,32 +504,32 @@ header.svelte-1ef2ahj .label .logo.svelte-1ef2ahj {
   text-decoration: none;
   width: calc(var(--sidemenu-width) - 20px);
 }
-header.svelte-1ef2ahj .label .logo img.svelte-1ef2ahj {
+header.svelte-e25ewh .label .logo img.svelte-e25ewh {
   width: 30px;
   height: auto;
 }
-header.svelte-1ef2ahj .info.svelte-1ef2ahj {
+header.svelte-e25ewh .info.svelte-e25ewh {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   font-size: 13px;
 }
-header.svelte-1ef2ahj .info .role.svelte-1ef2ahj {
+header.svelte-e25ewh .info .role.svelte-e25ewh {
   padding: 8px 15px;
   border-radius: 9999px;
   font-weight: 500;
   cursor: pointer;
 }
-header.svelte-1ef2ahj .info .role.Staff.svelte-1ef2ahj {
+header.svelte-e25ewh .info .role.Staff.svelte-e25ewh {
   color: var(--orange-007);
   background-color: var(--orange-transparent);
 }
-header.svelte-1ef2ahj .info .role.Admin.svelte-1ef2ahj {
+header.svelte-e25ewh .info .role.Admin.svelte-e25ewh {
   color: var(--green-007);
   background-color: var(--green-transparent);
 }
-header.svelte-1ef2ahj .info a.user.svelte-1ef2ahj {
+header.svelte-e25ewh .info a.user.svelte-e25ewh {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -496,12 +541,36 @@ header.svelte-1ef2ahj .info a.user.svelte-1ef2ahj {
   border-radius: 9999px;
   border: 1px solid var(--gray-002);
 }
-header.svelte-1ef2ahj .info a.user.svelte-1ef2ahj:hover {
+header.svelte-e25ewh .info a.user.svelte-e25ewh:hover {
   background-color: var(--gray-001);
+}
+header.svelte-e25ewh .label button.hamburger.svelte-e25ewh {
+  display: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+@media only screen and (max-width : 768px) {
+  header.svelte-e25ewh.svelte-e25ewh {
+    padding: 0 20px;
+  }
+  header.svelte-e25ewh .label.svelte-e25ewh {
+    padding: 0;
+  }
+  header.svelte-e25ewh .label .logo.svelte-e25ewh {
+    width: fit-content;
+  }
+  header.svelte-e25ewh .label button.hamburger.svelte-e25ewh {
+    display: block;
+  }
+  header.svelte-e25ewh .info a.user.svelte-e25ewh {
+    display: none;
+  }
 }
 
 /* fakecss:./_partials/Footer.esbuild-svelte-fake-css */
-footer.svelte-rnrmrc.svelte-rnrmrc {
+footer.svelte-14solik.svelte-14solik {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -510,24 +579,29 @@ footer.svelte-rnrmrc.svelte-rnrmrc {
   padding: 10px 20px;
   border-top: 1px solid var(--gray-002);
 }
-footer.svelte-rnrmrc nav.svelte-rnrmrc {
+footer.svelte-14solik nav.svelte-14solik {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 15px;
 }
-footer.svelte-rnrmrc nav a.svelte-rnrmrc {
+footer.svelte-14solik nav a.svelte-14solik {
   color: var(--gray-008);
   text-decoration: none;
 }
-footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
+footer.svelte-14solik nav a.svelte-14solik:hover {
   color: var(--blue-005);
   text-decoration: underline;
 }
+@media only screen and (max-width : 768px) {
+  footer.svelte-14solik.svelte-14solik {
+    flex-direction: column;
+  }
+}
 
 /* fakecss:./_layouts/main.esbuild-svelte-fake-css */
-.root-layout.svelte-1paq3kv.svelte-1paq3kv {
+.root-layout.svelte-13l6wr.svelte-13l6wr {
   display: block;
   top: 0;
   bottom: 0;
@@ -536,12 +610,12 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   height: 100vh;
   width: 100vw;
 }
-.root-layout.svelte-1paq3kv .root-container.svelte-1paq3kv {
+.root-layout.svelte-13l6wr .root-container.svelte-13l6wr {
   height: 100%;
   width: 100%;
   display: flex;
 }
-.root-layout.svelte-1paq3kv .root-container .root-content.svelte-1paq3kv {
+.root-layout.svelte-13l6wr .root-container .root-content.svelte-13l6wr {
   display: flex;
   flex-direction: column;
   -webkit-box-orient: vertical;
@@ -555,7 +629,7 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   margin-bottom: 0;
   overflow: hidden;
 }
-.root-layout.svelte-1paq3kv .root-container .root-content .content.svelte-1paq3kv {
+.root-layout.svelte-13l6wr .root-container .root-content .content.svelte-13l6wr {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -564,6 +638,11 @@ footer.svelte-rnrmrc nav a.svelte-rnrmrc:hover {
   padding: 0;
   margin: 0;
   font-size: var(--font-base);
+}
+@media only screen and (max-width : 768px) {
+  .root-layout.svelte-13l6wr .root-container .root-content.svelte-13l6wr {
+    margin-left: 0;
+  }
 }
 
 /* fakecss:./node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/ChevronIcon.esbuild-svelte-fake-css */
@@ -4165,6 +4244,10 @@ table tbody tr td .actions .btn:hover svg {
   function null_to_empty(value) {
     return value == null ? "" : value;
   }
+  function set_store_value(store, ret, value) {
+    store.set(value);
+    return ret;
+  }
   function action_destroyer(action_result) {
     return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
   }
@@ -5201,7 +5284,536 @@ table tbody tr td .actions .btn:hover svg {
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
 
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/store/index.js
+  var subscriber_queue = [];
+  function writable(value, start = noop) {
+    let stop;
+    const subscribers = /* @__PURE__ */ new Set();
+    function set(new_value) {
+      if (safe_not_equal(value, new_value)) {
+        value = new_value;
+        if (stop) {
+          const run_queue = !subscriber_queue.length;
+          for (const subscriber of subscribers) {
+            subscriber[1]();
+            subscriber_queue.push(subscriber, value);
+          }
+          if (run_queue) {
+            for (let i = 0; i < subscriber_queue.length; i += 2) {
+              subscriber_queue[i][0](subscriber_queue[i + 1]);
+            }
+            subscriber_queue.length = 0;
+          }
+        }
+      }
+    }
+    function update2(fn) {
+      set(fn(value));
+    }
+    function subscribe2(run2, invalidate = noop) {
+      const subscriber = [run2, invalidate];
+      subscribers.add(subscriber);
+      if (subscribers.size === 1) {
+        stop = start(set, update2) || noop;
+      }
+      run2(value);
+      return () => {
+        subscribers.delete(subscriber);
+        if (subscribers.size === 0 && stop) {
+          stop();
+          stop = null;
+        }
+      };
+    }
+    return { set, update: update2, subscribe: subscribe2 };
+  }
+
+  // _components/xState.js
+  var isOpenSideMenu = writable(false);
+
   // _partials/SideMenu.svelte
+  function create_if_block_3(ctx) {
+    let h3;
+    let t1;
+    let nav;
+    let a;
+    let icon;
+    let t2;
+    let span;
+    let current;
+    icon = new Icon_default({
+      props: {
+        src: RiBusinessCalendarScheduleLine,
+        size: "20"
+      }
+    });
+    return {
+      c() {
+        h3 = element("h3");
+        h3.textContent = "Staff";
+        t1 = space();
+        nav = element("nav");
+        a = element("a");
+        create_component(icon.$.fragment);
+        t2 = space();
+        span = element("span");
+        span.textContent = "Bookings";
+        attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
+        attr(a, "href", "/staff/booking");
+        attr(a, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "booking"
+        );
+        attr(nav, "class", "nav-menu svelte-1fwsz8h");
+      },
+      m(target, anchor) {
+        insert(target, h3, anchor);
+        insert(target, t1, anchor);
+        insert(target, nav, anchor);
+        append(nav, a);
+        mount_component(icon, a, null);
+        append(a, t2);
+        append(a, span);
+        current = true;
+      },
+      p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(h3);
+          detach(t1);
+          detach(nav);
+        }
+        destroy_component(icon);
+      }
+    };
+  }
+  function create_if_block_2(ctx) {
+    let h3;
+    let t1;
+    let nav;
+    let a0;
+    let icon0;
+    let t2;
+    let span0;
+    let t4;
+    let a1;
+    let icon1;
+    let t5;
+    let span1;
+    let t7;
+    let a2;
+    let icon2;
+    let t8;
+    let span2;
+    let t10;
+    let a3;
+    let icon3;
+    let t11;
+    let span3;
+    let t13;
+    let a4;
+    let icon4;
+    let t14;
+    let span4;
+    let t16;
+    let a5;
+    let icon5;
+    let t17;
+    let span5;
+    let t19;
+    let a6;
+    let icon6;
+    let t20;
+    let span6;
+    let t22;
+    let a7;
+    let icon7;
+    let t23;
+    let span7;
+    let t25;
+    let a8;
+    let icon8;
+    let t26;
+    let span8;
+    let t28;
+    let a9;
+    let icon9;
+    let t29;
+    let span9;
+    let t31;
+    let a10;
+    let icon10;
+    let t32;
+    let span10;
+    let t34;
+    let a11;
+    let icon11;
+    let t35;
+    let span11;
+    let current;
+    icon0 = new Icon_default({
+      props: { src: RiSystemMenu2Line, size: "20" }
+    });
+    icon1 = new Icon_default({
+      props: { src: RiFinanceCashLine, size: "20" }
+    });
+    icon2 = new Icon_default({
+      props: { src: RiMapMapPin2Line, size: "20" }
+    });
+    icon3 = new Icon_default({
+      props: { src: LuHandPlatter, size: "20" }
+    });
+    icon4 = new Icon_default({
+      props: { src: RiBuildingsHotelLine, size: "20" }
+    });
+    icon5 = new Icon_default({
+      props: { src: RiOthersDoorOpenLine, size: "20" }
+    });
+    icon6 = new Icon_default({
+      props: {
+        src: RiBusinessCalendarScheduleLine,
+        size: "20"
+      }
+    });
+    icon7 = new Icon_default({
+      props: { src: RiFinanceWallet3Line, size: "20" }
+    });
+    icon8 = new Icon_default({
+      props: {
+        src: RiBusinessInboxUnarchiveLine,
+        size: "20"
+      }
+    });
+    icon9 = new Icon_default({
+      props: {
+        src: RiUserFacesUserFollowLine,
+        size: "20"
+      }
+    });
+    icon10 = new Icon_default({
+      props: { src: RiUserFacesGroupLine, size: "20" }
+    });
+    icon11 = new Icon_default({
+      props: {
+        src: RiBusinessBarChartBoxLine,
+        size: "20"
+      }
+    });
+    return {
+      c() {
+        h3 = element("h3");
+        h3.textContent = "Admin";
+        t1 = space();
+        nav = element("nav");
+        a0 = element("a");
+        create_component(icon0.$.fragment);
+        t2 = space();
+        span0 = element("span");
+        span0.textContent = "Menu";
+        t4 = space();
+        a1 = element("a");
+        create_component(icon1.$.fragment);
+        t5 = space();
+        span1 = element("span");
+        span1.textContent = "Sales";
+        t7 = space();
+        a2 = element("a");
+        create_component(icon2.$.fragment);
+        t8 = space();
+        span2 = element("span");
+        span2.textContent = "Locations";
+        t10 = space();
+        a3 = element("a");
+        create_component(icon3.$.fragment);
+        t11 = space();
+        span3 = element("span");
+        span3.textContent = "Facilities";
+        t13 = space();
+        a4 = element("a");
+        create_component(icon4.$.fragment);
+        t14 = space();
+        span4 = element("span");
+        span4.textContent = "Buildings";
+        t16 = space();
+        a5 = element("a");
+        create_component(icon5.$.fragment);
+        t17 = space();
+        span5 = element("span");
+        span5.textContent = "Rooms";
+        t19 = space();
+        a6 = element("a");
+        create_component(icon6.$.fragment);
+        t20 = space();
+        span6 = element("span");
+        span6.textContent = "Bookings";
+        t22 = space();
+        a7 = element("a");
+        create_component(icon7.$.fragment);
+        t23 = space();
+        span7 = element("span");
+        span7.textContent = "Payments";
+        t25 = space();
+        a8 = element("a");
+        create_component(icon8.$.fragment);
+        t26 = space();
+        span8 = element("span");
+        span8.textContent = "Stocks";
+        t28 = space();
+        a9 = element("a");
+        create_component(icon9.$.fragment);
+        t29 = space();
+        span9 = element("span");
+        span9.textContent = "Tenants";
+        t31 = space();
+        a10 = element("a");
+        create_component(icon10.$.fragment);
+        t32 = space();
+        span10 = element("span");
+        span10.textContent = "Users";
+        t34 = space();
+        a11 = element("a");
+        create_component(icon11.$.fragment);
+        t35 = space();
+        span11 = element("span");
+        span11.textContent = "Logs";
+        attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
+        attr(a0, "href", "/admin/menu");
+        attr(a0, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a0,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "menu"
+        );
+        attr(a1, "href", "/admin/sale");
+        attr(a1, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a1,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "sale"
+        );
+        attr(a2, "href", "/admin/location");
+        attr(a2, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a2,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "location"
+        );
+        attr(a3, "href", "/admin/facility");
+        attr(a3, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a3,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "facility"
+        );
+        attr(a4, "href", "/admin/building");
+        attr(a4, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a4,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "building"
+        );
+        attr(a5, "href", "/admin/room");
+        attr(a5, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a5,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "room"
+        );
+        attr(a6, "href", "/admin/booking");
+        attr(a6, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a6,
+          "active",
+          /*pathLv1*/
+          ctx[3] === "admin" && /*pathLv2*/
+          ctx[4] === "booking"
+        );
+        attr(a7, "href", "/admin/payment");
+        attr(a7, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a7,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "payment"
+        );
+        attr(a8, "href", "/admin/stock");
+        attr(a8, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a8,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "stock"
+        );
+        attr(a9, "href", "/admin/tenants");
+        attr(a9, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a9,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "tenants"
+        );
+        attr(a10, "href", "/admin/usersManagement");
+        attr(a10, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a10,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "usersManagement"
+        );
+        attr(a11, "href", "/admin/bookingLogs");
+        attr(a11, "class", "svelte-1fwsz8h");
+        toggle_class(a11, "active", String(
+          /*pathLv2*/
+          ctx[4]
+        ).includes("Logs") || false);
+        attr(nav, "class", "nav-menu svelte-1fwsz8h");
+      },
+      m(target, anchor) {
+        insert(target, h3, anchor);
+        insert(target, t1, anchor);
+        insert(target, nav, anchor);
+        append(nav, a0);
+        mount_component(icon0, a0, null);
+        append(a0, t2);
+        append(a0, span0);
+        append(nav, t4);
+        append(nav, a1);
+        mount_component(icon1, a1, null);
+        append(a1, t5);
+        append(a1, span1);
+        append(nav, t7);
+        append(nav, a2);
+        mount_component(icon2, a2, null);
+        append(a2, t8);
+        append(a2, span2);
+        append(nav, t10);
+        append(nav, a3);
+        mount_component(icon3, a3, null);
+        append(a3, t11);
+        append(a3, span3);
+        append(nav, t13);
+        append(nav, a4);
+        mount_component(icon4, a4, null);
+        append(a4, t14);
+        append(a4, span4);
+        append(nav, t16);
+        append(nav, a5);
+        mount_component(icon5, a5, null);
+        append(a5, t17);
+        append(a5, span5);
+        append(nav, t19);
+        append(nav, a6);
+        mount_component(icon6, a6, null);
+        append(a6, t20);
+        append(a6, span6);
+        append(nav, t22);
+        append(nav, a7);
+        mount_component(icon7, a7, null);
+        append(a7, t23);
+        append(a7, span7);
+        append(nav, t25);
+        append(nav, a8);
+        mount_component(icon8, a8, null);
+        append(a8, t26);
+        append(a8, span8);
+        append(nav, t28);
+        append(nav, a9);
+        mount_component(icon9, a9, null);
+        append(a9, t29);
+        append(a9, span9);
+        append(nav, t31);
+        append(nav, a10);
+        mount_component(icon10, a10, null);
+        append(a10, t32);
+        append(a10, span10);
+        append(nav, t34);
+        append(nav, a11);
+        mount_component(icon11, a11, null);
+        append(a11, t35);
+        append(a11, span11);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        if (!current || dirty & /*String, pathLv2*/
+        16) {
+          toggle_class(a11, "active", String(
+            /*pathLv2*/
+            ctx2[4]
+          ).includes("Logs") || false);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon0.$.fragment, local);
+        transition_in(icon1.$.fragment, local);
+        transition_in(icon2.$.fragment, local);
+        transition_in(icon3.$.fragment, local);
+        transition_in(icon4.$.fragment, local);
+        transition_in(icon5.$.fragment, local);
+        transition_in(icon6.$.fragment, local);
+        transition_in(icon7.$.fragment, local);
+        transition_in(icon8.$.fragment, local);
+        transition_in(icon9.$.fragment, local);
+        transition_in(icon10.$.fragment, local);
+        transition_in(icon11.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon0.$.fragment, local);
+        transition_out(icon1.$.fragment, local);
+        transition_out(icon2.$.fragment, local);
+        transition_out(icon3.$.fragment, local);
+        transition_out(icon4.$.fragment, local);
+        transition_out(icon5.$.fragment, local);
+        transition_out(icon6.$.fragment, local);
+        transition_out(icon7.$.fragment, local);
+        transition_out(icon8.$.fragment, local);
+        transition_out(icon9.$.fragment, local);
+        transition_out(icon10.$.fragment, local);
+        transition_out(icon11.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(h3);
+          detach(t1);
+          detach(nav);
+        }
+        destroy_component(icon0);
+        destroy_component(icon1);
+        destroy_component(icon2);
+        destroy_component(icon3);
+        destroy_component(icon4);
+        destroy_component(icon5);
+        destroy_component(icon6);
+        destroy_component(icon7);
+        destroy_component(icon8);
+        destroy_component(icon9);
+        destroy_component(icon10);
+        destroy_component(icon11);
+      }
+    };
+  }
   function create_if_block_1(ctx) {
     let h3;
     let t1;
@@ -5228,16 +5840,16 @@ table tbody tr td .actions .btn:hover svg {
         t2 = space();
         span = element("span");
         span.textContent = "Bookings";
-        attr(h3, "class", "nav-menu-title svelte-1h4x6vo");
+        attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a, "href", "/staff/booking");
-        attr(a, "class", "svelte-1h4x6vo");
+        attr(a, "class", "svelte-1fwsz8h");
         toggle_class(
           a,
           "active",
           /*pathLv2*/
-          ctx[3] === "booking"
+          ctx[4] === "booking"
         );
-        attr(nav, "class", "nav-menu svelte-1h4x6vo");
+        attr(nav, "class", "nav-menu svelte-1fwsz8h");
       },
       m(target, anchor) {
         insert(target, h3, anchor);
@@ -5459,103 +6071,103 @@ table tbody tr td .actions .btn:hover svg {
         t35 = space();
         span11 = element("span");
         span11.textContent = "Logs";
-        attr(h3, "class", "nav-menu-title svelte-1h4x6vo");
+        attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "href", "/admin/menu");
-        attr(a0, "class", "svelte-1h4x6vo");
+        attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
           a0,
           "active",
           /*pathLv2*/
-          ctx[3] === "menu"
+          ctx[4] === "menu"
         );
         attr(a1, "href", "/admin/sale");
-        attr(a1, "class", "svelte-1h4x6vo");
+        attr(a1, "class", "svelte-1fwsz8h");
         toggle_class(
           a1,
           "active",
           /*pathLv2*/
-          ctx[3] === "sale"
+          ctx[4] === "sale"
         );
         attr(a2, "href", "/admin/location");
-        attr(a2, "class", "svelte-1h4x6vo");
+        attr(a2, "class", "svelte-1fwsz8h");
         toggle_class(
           a2,
           "active",
           /*pathLv2*/
-          ctx[3] === "location"
+          ctx[4] === "location"
         );
         attr(a3, "href", "/admin/facility");
-        attr(a3, "class", "svelte-1h4x6vo");
+        attr(a3, "class", "svelte-1fwsz8h");
         toggle_class(
           a3,
           "active",
           /*pathLv2*/
-          ctx[3] === "facility"
+          ctx[4] === "facility"
         );
         attr(a4, "href", "/admin/building");
-        attr(a4, "class", "svelte-1h4x6vo");
+        attr(a4, "class", "svelte-1fwsz8h");
         toggle_class(
           a4,
           "active",
           /*pathLv2*/
-          ctx[3] === "building"
+          ctx[4] === "building"
         );
         attr(a5, "href", "/admin/room");
-        attr(a5, "class", "svelte-1h4x6vo");
+        attr(a5, "class", "svelte-1fwsz8h");
         toggle_class(
           a5,
           "active",
           /*pathLv2*/
-          ctx[3] === "room"
+          ctx[4] === "room"
         );
         attr(a6, "href", "/admin/booking");
-        attr(a6, "class", "svelte-1h4x6vo");
+        attr(a6, "class", "svelte-1fwsz8h");
         toggle_class(
           a6,
           "active",
           /*pathLv1*/
-          ctx[2] === "admin" && /*pathLv2*/
-          ctx[3] === "booking"
+          ctx[3] === "admin" && /*pathLv2*/
+          ctx[4] === "booking"
         );
         attr(a7, "href", "/admin/payment");
-        attr(a7, "class", "svelte-1h4x6vo");
+        attr(a7, "class", "svelte-1fwsz8h");
         toggle_class(
           a7,
           "active",
           /*pathLv2*/
-          ctx[3] === "payment"
+          ctx[4] === "payment"
         );
         attr(a8, "href", "/admin/stock");
-        attr(a8, "class", "svelte-1h4x6vo");
+        attr(a8, "class", "svelte-1fwsz8h");
         toggle_class(
           a8,
           "active",
           /*pathLv2*/
-          ctx[3] === "stock"
+          ctx[4] === "stock"
         );
         attr(a9, "href", "/admin/tenants");
-        attr(a9, "class", "svelte-1h4x6vo");
+        attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
           a9,
           "active",
           /*pathLv2*/
-          ctx[3] === "tenants"
+          ctx[4] === "tenants"
         );
         attr(a10, "href", "/admin/usersManagement");
-        attr(a10, "class", "svelte-1h4x6vo");
+        attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
           a10,
           "active",
           /*pathLv2*/
-          ctx[3] === "usersManagement"
+          ctx[4] === "usersManagement"
         );
         attr(a11, "href", "/admin/bookingLogs");
-        attr(a11, "class", "svelte-1h4x6vo");
+        attr(a11, "class", "svelte-1fwsz8h");
         toggle_class(a11, "active", String(
           /*pathLv2*/
-          ctx[3]
+          ctx[4]
         ).includes("Logs") || false);
-        attr(nav, "class", "nav-menu svelte-1h4x6vo");
+        attr(nav, "class", "nav-menu svelte-1fwsz8h");
       },
       m(target, anchor) {
         insert(target, h3, anchor);
@@ -5624,10 +6236,10 @@ table tbody tr td .actions .btn:hover svg {
       },
       p(ctx2, dirty) {
         if (!current || dirty & /*String, pathLv2*/
-        8) {
+        16) {
           toggle_class(a11, "active", String(
             /*pathLv2*/
-            ctx2[3]
+            ctx2[4]
           ).includes("Logs") || false);
         }
       },
@@ -5685,8 +6297,8 @@ table tbody tr td .actions .btn:hover svg {
     };
   }
   function create_fragment2(ctx) {
-    let aside;
-    let div;
+    let aside0;
+    let div0;
     let nav0;
     let a0;
     let icon0;
@@ -5713,10 +6325,47 @@ table tbody tr td .actions .btn:hover svg {
     let span4;
     let t14;
     let nav1;
-    let button;
+    let button0;
     let icon4;
     let t15;
     let span5;
+    let t17;
+    let button1;
+    let button1_class_value;
+    let t18;
+    let aside1;
+    let div1;
+    let nav2;
+    let a4;
+    let icon5;
+    let t19;
+    let span6;
+    let t21;
+    let a5;
+    let icon6;
+    let t22;
+    let span7;
+    let t24;
+    let a6;
+    let icon7;
+    let t25;
+    let span8;
+    let t27;
+    let a7;
+    let icon8;
+    let t28;
+    let span9;
+    let t30;
+    let t31;
+    let t32;
+    let span10;
+    let t33;
+    let nav3;
+    let button2;
+    let icon9;
+    let t34;
+    let span11;
+    let aside1_class_value;
     let current;
     let mounted;
     let dispose;
@@ -5733,18 +6382,39 @@ table tbody tr td .actions .btn:hover svg {
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block0 = !/*access*/
-    ctx[0].admin && create_if_block_1(ctx);
+    ctx[0].admin && create_if_block_3(ctx);
     let if_block1 = (
       /*access*/
-      ctx[0].admin && create_if_block(ctx)
+      ctx[0].admin && create_if_block_2(ctx)
     );
     icon4 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
+    icon5 = new Icon_default({
+      props: { src: RiBuildingsHome2Line, size: "20" }
+    });
+    icon6 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon7 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon8 = new Icon_default({
+      props: { src: RiUserFacesUser3Line, size: "20" }
+    });
+    let if_block2 = !/*access*/
+    ctx[0].admin && create_if_block_1(ctx);
+    let if_block3 = (
+      /*access*/
+      ctx[0].admin && create_if_block(ctx)
+    );
+    icon9 = new Icon_default({
+      props: { src: RiSystemLogoutBoxRLine, size: "20" }
+    });
     return {
       c() {
-        aside = element("aside");
-        div = element("div");
+        aside0 = element("aside");
+        div0 = element("div");
         nav0 = element("nav");
         a0 = element("a");
         create_component(icon0.$.fragment);
@@ -5779,54 +6449,140 @@ table tbody tr td .actions .btn:hover svg {
         span4 = element("span");
         t14 = space();
         nav1 = element("nav");
-        button = element("button");
+        button0 = element("button");
         create_component(icon4.$.fragment);
         t15 = space();
         span5 = element("span");
         span5.textContent = "Logout";
+        t17 = space();
+        button1 = element("button");
+        t18 = space();
+        aside1 = element("aside");
+        div1 = element("div");
+        nav2 = element("nav");
+        a4 = element("a");
+        create_component(icon5.$.fragment);
+        t19 = space();
+        span6 = element("span");
+        span6.textContent = "Home";
+        t21 = space();
+        a5 = element("a");
+        create_component(icon6.$.fragment);
+        t22 = space();
+        span7 = element("span");
+        span7.textContent = "Occupancy Report";
+        t24 = space();
+        a6 = element("a");
+        create_component(icon7.$.fragment);
+        t25 = space();
+        span8 = element("span");
+        span8.textContent = "Missing Data Report";
+        t27 = space();
+        a7 = element("a");
+        create_component(icon8.$.fragment);
+        t28 = space();
+        span9 = element("span");
+        span9.textContent = "Profile";
+        t30 = space();
+        if (if_block2)
+          if_block2.c();
+        t31 = space();
+        if (if_block3)
+          if_block3.c();
+        t32 = space();
+        span10 = element("span");
+        t33 = space();
+        nav3 = element("nav");
+        button2 = element("button");
+        create_component(icon9.$.fragment);
+        t34 = space();
+        span11 = element("span");
+        span11.textContent = "Logout";
         attr(a0, "href", "/");
-        attr(a0, "class", "svelte-1h4x6vo");
+        attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
           a0,
           "active",
           /*pathLv1*/
-          ctx[2] === ""
+          ctx[3] === ""
         );
         attr(a1, "href", "/staff/occupancyReport");
-        attr(a1, "class", "svelte-1h4x6vo");
+        attr(a1, "class", "svelte-1fwsz8h");
         toggle_class(
           a1,
           "active",
           /*pathAll*/
-          ctx[1] === "/staff/occupancyReport"
+          ctx[2] === "/staff/occupancyReport"
         );
         attr(a2, "href", "/staff/missingDataReport");
-        attr(a2, "class", "svelte-1h4x6vo");
+        attr(a2, "class", "svelte-1fwsz8h");
         toggle_class(
           a2,
           "active",
           /*pathAll*/
-          ctx[1] === "/staff/missingDataReport"
+          ctx[2] === "/staff/missingDataReport"
         );
         attr(a3, "href", "/user");
-        attr(a3, "class", "svelte-1h4x6vo");
+        attr(a3, "class", "svelte-1fwsz8h");
         toggle_class(
           a3,
           "active",
           /*pathAll*/
-          ctx[1] === "/user"
+          ctx[2] === "/user"
         );
-        attr(nav0, "class", "nav-menu svelte-1h4x6vo");
-        attr(span4, "class", "separator svelte-1h4x6vo");
-        attr(button, "class", "red svelte-1h4x6vo");
-        attr(nav1, "class", "nav-menu svelte-1h4x6vo");
-        attr(div, "class", "container svelte-1h4x6vo");
-        attr(aside, "class", "svelte-1h4x6vo");
+        attr(nav0, "class", "nav-menu svelte-1fwsz8h");
+        attr(span4, "class", "separator svelte-1fwsz8h");
+        attr(button0, "class", "red svelte-1fwsz8h");
+        attr(nav1, "class", "nav-menu svelte-1fwsz8h");
+        attr(div0, "class", "container svelte-1fwsz8h");
+        attr(aside0, "class", "side-menu-desktop svelte-1fwsz8h");
+        attr(button1, "aria-label", "backdrop toggle menu");
+        attr(button1, "class", button1_class_value = "backdrop " + /*$isOpenSideMenu*/
+        (ctx[1] ? "open" : "") + " svelte-1fwsz8h");
+        attr(a4, "href", "/");
+        attr(a4, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a4,
+          "active",
+          /*pathLv1*/
+          ctx[3] === ""
+        );
+        attr(a5, "href", "/staff/occupancyReport");
+        attr(a5, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a5,
+          "active",
+          /*pathAll*/
+          ctx[2] === "/staff/occupancyReport"
+        );
+        attr(a6, "href", "/staff/missingDataReport");
+        attr(a6, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a6,
+          "active",
+          /*pathAll*/
+          ctx[2] === "/staff/missingDataReport"
+        );
+        attr(a7, "href", "/user");
+        attr(a7, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a7,
+          "active",
+          /*pathAll*/
+          ctx[2] === "/user"
+        );
+        attr(nav2, "class", "nav-menu svelte-1fwsz8h");
+        attr(span10, "class", "separator svelte-1fwsz8h");
+        attr(button2, "class", "red svelte-1fwsz8h");
+        attr(nav3, "class", "nav-menu svelte-1fwsz8h");
+        attr(div1, "class", "container svelte-1fwsz8h");
+        attr(aside1, "class", aside1_class_value = "side-menu-mobile " + /*$isOpenSideMenu*/
+        (ctx[1] ? "open" : "") + " svelte-1fwsz8h");
       },
       m(target, anchor) {
-        insert(target, aside, anchor);
-        append(aside, div);
-        append(div, nav0);
+        insert(target, aside0, anchor);
+        append(aside0, div0);
+        append(div0, nav0);
         append(nav0, a0);
         mount_component(icon0, a0, null);
         append(a0, t0);
@@ -5846,28 +6602,81 @@ table tbody tr td .actions .btn:hover svg {
         mount_component(icon3, a3, null);
         append(a3, t9);
         append(a3, span3);
-        append(div, t11);
+        append(div0, t11);
         if (if_block0)
-          if_block0.m(div, null);
-        append(div, t12);
+          if_block0.m(div0, null);
+        append(div0, t12);
         if (if_block1)
-          if_block1.m(div, null);
-        append(div, t13);
-        append(div, span4);
-        append(div, t14);
-        append(div, nav1);
-        append(nav1, button);
-        mount_component(icon4, button, null);
-        append(button, t15);
-        append(button, span5);
+          if_block1.m(div0, null);
+        append(div0, t13);
+        append(div0, span4);
+        append(div0, t14);
+        append(div0, nav1);
+        append(nav1, button0);
+        mount_component(icon4, button0, null);
+        append(button0, t15);
+        append(button0, span5);
+        insert(target, t17, anchor);
+        insert(target, button1, anchor);
+        insert(target, t18, anchor);
+        insert(target, aside1, anchor);
+        append(aside1, div1);
+        append(div1, nav2);
+        append(nav2, a4);
+        mount_component(icon5, a4, null);
+        append(a4, t19);
+        append(a4, span6);
+        append(nav2, t21);
+        append(nav2, a5);
+        mount_component(icon6, a5, null);
+        append(a5, t22);
+        append(a5, span7);
+        append(nav2, t24);
+        append(nav2, a6);
+        mount_component(icon7, a6, null);
+        append(a6, t25);
+        append(a6, span8);
+        append(nav2, t27);
+        append(nav2, a7);
+        mount_component(icon8, a7, null);
+        append(a7, t28);
+        append(a7, span9);
+        append(div1, t30);
+        if (if_block2)
+          if_block2.m(div1, null);
+        append(div1, t31);
+        if (if_block3)
+          if_block3.m(div1, null);
+        append(div1, t32);
+        append(div1, span10);
+        append(div1, t33);
+        append(div1, nav3);
+        append(nav3, button2);
+        mount_component(icon9, button2, null);
+        append(button2, t34);
+        append(button2, span11);
         current = true;
         if (!mounted) {
-          dispose = listen(
-            button,
-            "click",
-            /*logout*/
-            ctx[4]
-          );
+          dispose = [
+            listen(
+              button0,
+              "click",
+              /*logout*/
+              ctx[5]
+            ),
+            listen(
+              button1,
+              "click",
+              /*click_handler*/
+              ctx[6]
+            ),
+            listen(
+              button2,
+              "click",
+              /*logout*/
+              ctx[5]
+            )
+          ];
           mounted = true;
         }
       },
@@ -5881,10 +6690,10 @@ table tbody tr td .actions .btn:hover svg {
               transition_in(if_block0, 1);
             }
           } else {
-            if_block0 = create_if_block_1(ctx2);
+            if_block0 = create_if_block_3(ctx2);
             if_block0.c();
             transition_in(if_block0, 1);
-            if_block0.m(div, t12);
+            if_block0.m(div0, t12);
           }
         } else if (if_block0) {
           group_outros();
@@ -5904,10 +6713,10 @@ table tbody tr td .actions .btn:hover svg {
               transition_in(if_block1, 1);
             }
           } else {
-            if_block1 = create_if_block(ctx2);
+            if_block1 = create_if_block_2(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
-            if_block1.m(div, t13);
+            if_block1.m(div0, t13);
           }
         } else if (if_block1) {
           group_outros();
@@ -5915,6 +6724,60 @@ table tbody tr td .actions .btn:hover svg {
             if_block1 = null;
           });
           check_outros();
+        }
+        if (!current || dirty & /*$isOpenSideMenu*/
+        2 && button1_class_value !== (button1_class_value = "backdrop " + /*$isOpenSideMenu*/
+        (ctx2[1] ? "open" : "") + " svelte-1fwsz8h")) {
+          attr(button1, "class", button1_class_value);
+        }
+        if (!/*access*/
+        ctx2[0].admin) {
+          if (if_block2) {
+            if_block2.p(ctx2, dirty);
+            if (dirty & /*access*/
+            1) {
+              transition_in(if_block2, 1);
+            }
+          } else {
+            if_block2 = create_if_block_1(ctx2);
+            if_block2.c();
+            transition_in(if_block2, 1);
+            if_block2.m(div1, t31);
+          }
+        } else if (if_block2) {
+          group_outros();
+          transition_out(if_block2, 1, 1, () => {
+            if_block2 = null;
+          });
+          check_outros();
+        }
+        if (
+          /*access*/
+          ctx2[0].admin
+        ) {
+          if (if_block3) {
+            if_block3.p(ctx2, dirty);
+            if (dirty & /*access*/
+            1) {
+              transition_in(if_block3, 1);
+            }
+          } else {
+            if_block3 = create_if_block(ctx2);
+            if_block3.c();
+            transition_in(if_block3, 1);
+            if_block3.m(div1, t32);
+          }
+        } else if (if_block3) {
+          group_outros();
+          transition_out(if_block3, 1, 1, () => {
+            if_block3 = null;
+          });
+          check_outros();
+        }
+        if (!current || dirty & /*$isOpenSideMenu*/
+        2 && aside1_class_value !== (aside1_class_value = "side-menu-mobile " + /*$isOpenSideMenu*/
+        (ctx2[1] ? "open" : "") + " svelte-1fwsz8h")) {
+          attr(aside1, "class", aside1_class_value);
         }
       },
       i(local) {
@@ -5927,6 +6790,13 @@ table tbody tr td .actions .btn:hover svg {
         transition_in(if_block0);
         transition_in(if_block1);
         transition_in(icon4.$.fragment, local);
+        transition_in(icon5.$.fragment, local);
+        transition_in(icon6.$.fragment, local);
+        transition_in(icon7.$.fragment, local);
+        transition_in(icon8.$.fragment, local);
+        transition_in(if_block2);
+        transition_in(if_block3);
+        transition_in(icon9.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -5937,11 +6807,22 @@ table tbody tr td .actions .btn:hover svg {
         transition_out(if_block0);
         transition_out(if_block1);
         transition_out(icon4.$.fragment, local);
+        transition_out(icon5.$.fragment, local);
+        transition_out(icon6.$.fragment, local);
+        transition_out(icon7.$.fragment, local);
+        transition_out(icon8.$.fragment, local);
+        transition_out(if_block2);
+        transition_out(if_block3);
+        transition_out(icon9.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
-          detach(aside);
+          detach(aside0);
+          detach(t17);
+          detach(button1);
+          detach(t18);
+          detach(aside1);
         }
         destroy_component(icon0);
         destroy_component(icon1);
@@ -5952,12 +6833,23 @@ table tbody tr td .actions .btn:hover svg {
         if (if_block1)
           if_block1.d();
         destroy_component(icon4);
+        destroy_component(icon5);
+        destroy_component(icon6);
+        destroy_component(icon7);
+        destroy_component(icon8);
+        if (if_block2)
+          if_block2.d();
+        if (if_block3)
+          if_block3.d();
+        destroy_component(icon9);
         mounted = false;
-        dispose();
+        run_all(dispose);
       }
     };
   }
   function instance2($self, $props, $invalidate) {
+    let $isOpenSideMenu;
+    component_subscribe($self, isOpenSideMenu, ($value) => $invalidate(1, $isOpenSideMenu = $value));
     let { access = (
       /** @type {Access} */
       {}
@@ -5996,11 +6888,12 @@ table tbody tr td .actions .btn:hover svg {
         });
       });
     }
+    const click_handler = () => set_store_value(isOpenSideMenu, $isOpenSideMenu = !$isOpenSideMenu, $isOpenSideMenu);
     $self.$set = ($props2) => {
       if ("access" in $props2)
         $invalidate(0, access = $props2.access);
     };
-    return [access, pathAll, pathLv1, pathLv2, logout];
+    return [access, $isOpenSideMenu, pathAll, pathLv1, pathLv2, logout, click_handler];
   }
   var SideMenu = class extends SvelteComponent {
     constructor(options) {
@@ -6010,83 +6903,114 @@ table tbody tr td .actions .btn:hover svg {
   };
   var SideMenu_default = SideMenu;
 
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/bs/index.js
+  var BsList = { a: { fill: "currentColor", viewBox: "0 0 16 16" }, c: '<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>' };
+
   // _partials/Navbar.svelte
   function create_fragment3(ctx) {
     let header;
     let div0;
-    let t2;
+    let button;
+    let icon0;
+    let t0;
+    let a0;
+    let t3;
     let div1;
     let span0;
-    let t3;
+    let t4;
     let span0_class_value;
     let span0_title_value;
-    let t4;
+    let t5;
     let a1;
     let span1;
-    let t5;
     let t6;
-    let icon;
+    let t7;
+    let icon1;
     let current;
-    icon = new Icon_default({
+    let mounted;
+    let dispose;
+    icon0 = new Icon_default({ props: { src: BsList, size: "25" } });
+    icon1 = new Icon_default({
       props: { src: RiUserFacesUserLine, size: "15" }
     });
     return {
       c() {
         header = element("header");
         div0 = element("div");
-        div0.innerHTML = `<a href="/" class="logo svelte-1ef2ahj"><img src="/assets/house.svg" alt="House" class="svelte-1ef2ahj"/> <h2>KostJC</h2></a>`;
-        t2 = space();
+        button = element("button");
+        create_component(icon0.$.fragment);
+        t0 = space();
+        a0 = element("a");
+        a0.innerHTML = `<img src="/assets/house.svg" alt="House" class="svelte-e25ewh"/> <h2>KostJC</h2>`;
+        t3 = space();
         div1 = element("div");
         span0 = element("span");
-        t3 = text(
+        t4 = text(
           /*role*/
           ctx[1]
         );
-        t4 = space();
+        t5 = space();
         a1 = element("a");
         span1 = element("span");
-        t5 = text(
+        t6 = text(
           /*username*/
           ctx[0]
         );
-        t6 = space();
-        create_component(icon.$.fragment);
-        attr(div0, "class", "label svelte-1ef2ahj");
+        t7 = space();
+        create_component(icon1.$.fragment);
+        attr(button, "type", "button");
+        attr(button, "class", "hamburger svelte-e25ewh");
+        attr(a0, "href", "/");
+        attr(a0, "class", "logo svelte-e25ewh");
+        attr(div0, "class", "label svelte-e25ewh");
         attr(span0, "class", span0_class_value = "role " + /*role*/
-        ctx[1] + " svelte-1ef2ahj");
+        ctx[1] + " svelte-e25ewh");
         attr(span0, "title", span0_title_value = "You are " + /*role*/
         ctx[1]);
         attr(a1, "href", "/user");
-        attr(a1, "class", "user svelte-1ef2ahj");
-        attr(div1, "class", "info svelte-1ef2ahj");
-        attr(header, "class", "svelte-1ef2ahj");
+        attr(a1, "class", "user svelte-e25ewh");
+        attr(div1, "class", "info svelte-e25ewh");
+        attr(header, "class", "svelte-e25ewh");
       },
       m(target, anchor) {
         insert(target, header, anchor);
         append(header, div0);
-        append(header, t2);
+        append(div0, button);
+        mount_component(icon0, button, null);
+        append(div0, t0);
+        append(div0, a0);
+        append(header, t3);
         append(header, div1);
         append(div1, span0);
-        append(span0, t3);
-        append(div1, t4);
+        append(span0, t4);
+        append(div1, t5);
         append(div1, a1);
         append(a1, span1);
-        append(span1, t5);
-        append(a1, t6);
-        mount_component(icon, a1, null);
+        append(span1, t6);
+        append(a1, t7);
+        mount_component(icon1, a1, null);
         current = true;
+        if (!mounted) {
+          dispose = listen(
+            button,
+            "click",
+            /*click_handler*/
+            ctx[3]
+          );
+          mounted = true;
+        }
       },
       p(ctx2, [dirty]) {
         if (!current || dirty & /*role*/
         2)
           set_data(
-            t3,
+            t4,
             /*role*/
             ctx2[1]
           );
         if (!current || dirty & /*role*/
         2 && span0_class_value !== (span0_class_value = "role " + /*role*/
-        ctx2[1] + " svelte-1ef2ahj")) {
+        ctx2[1] + " svelte-e25ewh")) {
           attr(span0, "class", span0_class_value);
         }
         if (!current || dirty & /*role*/
@@ -6097,7 +7021,7 @@ table tbody tr td .actions .btn:hover svg {
         if (!current || dirty & /*username*/
         1)
           set_data(
-            t5,
+            t6,
             /*username*/
             ctx2[0]
           );
@@ -6105,22 +7029,29 @@ table tbody tr td .actions .btn:hover svg {
       i(local) {
         if (current)
           return;
-        transition_in(icon.$.fragment, local);
+        transition_in(icon0.$.fragment, local);
+        transition_in(icon1.$.fragment, local);
         current = true;
       },
       o(local) {
-        transition_out(icon.$.fragment, local);
+        transition_out(icon0.$.fragment, local);
+        transition_out(icon1.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
           detach(header);
         }
-        destroy_component(icon);
+        destroy_component(icon0);
+        destroy_component(icon1);
+        mounted = false;
+        dispose();
       }
     };
   }
   function instance3($self, $props, $invalidate) {
+    let $isOpenSideMenu;
+    component_subscribe($self, isOpenSideMenu, ($value) => $invalidate(2, $isOpenSideMenu = $value));
     let { username = (
       /** @type {string} */
       "unknown"
@@ -6129,13 +7060,14 @@ table tbody tr td .actions .btn:hover svg {
       /** @type {'Staff' | 'Admin' | string} */
       "Staff"
     ) } = $props;
+    const click_handler = () => set_store_value(isOpenSideMenu, $isOpenSideMenu = !$isOpenSideMenu, $isOpenSideMenu);
     $self.$set = ($props2) => {
       if ("username" in $props2)
         $invalidate(0, username = $props2.username);
       if ("role" in $props2)
         $invalidate(1, role = $props2.role);
     };
-    return [username, role];
+    return [username, role, $isOpenSideMenu, click_handler];
   }
   var Navbar = class extends SvelteComponent {
     constructor(options) {
@@ -6159,9 +7091,9 @@ table tbody tr td .actions .btn:hover svg {
         ctx[0]}`;
         t2 = space();
         nav = element("nav");
-        nav.innerHTML = `<a href="/privacy" class="svelte-rnrmrc">Privacy</a> <a href="/tos" class="svelte-rnrmrc">Terms and Conditions</a> <a href="/about" class="svelte-rnrmrc">About Us</a>`;
-        attr(nav, "class", "svelte-rnrmrc");
-        attr(footer, "class", "svelte-rnrmrc");
+        nav.innerHTML = `<a href="/privacy" class="svelte-14solik">Privacy</a> <a href="/tos" class="svelte-14solik">Terms and Conditions</a> <a href="/about" class="svelte-14solik">About Us</a>`;
+        attr(nav, "class", "svelte-14solik");
+        attr(footer, "class", "svelte-14solik");
       },
       m(target, anchor) {
         insert(target, footer, anchor);
@@ -6193,50 +7125,6 @@ table tbody tr td .actions .btn:hover svg {
     }
   };
   var Footer_default = Footer;
-
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/store/index.js
-  var subscriber_queue = [];
-  function writable(value, start = noop) {
-    let stop;
-    const subscribers = /* @__PURE__ */ new Set();
-    function set(new_value) {
-      if (safe_not_equal(value, new_value)) {
-        value = new_value;
-        if (stop) {
-          const run_queue = !subscriber_queue.length;
-          for (const subscriber of subscribers) {
-            subscriber[1]();
-            subscriber_queue.push(subscriber, value);
-          }
-          if (run_queue) {
-            for (let i = 0; i < subscriber_queue.length; i += 2) {
-              subscriber_queue[i][0](subscriber_queue[i + 1]);
-            }
-            subscriber_queue.length = 0;
-          }
-        }
-      }
-    }
-    function update2(fn) {
-      set(fn(value));
-    }
-    function subscribe2(run2, invalidate = noop) {
-      const subscriber = [run2, invalidate];
-      subscribers.add(subscriber);
-      if (subscribers.size === 1) {
-        stop = start(set, update2) || noop;
-      }
-      run2(value);
-      return () => {
-        subscribers.delete(subscriber);
-        if (subscribers.size === 0 && stop) {
-          stop();
-          stop = null;
-        }
-      };
-    }
-    return { set, update: update2, subscribe: subscribe2 };
-  }
 
   // _states/page.js
   var isShrinkMenu = (
@@ -6300,11 +7188,11 @@ table tbody tr td .actions .btn:hover svg {
           default_slot.c();
         t2 = space();
         create_component(footer.$.fragment);
-        attr(main, "class", "content svelte-1paq3kv");
+        attr(main, "class", "content svelte-13l6wr");
         attr(div0, "class", div0_class_value = "root-content " + /*$isShrinkMenu*/
-        (ctx[2] ? "shrink" : "expand") + " svelte-1paq3kv");
-        attr(div1, "class", "root-container svelte-1paq3kv");
-        attr(div2, "class", "root-layout svelte-1paq3kv");
+        (ctx[2] ? "shrink" : "expand") + " svelte-13l6wr");
+        attr(div1, "class", "root-container svelte-13l6wr");
+        attr(div2, "class", "root-layout svelte-13l6wr");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -6364,7 +7252,7 @@ table tbody tr td .actions .btn:hover svg {
         }
         if (!current || dirty & /*$isShrinkMenu*/
         4 && div0_class_value !== (div0_class_value = "root-content " + /*$isShrinkMenu*/
-        (ctx2[2] ? "shrink" : "expand") + " svelte-1paq3kv")) {
+        (ctx2[2] ? "shrink" : "expand") + " svelte-13l6wr")) {
           attr(div0, "class", div0_class_value);
         }
       },
@@ -9671,7 +10559,7 @@ table tbody tr td .actions .btn:hover svg {
       }
     };
   }
-  function create_if_block_3(ctx) {
+  function create_if_block_32(ctx) {
     let div;
     let current;
     const loading_icon_slot_template = (
@@ -9772,7 +10660,7 @@ table tbody tr td .actions .btn:hover svg {
       }
     };
   }
-  function create_if_block_2(ctx) {
+  function create_if_block_22(ctx) {
     let button;
     let current;
     let mounted;
@@ -10196,11 +11084,11 @@ table tbody tr td .actions .btn:hover svg {
     }
     let if_block3 = (
       /*loading*/
-      ctx[5] && create_if_block_3(ctx)
+      ctx[5] && create_if_block_32(ctx)
     );
     let if_block4 = (
       /*showClear*/
-      ctx[34] && create_if_block_2(ctx)
+      ctx[34] && create_if_block_22(ctx)
     );
     let if_block5 = (
       /*showChevron*/
@@ -10537,7 +11425,7 @@ table tbody tr td .actions .btn:hover svg {
               transition_in(if_block3, 1);
             }
           } else {
-            if_block3 = create_if_block_3(ctx2);
+            if_block3 = create_if_block_32(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
             if_block3.m(div2, t5);
@@ -10560,7 +11448,7 @@ table tbody tr td .actions .btn:hover svg {
               transition_in(if_block4, 1);
             }
           } else {
-            if_block4 = create_if_block_2(ctx2);
+            if_block4 = create_if_block_22(ctx2);
             if_block4.c();
             transition_in(if_block4, 1);
             if_block4.m(div2, t6);
@@ -13232,12 +14120,12 @@ table tbody tr td .actions .btn:hover svg {
       }
     };
   }
-  function create_if_block_22(ctx) {
+  function create_if_block_23(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
     let current;
-    const if_block_creators = [create_if_block_32, create_else_block2];
+    const if_block_creators = [create_if_block_33, create_else_block2];
     const if_blocks = [];
     function select_block_type_1(ctx2, dirty) {
       if (
@@ -13828,7 +14716,7 @@ table tbody tr td .actions .btn:hover svg {
       }
     };
   }
-  function create_if_block_32(ctx) {
+  function create_if_block_33(ctx) {
     let label_1;
     let t0;
     let t1;
@@ -13956,7 +14844,7 @@ table tbody tr td .actions .btn:hover svg {
     const if_block_creators = [
       create_if_block3,
       create_if_block_15,
-      create_if_block_22,
+      create_if_block_23,
       create_if_block_42,
       create_if_block_52,
       create_if_block_62,

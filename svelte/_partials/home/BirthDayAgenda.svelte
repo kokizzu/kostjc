@@ -118,4 +118,10 @@
     fill: var(--gray-003);
     z-index: 10;
   }
+
+  @media only screen and (max-width : 768px) {
+    .birthday-agenda .cards {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

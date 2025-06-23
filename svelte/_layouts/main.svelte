@@ -66,4 +66,10 @@
     margin: 0;
     font-size: var(--font-base);
   }
+
+  @media only screen and (max-width : 768px) {
+    .root-layout .root-container .root-content {
+      margin-left: 0;
+    }
+  }
 </style>

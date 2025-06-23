@@ -86,4 +86,10 @@
     gap: 5px;
     z-index: 20;
   }
+
+  @media only screen and (max-width : 768px) {
+    .empty-rooms .cards {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

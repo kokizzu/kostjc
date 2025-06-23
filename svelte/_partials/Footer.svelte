@@ -39,4 +39,10 @@
 		color: var(--blue-005);
 		text-decoration: underline;
 	}
+
+	@media only screen and (max-width : 768px) {
+		footer {
+			flex-direction: column;
+		}
+	}
 </style>
