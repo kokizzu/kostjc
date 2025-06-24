@@ -439,4 +439,14 @@
     -webkit-line-clamp: 1;
     line-clamp: 1;
   }
+
+  @media only screen and (max-width : 768px) {
+    .popup-container {
+      padding: 10px;
+    }
+
+    .popup-container .popup {
+      width: 100%;
+    }
+  }
 </style>

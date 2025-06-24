@@ -147,85 +147,85 @@
     </div>
   </LayoutMain>
 {:else}
-<section class="auth-section">
-  <div class="main-container">
-    <div class="title-container">
-      <p>KostJC</p>
-      <h1>{Mode.split( '_' ).join( ' ' )}</h1>
-    </div>
-    <div class="form-container">
-      <div class="input-container">
-        {#if Mode === ModeLogin || Mode === ModeRegister}
-          <InputBox
-            id="email"
-            label="Email"
-            type="text"
-            bind:value={email}
-            autocomplete="on"
-          />
-        {/if}
-
-        {#if Mode === ModeLogin || Mode === ModeRegister}
-          <InputBox
-            id="password"
-            label="Password"
-            type="password"
-            bind:value={password}
-          />
-        {/if}
-
-        {#if Mode === ModeRegister}
-          <InputBox
-            id="confirmPass"
-            label="Confirm Password"
-            type="password"
-            bind:value={confirmPassword}
-          />
-        {/if}
+  <section class="auth-section">
+    <div class="main-container">
+      <div class="title-container">
+        <p>KostJC</p>
+        <h1>{Mode.split( '_' ).join( ' ' )}</h1>
       </div>
-      <div class="button-container">
-        {#if Mode===ModeRegister}
-          <button on:click={guestRegister}>
-            {#if isSubmitting===true}
-              <Icon className="spin" color='#FFF' size="15" src={FaSolidCircleNotch}/>
-            {/if}
-            {#if isSubmitting===false}
-              <span>Register</span>
-            {/if}
-          </button>
-        {/if}
-        {#if Mode===ModeLogin}
-          <button on:click={guestLogin}>
-            {#if isSubmitting===true}
-              <Icon className="spin" color='#FFF' size="15" src={FaSolidCircleNotch}/>
-            {/if}
-            {#if isSubmitting===false}
-              <span>Login</span>
-            {/if}
-          </button>
-        {/if}
-      </div>
-      <!-- Oauth Buttons -->
-      {#if Mode===ModeRegister || Mode===ModeLogin}
-        <div class="oauth-container">
-          <div class="or-separator">
-            <span/>
-            <p>or</p>
-            <span/>
-          </div>
+      <div class="form-container">
+        <div class="input-container">
+          {#if Mode === ModeLogin || Mode === ModeRegister}
+            <InputBox
+              id="email"
+              label="Email"
+              type="text"
+              bind:value={email}
+              autocomplete="on"
+            />
+          {/if}
+
+          {#if Mode === ModeLogin || Mode === ModeRegister}
+            <InputBox
+              id="password"
+              label="Password"
+              type="password"
+              bind:value={password}
+            />
+          {/if}
+
+          {#if Mode === ModeRegister}
+            <InputBox
+              id="confirmPass"
+              label="Confirm Password"
+              type="password"
+              bind:value={confirmPassword}
+            />
+          {/if}
         </div>
-      {/if}
-      <div class="foot-auth">
-        {#if Mode!==ModeRegister}
-          <p>Have no account? <a href={`#${ModeRegister}`} on:click={() => (Mode = ModeRegister)}>Register</a></p>
+        <div class="button-container">
+          {#if Mode===ModeRegister}
+            <button on:click={guestRegister}>
+              {#if isSubmitting===true}
+                <Icon className="spin" color='#FFF' size="15" src={FaSolidCircleNotch}/>
+              {/if}
+              {#if isSubmitting===false}
+                <span>Register</span>
+              {/if}
+            </button>
+          {/if}
+          {#if Mode===ModeLogin}
+            <button on:click={guestLogin}>
+              {#if isSubmitting===true}
+                <Icon className="spin" color='#FFF' size="15" src={FaSolidCircleNotch}/>
+              {/if}
+              {#if isSubmitting===false}
+                <span>Login</span>
+              {/if}
+            </button>
+          {/if}
+        </div>
+        <!-- Oauth Buttons -->
+        {#if Mode===ModeRegister || Mode===ModeLogin}
+          <div class="oauth-container">
+            <div class="or-separator">
+              <span/>
+              <p>or</p>
+              <span/>
+            </div>
+          </div>
         {/if}
-        {#if Mode!==ModeLogin}
-          <p>Already have account? <a href={`#${ModeLogin}`} on:click={() => (Mode = ModeLogin)}>Login</a></p>
-        {/if}
+        <div class="foot-auth">
+          {#if Mode!==ModeRegister}
+            <p>Have no account? <a href={`#${ModeRegister}`} on:click={() => (Mode = ModeRegister)}>Register</a></p>
+          {/if}
+          {#if Mode!==ModeLogin}
+            <p>Already have account? <a href={`#${ModeLogin}`} on:click={() => (Mode = ModeLogin)}>Login</a></p>
+          {/if}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 {/if}
 
 <style>
@@ -389,5 +389,15 @@
   .auth-section .main-container .form-container .foot-auth a:hover {
     color: var(--blue-005);
     text-decoration: underline;
+  }
+
+  @media only screen and (max-width : 768px) {
+    .auth-section {
+      background-color: #FFF;
+    }
+
+    .auth-section .main-container {
+      border: none;
+    }
   }
 </style>

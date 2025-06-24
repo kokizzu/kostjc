@@ -125,6 +125,13 @@
     padding: 0;
   }
 
+  header .label button.hamburger:focus,
+  header .label button.hamburger:hover,
+  header .label button.hamburger:active {
+    outline: none;
+    background-color: transparent;
+  }
+
   @media only screen and (max-width : 768px) {
     header {
       padding: 0 20px;
