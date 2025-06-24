@@ -1158,6 +1158,7 @@ type AvailableRoom struct {
 	RoomName       string `json:"roomName"`
 	AvailableAt    string `json:"availableAt"`
 	IsAvailableNow bool   `json:"isAvailableNow"`
+	LastTenant     string `json:"lastTenant"`
 }
 
 func (r *Rooms) FindAvailableRooms() (out []AvailableRoom) {
@@ -1175,9 +1176,11 @@ WITH "all_rooms" AS (
 		MAX("bookings"."dateEnd") AS "maxDateEnd",
 		"rooms"."lastUseAt" AS "lastUseAt",
 		"rooms"."currentTenantId" AS "currentTenantId",
-		"rooms"."deletedAt" AS "deletedAt"
+		"rooms"."deletedAt" AS "deletedAt",
+		"tenants"."tenantName" AS "tenantName"
 	FROM "rooms"
 	LEFT JOIN "bookings" ON "rooms"."id" = "bookings"."roomId"
+	LEFT JOIN "tenants" ON "rooms"."currentTenantId" = "tenants"."id"
 	GROUP BY "rooms"."roomName"
 )
 
@@ -1187,7 +1190,8 @@ SELECT
 	CASE
 		WHEN "dateEnd" <= '` + dateTimeNow + `'
 		THEN 'TRUE'
-	ELSE 'FALSE' END AS "isAvailable"
+	ELSE 'FALSE' END AS "isAvailable",
+	"tenantName"
 FROM "all_rooms"
 WHERE
 	(
@@ -1196,17 +1200,19 @@ WHERE
 		OR "currentTenantId" = 0
 	)
 	AND "deletedAt" = 0
-ORDER BY "roomName" ASC`
+ORDER BY "dateEnd" ASC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 3 {
+		if len(row) == 4 {
 			roomName := X.ToS(row[0])
 			availableAt := X.ToS(row[1])
 			isAvailableNow := X.ToBool(row[2])
+			tenantName := X.ToS(row[3])
 			out = append(out, AvailableRoom{
 				RoomName:       roomName,
 				AvailableAt:    availableAt,
 				IsAvailableNow: isAvailableNow,
+				LastTenant:     tenantName,
 			})
 		}
 	})
