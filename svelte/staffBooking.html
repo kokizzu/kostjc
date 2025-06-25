@@ -6991,27 +6991,27 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t9;
     let span3;
     let t11;
+    let a4;
+    let icon4;
     let t12;
-    let t13;
     let span4;
     let t14;
-    let nav1;
-    let button0;
-    let icon4;
     let t15;
+    let t16;
     let span5;
     let t17;
+    let nav1;
+    let button0;
+    let icon5;
+    let t18;
+    let span6;
+    let t20;
     let button1;
     let button1_class_value;
-    let t18;
+    let t21;
     let aside1;
     let div1;
     let nav2;
-    let a4;
-    let icon5;
-    let t19;
-    let span6;
-    let t21;
     let a5;
     let icon6;
     let t22;
@@ -7032,15 +7032,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t31;
     let span10;
     let t33;
+    let a9;
+    let icon10;
     let t34;
-    let t35;
     let span11;
     let t36;
+    let t37;
+    let t38;
+    let span12;
+    let t39;
     let nav3;
     let button2;
-    let icon10;
-    let t37;
-    let span12;
+    let icon11;
+    let t40;
+    let span13;
     let aside1_class_value;
     let current;
     let mounted;
@@ -7055,6 +7060,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon3 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon4 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block0 = !/*access*/
@@ -7063,14 +7071,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*access*/
       ctx[0].admin && create_if_block_2(ctx)
     );
-    icon4 = new Icon_default({
+    icon5 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
-    icon5 = new Icon_default({
-      props: { src: RiBuildingsHome2Line, size: "20" }
-    });
     icon6 = new Icon_default({
-      props: { src: RiDocumentFileChartLine, size: "20" }
+      props: { src: RiBuildingsHome2Line, size: "20" }
     });
     icon7 = new Icon_default({
       props: { src: RiDocumentFileChartLine, size: "20" }
@@ -7079,6 +7084,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon9 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon10 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block2 = !/*access*/
@@ -7087,7 +7095,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*access*/
       ctx[0].admin && create_if_block(ctx)
     );
-    icon10 = new Icon_default({
+    icon11 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
     return {
@@ -7117,72 +7125,78 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon3.$.fragment);
         t9 = space();
         span3 = element("span");
-        span3.textContent = "Profile";
+        span3.textContent = "Revenue Report";
         t11 = space();
+        a4 = element("a");
+        create_component(icon4.$.fragment);
+        t12 = space();
+        span4 = element("span");
+        span4.textContent = "Profile";
+        t14 = space();
         if (if_block0)
           if_block0.c();
-        t12 = space();
+        t15 = space();
         if (if_block1)
           if_block1.c();
-        t13 = space();
-        span4 = element("span");
-        t14 = space();
+        t16 = space();
+        span5 = element("span");
+        t17 = space();
         nav1 = element("nav");
         button0 = element("button");
-        create_component(icon4.$.fragment);
-        t15 = space();
-        span5 = element("span");
-        span5.textContent = "Logout";
-        t17 = space();
-        button1 = element("button");
+        create_component(icon5.$.fragment);
         t18 = space();
+        span6 = element("span");
+        span6.textContent = "Logout";
+        t20 = space();
+        button1 = element("button");
+        t21 = space();
         aside1 = element("aside");
         div1 = element("div");
         nav2 = element("nav");
-        a4 = element("a");
-        create_component(icon5.$.fragment);
-        t19 = space();
-        span6 = element("span");
-        span6.textContent = "Home";
-        t21 = space();
         a5 = element("a");
         create_component(icon6.$.fragment);
         t22 = space();
         span7 = element("span");
-        span7.textContent = "Occupancy Report";
+        span7.textContent = "Home";
         t24 = space();
         a6 = element("a");
         create_component(icon7.$.fragment);
         t25 = space();
         span8 = element("span");
-        span8.textContent = "Missing Data Report";
+        span8.textContent = "Occupancy Report";
         t27 = space();
         a7 = element("a");
         create_component(icon8.$.fragment);
         t28 = space();
         span9 = element("span");
-        span9.textContent = "Revenue Report";
+        span9.textContent = "Missing Data Report";
         t30 = space();
         a8 = element("a");
         create_component(icon9.$.fragment);
         t31 = space();
         span10 = element("span");
-        span10.textContent = "Profile";
+        span10.textContent = "Revenue Report";
         t33 = space();
+        a9 = element("a");
+        create_component(icon10.$.fragment);
+        t34 = space();
+        span11 = element("span");
+        span11.textContent = "Profile";
+        t36 = space();
         if (if_block2)
           if_block2.c();
-        t34 = space();
+        t37 = space();
         if (if_block3)
           if_block3.c();
-        t35 = space();
-        span11 = element("span");
-        t36 = space();
+        t38 = space();
+        span12 = element("span");
+        t39 = space();
         nav3 = element("nav");
         button2 = element("button");
-        create_component(icon10.$.fragment);
-        t37 = space();
-        span12 = element("span");
-        span12.textContent = "Logout";
+        create_component(icon11.$.fragment);
+        t40 = space();
+        span13 = element("span");
+        span13.textContent = "Logout";
         attr(a0, "href", "/");
         attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -7207,16 +7221,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathAll*/
           ctx[2] === "/staff/missingDataReport"
         );
-        attr(a3, "href", "/user");
+        attr(a3, "href", "/staff/revenueReport");
         attr(a3, "class", "svelte-1fwsz8h");
         toggle_class(
           a3,
           "active",
           /*pathAll*/
+          ctx[2] === "/staff/revenueReport"
+        );
+        attr(a4, "href", "/user");
+        attr(a4, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a4,
+          "active",
+          /*pathAll*/
           ctx[2] === "/user"
         );
         attr(nav0, "class", "nav-menu svelte-1fwsz8h");
-        attr(span4, "class", "separator svelte-1fwsz8h");
+        attr(span5, "class", "separator svelte-1fwsz8h");
         attr(button0, "class", "red svelte-1fwsz8h");
         attr(nav1, "class", "nav-menu svelte-1fwsz8h");
         attr(div0, "class", "container svelte-1fwsz8h");
@@ -7224,48 +7246,48 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(button1, "aria-label", "backdrop toggle menu");
         attr(button1, "class", button1_class_value = "backdrop " + /*$isOpenSideMenu*/
         (ctx[1] ? "open" : "") + " svelte-1fwsz8h");
-        attr(a4, "href", "/");
-        attr(a4, "class", "svelte-1fwsz8h");
-        toggle_class(
-          a4,
-          "active",
-          /*pathLv1*/
-          ctx[3] === ""
-        );
-        attr(a5, "href", "/staff/occupancyReport");
+        attr(a5, "href", "/");
         attr(a5, "class", "svelte-1fwsz8h");
         toggle_class(
           a5,
           "active",
-          /*pathAll*/
-          ctx[2] === "/staff/occupancyReport"
+          /*pathLv1*/
+          ctx[3] === ""
         );
-        attr(a6, "href", "/staff/missingDataReport");
+        attr(a6, "href", "/staff/occupancyReport");
         attr(a6, "class", "svelte-1fwsz8h");
         toggle_class(
           a6,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/missingDataReport"
+          ctx[2] === "/staff/occupancyReport"
         );
-        attr(a7, "href", "/staff/revenueReport");
+        attr(a7, "href", "/staff/missingDataReport");
         attr(a7, "class", "svelte-1fwsz8h");
         toggle_class(
           a7,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/revenueReport"
+          ctx[2] === "/staff/missingDataReport"
         );
-        attr(a8, "href", "/user");
+        attr(a8, "href", "/staff/revenueReport");
         attr(a8, "class", "svelte-1fwsz8h");
         toggle_class(
           a8,
           "active",
           /*pathAll*/
+          ctx[2] === "/staff/revenueReport"
+        );
+        attr(a9, "href", "/user");
+        attr(a9, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a9,
+          "active",
+          /*pathAll*/
           ctx[2] === "/user"
         );
         attr(nav2, "class", "nav-menu svelte-1fwsz8h");
-        attr(span11, "class", "separator svelte-1fwsz8h");
+        attr(span12, "class", "separator svelte-1fwsz8h");
         attr(button2, "class", "red svelte-1fwsz8h");
         attr(nav3, "class", "nav-menu svelte-1fwsz8h");
         attr(div1, "class", "container svelte-1fwsz8h");
@@ -7295,31 +7317,31 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon3, a3, null);
         append(a3, t9);
         append(a3, span3);
-        append(div0, t11);
+        append(nav0, t11);
+        append(nav0, a4);
+        mount_component(icon4, a4, null);
+        append(a4, t12);
+        append(a4, span4);
+        append(div0, t14);
         if (if_block0)
           if_block0.m(div0, null);
-        append(div0, t12);
+        append(div0, t15);
         if (if_block1)
           if_block1.m(div0, null);
-        append(div0, t13);
-        append(div0, span4);
-        append(div0, t14);
+        append(div0, t16);
+        append(div0, span5);
+        append(div0, t17);
         append(div0, nav1);
         append(nav1, button0);
-        mount_component(icon4, button0, null);
-        append(button0, t15);
-        append(button0, span5);
-        insert(target, t17, anchor);
+        mount_component(icon5, button0, null);
+        append(button0, t18);
+        append(button0, span6);
+        insert(target, t20, anchor);
         insert(target, button1, anchor);
-        insert(target, t18, anchor);
+        insert(target, t21, anchor);
         insert(target, aside1, anchor);
         append(aside1, div1);
         append(div1, nav2);
-        append(nav2, a4);
-        mount_component(icon5, a4, null);
-        append(a4, t19);
-        append(a4, span6);
-        append(nav2, t21);
         append(nav2, a5);
         mount_component(icon6, a5, null);
         append(a5, t22);
@@ -7339,20 +7361,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon9, a8, null);
         append(a8, t31);
         append(a8, span10);
-        append(div1, t33);
+        append(nav2, t33);
+        append(nav2, a9);
+        mount_component(icon10, a9, null);
+        append(a9, t34);
+        append(a9, span11);
+        append(div1, t36);
         if (if_block2)
           if_block2.m(div1, null);
-        append(div1, t34);
+        append(div1, t37);
         if (if_block3)
           if_block3.m(div1, null);
-        append(div1, t35);
-        append(div1, span11);
-        append(div1, t36);
+        append(div1, t38);
+        append(div1, span12);
+        append(div1, t39);
         append(div1, nav3);
         append(nav3, button2);
-        mount_component(icon10, button2, null);
-        append(button2, t37);
-        append(button2, span12);
+        mount_component(icon11, button2, null);
+        append(button2, t40);
+        append(button2, span13);
         current = true;
         if (!mounted) {
           dispose = [
@@ -7391,7 +7418,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block0 = create_if_block_3(ctx2);
             if_block0.c();
             transition_in(if_block0, 1);
-            if_block0.m(div0, t12);
+            if_block0.m(div0, t15);
           }
         } else if (if_block0) {
           group_outros();
@@ -7414,7 +7441,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block1 = create_if_block_2(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
-            if_block1.m(div0, t13);
+            if_block1.m(div0, t16);
           }
         } else if (if_block1) {
           group_outros();
@@ -7440,7 +7467,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block2 = create_if_block_1(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
-            if_block2.m(div1, t34);
+            if_block2.m(div1, t37);
           }
         } else if (if_block2) {
           group_outros();
@@ -7463,7 +7490,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block3 = create_if_block(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
-            if_block3.m(div1, t35);
+            if_block3.m(div1, t38);
           }
         } else if (if_block3) {
           group_outros();
@@ -7485,17 +7512,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_in(icon1.$.fragment, local);
         transition_in(icon2.$.fragment, local);
         transition_in(icon3.$.fragment, local);
+        transition_in(icon4.$.fragment, local);
         transition_in(if_block0);
         transition_in(if_block1);
-        transition_in(icon4.$.fragment, local);
         transition_in(icon5.$.fragment, local);
         transition_in(icon6.$.fragment, local);
         transition_in(icon7.$.fragment, local);
         transition_in(icon8.$.fragment, local);
         transition_in(icon9.$.fragment, local);
+        transition_in(icon10.$.fragment, local);
         transition_in(if_block2);
         transition_in(if_block3);
-        transition_in(icon10.$.fragment, local);
+        transition_in(icon11.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -7503,46 +7531,48 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_out(icon1.$.fragment, local);
         transition_out(icon2.$.fragment, local);
         transition_out(icon3.$.fragment, local);
+        transition_out(icon4.$.fragment, local);
         transition_out(if_block0);
         transition_out(if_block1);
-        transition_out(icon4.$.fragment, local);
         transition_out(icon5.$.fragment, local);
         transition_out(icon6.$.fragment, local);
         transition_out(icon7.$.fragment, local);
         transition_out(icon8.$.fragment, local);
         transition_out(icon9.$.fragment, local);
+        transition_out(icon10.$.fragment, local);
         transition_out(if_block2);
         transition_out(if_block3);
-        transition_out(icon10.$.fragment, local);
+        transition_out(icon11.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
           detach(aside0);
-          detach(t17);
+          detach(t20);
           detach(button1);
-          detach(t18);
+          detach(t21);
           detach(aside1);
         }
         destroy_component(icon0);
         destroy_component(icon1);
         destroy_component(icon2);
         destroy_component(icon3);
+        destroy_component(icon4);
         if (if_block0)
           if_block0.d();
         if (if_block1)
           if_block1.d();
-        destroy_component(icon4);
         destroy_component(icon5);
         destroy_component(icon6);
         destroy_component(icon7);
         destroy_component(icon8);
         destroy_component(icon9);
+        destroy_component(icon10);
         if (if_block2)
           if_block2.d();
         if (if_block3)
           if_block3.d();
-        destroy_component(icon10);
+        destroy_component(icon11);
         mounted = false;
         run_all(dispose);
       }

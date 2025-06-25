@@ -1281,3 +1281,49 @@ ORDER BY "rooms"."roomName" ASC`
 
 	return
 }
+
+type RevenueReport struct {
+	YearMonth   string `json:"yearMonth"`
+	Booking     string `json:"booking"`
+	RevenueIDR  int64  `json:"revenueIDR"`
+	DonationIDR int64  `json:"donationIDR"`
+}
+
+func (b *Bookings) FindRevenueReport(yearMonth string) (out []RevenueReport) {
+	const comment = `-- Bookings) FindRevenueReport`
+
+	if !isValidYearMonth(yearMonth) {
+		yearMonth = time.Now().Format(DateFormatYYYYMM)
+	}
+	query := comment + `
+SELECT
+	SUBSTR("dateStart", 1, 7) AS "yearMonth",
+	"bookings"."id" AS "booking",
+	CASE WHEN "paymentMethod" != 'Donation'
+		THEN COALESCE(SUM("payments"."paidIDR"), 0)
+	END AS "revenueIDR",
+	CASE WHEN "paymentMethod" = 'Donation'
+		THEN COALESCE(SUM("payments"."paidIDR"), 0)
+	END AS "donationIDR"
+FROM "bookings"
+LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
+WHERE "bookings"."deletedAt" = 0
+GROUP BY "bookings"."id", "yearMonth"`
+
+	b.Adapter.QuerySql(query, func(row []any) {
+		if len(row) == 4 {
+			yearMonth := X.ToS(row[0])
+			booking := X.ToS(row[1])
+			revenueIDR := X.ToI(row[2])
+			donationIDR := X.ToI(row[3])
+			out = append(out, RevenueReport{
+				YearMonth:   yearMonth,
+				Booking:     booking,
+				RevenueIDR:  revenueIDR,
+				DonationIDR: donationIDR,
+			})
+		}
+	})
+
+	return
+}
