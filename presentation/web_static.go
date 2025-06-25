@@ -94,6 +94,26 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.StaffRevenueReportAction, func(ctx *fiber.Ctx) error {
+		var in domain.StaffRevenueReportIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffRevenueReportAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		return views.RenderStaffRevenueReport(ctx, M.SX{
+			`title`:    `KostJC | Revenue Report`,
+			`user`:     user,
+			`segments`: segments,
+		})
+	})
+
 	fw.Get(`/`+domain.StaffMissingDataReportAction, func(ctx *fiber.Ctx) error {
 		var in domain.StaffMissingDataReportIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffMissingDataReportAction)

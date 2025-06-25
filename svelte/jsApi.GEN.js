@@ -2806,6 +2806,134 @@ exports.StaffOccupancyReport = async function StaffOccupancyReport( i, cb ) {
 }
 
 /**
+ * @typedef {Object} StaffRevenueReportIn
+ */
+const StaffRevenueReportIn = {
+}
+/**
+ * @typedef {Object} StaffRevenueReportOut
+ * @property {number} user.id
+ * @property {String} user.email
+ * @property {String} user.password
+ * @property {number} user.createdAt
+ * @property {number} user.createdBy
+ * @property {number} user.updatedAt
+ * @property {number} user.updatedBy
+ * @property {number} user.deletedAt
+ * @property {number} user.passwordSetAt
+ * @property {String} user.secretCode
+ * @property {number} user.secretCodeAt
+ * @property {number} user.verifiedAt
+ * @property {number} user.lastLoginAt
+ * @property {String} user.fullName
+ * @property {String} user.userName
+ * @property {String} user.role
+ * @property {Object} segments
+ */
+const StaffRevenueReportOut = {
+  user: { // rqAuth.Users
+    id: 0, // uint64
+    email: '', // string
+    password: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    passwordSetAt: 0, // int64
+    secretCode: '', // string
+    secretCodeAt: 0, // int64
+    verifiedAt: 0, // int64
+    lastLoginAt: 0, // int64
+    fullName: '', // string
+    userName: '', // string
+    role: '', // string
+  }, // rqAuth.Users
+  segments: { // M.SB
+  }, // M.SB
+}
+/**
+ * @callback StaffRevenueReportCallback
+ * @param {StaffRevenueReportOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {StaffRevenueReportIn} i
+ * @param {StaffRevenueReportCallback} cb
+ * @returns {Promise}
+ */
+exports.StaffRevenueReport = async function StaffRevenueReport( i, cb ) {
+  return await axios.post( '/staff/revenueReport', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} StaffSalesIn
+ * @property {String} staffData
+ */
+const StaffSalesIn = {
+  staffData: '', // string
+}
+/**
+ * @typedef {Object} StaffSalesOut
+ * @property {number} user.id
+ * @property {String} user.email
+ * @property {String} user.password
+ * @property {number} user.createdAt
+ * @property {number} user.createdBy
+ * @property {number} user.updatedAt
+ * @property {number} user.updatedBy
+ * @property {number} user.deletedAt
+ * @property {number} user.passwordSetAt
+ * @property {String} user.secretCode
+ * @property {number} user.secretCodeAt
+ * @property {number} user.verifiedAt
+ * @property {number} user.lastLoginAt
+ * @property {String} user.fullName
+ * @property {String} user.userName
+ * @property {String} user.role
+ * @property {Object} segments
+ */
+const StaffSalesOut = {
+  user: { // rqAuth.Users
+    id: 0, // uint64
+    email: '', // string
+    password: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    passwordSetAt: 0, // int64
+    secretCode: '', // string
+    secretCodeAt: 0, // int64
+    verifiedAt: 0, // int64
+    lastLoginAt: 0, // int64
+    fullName: '', // string
+    userName: '', // string
+    role: '', // string
+  }, // rqAuth.Users
+  segments: { // M.SB
+  }, // M.SB
+}
+/**
+ * @callback StaffSalesCallback
+ * @param {StaffSalesOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {StaffSalesIn} i
+ * @param {StaffSalesCallback} cb
+ * @returns {Promise}
+ */
+exports.StaffSales = async function StaffSales( i, cb ) {
+  return await axios.post( '/staff/sales', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} UserLogoutIn
  */
 const UserLogoutIn = {

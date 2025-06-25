@@ -290,6 +290,26 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// StaffRevenueReport
+	fw.Post("/"+domain.StaffRevenueReportAction, func(c *fiber.Ctx) error {
+		in := domain.StaffRevenueReportIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.StaffRevenueReportAction); err != nil {
+			return nil
+		}
+		out := d.StaffRevenueReport(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// StaffSales
+	fw.Post("/"+domain.StaffSalesAction, func(c *fiber.Ctx) error {
+		in := domain.StaffSalesIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.StaffSalesAction); err != nil {
+			return nil
+		}
+		out := d.StaffSales(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// UserLogout
 	fw.Post("/"+domain.UserLogoutAction, func(c *fiber.Ctx) error {
 		in := domain.UserLogoutIn{}

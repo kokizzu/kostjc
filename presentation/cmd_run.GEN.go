@@ -236,6 +236,22 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.StaffOccupancyReport(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.StaffRevenueReportAction:
+		in := domain.StaffRevenueReportIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.StaffRevenueReport(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.StaffSalesAction:
+		in := domain.StaffSalesIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.StaffSales(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.UserLogoutAction:
 		in := domain.UserLogoutIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

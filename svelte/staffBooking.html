@@ -4566,6 +4566,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       exports.StaffOccupancyReport = async function StaffOccupancyReport(i, cb) {
         return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.StaffRevenueReport = async function StaffRevenueReport(i, cb) {
+        return await axios.post("/staff/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.StaffSales = async function StaffSales(i, cb) {
+        return await axios.post("/staff/sales", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.UserLogout = async function UserLogout2(i, cb) {
         return await axios.post("/user/logout", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -7021,15 +7027,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t28;
     let span9;
     let t30;
+    let a8;
+    let icon9;
     let t31;
-    let t32;
     let span10;
     let t33;
+    let t34;
+    let t35;
+    let span11;
+    let t36;
     let nav3;
     let button2;
-    let icon9;
-    let t34;
-    let span11;
+    let icon10;
+    let t37;
+    let span12;
     let aside1_class_value;
     let current;
     let mounted;
@@ -7065,6 +7076,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon8 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon9 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block2 = !/*access*/
@@ -7073,7 +7087,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*access*/
       ctx[0].admin && create_if_block(ctx)
     );
-    icon9 = new Icon_default({
+    icon10 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
     return {
@@ -7147,22 +7161,28 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon8.$.fragment);
         t28 = space();
         span9 = element("span");
-        span9.textContent = "Profile";
+        span9.textContent = "Revenue Report";
         t30 = space();
+        a8 = element("a");
+        create_component(icon9.$.fragment);
+        t31 = space();
+        span10 = element("span");
+        span10.textContent = "Profile";
+        t33 = space();
         if (if_block2)
           if_block2.c();
-        t31 = space();
+        t34 = space();
         if (if_block3)
           if_block3.c();
-        t32 = space();
-        span10 = element("span");
-        t33 = space();
+        t35 = space();
+        span11 = element("span");
+        t36 = space();
         nav3 = element("nav");
         button2 = element("button");
-        create_component(icon9.$.fragment);
-        t34 = space();
-        span11 = element("span");
-        span11.textContent = "Logout";
+        create_component(icon10.$.fragment);
+        t37 = space();
+        span12 = element("span");
+        span12.textContent = "Logout";
         attr(a0, "href", "/");
         attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -7228,16 +7248,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathAll*/
           ctx[2] === "/staff/missingDataReport"
         );
-        attr(a7, "href", "/user");
+        attr(a7, "href", "/staff/revenueReport");
         attr(a7, "class", "svelte-1fwsz8h");
         toggle_class(
           a7,
           "active",
           /*pathAll*/
+          ctx[2] === "/staff/revenueReport"
+        );
+        attr(a8, "href", "/user");
+        attr(a8, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a8,
+          "active",
+          /*pathAll*/
           ctx[2] === "/user"
         );
         attr(nav2, "class", "nav-menu svelte-1fwsz8h");
-        attr(span10, "class", "separator svelte-1fwsz8h");
+        attr(span11, "class", "separator svelte-1fwsz8h");
         attr(button2, "class", "red svelte-1fwsz8h");
         attr(nav3, "class", "nav-menu svelte-1fwsz8h");
         attr(div1, "class", "container svelte-1fwsz8h");
@@ -7306,20 +7334,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon8, a7, null);
         append(a7, t28);
         append(a7, span9);
-        append(div1, t30);
+        append(nav2, t30);
+        append(nav2, a8);
+        mount_component(icon9, a8, null);
+        append(a8, t31);
+        append(a8, span10);
+        append(div1, t33);
         if (if_block2)
           if_block2.m(div1, null);
-        append(div1, t31);
+        append(div1, t34);
         if (if_block3)
           if_block3.m(div1, null);
-        append(div1, t32);
-        append(div1, span10);
-        append(div1, t33);
+        append(div1, t35);
+        append(div1, span11);
+        append(div1, t36);
         append(div1, nav3);
         append(nav3, button2);
-        mount_component(icon9, button2, null);
-        append(button2, t34);
-        append(button2, span11);
+        mount_component(icon10, button2, null);
+        append(button2, t37);
+        append(button2, span12);
         current = true;
         if (!mounted) {
           dispose = [
@@ -7407,7 +7440,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block2 = create_if_block_1(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
-            if_block2.m(div1, t31);
+            if_block2.m(div1, t34);
           }
         } else if (if_block2) {
           group_outros();
@@ -7430,7 +7463,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block3 = create_if_block(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
-            if_block3.m(div1, t32);
+            if_block3.m(div1, t35);
           }
         } else if (if_block3) {
           group_outros();
@@ -7459,9 +7492,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_in(icon6.$.fragment, local);
         transition_in(icon7.$.fragment, local);
         transition_in(icon8.$.fragment, local);
+        transition_in(icon9.$.fragment, local);
         transition_in(if_block2);
         transition_in(if_block3);
-        transition_in(icon9.$.fragment, local);
+        transition_in(icon10.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -7476,9 +7510,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_out(icon6.$.fragment, local);
         transition_out(icon7.$.fragment, local);
         transition_out(icon8.$.fragment, local);
+        transition_out(icon9.$.fragment, local);
         transition_out(if_block2);
         transition_out(if_block3);
-        transition_out(icon9.$.fragment, local);
+        transition_out(icon10.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -7502,11 +7537,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         destroy_component(icon6);
         destroy_component(icon7);
         destroy_component(icon8);
+        destroy_component(icon9);
         if (if_block2)
           if_block2.d();
         if (if_block3)
           if_block3.d();
-        destroy_component(icon9);
+        destroy_component(icon10);
         mounted = false;
         run_all(dispose);
       }
