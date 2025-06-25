@@ -738,4 +738,29 @@
     border: 1px solid var(--gray-004);
     cursor: not-allowed;
   }
+
+  @media only screen and (max-width: 768px) {
+    .popup-container {
+      padding: 10px;
+    }
+
+    .popup-container .popup {
+      width: 100%;
+    }
+    
+    .table-root .table-container {
+      overflow-x: scroll;
+    }
+
+    .table-root .pagination-container {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .table-root .pagination-container .pagination {
+      gap: 2px;
+      width: 100%;
+      justify-content: center;
+    }
+  }
 </style>

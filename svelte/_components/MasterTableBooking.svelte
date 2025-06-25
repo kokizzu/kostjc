@@ -644,7 +644,7 @@
       </tbody>
     </table>
   </div>
-  <div class="pagination_container">
+  <div class="pagination-container">
     <div class="filter">
       <div class="showing">
         <p>Showing <span class="text-blue">{totalRowsCurrent}</span> /</p>
@@ -1124,7 +1124,7 @@
     fill: var(--red-005);
   }
 
-  .table-root .pagination_container {
+  .table-root .pagination-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -1132,20 +1132,20 @@
     padding: 15px 15px 0 15px;
   }
 
-  .table-root .pagination_container .filter {
+  .table-root .pagination-container .filter {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
   }
 
-  .table-root .pagination_container .filter .row_to_show {
+  .table-root .pagination-container .filter .row_to_show {
     position: relative;
     width: fit-content;
     height: fit-content;
   }
 
-  .table-root .pagination_container .filter .row_to_show .btn {
+  .table-root .pagination-container .filter .row_to_show .btn {
     border: none;
     background-color: var(--blue-transparent);
     color: var(--blue-005);
@@ -1162,11 +1162,11 @@
     cursor: pointer;
   }
 
-  .table-root .pagination_container .filter .row_to_show .btn:hover {
+  .table-root .pagination-container .filter .row_to_show .btn:hover {
     background-color: var(--blue-002);
   }
 
-  .table-root .pagination_container .filter .row_to_show .rows {
+  .table-root .pagination-container .filter .row_to_show .rows {
     display: flex;
     flex-direction: column-reverse;
     position: absolute;
@@ -1177,7 +1177,7 @@
     background-color: #fff;
   }
 
-  .table-root .pagination_container .filter .row_to_show .rows button {
+  .table-root .pagination-container .filter .row_to_show .rows button {
     border: none;
     background-color: transparent;
     padding: 5px;
@@ -1185,12 +1185,12 @@
     color: var(--gray-007);
   }
 
-  .table-root .pagination_container .filter .row_to_show .rows button:hover {
+  .table-root .pagination-container .filter .row_to_show .rows button:hover {
     background-color: var(--blue-transparent);
     color: var(--blue-007);
   }
 
-  .table-root .pagination_container .pagination {
+  .table-root .pagination-container .pagination {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1198,7 +1198,7 @@
     overflow: hidden;
   }
 
-  .table-root .pagination_container .pagination .btn {
+  .table-root .pagination-container .pagination .btn {
     border: none;
     background-color: transparent;
     display: flex;
@@ -1213,29 +1213,29 @@
     border: 1px solid transparent;
   }
 
-  .table-root .pagination_container .pagination .btn:hover {
+  .table-root .pagination-container .pagination .btn:hover {
     border: 1px solid var(--gray-004);
   }
 
-  .table-root .pagination_container .pagination .btn.active {
+  .table-root .pagination-container .pagination .btn.active {
     background-color: var(--blue-transparent);
     color: var(--blue-006);
     font-weight: 600;
     border: 1px solid var(--blue-004);
   }
 
-  .table-root .pagination_container .pagination .btn.to {
+  .table-root .pagination-container .pagination .btn.to {
     background-color: var(--blue-006);
     color: #fff;
     font-weight: 600;
     border: none;
   }
 
-  .table-root .pagination_container .pagination .btn.to:hover {
+  .table-root .pagination-container .pagination .btn.to:hover {
     background-color: var(--blue-005);
   }
 
-  .table-root .pagination_container .pagination .btn.to:disabled {
+  .table-root .pagination-container .pagination .btn.to:disabled {
     background-color: var(--gray-002);
     color: var(--gray-006);
     font-weight: 600;
@@ -1244,26 +1244,43 @@
   }
 
   @media only screen and (max-width: 768px) {
+    .popup-container {
+      padding: 10px;
+    }
+
+    .popup-container .popup {
+      width: 100%;
+    }
+    
     .table-root .actions-container {
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .table-root .actions-container .left {
+    .table-root .actions-container .left,
+    .table-root .actions-container .right {
       flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .table-root .actions-container .right .search-handler,
+    .table-root .actions-container .right .search-handler input.search {
+      width: 100%;
     }
 
     .table-root .table-container {
       overflow-x: scroll;
     }
 
-    .table-root .pagination_container {
+    .table-root .pagination-container {
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .table-root .pagination_container .pagination {
+    .table-root .pagination-container .pagination {
       gap: 2px;
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>

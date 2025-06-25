@@ -123,12 +123,14 @@
 				<div class="profile-form">
 					<div class="row">
 						<InputBox
+							className="input-box-container"
 							label="Username"
 							id="username"
 							type="text"
 							bind:value={username}
 						/>
 						<InputBox
+							className="input-box-container"
 							label="Full Name"
 							id="fullname"
 							type="text"
@@ -137,6 +139,7 @@
 					</div>
 					<div class="row">
 						<InputBox
+							className="input-box-container"
 							label="Email"
 							id="email"
 							type="email"
@@ -201,7 +204,7 @@
 								<th class="a-row">Action</th>
 								<th>IP Address</th>
 								<th class="datetime">Expired At</th>
-								<th>Device</th>
+								<th style="min-width: 200px;">User Agent</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -466,4 +469,30 @@
     fill: var(--red-005);
   }
   
+	@media only screen and (max-width : 768px) {
+		.user-detail-container .user-profile {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			gap: 20px;
+			border: none;
+			padding: 0;
+		}
+
+		.user-detail-container .user-profile .profile .profile-form {
+			gap: 10px;
+		}
+
+		.user-detail-container .user-profile .profile .profile-form .row {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			width: 100%;
+		}
+
+		:global(.user-detail-container .user-profile .profile .profile-form .row .input-box-container),
+		.user-detail-container .user-profile .profile .profile-form .row .pill-box {
+			width: 100%;
+		}
+	}
 </style>

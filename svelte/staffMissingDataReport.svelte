@@ -171,44 +171,46 @@
       options={filterOptions}
       bind:selected={selectedFilter}
     />
-    <table>
-      <thead>
-        <tr>
-          <th>Actions</th>
-          <th>Room</th>
-          <th>Tenant Name</th>
-          <th>Telegram</th>
-          <th>WhatsApp</th>
-          <th>Last Use At</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each (missingDataFiltered || []) as data}
+    <div class="table-container">
+      <table>
+        <thead>
           <tr>
-            <td>
-              <div class="actions">
-                <button
-                  class="btn"
-                  title="Edit"
-                  on:click={() => showPopUpEditTenant(data.tenantId)}
-                >
-                  <Icon
-                    size="15"
-                    color="var(--gray-007)"
-                    src={RiDesignBallPenLine}
-                  />
-                </button>
-              </div>
-            </td>
-            <td>{data.roomName}</td>
-            <td>{data.tenantName || '--'}</td>
-            <td>{data.tenantTelegramUsername || '--'}</td>
-            <td>{data.tenantWhatsappNumber || '--'}</td>
-            <td>{data.lastUseAt || '--'}</td>
+            <th>Actions</th>
+            <th>Room</th>
+            <th style="min-width: 170px;">Tenant Name</th>
+            <th>Telegram</th>
+            <th style="min-width: 180px;">WhatsApp</th>
+            <th style="min-width: 140px;">Last Use At</th>
           </tr>
-        {/each}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {#each (missingDataFiltered || []) as data}
+            <tr>
+              <td>
+                <div class="actions">
+                  <button
+                    class="btn"
+                    title="Edit"
+                    on:click={() => showPopUpEditTenant(data.tenantId)}
+                  >
+                    <Icon
+                      size="15"
+                      color="var(--gray-007)"
+                      src={RiDesignBallPenLine}
+                    />
+                  </button>
+                </div>
+              </td>
+              <td>{data.roomName}</td>
+              <td>{data.tenantName || '--'}</td>
+              <td>{data.tenantTelegramUsername || '--'}</td>
+              <td>{data.tenantWhatsappNumber || '--'}</td>
+              <td>{data.lastUseAt || '--'}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
   </div>
 </LayoutMain>
 
@@ -227,6 +229,10 @@
     gap: 10px;
   }
 
+  .table-container {
+    overflow-x: auto;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
@@ -243,6 +249,7 @@
   table thead tr th {
     text-align: left;
     padding: 8px 12px;
+    text-wrap: nowrap;
   }
 
   table tbody tr {
@@ -275,5 +282,9 @@
 
   :global(table tbody tr td .actions .btn:hover svg) {
     fill: var(--blue-005);
+  }
+
+  @media only screen and (max-width : 768px) {
+
   }
 </style>

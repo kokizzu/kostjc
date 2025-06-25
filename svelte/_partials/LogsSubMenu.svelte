@@ -54,6 +54,7 @@
 	.admin-submenu nav {
 		display: flex;
 		flex-direction: row;
+		flex-wrap: wrap;
 		width: 100%;
 		height: fit-content;
 		gap: 10px;
@@ -93,5 +94,8 @@
 	}
 	.admin-submenu nav a.active .block {
 		background-color: var(--blue-005);
+	}
+
+	@media only screen and (max-width: 768px) {
 	}
 </style>

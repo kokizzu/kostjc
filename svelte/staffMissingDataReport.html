@@ -1386,7 +1386,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
 }
 
 /* fakecss:./staffMissingDataReport.esbuild-svelte-fake-css */
-.report-container.svelte-xap96w.svelte-xap96w {
+.report-container.svelte-1gd957n.svelte-1gd957n {
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -1398,32 +1398,36 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   flex-wrap: wrap;
   gap: 10px;
 }
-table.svelte-xap96w.svelte-xap96w {
+.table-container.svelte-1gd957n.svelte-1gd957n {
+  overflow-x: auto;
+}
+table.svelte-1gd957n.svelte-1gd957n {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-xap96w thead.svelte-xap96w {
+table.svelte-1gd957n thead.svelte-1gd957n {
   position: sticky;
   top: 0;
   background-color: var(--gray-002);
   z-index: 10;
   border: none;
 }
-table.svelte-xap96w thead tr th.svelte-xap96w {
+table.svelte-1gd957n thead tr th.svelte-1gd957n {
   text-align: left;
   padding: 8px 12px;
+  text-wrap: nowrap;
 }
-table.svelte-xap96w tbody tr.svelte-xap96w {
+table.svelte-1gd957n tbody tr.svelte-1gd957n {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-xap96w tbody tr td.svelte-xap96w {
+table.svelte-1gd957n tbody tr td.svelte-1gd957n {
   padding: 8px 12px;
 }
-table.svelte-xap96w tbody tr td .actions.svelte-xap96w {
+table.svelte-1gd957n tbody tr td .actions.svelte-1gd957n {
   display: flex;
   flex-direction: row;
 }
-table.svelte-xap96w tbody tr td .actions .btn.svelte-xap96w {
+table.svelte-1gd957n tbody tr td .actions .btn.svelte-1gd957n {
   border: none;
   padding: 6px;
   border-radius: 8px;
@@ -1433,11 +1437,13 @@ table.svelte-xap96w tbody tr td .actions .btn.svelte-xap96w {
   justify-content: center;
   align-items: center;
 }
-table.svelte-xap96w tbody tr td .actions .btn.svelte-xap96w:hover {
+table.svelte-1gd957n tbody tr td .actions .btn.svelte-1gd957n:hover {
   background-color: var(--blue-transparent);
 }
 table tbody tr td .actions .btn:hover svg {
   fill: var(--blue-005);
+}
+@media only screen and (max-width : 768px) {
 }
 </style>
 <script>(() => {
@@ -16857,16 +16863,16 @@ table tbody tr td .actions .btn:hover svg {
         td5 = element("td");
         t9 = text(t9_value);
         t10 = space();
-        attr(button, "class", "btn svelte-xap96w");
+        attr(button, "class", "btn svelte-1gd957n");
         attr(button, "title", "Edit");
-        attr(div, "class", "actions svelte-xap96w");
-        attr(td0, "class", "svelte-xap96w");
-        attr(td1, "class", "svelte-xap96w");
-        attr(td2, "class", "svelte-xap96w");
-        attr(td3, "class", "svelte-xap96w");
-        attr(td4, "class", "svelte-xap96w");
-        attr(td5, "class", "svelte-xap96w");
-        attr(tr, "class", "svelte-xap96w");
+        attr(div, "class", "actions svelte-1gd957n");
+        attr(td0, "class", "svelte-1gd957n");
+        attr(td1, "class", "svelte-1gd957n");
+        attr(td2, "class", "svelte-1gd957n");
+        attr(td3, "class", "svelte-1gd957n");
+        attr(td4, "class", "svelte-1gd957n");
+        attr(td5, "class", "svelte-1gd957n");
+        attr(tr, "class", "svelte-1gd957n");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -16940,10 +16946,11 @@ table tbody tr td .actions .btn:hover svg {
     };
   }
   function create_default_slot(ctx) {
-    let div;
+    let div1;
     let radio;
     let updating_selected;
     let t0;
+    let div0;
     let table;
     let thead;
     let t12;
@@ -16981,26 +16988,29 @@ table tbody tr td .actions .btn:hover svg {
     });
     return {
       c() {
-        div = element("div");
+        div1 = element("div");
         create_component(radio.$.fragment);
         t0 = space();
+        div0 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-xap96w"><th class="svelte-xap96w">Actions</th> <th class="svelte-xap96w">Room</th> <th class="svelte-xap96w">Tenant Name</th> <th class="svelte-xap96w">Telegram</th> <th class="svelte-xap96w">WhatsApp</th> <th class="svelte-xap96w">Last Use At</th></tr>`;
+        thead.innerHTML = `<tr class="svelte-1gd957n"><th class="svelte-1gd957n">Actions</th> <th class="svelte-1gd957n">Room</th> <th style="min-width: 170px;" class="svelte-1gd957n">Tenant Name</th> <th class="svelte-1gd957n">Telegram</th> <th style="min-width: 180px;" class="svelte-1gd957n">WhatsApp</th> <th style="min-width: 140px;" class="svelte-1gd957n">Last Use At</th></tr>`;
         t12 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(thead, "class", "svelte-xap96w");
-        attr(table, "class", "svelte-xap96w");
-        attr(div, "class", "report-container svelte-xap96w");
+        attr(thead, "class", "svelte-1gd957n");
+        attr(table, "class", "svelte-1gd957n");
+        attr(div0, "class", "table-container svelte-1gd957n");
+        attr(div1, "class", "report-container svelte-1gd957n");
       },
       m(target, anchor) {
-        insert(target, div, anchor);
-        mount_component(radio, div, null);
-        append(div, t0);
-        append(div, table);
+        insert(target, div1, anchor);
+        mount_component(radio, div1, null);
+        append(div1, t0);
+        append(div1, div0);
+        append(div0, table);
         append(table, thead);
         append(table, t12);
         append(table, tbody);
@@ -17066,7 +17076,7 @@ table tbody tr td .actions .btn:hover svg {
       },
       d(detaching) {
         if (detaching) {
-          detach(div);
+          detach(div1);
         }
         destroy_component(radio);
         destroy_each(each_blocks, detaching);
