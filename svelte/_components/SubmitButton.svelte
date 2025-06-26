@@ -7,7 +7,7 @@
   export let label        = /** @type {string} */ ('Submit');
 </script>
 
-<button class={isFullWidth ? 'submit-btn full-width' : 'submit-btn'} on:click|preventDefault>
+<button class={isFullWidth ? 'submit-btn full-width' : 'submit-btn'} on:click|preventDefault disabled={isSubmitted}>
   {#if isSubmitted}
     <Icon className="spin" color="#FFF" size="15" src={RiSystemLoaderLine} />
   {/if}
@@ -45,9 +45,15 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    font-weight: 600;
   }
 
   .submit-btn:hover {
     background-color: var(--blue-005);
+  }
+
+  .submit-btn:disabled {
+    background-color: var(--gray-004);
+    cursor: not-allowed;
   }
 </style>

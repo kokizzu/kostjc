@@ -2807,8 +2807,10 @@ exports.StaffOccupancyReport = async function StaffOccupancyReport( i, cb ) {
 
 /**
  * @typedef {Object} StaffRevenueReportIn
+ * @property {String} yearMonth
  */
 const StaffRevenueReportIn = {
+  yearMonth: '', // string
 }
 /**
  * @typedef {Object} StaffRevenueReportOut
@@ -2829,6 +2831,7 @@ const StaffRevenueReportIn = {
  * @property {String} user.userName
  * @property {String} user.role
  * @property {Object} segments
+ * @property {Object} revenueReports
  */
 const StaffRevenueReportOut = {
   user: { // rqAuth.Users
@@ -2851,6 +2854,8 @@ const StaffRevenueReportOut = {
   }, // rqAuth.Users
   segments: { // M.SB
   }, // M.SB
+  revenueReports: { // []rqProperty.RevenueReport
+  }, // []rqProperty.RevenueReport
 }
 /**
  * @callback StaffRevenueReportCallback

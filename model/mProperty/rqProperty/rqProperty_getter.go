@@ -406,7 +406,6 @@ ORDER BY "bookings"."id" ASC`
 
 	out := make(map[uint64]string)
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		fmt.Println(`Row:`, row)
 		if len(row) == 5 {
 			id := `#` + X.ToS(row[0])
 			totalPriceIdr := formatCurrency(X.ToI(row[1]), `IDR`)
@@ -1284,21 +1283,22 @@ ORDER BY "rooms"."roomName" ASC`
 
 type RevenueReport struct {
 	YearMonth   string `json:"yearMonth"`
-	Booking     string `json:"booking"`
+	BookingId   uint64 `json:"bookingId"`
 	RevenueIDR  int64  `json:"revenueIDR"`
 	DonationIDR int64  `json:"donationIDR"`
 }
 
-func (b *Bookings) FindRevenueReport(yearMonth string) (out []RevenueReport) {
+func (b *Bookings) FindRevenueReports(yearMonth string) (out []RevenueReport) {
 	const comment = `-- Bookings) FindRevenueReport`
 
 	if !isValidYearMonth(yearMonth) {
 		yearMonth = time.Now().Format(DateFormatYYYYMM)
 	}
+
 	query := comment + `
 SELECT
-	SUBSTR("dateStart", 1, 7) AS "yearMonth",
-	"bookings"."id" AS "booking",
+	SUBSTR("bookings"."dateStart", 1, 7) AS "yearMonth",
+	"bookings"."id" AS "bookingId",
 	CASE WHEN "paymentMethod" != 'Donation'
 		THEN COALESCE(SUM("payments"."paidIDR"), 0)
 	END AS "revenueIDR",
@@ -1307,18 +1307,20 @@ SELECT
 	END AS "donationIDR"
 FROM "bookings"
 LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
-WHERE "bookings"."deletedAt" = 0
-GROUP BY "bookings"."id", "yearMonth"`
+WHERE
+	"bookings"."deletedAt" = 0
+	AND SUBSTR("bookings"."dateStart", 1, 7) = '` + yearMonth + `'
+GROUP BY "bookings"."id"`
 
 	b.Adapter.QuerySql(query, func(row []any) {
 		if len(row) == 4 {
 			yearMonth := X.ToS(row[0])
-			booking := X.ToS(row[1])
+			bookingId := X.ToU(row[1])
 			revenueIDR := X.ToI(row[2])
 			donationIDR := X.ToI(row[3])
 			out = append(out, RevenueReport{
 				YearMonth:   yearMonth,
-				Booking:     booking,
+				BookingId:   bookingId,
 				RevenueIDR:  revenueIDR,
 				DonationIDR: donationIDR,
 			})

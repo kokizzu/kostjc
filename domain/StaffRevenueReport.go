@@ -2,6 +2,7 @@ package domain
 
 import (
 	"kostjc/model/mAuth/rqAuth"
+	"kostjc/model/mProperty/rqProperty"
 
 	"github.com/kokizzu/gotro/M"
 )
@@ -15,12 +16,14 @@ import (
 type (
 	StaffRevenueReportIn struct {
 		RequestCommon
+		YearMonth string `json:"yearMonth" form:"yearMonth" query:"yearMonth" long:"yearMonth" msg:"yearMonth"`
 	}
 	StaffRevenueReportOut struct {
 		ResponseCommon
 		User *rqAuth.Users `json:"user" form:"user" query:"user" long:"user" msg:"user"`
 
-		Segments M.SB `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
+		Segments       M.SB                       `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
+		RevenueReports []rqProperty.RevenueReport `json:"revenueReports" form:"revenueReports" query:"revenueReports" long:"revenueReports" msg:"revenueReports"`
 	}
 )
 
@@ -36,6 +39,9 @@ func (d *Domain) StaffRevenueReport(in *StaffRevenueReportIn) (out StaffRevenueR
 	if sess == nil {
 		return
 	}
+
+	booking := rqProperty.NewBookings(d.PropOltp)
+	out.RevenueReports = booking.FindRevenueReports(in.YearMonth)
 
 	return
 }

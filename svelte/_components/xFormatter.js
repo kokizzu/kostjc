@@ -136,6 +136,18 @@ function arrToArrNum(arr) {
   return arr.map(Number);
 }
 
+/**
+ * @description Returns 'Month YYYY'
+ * @param {string} ym - YYYY-MM e.g. 2025-12
+ * @returns {string}
+ */
+function formatYearMonth(ym) {
+  const [year, month] = ym.split('-');
+  const date = new Date(`${ym}-01`);
+  const monthName = date.toLocaleString('en-US', { month: 'long' });
+  return `${monthName} ${year}`;
+}
+
 module.exports = {
   datetime: datetime,
   localeDatetime: localeDatetime,
@@ -146,5 +158,6 @@ module.exports = {
   dateISOFormatFromYYYYMMDD: dateISOFormatFromYYYYMMDD,
   loadScript: loadScript,
   formatPrice: formatPrice,
-  arrToArrNum: arrToArrNum
+  arrToArrNum: arrToArrNum,
+  formatYearMonth: formatYearMonth
 };

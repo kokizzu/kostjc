@@ -95,22 +95,27 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	})
 
 	fw.Get(`/`+domain.StaffRevenueReportAction, func(ctx *fiber.Ctx) error {
-		var in domain.StaffRevenueReportIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffRevenueReportAction)
-		if err != nil {
-			return err
-		}
+		in, user, segments := userInfoFromContext(ctx, d)
 
 		if notLogin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.RequestCommon.Action = domain.StaffRevenueReportAction
+		out := d.StaffRevenueReport(&domain.StaffRevenueReportIn{
+			RequestCommon: in.RequestCommon,
+			YearMonth:     time.Now().Format(rqProperty.DateFormatYYYYMM),
+		})
+
+		bk := rqProperty.NewBookings(d.PropOltp)
+		bookings := bk.FindBookingChoices()
 
 		return views.RenderStaffRevenueReport(ctx, M.SX{
-			`title`:    `KostJC | Revenue Report`,
-			`user`:     user,
-			`segments`: segments,
+			`title`:          `KostJC | Revenue Report`,
+			`user`:           user,
+			`segments`:       segments,
+			`revenueReports`: out.RevenueReports,
+			`bookings`:       bookings,
 		})
 	})
 
