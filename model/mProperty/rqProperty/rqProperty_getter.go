@@ -1329,3 +1329,89 @@ GROUP BY "bookings"."id"`
 
 	return
 }
+
+func (w *WifiDevices) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud.PagerOut) (res [][]any) {
+	const comment = `-- WifiDevices) FindByPagination`
+
+	validFields := WifiDevicesFieldTypeMap
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
+
+	queryCount := comment + `
+SELECT COUNT(1)
+FROM ` + w.SqlTableName() + whereAndSql + `
+LIMIT 1`
+	w.Adapter.QuerySql(queryCount, func(row []any) {
+		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
+	})
+
+	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	limitOffsetSql := out.LimitOffsetSql()
+
+	queryRows := comment + `
+SELECT ` + meta.ToSelect() + `
+FROM ` + w.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
+
+	w.Adapter.QuerySql(queryRows, func(row []any) {
+		row[0] = X.ToS(row[0]) // ensure id is string
+		res = append(res, row)
+	})
+
+	out.Order = in.Order
+	out.Filters = in.Filters
+
+	return
+}
+
+type WifiDeviceReport struct {
+	TenantId uint64 `json:"tenantId"`
+	RoomId   uint64 `json:"roomId"`
+	StartAt  int64  `json:"startAt"`
+	EndAt    int64  `json:"endAt"`
+	PaidAt   int64  `json:"paidAt"`
+}
+
+func (w *WifiDevices) FindWifiDeviceReports(yearMonth string) (out []WifiDeviceReport) {
+	const comment = `-- WifiDevices) FindWifiDeviceReports`
+
+	if !isValidYearMonth(yearMonth) {
+		yearMonth = time.Now().Format(DateFormatYYYYMM)
+	}
+
+	query := comment + `
+SELECT
+	"tenantId",
+	"roomId",
+	"startAt",
+	MAX("endAt"),
+	"paidAt"
+FROM "wifiDevices"
+WHERE
+	"deletedAt" = 0
+	AND SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
+	AND "paidAt" = 0
+`
+
+	w.Adapter.QuerySql(query, func(row []any) {
+		if len(row) == 5 {
+			tenantId := X.ToU(row[0])
+			roomId := X.ToU(row[1])
+			startAt := X.ToI(row[2])
+			endAt := X.ToI(row[3])
+			paidAt := X.ToI(row[4])
+			out = append(out, WifiDeviceReport{
+				TenantId: tenantId,
+				RoomId:   roomId,
+				StartAt:  startAt,
+				EndAt:    endAt,
+				PaidAt:   paidAt,
+			})
+		}
+	})
+
+	return
+}
