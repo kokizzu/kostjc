@@ -41,6 +41,18 @@
     );
     isFiltering = false;
   }
+
+  let sumRevenueIDR = 0;
+  let sumDonationIDR = 0;
+
+  $: {
+	  sumRevenueIDR = 0;
+	  sumDonationIDR = 0;
+	  for(let i=0; i<revenueReports.length; i++) {
+		  sumRevenueIDR += revenueReports[i].revenueIDR|0
+		  sumDonationIDR += revenueReports[i].donationIDR|0
+	  }
+  }
 </script>
 
 <LayoutMain access={segments} user={user}>
@@ -75,8 +87,8 @@
             <tr>
               <td>{formatYearMonth(data.yearMonth)}</td>
               <td>{bookings[data.bookingId]}</td>
-              <td>{data.revenueIDR}</td>
-              <td>{data.donationIDR}</td>
+              <td class="r">{data.revenueIDR}</td>
+              <td class="r">{data.donationIDR}</td>
             </tr>
           {/each}
 
@@ -86,6 +98,14 @@
             </tr>
           {/if}
         </tbody>
+			<tfoot>
+				<tr>
+					<th></th>
+					<th></th>
+					<th class="r">{sumRevenueIDR}</th>
+					<th class="r">{sumDonationIDR}</th>
+				</tr>
+			</tfoot>
       </table>
     </div>
   </div>
@@ -137,8 +157,8 @@
     border-bottom: 1px solid var(--gray-004);
   }
 
-  table tbody tr td {
-    padding: 8px 12px;
+  table tr td, table tr th {
+    padding: 4px 12px;
   }
 
   @media only screen and (max-width : 768px) {
@@ -153,5 +173,10 @@
     :global(.report-container .actions .submit-btn) {
       width: 100% !important;
     }
+  }
+
+  /* align right */
+  td.r, th.r {
+	 text-align: right;
   }
 </style>
