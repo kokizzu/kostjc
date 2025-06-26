@@ -116,6 +116,14 @@ const (
 	PriceIDR     = `priceIDR`
 )
 
+const (
+	TableWifiDevices Tt.TableName = `wifiDevices`
+
+	StartAt    = `startAt` // UNIX timestamp
+	EndAt      = `endAt`   // UNIX timestamp
+	MacAddress = `macAddress`
+)
+
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 	TableLocations: {
 		Fields: []Tt.Field{
@@ -243,6 +251,27 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{StockAddedAt, Tt.String},
 			{Quantity, Tt.Integer},
 			{PriceIDR, Tt.Integer},
+			{CreatedAt, Tt.Integer},
+			{CreatedBy, Tt.Unsigned},
+			{UpdatedAt, Tt.Integer},
+			{UpdatedBy, Tt.Unsigned},
+			{DeletedAt, Tt.Integer},
+			{DeletedBy, Tt.Unsigned},
+			{RestoredBy, Tt.Unsigned},
+		},
+		AutoIncrementId: true,
+		Engine:          Tt.Memtx,
+	},
+	TableWifiDevices: {
+		Fields: []Tt.Field{
+			{Id, Tt.Unsigned},
+			{StartAt, Tt.Integer},
+			{EndAt, Tt.Integer},
+			{PaidAt, Tt.Integer},
+			{PriceIDR, Tt.Integer},
+			{TenantId, Tt.Unsigned},
+			{MacAddress, Tt.String},
+			{RoomId, Tt.Unsigned},
 			{CreatedAt, Tt.Integer},
 			{CreatedBy, Tt.Unsigned},
 			{UpdatedAt, Tt.Integer},

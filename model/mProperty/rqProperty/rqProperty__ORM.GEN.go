@@ -2555,3 +2555,391 @@ var StocksFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
+// WifiDevices DAO reader/query struct
+type WifiDevices struct {
+	Adapter    *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id         uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	StartAt    int64       `json:"startAt" form:"startAt" query:"startAt" long:"startAt" msg:"startAt"`
+	EndAt      int64       `json:"endAt" form:"endAt" query:"endAt" long:"endAt" msg:"endAt"`
+	PaidAt     int64       `json:"paidAt" form:"paidAt" query:"paidAt" long:"paidAt" msg:"paidAt"`
+	PriceIDR   int64       `json:"priceIDR" form:"priceIDR" query:"priceIDR" long:"priceIDR" msg:"priceIDR"`
+	TenantId   uint64      `json:"tenantId,string" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
+	MacAddress string      `json:"macAddress" form:"macAddress" query:"macAddress" long:"macAddress" msg:"macAddress"`
+	RoomId     uint64      `json:"roomId,string" form:"roomId" query:"roomId" long:"roomId" msg:"roomId"`
+	CreatedAt  int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy  uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt  int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy  uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt  int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy  uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+}
+
+// NewWifiDevices create new ORM reader/query object
+func NewWifiDevices(adapter *Tt.Adapter) *WifiDevices {
+	return &WifiDevices{Adapter: adapter}
+}
+
+// SpaceName returns full package and table name
+func (w *WifiDevices) SpaceName() string { //nolint:dupl false positive
+	return string(mProperty.TableWifiDevices) // casting required to string from Tt.TableName
+}
+
+// SqlTableName returns quoted table name
+func (w *WifiDevices) SqlTableName() string { //nolint:dupl false positive
+	return `"wifiDevices"`
+}
+
+func (w *WifiDevices) UniqueIndexId() string { //nolint:dupl false positive
+	return `id`
+}
+
+// FindById Find one by Id
+func (w *WifiDevices) FindById() bool { //nolint:dupl false positive
+	res, err := w.Adapter.Select(w.SpaceName(), w.UniqueIndexId(), 0, 1, tarantool.IterEq, A.X{w.Id})
+	if L.IsError(err, `WifiDevices.FindById failed: `+w.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		w.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
+// SqlSelectAllFields generate Sql select fields
+func (w *WifiDevices) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "startAt"
+	, "endAt"
+	, "paidAt"
+	, "priceIDR"
+	, "tenantId"
+	, "macAddress"
+	, "roomId"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// SqlSelectAllUncensoredFields generate Sql select fields
+func (w *WifiDevices) SqlSelectAllUncensoredFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "startAt"
+	, "endAt"
+	, "paidAt"
+	, "priceIDR"
+	, "tenantId"
+	, "macAddress"
+	, "roomId"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// ToUpdateArray generate slice of update command
+func (w *WifiDevices) ToUpdateArray() A.X { //nolint:dupl false positive
+	return A.X{
+		A.X{`=`, 0, w.Id},
+		A.X{`=`, 1, w.StartAt},
+		A.X{`=`, 2, w.EndAt},
+		A.X{`=`, 3, w.PaidAt},
+		A.X{`=`, 4, w.PriceIDR},
+		A.X{`=`, 5, w.TenantId},
+		A.X{`=`, 6, w.MacAddress},
+		A.X{`=`, 7, w.RoomId},
+		A.X{`=`, 8, w.CreatedAt},
+		A.X{`=`, 9, w.CreatedBy},
+		A.X{`=`, 10, w.UpdatedAt},
+		A.X{`=`, 11, w.UpdatedBy},
+		A.X{`=`, 12, w.DeletedAt},
+		A.X{`=`, 13, w.DeletedBy},
+		A.X{`=`, 14, w.RestoredBy},
+	}
+}
+
+// IdxId return name of the index
+func (w *WifiDevices) IdxId() int { //nolint:dupl false positive
+	return 0
+}
+
+// SqlId return name of the column being indexed
+func (w *WifiDevices) SqlId() string { //nolint:dupl false positive
+	return `"id"`
+}
+
+// IdxStartAt return name of the index
+func (w *WifiDevices) IdxStartAt() int { //nolint:dupl false positive
+	return 1
+}
+
+// SqlStartAt return name of the column being indexed
+func (w *WifiDevices) SqlStartAt() string { //nolint:dupl false positive
+	return `"startAt"`
+}
+
+// IdxEndAt return name of the index
+func (w *WifiDevices) IdxEndAt() int { //nolint:dupl false positive
+	return 2
+}
+
+// SqlEndAt return name of the column being indexed
+func (w *WifiDevices) SqlEndAt() string { //nolint:dupl false positive
+	return `"endAt"`
+}
+
+// IdxPaidAt return name of the index
+func (w *WifiDevices) IdxPaidAt() int { //nolint:dupl false positive
+	return 3
+}
+
+// SqlPaidAt return name of the column being indexed
+func (w *WifiDevices) SqlPaidAt() string { //nolint:dupl false positive
+	return `"paidAt"`
+}
+
+// IdxPriceIDR return name of the index
+func (w *WifiDevices) IdxPriceIDR() int { //nolint:dupl false positive
+	return 4
+}
+
+// SqlPriceIDR return name of the column being indexed
+func (w *WifiDevices) SqlPriceIDR() string { //nolint:dupl false positive
+	return `"priceIDR"`
+}
+
+// IdxTenantId return name of the index
+func (w *WifiDevices) IdxTenantId() int { //nolint:dupl false positive
+	return 5
+}
+
+// SqlTenantId return name of the column being indexed
+func (w *WifiDevices) SqlTenantId() string { //nolint:dupl false positive
+	return `"tenantId"`
+}
+
+// IdxMacAddress return name of the index
+func (w *WifiDevices) IdxMacAddress() int { //nolint:dupl false positive
+	return 6
+}
+
+// SqlMacAddress return name of the column being indexed
+func (w *WifiDevices) SqlMacAddress() string { //nolint:dupl false positive
+	return `"macAddress"`
+}
+
+// IdxRoomId return name of the index
+func (w *WifiDevices) IdxRoomId() int { //nolint:dupl false positive
+	return 7
+}
+
+// SqlRoomId return name of the column being indexed
+func (w *WifiDevices) SqlRoomId() string { //nolint:dupl false positive
+	return `"roomId"`
+}
+
+// IdxCreatedAt return name of the index
+func (w *WifiDevices) IdxCreatedAt() int { //nolint:dupl false positive
+	return 8
+}
+
+// SqlCreatedAt return name of the column being indexed
+func (w *WifiDevices) SqlCreatedAt() string { //nolint:dupl false positive
+	return `"createdAt"`
+}
+
+// IdxCreatedBy return name of the index
+func (w *WifiDevices) IdxCreatedBy() int { //nolint:dupl false positive
+	return 9
+}
+
+// SqlCreatedBy return name of the column being indexed
+func (w *WifiDevices) SqlCreatedBy() string { //nolint:dupl false positive
+	return `"createdBy"`
+}
+
+// IdxUpdatedAt return name of the index
+func (w *WifiDevices) IdxUpdatedAt() int { //nolint:dupl false positive
+	return 10
+}
+
+// SqlUpdatedAt return name of the column being indexed
+func (w *WifiDevices) SqlUpdatedAt() string { //nolint:dupl false positive
+	return `"updatedAt"`
+}
+
+// IdxUpdatedBy return name of the index
+func (w *WifiDevices) IdxUpdatedBy() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlUpdatedBy return name of the column being indexed
+func (w *WifiDevices) SqlUpdatedBy() string { //nolint:dupl false positive
+	return `"updatedBy"`
+}
+
+// IdxDeletedAt return name of the index
+func (w *WifiDevices) IdxDeletedAt() int { //nolint:dupl false positive
+	return 12
+}
+
+// SqlDeletedAt return name of the column being indexed
+func (w *WifiDevices) SqlDeletedAt() string { //nolint:dupl false positive
+	return `"deletedAt"`
+}
+
+// IdxDeletedBy return name of the index
+func (w *WifiDevices) IdxDeletedBy() int { //nolint:dupl false positive
+	return 13
+}
+
+// SqlDeletedBy return name of the column being indexed
+func (w *WifiDevices) SqlDeletedBy() string { //nolint:dupl false positive
+	return `"deletedBy"`
+}
+
+// IdxRestoredBy return name of the index
+func (w *WifiDevices) IdxRestoredBy() int { //nolint:dupl false positive
+	return 14
+}
+
+// SqlRestoredBy return name of the column being indexed
+func (w *WifiDevices) SqlRestoredBy() string { //nolint:dupl false positive
+	return `"restoredBy"`
+}
+
+// ToArray receiver fields to slice
+func (w *WifiDevices) ToArray() A.X { //nolint:dupl false positive
+	var id any = nil
+	if w.Id != 0 {
+		id = w.Id
+	}
+	return A.X{
+		id,
+		w.StartAt,    // 1
+		w.EndAt,      // 2
+		w.PaidAt,     // 3
+		w.PriceIDR,   // 4
+		w.TenantId,   // 5
+		w.MacAddress, // 6
+		w.RoomId,     // 7
+		w.CreatedAt,  // 8
+		w.CreatedBy,  // 9
+		w.UpdatedAt,  // 10
+		w.UpdatedBy,  // 11
+		w.DeletedAt,  // 12
+		w.DeletedBy,  // 13
+		w.RestoredBy, // 14
+	}
+}
+
+// FromArray convert slice to receiver fields
+func (w *WifiDevices) FromArray(a A.X) *WifiDevices { //nolint:dupl false positive
+	w.Id = X.ToU(a[0])
+	w.StartAt = X.ToI(a[1])
+	w.EndAt = X.ToI(a[2])
+	w.PaidAt = X.ToI(a[3])
+	w.PriceIDR = X.ToI(a[4])
+	w.TenantId = X.ToU(a[5])
+	w.MacAddress = X.ToS(a[6])
+	w.RoomId = X.ToU(a[7])
+	w.CreatedAt = X.ToI(a[8])
+	w.CreatedBy = X.ToU(a[9])
+	w.UpdatedAt = X.ToI(a[10])
+	w.UpdatedBy = X.ToU(a[11])
+	w.DeletedAt = X.ToI(a[12])
+	w.DeletedBy = X.ToU(a[13])
+	w.RestoredBy = X.ToU(a[14])
+	return w
+}
+
+// FromUncensoredArray convert slice to receiver fields
+func (w *WifiDevices) FromUncensoredArray(a A.X) *WifiDevices { //nolint:dupl false positive
+	w.Id = X.ToU(a[0])
+	w.StartAt = X.ToI(a[1])
+	w.EndAt = X.ToI(a[2])
+	w.PaidAt = X.ToI(a[3])
+	w.PriceIDR = X.ToI(a[4])
+	w.TenantId = X.ToU(a[5])
+	w.MacAddress = X.ToS(a[6])
+	w.RoomId = X.ToU(a[7])
+	w.CreatedAt = X.ToI(a[8])
+	w.CreatedBy = X.ToU(a[9])
+	w.UpdatedAt = X.ToI(a[10])
+	w.UpdatedBy = X.ToU(a[11])
+	w.DeletedAt = X.ToI(a[12])
+	w.DeletedBy = X.ToU(a[13])
+	w.RestoredBy = X.ToU(a[14])
+	return w
+}
+
+// FindOffsetLimit returns slice of struct, order by idx, eg. .UniqueIndex*()
+func (w *WifiDevices) FindOffsetLimit(offset, limit uint32, idx string) []WifiDevices { //nolint:dupl false positive
+	var rows []WifiDevices
+	res, err := w.Adapter.Select(w.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `WifiDevices.FindOffsetLimit failed: `+w.SpaceName()) {
+		return rows
+	}
+	for _, row := range res.Tuples() {
+		item := WifiDevices{}
+		rows = append(rows, *item.FromArray(row))
+	}
+	return rows
+}
+
+// FindArrOffsetLimit returns as slice of slice order by idx eg. .UniqueIndex*()
+func (w *WifiDevices) FindArrOffsetLimit(offset, limit uint32, idx string) ([]A.X, Tt.QueryMeta) { //nolint:dupl false positive
+	var rows []A.X
+	res, err := w.Adapter.Select(w.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `WifiDevices.FindOffsetLimit failed: `+w.SpaceName()) {
+		return rows, Tt.QueryMetaFrom(res, err)
+	}
+	tuples := res.Tuples()
+	rows = make([]A.X, len(tuples))
+	for z, row := range tuples {
+		rows[z] = row
+	}
+	return rows, Tt.QueryMetaFrom(res, nil)
+}
+
+// Total count number of rows
+func (w *WifiDevices) Total() int64 { //nolint:dupl false positive
+	rows := w.Adapter.CallBoxSpace(w.SpaceName()+`:count`, A.X{})
+	if len(rows) > 0 && len(rows[0]) > 0 {
+		return X.ToI(rows[0][0])
+	}
+	return 0
+}
+
+// WifiDevicesFieldTypeMap returns key value of field name and key
+var WifiDevicesFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
+	`id`:         Tt.Unsigned,
+	`startAt`:    Tt.Integer,
+	`endAt`:      Tt.Integer,
+	`paidAt`:     Tt.Integer,
+	`priceIDR`:   Tt.Integer,
+	`tenantId`:   Tt.Unsigned,
+	`macAddress`: Tt.String,
+	`roomId`:     Tt.Unsigned,
+	`createdAt`:  Tt.Integer,
+	`createdBy`:  Tt.Unsigned,
+	`updatedAt`:  Tt.Integer,
+	`updatedBy`:  Tt.Unsigned,
+	`deletedAt`:  Tt.Integer,
+	`deletedBy`:  Tt.Unsigned,
+	`restoredBy`: Tt.Unsigned,
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
