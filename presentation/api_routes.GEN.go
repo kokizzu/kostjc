@@ -210,6 +210,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// AdminWifiDevice
+	fw.Post("/"+domain.AdminWifiDeviceAction, func(c *fiber.Ctx) error {
+		in := domain.AdminWifiDeviceIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminWifiDeviceAction); err != nil {
+			return nil
+		}
+		out := d.AdminWifiDevice(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// GuestLogin
 	fw.Post("/"+domain.GuestLoginAction, func(c *fiber.Ctx) error {
 		in := domain.GuestLoginIn{}
@@ -307,6 +317,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 			return nil
 		}
 		out := d.StaffSales(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// StaffWifiDeviceReport
+	fw.Post("/"+domain.StaffWifiDeviceReportAction, func(c *fiber.Ctx) error {
+		in := domain.StaffWifiDeviceReportIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.StaffWifiDeviceReportAction); err != nil {
+			return nil
+		}
+		out := d.StaffWifiDeviceReport(&in)
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
