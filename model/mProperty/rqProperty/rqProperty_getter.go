@@ -406,7 +406,6 @@ ORDER BY "bookings"."id" ASC`
 
 	out := make(map[uint64]string)
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		fmt.Println(`Row:`, row)
 		if len(row) == 5 {
 			id := `#` + X.ToS(row[0])
 			totalPriceIdr := formatCurrency(X.ToI(row[1]), `IDR`)
@@ -1158,6 +1157,7 @@ type AvailableRoom struct {
 	RoomName       string `json:"roomName"`
 	AvailableAt    string `json:"availableAt"`
 	IsAvailableNow bool   `json:"isAvailableNow"`
+	LastTenant     string `json:"lastTenant"`
 }
 
 func (r *Rooms) FindAvailableRooms() (out []AvailableRoom) {
@@ -1175,9 +1175,11 @@ WITH "all_rooms" AS (
 		MAX("bookings"."dateEnd") AS "maxDateEnd",
 		"rooms"."lastUseAt" AS "lastUseAt",
 		"rooms"."currentTenantId" AS "currentTenantId",
-		"rooms"."deletedAt" AS "deletedAt"
+		"rooms"."deletedAt" AS "deletedAt",
+		"tenants"."tenantName" AS "tenantName"
 	FROM "rooms"
 	LEFT JOIN "bookings" ON "rooms"."id" = "bookings"."roomId"
+	LEFT JOIN "tenants" ON "rooms"."currentTenantId" = "tenants"."id"
 	GROUP BY "rooms"."roomName"
 )
 
@@ -1187,7 +1189,8 @@ SELECT
 	CASE
 		WHEN "dateEnd" <= '` + dateTimeNow + `'
 		THEN 'TRUE'
-	ELSE 'FALSE' END AS "isAvailable"
+	ELSE 'FALSE' END AS "isAvailable",
+	"tenantName"
 FROM "all_rooms"
 WHERE
 	(
@@ -1196,17 +1199,19 @@ WHERE
 		OR "currentTenantId" = 0
 	)
 	AND "deletedAt" = 0
-ORDER BY "roomName" ASC`
+ORDER BY "dateEnd" ASC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 3 {
+		if len(row) == 4 {
 			roomName := X.ToS(row[0])
 			availableAt := X.ToS(row[1])
 			isAvailableNow := X.ToBool(row[2])
+			tenantName := X.ToS(row[3])
 			out = append(out, AvailableRoom{
 				RoomName:       roomName,
 				AvailableAt:    availableAt,
 				IsAvailableNow: isAvailableNow,
+				LastTenant:     tenantName,
 			})
 		}
 	})
@@ -1246,7 +1251,7 @@ LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
 LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
 LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
 WHERE "bookings"."deletedAt" = 0
-	AND "payments"."deletedAt" = 0
+	OR "payments"."deletedAt" = 0
 	AND "rooms"."deletedAt" = 0
 	AND "tenants"."deletedAt" = 0
 GROUP BY
@@ -1269,6 +1274,55 @@ ORDER BY "rooms"."roomName" ASC`
 				TotalPaid:  totalPaid,
 				TotalPrice: totalPrice,
 				DateStart:  dateStart,
+			})
+		}
+	})
+
+	return
+}
+
+type RevenueReport struct {
+	YearMonth   string `json:"yearMonth"`
+	BookingId   uint64 `json:"bookingId"`
+	RevenueIDR  int64  `json:"revenueIDR"`
+	DonationIDR int64  `json:"donationIDR"`
+}
+
+func (b *Bookings) FindRevenueReports(yearMonth string) (out []RevenueReport) {
+	const comment = `-- Bookings) FindRevenueReport`
+
+	if !isValidYearMonth(yearMonth) {
+		yearMonth = time.Now().Format(DateFormatYYYYMM)
+	}
+
+	query := comment + `
+SELECT
+	SUBSTR("bookings"."dateStart", 1, 7) AS "yearMonth",
+	"bookings"."id" AS "bookingId",
+	CASE WHEN "paymentMethod" != 'Donation'
+		THEN COALESCE(SUM("payments"."paidIDR"), 0)
+	END AS "revenueIDR",
+	CASE WHEN "paymentMethod" = 'Donation'
+		THEN COALESCE(SUM("payments"."paidIDR"), 0)
+	END AS "donationIDR"
+FROM "bookings"
+LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
+WHERE
+	"bookings"."deletedAt" = 0
+	AND SUBSTR("bookings"."dateStart", 1, 7) = '` + yearMonth + `'
+GROUP BY "bookings"."id"`
+
+	b.Adapter.QuerySql(query, func(row []any) {
+		if len(row) == 4 {
+			yearMonth := X.ToS(row[0])
+			bookingId := X.ToU(row[1])
+			revenueIDR := X.ToI(row[2])
+			donationIDR := X.ToI(row[3])
+			out = append(out, RevenueReport{
+				YearMonth:   yearMonth,
+				BookingId:   bookingId,
+				RevenueIDR:  revenueIDR,
+				DonationIDR: donationIDR,
 			})
 		}
 	})

@@ -60,6 +60,10 @@
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Missing Data Report</span>
       </a>
+      <a href="/staff/revenueReport" class:active={pathAll === '/staff/revenueReport'}>
+        <Icon src={RiDocumentFileChartLine} size="20" />
+        <span>Revenue Report</span>
+      </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />
         <span>Profile</span>
@@ -158,6 +162,10 @@
       <a href="/staff/missingDataReport" class:active={pathAll === '/staff/missingDataReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Missing Data Report</span>
+      </a>
+      <a href="/staff/revenueReport" class:active={pathAll === '/staff/revenueReport'}>
+        <Icon src={RiDocumentFileChartLine} size="20" />
+        <span>Revenue Report</span>
       </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />

@@ -124,4 +124,19 @@
 		cursor: pointer;
 		font-weight: 600;
 	}
+
+	@media only screen and (max-width: 768px) {
+		.popup-container {
+      padding: 10px;
+    }
+
+    .popup-container .popup {
+      width: 100%;
+    }
+
+		.popup-container .popup .forms .data-object-container {
+			display: flex;
+			flex-direction: column;
+		}
+	}
 </style>

@@ -173,6 +173,11 @@
     {:else if type === 'datetime'}
       <label class="label" for={id}>{label}</label>
       <input type="date" bind:value={value} {id} {placeholder} />
+    {:else if type === 'month'}
+      {#if label != ''}    
+        <label class="label" for={id}>{label}</label>
+      {/if}
+      <input type="month" bind:value={value} {id} {placeholder} />
     {:else if type === 'percentage'}
       <label class="label" for={id}>{label}</label>
       <div class="input-percentage">

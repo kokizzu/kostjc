@@ -357,5 +357,9 @@
     .popup-container {
       padding: 10px;
     }
+
+    .popup-container .popup {
+      width: 100%;
+    }
   }
 </style>

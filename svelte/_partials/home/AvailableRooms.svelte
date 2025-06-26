@@ -4,6 +4,7 @@
    * @property {string} roomName
    * @property {string} availableAt
    * @property {boolean} isAvailableNow
+   * @property {string} lastTenant
    */
   const rooms = /** @type {AvailableRoom[]} */ ([/* availableRooms */]);
 
@@ -30,6 +31,7 @@
               ? 'Available Now'
               : 'Available on <b>' + formatDateLong(r.availableAt)+'</b>'
             }</span>
+            <span>Last Tenant: <b>{r.lastTenant || '--'}</b></span>
           </div>
         </div>
       {/each}

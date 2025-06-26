@@ -420,91 +420,95 @@
         />
       </div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          {#each (quartals || []) as quartal}
-            <th>{formatMonthYear(quartal)}</th>
-          {/each}
-        </tr>
-      </thead>
-      <tbody>
-        {#each (roomNames || []) as room}
+    <div class="table-container">
+      <table>
+        <thead>
           <tr>
-            <th>Room {room}</th>
+            <th></th>
             {#each (quartals || []) as quartal}
-              <td>
-                <div class="cells">
-                  {#each reOrderBookingPerQuartal(room, quartal) as booking}
-                    <div
-                      class="cell
-                      {booking.deletedAt > 0 ? 'refunded' : ''}
-                      {showOnlyNotPaid && booking.amountPaid >= booking.totalPrice ? 'hidden' : ''}
-                      {!showRefunded && booking.deletedAt > 0 ? 'hidden' : ''}
-                      "
-                    >
-                      {#if booking.tenantName}
-                        <span class="{showTenant ? '' : 'hidden'}">{booking.tenantName} {(booking.extraTenants || []).length ? '*' : ''}</span> 
-                        <span>
-                          <span class="{showDateStart ? '' : 'hidden'}">{booking.dateStart}</span>
-                          <span> s/d </span>
-                          <span
-                            class="
-                            {!booking.isNearEnding && !booking.isExtended
-                              ? `${!isDateToCharge(booking.dateStart) ? 'date-warning' : 'date-alert'}`
-                              : ''
-                            }
-                            {!booking.isExtended && booking.isNearEnding
-                              ? `${isDateToCharge(booking.dateStart) ? 'date-alert' : 'date-warning'}`
-                              : ''
-                            }
-                            {showDateEnd ? '' : 'hidden'}
-                          ">
-                            {booking.dateEnd} {!booking.isExtended && booking.isNearEnding && showHDaysSince ? `(${getRelativeDayLabel(booking.dateEnd)})` : ''}
-                          </span>
-                        </span>
-                        <span class="{(booking.amountPaid == booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
-                          <span class="{showPaid ? '' : 'hidden'}">{booking.amountPaid}</span>
-                          <span>/</span>
-                          <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
-                        </span>
-                        <div class="actions">
-                          <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking)}>
-                            <Icon
-                              src={RiSystemExternalLinkLine}
-                              size="17"
-                            />
-                          </button>
-                          <button class="btn" title="Input Payment" on:click={() => showInputPayment(booking.id)}>
-                            <Icon
-                              src={RiFinanceWallet3Line}
-                              size="17"
-                            />
-                          </button>
-                          <button class="btn" title="Show Payments" on:click={() => showPaymentsForBooking(booking.id)}>
-                            <Icon
-                              src={RiSystemEyeLine}
-                              size="17"
-                            />
-                          </button>
-                          <button class="btn" title="Edit Booking" on:click={() => showEditBooking(booking)}>
-                            <Icon
-                              src={RiDesignBallPenLine}
-                              size="17"
-                            />
-                          </button>
-                        </div>
-                      {/if}
-                    </div>
-                  {/each}
-                </div>
-              </td>
+              <th class="month">
+                {formatMonthYear(quartal)}
+              </th>
             {/each}
           </tr>
-        {/each}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {#each (roomNames || []) as room}
+            <tr>
+              <th>Room {room}</th>
+              {#each (quartals || []) as quartal}
+                <td>
+                  <div class="cells">
+                    {#each reOrderBookingPerQuartal(room, quartal) as booking}
+                      <div
+                        class="cell
+                        {booking.deletedAt > 0 ? 'refunded' : ''}
+                        {showOnlyNotPaid && booking.amountPaid >= booking.totalPrice ? 'hidden' : ''}
+                        {!showRefunded && booking.deletedAt > 0 ? 'hidden' : ''}
+                        "
+                      >
+                        {#if booking.tenantName}
+                          <span class="{showTenant ? '' : 'hidden'}">{booking.tenantName} {(booking.extraTenants || []).length ? '*' : ''}</span> 
+                          <span>
+                            <span class="{showDateStart ? '' : 'hidden'}">{booking.dateStart}</span>
+                            <span> s/d </span>
+                            <span
+                              class="
+                              {!booking.isNearEnding && !booking.isExtended
+                                ? `${!isDateToCharge(booking.dateStart) ? 'date-warning' : 'date-alert'}`
+                                : ''
+                              }
+                              {!booking.isExtended && booking.isNearEnding
+                                ? `${isDateToCharge(booking.dateStart) ? 'date-alert' : 'date-warning'}`
+                                : ''
+                              }
+                              {showDateEnd ? '' : 'hidden'}
+                            ">
+                              {booking.dateEnd} {!booking.isExtended && booking.isNearEnding && showHDaysSince ? `(${getRelativeDayLabel(booking.dateEnd)})` : ''}
+                            </span>
+                          </span>
+                          <span class="{(booking.amountPaid == booking.totalPrice) ? "" : `${booking.deletedAt == 0 ? 'text-red' : ''}`}">
+                            <span class="{showPaid ? '' : 'hidden'}">{booking.amountPaid}</span>
+                            <span>/</span>
+                            <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
+                          </span>
+                          <div class="actions">
+                            <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking)}>
+                              <Icon
+                                src={RiSystemExternalLinkLine}
+                                size="17"
+                              />
+                            </button>
+                            <button class="btn" title="Input Payment" on:click={() => showInputPayment(booking.id)}>
+                              <Icon
+                                src={RiFinanceWallet3Line}
+                                size="17"
+                              />
+                            </button>
+                            <button class="btn" title="Show Payments" on:click={() => showPaymentsForBooking(booking.id)}>
+                              <Icon
+                                src={RiSystemEyeLine}
+                                size="17"
+                              />
+                            </button>
+                            <button class="btn" title="Edit Booking" on:click={() => showEditBooking(booking)}>
+                              <Icon
+                                src={RiDesignBallPenLine}
+                                size="17"
+                              />
+                            </button>
+                          </div>
+                        {/if}
+                      </div>
+                    {/each}
+                  </div>
+                </td>
+              {/each}
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
   </div>
 </LayoutMain>
 
@@ -561,9 +565,14 @@
     gap: 10px;
   }
 
+  .table-container {
+    overflow-x: auto;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
+    overflow-x: auto;
   }
 
   table thead {
@@ -670,5 +679,22 @@
 
   .hidden {
     display: none !important;
+  }
+
+  @media only screen and (max-width : 768px) {
+    table thead th {
+      min-width: 100px;
+    }
+    table thead th.month {
+      min-width: 200px;
+    }
+
+    table tbody tr td .cell .actions {
+      display: flex;
+      position: static;
+      background-color: var(--gray-002);
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
   }
 </style>
