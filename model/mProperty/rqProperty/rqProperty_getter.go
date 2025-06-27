@@ -1299,12 +1299,16 @@ func (b *Bookings) FindRevenueReports(yearMonth string) (out []RevenueReport) {
 SELECT
 	SUBSTR("bookings"."dateStart", 1, 7) AS "yearMonth",
 	"bookings"."id" AS "bookingId",
-	CASE WHEN "paymentMethod" != 'Donation'
-		THEN COALESCE(SUM("payments"."paidIDR"), 0)
-	END AS "revenueIDR",
-	CASE WHEN "paymentMethod" = 'Donation'
-		THEN COALESCE(SUM("payments"."paidIDR"), 0)
-	END AS "donationIDR"
+	SUM(CASE 
+		WHEN "paymentMethod" != 'Donation'
+			THEN "payments"."paidIDR"
+		ELSE 0
+	END) AS "revenueIDR",
+	SUM(CASE 
+		WHEN "paymentMethod" = 'Donation'
+			THEN "payments"."paidIDR"
+		ELSE 0
+	END) AS "donationIDR"
 FROM "bookings"
 LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
 WHERE

@@ -46,12 +46,12 @@
   let sumDonationIDR = 0;
 
   $: {
-	  sumRevenueIDR = 0;
-	  sumDonationIDR = 0;
-	  for(let i=0; i<revenueReports.length; i++) {
-		  sumRevenueIDR += revenueReports[i].revenueIDR|0
-		  sumDonationIDR += revenueReports[i].donationIDR|0
-	  }
+    sumRevenueIDR = 0;
+    sumDonationIDR = 0;
+    for(let i=0; i< (revenueReports || []).length; i++) {
+      sumRevenueIDR += revenueReports[i].revenueIDR|0
+      sumDonationIDR += revenueReports[i].donationIDR|0
+    }
   }
 </script>
 
