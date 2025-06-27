@@ -1238,13 +1238,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./staffRevenueReport.esbuild-svelte-fake-css */
-.report-container.svelte-134k7vk.svelte-134k7vk {
+.report-container.svelte-1g4l9i6.svelte-1g4l9i6 {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.report-container.svelte-134k7vk .actions.svelte-134k7vk {
+.report-container.svelte-1g4l9i6 .actions.svelte-1g4l9i6 {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -1253,33 +1253,34 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 .report-container .actions .year-month {
   width: 300px;
 }
-.table-container.svelte-134k7vk.svelte-134k7vk {
+.table-container.svelte-1g4l9i6.svelte-1g4l9i6 {
   overflow-x: auto;
 }
-table.svelte-134k7vk.svelte-134k7vk {
+table.svelte-1g4l9i6.svelte-1g4l9i6 {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-134k7vk thead.svelte-134k7vk {
+table.svelte-1g4l9i6 thead.svelte-1g4l9i6 {
   position: sticky;
   top: 0;
   background-color: var(--gray-002);
   z-index: 10;
   border: none;
 }
-table.svelte-134k7vk thead tr th.svelte-134k7vk {
+table.svelte-1g4l9i6 thead tr th.svelte-1g4l9i6 {
   text-align: left;
   padding: 8px 12px;
   text-wrap: nowrap;
 }
-table.svelte-134k7vk tbody tr.svelte-134k7vk {
+table.svelte-1g4l9i6 tbody tr.svelte-1g4l9i6 {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-134k7vk tbody tr td.svelte-134k7vk {
-  padding: 8px 12px;
+table.svelte-1g4l9i6 tr td.svelte-1g4l9i6,
+table.svelte-1g4l9i6 tr th.svelte-1g4l9i6 {
+  padding: 4px 12px;
 }
 @media only screen and (max-width : 768px) {
-  .report-container.svelte-134k7vk .actions.svelte-134k7vk {
+  .report-container.svelte-1g4l9i6 .actions.svelte-1g4l9i6 {
     flex-direction: column;
   }
   .report-container .actions .year-month {
@@ -1288,6 +1289,10 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
   .report-container .actions .submit-btn {
     width: 100% !important;
   }
+}
+td.r.svelte-1g4l9i6.svelte-1g4l9i6,
+th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
+  text-align: right;
 }
 </style>
 <script>(() => {
@@ -1464,9 +1469,9 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     }
   });
 
-  // node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs
+  // node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/browser/axios.cjs
   var require_axios = __commonJS({
-    "node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
+    "node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
       "use strict";
       function bind2(fn, thisArg) {
         return function wrap() {
@@ -1475,6 +1480,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
       }
       var { toString } = Object.prototype;
       var { getPrototypeOf } = Object;
+      var { iterator, toStringTag } = Symbol;
       var kindOf = ((cache) => (thing) => {
         const str = toString.call(thing);
         return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
@@ -1509,7 +1515,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
           return false;
         }
         const prototype2 = getPrototypeOf(val);
-        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(Symbol.toStringTag in val) && !(Symbol.iterator in val);
+        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
       };
       var isDate = kindOfTest("Date");
       var isFile = kindOfTest("File");
@@ -1661,10 +1667,10 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         };
       })(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
       var forEachEntry = (obj, fn) => {
-        const generator = obj && obj[Symbol.iterator];
-        const iterator = generator.call(obj);
+        const generator = obj && obj[iterator];
+        const _iterator = generator.call(obj);
         let result;
-        while ((result = iterator.next()) && !result.done) {
+        while ((result = _iterator.next()) && !result.done) {
           const pair = result.value;
           fn.call(obj, pair[0], pair[1]);
         }
@@ -1734,23 +1740,8 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
       var toFiniteNumber = (value, defaultValue) => {
         return value != null && Number.isFinite(value = +value) ? value : defaultValue;
       };
-      var ALPHA = "abcdefghijklmnopqrstuvwxyz";
-      var DIGIT = "0123456789";
-      var ALPHABET = {
-        DIGIT,
-        ALPHA,
-        ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
-      };
-      var generateString = (size2 = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
-        let str = "";
-        const { length } = alphabet;
-        while (size2--) {
-          str += alphabet[Math.random() * length | 0];
-        }
-        return str;
-      };
       function isSpecCompliantForm(thing) {
-        return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
+        return !!(thing && isFunction(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
       }
       var toJSONObject = (obj) => {
         const stack = new Array(10);
@@ -1796,6 +1787,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         isFunction(_global.postMessage)
       );
       var asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
+      var isIterable = (thing) => thing != null && isFunction(thing[iterator]);
       var utils$1 = {
         isArray,
         isArrayBuffer,
@@ -1847,14 +1839,13 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         findKey,
         global: _global,
         isContextDefined,
-        ALPHABET,
-        generateString,
         isSpecCompliantForm,
         toJSONObject,
         isAsyncFn,
         isThenable,
         setImmediate: _setImmediate,
-        asap
+        asap,
+        isIterable
       };
       function AxiosError(message, code, config, request, response) {
         Error.call(this);
@@ -2079,6 +2070,11 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
           return url;
         }
         const _encode = options && options.encode || encode;
+        if (utils$1.isFunction(options)) {
+          options = {
+            serialize: options
+          };
+        }
         const serializeFn = options && options.serialize;
         let serializedParams;
         if (serializeFn) {
@@ -2479,10 +2475,15 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
             setHeaders(header, valueOrRewrite);
           } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
             setHeaders(parseHeaders(header), valueOrRewrite);
-          } else if (utils$1.isHeaders(header)) {
-            for (const [key, value] of header.entries()) {
-              setHeader(value, key, rewrite);
+          } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
+            let obj = {}, dest, key;
+            for (const entry of header) {
+              if (!utils$1.isArray(entry)) {
+                throw TypeError("Object iterator must return a key-value pair");
+              }
+              obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
             }
+            setHeaders(obj, valueOrRewrite);
           } else {
             header != null && setHeader(valueOrRewrite, header, rewrite);
           }
@@ -2585,6 +2586,9 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         }
         toString() {
           return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
+        }
+        getSetCookie() {
+          return this.get("set-cookie") || [];
         }
         get [Symbol.toStringTag]() {
           return "AxiosHeaders";
@@ -2763,45 +2767,13 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         }), throttled[1]];
       };
       var asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
-      var isURLSameOrigin = platform2.hasStandardBrowserEnv ? (
-        // Standard browser envs have full support of the APIs needed to test
-        // whether the request URL is of the same origin as current location.
-        function standardBrowserEnv() {
-          const msie = platform2.navigator && /(msie|trident)/i.test(platform2.navigator.userAgent);
-          const urlParsingNode = document.createElement("a");
-          let originURL;
-          function resolveURL(url) {
-            let href = url;
-            if (msie) {
-              urlParsingNode.setAttribute("href", href);
-              href = urlParsingNode.href;
-            }
-            urlParsingNode.setAttribute("href", href);
-            return {
-              href: urlParsingNode.href,
-              protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
-              host: urlParsingNode.host,
-              search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
-              hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
-              hostname: urlParsingNode.hostname,
-              port: urlParsingNode.port,
-              pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
-            };
-          }
-          originURL = resolveURL(window.location.href);
-          return function isURLSameOrigin2(requestURL) {
-            const parsed = utils$1.isString(requestURL) ? resolveURL(requestURL) : requestURL;
-            return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
-          };
-        }()
-      ) : (
-        // Non standard browser envs (web workers, react-native) lack needed support.
-        function nonStandardBrowserEnv() {
-          return function isURLSameOrigin2() {
-            return true;
-          };
-        }()
-      );
+      var isURLSameOrigin = platform2.hasStandardBrowserEnv ? ((origin2, isMSIE) => (url) => {
+        url = new URL(url, platform2.origin);
+        return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
+      })(
+        new URL(platform2.origin),
+        platform2.navigator && /(msie|trident)/i.test(platform2.navigator.userAgent)
+      ) : () => true;
       var cookies = platform2.hasStandardBrowserEnv ? (
         // Standard browser envs support document.cookie
         {
@@ -2839,8 +2811,9 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
       function combineURLs(baseURL, relativeURL) {
         return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
       }
-      function buildFullPath(baseURL, requestedURL) {
-        if (baseURL && !isAbsoluteURL(requestedURL)) {
+      function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
+        let isRelativeUrl = !isAbsoluteURL(requestedURL);
+        if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {
           return combineURLs(baseURL, requestedURL);
         }
         return requestedURL;
@@ -2849,7 +2822,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
       function mergeConfig(config1, config2) {
         config2 = config2 || {};
         const config = {};
-        function getMergedValue(target, source, caseless) {
+        function getMergedValue(target, source, prop, caseless) {
           if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
             return utils$1.merge.call({ caseless }, target, source);
           } else if (utils$1.isPlainObject(source)) {
@@ -2859,11 +2832,11 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
           }
           return source;
         }
-        function mergeDeepProperties(a, b, caseless) {
+        function mergeDeepProperties(a, b, prop, caseless) {
           if (!utils$1.isUndefined(b)) {
-            return getMergedValue(a, b, caseless);
+            return getMergedValue(a, b, prop, caseless);
           } else if (!utils$1.isUndefined(a)) {
-            return getMergedValue(void 0, a, caseless);
+            return getMergedValue(void 0, a, prop, caseless);
           }
         }
         function valueFromConfig2(a, b) {
@@ -2914,7 +2887,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
           socketPath: defaultToConfig2,
           responseEncoding: defaultToConfig2,
           validateStatus: mergeDirectKeys,
-          headers: (a, b) => mergeDeepProperties(headersToObject(a), headersToObject(b), true)
+          headers: (a, b, prop) => mergeDeepProperties(headersToObject(a), headersToObject(b), prop, true)
         };
         utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
           const merge2 = mergeMap[prop] || mergeDeepProperties;
@@ -2927,7 +2900,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         const newConfig = mergeConfig({}, config);
         let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
         newConfig.headers = headers = AxiosHeaders$1.from(headers);
-        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url), config.params, config.paramsSerializer);
+        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
         if (auth) {
           headers.set(
             "Authorization",
@@ -3151,7 +3124,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         }
       };
       var trackStream = (stream, chunkSize, onProgress, onFinish) => {
-        const iterator = readBytes(stream, chunkSize);
+        const iterator2 = readBytes(stream, chunkSize);
         let bytes = 0;
         let done;
         let _onFinish = (e) => {
@@ -3163,7 +3136,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         return new ReadableStream({
           async pull(controller) {
             try {
-              const { done: done2, value } = await iterator.next();
+              const { done: done2, value } = await iterator2.next();
               if (done2) {
                 _onFinish();
                 controller.close();
@@ -3182,7 +3155,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
           },
           cancel(reason) {
             _onFinish(reason);
-            return iterator.return();
+            return iterator2.return();
           }
         }, {
           highWaterMark: 2
@@ -3339,7 +3312,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
           });
         } catch (err) {
           unsubscribe && unsubscribe();
-          if (err && err.name === "TypeError" && /fetch/i.test(err.message)) {
+          if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
             throw Object.assign(
               new AxiosError("Network Error", AxiosError.ERR_NETWORK, config, request),
               {
@@ -3445,7 +3418,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
           return Promise.reject(reason);
         });
       }
-      var VERSION2 = "1.7.7";
+      var VERSION2 = "1.9.0";
       var validators$1 = {};
       ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
         validators$1[type] = function validator2(thing) {
@@ -3474,6 +3447,12 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
             );
           }
           return validator2 ? validator2(value, opt, opts) : true;
+        };
+      };
+      validators$1.spelling = function spelling(correctSpelling) {
+        return (value, opt) => {
+          console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
+          return true;
         };
       };
       function assertOptions(options, schema, allowUnknown) {
@@ -3505,7 +3484,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
       var validators = validator.validators;
       var Axios = class {
         constructor(instanceConfig) {
-          this.defaults = instanceConfig;
+          this.defaults = instanceConfig || {};
           this.interceptors = {
             request: new InterceptorManager$1(),
             response: new InterceptorManager$1()
@@ -3524,8 +3503,8 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
             return await this._request(configOrUrl, config);
           } catch (err) {
             if (err instanceof Error) {
-              let dummy;
-              Error.captureStackTrace ? Error.captureStackTrace(dummy = {}) : dummy = new Error();
+              let dummy = {};
+              Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
               const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
               try {
                 if (!err.stack) {
@@ -3567,6 +3546,17 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
               }, true);
             }
           }
+          if (config.allowAbsoluteUrls !== void 0)
+            ;
+          else if (this.defaults.allowAbsoluteUrls !== void 0) {
+            config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
+          } else {
+            config.allowAbsoluteUrls = true;
+          }
+          validator.assertOptions(config, {
+            baseUrl: validators.spelling("baseURL"),
+            withXsrfToken: validators.spelling("withXSRFToken")
+          }, true);
           config.method = (config.method || this.defaults.method || "get").toLowerCase();
           let contextHeaders = headers && utils$1.merge(
             headers.common,
@@ -3633,7 +3623,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         }
         getUri(config) {
           config = mergeConfig(this.defaults, config);
-          const fullPath = buildFullPath(config.baseURL, config.url);
+          const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
           return buildURL(fullPath, config.params, config.paramsSerializer);
         }
       };
@@ -3999,7 +3989,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     }
   });
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
   function assign(tar, src) {
@@ -4103,13 +4093,13 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/globals.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/globals.js
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
     // @ts-ignore Node typings have this
     global
   );
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
   var ResizeObserverSingleton = class {
     /**
      * @private
@@ -4155,7 +4145,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
   };
   ResizeObserverSingleton.entries = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/dom.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/dom.js
   var is_hydrating = false;
   function start_hydrating() {
     is_hydrating = true;
@@ -4272,7 +4262,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     return result;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/lifecycle.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/lifecycle.js
   var current_component;
   function set_current_component(component) {
     current_component = component;
@@ -4317,7 +4307,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/scheduler.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/scheduler.js
   var dirty_components = [];
   var binding_callbacks = [];
   var render_callbacks = [];
@@ -4399,7 +4389,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     render_callbacks = filtered;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/transitions.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/transitions.js
   var outroing = /* @__PURE__ */ new Set();
   var outros;
   function group_outros() {
@@ -4441,12 +4431,12 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/each.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/each.js
   function ensure_array_like(array_like_or_iterator) {
     return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/spread.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/spread.js
   function get_spread_update(levels, updates) {
     const update2 = {};
     const to_null_out = {};
@@ -4480,7 +4470,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     return update2;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/boolean_attributes.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/shared/boolean_attributes.js
   var _boolean_attributes = (
     /** @type {const} */
     [
@@ -4513,7 +4503,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
   );
   var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/Component.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/Component.js
   function bind(component, name, callback) {
     const index = component.$.props[name];
     if (index !== void 0) {
@@ -4691,7 +4681,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
             };
           };
           await Promise.resolve();
-          if (!this.$cn) {
+          if (!this.$cn || this.$c) {
             return;
           }
           const $slots = {};
@@ -4705,6 +4695,12 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
             const name = this.$g_p(attribute.name);
             if (!(name in this.$d)) {
               this.$d[name] = get_custom_element_value(name, attribute.value, this.$p_d, "toProp");
+            }
+          }
+          for (const key in this.$p_d) {
+            if (!(key in this.$d) && this[key] !== void 0) {
+              this.$d[key] = this[key];
+              delete this[key];
             }
           }
           this.$c = new this.$ctor({
@@ -4760,7 +4756,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
       disconnectedCallback() {
         this.$cn = false;
         Promise.resolve().then(() => {
-          if (!this.$cn) {
+          if (!this.$cn && this.$c) {
             this.$c.$destroy();
             this.$c = void 0;
           }
@@ -4857,14 +4853,14 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     }
   };
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/version.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/shared/version.js
   var PUBLIC_VERSION = "4";
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/disclose-version/index.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/disclose-version/index.js
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/Icon.svelte
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/Icon.svelte
   function create_fragment(ctx) {
     let svg;
     let svg_style_value;
@@ -5023,7 +5019,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
   };
   var Icon_default = Icon;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ai/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/ai/index.js
   var AiOutlineEyeInvisible = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2Q889.47 375.11 816.7 305l-50.88 50.88C807.31 395.53 843.45 447.4 874.7 512 791.5 684.2 673.4 766 512 766q-72.67 0-133.87-22.38L323 798.75Q408 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5zm-63.57-320.64L836 122.88a8 8 0 0 0-11.32 0L715.31 232.2Q624.86 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.69 119.4 136.5 191.41L112.48 835a8 8 0 0 0 0 11.31L155.17 889a8 8 0 0 0 11.31 0l712.15-712.12a8 8 0 0 0 0-11.32zM149.3 512C232.6 339.8 350.7 258 512 258c54.54 0 104.13 9.36 149.12 28.39l-70.3 70.3a176 176 0 0 0-238.13 238.13l-83.42 83.42C223.1 637.49 183.3 582.28 149.3 512zm246.7 0a112.11 112.11 0 0 1 146.2-106.69L401.31 546.2A112 112 0 0 1 396 512z"></path><path d="M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 0 0 227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 0 1-112 112z"></path>' };
   var AiOutlineEye = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path>' };
 
@@ -6350,7 +6346,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     });
   };
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/store/index.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/store/index.js
   var subscriber_queue = [];
   function writable(value, start = noop) {
     let stop;
@@ -13167,7 +13163,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
   };
   var InputBox_default = InputBox;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/ri/index.js
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
   var RiBusinessBarChartBoxLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM4 5V19H20V5H4ZM7 13H9V17H7V13ZM11 7H13V17H11V7ZM15 10H17V17H15V10Z"></path>' };
@@ -13445,7 +13441,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
   // _partials/SideMenu.svelte
   var import_jsApi = __toESM(require_jsApi_GEN());
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
 
   // _components/xState.js
@@ -15083,7 +15079,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
   };
   var SideMenu_default = SideMenu;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/bs/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/bs/index.js
   var BsList = { a: { fill: "currentColor", viewBox: "0 0 16 16" }, c: '<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>' };
 
   // _partials/Navbar.svelte
@@ -15498,7 +15494,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[5] = list[i];
+    child_ctx[7] = list[i];
     return child_ctx;
   }
   function create_each_block2(ctx) {
@@ -15506,28 +15502,28 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     let td0;
     let t0_value = (0, import_xFormatter2.formatYearMonth)(
       /*data*/
-      ctx[5].yearMonth
+      ctx[7].yearMonth
     ) + "";
     let t0;
     let t1;
     let td1;
     let t2_value = bookings[
       /*data*/
-      ctx[5].bookingId
+      ctx[7].bookingId
     ] + "";
     let t2;
     let t3;
     let td2;
     let t4_value = (
       /*data*/
-      ctx[5].revenueIDR + ""
+      ctx[7].revenueIDR + ""
     );
     let t4;
     let t5;
     let td3;
     let t6_value = (
       /*data*/
-      ctx[5].donationIDR + ""
+      ctx[7].donationIDR + ""
     );
     let t6;
     return {
@@ -15544,11 +15540,11 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         t5 = space();
         td3 = element("td");
         t6 = text(t6_value);
-        attr(td0, "class", "svelte-134k7vk");
-        attr(td1, "class", "svelte-134k7vk");
-        attr(td2, "class", "svelte-134k7vk");
-        attr(td3, "class", "svelte-134k7vk");
-        attr(tr, "class", "svelte-134k7vk");
+        attr(td0, "class", "svelte-1g4l9i6");
+        attr(td1, "class", "svelte-1g4l9i6");
+        attr(td2, "class", "r svelte-1g4l9i6");
+        attr(td3, "class", "r svelte-1g4l9i6");
+        attr(tr, "class", "svelte-1g4l9i6");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -15568,22 +15564,22 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         if (dirty & /*revenueReports*/
         1 && t0_value !== (t0_value = (0, import_xFormatter2.formatYearMonth)(
           /*data*/
-          ctx2[5].yearMonth
+          ctx2[7].yearMonth
         ) + ""))
           set_data(t0, t0_value);
         if (dirty & /*revenueReports*/
         1 && t2_value !== (t2_value = bookings[
           /*data*/
-          ctx2[5].bookingId
+          ctx2[7].bookingId
         ] + ""))
           set_data(t2, t2_value);
         if (dirty & /*revenueReports*/
         1 && t4_value !== (t4_value = /*data*/
-        ctx2[5].revenueIDR + ""))
+        ctx2[7].revenueIDR + ""))
           set_data(t4, t4_value);
         if (dirty & /*revenueReports*/
         1 && t6_value !== (t6_value = /*data*/
-        ctx2[5].donationIDR + ""))
+        ctx2[7].donationIDR + ""))
           set_data(t6, t6_value);
       },
       d(detaching) {
@@ -15598,8 +15594,8 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     return {
       c() {
         tr = element("tr");
-        tr.innerHTML = `<td class="svelte-134k7vk">No data</td>`;
-        attr(tr, "class", "svelte-134k7vk");
+        tr.innerHTML = `<td class="svelte-1g4l9i6">No data</td>`;
+        attr(tr, "class", "svelte-1g4l9i6");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -15625,9 +15621,21 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     let t9;
     let tbody;
     let t10;
+    let t11;
+    let tfoot;
+    let tr1;
+    let th4;
+    let t12;
+    let th5;
+    let t13;
+    let th6;
+    let t14;
+    let t15;
+    let th7;
+    let t16;
     let current;
     function inputbox_value_binding(value) {
-      ctx[4](value);
+      ctx[6](value);
     }
     let inputbox_props = {
       className: "year-month",
@@ -15657,7 +15665,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
     submitbutton.$on(
       "click",
       /*getRevenueReports*/
-      ctx[3]
+      ctx[5]
     );
     let each_value = ensure_array_like(
       /*revenueReports*/
@@ -15681,7 +15689,7 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         div1 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-134k7vk"><th style="min-width: 100px;" class="svelte-134k7vk">Month</th> <th style="min-width: 170px;" class="svelte-134k7vk">Booking</th> <th class="svelte-134k7vk">Revenue (IDR)</th> <th class="svelte-134k7vk">Donation (IDR)</th></tr>`;
+        thead.innerHTML = `<tr class="svelte-1g4l9i6"><th style="min-width: 100px;" class="svelte-1g4l9i6">Month</th> <th style="min-width: 170px;" class="svelte-1g4l9i6">Booking</th> <th class="svelte-1g4l9i6">Revenue (IDR)</th> <th class="svelte-1g4l9i6">Donation (IDR)</th></tr>`;
         t9 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
@@ -15690,11 +15698,34 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         t10 = space();
         if (if_block)
           if_block.c();
-        attr(div0, "class", "actions svelte-134k7vk");
-        attr(thead, "class", "svelte-134k7vk");
-        attr(table, "class", "svelte-134k7vk");
-        attr(div1, "class", "table-container svelte-134k7vk");
-        attr(div2, "class", "report-container svelte-134k7vk");
+        t11 = space();
+        tfoot = element("tfoot");
+        tr1 = element("tr");
+        th4 = element("th");
+        t12 = space();
+        th5 = element("th");
+        t13 = space();
+        th6 = element("th");
+        t14 = text(
+          /*sumRevenueIDR*/
+          ctx[3]
+        );
+        t15 = space();
+        th7 = element("th");
+        t16 = text(
+          /*sumDonationIDR*/
+          ctx[4]
+        );
+        attr(div0, "class", "actions svelte-1g4l9i6");
+        attr(thead, "class", "svelte-1g4l9i6");
+        attr(th4, "class", "svelte-1g4l9i6");
+        attr(th5, "class", "svelte-1g4l9i6");
+        attr(th6, "class", "r svelte-1g4l9i6");
+        attr(th7, "class", "r svelte-1g4l9i6");
+        attr(tr1, "class", "svelte-1g4l9i6");
+        attr(table, "class", "svelte-1g4l9i6");
+        attr(div1, "class", "table-container svelte-1g4l9i6");
+        attr(div2, "class", "report-container svelte-1g4l9i6");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -15716,6 +15747,18 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
         append(tbody, t10);
         if (if_block)
           if_block.m(tbody, null);
+        append(table, t11);
+        append(table, tfoot);
+        append(tfoot, tr1);
+        append(tr1, th4);
+        append(tr1, t12);
+        append(tr1, th5);
+        append(tr1, t13);
+        append(tr1, th6);
+        append(th6, t14);
+        append(tr1, t15);
+        append(tr1, th7);
+        append(th7, t16);
         current = true;
       },
       p(ctx2, dirty) {
@@ -15769,6 +15812,20 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
           if_block.d(1);
           if_block = null;
         }
+        if (!current || dirty & /*sumRevenueIDR*/
+        8)
+          set_data(
+            t14,
+            /*sumRevenueIDR*/
+            ctx2[3]
+          );
+        if (!current || dirty & /*sumDonationIDR*/
+        16)
+          set_data(
+            t16,
+            /*sumDonationIDR*/
+            ctx2[4]
+          );
       },
       i(local) {
         if (current)
@@ -15815,8 +15872,8 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, revenueReports, isFiltering, yearMonth*/
-        263) {
+        if (dirty & /*$scope, sumDonationIDR, sumRevenueIDR, revenueReports, isFiltering, yearMonth*/
+        1055) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -15879,14 +15936,31 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
       );
       $invalidate(2, isFiltering = false);
     }
+    let sumRevenueIDR = 0;
+    let sumDonationIDR = 0;
     function inputbox_value_binding(value) {
       yearMonth = value;
       $invalidate(1, yearMonth);
     }
+    $self.$.update = () => {
+      if ($self.$.dirty & /*revenueReports, sumRevenueIDR, sumDonationIDR*/
+      25) {
+        $: {
+          $invalidate(3, sumRevenueIDR = 0);
+          $invalidate(4, sumDonationIDR = 0);
+          for (let i = 0; i < revenueReports.length; i++) {
+            $invalidate(3, sumRevenueIDR += revenueReports[i].revenueIDR | 0);
+            $invalidate(4, sumDonationIDR += revenueReports[i].donationIDR | 0);
+          }
+        }
+      }
+    };
     return [
       revenueReports,
       yearMonth,
       isFiltering,
+      sumRevenueIDR,
+      sumDonationIDR,
       getRevenueReports,
       inputbox_value_binding
     ];
@@ -15902,5 +15976,10 @@ table.svelte-134k7vk tbody tr td.svelte-134k7vk {
   // staffRevenueReport.svelte.ts
   var app = new staffRevenueReport_default({ target: document.getElementById("app") });
 })();
+/*! Bundled license information:
+
+axios/dist/browser/axios.cjs:
+  (*! Axios v1.9.0 Copyright (c) 2025 Matt Zabriskie and contributors *)
+*/
 </script>
 </body></html>
