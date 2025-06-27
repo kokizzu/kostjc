@@ -155,3 +155,23 @@ module.exports = {};
  * @property {string} lastUseAt
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} WifiDevice
+ * @property {string|number} id
+ * @property {string} startAt
+ * @property {string} endAt
+ * @property {string} paidAt
+ * @property {number} priceIDR
+ * @property {string} tenantId
+ * @property {string} macAddress
+ * @property {string} roomId
+ * @property {number} createdAt
+ * @property {string} createdBy
+ * @property {number} updatedAt
+ * @property {string} updatedBy
+ * @property {number} deletedAt
+ * @property {string} deletedBy
+ * @property {string} restoredBy
+ */
+module.exports = {};

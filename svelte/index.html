@@ -13485,6 +13485,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
+  var RiBuildingsHomeWifiLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M6 19H18V9.15745L12 3.7029L6 9.15745V19ZM19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM8 9.99998C11.866 9.99998 15 13.134 15 17H13C13 14.2386 10.7614 12 8 12V9.99998ZM8 14C9.65685 14 11 15.3431 11 17H8V14Z"></path>' };
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
   var RiBusinessBarChartBoxLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM4 5V19H20V5H4ZM7 13H9V17H7V13ZM11 7H13V17H11V7ZM15 10H17V17H15V10Z"></path>' };
   var RiBusinessCalendarScheduleLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M7 3V1H9V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V9H20V5H17V7H15V5H9V7H7V5H4V19H10V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7ZM17 12C14.7909 12 13 13.7909 13 16C13 18.2091 14.7909 20 17 20C19.2091 20 21 18.2091 21 16C21 13.7909 19.2091 12 17 12ZM11 16C11 12.6863 13.6863 10 17 10C20.3137 10 23 12.6863 23 16C23 19.3137 20.3137 22 17 22C13.6863 22 11 19.3137 11 16ZM16 13V16.4142L18.2929 18.7071L19.7071 17.2929L18 15.5858V13H16Z"></path>' };
@@ -13639,6 +13640,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let icon11;
     let t35;
     let span11;
+    let t37;
+    let a12;
+    let icon12;
+    let t38;
+    let span12;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -13674,15 +13680,18 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     });
     icon9 = new Icon_default({
+      props: { src: RiBuildingsHomeWifiLine, size: "20" }
+    });
+    icon10 = new Icon_default({
       props: {
         src: RiUserFacesUserFollowLine,
         size: "20"
       }
     });
-    icon10 = new Icon_default({
+    icon11 = new Icon_default({
       props: { src: RiUserFacesGroupLine, size: "20" }
     });
-    icon11 = new Icon_default({
+    icon12 = new Icon_default({
       props: {
         src: RiBusinessBarChartBoxLine,
         size: "20"
@@ -13752,19 +13761,25 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         create_component(icon9.$.fragment);
         t29 = space();
         span9 = element("span");
-        span9.textContent = "Tenants";
+        span9.textContent = "Wifi Devices";
         t31 = space();
         a10 = element("a");
         create_component(icon10.$.fragment);
         t32 = space();
         span10 = element("span");
-        span10.textContent = "Users";
+        span10.textContent = "Tenants";
         t34 = space();
         a11 = element("a");
         create_component(icon11.$.fragment);
         t35 = space();
         span11 = element("span");
-        span11.textContent = "Logs";
+        span11.textContent = "Users";
+        t37 = space();
+        a12 = element("a");
+        create_component(icon12.$.fragment);
+        t38 = space();
+        span12 = element("span");
+        span12.textContent = "Logs";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
@@ -13839,25 +13854,33 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           /*pathLv2*/
           ctx[4] === "stock"
         );
-        attr(a9, "href", "/admin/tenants");
+        attr(a9, "href", "/admin/wifiDevice");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
           a9,
           "active",
           /*pathLv2*/
-          ctx[4] === "tenants"
+          ctx[4] === "wifiDevice"
         );
-        attr(a10, "href", "/admin/usersManagement");
+        attr(a10, "href", "/admin/tenants");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
           a10,
           "active",
           /*pathLv2*/
+          ctx[4] === "tenants"
+        );
+        attr(a11, "href", "/admin/usersManagement");
+        attr(a11, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a11,
+          "active",
+          /*pathLv2*/
           ctx[4] === "usersManagement"
         );
-        attr(a11, "href", "/admin/bookingLogs");
-        attr(a11, "class", "svelte-1fwsz8h");
-        toggle_class(a11, "active", String(
+        attr(a12, "href", "/admin/bookingLogs");
+        attr(a12, "class", "svelte-1fwsz8h");
+        toggle_class(a12, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
@@ -13926,12 +13949,17 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         mount_component(icon11, a11, null);
         append(a11, t35);
         append(a11, span11);
+        append(nav, t37);
+        append(nav, a12);
+        mount_component(icon12, a12, null);
+        append(a12, t38);
+        append(a12, span12);
         current = true;
       },
       p(ctx2, dirty) {
         if (!current || dirty & /*String, pathLv2*/
         16) {
-          toggle_class(a11, "active", String(
+          toggle_class(a12, "active", String(
             /*pathLv2*/
             ctx2[4]
           ).includes("Logs") || false);
@@ -13952,6 +13980,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         transition_in(icon9.$.fragment, local);
         transition_in(icon10.$.fragment, local);
         transition_in(icon11.$.fragment, local);
+        transition_in(icon12.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -13967,6 +13996,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         transition_out(icon9.$.fragment, local);
         transition_out(icon10.$.fragment, local);
         transition_out(icon11.$.fragment, local);
+        transition_out(icon12.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -13987,6 +14017,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         destroy_component(icon9);
         destroy_component(icon10);
         destroy_component(icon11);
+        destroy_component(icon12);
       }
     };
   }
@@ -14121,6 +14152,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let icon11;
     let t35;
     let span11;
+    let t37;
+    let a12;
+    let icon12;
+    let t38;
+    let span12;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -14156,15 +14192,18 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     });
     icon9 = new Icon_default({
+      props: { src: RiBuildingsHomeWifiLine, size: "20" }
+    });
+    icon10 = new Icon_default({
       props: {
         src: RiUserFacesUserFollowLine,
         size: "20"
       }
     });
-    icon10 = new Icon_default({
+    icon11 = new Icon_default({
       props: { src: RiUserFacesGroupLine, size: "20" }
     });
-    icon11 = new Icon_default({
+    icon12 = new Icon_default({
       props: {
         src: RiBusinessBarChartBoxLine,
         size: "20"
@@ -14234,19 +14273,25 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         create_component(icon9.$.fragment);
         t29 = space();
         span9 = element("span");
-        span9.textContent = "Tenants";
+        span9.textContent = "Wifi Devices";
         t31 = space();
         a10 = element("a");
         create_component(icon10.$.fragment);
         t32 = space();
         span10 = element("span");
-        span10.textContent = "Users";
+        span10.textContent = "Tenants";
         t34 = space();
         a11 = element("a");
         create_component(icon11.$.fragment);
         t35 = space();
         span11 = element("span");
-        span11.textContent = "Logs";
+        span11.textContent = "Users";
+        t37 = space();
+        a12 = element("a");
+        create_component(icon12.$.fragment);
+        t38 = space();
+        span12 = element("span");
+        span12.textContent = "Logs";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
@@ -14321,25 +14366,33 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           /*pathLv2*/
           ctx[4] === "stock"
         );
-        attr(a9, "href", "/admin/tenants");
+        attr(a9, "href", "/admin/wifiDevice");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
           a9,
           "active",
           /*pathLv2*/
-          ctx[4] === "tenants"
+          ctx[4] === "wifiDevice"
         );
-        attr(a10, "href", "/admin/usersManagement");
+        attr(a10, "href", "/admin/tenants");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
           a10,
           "active",
           /*pathLv2*/
+          ctx[4] === "tenants"
+        );
+        attr(a11, "href", "/admin/usersManagement");
+        attr(a11, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a11,
+          "active",
+          /*pathLv2*/
           ctx[4] === "usersManagement"
         );
-        attr(a11, "href", "/admin/bookingLogs");
-        attr(a11, "class", "svelte-1fwsz8h");
-        toggle_class(a11, "active", String(
+        attr(a12, "href", "/admin/bookingLogs");
+        attr(a12, "class", "svelte-1fwsz8h");
+        toggle_class(a12, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
@@ -14408,12 +14461,17 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         mount_component(icon11, a11, null);
         append(a11, t35);
         append(a11, span11);
+        append(nav, t37);
+        append(nav, a12);
+        mount_component(icon12, a12, null);
+        append(a12, t38);
+        append(a12, span12);
         current = true;
       },
       p(ctx2, dirty) {
         if (!current || dirty & /*String, pathLv2*/
         16) {
-          toggle_class(a11, "active", String(
+          toggle_class(a12, "active", String(
             /*pathLv2*/
             ctx2[4]
           ).includes("Logs") || false);
@@ -14434,6 +14492,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         transition_in(icon9.$.fragment, local);
         transition_in(icon10.$.fragment, local);
         transition_in(icon11.$.fragment, local);
+        transition_in(icon12.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -14449,6 +14508,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         transition_out(icon9.$.fragment, local);
         transition_out(icon10.$.fragment, local);
         transition_out(icon11.$.fragment, local);
+        transition_out(icon12.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -14469,6 +14529,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         destroy_component(icon9);
         destroy_component(icon10);
         destroy_component(icon11);
+        destroy_component(icon12);
       }
     };
   }

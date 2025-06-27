@@ -5,6 +5,7 @@ import (
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
+	"time"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminWifiDevice.go
@@ -52,21 +53,21 @@ var AdminWifiDeviceMeta = zCrud.Meta{
 		{
 			Name:      mProperty.StartAt,
 			Label:     `Start At`,
-			DataType:  zCrud.DataTypeInt,
+			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeDateTime,
 			ReadOnly:  false,
 		},
 		{
 			Name:      mProperty.EndAt,
 			Label:     `End At`,
-			DataType:  zCrud.DataTypeInt,
+			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeDateTime,
 			ReadOnly:  false,
 		},
 		{
 			Name:      mProperty.PaidAt,
 			Label:     `Paid At`,
-			DataType:  zCrud.DataTypeInt,
+			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeDateTime,
 			ReadOnly:  false,
 		},
@@ -84,6 +85,13 @@ var AdminWifiDeviceMeta = zCrud.Meta{
 			Label:     `Mac Address`,
 			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeText,
+			ReadOnly:  false,
+		},
+		{
+			Name:      mProperty.TenantId,
+			Label:     `Tenant`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
 			ReadOnly:  false,
 		},
 		{
@@ -159,9 +167,15 @@ func (d *Domain) AdminWifiDevice(in *AdminWifiDeviceIn) (out AdminWifiDeviceOut)
 
 		// defer InsertPropertyLog(wd.Id, d.wifiDeviceLog, out.ResponseCommon, in.TimeNow(), sess.UserId, wd)()
 
-		wd.SetStartAt(in.WifiDevice.StartAt)
-		wd.SetEndAt(in.WifiDevice.EndAt)
-		wd.SetPaidAt(in.WifiDevice.PaidAt)
+		if mProperty.IsValidDate(in.WifiDevice.StartAt, time.DateOnly) {
+			wd.SetStartAt(in.WifiDevice.StartAt)
+		}
+		if mProperty.IsValidDate(in.WifiDevice.EndAt, time.DateOnly) {
+			wd.SetEndAt(in.WifiDevice.EndAt)
+		}
+		if mProperty.IsValidDate(in.WifiDevice.PaidAt, time.DateOnly) {
+			wd.SetPaidAt(in.WifiDevice.PaidAt)
+		}
 		wd.SetPriceIDR(in.WifiDevice.PriceIDR)
 		wd.SetTenantId(in.WifiDevice.TenantId)
 		wd.SetRoomId(in.WifiDevice.RoomId)
@@ -186,7 +200,7 @@ func (d *Domain) AdminWifiDevice(in *AdminWifiDeviceIn) (out AdminWifiDeviceOut)
 
 		fallthrough
 	case zCrud.CmdList:
-		wd := rqProperty.NewFacilities(d.PropOltp)
+		wd := rqProperty.NewWifiDevices(d.PropOltp)
 		out.WifiDevices = wd.FindByPagination(
 			&AdminWifiDeviceMeta,
 			&in.Pager,

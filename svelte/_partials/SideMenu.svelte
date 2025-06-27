@@ -10,7 +10,8 @@
     RiUserFacesUserFollowLine, RiBuildingsHotelLine, RiBusinessCalendarScheduleLine,
     RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
     RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine, RiUserFacesGroupLine,
-    RiDocumentFileChartLine, RiSystemMenu2Line, RiFinanceCashLine, RiBusinessBarChartBoxLine
+    RiDocumentFileChartLine, RiSystemMenu2Line, RiFinanceCashLine, RiBusinessBarChartBoxLine,
+    RiBuildingsHomeWifiLine
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { LuHandPlatter } from '../node_modules/svelte-icons-pack/dist/lu';
   import { isOpenSideMenu } from '../_components/xState';
@@ -117,6 +118,10 @@
           <Icon src={RiBusinessInboxUnarchiveLine} size="20" />
           <span>Stocks</span>
         </a>
+        <a href="/admin/wifiDevice" class:active={pathLv2 === 'wifiDevice'}>
+          <Icon src={RiBuildingsHomeWifiLine} size="20" />
+          <span>Wifi Devices</span>
+        </a>
         <a href="/admin/tenants" class:active={pathLv2 === 'tenants'}>
           <Icon src={RiUserFacesUserFollowLine} size="20" />
           <span>Tenants</span>
@@ -219,6 +224,10 @@
         <a href="/admin/stock" class:active={pathLv2 === 'stock'}>
           <Icon src={RiBusinessInboxUnarchiveLine} size="20" />
           <span>Stocks</span>
+        </a>
+        <a href="/admin/wifiDevice" class:active={pathLv2 === 'wifiDevice'}>
+          <Icon src={RiBuildingsHomeWifiLine} size="20" />
+          <span>Wifi Devices</span>
         </a>
         <a href="/admin/tenants" class:active={pathLv2 === 'tenants'}>
           <Icon src={RiUserFacesUserFollowLine} size="20" />

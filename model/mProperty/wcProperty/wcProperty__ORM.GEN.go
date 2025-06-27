@@ -2342,7 +2342,7 @@ func (w *WifiDevicesMutator) SetId(val uint64) bool { //nolint:dupl false positi
 }
 
 // SetStartAt create mutations, should not duplicate
-func (w *WifiDevicesMutator) SetStartAt(val int64) bool { //nolint:dupl false positive
+func (w *WifiDevicesMutator) SetStartAt(val string) bool { //nolint:dupl false positive
 	if val != w.StartAt {
 		w.mutations = append(w.mutations, A.X{`=`, 1, val})
 		w.logs = append(w.logs, A.X{`startAt`, w.StartAt, val})
@@ -2353,7 +2353,7 @@ func (w *WifiDevicesMutator) SetStartAt(val int64) bool { //nolint:dupl false po
 }
 
 // SetEndAt create mutations, should not duplicate
-func (w *WifiDevicesMutator) SetEndAt(val int64) bool { //nolint:dupl false positive
+func (w *WifiDevicesMutator) SetEndAt(val string) bool { //nolint:dupl false positive
 	if val != w.EndAt {
 		w.mutations = append(w.mutations, A.X{`=`, 2, val})
 		w.logs = append(w.logs, A.X{`endAt`, w.EndAt, val})
@@ -2364,7 +2364,7 @@ func (w *WifiDevicesMutator) SetEndAt(val int64) bool { //nolint:dupl false posi
 }
 
 // SetPaidAt create mutations, should not duplicate
-func (w *WifiDevicesMutator) SetPaidAt(val int64) bool { //nolint:dupl false positive
+func (w *WifiDevicesMutator) SetPaidAt(val string) bool { //nolint:dupl false positive
 	if val != w.PaidAt {
 		w.mutations = append(w.mutations, A.X{`=`, 3, val})
 		w.logs = append(w.logs, A.X{`paidAt`, w.PaidAt, val})
@@ -2507,16 +2507,16 @@ func (w *WifiDevicesMutator) SetAll(from rqProperty.WifiDevices, excludeMap, for
 		w.Id = from.Id
 		changed = true
 	}
-	if !excludeMap[`startAt`] && (forceMap[`startAt`] || from.StartAt != 0) {
-		w.StartAt = from.StartAt
+	if !excludeMap[`startAt`] && (forceMap[`startAt`] || from.StartAt != ``) {
+		w.StartAt = S.Trim(from.StartAt)
 		changed = true
 	}
-	if !excludeMap[`endAt`] && (forceMap[`endAt`] || from.EndAt != 0) {
-		w.EndAt = from.EndAt
+	if !excludeMap[`endAt`] && (forceMap[`endAt`] || from.EndAt != ``) {
+		w.EndAt = S.Trim(from.EndAt)
 		changed = true
 	}
-	if !excludeMap[`paidAt`] && (forceMap[`paidAt`] || from.PaidAt != 0) {
-		w.PaidAt = from.PaidAt
+	if !excludeMap[`paidAt`] && (forceMap[`paidAt`] || from.PaidAt != ``) {
+		w.PaidAt = S.Trim(from.PaidAt)
 		changed = true
 	}
 	if !excludeMap[`priceIDR`] && (forceMap[`priceIDR`] || from.PriceIDR != 0) {

@@ -2560,9 +2560,9 @@ var StocksFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 type WifiDevices struct {
 	Adapter    *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
 	Id         uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
-	StartAt    int64       `json:"startAt" form:"startAt" query:"startAt" long:"startAt" msg:"startAt"`
-	EndAt      int64       `json:"endAt" form:"endAt" query:"endAt" long:"endAt" msg:"endAt"`
-	PaidAt     int64       `json:"paidAt" form:"paidAt" query:"paidAt" long:"paidAt" msg:"paidAt"`
+	StartAt    string      `json:"startAt" form:"startAt" query:"startAt" long:"startAt" msg:"startAt"`
+	EndAt      string      `json:"endAt" form:"endAt" query:"endAt" long:"endAt" msg:"endAt"`
+	PaidAt     string      `json:"paidAt" form:"paidAt" query:"paidAt" long:"paidAt" msg:"paidAt"`
 	PriceIDR   int64       `json:"priceIDR" form:"priceIDR" query:"priceIDR" long:"priceIDR" msg:"priceIDR"`
 	TenantId   uint64      `json:"tenantId,string" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
 	MacAddress string      `json:"macAddress" form:"macAddress" query:"macAddress" long:"macAddress" msg:"macAddress"`
@@ -2848,9 +2848,9 @@ func (w *WifiDevices) ToArray() A.X { //nolint:dupl false positive
 // FromArray convert slice to receiver fields
 func (w *WifiDevices) FromArray(a A.X) *WifiDevices { //nolint:dupl false positive
 	w.Id = X.ToU(a[0])
-	w.StartAt = X.ToI(a[1])
-	w.EndAt = X.ToI(a[2])
-	w.PaidAt = X.ToI(a[3])
+	w.StartAt = X.ToS(a[1])
+	w.EndAt = X.ToS(a[2])
+	w.PaidAt = X.ToS(a[3])
 	w.PriceIDR = X.ToI(a[4])
 	w.TenantId = X.ToU(a[5])
 	w.MacAddress = X.ToS(a[6])
@@ -2868,9 +2868,9 @@ func (w *WifiDevices) FromArray(a A.X) *WifiDevices { //nolint:dupl false positi
 // FromUncensoredArray convert slice to receiver fields
 func (w *WifiDevices) FromUncensoredArray(a A.X) *WifiDevices { //nolint:dupl false positive
 	w.Id = X.ToU(a[0])
-	w.StartAt = X.ToI(a[1])
-	w.EndAt = X.ToI(a[2])
-	w.PaidAt = X.ToI(a[3])
+	w.StartAt = X.ToS(a[1])
+	w.EndAt = X.ToS(a[2])
+	w.PaidAt = X.ToS(a[3])
 	w.PriceIDR = X.ToI(a[4])
 	w.TenantId = X.ToU(a[5])
 	w.MacAddress = X.ToS(a[6])
@@ -2926,9 +2926,9 @@ func (w *WifiDevices) Total() int64 { //nolint:dupl false positive
 // WifiDevicesFieldTypeMap returns key value of field name and key
 var WifiDevicesFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`id`:         Tt.Unsigned,
-	`startAt`:    Tt.Integer,
-	`endAt`:      Tt.Integer,
-	`paidAt`:     Tt.Integer,
+	`startAt`:    Tt.String,
+	`endAt`:      Tt.String,
+	`paidAt`:     Tt.String,
 	`priceIDR`:   Tt.Integer,
 	`tenantId`:   Tt.Unsigned,
 	`macAddress`: Tt.String,

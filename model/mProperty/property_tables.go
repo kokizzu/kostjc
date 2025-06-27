@@ -265,9 +265,9 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 	TableWifiDevices: {
 		Fields: []Tt.Field{
 			{Id, Tt.Unsigned},
-			{StartAt, Tt.Integer},
-			{EndAt, Tt.Integer},
-			{PaidAt, Tt.Integer},
+			{StartAt, Tt.String},
+			{EndAt, Tt.String},
+			{PaidAt, Tt.String},
 			{PriceIDR, Tt.Integer},
 			{TenantId, Tt.Unsigned},
 			{MacAddress, Tt.String},

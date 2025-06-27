@@ -530,6 +530,42 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminWifiDeviceAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminWifiDeviceIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminWifiDeviceAction)
+		if err != nil {
+			return err
+		}
+
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.AdminWifiDevice(&in)
+
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
+		room := rqProperty.NewRooms(d.PropOltp)
+		rooms := room.FindRoomChoices()
+
+		return views.RenderAdminWifiDevice(ctx, M.SX{
+			`title`:       `KostJC | Wifi Device Management`,
+			`user`:        user,
+			`segments`:    segments,
+			`wifiDevice`:  out.WifiDevice,
+			`wifiDevices`: out.WifiDevices,
+			`fields`:      out.Meta.Fields,
+			`pager`:       out.Pager,
+			`tenants`:     tenants,
+			`rooms`:       rooms,
+		})
+	})
+
 	fw.Get(`/`+domain.AdminBookingLogsAction, func(ctx *fiber.Ctx) error {
 		var in domain.AdminBookingLogsIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminBookingLogsAction)
