@@ -119,6 +119,35 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.StaffWifiDeviceReportAction, func(ctx *fiber.Ctx) error {
+		in, user, segments := userInfoFromContext(ctx, d)
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		in.RequestCommon.Action = domain.StaffWifiDeviceReportAction
+		out := d.StaffWifiDeviceReport(&domain.StaffWifiDeviceReportIn{
+			RequestCommon: in.RequestCommon,
+			YearMonth:     time.Now().Format(rqProperty.DateFormatYYYYMM),
+		})
+
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
+		room := rqProperty.NewRooms(d.PropOltp)
+		rooms := room.FindRoomChoices()
+
+		return views.RenderStaffWifiDeviceReport(ctx, M.SX{
+			`title`:             `KostJC | Revenue Report`,
+			`user`:              user,
+			`segments`:          segments,
+			`wifiDeviceReports`: out.WifiDeviceReports,
+			`tenants`:           tenants,
+			`rooms`:             rooms,
+		})
+	})
+
 	fw.Get(`/`+domain.StaffMissingDataReportAction, func(ctx *fiber.Ctx) error {
 		var in domain.StaffMissingDataReportIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffMissingDataReportAction)

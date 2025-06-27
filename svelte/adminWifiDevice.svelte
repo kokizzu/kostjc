@@ -14,7 +14,6 @@
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
   import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
-  import { dateISOFormat } from './_components/xFormatter';
   import PopUpAddWifiDevice from './_components/PopUpAddWifiDevice.svelte';
 
   let user        = /** @type {User} */ ({/* user */});

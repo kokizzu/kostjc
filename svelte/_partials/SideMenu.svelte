@@ -65,6 +65,10 @@
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Revenue Report</span>
       </a>
+      <a href="/staff/wifiDeviceReport" class:active={pathAll === '/staff/wifiDeviceReport'}>
+        <Icon src={RiDocumentFileChartLine} size="20" />
+        <span>Wifi Device Report</span>
+      </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />
         <span>Profile</span>

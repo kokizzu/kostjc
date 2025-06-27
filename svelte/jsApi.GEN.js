@@ -2291,9 +2291,9 @@ exports.AdminUsersManagement = async function AdminUsersManagement( i, cb ) {
  * @property {Object} pager.filters
  * @property {Array<String>} pager.order
  * @property {number} wifiDevice.id
- * @property {number} wifiDevice.startAt
- * @property {number} wifiDevice.endAt
- * @property {number} wifiDevice.paidAt
+ * @property {String} wifiDevice.startAt
+ * @property {String} wifiDevice.endAt
+ * @property {String} wifiDevice.paidAt
  * @property {number} wifiDevice.priceIDR
  * @property {number} wifiDevice.tenantId
  * @property {String} wifiDevice.macAddress
@@ -2320,9 +2320,9 @@ const AdminWifiDeviceIn = {
   }, // zCrud.PagerIn
   wifiDevice: { // rqProperty.WifiDevices
     id: 0, // uint64
-    startAt: 0, // int64
-    endAt: 0, // int64
-    paidAt: 0, // int64
+    startAt: '', // string
+    endAt: '', // string
+    paidAt: '', // string
     priceIDR: 0, // int64
     tenantId: 0, // uint64
     macAddress: '', // string
@@ -2350,9 +2350,9 @@ const AdminWifiDeviceIn = {
  * @property {Object} meta.mutex
  * @property {String} meta.cachedSelect
  * @property {number} wifiDevice.id
- * @property {number} wifiDevice.startAt
- * @property {number} wifiDevice.endAt
- * @property {number} wifiDevice.paidAt
+ * @property {String} wifiDevice.startAt
+ * @property {String} wifiDevice.endAt
+ * @property {String} wifiDevice.paidAt
  * @property {number} wifiDevice.priceIDR
  * @property {number} wifiDevice.tenantId
  * @property {String} wifiDevice.macAddress
@@ -2387,9 +2387,9 @@ const AdminWifiDeviceOut = {
   }, // zCrud.Meta
   wifiDevice: { // rqProperty.WifiDevices
     id: 0, // uint64
-    startAt: 0, // int64
-    endAt: 0, // int64
-    paidAt: 0, // int64
+    startAt: '', // string
+    endAt: '', // string
+    paidAt: '', // string
     priceIDR: 0, // int64
     tenantId: 0, // uint64
     macAddress: '', // string

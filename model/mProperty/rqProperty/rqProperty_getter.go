@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/I"
 	"github.com/kokizzu/gotro/L"
@@ -1391,7 +1392,7 @@ SELECT
 	"tenantId",
 	"roomId",
 	"startAt",
-	MAX("endAt"),
+	"endAt",
 	"paidAt"
 FROM "wifiDevices"
 WHERE
@@ -1399,6 +1400,8 @@ WHERE
 	AND SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
 	AND "paidAt" = 0
 `
+
+	fmt.Println(color.GreenString(query))
 
 	w.Adapter.QuerySql(query, func(row []any) {
 		if len(row) == 5 {
