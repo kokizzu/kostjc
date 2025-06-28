@@ -1414,6 +1414,8 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         return `${year}-${month}-${date}`;
       }
       function dateISOFormatFromYYYYMMDD(dateStr, dayTo = 0) {
+        if (!dateStr)
+          return "";
         const dt = new Date(dateStr);
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -1453,6 +1455,16 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         const monthName = date.toLocaleString("en-US", { month: "long" });
         return `${monthName} ${year}`;
       }
+      function localeDateFromYYYYMMDD(dateStr) {
+        if (!dateStr)
+          return "";
+        const dt = new Date(dateStr);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = dt.toLocaleDateString("default", { month: "long" });
+        const year = dt.getFullYear();
+        return `${day}, ${date} ${month} ${year}`;
+      }
       module.exports = {
         datetime,
         localeDatetime,
@@ -1464,7 +1476,8 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         loadScript,
         formatPrice,
         arrToArrNum,
-        formatYearMonth: formatYearMonth2
+        formatYearMonth: formatYearMonth2,
+        localeDateFromYYYYMMDD
       };
     }
   });
@@ -12966,9 +12979,6 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
     function reStructureSvelteValues() {
       if (type === "combobox-arr") {
         $invalidate(10, itemsArr = values);
-        if (!value) {
-          $invalidate(0, value = itemsArr[0]);
-        }
         for (const v of values) {
           if (v == value) {
             $invalidate(12, svelteSelectValue = { value: v, label: v });
@@ -12988,13 +12998,6 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         });
       } else if (type === "combobox") {
         $invalidate(11, itemsArrObj = []);
-        if (!value || value === null || value === 0 || value === "" || value === void 0 || value === "null" || value === "undefined" || value === "0") {
-          const firstObjKey = Object.keys(values)[0];
-          $invalidate(12, svelteSelectValue = {
-            value: firstObjKey,
-            label: values[firstObjKey]
-          });
-        }
         for (const [k, v] of Object.entries(values)) {
           $invalidate(11, itemsArrObj = [...itemsArrObj, { value: k, label: v }]);
           if (k === value) {
@@ -13005,6 +13008,9 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
           return String(a.label).localeCompare(String(b.label));
         });
       }
+      if (!value || value === null || value === 0 || value === "" || value === void 0 || value === "null" || value === "undefined" || value === "0") {
+        $invalidate(12, svelteSelectValue = null);
+      }
     }
     onMount(() => {
       reStructureSvelteValues();
@@ -13014,6 +13020,7 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
     }
     function handleClear(e) {
       $invalidate(0, value = "");
+      $invalidate(12, svelteSelectValue = null);
     }
     function input_change_handler() {
       value = this.checked;

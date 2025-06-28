@@ -4900,6 +4900,8 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         return `${year}-${month}-${date}`;
       }
       function dateISOFormatFromYYYYMMDD2(dateStr, dayTo = 0) {
+        if (!dateStr)
+          return "";
         const dt = new Date(dateStr);
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -4939,6 +4941,16 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         const monthName = date.toLocaleString("en-US", { month: "long" });
         return `${monthName} ${year}`;
       }
+      function localeDateFromYYYYMMDD(dateStr) {
+        if (!dateStr)
+          return "";
+        const dt = new Date(dateStr);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = dt.toLocaleDateString("default", { month: "long" });
+        const year = dt.getFullYear();
+        return `${day}, ${date} ${month} ${year}`;
+      }
       module.exports = {
         datetime,
         localeDatetime,
@@ -4950,7 +4962,8 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         loadScript,
         formatPrice: formatPrice3,
         arrToArrNum: arrToArrNum2,
-        formatYearMonth
+        formatYearMonth,
+        localeDateFromYYYYMMDD
       };
     }
   });
@@ -16179,9 +16192,6 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
     function reStructureSvelteValues() {
       if (type === "combobox-arr") {
         $invalidate(10, itemsArr = values);
-        if (!value) {
-          $invalidate(0, value = itemsArr[0]);
-        }
         for (const v of values) {
           if (v == value) {
             $invalidate(12, svelteSelectValue = { value: v, label: v });
@@ -16201,13 +16211,6 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         });
       } else if (type === "combobox") {
         $invalidate(11, itemsArrObj = []);
-        if (!value || value === null || value === 0 || value === "" || value === void 0 || value === "null" || value === "undefined" || value === "0") {
-          const firstObjKey = Object.keys(values)[0];
-          $invalidate(12, svelteSelectValue = {
-            value: firstObjKey,
-            label: values[firstObjKey]
-          });
-        }
         for (const [k, v] of Object.entries(values)) {
           $invalidate(11, itemsArrObj = [...itemsArrObj, { value: k, label: v }]);
           if (k === value) {
@@ -16218,6 +16221,9 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
           return String(a.label).localeCompare(String(b.label));
         });
       }
+      if (!value || value === null || value === 0 || value === "" || value === void 0 || value === "null" || value === "undefined" || value === "0") {
+        $invalidate(12, svelteSelectValue = null);
+      }
     }
     onMount(() => {
       reStructureSvelteValues();
@@ -16227,6 +16233,7 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
     }
     function handleClear(e) {
       $invalidate(0, value = "");
+      $invalidate(12, svelteSelectValue = null);
     }
     function input_change_handler() {
       value = this.checked;

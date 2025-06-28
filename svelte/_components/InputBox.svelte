@@ -56,9 +56,6 @@
   function reStructureSvelteValues() {
     if (type === 'combobox-arr') {
       itemsArr = values;
-      if (!value) {
-        value = itemsArr[0];
-      }
       for (const v of values) {
         if (v == value) {
           svelteSelectValue = {
@@ -79,21 +76,6 @@
       })
     } else if (type === 'combobox') {
       itemsArrObj = [];
-      if (!value
-        || value === null
-        || value === 0
-        || value === ''
-        || value === undefined
-        || value === 'null'
-        || value === 'undefined'
-        || value === '0'
-      ) {
-        const firstObjKey = Object.keys(values)[0];
-        svelteSelectValue = {
-          value: firstObjKey,
-          label: values[firstObjKey]
-        }
-      }
       for (const [k, v] of Object.entries(values)) {
         itemsArrObj = [...itemsArrObj, {
           value: k,
@@ -111,6 +93,18 @@
         return String(a.label).localeCompare(String(b.label))
       });
     }
+
+    if (!value
+      || value === null
+      || value === 0
+      || value === ''
+      || value === undefined
+      || value === 'null'
+      || value === 'undefined'
+      || value === '0'
+    ) {
+      svelteSelectValue = null;
+    }
   }
 
   $: if (value) {
@@ -127,6 +121,7 @@
 
   function handleClear(/** @type {CustomEvent} */e) {
     value = '';
+    svelteSelectValue = null;
   }
 </script>
 

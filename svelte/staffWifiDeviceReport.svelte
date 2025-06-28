@@ -12,6 +12,7 @@
 
   import InputBox from './_components/InputBox.svelte';
   import SubmitButton from './_components/SubmitButton.svelte';
+    import { localeDateFromYYYYMMDD } from './_components/xFormatter';
   import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
   import { StaffWifiDeviceReport } from './jsApi.GEN';
@@ -21,8 +22,6 @@
   let wifiDeviceReports = /** @type {WifiDeviceReport[]} */ ([/* wifiDeviceReports */]);
   const rooms  = /** @type {Record<Number, string>} */ ({/* rooms */});
   const tenants = /** @type {Record<Number, string>} */ ({/* tenants */});
-
-  console.log('wifiDeviceReports:', wifiDeviceReports);
 
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
   let isFiltering = /** @type {boolean} */ (false);
@@ -43,6 +42,12 @@
       }
     );
     isFiltering = false;
+  }
+
+  function isTodayGreater(dateStr) {
+    const inputDate = new Date(dateStr);
+    const today = new Date();
+    return today > inputDate;
   }
 </script>
 
@@ -76,10 +81,10 @@
         </thead>
         <tbody>
           {#each (wifiDeviceReports || []) as data}
-            <tr>
-              <td>{data.startAt || '--'}</td>
-              <td>{data.endAt || '--'}</td>
-              <td>{data.paidAt || '--'}</td>
+            <tr class={isTodayGreater(data.endAt) ? 'reminding' : ''}>
+              <td>{localeDateFromYYYYMMDD(data.startAt)}</td>
+              <td>{localeDateFromYYYYMMDD(data.endAt)}</td>
+              <td>{localeDateFromYYYYMMDD(data.paidAt)}</td>
               <td>{tenants[data.tenantId] || '--'}</td>
               <td>{rooms[data.roomId] || '--'}</td>
             </tr>
@@ -140,6 +145,11 @@
 
   table tbody tr {
     border-bottom: 1px solid var(--gray-004);
+  }
+
+  table tbody tr.reminding {
+    background-color: var(--yellow-transparent);
+    color: var(--yellow-006);
   }
 
   table tr td, table tr th {

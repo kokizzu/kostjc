@@ -108,9 +108,16 @@
     );
   }
 
-  async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
+  async function OnEdit(/** @type any */ id, /** @type {any[]} */ payloads) {
     const wifiDevice = {
-      id: id
+      id: id,
+      startAt: payloads[1],
+      endAt: payloads[2],
+      paidAt: payloads[3],
+      priceIDR: payloads[4],
+      macAddress: payloads[5],
+      tenantId: (payloads[6] ||'0'),
+      roomId: (payloads[7] || '0')
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -145,7 +152,7 @@
     });
 
     await AdminWifiDevice(i,
-      /** @type {import('../jsApi.GEN').AdminWifiDeviceCallback} */
+      /** @type {import('./jsApi.GEN').AdminWifiDeviceCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         isSubmitAddWifiDevice = false;

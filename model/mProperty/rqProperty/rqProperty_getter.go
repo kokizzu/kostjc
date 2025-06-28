@@ -1375,9 +1375,9 @@ FROM ` + w.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 type WifiDeviceReport struct {
 	TenantId uint64 `json:"tenantId"`
 	RoomId   uint64 `json:"roomId"`
-	StartAt  int64  `json:"startAt"`
-	EndAt    int64  `json:"endAt"`
-	PaidAt   int64  `json:"paidAt"`
+	StartAt  string `json:"startAt"`
+	EndAt    string `json:"endAt"`
+	PaidAt   string `json:"paidAt"`
 }
 
 func (w *WifiDevices) FindWifiDeviceReports(yearMonth string) (out []WifiDeviceReport) {
@@ -1398,7 +1398,6 @@ FROM "wifiDevices"
 WHERE
 	"deletedAt" = 0
 	AND SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
-	AND "paidAt" = 0
 `
 
 	fmt.Println(color.GreenString(query))
@@ -1407,9 +1406,9 @@ WHERE
 		if len(row) == 5 {
 			tenantId := X.ToU(row[0])
 			roomId := X.ToU(row[1])
-			startAt := X.ToI(row[2])
-			endAt := X.ToI(row[3])
-			paidAt := X.ToI(row[4])
+			startAt := X.ToS(row[2])
+			endAt := X.ToS(row[3])
+			paidAt := X.ToS(row[4])
 			out = append(out, WifiDeviceReport{
 				TenantId: tenantId,
 				RoomId:   roomId,

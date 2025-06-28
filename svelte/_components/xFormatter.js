@@ -89,6 +89,8 @@ function dateISOFormat(/** @type number */ dayTo = 0) {
 }
 
 function dateISOFormatFromYYYYMMDD(/** @type {string} */ dateStr, /** @type {number} */ dayTo = 0) {
+  if (!dateStr) return '';
+
   const dt = new Date(dateStr);
   dt.setDate(dt.getDate() + dayTo);
 
@@ -148,6 +150,22 @@ function formatYearMonth(ym) {
   return `${monthName} ${year}`;
 }
 
+/**
+ * @description Returns 'Day, Date Month YYYY'
+ * @param {string} dateStr 
+ * @returns {string}
+ */
+function localeDateFromYYYYMMDD(dateStr) {
+  if (!dateStr) return '';
+
+  const dt = new Date(dateStr);
+  const day = dt.toLocaleDateString('default', { weekday: 'long' });
+  const date = String(dt.getDate()).padStart(2, '0');
+  const month = dt.toLocaleDateString('default', { month: 'long' });
+  const year = dt.getFullYear();
+  return `${day}, ${date} ${month} ${year}`;
+}
+
 module.exports = {
   datetime: datetime,
   localeDatetime: localeDatetime,
@@ -159,5 +177,6 @@ module.exports = {
   loadScript: loadScript,
   formatPrice: formatPrice,
   arrToArrNum: arrToArrNum,
-  formatYearMonth: formatYearMonth
+  formatYearMonth: formatYearMonth,
+  localeDateFromYYYYMMDD: localeDateFromYYYYMMDD
 };

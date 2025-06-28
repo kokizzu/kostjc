@@ -1238,13 +1238,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./staffWifiDeviceReport.esbuild-svelte-fake-css */
-.report-container.svelte-oe7xfo.svelte-oe7xfo {
+.report-container.svelte-1jtodzk.svelte-1jtodzk {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.report-container.svelte-oe7xfo .actions.svelte-oe7xfo {
+.report-container.svelte-1jtodzk .actions.svelte-1jtodzk {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -1253,34 +1253,38 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 .report-container .actions .year-month {
   width: 300px;
 }
-.table-container.svelte-oe7xfo.svelte-oe7xfo {
+.table-container.svelte-1jtodzk.svelte-1jtodzk {
   overflow-x: auto;
 }
-table.svelte-oe7xfo.svelte-oe7xfo {
+table.svelte-1jtodzk.svelte-1jtodzk {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-oe7xfo thead.svelte-oe7xfo {
+table.svelte-1jtodzk thead.svelte-1jtodzk {
   position: sticky;
   top: 0;
   background-color: var(--gray-002);
   z-index: 10;
   border: none;
 }
-table.svelte-oe7xfo thead tr th.svelte-oe7xfo {
+table.svelte-1jtodzk thead tr th.svelte-1jtodzk {
   text-align: left;
   padding: 8px 12px;
   text-wrap: nowrap;
 }
-table.svelte-oe7xfo tbody tr.svelte-oe7xfo {
+table.svelte-1jtodzk tbody tr.svelte-1jtodzk {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-oe7xfo tr td.svelte-oe7xfo,
-table.svelte-oe7xfo tr th.svelte-oe7xfo {
+table.svelte-1jtodzk tbody tr.reminding.svelte-1jtodzk {
+  background-color: var(--yellow-transparent);
+  color: var(--yellow-006);
+}
+table.svelte-1jtodzk tr td.svelte-1jtodzk,
+table.svelte-1jtodzk tr th.svelte-1jtodzk {
   padding: 4px 12px;
 }
 @media only screen and (max-width : 768px) {
-  .report-container.svelte-oe7xfo .actions.svelte-oe7xfo {
+  .report-container.svelte-1jtodzk .actions.svelte-1jtodzk {
     flex-direction: column;
   }
   .report-container .actions .year-month {
@@ -1410,6 +1414,8 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
         return `${year}-${month}-${date}`;
       }
       function dateISOFormatFromYYYYMMDD(dateStr, dayTo = 0) {
+        if (!dateStr)
+          return "";
         const dt = new Date(dateStr);
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -1449,6 +1455,16 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
         const monthName = date.toLocaleString("en-US", { month: "long" });
         return `${monthName} ${year}`;
       }
+      function localeDateFromYYYYMMDD2(dateStr) {
+        if (!dateStr)
+          return "";
+        const dt = new Date(dateStr);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = dt.toLocaleDateString("default", { month: "long" });
+        const year = dt.getFullYear();
+        return `${day}, ${date} ${month} ${year}`;
+      }
       module.exports = {
         datetime,
         localeDatetime,
@@ -1460,7 +1476,8 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
         loadScript,
         formatPrice,
         arrToArrNum,
-        formatYearMonth
+        formatYearMonth,
+        localeDateFromYYYYMMDD: localeDateFromYYYYMMDD2
       };
     }
   });
@@ -12962,9 +12979,6 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
     function reStructureSvelteValues() {
       if (type === "combobox-arr") {
         $invalidate(10, itemsArr = values);
-        if (!value) {
-          $invalidate(0, value = itemsArr[0]);
-        }
         for (const v of values) {
           if (v == value) {
             $invalidate(12, svelteSelectValue = { value: v, label: v });
@@ -12984,13 +12998,6 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
         });
       } else if (type === "combobox") {
         $invalidate(11, itemsArrObj = []);
-        if (!value || value === null || value === 0 || value === "" || value === void 0 || value === "null" || value === "undefined" || value === "0") {
-          const firstObjKey = Object.keys(values)[0];
-          $invalidate(12, svelteSelectValue = {
-            value: firstObjKey,
-            label: values[firstObjKey]
-          });
-        }
         for (const [k, v] of Object.entries(values)) {
           $invalidate(11, itemsArrObj = [...itemsArrObj, { value: k, label: v }]);
           if (k === value) {
@@ -13001,6 +13008,9 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
           return String(a.label).localeCompare(String(b.label));
         });
       }
+      if (!value || value === null || value === 0 || value === "" || value === void 0 || value === "null" || value === "undefined" || value === "0") {
+        $invalidate(12, svelteSelectValue = null);
+      }
     }
     onMount(() => {
       reStructureSvelteValues();
@@ -13010,6 +13020,7 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
     }
     function handleClear(e) {
       $invalidate(0, value = "");
+      $invalidate(12, svelteSelectValue = null);
     }
     function input_change_handler() {
       value = this.checked;
@@ -13373,6 +13384,9 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
     }
   };
   var SubmitButton_default = SubmitButton;
+
+  // staffWifiDeviceReport.svelte
+  var import_xFormatter2 = __toESM(require_xFormatter());
 
   // _components/xNotifier.js
   var Notifier = function() {
@@ -15599,24 +15613,24 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
   function create_each_block2(ctx) {
     let tr;
     let td0;
-    let t0_value = (
+    let t0_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
       /*data*/
-      (ctx[5].startAt || "--") + ""
-    );
+      ctx[5].startAt
+    ) + "";
     let t0;
     let t1;
     let td1;
-    let t2_value = (
+    let t2_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
       /*data*/
-      (ctx[5].endAt || "--") + ""
-    );
+      ctx[5].endAt
+    ) + "";
     let t2;
     let t3;
     let td2;
-    let t4_value = (
+    let t4_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
       /*data*/
-      (ctx[5].paidAt || "--") + ""
-    );
+      ctx[5].paidAt
+    ) + "";
     let t4;
     let t5;
     let td3;
@@ -15632,6 +15646,7 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
       ctx[5].roomId
     ] || "--") + "";
     let t8;
+    let tr_class_value;
     return {
       c() {
         tr = element("tr");
@@ -15649,12 +15664,15 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
         t7 = space();
         td4 = element("td");
         t8 = text(t8_value);
-        attr(td0, "class", "svelte-oe7xfo");
-        attr(td1, "class", "svelte-oe7xfo");
-        attr(td2, "class", "svelte-oe7xfo");
-        attr(td3, "class", "svelte-oe7xfo");
-        attr(td4, "class", "svelte-oe7xfo");
-        attr(tr, "class", "svelte-oe7xfo");
+        attr(td0, "class", "svelte-1jtodzk");
+        attr(td1, "class", "svelte-1jtodzk");
+        attr(td2, "class", "svelte-1jtodzk");
+        attr(td3, "class", "svelte-1jtodzk");
+        attr(td4, "class", "svelte-1jtodzk");
+        attr(tr, "class", tr_class_value = null_to_empty(isTodayGreater(
+          /*data*/
+          ctx[5].endAt
+        ) ? "reminding" : "") + " svelte-1jtodzk");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -15675,16 +15693,22 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
       },
       p(ctx2, dirty) {
         if (dirty & /*wifiDeviceReports*/
-        1 && t0_value !== (t0_value = /*data*/
-        (ctx2[5].startAt || "--") + ""))
+        1 && t0_value !== (t0_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
+          /*data*/
+          ctx2[5].startAt
+        ) + ""))
           set_data(t0, t0_value);
         if (dirty & /*wifiDeviceReports*/
-        1 && t2_value !== (t2_value = /*data*/
-        (ctx2[5].endAt || "--") + ""))
+        1 && t2_value !== (t2_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
+          /*data*/
+          ctx2[5].endAt
+        ) + ""))
           set_data(t2, t2_value);
         if (dirty & /*wifiDeviceReports*/
-        1 && t4_value !== (t4_value = /*data*/
-        (ctx2[5].paidAt || "--") + ""))
+        1 && t4_value !== (t4_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
+          /*data*/
+          ctx2[5].paidAt
+        ) + ""))
           set_data(t4, t4_value);
         if (dirty & /*wifiDeviceReports*/
         1 && t6_value !== (t6_value = (tenants[
@@ -15698,6 +15722,13 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
           ctx2[5].roomId
         ] || "--") + ""))
           set_data(t8, t8_value);
+        if (dirty & /*wifiDeviceReports*/
+        1 && tr_class_value !== (tr_class_value = null_to_empty(isTodayGreater(
+          /*data*/
+          ctx2[5].endAt
+        ) ? "reminding" : "") + " svelte-1jtodzk")) {
+          attr(tr, "class", tr_class_value);
+        }
       },
       d(detaching) {
         if (detaching) {
@@ -15711,8 +15742,8 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
     return {
       c() {
         tr = element("tr");
-        tr.innerHTML = `<td class="svelte-oe7xfo">No data</td>`;
-        attr(tr, "class", "svelte-oe7xfo");
+        tr.innerHTML = `<td class="svelte-1jtodzk">No data</td>`;
+        attr(tr, "class", "svelte-1jtodzk");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -15794,7 +15825,7 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
         div1 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-oe7xfo"><th class="svelte-oe7xfo">Start At</th> <th class="svelte-oe7xfo">End At</th> <th class="svelte-oe7xfo">Paid At</th> <th class="svelte-oe7xfo">Tenant</th> <th class="svelte-oe7xfo">Room</th></tr>`;
+        thead.innerHTML = `<tr class="svelte-1jtodzk"><th class="svelte-1jtodzk">Start At</th> <th class="svelte-1jtodzk">End At</th> <th class="svelte-1jtodzk">Paid At</th> <th class="svelte-1jtodzk">Tenant</th> <th class="svelte-1jtodzk">Room</th></tr>`;
         t11 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
@@ -15803,11 +15834,11 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
         t12 = space();
         if (if_block)
           if_block.c();
-        attr(div0, "class", "actions svelte-oe7xfo");
-        attr(thead, "class", "svelte-oe7xfo");
-        attr(table, "class", "svelte-oe7xfo");
-        attr(div1, "class", "table-container svelte-oe7xfo");
-        attr(div2, "class", "report-container svelte-oe7xfo");
+        attr(div0, "class", "actions svelte-1jtodzk");
+        attr(thead, "class", "svelte-1jtodzk");
+        attr(table, "class", "svelte-1jtodzk");
+        attr(div1, "class", "table-container svelte-1jtodzk");
+        attr(div2, "class", "report-container svelte-1jtodzk");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -15847,7 +15878,7 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
           submitbutton_changes.isSubmitted = /*isFiltering*/
           ctx2[2];
         submitbutton.$set(submitbutton_changes);
-        if (dirty & /*rooms, wifiDeviceReports, tenants*/
+        if (dirty & /*isTodayGreater, wifiDeviceReports, rooms, tenants*/
         1) {
           each_value = ensure_array_like(
             /*wifiDeviceReports*/
@@ -15965,12 +15996,16 @@ table.svelte-oe7xfo tr th.svelte-oe7xfo {
     /** @type {Record<Number, string>} */
     {/* tenants */}
   );
+  function isTodayGreater(dateStr) {
+    const inputDate = new Date(dateStr);
+    const today = new Date();
+    return today > inputDate;
+  }
   function instance9($self, $props, $invalidate) {
     let wifiDeviceReports = (
       /** @type {WifiDeviceReport[]} */
       [/* wifiDeviceReports */]
     );
-    console.log("wifiDeviceReports:", wifiDeviceReports);
     let yearMonth = (
       /** @type {string} */
       new Date().toISOString().slice(0, 7)
