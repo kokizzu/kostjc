@@ -4,13 +4,11 @@
   /** @typedef {import('../_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('../_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('../_types/users.js').User} User */
-  /** @typedef {import('../_types/property.js').Booking} Booking */
-  /** @typedef {import('../_types/property.js').Facility} Facility */
   /** @typedef {import('../_types/masters.js').ExtendedActionButton} ExtendedActionButton */
   
   import LayoutMain from '../_layouts/main.svelte';
   import MasterTableActionlog from '../_components/MasterTableActionlog.svelte';
-  import { AdminLocationLogs } from '../jsApi.GEN';
+  import { AdminWifiDeviceLogs } from '../jsApi.GEN';
   import { notifier } from '../_components/xNotifier';
   import LogsSubMenu from '../_partials/LogsSubMenu.svelte';
   import { RiSystemInformationLine } from '../node_modules/svelte-icons-pack/dist/ri';
@@ -28,8 +26,9 @@
     const i = {
       pager: pagerIn
     };
-    await AdminLocationLogs( // @ts-ignore
-      i, /** @type {import('../jsApi.GEN').AdminLocationLogsCallback} */
+    console.log('req:', i)
+    await AdminWifiDeviceLogs( // @ts-ignore
+      i, /** @type {import('../jsApi.GEN').AdminBookingLogsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -42,7 +41,7 @@
       }
     );
   }
-
+  
   let isPopUpReady = false;
   onMount(() => {
     isPopUpReady = true;

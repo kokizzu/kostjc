@@ -188,21 +188,19 @@
                 {#if field.name === 'id'}
                   <td class="a-row">
                     <div class="actions">
-                      {#if (EXTENDED_BUTTONS || []).length > 0}
-                        {#each (EXTENDED_BUTTONS || []) as b}
-                          <button
-                            class="btn"
-                            title="{b.tooltip}"
-                            on:click={() => b.action(row)}
-                          >
-                            <Icon
-                              size="15"
-                              color="var(--gray-007)"
-                              src={b.icon}
-                            />
-                          </button>
-                        {/each}
-                      {/if}
+                      {#each (EXTENDED_BUTTONS || []) as b}
+                        <button
+                          class="btn"
+                          title="{b.tooltip}"
+                          on:click={() => b.action(row)}
+                        >
+                          <Icon
+                            size="15"
+                            color="var(--gray-007)"
+                            src={b.icon}
+                          />
+                        </button>
+                      {/each}
                     </div>
                   </td>
                 {:else if renderFuncs[ field.name ]}
@@ -471,6 +469,7 @@
     overflow-x: auto;
     scrollbar-color: var(--gray-003) transparent;
     scrollbar-width: calc(100% - 20px);
+    border-radius: 10px;
   }
 
   .table-root .table-container table {
@@ -508,6 +507,14 @@
     text-wrap: nowrap;
     position: relative;
     z-index: 1;
+  }
+
+  .table-root .table-container table thead tr th:first-child {
+    border-top-left-radius: 10px;
+  }
+
+  .table-root .table-container table thead tr th:last-child {
+    border-top-right-radius: 10px;
   }
 
   .table-root .table-container table thead tr th.textarea {

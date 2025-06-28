@@ -18,6 +18,7 @@ var viewList = map[string]string{
 	`AdminRoomLogs`:          `../svelte/admin/roomLogs.html`,         // ../svelte/admin/roomLogs.svelte
 	`AdminSaleLogs`:          `../svelte/admin/saleLogs.html`,         // ../svelte/admin/saleLogs.svelte
 	`AdminStockLogs`:         `../svelte/admin/stockLogs.html`,        // ../svelte/admin/stockLogs.svelte
+	`AdminWifiDeviceLogs`:    `../svelte/admin/wifiDeviceLogs.html`,   // ../svelte/admin/wifiDeviceLogs.svelte
 	`AdminBooking`:           `../svelte/adminBooking.html`,           // ../svelte/adminBooking.svelte
 	`AdminBuilding`:          `../svelte/adminBuilding.html`,          // ../svelte/adminBuilding.svelte
 	`AdminFacility`:          `../svelte/adminFacility.html`,          // ../svelte/adminFacility.svelte
@@ -88,6 +89,11 @@ func (v *Views) RenderAdminSaleLogs(c *fiber.Ctx, m M.SX) error {
 func (v *Views) RenderAdminStockLogs(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`AdminStockLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminWifiDeviceLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminWifiDeviceLogs`].Str(m))
 }
 
 func (v *Views) RenderAdminBooking(c *fiber.Ctx, m M.SX) error {

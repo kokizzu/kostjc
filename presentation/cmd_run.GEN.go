@@ -180,6 +180,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminWifiDevice(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminWifiDeviceLogsAction:
+		in := domain.AdminWifiDeviceLogsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminWifiDeviceLogs(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.GuestLoginAction:
 		in := domain.GuestLoginIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

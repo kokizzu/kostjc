@@ -4674,6 +4674,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       exports.AdminWifiDevice = async function AdminWifiDevice(i, cb) {
         return await axios.post("/admin/wifiDevice", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminWifiDeviceLogs = async function AdminWifiDeviceLogs(i, cb) {
+        return await axios.post("/admin/wifiDeviceLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.GuestLogin = async function GuestLogin(i, cb) {
         return await axios.post("/guest/login", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };

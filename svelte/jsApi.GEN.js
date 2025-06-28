@@ -2422,6 +2422,81 @@ exports.AdminWifiDevice = async function AdminWifiDevice( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminWifiDeviceLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminWifiDeviceLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminWifiDeviceLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminWifiDeviceLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saProperty.WifiDeviceLogs
+  }, // []saProperty.WifiDeviceLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminWifiDeviceLogsCallback
+ * @param {AdminWifiDeviceLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminWifiDeviceLogsIn} i
+ * @param {AdminWifiDeviceLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminWifiDeviceLogs = async function AdminWifiDeviceLogs( i, cb ) {
+  return await axios.post( '/admin/wifiDeviceLogs', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} GuestLoginIn
  * @property {String} email
  * @property {String} password

@@ -165,7 +165,7 @@ func (d *Domain) AdminWifiDevice(in *AdminWifiDeviceIn) (out AdminWifiDeviceOut)
 			}
 		}
 
-		// defer InsertPropertyLog(wd.Id, d.wifiDeviceLog, out.ResponseCommon, in.TimeNow(), sess.UserId, wd)()
+		defer InsertPropertyLog(wd.Id, d.wifiDeviceLogs, out.ResponseCommon, in.TimeNow(), sess.UserId, wd)()
 
 		if mProperty.IsValidDate(in.WifiDevice.StartAt, time.DateOnly) {
 			wd.SetStartAt(in.WifiDevice.StartAt)

@@ -28,6 +28,7 @@ var allCommands = []string{
 	domain.AdminTenantsAction,
 	domain.AdminUsersManagementAction,
 	domain.AdminWifiDeviceAction,
+	domain.AdminWifiDeviceLogsAction,
 	domain.GuestLoginAction,
 	domain.GuestRegisterAction,
 	domain.GuestResendVerificationEmailAction,

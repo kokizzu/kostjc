@@ -29,6 +29,7 @@ var locationLogsDummy = LocationLogs{}
 var paymentLogsDummy = PaymentLogs{}
 var roomLogsDummy = RoomLogs{}
 var stockLogsDummy = StockLogs{}
+var wifiDeviceLogsDummy = WifiDeviceLogs{}
 var Preparators = map[Ch.TableName]chBuffer.Preparator{
 	mProperty.TableBookingLogs: func(tx *sql.Tx) *sql.Stmt {
 		query := bookingLogsDummy.SqlInsert()
@@ -68,6 +69,12 @@ var Preparators = map[Ch.TableName]chBuffer.Preparator{
 	},
 	mProperty.TableStockLogs: func(tx *sql.Tx) *sql.Stmt {
 		query := stockLogsDummy.SqlInsert()
+		stmt, err := tx.Prepare(query)
+		L.IsError(err, `failed to tx.Prepare: `+query)
+		return stmt
+	},
+	mProperty.TableWifiDeviceLogs: func(tx *sql.Tx) *sql.Stmt {
+		query := wifiDeviceLogsDummy.SqlInsert()
 		stmt, err := tx.Prepare(query)
 		L.IsError(err, `failed to tx.Prepare: `+query)
 		return stmt
@@ -937,6 +944,130 @@ func (s *StockLogs) ToArray() A.X { //nolint:dupl false positive
 		s.ActorId,    // 1
 		s.BeforeJson, // 2
 		s.AfterJson,  // 3
+	}
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/Ch/clickhouse_orm_generator.go
+
+type WifiDeviceLogs struct {
+	Adapter    *Ch.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	CreatedAt  time.Time   `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	ActorId    uint64      `json:"actorId,string" form:"actorId" query:"actorId" long:"actorId" msg:"actorId"`
+	BeforeJson string      `json:"beforeJson" form:"beforeJson" query:"beforeJson" long:"beforeJson" msg:"beforeJson"`
+	AfterJson  string      `json:"afterJson" form:"afterJson" query:"afterJson" long:"afterJson" msg:"afterJson"`
+}
+
+func NewWifiDeviceLogs(adapter *Ch.Adapter) *WifiDeviceLogs {
+	return &WifiDeviceLogs{Adapter: adapter}
+}
+
+// WifiDeviceLogsFieldTypeMap returns key value of field name and key
+var WifiDeviceLogsFieldTypeMap = map[string]Ch.DataType{ //nolint:dupl false positive
+	`createdAt`:  Ch.DateTime,
+	`actorId`:    Ch.UInt64,
+	`beforeJson`: Ch.String,
+	`afterJson`:  Ch.String,
+}
+
+func (w *WifiDeviceLogs) TableName() Ch.TableName { //nolint:dupl false positive
+	return mProperty.TableWifiDeviceLogs
+}
+
+func (w *WifiDeviceLogs) SqlTableName() string { //nolint:dupl false positive
+	return `"wifiDeviceLogs"`
+}
+
+func (w *WifiDeviceLogs) ScanRowAllCols(rows *sql.Rows) (err error) { //nolint:dupl false positive
+	return rows.Scan(
+		&w.CreatedAt,
+		&w.ActorId,
+		&w.BeforeJson,
+		&w.AfterJson,
+	)
+}
+
+func (w *WifiDeviceLogs) ScanRowsAllCols(rows *sql.Rows, estimateRows int) (res []WifiDeviceLogs, err error) { //nolint:dupl false positive
+	res = make([]WifiDeviceLogs, 0, estimateRows)
+	defer rows.Close()
+	for rows.Next() {
+		var row WifiDeviceLogs
+		err = row.ScanRowAllCols(rows)
+		if err != nil {
+			return
+		}
+		res = append(res, row)
+	}
+	return
+}
+
+// insert, error if exists
+func (w *WifiDeviceLogs) SqlInsert() string { //nolint:dupl false positive
+	return `INSERT INTO ` + w.SqlTableName() + `(` + w.SqlAllFields() + `) VALUES (?,?,?,?)`
+}
+
+func (w *WifiDeviceLogs) SqlCount() string { //nolint:dupl false positive
+	return `SELECT COUNT(*) FROM ` + w.SqlTableName()
+}
+
+func (w *WifiDeviceLogs) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` createdAt
+	, actorId
+	, beforeJson
+	, afterJson
+	`
+}
+
+func (w *WifiDeviceLogs) SqlAllFields() string { //nolint:dupl false positive
+	return `createdAt, actorId, beforeJson, afterJson`
+}
+
+func (w WifiDeviceLogs) SqlInsertParam() []any { //nolint:dupl false positive
+	return []any{
+		w.CreatedAt,  // 0
+		w.ActorId,    // 1
+		w.BeforeJson, // 2
+		w.AfterJson,  // 3
+	}
+}
+
+func (w *WifiDeviceLogs) IdxCreatedAt() int { //nolint:dupl false positive
+	return 0
+}
+
+func (w *WifiDeviceLogs) SqlCreatedAt() string { //nolint:dupl false positive
+	return `createdAt`
+}
+
+func (w *WifiDeviceLogs) IdxActorId() int { //nolint:dupl false positive
+	return 1
+}
+
+func (w *WifiDeviceLogs) SqlActorId() string { //nolint:dupl false positive
+	return `actorId`
+}
+
+func (w *WifiDeviceLogs) IdxBeforeJson() int { //nolint:dupl false positive
+	return 2
+}
+
+func (w *WifiDeviceLogs) SqlBeforeJson() string { //nolint:dupl false positive
+	return `beforeJson`
+}
+
+func (w *WifiDeviceLogs) IdxAfterJson() int { //nolint:dupl false positive
+	return 3
+}
+
+func (w *WifiDeviceLogs) SqlAfterJson() string { //nolint:dupl false positive
+	return `afterJson`
+}
+
+func (w *WifiDeviceLogs) ToArray() A.X { //nolint:dupl false positive
+	return A.X{
+		w.CreatedAt,  // 0
+		w.ActorId,    // 1
+		w.BeforeJson, // 2
+		w.AfterJson,  // 3
 	}
 }
 

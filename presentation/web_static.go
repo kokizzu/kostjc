@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/kokizzu/gotro/M"
 
+	"kostjc/conf"
 	"kostjc/domain"
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
@@ -28,7 +29,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		unpaidBookingTenants := booking.FindUnpaidBookingTenants()
 
 		return views.RenderIndex(ctx, M.SX{
-			`title`:                  `KostJC | Home`,
+			`title`:                  conf.PROJECT_NAME + ` | Home`,
 			`user`:                   user,
 			`segments`:               segments,
 			`tenantsNearbyBirthdays`: tenantsNearbyBirthdays,
@@ -49,7 +50,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 
 		return views.RenderUser(ctx, M.SX{
-			`title`:          `KostJC | User Profile`,
+			`title`:          conf.PROJECT_NAME + ` | User Profile`,
 			`user`:           user,
 			`segments`:       segments,
 			`activeSessions`: out.SessionsActive,
@@ -83,7 +84,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.StaffOccupancyReport(&in)
 
 		return views.RenderStaffOccupancyReport(ctx, M.SX{
-			`title`:              `KostJC | Occupancy Report`,
+			`title`:              conf.PROJECT_NAME + ` | Occupancy Report`,
 			`user`:               user,
 			`segments`:           segments,
 			`bookingsPerQuartal`: out.Bookings,
@@ -111,7 +112,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		bookings := bk.FindBookingChoices()
 
 		return views.RenderStaffRevenueReport(ctx, M.SX{
-			`title`:          `KostJC | Revenue Report`,
+			`title`:          conf.PROJECT_NAME + ` | Revenue Report`,
 			`user`:           user,
 			`segments`:       segments,
 			`revenueReports`: out.RevenueReports,
@@ -139,7 +140,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		rooms := room.FindRoomChoices()
 
 		return views.RenderStaffWifiDeviceReport(ctx, M.SX{
-			`title`:             `KostJC | Revenue Report`,
+			`title`:             conf.PROJECT_NAME + ` | Wifi Device Report`,
 			`user`:              user,
 			`segments`:          segments,
 			`wifiDeviceReports`: out.WifiDeviceReports,
@@ -164,7 +165,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.StaffMissingDataReport(&in)
 
 		return views.RenderStaffMissingDataReport(ctx, M.SX{
-			`title`:       `KostJC | Missing Data Report`,
+			`title`:       conf.PROJECT_NAME + ` | Missing Data Report`,
 			`user`:        user,
 			`segments`:    segments,
 			`missingData`: out.MissingData,
@@ -195,7 +196,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.StaffBooking(&in)
 
 		return views.RenderStaffBooking(ctx, M.SX{
-			`title`:      `KostJC | Booking Management`,
+			`title`:      conf.PROJECT_NAME + ` | Booking Management`,
 			`user`:       user,
 			`segments`:   segments,
 			`booking`:    out.Booking,
@@ -225,7 +226,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminUsersManagement(&in)
 
 		return views.RenderAdminUsersManagement(ctx, M.SX{
-			`title`:    `KostJC | Users Management`,
+			`title`:    conf.PROJECT_NAME + ` | Users Management`,
 			`user`:     user,
 			`segments`: segments,
 			`users`:    out.Users,
@@ -252,7 +253,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminLocation(&in)
 
 		return views.RenderAdminLocation(ctx, M.SX{
-			`title`:     `KostJC | Location Management`,
+			`title`:     conf.PROJECT_NAME + ` | Location Management`,
 			`user`:      user,
 			`segments`:  segments,
 			`location`:  out.Location,
@@ -280,7 +281,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminFacility(&in)
 
 		return views.RenderAdminFacility(ctx, M.SX{
-			`title`:      `KostJC | Facility Management`,
+			`title`:      conf.PROJECT_NAME + ` | Facility Management`,
 			`user`:       user,
 			`segments`:   segments,
 			`facility`:   out.Facility,
@@ -314,7 +315,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminRoom(&in)
 
 		return views.RenderAdminRoom(ctx, M.SX{
-			`title`:     `KostJC | Room Management`,
+			`title`:     conf.PROJECT_NAME + ` | Room Management`,
 			`user`:      user,
 			`segments`:  segments,
 			`room`:      out.Room,
@@ -351,7 +352,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminBuilding(&in)
 
 		return views.RenderAdminBuilding(ctx, M.SX{
-			`title`:             `KostJC | Building Management`,
+			`title`:             conf.PROJECT_NAME + ` | Building Management`,
 			`user`:              user,
 			`segments`:          segments,
 			`building`:          out.Building,
@@ -382,7 +383,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminTenants(&in)
 
 		return views.RenderAdminTenants(ctx, M.SX{
-			`title`:    `KostJC | Tenant Management`,
+			`title`:    conf.PROJECT_NAME + ` | Tenant Management`,
 			`user`:     user,
 			`segments`: segments,
 			`tenant`:   out.Tenant,
@@ -413,7 +414,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminPayment(&in)
 
 		return views.RenderAdminPayment(ctx, M.SX{
-			`title`:    `KostJC | Payment Management`,
+			`title`:    conf.PROJECT_NAME + ` | Payment Management`,
 			`user`:     user,
 			`segments`: segments,
 			`payment`:  out.Payment,
@@ -452,7 +453,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminBooking(&in)
 
 		return views.RenderAdminBooking(ctx, M.SX{
-			`title`:      `KostJC | Booking Management`,
+			`title`:      conf.PROJECT_NAME + ` | Booking Management`,
 			`user`:       user,
 			`segments`:   segments,
 			`booking`:    out.Booking,
@@ -483,7 +484,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminStock(&in)
 
 		return views.RenderAdminStock(ctx, M.SX{
-			`title`:    `KostJC | Stock Management`,
+			`title`:    conf.PROJECT_NAME + ` | Stock Management`,
 			`user`:     user,
 			`segments`: segments,
 			`stock`:    out.Stock,
@@ -511,7 +512,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminMenu(&in)
 
 		return views.RenderAdminMenu(ctx, M.SX{
-			`title`:    `KostJC | Menu Management`,
+			`title`:    conf.PROJECT_NAME + ` | Menu Management`,
 			`user`:     user,
 			`segments`: segments,
 			`menu`:     out.Menu,
@@ -547,7 +548,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminSale(&in)
 
 		return views.RenderAdminSale(ctx, M.SX{
-			`title`:    `KostJC | Sale Management`,
+			`title`:    conf.PROJECT_NAME + ` | Sale Management`,
 			`user`:     user,
 			`segments`: segments,
 			`tenants`:  tenants,
@@ -583,7 +584,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		rooms := room.FindRoomChoices()
 
 		return views.RenderAdminWifiDevice(ctx, M.SX{
-			`title`:       `KostJC | Wifi Device Management`,
+			`title`:       conf.PROJECT_NAME + ` | Wifi Device Management`,
 			`user`:        user,
 			`segments`:    segments,
 			`wifiDevice`:  out.WifiDevice,
@@ -612,7 +613,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminBookingLogs(&in)
 		return views.RenderAdminBookingLogs(ctx, M.SX{
 			`user`:     user,
-			`title`:    `Booking Log`,
+			`title`:    conf.PROJECT_NAME + ` | Booking Logs`,
 			`segments`: segments,
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
@@ -639,7 +640,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminBuildingLogs(&in)
 		return views.RenderAdminBuildingLogs(ctx, M.SX{
 			`user`:     user,
-			`title`:    `Booking Log`,
+			`title`:    conf.PROJECT_NAME + ` | Building Log`,
 			`segments`: segments,
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
@@ -666,7 +667,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminFacilityLogs(&in)
 		return views.RenderAdminFacilityLogs(ctx, M.SX{
 			`user`:     user,
-			`title`:    `Booking Log`,
+			`title`:    conf.PROJECT_NAME + ` | Facility Log`,
 			`segments`: segments,
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
@@ -693,7 +694,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminLocationLogs(&in)
 		return views.RenderAdminLocationLogs(ctx, M.SX{
 			`user`:     user,
-			`title`:    `Booking Log`,
+			`title`:    conf.PROJECT_NAME + ` | Location Logs`,
 			`segments`: segments,
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
@@ -720,7 +721,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminPaymentLogs(&in)
 		return views.RenderAdminPaymentLogs(ctx, M.SX{
 			`user`:     user,
-			`title`:    `Booking Log`,
+			`title`:    conf.PROJECT_NAME + ` | Payment Logs`,
 			`segments`: segments,
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
@@ -747,7 +748,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminRoomLogs(&in)
 		return views.RenderAdminRoomLogs(ctx, M.SX{
 			`user`:     user,
-			`title`:    `Booking Log`,
+			`title`:    conf.PROJECT_NAME + ` | Room Logs`,
 			`segments`: segments,
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
@@ -774,7 +775,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminStockLogs(&in)
 		return views.RenderAdminStockLogs(ctx, M.SX{
 			`user`:     user,
-			`title`:    `Booking Log`,
+			`title`:    conf.PROJECT_NAME + ` | Stock Logs`,
 			`segments`: segments,
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
@@ -801,7 +802,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminMenuLogs(&in)
 		return views.RenderAdminMenuLogs(ctx, M.SX{
 			`user`:     user,
-			`title`:    `Menu Log`,
+			`title`:    conf.PROJECT_NAME + ` | Menu Logs`,
 			`segments`: segments,
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,
@@ -828,7 +829,34 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminSaleLogs(&in)
 		return views.RenderAdminSaleLogs(ctx, M.SX{
 			`user`:     user,
-			`title`:    `Sale Log`,
+			`title`:    conf.PROJECT_NAME + ` | Sale Logs`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+			`users`:    users,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminWifiDeviceLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminWifiDeviceLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminWifiDeviceLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminWifiDeviceLogs(&in)
+		return views.RenderAdminWifiDeviceLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    conf.PROJECT_NAME + ` | Wifi Device Logs`,
 			`segments`: segments,
 			`logs`:     out.Logs,
 			`fields`:   out.Meta.Fields,

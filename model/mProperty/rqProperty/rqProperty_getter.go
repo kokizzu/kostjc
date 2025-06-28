@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/I"
 	"github.com/kokizzu/gotro/L"
@@ -1399,8 +1398,6 @@ WHERE
 	"deletedAt" = 0
 	AND SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
 `
-
-	fmt.Println(color.GreenString(query))
 
 	w.Adapter.QuerySql(query, func(row []any) {
 		if len(row) == 5 {

@@ -220,6 +220,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// AdminWifiDeviceLogs
+	fw.Post("/"+domain.AdminWifiDeviceLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminWifiDeviceLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminWifiDeviceLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminWifiDeviceLogs(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// GuestLogin
 	fw.Post("/"+domain.GuestLoginAction, func(c *fiber.Ctx) error {
 		in := domain.GuestLoginIn{}

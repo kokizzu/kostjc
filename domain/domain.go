@@ -32,16 +32,17 @@ type Domain struct {
 	IsBgSvc bool // long-running program
 
 	// timed buffer
-	authLogs     *chBuffer.TimedBuffer
-	locationLogs *chBuffer.TimedBuffer
-	facilityLogs *chBuffer.TimedBuffer
-	buildingLogs *chBuffer.TimedBuffer
-	roomLogs     *chBuffer.TimedBuffer
-	bookingLogs  *chBuffer.TimedBuffer
-	paymentLogs  *chBuffer.TimedBuffer
-	stockLogs    *chBuffer.TimedBuffer
-	menuLogs     *chBuffer.TimedBuffer
-	saleLogs     *chBuffer.TimedBuffer
+	authLogs       *chBuffer.TimedBuffer
+	locationLogs   *chBuffer.TimedBuffer
+	facilityLogs   *chBuffer.TimedBuffer
+	buildingLogs   *chBuffer.TimedBuffer
+	roomLogs       *chBuffer.TimedBuffer
+	bookingLogs    *chBuffer.TimedBuffer
+	paymentLogs    *chBuffer.TimedBuffer
+	stockLogs      *chBuffer.TimedBuffer
+	menuLogs       *chBuffer.TimedBuffer
+	saleLogs       *chBuffer.TimedBuffer
+	wifiDeviceLogs *chBuffer.TimedBuffer
 
 	// logger
 	Log *zerolog.Logger
@@ -73,6 +74,7 @@ func (d *Domain) InitTimedBuffer() {
 	d.stockLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableStockLogs])
 	d.menuLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableMenuLogs])
 	d.saleLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableSaleLogs])
+	d.wifiDeviceLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableWifiDeviceLogs])
 }
 
 func (d *Domain) WaitTimedBufferFinalFlush() {
