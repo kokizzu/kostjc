@@ -54,7 +54,7 @@
      const EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([
        {
          icon: RiSystemInformationLine,
-         tooltip: 'Update Password',
+         tooltip: 'Compare Data Before & After',
          action: (/** @type {Object} */ row) => {
            let dataBeforeJsonObj = row.beforeJson;
            let dataAfterJsonObj = row.afterJson;

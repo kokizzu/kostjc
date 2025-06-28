@@ -1237,14 +1237,14 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
 }
 
-/* fakecss:./staffRevenueReport.esbuild-svelte-fake-css */
-.report-container.svelte-1g4l9i6.svelte-1g4l9i6 {
+/* fakecss:./staffWifiDeviceReport.esbuild-svelte-fake-css */
+.report-container.svelte-1jtodzk.svelte-1jtodzk {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.report-container.svelte-1g4l9i6 .actions.svelte-1g4l9i6 {
+.report-container.svelte-1jtodzk .actions.svelte-1jtodzk {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -1253,34 +1253,38 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 .report-container .actions .year-month {
   width: 300px;
 }
-.table-container.svelte-1g4l9i6.svelte-1g4l9i6 {
+.table-container.svelte-1jtodzk.svelte-1jtodzk {
   overflow-x: auto;
 }
-table.svelte-1g4l9i6.svelte-1g4l9i6 {
+table.svelte-1jtodzk.svelte-1jtodzk {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-1g4l9i6 thead.svelte-1g4l9i6 {
+table.svelte-1jtodzk thead.svelte-1jtodzk {
   position: sticky;
   top: 0;
   background-color: var(--gray-002);
   z-index: 10;
   border: none;
 }
-table.svelte-1g4l9i6 thead tr th.svelte-1g4l9i6 {
+table.svelte-1jtodzk thead tr th.svelte-1jtodzk {
   text-align: left;
   padding: 8px 12px;
   text-wrap: nowrap;
 }
-table.svelte-1g4l9i6 tbody tr.svelte-1g4l9i6 {
+table.svelte-1jtodzk tbody tr.svelte-1jtodzk {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-1g4l9i6 tr td.svelte-1g4l9i6,
-table.svelte-1g4l9i6 tr th.svelte-1g4l9i6 {
+table.svelte-1jtodzk tbody tr.reminding.svelte-1jtodzk {
+  background-color: var(--yellow-transparent);
+  color: var(--yellow-006);
+}
+table.svelte-1jtodzk tr td.svelte-1jtodzk,
+table.svelte-1jtodzk tr th.svelte-1jtodzk {
   padding: 4px 12px;
 }
 @media only screen and (max-width : 768px) {
-  .report-container.svelte-1g4l9i6 .actions.svelte-1g4l9i6 {
+  .report-container.svelte-1jtodzk .actions.svelte-1jtodzk {
     flex-direction: column;
   }
   .report-container .actions .year-month {
@@ -1289,10 +1293,6 @@ table.svelte-1g4l9i6 tr th.svelte-1g4l9i6 {
   .report-container .actions .submit-btn {
     width: 100% !important;
   }
-}
-td.r.svelte-1g4l9i6.svelte-1g4l9i6,
-th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
-  text-align: right;
 }
 </style>
 <script>(() => {
@@ -1449,13 +1449,13 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
       function arrToArrNum(arr) {
         return arr.map(Number);
       }
-      function formatYearMonth2(ym) {
+      function formatYearMonth(ym) {
         const [year, month] = ym.split("-");
         const date = new Date(`${ym}-01`);
         const monthName = date.toLocaleString("en-US", { month: "long" });
         return `${monthName} ${year}`;
       }
-      function localeDateFromYYYYMMDD(dateStr) {
+      function localeDateFromYYYYMMDD2(dateStr) {
         if (!dateStr)
           return "";
         const dt = new Date(dateStr);
@@ -1476,8 +1476,8 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         loadScript,
         formatPrice,
         arrToArrNum,
-        formatYearMonth: formatYearMonth2,
-        localeDateFromYYYYMMDD
+        formatYearMonth,
+        localeDateFromYYYYMMDD: localeDateFromYYYYMMDD2
       };
     }
   });
@@ -3999,13 +3999,13 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
       exports.StaffOccupancyReport = async function StaffOccupancyReport(i, cb) {
         return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.StaffRevenueReport = async function StaffRevenueReport2(i, cb) {
+      exports.StaffRevenueReport = async function StaffRevenueReport(i, cb) {
         return await axios.post("/staff/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.StaffSales = async function StaffSales(i, cb) {
         return await axios.post("/staff/sales", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.StaffWifiDeviceReport = async function StaffWifiDeviceReport(i, cb) {
+      exports.StaffWifiDeviceReport = async function StaffWifiDeviceReport2(i, cb) {
         return await axios.post("/staff/wifiDeviceReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserLogout = async function UserLogout2(i, cb) {
@@ -13388,7 +13388,7 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
   };
   var SubmitButton_default = SubmitButton;
 
-  // staffRevenueReport.svelte
+  // staffWifiDeviceReport.svelte
   var import_xFormatter2 = __toESM(require_xFormatter());
 
   // _components/xNotifier.js
@@ -15606,42 +15606,50 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
   };
   var main_default = Main;
 
-  // staffRevenueReport.svelte
+  // staffWifiDeviceReport.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[7] = list[i];
+    child_ctx[5] = list[i];
     return child_ctx;
   }
   function create_each_block2(ctx) {
     let tr;
     let td0;
-    let t0_value = (0, import_xFormatter2.formatYearMonth)(
+    let t0_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
       /*data*/
-      ctx[7].yearMonth
+      ctx[5].startAt
     ) + "";
     let t0;
     let t1;
     let td1;
-    let t2_value = bookings[
+    let t2_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
       /*data*/
-      ctx[7].bookingId
-    ] + "";
+      ctx[5].endAt
+    ) + "";
     let t2;
     let t3;
     let td2;
-    let t4_value = (
+    let t4_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
       /*data*/
-      ctx[7].revenueIDR + ""
-    );
+      ctx[5].paidAt
+    ) + "";
     let t4;
     let t5;
     let td3;
-    let t6_value = (
+    let t6_value = (tenants[
       /*data*/
-      ctx[7].donationIDR + ""
-    );
+      ctx[5].tenantId
+    ] || "--") + "";
     let t6;
+    let t7;
+    let td4;
+    let t8_value = (rooms[
+      /*data*/
+      ctx[5].roomId
+    ] || "--") + "";
+    let t8;
+    let tr_class_value;
     return {
       c() {
         tr = element("tr");
@@ -15656,11 +15664,18 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         t5 = space();
         td3 = element("td");
         t6 = text(t6_value);
-        attr(td0, "class", "svelte-1g4l9i6");
-        attr(td1, "class", "svelte-1g4l9i6");
-        attr(td2, "class", "r svelte-1g4l9i6");
-        attr(td3, "class", "r svelte-1g4l9i6");
-        attr(tr, "class", "svelte-1g4l9i6");
+        t7 = space();
+        td4 = element("td");
+        t8 = text(t8_value);
+        attr(td0, "class", "svelte-1jtodzk");
+        attr(td1, "class", "svelte-1jtodzk");
+        attr(td2, "class", "svelte-1jtodzk");
+        attr(td3, "class", "svelte-1jtodzk");
+        attr(td4, "class", "svelte-1jtodzk");
+        attr(tr, "class", tr_class_value = null_to_empty(isTodayGreater(
+          /*data*/
+          ctx[5].endAt
+        ) ? "reminding" : "") + " svelte-1jtodzk");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -15675,28 +15690,48 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         append(tr, t5);
         append(tr, td3);
         append(td3, t6);
+        append(tr, t7);
+        append(tr, td4);
+        append(td4, t8);
       },
       p(ctx2, dirty) {
-        if (dirty & /*revenueReports*/
-        1 && t0_value !== (t0_value = (0, import_xFormatter2.formatYearMonth)(
+        if (dirty & /*wifiDeviceReports*/
+        1 && t0_value !== (t0_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
           /*data*/
-          ctx2[7].yearMonth
+          ctx2[5].startAt
         ) + ""))
           set_data(t0, t0_value);
-        if (dirty & /*revenueReports*/
-        1 && t2_value !== (t2_value = bookings[
+        if (dirty & /*wifiDeviceReports*/
+        1 && t2_value !== (t2_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
           /*data*/
-          ctx2[7].bookingId
-        ] + ""))
+          ctx2[5].endAt
+        ) + ""))
           set_data(t2, t2_value);
-        if (dirty & /*revenueReports*/
-        1 && t4_value !== (t4_value = /*data*/
-        ctx2[7].revenueIDR + ""))
+        if (dirty & /*wifiDeviceReports*/
+        1 && t4_value !== (t4_value = (0, import_xFormatter2.localeDateFromYYYYMMDD)(
+          /*data*/
+          ctx2[5].paidAt
+        ) + ""))
           set_data(t4, t4_value);
-        if (dirty & /*revenueReports*/
-        1 && t6_value !== (t6_value = /*data*/
-        ctx2[7].donationIDR + ""))
+        if (dirty & /*wifiDeviceReports*/
+        1 && t6_value !== (t6_value = (tenants[
+          /*data*/
+          ctx2[5].tenantId
+        ] || "--") + ""))
           set_data(t6, t6_value);
+        if (dirty & /*wifiDeviceReports*/
+        1 && t8_value !== (t8_value = (rooms[
+          /*data*/
+          ctx2[5].roomId
+        ] || "--") + ""))
+          set_data(t8, t8_value);
+        if (dirty & /*wifiDeviceReports*/
+        1 && tr_class_value !== (tr_class_value = null_to_empty(isTodayGreater(
+          /*data*/
+          ctx2[5].endAt
+        ) ? "reminding" : "") + " svelte-1jtodzk")) {
+          attr(tr, "class", tr_class_value);
+        }
       },
       d(detaching) {
         if (detaching) {
@@ -15710,8 +15745,8 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
     return {
       c() {
         tr = element("tr");
-        tr.innerHTML = `<td class="svelte-1g4l9i6">No data</td>`;
-        attr(tr, "class", "svelte-1g4l9i6");
+        tr.innerHTML = `<td class="svelte-1jtodzk">No data</td>`;
+        attr(tr, "class", "svelte-1jtodzk");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -15734,24 +15769,12 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
     let div1;
     let table;
     let thead;
-    let t9;
-    let tbody;
-    let t10;
     let t11;
-    let tfoot;
-    let tr1;
-    let th4;
+    let tbody;
     let t12;
-    let th5;
-    let t13;
-    let th6;
-    let t14;
-    let t15;
-    let th7;
-    let t16;
     let current;
     function inputbox_value_binding(value) {
-      ctx[6](value);
+      ctx[4](value);
     }
     let inputbox_props = {
       className: "year-month",
@@ -15780,20 +15803,20 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
     });
     submitbutton.$on(
       "click",
-      /*getRevenueReports*/
-      ctx[5]
+      /*getWifiDeviceReports*/
+      ctx[3]
     );
     let each_value = ensure_array_like(
-      /*revenueReports*/
+      /*wifiDeviceReports*/
       ctx[0] || []
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
       each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
     }
-    let if_block = (!/*revenueReports*/
-    ctx[0] || !/*revenueReports*/
-    ctx[0].length) && create_if_block5(ctx);
+    let if_block = (!/*wifiDeviceReports*/
+    ctx[0] || /*wifiDeviceReports*/
+    (ctx[0] || []).length == 0) && create_if_block5(ctx);
     return {
       c() {
         div2 = element("div");
@@ -15805,43 +15828,20 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         div1 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-1g4l9i6"><th style="min-width: 100px;" class="svelte-1g4l9i6">Month</th> <th style="min-width: 170px;" class="svelte-1g4l9i6">Booking</th> <th class="svelte-1g4l9i6">Revenue (IDR)</th> <th class="svelte-1g4l9i6">Donation (IDR)</th></tr>`;
-        t9 = space();
+        thead.innerHTML = `<tr class="svelte-1jtodzk"><th class="svelte-1jtodzk">Start At</th> <th class="svelte-1jtodzk">End At</th> <th class="svelte-1jtodzk">Paid At</th> <th class="svelte-1jtodzk">Tenant</th> <th class="svelte-1jtodzk">Room</th></tr>`;
+        t11 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        t10 = space();
+        t12 = space();
         if (if_block)
           if_block.c();
-        t11 = space();
-        tfoot = element("tfoot");
-        tr1 = element("tr");
-        th4 = element("th");
-        t12 = space();
-        th5 = element("th");
-        t13 = space();
-        th6 = element("th");
-        t14 = text(
-          /*sumRevenueIDR*/
-          ctx[3]
-        );
-        t15 = space();
-        th7 = element("th");
-        t16 = text(
-          /*sumDonationIDR*/
-          ctx[4]
-        );
-        attr(div0, "class", "actions svelte-1g4l9i6");
-        attr(thead, "class", "svelte-1g4l9i6");
-        attr(th4, "class", "svelte-1g4l9i6");
-        attr(th5, "class", "svelte-1g4l9i6");
-        attr(th6, "class", "r svelte-1g4l9i6");
-        attr(th7, "class", "r svelte-1g4l9i6");
-        attr(tr1, "class", "svelte-1g4l9i6");
-        attr(table, "class", "svelte-1g4l9i6");
-        attr(div1, "class", "table-container svelte-1g4l9i6");
-        attr(div2, "class", "report-container svelte-1g4l9i6");
+        attr(div0, "class", "actions svelte-1jtodzk");
+        attr(thead, "class", "svelte-1jtodzk");
+        attr(table, "class", "svelte-1jtodzk");
+        attr(div1, "class", "table-container svelte-1jtodzk");
+        attr(div2, "class", "report-container svelte-1jtodzk");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -15853,28 +15853,16 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         append(div2, div1);
         append(div1, table);
         append(table, thead);
-        append(table, t9);
+        append(table, t11);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
             each_blocks[i].m(tbody, null);
           }
         }
-        append(tbody, t10);
+        append(tbody, t12);
         if (if_block)
           if_block.m(tbody, null);
-        append(table, t11);
-        append(table, tfoot);
-        append(tfoot, tr1);
-        append(tr1, th4);
-        append(tr1, t12);
-        append(tr1, th5);
-        append(tr1, t13);
-        append(tr1, th6);
-        append(th6, t14);
-        append(tr1, t15);
-        append(tr1, th7);
-        append(th7, t16);
         current = true;
       },
       p(ctx2, dirty) {
@@ -15893,10 +15881,10 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
           submitbutton_changes.isSubmitted = /*isFiltering*/
           ctx2[2];
         submitbutton.$set(submitbutton_changes);
-        if (dirty & /*revenueReports, bookings*/
+        if (dirty & /*isTodayGreater, wifiDeviceReports, rooms, tenants*/
         1) {
           each_value = ensure_array_like(
-            /*revenueReports*/
+            /*wifiDeviceReports*/
             ctx2[0] || []
           );
           let i;
@@ -15907,7 +15895,7 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
             } else {
               each_blocks[i] = create_each_block2(child_ctx);
               each_blocks[i].c();
-              each_blocks[i].m(tbody, t10);
+              each_blocks[i].m(tbody, t12);
             }
           }
           for (; i < each_blocks.length; i += 1) {
@@ -15915,9 +15903,9 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
           }
           each_blocks.length = each_value.length;
         }
-        if (!/*revenueReports*/
-        ctx2[0] || !/*revenueReports*/
-        ctx2[0].length) {
+        if (!/*wifiDeviceReports*/
+        ctx2[0] || /*wifiDeviceReports*/
+        (ctx2[0] || []).length == 0) {
           if (if_block) {
           } else {
             if_block = create_if_block5(ctx2);
@@ -15928,20 +15916,6 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
           if_block.d(1);
           if_block = null;
         }
-        if (!current || dirty & /*sumRevenueIDR*/
-        8)
-          set_data(
-            t14,
-            /*sumRevenueIDR*/
-            ctx2[3]
-          );
-        if (!current || dirty & /*sumDonationIDR*/
-        16)
-          set_data(
-            t16,
-            /*sumDonationIDR*/
-            ctx2[4]
-          );
       },
       i(local) {
         if (current)
@@ -15988,8 +15962,8 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, sumDonationIDR, sumRevenueIDR, revenueReports, isFiltering, yearMonth*/
-        1055) {
+        if (dirty & /*$scope, wifiDeviceReports, isFiltering, yearMonth*/
+        263) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -16017,14 +15991,23 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
     /** @type {Access} */
     {/* segments */}
   );
-  var bookings = (
+  var rooms = (
     /** @type {Record<Number, string>} */
-    {/* bookings */}
+    {/* rooms */}
   );
+  var tenants = (
+    /** @type {Record<Number, string>} */
+    {/* tenants */}
+  );
+  function isTodayGreater(dateStr) {
+    const inputDate = new Date(dateStr);
+    const today = new Date();
+    return today > inputDate;
+  }
   function instance9($self, $props, $invalidate) {
-    let revenueReports = (
-      /** @type {RevenueReport[]} */
-      [/* revenueReports */]
+    let wifiDeviceReports = (
+      /** @type {WifiDeviceReport[]} */
+      [/* wifiDeviceReports */]
     );
     let yearMonth = (
       /** @type {string} */
@@ -16034,63 +16017,46 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
       /** @type {boolean} */
       false
     );
-    async function getRevenueReports() {
+    async function getWifiDeviceReports() {
       $invalidate(2, isFiltering = true);
-      await (0, import_jsApi2.StaffRevenueReport)(
+      await (0, import_jsApi2.StaffWifiDeviceReport)(
         // @ts-ignore
         { yearMonth },
-        /** @type {import('./jsApi.GEN').StaffRevenueReportCallback} */
+        /** @type {import('./jsApi.GEN').StaffWifiDeviceReportCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
             console.log(o);
-            notifier.showError(o.error || "Error filtering revenue reports");
+            notifier.showError(o.error || "Error filtering wifi device reports");
             return;
           }
-          $invalidate(0, revenueReports = o.revenueReports);
+          $invalidate(0, wifiDeviceReports = o.wifiDeviceReports);
         }
       );
       $invalidate(2, isFiltering = false);
     }
-    let sumRevenueIDR = 0;
-    let sumDonationIDR = 0;
     function inputbox_value_binding(value) {
       yearMonth = value;
       $invalidate(1, yearMonth);
     }
-    $self.$.update = () => {
-      if ($self.$.dirty & /*revenueReports, sumRevenueIDR, sumDonationIDR*/
-      25) {
-        $: {
-          $invalidate(3, sumRevenueIDR = 0);
-          $invalidate(4, sumDonationIDR = 0);
-          for (let i = 0; i < (revenueReports || []).length; i++) {
-            $invalidate(3, sumRevenueIDR += revenueReports[i].revenueIDR | 0);
-            $invalidate(4, sumDonationIDR += revenueReports[i].donationIDR | 0);
-          }
-        }
-      }
-    };
     return [
-      revenueReports,
+      wifiDeviceReports,
       yearMonth,
       isFiltering,
-      sumRevenueIDR,
-      sumDonationIDR,
-      getRevenueReports,
+      getWifiDeviceReports,
       inputbox_value_binding
     ];
   }
-  var StaffRevenueReport_1 = class extends SvelteComponent {
+  var StaffWifiDeviceReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance9, create_fragment12, safe_not_equal, {});
     }
   };
-  var staffRevenueReport_default = StaffRevenueReport_1;
+  var staffWifiDeviceReport_default = StaffWifiDeviceReport_1;
 
-  // staffRevenueReport.svelte.ts
-  var app = new staffRevenueReport_default({ target: document.getElementById("app") });
+  // staffWifiDeviceReport.svelte.ts
+  var app = new staffWifiDeviceReport_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

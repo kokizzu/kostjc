@@ -37,6 +37,13 @@ var (
 	AdminMenuLogsMeta = zCrud.Meta{
 		Fields: []zCrud.Field{
 			{
+				Name:      mCafe.Id,
+				Label:     `Id`,
+				ReadOnly:  true,
+				DataType:  zCrud.DataTypeInt,
+				InputType: zCrud.InputTypeHidden,
+			},
+			{
 				Name:      mCafe.CreatedAt,
 				Label:     `Datetime`,
 				ReadOnly:  true,

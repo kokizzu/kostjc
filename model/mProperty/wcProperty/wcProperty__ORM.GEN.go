@@ -2229,3 +2229,341 @@ func (s *StocksMutator) SetAll(from rqProperty.Stocks, excludeMap, forceMap M.SB
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
+// WifiDevicesMutator DAO writer/command struct
+type WifiDevicesMutator struct {
+	rqProperty.WifiDevices
+	mutations []A.X
+	logs      []A.X
+}
+
+// NewWifiDevicesMutator create new ORM writer/command object
+func NewWifiDevicesMutator(adapter *Tt.Adapter) (res *WifiDevicesMutator) {
+	res = &WifiDevicesMutator{WifiDevices: rqProperty.WifiDevices{Adapter: adapter}}
+	return
+}
+
+// Logs get array of logs [field, old, new]
+func (w *WifiDevicesMutator) Logs() []A.X { //nolint:dupl false positive
+	return w.logs
+}
+
+// HaveMutation check whether Set* methods ever called
+func (w *WifiDevicesMutator) HaveMutation() bool { //nolint:dupl false positive
+	return len(w.mutations) > 0
+}
+
+// ClearMutations clear all previously called Set* methods
+func (w *WifiDevicesMutator) ClearMutations() { //nolint:dupl false positive
+	w.mutations = []A.X{}
+	w.logs = []A.X{}
+}
+
+// DoOverwriteById update all columns, error if not exists, not using mutations/Set*
+func (w *WifiDevicesMutator) DoOverwriteById() bool { //nolint:dupl false positive
+	_, err := w.Adapter.Update(w.SpaceName(), w.UniqueIndexId(), A.X{w.Id}, w.ToUpdateArray())
+	return !L.IsError(err, `WifiDevices.DoOverwriteById failed: `+w.SpaceName())
+}
+
+// DoUpdateById update only mutated fields, error if not exists, use Find* and Set* methods instead of direct assignment
+func (w *WifiDevicesMutator) DoUpdateById() bool { //nolint:dupl false positive
+	if !w.HaveMutation() {
+		return true
+	}
+	_, err := w.Adapter.Update(w.SpaceName(), w.UniqueIndexId(), A.X{w.Id}, w.mutations)
+	return !L.IsError(err, `WifiDevices.DoUpdateById failed: `+w.SpaceName())
+}
+
+// DoDeletePermanentById permanent delete
+func (w *WifiDevicesMutator) DoDeletePermanentById() bool { //nolint:dupl false positive
+	_, err := w.Adapter.Delete(w.SpaceName(), w.UniqueIndexId(), A.X{w.Id})
+	return !L.IsError(err, `WifiDevices.DoDeletePermanentById failed: `+w.SpaceName())
+}
+
+// func (w *WifiDevicesMutator) DoUpsert() bool { //nolint:dupl false positive
+//	arr := w.ToArray()
+//	_, err := w.Adapter.Upsert(w.SpaceName(), arr, A.X{
+//		A.X{`=`, 0, w.Id},
+//		A.X{`=`, 1, w.StartAt},
+//		A.X{`=`, 2, w.EndAt},
+//		A.X{`=`, 3, w.PaidAt},
+//		A.X{`=`, 4, w.PriceIDR},
+//		A.X{`=`, 5, w.TenantId},
+//		A.X{`=`, 6, w.MacAddress},
+//		A.X{`=`, 7, w.RoomId},
+//		A.X{`=`, 8, w.CreatedAt},
+//		A.X{`=`, 9, w.CreatedBy},
+//		A.X{`=`, 10, w.UpdatedAt},
+//		A.X{`=`, 11, w.UpdatedBy},
+//		A.X{`=`, 12, w.DeletedAt},
+//		A.X{`=`, 13, w.DeletedBy},
+//		A.X{`=`, 14, w.RestoredBy},
+//	})
+//	return !L.IsError(err, `WifiDevices.DoUpsert failed: `+w.SpaceName()+ `\n%#v`, arr)
+// }
+
+// DoInsert insert, error if already exists
+func (w *WifiDevicesMutator) DoInsert() bool { //nolint:dupl false positive
+	arr := w.ToArray()
+	row, err := w.Adapter.Insert(w.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			w.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `WifiDevices.DoInsert failed: `+w.SpaceName()+`\n%#v`, arr)
+}
+
+// DoUpsert upsert, insert or overwrite, will error only when there's unique secondary key being violated
+// replace = upsert, only error when there's unique secondary key
+// previous name: DoReplace
+func (w *WifiDevicesMutator) DoUpsert() bool { //nolint:dupl false positive
+	arr := w.ToArray()
+	row, err := w.Adapter.Replace(w.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			w.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `WifiDevices.DoUpsert failed: `+w.SpaceName()+`\n%#v`, arr)
+}
+
+// SetId create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetId(val uint64) bool { //nolint:dupl false positive
+	if val != w.Id {
+		w.mutations = append(w.mutations, A.X{`=`, 0, val})
+		w.logs = append(w.logs, A.X{`id`, w.Id, val})
+		w.Id = val
+		return true
+	}
+	return false
+}
+
+// SetStartAt create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetStartAt(val string) bool { //nolint:dupl false positive
+	if val != w.StartAt {
+		w.mutations = append(w.mutations, A.X{`=`, 1, val})
+		w.logs = append(w.logs, A.X{`startAt`, w.StartAt, val})
+		w.StartAt = val
+		return true
+	}
+	return false
+}
+
+// SetEndAt create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetEndAt(val string) bool { //nolint:dupl false positive
+	if val != w.EndAt {
+		w.mutations = append(w.mutations, A.X{`=`, 2, val})
+		w.logs = append(w.logs, A.X{`endAt`, w.EndAt, val})
+		w.EndAt = val
+		return true
+	}
+	return false
+}
+
+// SetPaidAt create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetPaidAt(val string) bool { //nolint:dupl false positive
+	if val != w.PaidAt {
+		w.mutations = append(w.mutations, A.X{`=`, 3, val})
+		w.logs = append(w.logs, A.X{`paidAt`, w.PaidAt, val})
+		w.PaidAt = val
+		return true
+	}
+	return false
+}
+
+// SetPriceIDR create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetPriceIDR(val int64) bool { //nolint:dupl false positive
+	if val != w.PriceIDR {
+		w.mutations = append(w.mutations, A.X{`=`, 4, val})
+		w.logs = append(w.logs, A.X{`priceIDR`, w.PriceIDR, val})
+		w.PriceIDR = val
+		return true
+	}
+	return false
+}
+
+// SetTenantId create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetTenantId(val uint64) bool { //nolint:dupl false positive
+	if val != w.TenantId {
+		w.mutations = append(w.mutations, A.X{`=`, 5, val})
+		w.logs = append(w.logs, A.X{`tenantId`, w.TenantId, val})
+		w.TenantId = val
+		return true
+	}
+	return false
+}
+
+// SetMacAddress create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetMacAddress(val string) bool { //nolint:dupl false positive
+	if val != w.MacAddress {
+		w.mutations = append(w.mutations, A.X{`=`, 6, val})
+		w.logs = append(w.logs, A.X{`macAddress`, w.MacAddress, val})
+		w.MacAddress = val
+		return true
+	}
+	return false
+}
+
+// SetRoomId create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetRoomId(val uint64) bool { //nolint:dupl false positive
+	if val != w.RoomId {
+		w.mutations = append(w.mutations, A.X{`=`, 7, val})
+		w.logs = append(w.logs, A.X{`roomId`, w.RoomId, val})
+		w.RoomId = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedAt create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positive
+	if val != w.CreatedAt {
+		w.mutations = append(w.mutations, A.X{`=`, 8, val})
+		w.logs = append(w.logs, A.X{`createdAt`, w.CreatedAt, val})
+		w.CreatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedBy create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != w.CreatedBy {
+		w.mutations = append(w.mutations, A.X{`=`, 9, val})
+		w.logs = append(w.logs, A.X{`createdBy`, w.CreatedBy, val})
+		w.CreatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedAt create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positive
+	if val != w.UpdatedAt {
+		w.mutations = append(w.mutations, A.X{`=`, 10, val})
+		w.logs = append(w.logs, A.X{`updatedAt`, w.UpdatedAt, val})
+		w.UpdatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedBy create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != w.UpdatedBy {
+		w.mutations = append(w.mutations, A.X{`=`, 11, val})
+		w.logs = append(w.logs, A.X{`updatedBy`, w.UpdatedBy, val})
+		w.UpdatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedAt create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positive
+	if val != w.DeletedAt {
+		w.mutations = append(w.mutations, A.X{`=`, 12, val})
+		w.logs = append(w.logs, A.X{`deletedAt`, w.DeletedAt, val})
+		w.DeletedAt = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedBy create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetDeletedBy(val uint64) bool { //nolint:dupl false positive
+	if val != w.DeletedBy {
+		w.mutations = append(w.mutations, A.X{`=`, 13, val})
+		w.logs = append(w.logs, A.X{`deletedBy`, w.DeletedBy, val})
+		w.DeletedBy = val
+		return true
+	}
+	return false
+}
+
+// SetRestoredBy create mutations, should not duplicate
+func (w *WifiDevicesMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false positive
+	if val != w.RestoredBy {
+		w.mutations = append(w.mutations, A.X{`=`, 14, val})
+		w.logs = append(w.logs, A.X{`restoredBy`, w.RestoredBy, val})
+		w.RestoredBy = val
+		return true
+	}
+	return false
+}
+
+// SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
+func (w *WifiDevicesMutator) SetAll(from rqProperty.WifiDevices, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
+	if excludeMap == nil { // list of fields to exclude
+		excludeMap = M.SB{}
+	}
+	if forceMap == nil { // list of fields to force overwrite
+		forceMap = M.SB{}
+	}
+	if !excludeMap[`id`] && (forceMap[`id`] || from.Id != 0) {
+		w.Id = from.Id
+		changed = true
+	}
+	if !excludeMap[`startAt`] && (forceMap[`startAt`] || from.StartAt != ``) {
+		w.StartAt = S.Trim(from.StartAt)
+		changed = true
+	}
+	if !excludeMap[`endAt`] && (forceMap[`endAt`] || from.EndAt != ``) {
+		w.EndAt = S.Trim(from.EndAt)
+		changed = true
+	}
+	if !excludeMap[`paidAt`] && (forceMap[`paidAt`] || from.PaidAt != ``) {
+		w.PaidAt = S.Trim(from.PaidAt)
+		changed = true
+	}
+	if !excludeMap[`priceIDR`] && (forceMap[`priceIDR`] || from.PriceIDR != 0) {
+		w.PriceIDR = from.PriceIDR
+		changed = true
+	}
+	if !excludeMap[`tenantId`] && (forceMap[`tenantId`] || from.TenantId != 0) {
+		w.TenantId = from.TenantId
+		changed = true
+	}
+	if !excludeMap[`macAddress`] && (forceMap[`macAddress`] || from.MacAddress != ``) {
+		w.MacAddress = S.Trim(from.MacAddress)
+		changed = true
+	}
+	if !excludeMap[`roomId`] && (forceMap[`roomId`] || from.RoomId != 0) {
+		w.RoomId = from.RoomId
+		changed = true
+	}
+	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {
+		w.CreatedAt = from.CreatedAt
+		changed = true
+	}
+	if !excludeMap[`createdBy`] && (forceMap[`createdBy`] || from.CreatedBy != 0) {
+		w.CreatedBy = from.CreatedBy
+		changed = true
+	}
+	if !excludeMap[`updatedAt`] && (forceMap[`updatedAt`] || from.UpdatedAt != 0) {
+		w.UpdatedAt = from.UpdatedAt
+		changed = true
+	}
+	if !excludeMap[`updatedBy`] && (forceMap[`updatedBy`] || from.UpdatedBy != 0) {
+		w.UpdatedBy = from.UpdatedBy
+		changed = true
+	}
+	if !excludeMap[`deletedAt`] && (forceMap[`deletedAt`] || from.DeletedAt != 0) {
+		w.DeletedAt = from.DeletedAt
+		changed = true
+	}
+	if !excludeMap[`deletedBy`] && (forceMap[`deletedBy`] || from.DeletedBy != 0) {
+		w.DeletedBy = from.DeletedBy
+		changed = true
+	}
+	if !excludeMap[`restoredBy`] && (forceMap[`restoredBy`] || from.RestoredBy != 0) {
+		w.RestoredBy = from.RestoredBy
+		changed = true
+	}
+	return
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

@@ -1275,7 +1275,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   }
 }
 
-/* fakecss:./admin/locationLogs.esbuild-svelte-fake-css */
+/* fakecss:./admin/wifiDeviceLogs.esbuild-svelte-fake-css */
 .logs-container.svelte-9g9cdz {
   display: flex;
   flex-direction: column;
@@ -3758,7 +3758,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminLocation = async function AdminLocation(i, cb) {
         return await axios.post("/admin/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminLocationLogs = async function AdminLocationLogs2(i, cb) {
+      exports.AdminLocationLogs = async function AdminLocationLogs(i, cb) {
         return await axios.post("/admin/locationLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminMenu = async function AdminMenu(i, cb) {
@@ -3800,7 +3800,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminWifiDevice = async function AdminWifiDevice(i, cb) {
         return await axios.post("/admin/wifiDevice", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminWifiDeviceLogs = async function AdminWifiDeviceLogs(i, cb) {
+      exports.AdminWifiDeviceLogs = async function AdminWifiDeviceLogs2(i, cb) {
         return await axios.post("/admin/wifiDeviceLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.GuestLogin = async function GuestLogin(i, cb) {
@@ -11617,7 +11617,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var MasterTableActionlog_default = MasterTableActionlog;
 
-  // admin/locationLogs.svelte
+  // admin/wifiDeviceLogs.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
   // _partials/LogsSubMenu.svelte
@@ -12135,7 +12135,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var PopUpCompareJson_default = PopUpCompareJson;
 
-  // admin/locationLogs.svelte
+  // admin/wifiDeviceLogs.svelte
   function create_if_block5(ctx) {
     let popupcomparejson;
     let updating_beforeJson;
@@ -12407,10 +12407,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     );
     async function refreshTableView(pagerIn) {
       const i = { pager: pagerIn };
-      await (0, import_jsApi2.AdminLocationLogs)(
+      console.log("req:", i);
+      await (0, import_jsApi2.AdminWifiDeviceLogs)(
         // @ts-ignore
         i,
-        /** @type {import('../jsApi.GEN').AdminLocationLogsCallback} */
+        /** @type {import('../jsApi.GEN').AdminBookingLogsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -12488,16 +12489,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       mastertableactionlog_pager_binding
     ];
   }
-  var LocationLogs = class extends SvelteComponent {
+  var WifiDeviceLogs = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance12, create_fragment12, safe_not_equal, {});
     }
   };
-  var locationLogs_default = LocationLogs;
+  var wifiDeviceLogs_default = WifiDeviceLogs;
 
-  // admin/locationLogs.svelte.ts
-  var app = new locationLogs_default({ target: document.getElementById("app") });
+  // admin/wifiDeviceLogs.svelte.ts
+  var app = new wifiDeviceLogs_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

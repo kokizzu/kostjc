@@ -2,56 +2,52 @@
   /** @typedef {import('./_types/masters.js').Access} Access */
   /** @typedef {import('./_types/users.js').User} User */
   /**
-   * @typedef {Object} RevenueReport
-   * @property {string} yearMonth
-   * @property {number} bookingId
-   * @property {number} revenueIDR
-   * @property {number} donationIDR
+   * @typedef {Object} WifiDeviceReport
+   * @property {number} tenantId
+   * @property {number} roomId
+   * @property {string} startAt
+   * @property {string} endAt
+   * @property {string} paidAt
    */
 
   import InputBox from './_components/InputBox.svelte';
   import SubmitButton from './_components/SubmitButton.svelte';
-  import { formatYearMonth } from './_components/xFormatter';
+    import { localeDateFromYYYYMMDD } from './_components/xFormatter';
   import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
-  import { StaffRevenueReport } from './jsApi.GEN';
+  import { StaffWifiDeviceReport } from './jsApi.GEN';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
-  let revenueReports = /** @type {RevenueReport[]} */ ([/* revenueReports */]);
-  let bookings = /** @type {Record<Number, string>} */ ({/* bookings */});
+  let wifiDeviceReports = /** @type {WifiDeviceReport[]} */ ([/* wifiDeviceReports */]);
+  const rooms  = /** @type {Record<Number, string>} */ ({/* rooms */});
+  const tenants = /** @type {Record<Number, string>} */ ({/* tenants */});
 
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
   let isFiltering = /** @type {boolean} */ (false);
 
-  async function getRevenueReports() {
+  async function getWifiDeviceReports() {
     isFiltering = true;
-    await StaffRevenueReport(// @ts-ignore
-      { yearMonth }, /** @type {import('./jsApi.GEN').StaffRevenueReportCallback} */
+    await StaffWifiDeviceReport(// @ts-ignore
+      { yearMonth }, /** @type {import('./jsApi.GEN').StaffWifiDeviceReportCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
           console.log(o);
-          notifier.showError(o.error || 'Error filtering revenue reports');
+          notifier.showError(o.error || 'Error filtering wifi device reports');
           return
         }
         
-        revenueReports = o.revenueReports;
+        wifiDeviceReports = o.wifiDeviceReports;
       }
     );
     isFiltering = false;
   }
 
-  let sumRevenueIDR = 0;
-  let sumDonationIDR = 0;
-
-  $: {
-    sumRevenueIDR = 0;
-    sumDonationIDR = 0;
-    for(let i=0; i< (revenueReports || []).length; i++) {
-      sumRevenueIDR += revenueReports[i].revenueIDR|0
-      sumDonationIDR += revenueReports[i].donationIDR|0
-    }
+  function isTodayGreater(dateStr) {
+    const inputDate = new Date(dateStr);
+    const today = new Date();
+    return today > inputDate;
   }
 </script>
 
@@ -68,7 +64,7 @@
       />
       <SubmitButton
         label="Filter"
-        on:click={getRevenueReports}
+        on:click={getWifiDeviceReports}
         isSubmitted={isFiltering}
       />
     </div>
@@ -76,36 +72,30 @@
       <table>
         <thead>
           <tr>
-            <th style="min-width: 100px;">Month</th>
-            <th style="min-width: 170px;">Booking</th>
-            <th>Revenue (IDR)</th>
-            <th>Donation (IDR)</th>
+            <th>Start At</th>
+            <th>End At</th>
+            <th>Paid At</th>
+            <th>Tenant</th>
+            <th>Room</th>
           </tr>
         </thead>
         <tbody>
-          {#each (revenueReports || []) as data}
-            <tr>
-              <td>{formatYearMonth(data.yearMonth)}</td>
-              <td>{bookings[data.bookingId]}</td>
-              <td class="r">{data.revenueIDR}</td>
-              <td class="r">{data.donationIDR}</td>
+          {#each (wifiDeviceReports || []) as data}
+            <tr class={isTodayGreater(data.endAt) ? 'reminding' : ''}>
+              <td>{localeDateFromYYYYMMDD(data.startAt)}</td>
+              <td>{localeDateFromYYYYMMDD(data.endAt)}</td>
+              <td>{localeDateFromYYYYMMDD(data.paidAt)}</td>
+              <td>{tenants[data.tenantId] || '--'}</td>
+              <td>{rooms[data.roomId] || '--'}</td>
             </tr>
           {/each}
 
-          {#if !revenueReports || !revenueReports.length}
+          {#if !wifiDeviceReports || (wifiDeviceReports || []).length == 0}
             <tr>
               <td>No data</td>
             </tr>
           {/if}
         </tbody>
-			<tfoot>
-				<tr>
-					<th></th>
-					<th></th>
-					<th class="r">{sumRevenueIDR}</th>
-					<th class="r">{sumDonationIDR}</th>
-				</tr>
-			</tfoot>
       </table>
     </div>
   </div>
@@ -157,6 +147,11 @@
     border-bottom: 1px solid var(--gray-004);
   }
 
+  table tbody tr.reminding {
+    background-color: var(--yellow-transparent);
+    color: var(--yellow-006);
+  }
+
   table tr td, table tr th {
     padding: 4px 12px;
   }
@@ -173,10 +168,5 @@
     :global(.report-container .actions .submit-btn) {
       width: 100% !important;
     }
-  }
-
-  /* align right */
-  td.r, th.r {
-	 text-align: right;
   }
 </style>

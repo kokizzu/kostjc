@@ -116,6 +116,14 @@ const (
 	PriceIDR     = `priceIDR`
 )
 
+const (
+	TableWifiDevices Tt.TableName = `wifiDevices`
+
+	StartAt    = `startAt` // UNIX timestamp
+	EndAt      = `endAt`   // UNIX timestamp
+	MacAddress = `macAddress`
+)
+
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 	TableLocations: {
 		Fields: []Tt.Field{
@@ -254,16 +262,38 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,
 	},
+	TableWifiDevices: {
+		Fields: []Tt.Field{
+			{Id, Tt.Unsigned},
+			{StartAt, Tt.String},
+			{EndAt, Tt.String},
+			{PaidAt, Tt.String},
+			{PriceIDR, Tt.Integer},
+			{TenantId, Tt.Unsigned},
+			{MacAddress, Tt.String},
+			{RoomId, Tt.Unsigned},
+			{CreatedAt, Tt.Integer},
+			{CreatedBy, Tt.Unsigned},
+			{UpdatedAt, Tt.Integer},
+			{UpdatedBy, Tt.Unsigned},
+			{DeletedAt, Tt.Integer},
+			{DeletedBy, Tt.Unsigned},
+			{RestoredBy, Tt.Unsigned},
+		},
+		AutoIncrementId: true,
+		Engine:          Tt.Memtx,
+	},
 }
 
 const (
-	TableLocationLogs Ch.TableName = `locationLogs`
-	TableFacilityLogs Ch.TableName = `facilityLogs`
-	TableBuildingLogs Ch.TableName = `buildingLogs`
-	TableRoomLogs     Ch.TableName = `roomLogs`
-	TableBookingLogs  Ch.TableName = `bookingLogs`
-	TablePaymentLogs  Ch.TableName = `paymentLogs`
-	TableStockLogs    Ch.TableName = `stockLogs`
+	TableLocationLogs   Ch.TableName = `locationLogs`
+	TableFacilityLogs   Ch.TableName = `facilityLogs`
+	TableBuildingLogs   Ch.TableName = `buildingLogs`
+	TableRoomLogs       Ch.TableName = `roomLogs`
+	TableBookingLogs    Ch.TableName = `bookingLogs`
+	TablePaymentLogs    Ch.TableName = `paymentLogs`
+	TableStockLogs      Ch.TableName = `stockLogs`
+	TableWifiDeviceLogs Ch.TableName = `wifiDeviceLogs`
 )
 
 const (
@@ -328,6 +358,15 @@ var ClickhouseTables = map[Ch.TableName]*Ch.TableProp{
 		Orders: []string{CreatedAt, ActorId},
 	},
 	TableStockLogs: {
+		Fields: []Ch.Field{
+			{CreatedAt, Ch.DateTime},
+			{ActorId, Ch.UInt64},
+			{BeforeJSON, Ch.String},
+			{AfterJSON, Ch.String},
+		},
+		Orders: []string{CreatedAt, ActorId},
+	},
+	TableWifiDeviceLogs: {
 		Fields: []Ch.Field{
 			{CreatedAt, Ch.DateTime},
 			{ActorId, Ch.UInt64},

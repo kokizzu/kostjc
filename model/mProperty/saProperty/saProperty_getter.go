@@ -9,7 +9,7 @@ import (
 func (l LocationLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []LocationLogs) {
 	const comment = `-- LocationLogs) FindByPagination`
 
-	validFields := BookingLogsFieldTypeMap
+	validFields := LocationLogsFieldTypeMap
 	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
 
 	queryCount := comment + `
@@ -47,7 +47,7 @@ FROM ` + l.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 func (f FacilityLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []FacilityLogs) {
 	const comment = `-- FacilityLogs) FindByPagination`
 
-	validFields := BookingLogsFieldTypeMap
+	validFields := FacilityLogsFieldTypeMap
 	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
 
 	queryCount := comment + `
@@ -85,7 +85,7 @@ FROM ` + f.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 func (b BuildingLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []BuildingLogs) {
 	const comment = `-- BuildingLogs) FindByPagination`
 
-	validFields := BookingLogsFieldTypeMap
+	validFields := BuildingLogsFieldTypeMap
 	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
 
 	queryCount := comment + `
@@ -123,7 +123,7 @@ FROM ` + b.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 func (r RoomLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []RoomLogs) {
 	const comment = `-- RoomLogs) FindByPagination`
 
-	validFields := BookingLogsFieldTypeMap
+	validFields := RoomLogsFieldTypeMap
 	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
 
 	queryCount := comment + `
@@ -199,7 +199,7 @@ FROM ` + b.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 func (p PaymentLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []PaymentLogs) {
 	const comment = `-- PaymentLogs) FindByPagination`
 
-	validFields := BookingLogsFieldTypeMap
+	validFields := PaymentLogsFieldTypeMap
 	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
 
 	queryCount := comment + `
@@ -237,7 +237,45 @@ FROM ` + p.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 func (s StockLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []StockLogs) {
 	const comment = `-- StockLogs) FindByPagination`
 
-	validFields := BookingLogsFieldTypeMap
+	validFields := StockLogsFieldTypeMap
+	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
+
+	queryCount := comment + `
+SELECT COUNT(1)
+FROM ` + s.SqlTableName() + whereAndSql + `
+LIMIT 1`
+	row := s.Adapter.QueryRow(queryCount)
+	err := row.Err()
+	if L.IsError(err, `FindByPagination.Adapter.QueryRow error: `+queryCount) {
+		return
+	}
+	err = row.Scan(&out.Total)
+	L.IsError(err, comment+`: error while scanning total`)
+	out.CalculatePages(in.Page, in.PerPage, out.Total)
+
+	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	limitOffsetSql := out.LimitOffsetSql()
+
+	queryRows := comment + `
+SELECT ` + s.SqlAllFields() + `
+FROM ` + s.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
+	rows, err := s.Adapter.Query(queryRows)
+	if L.IsError(err, `FindByPagination.Adapter.Query error: `+queryRows) {
+		return
+	}
+
+	res, err = s.ScanRowsAllCols(rows, out.PerPage)
+	if L.IsError(err, `FindByPagination.ScanRowsAllCols error: `+queryRows) {
+		return
+	}
+
+	return
+}
+
+func (s WifiDeviceLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []WifiDeviceLogs) {
+	const comment = `-- WifiDeviceLogs) FindByPagination`
+
+	validFields := WifiDeviceLogsFieldTypeMap
 	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
 
 	queryCount := comment + `

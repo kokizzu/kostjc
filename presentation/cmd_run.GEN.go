@@ -172,6 +172,22 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminUsersManagement(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminWifiDeviceAction:
+		in := domain.AdminWifiDeviceIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminWifiDevice(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminWifiDeviceLogsAction:
+		in := domain.AdminWifiDeviceLogsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminWifiDeviceLogs(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.GuestLoginAction:
 		in := domain.GuestLoginIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -250,6 +266,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 			return
 		}
 		out := b.StaffSales(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.StaffWifiDeviceReportAction:
+		in := domain.StaffWifiDeviceReportIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.StaffWifiDeviceReport(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.UserLogoutAction:

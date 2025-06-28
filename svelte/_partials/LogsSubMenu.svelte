@@ -40,6 +40,10 @@
 			<span class="title">Menu</span>
 			<span class="block"></span>
 		</a>
+		<a href="/admin/wifiDeviceLogs" class:active={segment2==='wifiDeviceLogs'}>
+			<span class="title">Wifi Device</span>
+			<span class="block"></span>
+		</a>
 	</nav>
 </div>
 

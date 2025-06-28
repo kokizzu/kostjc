@@ -18,6 +18,7 @@ var viewList = map[string]string{
 	`AdminRoomLogs`:          `../svelte/admin/roomLogs.html`,         // ../svelte/admin/roomLogs.svelte
 	`AdminSaleLogs`:          `../svelte/admin/saleLogs.html`,         // ../svelte/admin/saleLogs.svelte
 	`AdminStockLogs`:         `../svelte/admin/stockLogs.html`,        // ../svelte/admin/stockLogs.svelte
+	`AdminWifiDeviceLogs`:    `../svelte/admin/wifiDeviceLogs.html`,   // ../svelte/admin/wifiDeviceLogs.svelte
 	`AdminBooking`:           `../svelte/adminBooking.html`,           // ../svelte/adminBooking.svelte
 	`AdminBuilding`:          `../svelte/adminBuilding.html`,          // ../svelte/adminBuilding.svelte
 	`AdminFacility`:          `../svelte/adminFacility.html`,          // ../svelte/adminFacility.svelte
@@ -28,6 +29,7 @@ var viewList = map[string]string{
 	`AdminStock`:             `../svelte/adminStock.html`,             // ../svelte/adminStock.svelte
 	`AdminTenants`:           `../svelte/adminTenants.html`,           // ../svelte/adminTenants.svelte
 	`AdminUsersManagement`:   `../svelte/adminUsersManagement.html`,   // ../svelte/adminUsersManagement.svelte
+	`AdminWifiDevice`:        `../svelte/adminWifiDevice.html`,        // ../svelte/adminWifiDevice.svelte
 	`Debug`:                  `../svelte/debug.html`,                  // ../svelte/debug.svelte
 	`Error`:                  `../svelte/error.html`,                  // ../svelte/error.svelte
 	`Index`:                  `../svelte/index.html`,                  // ../svelte/index.svelte
@@ -35,6 +37,7 @@ var viewList = map[string]string{
 	`StaffMissingDataReport`: `../svelte/staffMissingDataReport.html`, // ../svelte/staffMissingDataReport.svelte
 	`StaffOccupancyReport`:   `../svelte/staffOccupancyReport.html`,   // ../svelte/staffOccupancyReport.svelte
 	`StaffRevenueReport`:     `../svelte/staffRevenueReport.html`,     // ../svelte/staffRevenueReport.svelte
+	`StaffWifiDeviceReport`:  `../svelte/staffWifiDeviceReport.html`,  // ../svelte/staffWifiDeviceReport.svelte
 	`User`:                   `../svelte/user.html`,                   // ../svelte/user.svelte
 }
 
@@ -88,6 +91,11 @@ func (v *Views) RenderAdminStockLogs(c *fiber.Ctx, m M.SX) error {
 	return c.SendString(v.cache[`AdminStockLogs`].Str(m))
 }
 
+func (v *Views) RenderAdminWifiDeviceLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminWifiDeviceLogs`].Str(m))
+}
+
 func (v *Views) RenderAdminBooking(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`AdminBooking`].Str(m))
@@ -138,6 +146,11 @@ func (v *Views) RenderAdminUsersManagement(c *fiber.Ctx, m M.SX) error {
 	return c.SendString(v.cache[`AdminUsersManagement`].Str(m))
 }
 
+func (v *Views) RenderAdminWifiDevice(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminWifiDevice`].Str(m))
+}
+
 func (v *Views) RenderDebug(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`Debug`].Str(m))
@@ -171,6 +184,11 @@ func (v *Views) RenderStaffOccupancyReport(c *fiber.Ctx, m M.SX) error {
 func (v *Views) RenderStaffRevenueReport(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`StaffRevenueReport`].Str(m))
+}
+
+func (v *Views) RenderStaffWifiDeviceReport(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`StaffWifiDeviceReport`].Str(m))
 }
 
 func (v *Views) RenderUser(c *fiber.Ctx, m M.SX) error {

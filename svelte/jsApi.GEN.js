@@ -2281,6 +2281,222 @@ exports.AdminUsersManagement = async function AdminUsersManagement( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminWifiDeviceIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} wifiDevice.id
+ * @property {String} wifiDevice.startAt
+ * @property {String} wifiDevice.endAt
+ * @property {String} wifiDevice.paidAt
+ * @property {number} wifiDevice.priceIDR
+ * @property {number} wifiDevice.tenantId
+ * @property {String} wifiDevice.macAddress
+ * @property {number} wifiDevice.roomId
+ * @property {number} wifiDevice.createdAt
+ * @property {number} wifiDevice.createdBy
+ * @property {number} wifiDevice.updatedAt
+ * @property {number} wifiDevice.updatedBy
+ * @property {number} wifiDevice.deletedAt
+ * @property {number} wifiDevice.deletedBy
+ * @property {number} wifiDevice.restoredBy
+ */
+const AdminWifiDeviceIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  wifiDevice: { // rqProperty.WifiDevices
+    id: 0, // uint64
+    startAt: '', // string
+    endAt: '', // string
+    paidAt: '', // string
+    priceIDR: 0, // int64
+    tenantId: 0, // uint64
+    macAddress: '', // string
+    roomId: 0, // uint64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.WifiDevices
+}
+/**
+ * @typedef {Object} AdminWifiDeviceOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} wifiDevice.id
+ * @property {String} wifiDevice.startAt
+ * @property {String} wifiDevice.endAt
+ * @property {String} wifiDevice.paidAt
+ * @property {number} wifiDevice.priceIDR
+ * @property {number} wifiDevice.tenantId
+ * @property {String} wifiDevice.macAddress
+ * @property {number} wifiDevice.roomId
+ * @property {number} wifiDevice.createdAt
+ * @property {number} wifiDevice.createdBy
+ * @property {number} wifiDevice.updatedAt
+ * @property {number} wifiDevice.updatedBy
+ * @property {number} wifiDevice.deletedAt
+ * @property {number} wifiDevice.deletedBy
+ * @property {number} wifiDevice.restoredBy
+ * @property {Object} wifiDevices
+ */
+const AdminWifiDeviceOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  wifiDevice: { // rqProperty.WifiDevices
+    id: 0, // uint64
+    startAt: '', // string
+    endAt: '', // string
+    paidAt: '', // string
+    priceIDR: 0, // int64
+    tenantId: 0, // uint64
+    macAddress: '', // string
+    roomId: 0, // uint64
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqProperty.WifiDevices
+  wifiDevices: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback AdminWifiDeviceCallback
+ * @param {AdminWifiDeviceOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminWifiDeviceIn} i
+ * @param {AdminWifiDeviceCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminWifiDevice = async function AdminWifiDevice( i, cb ) {
+  return await axios.post( '/admin/wifiDevice', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminWifiDeviceLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminWifiDeviceLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminWifiDeviceLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminWifiDeviceLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saProperty.WifiDeviceLogs
+  }, // []saProperty.WifiDeviceLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminWifiDeviceLogsCallback
+ * @param {AdminWifiDeviceLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminWifiDeviceLogsIn} i
+ * @param {AdminWifiDeviceLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminWifiDeviceLogs = async function AdminWifiDeviceLogs( i, cb ) {
+  return await axios.post( '/admin/wifiDeviceLogs', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} GuestLoginIn
  * @property {String} email
  * @property {String} password
@@ -2934,6 +3150,74 @@ const StaffSalesOut = {
  */
 exports.StaffSales = async function StaffSales( i, cb ) {
   return await axios.post( '/staff/sales', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} StaffWifiDeviceReportIn
+ * @property {String} yearMonth
+ */
+const StaffWifiDeviceReportIn = {
+  yearMonth: '', // string
+}
+/**
+ * @typedef {Object} StaffWifiDeviceReportOut
+ * @property {number} user.id
+ * @property {String} user.email
+ * @property {String} user.password
+ * @property {number} user.createdAt
+ * @property {number} user.createdBy
+ * @property {number} user.updatedAt
+ * @property {number} user.updatedBy
+ * @property {number} user.deletedAt
+ * @property {number} user.passwordSetAt
+ * @property {String} user.secretCode
+ * @property {number} user.secretCodeAt
+ * @property {number} user.verifiedAt
+ * @property {number} user.lastLoginAt
+ * @property {String} user.fullName
+ * @property {String} user.userName
+ * @property {String} user.role
+ * @property {Object} segments
+ * @property {Object} wifiDeviceReports
+ */
+const StaffWifiDeviceReportOut = {
+  user: { // rqAuth.Users
+    id: 0, // uint64
+    email: '', // string
+    password: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    passwordSetAt: 0, // int64
+    secretCode: '', // string
+    secretCodeAt: 0, // int64
+    verifiedAt: 0, // int64
+    lastLoginAt: 0, // int64
+    fullName: '', // string
+    userName: '', // string
+    role: '', // string
+  }, // rqAuth.Users
+  segments: { // M.SB
+  }, // M.SB
+  wifiDeviceReports: { // []rqProperty.WifiDeviceReport
+  }, // []rqProperty.WifiDeviceReport
+}
+/**
+ * @callback StaffWifiDeviceReportCallback
+ * @param {StaffWifiDeviceReportOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {StaffWifiDeviceReportIn} i
+ * @param {StaffWifiDeviceReportCallback} cb
+ * @returns {Promise}
+ */
+exports.StaffWifiDeviceReport = async function StaffWifiDeviceReport( i, cb ) {
+  return await axios.post( '/staff/wifiDeviceReport', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }

@@ -1997,9 +1997,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     mod
   ));
 
-  // node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/browser/axios.cjs
+  // node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs
   var require_axios = __commonJS({
-    "node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
+    "node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
       "use strict";
       function bind2(fn, thisArg) {
         return function wrap() {
@@ -2008,7 +2008,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
       var { toString } = Object.prototype;
       var { getPrototypeOf } = Object;
-      var { iterator, toStringTag } = Symbol;
       var kindOf = ((cache) => (thing) => {
         const str = toString.call(thing);
         return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
@@ -2043,7 +2042,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return false;
         }
         const prototype2 = getPrototypeOf(val);
-        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
+        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(Symbol.toStringTag in val) && !(Symbol.iterator in val);
       };
       var isDate = kindOfTest("Date");
       var isFile = kindOfTest("File");
@@ -2195,10 +2194,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         };
       })(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
       var forEachEntry = (obj, fn) => {
-        const generator = obj && obj[iterator];
-        const _iterator = generator.call(obj);
+        const generator = obj && obj[Symbol.iterator];
+        const iterator = generator.call(obj);
         let result;
-        while ((result = _iterator.next()) && !result.done) {
+        while ((result = iterator.next()) && !result.done) {
           const pair = result.value;
           fn.call(obj, pair[0], pair[1]);
         }
@@ -2268,8 +2267,23 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       var toFiniteNumber = (value, defaultValue) => {
         return value != null && Number.isFinite(value = +value) ? value : defaultValue;
       };
+      var ALPHA = "abcdefghijklmnopqrstuvwxyz";
+      var DIGIT = "0123456789";
+      var ALPHABET = {
+        DIGIT,
+        ALPHA,
+        ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
+      };
+      var generateString = (size2 = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
+        let str = "";
+        const { length } = alphabet;
+        while (size2--) {
+          str += alphabet[Math.random() * length | 0];
+        }
+        return str;
+      };
       function isSpecCompliantForm(thing) {
-        return !!(thing && isFunction(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
+        return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
       }
       var toJSONObject = (obj) => {
         const stack = new Array(10);
@@ -2315,7 +2329,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         isFunction(_global.postMessage)
       );
       var asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
-      var isIterable = (thing) => thing != null && isFunction(thing[iterator]);
       var utils$1 = {
         isArray,
         isArrayBuffer,
@@ -2367,13 +2380,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         findKey,
         global: _global,
         isContextDefined,
+        ALPHABET,
+        generateString,
         isSpecCompliantForm,
         toJSONObject,
         isAsyncFn,
         isThenable,
         setImmediate: _setImmediate,
-        asap,
-        isIterable
+        asap
       };
       function AxiosError(message, code, config, request, response) {
         Error.call(this);
@@ -2598,11 +2612,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return url;
         }
         const _encode = options && options.encode || encode;
-        if (utils$1.isFunction(options)) {
-          options = {
-            serialize: options
-          };
-        }
         const serializeFn = options && options.serialize;
         let serializedParams;
         if (serializeFn) {
@@ -3003,15 +3012,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             setHeaders(header, valueOrRewrite);
           } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
             setHeaders(parseHeaders(header), valueOrRewrite);
-          } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
-            let obj = {}, dest, key;
-            for (const entry of header) {
-              if (!utils$1.isArray(entry)) {
-                throw TypeError("Object iterator must return a key-value pair");
-              }
-              obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
+          } else if (utils$1.isHeaders(header)) {
+            for (const [key, value] of header.entries()) {
+              setHeader(value, key, rewrite);
             }
-            setHeaders(obj, valueOrRewrite);
           } else {
             header != null && setHeader(valueOrRewrite, header, rewrite);
           }
@@ -3114,9 +3118,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         toString() {
           return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
-        }
-        getSetCookie() {
-          return this.get("set-cookie") || [];
         }
         get [Symbol.toStringTag]() {
           return "AxiosHeaders";
@@ -3295,13 +3296,45 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }), throttled[1]];
       };
       var asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
-      var isURLSameOrigin = platform2.hasStandardBrowserEnv ? ((origin2, isMSIE) => (url) => {
-        url = new URL(url, platform2.origin);
-        return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
-      })(
-        new URL(platform2.origin),
-        platform2.navigator && /(msie|trident)/i.test(platform2.navigator.userAgent)
-      ) : () => true;
+      var isURLSameOrigin = platform2.hasStandardBrowserEnv ? (
+        // Standard browser envs have full support of the APIs needed to test
+        // whether the request URL is of the same origin as current location.
+        function standardBrowserEnv() {
+          const msie = platform2.navigator && /(msie|trident)/i.test(platform2.navigator.userAgent);
+          const urlParsingNode = document.createElement("a");
+          let originURL;
+          function resolveURL(url) {
+            let href = url;
+            if (msie) {
+              urlParsingNode.setAttribute("href", href);
+              href = urlParsingNode.href;
+            }
+            urlParsingNode.setAttribute("href", href);
+            return {
+              href: urlParsingNode.href,
+              protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
+              host: urlParsingNode.host,
+              search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
+              hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
+              hostname: urlParsingNode.hostname,
+              port: urlParsingNode.port,
+              pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
+            };
+          }
+          originURL = resolveURL(window.location.href);
+          return function isURLSameOrigin2(requestURL) {
+            const parsed = utils$1.isString(requestURL) ? resolveURL(requestURL) : requestURL;
+            return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
+          };
+        }()
+      ) : (
+        // Non standard browser envs (web workers, react-native) lack needed support.
+        function nonStandardBrowserEnv() {
+          return function isURLSameOrigin2() {
+            return true;
+          };
+        }()
+      );
       var cookies = platform2.hasStandardBrowserEnv ? (
         // Standard browser envs support document.cookie
         {
@@ -3339,9 +3372,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       function combineURLs(baseURL, relativeURL) {
         return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
       }
-      function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
-        let isRelativeUrl = !isAbsoluteURL(requestedURL);
-        if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {
+      function buildFullPath(baseURL, requestedURL) {
+        if (baseURL && !isAbsoluteURL(requestedURL)) {
           return combineURLs(baseURL, requestedURL);
         }
         return requestedURL;
@@ -3350,7 +3382,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       function mergeConfig(config1, config2) {
         config2 = config2 || {};
         const config = {};
-        function getMergedValue(target, source, prop, caseless) {
+        function getMergedValue(target, source, caseless) {
           if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
             return utils$1.merge.call({ caseless }, target, source);
           } else if (utils$1.isPlainObject(source)) {
@@ -3360,11 +3392,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           }
           return source;
         }
-        function mergeDeepProperties(a, b, prop, caseless) {
+        function mergeDeepProperties(a, b, caseless) {
           if (!utils$1.isUndefined(b)) {
-            return getMergedValue(a, b, prop, caseless);
+            return getMergedValue(a, b, caseless);
           } else if (!utils$1.isUndefined(a)) {
-            return getMergedValue(void 0, a, prop, caseless);
+            return getMergedValue(void 0, a, caseless);
           }
         }
         function valueFromConfig2(a, b) {
@@ -3415,7 +3447,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           socketPath: defaultToConfig2,
           responseEncoding: defaultToConfig2,
           validateStatus: mergeDirectKeys,
-          headers: (a, b, prop) => mergeDeepProperties(headersToObject(a), headersToObject(b), prop, true)
+          headers: (a, b) => mergeDeepProperties(headersToObject(a), headersToObject(b), true)
         };
         utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
           const merge2 = mergeMap[prop] || mergeDeepProperties;
@@ -3428,7 +3460,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         const newConfig = mergeConfig({}, config);
         let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
         newConfig.headers = headers = AxiosHeaders$1.from(headers);
-        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
+        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url), config.params, config.paramsSerializer);
         if (auth) {
           headers.set(
             "Authorization",
@@ -3652,7 +3684,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
       };
       var trackStream = (stream, chunkSize, onProgress, onFinish) => {
-        const iterator2 = readBytes(stream, chunkSize);
+        const iterator = readBytes(stream, chunkSize);
         let bytes = 0;
         let done;
         let _onFinish = (e) => {
@@ -3664,7 +3696,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         return new ReadableStream({
           async pull(controller) {
             try {
-              const { done: done2, value } = await iterator2.next();
+              const { done: done2, value } = await iterator.next();
               if (done2) {
                 _onFinish();
                 controller.close();
@@ -3683,7 +3715,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           },
           cancel(reason) {
             _onFinish(reason);
-            return iterator2.return();
+            return iterator.return();
           }
         }, {
           highWaterMark: 2
@@ -3840,7 +3872,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           });
         } catch (err) {
           unsubscribe && unsubscribe();
-          if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
+          if (err && err.name === "TypeError" && /fetch/i.test(err.message)) {
             throw Object.assign(
               new AxiosError("Network Error", AxiosError.ERR_NETWORK, config, request),
               {
@@ -3946,7 +3978,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return Promise.reject(reason);
         });
       }
-      var VERSION2 = "1.9.0";
+      var VERSION2 = "1.7.7";
       var validators$1 = {};
       ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
         validators$1[type] = function validator2(thing) {
@@ -3975,12 +4007,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             );
           }
           return validator2 ? validator2(value, opt, opts) : true;
-        };
-      };
-      validators$1.spelling = function spelling(correctSpelling) {
-        return (value, opt) => {
-          console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
-          return true;
         };
       };
       function assertOptions(options, schema, allowUnknown) {
@@ -4012,7 +4038,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       var validators = validator.validators;
       var Axios = class {
         constructor(instanceConfig) {
-          this.defaults = instanceConfig || {};
+          this.defaults = instanceConfig;
           this.interceptors = {
             request: new InterceptorManager$1(),
             response: new InterceptorManager$1()
@@ -4031,8 +4057,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             return await this._request(configOrUrl, config);
           } catch (err) {
             if (err instanceof Error) {
-              let dummy = {};
-              Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
+              let dummy;
+              Error.captureStackTrace ? Error.captureStackTrace(dummy = {}) : dummy = new Error();
               const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
               try {
                 if (!err.stack) {
@@ -4074,17 +4100,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               }, true);
             }
           }
-          if (config.allowAbsoluteUrls !== void 0)
-            ;
-          else if (this.defaults.allowAbsoluteUrls !== void 0) {
-            config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
-          } else {
-            config.allowAbsoluteUrls = true;
-          }
-          validator.assertOptions(config, {
-            baseUrl: validators.spelling("baseURL"),
-            withXsrfToken: validators.spelling("withXSRFToken")
-          }, true);
           config.method = (config.method || this.defaults.method || "get").toLowerCase();
           let contextHeaders = headers && utils$1.merge(
             headers.common,
@@ -4151,7 +4166,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         getUri(config) {
           config = mergeConfig(this.defaults, config);
-          const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
+          const fullPath = buildFullPath(config.baseURL, config.url);
           return buildURL(fullPath, config.params, config.paramsSerializer);
         }
       };
@@ -4469,6 +4484,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       exports.AdminUsersManagement = async function AdminUsersManagement(i, cb) {
         return await axios.post("/admin/usersManagement", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminWifiDevice = async function AdminWifiDevice(i, cb) {
+        return await axios.post("/admin/wifiDevice", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminWifiDeviceLogs = async function AdminWifiDeviceLogs(i, cb) {
+        return await axios.post("/admin/wifiDeviceLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.GuestLogin = async function GuestLogin(i, cb) {
         return await axios.post("/guest/login", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -4498,6 +4519,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       };
       exports.StaffSales = async function StaffSales(i, cb) {
         return await axios.post("/staff/sales", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.StaffWifiDeviceReport = async function StaffWifiDeviceReport(i, cb) {
+        return await axios.post("/staff/wifiDeviceReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.UserLogout = async function UserLogout2(i, cb) {
         return await axios.post("/user/logout", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -4609,6 +4633,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         return `${year}-${month}-${date}`;
       }
       function dateISOFormatFromYYYYMMDD(dateStr, dayTo = 0) {
+        if (!dateStr)
+          return "";
         const dt = new Date(dateStr);
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -4648,6 +4674,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         const monthName = date.toLocaleString("en-US", { month: "long" });
         return `${monthName} ${year}`;
       }
+      function localeDateFromYYYYMMDD(dateStr) {
+        if (!dateStr)
+          return "";
+        const dt = new Date(dateStr);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = dt.toLocaleDateString("default", { month: "long" });
+        const year = dt.getFullYear();
+        return `${day}, ${date} ${month} ${year}`;
+      }
       module.exports = {
         datetime: datetime2,
         localeDatetime,
@@ -4659,7 +4695,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         loadScript,
         formatPrice: formatPrice2,
         arrToArrNum: arrToArrNum2,
-        formatYearMonth
+        formatYearMonth,
+        localeDateFromYYYYMMDD
       };
     }
   });
@@ -4682,7 +4719,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
   });
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/utils.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
   function assign(tar, src) {
@@ -4786,13 +4823,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/globals.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/globals.js
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
     // @ts-ignore Node typings have this
     global
   );
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
   var ResizeObserverSingleton = class {
     /**
      * @private
@@ -4838,7 +4875,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   ResizeObserverSingleton.entries = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/dom.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/dom.js
   var is_hydrating = false;
   function start_hydrating() {
     is_hydrating = true;
@@ -4958,7 +4995,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return result;
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/lifecycle.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/lifecycle.js
   var current_component;
   function set_current_component(component) {
     current_component = component;
@@ -5003,7 +5040,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/scheduler.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/scheduler.js
   var dirty_components = [];
   var binding_callbacks = [];
   var render_callbacks = [];
@@ -5085,7 +5122,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     render_callbacks = filtered;
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/transitions.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/transitions.js
   var outroing = /* @__PURE__ */ new Set();
   var outros;
   function group_outros() {
@@ -5127,7 +5164,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/each.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/each.js
   function ensure_array_like(array_like_or_iterator) {
     return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
   }
@@ -5206,7 +5243,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return new_blocks;
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/spread.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/spread.js
   function get_spread_update(levels, updates) {
     const update2 = {};
     const to_null_out = {};
@@ -5240,7 +5277,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return update2;
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/shared/boolean_attributes.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/boolean_attributes.js
   var _boolean_attributes = (
     /** @type {const} */
     [
@@ -5273,7 +5310,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   );
   var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/Component.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/Component.js
   function bind(component, name, callback) {
     const index = component.$.props[name];
     if (index !== void 0) {
@@ -5451,7 +5488,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             };
           };
           await Promise.resolve();
-          if (!this.$cn || this.$c) {
+          if (!this.$cn) {
             return;
           }
           const $slots = {};
@@ -5465,12 +5502,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             const name = this.$g_p(attribute.name);
             if (!(name in this.$d)) {
               this.$d[name] = get_custom_element_value(name, attribute.value, this.$p_d, "toProp");
-            }
-          }
-          for (const key in this.$p_d) {
-            if (!(key in this.$d) && this[key] !== void 0) {
-              this.$d[key] = this[key];
-              delete this[key];
             }
           }
           this.$c = new this.$ctor({
@@ -5526,7 +5557,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       disconnectedCallback() {
         this.$cn = false;
         Promise.resolve().then(() => {
-          if (!this.$cn && this.$c) {
+          if (!this.$cn) {
             this.$c.$destroy();
             this.$c = void 0;
           }
@@ -5623,10 +5654,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
   };
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/shared/version.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/version.js
   var PUBLIC_VERSION = "4";
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/disclose-version/index.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/disclose-version/index.js
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
@@ -5706,7 +5737,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   }();
   var notifier = new Notifier();
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/Icon.svelte
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/Icon.svelte
   function create_fragment(ctx) {
     let svg;
     let svg_style_value;
@@ -5865,9 +5896,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   var Icon_default = Icon;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/ri/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
   var RiDesignBallPenLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M17.8492 11.6983L17.1421 10.9912L7.24264 20.8907H3V16.648L14.3137 5.33432L19.9706 10.9912C20.3611 11.3817 20.3611 12.0149 19.9706 12.4054L12.8995 19.4765L11.4853 18.0622L17.8492 11.6983ZM15.7279 9.57696L14.3137 8.16274L5 17.4765V18.8907H6.41421L15.7279 9.57696ZM18.5563 2.50589L21.3848 5.33432C21.7753 5.72484 21.7753 6.35801 21.3848 6.74853L19.9706 8.16274L15.7279 3.9201L17.1421 2.50589C17.5327 2.11537 18.1658 2.11537 18.5563 2.50589Z"></path>' };
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
+  var RiBuildingsHomeWifiLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M6 19H18V9.15745L12 3.7029L6 9.15745V19ZM19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM8 9.99998C11.866 9.99998 15 13.134 15 17H13C13 14.2386 10.7614 12 8 12V9.99998ZM8 14C9.65685 14 11 15.3431 11 17H8V14Z"></path>' };
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
   var RiBusinessBarChartBoxLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM4 5V19H20V5H4ZM7 13H9V17H7V13ZM11 7H13V17H11V7ZM15 10H17V17H15V10Z"></path>' };
   var RiBusinessCalendarScheduleLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M7 3V1H9V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V9H20V5H17V7H15V5H9V7H7V5H4V19H10V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7ZM17 12C14.7909 12 13 13.7909 13 16C13 18.2091 14.7909 20 17 20C19.2091 20 21 18.2091 21 16C21 13.7909 19.2091 12 17 12ZM11 16C11 12.6863 13.6863 10 17 10C20.3137 10 23 12.6863 23 16C23 19.3137 20.3137 22 17 22C13.6863 22 11 19.3137 11 16ZM16 13V16.4142L18.2929 18.7071L19.7071 17.2929L18 15.5858V13H16Z"></path>' };
@@ -5892,10 +5924,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   var RiArrowsExpandUpDownFill = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M18 9 12 3 6 9H18ZM18 15 12 21 6 15H18Z"></path>' };
   var RiArrowsArrowUpSFill = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 8L18 14H6L12 8Z"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/lu/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/store/index.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/store/index.js
   var subscriber_queue = [];
   function writable(value, start = noop) {
     let stop;
@@ -6074,6 +6106,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let icon11;
     let t35;
     let span11;
+    let t37;
+    let a12;
+    let icon12;
+    let t38;
+    let span12;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -6109,15 +6146,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
     });
     icon9 = new Icon_default({
+      props: { src: RiBuildingsHomeWifiLine, size: "20" }
+    });
+    icon10 = new Icon_default({
       props: {
         src: RiUserFacesUserFollowLine,
         size: "20"
       }
     });
-    icon10 = new Icon_default({
+    icon11 = new Icon_default({
       props: { src: RiUserFacesGroupLine, size: "20" }
     });
-    icon11 = new Icon_default({
+    icon12 = new Icon_default({
       props: {
         src: RiBusinessBarChartBoxLine,
         size: "20"
@@ -6187,19 +6227,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon9.$.fragment);
         t29 = space();
         span9 = element("span");
-        span9.textContent = "Tenants";
+        span9.textContent = "Wifi Devices";
         t31 = space();
         a10 = element("a");
         create_component(icon10.$.fragment);
         t32 = space();
         span10 = element("span");
-        span10.textContent = "Users";
+        span10.textContent = "Tenants";
         t34 = space();
         a11 = element("a");
         create_component(icon11.$.fragment);
         t35 = space();
         span11 = element("span");
-        span11.textContent = "Logs";
+        span11.textContent = "Users";
+        t37 = space();
+        a12 = element("a");
+        create_component(icon12.$.fragment);
+        t38 = space();
+        span12 = element("span");
+        span12.textContent = "Logs";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
@@ -6274,25 +6320,33 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "stock"
         );
-        attr(a9, "href", "/admin/tenants");
+        attr(a9, "href", "/admin/wifiDevice");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
           a9,
           "active",
           /*pathLv2*/
-          ctx[4] === "tenants"
+          ctx[4] === "wifiDevice"
         );
-        attr(a10, "href", "/admin/usersManagement");
+        attr(a10, "href", "/admin/tenants");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
           a10,
           "active",
           /*pathLv2*/
+          ctx[4] === "tenants"
+        );
+        attr(a11, "href", "/admin/usersManagement");
+        attr(a11, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a11,
+          "active",
+          /*pathLv2*/
           ctx[4] === "usersManagement"
         );
-        attr(a11, "href", "/admin/bookingLogs");
-        attr(a11, "class", "svelte-1fwsz8h");
-        toggle_class(a11, "active", String(
+        attr(a12, "href", "/admin/bookingLogs");
+        attr(a12, "class", "svelte-1fwsz8h");
+        toggle_class(a12, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
@@ -6361,12 +6415,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon11, a11, null);
         append(a11, t35);
         append(a11, span11);
+        append(nav, t37);
+        append(nav, a12);
+        mount_component(icon12, a12, null);
+        append(a12, t38);
+        append(a12, span12);
         current = true;
       },
       p(ctx2, dirty) {
         if (!current || dirty & /*String, pathLv2*/
         16) {
-          toggle_class(a11, "active", String(
+          toggle_class(a12, "active", String(
             /*pathLv2*/
             ctx2[4]
           ).includes("Logs") || false);
@@ -6387,6 +6446,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_in(icon9.$.fragment, local);
         transition_in(icon10.$.fragment, local);
         transition_in(icon11.$.fragment, local);
+        transition_in(icon12.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -6402,6 +6462,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_out(icon9.$.fragment, local);
         transition_out(icon10.$.fragment, local);
         transition_out(icon11.$.fragment, local);
+        transition_out(icon12.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -6422,6 +6483,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         destroy_component(icon9);
         destroy_component(icon10);
         destroy_component(icon11);
+        destroy_component(icon12);
       }
     };
   }
@@ -6556,6 +6618,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let icon11;
     let t35;
     let span11;
+    let t37;
+    let a12;
+    let icon12;
+    let t38;
+    let span12;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -6591,15 +6658,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
     });
     icon9 = new Icon_default({
+      props: { src: RiBuildingsHomeWifiLine, size: "20" }
+    });
+    icon10 = new Icon_default({
       props: {
         src: RiUserFacesUserFollowLine,
         size: "20"
       }
     });
-    icon10 = new Icon_default({
+    icon11 = new Icon_default({
       props: { src: RiUserFacesGroupLine, size: "20" }
     });
-    icon11 = new Icon_default({
+    icon12 = new Icon_default({
       props: {
         src: RiBusinessBarChartBoxLine,
         size: "20"
@@ -6669,19 +6739,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon9.$.fragment);
         t29 = space();
         span9 = element("span");
-        span9.textContent = "Tenants";
+        span9.textContent = "Wifi Devices";
         t31 = space();
         a10 = element("a");
         create_component(icon10.$.fragment);
         t32 = space();
         span10 = element("span");
-        span10.textContent = "Users";
+        span10.textContent = "Tenants";
         t34 = space();
         a11 = element("a");
         create_component(icon11.$.fragment);
         t35 = space();
         span11 = element("span");
-        span11.textContent = "Logs";
+        span11.textContent = "Users";
+        t37 = space();
+        a12 = element("a");
+        create_component(icon12.$.fragment);
+        t38 = space();
+        span12 = element("span");
+        span12.textContent = "Logs";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
@@ -6756,25 +6832,33 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "stock"
         );
-        attr(a9, "href", "/admin/tenants");
+        attr(a9, "href", "/admin/wifiDevice");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
           a9,
           "active",
           /*pathLv2*/
-          ctx[4] === "tenants"
+          ctx[4] === "wifiDevice"
         );
-        attr(a10, "href", "/admin/usersManagement");
+        attr(a10, "href", "/admin/tenants");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
           a10,
           "active",
           /*pathLv2*/
+          ctx[4] === "tenants"
+        );
+        attr(a11, "href", "/admin/usersManagement");
+        attr(a11, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a11,
+          "active",
+          /*pathLv2*/
           ctx[4] === "usersManagement"
         );
-        attr(a11, "href", "/admin/bookingLogs");
-        attr(a11, "class", "svelte-1fwsz8h");
-        toggle_class(a11, "active", String(
+        attr(a12, "href", "/admin/bookingLogs");
+        attr(a12, "class", "svelte-1fwsz8h");
+        toggle_class(a12, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
@@ -6843,12 +6927,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon11, a11, null);
         append(a11, t35);
         append(a11, span11);
+        append(nav, t37);
+        append(nav, a12);
+        mount_component(icon12, a12, null);
+        append(a12, t38);
+        append(a12, span12);
         current = true;
       },
       p(ctx2, dirty) {
         if (!current || dirty & /*String, pathLv2*/
         16) {
-          toggle_class(a11, "active", String(
+          toggle_class(a12, "active", String(
             /*pathLv2*/
             ctx2[4]
           ).includes("Logs") || false);
@@ -6869,6 +6958,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_in(icon9.$.fragment, local);
         transition_in(icon10.$.fragment, local);
         transition_in(icon11.$.fragment, local);
+        transition_in(icon12.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -6884,6 +6974,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_out(icon9.$.fragment, local);
         transition_out(icon10.$.fragment, local);
         transition_out(icon11.$.fragment, local);
+        transition_out(icon12.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -6904,6 +6995,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         destroy_component(icon9);
         destroy_component(icon10);
         destroy_component(icon11);
+        destroy_component(icon12);
       }
     };
   }
@@ -6936,27 +7028,27 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t12;
     let span4;
     let t14;
+    let a5;
+    let icon5;
     let t15;
-    let t16;
     let span5;
     let t17;
-    let nav1;
-    let button0;
-    let icon5;
     let t18;
+    let t19;
     let span6;
     let t20;
+    let nav1;
+    let button0;
+    let icon6;
+    let t21;
+    let span7;
+    let t23;
     let button1;
     let button1_class_value;
-    let t21;
+    let t24;
     let aside1;
     let div1;
     let nav2;
-    let a5;
-    let icon6;
-    let t22;
-    let span7;
-    let t24;
     let a6;
     let icon7;
     let t25;
@@ -6977,15 +7069,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t34;
     let span11;
     let t36;
+    let a10;
+    let icon11;
     let t37;
-    let t38;
     let span12;
     let t39;
+    let t40;
+    let t41;
+    let span13;
+    let t42;
     let nav3;
     let button2;
-    let icon11;
-    let t40;
-    let span13;
+    let icon12;
+    let t43;
+    let span14;
     let aside1_class_value;
     let current;
     let mounted;
@@ -7003,6 +7100,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon4 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon5 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block0 = !/*access*/
@@ -7011,14 +7111,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*access*/
       ctx[0].admin && create_if_block_2(ctx)
     );
-    icon5 = new Icon_default({
+    icon6 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
-    icon6 = new Icon_default({
-      props: { src: RiBuildingsHome2Line, size: "20" }
-    });
     icon7 = new Icon_default({
-      props: { src: RiDocumentFileChartLine, size: "20" }
+      props: { src: RiBuildingsHome2Line, size: "20" }
     });
     icon8 = new Icon_default({
       props: { src: RiDocumentFileChartLine, size: "20" }
@@ -7027,6 +7124,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon10 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon11 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block2 = !/*access*/
@@ -7035,7 +7135,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*access*/
       ctx[0].admin && create_if_block(ctx)
     );
-    icon11 = new Icon_default({
+    icon12 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
     return {
@@ -7071,72 +7171,78 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon4.$.fragment);
         t12 = space();
         span4 = element("span");
-        span4.textContent = "Profile";
+        span4.textContent = "Wifi Device Report";
         t14 = space();
+        a5 = element("a");
+        create_component(icon5.$.fragment);
+        t15 = space();
+        span5 = element("span");
+        span5.textContent = "Profile";
+        t17 = space();
         if (if_block0)
           if_block0.c();
-        t15 = space();
+        t18 = space();
         if (if_block1)
           if_block1.c();
-        t16 = space();
-        span5 = element("span");
-        t17 = space();
+        t19 = space();
+        span6 = element("span");
+        t20 = space();
         nav1 = element("nav");
         button0 = element("button");
-        create_component(icon5.$.fragment);
-        t18 = space();
-        span6 = element("span");
-        span6.textContent = "Logout";
-        t20 = space();
-        button1 = element("button");
+        create_component(icon6.$.fragment);
         t21 = space();
+        span7 = element("span");
+        span7.textContent = "Logout";
+        t23 = space();
+        button1 = element("button");
+        t24 = space();
         aside1 = element("aside");
         div1 = element("div");
         nav2 = element("nav");
-        a5 = element("a");
-        create_component(icon6.$.fragment);
-        t22 = space();
-        span7 = element("span");
-        span7.textContent = "Home";
-        t24 = space();
         a6 = element("a");
         create_component(icon7.$.fragment);
         t25 = space();
         span8 = element("span");
-        span8.textContent = "Occupancy Report";
+        span8.textContent = "Home";
         t27 = space();
         a7 = element("a");
         create_component(icon8.$.fragment);
         t28 = space();
         span9 = element("span");
-        span9.textContent = "Missing Data Report";
+        span9.textContent = "Occupancy Report";
         t30 = space();
         a8 = element("a");
         create_component(icon9.$.fragment);
         t31 = space();
         span10 = element("span");
-        span10.textContent = "Revenue Report";
+        span10.textContent = "Missing Data Report";
         t33 = space();
         a9 = element("a");
         create_component(icon10.$.fragment);
         t34 = space();
         span11 = element("span");
-        span11.textContent = "Profile";
+        span11.textContent = "Revenue Report";
         t36 = space();
+        a10 = element("a");
+        create_component(icon11.$.fragment);
+        t37 = space();
+        span12 = element("span");
+        span12.textContent = "Profile";
+        t39 = space();
         if (if_block2)
           if_block2.c();
-        t37 = space();
+        t40 = space();
         if (if_block3)
           if_block3.c();
-        t38 = space();
-        span12 = element("span");
-        t39 = space();
+        t41 = space();
+        span13 = element("span");
+        t42 = space();
         nav3 = element("nav");
         button2 = element("button");
-        create_component(icon11.$.fragment);
-        t40 = space();
-        span13 = element("span");
-        span13.textContent = "Logout";
+        create_component(icon12.$.fragment);
+        t43 = space();
+        span14 = element("span");
+        span14.textContent = "Logout";
         attr(a0, "href", "/");
         attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -7169,16 +7275,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathAll*/
           ctx[2] === "/staff/revenueReport"
         );
-        attr(a4, "href", "/user");
+        attr(a4, "href", "/staff/wifiDeviceReport");
         attr(a4, "class", "svelte-1fwsz8h");
         toggle_class(
           a4,
           "active",
           /*pathAll*/
+          ctx[2] === "/staff/wifiDeviceReport"
+        );
+        attr(a5, "href", "/user");
+        attr(a5, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a5,
+          "active",
+          /*pathAll*/
           ctx[2] === "/user"
         );
         attr(nav0, "class", "nav-menu svelte-1fwsz8h");
-        attr(span5, "class", "separator svelte-1fwsz8h");
+        attr(span6, "class", "separator svelte-1fwsz8h");
         attr(button0, "class", "red svelte-1fwsz8h");
         attr(nav1, "class", "nav-menu svelte-1fwsz8h");
         attr(div0, "class", "container svelte-1fwsz8h");
@@ -7186,48 +7300,48 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(button1, "aria-label", "backdrop toggle menu");
         attr(button1, "class", button1_class_value = "backdrop " + /*$isOpenSideMenu*/
         (ctx[1] ? "open" : "") + " svelte-1fwsz8h");
-        attr(a5, "href", "/");
-        attr(a5, "class", "svelte-1fwsz8h");
-        toggle_class(
-          a5,
-          "active",
-          /*pathLv1*/
-          ctx[3] === ""
-        );
-        attr(a6, "href", "/staff/occupancyReport");
+        attr(a6, "href", "/");
         attr(a6, "class", "svelte-1fwsz8h");
         toggle_class(
           a6,
           "active",
-          /*pathAll*/
-          ctx[2] === "/staff/occupancyReport"
+          /*pathLv1*/
+          ctx[3] === ""
         );
-        attr(a7, "href", "/staff/missingDataReport");
+        attr(a7, "href", "/staff/occupancyReport");
         attr(a7, "class", "svelte-1fwsz8h");
         toggle_class(
           a7,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/missingDataReport"
+          ctx[2] === "/staff/occupancyReport"
         );
-        attr(a8, "href", "/staff/revenueReport");
+        attr(a8, "href", "/staff/missingDataReport");
         attr(a8, "class", "svelte-1fwsz8h");
         toggle_class(
           a8,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/revenueReport"
+          ctx[2] === "/staff/missingDataReport"
         );
-        attr(a9, "href", "/user");
+        attr(a9, "href", "/staff/revenueReport");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
           a9,
           "active",
           /*pathAll*/
+          ctx[2] === "/staff/revenueReport"
+        );
+        attr(a10, "href", "/user");
+        attr(a10, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a10,
+          "active",
+          /*pathAll*/
           ctx[2] === "/user"
         );
         attr(nav2, "class", "nav-menu svelte-1fwsz8h");
-        attr(span12, "class", "separator svelte-1fwsz8h");
+        attr(span13, "class", "separator svelte-1fwsz8h");
         attr(button2, "class", "red svelte-1fwsz8h");
         attr(nav3, "class", "nav-menu svelte-1fwsz8h");
         attr(div1, "class", "container svelte-1fwsz8h");
@@ -7262,31 +7376,31 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon4, a4, null);
         append(a4, t12);
         append(a4, span4);
-        append(div0, t14);
+        append(nav0, t14);
+        append(nav0, a5);
+        mount_component(icon5, a5, null);
+        append(a5, t15);
+        append(a5, span5);
+        append(div0, t17);
         if (if_block0)
           if_block0.m(div0, null);
-        append(div0, t15);
+        append(div0, t18);
         if (if_block1)
           if_block1.m(div0, null);
-        append(div0, t16);
-        append(div0, span5);
-        append(div0, t17);
+        append(div0, t19);
+        append(div0, span6);
+        append(div0, t20);
         append(div0, nav1);
         append(nav1, button0);
-        mount_component(icon5, button0, null);
-        append(button0, t18);
-        append(button0, span6);
-        insert(target, t20, anchor);
+        mount_component(icon6, button0, null);
+        append(button0, t21);
+        append(button0, span7);
+        insert(target, t23, anchor);
         insert(target, button1, anchor);
-        insert(target, t21, anchor);
+        insert(target, t24, anchor);
         insert(target, aside1, anchor);
         append(aside1, div1);
         append(div1, nav2);
-        append(nav2, a5);
-        mount_component(icon6, a5, null);
-        append(a5, t22);
-        append(a5, span7);
-        append(nav2, t24);
         append(nav2, a6);
         mount_component(icon7, a6, null);
         append(a6, t25);
@@ -7306,20 +7420,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon10, a9, null);
         append(a9, t34);
         append(a9, span11);
-        append(div1, t36);
+        append(nav2, t36);
+        append(nav2, a10);
+        mount_component(icon11, a10, null);
+        append(a10, t37);
+        append(a10, span12);
+        append(div1, t39);
         if (if_block2)
           if_block2.m(div1, null);
-        append(div1, t37);
+        append(div1, t40);
         if (if_block3)
           if_block3.m(div1, null);
-        append(div1, t38);
-        append(div1, span12);
-        append(div1, t39);
+        append(div1, t41);
+        append(div1, span13);
+        append(div1, t42);
         append(div1, nav3);
         append(nav3, button2);
-        mount_component(icon11, button2, null);
-        append(button2, t40);
-        append(button2, span13);
+        mount_component(icon12, button2, null);
+        append(button2, t43);
+        append(button2, span14);
         current = true;
         if (!mounted) {
           dispose = [
@@ -7358,7 +7477,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block0 = create_if_block_3(ctx2);
             if_block0.c();
             transition_in(if_block0, 1);
-            if_block0.m(div0, t15);
+            if_block0.m(div0, t18);
           }
         } else if (if_block0) {
           group_outros();
@@ -7381,7 +7500,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block1 = create_if_block_2(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
-            if_block1.m(div0, t16);
+            if_block1.m(div0, t19);
           }
         } else if (if_block1) {
           group_outros();
@@ -7407,7 +7526,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block2 = create_if_block_1(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
-            if_block2.m(div1, t37);
+            if_block2.m(div1, t40);
           }
         } else if (if_block2) {
           group_outros();
@@ -7430,7 +7549,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block3 = create_if_block(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
-            if_block3.m(div1, t38);
+            if_block3.m(div1, t41);
           }
         } else if (if_block3) {
           group_outros();
@@ -7453,17 +7572,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_in(icon2.$.fragment, local);
         transition_in(icon3.$.fragment, local);
         transition_in(icon4.$.fragment, local);
+        transition_in(icon5.$.fragment, local);
         transition_in(if_block0);
         transition_in(if_block1);
-        transition_in(icon5.$.fragment, local);
         transition_in(icon6.$.fragment, local);
         transition_in(icon7.$.fragment, local);
         transition_in(icon8.$.fragment, local);
         transition_in(icon9.$.fragment, local);
         transition_in(icon10.$.fragment, local);
+        transition_in(icon11.$.fragment, local);
         transition_in(if_block2);
         transition_in(if_block3);
-        transition_in(icon11.$.fragment, local);
+        transition_in(icon12.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -7472,25 +7592,26 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_out(icon2.$.fragment, local);
         transition_out(icon3.$.fragment, local);
         transition_out(icon4.$.fragment, local);
+        transition_out(icon5.$.fragment, local);
         transition_out(if_block0);
         transition_out(if_block1);
-        transition_out(icon5.$.fragment, local);
         transition_out(icon6.$.fragment, local);
         transition_out(icon7.$.fragment, local);
         transition_out(icon8.$.fragment, local);
         transition_out(icon9.$.fragment, local);
         transition_out(icon10.$.fragment, local);
+        transition_out(icon11.$.fragment, local);
         transition_out(if_block2);
         transition_out(if_block3);
-        transition_out(icon11.$.fragment, local);
+        transition_out(icon12.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
           detach(aside0);
-          detach(t20);
+          detach(t23);
           detach(button1);
-          detach(t21);
+          detach(t24);
           detach(aside1);
         }
         destroy_component(icon0);
@@ -7498,21 +7619,22 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         destroy_component(icon2);
         destroy_component(icon3);
         destroy_component(icon4);
+        destroy_component(icon5);
         if (if_block0)
           if_block0.d();
         if (if_block1)
           if_block1.d();
-        destroy_component(icon5);
         destroy_component(icon6);
         destroy_component(icon7);
         destroy_component(icon8);
         destroy_component(icon9);
         destroy_component(icon10);
+        destroy_component(icon11);
         if (if_block2)
           if_block2.d();
         if (if_block3)
           if_block3.d();
-        destroy_component(icon11);
+        destroy_component(icon12);
         mounted = false;
         run_all(dispose);
       }
@@ -7574,7 +7696,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   var SideMenu_default = SideMenu;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/bs/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/bs/index.js
   var BsList = { a: { fill: "currentColor", viewBox: "0 0 16 16" }, c: '<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>' };
 
   // _partials/Navbar.svelte
@@ -7985,20 +8107,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   var main_default = Main;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/io/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/io/index.js
   var IoSearch = { a: { viewBox: "0 0 512 512" }, c: '<path d="M456.69,421.39,362.6,327.3a173.81,173.81,0,0,0,34.84-104.58C397.44,126.38,319.06,48,222.72,48S48,126.38,48,222.72s78.38,174.72,174.72,174.72A173.81,173.81,0,0,0,327.3,362.6l94.09,94.09a25,25,0,0,0,35.3-35.3ZM97.92,222.72a124.8,124.8,0,1,1,124.8,124.8A124.95,124.95,0,0,1,97.92,222.72Z"></path>' };
   var IoClose = { a: { viewBox: "0 0 512 512" }, c: '<path d="M289.94,256l95-95A24,24,0,0,0,351,127l-95,95-95-95A24,24,0,0,0,127,161l95,95-95,95A24,24,0,1,0,161,385l95-95,95,95A24,24,0,0,0,385,351Z"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/fi/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/fi/index.js
   var FiLoader = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/cg/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/cg/index.js
   var CgChevronDoubleRight = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M5.63605 7.75735L7.05026 6.34314L12.7071 12L7.05029 17.6568L5.63608 16.2426L9.87869 12L5.63605 7.75735Z" fill="currentColor"></path><path d="M12.7071 6.34314L11.2929 7.75735L15.5356 12L11.2929 16.2426L12.7072 17.6568L18.364 12L12.7071 6.34314Z" fill="currentColor"></path>' };
   var CgChevronDoubleLeft = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M18.3639 7.75735L16.9497 6.34314L11.2929 12L16.9497 17.6568L18.3639 16.2426L14.1213 12L18.3639 7.75735Z" fill="currentColor"></path><path d="M11.2929 6.34314L12.7071 7.75735L8.46447 12L12.7071 16.2426L11.2929 17.6568L5.63605 12L11.2929 6.34314Z" fill="currentColor"></path>' };
   var CgChevronRight = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M10.5858 6.34317L12 4.92896L19.0711 12L12 19.0711L10.5858 17.6569L16.2427 12L10.5858 6.34317Z" fill="currentColor"></path>' };
   var CgChevronLeft = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M16.2426 6.34317L14.8284 4.92896L7.75739 12L14.8285 19.0711L16.2427 17.6569L10.5858 12L16.2426 6.34317Z" fill="currentColor"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/ai/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ai/index.js
   var AiOutlineEyeInvisible = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2Q889.47 375.11 816.7 305l-50.88 50.88C807.31 395.53 843.45 447.4 874.7 512 791.5 684.2 673.4 766 512 766q-72.67 0-133.87-22.38L323 798.75Q408 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5zm-63.57-320.64L836 122.88a8 8 0 0 0-11.32 0L715.31 232.2Q624.86 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.69 119.4 136.5 191.41L112.48 835a8 8 0 0 0 0 11.31L155.17 889a8 8 0 0 0 11.31 0l712.15-712.12a8 8 0 0 0 0-11.32zM149.3 512C232.6 339.8 350.7 258 512 258c54.54 0 104.13 9.36 149.12 28.39l-70.3 70.3a176 176 0 0 0-238.13 238.13l-83.42 83.42C223.1 637.49 183.3 582.28 149.3 512zm246.7 0a112.11 112.11 0 0 1 146.2-106.69L401.31 546.2A112 112 0 0 1 396 512z"></path><path d="M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 0 0 227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 0 1-112 112z"></path>' };
   var AiOutlineEye = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path>' };
 
@@ -15886,9 +16008,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function reStructureSvelteValues() {
       if (type === "combobox-arr") {
         $invalidate(10, itemsArr = values);
-        if (!value) {
-          $invalidate(0, value = itemsArr[0]);
-        }
         for (const v of values) {
           if (v == value) {
             $invalidate(12, svelteSelectValue = { value: v, label: v });
@@ -15908,13 +16027,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         });
       } else if (type === "combobox") {
         $invalidate(11, itemsArrObj = []);
-        if (!value || value === null || value === 0 || value === "" || value === void 0 || value === "null" || value === "undefined" || value === "0") {
-          const firstObjKey = Object.keys(values)[0];
-          $invalidate(12, svelteSelectValue = {
-            value: firstObjKey,
-            label: values[firstObjKey]
-          });
-        }
         for (const [k, v] of Object.entries(values)) {
           $invalidate(11, itemsArrObj = [...itemsArrObj, { value: k, label: v }]);
           if (k === value) {
@@ -15925,6 +16037,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return String(a.label).localeCompare(String(b.label));
         });
       }
+      if (!value || value === null || value === 0 || value === "" || value === void 0 || value === "null" || value === "undefined" || value === "0") {
+        $invalidate(12, svelteSelectValue = null);
+      }
     }
     onMount(() => {
       reStructureSvelteValues();
@@ -15934,6 +16049,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
     function handleClear(e) {
       $invalidate(0, value = "");
+      $invalidate(12, svelteSelectValue = null);
     }
     function input_change_handler() {
       value = this.checked;
@@ -22823,10 +22939,5 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   // adminBuilding.svelte.ts
   var app = new adminBuilding_default({ target: document.getElementById("app") });
 })();
-/*! Bundled license information:
-
-axios/dist/browser/axios.cjs:
-  (*! Axios v1.9.0 Copyright (c) 2025 Matt Zabriskie and contributors *)
-*/
 </script>
 </body></html>

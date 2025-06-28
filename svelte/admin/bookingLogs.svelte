@@ -4,8 +4,6 @@
   /** @typedef {import('../_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('../_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('../_types/users.js').User} User */
-  /** @typedef {import('../_types/property.js').Booking} Booking */
-  /** @typedef {import('../_types/property.js').Facility} Facility */
   /** @typedef {import('../_types/masters.js').ExtendedActionButton} ExtendedActionButton */
   
   import LayoutMain from '../_layouts/main.svelte';
@@ -56,7 +54,7 @@
   const EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([
     {
       icon: RiSystemInformationLine,
-      tooltip: 'Update Password',
+      tooltip: 'Compare Data Before & After',
       action: (/** @type {Object} */ row) => {
         let dataBeforeJsonObj = row.beforeJson;
         let dataAfterJsonObj = row.afterJson;
