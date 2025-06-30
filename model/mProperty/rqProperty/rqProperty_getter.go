@@ -1438,7 +1438,7 @@ type DoubleBookingReport struct {
 func (b *Bookings) FindDoubleBookingReports() (out []DoubleBookingReport) {
 	const comment = `-- Bookings) FindDoubleBookingReports`
 
-	// dtNow := time.Now().Format(time.DateOnly)
+	dtNow := time.Now().Format(time.DateOnly)
 	queryRows := comment + `
 SELECT
 	t."id",
@@ -1452,12 +1452,12 @@ JOIN "rooms" r ON b."roomId" = r."id"
 WHERE b."deletedAt" = 0
   AND t."deletedAt" = 0
   AND r."deletedAt" = 0
-  AND b."dateEnd" >= '2025-05-30'
+  AND b."dateEnd" >= '` + dtNow + `'
   AND b."tenantId" IN (
     SELECT b2."tenantId"
     FROM "bookings" b2
     WHERE b2."deletedAt" = 0
-      AND b2."dateEnd" >= '2025-05-30'
+      AND b2."dateEnd" >= '` + dtNow + `'
     GROUP BY b2."tenantId"
     HAVING COUNT(DISTINCT b2."roomId") > 1
   )
