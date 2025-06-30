@@ -8,11 +8,12 @@
    * @property {string} startAt
    * @property {string} endAt
    * @property {string} paidAt
+   * @property {number} deletedAt
    */
 
   import InputBox from './_components/InputBox.svelte';
   import SubmitButton from './_components/SubmitButton.svelte';
-    import { localeDateFromYYYYMMDD } from './_components/xFormatter';
+  import { localeDateFromYYYYMMDD } from './_components/xFormatter';
   import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
   import { StaffWifiDeviceReport } from './jsApi.GEN';
@@ -23,7 +24,14 @@
   const rooms  = /** @type {Record<Number, string>} */ ({/* rooms */});
   const tenants = /** @type {Record<Number, string>} */ ({/* tenants */});
 
-  let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
+  function currentYearMonth() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    return `${year}-${month}`;
+  }
+
+  let yearMonth = /** @type {string} */ (currentYearMonth());
   let isFiltering = /** @type {boolean} */ (false);
 
   async function getWifiDeviceReports() {
@@ -81,7 +89,10 @@
         </thead>
         <tbody>
           {#each (wifiDeviceReports || []) as data}
-            <tr class={isTodayGreater(data.endAt) ? 'reminding' : ''}>
+            <tr class="
+              {isTodayGreater(data.endAt) ? 'reminding' : ''} 
+              {data.deletedAt > 0 ? 'deleted' : ''}
+            ">
               <td>{localeDateFromYYYYMMDD(data.startAt)}</td>
               <td>{localeDateFromYYYYMMDD(data.endAt)}</td>
               <td>{localeDateFromYYYYMMDD(data.paidAt)}</td>
@@ -150,6 +161,11 @@
   table tbody tr.reminding {
     background-color: var(--yellow-transparent);
     color: var(--yellow-006);
+  }
+
+  table tbody tr.deleted {
+    background-color: var(--red-transparent) !important;
+    color: var(--red-006) !important;
   }
 
   table tr td, table tr th {

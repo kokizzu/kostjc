@@ -27,9 +27,9 @@
   let pager     = /** @type {PagerOut} */ ({/* pager */});
 
   const PaymentMethods = [
+    'Transfer',
     'Cash',
     'QRIS',
-    'Transfer',
     'Donation'
   ];
   const PaymentStatuses = [

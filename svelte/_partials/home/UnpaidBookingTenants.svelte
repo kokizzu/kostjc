@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from "svelte";
+
   /**
    * @typedef {Object} UnpaidBookingTenant
    * @property {string} tenantName
@@ -29,6 +31,12 @@
     
     return `H${diffDays}`;
   }
+
+  onMount(() => {
+    (unpaidBookingTenants || []).sort((a, b) => {
+      return new Date(a.dateStart).getTime() - new Date(b.dateStart).getTime();
+    })
+  })
 </script>
 
 <section class="empty-unpaidBookingTenants">

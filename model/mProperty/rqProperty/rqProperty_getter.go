@@ -1372,11 +1372,12 @@ FROM ` + w.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 }
 
 type WifiDeviceReport struct {
-	TenantId uint64 `json:"tenantId"`
-	RoomId   uint64 `json:"roomId"`
-	StartAt  string `json:"startAt"`
-	EndAt    string `json:"endAt"`
-	PaidAt   string `json:"paidAt"`
+	TenantId  uint64 `json:"tenantId"`
+	RoomId    uint64 `json:"roomId"`
+	StartAt   string `json:"startAt"`
+	EndAt     string `json:"endAt"`
+	PaidAt    string `json:"paidAt"`
+	DeletedAt int64  `json:"deletedAt"`
 }
 
 func (w *WifiDevices) FindWifiDeviceReports(yearMonth string) (out []WifiDeviceReport) {
@@ -1392,29 +1393,114 @@ SELECT
 	"roomId",
 	"startAt",
 	"endAt",
-	"paidAt"
+	"paidAt",
+	"deletedAt"
 FROM "wifiDevices"
-WHERE
-	"deletedAt" = 0
-	AND SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
+WHERE SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
 `
 
 	w.Adapter.QuerySql(query, func(row []any) {
-		if len(row) == 5 {
+		if len(row) == 6 {
 			tenantId := X.ToU(row[0])
 			roomId := X.ToU(row[1])
 			startAt := X.ToS(row[2])
 			endAt := X.ToS(row[3])
 			paidAt := X.ToS(row[4])
+			deletedAt := X.ToI(row[5])
 			out = append(out, WifiDeviceReport{
-				TenantId: tenantId,
-				RoomId:   roomId,
-				StartAt:  startAt,
-				EndAt:    endAt,
-				PaidAt:   paidAt,
+				TenantId:  tenantId,
+				RoomId:    roomId,
+				StartAt:   startAt,
+				EndAt:     endAt,
+				PaidAt:    paidAt,
+				DeletedAt: deletedAt,
 			})
 		}
 	})
 
 	return
+}
+
+type DoubleBookingReportData struct {
+	TenantId   uint64 `json:"-"`
+	TenantName string `json:"-"`
+	RoomName   string `json:"roomName"`
+	DateStart  string `json:"dateStart"`
+	DateEnd    string `json:"dateEnd"`
+}
+
+type DoubleBookingReport struct {
+	TenantId   uint64                    `json:"tenantId"`
+	TenantName string                    `json:"tenantName"`
+	Bookings   []DoubleBookingReportData `json:"bookings"`
+}
+
+func (b *Bookings) FindDoubleBookingReports() (out []DoubleBookingReport) {
+	const comment = `-- Bookings) FindDoubleBookingReports`
+
+	// dtNow := time.Now().Format(time.DateOnly)
+	queryRows := comment + `
+SELECT
+	t."id",
+  t."tenantName",
+  r."roomName",
+	b."dateStart",
+  MAX(b."dateEnd")
+FROM "bookings" b
+JOIN "tenants" t ON b."tenantId" = t."id"
+JOIN "rooms" r ON b."roomId" = r."id"
+WHERE b."deletedAt" = 0
+  AND t."deletedAt" = 0
+  AND r."deletedAt" = 0
+  AND b."dateEnd" >= '2025-05-30'
+  AND b."tenantId" IN (
+    SELECT b2."tenantId"
+    FROM "bookings" b2
+    WHERE b2."deletedAt" = 0
+      AND b2."dateEnd" >= '2025-05-30'
+    GROUP BY b2."tenantId"
+    HAVING COUNT(DISTINCT b2."roomId") > 1
+  )
+GROUP BY t."id", t."tenantName", r."id", r."roomName"
+ORDER BY t."tenantName", r."roomName"
+`
+
+	rawResults := []DoubleBookingReportData{}
+	b.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 5 {
+			rawResults = append(rawResults, DoubleBookingReportData{
+				TenantId:   X.ToU(row[0]),
+				TenantName: X.ToS(row[1]),
+				RoomName:   X.ToS(row[2]),
+				DateStart:  X.ToS(row[3]),
+				DateEnd:    X.ToS(row[4]),
+			})
+		}
+	})
+
+	out = groupDoubleBookingByTenant(rawResults)
+
+	return
+}
+
+func groupDoubleBookingByTenant(data []DoubleBookingReportData) []DoubleBookingReport {
+	groupMap := make(map[uint64]*DoubleBookingReport)
+
+	for _, d := range data {
+		if groupMap[d.TenantId] == nil {
+			groupMap[d.TenantId] = &DoubleBookingReport{
+				TenantId:   d.TenantId,
+				TenantName: d.TenantName,
+				Bookings:   []DoubleBookingReportData{},
+			}
+		}
+		groupMap[d.TenantId].Bookings = append(groupMap[d.TenantId].Bookings, d)
+	}
+
+	var result = []DoubleBookingReport{}
+	for _, group := range groupMap {
+		result = append(result, *group)
+	}
+
+	return result
 }

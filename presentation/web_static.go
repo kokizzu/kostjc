@@ -27,6 +27,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		booking := rqProperty.NewBookings(d.PropOltp)
 		unpaidBookingTenants := booking.FindUnpaidBookingTenants()
+		doubleBookingReports := booking.FindDoubleBookingReports()
 
 		return views.RenderIndex(ctx, M.SX{
 			`title`:                  conf.PROJECT_NAME + ` | Home`,
@@ -35,6 +36,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`tenantsNearbyBirthdays`: tenantsNearbyBirthdays,
 			`availableRooms`:         availableRooms,
 			`unpaidBookingTenants`:   unpaidBookingTenants,
+			`doubleBookingReports`:   doubleBookingReports,
 		})
 	})
 

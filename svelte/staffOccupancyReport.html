@@ -20038,7 +20038,7 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
     let { bookingId = 0 } = $props;
     let { isBookingReadOnly = false } = $props;
     let { paymentAt = (0, import_xFormatter5.dateISOFormat)(0) } = $props;
-    const PaymentMethods = ["Cash", "QRIS", "Transfer", "Donation"];
+    const PaymentMethods = ["Transfer", "Cash", "QRIS", "Donation"];
     const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
     let paidIDR = 0;
     let paymentMethod = PaymentMethods[0];
