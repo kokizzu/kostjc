@@ -1358,22 +1358,22 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./_partials/home/DoubleBookingReports.esbuild-svelte-fake-css */
-.empty-doubleBookingReports.svelte-1s87ku4.svelte-1s87ku4 {
+.empty-doubleBookingReports.svelte-9blmyr.svelte-9blmyr {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.empty-doubleBookingReports.svelte-1s87ku4 h1.svelte-1s87ku4 {
+.empty-doubleBookingReports.svelte-9blmyr h1.svelte-9blmyr {
   margin: 0;
   padding: 0;
   font-size: var(--font-xl);
 }
-.empty-doubleBookingReports.svelte-1s87ku4 .cards.svelte-1s87ku4 {
+.empty-doubleBookingReports.svelte-9blmyr .cards.svelte-9blmyr {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
-.empty-doubleBookingReports.svelte-1s87ku4 .cards .card.svelte-1s87ku4 {
+.empty-doubleBookingReports.svelte-9blmyr .cards .card.svelte-9blmyr {
   background-color: var(--gray-001);
   padding: 20px;
   border-radius: 8px;
@@ -1383,13 +1383,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   position: relative;
   overflow: hidden;
 }
-.empty-doubleBookingReports.svelte-1s87ku4 .cards .card h3.svelte-1s87ku4 {
+.empty-doubleBookingReports.svelte-9blmyr .cards .card h3.svelte-9blmyr {
   margin: 0;
   padding: 0;
   font-size: var(--font-lg);
   z-index: 20;
 }
-.empty-doubleBookingReports.svelte-1s87ku4 .cards .card .desc.svelte-1s87ku4 {
+.empty-doubleBookingReports.svelte-9blmyr .cards .card .desc.svelte-9blmyr {
   padding-top: 10px;
   border-top: 1px solid var(--gray-004);
   display: flex;
@@ -1398,7 +1398,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   z-index: 20;
 }
 @media only screen and (max-width : 768px) {
-  .empty-doubleBookingReports.svelte-1s87ku4 .cards.svelte-1s87ku4 {
+  .empty-doubleBookingReports.svelte-9blmyr .cards.svelte-9blmyr {
     grid-template-columns: 1fr;
   }
 }
@@ -16358,7 +16358,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cards svelte-1s87ku4");
+        attr(div, "class", "cards svelte-9blmyr");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16402,8 +16402,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return {
       c() {
         span = element("span");
-        span.textContent = `Room ${/*bk*/
-        ctx[3].roomName} (${/*bk*/
+        span.textContent = `${/*bk*/
+        ctx[3].tenantName} (${/*bk*/
         ctx[3].dateStart} s/d ${/*bk*/
         ctx[3].dateEnd})`;
       },
@@ -16421,12 +16421,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   function create_each_block5(ctx) {
     let div1;
     let h3;
-    let t1;
-    let div0;
     let t2;
+    let div0;
+    let t3;
     let each_value_1 = ensure_array_like(
       /*db*/
-      ctx[0].bookings || []
+      ctx[0].tenants || []
     );
     let each_blocks = [];
     for (let i = 0; i < each_value_1.length; i += 1) {
@@ -16436,36 +16436,36 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       c() {
         div1 = element("div");
         h3 = element("h3");
-        h3.textContent = `${/*db*/
-        ctx[0].tenantName}`;
-        t1 = space();
+        h3.textContent = `Room ${/*db*/
+        ctx[0].roomName}`;
+        t2 = space();
         div0 = element("div");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        t2 = space();
-        attr(h3, "class", "svelte-1s87ku4");
-        attr(div0, "class", "desc svelte-1s87ku4");
-        attr(div1, "class", "card svelte-1s87ku4");
+        t3 = space();
+        attr(h3, "class", "svelte-9blmyr");
+        attr(div0, "class", "desc svelte-9blmyr");
+        attr(div1, "class", "card svelte-9blmyr");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
         append(div1, h3);
-        append(div1, t1);
+        append(div1, t2);
         append(div1, div0);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
             each_blocks[i].m(div0, null);
           }
         }
-        append(div1, t2);
+        append(div1, t3);
       },
       p(ctx2, dirty) {
         if (dirty & /*doubleBookingReports*/
         0) {
           each_value_1 = ensure_array_like(
             /*db*/
-            ctx2[0].bookings || []
+            ctx2[0].tenants || []
           );
           let i;
           for (i = 0; i < each_value_1.length; i += 1) {
@@ -16510,8 +16510,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         h1.textContent = "Double Bookings";
         t1 = space();
         if_block.c();
-        attr(h1, "class", "svelte-1s87ku4");
-        attr(section, "class", "empty-doubleBookingReports svelte-1s87ku4");
+        attr(h1, "class", "svelte-9blmyr");
+        attr(section, "class", "empty-doubleBookingReports svelte-9blmyr");
       },
       m(target, anchor) {
         insert(target, section, anchor);

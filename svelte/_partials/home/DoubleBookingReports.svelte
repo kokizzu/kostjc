@@ -1,16 +1,17 @@
 <script>
   /**
    * @typedef {Object} DoubleBookingReportData
-   * @property {string} roomName
+   * @property {string|number} tenantId
+   * @property {string} tenantName
    * @property {string} dateStart
    * @property {string} dateEnd
    */
 
   /**
    * @typedef {Object} DoubleBookingReport
-   * @property {string|number} tenantId
-   * @property {string} tenantName
-   * @property {DoubleBookingReportData[]} bookings
+   * @property {string|number} roomId
+   * @property {string} roomName
+   * @property {DoubleBookingReportData[]} tenants
    */
 
   const doubleBookingReports = /** @type {DoubleBookingReport[]} */ ([/* doubleBookingReports */]);
@@ -22,10 +23,10 @@
     <div class="cards">
       {#each (doubleBookingReports || []) as db}
         <div class="card">
-          <h3>{db.tenantName}</h3>
+          <h3>Room {db.roomName}</h3>
           <div class="desc">
-            {#each (db.bookings || []) as bk}
-              <span>Room {bk.roomName} ({bk.dateStart} s/d {bk.dateEnd})</span>
+            {#each (db.tenants || []) as bk}
+              <span>{bk.tenantName} ({bk.dateStart} s/d {bk.dateEnd})</span>
             {/each}
           </div>
         </div>
@@ -53,7 +54,7 @@
 
   .empty-doubleBookingReports .cards {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 10px;
   }
 

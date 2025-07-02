@@ -1035,12 +1035,7 @@ SELECT
 FROM "rooms"
 LEFT JOIN "tenants"
 	ON "rooms"."currentTenantId" = "tenants"."id"
-WHERE
-	"rooms"."deletedAt" = 0 AND
-	(
-		"tenants"."telegramUsername" = ''
-		OR "tenants"."whatsappNumber" = ''
-	)
+WHERE "rooms"."deletedAt" = 0
 ORDER BY "rooms"."updatedAt"`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
@@ -1422,17 +1417,18 @@ WHERE SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
 }
 
 type DoubleBookingReportData struct {
-	TenantId   uint64 `json:"-"`
-	TenantName string `json:"-"`
-	RoomName   string `json:"roomName"`
+	RoomId     uint64 `json:"-"`
+	RoomName   string `json:"-"`
+	TenantId   uint64 `json:"tenantId"`
+	TenantName string `json:"tenantName"`
 	DateStart  string `json:"dateStart"`
 	DateEnd    string `json:"dateEnd"`
 }
 
 type DoubleBookingReport struct {
-	TenantId   uint64                    `json:"tenantId"`
-	TenantName string                    `json:"tenantName"`
-	Bookings   []DoubleBookingReportData `json:"bookings"`
+	RoomId   uint64                    `json:"roomId"`
+	RoomName string                    `json:"roomName"`
+	Tenants  []DoubleBookingReportData `json:"tenants"`
 }
 
 func (b *Bookings) FindDoubleBookingReports() (out []DoubleBookingReport) {
@@ -1441,11 +1437,12 @@ func (b *Bookings) FindDoubleBookingReports() (out []DoubleBookingReport) {
 	dtNow := time.Now().Format(time.DateOnly)
 	queryRows := comment + `
 SELECT
-	t."id",
-  t."tenantName",
+  r."id" AS "roomId",
   r."roomName",
+	t."id" AS "tenantId",
+  t."tenantName",
 	b."dateStart",
-  MAX(b."dateEnd")
+  b."dateEnd"
 FROM "bookings" b
 JOIN "tenants" t ON b."tenantId" = t."id"
 JOIN "rooms" r ON b."roomId" = r."id"
@@ -1453,48 +1450,48 @@ WHERE b."deletedAt" = 0
   AND t."deletedAt" = 0
   AND r."deletedAt" = 0
   AND b."dateEnd" >= '` + dtNow + `'
-  AND b."tenantId" IN (
-    SELECT b2."tenantId"
+  AND EXISTS (
+    SELECT 1
     FROM "bookings" b2
-    WHERE b2."deletedAt" = 0
+    WHERE b2."roomId" = b."roomId"
+      AND b2."deletedAt" = 0
       AND b2."dateEnd" >= '` + dtNow + `'
-    GROUP BY b2."tenantId"
-    HAVING COUNT(DISTINCT b2."roomId") > 1
+    GROUP BY b2."roomId"
+    HAVING COUNT(*) > 1
   )
-GROUP BY t."id", t."tenantName", r."id", r."roomName"
-ORDER BY t."tenantName", r."roomName"
-`
+ORDER BY r."roomName"`
 
 	rawResults := []DoubleBookingReportData{}
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 5 {
+		if len(row) == 6 {
 			rawResults = append(rawResults, DoubleBookingReportData{
-				TenantId:   X.ToU(row[0]),
-				TenantName: X.ToS(row[1]),
-				RoomName:   X.ToS(row[2]),
-				DateStart:  X.ToS(row[3]),
-				DateEnd:    X.ToS(row[4]),
+				RoomId:     X.ToU(row[0]),
+				RoomName:   X.ToS(row[1]),
+				TenantId:   X.ToU(row[2]),
+				TenantName: X.ToS(row[3]),
+				DateStart:  X.ToS(row[4]),
+				DateEnd:    X.ToS(row[5]),
 			})
 		}
 	})
 
-	out = groupDoubleBookingByTenant(rawResults)
+	out = groupDoubleBookingByRoom(rawResults)
 
 	return
 }
 
-func groupDoubleBookingByTenant(data []DoubleBookingReportData) []DoubleBookingReport {
+func groupDoubleBookingByRoom(data []DoubleBookingReportData) []DoubleBookingReport {
 	groupMap := make(map[uint64]*DoubleBookingReport)
 
 	for _, d := range data {
-		if groupMap[d.TenantId] == nil {
-			groupMap[d.TenantId] = &DoubleBookingReport{
-				TenantId:   d.TenantId,
-				TenantName: d.TenantName,
-				Bookings:   []DoubleBookingReportData{},
+		if groupMap[d.RoomId] == nil {
+			groupMap[d.RoomId] = &DoubleBookingReport{
+				RoomId:   d.RoomId,
+				RoomName: d.RoomName,
+				Tenants:  []DoubleBookingReportData{},
 			}
 		}
-		groupMap[d.TenantId].Bookings = append(groupMap[d.TenantId].Bookings, d)
+		groupMap[d.RoomId].Tenants = append(groupMap[d.RoomId].Tenants, d)
 	}
 
 	var result = []DoubleBookingReport{}
