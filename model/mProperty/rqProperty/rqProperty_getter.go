@@ -1501,3 +1501,48 @@ func groupDoubleBookingByRoom(data []DoubleBookingReportData) []DoubleBookingRep
 
 	return result
 }
+
+type RoomBookingInconsistency struct {
+	RoomId          uint64 `json:"roomId"`
+	TenantId        uint64 `json:"tenantId"`
+	CurrentTenantId uint64 `json:"currentTenantId"`
+	DateEnd         string `json:"dateEnd"`
+	IsInconsistent  bool   `json:"isInconsistent"`
+}
+
+func (r *Rooms) CheckInconsistencies() (out []RoomBookingInconsistency) {
+	const comment = `-- Rooms) CheckInconsistencies`
+
+	queryRows := comment + `
+WITH last AS ( 
+	SELECT "roomId", MAX("dateEnd") "dateEnd" 
+	FROM "bookings" GROUP BY 1 
+) 
+SELECT
+	b."roomId",
+	b."tenantId",
+	r."currentTenantId",
+	b."dateEnd",
+	b."tenantId" <> r."currentTenantId" 
+FROM last l 
+LEFT JOIN "bookings" b 
+	ON l."roomId" = b."roomId"
+	AND b."dateEnd" = l."dateEnd" 
+LEFT JOIN "rooms" r 
+	ON l."roomId" = r."id"
+`
+
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 5 {
+			out = append(out, RoomBookingInconsistency{
+				RoomId:          X.ToU(row[0]),
+				TenantId:        X.ToU(row[1]),
+				CurrentTenantId: X.ToU(row[2]),
+				DateEnd:         X.ToS(row[3]),
+				IsInconsistent:  X.ToBool(row[4]),
+			})
+		}
+	})
+
+	return
+}
