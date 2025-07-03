@@ -1238,13 +1238,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./staffWifiDeviceReport.esbuild-svelte-fake-css */
-.report-container.svelte-1jtodzk.svelte-1jtodzk {
+.report-container.svelte-10xmolq.svelte-10xmolq {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.report-container.svelte-1jtodzk .actions.svelte-1jtodzk {
+.report-container.svelte-10xmolq .actions.svelte-10xmolq {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -1253,38 +1253,42 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 .report-container .actions .year-month {
   width: 300px;
 }
-.table-container.svelte-1jtodzk.svelte-1jtodzk {
+.table-container.svelte-10xmolq.svelte-10xmolq {
   overflow-x: auto;
 }
-table.svelte-1jtodzk.svelte-1jtodzk {
+table.svelte-10xmolq.svelte-10xmolq {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-1jtodzk thead.svelte-1jtodzk {
+table.svelte-10xmolq thead.svelte-10xmolq {
   position: sticky;
   top: 0;
   background-color: var(--gray-002);
   z-index: 10;
   border: none;
 }
-table.svelte-1jtodzk thead tr th.svelte-1jtodzk {
+table.svelte-10xmolq thead tr th.svelte-10xmolq {
   text-align: left;
   padding: 8px 12px;
   text-wrap: nowrap;
 }
-table.svelte-1jtodzk tbody tr.svelte-1jtodzk {
+table.svelte-10xmolq tbody tr.svelte-10xmolq {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-1jtodzk tbody tr.reminding.svelte-1jtodzk {
+table.svelte-10xmolq tbody tr.reminding.svelte-10xmolq {
   background-color: var(--yellow-transparent);
   color: var(--yellow-006);
 }
-table.svelte-1jtodzk tr td.svelte-1jtodzk,
-table.svelte-1jtodzk tr th.svelte-1jtodzk {
+table.svelte-10xmolq tbody tr.deleted.svelte-10xmolq {
+  background-color: var(--red-transparent) !important;
+  color: var(--red-006) !important;
+}
+table.svelte-10xmolq tr td.svelte-10xmolq,
+table.svelte-10xmolq tr th.svelte-10xmolq {
   padding: 4px 12px;
 }
 @media only screen and (max-width : 768px) {
-  .report-container.svelte-1jtodzk .actions.svelte-1jtodzk {
+  .report-container.svelte-10xmolq .actions.svelte-10xmolq {
     flex-direction: column;
   }
   .report-container .actions .year-month {
@@ -15667,15 +15671,16 @@ table.svelte-1jtodzk tr th.svelte-1jtodzk {
         t7 = space();
         td4 = element("td");
         t8 = text(t8_value);
-        attr(td0, "class", "svelte-1jtodzk");
-        attr(td1, "class", "svelte-1jtodzk");
-        attr(td2, "class", "svelte-1jtodzk");
-        attr(td3, "class", "svelte-1jtodzk");
-        attr(td4, "class", "svelte-1jtodzk");
-        attr(tr, "class", tr_class_value = null_to_empty(isTodayGreater(
+        attr(td0, "class", "svelte-10xmolq");
+        attr(td1, "class", "svelte-10xmolq");
+        attr(td2, "class", "svelte-10xmolq");
+        attr(td3, "class", "svelte-10xmolq");
+        attr(td4, "class", "svelte-10xmolq");
+        attr(tr, "class", tr_class_value = (isTodayGreater(
           /*data*/
           ctx[5].endAt
-        ) ? "reminding" : "") + " svelte-1jtodzk");
+        ) ? "reminding" : "") + " " + /*data*/
+        (ctx[5].deletedAt > 0 ? "deleted" : "") + " svelte-10xmolq");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -15726,10 +15731,11 @@ table.svelte-1jtodzk tr th.svelte-1jtodzk {
         ] || "--") + ""))
           set_data(t8, t8_value);
         if (dirty & /*wifiDeviceReports*/
-        1 && tr_class_value !== (tr_class_value = null_to_empty(isTodayGreater(
+        1 && tr_class_value !== (tr_class_value = (isTodayGreater(
           /*data*/
           ctx2[5].endAt
-        ) ? "reminding" : "") + " svelte-1jtodzk")) {
+        ) ? "reminding" : "") + " " + /*data*/
+        (ctx2[5].deletedAt > 0 ? "deleted" : "") + " svelte-10xmolq")) {
           attr(tr, "class", tr_class_value);
         }
       },
@@ -15745,8 +15751,8 @@ table.svelte-1jtodzk tr th.svelte-1jtodzk {
     return {
       c() {
         tr = element("tr");
-        tr.innerHTML = `<td class="svelte-1jtodzk">No data</td>`;
-        attr(tr, "class", "svelte-1jtodzk");
+        tr.innerHTML = `<td class="svelte-10xmolq">No data</td>`;
+        attr(tr, "class", "svelte-10xmolq");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -15828,7 +15834,7 @@ table.svelte-1jtodzk tr th.svelte-1jtodzk {
         div1 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-1jtodzk"><th class="svelte-1jtodzk">Start At</th> <th class="svelte-1jtodzk">End At</th> <th class="svelte-1jtodzk">Paid At</th> <th class="svelte-1jtodzk">Tenant</th> <th class="svelte-1jtodzk">Room</th></tr>`;
+        thead.innerHTML = `<tr class="svelte-10xmolq"><th class="svelte-10xmolq">Start At</th> <th class="svelte-10xmolq">End At</th> <th class="svelte-10xmolq">Paid At</th> <th class="svelte-10xmolq">Tenant</th> <th class="svelte-10xmolq">Room</th></tr>`;
         t11 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
@@ -15837,11 +15843,11 @@ table.svelte-1jtodzk tr th.svelte-1jtodzk {
         t12 = space();
         if (if_block)
           if_block.c();
-        attr(div0, "class", "actions svelte-1jtodzk");
-        attr(thead, "class", "svelte-1jtodzk");
-        attr(table, "class", "svelte-1jtodzk");
-        attr(div1, "class", "table-container svelte-1jtodzk");
-        attr(div2, "class", "report-container svelte-1jtodzk");
+        attr(div0, "class", "actions svelte-10xmolq");
+        attr(thead, "class", "svelte-10xmolq");
+        attr(table, "class", "svelte-10xmolq");
+        attr(div1, "class", "table-container svelte-10xmolq");
+        attr(div2, "class", "report-container svelte-10xmolq");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -15999,6 +16005,12 @@ table.svelte-1jtodzk tr th.svelte-1jtodzk {
     /** @type {Record<Number, string>} */
     {/* tenants */}
   );
+  function currentYearMonth() {
+    const now2 = new Date();
+    const year = now2.getFullYear();
+    const month = String(now2.getMonth() + 1).padStart(2, "0");
+    return `${year}-${month}`;
+  }
   function isTodayGreater(dateStr) {
     const inputDate = new Date(dateStr);
     const today = new Date();
@@ -16011,7 +16023,7 @@ table.svelte-1jtodzk tr th.svelte-1jtodzk {
     );
     let yearMonth = (
       /** @type {string} */
-      new Date().toISOString().slice(0, 7)
+      currentYearMonth()
     );
     let isFiltering = (
       /** @type {boolean} */

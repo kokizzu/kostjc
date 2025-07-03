@@ -1035,12 +1035,7 @@ SELECT
 FROM "rooms"
 LEFT JOIN "tenants"
 	ON "rooms"."currentTenantId" = "tenants"."id"
-WHERE
-	"rooms"."deletedAt" = 0 AND
-	(
-		"tenants"."telegramUsername" = ''
-		OR "tenants"."whatsappNumber" = ''
-	)
+WHERE "rooms"."deletedAt" = 0
 ORDER BY "rooms"."updatedAt"`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
@@ -1372,11 +1367,12 @@ FROM ` + w.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 }
 
 type WifiDeviceReport struct {
-	TenantId uint64 `json:"tenantId"`
-	RoomId   uint64 `json:"roomId"`
-	StartAt  string `json:"startAt"`
-	EndAt    string `json:"endAt"`
-	PaidAt   string `json:"paidAt"`
+	TenantId  uint64 `json:"tenantId"`
+	RoomId    uint64 `json:"roomId"`
+	StartAt   string `json:"startAt"`
+	EndAt     string `json:"endAt"`
+	PaidAt    string `json:"paidAt"`
+	DeletedAt int64  `json:"deletedAt"`
 }
 
 func (w *WifiDevices) FindWifiDeviceReports(yearMonth string) (out []WifiDeviceReport) {
@@ -1392,26 +1388,158 @@ SELECT
 	"roomId",
 	"startAt",
 	"endAt",
-	"paidAt"
+	"paidAt",
+	"deletedAt"
 FROM "wifiDevices"
-WHERE
-	"deletedAt" = 0
-	AND SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
+WHERE SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
 `
 
 	w.Adapter.QuerySql(query, func(row []any) {
-		if len(row) == 5 {
+		if len(row) == 6 {
 			tenantId := X.ToU(row[0])
 			roomId := X.ToU(row[1])
 			startAt := X.ToS(row[2])
 			endAt := X.ToS(row[3])
 			paidAt := X.ToS(row[4])
+			deletedAt := X.ToI(row[5])
 			out = append(out, WifiDeviceReport{
-				TenantId: tenantId,
-				RoomId:   roomId,
-				StartAt:  startAt,
-				EndAt:    endAt,
-				PaidAt:   paidAt,
+				TenantId:  tenantId,
+				RoomId:    roomId,
+				StartAt:   startAt,
+				EndAt:     endAt,
+				PaidAt:    paidAt,
+				DeletedAt: deletedAt,
+			})
+		}
+	})
+
+	return
+}
+
+type DoubleBookingReportData struct {
+	RoomId     uint64 `json:"-"`
+	RoomName   string `json:"-"`
+	TenantId   uint64 `json:"tenantId"`
+	TenantName string `json:"tenantName"`
+	DateStart  string `json:"dateStart"`
+	DateEnd    string `json:"dateEnd"`
+}
+
+type DoubleBookingReport struct {
+	RoomId   uint64                    `json:"roomId"`
+	RoomName string                    `json:"roomName"`
+	Tenants  []DoubleBookingReportData `json:"tenants"`
+}
+
+func (b *Bookings) FindDoubleBookingReports() (out []DoubleBookingReport) {
+	const comment = `-- Bookings) FindDoubleBookingReports`
+
+	dtNow := time.Now().Format(time.DateOnly)
+	queryRows := comment + `
+SELECT
+  r."id" AS "roomId",
+  r."roomName",
+	t."id" AS "tenantId",
+  t."tenantName",
+	b."dateStart",
+  b."dateEnd"
+FROM "bookings" b
+JOIN "tenants" t ON b."tenantId" = t."id"
+JOIN "rooms" r ON b."roomId" = r."id"
+WHERE b."deletedAt" = 0
+  AND t."deletedAt" = 0
+  AND r."deletedAt" = 0
+  AND b."dateEnd" >= '` + dtNow + `'
+  AND EXISTS (
+    SELECT 1
+    FROM "bookings" b2
+    WHERE b2."roomId" = b."roomId"
+      AND b2."deletedAt" = 0
+      AND b2."dateEnd" >= '` + dtNow + `'
+    GROUP BY b2."roomId"
+    HAVING COUNT(*) > 1
+  )
+ORDER BY r."roomName"`
+
+	rawResults := []DoubleBookingReportData{}
+	b.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 6 {
+			rawResults = append(rawResults, DoubleBookingReportData{
+				RoomId:     X.ToU(row[0]),
+				RoomName:   X.ToS(row[1]),
+				TenantId:   X.ToU(row[2]),
+				TenantName: X.ToS(row[3]),
+				DateStart:  X.ToS(row[4]),
+				DateEnd:    X.ToS(row[5]),
+			})
+		}
+	})
+
+	out = groupDoubleBookingByRoom(rawResults)
+
+	return
+}
+
+func groupDoubleBookingByRoom(data []DoubleBookingReportData) []DoubleBookingReport {
+	groupMap := make(map[uint64]*DoubleBookingReport)
+
+	for _, d := range data {
+		if groupMap[d.RoomId] == nil {
+			groupMap[d.RoomId] = &DoubleBookingReport{
+				RoomId:   d.RoomId,
+				RoomName: d.RoomName,
+				Tenants:  []DoubleBookingReportData{},
+			}
+		}
+		groupMap[d.RoomId].Tenants = append(groupMap[d.RoomId].Tenants, d)
+	}
+
+	var result = []DoubleBookingReport{}
+	for _, group := range groupMap {
+		result = append(result, *group)
+	}
+
+	return result
+}
+
+type RoomBookingInconsistency struct {
+	RoomId          uint64 `json:"roomId"`
+	TenantId        uint64 `json:"tenantId"`
+	CurrentTenantId uint64 `json:"currentTenantId"`
+	DateEnd         string `json:"dateEnd"`
+	IsInconsistent  bool   `json:"isInconsistent"`
+}
+
+func (r *Rooms) CheckInconsistencies() (out []RoomBookingInconsistency) {
+	const comment = `-- Rooms) CheckInconsistencies`
+
+	queryRows := comment + `
+WITH last AS ( 
+	SELECT "roomId", MAX("dateEnd") "dateEnd" 
+	FROM "bookings" GROUP BY 1 
+) 
+SELECT
+	b."roomId",
+	b."tenantId",
+	r."currentTenantId",
+	b."dateEnd",
+	b."tenantId" <> r."currentTenantId" 
+FROM last l 
+LEFT JOIN "bookings" b 
+	ON l."roomId" = b."roomId"
+	AND b."dateEnd" = l."dateEnd" 
+LEFT JOIN "rooms" r 
+	ON l."roomId" = r."id"
+`
+
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 5 {
+			out = append(out, RoomBookingInconsistency{
+				RoomId:          X.ToU(row[0]),
+				TenantId:        X.ToU(row[1]),
+				CurrentTenantId: X.ToU(row[2]),
+				DateEnd:         X.ToS(row[3]),
+				IsInconsistent:  X.ToBool(row[4]),
 			})
 		}
 	})

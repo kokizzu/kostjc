@@ -22396,7 +22396,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let { bookingId = 0 } = $props;
     let { isBookingReadOnly = false } = $props;
     let { paymentAt = (0, import_xFormatter3.dateISOFormat)(0) } = $props;
-    const PaymentMethods = ["Cash", "QRIS", "Transfer", "Donation"];
+    const PaymentMethods = ["Transfer", "Cash", "QRIS", "Donation"];
     const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
     let paidIDR = 0;
     let paymentMethod = PaymentMethods[0];
@@ -25425,7 +25425,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /** @type {PagerOut} */
       {/* pager */}
     );
-    const PaymentMethods = ["Cash", "QRIS", "Transfer", "Donation"];
+    const PaymentMethods = ["Transfer", "Cash", "QRIS", "Donation"];
     const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
     let isPopUpFormReady = (
       /** @type boolean */

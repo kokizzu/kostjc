@@ -16,9 +16,9 @@
   export let paymentAt = dateISOFormat(0);
 
   const PaymentMethods = [
+    'Transfer',
     'Cash',
     'QRIS',
-    'Transfer',
     'Donation'
   ];
   const PaymentStatuses = [
