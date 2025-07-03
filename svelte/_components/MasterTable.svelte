@@ -33,6 +33,7 @@
   import { datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
   import MultiSelect from './MultiSelect.svelte';
+  import SingleSelect from './SingleSelected.svelte';
 
   export let FIELDS = /** @type Field[] */ ([]); // bind
   export let PAGER = /** @type PagerOut */ ({}); // bind
@@ -53,6 +54,7 @@
   export let UNSORTED_ROWS = [];
   export let EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([]);
   export let FIELD_TO_SEARCH = '';
+  export let SINGLE_SELECTED = false;
 
   /**
    * @type {Record<string, number>}
@@ -338,14 +340,24 @@
                   values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
                 />
               {:else if field.inputType === 'multiselect'}
-                <MultiSelect
+                {#if SINGLE_SELECTED}
+                  <SingleSelect
+                    id={field.name}
+                    label={field.label}
+                    placeholder={field.description}
+                    bind:valuesTarget={payloads[idx]}
+                    valuesSourceObj={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
+                  />
+                {:else}
+                  <MultiSelect
                   id={field.name}
                   label={field.label}
                   placeholder={field.description}
                   bind:valuesTarget={payloads[idx]}
                   valuesSourceType="object"
                   valuesSourceObj={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
-                />
+                  />
+                {/if}
               {:else}
                 <InputBox
                   id={field.name}

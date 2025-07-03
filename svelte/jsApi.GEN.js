@@ -1527,6 +1527,8 @@ exports.AdminRoomLogs = async function AdminRoomLogs( i, cb ) {
  * @property {String} sale.note
  * @property {number} sale.donation
  * @property {number} sale.transferIDR
+ * @property {String} sale.paymentMethod
+ * @property {String} sale.paymentStatus
  * @property {number} sale.createdAt
  * @property {number} sale.createdBy
  * @property {number} sale.updatedAt
@@ -1565,6 +1567,8 @@ const AdminSaleIn = {
     note: '', // string
     donation: 0, // int64
     transferIDR: 0, // int64
+    paymentMethod: '', // string
+    paymentStatus: '', // string
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64
@@ -1603,6 +1607,8 @@ const AdminSaleIn = {
  * @property {String} sale.note
  * @property {number} sale.donation
  * @property {number} sale.transferIDR
+ * @property {String} sale.paymentMethod
+ * @property {String} sale.paymentStatus
  * @property {number} sale.createdAt
  * @property {number} sale.createdBy
  * @property {number} sale.updatedAt
@@ -1648,6 +1654,8 @@ const AdminSaleOut = {
     note: '', // string
     donation: 0, // int64
     transferIDR: 0, // int64
+    paymentMethod: '', // string
+    paymentStatus: '', // string
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64
