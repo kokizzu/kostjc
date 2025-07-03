@@ -2,13 +2,12 @@
   /** @typedef {import('../_types/cafe').Sale} Sale */
   /** @typedef {import('../_types/cafe').Menu} Menu */
 
-  import { onMount } from 'svelte';
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
   import InputBox from './InputBox.svelte';
-  import { dateISOFormat, arrToArrNum } from './xFormatter';
-  import MultiSelect from './MultiSelect.svelte';
+  import { dateISOFormat } from './xFormatter';
+  import SingleSelected from './SingleSelected.svelte';
 
   let isShow = /** @type {boolean} */ (false);
 
@@ -16,11 +15,27 @@
   export let tenants = /** @type {Record<number, string>} */ ({});
   export let menus = /** @type {Record<number, string>} */ ({});
 
+  const PaymentMethods = [
+    'Cash',
+    'QRIS',
+    'Transfer',
+    'Donation',
+    'TopUp',
+    'Debt'
+  ];
+  const PaymentStatuses = [
+    'Paid',
+    'Unpaid',
+    'Refunded'
+  ];
+
   let cashier = '';
   let tenantId = 0;
   let buyerName = '';
   let salesDate = dateISOFormat(0);
-  let paidAt = dateISOFormat(0);
+  let paymentMethod = PaymentMethods[0];
+  let paymentStatus = PaymentStatuses[0];
+  let paidAt = '';
   let note = '';
   let transferIDR = 0;
   let qrisIDR = 0;
@@ -42,6 +57,8 @@
       buyerName: buyerName,
       menuIds: menuIds,
       salesDate: salesDate,
+      paymentMethod: paymentMethod,
+      paymentStatus: paymentStatus,
       paidAt: paidAt,
       note: note,
       qrisIDR: qrisIDR,
@@ -52,7 +69,7 @@
       donation: donation,
     });
 
-
+    console.log('sale data yang disimpan :::', sale);
     await OnSubmit(sale);
   }
 
@@ -65,7 +82,9 @@
   menuIds = [];
   buyerName = '';
   salesDate = dateISOFormat(0);
-  paidAt = dateISOFormat(0);
+  paymentMethod = PaymentMethods[0];
+  paymentStatus = PaymentStatuses[0];
+  paidAt = '';
   note = '';
   transferIDR = 0;
   qrisIDR = 0;
@@ -112,13 +131,27 @@
         type="text"
         placeholder="Jamal"
       />
-      <MultiSelect
+      <SingleSelected
         id="menuIds"
         label="Menus"
-        placeholder="Menus"
-        valuesSourceType="object"
+        placeholder="Pilih menu"
         bind:valuesTarget={menuIds}
         valuesSourceObj={menus}
+      />
+      <InputBox
+        id="paymentMethod"
+        label="Payment Method"
+        bind:value={paymentMethod}
+        type="combobox-arr"
+        values={PaymentMethods}
+      />
+      <InputBox
+        id="paymentStatus"
+        label="Payment Status"
+        bind:value={paymentStatus}
+        type="combobox-arr"
+        placeholder="Paid"
+        values={PaymentStatuses}
       />
       <InputBox
       id="transferIDR"

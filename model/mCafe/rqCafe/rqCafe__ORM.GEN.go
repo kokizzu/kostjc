@@ -407,6 +407,8 @@ type Sales struct {
 	Note          string      `json:"note" form:"note" query:"note" long:"note" msg:"note"`
 	Donation      int64       `json:"donation" form:"donation" query:"donation" long:"donation" msg:"donation"`
 	TransferIDR   int64       `json:"transferIDR" form:"transferIDR" query:"transferIDR" long:"transferIDR" msg:"transferIDR"`
+	PaymentMethod string      `json:"paymentMethod" form:"paymentMethod" query:"paymentMethod" long:"paymentMethod" msg:"paymentMethod"`
+	PaymentStatus string      `json:"paymentStatus" form:"paymentStatus" query:"paymentStatus" long:"paymentStatus" msg:"paymentStatus"`
 	CreatedAt     int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
 	CreatedBy     uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
 	UpdatedAt     int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
@@ -466,6 +468,8 @@ func (s *Sales) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "note"
 	, "donation"
 	, "transferIDR"
+	, "paymentMethod"
+	, "paymentStatus"
 	, "createdAt"
 	, "createdBy"
 	, "updatedAt"
@@ -493,6 +497,8 @@ func (s *Sales) SqlSelectAllUncensoredFields() string { //nolint:dupl false posi
 	, "note"
 	, "donation"
 	, "transferIDR"
+	, "paymentMethod"
+	, "paymentStatus"
 	, "createdAt"
 	, "createdBy"
 	, "updatedAt"
@@ -521,13 +527,15 @@ func (s *Sales) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 12, s.Note},
 		A.X{`=`, 13, s.Donation},
 		A.X{`=`, 14, s.TransferIDR},
-		A.X{`=`, 15, s.CreatedAt},
-		A.X{`=`, 16, s.CreatedBy},
-		A.X{`=`, 17, s.UpdatedAt},
-		A.X{`=`, 18, s.UpdatedBy},
-		A.X{`=`, 19, s.DeletedAt},
-		A.X{`=`, 20, s.DeletedBy},
-		A.X{`=`, 21, s.RestoredBy},
+		A.X{`=`, 15, s.PaymentMethod},
+		A.X{`=`, 16, s.PaymentStatus},
+		A.X{`=`, 17, s.CreatedAt},
+		A.X{`=`, 18, s.CreatedBy},
+		A.X{`=`, 19, s.UpdatedAt},
+		A.X{`=`, 20, s.UpdatedBy},
+		A.X{`=`, 21, s.DeletedAt},
+		A.X{`=`, 22, s.DeletedBy},
+		A.X{`=`, 23, s.RestoredBy},
 	}
 }
 
@@ -681,9 +689,29 @@ func (s *Sales) SqlTransferIDR() string { //nolint:dupl false positive
 	return `"transferIDR"`
 }
 
+// IdxPaymentMethod return name of the index
+func (s *Sales) IdxPaymentMethod() int { //nolint:dupl false positive
+	return 15
+}
+
+// SqlPaymentMethod return name of the column being indexed
+func (s *Sales) SqlPaymentMethod() string { //nolint:dupl false positive
+	return `"paymentMethod"`
+}
+
+// IdxPaymentStatus return name of the index
+func (s *Sales) IdxPaymentStatus() int { //nolint:dupl false positive
+	return 16
+}
+
+// SqlPaymentStatus return name of the column being indexed
+func (s *Sales) SqlPaymentStatus() string { //nolint:dupl false positive
+	return `"paymentStatus"`
+}
+
 // IdxCreatedAt return name of the index
 func (s *Sales) IdxCreatedAt() int { //nolint:dupl false positive
-	return 15
+	return 17
 }
 
 // SqlCreatedAt return name of the column being indexed
@@ -693,7 +721,7 @@ func (s *Sales) SqlCreatedAt() string { //nolint:dupl false positive
 
 // IdxCreatedBy return name of the index
 func (s *Sales) IdxCreatedBy() int { //nolint:dupl false positive
-	return 16
+	return 18
 }
 
 // SqlCreatedBy return name of the column being indexed
@@ -703,7 +731,7 @@ func (s *Sales) SqlCreatedBy() string { //nolint:dupl false positive
 
 // IdxUpdatedAt return name of the index
 func (s *Sales) IdxUpdatedAt() int { //nolint:dupl false positive
-	return 17
+	return 19
 }
 
 // SqlUpdatedAt return name of the column being indexed
@@ -713,7 +741,7 @@ func (s *Sales) SqlUpdatedAt() string { //nolint:dupl false positive
 
 // IdxUpdatedBy return name of the index
 func (s *Sales) IdxUpdatedBy() int { //nolint:dupl false positive
-	return 18
+	return 20
 }
 
 // SqlUpdatedBy return name of the column being indexed
@@ -723,7 +751,7 @@ func (s *Sales) SqlUpdatedBy() string { //nolint:dupl false positive
 
 // IdxDeletedAt return name of the index
 func (s *Sales) IdxDeletedAt() int { //nolint:dupl false positive
-	return 19
+	return 21
 }
 
 // SqlDeletedAt return name of the column being indexed
@@ -733,7 +761,7 @@ func (s *Sales) SqlDeletedAt() string { //nolint:dupl false positive
 
 // IdxDeletedBy return name of the index
 func (s *Sales) IdxDeletedBy() int { //nolint:dupl false positive
-	return 20
+	return 22
 }
 
 // SqlDeletedBy return name of the column being indexed
@@ -743,7 +771,7 @@ func (s *Sales) SqlDeletedBy() string { //nolint:dupl false positive
 
 // IdxRestoredBy return name of the index
 func (s *Sales) IdxRestoredBy() int { //nolint:dupl false positive
-	return 21
+	return 23
 }
 
 // SqlRestoredBy return name of the column being indexed
@@ -773,13 +801,15 @@ func (s *Sales) ToArray() A.X { //nolint:dupl false positive
 		s.Note,          // 12
 		s.Donation,      // 13
 		s.TransferIDR,   // 14
-		s.CreatedAt,     // 15
-		s.CreatedBy,     // 16
-		s.UpdatedAt,     // 17
-		s.UpdatedBy,     // 18
-		s.DeletedAt,     // 19
-		s.DeletedBy,     // 20
-		s.RestoredBy,    // 21
+		s.PaymentMethod, // 15
+		s.PaymentStatus, // 16
+		s.CreatedAt,     // 17
+		s.CreatedBy,     // 18
+		s.UpdatedAt,     // 19
+		s.UpdatedBy,     // 20
+		s.DeletedAt,     // 21
+		s.DeletedBy,     // 22
+		s.RestoredBy,    // 23
 	}
 }
 
@@ -800,13 +830,15 @@ func (s *Sales) FromArray(a A.X) *Sales { //nolint:dupl false positive
 	s.Note = X.ToS(a[12])
 	s.Donation = X.ToI(a[13])
 	s.TransferIDR = X.ToI(a[14])
-	s.CreatedAt = X.ToI(a[15])
-	s.CreatedBy = X.ToU(a[16])
-	s.UpdatedAt = X.ToI(a[17])
-	s.UpdatedBy = X.ToU(a[18])
-	s.DeletedAt = X.ToI(a[19])
-	s.DeletedBy = X.ToU(a[20])
-	s.RestoredBy = X.ToU(a[21])
+	s.PaymentMethod = X.ToS(a[15])
+	s.PaymentStatus = X.ToS(a[16])
+	s.CreatedAt = X.ToI(a[17])
+	s.CreatedBy = X.ToU(a[18])
+	s.UpdatedAt = X.ToI(a[19])
+	s.UpdatedBy = X.ToU(a[20])
+	s.DeletedAt = X.ToI(a[21])
+	s.DeletedBy = X.ToU(a[22])
+	s.RestoredBy = X.ToU(a[23])
 	return s
 }
 
@@ -827,13 +859,15 @@ func (s *Sales) FromUncensoredArray(a A.X) *Sales { //nolint:dupl false positive
 	s.Note = X.ToS(a[12])
 	s.Donation = X.ToI(a[13])
 	s.TransferIDR = X.ToI(a[14])
-	s.CreatedAt = X.ToI(a[15])
-	s.CreatedBy = X.ToU(a[16])
-	s.UpdatedAt = X.ToI(a[17])
-	s.UpdatedBy = X.ToU(a[18])
-	s.DeletedAt = X.ToI(a[19])
-	s.DeletedBy = X.ToU(a[20])
-	s.RestoredBy = X.ToU(a[21])
+	s.PaymentMethod = X.ToS(a[15])
+	s.PaymentStatus = X.ToS(a[16])
+	s.CreatedAt = X.ToI(a[17])
+	s.CreatedBy = X.ToU(a[18])
+	s.UpdatedAt = X.ToI(a[19])
+	s.UpdatedBy = X.ToU(a[20])
+	s.DeletedAt = X.ToI(a[21])
+	s.DeletedBy = X.ToU(a[22])
+	s.RestoredBy = X.ToU(a[23])
 	return s
 }
 
@@ -892,6 +926,8 @@ var SalesFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`note`:          Tt.String,
 	`donation`:      Tt.Integer,
 	`transferIDR`:   Tt.Integer,
+	`paymentMethod`: Tt.String,
+	`paymentStatus`: Tt.String,
 	`createdAt`:     Tt.Integer,
 	`createdBy`:     Tt.Unsigned,
 	`updatedAt`:     Tt.Integer,

@@ -33,6 +33,20 @@
   let tenants = /** @type {Record<Number, string>} */ ({/* tenants */});
   let menus     = /** @type {Record<Number, string>} */({/* menus */});
 
+  const PaymentMethods = [
+    'Cash',
+    'QRIS',
+    'Transfer',
+    'Donation',
+    'TopUp',
+    'Debt'
+  ];
+  const PaymentStatuses = [
+    'Paid',
+    'Unpaid',
+    'Refunded'
+  ];
+
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
     import('svelte').SvelteComponent | HTMLElement | PopUpAddSale |any
@@ -124,16 +138,18 @@
     tenantId: String(payloads[2]),
     buyerName: String(payloads[3]),
     menuIds: payloads[4],
-    transferIDR: Number(payloads[5]),
-    qrisIDR: Number(payloads[6]),
-    cashIDR: Number(payloads[7]),
-    debtIDR: Number(payloads[8]),
-    topupIDR: Number(payloads[9]),
-    donation: Number(payloads[10]),
-    totalPriceIDR: Number(payloads[11]),
-    salesDate: String(payloads[12]),
-    paidAt: String(payloads[13]),
-    note: String(payloads[14]),
+    paymentMethod: String(payloads[5]),
+    paymentStatus: String(payloads[6]),
+    transferIDR: Number(payloads[7]),
+    qrisIDR: Number(payloads[8]),
+    cashIDR: Number(payloads[9]),
+    debtIDR: Number(payloads[10]),
+    topupIDR: Number(payloads[11]),
+    donation: Number(payloads[12]),
+    totalPriceIDR: Number(payloads[13]),
+    salesDate: String(payloads[14]),
+    paidAt: String(payloads[15]),
+    note: String(payloads[16]),
   }
     const i = /** @type {any}*/ ({
       pager,
@@ -210,6 +226,8 @@
       REFS={{
         'tenantId': tenants,
         'menuIds': menus,
+        'paymentStatus': PaymentStatuses,
+        'paymentMethod': PaymentMethods
       }}
 
       COL_WIDTHS={{
@@ -230,6 +248,8 @@
       {OnRestore}
       {OnRefresh}
       {OnEdit}
+
+      SINGLE_SELECTED={true}
     >
     <button
       class="btn"

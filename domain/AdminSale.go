@@ -85,6 +85,20 @@ var AdminSaleMeta = zCrud.Meta{
 			ReadOnly:  false,
 		},
 		{
+			Name:      mCafe.PaymentMethod,
+			Label:     `Payment Method`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeComboboxArr,
+			ReadOnly:  false,
+		},
+		{
+			Name:      mCafe.PaymentStatus,
+			Label:     `Payment Status`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeComboboxArr,
+			ReadOnly:  false,
+		},
+		{
 			Name:      mCafe.TransferIDR,
 			Label:     `Transfer IDR`,
 			DataType:  zCrud.DataTypeCurrency,
@@ -249,6 +263,14 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 
 		if in.Cmd == zCrud.CmdUpsert {
 			sale.SetMenuIds(in.Sale.MenuIds)
+		}
+
+		if in.Sale.PaymentMethod != `` {
+			sale.SetPaymentMethod(in.Sale.PaymentMethod)
+		}
+
+		if in.Sale.PaymentStatus != `` {
+			sale.SetPaymentStatus(in.Sale.PaymentStatus)
 		}
 
 		if in.Sale.Cashier != `` {
