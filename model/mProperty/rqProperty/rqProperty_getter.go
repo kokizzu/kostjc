@@ -1546,3 +1546,28 @@ LEFT JOIN "rooms" r
 
 	return
 }
+
+func (r *Rooms) FixRoomBookingInconsistencies() {
+	const comment = `-- Rooms) FixRoomBookingInconsistencies`
+
+	query := comment + `
+WITH last AS ( 
+	SELECT "roomId", MAX("dateEnd") "dateEnd" 
+	FROM "bookings" GROUP BY 1 
+), lastBooking AS ( 
+	SELECT l."roomId", b."tenantId" 
+	FROM last l 
+	LEFT JOIN "bookings" b 
+		ON b."roomId" = l."roomId" 
+		AND b."dateEnd" = l."dateEnd" 
+) 
+UPDATE "rooms" 
+SET "currentTenantId" = COALESCE((
+	SELECT lb."tenantId" 
+	FROM lastBooking lb 
+	WHERE lb."roomId" = "rooms"."id" 
+),0)
+WHERE "rooms"."deletedAt" = 0`
+
+	r.Adapter.ExecSql(query)
+}

@@ -884,6 +884,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		rooms := room.FindRoomChoices()
 
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.Cmd = zCrud.CmdList
 		out := d.AdminSettingFixInconsistencies(&in)
 
 		return views.RenderAdminSettingFixInconsistencies(ctx, M.SX{

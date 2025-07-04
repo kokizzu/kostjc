@@ -2,6 +2,7 @@ package domain
 
 import (
 	"kostjc/model/mProperty/rqProperty"
+	"kostjc/model/mProperty/wcProperty"
 	"kostjc/model/zCrud"
 )
 
@@ -35,6 +36,8 @@ func (d *Domain) AdminSettingFixInconsistencies(in *AdminSettingFixInconsistenci
 
 	switch in.Cmd {
 	case zCrud.CmdUpsert:
+		room := wcProperty.NewRoomsMutator(d.PropOltp)
+		room.FixRoomBookingInconsistencies()
 		fallthrough
 	case zCrud.CmdList:
 		room := rqProperty.NewRooms(d.PropOltp)

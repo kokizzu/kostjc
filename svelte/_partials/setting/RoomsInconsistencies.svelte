@@ -1,9 +1,11 @@
 <script>
-    import SubmitButton from "../../_components/SubmitButton.svelte";
-    import { CmdUpsert } from "../../_components/xConstant";
-    import { localeDateFromYYYYMMDD } from "../../_components/xFormatter";
-    import { notifier } from "../../_components/xNotifier";
-    import { AdminSettingFixInconsistencies } from "../../jsApi.GEN";
+  import SubmitButton from "../../_components/SubmitButton.svelte";
+  import { CmdUpsert } from "../../_components/xConstant";
+  import { localeDateFromYYYYMMDD } from "../../_components/xFormatter";
+  import { notifier } from "../../_components/xNotifier";
+  import { AdminSettingFixInconsistencies } from "../../jsApi.GEN";
+  import { Icon } from "../../node_modules/svelte-icons-pack/dist";
+  import { RiSystemCheckboxFill } from "../../node_modules/svelte-icons-pack/dist/ri";
 
   export let tenants          = /** @type {Record<number, string>} */ ({/* tenants */});
   export let rooms            = /** @type {Record<number, string>} */ ({/* rooms */});
@@ -65,7 +67,16 @@
             <td>{tenants[data.tenantId]}</td>
             <td>{tenants[data.currentTenantId]}</td>
             <td>{localeDateFromYYYYMMDD(data.dateEnd)}</td>
-            <td>{data.isInconsistent ? '❌' : '✅'}</td>
+            <td>
+              <Icon
+                src={RiSystemCheckboxFill}
+                size="20"
+                color={data.isInconsistent
+                  ? 'var(--gray-004)'
+                  : 'var(--green-005)'
+                }
+              />
+            </td>
           </tr>
         {/each}
 
