@@ -23,6 +23,8 @@ var allCommands = []string{
 	domain.AdminRoomLogsAction,
 	domain.AdminSaleAction,
 	domain.AdminSaleLogsAction,
+	domain.AdminSettingFixInconsistenciesAction,
+	domain.AdminSettingsAction,
 	domain.AdminStockAction,
 	domain.AdminStockLogsAction,
 	domain.AdminTenantsAction,

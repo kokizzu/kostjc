@@ -1759,6 +1759,63 @@ exports.AdminSaleLogs = async function AdminSaleLogs( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminSettingFixInconsistenciesIn
+ * @property {String} cmd
+ */
+const AdminSettingFixInconsistenciesIn = {
+  cmd: '', // string
+}
+/**
+ * @typedef {Object} AdminSettingFixInconsistenciesOut
+ * @property {Object} roomIncosistencies
+ */
+const AdminSettingFixInconsistenciesOut = {
+  roomIncosistencies: { // []rqProperty.RoomBookingInconsistency
+  }, // []rqProperty.RoomBookingInconsistency
+}
+/**
+ * @callback AdminSettingFixInconsistenciesCallback
+ * @param {AdminSettingFixInconsistenciesOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminSettingFixInconsistenciesIn} i
+ * @param {AdminSettingFixInconsistenciesCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminSettingFixInconsistencies = async function AdminSettingFixInconsistencies( i, cb ) {
+  return await axios.post( '/admin/settingFixInconsistencies', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminSettingsIn
+ */
+const AdminSettingsIn = {
+}
+/**
+ * @typedef {Object} AdminSettingsOut
+ */
+const AdminSettingsOut = {
+}
+/**
+ * @callback AdminSettingsCallback
+ * @param {AdminSettingsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminSettingsIn} i
+ * @param {AdminSettingsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminSettings = async function AdminSettings( i, cb ) {
+  return await axios.post( '/admin/settings', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminStockIn
  * @property {String} cmd
  * @property {Object} withMeta

@@ -3961,6 +3961,12 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
       exports.AdminSaleLogs = async function AdminSaleLogs(i, cb) {
         return await axios.post("/admin/saleLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminSettingFixInconsistencies = async function AdminSettingFixInconsistencies(i, cb) {
+        return await axios.post("/admin/settingFixInconsistencies", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminSettings = async function AdminSettings(i, cb) {
+        return await axios.post("/admin/settings", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminStock = async function AdminStock(i, cb) {
         return await axios.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -13206,6 +13212,7 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
   var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
   var RiUserFacesGroupLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>' };
   var RiSystemMenu2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 4H21V6H3V4ZM3 11H15V13H3V11ZM3 18H21V20H3V18Z"></path>' };
+  var RiSystemSettingsLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"></path>' };
   var RiSystemLoaderLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M11.9995 2C12.5518 2 12.9995 2.44772 12.9995 3V6C12.9995 6.55228 12.5518 7 11.9995 7C11.4472 7 10.9995 6.55228 10.9995 6V3C10.9995 2.44772 11.4472 2 11.9995 2ZM11.9995 17C12.5518 17 12.9995 17.4477 12.9995 18V21C12.9995 21.5523 12.5518 22 11.9995 22C11.4472 22 10.9995 21.5523 10.9995 21V18C10.9995 17.4477 11.4472 17 11.9995 17ZM20.6597 7C20.9359 7.47829 20.772 8.08988 20.2937 8.36602L17.6956 9.86602C17.2173 10.1422 16.6057 9.97829 16.3296 9.5C16.0535 9.02171 16.2173 8.41012 16.6956 8.13398L19.2937 6.63397C19.772 6.35783 20.3836 6.52171 20.6597 7ZM7.66935 14.5C7.94549 14.9783 7.78161 15.5899 7.30332 15.866L4.70525 17.366C4.22695 17.6422 3.61536 17.4783 3.33922 17C3.06308 16.5217 3.22695 15.9101 3.70525 15.634L6.30332 14.134C6.78161 13.8578 7.3932 14.0217 7.66935 14.5ZM20.6597 17C20.3836 17.4783 19.772 17.6422 19.2937 17.366L16.6956 15.866C16.2173 15.5899 16.0535 14.9783 16.3296 14.5C16.6057 14.0217 17.2173 13.8578 17.6956 14.134L20.2937 15.634C20.772 15.9101 20.9359 16.5217 20.6597 17ZM7.66935 9.5C7.3932 9.97829 6.78161 10.1422 6.30332 9.86602L3.70525 8.36602C3.22695 8.08988 3.06308 7.47829 3.33922 7C3.61536 6.52171 4.22695 6.35783 4.70525 6.63397L7.30332 8.13398C7.78161 8.41012 7.94549 9.02171 7.66935 9.5Z"></path>' };
   var RiSystemLogoutBoxRLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path>' };
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
@@ -13614,6 +13621,11 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
     let icon12;
     let t38;
     let span12;
+    let t40;
+    let a13;
+    let icon13;
+    let t41;
+    let span13;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -13665,6 +13677,9 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
         src: RiBusinessBarChartBoxLine,
         size: "20"
       }
+    });
+    icon13 = new Icon_default({
+      props: { src: RiSystemSettingsLine, size: "20" }
     });
     return {
       c() {
@@ -13749,6 +13764,12 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
         t38 = space();
         span12 = element("span");
         span12.textContent = "Logs";
+        t40 = space();
+        a13 = element("a");
+        create_component(icon13.$.fragment);
+        t41 = space();
+        span13 = element("span");
+        span13.textContent = "Settings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
@@ -13853,6 +13874,12 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
+        attr(a13, "href", "/admin/settingFixInconsistencies");
+        attr(a13, "class", "svelte-1fwsz8h");
+        toggle_class(a13, "active", String(
+          /*pathLv2*/
+          ctx[4]
+        ).includes("setting") || false);
         attr(nav, "class", "nav-menu svelte-1fwsz8h");
       },
       m(target, anchor) {
@@ -13923,6 +13950,11 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
         mount_component(icon12, a12, null);
         append(a12, t38);
         append(a12, span12);
+        append(nav, t40);
+        append(nav, a13);
+        mount_component(icon13, a13, null);
+        append(a13, t41);
+        append(a13, span13);
         current = true;
       },
       p(ctx2, dirty) {
@@ -13932,6 +13964,13 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
             /*pathLv2*/
             ctx2[4]
           ).includes("Logs") || false);
+        }
+        if (!current || dirty & /*String, pathLv2*/
+        16) {
+          toggle_class(a13, "active", String(
+            /*pathLv2*/
+            ctx2[4]
+          ).includes("setting") || false);
         }
       },
       i(local) {
@@ -13950,6 +13989,7 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
         transition_in(icon10.$.fragment, local);
         transition_in(icon11.$.fragment, local);
         transition_in(icon12.$.fragment, local);
+        transition_in(icon13.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -13966,6 +14006,7 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
         transition_out(icon10.$.fragment, local);
         transition_out(icon11.$.fragment, local);
         transition_out(icon12.$.fragment, local);
+        transition_out(icon13.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -13987,6 +14028,7 @@ table.svelte-10xmolq tr th.svelte-10xmolq {
         destroy_component(icon10);
         destroy_component(icon11);
         destroy_component(icon12);
+        destroy_component(icon13);
       }
     };
   }

@@ -867,6 +867,35 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminSettingFixInconsistenciesAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminSettingFixInconsistenciesIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSettingFixInconsistenciesAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		tenant := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tenant.FindTenantChoices()
+
+		room := rqProperty.NewRooms(d.PropOltp)
+		rooms := room.FindRoomChoices()
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		out := d.AdminSettingFixInconsistencies(&in)
+
+		return views.RenderAdminSettingFixInconsistencies(ctx, M.SX{
+			`user`:               user,
+			`title`:              conf.PROJECT_NAME + ` | Setting: Fix Incosistencies`,
+			`segments`:           segments,
+			`tenants`:            tenants,
+			`rooms`:              rooms,
+			`roomIncosistencies`: out.RoomIncosistencies,
+		})
+	})
+
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {
 		return views.RenderDebug(ctx, M.SX{})
 	})

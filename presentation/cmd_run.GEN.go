@@ -140,6 +140,22 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminSaleLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminSettingFixInconsistenciesAction:
+		in := domain.AdminSettingFixInconsistenciesIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminSettingFixInconsistencies(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminSettingsAction:
+		in := domain.AdminSettingsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminSettings(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.AdminStockAction:
 		in := domain.AdminStockIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

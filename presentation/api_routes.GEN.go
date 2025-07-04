@@ -170,6 +170,26 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// AdminSettingFixInconsistencies
+	fw.Post("/"+domain.AdminSettingFixInconsistenciesAction, func(c *fiber.Ctx) error {
+		in := domain.AdminSettingFixInconsistenciesIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminSettingFixInconsistenciesAction); err != nil {
+			return nil
+		}
+		out := d.AdminSettingFixInconsistencies(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// AdminSettings
+	fw.Post("/"+domain.AdminSettingsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminSettingsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminSettingsAction); err != nil {
+			return nil
+		}
+		out := d.AdminSettings(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// AdminStock
 	fw.Post("/"+domain.AdminStockAction, func(c *fiber.Ctx) error {
 		in := domain.AdminStockIn{}

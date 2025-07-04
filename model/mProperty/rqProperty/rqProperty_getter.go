@@ -1510,8 +1510,8 @@ type RoomBookingInconsistency struct {
 	IsInconsistent  bool   `json:"isInconsistent"`
 }
 
-func (r *Rooms) CheckInconsistencies() (out []RoomBookingInconsistency) {
-	const comment = `-- Rooms) CheckInconsistencies`
+func (r *Rooms) FindRoomBookingInconsistencies() (out []RoomBookingInconsistency) {
+	const comment = `-- Rooms) FindRoomBookingInconsistencies`
 
 	queryRows := comment + `
 WITH last AS ( 

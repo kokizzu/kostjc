@@ -3785,6 +3785,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminSaleLogs = async function AdminSaleLogs(i, cb) {
         return await axios.post("/admin/saleLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminSettingFixInconsistencies = async function AdminSettingFixInconsistencies(i, cb) {
+        return await axios.post("/admin/settingFixInconsistencies", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminSettings = async function AdminSettings(i, cb) {
+        return await axios.post("/admin/settings", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminStock = async function AdminStock(i, cb) {
         return await axios.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -6620,6 +6626,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
   var RiUserFacesGroupLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>' };
   var RiSystemMenu2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 4H21V6H3V4ZM3 11H15V13H3V11ZM3 18H21V20H3V18Z"></path>' };
+  var RiSystemSettingsLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"></path>' };
   var RiSystemInformationLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z"></path>' };
   var RiSystemLogoutBoxRLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path>' };
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
@@ -6813,6 +6820,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let icon12;
     let t38;
     let span12;
+    let t40;
+    let a13;
+    let icon13;
+    let t41;
+    let span13;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -6864,6 +6876,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         src: RiBusinessBarChartBoxLine,
         size: "20"
       }
+    });
+    icon13 = new Icon_default({
+      props: { src: RiSystemSettingsLine, size: "20" }
     });
     return {
       c() {
@@ -6948,6 +6963,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         t38 = space();
         span12 = element("span");
         span12.textContent = "Logs";
+        t40 = space();
+        a13 = element("a");
+        create_component(icon13.$.fragment);
+        t41 = space();
+        span13 = element("span");
+        span13.textContent = "Settings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
@@ -7052,6 +7073,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
+        attr(a13, "href", "/admin/settingFixInconsistencies");
+        attr(a13, "class", "svelte-1fwsz8h");
+        toggle_class(a13, "active", String(
+          /*pathLv2*/
+          ctx[4]
+        ).includes("setting") || false);
         attr(nav, "class", "nav-menu svelte-1fwsz8h");
       },
       m(target, anchor) {
@@ -7122,6 +7149,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         mount_component(icon12, a12, null);
         append(a12, t38);
         append(a12, span12);
+        append(nav, t40);
+        append(nav, a13);
+        mount_component(icon13, a13, null);
+        append(a13, t41);
+        append(a13, span13);
         current = true;
       },
       p(ctx2, dirty) {
@@ -7131,6 +7163,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             /*pathLv2*/
             ctx2[4]
           ).includes("Logs") || false);
+        }
+        if (!current || dirty & /*String, pathLv2*/
+        16) {
+          toggle_class(a13, "active", String(
+            /*pathLv2*/
+            ctx2[4]
+          ).includes("setting") || false);
         }
       },
       i(local) {
@@ -7149,6 +7188,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_in(icon10.$.fragment, local);
         transition_in(icon11.$.fragment, local);
         transition_in(icon12.$.fragment, local);
+        transition_in(icon13.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -7165,6 +7205,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_out(icon10.$.fragment, local);
         transition_out(icon11.$.fragment, local);
         transition_out(icon12.$.fragment, local);
+        transition_out(icon13.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -7186,6 +7227,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         destroy_component(icon10);
         destroy_component(icon11);
         destroy_component(icon12);
+        destroy_component(icon13);
       }
     };
   }

@@ -11,7 +11,7 @@
     RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
     RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine, RiUserFacesGroupLine,
     RiDocumentFileChartLine, RiSystemMenu2Line, RiFinanceCashLine, RiBusinessBarChartBoxLine,
-    RiBuildingsHomeWifiLine
+    RiBuildingsHomeWifiLine, RiSystemSettingsLine
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { LuHandPlatter } from '../node_modules/svelte-icons-pack/dist/lu';
   import { isOpenSideMenu } from '../_components/xState';
@@ -137,6 +137,10 @@
         <a href="/admin/bookingLogs" class:active={String(pathLv2).includes('Logs')||false}>
           <Icon src={RiBusinessBarChartBoxLine} size="20" />
           <span>Logs</span>
+        </a>
+        <a href="/admin/settingFixInconsistencies" class:active={String(pathLv2).includes('setting')||false}>
+          <Icon src={RiSystemSettingsLine} size="20" />
+          <span>Settings</span>
         </a>
       </nav>
     {/if}

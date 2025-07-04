@@ -4742,6 +4742,12 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
       exports.AdminSaleLogs = async function AdminSaleLogs(i, cb) {
         return await axios.post("/admin/saleLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminSettingFixInconsistencies = async function AdminSettingFixInconsistencies(i, cb) {
+        return await axios.post("/admin/settingFixInconsistencies", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminSettings = async function AdminSettings(i, cb) {
+        return await axios.post("/admin/settings", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminStock = async function AdminStock(i, cb) {
         return await axios.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -6106,6 +6112,7 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
   var RiSystemEyeLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3ZM12.0003 19C16.2359 19 19.8603 16.052 20.7777 12C19.8603 7.94803 16.2359 5 12.0003 5C7.7646 5 4.14022 7.94803 3.22278 12C4.14022 16.052 7.7646 19 12.0003 19ZM12.0003 16.5C9.51498 16.5 7.50026 14.4853 7.50026 12C7.50026 9.51472 9.51498 7.5 12.0003 7.5C14.4855 7.5 16.5003 9.51472 16.5003 12C16.5003 14.4853 14.4855 16.5 12.0003 16.5ZM12.0003 14.5C13.381 14.5 14.5003 13.3807 14.5003 12C14.5003 10.6193 13.381 9.5 12.0003 9.5C10.6196 9.5 9.50026 10.6193 9.50026 12C9.50026 13.3807 10.6196 14.5 12.0003 14.5Z"></path>' };
   var RiSystemDeleteBin5Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8ZM6 10V20H18V10H6ZM9 12H11V18H9V12ZM13 12H15V18H13V12ZM7 5V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V5H22V7H2V5H7ZM9 4V5H15V4H9Z"></path>' };
   var RiSystemMenu2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 4H21V6H3V4ZM3 11H15V13H3V11ZM3 18H21V20H3V18Z"></path>' };
+  var RiSystemSettingsLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"></path>' };
   var RiSystemLogoutBoxRLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path>' };
   var RiSystemExternalLinkLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M10 6V8H5V19H16V14H18V20C18 20.5523 17.5523 21 17 21H4C3.44772 21 3 20.5523 3 20V7C3 6.44772 3.44772 6 4 6H10ZM21 3V11H19L18.9999 6.413L11.2071 14.2071L9.79289 12.7929L17.5849 5H13V3H21Z"></path>' };
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
@@ -6302,6 +6309,11 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
     let icon12;
     let t38;
     let span12;
+    let t40;
+    let a13;
+    let icon13;
+    let t41;
+    let span13;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -6353,6 +6365,9 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         src: RiBusinessBarChartBoxLine,
         size: "20"
       }
+    });
+    icon13 = new Icon_default({
+      props: { src: RiSystemSettingsLine, size: "20" }
     });
     return {
       c() {
@@ -6437,6 +6452,12 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         t38 = space();
         span12 = element("span");
         span12.textContent = "Logs";
+        t40 = space();
+        a13 = element("a");
+        create_component(icon13.$.fragment);
+        t41 = space();
+        span13 = element("span");
+        span13.textContent = "Settings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
@@ -6541,6 +6562,12 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
+        attr(a13, "href", "/admin/settingFixInconsistencies");
+        attr(a13, "class", "svelte-1fwsz8h");
+        toggle_class(a13, "active", String(
+          /*pathLv2*/
+          ctx[4]
+        ).includes("setting") || false);
         attr(nav, "class", "nav-menu svelte-1fwsz8h");
       },
       m(target, anchor) {
@@ -6611,6 +6638,11 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         mount_component(icon12, a12, null);
         append(a12, t38);
         append(a12, span12);
+        append(nav, t40);
+        append(nav, a13);
+        mount_component(icon13, a13, null);
+        append(a13, t41);
+        append(a13, span13);
         current = true;
       },
       p(ctx2, dirty) {
@@ -6620,6 +6652,13 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
             /*pathLv2*/
             ctx2[4]
           ).includes("Logs") || false);
+        }
+        if (!current || dirty & /*String, pathLv2*/
+        16) {
+          toggle_class(a13, "active", String(
+            /*pathLv2*/
+            ctx2[4]
+          ).includes("setting") || false);
         }
       },
       i(local) {
@@ -6638,6 +6677,7 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         transition_in(icon10.$.fragment, local);
         transition_in(icon11.$.fragment, local);
         transition_in(icon12.$.fragment, local);
+        transition_in(icon13.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -6654,6 +6694,7 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         transition_out(icon10.$.fragment, local);
         transition_out(icon11.$.fragment, local);
         transition_out(icon12.$.fragment, local);
+        transition_out(icon13.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -6675,6 +6716,7 @@ table.svelte-1l39tow tbody tr td .cell.refunded.svelte-1l39tow.svelte-1l39tow {
         destroy_component(icon10);
         destroy_component(icon11);
         destroy_component(icon12);
+        destroy_component(icon13);
       }
     };
   }
