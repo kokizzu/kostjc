@@ -1312,22 +1312,22 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./_partials/home/UnpaidBookingTenants.esbuild-svelte-fake-css */
-.empty-unpaidBookingTenants.svelte-4sqcgm.svelte-4sqcgm {
+.empty-unpaidBookingTenants.svelte-1n9v0lv.svelte-1n9v0lv {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.empty-unpaidBookingTenants.svelte-4sqcgm h1.svelte-4sqcgm {
+.empty-unpaidBookingTenants.svelte-1n9v0lv h1.svelte-1n9v0lv {
   margin: 0;
   padding: 0;
   font-size: var(--font-xl);
 }
-.empty-unpaidBookingTenants.svelte-4sqcgm .cards.svelte-4sqcgm {
+.empty-unpaidBookingTenants.svelte-1n9v0lv .cards.svelte-1n9v0lv {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
-.empty-unpaidBookingTenants.svelte-4sqcgm .cards .card.svelte-4sqcgm {
+.empty-unpaidBookingTenants.svelte-1n9v0lv .cards .card.svelte-1n9v0lv {
   background-color: var(--gray-001);
   padding: 20px;
   border-radius: 8px;
@@ -1337,13 +1337,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   position: relative;
   overflow: hidden;
 }
-.empty-unpaidBookingTenants.svelte-4sqcgm .cards .card h3.svelte-4sqcgm {
+.empty-unpaidBookingTenants.svelte-1n9v0lv .cards .card h3.svelte-1n9v0lv {
   margin: 0;
   padding: 0;
   font-size: var(--font-lg);
   z-index: 20;
 }
-.empty-unpaidBookingTenants.svelte-4sqcgm .cards .card .desc.svelte-4sqcgm {
+.empty-unpaidBookingTenants.svelte-1n9v0lv .cards .card .desc.svelte-1n9v0lv {
   padding-top: 10px;
   border-top: 1px solid var(--gray-004);
   display: flex;
@@ -1352,28 +1352,33 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   z-index: 20;
 }
 @media only screen and (max-width : 768px) {
-  .empty-unpaidBookingTenants.svelte-4sqcgm .cards.svelte-4sqcgm {
+  .empty-unpaidBookingTenants.svelte-1n9v0lv .cards.svelte-1n9v0lv {
     grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .empty-unpaidBookingTenants.svelte-1n9v0lv .cards.svelte-1n9v0lv {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 /* fakecss:./_partials/home/DoubleBookingReports.esbuild-svelte-fake-css */
-.empty-doubleBookingReports.svelte-9blmyr.svelte-9blmyr {
+.empty-doubleBookingReports.svelte-vmi6rx.svelte-vmi6rx {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.empty-doubleBookingReports.svelte-9blmyr h1.svelte-9blmyr {
+.empty-doubleBookingReports.svelte-vmi6rx h1.svelte-vmi6rx {
   margin: 0;
   padding: 0;
   font-size: var(--font-xl);
 }
-.empty-doubleBookingReports.svelte-9blmyr .cards.svelte-9blmyr {
+.empty-doubleBookingReports.svelte-vmi6rx .cards.svelte-vmi6rx {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
-.empty-doubleBookingReports.svelte-9blmyr .cards .card.svelte-9blmyr {
+.empty-doubleBookingReports.svelte-vmi6rx .cards .card.svelte-vmi6rx {
   background-color: var(--gray-001);
   padding: 20px;
   border-radius: 8px;
@@ -1383,23 +1388,29 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   position: relative;
   overflow: hidden;
 }
-.empty-doubleBookingReports.svelte-9blmyr .cards .card h3.svelte-9blmyr {
+.empty-doubleBookingReports.svelte-vmi6rx .cards .card h3.svelte-vmi6rx {
   margin: 0;
   padding: 0;
   font-size: var(--font-lg);
   z-index: 20;
 }
-.empty-doubleBookingReports.svelte-9blmyr .cards .card .desc.svelte-9blmyr {
+.empty-doubleBookingReports.svelte-vmi6rx .cards .card .desc.svelte-vmi6rx {
   padding-top: 10px;
   border-top: 1px solid var(--gray-004);
   display: flex;
   flex-direction: column;
   gap: 5px;
   z-index: 20;
+  font-size: 12px;
 }
 @media only screen and (max-width : 768px) {
-  .empty-doubleBookingReports.svelte-9blmyr .cards.svelte-9blmyr {
+  .empty-doubleBookingReports.svelte-vmi6rx .cards.svelte-vmi6rx {
     grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .empty-doubleBookingReports.svelte-vmi6rx .cards.svelte-vmi6rx {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -16186,7 +16197,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cards svelte-4sqcgm");
+        attr(div, "class", "cards svelte-1n9v0lv");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16260,9 +16271,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           ctx[0].dateStart
         )})`;
         t13 = space();
-        attr(h3, "class", "svelte-4sqcgm");
-        attr(div0, "class", "desc svelte-4sqcgm");
-        attr(div1, "class", "card svelte-4sqcgm");
+        attr(h3, "class", "svelte-1n9v0lv");
+        attr(div0, "class", "desc svelte-1n9v0lv");
+        attr(div1, "class", "card svelte-1n9v0lv");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
@@ -16302,8 +16313,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         h1.textContent = "Unpaid Bookings";
         t1 = space();
         if_block.c();
-        attr(h1, "class", "svelte-4sqcgm");
-        attr(section, "class", "empty-unpaidBookingTenants svelte-4sqcgm");
+        attr(h1, "class", "svelte-1n9v0lv");
+        attr(section, "class", "empty-unpaidBookingTenants svelte-1n9v0lv");
       },
       m(target, anchor) {
         insert(target, section, anchor);
@@ -16400,7 +16411,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cards svelte-9blmyr");
+        attr(div, "class", "cards svelte-vmi6rx");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16486,9 +16497,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           each_blocks[i].c();
         }
         t3 = space();
-        attr(h3, "class", "svelte-9blmyr");
-        attr(div0, "class", "desc svelte-9blmyr");
-        attr(div1, "class", "card svelte-9blmyr");
+        attr(h3, "class", "svelte-vmi6rx");
+        attr(div0, "class", "desc svelte-vmi6rx");
+        attr(div1, "class", "card svelte-vmi6rx");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
@@ -16552,8 +16563,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         h1.textContent = "Double Bookings";
         t1 = space();
         if_block.c();
-        attr(h1, "class", "svelte-9blmyr");
-        attr(section, "class", "empty-doubleBookingReports svelte-9blmyr");
+        attr(h1, "class", "svelte-vmi6rx");
+        attr(section, "class", "empty-doubleBookingReports svelte-vmi6rx");
       },
       m(target, anchor) {
         insert(target, section, anchor);

@@ -14,6 +14,7 @@
   import { formatYearMonth } from './_components/xFormatter';
   import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
+    import ChartRevenueDaily from './_partials/ChartRevenueDaily.svelte';
   import { StaffRevenueReport } from './jsApi.GEN';
 
   let user      = /** @type {User} */ ({/* user */});
@@ -56,6 +57,7 @@
 </script>
 
 <LayoutMain access={segments} user={user}>
+  <ChartRevenueDaily />
   <div class="report-container">
     <div class="actions">
       <InputBox

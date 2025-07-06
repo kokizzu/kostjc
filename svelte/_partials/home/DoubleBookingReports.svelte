@@ -83,11 +83,18 @@
     flex-direction: column;
     gap: 5px;
     z-index: 20;
+    font-size: 12px;
   }
 
   @media only screen and (max-width : 768px) {
     .empty-doubleBookingReports .cards {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media only screen and (max-width: 992px) {
+    .empty-doubleBookingReports .cards {
+      grid-template-columns: 1fr 1fr;
     }
   }
 </style>

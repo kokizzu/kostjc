@@ -112,4 +112,10 @@
       grid-template-columns: 1fr;
     }
   }
+
+  @media only screen and (max-width: 992px) {
+    .empty-unpaidBookingTenants .cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 </style>

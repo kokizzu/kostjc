@@ -298,6 +298,7 @@
 
   async function handleSearchOnEnter(/** @type {KeyboardEvent} */ event) {
     if (event.key === 'Enter') {
+      showRowsNum = false;
       await handleSearch();
     }
   }
@@ -582,7 +583,16 @@
             {/each}
           </div>
         {/if}
-        <button class="btn" on:click={toggleRowsNum}>
+        <button
+          class="btn"
+          on:click={toggleRowsNum}
+          on:keydown={(e) => {
+            if (e.key === 'Escape') {
+              showRowsNum = false;
+              console.log('event:', e);
+            }
+          }}
+        >
           <span>{currentRows}</span>
           <Icon className={showRowsNum ? 'rotate_right' : 'dropdown'} size="13" src={CgChevronRight} />
         </button>
@@ -1069,6 +1079,7 @@
     position: relative;
     width: fit-content;
     height: fit-content;
+    z-index: 11;
   }
 
   .table-root .pagination-container .filter .row-to-show .btn {

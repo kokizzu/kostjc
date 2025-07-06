@@ -649,7 +649,7 @@
       <div class="showing">
         <p>Showing <span class="text-blue">{totalRowsCurrent}</span> /</p>
       </div>
-      <div class="row_to_show">
+      <div class="row-to-show">
         {#if showRowsNum}
           <div class="rows">
             {#each rowsToShow as r}
@@ -1139,13 +1139,14 @@
     gap: 8px;
   }
 
-  .table-root .pagination-container .filter .row_to_show {
+  .table-root .pagination-container .filter .row-to-show {
     position: relative;
     width: fit-content;
     height: fit-content;
+    z-index: 11;
   }
 
-  .table-root .pagination-container .filter .row_to_show .btn {
+  .table-root .pagination-container .filter .row-to-show .btn {
     border: none;
     background-color: var(--blue-transparent);
     color: var(--blue-005);
@@ -1162,11 +1163,11 @@
     cursor: pointer;
   }
 
-  .table-root .pagination-container .filter .row_to_show .btn:hover {
+  .table-root .pagination-container .filter .row-to-show .btn:hover {
     background-color: var(--blue-002);
   }
 
-  .table-root .pagination-container .filter .row_to_show .rows {
+  .table-root .pagination-container .filter .row-to-show .rows {
     display: flex;
     flex-direction: column-reverse;
     position: absolute;
@@ -1177,7 +1178,7 @@
     background-color: #fff;
   }
 
-  .table-root .pagination-container .filter .row_to_show .rows button {
+  .table-root .pagination-container .filter .row-to-show .rows button {
     border: none;
     background-color: transparent;
     padding: 5px;
@@ -1185,7 +1186,7 @@
     color: var(--gray-007);
   }
 
-  .table-root .pagination-container .filter .row_to_show .rows button:hover {
+  .table-root .pagination-container .filter .row-to-show .rows button:hover {
     background-color: var(--blue-transparent);
     color: var(--blue-007);
   }
