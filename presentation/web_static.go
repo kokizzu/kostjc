@@ -114,11 +114,12 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		bookings := bk.FindBookingChoices()
 
 		return views.RenderStaffRevenueReport(ctx, M.SX{
-			`title`:          conf.PROJECT_NAME + ` | Revenue Report`,
-			`user`:           user,
-			`segments`:       segments,
-			`revenueReports`: out.RevenueReports,
-			`bookings`:       bookings,
+			`title`:               conf.PROJECT_NAME + ` | Revenue Report`,
+			`user`:                user,
+			`segments`:            segments,
+			`revenueReports`:      out.RevenueReports,
+			`chartRevenueReports`: out.ChartRevenueReports,
+			`bookings`:            bookings,
 		})
 	})
 

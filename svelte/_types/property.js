@@ -175,3 +175,10 @@ module.exports = {};
  * @property {string} restoredBy
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} ChartRevenueReport
+ * @property {string} date
+ * @property {number} revenueIDR
+ */
+module.exports = {};

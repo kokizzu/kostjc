@@ -1,35 +1,19 @@
 <script>
-  /**
-   * @typedef {Object} Revenue
-   * @property {string|number} revenue
-   * @property {number} bookingTotal
-   * @property {string} salesDate
-   */
+  /** @typedef {import('../_types/property.js').ChartRevenueReport} ChartRevenueReport */
 
   import Chart from 'chart.js/auto';  
 
   let chart = /** @type {import('chart.js').Chart} */ (null);
 
-  let revenues = /** @type {Revenue[]} */ ([
-    {
-      revenue: 560,
-      bookingTotal: 4,
-      salesDate: '2025-07-07'
-    },
-    {
-      revenue: 890,
-      bookingTotal: 8,
-      salesDate: '2025-07-06'
-    },
-  ]);
+  export let chartRevenueReports = /** @type {ChartRevenueReport[]} */ ([]);
 
   setTimeout(() => {
     const ElmChart = /** @type {HTMLCanvasElement} */ (document.getElementById('chart'));
     chart = new Chart(ElmChart, {
       type: 'line',
       data: {
-        labels: (revenues || []).map((/** @type {Revenue} */ i) => {
-          const dt = /** @type {Date} */ (new Date(i.salesDate));
+        labels: (chartRevenueReports || []).map((/** @type {ChartRevenueReport} */ i) => {
+          const dt = /** @type {Date} */ (new Date(i.date));
           return dt.toLocaleDateString('en-US', {
             month: 'short',
             day: '2-digit'
@@ -37,7 +21,7 @@
         }),
         datasets: [{
           label: 'Revenue',
-          data: (revenues || []).map((/** @type {Revenue} */ i) => Number(i.revenue)),
+          data: (chartRevenueReports || []).map((/** @type {ChartRevenueReport} */ i) => Number(i.revenueIDR)),
           borderColor: '#f97316',
           backgroundColor: '#f9731630',
           pointRadius: 0,
@@ -69,6 +53,32 @@
       }
     });
   }, 400);
+
+  export function updateData() {
+    if (chart) {
+      chart.data.labels = (chartRevenueReports || []).map((/** @type {ChartRevenueReport} */ i) => {
+        const dt = /** @type {Date} */ (new Date(i.date));
+        return dt.toLocaleDateString('en-US', {
+          month: 'short',
+          day: '2-digit'
+        });
+      });
+      chart.data.datasets[0].data = (chartRevenueReports || []).map((/** @type {ChartRevenueReport} */ i) => Number(i.revenueIDR));
+      chart.data.datasets[0].label = 'Revenue';
+      chart.options.scales.y = {
+        ticks: {
+          stepSize: 10000000,
+          callback: function(value) {
+            if (Number(value) >= 1000000000) return Number(value) / 1000000000 + 'B';
+            if (Number(value) >= 1000000) return Number(value) / 1000000 + 'M';
+            if (Number(value) >= 1000) return Number(value) / 1000 + 'K';
+            return Number(value);
+          }
+        }
+      };
+      chart.update();
+    }
+  }
 </script>
 
 <div class="chart">

@@ -22,8 +22,9 @@ type (
 		ResponseCommon
 		User *rqAuth.Users `json:"user" form:"user" query:"user" long:"user" msg:"user"`
 
-		Segments       M.SB                       `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
-		RevenueReports []rqProperty.RevenueReport `json:"revenueReports" form:"revenueReports" query:"revenueReports" long:"revenueReports" msg:"revenueReports"`
+		Segments            M.SB                            `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
+		RevenueReports      []rqProperty.RevenueReport      `json:"revenueReports" form:"revenueReports" query:"revenueReports" long:"revenueReports" msg:"revenueReports"`
+		ChartRevenueReports []rqProperty.ChartRevenueReport `json:"chartRevenueReports" form:"chartRevenueReports" query:"chartRevenueReports" long:"chartRevenueReports" msg:"chartRevenueReports"`
 	}
 )
 
@@ -42,6 +43,9 @@ func (d *Domain) StaffRevenueReport(in *StaffRevenueReportIn) (out StaffRevenueR
 
 	booking := rqProperty.NewBookings(d.PropOltp)
 	out.RevenueReports = booking.FindRevenueReports(in.YearMonth)
+
+	py := rqProperty.NewPayments(d.PropOltp)
+	out.ChartRevenueReports = py.GetChartRevenueReports(in.YearMonth)
 
 	return
 }

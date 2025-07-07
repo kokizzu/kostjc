@@ -1237,7 +1237,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
 }
 
-/* fakecss:./_partials/ChartRevenueDaily.esbuild-svelte-fake-css */
+/* fakecss:./_partials/ChartRevenueMonthly.esbuild-svelte-fake-css */
 .chart.svelte-9drywf.svelte-9drywf {
   height: 92%;
   width: 100%;
@@ -29933,7 +29933,7 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
   Chart.register(...registerables);
   var auto_default = Chart;
 
-  // _partials/ChartRevenueDaily.svelte
+  // _partials/ChartRevenueMonthly.svelte
   function create_fragment12(ctx) {
     let div;
     return {
@@ -29955,26 +29955,15 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
       }
     };
   }
-  function instance9($self) {
+  function instance9($self, $props, $invalidate) {
     let chart = (
       /** @type {import('chart.js').Chart} */
       null
     );
-    let revenues = (
-      /** @type {Revenue[]} */
-      [
-        {
-          revenue: 560,
-          bookingTotal: 4,
-          salesDate: "2025-07-07"
-        },
-        {
-          revenue: 890,
-          bookingTotal: 8,
-          salesDate: "2025-07-06"
-        }
-      ]
-    );
+    let { chartRevenueReports = (
+      /** @type {ChartRevenueReport[]} */
+      []
+    ) } = $props;
     setTimeout(
       () => {
         const ElmChart = (
@@ -29986,12 +29975,12 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
           {
             type: "line",
             data: {
-              labels: (revenues || []).map(
-                /** @type {Revenue} */
+              labels: (chartRevenueReports || []).map(
+                /** @type {ChartRevenueReport} */
                 (i) => {
                   const dt = (
                     /** @type {Date} */
-                    new Date(i.salesDate)
+                    new Date(i.date)
                   );
                   return dt.toLocaleDateString("en-US", { month: "short", day: "2-digit" });
                 }
@@ -29999,9 +29988,9 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
               datasets: [
                 {
                   label: "Revenue",
-                  data: (revenues || []).map(
-                    /** @type {Revenue} */
-                    (i) => Number(i.revenue)
+                  data: (chartRevenueReports || []).map(
+                    /** @type {ChartRevenueReport} */
+                    (i) => Number(i.revenueIDR)
                   ),
                   borderColor: "#f97316",
                   backgroundColor: "#f9731630",
@@ -30037,21 +30026,62 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
       },
       400
     );
-    return [];
+    function updateData() {
+      if (chart) {
+        chart.data.labels = (chartRevenueReports || []).map(
+          /** @type {ChartRevenueReport} */
+          (i) => {
+            const dt = (
+              /** @type {Date} */
+              new Date(i.date)
+            );
+            return dt.toLocaleDateString("en-US", { month: "short", day: "2-digit" });
+          }
+        );
+        chart.data.datasets[0].data = (chartRevenueReports || []).map(
+          /** @type {ChartRevenueReport} */
+          (i) => Number(i.revenueIDR)
+        );
+        chart.data.datasets[0].label = "Revenue";
+        chart.options.scales.y = {
+          ticks: {
+            stepSize: 1e7,
+            callback(value) {
+              if (Number(value) >= 1e9)
+                return Number(value) / 1e9 + "B";
+              if (Number(value) >= 1e6)
+                return Number(value) / 1e6 + "M";
+              if (Number(value) >= 1e3)
+                return Number(value) / 1e3 + "K";
+              return Number(value);
+            }
+          }
+        };
+        chart.update();
+      }
+    }
+    $self.$set = ($props2) => {
+      if ("chartRevenueReports" in $props2)
+        $invalidate(0, chartRevenueReports = $props2.chartRevenueReports);
+    };
+    return [chartRevenueReports, updateData];
   }
-  var ChartRevenueDaily = class extends SvelteComponent {
+  var ChartRevenueMonthly = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance9, create_fragment12, safe_not_equal, {});
+      init(this, options, instance9, create_fragment12, safe_not_equal, { chartRevenueReports: 0, updateData: 1 });
+    }
+    get updateData() {
+      return this.$.ctx[1];
     }
   };
-  var ChartRevenueDaily_default = ChartRevenueDaily;
+  var ChartRevenueMonthly_default = ChartRevenueMonthly;
 
   // staffRevenueReport.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[7] = list[i];
+    child_ctx[11] = list[i];
     return child_ctx;
   }
   function create_each_block2(ctx) {
@@ -30059,28 +30089,28 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
     let td0;
     let t0_value = (0, import_xFormatter2.formatYearMonth)(
       /*data*/
-      ctx[7].yearMonth
+      ctx[11].yearMonth
     ) + "";
     let t0;
     let t1;
     let td1;
     let t2_value = bookings[
       /*data*/
-      ctx[7].bookingId
+      ctx[11].bookingId
     ] + "";
     let t2;
     let t3;
     let td2;
     let t4_value = (
       /*data*/
-      ctx[7].revenueIDR + ""
+      ctx[11].revenueIDR + ""
     );
     let t4;
     let t5;
     let td3;
     let t6_value = (
       /*data*/
-      ctx[7].donationIDR + ""
+      ctx[11].donationIDR + ""
     );
     let t6;
     return {
@@ -30121,22 +30151,22 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         if (dirty & /*revenueReports*/
         1 && t0_value !== (t0_value = (0, import_xFormatter2.formatYearMonth)(
           /*data*/
-          ctx2[7].yearMonth
+          ctx2[11].yearMonth
         ) + ""))
           set_data(t0, t0_value);
         if (dirty & /*revenueReports*/
         1 && t2_value !== (t2_value = bookings[
           /*data*/
-          ctx2[7].bookingId
+          ctx2[11].bookingId
         ] + ""))
           set_data(t2, t2_value);
         if (dirty & /*revenueReports*/
         1 && t4_value !== (t4_value = /*data*/
-        ctx2[7].revenueIDR + ""))
+        ctx2[11].revenueIDR + ""))
           set_data(t4, t4_value);
         if (dirty & /*revenueReports*/
         1 && t6_value !== (t6_value = /*data*/
-        ctx2[7].donationIDR + ""))
+        ctx2[11].donationIDR + ""))
           set_data(t6, t6_value);
       },
       d(detaching) {
@@ -30166,6 +30196,7 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
   }
   function create_default_slot(ctx) {
     let chartrevenuedaily;
+    let updating_chartRevenueReports;
     let t0;
     let div2;
     let div0;
@@ -30193,9 +30224,22 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
     let th7;
     let t17;
     let current;
-    chartrevenuedaily = new ChartRevenueDaily_default({});
+    function chartrevenuedaily_chartRevenueReports_binding(value) {
+      ctx[8](value);
+    }
+    let chartrevenuedaily_props = {};
+    if (
+      /*chartRevenueReports*/
+      ctx[1] !== void 0
+    ) {
+      chartrevenuedaily_props.chartRevenueReports = /*chartRevenueReports*/
+      ctx[1];
+    }
+    chartrevenuedaily = new ChartRevenueMonthly_default({ props: chartrevenuedaily_props });
+    binding_callbacks.push(() => bind(chartrevenuedaily, "chartRevenueReports", chartrevenuedaily_chartRevenueReports_binding));
+    ctx[9](chartrevenuedaily);
     function inputbox_value_binding(value) {
-      ctx[6](value);
+      ctx[10](value);
     }
     let inputbox_props = {
       className: "year-month",
@@ -30206,10 +30250,10 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
     };
     if (
       /*yearMonth*/
-      ctx[1] !== void 0
+      ctx[3] !== void 0
     ) {
       inputbox_props.value = /*yearMonth*/
-      ctx[1];
+      ctx[3];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
     binding_callbacks.push(() => bind(inputbox, "value", inputbox_value_binding));
@@ -30218,14 +30262,14 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         label: "Filter",
         isSubmitted: (
           /*isFiltering*/
-          ctx[2]
+          ctx[4]
         )
       }
     });
     submitbutton.$on(
       "click",
       /*getRevenueReports*/
-      ctx[5]
+      ctx[7]
     );
     let each_value = ensure_array_like(
       /*revenueReports*/
@@ -30270,13 +30314,13 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         th6 = element("th");
         t15 = text(
           /*sumRevenueIDR*/
-          ctx[3]
+          ctx[5]
         );
         t16 = space();
         th7 = element("th");
         t17 = text(
           /*sumDonationIDR*/
-          ctx[4]
+          ctx[6]
         );
         attr(div0, "class", "actions svelte-1g4l9i6");
         attr(thead, "class", "svelte-1g4l9i6");
@@ -30326,20 +30370,29 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
         current = true;
       },
       p(ctx2, dirty) {
+        const chartrevenuedaily_changes = {};
+        if (!updating_chartRevenueReports && dirty & /*chartRevenueReports*/
+        2) {
+          updating_chartRevenueReports = true;
+          chartrevenuedaily_changes.chartRevenueReports = /*chartRevenueReports*/
+          ctx2[1];
+          add_flush_callback(() => updating_chartRevenueReports = false);
+        }
+        chartrevenuedaily.$set(chartrevenuedaily_changes);
         const inputbox_changes = {};
         if (!updating_value && dirty & /*yearMonth*/
-        2) {
+        8) {
           updating_value = true;
           inputbox_changes.value = /*yearMonth*/
-          ctx2[1];
+          ctx2[3];
           add_flush_callback(() => updating_value = false);
         }
         inputbox.$set(inputbox_changes);
         const submitbutton_changes = {};
         if (dirty & /*isFiltering*/
-        4)
+        16)
           submitbutton_changes.isSubmitted = /*isFiltering*/
-          ctx2[2];
+          ctx2[4];
         submitbutton.$set(submitbutton_changes);
         if (dirty & /*revenueReports, bookings*/
         1) {
@@ -30377,18 +30430,18 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
           if_block = null;
         }
         if (!current || dirty & /*sumRevenueIDR*/
-        8)
+        32)
           set_data(
             t15,
             /*sumRevenueIDR*/
-            ctx2[3]
+            ctx2[5]
           );
         if (!current || dirty & /*sumDonationIDR*/
-        16)
+        64)
           set_data(
             t17,
             /*sumDonationIDR*/
-            ctx2[4]
+            ctx2[6]
           );
       },
       i(local) {
@@ -30410,6 +30463,7 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
           detach(t0);
           detach(div2);
         }
+        ctx[9](null);
         destroy_component(chartrevenuedaily, detaching);
         destroy_component(inputbox);
         destroy_component(submitbutton);
@@ -30440,8 +30494,8 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, sumDonationIDR, sumRevenueIDR, revenueReports, isFiltering, yearMonth*/
-        1055) {
+        if (dirty & /*$scope, sumDonationIDR, sumRevenueIDR, revenueReports, isFiltering, yearMonth, chartRevenueReports, chartRevenueDaily*/
+        16511) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -30478,6 +30532,14 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
       /** @type {RevenueReport[]} */
       [/* revenueReports */]
     );
+    let chartRevenueReports = (
+      /** @type {ChartRevenueReport[]} */
+      [/* chartRevenueReports */]
+    );
+    let chartRevenueDaily = (
+      /** @type {ChartRevenueDaily|import('svelte').SvelteComponent} */
+      null
+    );
     let yearMonth = (
       /** @type {string} */
       new Date().toISOString().slice(0, 7)
@@ -30487,7 +30549,7 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
       false
     );
     async function getRevenueReports() {
-      $invalidate(2, isFiltering = true);
+      $invalidate(4, isFiltering = true);
       await (0, import_jsApi2.StaffRevenueReport)(
         // @ts-ignore
         { yearMonth },
@@ -30500,36 +30562,52 @@ th.r.svelte-1g4l9i6.svelte-1g4l9i6 {
             return;
           }
           $invalidate(0, revenueReports = o.revenueReports);
+          $invalidate(1, chartRevenueReports = o.chartRevenueReports);
+          chartRevenueDaily.updateData();
         }
       );
-      $invalidate(2, isFiltering = false);
+      $invalidate(4, isFiltering = false);
     }
     let sumRevenueIDR = 0;
     let sumDonationIDR = 0;
+    function chartrevenuedaily_chartRevenueReports_binding(value) {
+      chartRevenueReports = value;
+      $invalidate(1, chartRevenueReports);
+    }
+    function chartrevenuedaily_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        chartRevenueDaily = $value;
+        $invalidate(2, chartRevenueDaily);
+      });
+    }
     function inputbox_value_binding(value) {
       yearMonth = value;
-      $invalidate(1, yearMonth);
+      $invalidate(3, yearMonth);
     }
     $self.$.update = () => {
       if ($self.$.dirty & /*revenueReports, sumRevenueIDR, sumDonationIDR*/
-      25) {
+      97) {
         $: {
-          $invalidate(3, sumRevenueIDR = 0);
-          $invalidate(4, sumDonationIDR = 0);
+          $invalidate(5, sumRevenueIDR = 0);
+          $invalidate(6, sumDonationIDR = 0);
           for (let i = 0; i < (revenueReports || []).length; i++) {
-            $invalidate(3, sumRevenueIDR += revenueReports[i].revenueIDR | 0);
-            $invalidate(4, sumDonationIDR += revenueReports[i].donationIDR | 0);
+            $invalidate(5, sumRevenueIDR += revenueReports[i].revenueIDR | 0);
+            $invalidate(6, sumDonationIDR += revenueReports[i].donationIDR | 0);
           }
         }
       }
     };
     return [
       revenueReports,
+      chartRevenueReports,
+      chartRevenueDaily,
       yearMonth,
       isFiltering,
       sumRevenueIDR,
       sumDonationIDR,
       getRevenueReports,
+      chartrevenuedaily_chartRevenueReports_binding,
+      chartrevenuedaily_binding,
       inputbox_value_binding
     ];
   }

@@ -1,6 +1,7 @@
 <script>
   /** @typedef {import('./_types/masters.js').Access} Access */
   /** @typedef {import('./_types/users.js').User} User */
+  /** @typedef {import('./_types/property.js').ChartRevenueReport} ChartRevenueReport */
   /**
    * @typedef {Object} RevenueReport
    * @property {string} yearMonth
@@ -14,13 +15,16 @@
   import { formatYearMonth } from './_components/xFormatter';
   import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
-    import ChartRevenueDaily from './_partials/ChartRevenueDaily.svelte';
+  import ChartRevenueDaily from './_partials/ChartRevenueMonthly.svelte';
   import { StaffRevenueReport } from './jsApi.GEN';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
   let revenueReports = /** @type {RevenueReport[]} */ ([/* revenueReports */]);
+  let chartRevenueReports = /** @type {ChartRevenueReport[]} */ ([/* chartRevenueReports */]);
   let bookings = /** @type {Record<Number, string>} */ ({/* bookings */});
+
+  let chartRevenueDaily = /** @type {ChartRevenueDaily|import('svelte').SvelteComponent} */ (null);
 
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
   let isFiltering = /** @type {boolean} */ (false);
@@ -38,6 +42,9 @@
         }
         
         revenueReports = o.revenueReports;
+        chartRevenueReports = o.chartRevenueReports;
+
+        chartRevenueDaily.updateData();
       }
     );
     isFiltering = false;
@@ -57,7 +64,7 @@
 </script>
 
 <LayoutMain access={segments} user={user}>
-  <ChartRevenueDaily />
+  <ChartRevenueDaily bind:chartRevenueReports bind:this={chartRevenueDaily}/>
   <div class="report-container">
     <div class="actions">
       <InputBox
