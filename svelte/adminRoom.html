@@ -4867,8 +4867,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         let dt = new Date(unixSec * 1e3);
         if (typeof unixSec !== "number")
           dt = new Date(unixSec);
-        const year = dt.toLocaleDateString("en-US", { year: "2-digit", timeZone: "UTC" });
-        const month = dt.toLocaleDateString("en-US", { month: "2-digit", timeZone: "UTC" });
+        const year = dt.toLocaleDateString("id-ID", { year: "2-digit", timeZone: "UTC" });
+        const month = dt.toLocaleDateString("id-ID", { month: "2-digit", timeZone: "UTC" });
         const date = dt.getUTCDate();
         let hh = dt.getUTCHours();
         if (hh < 10)
@@ -4937,7 +4937,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
       function formatPrice2(price, currency) {
         try {
-          return new Intl.NumberFormat("en-US", {
+          return new Intl.NumberFormat("id-ID", {
             style: "currency",
             currency,
             minimumFractionDigits: 0,
@@ -4954,7 +4954,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       function formatYearMonth(ym) {
         const [year, month] = ym.split("-");
         const date = new Date(`${ym}-01`);
-        const monthName = date.toLocaleString("en-US", { month: "long" });
+        const monthName = date.toLocaleString("id-ID", { month: "long" });
         return `${monthName} ${year}`;
       }
       function localeDateFromYYYYMMDD(dateStr) {
@@ -26720,7 +26720,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         });
         roomsObj = [...roomsObj, roomObj];
       });
-      console.log("Rooms Objects: ", roomsObj);
       $invalidate(8, roomsObjJson = JSON.stringify(roomsObj, null, 2));
       $invalidate(6, isShowPopUpExportRoom = true);
     };

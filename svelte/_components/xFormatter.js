@@ -39,8 +39,8 @@ function utcDatetime(unixSec) {
   let dt = new Date(unixSec * 1000);
   if (typeof unixSec !== 'number') dt = new Date(unixSec);
 
-  const year = dt.toLocaleDateString('en-US', { year: '2-digit', timeZone: 'UTC' });
-  const month = dt.toLocaleDateString('en-US', { month: '2-digit', timeZone: 'UTC' });
+  const year = dt.toLocaleDateString('id-ID', { year: '2-digit', timeZone: 'UTC' });
+  const month = dt.toLocaleDateString('id-ID', { month: '2-digit', timeZone: 'UTC' });
   const date = dt.getUTCDate();
   let hh = dt.getUTCHours();
   if (hh < 10) hh = '0' + hh;
@@ -117,7 +117,7 @@ function loadScript(/** @type {string} */ url, /** @type {Function} */ callback)
  */
 function formatPrice(price, currency) {
   try {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('id-ID', {
       style: 'currency',
       currency: currency,
       minimumFractionDigits: 0,
@@ -146,7 +146,7 @@ function arrToArrNum(arr) {
 function formatYearMonth(ym) {
   const [year, month] = ym.split('-');
   const date = new Date(`${ym}-01`);
-  const monthName = date.toLocaleString('en-US', { month: 'long' });
+  const monthName = date.toLocaleString('id-ID', { month: 'long' });
   return `${monthName} ${year}`;
 }
 

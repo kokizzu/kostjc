@@ -10,13 +10,11 @@
    * @property {number} donationIDR
    */
 
-  import InputBox from './_components/InputBox.svelte';
-    import MonthShifter from './_components/MonthShifter.svelte';
-  import SubmitButton from './_components/SubmitButton.svelte';
+  import MonthShifter from './_components/MonthShifter.svelte';
   import { formatYearMonth } from './_components/xFormatter';
   import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
-  import ChartRevenueDaily from './_partials/ChartRevenueMonthly.svelte';
+  import ChartRevenueMonthly from './_partials/ChartRevenueMonthly.svelte';
   import { StaffRevenueReport } from './jsApi.GEN';
 
   let user      = /** @type {User} */ ({/* user */});
@@ -25,13 +23,14 @@
   let chartRevenueReports = /** @type {ChartRevenueReport[]} */ ([/* chartRevenueReports */]);
   let bookings = /** @type {Record<Number, string>} */ ({/* bookings */});
 
-  let chartRevenueDaily = /** @type {ChartRevenueDaily|import('svelte').SvelteComponent} */ (null);
+  let chartRevenueMonthly = /** @type {ChartRevenueMonthly|import('svelte').SvelteComponent} */ (null);
 
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
   let isFiltering = /** @type {boolean} */ (false);
 
   async function getRevenueReports() {
     isFiltering = true;
+    console.log('YearMonth:', yearMonth);
     await StaffRevenueReport(// @ts-ignore
       { yearMonth }, /** @type {import('./jsApi.GEN').StaffRevenueReportCallback} */
       /** @returns {Promise<void>} */
@@ -45,7 +44,7 @@
         revenueReports = o.revenueReports;
         chartRevenueReports = o.chartRevenueReports;
 
-        chartRevenueDaily.updateData();
+        chartRevenueMonthly.updateData(chartRevenueReports);
       }
     );
     isFiltering = false;
@@ -72,9 +71,9 @@
         OnChanges={getRevenueReports}
       />
     </div>
-    <ChartRevenueDaily
+    <ChartRevenueMonthly
       bind:chartRevenueReports
-      bind:this={chartRevenueDaily}
+      bind:this={chartRevenueMonthly}
     />
     <div class="table-container">
       <table>

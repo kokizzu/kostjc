@@ -22,62 +22,64 @@
         datasets: [{
           label: 'Revenue',
           data: (chartRevenueReports || []).map((/** @type {ChartRevenueReport} */ i) => Number(i.revenueIDR)),
-          borderColor: '#f97316',
-          backgroundColor: '#f9731630',
+          borderColor: '#2563eb',
+          backgroundColor: '#2563eb60',
           pointRadius: 0,
-          tension: 0.1
+          tension: 0.1,
+          fill: true,
+          pointStyle: 'circle',
+          pointBackgroundColor: '#2563eb',
+          pointBorderWidth: 2,
+          pointHitRadius: 10
         }]
       },
       options: {
         plugins: {
           legend: {
             display: false
+          },
+          tooltip: {
+            enabled: true
           }
         },
         maintainAspectRatio: false,
         responsive: true,
         scales: {
           y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 10000000,
-              callback: function(value) {
-                if (Number(value) >= 1000000000) return Number(value) / 1000000000 + 'B';
-                if (Number(value) >= 1000000) return Number(value) / 1000000 + 'M';
-                if (Number(value) >= 1000) return Number(value) / 1000 + 'K';
-                return Number(value);
-              }
-            }
+            beginAtZero: true
           }
         }
       }
     });
   }, 400);
 
-  export function updateData() {
-    if (chart) {
-      chart.data.labels = (chartRevenueReports || []).map((/** @type {ChartRevenueReport} */ i) => {
-        const dt = /** @type {Date} */ (new Date(i.date));
-        return dt.toLocaleDateString('en-US', {
-          month: 'short',
-          day: '2-digit'
-        });
-      });
-      chart.data.datasets[0].data = (chartRevenueReports || []).map((/** @type {ChartRevenueReport} */ i) => Number(i.revenueIDR));
-      chart.data.datasets[0].label = 'Revenue';
-      chart.options.scales.y = {
-        ticks: {
-          stepSize: 10000000,
-          callback: function(value) {
-            if (Number(value) >= 1000000000) return Number(value) / 1000000000 + 'B';
-            if (Number(value) >= 1000000) return Number(value) / 1000000 + 'M';
-            if (Number(value) >= 1000) return Number(value) / 1000 + 'K';
-            return Number(value);
-          }
-        }
-      };
-      chart.update();
+  export function updateData(/** @type {ChartRevenueReport[]} */ data) {
+    if (!chart) {
+      return
     }
+
+    chart.data.labels = (data || []).map((/** @type {ChartRevenueReport} */ i) => {
+      const dt = /** @type {Date} */ (new Date(i.date));
+      return dt.toLocaleDateString('en-US', {
+        month: 'short',
+        day: '2-digit'
+      });
+    }),
+    chart.data.datasets = [{
+      label: 'Revenue',
+      data: (data || []).map((/** @type {ChartRevenueReport} */ i) => Number(i.revenueIDR)),
+      borderColor: '#2563eb',
+      backgroundColor: '#2563eb60',
+      pointRadius: 0,
+      tension: 0.1,
+      fill: true,
+      pointStyle: 'circle',
+      pointBackgroundColor: '#2563eb',
+      pointBorderWidth: 2,
+      pointHitRadius: 10
+    }];
+    
+    chart.update();
   }
 </script>
 
