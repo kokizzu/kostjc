@@ -1431,6 +1431,8 @@ type DoubleBookingReport struct {
 	Tenants  []DoubleBookingReportData `json:"tenants"`
 }
 
+// TODO:
+// query overlap booking dateEnd and dateStart
 func (b *Bookings) FindDoubleBookingReports() (out []DoubleBookingReport) {
 	const comment = `-- Bookings) FindDoubleBookingReports`
 

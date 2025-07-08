@@ -17,10 +17,10 @@
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
-  let logs    = /** @type {any[][]} */([/* logs */]);
+  let logs        = /** @type {any[][]} */([/* logs */]);
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
-  let users     = /** @type {Record<number, string>} */({/* users */});
+  let users       = /** @type {Record<number, string>} */({/* users */});
 
   async function refreshTableView(/** @type PagerIn */ pagerIn) {
     const i = {
