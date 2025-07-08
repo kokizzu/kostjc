@@ -11,6 +11,7 @@
    */
 
   import InputBox from './_components/InputBox.svelte';
+    import MonthShifter from './_components/MonthShifter.svelte';
   import SubmitButton from './_components/SubmitButton.svelte';
   import { formatYearMonth } from './_components/xFormatter';
   import { notifier } from './_components/xNotifier';
@@ -64,23 +65,17 @@
 </script>
 
 <LayoutMain access={segments} user={user}>
-  <ChartRevenueDaily bind:chartRevenueReports bind:this={chartRevenueDaily}/>
   <div class="report-container">
     <div class="actions">
-      <InputBox
-        className="year-month"
-        id="yearMonth"
-        type="month"
-        placeholder="Select Month"
-        label=""
-        bind:value={yearMonth}
-      />
-      <SubmitButton
-        label="Filter"
-        on:click={getRevenueReports}
-        isSubmitted={isFiltering}
+      <MonthShifter
+        bind:yearMonth
+        OnChanges={getRevenueReports}
       />
     </div>
+    <ChartRevenueDaily
+      bind:chartRevenueReports
+      bind:this={chartRevenueDaily}
+    />
     <div class="table-container">
       <table>
         <thead>
@@ -132,7 +127,7 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   :global(.report-container .actions .year-month) {

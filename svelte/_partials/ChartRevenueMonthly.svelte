@@ -87,11 +87,13 @@
 
 <style>
   .chart {
-    height: 92%;
+    height: 400px;
     width: 100%;
     display: flex;
     width: 100%;
-    padding: 0 16px 45px 16px;
+    padding: 10px;
+    border: 1px solid var(--gray-003);
+    border-radius: 8px;
   }
 
   .chart canvas {
