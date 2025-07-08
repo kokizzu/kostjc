@@ -898,6 +898,46 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.StaffSalesAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminSaleIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSaleAction)
+		if err != nil {
+			return err
+		}
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		menuOrm := rqCafe.NewMenus(d.PropOltp)
+		menuChoices := menuOrm.FindMenusSalesChoices()
+
+		// saleOrm := rqCafe.NewSales(d.PropOltp)
+		// sales := saleOrm.FindAll()
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+
+		out := d.AdminSale(&in)
+
+		if out.Meta == nil {
+			return ctx.Status(500).SendString("Internal Server Error: sales output is nil")
+		}
+
+		return views.RenderStaffSales(ctx, M.SX{
+			`title`:       `KostJC | Sales Report`,
+			`user`:        user,
+			`segments`:    segments,
+			`sale`:        out.Sale,
+			`sales`:       out.Sales,
+			`fields`:      out.Meta.Fields,
+			`pager`:       out.Pager,
+			`menuChoices`: menuChoices,
+		})
+	})
+
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {
 		return views.RenderDebug(ctx, M.SX{})
 	})

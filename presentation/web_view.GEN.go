@@ -38,6 +38,7 @@ var viewList = map[string]string{
 	`StaffMissingDataReport`:         `../svelte/staffMissingDataReport.html`,          // ../svelte/staffMissingDataReport.svelte
 	`StaffOccupancyReport`:           `../svelte/staffOccupancyReport.html`,            // ../svelte/staffOccupancyReport.svelte
 	`StaffRevenueReport`:             `../svelte/staffRevenueReport.html`,              // ../svelte/staffRevenueReport.svelte
+	`StaffSales`:                     `../svelte/staffSales.html`,                      // ../svelte/staffSales.svelte
 	`StaffWifiDeviceReport`:          `../svelte/staffWifiDeviceReport.html`,           // ../svelte/staffWifiDeviceReport.svelte
 	`User`:                           `../svelte/user.html`,                            // ../svelte/user.svelte
 }
@@ -190,6 +191,11 @@ func (v *Views) RenderStaffOccupancyReport(c *fiber.Ctx, m M.SX) error {
 func (v *Views) RenderStaffRevenueReport(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`StaffRevenueReport`].Str(m))
+}
+
+func (v *Views) RenderStaffSales(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`StaffSales`].Str(m))
 }
 
 func (v *Views) RenderStaffWifiDeviceReport(c *fiber.Ctx, m M.SX) error {

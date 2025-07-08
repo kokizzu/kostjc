@@ -42,3 +42,25 @@ module.exports = {};
  * @property {string} restoredBy
  */
 module.exports = {};
+
+
+/**
+ * @typedef {Object} Payment
+ * @property {number} id
+ * @property {string} customer
+ * @property {number} amount
+ * @property {"Cash" | "QRIS" | "Transfer"} method
+ * @property {string} time
+ */
+module.exports = {};
+
+
+/**
+ * @typedef {Object} UnpaidItem
+ * @property {number} id
+ * @property {string} customer
+ * @property {string} item
+ * @property {number} amount
+ * @property {string} date
+ */
+module.exports = {};
