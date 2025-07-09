@@ -190,6 +190,22 @@ var AdminTenantsMeta = zCrud.Meta{
 			ReadOnly:    false,
 		},
 		{
+			Name:        mAuth.AddedToWhatsapp,
+			Label:       `Ditambahkan ke Whatsapp`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeComboboxArr,
+			Description: ``,
+			ReadOnly:    false,
+		},
+		{
+			Name:        mAuth.AddedToTelegram,
+			Label:       `Ditambahkan ke Telegram`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeComboboxArr,
+			Description: ``,
+			ReadOnly:    false,
+		},
+		{
 			Name:      mAuth.CreatedAt,
 			Label:     `Created At`,
 			DataType:  zCrud.DataTypeInt,

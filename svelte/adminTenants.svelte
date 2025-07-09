@@ -49,6 +49,11 @@
     'Konghucu'
   ];
 
+  const AddedToStatus = [
+  'Belum',
+  'Sudah'
+  ];
+
   onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
@@ -145,7 +150,9 @@
       ktpOccupation: payloads[14],
       ktpCitizenship: payloads[15],
       telegramUsername: payloads[16],
-      whatsappNumber: payloads[17]
+      whatsappNumber: payloads[17],
+     addedToWhatsapp: payloads[18],
+      addedToTelegram: payloads[19]
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -192,7 +199,9 @@
       ktpOccupation: payloads[14],
       ktpCitizenship: payloads[15],
       telegramUsername: payloads[16],
-      whatsappNumber: payloads[17]
+      whatsappNumber: payloads[17],
+      addedToWhatsapp: payloads[18],
+      addedToTelegram: payloads[19]
     });
     const i = /** @type {any} */ ({
       pager,
@@ -235,7 +244,9 @@
     REFS={{
       'ktpGender': KtpGenders,
       'ktpMaritalStatus': KtpMaritalStatus,
-      'ktpReligion': KtpReligions
+      'ktpReligion': KtpReligions,
+      'addedToTelegram': AddedToStatus,
+      'addedToWhatsapp': AddedToStatus
     }}
     bind:isSubmitted={isSubmitTenant}
     OnSubmit={OnAddTenant}
@@ -254,7 +265,9 @@
       REFS={{
         'ktpGender': KtpGenders,
         'ktpMaritalStatus': KtpMaritalStatus,
-        'ktpReligion': KtpReligions
+        'ktpReligion': KtpReligions,
+        'addedToTelegram': AddedToStatus,
+        'addedToWhatsapp': AddedToStatus
       }}
       COL_WIDTHS={{
         'tenantName': 250,

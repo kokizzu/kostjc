@@ -278,6 +278,8 @@ func (t *TenantsMutator) DoDeletePermanentById() bool { //nolint:dupl false posi
 //		A.X{`=`, 22, t.DeletedBy},
 //		A.X{`=`, 23, t.RestoredBy},
 //		A.X{`=`, 24, t.KtpOccupation},
+//		A.X{`=`, 25, t.AddedToWhatsapp},
+//		A.X{`=`, 26, t.AddedToTelegram},
 //	})
 //	return !L.IsError(err, `Tenants.DoUpsert failed: `+t.SpaceName()+ `\n%#v`, arr)
 // }
@@ -606,6 +608,28 @@ func (t *TenantsMutator) SetKtpOccupation(val string) bool { //nolint:dupl false
 	return false
 }
 
+// SetAddedToWhatsapp create mutations, should not duplicate
+func (t *TenantsMutator) SetAddedToWhatsapp(val string) bool { //nolint:dupl false positive
+	if val != t.AddedToWhatsapp {
+		t.mutations = append(t.mutations, A.X{`=`, 25, val})
+		t.logs = append(t.logs, A.X{`addedToWhatsapp`, t.AddedToWhatsapp, val})
+		t.AddedToWhatsapp = val
+		return true
+	}
+	return false
+}
+
+// SetAddedToTelegram create mutations, should not duplicate
+func (t *TenantsMutator) SetAddedToTelegram(val string) bool { //nolint:dupl false positive
+	if val != t.AddedToTelegram {
+		t.mutations = append(t.mutations, A.X{`=`, 26, val})
+		t.logs = append(t.logs, A.X{`addedToTelegram`, t.AddedToTelegram, val})
+		t.AddedToTelegram = val
+		return true
+	}
+	return false
+}
+
 // SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
 func (t *TenantsMutator) SetAll(from rqAuth.Tenants, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
 	if excludeMap == nil { // list of fields to exclude
@@ -712,6 +736,14 @@ func (t *TenantsMutator) SetAll(from rqAuth.Tenants, excludeMap, forceMap M.SB) 
 	}
 	if !excludeMap[`ktpOccupation`] && (forceMap[`ktpOccupation`] || from.KtpOccupation != ``) {
 		t.KtpOccupation = S.Trim(from.KtpOccupation)
+		changed = true
+	}
+	if !excludeMap[`addedToWhatsapp`] && (forceMap[`addedToWhatsapp`] || from.AddedToWhatsapp != ``) {
+		t.AddedToWhatsapp = S.Trim(from.AddedToWhatsapp)
+		changed = true
+	}
+	if !excludeMap[`addedToTelegram`] && (forceMap[`addedToTelegram`] || from.AddedToTelegram != ``) {
+		t.AddedToTelegram = S.Trim(from.AddedToTelegram)
 		changed = true
 	}
 	return
