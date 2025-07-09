@@ -1017,6 +1017,8 @@ type RoomMissingTenantData struct {
 	TenantName             string `json:"tenantName"`
 	TenantTelegramUsername string `json:"tenantTelegramUsername"`
 	TenantWhatsappNumber   string `json:"tenantWhatsappNumber"`
+	TenantAddedToWhatsapp  string `json:"tenantAddedToWhatsapp"`
+	TenantAddedToTelegram  string `json:"tenantAddedToTelegram"`
 	LastUseAt              string `json:"lastUseAt"`
 }
 
@@ -1031,6 +1033,8 @@ SELECT
   "tenants"."tenantName",
   "tenants"."telegramUsername",
   "tenants"."whatsappNumber",
+  "tenants"."addedToWhatsapp",
+  "tenants"."addedToTelegram",
 	"rooms"."lastUseAt"
 FROM "rooms"
 LEFT JOIN "tenants"
@@ -1039,7 +1043,7 @@ WHERE "rooms"."deletedAt" = 0
 ORDER BY "rooms"."updatedAt"`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) != 7 {
+		if len(row) != 9 {
 			return
 		}
 		out = append(out, RoomMissingTenantData{
@@ -1049,7 +1053,9 @@ ORDER BY "rooms"."updatedAt"`
 			TenantName:             X.ToS(row[3]),
 			TenantTelegramUsername: X.ToS(row[4]),
 			TenantWhatsappNumber:   X.ToS(row[5]),
-			LastUseAt:              X.ToS(row[6]),
+			TenantAddedToWhatsapp:  X.ToS(row[6]),
+			TenantAddedToTelegram:  X.ToS(row[7]),
+			LastUseAt:              X.ToS(row[8]),
 		})
 	})
 

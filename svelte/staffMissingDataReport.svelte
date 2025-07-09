@@ -68,8 +68,8 @@
       RefreshData();
     });
   }
-  
-  /** @typedef {'showMissingAny' | 'showOnlyMissingTelegram' | 'showOnlyMissingWhatsapp' | 'showOnlyCompleted' | 'showAll'} FilterValues */
+
+  /** @typedef {'showMissingAny' | 'showOnlyMissingTelegram' | 'showOnlyMissingWhatsapp' | 'showOnlyCompleted' | 'showAll' | 'showNotAddedToWhatsapp' | 'showNotAddedToTelegram'} FilterValues */
   /** @typedef {import('./_types/masters.js').RadioOption<FilterValues>} RadioOption<FilterValues> */
 
   let selectedFilter = /** @type {FilterValues} */ ('showAll');
@@ -104,10 +104,24 @@
       name: filterName,
       value: 'showAll',
       label: 'Show All'
+    },
+    {
+       id: 'showNotAddedToWhatsapp',
+      name: filterName,
+      value: 'showNotAddedToWhatsapp',
+      label: 'Show Not Added To Whatsapp'
+    },
+    {
+      id: 'showNotAddedToTelegram',
+      name: filterName,
+      value: 'showNotAddedToTelegram',
+      label: 'Show Not Added To Telegram'
     }
   ]);
 
   let missingDataFiltered = /** @type {MissingTenantData[]} */ ([]);
+
+  console.log('missingDataFiltered dari depan', missingDataFiltered);
 
   function restrucureMissingData() {
     missingDataFiltered = [];
@@ -138,6 +152,18 @@
         }
         case 'showOnlyMissingWhatsapp': {
           if (!dt.tenantWhatsappNumber) {
+            missingDataFiltered = [...missingDataFiltered, dt];
+          }
+          break;
+        }
+        case 'showNotAddedToWhatsapp': {
+          if (dt.tenantAddedToWhatsapp === "Belum") {
+            missingDataFiltered = [...missingDataFiltered, dt];
+          }
+          break;
+        }
+         case 'showNotAddedToTelegram': {
+          if (dt.tenantAddedToTelegram === "Belum") {
             missingDataFiltered = [...missingDataFiltered, dt];
           }
           break;
@@ -180,6 +206,8 @@
             <th style="min-width: 170px;">Tenant Name</th>
             <th>Telegram</th>
             <th style="min-width: 180px;">WhatsApp</th>
+            <th>Added To WhatsApp</th>
+            <th>Added To Telegram</th>
             <th style="min-width: 140px;">Last Use At</th>
           </tr>
         </thead>
@@ -205,6 +233,8 @@
               <td>{data.tenantName || '--'}</td>
               <td>{data.tenantTelegramUsername || '--'}</td>
               <td>{data.tenantWhatsappNumber || '--'}</td>
+              <td>{data.tenantAddedToWhatsapp || '--'}</td>
+              <td>{data.tenantAddedToTelegram || '--'}</td>
               <td>{data.lastUseAt || '--'}</td>
             </tr>
           {/each}
