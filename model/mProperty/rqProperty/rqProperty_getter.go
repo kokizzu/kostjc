@@ -1449,9 +1449,7 @@ WITH RECURSIVE overlapping_groups AS (
   FROM "bookings" b
   LEFT JOIN "tenants" t ON b."tenantId" = t."id"
   LEFT JOIN "rooms" r ON b."roomId" = r."id"
-	WHERE
-		b."dateEnd" >= ` + S.Z(dtNow) + `
-		AND b."deletedAt" = 0
+	WHERE b."deletedAt" = 0
 
   UNION ALL
 
@@ -1473,7 +1471,7 @@ WITH RECURSIVE overlapping_groups AS (
     AND b2."dateStart" <= og.date_end
     AND b2."dateEnd" >= og.date_start
     AND b2."id" > og.booking_id
-	WHERE b2."dateEnd" >= ` + S.Z(dtNow) + `
+	WHERE b2."deletedAt" = 0
 )
 
 SELECT DISTINCT
@@ -1484,6 +1482,7 @@ SELECT DISTINCT
   date_start,
   date_end
 FROM overlapping_groups
+WHERE date_end >= ` + S.Z(dtNow) + `
 ORDER BY room_name`
 
 	rawResults := []DoubleBookingReportData{}
