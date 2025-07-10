@@ -1449,7 +1449,9 @@ WITH RECURSIVE overlapping_groups AS (
   FROM "bookings" b
   LEFT JOIN "tenants" t ON b."tenantId" = t."id"
   LEFT JOIN "rooms" r ON b."roomId" = r."id"
-	WHERE b."dateEnd" >= ` + S.Z(dtNow) + `
+	WHERE
+		b."dateEnd" >= ` + S.Z(dtNow) + `
+		AND b."deletedAt" = 0
 
   UNION ALL
 
@@ -1521,10 +1523,30 @@ func groupDoubleBookingByRoom(data []DoubleBookingReportData) []DoubleBookingRep
 	for _, group := range groupMap {
 		result = append(result, *group)
 	}
+	groupMap = nil
 
-	var finalResult = []DoubleBookingReport{}
+	var filteredResult = []DoubleBookingReport{}
 	for _, report := range result {
 		if len(report.Tenants) > 1 {
+			filteredResult = append(filteredResult, report)
+		}
+	}
+	result = nil
+
+	var finalResult = []DoubleBookingReport{}
+	for _, report := range filteredResult {
+		tenantCount := make(map[uint64]int)
+		duplicateFound := false
+
+		for _, tenant := range report.Tenants {
+			tenantCount[tenant.TenantId]++
+			if tenantCount[tenant.TenantId] > 1 {
+				duplicateFound = true
+				break
+			}
+		}
+
+		if !duplicateFound {
 			finalResult = append(finalResult, report)
 		}
 	}
