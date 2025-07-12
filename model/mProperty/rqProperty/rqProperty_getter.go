@@ -1237,7 +1237,7 @@ LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
 LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
 LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
 WHERE "bookings"."deletedAt" = 0
-	OR "payments"."deletedAt" = 0
+	AND "payments"."deletedAt" = 0
 	AND "rooms"."deletedAt" = 0
 	AND "tenants"."deletedAt" = 0
 GROUP BY
