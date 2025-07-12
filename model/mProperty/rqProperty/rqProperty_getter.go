@@ -1227,33 +1227,34 @@ func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
 
 	queryRows := comment + `
 SELECT
-	"tenants"."tenantName",
-	"rooms"."roomName",
-	COALESCE(SUM("payments"."paidIDR"), 0) AS "totalPaidIDR",
-	"bookings"."totalPriceIDR",
-	"bookings"."dateStart"
-FROM "bookings"
-LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
-LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
-LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
-WHERE "bookings"."deletedAt" = 0
-	AND "payments"."deletedAt" = 0
-	AND "rooms"."deletedAt" = 0
-	AND "tenants"."deletedAt" = 0
-GROUP BY
-	"rooms"."roomName",
-	"tenants"."tenantName",
-	"bookings"."totalPriceIDR"
-HAVING COALESCE(SUM("payments"."paidIDR"), 0) <> "bookings"."totalPriceIDR"
-ORDER BY "rooms"."roomName" ASC`
+	t."id" AS "tenantId",
+	t."tenantName",
+	r."roomName",
+	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
+	b."totalPriceIDR",
+	b."dateStart"
+FROM "bookings" b
+LEFT JOIN "tenants" t
+	ON b."tenantId" = t."id"
+LEFT JOIN "rooms" r
+	ON b."roomId" = r."id"
+LEFT JOIN "payments" p
+	ON b."id" = p."bookingId"
+WHERE b."deletedAt" = 0
+	AND p."deletedAt" = 0
+	AND r."deletedAt" = 0
+	AND t."deletedAt" = 0
+GROUP BY "tenantId"
+HAVING totalPaidIDR <> b."totalPriceIDR"
+ORDER BY t."tenantName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 5 {
-			tenantName := X.ToS(row[0])
-			roomName := X.ToS(row[1])
-			totalPaid := X.ToI(row[2])
-			totalPrice := X.ToI(row[3])
-			dateStart := X.ToS(row[4])
+		if len(row) == 6 {
+			tenantName := X.ToS(row[1])
+			roomName := X.ToS(row[2])
+			totalPaid := X.ToI(row[3])
+			totalPrice := X.ToI(row[4])
+			dateStart := X.ToS(row[5])
 			out = append(out, UnpaidBookingTenant{
 				TenantName: tenantName,
 				RoomName:   roomName,
