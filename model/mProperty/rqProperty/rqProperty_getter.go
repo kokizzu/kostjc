@@ -1233,15 +1233,6 @@ SELECT
 	"bookings"."totalPriceIDR",
 	"bookings"."dateStart"
 FROM "bookings"
-JOIN (
-	SELECT
-		"bookings"."roomId" AS "roomId",
-		MAX("bookings"."dateEnd") AS "maxBookingDate"
-	FROM "bookings"
-	GROUP BY "bookings"."roomId"
-) "latest"
-	ON "bookings"."roomId" = "latest"."roomId"
-		AND "bookings"."dateEnd" = "latest"."maxBookingDate"
 LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
 LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
 LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
