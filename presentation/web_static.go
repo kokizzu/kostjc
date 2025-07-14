@@ -1,7 +1,6 @@
 package presentation
 
 import (
-	"sort"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -29,10 +28,6 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		booking := rqProperty.NewBookings(d.PropOltp)
 		unpaidBookingTenants := booking.FindUnpaidBookingTenants()
 		doubleBookingReports := booking.FindDoubleBookingReports()
-
-		sort.Slice(unpaidBookingTenants, func(i, j int) bool {
-			return unpaidBookingTenants[i].RoomName < unpaidBookingTenants[j].RoomName
-		})
 
 		return views.RenderIndex(ctx, M.SX{
 			`title`:                  conf.PROJECT_NAME + ` | Home`,
