@@ -2,10 +2,11 @@ package rqProperty
 
 import (
 	"fmt"
-	"kostjc/model/zCrud"
 	"sort"
 	"strconv"
 	"time"
+
+	"kostjc/model/zCrud"
 
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/I"
@@ -213,19 +214,19 @@ LIMIT 1`
 	queryRows := comment + `
 SELECT
 	"bookings"."id",
-	"bookings"."roomId",
-	COALESCE(SUM("payments"."paidIDR"), 0) AS "totalPaidIDR",
-	"bookings"."dateStart",
-	"bookings"."dateEnd",
-	"bookings"."tenantId",
-	"bookings"."basePriceIDR",
-	"bookings"."facilitiesObj",
-	"bookings"."totalPriceIDR",
-	"bookings"."paidAt",
-	"bookings"."extraTenants",
-	"bookings"."createdAt",
-	"bookings"."updatedAt",
-	"bookings"."deletedAt"
+	"bookings"."roomid",
+	COALESCE(SUM("payments"."paididr"), 0) AS "totalpaididr",
+	"bookings"."datestart",
+	"bookings"."dateend",
+	"bookings"."tenantid",
+	"bookings"."basepriceidr",
+	"bookings"."facilitiesobj",
+	"bookings"."totalpriceidr",
+	"bookings"."paidat",
+	"bookings"."extratenants",
+	"bookings"."createdat",
+	"bookings"."updatedat",
+	"bookings"."deletedat"
 FROM ` + b.SqlTableName() + `
 LEFT JOIN "payments" ON "payments"."bookingId" = "bookings"."id"
 ` + whereAndSql + `
@@ -395,13 +396,13 @@ func (b *Bookings) FindBookingChoices() map[uint64]string {
 	queryRows := comment + `
 SELECT
 	"bookings"."id",
-	"bookings"."totalPriceIDR",
-	COALESCE("rooms"."roomName", ''),
-	"bookings"."dateStart",
-	COALESCE("tenants"."tenantName", '')
+	"bookings"."totalpriceidr",
+	COALESCE("rooms"."roomname", ''),
+	"bookings"."datestart",
+	COALESCE("tenants"."tenantname", '')
 FROM "bookings"
-LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
-LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
+LEFT JOIN "tenants" ON "bookings"."tenantid" = "tenants"."id"
+LEFT JOIN "rooms" ON "bookings"."roomid" = "rooms"."id"
 ORDER BY "bookings"."id" ASC`
 
 	out := make(map[uint64]string)
@@ -812,29 +813,29 @@ func (b *Bookings) FindBookingsPerQuartal(monthStart, monthEnd string) (out []Bo
 	queryRows := comment + `
 SELECT 
 	"bookings"."id" AS "id",
-	"rooms"."id" AS "roomId",
-  "rooms"."roomName",
-	"bookings"."tenantId",
-  COALESCE("tenants"."tenantName", '') AS "tenantName",
-  COALESCE("bookings"."dateStart", '') AS "dateStart",
-  COALESCE("bookings"."dateEnd", '') AS "dateEnd",
+	"rooms"."id" AS "roomid",
+  "rooms"."roomname",
+	"bookings"."tenantid",
+  COALESCE("tenants"."tenantname", '') AS "tenantname",
+  COALESCE("bookings"."datestart", '') AS "datestart",
+  COALESCE("bookings"."dateend", '') AS "dateend",
   COALESCE(
 		SUM(CASE
-			WHEN "payments"."deletedAt" = 0
-			THEN "payments"."paidIDR"
+			WHEN "payments"."deletedat" = 0
+			THEN "payments"."paididr"
 			ELSE 0 END
 		),
-	0) AS "totalPaidIDR",
-  "bookings"."totalPriceIDR",
-	"bookings"."deletedAt",
-	"bookings"."extraTenants"
+	0) AS "totalpaididr",
+  "bookings"."totalpriceidr",
+	"bookings"."deletedat",
+	"bookings"."extratenants"
 FROM "bookings"
-LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
-LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
-LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
+LEFT JOIN "tenants" ON "bookings"."tenantid" = "tenants"."id"
+LEFT JOIN "rooms" ON "bookings"."roomid" = "rooms"."id"
+LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingid"
 WHERE
 	(
-    "bookings"."dateStart" BETWEEN ` + S.Z(monthStart) + ` AND ` + S.Z(monthEnd) + `
+    "bookings"."datestart" BETWEEN ` + S.Z(monthStart) + ` AND ` + S.Z(monthEnd) + `
     OR
     "bookings"."dateEnd" BETWEEN ` + S.Z(monthStart) + ` AND ` + S.Z(monthEnd) + `
   )
@@ -1026,17 +1027,17 @@ func (r *Rooms) FindMissingTenantsData() (out []RoomMissingTenantData) {
 	queryRows := comment + `
 SELECT 
   "rooms"."id",
-  "rooms"."roomName",
+  "rooms"."roomname",
   "tenants"."id",
-  "tenants"."tenantName",
-  "tenants"."telegramUsername",
-  "tenants"."whatsappNumber",
-	"rooms"."lastUseAt"
+  "tenants"."tenantname",
+  "tenants"."telegramusername",
+  "tenants"."whatsappnumber",
+	"rooms"."lastuseat"
 FROM "rooms"
 LEFT JOIN "tenants"
-	ON "rooms"."currentTenantId" = "tenants"."id"
-WHERE "rooms"."deletedAt" = 0
-ORDER BY "rooms"."updatedAt"`
+	ON "rooms"."currenttenantid" = "tenants"."id"
+WHERE "rooms"."deletedat" = 0
+ORDER BY "rooms"."updatedat"`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) != 7 {
@@ -1070,12 +1071,12 @@ func (r *Rooms) FindTenantsNearbyBirthdays() []TenantNearbyBirthday {
 	queryRows := comment + `
 SELECT
 	"tenants"."id",
-  "tenants"."tenantName",
-  "tenants"."ktpDateBirth",
-  "rooms"."roomName"
+  "tenants"."tenantname",
+  "tenants"."ktpdatebirth",
+  "rooms"."roomname"
 FROM "rooms"
-LEFT JOIN "tenants" ON "rooms"."currentTenantId" = "tenants"."id"
-WHERE "rooms"."deletedAt" = 0`
+LEFT JOIN "tenants" ON "rooms"."currenttenantid" = "tenants"."id"
+WHERE "rooms"."deletedat" = 0`
 
 	mapTenants := make(map[any]bool)
 	resp := []TenantNearbyBirthday{}
@@ -1227,26 +1228,24 @@ func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
 
 	queryRows := comment + `
 SELECT
-	t."id" AS "tenantId",
-	t."tenantName",
-	r."roomName",
-	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
-	b."totalPriceIDR",
-	b."dateStart"
+	t."id" AS "tenantid",
+	t."tenantname",
+	r."roomname",
+	COALESCE(SUM(p."paididr"), 0) AS totalPaidIDR,
+	b."totalpriceidr",
+	b."datestart"
 FROM "bookings" b
 LEFT JOIN "tenants" t
-	ON b."tenantId" = t."id"
+	ON b."tenantid" = t."id"
 LEFT JOIN "rooms" r
-	ON b."roomId" = r."id"
+	ON b."roomid" = r."id"
 LEFT JOIN "payments" p
-	ON b."id" = p."bookingId"
-WHERE b."deletedAt" = 0
-	AND p."deletedAt" = 0
-	AND r."deletedAt" = 0
-	AND t."deletedAt" = 0
-GROUP BY "tenantId"
-HAVING totalPaidIDR <> b."totalPriceIDR"
-ORDER BY t."tenantName" ASC`
+	ON b."id" = p."bookingid"
+	AND p."deletedat" = 0
+WHERE b."deletedat" = 0
+GROUP BY b."id"
+HAVING totalPaidIDR <> b."totalpriceidr"
+ORDER BY t."tenantname" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) == 6 {
@@ -1284,23 +1283,23 @@ func (b *Bookings) FindRevenueReports(yearMonth string) (out []RevenueReport) {
 
 	query := comment + `
 SELECT
-	SUBSTR("bookings"."dateStart", 1, 7) AS "yearMonth",
-	"bookings"."id" AS "bookingId",
+	SUBSTR("bookings"."datestart", 1, 7) AS "yearmonth",
+	"bookings"."id" AS "bookingid",
 	SUM(CASE 
-		WHEN "paymentMethod" != 'Donation'
-			THEN "payments"."paidIDR"
+		WHEN "paymentmethod" != 'Donation'
+			THEN "payments"."paididr"
 		ELSE 0
-	END) AS "revenueIDR",
+	END) AS "revenueidr",
 	SUM(CASE 
-		WHEN "paymentMethod" = 'Donation'
-			THEN "payments"."paidIDR"
+		WHEN "paymentmethod" = 'Donation'
+			THEN "payments"."paididr"
 		ELSE 0
-	END) AS "donationIDR"
+	END) AS "donationidr"
 FROM "bookings"
-LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
+LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingid"
 WHERE
-	"bookings"."deletedAt" = 0
-	AND SUBSTR("bookings"."dateStart", 1, 7) = '` + yearMonth + `'
+	"bookings"."deletedat" = 0
+	AND SUBSTR("bookings"."datestart", 1, 7) = '` + yearMonth + `'
 GROUP BY "bookings"."id"`
 
 	b.Adapter.QuerySql(query, func(row []any) {
@@ -1376,14 +1375,14 @@ func (w *WifiDevices) FindWifiDeviceReports(yearMonth string) (out []WifiDeviceR
 
 	query := comment + `
 SELECT
-	"tenantId",
-	"roomId",
-	"startAt",
-	"endAt",
-	"paidAt",
-	"deletedAt"
-FROM "wifiDevices"
-WHERE SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
+	"tenantid",
+	"roomid",
+	"startat",
+	"endat",
+	"paidat",
+	"deletedat"
+FROM "wifidevices"
+WHERE SUBSTR("endat", 1, 7) = '` + yearMonth + `'
 `
 
 	w.Adapter.QuerySql(query, func(row []any) {
@@ -1678,16 +1677,16 @@ func (p *Payments) GetChartRevenueReports(yearMonth string) (out []ChartRevenueR
 
 	query := comment + `
 SELECT
-	"paymentAt",
+	"paymentat",
 	SUM(CASE 
-		WHEN "paymentMethod" != 'Donation'
-			THEN "paidIDR"
+		WHEN "paymentmethod" != 'Donation'
+			THEN "paididr"
 		ELSE 0
 	END)
 FROM "payments"
 WHERE
-	"deletedAt" = 0
-	AND "paymentAt" >= ` + S.Z(startDate) + `
+	"deletedat" = 0
+	AND "paymentat" >= ` + S.Z(startDate) + `
 	AND "paymentAt" <= ` + S.Z(endDate) + `
 GROUP BY "paymentAt"`
 
