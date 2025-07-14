@@ -2,10 +2,11 @@ package rqProperty
 
 import (
 	"fmt"
-	"kostjc/model/zCrud"
 	"sort"
 	"strconv"
 	"time"
+
+	"kostjc/model/zCrud"
 
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/I"
@@ -1227,7 +1228,7 @@ func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
 
 	queryRows := comment + `
 SELECT
-	t."id" AS "tenantId",
+	t."id" AS "tenantid",
 	t."tenantName",
 	r."roomName",
 	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
@@ -1240,11 +1241,9 @@ LEFT JOIN "rooms" r
 	ON b."roomId" = r."id"
 LEFT JOIN "payments" p
 	ON b."id" = p."bookingId"
-WHERE b."deletedAt" = 0
 	AND p."deletedAt" = 0
-	AND r."deletedAt" = 0
-	AND t."deletedAt" = 0
-GROUP BY "tenantId"
+WHERE b."deletedAt" = 0
+GROUP BY b."id"
 HAVING totalPaidIDR <> b."totalPriceIDR"
 ORDER BY t."tenantName" ASC`
 
