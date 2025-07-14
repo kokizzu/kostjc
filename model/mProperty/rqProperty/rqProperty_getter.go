@@ -1229,24 +1229,23 @@ func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
 	queryRows := comment + `
 SELECT
 	t."id" AS "tenantid",
-	t."tenantName",
-	r."roomName",
-	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
-	b."totalPriceIDR",
-	b."dateStart"
+	t."tenantname",
+	r."roomname",
+	COALESCE(SUM(p."paididr"), 0) AS totalPaidIDR,
+	b."totalpriceidr",
+	b."datestart"
 FROM "bookings" b
 LEFT JOIN "tenants" t
-	ON b."tenantId" = t."id"
+	ON b."tenantid" = t."id"
 LEFT JOIN "rooms" r
-	ON b."roomId" = r."id"
+	ON b."roomid" = r."id"
 LEFT JOIN "payments" p
-	ON b."id" = p."bookingId"
-	AND p."deletedAt" = 0
-WHERE b."deletedAt" = 0
+	ON b."id" = p."bookingid"
+	AND p."deletedat" = 0
+WHERE b."deletedat" = 0
 GROUP BY b."id"
-HAVING totalPaidIDR <> b."totalPriceIDR"
-ORDER BY t."tenantName" ASC
-`
+HAVING totalPaidIDR <> b."totalpriceidr"
+ORDER BY t."tenantname" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) == 6 {
