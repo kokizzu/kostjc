@@ -2,10 +2,11 @@ package rqProperty
 
 import (
 	"fmt"
-	"kostjc/model/zCrud"
 	"sort"
 	"strconv"
 	"time"
+
+	"kostjc/model/zCrud"
 
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/I"
@@ -1233,42 +1234,32 @@ func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
 
 	queryRows := comment + `
 SELECT
-	"tenants"."tenantName",
-	"rooms"."roomName",
-	COALESCE(SUM("payments"."paidIDR"), 0) AS "totalPaidIDR",
-	"bookings"."totalPriceIDR",
-	"bookings"."dateStart"
-FROM "bookings"
-JOIN (
-	SELECT
-		"bookings"."roomId" AS "roomId",
-		MAX("bookings"."dateEnd") AS "maxBookingDate"
-	FROM "bookings"
-	GROUP BY "bookings"."roomId"
-) "latest"
-	ON "bookings"."roomId" = "latest"."roomId"
-		AND "bookings"."dateEnd" = "latest"."maxBookingDate"
-LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
-LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
-LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
-WHERE "bookings"."deletedAt" = 0
-	OR "payments"."deletedAt" = 0
-	AND "rooms"."deletedAt" = 0
-	AND "tenants"."deletedAt" = 0
-GROUP BY
-	"rooms"."roomName",
-	"tenants"."tenantName",
-	"bookings"."totalPriceIDR"
-HAVING COALESCE(SUM("payments"."paidIDR"), 0) <> "bookings"."totalPriceIDR"
-ORDER BY "rooms"."roomName" ASC`
+	t."id" AS "tenantid",
+	t."tenantName",
+	r."roomName",
+	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
+	b."totalPriceIDR",
+	b."dateStart"
+FROM "bookings" b
+LEFT JOIN "tenants" t
+	ON b."tenantId" = t."id"
+LEFT JOIN "rooms" r
+	ON b."roomId" = r."id"
+LEFT JOIN "payments" p
+	ON b."id" = p."bookingId"
+	AND p."deletedAt" = 0
+WHERE b."deletedAt" = 0
+GROUP BY b."id"
+HAVING totalPaidIDR <> b."totalPriceIDR"
+ORDER BY t."tenantName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 5 {
-			tenantName := X.ToS(row[0])
-			roomName := X.ToS(row[1])
-			totalPaid := X.ToI(row[2])
-			totalPrice := X.ToI(row[3])
-			dateStart := X.ToS(row[4])
+		if len(row) == 6 {
+			tenantName := X.ToS(row[1])
+			roomName := X.ToS(row[2])
+			totalPaid := X.ToI(row[3])
+			totalPrice := X.ToI(row[4])
+			dateStart := X.ToS(row[5])
 			out = append(out, UnpaidBookingTenant{
 				TenantName: tenantName,
 				RoomName:   roomName,
@@ -1437,37 +1428,59 @@ type DoubleBookingReport struct {
 	Tenants  []DoubleBookingReportData `json:"tenants"`
 }
 
-// TODO:
-// query overlap booking dateEnd and dateStart
 func (b *Bookings) FindDoubleBookingReports() (out []DoubleBookingReport) {
 	const comment = `-- Bookings) FindDoubleBookingReports`
 
 	dtNow := time.Now().Format(time.DateOnly)
 	queryRows := comment + `
-SELECT
-  r."id" AS "roomId",
-  r."roomName",
-	t."id" AS "tenantId",
-  t."tenantName",
-	b."dateStart",
-  b."dateEnd"
-FROM "bookings" b
-JOIN "tenants" t ON b."tenantId" = t."id"
-JOIN "rooms" r ON b."roomId" = r."id"
-WHERE b."deletedAt" = 0
-  AND t."deletedAt" = 0
-  AND r."deletedAt" = 0
-  AND b."dateEnd" >= '` + dtNow + `'
-  AND EXISTS (
-    SELECT 1
-    FROM "bookings" b2
-    WHERE b2."roomId" = b."roomId"
-      AND b2."deletedAt" = 0
-      AND b2."dateEnd" >= '` + dtNow + `'
-    GROUP BY b2."roomId"
-    HAVING COUNT(*) > 1
-  )
-ORDER BY r."roomName"`
+WITH RECURSIVE overlapping_groups AS (
+  SELECT 
+    b."id" AS booking_id,
+    b."roomId" AS room_id,
+    r."roomName" AS room_name,
+    b."tenantId" AS tenant_id,
+    t."tenantName" AS tenant_name,
+    b."dateStart" AS date_start,
+    b."dateEnd" AS date_end,
+    b."id" AS group_id
+  FROM "bookings" b
+  LEFT JOIN "tenants" t ON b."tenantId" = t."id"
+  LEFT JOIN "rooms" r ON b."roomId" = r."id"
+	WHERE b."deletedAt" = 0
+
+  UNION ALL
+
+  SELECT 
+    b2."id" AS booking_id,
+    b2."roomId" AS room_id,
+    r2."roomName" AS room_name,
+    b2."tenantId" AS tenant_id,
+    t2."tenantName" AS tenant_name,
+    b2."dateStart" AS date_start,
+    b2."dateEnd" AS date_end,
+    og.group_id AS group_id
+  FROM "bookings" b2
+  LEFT JOin "tenants" t2 ON b2."tenantId" = t2."id"
+  LEFT JOIN "rooms" r2 ON b2."roomId" = r2."id"
+  JOIN overlapping_groups AS og
+    ON b2."roomId" = og.room_id
+    AND b2."id" <> og.booking_id
+    AND b2."dateStart" <= og.date_end
+    AND b2."dateEnd" >= og.date_start
+    AND b2."id" > og.booking_id
+	WHERE b2."deletedAt" = 0
+)
+
+SELECT DISTINCT
+  room_id,
+  room_name,
+  tenant_id,
+  tenant_name,
+  date_start,
+  date_end
+FROM overlapping_groups
+WHERE date_end >= ` + S.Z(dtNow) + `
+ORDER BY room_name`
 
 	rawResults := []DoubleBookingReportData{}
 	b.Adapter.QuerySql(queryRows, func(row []any) {
@@ -1506,8 +1519,35 @@ func groupDoubleBookingByRoom(data []DoubleBookingReportData) []DoubleBookingRep
 	for _, group := range groupMap {
 		result = append(result, *group)
 	}
+	groupMap = nil
 
-	return result
+	var filteredResult = []DoubleBookingReport{}
+	for _, report := range result {
+		if len(report.Tenants) > 1 {
+			filteredResult = append(filteredResult, report)
+		}
+	}
+	result = nil
+
+	var finalResult = []DoubleBookingReport{}
+	for _, report := range filteredResult {
+		tenantCount := make(map[uint64]int)
+		duplicateFound := false
+
+		for _, tenant := range report.Tenants {
+			tenantCount[tenant.TenantId]++
+			if tenantCount[tenant.TenantId] > 1 {
+				duplicateFound = true
+				break
+			}
+		}
+
+		if !duplicateFound {
+			finalResult = append(finalResult, report)
+		}
+	}
+
+	return finalResult
 }
 
 type RoomBookingInconsistency struct {
