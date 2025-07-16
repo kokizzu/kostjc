@@ -29,8 +29,6 @@
   let ktpOccupation     = /** @type {string} */ ('');
   let telegramUsername  = /** @type {string} */ ('');
   let whatsappNumber    = /** @type {string} */ ('');
-  let addedToWhatsapp  = /** @type {string} */ ('');
-  let addedToTelegram    = /** @type {string} */ ('');
 
   export let OnSubmit = async function(/** @type {Tenant} */ tenant) {
     console.log('OnSubmit :::', tenant);
@@ -56,8 +54,6 @@
       ktpOccupation: ktpOccupation,
       telegramUsername: telegramUsername,
       whatsappNumber: whatsappNumber,
-      addedToWhatsapp: addedToWhatsapp,
-      addedToTelegram: addedToTelegram
     });
 
     await OnSubmit(tenant);
@@ -105,8 +101,6 @@
       ktpOccupation = tenant.ktpOccupation;
       telegramUsername = tenant.telegramUsername;
       whatsappNumber = tenant.whatsappNumber;
-      addedToWhatsapp = tenant.addedToWhatsapp;
-      addedToTelegram = tenant.addedToTelegram;
     })
   }
 
@@ -127,11 +121,6 @@
     'Katholik',
     'Buddha',
     'Konghucu'
-  ];
-
-  const AddedToStatus = [
-    'Belum',
-    'Sudah'
   ];
 </script>
 
@@ -261,20 +250,6 @@
         type="text"
         placeholder="+6281234567890"
         bind:value={whatsappNumber}
-      />
-      <InputBox
-        id="addedToWhatsapp"
-        label="Ditambahkan ke Whatsapp"
-        type="combobox-arr"
-        bind:value={addedToWhatsapp}
-        values={AddedToStatus}
-      />
-      <InputBox
-        id="addedToTelegram"
-        label="Ditambahkan ke Telegram"
-        type="combobox-arr"
-        bind:value={addedToTelegram}
-        values={AddedToStatus}
       />
     </div>
     <div class="foot">

@@ -13,6 +13,8 @@
   import { notifier } from './_components/xNotifier';
   import Radio from './_components/Radio.svelte';
   import { onMount } from 'svelte';
+  import {checkboxToDate} from './_components/xFormatter';
+  import {CmdToggleWaAdded, CmdToggleTeleAdded} from './_components/xConstant';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -69,6 +71,60 @@
     });
   }
 
+  async function OnEditWaAddedAt(/** @type any */ id, /** @type any[]*/ payloads) {
+    const i = /** @type {any}*/ ({
+      tenant: {
+        id: payloads[0]+'',
+        waAddedAt: checkboxToDate(payloads[2]),
+      },
+      cmd: CmdToggleWaAdded
+    });
+
+    console.log('sending to AdminTenants', i);
+
+    await AdminTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        notifier.showSuccess(`'${payloads[1]}' WaAddedAt updated !!`);
+        RefreshData();
+      }
+    );
+  }
+
+  async function OnEditTeleAddedAt(/** @type any */ id, /** @type any[]*/ payloads) {
+    const i = /** @type {any}*/ ({
+      tenant: {
+        id: payloads[0]+'',
+        teleAddedAt: checkboxToDate(payloads[2]),
+      },
+      cmd: CmdToggleTeleAdded
+    });
+
+    console.log('sending to AdminTenants', i);
+
+    await AdminTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        notifier.showSuccess(`'${payloads[1]}' TeleAddedAt updated !!`);
+        RefreshData();
+      }
+    );
+  }
+
   /** @typedef {'showMissingAny' | 'showOnlyMissingTelegram' | 'showOnlyMissingWhatsapp' | 'showOnlyCompleted' | 'showAll' | 'showNotAddedToWhatsapp' | 'showNotAddedToTelegram'} FilterValues */
   /** @typedef {import('./_types/masters.js').RadioOption<FilterValues>} RadioOption<FilterValues> */
 
@@ -121,7 +177,6 @@
 
   let missingDataFiltered = /** @type {MissingTenantData[]} */ ([]);
 
-  console.log('missingDataFiltered dari depan', missingDataFiltered);
 
   function restrucureMissingData() {
     missingDataFiltered = [];
@@ -157,13 +212,13 @@
           break;
         }
         case 'showNotAddedToWhatsapp': {
-          if (dt.tenantAddedToWhatsapp === "Belum") {
+          if (!dt.tenantWaAddedAt) {
             missingDataFiltered = [...missingDataFiltered, dt];
           }
           break;
         }
          case 'showNotAddedToTelegram': {
-          if (dt.tenantAddedToTelegram === "Belum") {
+          if (!dt.tenantTeleAddedAt) {
             missingDataFiltered = [...missingDataFiltered, dt];
           }
           break;
@@ -180,6 +235,31 @@
     isPopUpFormReady = true;
     restrucureMissingData();
   });
+
+  function toggleCheckboxField(tenantId, tenantName, addedAt, fieldName) {
+    let payloads = [tenantId, tenantName, addedAt];
+
+
+    if (fieldName === 'waAddedAt' && OnEditWaAddedAt) {
+      OnEditWaAddedAt(tenantId, payloads);
+    }
+
+    if (fieldName === 'teleAddedAt' && OnEditTeleAddedAt) {
+      OnEditTeleAddedAt(tenantId, payloads);
+    }
+    
+  }
+
+  function handleToggleWaAddedAt(e, data) {
+    const isChecked = /** @type {HTMLInputElement} */ (e.target).checked;
+    toggleCheckboxField(data.tenantId, data.tenantName, isChecked, 'waAddedAt');
+  }
+
+  function handleToggleTeleAddedAt(e, data) {
+    const isChecked = /** @type {HTMLInputElement} */ (e.target).checked;
+    toggleCheckboxField(data.tenantId, data.tenantName, isChecked, 'teleAddedAt');
+  }
+
 </script>
 
 {#if isPopUpFormReady}
@@ -206,8 +286,8 @@
             <th style="min-width: 170px;">Tenant Name</th>
             <th>Telegram</th>
             <th style="min-width: 180px;">WhatsApp</th>
-            <th>Added To WhatsApp</th>
-            <th>Added To Telegram</th>
+            <th>Wa Added</th>
+            <th>Tele Added</th>
             <th style="min-width: 140px;">Last Use At</th>
           </tr>
         </thead>
@@ -233,8 +313,21 @@
               <td>{data.tenantName || '--'}</td>
               <td>{data.tenantTelegramUsername || '--'}</td>
               <td>{data.tenantWhatsappNumber || '--'}</td>
-              <td>{data.tenantAddedToWhatsapp || '--'}</td>
-              <td>{data.tenantAddedToTelegram || '--'}</td>
+              <td class="checkbox-cell">
+                <input
+                  type="checkbox"
+                  checked={data.tenantWaAddedAt}
+                  on:change={(e) => handleToggleWaAddedAt(e, data)}
+                />
+              </td>
+              
+              <td class="checkbox-cell">
+                <input
+                  type="checkbox"
+                  checked={data.tenantTeleAddedAt}
+                  on:change={(e) => handleToggleTeleAddedAt(e, data)}
+                />
+              </td>
               <td>{data.lastUseAt || '--'}</td>
             </tr>
           {/each}
@@ -293,6 +386,13 @@
   table tbody tr td .actions {
     display: flex;
     flex-direction: row;
+  }
+
+  .checkbox-cell {
+    text-align: center;
+  }
+  .checkbox-cell input[type="checkbox"] {
+    transform: scale(1.2);
   }
 
   table tbody tr td .actions .btn {

@@ -14,8 +14,8 @@
   import PopUpForms from './_components/PopUpForms.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
-  import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
-  import { dateISOFormat } from './_components/xFormatter';
+  import { CmdDelete, CmdList, CmdRestore, CmdUpsert, CmdToggleTeleAdded, CmdToggleWaAdded } from './_components/xConstant';
+  import { dateISOFormat, checkboxToDate } from './_components/xFormatter';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -47,11 +47,6 @@
     'Katholik',
     'Buddha',
     'Konghucu'
-  ];
-
-  const AddedToStatus = [
-  'Belum',
-  'Sudah'
   ];
 
   onMount(() => isPopUpFormReady = true);
@@ -151,8 +146,6 @@
       ktpCitizenship: payloads[15],
       telegramUsername: payloads[16],
       whatsappNumber: payloads[17],
-     addedToWhatsapp: payloads[18],
-      addedToTelegram: payloads[19]
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -200,8 +193,8 @@
       ktpCitizenship: payloads[15],
       telegramUsername: payloads[16],
       whatsappNumber: payloads[17],
-      addedToWhatsapp: payloads[18],
-      addedToTelegram: payloads[19]
+      waAddedAt: '',
+      teleAddedAt: '',
     });
     const i = /** @type {any} */ ({
       pager,
@@ -231,6 +224,65 @@
       }
     );
   }
+
+async function OnEditWaAddedAt(/** @type any */ id, /** @type any[]*/ payloads) {
+    const i = /** @type {any}*/ ({
+      pager,
+      tenant: {
+        id: payloads[0],
+        waAddedAt: checkboxToDate(payloads[18]),
+      },
+      cmd: CmdToggleWaAdded
+    });
+    await AdminTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        pager = o.pager;
+        tenants = o.tenants;
+        notifier.showSuccess(`'${payloads[1]}' WaAddedAt updated !!`);
+
+        OnRefresh(pager);
+        popUpForms.Hide();
+      }
+    );
+  }
+
+  async function OnEditTeleAddedAt(/** @type any */ id, /** @type any[]*/ payloads) {
+    const i = /** @type {any}*/ ({
+      pager,
+      tenant: {
+        id: payloads[0],
+        teleAddedAt: checkboxToDate(payloads[19]),
+      },
+      cmd: CmdToggleTeleAdded
+    });
+    await AdminTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        pager = o.pager;
+        tenants = o.tenants;
+        notifier.showSuccess(`'${payloads[1]}' TeleAddedAt updated !!`);
+
+        OnRefresh(pager);
+        popUpForms.Hide();
+      }
+    );
+  }
+
 </script>
 
 {#if isPopUpFormReady}
@@ -245,8 +297,6 @@
       'ktpGender': KtpGenders,
       'ktpMaritalStatus': KtpMaritalStatus,
       'ktpReligion': KtpReligions,
-      'addedToTelegram': AddedToStatus,
-      'addedToWhatsapp': AddedToStatus
     }}
     bind:isSubmitted={isSubmitTenant}
     OnSubmit={OnAddTenant}
@@ -266,8 +316,6 @@
         'ktpGender': KtpGenders,
         'ktpMaritalStatus': KtpMaritalStatus,
         'ktpReligion': KtpReligions,
-        'addedToTelegram': AddedToStatus,
-        'addedToWhatsapp': AddedToStatus
       }}
       COL_WIDTHS={{
         'tenantName': 250,
@@ -284,6 +332,8 @@
       {OnRestore}
       {OnRefresh}
       {OnEdit}
+      {OnEditWaAddedAt}
+      {OnEditTeleAddedAt}
     >
     <button
       class="btn"

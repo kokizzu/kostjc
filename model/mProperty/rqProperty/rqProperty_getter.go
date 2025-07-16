@@ -1017,8 +1017,8 @@ type RoomMissingTenantData struct {
 	TenantName             string `json:"tenantName"`
 	TenantTelegramUsername string `json:"tenantTelegramUsername"`
 	TenantWhatsappNumber   string `json:"tenantWhatsappNumber"`
-	TenantAddedToWhatsapp  string `json:"tenantAddedToWhatsapp"`
-	TenantAddedToTelegram  string `json:"tenantAddedToTelegram"`
+	TenantWaAddedAt        bool   `json:"tenantWaAddedAt"`
+	TenantTeleAddedAt      bool   `json:"tenantTeleAddedAt"`
 	LastUseAt              string `json:"lastUseAt"`
 }
 
@@ -1033,8 +1033,8 @@ SELECT
   "tenants"."tenantName",
   "tenants"."telegramUsername",
   "tenants"."whatsappNumber",
-  "tenants"."addedToWhatsapp",
-  "tenants"."addedToTelegram",
+  "tenants"."waAddedAt",
+  "tenants"."teleAddedAt",
 	"rooms"."lastUseAt"
 FROM "rooms"
 LEFT JOIN "tenants"
@@ -1053,8 +1053,8 @@ ORDER BY "rooms"."updatedAt"`
 			TenantName:             X.ToS(row[3]),
 			TenantTelegramUsername: X.ToS(row[4]),
 			TenantWhatsappNumber:   X.ToS(row[5]),
-			TenantAddedToWhatsapp:  X.ToS(row[6]),
-			TenantAddedToTelegram:  X.ToS(row[7]),
+			TenantWaAddedAt:        X.ToBool(row[6]),
+			TenantTeleAddedAt:      X.ToBool(row[7]),
 			LastUseAt:              X.ToS(row[8]),
 		})
 	})

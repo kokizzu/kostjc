@@ -30,7 +30,7 @@
   } from '../node_modules/svelte-icons-pack/dist/cg';
   import InputBox from './InputBox.svelte';
   import { onMount } from 'svelte';
-  import { datetime, formatPrice } from './xFormatter.js';
+  import { dateISOFormat, datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
   import MultiSelect from './MultiSelect.svelte';
   import SingleSelect from './SingleSelected.svelte';
@@ -55,6 +55,22 @@
   export let EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([]);
   export let FIELD_TO_SEARCH = '';
   export let SINGLE_SELECTED = false;
+
+  MASTER_ROWS = MASTER_ROWS.map(row => {
+  const waIdx = FIELDS.findIndex(f => f.name === 'waAddedAt');
+  const teleIdx = FIELDS.findIndex(f => f.name === 'teleAddedAt');
+
+  // Convert string dari database ke boolean untuk UI
+  if (waIdx >= 0) {
+    row[waIdx] = row[waIdx] !== '0' && row[waIdx] !== '' && row[waIdx] !== null;
+  }
+  if (teleIdx >= 0) {
+    row[teleIdx] = row[teleIdx] !== '0' && row[teleIdx] !== '' && row[teleIdx] !== null;
+  }
+
+  return row;
+});
+
 
   /**
    * @type {Record<string, number>}
@@ -204,6 +220,8 @@
   export let OnEdit = async function (/** @type any */ id, /** @type any[]*/ payloads) {};
   export let OnRefresh = async function (/** @type PagerIn */ pagerIn) {};
   export let OnInfo = async function (/** @type any[] */ row) {};
+  export let OnEditWaAddedAt = async function (/** @type any */ id, /** @type any[]*/ payloads) {};
+  export let OnEditTeleAddedAt = async function (/** @type any */ id, /** @type any[]*/ payloads) {};
 
   function ApplyFilter() {
     // Hide FilterTable.svelte
@@ -302,6 +320,28 @@
       await handleSearch();
     }
   }
+
+function toggleCheckboxField(fieldName, rowIndex) {
+  const fieldIdx = FIELDS.findIndex(f => f.name === fieldName);
+  if (fieldIdx === -1) return;
+
+  const row = MASTER_ROWS[rowIndex];
+  row[fieldIdx] = !row[fieldIdx];
+  const payload = [...row];
+  const idIdx = FIELDS.findIndex(f => f.name === 'id');
+  const id = row[idIdx];
+
+  // ✨ Panggil handler sesuai field
+  if (fieldName === 'waAddedAt' && OnEditWaAddedAt) {
+    OnEditWaAddedAt(id, payload);
+  }
+
+  if (fieldName === 'teleAddedAt' && OnEditTeleAddedAt) {
+    OnEditTeleAddedAt(id, payload);
+  }
+}
+
+
 </script>
 
 {#if filterTableReady}
@@ -319,7 +359,7 @@
       </header>
       <div class="forms">
         {#each (FIELDS || []) as field, idx}
-          {#if field.name !== 'id'}
+          {#if field.name !== 'id' && field.name !== 'waAddedAt' && field.name !== 'teleAddedAt'}
             {#if !field.readOnly}
               {#if field.inputType === 'combobox'}
                 <InputBox
@@ -553,6 +593,14 @@
                   <td class="combobox">{REFS[f.name][row[idx]] || '--'}</td>
                 {:else if f.inputType === 'percentage'}
                   <td class="percentage">{row[idx] || '0'}%</td>
+                {:else if f.inputType === 'checkbox'}
+                  <td class="checkbox-cell">
+                    <input
+                      type="checkbox"
+                      checked={row[idx]}
+                      on:change={() => toggleCheckboxField(f.name, MASTER_ROWS.indexOf(row))}
+                    />
+                  </td>
                 {:else}
                   <td class={f.type}>
                     {typeof row[idx] === 'boolean' ? (row[idx] ? 'Yes' : 'No') : (row[idx] || '--')}
@@ -1031,6 +1079,13 @@
   .table-root .table-container table tbody tr td .actions {
     display: flex;
     flex-direction: row;
+  }
+
+  .checkbox-cell {
+    text-align: center;
+  }
+  .checkbox-cell input[type="checkbox"] {
+    transform: scale(1.2);
   }
 
   .table-root .table-container table tbody tr td .actions .btn {

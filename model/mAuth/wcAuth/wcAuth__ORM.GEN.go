@@ -278,8 +278,8 @@ func (t *TenantsMutator) DoDeletePermanentById() bool { //nolint:dupl false posi
 //		A.X{`=`, 22, t.DeletedBy},
 //		A.X{`=`, 23, t.RestoredBy},
 //		A.X{`=`, 24, t.KtpOccupation},
-//		A.X{`=`, 25, t.AddedToWhatsapp},
-//		A.X{`=`, 26, t.AddedToTelegram},
+//		A.X{`=`, 25, t.WaAddedAt},
+//		A.X{`=`, 26, t.TeleAddedAt},
 //	})
 //	return !L.IsError(err, `Tenants.DoUpsert failed: `+t.SpaceName()+ `\n%#v`, arr)
 // }
@@ -608,23 +608,23 @@ func (t *TenantsMutator) SetKtpOccupation(val string) bool { //nolint:dupl false
 	return false
 }
 
-// SetAddedToWhatsapp create mutations, should not duplicate
-func (t *TenantsMutator) SetAddedToWhatsapp(val string) bool { //nolint:dupl false positive
-	if val != t.AddedToWhatsapp {
+// SetWaAddedAt create mutations, should not duplicate
+func (t *TenantsMutator) SetWaAddedAt(val string) bool { //nolint:dupl false positive
+	if val != t.WaAddedAt {
 		t.mutations = append(t.mutations, A.X{`=`, 25, val})
-		t.logs = append(t.logs, A.X{`addedToWhatsapp`, t.AddedToWhatsapp, val})
-		t.AddedToWhatsapp = val
+		t.logs = append(t.logs, A.X{`waAddedAt`, t.WaAddedAt, val})
+		t.WaAddedAt = val
 		return true
 	}
 	return false
 }
 
-// SetAddedToTelegram create mutations, should not duplicate
-func (t *TenantsMutator) SetAddedToTelegram(val string) bool { //nolint:dupl false positive
-	if val != t.AddedToTelegram {
+// SetTeleAddedAt create mutations, should not duplicate
+func (t *TenantsMutator) SetTeleAddedAt(val string) bool { //nolint:dupl false positive
+	if val != t.TeleAddedAt {
 		t.mutations = append(t.mutations, A.X{`=`, 26, val})
-		t.logs = append(t.logs, A.X{`addedToTelegram`, t.AddedToTelegram, val})
-		t.AddedToTelegram = val
+		t.logs = append(t.logs, A.X{`teleAddedAt`, t.TeleAddedAt, val})
+		t.TeleAddedAt = val
 		return true
 	}
 	return false
@@ -738,12 +738,12 @@ func (t *TenantsMutator) SetAll(from rqAuth.Tenants, excludeMap, forceMap M.SB) 
 		t.KtpOccupation = S.Trim(from.KtpOccupation)
 		changed = true
 	}
-	if !excludeMap[`addedToWhatsapp`] && (forceMap[`addedToWhatsapp`] || from.AddedToWhatsapp != ``) {
-		t.AddedToWhatsapp = S.Trim(from.AddedToWhatsapp)
+	if !excludeMap[`waAddedAt`] && (forceMap[`waAddedAt`] || from.WaAddedAt != ``) {
+		t.WaAddedAt = S.Trim(from.WaAddedAt)
 		changed = true
 	}
-	if !excludeMap[`addedToTelegram`] && (forceMap[`addedToTelegram`] || from.AddedToTelegram != ``) {
-		t.AddedToTelegram = S.Trim(from.AddedToTelegram)
+	if !excludeMap[`teleAddedAt`] && (forceMap[`teleAddedAt`] || from.TeleAddedAt != ``) {
+		t.TeleAddedAt = S.Trim(from.TeleAddedAt)
 		changed = true
 	}
 	return
