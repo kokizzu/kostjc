@@ -48,6 +48,8 @@ module.exports = {}
  * @property {string} ktpOccupation
  * @property {string} telegramUsername
  * @property {string} whatsappNumber
+ * @property {number} waAddedAt
+ * @property {number} teleAddedAt
  * @property {number} createdAt
  * @property {string} createdBy
  * @property {number} updatedAt

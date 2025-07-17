@@ -166,6 +166,13 @@ function localeDateFromYYYYMMDD(dateStr) {
   return `${day}, ${date} ${month} ${year}`;
 }
 
+//return a now date depends if value is false or true
+function checkboxToDate(value) {
+  return value === true || value === 'true'
+    ? new Date().toISOString().split('T')[0]
+    : '';
+}
+
 module.exports = {
   datetime: datetime,
   localeDatetime: localeDatetime,
@@ -178,5 +185,7 @@ module.exports = {
   formatPrice: formatPrice,
   arrToArrNum: arrToArrNum,
   formatYearMonth: formatYearMonth,
-  localeDateFromYYYYMMDD: localeDateFromYYYYMMDD
+  localeDateFromYYYYMMDD: localeDateFromYYYYMMDD,
+  checkboxToDate: checkboxToDate,
 };
+
