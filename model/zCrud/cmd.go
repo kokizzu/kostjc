@@ -6,6 +6,6 @@ const (
 	CmdUpsert          = `upsert`  // insert if id=0, update if id>0
 	CmdRestore         = `restore` // same as upsert but also unset deletedAt, deletedBy
 	CmdDelete          = `delete`  // same as upsert but also set deletedAt, deletedBy
-	CmdToggleWaAdded   = `toggle-wa-added`
-	CmdToggleTeleAdded = `toggle-tele-added`
+	CmdToggleWaAdded   = `toggle_wa_added`
+	CmdToggleTeleAdded = `toggle_tele_added`
 )
