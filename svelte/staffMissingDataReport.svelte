@@ -225,6 +225,12 @@
         }
       }
     }
+    const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+    missingDataFiltered.sort((a, b) => {
+      const roomA = a.roomName?.toUpperCase() || '';
+      const roomB = b.roomName?.toUpperCase() || '';
+      return collator.compare(roomA, roomB);
+    });
   }
 
   $: if (selectedFilter) {
