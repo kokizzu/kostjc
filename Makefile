@@ -51,9 +51,9 @@ backup-db:
 restore-db:
 	go run main.go restore $(word 2, $(MAKECMDGOALS))
 
-svelte:
-	pnpm i
-	pnpm watch
+frontend:
+	cd svelte && pnpm i && bun watch
+	#pnpm watch
 
 web:
 	air web

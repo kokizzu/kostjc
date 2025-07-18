@@ -10,12 +10,11 @@
    * @property {number} donationIDR
    */
 
-  import InputBox from './_components/InputBox.svelte';
-  import SubmitButton from './_components/SubmitButton.svelte';
+  import MonthShifter from './_components/MonthShifter.svelte';
   import { formatYearMonth } from './_components/xFormatter';
   import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
-  import ChartRevenueDaily from './_partials/ChartRevenueMonthly.svelte';
+  import ChartRevenueMonthly from './_partials/ChartRevenueMonthly.svelte';
   import { StaffRevenueReport } from './jsApi.GEN';
 
   let user      = /** @type {User} */ ({/* user */});
@@ -24,13 +23,14 @@
   let chartRevenueReports = /** @type {ChartRevenueReport[]} */ ([/* chartRevenueReports */]);
   let bookings = /** @type {Record<Number, string>} */ ({/* bookings */});
 
-  let chartRevenueDaily = /** @type {ChartRevenueDaily|import('svelte').SvelteComponent} */ (null);
+  let chartRevenueMonthly = /** @type {ChartRevenueMonthly|import('svelte').SvelteComponent} */ (null);
 
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
   let isFiltering = /** @type {boolean} */ (false);
 
   async function getRevenueReports() {
     isFiltering = true;
+    console.log('YearMonth:', yearMonth);
     await StaffRevenueReport(// @ts-ignore
       { yearMonth }, /** @type {import('./jsApi.GEN').StaffRevenueReportCallback} */
       /** @returns {Promise<void>} */
@@ -44,7 +44,7 @@
         revenueReports = o.revenueReports;
         chartRevenueReports = o.chartRevenueReports;
 
-        chartRevenueDaily.updateData();
+        chartRevenueMonthly.updateData(chartRevenueReports);
       }
     );
     isFiltering = false;
@@ -64,23 +64,17 @@
 </script>
 
 <LayoutMain access={segments} user={user}>
-  <ChartRevenueDaily bind:chartRevenueReports bind:this={chartRevenueDaily}/>
   <div class="report-container">
     <div class="actions">
-      <InputBox
-        className="year-month"
-        id="yearMonth"
-        type="month"
-        placeholder="Select Month"
-        label=""
-        bind:value={yearMonth}
-      />
-      <SubmitButton
-        label="Filter"
-        on:click={getRevenueReports}
-        isSubmitted={isFiltering}
+      <MonthShifter
+        bind:yearMonth
+        OnChanges={getRevenueReports}
       />
     </div>
+    <ChartRevenueMonthly
+      bind:chartRevenueReports
+      bind:this={chartRevenueMonthly}
+    />
     <div class="table-container">
       <table>
         <thead>
@@ -132,7 +126,7 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   :global(.report-container .actions .year-month) {

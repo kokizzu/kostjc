@@ -5,6 +5,7 @@
   /** @typedef {import('../_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('../_types/masters.js').ExtendedAction} ExtendedAction */
   /** @typedef {import('../_types/property.js').Booking} Booking */
+  /** @typedef {import('../_types/property').Facility} Facility */
 
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import {
@@ -34,8 +35,10 @@
   import { notifier } from './xNotifier';
   import PopUpAddPayment from './PopUpAddPayment.svelte';
   import MultiSelect from './MultiSelect.svelte';
+    import SelectFacilitiesFromJson from './SelectFacilitiesFromJson.svelte';
 
   export let tenants = /** @type {Record<number, string>} */ ({});
+  export let facilities = /** @type {Facility[]} */ ([]);
 
   /**
    * @description Get extra tenants
@@ -411,7 +414,12 @@
       <div class="forms">
         {#each (FIELDS || []) as field, idx}
           {#if field.name !== 'id' && !field.readOnly}
-            {#if field.inputType === 'combobox'}
+            {#if field.name == 'facilitiesObj'}
+              <SelectFacilitiesFromJson
+                bind:stringJson={payloads[idx]}
+                {facilities}
+              />
+            {:else if field.inputType === 'combobox'}
               <InputBox
                 id={field.name}
                 label={field.label}

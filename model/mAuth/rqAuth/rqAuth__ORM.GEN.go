@@ -269,6 +269,8 @@ type Tenants struct {
 	DeletedBy        uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
 	RestoredBy       uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
 	KtpOccupation    string      `json:"ktpOccupation" form:"ktpOccupation" query:"ktpOccupation" long:"ktpOccupation" msg:"ktpOccupation"`
+	WaAddedAt        string      `json:"waAddedAt" form:"waAddedAt" query:"waAddedAt" long:"waAddedAt" msg:"waAddedAt"`
+	TeleAddedAt      string      `json:"teleAddedAt" form:"teleAddedAt" query:"teleAddedAt" long:"teleAddedAt" msg:"teleAddedAt"`
 }
 
 // NewTenants create new ORM reader/query object
@@ -350,6 +352,8 @@ func (t *Tenants) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "deletedBy"
 	, "restoredBy"
 	, "ktpOccupation"
+	, "waAddedAt"
+	, "teleAddedAt"
 	`
 }
 
@@ -380,6 +384,8 @@ func (t *Tenants) SqlSelectAllUncensoredFields() string { //nolint:dupl false po
 	, "deletedBy"
 	, "restoredBy"
 	, "ktpOccupation"
+	, "waAddedAt"
+	, "teleAddedAt"
 	`
 }
 
@@ -411,6 +417,8 @@ func (t *Tenants) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 22, t.DeletedBy},
 		A.X{`=`, 23, t.RestoredBy},
 		A.X{`=`, 24, t.KtpOccupation},
+		A.X{`=`, 25, t.WaAddedAt},
+		A.X{`=`, 26, t.TeleAddedAt},
 	}
 }
 
@@ -664,6 +672,26 @@ func (t *Tenants) SqlKtpOccupation() string { //nolint:dupl false positive
 	return `"ktpOccupation"`
 }
 
+// IdxWaAddedAt return name of the index
+func (t *Tenants) IdxWaAddedAt() int { //nolint:dupl false positive
+	return 25
+}
+
+// SqlWaAddedAt return name of the column being indexed
+func (t *Tenants) SqlWaAddedAt() string { //nolint:dupl false positive
+	return `"waAddedAt"`
+}
+
+// IdxTeleAddedAt return name of the index
+func (t *Tenants) IdxTeleAddedAt() int { //nolint:dupl false positive
+	return 26
+}
+
+// SqlTeleAddedAt return name of the column being indexed
+func (t *Tenants) SqlTeleAddedAt() string { //nolint:dupl false positive
+	return `"teleAddedAt"`
+}
+
 // ToArray receiver fields to slice
 func (t *Tenants) ToArray() A.X { //nolint:dupl false positive
 	var id any = nil
@@ -696,6 +724,8 @@ func (t *Tenants) ToArray() A.X { //nolint:dupl false positive
 		t.DeletedBy,        // 22
 		t.RestoredBy,       // 23
 		t.KtpOccupation,    // 24
+		t.WaAddedAt,        // 25
+		t.TeleAddedAt,      // 26
 	}
 }
 
@@ -726,6 +756,8 @@ func (t *Tenants) FromArray(a A.X) *Tenants { //nolint:dupl false positive
 	t.DeletedBy = X.ToU(a[22])
 	t.RestoredBy = X.ToU(a[23])
 	t.KtpOccupation = X.ToS(a[24])
+	t.WaAddedAt = X.ToS(a[25])
+	t.TeleAddedAt = X.ToS(a[26])
 	return t
 }
 
@@ -756,6 +788,8 @@ func (t *Tenants) FromUncensoredArray(a A.X) *Tenants { //nolint:dupl false posi
 	t.DeletedBy = X.ToU(a[22])
 	t.RestoredBy = X.ToU(a[23])
 	t.KtpOccupation = X.ToS(a[24])
+	t.WaAddedAt = X.ToS(a[25])
+	t.TeleAddedAt = X.ToS(a[26])
 	return t
 }
 
@@ -824,6 +858,8 @@ var TenantsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`deletedBy`:        Tt.Unsigned,
 	`restoredBy`:       Tt.Unsigned,
 	`ktpOccupation`:    Tt.String,
+	`waAddedAt`:        Tt.String,
+	`teleAddedAt`:      Tt.String,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

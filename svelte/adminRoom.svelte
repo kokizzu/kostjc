@@ -209,7 +209,6 @@
       });
       roomsObj = [...roomsObj, roomObj];
     })
-    console.log('Rooms Objects: ', roomsObj);
     roomsObjJson = JSON.stringify(roomsObj, null, 2);
     isShowPopUpExportRoom = true;
   }

@@ -73,6 +73,8 @@ const (
 	KtpOccupation    = `ktpOccupation`
 	TelegramUsername = `telegramUsername`
 	WhatsappNumber   = `whatsappNumber`
+	WaAddedAt        = `waAddedAt`
+	TeleAddedAt      = `teleAddedAt`
 )
 
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
@@ -140,6 +142,8 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{DeletedBy, Tt.Unsigned},
 			{RestoredBy, Tt.Unsigned},
 			{KtpOccupation, Tt.String},
+			{WaAddedAt, Tt.String},
+			{TeleAddedAt, Tt.String},
 		},
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,

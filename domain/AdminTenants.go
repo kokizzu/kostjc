@@ -190,6 +190,22 @@ var AdminTenantsMeta = zCrud.Meta{
 			ReadOnly:    false,
 		},
 		{
+			Name:        mAuth.WaAddedAt,
+			Label:       `Wa Added`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeCheckbox,
+			Description: ``,
+			ReadOnly:    false,
+		},
+		{
+			Name:        mAuth.TeleAddedAt,
+			Label:       `Tele Added`,
+			DataType:    zCrud.DataTypeString,
+			InputType:   zCrud.InputTypeCheckbox,
+			Description: ``,
+			ReadOnly:    false,
+		},
+		{
 			Name:      mAuth.CreatedAt,
 			Label:     `Created At`,
 			DataType:  zCrud.DataTypeInt,
@@ -238,7 +254,7 @@ func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 			}
 		}
 		out.Tenant = tnt
-	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
+	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore, zCrud.CmdToggleWaAdded, zCrud.CmdToggleTeleAdded:
 		tenant := wcAuth.NewTenantsMutator(d.AuthOltp)
 		tenant.Id = in.Tenant.Id
 		if tenant.Id > 0 {
@@ -259,6 +275,27 @@ func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 					tenant.SetRestoredBy(sess.UserId)
 				}
 			}
+			if in.Cmd == zCrud.CmdToggleWaAdded {
+				tenant.SetWaAddedAt(in.Tenant.WaAddedAt)
+				tenant.SetUpdatedAt(in.UnixNow())
+				tenant.SetUpdatedBy(sess.UserId)
+
+				if !tenant.DoUpsert() {
+					out.SetError(500, ErrAdminTenantsSaveFailed)
+					return
+				}
+			}
+			if in.Cmd == zCrud.CmdToggleTeleAdded {
+				tenant.SetTeleAddedAt(in.Tenant.TeleAddedAt)
+				tenant.SetUpdatedAt(in.UnixNow())
+				tenant.SetUpdatedBy(sess.UserId)
+
+				if !tenant.DoUpsert() {
+					out.SetError(500, ErrAdminTenantsSaveFailed)
+					return
+				}
+			}
+
 		}
 
 		// Ini semua biar mirip di KTP

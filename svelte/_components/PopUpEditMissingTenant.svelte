@@ -53,7 +53,7 @@
       ktpCitizenship: ktpCitizenship,
       ktpOccupation: ktpOccupation,
       telegramUsername: telegramUsername,
-      whatsappNumber: whatsappNumber
+      whatsappNumber: whatsappNumber,
     });
 
     await OnSubmit(tenant);

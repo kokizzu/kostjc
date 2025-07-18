@@ -235,7 +235,8 @@
         'extraTenants': 300
       }}
 
-      tenants={tenants}
+      {tenants}
+      {facilities}
       
       CAN_SEARCH_ROW
 

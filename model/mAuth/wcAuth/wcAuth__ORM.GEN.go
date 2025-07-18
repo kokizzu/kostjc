@@ -278,6 +278,8 @@ func (t *TenantsMutator) DoDeletePermanentById() bool { //nolint:dupl false posi
 //		A.X{`=`, 22, t.DeletedBy},
 //		A.X{`=`, 23, t.RestoredBy},
 //		A.X{`=`, 24, t.KtpOccupation},
+//		A.X{`=`, 25, t.WaAddedAt},
+//		A.X{`=`, 26, t.TeleAddedAt},
 //	})
 //	return !L.IsError(err, `Tenants.DoUpsert failed: `+t.SpaceName()+ `\n%#v`, arr)
 // }
@@ -606,6 +608,28 @@ func (t *TenantsMutator) SetKtpOccupation(val string) bool { //nolint:dupl false
 	return false
 }
 
+// SetWaAddedAt create mutations, should not duplicate
+func (t *TenantsMutator) SetWaAddedAt(val string) bool { //nolint:dupl false positive
+	if val != t.WaAddedAt {
+		t.mutations = append(t.mutations, A.X{`=`, 25, val})
+		t.logs = append(t.logs, A.X{`waAddedAt`, t.WaAddedAt, val})
+		t.WaAddedAt = val
+		return true
+	}
+	return false
+}
+
+// SetTeleAddedAt create mutations, should not duplicate
+func (t *TenantsMutator) SetTeleAddedAt(val string) bool { //nolint:dupl false positive
+	if val != t.TeleAddedAt {
+		t.mutations = append(t.mutations, A.X{`=`, 26, val})
+		t.logs = append(t.logs, A.X{`teleAddedAt`, t.TeleAddedAt, val})
+		t.TeleAddedAt = val
+		return true
+	}
+	return false
+}
+
 // SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
 func (t *TenantsMutator) SetAll(from rqAuth.Tenants, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
 	if excludeMap == nil { // list of fields to exclude
@@ -712,6 +736,14 @@ func (t *TenantsMutator) SetAll(from rqAuth.Tenants, excludeMap, forceMap M.SB) 
 	}
 	if !excludeMap[`ktpOccupation`] && (forceMap[`ktpOccupation`] || from.KtpOccupation != ``) {
 		t.KtpOccupation = S.Trim(from.KtpOccupation)
+		changed = true
+	}
+	if !excludeMap[`waAddedAt`] && (forceMap[`waAddedAt`] || from.WaAddedAt != ``) {
+		t.WaAddedAt = S.Trim(from.WaAddedAt)
+		changed = true
+	}
+	if !excludeMap[`teleAddedAt`] && (forceMap[`teleAddedAt`] || from.TeleAddedAt != ``) {
+		t.TeleAddedAt = S.Trim(from.TeleAddedAt)
 		changed = true
 	}
 	return

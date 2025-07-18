@@ -69,7 +69,7 @@
     </header>
     <div class="forms">
       {#each (FIELDS || []) as field, idx}
-        {#if field.name !== 'id'}
+        {#if field.name !== 'id' && field.name !== 'waAddedAt' && field.name !== 'teleAddedAt'}
           {#if !field.readOnly}
             {#if field.inputType === 'combobox' || field.inputType === 'combobox-arr'}
               <InputBox

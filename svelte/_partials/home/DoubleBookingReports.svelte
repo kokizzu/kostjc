@@ -34,7 +34,7 @@
     </div>
   {:else}
     <div class="no-data">
-      <p>No Unpaid Bookings</p>
+      <p>No Double Bookings</p>
     </div>
   {/if}
 </section>
