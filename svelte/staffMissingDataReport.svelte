@@ -291,9 +291,9 @@
             <th>Room</th>
             <th style="min-width: 170px;">Tenant Name</th>
             <th>Telegram</th>
+            <th>Tele Added</th>
             <th style="min-width: 180px;">WhatsApp</th>
             <th>Wa Added</th>
-            <th>Tele Added</th>
             <th style="min-width: 140px;">Last Use At</th>
           </tr>
         </thead>
@@ -318,20 +318,19 @@
               <td>{data.roomName}</td>
               <td>{data.tenantName || '--'}</td>
               <td>{data.tenantTelegramUsername || '--'}</td>
+              <td class="checkbox-cell">
+                <input
+                  type="checkbox"
+                  checked={data.tenantTeleAddedAt}
+                  on:change={(e) => handleToggleTeleAddedAt(e, data)}
+                />
+              </td>
               <td>{data.tenantWhatsappNumber || '--'}</td>
               <td class="checkbox-cell">
                 <input
                   type="checkbox"
                   checked={data.tenantWaAddedAt}
                   on:change={(e) => handleToggleWaAddedAt(e, data)}
-                />
-              </td>
-              
-              <td class="checkbox-cell">
-                <input
-                  type="checkbox"
-                  checked={data.tenantTeleAddedAt}
-                  on:change={(e) => handleToggleTeleAddedAt(e, data)}
                 />
               </td>
               <td>{data.lastUseAt || '--'}</td>
