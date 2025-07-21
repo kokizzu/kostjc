@@ -1245,10 +1245,13 @@ LEFT JOIN "tenants" t
 	ON b."tenantId" = t."id"
 LEFT JOIN "rooms" r
 	ON b."roomId" = r."id"
-LEFT JOIN "payments" p
+INNER JOIN "payments" p
 	ON b."id" = p."bookingId"
+WHERE
+	b."deletedAt" = 0
 	AND p."deletedAt" = 0
-WHERE b."deletedAt" = 0
+	AND t."deletedAt" = 0
+	AND r."deletedAt" = 0
 GROUP BY b."id"
 HAVING totalPaidIDR <> b."totalPriceIDR"
 ORDER BY t."tenantName" ASC`
