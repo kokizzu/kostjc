@@ -4,8 +4,11 @@
   import { writable } from 'svelte/store';
   import { dateISOFormat } from './xFormatter';
   import { createEventDispatcher } from 'svelte';
+  import InputBox from './InputBox.svelte';
 
   const dispatch = createEventDispatcher();
+
+  export let tenants;
 
   let menuChoices = /** @type {Record<Number, string>} */({/* menuChoices */});
   let menuOptions = convertMapToMenuOptions(menuChoices);
@@ -129,7 +132,7 @@ function decrementMenu(menuId) {
   function submitFormSale() {
     const saleData = /** @type {Sale|any} */ ({
       cashier: cashier,
-      tenantId: String(tenantId),
+      tenantId: tenantId+'',
       buyerName: buyerName,
       menuIds: menuIds,
       salesDate: salesDate,
@@ -148,8 +151,14 @@ function decrementMenu(menuId) {
   </div>
 
   <div class="form-group">
-    <label for="tenantId">ID Tenant</label>
-    <input type="number" id="tenantId" bind:value={tenantId} placeholder="ID Tenant" />
+    <InputBox
+          id="tenantId"
+          label="Tenant"
+          isObject={true}
+          bind:value={tenantId}
+          type="combobox"
+          values={tenants}
+        />
   </div>
 
   <div class="form-group">
@@ -208,7 +217,8 @@ function decrementMenu(menuId) {
 
   .form-group label {
     display: block;
-    font-size: 0.875rem;
+    font-size: 13px;
+    margin-left: 10px;
     font-weight: 500;
     margin-bottom: 0.5rem;
     color: #374151;
@@ -217,10 +227,10 @@ function decrementMenu(menuId) {
   .form-group input,
   .form-group textarea {
     width: 100%;
-    padding: 0.5rem;
+    padding: 1.1rem;
     border: 1px solid #d1d5db;
     border-radius: 0.375rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 
   .form-group input:focus,
@@ -262,12 +272,6 @@ function decrementMenu(menuId) {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
-  .menu-card.selected {
-    border-color: #2563eb;
-    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-  }
-
   .menu-image {
     width: 80px;
     height: 80px;
@@ -291,19 +295,11 @@ function decrementMenu(menuId) {
     color: #374151;
   }
 
-  .menu-card.selected .menu-name {
-    color: #1e40af;
-  }
-
   .menu-price {
     font-size: 0.75rem;
     font-weight: 500;
     margin: 0;
     color: #6b7280;
-  }
-
-  .menu-card.selected .menu-price {
-    color: #2563eb;
   }
 
 
@@ -364,10 +360,11 @@ function decrementMenu(menuId) {
     background-color: #1d4ed8;
   }
 
-  .menu-counter {
+.menu-counter {
   margin-top: 0.5rem;
   display: flex;
   align-items: center;
+  justify-content: center; /* optional: kalau ingin tombol+angka tetap di tengah container */
   gap: 0.5rem;
 }
 
@@ -378,10 +375,22 @@ function decrementMenu(menuId) {
   border-radius: 0.375rem;
   padding: 0.25rem 0.5rem;
   cursor: pointer;
+  font-size: 1rem;          /* pastikan sama dengan span */
+  line-height: 1;           /* agar tidak melebihi tinggi */
+  height: 32px;             /* tambahkan tinggi agar seragam */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu-counter span {
   min-width: 1.5rem;
   text-align: center;
+  font-size: 1rem;
+  line-height: 1;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

@@ -23,6 +23,8 @@ module.exports = {};
  * @property {string|number} tenantId
  * @property {string} buyerName
  * @property {number[]} menuIds
+ * @property {string} paymentMethod
+ * @property {string} paymentStatus
  * @property {number} transferIDR
  * @property {number} qrisIDR
  * @property {number} cashIDR
@@ -49,7 +51,8 @@ module.exports = {};
  * @property {number} id
  * @property {string} customer
  * @property {number} amount
- * @property {"Cash" | "QRIS" | "Transfer"} method
+ * @property {string} method
+ * @property {string} status
  * @property {string} time
  */
 module.exports = {};

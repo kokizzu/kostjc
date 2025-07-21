@@ -911,6 +911,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 
+		rqTenants := rqAuth.NewTenants(d.PropOltp)
+		tenants := rqTenants.FindTenantChoices()
+
 		menuOrm := rqCafe.NewMenus(d.PropOltp)
 		menuChoices := menuOrm.FindMenusSalesChoices()
 
@@ -935,6 +938,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`fields`:      out.Meta.Fields,
 			`pager`:       out.Pager,
 			`menuChoices`: menuChoices,
+			`tenants`:     tenants,
 		})
 	})
 

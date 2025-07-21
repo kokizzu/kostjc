@@ -20,6 +20,7 @@
   let sales = /** @type {any[][]} */([/* sales */]);
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
+  let tenants = /** @type {Record<Number, string>} */ ({/* tenants */});
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = {
@@ -75,5 +76,6 @@
   <MasterSales
   sales={sales}
   OnSubmit={OnAddSale}
+  tenants={tenants}
   />
 </LayoutMain>

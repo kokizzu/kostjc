@@ -36,6 +36,7 @@
 
 
   export let sales;
+  export let tenants;
 
   if (sales == undefined || sales == null) {
     sales = [];
@@ -114,14 +115,32 @@
   ];
 
   // Computed values
-
   let totalSales = 0;
   let totalPayments = 0;
 
-  if (sales != undefined) {
-    totalSales = sales.reduce((sum, sale) => sum + sale[11], 0);
-    totalPayments = todayPayments.reduce((sum, payment) => sum + payment.amount, 0);
-  }
+console.log("Today Sales:", sales);
+console.log("Today Payments:", todayPayments);
+
+if (sales && Array.isArray(sales) && sales.length > 0) {
+  totalSales = sales.reduce((sum, sale) => {
+    const saleAmount = sale[13] || 0;
+    return sum + (typeof saleAmount === 'number' ? saleAmount : 0);
+  }, 0);
+  
+  console.log("Calculated Total Sales:", totalSales);
+}
+
+if (todayPayments && Array.isArray(todayPayments) && todayPayments.length > 0) {
+  totalPayments = todayPayments.reduce((sum, payment) => {
+    const paymentAmount = payment.amount || 0;
+    return sum + (typeof paymentAmount === 'number' ? paymentAmount : 0);
+  }, 0);
+  
+  console.log("Calculated Total Payments:", totalPayments);
+}
+
+console.log("Final Total Sales:", totalSales);
+console.log("Final Total Payments:", totalPayments);
 
   // State for modals
   let showSaleForm = false;
@@ -133,6 +152,8 @@
     tenantId: '0',
     buyerName: '',
     menuIds: [],
+    paymentMethod: '',
+    paymentStatus: '',
     transferIDR: 0,
     qrisIDR: 0,
     cashIDR: 0,
@@ -452,7 +473,7 @@
             <Icon src={FiX} size={18} />
           </button>
         </div>
-        <SaleForm on:saleSubmit={handleSaleSubmit} />
+        <SaleForm on:saleSubmit={handleSaleSubmit} tenants={tenants} />
       </div>
     </div>
   {/if}
