@@ -377,6 +377,16 @@
           <Icon size="20" src={RiArrowsArrowRightSLine} />
         </button>
       </div>
+      <div class="legends">
+        <div class="legend">
+          <span class="block not-paid"></span>
+          <span class="text">Overdue & Unpaid</span>
+        </div>
+        <div class="legend">
+          <span class="block warning"></span>
+          <span class="text">Upcoming Due</span>
+        </div>
+      </div>
       <div class="filters">
         <Switcher
           id="show-refunded"
@@ -555,6 +565,42 @@
   .report-container .actions .quartal-shifter .month-text {
     font-weight: 600;
     font-size: 18px;
+    user-select: none;
+  }
+
+  .report-container .actions .legends {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .report-container .actions .legends .legend {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .report-container .actions .legends .legend .block {
+    height: 25px;
+    width: 45px;
+    border-radius: 5px;
+  }
+
+  .report-container .actions .legends .legend .block.not-paid {
+    background-color: var(--red-transparent);
+    border: var(--red-006) 1px solid;
+  }
+
+  .report-container .actions .legends .legend .block.warning {
+    background-color: var(--yellow-transparent);
+    border: var(--yellow-006) 1px solid;
+  }
+
+  .report-container .actions .legends .legend .text {
+    font-size: 14px;
+    font-weight: 600;
     user-select: none;
   }
 
