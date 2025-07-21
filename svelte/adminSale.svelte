@@ -33,6 +33,10 @@
   let tenants = /** @type {Record<Number, string>} */ ({/* tenants */});
   let menus     = /** @type {Record<Number, string>} */({/* menus */});
 
+  if (sales === undefined || sales === null) {
+    sales = [];
+  }
+
   const PaymentMethods = [
     'Cash',
     'QRIS',
