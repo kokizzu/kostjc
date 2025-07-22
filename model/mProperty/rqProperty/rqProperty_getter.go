@@ -1273,6 +1273,12 @@ ORDER BY t."tenantName" ASC`
 		}
 	})
 
+	sort.Slice(out, func(i, j int) bool {
+		t1, _ := time.Parse(time.DateOnly, out[i].DateStart)
+		t2, _ := time.Parse(time.DateOnly, out[j].DateStart)
+		return t1.Before(t2)
+	})
+
 	return
 }
 

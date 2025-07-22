@@ -380,7 +380,7 @@
       <div class="legends">
         <div class="legend">
           <span class="block not-paid"></span>
-          <span class="text">Overdue & Unpaid</span>
+          <span class="text">Overdue or Unpaid</span>
         </div>
         <div class="legend">
           <span class="block warning"></span>

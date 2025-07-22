@@ -18215,6 +18215,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       []
     );
     function resfreshStringJson() {
+      if (!stringJson)
+        return;
+      if (stringJson == "")
+        return;
       let facilitiesArrOfObj = (
         /** @type {FacilityJson[]} */
         []
@@ -18264,7 +18268,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           }
         ]);
       });
-      if (stringJson) {
+      console.log("String JSON ::", stringJson);
+      if (stringJson || stringJson != "") {
         try {
           facilitiesJson = JSON.parse(stringJson);
         } catch (err) {
@@ -18308,7 +18313,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       1) {
         $:
           if (valueSvelteSelectedFacilities) {
-            resfreshStringJson();
+            setTimeout(
+              () => {
+                resfreshStringJson();
+              },
+              400
+            );
           }
       }
     };

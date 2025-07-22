@@ -46,6 +46,9 @@
   }
 
   function resfreshStringJson() {
+    if (!stringJson) return;
+    if (stringJson == '') return;
+
     let facilitiesArrOfObj = /** @type {FacilityJson[]} */ ([]);
     (valueSvelteSelectedFacilities || []).forEach(v => {
       if (parseInt(v.value)) {
@@ -67,7 +70,9 @@
   }
 
   $: if (valueSvelteSelectedFacilities) {
-    resfreshStringJson();
+    setTimeout(() => {
+      resfreshStringJson();
+    }, 400);
   }
 
   let isFacilitiesReady = false;
@@ -75,11 +80,6 @@
   function handleSelectFacilities(/** @type {CustomEvent} */e) {
     console.log('handleSelectFacilities:',e.detail)
     facilitiesIds = [...facilitiesIds, e.detail.value];
-    // facilities.forEach((f) => {
-    //   if (f.id === e.detail.value) {
-    //     facilitiesPrice += f.extraChargeIDR || 0;
-    //   }
-    // })
   }
 
   function handleClearFacilities(/** @type {CustomEvent} */e) {
@@ -87,11 +87,6 @@
     if (index !== -1) {
       facilitiesIds.splice(index, 1);
     }
-    // facilities.forEach((f) => {
-    //   if (f.id === e.detail.value) {
-    //     facilitiesPrice -= f.extraChargeIDR || 0;
-    //   }
-    // })
   }
   
   let facilitiesJson = /** @type {FacilityJson[]} */ ([]);
@@ -103,7 +98,8 @@
         label: `${f.facilityName} ${f.facilityType ? `(${f.facilityType})` : ''}`
       }]
     });
-    if (stringJson) {
+    console.log('String JSON ::', stringJson)
+    if (stringJson || stringJson != '') {
       try {
         facilitiesJson = JSON.parse(stringJson);
       } catch (err) {

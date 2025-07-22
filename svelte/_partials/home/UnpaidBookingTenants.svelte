@@ -31,12 +31,6 @@
     
     return `H${diffDays}`;
   }
-
-  onMount(() => {
-    (unpaidBookingTenants || []).sort((a, b) => {
-      return new Date(a.dateStart).getTime() - new Date(b.dateStart).getTime();
-    })
-  })
 </script>
 
 <section class="empty-unpaidBookingTenants">
@@ -49,7 +43,7 @@
           <div class="desc">
             <span>Room {ub.roomName}</span>
             <span>{ub.totalPaid}/{ub.totalPrice}</span>
-            <span>{ub.dateStart} ({getRelativeDayLabel(ub.dateStart)})</span>
+            <span>Start at {ub.dateStart} ({getRelativeDayLabel(ub.dateStart)})</span>
           </div>
         </div>
       {/each}
