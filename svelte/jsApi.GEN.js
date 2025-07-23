@@ -2054,6 +2054,8 @@ exports.AdminStockLogs = async function AdminStockLogs( i, cb ) {
  * @property {number} tenant.deletedBy
  * @property {number} tenant.restoredBy
  * @property {String} tenant.ktpOccupation
+ * @property {String} tenant.waAddedAt
+ * @property {String} tenant.teleAddedAt
  */
 const AdminTenantsIn = {
   cmd: '', // string
@@ -2093,6 +2095,8 @@ const AdminTenantsIn = {
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
     ktpOccupation: '', // string
+    waAddedAt: '', // string
+    teleAddedAt: '', // string
   }, // rqAuth.Tenants
 }
 /**
@@ -2133,6 +2137,8 @@ const AdminTenantsIn = {
  * @property {number} tenant.deletedBy
  * @property {number} tenant.restoredBy
  * @property {String} tenant.ktpOccupation
+ * @property {String} tenant.waAddedAt
+ * @property {String} tenant.teleAddedAt
  * @property {Object} tenants
  */
 const AdminTenantsOut = {
@@ -2180,6 +2186,8 @@ const AdminTenantsOut = {
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
     ktpOccupation: '', // string
+    waAddedAt: '', // string
+    teleAddedAt: '', // string
   }, // rqAuth.Tenants
   tenants: { // [][]any
   }, // [][]any
@@ -3113,6 +3121,7 @@ const StaffRevenueReportIn = {
  * @property {String} user.role
  * @property {Object} segments
  * @property {Object} revenueReports
+ * @property {Object} chartRevenueReports
  */
 const StaffRevenueReportOut = {
   user: { // rqAuth.Users
@@ -3137,6 +3146,8 @@ const StaffRevenueReportOut = {
   }, // M.SB
   revenueReports: { // []rqProperty.RevenueReport
   }, // []rqProperty.RevenueReport
+  chartRevenueReports: { // []rqProperty.ChartRevenueReport
+  }, // []rqProperty.ChartRevenueReport
 }
 /**
  * @callback StaffRevenueReportCallback

@@ -1716,3 +1716,49 @@ GROUP BY "paymentAt"`
 
 	return
 }
+
+type UpcomingTenant struct {
+	TenantName string `json:"tenantName"`
+	RoomName   string `json:"roomName"`
+	DateStart  string `json:"dateStart"`
+	DateEnd    string `json:"dateEnd"`
+}
+
+func (b *Bookings) GetUpcomingTenants() (out []UpcomingTenant) {
+	const comment = `-- Bookings) GetUpcomingTenants`
+
+	dateNow := time.Now().Format(time.DateOnly)
+	query := comment + `
+SELECT
+	r."roomName",
+	t."tenantName",
+	b."dateStart",
+	b."dateEnd"
+FROM "bookings" b
+LEFT JOIN "rooms" r ON r."id" = b."roomId"
+LEFT JOIN "tenants" t ON t."id" = b."tenantId"
+WHERE b."dateStart" >= ` + S.Z(dateNow) + `
+	AND NOT EXISTS (
+		SELECT 1
+		FROM "bookings" prev
+		WHERE prev."roomId" = b."roomId"
+			AND prev."tenantId" = b."tenantId"
+			AND prev."dateStart" < b."dateStart"
+  )
+ORDER BY b."dateStart" ASC`
+
+	b.Adapter.QuerySql(query, func(row []any) {
+		if len(row) != 4 {
+			return
+		}
+		out = append(out, UpcomingTenant{
+			TenantName: X.ToS(row[1]),
+			RoomName:   X.ToS(row[0]),
+			DateStart:  X.ToS(row[2]),
+			DateEnd:    X.ToS(row[3]),
+		})
+
+	})
+
+	return
+}

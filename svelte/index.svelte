@@ -13,6 +13,7 @@
   import AvailableRooms from './_partials/home/AvailableRooms.svelte';
     import UnpaidBookingTenants from './_partials/home/UnpaidBookingTenants.svelte';
     import DoubleBookingReports from './_partials/home/DoubleBookingReports.svelte';
+    import UpcomingTenants from './_partials/home/UpcomingTenants.svelte';
 
   let title = '#{title}';
   let user  = /** @type {User} */ ({/* user */});
@@ -146,6 +147,7 @@
       <AvailableRooms />
       <UnpaidBookingTenants />
       <DoubleBookingReports />
+      <UpcomingTenants />
     </div>
   </LayoutMain>
 {:else}
