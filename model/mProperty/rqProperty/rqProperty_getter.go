@@ -839,7 +839,9 @@ WHERE
     OR
     "bookings"."dateEnd" BETWEEN ` + S.Z(monthStart) + ` AND ` + S.Z(monthEnd) + `
   )
-GROUP BY "rooms"."roomName", "tenants"."tenantName", "bookings"."dateStart", "bookings"."dateEnd", "bookings"."totalPriceIDR"
+GROUP BY
+	"bookings"."id",
+	"rooms"."roomName"
 ORDER BY "rooms"."roomName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
