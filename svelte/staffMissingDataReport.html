@@ -1385,6 +1385,76 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   border-radius: 50%;
 }
 
+/* fakecss:./_components/PopUpShowBookingMissingTenant.esbuild-svelte-fake-css */
+.popup-container.svelte-m2ydvm.svelte-m2ydvm {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+  background-color: rgba(0 0 0 / 40%);
+  backdrop-filter: blur(1px);
+  justify-content: center;
+  padding: 50px;
+  overflow: auto;
+}
+.popup-container.show.svelte-m2ydvm.svelte-m2ydvm {
+  display: flex;
+}
+.popup-container.svelte-m2ydvm .popup.svelte-m2ydvm {
+  border-radius: 8px;
+  background-color: #FFF;
+  height: fit-content;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.popup-container.svelte-m2ydvm .popup header.svelte-m2ydvm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--gray-004);
+}
+.popup-container.svelte-m2ydvm .popup header h2.svelte-m2ydvm {
+  margin: 0;
+}
+.popup-container.svelte-m2ydvm .popup header button.svelte-m2ydvm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.popup-container.svelte-m2ydvm .popup header button.svelte-m2ydvm:hover {
+  background-color: #ef444420;
+}
+.popup-container.svelte-m2ydvm .popup header button.svelte-m2ydvm:active {
+  background-color: #ef444430;
+}
+.popup-container.svelte-m2ydvm .popup .forms.svelte-m2ydvm {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media only screen and (max-width : 768px) {
+  .popup-container.svelte-m2ydvm.svelte-m2ydvm {
+    padding: 10px;
+  }
+  .popup-container.svelte-m2ydvm .popup.svelte-m2ydvm {
+    width: 100%;
+  }
+}
+
 /* fakecss:./staffMissingDataReport.esbuild-svelte-fake-css */
 .report-container.svelte-lch0hh.svelte-lch0hh {
   display: flex;
@@ -3854,13 +3924,13 @@ table tbody tr td .actions .btn:hover svg {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance11 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance11, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance11, context, null, { allOwnKeys: true });
-        instance11.create = function create(instanceConfig) {
+        const instance12 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance12, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance12, context, null, { allOwnKeys: true });
+        instance12.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance11;
+        return instance12;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -4197,7 +4267,7 @@ table tbody tr td .actions .btn:hover svg {
   var require_xConstant = __commonJS({
     "_components/xConstant.js"(exports, module) {
       var CmdList = `list`;
-      var CmdForm = `form`;
+      var CmdForm2 = `form`;
       var CmdUpsert2 = `upsert`;
       var CmdRestore = `restore`;
       var CmdDelete = `delete`;
@@ -4205,7 +4275,7 @@ table tbody tr td .actions .btn:hover svg {
       var CmdToggleTeleAdded2 = `toggle_tele_added`;
       module.exports = {
         CmdList,
-        CmdForm,
+        CmdForm: CmdForm2,
         CmdUpsert: CmdUpsert2,
         CmdRestore,
         CmdDelete,
@@ -4786,7 +4856,7 @@ table tbody tr td .actions .btn:hover svg {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance11, create_fragment14, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance12, create_fragment15, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -4812,7 +4882,7 @@ table tbody tr td .actions .btn:hover svg {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance11 ? instance11(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance12 ? instance12(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -4825,7 +4895,7 @@ table tbody tr td .actions .btn:hover svg {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment14 ? create_fragment14($.ctx) : false;
+    $.fragment = create_fragment15 ? create_fragment15($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -5345,6 +5415,7 @@ table tbody tr td .actions .btn:hover svg {
   var RiUserFacesGroupLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>' };
   var RiSystemMenu2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 4H21V6H3V4ZM3 11H15V13H3V11ZM3 18H21V20H3V18Z"></path>' };
   var RiSystemSettingsLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"></path>' };
+  var RiSystemHistoryFill = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C9.53614 4 7.33243 5.11383 5.86492 6.86543L8 9H2V3L4.44656 5.44648C6.28002 3.33509 8.9841 2 12 2ZM13 7L12.9998 11.585L16.2426 14.8284L14.8284 16.2426L10.9998 12.413L11 7H13Z"></path>' };
   var RiSystemLogoutBoxRLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path>' };
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
   var RiFinanceCashLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path>' };
@@ -17119,278 +17190,92 @@ table tbody tr td .actions .btn:hover svg {
   // staffMissingDataReport.svelte
   var import_xFormatter2 = __toESM(require_xFormatter());
   var import_xConstant2 = __toESM(require_xConstant());
-  function get_each_context3(ctx, list, i) {
-    const child_ctx = ctx.slice();
-    child_ctx[22] = list[i];
-    return child_ctx;
-  }
-  function create_if_block5(ctx) {
-    let popupeditmissingtenant;
-    let updating_isSubmitted;
-    let current;
-    function popupeditmissingtenant_isSubmitted_binding(value) {
-      ctx[11](value);
-    }
-    let popupeditmissingtenant_props = {
-      OnSubmit: (
-        /*submitEditMissingTenant*/
-        ctx[6]
-      )
-    };
-    if (
-      /*isSubmitEditMissingTenant*/
-      ctx[2] !== void 0
-    ) {
-      popupeditmissingtenant_props.isSubmitted = /*isSubmitEditMissingTenant*/
-      ctx[2];
-    }
-    popupeditmissingtenant = new PopUpEditMissingTenant_default({ props: popupeditmissingtenant_props });
-    ctx[10](popupeditmissingtenant);
-    binding_callbacks.push(() => bind(popupeditmissingtenant, "isSubmitted", popupeditmissingtenant_isSubmitted_binding));
-    return {
-      c() {
-        create_component(popupeditmissingtenant.$.fragment);
-      },
-      m(target, anchor) {
-        mount_component(popupeditmissingtenant, target, anchor);
-        current = true;
-      },
-      p(ctx2, dirty) {
-        const popupeditmissingtenant_changes = {};
-        if (!updating_isSubmitted && dirty & /*isSubmitEditMissingTenant*/
-        4) {
-          updating_isSubmitted = true;
-          popupeditmissingtenant_changes.isSubmitted = /*isSubmitEditMissingTenant*/
-          ctx2[2];
-          add_flush_callback(() => updating_isSubmitted = false);
-        }
-        popupeditmissingtenant.$set(popupeditmissingtenant_changes);
-      },
-      i(local) {
-        if (current)
-          return;
-        transition_in(popupeditmissingtenant.$.fragment, local);
-        current = true;
-      },
-      o(local) {
-        transition_out(popupeditmissingtenant.$.fragment, local);
-        current = false;
-      },
-      d(detaching) {
-        ctx[10](null);
-        destroy_component(popupeditmissingtenant, detaching);
-      }
-    };
-  }
-  function create_each_block3(ctx) {
-    let tr;
-    let td0;
-    let div;
-    let button;
-    let icon;
+
+  // _components/PopUpShowBookingMissingTenant.svelte
+  function create_fragment13(ctx) {
+    let div2;
+    let div1;
+    let header;
+    let h2;
     let t0;
-    let td1;
-    let t1_value = (
-      /*data*/
-      ctx[22].roomName + ""
-    );
     let t1;
     let t2;
-    let td2;
-    let t3_value = (
-      /*data*/
-      (ctx[22].tenantName || "--") + ""
-    );
+    let button;
+    let icon;
     let t3;
-    let t4;
-    let td3;
-    let t5_value = (
-      /*data*/
-      (ctx[22].tenantTelegramUsername || "--") + ""
-    );
-    let t5;
-    let t6;
-    let td4;
-    let input0;
-    let input0_checked_value;
-    let t7;
-    let td5;
-    let t8_value = (
-      /*data*/
-      (ctx[22].tenantWhatsappNumber || "--") + ""
-    );
-    let t8;
-    let t9;
-    let td6;
-    let input1;
-    let input1_checked_value;
-    let t10;
-    let td7;
-    let t11_value = (
-      /*data*/
-      (ctx[22].lastUseAt || "--") + ""
-    );
-    let t11;
-    let t12;
+    let div0;
+    let div2_class_value;
     let current;
     let mounted;
     let dispose;
     icon = new Icon_default({
       props: {
-        size: "15",
-        color: "var(--gray-007)",
-        src: RiDesignBallPenLine
+        size: "22",
+        color: "var(--red-005)",
+        src: IoClose
       }
     });
-    function click_handler() {
-      return (
-        /*click_handler*/
-        ctx[13](
-          /*data*/
-          ctx[22]
-        )
-      );
-    }
-    function change_handler(...args) {
-      return (
-        /*change_handler*/
-        ctx[14](
-          /*data*/
-          ctx[22],
-          ...args
-        )
-      );
-    }
-    function change_handler_1(...args) {
-      return (
-        /*change_handler_1*/
-        ctx[15](
-          /*data*/
-          ctx[22],
-          ...args
-        )
-      );
-    }
     return {
       c() {
-        tr = element("tr");
-        td0 = element("td");
-        div = element("div");
+        div2 = element("div");
+        div1 = element("div");
+        header = element("header");
+        h2 = element("h2");
+        t0 = text("Booking History of ");
+        t1 = text(
+          /*tenantName*/
+          ctx[0]
+        );
+        t2 = space();
         button = element("button");
         create_component(icon.$.fragment);
-        t0 = space();
-        td1 = element("td");
-        t1 = text(t1_value);
-        t2 = space();
-        td2 = element("td");
-        t3 = text(t3_value);
-        t4 = space();
-        td3 = element("td");
-        t5 = text(t5_value);
-        t6 = space();
-        td4 = element("td");
-        input0 = element("input");
-        t7 = space();
-        td5 = element("td");
-        t8 = text(t8_value);
-        t9 = space();
-        td6 = element("td");
-        input1 = element("input");
-        t10 = space();
-        td7 = element("td");
-        t11 = text(t11_value);
-        t12 = space();
-        attr(button, "class", "btn svelte-lch0hh");
-        attr(button, "title", "Edit");
-        attr(div, "class", "actions svelte-lch0hh");
-        attr(td0, "class", "svelte-lch0hh");
-        attr(td1, "class", "svelte-lch0hh");
-        attr(td2, "class", "svelte-lch0hh");
-        attr(td3, "class", "svelte-lch0hh");
-        attr(input0, "type", "checkbox");
-        input0.checked = input0_checked_value = /*data*/
-        ctx[22].tenantTeleAddedAt;
-        attr(input0, "class", "svelte-lch0hh");
-        attr(td4, "class", "checkbox-cell svelte-lch0hh");
-        attr(td5, "class", "svelte-lch0hh");
-        attr(input1, "type", "checkbox");
-        input1.checked = input1_checked_value = /*data*/
-        ctx[22].tenantWaAddedAt;
-        attr(input1, "class", "svelte-lch0hh");
-        attr(td6, "class", "checkbox-cell svelte-lch0hh");
-        attr(td7, "class", "svelte-lch0hh");
-        attr(tr, "class", "svelte-lch0hh");
+        t3 = space();
+        div0 = element("div");
+        div0.innerHTML = `<h4>Cihuyy</h4>`;
+        attr(h2, "class", "svelte-m2ydvm");
+        attr(button, "class", "svelte-m2ydvm");
+        attr(header, "class", "header svelte-m2ydvm");
+        attr(div0, "class", "forms svelte-m2ydvm");
+        attr(div1, "class", "popup svelte-m2ydvm");
+        attr(div2, "class", div2_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx[2] ? "show" : ""}`) + " svelte-m2ydvm");
       },
       m(target, anchor) {
-        insert(target, tr, anchor);
-        append(tr, td0);
-        append(td0, div);
-        append(div, button);
+        insert(target, div2, anchor);
+        append(div2, div1);
+        append(div1, header);
+        append(header, h2);
+        append(h2, t0);
+        append(h2, t1);
+        append(header, t2);
+        append(header, button);
         mount_component(icon, button, null);
-        append(tr, t0);
-        append(tr, td1);
-        append(td1, t1);
-        append(tr, t2);
-        append(tr, td2);
-        append(td2, t3);
-        append(tr, t4);
-        append(tr, td3);
-        append(td3, t5);
-        append(tr, t6);
-        append(tr, td4);
-        append(td4, input0);
-        append(tr, t7);
-        append(tr, td5);
-        append(td5, t8);
-        append(tr, t9);
-        append(tr, td6);
-        append(td6, input1);
-        append(tr, t10);
-        append(tr, td7);
-        append(td7, t11);
-        append(tr, t12);
+        append(div1, t3);
+        append(div1, div0);
         current = true;
         if (!mounted) {
-          dispose = [
-            listen(button, "click", click_handler),
-            listen(input0, "change", change_handler),
-            listen(input1, "change", change_handler_1)
-          ];
+          dispose = listen(
+            button,
+            "click",
+            /*Hide*/
+            ctx[1]
+          );
           mounted = true;
         }
       },
-      p(new_ctx, dirty) {
-        ctx = new_ctx;
-        if ((!current || dirty & /*missingDataFiltered*/
-        16) && t1_value !== (t1_value = /*data*/
-        ctx[22].roomName + ""))
-          set_data(t1, t1_value);
-        if ((!current || dirty & /*missingDataFiltered*/
-        16) && t3_value !== (t3_value = /*data*/
-        (ctx[22].tenantName || "--") + ""))
-          set_data(t3, t3_value);
-        if ((!current || dirty & /*missingDataFiltered*/
-        16) && t5_value !== (t5_value = /*data*/
-        (ctx[22].tenantTelegramUsername || "--") + ""))
-          set_data(t5, t5_value);
-        if (!current || dirty & /*missingDataFiltered*/
-        16 && input0_checked_value !== (input0_checked_value = /*data*/
-        ctx[22].tenantTeleAddedAt)) {
-          input0.checked = input0_checked_value;
+      p(ctx2, [dirty]) {
+        if (!current || dirty & /*tenantName*/
+        1)
+          set_data(
+            t1,
+            /*tenantName*/
+            ctx2[0]
+          );
+        if (!current || dirty & /*isShow*/
+        4 && div2_class_value !== (div2_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[2] ? "show" : ""}`) + " svelte-m2ydvm")) {
+          attr(div2, "class", div2_class_value);
         }
-        if ((!current || dirty & /*missingDataFiltered*/
-        16) && t8_value !== (t8_value = /*data*/
-        (ctx[22].tenantWhatsappNumber || "--") + ""))
-          set_data(t8, t8_value);
-        if (!current || dirty & /*missingDataFiltered*/
-        16 && input1_checked_value !== (input1_checked_value = /*data*/
-        ctx[22].tenantWaAddedAt)) {
-          input1.checked = input1_checked_value;
-        }
-        if ((!current || dirty & /*missingDataFiltered*/
-        16) && t11_value !== (t11_value = /*data*/
-        (ctx[22].lastUseAt || "--") + ""))
-          set_data(t11, t11_value);
       },
       i(local) {
         if (current)
@@ -17404,9 +17289,464 @@ table tbody tr td .actions .btn:hover svg {
       },
       d(detaching) {
         if (detaching) {
-          detach(tr);
+          detach(div2);
         }
         destroy_component(icon);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function instance10($self, $props, $invalidate) {
+    let { tenantName = "" } = $props;
+    let { bookings = (
+      /** @type {TenantBookingDetail[]} */
+      []
+    ) } = $props;
+    let { payments = (
+      /** @type {PaymentOfBooking[]} */
+      []
+    ) } = $props;
+    let isShow = false;
+    const Show = () => $invalidate(2, isShow = true);
+    const Hide = () => $invalidate(2, isShow = false);
+    $self.$set = ($props2) => {
+      if ("tenantName" in $props2)
+        $invalidate(0, tenantName = $props2.tenantName);
+      if ("bookings" in $props2)
+        $invalidate(3, bookings = $props2.bookings);
+      if ("payments" in $props2)
+        $invalidate(4, payments = $props2.payments);
+    };
+    $self.$.update = () => {
+      if ($self.$.dirty & /*tenantName, bookings, payments*/
+      25) {
+        $:
+          if (tenantName) {
+            console.log("Bookings", bookings);
+            console.log("Payments", payments);
+          }
+      }
+    };
+    return [tenantName, Hide, isShow, bookings, payments, Show];
+  }
+  var PopUpShowBookingMissingTenant = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance10, create_fragment13, safe_not_equal, {
+        tenantName: 0,
+        bookings: 3,
+        payments: 4,
+        Show: 5,
+        Hide: 1
+      });
+    }
+    get Show() {
+      return this.$.ctx[5];
+    }
+    get Hide() {
+      return this.$.ctx[1];
+    }
+  };
+  var PopUpShowBookingMissingTenant_default = PopUpShowBookingMissingTenant;
+
+  // staffMissingDataReport.svelte
+  function get_each_context3(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[32] = list[i];
+    return child_ctx;
+  }
+  function create_if_block5(ctx) {
+    let popupeditmissingtenant;
+    let updating_isSubmitted;
+    let t;
+    let popupshowbookingmissingtenant;
+    let updating_tenantName;
+    let updating_bookings;
+    let updating_payments;
+    let current;
+    function popupeditmissingtenant_isSubmitted_binding(value) {
+      ctx[16](value);
+    }
+    let popupeditmissingtenant_props = {
+      OnSubmit: (
+        /*submitEditMissingTenant*/
+        ctx[10]
+      )
+    };
+    if (
+      /*isSubmitEditMissingTenant*/
+      ctx[2] !== void 0
+    ) {
+      popupeditmissingtenant_props.isSubmitted = /*isSubmitEditMissingTenant*/
+      ctx[2];
+    }
+    popupeditmissingtenant = new PopUpEditMissingTenant_default({ props: popupeditmissingtenant_props });
+    ctx[15](popupeditmissingtenant);
+    binding_callbacks.push(() => bind(popupeditmissingtenant, "isSubmitted", popupeditmissingtenant_isSubmitted_binding));
+    function popupshowbookingmissingtenant_tenantName_binding(value) {
+      ctx[18](value);
+    }
+    function popupshowbookingmissingtenant_bookings_binding(value) {
+      ctx[19](value);
+    }
+    function popupshowbookingmissingtenant_payments_binding(value) {
+      ctx[20](value);
+    }
+    let popupshowbookingmissingtenant_props = {};
+    if (
+      /*tenantName*/
+      ctx[6] !== void 0
+    ) {
+      popupshowbookingmissingtenant_props.tenantName = /*tenantName*/
+      ctx[6];
+    }
+    if (
+      /*bookingsOfTenant*/
+      ctx[7] !== void 0
+    ) {
+      popupshowbookingmissingtenant_props.bookings = /*bookingsOfTenant*/
+      ctx[7];
+    }
+    if (
+      /*paymentsOfBookingOfTenant*/
+      ctx[8] !== void 0
+    ) {
+      popupshowbookingmissingtenant_props.payments = /*paymentsOfBookingOfTenant*/
+      ctx[8];
+    }
+    popupshowbookingmissingtenant = new PopUpShowBookingMissingTenant_default({
+      props: popupshowbookingmissingtenant_props
+    });
+    ctx[17](popupshowbookingmissingtenant);
+    binding_callbacks.push(() => bind(popupshowbookingmissingtenant, "tenantName", popupshowbookingmissingtenant_tenantName_binding));
+    binding_callbacks.push(() => bind(popupshowbookingmissingtenant, "bookings", popupshowbookingmissingtenant_bookings_binding));
+    binding_callbacks.push(() => bind(popupshowbookingmissingtenant, "payments", popupshowbookingmissingtenant_payments_binding));
+    return {
+      c() {
+        create_component(popupeditmissingtenant.$.fragment);
+        t = space();
+        create_component(popupshowbookingmissingtenant.$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(popupeditmissingtenant, target, anchor);
+        insert(target, t, anchor);
+        mount_component(popupshowbookingmissingtenant, target, anchor);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        const popupeditmissingtenant_changes = {};
+        if (!updating_isSubmitted && dirty[0] & /*isSubmitEditMissingTenant*/
+        4) {
+          updating_isSubmitted = true;
+          popupeditmissingtenant_changes.isSubmitted = /*isSubmitEditMissingTenant*/
+          ctx2[2];
+          add_flush_callback(() => updating_isSubmitted = false);
+        }
+        popupeditmissingtenant.$set(popupeditmissingtenant_changes);
+        const popupshowbookingmissingtenant_changes = {};
+        if (!updating_tenantName && dirty[0] & /*tenantName*/
+        64) {
+          updating_tenantName = true;
+          popupshowbookingmissingtenant_changes.tenantName = /*tenantName*/
+          ctx2[6];
+          add_flush_callback(() => updating_tenantName = false);
+        }
+        if (!updating_bookings && dirty[0] & /*bookingsOfTenant*/
+        128) {
+          updating_bookings = true;
+          popupshowbookingmissingtenant_changes.bookings = /*bookingsOfTenant*/
+          ctx2[7];
+          add_flush_callback(() => updating_bookings = false);
+        }
+        if (!updating_payments && dirty[0] & /*paymentsOfBookingOfTenant*/
+        256) {
+          updating_payments = true;
+          popupshowbookingmissingtenant_changes.payments = /*paymentsOfBookingOfTenant*/
+          ctx2[8];
+          add_flush_callback(() => updating_payments = false);
+        }
+        popupshowbookingmissingtenant.$set(popupshowbookingmissingtenant_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(popupeditmissingtenant.$.fragment, local);
+        transition_in(popupshowbookingmissingtenant.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(popupeditmissingtenant.$.fragment, local);
+        transition_out(popupshowbookingmissingtenant.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(t);
+        }
+        ctx[15](null);
+        destroy_component(popupeditmissingtenant, detaching);
+        ctx[17](null);
+        destroy_component(popupshowbookingmissingtenant, detaching);
+      }
+    };
+  }
+  function create_each_block3(ctx) {
+    let tr;
+    let td0;
+    let div;
+    let button0;
+    let icon0;
+    let t0;
+    let button1;
+    let icon1;
+    let t1;
+    let td1;
+    let t2_value = (
+      /*data*/
+      ctx[32].roomName + ""
+    );
+    let t2;
+    let t3;
+    let td2;
+    let t4_value = (
+      /*data*/
+      (ctx[32].tenantName || "--") + ""
+    );
+    let t4;
+    let t5;
+    let td3;
+    let t6_value = (
+      /*data*/
+      (ctx[32].tenantTelegramUsername || "--") + ""
+    );
+    let t6;
+    let t7;
+    let td4;
+    let input0;
+    let input0_checked_value;
+    let t8;
+    let td5;
+    let t9_value = (
+      /*data*/
+      (ctx[32].tenantWhatsappNumber || "--") + ""
+    );
+    let t9;
+    let t10;
+    let td6;
+    let input1;
+    let input1_checked_value;
+    let t11;
+    let td7;
+    let t12_value = (
+      /*data*/
+      (ctx[32].lastUseAt || "--") + ""
+    );
+    let t12;
+    let t13;
+    let current;
+    let mounted;
+    let dispose;
+    icon0 = new Icon_default({
+      props: {
+        size: "15",
+        color: "var(--gray-007)",
+        src: RiDesignBallPenLine
+      }
+    });
+    function click_handler() {
+      return (
+        /*click_handler*/
+        ctx[22](
+          /*data*/
+          ctx[32]
+        )
+      );
+    }
+    icon1 = new Icon_default({
+      props: {
+        size: "15",
+        color: "var(--gray-007)",
+        src: RiSystemHistoryFill
+      }
+    });
+    function click_handler_1() {
+      return (
+        /*click_handler_1*/
+        ctx[23](
+          /*data*/
+          ctx[32]
+        )
+      );
+    }
+    function change_handler(...args) {
+      return (
+        /*change_handler*/
+        ctx[24](
+          /*data*/
+          ctx[32],
+          ...args
+        )
+      );
+    }
+    function change_handler_1(...args) {
+      return (
+        /*change_handler_1*/
+        ctx[25](
+          /*data*/
+          ctx[32],
+          ...args
+        )
+      );
+    }
+    return {
+      c() {
+        tr = element("tr");
+        td0 = element("td");
+        div = element("div");
+        button0 = element("button");
+        create_component(icon0.$.fragment);
+        t0 = space();
+        button1 = element("button");
+        create_component(icon1.$.fragment);
+        t1 = space();
+        td1 = element("td");
+        t2 = text(t2_value);
+        t3 = space();
+        td2 = element("td");
+        t4 = text(t4_value);
+        t5 = space();
+        td3 = element("td");
+        t6 = text(t6_value);
+        t7 = space();
+        td4 = element("td");
+        input0 = element("input");
+        t8 = space();
+        td5 = element("td");
+        t9 = text(t9_value);
+        t10 = space();
+        td6 = element("td");
+        input1 = element("input");
+        t11 = space();
+        td7 = element("td");
+        t12 = text(t12_value);
+        t13 = space();
+        attr(button0, "class", "btn svelte-lch0hh");
+        attr(button0, "title", "Edit");
+        attr(button1, "class", "btn svelte-lch0hh");
+        attr(button1, "title", "Show History");
+        attr(div, "class", "actions svelte-lch0hh");
+        attr(td0, "class", "svelte-lch0hh");
+        attr(td1, "class", "svelte-lch0hh");
+        attr(td2, "class", "svelte-lch0hh");
+        attr(td3, "class", "svelte-lch0hh");
+        attr(input0, "type", "checkbox");
+        input0.checked = input0_checked_value = /*data*/
+        ctx[32].tenantTeleAddedAt;
+        attr(input0, "class", "svelte-lch0hh");
+        attr(td4, "class", "checkbox-cell svelte-lch0hh");
+        attr(td5, "class", "svelte-lch0hh");
+        attr(input1, "type", "checkbox");
+        input1.checked = input1_checked_value = /*data*/
+        ctx[32].tenantWaAddedAt;
+        attr(input1, "class", "svelte-lch0hh");
+        attr(td6, "class", "checkbox-cell svelte-lch0hh");
+        attr(td7, "class", "svelte-lch0hh");
+        attr(tr, "class", "svelte-lch0hh");
+      },
+      m(target, anchor) {
+        insert(target, tr, anchor);
+        append(tr, td0);
+        append(td0, div);
+        append(div, button0);
+        mount_component(icon0, button0, null);
+        append(div, t0);
+        append(div, button1);
+        mount_component(icon1, button1, null);
+        append(tr, t1);
+        append(tr, td1);
+        append(td1, t2);
+        append(tr, t3);
+        append(tr, td2);
+        append(td2, t4);
+        append(tr, t5);
+        append(tr, td3);
+        append(td3, t6);
+        append(tr, t7);
+        append(tr, td4);
+        append(td4, input0);
+        append(tr, t8);
+        append(tr, td5);
+        append(td5, t9);
+        append(tr, t10);
+        append(tr, td6);
+        append(td6, input1);
+        append(tr, t11);
+        append(tr, td7);
+        append(td7, t12);
+        append(tr, t13);
+        current = true;
+        if (!mounted) {
+          dispose = [
+            listen(button0, "click", click_handler),
+            listen(button1, "click", click_handler_1),
+            listen(input0, "change", change_handler),
+            listen(input1, "change", change_handler_1)
+          ];
+          mounted = true;
+        }
+      },
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+        if ((!current || dirty[0] & /*missingDataFiltered*/
+        16) && t2_value !== (t2_value = /*data*/
+        ctx[32].roomName + ""))
+          set_data(t2, t2_value);
+        if ((!current || dirty[0] & /*missingDataFiltered*/
+        16) && t4_value !== (t4_value = /*data*/
+        (ctx[32].tenantName || "--") + ""))
+          set_data(t4, t4_value);
+        if ((!current || dirty[0] & /*missingDataFiltered*/
+        16) && t6_value !== (t6_value = /*data*/
+        (ctx[32].tenantTelegramUsername || "--") + ""))
+          set_data(t6, t6_value);
+        if (!current || dirty[0] & /*missingDataFiltered*/
+        16 && input0_checked_value !== (input0_checked_value = /*data*/
+        ctx[32].tenantTeleAddedAt)) {
+          input0.checked = input0_checked_value;
+        }
+        if ((!current || dirty[0] & /*missingDataFiltered*/
+        16) && t9_value !== (t9_value = /*data*/
+        (ctx[32].tenantWhatsappNumber || "--") + ""))
+          set_data(t9, t9_value);
+        if (!current || dirty[0] & /*missingDataFiltered*/
+        16 && input1_checked_value !== (input1_checked_value = /*data*/
+        ctx[32].tenantWaAddedAt)) {
+          input1.checked = input1_checked_value;
+        }
+        if ((!current || dirty[0] & /*missingDataFiltered*/
+        16) && t12_value !== (t12_value = /*data*/
+        (ctx[32].lastUseAt || "--") + ""))
+          set_data(t12, t12_value);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon0.$.fragment, local);
+        transition_in(icon1.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon0.$.fragment, local);
+        transition_out(icon1.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(tr);
+        }
+        destroy_component(icon0);
+        destroy_component(icon1);
         mounted = false;
         run_all(dispose);
       }
@@ -17424,13 +17764,13 @@ table tbody tr td .actions .btn:hover svg {
     let tbody;
     let current;
     function radio_selected_binding(value) {
-      ctx[12](value);
+      ctx[21](value);
     }
     let radio_props = {
       className: "filters",
       options: (
         /*filterOptions*/
-        ctx[7]
+        ctx[11]
       )
     };
     if (
@@ -17490,7 +17830,7 @@ table tbody tr td .actions .btn:hover svg {
       },
       p(ctx2, dirty) {
         const radio_changes = {};
-        if (!updating_selected && dirty & /*selectedFilter*/
+        if (!updating_selected && dirty[0] & /*selectedFilter*/
         1) {
           updating_selected = true;
           radio_changes.selected = /*selectedFilter*/
@@ -17498,8 +17838,8 @@ table tbody tr td .actions .btn:hover svg {
           add_flush_callback(() => updating_selected = false);
         }
         radio.$set(radio_changes);
-        if (dirty & /*missingDataFiltered, handleToggleWaAddedAt, handleToggleTeleAddedAt, showPopUpEditTenant*/
-        816) {
+        if (dirty[0] & /*missingDataFiltered, handleToggleWaAddedAt, handleToggleTeleAddedAt, showPopUpShowBookingTenant, showPopUpEditTenant*/
+        29200) {
           each_value = ensure_array_like(
             /*missingDataFiltered*/
             ctx2[4] || []
@@ -17550,7 +17890,7 @@ table tbody tr td .actions .btn:hover svg {
       }
     };
   }
-  function create_fragment13(ctx) {
+  function create_fragment14(ctx) {
     let t;
     let layoutmain;
     let current;
@@ -17580,14 +17920,14 @@ table tbody tr td .actions .btn:hover svg {
         mount_component(layoutmain, target, anchor);
         current = true;
       },
-      p(ctx2, [dirty]) {
+      p(ctx2, dirty) {
         if (
           /*isPopUpFormReady*/
           ctx2[3]
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
-            if (dirty & /*isPopUpFormReady*/
+            if (dirty[0] & /*isPopUpFormReady*/
             8) {
               transition_in(if_block, 1);
             }
@@ -17605,8 +17945,9 @@ table tbody tr td .actions .btn:hover svg {
           check_outros();
         }
         const layoutmain_changes = {};
-        if (dirty & /*$scope, missingDataFiltered, selectedFilter*/
-        33554449) {
+        if (dirty[0] & /*missingDataFiltered, selectedFilter*/
+        17 | dirty[1] & /*$scope*/
+        16) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -17645,7 +17986,7 @@ table tbody tr td .actions .btn:hover svg {
     /** @type {string} */
     "show-filter"
   );
-  function instance10($self, $props, $invalidate) {
+  function instance11($self, $props, $invalidate) {
     let missingData = (
       /** @type {MissingTenantData[]} */
       [/* missingData */]
@@ -17876,8 +18217,8 @@ table tbody tr td .actions .btn:hover svg {
       $invalidate(3, isPopUpFormReady = true);
       restrucureMissingData();
     });
-    function toggleCheckboxField(tenantId, tenantName, addedAt, fieldName) {
-      let payloads = [tenantId, tenantName, addedAt];
+    function toggleCheckboxField(tenantId, tenantName2, addedAt, fieldName) {
+      let payloads = [tenantId, tenantName2, addedAt];
       if (fieldName === "waAddedAt" && OnEditWaAddedAt) {
         OnEditWaAddedAt(tenantId, payloads);
       }
@@ -17899,6 +18240,42 @@ table tbody tr td .actions .btn:hover svg {
       );
       toggleCheckboxField(data.tenantId, data.tenantName, isChecked, "teleAddedAt");
     }
+    let popUpShowBookingMissingTenant = (
+      /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpShowBookingMissingTenant | any} */
+      null
+    );
+    let tenantName = "";
+    let bookingsOfTenant = (
+      /** @type {TenantBookingDetail[]} */
+      []
+    );
+    let paymentsOfBookingOfTenant = (
+      /** @type {PaymentOfBooking[]} */
+      []
+    );
+    async function showPopUpShowBookingTenant(tenantId, name) {
+      $invalidate(
+        /** @type {string} */
+        6,
+        tenantName = name
+      );
+      popUpShowBookingMissingTenant.Show();
+      await (0, import_jsApi3.StaffMissingDataReport)(
+        { tenantId, cmd: import_xConstant.CmdForm },
+        /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error || "something went wrong");
+            return;
+          }
+          $invalidate(7, bookingsOfTenant = o.bookings || []);
+          $invalidate(8, paymentsOfBookingOfTenant = o.payments || []);
+          return;
+        }
+      );
+    }
     function popupeditmissingtenant_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         popUpEditMissingTenant = $value;
@@ -17909,15 +18286,34 @@ table tbody tr td .actions .btn:hover svg {
       isSubmitEditMissingTenant = value;
       $invalidate(2, isSubmitEditMissingTenant);
     }
+    function popupshowbookingmissingtenant_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        popUpShowBookingMissingTenant = $value;
+        $invalidate(5, popUpShowBookingMissingTenant);
+      });
+    }
+    function popupshowbookingmissingtenant_tenantName_binding(value) {
+      tenantName = value;
+      $invalidate(6, tenantName);
+    }
+    function popupshowbookingmissingtenant_bookings_binding(value) {
+      bookingsOfTenant = value;
+      $invalidate(7, bookingsOfTenant);
+    }
+    function popupshowbookingmissingtenant_payments_binding(value) {
+      paymentsOfBookingOfTenant = value;
+      $invalidate(8, paymentsOfBookingOfTenant);
+    }
     function radio_selected_binding(value) {
       selectedFilter = value;
       $invalidate(0, selectedFilter);
     }
     const click_handler = (data) => showPopUpEditTenant(data.tenantId);
+    const click_handler_1 = (data) => showPopUpShowBookingTenant(data.tenantId, data.tenantName);
     const change_handler = (data, e) => handleToggleTeleAddedAt(e, data);
     const change_handler_1 = (data, e) => handleToggleWaAddedAt(e, data);
     $self.$.update = () => {
-      if ($self.$.dirty & /*selectedFilter*/
+      if ($self.$.dirty[0] & /*selectedFilter*/
       1) {
         $:
           if (selectedFilter) {
@@ -17931,15 +18327,25 @@ table tbody tr td .actions .btn:hover svg {
       isSubmitEditMissingTenant,
       isPopUpFormReady,
       missingDataFiltered,
+      popUpShowBookingMissingTenant,
+      tenantName,
+      bookingsOfTenant,
+      paymentsOfBookingOfTenant,
       showPopUpEditTenant,
       submitEditMissingTenant,
       filterOptions,
       handleToggleWaAddedAt,
       handleToggleTeleAddedAt,
+      showPopUpShowBookingTenant,
       popupeditmissingtenant_binding,
       popupeditmissingtenant_isSubmitted_binding,
+      popupshowbookingmissingtenant_binding,
+      popupshowbookingmissingtenant_tenantName_binding,
+      popupshowbookingmissingtenant_bookings_binding,
+      popupshowbookingmissingtenant_payments_binding,
       radio_selected_binding,
       click_handler,
+      click_handler_1,
       change_handler,
       change_handler_1
     ];
@@ -17947,7 +18353,7 @@ table tbody tr td .actions .btn:hover svg {
   var StaffMissingDataReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance10, create_fragment13, safe_not_equal, {});
+      init(this, options, instance11, create_fragment14, safe_not_equal, {}, null, [-1, -1]);
     }
   };
   var staffMissingDataReport_default = StaffMissingDataReport_1;

@@ -2958,8 +2958,12 @@ exports.StaffBooking = async function StaffBooking( i, cb ) {
 
 /**
  * @typedef {Object} StaffMissingDataReportIn
+ * @property {String} cmd
+ * @property {number} tenantId
  */
 const StaffMissingDataReportIn = {
+  cmd: '', // string
+  tenantId: 0, // uint64
 }
 /**
  * @typedef {Object} StaffMissingDataReportOut
@@ -2981,6 +2985,8 @@ const StaffMissingDataReportIn = {
  * @property {String} user.role
  * @property {Object} segments
  * @property {Object} missingData
+ * @property {Object} payments
+ * @property {Object} bookings
  */
 const StaffMissingDataReportOut = {
   user: { // rqAuth.Users
@@ -3005,6 +3011,10 @@ const StaffMissingDataReportOut = {
   }, // M.SB
   missingData: { // []rqProperty.RoomMissingTenantData
   }, // []rqProperty.RoomMissingTenantData
+  payments: { // []rqProperty.PaymentOfBooking
+  }, // []rqProperty.PaymentOfBooking
+  bookings: { // []rqProperty.TenantBookingDetail
+  }, // []rqProperty.TenantBookingDetail
 }
 /**
  * @callback StaffMissingDataReportCallback
