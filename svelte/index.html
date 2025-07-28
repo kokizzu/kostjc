@@ -16199,6 +16199,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   );
   function formatDateLong2(dateStr) {
     const dt = new Date(dateStr);
+    dt.setDate(dt.getDate() + 1);
     return dt.toLocaleDateString("en-GB", {
       weekday: "long",
       day: "2-digit",

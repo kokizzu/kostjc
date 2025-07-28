@@ -10,6 +10,7 @@
 
   function formatDateLong(/** @type {string} */ dateStr) {
     const dt = new Date(dateStr);
+    dt.setDate(dt.getDate() + 1);
     return dt.toLocaleDateString('en-GB', {
       weekday: 'long',
       day: '2-digit',

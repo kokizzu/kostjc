@@ -1191,7 +1191,7 @@ SELECT
 	"roomName",
 	"dateEnd",
 	CASE
-		WHEN "dateEnd" <= '` + dateTimeNow + `'
+		WHEN "dateEnd" < '` + dateTimeNow + `'
 		THEN 'TRUE'
 	ELSE 'FALSE' END AS "isAvailable",
 	"tenantName"
