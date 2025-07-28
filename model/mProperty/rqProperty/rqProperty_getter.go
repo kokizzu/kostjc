@@ -1805,6 +1805,9 @@ type TenantBookingDetail struct {
 	BookingId     uint64 `json:"bookingId"`
 	TotalPaidIDR  int64  `json:"totalPaidIDR"`
 	TotalPriceIDR int64  `json:"totalPriceIDR"`
+	DateStart     string `json:"dateStart"`
+	DateEnd       string `json:"dateEnd"`
+	RoomName      string `json:"roomName"`
 }
 
 func (b *Bookings) GetBookingsByTenantId(tenantId uint64) (out []TenantBookingDetail) {
@@ -1814,15 +1817,19 @@ func (b *Bookings) GetBookingsByTenantId(tenantId uint64) (out []TenantBookingDe
 SELECT
 	b."id",
 	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
-	b."totalPriceIDR"
+	b."totalPriceIDR",
+	b."dateStart",
+	b."dateEnd",
+	r."roomName"
 FROM "bookings" b
 LEFT JOIN "payments" p ON b."id" = p."bookingId"
+LEFT JOIN "rooms" r ON b."roomId" = r."id"
 WHERE b."tenantId" = ` + I.UToS(tenantId) + `
 GROUP BY b."id"
 ORDER BY b."dateStart" ASC`
 
 	b.Adapter.QuerySql(query, func(row []any) {
-		if len(row) != 3 {
+		if len(row) != 6 {
 			return
 		}
 
@@ -1830,6 +1837,9 @@ ORDER BY b."dateStart" ASC`
 			BookingId:     X.ToU(row[0]),
 			TotalPaidIDR:  X.ToI(row[1]),
 			TotalPriceIDR: X.ToI(row[2]),
+			DateStart:     X.ToS(row[3]),
+			DateEnd:       X.ToS(row[4]),
+			RoomName:      X.ToS(row[5]),
 		})
 	})
 

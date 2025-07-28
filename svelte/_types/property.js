@@ -199,5 +199,8 @@ module.exports = {};
  * @property {number} bookingId
  * @property {number} totalPaidIDR
  * @property {number} totalPriceIDR
+ * @property {string} dateStart
+ * @property {string} dateEnd
+ * @property {string} roomName
  */
 module.exports = {};

@@ -14,10 +14,14 @@
   export const Show = () => isShow = true;
   export const Hide = () => isShow = false;
 
-  $: if (tenantName) {
-    console.log('Bookings', bookings);
-    console.log('Payments', payments);
-  }
+	/**
+	 * @description	Get Payments by bookingId
+	 * @param {number} bookingId
+	 * @return {PaymentOfBooking[]}
+	 */
+	function getPaymentsByBookingId(bookingId) {
+		return payments.filter(p => p.bookingId == bookingId);
+	}
 </script>
 
 <div class={`popup-container ${isShow ? 'show' : ''}`}>
@@ -28,8 +32,21 @@
         <Icon size="22" color="var(--red-005)" src={IoClose}/>
       </button>
     </header>
-    <div class="forms">
-      <h4>Cihuyy</h4>
+    <div class="bookings">
+			{#each bookings as b}
+				<div class="booking">
+					<h3>Booking #{b.bookingId}, Room {b.roomName}</h3>
+					<div class="detail">
+						<span>{b.dateStart} s/d {b.dateEnd}</span>
+						<span>{b.totalPaidIDR}/{b.totalPriceIDR}</span>
+					</div>
+					<div class="payments">
+						{#each getPaymentsByBookingId(b.bookingId) as p}
+							<span>Payment #{p.paymentId} Rp{p.paidIDR} {p.paymentAt}</span>
+						{/each}
+					</div>
+				</div>
+			{/each}
     </div>
   </div>
 </div>
@@ -97,11 +114,42 @@
 		background-color: #ef444430;
 	}
 
-	.popup-container .popup .forms {
+	.popup-container .popup .bookings {
 		padding: 20px;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+	}
+
+	.popup-container .popup .bookings .booking {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		background-color: var(--gray-001);
+		border: 1px solid var(--gray-002);
+		border-radius: 8px;
+		padding: 10px;
+	}
+
+	.popup-container .popup .bookings .booking h3 {
+		margin: 0;
+	}
+
+	.popup-container .popup .bookings .booking .detail {
+		display: flex;
+    flex-direction: column;
+    gap: 5px;
+	}
+
+	.popup-container .popup .bookings .booking .payments {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.popup-container .popup .bookings .booking .payments span {
+		border-bottom: 1px solid var(--gray-003);
+		padding: 5px 2px;
 	}
 
   @media only screen and (max-width : 768px) {

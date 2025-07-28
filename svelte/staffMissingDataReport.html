@@ -1386,7 +1386,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
 }
 
 /* fakecss:./_components/PopUpShowBookingMissingTenant.esbuild-svelte-fake-css */
-.popup-container.svelte-m2ydvm.svelte-m2ydvm {
+.popup-container.svelte-1urvuz7.svelte-1urvuz7 {
   display: none;
   position: fixed;
   width: 100%;
@@ -1402,10 +1402,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   padding: 50px;
   overflow: auto;
 }
-.popup-container.show.svelte-m2ydvm.svelte-m2ydvm {
+.popup-container.show.svelte-1urvuz7.svelte-1urvuz7 {
   display: flex;
 }
-.popup-container.svelte-m2ydvm .popup.svelte-m2ydvm {
+.popup-container.svelte-1urvuz7 .popup.svelte-1urvuz7 {
   border-radius: 8px;
   background-color: #FFF;
   height: fit-content;
@@ -1413,7 +1413,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   display: flex;
   flex-direction: column;
 }
-.popup-container.svelte-m2ydvm .popup header.svelte-m2ydvm {
+.popup-container.svelte-1urvuz7 .popup header.svelte-1urvuz7 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -1421,10 +1421,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   padding: 15px 20px;
   border-bottom: 1px solid var(--gray-004);
 }
-.popup-container.svelte-m2ydvm .popup header h2.svelte-m2ydvm {
+.popup-container.svelte-1urvuz7 .popup header h2.svelte-1urvuz7 {
   margin: 0;
 }
-.popup-container.svelte-m2ydvm .popup header button.svelte-m2ydvm {
+.popup-container.svelte-1urvuz7 .popup header button.svelte-1urvuz7 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1434,23 +1434,49 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   background-color: transparent;
   cursor: pointer;
 }
-.popup-container.svelte-m2ydvm .popup header button.svelte-m2ydvm:hover {
+.popup-container.svelte-1urvuz7 .popup header button.svelte-1urvuz7:hover {
   background-color: #ef444420;
 }
-.popup-container.svelte-m2ydvm .popup header button.svelte-m2ydvm:active {
+.popup-container.svelte-1urvuz7 .popup header button.svelte-1urvuz7:active {
   background-color: #ef444430;
 }
-.popup-container.svelte-m2ydvm .popup .forms.svelte-m2ydvm {
+.popup-container.svelte-1urvuz7 .popup .bookings.svelte-1urvuz7 {
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+.popup-container.svelte-1urvuz7 .popup .bookings .booking.svelte-1urvuz7 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: var(--gray-001);
+  border: 1px solid var(--gray-002);
+  border-radius: 8px;
+  padding: 10px;
+}
+.popup-container.svelte-1urvuz7 .popup .bookings .booking h3.svelte-1urvuz7 {
+  margin: 0;
+}
+.popup-container.svelte-1urvuz7 .popup .bookings .booking .detail.svelte-1urvuz7 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.popup-container.svelte-1urvuz7 .popup .bookings .booking .payments.svelte-1urvuz7 {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.popup-container.svelte-1urvuz7 .popup .bookings .booking .payments span.svelte-1urvuz7 {
+  border-bottom: 1px solid var(--gray-003);
+  padding: 5px 2px;
+}
 @media only screen and (max-width : 768px) {
-  .popup-container.svelte-m2ydvm.svelte-m2ydvm {
+  .popup-container.svelte-1urvuz7.svelte-1urvuz7 {
     padding: 10px;
   }
-  .popup-container.svelte-m2ydvm .popup.svelte-m2ydvm {
+  .popup-container.svelte-1urvuz7 .popup.svelte-1urvuz7 {
     width: 100%;
   }
 }
@@ -17192,6 +17218,251 @@ table tbody tr td .actions .btn:hover svg {
   var import_xConstant2 = __toESM(require_xConstant());
 
   // _components/PopUpShowBookingMissingTenant.svelte
+  function get_each_context3(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[7] = list[i];
+    return child_ctx;
+  }
+  function get_each_context_12(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[10] = list[i];
+    return child_ctx;
+  }
+  function create_each_block_12(ctx) {
+    let span;
+    let t0;
+    let t1_value = (
+      /*p*/
+      ctx[10].paymentId + ""
+    );
+    let t1;
+    let t2;
+    let t3_value = (
+      /*p*/
+      ctx[10].paidIDR + ""
+    );
+    let t3;
+    let t4;
+    let t5_value = (
+      /*p*/
+      ctx[10].paymentAt + ""
+    );
+    let t5;
+    return {
+      c() {
+        span = element("span");
+        t0 = text("Payment #");
+        t1 = text(t1_value);
+        t2 = text(" Rp");
+        t3 = text(t3_value);
+        t4 = space();
+        t5 = text(t5_value);
+        attr(span, "class", "svelte-1urvuz7");
+      },
+      m(target, anchor) {
+        insert(target, span, anchor);
+        append(span, t0);
+        append(span, t1);
+        append(span, t2);
+        append(span, t3);
+        append(span, t4);
+        append(span, t5);
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*bookings*/
+        2 && t1_value !== (t1_value = /*p*/
+        ctx2[10].paymentId + ""))
+          set_data(t1, t1_value);
+        if (dirty & /*bookings*/
+        2 && t3_value !== (t3_value = /*p*/
+        ctx2[10].paidIDR + ""))
+          set_data(t3, t3_value);
+        if (dirty & /*bookings*/
+        2 && t5_value !== (t5_value = /*p*/
+        ctx2[10].paymentAt + ""))
+          set_data(t5, t5_value);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(span);
+        }
+      }
+    };
+  }
+  function create_each_block3(ctx) {
+    let div2;
+    let h3;
+    let t0;
+    let t1_value = (
+      /*b*/
+      ctx[7].bookingId + ""
+    );
+    let t1;
+    let t2;
+    let t3_value = (
+      /*b*/
+      ctx[7].roomName + ""
+    );
+    let t3;
+    let t4;
+    let div0;
+    let span0;
+    let t5_value = (
+      /*b*/
+      ctx[7].dateStart + ""
+    );
+    let t5;
+    let t6;
+    let t7_value = (
+      /*b*/
+      ctx[7].dateEnd + ""
+    );
+    let t7;
+    let t8;
+    let span1;
+    let t9_value = (
+      /*b*/
+      ctx[7].totalPaidIDR + ""
+    );
+    let t9;
+    let t10;
+    let t11_value = (
+      /*b*/
+      ctx[7].totalPriceIDR + ""
+    );
+    let t11;
+    let t12;
+    let div1;
+    let t13;
+    let each_value_1 = ensure_array_like(
+      /*getPaymentsByBookingId*/
+      ctx[4](
+        /*b*/
+        ctx[7].bookingId
+      )
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value_1.length; i += 1) {
+      each_blocks[i] = create_each_block_12(get_each_context_12(ctx, each_value_1, i));
+    }
+    return {
+      c() {
+        div2 = element("div");
+        h3 = element("h3");
+        t0 = text("Booking #");
+        t1 = text(t1_value);
+        t2 = text(", Room ");
+        t3 = text(t3_value);
+        t4 = space();
+        div0 = element("div");
+        span0 = element("span");
+        t5 = text(t5_value);
+        t6 = text(" s/d ");
+        t7 = text(t7_value);
+        t8 = space();
+        span1 = element("span");
+        t9 = text(t9_value);
+        t10 = text("/");
+        t11 = text(t11_value);
+        t12 = space();
+        div1 = element("div");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        t13 = space();
+        attr(h3, "class", "svelte-1urvuz7");
+        attr(span0, "class", "svelte-1urvuz7");
+        attr(span1, "class", "svelte-1urvuz7");
+        attr(div0, "class", "detail svelte-1urvuz7");
+        attr(div1, "class", "payments svelte-1urvuz7");
+        attr(div2, "class", "booking svelte-1urvuz7");
+      },
+      m(target, anchor) {
+        insert(target, div2, anchor);
+        append(div2, h3);
+        append(h3, t0);
+        append(h3, t1);
+        append(h3, t2);
+        append(h3, t3);
+        append(div2, t4);
+        append(div2, div0);
+        append(div0, span0);
+        append(span0, t5);
+        append(span0, t6);
+        append(span0, t7);
+        append(div0, t8);
+        append(div0, span1);
+        append(span1, t9);
+        append(span1, t10);
+        append(span1, t11);
+        append(div2, t12);
+        append(div2, div1);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div1, null);
+          }
+        }
+        append(div2, t13);
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*bookings*/
+        2 && t1_value !== (t1_value = /*b*/
+        ctx2[7].bookingId + ""))
+          set_data(t1, t1_value);
+        if (dirty & /*bookings*/
+        2 && t3_value !== (t3_value = /*b*/
+        ctx2[7].roomName + ""))
+          set_data(t3, t3_value);
+        if (dirty & /*bookings*/
+        2 && t5_value !== (t5_value = /*b*/
+        ctx2[7].dateStart + ""))
+          set_data(t5, t5_value);
+        if (dirty & /*bookings*/
+        2 && t7_value !== (t7_value = /*b*/
+        ctx2[7].dateEnd + ""))
+          set_data(t7, t7_value);
+        if (dirty & /*bookings*/
+        2 && t9_value !== (t9_value = /*b*/
+        ctx2[7].totalPaidIDR + ""))
+          set_data(t9, t9_value);
+        if (dirty & /*bookings*/
+        2 && t11_value !== (t11_value = /*b*/
+        ctx2[7].totalPriceIDR + ""))
+          set_data(t11, t11_value);
+        if (dirty & /*getPaymentsByBookingId, bookings*/
+        18) {
+          each_value_1 = ensure_array_like(
+            /*getPaymentsByBookingId*/
+            ctx2[4](
+              /*b*/
+              ctx2[7].bookingId
+            )
+          );
+          let i;
+          for (i = 0; i < each_value_1.length; i += 1) {
+            const child_ctx = get_each_context_12(ctx2, each_value_1, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block_12(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div1, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value_1.length;
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div2);
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
   function create_fragment13(ctx) {
     let div2;
     let div1;
@@ -17215,6 +17486,14 @@ table tbody tr td .actions .btn:hover svg {
         src: IoClose
       }
     });
+    let each_value = ensure_array_like(
+      /*bookings*/
+      ctx[1]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block3(get_each_context3(ctx, each_value, i));
+    }
     return {
       c() {
         div2 = element("div");
@@ -17231,14 +17510,16 @@ table tbody tr td .actions .btn:hover svg {
         create_component(icon.$.fragment);
         t3 = space();
         div0 = element("div");
-        div0.innerHTML = `<h4>Cihuyy</h4>`;
-        attr(h2, "class", "svelte-m2ydvm");
-        attr(button, "class", "svelte-m2ydvm");
-        attr(header, "class", "header svelte-m2ydvm");
-        attr(div0, "class", "forms svelte-m2ydvm");
-        attr(div1, "class", "popup svelte-m2ydvm");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(h2, "class", "svelte-1urvuz7");
+        attr(button, "class", "svelte-1urvuz7");
+        attr(header, "class", "header svelte-1urvuz7");
+        attr(div0, "class", "bookings svelte-1urvuz7");
+        attr(div1, "class", "popup svelte-1urvuz7");
         attr(div2, "class", div2_class_value = null_to_empty(`popup-container ${/*isShow*/
-        ctx[2] ? "show" : ""}`) + " svelte-m2ydvm");
+        ctx[3] ? "show" : ""}`) + " svelte-1urvuz7");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -17252,13 +17533,18 @@ table tbody tr td .actions .btn:hover svg {
         mount_component(icon, button, null);
         append(div1, t3);
         append(div1, div0);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div0, null);
+          }
+        }
         current = true;
         if (!mounted) {
           dispose = listen(
             button,
             "click",
             /*Hide*/
-            ctx[1]
+            ctx[2]
           );
           mounted = true;
         }
@@ -17271,9 +17557,31 @@ table tbody tr td .actions .btn:hover svg {
             /*tenantName*/
             ctx2[0]
           );
+        if (dirty & /*getPaymentsByBookingId, bookings*/
+        18) {
+          each_value = ensure_array_like(
+            /*bookings*/
+            ctx2[1]
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context3(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block3(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div0, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value.length;
+        }
         if (!current || dirty & /*isShow*/
-        4 && div2_class_value !== (div2_class_value = null_to_empty(`popup-container ${/*isShow*/
-        ctx2[2] ? "show" : ""}`) + " svelte-m2ydvm")) {
+        8 && div2_class_value !== (div2_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[3] ? "show" : ""}`) + " svelte-1urvuz7")) {
           attr(div2, "class", div2_class_value);
         }
       },
@@ -17292,6 +17600,7 @@ table tbody tr td .actions .btn:hover svg {
           detach(div2);
         }
         destroy_component(icon);
+        destroy_each(each_blocks, detaching);
         mounted = false;
         dispose();
       }
@@ -17308,50 +17617,43 @@ table tbody tr td .actions .btn:hover svg {
       []
     ) } = $props;
     let isShow = false;
-    const Show = () => $invalidate(2, isShow = true);
-    const Hide = () => $invalidate(2, isShow = false);
+    const Show = () => $invalidate(3, isShow = true);
+    const Hide = () => $invalidate(3, isShow = false);
+    function getPaymentsByBookingId(bookingId) {
+      return payments.filter((p) => p.bookingId == bookingId);
+    }
     $self.$set = ($props2) => {
       if ("tenantName" in $props2)
         $invalidate(0, tenantName = $props2.tenantName);
       if ("bookings" in $props2)
-        $invalidate(3, bookings = $props2.bookings);
+        $invalidate(1, bookings = $props2.bookings);
       if ("payments" in $props2)
-        $invalidate(4, payments = $props2.payments);
+        $invalidate(5, payments = $props2.payments);
     };
-    $self.$.update = () => {
-      if ($self.$.dirty & /*tenantName, bookings, payments*/
-      25) {
-        $:
-          if (tenantName) {
-            console.log("Bookings", bookings);
-            console.log("Payments", payments);
-          }
-      }
-    };
-    return [tenantName, Hide, isShow, bookings, payments, Show];
+    return [tenantName, bookings, Hide, isShow, getPaymentsByBookingId, payments, Show];
   }
   var PopUpShowBookingMissingTenant = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance10, create_fragment13, safe_not_equal, {
         tenantName: 0,
-        bookings: 3,
-        payments: 4,
-        Show: 5,
-        Hide: 1
+        bookings: 1,
+        payments: 5,
+        Show: 6,
+        Hide: 2
       });
     }
     get Show() {
-      return this.$.ctx[5];
+      return this.$.ctx[6];
     }
     get Hide() {
-      return this.$.ctx[1];
+      return this.$.ctx[2];
     }
   };
   var PopUpShowBookingMissingTenant_default = PopUpShowBookingMissingTenant;
 
   // staffMissingDataReport.svelte
-  function get_each_context3(ctx, list, i) {
+  function get_each_context4(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[32] = list[i];
     return child_ctx;
@@ -17491,7 +17793,7 @@ table tbody tr td .actions .btn:hover svg {
       }
     };
   }
-  function create_each_block3(ctx) {
+  function create_each_block4(ctx) {
     let tr;
     let td0;
     let div;
@@ -17788,7 +18090,7 @@ table tbody tr td .actions .btn:hover svg {
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block3(get_each_context3(ctx, each_value, i));
+      each_blocks[i] = create_each_block4(get_each_context4(ctx, each_value, i));
     }
     const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
       each_blocks[i] = null;
@@ -17846,12 +18148,12 @@ table tbody tr td .actions .btn:hover svg {
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context3(ctx2, each_value, i);
+            const child_ctx = get_each_context4(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
               transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block3(child_ctx);
+              each_blocks[i] = create_each_block4(child_ctx);
               each_blocks[i].c();
               transition_in(each_blocks[i], 1);
               each_blocks[i].m(tbody, null);
