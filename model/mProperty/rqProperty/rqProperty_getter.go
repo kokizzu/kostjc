@@ -1470,11 +1470,13 @@ WITH RECURSIVE overlapping_groups AS (
   FROM "bookings" b2
   LEFT JOin "tenants" t2 ON b2."tenantId" = t2."id"
   LEFT JOIN "rooms" r2 ON b2."roomId" = r2."id"
-  JOIN overlapping_groups AS og
+  LEFT JOIN overlapping_groups AS og
     ON b2."roomId" = og.room_id
     AND b2."id" <> og.booking_id
-    AND b2."dateStart" <= og.date_end
-    AND b2."dateEnd" >= og.date_start
+    AND (
+			b2."dateStart" <= og.date_end AND
+			b2."dateEnd" > og.date_start
+		)
     AND b2."id" > og.booking_id
 	WHERE b2."deletedAt" = 0
 )
@@ -1489,6 +1491,8 @@ SELECT DISTINCT
 FROM overlapping_groups
 WHERE date_end >= ` + S.Z(dtNow) + `
 ORDER BY room_name`
+
+	fmt.Println(queryRows)
 
 	rawResults := []DoubleBookingReportData{}
 	b.Adapter.QuerySql(queryRows, func(row []any) {

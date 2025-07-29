@@ -16016,6 +16016,21 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   var BirthDayAgenda_default = BirthDayAgenda;
 
+  // _components/xGenerator.js
+  function GetRelativeDayLabel(dateStr) {
+    const inputDate = new Date(dateStr);
+    const currentDate = new Date();
+    inputDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+    const msInDay = 1e3 * 60 * 60 * 24;
+    const diffDays = Math.round((currentDate - inputDate) / msInDay);
+    if (diffDays === 0)
+      return "H";
+    if (diffDays > 0)
+      return `H+${diffDays}`;
+    return `H${diffDays}`;
+  }
+
   // _partials/home/AvailableRooms.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
@@ -16065,7 +16080,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*rooms, formatDateLong*/
+        if (dirty & /*rooms, formatDateLong, getRelativeDayLabel*/
         0) {
           each_value = ensure_array_like(rooms || []);
           let i;
@@ -16104,8 +16119,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       ctx[0].isAvailableNow || /*r*/
       ctx[0].availableAt == "" ? "Available Now" : "Available on <b>" + formatDateLong2(
         /*r*/
-        ctx[0].availableAt
-      ) + "</b>"
+        ctx[0].availableAt,
+        1
+      ) + " (" + getRelativeDayLabel(
+        /*r*/
+        ctx[0].availableAt,
+        1
+      ) + ") </b>"
     );
     let t3;
     let span1;
@@ -16197,15 +16217,29 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {AvailableRoom[]} */
     [/* availableRooms */]
   );
-  function formatDateLong2(dateStr) {
+  function formatDateLong2(dateStr, dayTo = 0) {
     const dt = new Date(dateStr);
-    dt.setDate(dt.getDate() + 1);
+    dt.setDate(dt.getDate() + dayTo);
     return dt.toLocaleDateString("en-GB", {
       weekday: "long",
       day: "2-digit",
       month: "long",
       year: "numeric"
     });
+  }
+  function getRelativeDayLabel(dateStr, dayTo = 0) {
+    const inputDate = new Date(dateStr);
+    inputDate.setDate(inputDate.getDate() + dayTo);
+    const currentDate = new Date();
+    inputDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+    const msInDay = 1e3 * 60 * 60 * 24;
+    const diffDays = Math.round((currentDate - inputDate) / msInDay);
+    if (diffDays === 0)
+      return "H";
+    if (diffDays > 0)
+      return `H+${diffDays}`;
+    return `H${diffDays}`;
   }
   var AvailableRooms = class extends SvelteComponent {
     constructor(options) {
@@ -16264,7 +16298,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*getRelativeDayLabel, unpaidBookingTenants*/
+        if (dirty & /*unpaidBookingTenants*/
         0) {
           each_value = ensure_array_like(unpaidBookingTenants || []);
           let i;
@@ -16322,7 +16356,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         t8 = space();
         span2 = element("span");
         span2.textContent = `Start at ${/*ub*/
-        ctx[0].dateStart} (${getRelativeDayLabel(
+        ctx[0].dateStart} (${GetRelativeDayLabel(
           /*ub*/
           ctx[0].dateStart
         )})`;
@@ -16395,19 +16429,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {UnpaidBookingTenant[]} */
     [/* unpaidBookingTenants */]
   );
-  function getRelativeDayLabel(dateStr) {
-    const inputDate = new Date(dateStr);
-    const currentDate = new Date();
-    inputDate.setHours(0, 0, 0, 0);
-    currentDate.setHours(0, 0, 0, 0);
-    const msInDay = 1e3 * 60 * 60 * 24;
-    const diffDays = Math.round((currentDate - inputDate) / msInDay);
-    if (diffDays === 0)
-      return "H";
-    if (diffDays > 0)
-      return `H+${diffDays}`;
-    return `H${diffDays}`;
-  }
   var UnpaidBookingTenants = class extends SvelteComponent {
     constructor(options) {
       super();

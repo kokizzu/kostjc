@@ -1,4 +1,6 @@
 <script>
+    import { GetRelativeDayLabel } from "../../_components/xGenerator";
+
   /**
    * @typedef {Object} AvailableRoom
    * @property {string} roomName
@@ -8,15 +10,32 @@
    */
   const rooms = /** @type {AvailableRoom[]} */ ([/* availableRooms */]);
 
-  function formatDateLong(/** @type {string} */ dateStr) {
+  function formatDateLong(/** @type {string} */ dateStr, /** @type {number} */ dayTo = 0) {
     const dt = new Date(dateStr);
-    dt.setDate(dt.getDate() + 1);
+    dt.setDate(dt.getDate() + dayTo);
     return dt.toLocaleDateString('en-GB', {
       weekday: 'long',
       day: '2-digit',
       month: 'long',
       year: 'numeric'
     });
+  }
+
+  function getRelativeDayLabel(/** @type {string} */ dateStr, /** @type {number} */ dayTo = 0) {
+    const inputDate = new Date(dateStr);
+    inputDate.setDate(inputDate.getDate() + dayTo);
+    const currentDate = new Date();
+    
+    inputDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
+    const msInDay = 1000 * 60 * 60 * 24; // @ts-ignore
+    const diffDays = Math.round((currentDate - inputDate) / msInDay);
+
+    if (diffDays === 0) return 'H';
+    if (diffDays > 0) return `H+${diffDays}`;
+    
+    return `H${diffDays}`;
   }
 </script>
 
@@ -30,7 +49,7 @@
           <div class="desc">
             <span>{@html r.isAvailableNow || r.availableAt == ''
               ? 'Available Now'
-              : 'Available on <b>' + formatDateLong(r.availableAt)+'</b>'
+              : 'Available on <b>' + formatDateLong(r.availableAt, 1)+' ('+ getRelativeDayLabel(r.availableAt, 1) +') </b>'
             }</span>
             <span>Last Tenant: <b>{r.lastTenant || '--'}</b></span>
           </div>
