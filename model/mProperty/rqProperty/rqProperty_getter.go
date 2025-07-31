@@ -1400,22 +1400,23 @@ WHERE SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
 `
 
 	w.Adapter.QuerySql(query, func(row []any) {
-		if len(row) == 6 {
-			tenantId := X.ToU(row[0])
-			roomId := X.ToU(row[1])
-			startAt := X.ToS(row[2])
-			endAt := X.ToS(row[3])
-			paidAt := X.ToS(row[4])
-			deletedAt := X.ToI(row[5])
-			out = append(out, WifiDeviceReport{
-				TenantId:  tenantId,
-				RoomId:    roomId,
-				StartAt:   startAt,
-				EndAt:     endAt,
-				PaidAt:    paidAt,
-				DeletedAt: deletedAt,
-			})
+		if len(row) != 6 {
+			return
 		}
+		tenantId := X.ToU(row[0])
+		roomId := X.ToU(row[1])
+		startAt := X.ToS(row[2])
+		endAt := X.ToS(row[3])
+		paidAt := X.ToS(row[4])
+		deletedAt := X.ToI(row[5])
+		out = append(out, WifiDeviceReport{
+			TenantId:  tenantId,
+			RoomId:    roomId,
+			StartAt:   startAt,
+			EndAt:     endAt,
+			PaidAt:    paidAt,
+			DeletedAt: deletedAt,
+		})
 	})
 
 	return
@@ -1468,19 +1469,14 @@ WITH RECURSIVE overlapping_groups AS (
     b2."dateEnd" AS date_end,
     og.group_id AS group_id
   FROM "bookings" b2
-  LEFT JOIN "tenants" t2 ON b2."tenantId" = t2."id"
+  LEFT JOin "tenants" t2 ON b2."tenantId" = t2."id"
   LEFT JOIN "rooms" r2 ON b2."roomId" = r2."id"
   JOIN overlapping_groups AS og
     ON b2."roomId" = og.room_id
     AND b2."id" <> og.booking_id
-		AND (
-			b2."dateStart" < og.date_end
-			AND b2."dateEnd" > og.date_start
-		)
-		OR (
-			SUBSTR(b2."dateStart", 1, 7) = SUBSTR(og.date_end, 1, 7)
-			OR SUBSTR(b2."dateEnd", 1, 7) = SUBSTR(og.date_start, 1, 7)
-		)
+    AND b2."dateStart" <= og.date_end
+    AND b2."dateEnd" >= og.date_start
+    AND b2."id" > og.booking_id
 	WHERE b2."deletedAt" = 0
 )
 
@@ -1849,4 +1845,34 @@ ORDER BY b."dateStart" ASC`
 	})
 
 	return
+}
+
+func (w *WifiDevices) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := w.Adapter.Select(w.SpaceName(), w.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query wifi devices`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (w *WifiDevices) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + w.SqlTableName() + `
+	LIMIT 1`
+
+	w.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (w *WifiDevices) Truncate() bool {
+	return w.Adapter.ExecBoxSpace(w.SpaceName()+`:truncate`, A.X{})
 }

@@ -22124,7 +22124,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     ) } = $props;
     let { FIELD_TO_SEARCH = "" } = $props;
     let { SINGLE_SELECTED = false } = $props;
-    MASTER_ROWS = MASTER_ROWS.map((row) => {
+    MASTER_ROWS = (MASTER_ROWS || []).map((row) => {
       const waIdx = FIELDS.findIndex((f) => f.name === "waAddedAt");
       const teleIdx = FIELDS.findIndex((f) => f.name === "teleAddedAt");
       if (waIdx >= 0) {
