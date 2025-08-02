@@ -1275,7 +1275,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   }
 }
 
-/* fakecss:./admin/roomLogs.esbuild-svelte-fake-css */
+/* fakecss:./admin/userLogs.esbuild-svelte-fake-css */
 .logs-container.svelte-9g9cdz {
   display: flex;
   flex-direction: column;
@@ -3776,7 +3776,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminRoom = async function AdminRoom(i, cb) {
         return await axios.post("/admin/room", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminRoomLogs = async function AdminRoomLogs2(i, cb) {
+      exports.AdminRoomLogs = async function AdminRoomLogs(i, cb) {
         return await axios.post("/admin/roomLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminSale = async function AdminSale(i, cb) {
@@ -3803,7 +3803,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminTenants = async function AdminTenants(i, cb) {
         return await axios.post("/admin/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminUserLogs = async function AdminUserLogs(i, cb) {
+      exports.AdminUserLogs = async function AdminUserLogs2(i, cb) {
         return await axios.post("/admin/userLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminUsersManagement = async function AdminUsersManagement(i, cb) {
@@ -11678,7 +11678,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var MasterTableActionlog_default = MasterTableActionlog;
 
-  // admin/roomLogs.svelte
+  // admin/userLogs.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
 
   // _partials/LogsSubMenu.svelte
@@ -12226,7 +12226,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var PopUpCompareJson_default = PopUpCompareJson;
 
-  // admin/roomLogs.svelte
+  // admin/userLogs.svelte
   function create_if_block5(ctx) {
     let popupcomparejson;
     let updating_beforeJson;
@@ -12321,7 +12321,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         /*logs*/
         ctx[0]
       ),
-      users,
+      REFS: { "actorId": users },
       COL_WIDTHS: { "actorId": 200 },
       EXTENDED_BUTTONS: (
         /*EXTENDED_BUTTONS*/
@@ -12498,10 +12498,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     );
     async function refreshTableView(pagerIn) {
       const i = { pager: pagerIn };
-      await (0, import_jsApi2.AdminRoomLogs)(
+      await (0, import_jsApi2.AdminUserLogs)(
         // @ts-ignore
         i,
-        /** @type {import('../jsApi.GEN').AdminRoomLogsCallback} */
+        /** @type {import('../jsApi.GEN').AdminUserLogsCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -12579,16 +12579,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       mastertableactionlog_pager_binding
     ];
   }
-  var RoomLogs = class extends SvelteComponent {
+  var UserLogs = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance12, create_fragment12, safe_not_equal, {});
     }
   };
-  var roomLogs_default = RoomLogs;
+  var userLogs_default = UserLogs;
 
-  // admin/roomLogs.svelte.ts
-  var app = new roomLogs_default({ target: document.getElementById("app") });
+  // admin/userLogs.svelte.ts
+  var app = new userLogs_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

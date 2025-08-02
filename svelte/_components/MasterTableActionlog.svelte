@@ -203,12 +203,12 @@
                       {/each}
                     </div>
                   </td>
+                {:else if field.inputType === 'combobox' && REFS[field.name]}
+                  <td>{REFS[field.name][row[field.name]]}</td>
                 {:else if renderFuncs[ field.name ]}
                   <td>{renderFuncs[ field.name ]( cell( row, i, field ) ) }</td>
                 {:else if field.inputType==='datetime' || field.name==='deletedAt' || field.name==='createdAt' || field.name==='updatedAt'}
                   <td>{localeDatetime( cell( row, i, field ) )}</td>
-                {:else if field.inputType === 'combobox' && REFS[field.name]}
-                  <td>{@html row[field.name]}</td>
                 {:else if field.name == 'beforeJson'}
                   <td>
                     <button class="show-json" on:click={() => showDataBefore( row )}>Show JSON</button>

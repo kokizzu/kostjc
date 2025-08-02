@@ -130,3 +130,79 @@ FROM ` + a.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 
 	return
 }
+
+func (u UserLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []UserLogs) {
+	const comment = `-- UserLogs) FindByPagination`
+
+	validFields := UserLogsFieldTypeMap
+	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
+
+	queryCount := comment + `
+SELECT COUNT(1)
+FROM ` + u.SqlTableName() + whereAndSql + `
+LIMIT 1`
+	row := u.Adapter.QueryRow(queryCount)
+	err := row.Err()
+	if L.IsError(err, `FindByPagination.Adapter.QueryRow error: `+queryCount) {
+		return
+	}
+	err = row.Scan(&out.Total)
+	L.IsError(err, comment+`: error while scanning total`)
+	out.CalculatePages(in.Page, in.PerPage, out.Total)
+
+	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	limitOffsetSql := out.LimitOffsetSql()
+
+	queryRows := comment + `
+SELECT ` + u.SqlAllFields() + `
+FROM ` + u.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
+	rows, err := u.Adapter.Query(queryRows)
+	if L.IsError(err, `FindByPagination.Adapter.Query error: `+queryRows) {
+		return
+	}
+
+	res, err = u.ScanRowsAllCols(rows, out.PerPage)
+	if L.IsError(err, `FindByPagination.ScanRowsAllCols error: `+queryRows) {
+		return
+	}
+
+	return
+}
+
+func (t TenantLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []TenantLogs) {
+	const comment = `-- TenantLogs) FindByPagination`
+
+	validFields := TenantLogsFieldTypeMap
+	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
+
+	queryCount := comment + `
+SELECT COUNT(1)
+FROM ` + t.SqlTableName() + whereAndSql + `
+LIMIT 1`
+	row := t.Adapter.QueryRow(queryCount)
+	err := row.Err()
+	if L.IsError(err, `FindByPagination.Adapter.QueryRow error: `+queryCount) {
+		return
+	}
+	err = row.Scan(&out.Total)
+	L.IsError(err, comment+`: error while scanning total`)
+	out.CalculatePages(in.Page, in.PerPage, out.Total)
+
+	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	limitOffsetSql := out.LimitOffsetSql()
+
+	queryRows := comment + `
+SELECT ` + t.SqlAllFields() + `
+FROM ` + t.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
+	rows, err := t.Adapter.Query(queryRows)
+	if L.IsError(err, `FindByPagination.Adapter.Query error: `+queryRows) {
+		return
+	}
+
+	res, err = t.ScanRowsAllCols(rows, out.PerPage)
+	if L.IsError(err, `FindByPagination.ScanRowsAllCols error: `+queryRows) {
+		return
+	}
+
+	return
+}

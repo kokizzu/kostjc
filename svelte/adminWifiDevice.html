@@ -4541,8 +4541,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       exports.AdminStockLogs = async function AdminStockLogs(i, cb) {
         return await axios.post("/admin/stockLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminTenantLogs = async function AdminTenantLogs(i, cb) {
+        return await axios.post("/admin/tenantLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminTenants = async function AdminTenants(i, cb) {
         return await axios.post("/admin/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminUserLogs = async function AdminUserLogs(i, cb) {
+        return await axios.post("/admin/userLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminUsersManagement = async function AdminUsersManagement(i, cb) {
         return await axios.post("/admin/usersManagement", i).then(wrapOk(cb)).catch(wrapErr(cb));

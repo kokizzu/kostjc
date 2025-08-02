@@ -21,12 +21,26 @@ import (
 //go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type saAuth__ORM.GEN.go
 //go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type saAuth__ORM.GEN.go
 //go:generate replacer -afterprefix "By\" form" "By,string\" form" type saAuth__ORM.GEN.go
-// go:generate msgp -tests=false -file saAuth__ORM.GEN.go -o saAuth__MSG.GEN.go
+//go:generate msgp -tests=false -file saAuth__ORM.GEN.go -o saAuth__MSG.GEN.go
 
 var actionLogsDummy = ActionLogs{}
+var tenantLogsDummy = TenantLogs{}
+var userLogsDummy = UserLogs{}
 var Preparators = map[Ch.TableName]chBuffer.Preparator{
 	mAuth.TableActionLogs: func(tx *sql.Tx) *sql.Stmt {
 		query := actionLogsDummy.SqlInsert()
+		stmt, err := tx.Prepare(query)
+		L.IsError(err, `failed to tx.Prepare: `+query)
+		return stmt
+	},
+	mAuth.TableTenantLogs: func(tx *sql.Tx) *sql.Stmt {
+		query := tenantLogsDummy.SqlInsert()
+		stmt, err := tx.Prepare(query)
+		L.IsError(err, `failed to tx.Prepare: `+query)
+		return stmt
+	},
+	mAuth.TableUserLogs: func(tx *sql.Tx) *sql.Stmt {
+		query := userLogsDummy.SqlInsert()
 		stmt, err := tx.Prepare(query)
 		L.IsError(err, `failed to tx.Prepare: `+query)
 		return stmt
@@ -292,6 +306,254 @@ func (a *ActionLogs) ToArray() A.X { //nolint:dupl false positive
 		a.Long,       // 11
 		a.Latency,    // 12
 		a.RefId,      // 13
+	}
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/Ch/clickhouse_orm_generator.go
+
+type TenantLogs struct {
+	Adapter    *Ch.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	CreatedAt  time.Time   `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	ActorId    uint64      `json:"actorId,string" form:"actorId" query:"actorId" long:"actorId" msg:"actorId"`
+	BeforeJson string      `json:"beforeJson" form:"beforeJson" query:"beforeJson" long:"beforeJson" msg:"beforeJson"`
+	AfterJson  string      `json:"afterJson" form:"afterJson" query:"afterJson" long:"afterJson" msg:"afterJson"`
+}
+
+func NewTenantLogs(adapter *Ch.Adapter) *TenantLogs {
+	return &TenantLogs{Adapter: adapter}
+}
+
+// TenantLogsFieldTypeMap returns key value of field name and key
+var TenantLogsFieldTypeMap = map[string]Ch.DataType{ //nolint:dupl false positive
+	`createdAt`:  Ch.DateTime,
+	`actorId`:    Ch.UInt64,
+	`beforeJson`: Ch.String,
+	`afterJson`:  Ch.String,
+}
+
+func (t *TenantLogs) TableName() Ch.TableName { //nolint:dupl false positive
+	return mAuth.TableTenantLogs
+}
+
+func (t *TenantLogs) SqlTableName() string { //nolint:dupl false positive
+	return `"tenantLogs"`
+}
+
+func (t *TenantLogs) ScanRowAllCols(rows *sql.Rows) (err error) { //nolint:dupl false positive
+	return rows.Scan(
+		&t.CreatedAt,
+		&t.ActorId,
+		&t.BeforeJson,
+		&t.AfterJson,
+	)
+}
+
+func (t *TenantLogs) ScanRowsAllCols(rows *sql.Rows, estimateRows int) (res []TenantLogs, err error) { //nolint:dupl false positive
+	res = make([]TenantLogs, 0, estimateRows)
+	defer rows.Close()
+	for rows.Next() {
+		var row TenantLogs
+		err = row.ScanRowAllCols(rows)
+		if err != nil {
+			return
+		}
+		res = append(res, row)
+	}
+	return
+}
+
+// insert, error if exists
+func (t *TenantLogs) SqlInsert() string { //nolint:dupl false positive
+	return `INSERT INTO ` + t.SqlTableName() + `(` + t.SqlAllFields() + `) VALUES (?,?,?,?)`
+}
+
+func (t *TenantLogs) SqlCount() string { //nolint:dupl false positive
+	return `SELECT COUNT(*) FROM ` + t.SqlTableName()
+}
+
+func (t *TenantLogs) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` createdAt
+	, actorId
+	, beforeJson
+	, afterJson
+	`
+}
+
+func (t *TenantLogs) SqlAllFields() string { //nolint:dupl false positive
+	return `createdAt, actorId, beforeJson, afterJson`
+}
+
+func (t TenantLogs) SqlInsertParam() []any { //nolint:dupl false positive
+	return []any{
+		t.CreatedAt,  // 0
+		t.ActorId,    // 1
+		t.BeforeJson, // 2
+		t.AfterJson,  // 3
+	}
+}
+
+func (t *TenantLogs) IdxCreatedAt() int { //nolint:dupl false positive
+	return 0
+}
+
+func (t *TenantLogs) SqlCreatedAt() string { //nolint:dupl false positive
+	return `createdAt`
+}
+
+func (t *TenantLogs) IdxActorId() int { //nolint:dupl false positive
+	return 1
+}
+
+func (t *TenantLogs) SqlActorId() string { //nolint:dupl false positive
+	return `actorId`
+}
+
+func (t *TenantLogs) IdxBeforeJson() int { //nolint:dupl false positive
+	return 2
+}
+
+func (t *TenantLogs) SqlBeforeJson() string { //nolint:dupl false positive
+	return `beforeJson`
+}
+
+func (t *TenantLogs) IdxAfterJson() int { //nolint:dupl false positive
+	return 3
+}
+
+func (t *TenantLogs) SqlAfterJson() string { //nolint:dupl false positive
+	return `afterJson`
+}
+
+func (t *TenantLogs) ToArray() A.X { //nolint:dupl false positive
+	return A.X{
+		t.CreatedAt,  // 0
+		t.ActorId,    // 1
+		t.BeforeJson, // 2
+		t.AfterJson,  // 3
+	}
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/Ch/clickhouse_orm_generator.go
+
+type UserLogs struct {
+	Adapter    *Ch.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	CreatedAt  time.Time   `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	ActorId    uint64      `json:"actorId,string" form:"actorId" query:"actorId" long:"actorId" msg:"actorId"`
+	BeforeJson string      `json:"beforeJson" form:"beforeJson" query:"beforeJson" long:"beforeJson" msg:"beforeJson"`
+	AfterJson  string      `json:"afterJson" form:"afterJson" query:"afterJson" long:"afterJson" msg:"afterJson"`
+}
+
+func NewUserLogs(adapter *Ch.Adapter) *UserLogs {
+	return &UserLogs{Adapter: adapter}
+}
+
+// UserLogsFieldTypeMap returns key value of field name and key
+var UserLogsFieldTypeMap = map[string]Ch.DataType{ //nolint:dupl false positive
+	`createdAt`:  Ch.DateTime,
+	`actorId`:    Ch.UInt64,
+	`beforeJson`: Ch.String,
+	`afterJson`:  Ch.String,
+}
+
+func (u *UserLogs) TableName() Ch.TableName { //nolint:dupl false positive
+	return mAuth.TableUserLogs
+}
+
+func (u *UserLogs) SqlTableName() string { //nolint:dupl false positive
+	return `"userLogs"`
+}
+
+func (u *UserLogs) ScanRowAllCols(rows *sql.Rows) (err error) { //nolint:dupl false positive
+	return rows.Scan(
+		&u.CreatedAt,
+		&u.ActorId,
+		&u.BeforeJson,
+		&u.AfterJson,
+	)
+}
+
+func (u *UserLogs) ScanRowsAllCols(rows *sql.Rows, estimateRows int) (res []UserLogs, err error) { //nolint:dupl false positive
+	res = make([]UserLogs, 0, estimateRows)
+	defer rows.Close()
+	for rows.Next() {
+		var row UserLogs
+		err = row.ScanRowAllCols(rows)
+		if err != nil {
+			return
+		}
+		res = append(res, row)
+	}
+	return
+}
+
+// insert, error if exists
+func (u *UserLogs) SqlInsert() string { //nolint:dupl false positive
+	return `INSERT INTO ` + u.SqlTableName() + `(` + u.SqlAllFields() + `) VALUES (?,?,?,?)`
+}
+
+func (u *UserLogs) SqlCount() string { //nolint:dupl false positive
+	return `SELECT COUNT(*) FROM ` + u.SqlTableName()
+}
+
+func (u *UserLogs) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` createdAt
+	, actorId
+	, beforeJson
+	, afterJson
+	`
+}
+
+func (u *UserLogs) SqlAllFields() string { //nolint:dupl false positive
+	return `createdAt, actorId, beforeJson, afterJson`
+}
+
+func (u UserLogs) SqlInsertParam() []any { //nolint:dupl false positive
+	return []any{
+		u.CreatedAt,  // 0
+		u.ActorId,    // 1
+		u.BeforeJson, // 2
+		u.AfterJson,  // 3
+	}
+}
+
+func (u *UserLogs) IdxCreatedAt() int { //nolint:dupl false positive
+	return 0
+}
+
+func (u *UserLogs) SqlCreatedAt() string { //nolint:dupl false positive
+	return `createdAt`
+}
+
+func (u *UserLogs) IdxActorId() int { //nolint:dupl false positive
+	return 1
+}
+
+func (u *UserLogs) SqlActorId() string { //nolint:dupl false positive
+	return `actorId`
+}
+
+func (u *UserLogs) IdxBeforeJson() int { //nolint:dupl false positive
+	return 2
+}
+
+func (u *UserLogs) SqlBeforeJson() string { //nolint:dupl false positive
+	return `beforeJson`
+}
+
+func (u *UserLogs) IdxAfterJson() int { //nolint:dupl false positive
+	return 3
+}
+
+func (u *UserLogs) SqlAfterJson() string { //nolint:dupl false positive
+	return `afterJson`
+}
+
+func (u *UserLogs) ToArray() A.X { //nolint:dupl false positive
+	return A.X{
+		u.CreatedAt,  // 0
+		u.ActorId,    // 1
+		u.BeforeJson, // 2
+		u.AfterJson,  // 3
 	}
 }
 

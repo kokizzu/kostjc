@@ -19,6 +19,8 @@ var viewList = map[string]string{
 	`AdminSaleLogs`:                  `../svelte/admin/saleLogs.html`,                  // ../svelte/admin/saleLogs.svelte
 	`AdminSettingFixInconsistencies`: `../svelte/admin/settingFixInconsistencies.html`, // ../svelte/admin/settingFixInconsistencies.svelte
 	`AdminStockLogs`:                 `../svelte/admin/stockLogs.html`,                 // ../svelte/admin/stockLogs.svelte
+	`AdminTenantLogs`:                `../svelte/admin/tenantLogs.html`,                // ../svelte/admin/tenantLogs.svelte
+	`AdminUserLogs`:                  `../svelte/admin/userLogs.html`,                  // ../svelte/admin/userLogs.svelte
 	`AdminWifiDeviceLogs`:            `../svelte/admin/wifiDeviceLogs.html`,            // ../svelte/admin/wifiDeviceLogs.svelte
 	`AdminBooking`:                   `../svelte/adminBooking.html`,                    // ../svelte/adminBooking.svelte
 	`AdminBuilding`:                  `../svelte/adminBuilding.html`,                   // ../svelte/adminBuilding.svelte
@@ -95,6 +97,16 @@ func (v *Views) RenderAdminSettingFixInconsistencies(c *fiber.Ctx, m M.SX) error
 func (v *Views) RenderAdminStockLogs(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`AdminStockLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminTenantLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminTenantLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminUserLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminUserLogs`].Str(m))
 }
 
 func (v *Views) RenderAdminWifiDeviceLogs(c *fiber.Ctx, m M.SX) error {

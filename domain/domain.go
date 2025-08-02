@@ -33,6 +33,8 @@ type Domain struct {
 
 	// timed buffer
 	authLogs       *chBuffer.TimedBuffer
+	userLogs       *chBuffer.TimedBuffer
+	tenantLogs     *chBuffer.TimedBuffer
 	locationLogs   *chBuffer.TimedBuffer
 	facilityLogs   *chBuffer.TimedBuffer
 	buildingLogs   *chBuffer.TimedBuffer
@@ -65,6 +67,8 @@ func (d *Domain) runSubtask(subTask func()) {
 
 func (d *Domain) InitTimedBuffer() {
 	d.authLogs = chBuffer.NewTimedBuffer(d.AuthOlap.DB, 100_000, 1*time.Second, saAuth.Preparators[mAuth.TableActionLogs])
+	d.userLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saAuth.Preparators[mAuth.TableUserLogs])
+	d.tenantLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saAuth.Preparators[mAuth.TableTenantLogs])
 	d.locationLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableLocationLogs])
 	d.facilityLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableFacilityLogs])
 	d.buildingLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableBuildingLogs])

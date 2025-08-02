@@ -153,6 +153,8 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 
 const (
 	TableActionLogs Ch.TableName = `actionLogs`
+	TableUserLogs   Ch.TableName = `userLogs`
+	TableTenantLogs Ch.TableName = `tenantLogs`
 
 	RequestId  = `requestId`
 	Error      = `error`
@@ -169,6 +171,9 @@ const (
 	Latency = `latency` // in seconds
 
 	RefId = `refId`
+
+	BeforeJSON = `beforeJson`
+	AfterJSON  = `afterJson`
 )
 
 var ClickhouseTables = map[Ch.TableName]*Ch.TableProp{
@@ -190,5 +195,23 @@ var ClickhouseTables = map[Ch.TableName]*Ch.TableProp{
 			{RefId, Ch.UInt64},
 		},
 		Orders: []string{CreatedAt, RequestId, ActorId, Action},
+	},
+	TableUserLogs: {
+		Fields: []Ch.Field{
+			{CreatedAt, Ch.DateTime},
+			{ActorId, Ch.UInt64},
+			{BeforeJSON, Ch.String},
+			{AfterJSON, Ch.String},
+		},
+		Orders: []string{CreatedAt, ActorId},
+	},
+	TableTenantLogs: {
+		Fields: []Ch.Field{
+			{CreatedAt, Ch.DateTime},
+			{ActorId, Ch.UInt64},
+			{BeforeJSON, Ch.String},
+			{AfterJSON, Ch.String},
+		},
+		Orders: []string{CreatedAt, ActorId},
 	},
 }

@@ -4,6 +4,14 @@
 
 <div class="admin-submenu">
 	<nav>
+		<a href="/admin/userLogs" class:active={segment2==='userLogs'}>
+			<span class="title">User</span>
+			<span class="block"></span>
+		</a>
+		<a href="/admin/tenantLogs" class:active={segment2==='tenantLogs'}>
+			<span class="title">Tenant</span>
+			<span class="block"></span>
+		</a>
 		<a href="/admin/bookingLogs" class:active={segment2==='bookingLogs'}>
 			<span class="title">Booking</span>
 			<span class="block"></span>

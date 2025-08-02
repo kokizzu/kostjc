@@ -10,7 +10,7 @@
   
   import LayoutMain from '../_layouts/main.svelte';
   import MasterTableActionlog from '../_components/MasterTableActionlog.svelte';
-  import { AdminFacilityLogs } from '../jsApi.GEN';
+  import { AdminUserLogs } from '../jsApi.GEN';
   import { notifier } from '../_components/xNotifier';
   import LogsSubMenu from '../_partials/LogsSubMenu.svelte';
   import PopUpCompareJson from '../_components/PopUpCompareJson.svelte';
@@ -28,8 +28,8 @@
     const i = {
       pager: pagerIn
     };
-    await AdminFacilityLogs( // @ts-ignore
-      i, /** @type {import('../jsApi.GEN').AdminFacilityLogsCallback} */
+    await AdminUserLogs( // @ts-ignore
+      i, /** @type {import('../jsApi.GEN').AdminUserLogsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {

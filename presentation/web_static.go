@@ -874,6 +874,68 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminUserLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminUserLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminUserLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminUserLogs(&in)
+		return views.RenderAdminUserLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    conf.PROJECT_NAME + ` | User Logs`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+			`users`:    users,
+			`tenants`:  tenants,
+		})
+	})
+
+	fw.Get(`/`+domain.AdminTenantLogsAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminTenantLogsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminTenantLogsAction)
+		if err != nil {
+			return err
+		}
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+		in.WithMeta = true
+		out := d.AdminTenantLogs(&in)
+		return views.RenderAdminTenantLogs(ctx, M.SX{
+			`user`:     user,
+			`title`:    conf.PROJECT_NAME + ` | Tenant Logs`,
+			`segments`: segments,
+			`logs`:     out.Logs,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
+			`users`:    users,
+			`tenants`:  tenants,
+		})
+	})
+
 	fw.Get(`/`+domain.AdminSettingFixInconsistenciesAction, func(ctx *fiber.Ctx) error {
 		var in domain.AdminSettingFixInconsistenciesIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSettingFixInconsistenciesAction)

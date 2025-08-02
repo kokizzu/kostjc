@@ -3797,8 +3797,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminStockLogs = async function AdminStockLogs(i, cb) {
         return await axios.post("/admin/stockLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminTenantLogs = async function AdminTenantLogs(i, cb) {
+        return await axios.post("/admin/tenantLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminTenants = async function AdminTenants(i, cb) {
         return await axios.post("/admin/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminUserLogs = async function AdminUserLogs(i, cb) {
+        return await axios.post("/admin/userLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminUsersManagement = async function AdminUsersManagement(i, cb) {
         return await axios.post("/admin/usersManagement", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -10130,7 +10136,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*rows, deletedAtIdx, fields, EXTENDED_BUTTONS, renderFuncs, cell, REFS, showDataBefore, showDataAfter, pager*/
+        if (dirty[0] & /*rows, deletedAtIdx, fields, EXTENDED_BUTTONS, REFS, renderFuncs, cell, showDataBefore, showDataAfter, pager*/
         14680639) {
           each_value_1 = ensure_array_like(
             /*rows*/
@@ -10315,43 +10321,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   }
   function create_if_block_5(ctx) {
     let td;
-    let raw_value = (
-      /*row*/
-      ctx[38][
-        /*field*/
-        ctx[41].name
-      ] + ""
-    );
-    return {
-      c() {
-        td = element("td");
-        attr(td, "class", "svelte-1ga6f2z");
-      },
-      m(target, anchor) {
-        insert(target, td, anchor);
-        td.innerHTML = raw_value;
-      },
-      p(ctx2, dirty) {
-        if (dirty[0] & /*rows, fields*/
-        6 && raw_value !== (raw_value = /*row*/
-        ctx2[38][
-          /*field*/
-          ctx2[41].name
-        ] + ""))
-          td.innerHTML = raw_value;
-        ;
-      },
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(td);
-        }
-      }
-    };
-  }
-  function create_if_block_4(ctx) {
-    let td;
     let t_value = localeDatetime(
       /*cell*/
       ctx[21](
@@ -10398,7 +10367,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_if_block_32(ctx) {
+  function create_if_block_4(ctx) {
     let td;
     let t_value = (
       /*renderFuncs*/
@@ -10445,6 +10414,56 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             ctx2[41]
           )
         ) + ""))
+          set_data(t, t_value);
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(td);
+        }
+      }
+    };
+  }
+  function create_if_block_32(ctx) {
+    let td;
+    let t_value = (
+      /*REFS*/
+      ctx[4][
+        /*field*/
+        ctx[41].name
+      ][
+        /*row*/
+        ctx[38][
+          /*field*/
+          ctx[41].name
+        ]
+      ] + ""
+    );
+    let t;
+    return {
+      c() {
+        td = element("td");
+        t = text(t_value);
+        attr(td, "class", "svelte-1ga6f2z");
+      },
+      m(target, anchor) {
+        insert(target, td, anchor);
+        append(td, t);
+      },
+      p(ctx2, dirty) {
+        if (dirty[0] & /*REFS, fields, rows*/
+        22 && t_value !== (t_value = /*REFS*/
+        ctx2[4][
+          /*field*/
+          ctx2[41].name
+        ][
+          /*row*/
+          ctx2[38][
+            /*field*/
+            ctx2[41].name
+          ]
+        ] + ""))
           set_data(t, t_value);
       },
       i: noop,
@@ -10642,28 +10661,28 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       )
         return 0;
       if (
-        /*renderFuncs*/
-        ctx2[0][
-          /*field*/
-          ctx2[41].name
-        ]
-      )
-        return 1;
-      if (
-        /*field*/
-        ctx2[41].inputType === "datetime" || /*field*/
-        ctx2[41].name === "deletedAt" || /*field*/
-        ctx2[41].name === "createdAt" || /*field*/
-        ctx2[41].name === "updatedAt"
-      )
-        return 2;
-      if (
         /*field*/
         ctx2[41].inputType === "combobox" && /*REFS*/
         ctx2[4][
           /*field*/
           ctx2[41].name
         ]
+      )
+        return 1;
+      if (
+        /*renderFuncs*/
+        ctx2[0][
+          /*field*/
+          ctx2[41].name
+        ]
+      )
+        return 2;
+      if (
+        /*field*/
+        ctx2[41].inputType === "datetime" || /*field*/
+        ctx2[41].name === "deletedAt" || /*field*/
+        ctx2[41].name === "createdAt" || /*field*/
+        ctx2[41].name === "updatedAt"
       )
         return 3;
       if (
@@ -10796,7 +10815,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ctx2[3].perPage + /*idx*/
         ctx2[40] + 1 + ""))
           set_data(t0, t0_value);
-        if (dirty[0] & /*EXTENDED_BUTTONS, rows, fields, renderFuncs, cell, REFS, showDataBefore, showDataAfter*/
+        if (dirty[0] & /*EXTENDED_BUTTONS, rows, fields, REFS, renderFuncs, cell, showDataBefore, showDataAfter*/
         14680119) {
           each_value_2 = ensure_array_like(
             /*fields*/
@@ -11685,115 +11704,141 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let a8;
     let t26;
     let a9;
+    let t29;
+    let a10;
+    let t32;
+    let a11;
     return {
       c() {
         div = element("div");
         nav = element("nav");
         a0 = element("a");
-        a0.innerHTML = `<span class="title svelte-5qqpzn">Booking</span> <span class="block svelte-5qqpzn"></span>`;
+        a0.innerHTML = `<span class="title svelte-5qqpzn">User</span> <span class="block svelte-5qqpzn"></span>`;
         t2 = space();
         a1 = element("a");
-        a1.innerHTML = `<span class="title svelte-5qqpzn">Building</span> <span class="block svelte-5qqpzn"></span>`;
+        a1.innerHTML = `<span class="title svelte-5qqpzn">Tenant</span> <span class="block svelte-5qqpzn"></span>`;
         t5 = space();
         a2 = element("a");
-        a2.innerHTML = `<span class="title svelte-5qqpzn">Facility</span> <span class="block svelte-5qqpzn"></span>`;
+        a2.innerHTML = `<span class="title svelte-5qqpzn">Booking</span> <span class="block svelte-5qqpzn"></span>`;
         t8 = space();
         a3 = element("a");
-        a3.innerHTML = `<span class="title svelte-5qqpzn">Location</span> <span class="block svelte-5qqpzn"></span>`;
+        a3.innerHTML = `<span class="title svelte-5qqpzn">Building</span> <span class="block svelte-5qqpzn"></span>`;
         t11 = space();
         a4 = element("a");
-        a4.innerHTML = `<span class="title svelte-5qqpzn">Payment</span> <span class="block svelte-5qqpzn"></span>`;
+        a4.innerHTML = `<span class="title svelte-5qqpzn">Facility</span> <span class="block svelte-5qqpzn"></span>`;
         t14 = space();
         a5 = element("a");
-        a5.innerHTML = `<span class="title svelte-5qqpzn">Room</span> <span class="block svelte-5qqpzn"></span>`;
+        a5.innerHTML = `<span class="title svelte-5qqpzn">Location</span> <span class="block svelte-5qqpzn"></span>`;
         t17 = space();
         a6 = element("a");
-        a6.innerHTML = `<span class="title svelte-5qqpzn">Stock</span> <span class="block svelte-5qqpzn"></span>`;
+        a6.innerHTML = `<span class="title svelte-5qqpzn">Payment</span> <span class="block svelte-5qqpzn"></span>`;
         t20 = space();
         a7 = element("a");
-        a7.innerHTML = `<span class="title svelte-5qqpzn">Sale</span> <span class="block svelte-5qqpzn"></span>`;
+        a7.innerHTML = `<span class="title svelte-5qqpzn">Room</span> <span class="block svelte-5qqpzn"></span>`;
         t23 = space();
         a8 = element("a");
-        a8.innerHTML = `<span class="title svelte-5qqpzn">Menu</span> <span class="block svelte-5qqpzn"></span>`;
+        a8.innerHTML = `<span class="title svelte-5qqpzn">Stock</span> <span class="block svelte-5qqpzn"></span>`;
         t26 = space();
         a9 = element("a");
-        a9.innerHTML = `<span class="title svelte-5qqpzn">Wifi Device</span> <span class="block svelte-5qqpzn"></span>`;
-        attr(a0, "href", "/admin/bookingLogs");
+        a9.innerHTML = `<span class="title svelte-5qqpzn">Sale</span> <span class="block svelte-5qqpzn"></span>`;
+        t29 = space();
+        a10 = element("a");
+        a10.innerHTML = `<span class="title svelte-5qqpzn">Menu</span> <span class="block svelte-5qqpzn"></span>`;
+        t32 = space();
+        a11 = element("a");
+        a11.innerHTML = `<span class="title svelte-5qqpzn">Wifi Device</span> <span class="block svelte-5qqpzn"></span>`;
+        attr(a0, "href", "/admin/userLogs");
         attr(a0, "class", "svelte-5qqpzn");
         toggle_class(
           a0,
           "active",
           /*segment2*/
-          ctx[0] === "bookingLogs"
+          ctx[0] === "userLogs"
         );
-        attr(a1, "href", "/admin/buildingLogs");
+        attr(a1, "href", "/admin/tenantLogs");
         attr(a1, "class", "svelte-5qqpzn");
         toggle_class(
           a1,
           "active",
           /*segment2*/
-          ctx[0] === "buildingLogs"
+          ctx[0] === "tenantLogs"
         );
-        attr(a2, "href", "/admin/facilityLogs");
+        attr(a2, "href", "/admin/bookingLogs");
         attr(a2, "class", "svelte-5qqpzn");
         toggle_class(
           a2,
           "active",
           /*segment2*/
-          ctx[0] === "facilityLogs"
+          ctx[0] === "bookingLogs"
         );
-        attr(a3, "href", "/admin/locationLogs");
+        attr(a3, "href", "/admin/buildingLogs");
         attr(a3, "class", "svelte-5qqpzn");
         toggle_class(
           a3,
           "active",
           /*segment2*/
-          ctx[0] === "locationLogs"
+          ctx[0] === "buildingLogs"
         );
-        attr(a4, "href", "/admin/paymentLogs");
+        attr(a4, "href", "/admin/facilityLogs");
         attr(a4, "class", "svelte-5qqpzn");
         toggle_class(
           a4,
           "active",
           /*segment2*/
-          ctx[0] === "paymentLogs"
+          ctx[0] === "facilityLogs"
         );
-        attr(a5, "href", "/admin/roomLogs");
+        attr(a5, "href", "/admin/locationLogs");
         attr(a5, "class", "svelte-5qqpzn");
         toggle_class(
           a5,
           "active",
           /*segment2*/
-          ctx[0] === "roomLogs"
+          ctx[0] === "locationLogs"
         );
-        attr(a6, "href", "/admin/stockLogs");
+        attr(a6, "href", "/admin/paymentLogs");
         attr(a6, "class", "svelte-5qqpzn");
         toggle_class(
           a6,
           "active",
           /*segment2*/
-          ctx[0] === "stockLogs"
+          ctx[0] === "paymentLogs"
         );
-        attr(a7, "href", "/admin/saleLogs");
+        attr(a7, "href", "/admin/roomLogs");
         attr(a7, "class", "svelte-5qqpzn");
         toggle_class(
           a7,
           "active",
           /*segment2*/
-          ctx[0] === "saleLogs"
+          ctx[0] === "roomLogs"
         );
-        attr(a8, "href", "/admin/menuLogs");
+        attr(a8, "href", "/admin/stockLogs");
         attr(a8, "class", "svelte-5qqpzn");
         toggle_class(
           a8,
           "active",
           /*segment2*/
-          ctx[0] === "menuLogs"
+          ctx[0] === "stockLogs"
         );
-        attr(a9, "href", "/admin/wifiDeviceLogs");
+        attr(a9, "href", "/admin/saleLogs");
         attr(a9, "class", "svelte-5qqpzn");
         toggle_class(
           a9,
+          "active",
+          /*segment2*/
+          ctx[0] === "saleLogs"
+        );
+        attr(a10, "href", "/admin/menuLogs");
+        attr(a10, "class", "svelte-5qqpzn");
+        toggle_class(
+          a10,
+          "active",
+          /*segment2*/
+          ctx[0] === "menuLogs"
+        );
+        attr(a11, "href", "/admin/wifiDeviceLogs");
+        attr(a11, "class", "svelte-5qqpzn");
+        toggle_class(
+          a11,
           "active",
           /*segment2*/
           ctx[0] === "wifiDeviceLogs"
@@ -11823,6 +11868,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         append(nav, a8);
         append(nav, t26);
         append(nav, a9);
+        append(nav, t29);
+        append(nav, a10);
+        append(nav, t32);
+        append(nav, a11);
       },
       p: noop,
       i: noop,
