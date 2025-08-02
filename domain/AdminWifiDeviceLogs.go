@@ -58,6 +58,20 @@ var (
 				InputType: zCrud.InputTypeCombobox,
 			},
 			{
+				Name:      `tenantBefore`,
+				Label:     `Tenant (Before)`,
+				ReadOnly:  true,
+				DataType:  zCrud.DataTypeInt,
+				InputType: zCrud.InputTypeCombobox,
+			},
+			{
+				Name:      `tenantAfter`,
+				Label:     `Tenant (After)`,
+				ReadOnly:  true,
+				DataType:  zCrud.DataTypeInt,
+				InputType: zCrud.InputTypeCombobox,
+			},
+			{
 				Name:      mProperty.BeforeJSON,
 				Label:     `Before (JSON)`,
 				ReadOnly:  true,

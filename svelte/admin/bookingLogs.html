@@ -10130,7 +10130,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         current = true;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*rows, deletedAtIdx, fields, EXTENDED_BUTTONS, renderFuncs, cell, users, showDataBefore, showDataAfter, pager*/
+        if (dirty[0] & /*rows, deletedAtIdx, fields, EXTENDED_BUTTONS, renderFuncs, cell, REFS, showDataBefore, showDataAfter, pager*/
         14680639) {
           each_value_1 = ensure_array_like(
             /*rows*/
@@ -10315,32 +10315,31 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   }
   function create_if_block_5(ctx) {
     let td;
-    let t_value = (
-      /*users*/
-      ctx[4][Number(
-        /*row*/
-        ctx[38].actorId
-      )] + ""
+    let raw_value = (
+      /*row*/
+      ctx[38][
+        /*field*/
+        ctx[41].name
+      ] + ""
     );
-    let t;
     return {
       c() {
         td = element("td");
-        t = text(t_value);
         attr(td, "class", "svelte-1ga6f2z");
       },
       m(target, anchor) {
         insert(target, td, anchor);
-        append(td, t);
+        td.innerHTML = raw_value;
       },
       p(ctx2, dirty) {
-        if (dirty[0] & /*users, rows*/
-        20 && t_value !== (t_value = /*users*/
-        ctx2[4][Number(
-          /*row*/
-          ctx2[38].actorId
-        )] + ""))
-          set_data(t, t_value);
+        if (dirty[0] & /*rows, fields*/
+        6 && raw_value !== (raw_value = /*row*/
+        ctx2[38][
+          /*field*/
+          ctx2[41].name
+        ] + ""))
+          td.innerHTML = raw_value;
+        ;
       },
       i: noop,
       o: noop,
@@ -10660,7 +10659,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         return 2;
       if (
         /*field*/
-        ctx2[41].name == "actorId"
+        ctx2[41].inputType === "combobox" && /*REFS*/
+        ctx2[4][
+          /*field*/
+          ctx2[41].name
+        ]
       )
         return 3;
       if (
@@ -10793,7 +10796,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ctx2[3].perPage + /*idx*/
         ctx2[40] + 1 + ""))
           set_data(t0, t0_value);
-        if (dirty[0] & /*EXTENDED_BUTTONS, rows, fields, renderFuncs, cell, users, showDataBefore, showDataAfter*/
+        if (dirty[0] & /*EXTENDED_BUTTONS, rows, fields, renderFuncs, cell, REFS, showDataBefore, showDataAfter*/
         14680119) {
           each_value_2 = ensure_array_like(
             /*fields*/
@@ -11484,10 +11487,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       /** @type {PagerOut} */
       {}
     ) } = $props;
-    let { users: users2 = (
-      /** @type {Record<number, string>} */
-      {}
-    ) } = $props;
+    let { REFS = {} } = $props;
     let { EXTENDED_BUTTONS = (
       /** @type {ExtendedActionButton[]} */
       []
@@ -11573,8 +11573,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         $invalidate(2, rows = $props2.rows);
       if ("pager" in $props2)
         $invalidate(3, pager = $props2.pager);
-      if ("users" in $props2)
-        $invalidate(4, users2 = $props2.users);
+      if ("REFS" in $props2)
+        $invalidate(4, REFS = $props2.REFS);
       if ("EXTENDED_BUTTONS" in $props2)
         $invalidate(5, EXTENDED_BUTTONS = $props2.EXTENDED_BUTTONS);
       if ("COL_WIDTHS" in $props2)
@@ -11599,7 +11599,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       fields2,
       rows,
       pager,
-      users2,
+      REFS,
       EXTENDED_BUTTONS,
       COL_WIDTHS,
       currentRows,
@@ -11647,7 +11647,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           fields: 1,
           rows: 2,
           pager: 3,
-          users: 4,
+          REFS: 4,
           EXTENDED_BUTTONS: 5,
           COL_WIDTHS: 6,
           onRefreshTableView: 25
@@ -12272,7 +12272,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         /*logs*/
         ctx[0]
       ),
-      users,
+      REFS: { "actorId": users },
       COL_WIDTHS: { "actorId": 200 },
       EXTENDED_BUTTONS: (
         /*EXTENDED_BUTTONS*/

@@ -7,13 +7,13 @@
   /** @typedef {import('../_types/masters.js').ExtendedActionButton} ExtendedActionButton */
   
   import LayoutMain from '../_layouts/main.svelte';
-  import MasterTableActionlog from '../_components/MasterTableActionlog.svelte';
   import { AdminWifiDeviceLogs } from '../jsApi.GEN';
   import { notifier } from '../_components/xNotifier';
   import LogsSubMenu from '../_partials/LogsSubMenu.svelte';
   import { RiSystemInformationLine } from '../node_modules/svelte-icons-pack/dist/ri';
   import PopUpCompareJson from '../_components/PopUpCompareJson.svelte';
   import { onMount } from 'svelte';
+  import MasterTableWifiDeviceLog from '../_components/MasterTableWifiDeviceLog.svelte';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -86,12 +86,14 @@
 <LayoutMain access={segments} user={user}>
   <div class="logs-container">
     <LogsSubMenu />
-    <MasterTableActionlog arrayOfArray={false}
+    <MasterTableWifiDeviceLog arrayOfArray={false}
       bind:pager={pager}
       {fields}
       onRefreshTableView={refreshTableView}
       rows={logs}
-      {users}
+      REFS={{
+        'actorId': users
+      }}
       COL_WIDTHS={{
         'actorId': 200
       }}
