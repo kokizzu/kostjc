@@ -1312,38 +1312,44 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./_partials/home/UnpaidBookingTenants.esbuild-svelte-fake-css */
-.empty-unpaidBookingTenants.svelte-1n9v0lv.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-1ru427w.svelte-1ru427w {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv h1.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-1ru427w h1.svelte-1ru427w {
   margin: 0;
   padding: 0;
   font-size: var(--font-xl);
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv .cards.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-1ru427w .cards.svelte-1ru427w {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv .cards .card.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-1ru427w .cards .card.svelte-1ru427w {
   background-color: var(--gray-001);
   padding: 20px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
   position: relative;
   overflow: hidden;
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv .cards .card h3.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-1ru427w .cards .card .detail.svelte-1ru427w {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.empty-unpaidBookingTenants.svelte-1ru427w .cards .card h3.svelte-1ru427w {
   margin: 0;
   padding: 0;
   font-size: var(--font-lg);
   z-index: 20;
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv .cards .card .desc.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-1ru427w .cards .card .desc.svelte-1ru427w {
   padding-top: 10px;
   border-top: 1px solid var(--gray-004);
   display: flex;
@@ -1352,14 +1358,28 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   z-index: 20;
 }
 @media only screen and (max-width : 768px) {
-  .empty-unpaidBookingTenants.svelte-1n9v0lv .cards.svelte-1n9v0lv {
+  .empty-unpaidBookingTenants.svelte-1ru427w .cards.svelte-1ru427w {
     grid-template-columns: 1fr;
   }
 }
 @media only screen and (max-width: 992px) {
-  .empty-unpaidBookingTenants.svelte-1n9v0lv .cards.svelte-1n9v0lv {
+  .empty-unpaidBookingTenants.svelte-1ru427w .cards.svelte-1ru427w {
     grid-template-columns: 1fr 1fr;
   }
+}
+.progress.svelte-1ru427w.svelte-1ru427w {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background-color: var(--gray-003);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.progress.svelte-1ru427w span.svelte-1ru427w {
+  height: 100%;
+  background-image: linear-gradient(#f1a165, #f36d0a);
+  width: 33.3%;
+  display: block;
 }
 
 /* fakecss:./_partials/home/DoubleBookingReports.esbuild-svelte-fake-css */
@@ -16293,7 +16313,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cards svelte-1n9v0lv");
+        attr(div, "class", "cards svelte-1ru427w");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16333,9 +16353,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     };
   }
   function create_each_block4(ctx) {
-    let div1;
+    let div3;
     let h3;
     let t1;
+    let div2;
     let div0;
     let span0;
     let t4;
@@ -16343,13 +16364,16 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let t8;
     let span2;
     let t14;
+    let div1;
+    let t15;
     return {
       c() {
-        div1 = element("div");
+        div3 = element("div");
         h3 = element("h3");
         h3.textContent = `${/*ub*/
         ctx[0].tenantName}`;
         t1 = space();
+        div2 = element("div");
         div0 = element("div");
         span0 = element("span");
         span0.textContent = `Room ${/*ub*/
@@ -16367,26 +16391,34 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           ctx[0].dateStart
         )})`;
         t14 = space();
-        attr(h3, "class", "svelte-1n9v0lv");
-        attr(div0, "class", "desc svelte-1n9v0lv");
-        attr(div1, "class", "card svelte-1n9v0lv");
+        div1 = element("div");
+        div1.innerHTML = `<span class="svelte-1ru427w"></span>`;
+        t15 = space();
+        attr(h3, "class", "svelte-1ru427w");
+        attr(div0, "class", "desc svelte-1ru427w");
+        attr(div1, "class", "progress svelte-1ru427w");
+        attr(div2, "class", "detail svelte-1ru427w");
+        attr(div3, "class", "card svelte-1ru427w");
       },
       m(target, anchor) {
-        insert(target, div1, anchor);
-        append(div1, h3);
-        append(div1, t1);
-        append(div1, div0);
+        insert(target, div3, anchor);
+        append(div3, h3);
+        append(div3, t1);
+        append(div3, div2);
+        append(div2, div0);
         append(div0, span0);
         append(div0, t4);
         append(div0, span1);
         append(div0, t8);
         append(div0, span2);
-        append(div1, t14);
+        append(div2, t14);
+        append(div2, div1);
+        append(div3, t15);
       },
       p: noop,
       d(detaching) {
         if (detaching) {
-          detach(div1);
+          detach(div3);
         }
       }
     };
@@ -16409,8 +16441,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         h1.textContent = "Unpaid Bookings";
         t1 = space();
         if_block.c();
-        attr(h1, "class", "svelte-1n9v0lv");
-        attr(section, "class", "empty-unpaidBookingTenants svelte-1n9v0lv");
+        attr(h1, "class", "svelte-1ru427w");
+        attr(section, "class", "empty-unpaidBookingTenants svelte-1ru427w");
       },
       m(target, anchor) {
         insert(target, section, anchor);

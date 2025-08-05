@@ -20,10 +20,15 @@
       {#each (unpaidBookingTenants || []) as ub}
         <div class="card">
           <h3>{ub.tenantName}</h3>
-          <div class="desc">
-            <span>Room {ub.roomName}</span>
-            <span>{ub.totalPaid}/{ub.totalPrice}</span>
-            <span>Start at {ub.dateStart} ({GetRelativeDayLabel(ub.dateStart)})</span>
+          <div class="detail">
+            <div class="desc">
+              <span>Room {ub.roomName}</span>
+              <span>{ub.totalPaid}/{ub.totalPrice}</span>
+              <span>Start at {ub.dateStart} ({GetRelativeDayLabel(ub.dateStart)})</span>
+            </div>
+            <div class="progress">
+              <span></span>
+            </div>
           </div>
         </div>
       {/each}
@@ -60,9 +65,16 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 10px;
     position: relative;
     overflow: hidden;
+  }
+
+  .empty-unpaidBookingTenants .cards .card .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .empty-unpaidBookingTenants .cards .card h3 {
@@ -91,5 +103,21 @@
     .empty-unpaidBookingTenants .cards {
       grid-template-columns: 1fr 1fr;
     }
+  }
+
+  .progress {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background-color: var(--gray-003);
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+
+  .progress span {
+    height: 100%;
+    background-image: linear-gradient(#f1a165, #f36d0a);
+    width: 33.3%;
+    display: block;
   }
 </style>
