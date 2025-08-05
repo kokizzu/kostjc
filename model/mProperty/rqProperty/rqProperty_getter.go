@@ -1442,7 +1442,7 @@ func (b *Bookings) FindDoubleBookingReports() (out []DoubleBookingReport) {
 
 	dtNow := time.Now().Format(time.DateOnly)
 	queryRows := comment + `
-WITH RECURSIVE overlapping_groups AS (
+WITH overlapping_groups AS (
   SELECT 
     b."id" AS booking_id,
     b."roomId" AS room_id,
@@ -1450,37 +1450,21 @@ WITH RECURSIVE overlapping_groups AS (
     b."tenantId" AS tenant_id,
     t."tenantName" AS tenant_name,
     b."dateStart" AS date_start,
-    b."dateEnd" AS date_end,
-    b."id" AS group_id
+    b."dateEnd" AS date_end
   FROM "bookings" b
+	LEFT JOIN "bookings" b2
+		ON b."roomId" = b2."roomId"
+		AND b."id" <> b2."id"
+		AND (
+			b."dateStart" <= b2."dateEnd" AND
+			b."dateEnd" >= b2."dateStart"
+		)
   LEFT JOIN "tenants" t ON b."tenantId" = t."id"
   LEFT JOIN "rooms" r ON b."roomId" = r."id"
 	WHERE b."deletedAt" = 0
-
-  UNION ALL
-
-  SELECT 
-    b2."id" AS booking_id,
-    b2."roomId" AS room_id,
-    r2."roomName" AS room_name,
-    b2."tenantId" AS tenant_id,
-    t2."tenantName" AS tenant_name,
-    b2."dateStart" AS date_start,
-    b2."dateEnd" AS date_end,
-    og.group_id AS group_id
-  FROM "bookings" b2
-  LEFT JOin "tenants" t2 ON b2."tenantId" = t2."id"
-  LEFT JOIN "rooms" r2 ON b2."roomId" = r2."id"
-  JOIN overlapping_groups AS og
-    ON b2."roomId" = og.room_id
-    AND b2."id" <> og.booking_id
-    AND b2."dateStart" <= og.date_end
-    AND b2."dateEnd" >= og.date_start
-    AND b2."id" > og.booking_id
-	WHERE b2."deletedAt" = 0
 )
 
-SELECT DISTINCT
+SELECT 
   room_id,
   room_name,
   tenant_id,
@@ -1510,6 +1494,35 @@ ORDER BY room_name`
 	return
 }
 
+func parseDateYYYYMMDD(dateStr string) time.Time {
+	t, err := time.Parse(time.DateOnly, dateStr)
+	if err != nil {
+		return time.Now()
+	}
+
+	return t
+}
+
+func isOverlapping(a, b DoubleBookingReportData) bool {
+	startA := parseDateYYYYMMDD(a.DateStart)
+	endA := parseDateYYYYMMDD(a.DateEnd)
+	startB := parseDateYYYYMMDD(b.DateStart)
+	endB := parseDateYYYYMMDD(b.DateEnd)
+
+	return startA.Before(endB.Add(24*time.Hour)) && startB.Before(endA.Add(24*time.Hour))
+}
+
+func hasAnyOverlap(data []DoubleBookingReportData) bool {
+	for i := range data {
+		for j := i + 1; j < len(data); j++ {
+			if isOverlapping(data[i], data[j]) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func groupDoubleBookingByRoom(data []DoubleBookingReportData) []DoubleBookingReport {
 	groupMap := make(map[uint64]*DoubleBookingReport)
 
@@ -1532,8 +1545,11 @@ func groupDoubleBookingByRoom(data []DoubleBookingReportData) []DoubleBookingRep
 
 	var filteredResult = []DoubleBookingReport{}
 	for _, report := range result {
-		if len(report.Tenants) > 1 {
-			filteredResult = append(filteredResult, report)
+		totalTenants := len(report.Tenants)
+		if totalTenants > 1 {
+			if hasAnyOverlap(report.Tenants) {
+				filteredResult = append(filteredResult, report)
+			}
 		}
 	}
 	result = nil
