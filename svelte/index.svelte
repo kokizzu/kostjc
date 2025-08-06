@@ -143,9 +143,9 @@
 {#if Mode === ModeUser}
   <LayoutMain access={segments} user={user}>
     <div class="home-container">
+      <UnpaidBookingTenants />
       <BirthDayAgenda />
       <AvailableRooms />
-      <UnpaidBookingTenants />
       <DoubleBookingReports />
       <UpcomingTenants />
     </div>

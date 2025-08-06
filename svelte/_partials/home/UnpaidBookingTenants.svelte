@@ -10,7 +10,59 @@
    * @property {number} totalPrice
    * @property {string} dateStart
    */
-   const unpaidBookingTenants = /** @type {UnpaidBookingTenant[]} */ ([/* unpaidBookingTenants */]);
+  const unpaidBookingTenants = /** @type {UnpaidBookingTenant[]} */ ([/* unpaidBookingTenants */]);
+
+  const msPerDay = 1000 * 60 * 60 * 24;
+
+  /**
+   * @typedef {'green' | 'yellow' | 'red'} ProgressColor
+   */
+
+  /**
+   * @typedef {Object} PaidProgress
+   * @property {number} percentage
+   * @property {ProgressColor} color
+   */
+
+  /**
+   * @description Get progress paid percentage, by total price, total paid, and days occupied
+   * @param {UnpaidBookingTenant} data
+   * @returns {PaidProgress}
+   */
+  function getProgressPaidPercentage(data) {
+    const now = new Date();
+    const startDate = new Date(data.dateStart);
+    // @ts-ignore
+    const daysOccupied = Math.floor((now - startDate) / msPerDay);
+
+    let percentPaid = (data.totalPaid / data.totalPrice) * 100;
+    percentPaid = Math.min(percentPaid, 100);
+
+    if (daysOccupied > 30 && data.totalPaid < data.totalPrice) {
+      percentPaid = 100;
+    }
+
+    const dayFactor = Math.min((daysOccupied / 30) * 100, 100);
+
+    // 70% weight to payment
+    // 30% weight to days occupied
+    let percentage = (percentPaid * 0.7) + (dayFactor * 0.3);
+    percentage = Math.min(percentage, 100);
+
+    let color = /** @type {ProgressColor} */ ('green');
+
+    if (percentage < 30) color = 'green';
+    else if (percentage < 70) color = 'yellow';
+    else color = 'red';
+
+    if (percentage == 0) color = 'green';
+    if (percentage < 5) percentage = 5;
+
+    return {
+      percentage: Math.round(percentage),
+      color: color
+    };
+  }
 </script>
 
 <section class="empty-unpaidBookingTenants">
@@ -18,6 +70,7 @@
   {#if unpaidBookingTenants && unpaidBookingTenants.length > 0}
     <div class="cards">
       {#each (unpaidBookingTenants || []) as ub}
+        {@const prog = getProgressPaidPercentage(ub)}
         <div class="card">
           <h3>{ub.tenantName}</h3>
           <div class="detail">
@@ -27,7 +80,7 @@
               <span>Start at {ub.dateStart} ({GetRelativeDayLabel(ub.dateStart)})</span>
             </div>
             <div class="progress">
-              <span></span>
+              <span class={prog.color} style="width: {prog.percentage}%;"></span>
             </div>
           </div>
         </div>
@@ -108,7 +161,7 @@
   .progress {
     position: relative;
     width: 100%;
-    height: 10px;
+    height: 14px;
     background-color: var(--gray-003);
     border-radius: 9999px;
     overflow: hidden;
@@ -116,8 +169,18 @@
 
   .progress span {
     height: 100%;
-    background-image: linear-gradient(#f1a165, #f36d0a);
-    width: 33.3%;
     display: block;
+  }
+
+  :global(.progress span.green) {
+    background-image: linear-gradient(var(--green-005), var(--green-006));
+  }
+
+  :global(.progress span.yellow) {
+    background-image: linear-gradient(var(--yellow-005), var(--yellow-006));
+  }
+
+  :global(.progress span.red) {
+    background-image: linear-gradient(var(--red-005), var(--red-006));
   }
 </style>
