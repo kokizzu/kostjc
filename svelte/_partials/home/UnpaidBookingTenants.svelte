@@ -29,7 +29,7 @@
    * @param {UnpaidBookingTenant} data
    * @returns {PaidProgress}
    */
-  function getProgressPaidPercentage(data) {
+  function getProgressOccupiedPercentage(data) {
     const now = new Date();
     const startDate = new Date(data.dateStart);
     // @ts-ignore
@@ -63,6 +63,18 @@
       color: color
     };
   }
+
+  /**
+   * @description Get progress paid percentage, by total price, total paid
+   * @param {UnpaidBookingTenant} data
+   * @returns {number} percentage
+   */
+  function getProgressPaidPercentage(data) {
+    if (data.totalPaid >= data.totalPrice) return 100;
+    
+    const percentage = (data.totalPaid / data.totalPrice) * 100;
+    return Math.min(percentage, 100);
+  }
 </script>
 
 <section class="empty-unpaidBookingTenants">
@@ -70,17 +82,29 @@
   {#if unpaidBookingTenants && unpaidBookingTenants.length > 0}
     <div class="cards">
       {#each (unpaidBookingTenants || []) as ub}
-        {@const prog = getProgressPaidPercentage(ub)}
+        {@const prog = getProgressOccupiedPercentage(ub)}
+        {@const paidPercent = getProgressPaidPercentage(ub)}
         <div class="card">
           <h3>{ub.tenantName}</h3>
           <div class="detail">
+            <hr />
             <div class="desc">
               <span>Room {ub.roomName}</span>
               <span>{ub.totalPaid}/{ub.totalPrice}</span>
               <span>Start at {ub.dateStart} ({GetRelativeDayLabel(ub.dateStart)})</span>
             </div>
-            <div class="progress">
-              <span class={prog.color} style="width: {prog.percentage}%;"></span>
+            <hr />
+            <div class="progress-container">
+              <label for="">Paid progress</label>
+              <div class="progress">
+                <span class="blue" style="width: {paidPercent}%;"></span>
+              </div>
+            </div>
+            <div class="progress-container">
+              <label for="">Occupancy progress</label>
+              <div class="progress">
+                <span class={prog.color} style="width: {prog.percentage}%;"></span>
+              </div>
             </div>
           </div>
         </div>
@@ -124,6 +148,12 @@
     overflow: hidden;
   }
 
+  .empty-unpaidBookingTenants .cards .card hr {
+    height: 1px;
+    background-color: var(--gray-004) !important;
+    border: none;
+  }
+
   .empty-unpaidBookingTenants .cards .card .detail {
     display: flex;
     flex-direction: column;
@@ -138,8 +168,6 @@
   }
 
   .empty-unpaidBookingTenants .cards .card .desc {
-    padding-top: 10px;
-    border-top: 1px solid var(--gray-004);
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -158,6 +186,17 @@
     }
   }
 
+  .progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .progress-container label {
+    font-size: 12px;
+    margin-left: 5px;
+  }
+
   .progress {
     position: relative;
     width: 100%;
@@ -173,14 +212,18 @@
   }
 
   :global(.progress span.green) {
-    background-image: linear-gradient(var(--green-005), var(--green-006));
+    background-image: linear-gradient(var(--green-004), var(--green-006));
   }
 
   :global(.progress span.yellow) {
-    background-image: linear-gradient(var(--yellow-005), var(--yellow-006));
+    background-image: linear-gradient(var(--yellow-004), var(--yellow-006));
   }
 
   :global(.progress span.red) {
-    background-image: linear-gradient(var(--red-005), var(--red-006));
+    background-image: linear-gradient(var(--red-004), var(--red-006));
+  }
+
+  :global(.progress span.blue) {
+    background-image: linear-gradient(var(--blue-004), var(--blue-006));
   }
 </style>

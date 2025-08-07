@@ -1312,22 +1312,22 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./_partials/home/UnpaidBookingTenants.esbuild-svelte-fake-css */
-.empty-unpaidBookingTenants.svelte-187auzp.svelte-187auzp {
+.empty-unpaidBookingTenants.svelte-56jrvm.svelte-56jrvm {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.empty-unpaidBookingTenants.svelte-187auzp h1.svelte-187auzp {
+.empty-unpaidBookingTenants.svelte-56jrvm h1.svelte-56jrvm {
   margin: 0;
   padding: 0;
   font-size: var(--font-xl);
 }
-.empty-unpaidBookingTenants.svelte-187auzp .cards.svelte-187auzp {
+.empty-unpaidBookingTenants.svelte-56jrvm .cards.svelte-56jrvm {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
-.empty-unpaidBookingTenants.svelte-187auzp .cards .card.svelte-187auzp {
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card.svelte-56jrvm {
   background-color: var(--gray-001);
   padding: 20px;
   border-radius: 8px;
@@ -1338,36 +1338,48 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   position: relative;
   overflow: hidden;
 }
-.empty-unpaidBookingTenants.svelte-187auzp .cards .card .detail.svelte-187auzp {
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card hr.svelte-56jrvm {
+  height: 1px;
+  background-color: var(--gray-004) !important;
+  border: none;
+}
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card .detail.svelte-56jrvm {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.empty-unpaidBookingTenants.svelte-187auzp .cards .card h3.svelte-187auzp {
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card h3.svelte-56jrvm {
   margin: 0;
   padding: 0;
   font-size: var(--font-lg);
   z-index: 20;
 }
-.empty-unpaidBookingTenants.svelte-187auzp .cards .card .desc.svelte-187auzp {
-  padding-top: 10px;
-  border-top: 1px solid var(--gray-004);
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card .desc.svelte-56jrvm {
   display: flex;
   flex-direction: column;
   gap: 5px;
   z-index: 20;
 }
 @media only screen and (max-width : 768px) {
-  .empty-unpaidBookingTenants.svelte-187auzp .cards.svelte-187auzp {
+  .empty-unpaidBookingTenants.svelte-56jrvm .cards.svelte-56jrvm {
     grid-template-columns: 1fr;
   }
 }
 @media only screen and (max-width: 992px) {
-  .empty-unpaidBookingTenants.svelte-187auzp .cards.svelte-187auzp {
+  .empty-unpaidBookingTenants.svelte-56jrvm .cards.svelte-56jrvm {
     grid-template-columns: 1fr 1fr;
   }
 }
-.progress.svelte-187auzp.svelte-187auzp {
+.progress-container.svelte-56jrvm.svelte-56jrvm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.progress-container.svelte-56jrvm label.svelte-56jrvm {
+  font-size: 12px;
+  margin-left: 5px;
+}
+.progress.svelte-56jrvm.svelte-56jrvm {
   position: relative;
   width: 100%;
   height: 14px;
@@ -1375,18 +1387,21 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   border-radius: 9999px;
   overflow: hidden;
 }
-.progress.svelte-187auzp span.svelte-187auzp {
+.progress.svelte-56jrvm span.svelte-56jrvm {
   height: 100%;
   display: block;
 }
 .progress span.green {
-  background-image: linear-gradient(var(--green-005), var(--green-006));
+  background-image: linear-gradient(var(--green-004), var(--green-006));
 }
 .progress span.yellow {
-  background-image: linear-gradient(var(--yellow-005), var(--yellow-006));
+  background-image: linear-gradient(var(--yellow-004), var(--yellow-006));
 }
 .progress span.red {
-  background-image: linear-gradient(var(--red-005), var(--red-006));
+  background-image: linear-gradient(var(--red-004), var(--red-006));
+}
+.progress span.blue {
+  background-image: linear-gradient(var(--blue-004), var(--blue-006));
 }
 
 /* fakecss:./_partials/home/DoubleBookingReports.esbuild-svelte-fake-css */
@@ -16294,13 +16309,18 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     const child_ctx = ctx.slice();
     child_ctx[2] = list[i];
     const constants_0 = (
-      /*getProgressPaidPercentage*/
+      /*getProgressOccupiedPercentage*/
       child_ctx[0](
         /*ub*/
         child_ctx[2]
       )
     );
     child_ctx[3] = constants_0;
+    const constants_1 = getProgressPaidPercentage(
+      /*ub*/
+      child_ctx[2]
+    );
+    child_ctx[4] = constants_1;
     return child_ctx;
   }
   function create_else_block5(ctx) {
@@ -16335,7 +16355,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cards svelte-187auzp");
+        attr(div, "class", "cards svelte-56jrvm");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16346,7 +16366,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*getProgressPaidPercentage, unpaidBookingTenants*/
+        if (dirty & /*getProgressOccupiedPercentage, unpaidBookingTenants, getProgressPaidPercentage*/
         1) {
           each_value = ensure_array_like(unpaidBookingTenants || []);
           let i;
@@ -16375,85 +16395,142 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     };
   }
   function create_each_block4(ctx) {
-    let div3;
+    let div6;
     let h3;
     let t1;
-    let div2;
+    let div5;
+    let hr0;
+    let t2;
     let div0;
     let span0;
-    let t4;
+    let t5;
     let span1;
-    let t8;
+    let t9;
     let span2;
-    let t14;
+    let t15;
+    let hr1;
+    let t16;
+    let div2;
+    let label0;
+    let t18;
     let div1;
     let span3;
-    let span3_class_value;
-    let t15;
+    let t19;
+    let div4;
+    let label1;
+    let t21;
+    let div3;
+    let span4;
+    let span4_class_value;
+    let t22;
     return {
       c() {
-        div3 = element("div");
+        div6 = element("div");
         h3 = element("h3");
         h3.textContent = `${/*ub*/
         ctx[2].tenantName}`;
         t1 = space();
-        div2 = element("div");
+        div5 = element("div");
+        hr0 = element("hr");
+        t2 = space();
         div0 = element("div");
         span0 = element("span");
         span0.textContent = `Room ${/*ub*/
         ctx[2].roomName}`;
-        t4 = space();
+        t5 = space();
         span1 = element("span");
         span1.textContent = `${/*ub*/
         ctx[2].totalPaid}/${/*ub*/
         ctx[2].totalPrice}`;
-        t8 = space();
+        t9 = space();
         span2 = element("span");
         span2.textContent = `Start at ${/*ub*/
         ctx[2].dateStart} (${GetRelativeDayLabel(
           /*ub*/
           ctx[2].dateStart
         )})`;
-        t14 = space();
+        t15 = space();
+        hr1 = element("hr");
+        t16 = space();
+        div2 = element("div");
+        label0 = element("label");
+        label0.textContent = "Paid progress";
+        t18 = space();
         div1 = element("div");
         span3 = element("span");
-        t15 = space();
-        attr(h3, "class", "svelte-187auzp");
-        attr(div0, "class", "desc svelte-187auzp");
-        attr(span3, "class", span3_class_value = null_to_empty(
-          /*prog*/
-          ctx[3].color
-        ) + " svelte-187auzp");
+        t19 = space();
+        div4 = element("div");
+        label1 = element("label");
+        label1.textContent = "Occupancy progress";
+        t21 = space();
+        div3 = element("div");
+        span4 = element("span");
+        t22 = space();
+        attr(h3, "class", "svelte-56jrvm");
+        attr(hr0, "class", "svelte-56jrvm");
+        attr(div0, "class", "desc svelte-56jrvm");
+        attr(hr1, "class", "svelte-56jrvm");
+        attr(label0, "for", "");
+        attr(label0, "class", "svelte-56jrvm");
+        attr(span3, "class", "blue svelte-56jrvm");
         set_style(
           span3,
+          "width",
+          /*paidPercent*/
+          ctx[4] + "%"
+        );
+        attr(div1, "class", "progress svelte-56jrvm");
+        attr(div2, "class", "progress-container svelte-56jrvm");
+        attr(label1, "for", "");
+        attr(label1, "class", "svelte-56jrvm");
+        attr(span4, "class", span4_class_value = null_to_empty(
+          /*prog*/
+          ctx[3].color
+        ) + " svelte-56jrvm");
+        set_style(
+          span4,
           "width",
           /*prog*/
           ctx[3].percentage + "%"
         );
-        attr(div1, "class", "progress svelte-187auzp");
-        attr(div2, "class", "detail svelte-187auzp");
-        attr(div3, "class", "card svelte-187auzp");
+        attr(div3, "class", "progress svelte-56jrvm");
+        attr(div4, "class", "progress-container svelte-56jrvm");
+        attr(div5, "class", "detail svelte-56jrvm");
+        attr(div6, "class", "card svelte-56jrvm");
       },
       m(target, anchor) {
-        insert(target, div3, anchor);
-        append(div3, h3);
-        append(div3, t1);
-        append(div3, div2);
-        append(div2, div0);
+        insert(target, div6, anchor);
+        append(div6, h3);
+        append(div6, t1);
+        append(div6, div5);
+        append(div5, hr0);
+        append(div5, t2);
+        append(div5, div0);
         append(div0, span0);
-        append(div0, t4);
+        append(div0, t5);
         append(div0, span1);
-        append(div0, t8);
+        append(div0, t9);
         append(div0, span2);
-        append(div2, t14);
+        append(div5, t15);
+        append(div5, hr1);
+        append(div5, t16);
+        append(div5, div2);
+        append(div2, label0);
+        append(div2, t18);
         append(div2, div1);
         append(div1, span3);
-        append(div3, t15);
+        append(div5, t19);
+        append(div5, div4);
+        append(div4, label1);
+        append(div4, t21);
+        append(div4, div3);
+        append(div3, span4);
+        append(div6, t22);
       },
       p: noop,
       d(detaching) {
         if (detaching) {
-          detach(div3);
+          detach(div6);
         }
       }
     };
@@ -16476,8 +16553,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         h1.textContent = "Unpaid Bookings";
         t1 = space();
         if_block.c();
-        attr(h1, "class", "svelte-187auzp");
-        attr(section, "class", "empty-unpaidBookingTenants svelte-187auzp");
+        attr(h1, "class", "svelte-56jrvm");
+        attr(section, "class", "empty-unpaidBookingTenants svelte-56jrvm");
       },
       m(target, anchor) {
         insert(target, section, anchor);
@@ -16502,9 +16579,15 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {UnpaidBookingTenant[]} */
     [/* unpaidBookingTenants */]
   );
+  function getProgressPaidPercentage(data) {
+    if (data.totalPaid >= data.totalPrice)
+      return 100;
+    const percentage = data.totalPaid / data.totalPrice * 100;
+    return Math.min(percentage, 100);
+  }
   function instance8($self) {
     const msPerDay = 1e3 * 60 * 60 * 24;
-    function getProgressPaidPercentage(data) {
+    function getProgressOccupiedPercentage(data) {
       const now2 = new Date();
       const startDate = new Date(data.dateStart);
       const daysOccupied = Math.floor((now2 - startDate) / msPerDay);
@@ -16535,7 +16618,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         color
       };
     }
-    return [getProgressPaidPercentage];
+    return [getProgressOccupiedPercentage];
   }
   var UnpaidBookingTenants = class extends SvelteComponent {
     constructor(options) {
