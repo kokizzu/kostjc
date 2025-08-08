@@ -1457,22 +1457,22 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./_partials/home/UpcomingTenants.esbuild-svelte-fake-css */
-.empty-upcomingTenants.svelte-1vobm9.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg.svelte-16ygjvg {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.empty-upcomingTenants.svelte-1vobm9 h1.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg h1.svelte-16ygjvg {
   margin: 0;
   padding: 0;
   font-size: var(--font-xl);
 }
-.empty-upcomingTenants.svelte-1vobm9 .cards.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg .cards.svelte-16ygjvg {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
-.empty-upcomingTenants.svelte-1vobm9 .cards .card.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg .cards .card.svelte-16ygjvg {
   background-color: var(--gray-001);
   padding: 20px;
   border-radius: 8px;
@@ -1482,13 +1482,20 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   position: relative;
   overflow: hidden;
 }
-.empty-upcomingTenants.svelte-1vobm9 .cards .card h3.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .tenant.svelte-16ygjvg {
+  display: flex;
+  flex-direction: column;
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .tenant span.svelte-16ygjvg {
+  font-size: 12px;
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .tenant h3.svelte-16ygjvg {
   margin: 0;
   padding: 0;
   font-size: var(--font-lg);
   z-index: 20;
 }
-.empty-upcomingTenants.svelte-1vobm9 .cards .card .desc.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .desc.svelte-16ygjvg {
   padding-top: 10px;
   border-top: 1px solid var(--gray-004);
   display: flex;
@@ -1497,12 +1504,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   z-index: 20;
 }
 @media only screen and (max-width : 768px) {
-  .empty-upcomingTenants.svelte-1vobm9 .cards.svelte-1vobm9 {
+  .empty-upcomingTenants.svelte-16ygjvg .cards.svelte-16ygjvg {
     grid-template-columns: 1fr;
   }
 }
 @media only screen and (max-width: 992px) {
-  .empty-upcomingTenants.svelte-1vobm9 .cards.svelte-1vobm9 {
+  .empty-upcomingTenants.svelte-16ygjvg .cards.svelte-16ygjvg {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -16916,7 +16923,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cards svelte-1vobm9");
+        attr(div, "class", "cards svelte-16ygjvg");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16956,58 +16963,84 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     };
   }
   function create_each_block6(ctx) {
-    let div1;
-    let h30;
-    let t2;
-    let h31;
-    let t5;
+    let div3;
     let div0;
     let span0;
-    let t8;
+    let t1;
+    let h30;
+    let t3;
+    let div1;
     let span1;
-    let t12;
+    let t5;
+    let h31;
+    let t7;
+    let div2;
+    let span2;
+    let t10;
+    let span3;
+    let t14;
     return {
       c() {
-        div1 = element("div");
-        h30 = element("h3");
-        h30.textContent = `Prev: ${/*ub*/
-        ctx[0].tenantName}`;
-        t2 = space();
-        h31 = element("h3");
-        h31.textContent = `Next: ${/*ub*/
-        ctx[0].tenantName}`;
-        t5 = space();
+        div3 = element("div");
         div0 = element("div");
         span0 = element("span");
-        span0.textContent = `Room ${/*ub*/
-        ctx[0].roomName}`;
-        t8 = space();
+        span0.textContent = "Previous Tenant:";
+        t1 = space();
+        h30 = element("h3");
+        h30.textContent = `${/*ub*/
+        ctx[0].prevTenant}`;
+        t3 = space();
+        div1 = element("div");
         span1 = element("span");
-        span1.textContent = `${/*ub*/
+        span1.textContent = "Next Tenant:";
+        t5 = space();
+        h31 = element("h3");
+        h31.textContent = `${/*ub*/
+        ctx[0].nextTenant}`;
+        t7 = space();
+        div2 = element("div");
+        span2 = element("span");
+        span2.textContent = `Room ${/*ub*/
+        ctx[0].roomName}`;
+        t10 = space();
+        span3 = element("span");
+        span3.textContent = `${/*ub*/
         ctx[0].dateStart} s/d ${/*ub*/
         ctx[0].dateEnd}`;
-        t12 = space();
-        attr(h30, "class", "svelte-1vobm9");
-        attr(h31, "class", "svelte-1vobm9");
-        attr(div0, "class", "desc svelte-1vobm9");
-        attr(div1, "class", "card svelte-1vobm9");
+        t14 = space();
+        attr(span0, "class", "svelte-16ygjvg");
+        attr(h30, "class", "svelte-16ygjvg");
+        attr(div0, "class", "tenant svelte-16ygjvg");
+        attr(span1, "class", "svelte-16ygjvg");
+        attr(h31, "class", "svelte-16ygjvg");
+        attr(div1, "class", "tenant svelte-16ygjvg");
+        attr(span2, "class", "svelte-16ygjvg");
+        attr(span3, "class", "svelte-16ygjvg");
+        attr(div2, "class", "desc svelte-16ygjvg");
+        attr(div3, "class", "card svelte-16ygjvg");
       },
       m(target, anchor) {
-        insert(target, div1, anchor);
-        append(div1, h30);
-        append(div1, t2);
-        append(div1, h31);
-        append(div1, t5);
-        append(div1, div0);
+        insert(target, div3, anchor);
+        append(div3, div0);
         append(div0, span0);
-        append(div0, t8);
-        append(div0, span1);
-        append(div1, t12);
+        append(div0, t1);
+        append(div0, h30);
+        append(div3, t3);
+        append(div3, div1);
+        append(div1, span1);
+        append(div1, t5);
+        append(div1, h31);
+        append(div3, t7);
+        append(div3, div2);
+        append(div2, span2);
+        append(div2, t10);
+        append(div2, span3);
+        append(div3, t14);
       },
       p: noop,
       d(detaching) {
         if (detaching) {
-          detach(div1);
+          detach(div3);
         }
       }
     };
@@ -17030,8 +17063,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         h1.textContent = "Upcoming Tenants";
         t1 = space();
         if_block.c();
-        attr(h1, "class", "svelte-1vobm9");
-        attr(section, "class", "empty-upcomingTenants svelte-1vobm9");
+        attr(h1, "class", "svelte-16ygjvg");
+        attr(section, "class", "empty-upcomingTenants svelte-16ygjvg");
       },
       m(target, anchor) {
         insert(target, section, anchor);
@@ -18065,76 +18098,76 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
   function create_default_slot(ctx) {
     let div;
-    let upcomingtenants;
-    let t0;
     let unpaidbookingtenants;
-    let t1;
+    let t0;
     let birthdayagenda;
-    let t2;
+    let t1;
     let availablerooms;
-    let t3;
+    let t2;
     let doublebookingreports;
+    let t3;
+    let upcomingtenants;
     let current;
-    upcomingtenants = new UpcomingTenants_default({});
     unpaidbookingtenants = new UnpaidBookingTenants_default({});
     birthdayagenda = new BirthDayAgenda_default({});
     availablerooms = new AvailableRooms_default({});
     doublebookingreports = new DoubleBookingReports_default({});
+    upcomingtenants = new UpcomingTenants_default({});
     return {
       c() {
         div = element("div");
-        create_component(upcomingtenants.$.fragment);
-        t0 = space();
         create_component(unpaidbookingtenants.$.fragment);
-        t1 = space();
+        t0 = space();
         create_component(birthdayagenda.$.fragment);
-        t2 = space();
+        t1 = space();
         create_component(availablerooms.$.fragment);
-        t3 = space();
+        t2 = space();
         create_component(doublebookingreports.$.fragment);
+        t3 = space();
+        create_component(upcomingtenants.$.fragment);
         attr(div, "class", "home-container svelte-g4mxpt");
       },
       m(target, anchor) {
         insert(target, div, anchor);
-        mount_component(upcomingtenants, div, null);
-        append(div, t0);
         mount_component(unpaidbookingtenants, div, null);
-        append(div, t1);
+        append(div, t0);
         mount_component(birthdayagenda, div, null);
-        append(div, t2);
+        append(div, t1);
         mount_component(availablerooms, div, null);
-        append(div, t3);
+        append(div, t2);
         mount_component(doublebookingreports, div, null);
+        append(div, t3);
+        mount_component(upcomingtenants, div, null);
         current = true;
       },
       p: noop,
       i(local) {
         if (current)
           return;
-        transition_in(upcomingtenants.$.fragment, local);
         transition_in(unpaidbookingtenants.$.fragment, local);
         transition_in(birthdayagenda.$.fragment, local);
         transition_in(availablerooms.$.fragment, local);
         transition_in(doublebookingreports.$.fragment, local);
+        transition_in(upcomingtenants.$.fragment, local);
         current = true;
       },
       o(local) {
-        transition_out(upcomingtenants.$.fragment, local);
         transition_out(unpaidbookingtenants.$.fragment, local);
         transition_out(birthdayagenda.$.fragment, local);
         transition_out(availablerooms.$.fragment, local);
         transition_out(doublebookingreports.$.fragment, local);
+        transition_out(upcomingtenants.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
           detach(div);
         }
-        destroy_component(upcomingtenants);
         destroy_component(unpaidbookingtenants);
         destroy_component(birthdayagenda);
         destroy_component(availablerooms);
         destroy_component(doublebookingreports);
+        destroy_component(upcomingtenants);
       }
     };
   }

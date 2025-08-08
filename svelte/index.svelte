@@ -143,11 +143,11 @@
 {#if Mode === ModeUser}
   <LayoutMain access={segments} user={user}>
     <div class="home-container">
-      <UpcomingTenants />
       <UnpaidBookingTenants />
       <BirthDayAgenda />
       <AvailableRooms />
       <DoubleBookingReports />
+      <UpcomingTenants />
     </div>
   </LayoutMain>
 {:else}
