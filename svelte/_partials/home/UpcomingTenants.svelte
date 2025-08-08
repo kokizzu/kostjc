@@ -1,8 +1,7 @@
 <script>
   /**
    * @typedef {Object} UpcomingTenant
-   * @property {string} nextTenant
-   * @property {string} prevTenant
+   * @property {string} tenantName
    * @property {string} roomName
    * @property {string} dateStart
    * @property {string} dateEnd
@@ -16,8 +15,8 @@
     <div class="cards">
       {#each (upcomingTenants || []) as ub}
         <div class="card">
-          <h3>Prev: {ub.prevTenant}</h3>
-          <h3>Next: {ub.nextTenant}</h3>
+          <h3>Prev: {ub.tenantName}</h3>
+          <h3>Next: {ub.tenantName}</h3>
           <div class="desc">
             <span>Room {ub.roomName}</span>
             <span>{ub.dateStart} s/d {ub.dateEnd} </span>

@@ -67,13 +67,28 @@
   /**
    * @description Get progress paid percentage, by total price, total paid
    * @param {UnpaidBookingTenant} data
-   * @returns {number} percentage
+   * @returns {{ percentage: number; daysOccupied: number; }}
    */
   function getProgressPaidPercentage(data) {
-    if (data.totalPaid >= data.totalPrice) return 100;
+    if (data.totalPaid >= data.totalPrice) {
+      const now = new Date();
+      const startDate = new Date(data.dateStart);
+      // @ts-ignore
+      const daysOccupied = Math.floor((now - startDate) / msPerDay);
+
+      return {
+        percentage: 100,
+        daysOccupied: daysOccupied
+      };
+    }
     
     const percentage = (data.totalPaid / data.totalPrice) * 100;
-    return Math.min(percentage, 100);
+    const daysOccupied = (data.totalPaid / data.totalPrice) * 30;
+
+    return {
+      percentage: Math.min(percentage, 100),
+      daysOccupied: parseFloat(daysOccupied.toFixed(2))
+    }
   }
 </script>
 
@@ -95,9 +110,9 @@
             </div>
             <hr />
             <div class="progress-container">
-              <label for="">Paid progress</label>
+              <label for="">Paid <b>{paidPercent.daysOccupied}</b> days</label>
               <div class="progress">
-                <span class="blue" style="width: {paidPercent}%;"></span>
+                <span class="blue" style="width: {paidPercent.percentage}%;"></span>
               </div>
             </div>
             <div class="progress-container">

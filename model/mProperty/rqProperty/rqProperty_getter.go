@@ -8,7 +8,6 @@ import (
 
 	"kostjc/model/zCrud"
 
-	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/A"
 	"github.com/kokizzu/gotro/I"
 	"github.com/kokizzu/gotro/L"
@@ -1735,8 +1734,7 @@ GROUP BY "paymentAt"`
 }
 
 type UpcomingTenant struct {
-	PrevTenant string `json:"prevTenant"`
-	NextTenant string `json:"nextTenant"`
+	TenantName string `json:"tenantName"`
 	RoomName   string `json:"roomName"`
 	DateStart  string `json:"dateStart"`
 	DateEnd    string `json:"dateEnd"`
@@ -1748,8 +1746,6 @@ func (b *Bookings) GetUpcomingTenants() (out []UpcomingTenant) {
 	dateNow := time.Now().Format(time.DateOnly)
 	query := comment + `
 SELECT
-	prev_t."tenantName" AS "prevTenant",
-	t."tenantName" AS "nextTenant",
 	r."roomName",
 	t."tenantName",
 	b."dateStart",
@@ -1757,15 +1753,6 @@ SELECT
 FROM "bookings" b
 LEFT JOIN "rooms" r ON r."id" = b."roomId"
 LEFT JOIN "tenants" t ON t."id" = b."tenantId"
-LEFT JOIN LATERAL (
-	SELECT b2."tenantId"
-	FROM "bookings" b2
-	WHERE b2."roomId" = b."roomId"
-		AND b2."dateStart" < b."dateStart"
-	ORDER BY b2."dateStart" DESC
-	LIMIT 1
-) prev_b ON TRUE
-LEFT JOIN "tenants" prev_t ON prev_t."id" = prev_b."tenantId"
 WHERE b."dateStart" >= ` + S.Z(dateNow) + `
 	AND NOT EXISTS (
 		SELECT 1
@@ -1776,20 +1763,16 @@ WHERE b."dateStart" >= ` + S.Z(dateNow) + `
   )
 ORDER BY b."dateStart" ASC`
 
-	fmt.Println(color.GreenString(query))
-
 	b.Adapter.QuerySql(query, func(row []any) {
-		if len(row) != 5 {
+		if len(row) != 4 {
 			return
 		}
 		out = append(out, UpcomingTenant{
-			PrevTenant: X.ToS(row[0]),
-			NextTenant: X.ToS(row[1]),
-			RoomName:   X.ToS(row[2]),
-			DateStart:  X.ToS(row[3]),
-			DateEnd:    X.ToS(row[4]),
+			TenantName: X.ToS(row[1]),
+			RoomName:   X.ToS(row[0]),
+			DateStart:  X.ToS(row[2]),
+			DateEnd:    X.ToS(row[3]),
 		})
-
 	})
 
 	return

@@ -16307,20 +16307,23 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   // _partials/home/UnpaidBookingTenants.svelte
   function get_each_context4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[2] = list[i];
+    child_ctx[3] = list[i];
     const constants_0 = (
       /*getProgressOccupiedPercentage*/
       child_ctx[0](
         /*ub*/
-        child_ctx[2]
+        child_ctx[3]
       )
     );
-    child_ctx[3] = constants_0;
-    const constants_1 = getProgressPaidPercentage(
-      /*ub*/
-      child_ctx[2]
+    child_ctx[4] = constants_0;
+    const constants_1 = (
+      /*getProgressPaidPercentage*/
+      child_ctx[1](
+        /*ub*/
+        child_ctx[3]
+      )
     );
-    child_ctx[4] = constants_1;
+    child_ctx[5] = constants_1;
     return child_ctx;
   }
   function create_else_block5(ctx) {
@@ -16367,7 +16370,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       },
       p(ctx2, dirty) {
         if (dirty & /*getProgressOccupiedPercentage, unpaidBookingTenants, getProgressPaidPercentage*/
-        1) {
+        3) {
           each_value = ensure_array_like(unpaidBookingTenants || []);
           let i;
           for (i = 0; i < each_value.length; i += 1) {
@@ -16412,23 +16415,26 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let t16;
     let div2;
     let label0;
-    let t18;
+    let t17;
+    let b;
+    let t19;
+    let t20;
     let div1;
     let span3;
-    let t19;
+    let t21;
     let div4;
     let label1;
-    let t21;
+    let t23;
     let div3;
     let span4;
     let span4_class_value;
-    let t22;
+    let t24;
     return {
       c() {
         div6 = element("div");
         h3 = element("h3");
         h3.textContent = `${/*ub*/
-        ctx[2].tenantName}`;
+        ctx[3].tenantName}`;
         t1 = space();
         div5 = element("div");
         hr0 = element("hr");
@@ -16436,36 +16442,40 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         div0 = element("div");
         span0 = element("span");
         span0.textContent = `Room ${/*ub*/
-        ctx[2].roomName}`;
+        ctx[3].roomName}`;
         t5 = space();
         span1 = element("span");
         span1.textContent = `${/*ub*/
-        ctx[2].totalPaid}/${/*ub*/
-        ctx[2].totalPrice}`;
+        ctx[3].totalPaid}/${/*ub*/
+        ctx[3].totalPrice}`;
         t9 = space();
         span2 = element("span");
         span2.textContent = `Start at ${/*ub*/
-        ctx[2].dateStart} (${GetRelativeDayLabel(
+        ctx[3].dateStart} (${GetRelativeDayLabel(
           /*ub*/
-          ctx[2].dateStart
+          ctx[3].dateStart
         )})`;
         t15 = space();
         hr1 = element("hr");
         t16 = space();
         div2 = element("div");
         label0 = element("label");
-        label0.textContent = "Paid progress";
-        t18 = space();
+        t17 = text("Paid ");
+        b = element("b");
+        b.textContent = `${/*paidPercent*/
+        ctx[5].daysOccupied}`;
+        t19 = text(" days");
+        t20 = space();
         div1 = element("div");
         span3 = element("span");
-        t19 = space();
+        t21 = space();
         div4 = element("div");
         label1 = element("label");
         label1.textContent = "Occupancy progress";
-        t21 = space();
+        t23 = space();
         div3 = element("div");
         span4 = element("span");
-        t22 = space();
+        t24 = space();
         attr(h3, "class", "svelte-56jrvm");
         attr(hr0, "class", "svelte-56jrvm");
         attr(div0, "class", "desc svelte-56jrvm");
@@ -16477,7 +16487,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           span3,
           "width",
           /*paidPercent*/
-          ctx[4] + "%"
+          ctx[5].percentage + "%"
         );
         attr(div1, "class", "progress svelte-56jrvm");
         attr(div2, "class", "progress-container svelte-56jrvm");
@@ -16485,13 +16495,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         attr(label1, "class", "svelte-56jrvm");
         attr(span4, "class", span4_class_value = null_to_empty(
           /*prog*/
-          ctx[3].color
+          ctx[4].color
         ) + " svelte-56jrvm");
         set_style(
           span4,
           "width",
           /*prog*/
-          ctx[3].percentage + "%"
+          ctx[4].percentage + "%"
         );
         attr(div3, "class", "progress svelte-56jrvm");
         attr(div4, "class", "progress-container svelte-56jrvm");
@@ -16516,16 +16526,19 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         append(div5, t16);
         append(div5, div2);
         append(div2, label0);
-        append(div2, t18);
+        append(label0, t17);
+        append(label0, b);
+        append(label0, t19);
+        append(div2, t20);
         append(div2, div1);
         append(div1, span3);
-        append(div5, t19);
+        append(div5, t21);
         append(div5, div4);
         append(div4, label1);
-        append(div4, t21);
+        append(div4, t23);
         append(div4, div3);
         append(div3, span4);
-        append(div6, t22);
+        append(div6, t24);
       },
       p: noop,
       d(detaching) {
@@ -16579,12 +16592,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {UnpaidBookingTenant[]} */
     [/* unpaidBookingTenants */]
   );
-  function getProgressPaidPercentage(data) {
-    if (data.totalPaid >= data.totalPrice)
-      return 100;
-    const percentage = data.totalPaid / data.totalPrice * 100;
-    return Math.min(percentage, 100);
-  }
   function instance8($self) {
     const msPerDay = 1e3 * 60 * 60 * 24;
     function getProgressOccupiedPercentage(data) {
@@ -16618,7 +16625,21 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         color
       };
     }
-    return [getProgressOccupiedPercentage];
+    function getProgressPaidPercentage(data) {
+      if (data.totalPaid >= data.totalPrice) {
+        const now2 = new Date();
+        const startDate = new Date(data.dateStart);
+        const daysOccupied2 = Math.floor((now2 - startDate) / msPerDay);
+        return { percentage: 100, daysOccupied: daysOccupied2 };
+      }
+      const percentage = data.totalPaid / data.totalPrice * 100;
+      const daysOccupied = data.totalPaid / data.totalPrice * 30;
+      return {
+        percentage: Math.min(percentage, 100),
+        daysOccupied: parseFloat(daysOccupied.toFixed(2))
+      };
+    }
+    return [getProgressOccupiedPercentage, getProgressPaidPercentage];
   }
   var UnpaidBookingTenants = class extends SvelteComponent {
     constructor(options) {
@@ -16950,11 +16971,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         div1 = element("div");
         h30 = element("h3");
         h30.textContent = `Prev: ${/*ub*/
-        ctx[0].prevTenant}`;
+        ctx[0].tenantName}`;
         t2 = space();
         h31 = element("h3");
         h31.textContent = `Next: ${/*ub*/
-        ctx[0].nextTenant}`;
+        ctx[0].tenantName}`;
         t5 = space();
         div0 = element("div");
         span0 = element("span");
