@@ -16936,43 +16936,52 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
   function create_each_block6(ctx) {
     let div1;
-    let h3;
-    let t1;
+    let h30;
+    let t2;
+    let h31;
+    let t5;
     let div0;
     let span0;
-    let t4;
-    let span1;
     let t8;
+    let span1;
+    let t12;
     return {
       c() {
         div1 = element("div");
-        h3 = element("h3");
-        h3.textContent = `${/*ub*/
-        ctx[0].tenantName}`;
-        t1 = space();
+        h30 = element("h3");
+        h30.textContent = `Prev: ${/*ub*/
+        ctx[0].prevTenant}`;
+        t2 = space();
+        h31 = element("h3");
+        h31.textContent = `Next: ${/*ub*/
+        ctx[0].nextTenant}`;
+        t5 = space();
         div0 = element("div");
         span0 = element("span");
         span0.textContent = `Room ${/*ub*/
         ctx[0].roomName}`;
-        t4 = space();
+        t8 = space();
         span1 = element("span");
         span1.textContent = `${/*ub*/
         ctx[0].dateStart} s/d ${/*ub*/
         ctx[0].dateEnd}`;
-        t8 = space();
-        attr(h3, "class", "svelte-1vobm9");
+        t12 = space();
+        attr(h30, "class", "svelte-1vobm9");
+        attr(h31, "class", "svelte-1vobm9");
         attr(div0, "class", "desc svelte-1vobm9");
         attr(div1, "class", "card svelte-1vobm9");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
-        append(div1, h3);
-        append(div1, t1);
+        append(div1, h30);
+        append(div1, t2);
+        append(div1, h31);
+        append(div1, t5);
         append(div1, div0);
         append(div0, span0);
-        append(div0, t4);
+        append(div0, t8);
         append(div0, span1);
-        append(div1, t8);
+        append(div1, t12);
       },
       p: noop,
       d(detaching) {
@@ -18035,76 +18044,76 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
   function create_default_slot(ctx) {
     let div;
-    let unpaidbookingtenants;
-    let t0;
-    let birthdayagenda;
-    let t1;
-    let availablerooms;
-    let t2;
-    let doublebookingreports;
-    let t3;
     let upcomingtenants;
+    let t0;
+    let unpaidbookingtenants;
+    let t1;
+    let birthdayagenda;
+    let t2;
+    let availablerooms;
+    let t3;
+    let doublebookingreports;
     let current;
+    upcomingtenants = new UpcomingTenants_default({});
     unpaidbookingtenants = new UnpaidBookingTenants_default({});
     birthdayagenda = new BirthDayAgenda_default({});
     availablerooms = new AvailableRooms_default({});
     doublebookingreports = new DoubleBookingReports_default({});
-    upcomingtenants = new UpcomingTenants_default({});
     return {
       c() {
         div = element("div");
-        create_component(unpaidbookingtenants.$.fragment);
-        t0 = space();
-        create_component(birthdayagenda.$.fragment);
-        t1 = space();
-        create_component(availablerooms.$.fragment);
-        t2 = space();
-        create_component(doublebookingreports.$.fragment);
-        t3 = space();
         create_component(upcomingtenants.$.fragment);
+        t0 = space();
+        create_component(unpaidbookingtenants.$.fragment);
+        t1 = space();
+        create_component(birthdayagenda.$.fragment);
+        t2 = space();
+        create_component(availablerooms.$.fragment);
+        t3 = space();
+        create_component(doublebookingreports.$.fragment);
         attr(div, "class", "home-container svelte-g4mxpt");
       },
       m(target, anchor) {
         insert(target, div, anchor);
-        mount_component(unpaidbookingtenants, div, null);
-        append(div, t0);
-        mount_component(birthdayagenda, div, null);
-        append(div, t1);
-        mount_component(availablerooms, div, null);
-        append(div, t2);
-        mount_component(doublebookingreports, div, null);
-        append(div, t3);
         mount_component(upcomingtenants, div, null);
+        append(div, t0);
+        mount_component(unpaidbookingtenants, div, null);
+        append(div, t1);
+        mount_component(birthdayagenda, div, null);
+        append(div, t2);
+        mount_component(availablerooms, div, null);
+        append(div, t3);
+        mount_component(doublebookingreports, div, null);
         current = true;
       },
       p: noop,
       i(local) {
         if (current)
           return;
+        transition_in(upcomingtenants.$.fragment, local);
         transition_in(unpaidbookingtenants.$.fragment, local);
         transition_in(birthdayagenda.$.fragment, local);
         transition_in(availablerooms.$.fragment, local);
         transition_in(doublebookingreports.$.fragment, local);
-        transition_in(upcomingtenants.$.fragment, local);
         current = true;
       },
       o(local) {
+        transition_out(upcomingtenants.$.fragment, local);
         transition_out(unpaidbookingtenants.$.fragment, local);
         transition_out(birthdayagenda.$.fragment, local);
         transition_out(availablerooms.$.fragment, local);
         transition_out(doublebookingreports.$.fragment, local);
-        transition_out(upcomingtenants.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
           detach(div);
         }
+        destroy_component(upcomingtenants);
         destroy_component(unpaidbookingtenants);
         destroy_component(birthdayagenda);
         destroy_component(availablerooms);
         destroy_component(doublebookingreports);
-        destroy_component(upcomingtenants);
       }
     };
   }
