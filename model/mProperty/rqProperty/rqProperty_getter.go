@@ -1734,7 +1734,8 @@ GROUP BY "paymentAt"`
 }
 
 type UpcomingTenant struct {
-	TenantName string `json:"tenantName"`
+	PrevTenant string `json:"prevTenant"`
+	NextTenant string `json:"nextTenant"`
 	RoomName   string `json:"roomName"`
 	DateStart  string `json:"dateStart"`
 	DateEnd    string `json:"dateEnd"`
@@ -1747,13 +1748,24 @@ func (b *Bookings) GetUpcomingTenants() (out []UpcomingTenant) {
 	query := comment + `
 SELECT
 	r."roomName",
-	t."tenantName",
+	(
+		SELECT t2."tenantName"
+		FROM "bookings" b2
+		JOIN "tenants" t2 ON t2."id" = b2."tenantId"
+		WHERE b2."roomId" = b."roomId"
+			AND b2."tenantId" <> b."tenantId"
+			AND b2."dateStart" < b."dateStart"
+		ORDER BY b2."dateStart" DESC
+		LIMIT 1
+	) AS prev_tenant,
+	t."tenantName" AS next_tenant,
 	b."dateStart",
 	b."dateEnd"
 FROM "bookings" b
 LEFT JOIN "rooms" r ON r."id" = b."roomId"
 LEFT JOIN "tenants" t ON t."id" = b."tenantId"
 WHERE b."dateStart" >= ` + S.Z(dateNow) + `
+	AND b."deletedAt" = 0
 	AND NOT EXISTS (
 		SELECT 1
 		FROM "bookings" prev
@@ -1764,16 +1776,16 @@ WHERE b."dateStart" >= ` + S.Z(dateNow) + `
 ORDER BY b."dateStart" ASC`
 
 	b.Adapter.QuerySql(query, func(row []any) {
-		if len(row) != 4 {
+		if len(row) != 5 {
 			return
 		}
 		out = append(out, UpcomingTenant{
-			TenantName: X.ToS(row[1]),
 			RoomName:   X.ToS(row[0]),
-			DateStart:  X.ToS(row[2]),
-			DateEnd:    X.ToS(row[3]),
+			PrevTenant: X.ToS(row[1]),
+			NextTenant: X.ToS(row[2]),
+			DateStart:  X.ToS(row[3]),
+			DateEnd:    X.ToS(row[4]),
 		})
-
 	})
 
 	return

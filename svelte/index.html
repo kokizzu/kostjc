@@ -1457,22 +1457,22 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./_partials/home/UpcomingTenants.esbuild-svelte-fake-css */
-.empty-upcomingTenants.svelte-1vobm9.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg.svelte-16ygjvg {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.empty-upcomingTenants.svelte-1vobm9 h1.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg h1.svelte-16ygjvg {
   margin: 0;
   padding: 0;
   font-size: var(--font-xl);
 }
-.empty-upcomingTenants.svelte-1vobm9 .cards.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg .cards.svelte-16ygjvg {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
-.empty-upcomingTenants.svelte-1vobm9 .cards .card.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg .cards .card.svelte-16ygjvg {
   background-color: var(--gray-001);
   padding: 20px;
   border-radius: 8px;
@@ -1482,13 +1482,20 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   position: relative;
   overflow: hidden;
 }
-.empty-upcomingTenants.svelte-1vobm9 .cards .card h3.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .tenant.svelte-16ygjvg {
+  display: flex;
+  flex-direction: column;
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .tenant span.svelte-16ygjvg {
+  font-size: 12px;
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .tenant h3.svelte-16ygjvg {
   margin: 0;
   padding: 0;
   font-size: var(--font-lg);
   z-index: 20;
 }
-.empty-upcomingTenants.svelte-1vobm9 .cards .card .desc.svelte-1vobm9 {
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .desc.svelte-16ygjvg {
   padding-top: 10px;
   border-top: 1px solid var(--gray-004);
   display: flex;
@@ -1497,12 +1504,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   z-index: 20;
 }
 @media only screen and (max-width : 768px) {
-  .empty-upcomingTenants.svelte-1vobm9 .cards.svelte-1vobm9 {
+  .empty-upcomingTenants.svelte-16ygjvg .cards.svelte-16ygjvg {
     grid-template-columns: 1fr;
   }
 }
 @media only screen and (max-width: 992px) {
-  .empty-upcomingTenants.svelte-1vobm9 .cards.svelte-1vobm9 {
+  .empty-upcomingTenants.svelte-16ygjvg .cards.svelte-16ygjvg {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -16307,20 +16314,23 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   // _partials/home/UnpaidBookingTenants.svelte
   function get_each_context4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[2] = list[i];
+    child_ctx[3] = list[i];
     const constants_0 = (
-      /*getProgressOccupiedPercentage*/
+      /*getRemainingDaysProgress*/
       child_ctx[0](
         /*ub*/
-        child_ctx[2]
+        child_ctx[3]
       )
     );
-    child_ctx[3] = constants_0;
-    const constants_1 = getProgressPaidPercentage(
-      /*ub*/
-      child_ctx[2]
+    child_ctx[4] = constants_0;
+    const constants_1 = (
+      /*getProgressPaidPercentage*/
+      child_ctx[1](
+        /*ub*/
+        child_ctx[3]
+      )
     );
-    child_ctx[4] = constants_1;
+    child_ctx[5] = constants_1;
     return child_ctx;
   }
   function create_else_block5(ctx) {
@@ -16366,8 +16376,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*getProgressOccupiedPercentage, unpaidBookingTenants, getProgressPaidPercentage*/
-        1) {
+        if (dirty & /*getRemainingDaysProgress, unpaidBookingTenants, getProgressPaidPercentage*/
+        3) {
           each_value = ensure_array_like(unpaidBookingTenants || []);
           let i;
           for (i = 0; i < each_value.length; i += 1) {
@@ -16412,23 +16422,31 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let t16;
     let div2;
     let label0;
-    let t18;
+    let t17;
+    let b0;
+    let t19;
+    let t20;
     let div1;
     let span3;
-    let t19;
+    let t21;
     let div4;
     let label1;
-    let t21;
+    let t22;
+    let b1;
+    let t26;
+    let b2;
+    let t28;
+    let t29;
     let div3;
     let span4;
     let span4_class_value;
-    let t22;
+    let t30;
     return {
       c() {
         div6 = element("div");
         h3 = element("h3");
         h3.textContent = `${/*ub*/
-        ctx[2].tenantName}`;
+        ctx[3].tenantName}`;
         t1 = space();
         div5 = element("div");
         hr0 = element("hr");
@@ -16436,36 +16454,49 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         div0 = element("div");
         span0 = element("span");
         span0.textContent = `Room ${/*ub*/
-        ctx[2].roomName}`;
+        ctx[3].roomName}`;
         t5 = space();
         span1 = element("span");
         span1.textContent = `${/*ub*/
-        ctx[2].totalPaid}/${/*ub*/
-        ctx[2].totalPrice}`;
+        ctx[3].totalPaid}/${/*ub*/
+        ctx[3].totalPrice}`;
         t9 = space();
         span2 = element("span");
         span2.textContent = `Start at ${/*ub*/
-        ctx[2].dateStart} (${GetRelativeDayLabel(
+        ctx[3].dateStart} (${GetRelativeDayLabel(
           /*ub*/
-          ctx[2].dateStart
+          ctx[3].dateStart
         )})`;
         t15 = space();
         hr1 = element("hr");
         t16 = space();
         div2 = element("div");
         label0 = element("label");
-        label0.textContent = "Paid progress";
-        t18 = space();
+        t17 = text("Paid ");
+        b0 = element("b");
+        b0.textContent = `${/*paidPercent*/
+        ctx[5].daysOccupied}`;
+        t19 = text(" days");
+        t20 = space();
         div1 = element("div");
         span3 = element("span");
-        t19 = space();
+        t21 = space();
         div4 = element("div");
         label1 = element("label");
-        label1.textContent = "Occupancy progress";
-        t21 = space();
+        t22 = text("Total paid ");
+        b1 = element("b");
+        b1.textContent = `IDR ${/*ub*/
+        ctx[3].totalPaid}${/*ub*/
+        ctx[3].totalPaid >= 1e3 ? "M" : "K"}`;
+        t26 = text(", remaining ");
+        b2 = element("b");
+        b2.textContent = `${/*prog*/
+        ctx[4].remainingDays}`;
+        t28 = text(" days");
+        t29 = space();
         div3 = element("div");
         span4 = element("span");
-        t22 = space();
+        t30 = space();
         attr(h3, "class", "svelte-56jrvm");
         attr(hr0, "class", "svelte-56jrvm");
         attr(div0, "class", "desc svelte-56jrvm");
@@ -16477,7 +16508,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           span3,
           "width",
           /*paidPercent*/
-          ctx[4] + "%"
+          ctx[5].percentage + "%"
         );
         attr(div1, "class", "progress svelte-56jrvm");
         attr(div2, "class", "progress-container svelte-56jrvm");
@@ -16485,13 +16516,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         attr(label1, "class", "svelte-56jrvm");
         attr(span4, "class", span4_class_value = null_to_empty(
           /*prog*/
-          ctx[3].color
+          ctx[4].color
         ) + " svelte-56jrvm");
         set_style(
           span4,
           "width",
           /*prog*/
-          ctx[3].percentage + "%"
+          ctx[4].percentage + "%"
         );
         attr(div3, "class", "progress svelte-56jrvm");
         attr(div4, "class", "progress-container svelte-56jrvm");
@@ -16516,16 +16547,24 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         append(div5, t16);
         append(div5, div2);
         append(div2, label0);
-        append(div2, t18);
+        append(label0, t17);
+        append(label0, b0);
+        append(label0, t19);
+        append(div2, t20);
         append(div2, div1);
         append(div1, span3);
-        append(div5, t19);
+        append(div5, t21);
         append(div5, div4);
         append(div4, label1);
-        append(div4, t21);
+        append(label1, t22);
+        append(label1, b1);
+        append(label1, t26);
+        append(label1, b2);
+        append(label1, t28);
+        append(div4, t29);
         append(div4, div3);
         append(div3, span4);
-        append(div6, t22);
+        append(div6, t30);
       },
       p: noop,
       d(detaching) {
@@ -16579,46 +16618,48 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {UnpaidBookingTenant[]} */
     [/* unpaidBookingTenants */]
   );
-  function getProgressPaidPercentage(data) {
-    if (data.totalPaid >= data.totalPrice)
-      return 100;
-    const percentage = data.totalPaid / data.totalPrice * 100;
-    return Math.min(percentage, 100);
-  }
   function instance8($self) {
     const msPerDay = 1e3 * 60 * 60 * 24;
-    function getProgressOccupiedPercentage(data) {
+    function getRemainingDaysProgress(data) {
       const now2 = new Date();
       const startDate = new Date(data.dateStart);
       const daysOccupied = Math.floor((now2 - startDate) / msPerDay);
-      let percentPaid = data.totalPaid / data.totalPrice * 100;
-      percentPaid = Math.min(percentPaid, 100);
-      if (daysOccupied > 30 && data.totalPaid < data.totalPrice) {
-        percentPaid = 100;
-      }
-      const dayFactor = Math.min(daysOccupied / 30 * 100, 100);
-      let percentage = percentPaid * 0.7 + dayFactor * 0.3;
-      percentage = Math.min(percentage, 100);
+      const daysPaid = data.totalPaid / data.totalPrice * 30;
+      const remainingDays = Math.ceil(daysPaid - daysOccupied);
+      let percentage = daysOccupied / daysPaid * 100;
+      percentage = Math.min(Math.max(percentage, 0), 100);
       let color = (
         /** @type {ProgressColor} */
         "green"
       );
-      if (percentage < 30)
+      if (remainingDays > 3) {
         color = "green";
-      else if (percentage < 70)
+      } else if (remainingDays >= 0) {
         color = "yellow";
-      else
+      } else {
         color = "red";
-      if (percentage == 0)
-        color = "green";
-      if (percentage < 5)
-        percentage = 5;
+      }
       return {
         percentage: Math.round(percentage),
+        remainingDays,
         color
       };
     }
-    return [getProgressOccupiedPercentage];
+    function getProgressPaidPercentage(data) {
+      if (data.totalPaid >= data.totalPrice) {
+        const now2 = new Date();
+        const startDate = new Date(data.dateStart);
+        const daysOccupied2 = Math.floor((now2 - startDate) / msPerDay);
+        return { percentage: 100, daysOccupied: daysOccupied2 };
+      }
+      const percentage = data.totalPaid / data.totalPrice * 100;
+      const daysOccupied = data.totalPaid / data.totalPrice * 30;
+      return {
+        percentage: Math.min(percentage, 100),
+        daysOccupied: parseFloat(daysOccupied.toFixed(1))
+      };
+    }
+    return [getRemainingDaysProgress, getProgressPaidPercentage];
   }
   var UnpaidBookingTenants = class extends SvelteComponent {
     constructor(options) {
@@ -16895,7 +16936,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cards svelte-1vobm9");
+        attr(div, "class", "cards svelte-16ygjvg");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16935,49 +16976,84 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     };
   }
   function create_each_block6(ctx) {
-    let div1;
-    let h3;
-    let t1;
+    let div3;
     let div0;
     let span0;
-    let t4;
+    let t1;
+    let h30;
+    let t3;
+    let div1;
     let span1;
-    let t8;
+    let t5;
+    let h31;
+    let t7;
+    let div2;
+    let span2;
+    let t10;
+    let span3;
+    let t14;
     return {
       c() {
-        div1 = element("div");
-        h3 = element("h3");
-        h3.textContent = `${/*ub*/
-        ctx[0].tenantName}`;
-        t1 = space();
+        div3 = element("div");
         div0 = element("div");
         span0 = element("span");
-        span0.textContent = `Room ${/*ub*/
-        ctx[0].roomName}`;
-        t4 = space();
+        span0.textContent = "Previous Tenant:";
+        t1 = space();
+        h30 = element("h3");
+        h30.textContent = `${/*ub*/
+        ctx[0].prevTenant}`;
+        t3 = space();
+        div1 = element("div");
         span1 = element("span");
-        span1.textContent = `${/*ub*/
+        span1.textContent = "Next Tenant:";
+        t5 = space();
+        h31 = element("h3");
+        h31.textContent = `${/*ub*/
+        ctx[0].nextTenant}`;
+        t7 = space();
+        div2 = element("div");
+        span2 = element("span");
+        span2.textContent = `Room ${/*ub*/
+        ctx[0].roomName}`;
+        t10 = space();
+        span3 = element("span");
+        span3.textContent = `${/*ub*/
         ctx[0].dateStart} s/d ${/*ub*/
         ctx[0].dateEnd}`;
-        t8 = space();
-        attr(h3, "class", "svelte-1vobm9");
-        attr(div0, "class", "desc svelte-1vobm9");
-        attr(div1, "class", "card svelte-1vobm9");
+        t14 = space();
+        attr(span0, "class", "svelte-16ygjvg");
+        attr(h30, "class", "svelte-16ygjvg");
+        attr(div0, "class", "tenant svelte-16ygjvg");
+        attr(span1, "class", "svelte-16ygjvg");
+        attr(h31, "class", "svelte-16ygjvg");
+        attr(div1, "class", "tenant svelte-16ygjvg");
+        attr(span2, "class", "svelte-16ygjvg");
+        attr(span3, "class", "svelte-16ygjvg");
+        attr(div2, "class", "desc svelte-16ygjvg");
+        attr(div3, "class", "card svelte-16ygjvg");
       },
       m(target, anchor) {
-        insert(target, div1, anchor);
-        append(div1, h3);
-        append(div1, t1);
-        append(div1, div0);
+        insert(target, div3, anchor);
+        append(div3, div0);
         append(div0, span0);
-        append(div0, t4);
-        append(div0, span1);
-        append(div1, t8);
+        append(div0, t1);
+        append(div0, h30);
+        append(div3, t3);
+        append(div3, div1);
+        append(div1, span1);
+        append(div1, t5);
+        append(div1, h31);
+        append(div3, t7);
+        append(div3, div2);
+        append(div2, span2);
+        append(div2, t10);
+        append(div2, span3);
+        append(div3, t14);
       },
       p: noop,
       d(detaching) {
         if (detaching) {
-          detach(div1);
+          detach(div3);
         }
       }
     };
@@ -17000,8 +17076,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         h1.textContent = "Upcoming Tenants";
         t1 = space();
         if_block.c();
-        attr(h1, "class", "svelte-1vobm9");
-        attr(section, "class", "empty-upcomingTenants svelte-1vobm9");
+        attr(h1, "class", "svelte-16ygjvg");
+        attr(section, "class", "empty-upcomingTenants svelte-16ygjvg");
       },
       m(target, anchor) {
         insert(target, section, anchor);

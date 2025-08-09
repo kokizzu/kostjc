@@ -21,45 +21,41 @@
   /**
    * @typedef {Object} PaidProgress
    * @property {number} percentage
+   * @property {number} remainingDays
    * @property {ProgressColor} color
    */
 
   /**
-   * @description Get progress paid percentage, by total price, total paid, and days occupied
+   * @description Calculate percentage and color, based on days paid and days elapsed since start date.
    * @param {UnpaidBookingTenant} data
    * @returns {PaidProgress}
    */
-  function getProgressOccupiedPercentage(data) {
+  function getRemainingDaysProgress(data) {
     const now = new Date();
     const startDate = new Date(data.dateStart);
     // @ts-ignore
     const daysOccupied = Math.floor((now - startDate) / msPerDay);
 
-    let percentPaid = (data.totalPaid / data.totalPrice) * 100;
-    percentPaid = Math.min(percentPaid, 100);
+    const daysPaid = (data.totalPaid / data.totalPrice) * 30;
+    
+    const remainingDays = Math.ceil(daysPaid - daysOccupied);
 
-    if (daysOccupied > 30 && data.totalPaid < data.totalPrice) {
-      percentPaid = 100;
-    }
-
-    const dayFactor = Math.min((daysOccupied / 30) * 100, 100);
-
-    // 70% weight to payment
-    // 30% weight to days occupied
-    let percentage = (percentPaid * 0.7) + (dayFactor * 0.3);
-    percentage = Math.min(percentage, 100);
+    let percentage = (daysOccupied / daysPaid) * 100;
+    percentage = Math.min(Math.max(percentage, 0), 100);
 
     let color = /** @type {ProgressColor} */ ('green');
 
-    if (percentage < 30) color = 'green';
-    else if (percentage < 70) color = 'yellow';
-    else color = 'red';
-
-    if (percentage == 0) color = 'green';
-    if (percentage < 5) percentage = 5;
+    if (remainingDays > 3) {
+      color = 'green';
+    } else if (remainingDays >= 0) {
+      color = 'yellow';
+    } else {
+      color = 'red';
+    }
 
     return {
       percentage: Math.round(percentage),
+      remainingDays: remainingDays,
       color: color
     };
   }
@@ -67,13 +63,28 @@
   /**
    * @description Get progress paid percentage, by total price, total paid
    * @param {UnpaidBookingTenant} data
-   * @returns {number} percentage
+   * @returns {{ percentage: number; daysOccupied: number; }}
    */
   function getProgressPaidPercentage(data) {
-    if (data.totalPaid >= data.totalPrice) return 100;
+    if (data.totalPaid >= data.totalPrice) {
+      const now = new Date();
+      const startDate = new Date(data.dateStart);
+      // @ts-ignore
+      const daysOccupied = Math.floor((now - startDate) / msPerDay);
+
+      return {
+        percentage: 100,
+        daysOccupied: daysOccupied
+      };
+    }
     
     const percentage = (data.totalPaid / data.totalPrice) * 100;
-    return Math.min(percentage, 100);
+    const daysOccupied = (data.totalPaid / data.totalPrice) * 30;
+
+    return {
+      percentage: Math.min(percentage, 100),
+      daysOccupied: parseFloat(daysOccupied.toFixed(1))
+    }
   }
 </script>
 
@@ -82,7 +93,7 @@
   {#if unpaidBookingTenants && unpaidBookingTenants.length > 0}
     <div class="cards">
       {#each (unpaidBookingTenants || []) as ub}
-        {@const prog = getProgressOccupiedPercentage(ub)}
+        {@const prog = getRemainingDaysProgress(ub)}
         {@const paidPercent = getProgressPaidPercentage(ub)}
         <div class="card">
           <h3>{ub.tenantName}</h3>
@@ -95,13 +106,13 @@
             </div>
             <hr />
             <div class="progress-container">
-              <label for="">Paid progress</label>
+              <label for="">Paid <b>{paidPercent.daysOccupied}</b> days</label>
               <div class="progress">
-                <span class="blue" style="width: {paidPercent}%;"></span>
+                <span class="blue" style="width: {paidPercent.percentage}%;"></span>
               </div>
             </div>
             <div class="progress-container">
-              <label for="">Occupancy progress</label>
+              <label for="">Total paid <b>IDR {ub.totalPaid}{ub.totalPaid >= 1000 ? 'M' : 'K'}</b>, remaining <b>{prog.remainingDays}</b> days</label>
               <div class="progress">
                 <span class={prog.color} style="width: {prog.percentage}%;"></span>
               </div>
