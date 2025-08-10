@@ -1,6 +1,5 @@
 <script>
-  import { onMount } from "svelte";
-    import { GetRelativeDayLabel } from "../../_components/xGenerator";
+  import { GetRelativeDayLabel } from "../../_components/xGenerator";
 
   /**
    * @typedef {Object} UnpaidBookingTenant
@@ -9,6 +8,7 @@
    * @property {number} totalPaid
    * @property {number} totalPrice
    * @property {string} dateStart
+   * @property {string} dateEnd
    */
   const unpaidBookingTenants = /** @type {UnpaidBookingTenant[]} */ ([/* unpaidBookingTenants */]);
 
@@ -21,41 +21,46 @@
   /**
    * @typedef {Object} PaidProgress
    * @property {number} percentage
-   * @property {number} remainingDays
    * @property {ProgressColor} color
    */
 
   /**
-   * @description Calculate percentage and color, based on days paid and days elapsed since start date.
    * @param {UnpaidBookingTenant} data
    * @returns {PaidProgress}
    */
-  function getRemainingDaysProgress(data) {
+  function getOccupancyProgress(data) {
     const now = new Date();
-    const startDate = new Date(data.dateStart);
+    const dateStart = new Date(data.dateStart);
+    const dateEnd = new Date(data.dateEnd);
+
+     // @ts-ignore
+    const daysOccupied = Math.floor((now - dateStart) / msPerDay);
     // @ts-ignore
-    const daysOccupied = Math.floor((now - startDate) / msPerDay);
+    const totalDays = (dateEnd - dateStart) / msPerDay;
+
+    let percentage = (daysOccupied / totalDays) * 100;
+    if (daysOccupied <= 0) {
+      percentage = 0;
+    }
 
     const daysPaid = (data.totalPaid / data.totalPrice) * 30;
-    
-    const remainingDays = Math.ceil(daysPaid - daysOccupied);
-
-    let percentage = (daysOccupied / daysPaid) * 100;
-    percentage = Math.min(Math.max(percentage, 0), 100);
 
     let color = /** @type {ProgressColor} */ ('green');
 
-    if (remainingDays > 3) {
-      color = 'green';
-    } else if (remainingDays >= 0) {
+    if (daysOccupied < daysPaid) {
+      color = 'green'
+    }
+    
+    if (daysOccupied >= (daysPaid - 3)) {
       color = 'yellow';
-    } else {
+    }
+    
+    if (daysOccupied > daysPaid) {
       color = 'red';
     }
 
     return {
       percentage: Math.round(percentage),
-      remainingDays: remainingDays,
       color: color
     };
   }
@@ -63,27 +68,32 @@
   /**
    * @description Get progress paid percentage, by total price, total paid
    * @param {UnpaidBookingTenant} data
-   * @returns {{ percentage: number; daysOccupied: number; }}
+   * @returns {{ percentage: number; daysPaid: number; }}
    */
   function getProgressPaidPercentage(data) {
+    const dateStart = new Date(data.dateStart);
+    const dateEnd = new Date(data.dateEnd);
+
     if (data.totalPaid >= data.totalPrice) {
       const now = new Date();
-      const startDate = new Date(data.dateStart);
       // @ts-ignore
-      const daysOccupied = Math.floor((now - startDate) / msPerDay);
+      const daysOccupied = Math.floor((now - dateStart) / msPerDay);
 
       return {
         percentage: 100,
-        daysOccupied: daysOccupied
+        daysPaid: daysOccupied
       };
     }
+
+    // @ts-ignore
+    const totalDays = (dateEnd - dateStart) / msPerDay;
     
     const percentage = (data.totalPaid / data.totalPrice) * 100;
-    const daysOccupied = (data.totalPaid / data.totalPrice) * 30;
+    const daysPaid = (data.totalPaid / data.totalPrice) * totalDays;
 
     return {
       percentage: Math.min(percentage, 100),
-      daysOccupied: parseFloat(daysOccupied.toFixed(1))
+      daysPaid: parseFloat(daysPaid.toFixed(1))
     }
   }
 </script>
@@ -93,7 +103,7 @@
   {#if unpaidBookingTenants && unpaidBookingTenants.length > 0}
     <div class="cards">
       {#each (unpaidBookingTenants || []) as ub}
-        {@const prog = getRemainingDaysProgress(ub)}
+        {@const prog = getOccupancyProgress(ub)}
         {@const paidPercent = getProgressPaidPercentage(ub)}
         <div class="card">
           <h3>{ub.tenantName}</h3>
@@ -106,13 +116,13 @@
             </div>
             <hr />
             <div class="progress-container">
-              <label for="">Paid <b>{paidPercent.daysOccupied}</b> days</label>
+              <label for="">Paid <b>{paidPercent.daysPaid}</b> days</label>
               <div class="progress">
                 <span class="blue" style="width: {paidPercent.percentage}%;"></span>
               </div>
             </div>
             <div class="progress-container">
-              <label for="">Total paid <b>IDR {ub.totalPaid}{ub.totalPaid >= 1000 ? 'M' : 'K'}</b>, remaining <b>{prog.remainingDays}</b> days</label>
+              <label for="">Occupancy Progress</label>
               <div class="progress">
                 <span class={prog.color} style="width: {prog.percentage}%;"></span>
               </div>

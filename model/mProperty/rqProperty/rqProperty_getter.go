@@ -1229,6 +1229,7 @@ type UnpaidBookingTenant struct {
 	TotalPaid  int64  `json:"totalPaid"`
 	TotalPrice int64  `json:"totalPrice"`
 	DateStart  string `json:"dateStart"`
+	DateEnd    string `json:"dateEnd"`
 }
 
 func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
@@ -1241,7 +1242,8 @@ SELECT
 	r."roomName",
 	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
 	b."totalPriceIDR",
-	b."dateStart"
+	b."dateStart",
+	b."dateEnd"
 FROM "bookings" b
 LEFT JOIN "tenants" t ON b."tenantId" = t."id"
 LEFT JOIN "rooms" r ON b."roomId" = r."id"
@@ -1256,20 +1258,25 @@ HAVING totalPaidIDR <> b."totalPriceIDR"
 ORDER BY t."tenantName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 6 {
-			tenantName := X.ToS(row[1])
-			roomName := X.ToS(row[2])
-			totalPaid := X.ToI(row[3])
-			totalPrice := X.ToI(row[4])
-			dateStart := X.ToS(row[5])
-			out = append(out, UnpaidBookingTenant{
-				TenantName: tenantName,
-				RoomName:   roomName,
-				TotalPaid:  totalPaid,
-				TotalPrice: totalPrice,
-				DateStart:  dateStart,
-			})
+		if len(row) != 7 {
+			return
 		}
+
+		tenantName := X.ToS(row[1])
+		roomName := X.ToS(row[2])
+		totalPaid := X.ToI(row[3])
+		totalPrice := X.ToI(row[4])
+		dateStart := X.ToS(row[5])
+		dateEnd := X.ToS(row[6])
+
+		out = append(out, UnpaidBookingTenant{
+			TenantName: tenantName,
+			RoomName:   roomName,
+			TotalPaid:  totalPaid,
+			TotalPrice: totalPrice,
+			DateStart:  dateStart,
+			DateEnd:    dateEnd,
+		})
 	})
 
 	sort.Slice(out, func(i, j int) bool {

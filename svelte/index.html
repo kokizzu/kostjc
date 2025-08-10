@@ -16316,7 +16316,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     const child_ctx = ctx.slice();
     child_ctx[3] = list[i];
     const constants_0 = (
-      /*getRemainingDaysProgress*/
+      /*getOccupancyProgress*/
       child_ctx[0](
         /*ub*/
         child_ctx[3]
@@ -16376,7 +16376,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*getRemainingDaysProgress, unpaidBookingTenants, getProgressPaidPercentage*/
+        if (dirty & /*getOccupancyProgress, unpaidBookingTenants, getProgressPaidPercentage*/
         3) {
           each_value = ensure_array_like(unpaidBookingTenants || []);
           let i;
@@ -16423,7 +16423,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let div2;
     let label0;
     let t17;
-    let b0;
+    let b;
     let t19;
     let t20;
     let div1;
@@ -16431,16 +16431,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let t21;
     let div4;
     let label1;
-    let t22;
-    let b1;
-    let t26;
-    let b2;
-    let t28;
-    let t29;
+    let t23;
     let div3;
     let span4;
     let span4_class_value;
-    let t30;
+    let t24;
     return {
       c() {
         div6 = element("div");
@@ -16473,9 +16468,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         div2 = element("div");
         label0 = element("label");
         t17 = text("Paid ");
-        b0 = element("b");
-        b0.textContent = `${/*paidPercent*/
-        ctx[5].daysOccupied}`;
+        b = element("b");
+        b.textContent = `${/*paidPercent*/
+        ctx[5].daysPaid}`;
         t19 = text(" days");
         t20 = space();
         div1 = element("div");
@@ -16483,20 +16478,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         t21 = space();
         div4 = element("div");
         label1 = element("label");
-        t22 = text("Total paid ");
-        b1 = element("b");
-        b1.textContent = `IDR ${/*ub*/
-        ctx[3].totalPaid}${/*ub*/
-        ctx[3].totalPaid >= 1e3 ? "M" : "K"}`;
-        t26 = text(", remaining ");
-        b2 = element("b");
-        b2.textContent = `${/*prog*/
-        ctx[4].remainingDays}`;
-        t28 = text(" days");
-        t29 = space();
+        label1.textContent = "Occupancy Progress";
+        t23 = space();
         div3 = element("div");
         span4 = element("span");
-        t30 = space();
+        t24 = space();
         attr(h3, "class", "svelte-56jrvm");
         attr(hr0, "class", "svelte-56jrvm");
         attr(div0, "class", "desc svelte-56jrvm");
@@ -16548,7 +16534,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         append(div5, div2);
         append(div2, label0);
         append(label0, t17);
-        append(label0, b0);
+        append(label0, b);
         append(label0, t19);
         append(div2, t20);
         append(div2, div1);
@@ -16556,15 +16542,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         append(div5, t21);
         append(div5, div4);
         append(div4, label1);
-        append(label1, t22);
-        append(label1, b1);
-        append(label1, t26);
-        append(label1, b2);
-        append(label1, t28);
-        append(div4, t29);
+        append(div4, t23);
         append(div4, div3);
         append(div3, span4);
-        append(div6, t30);
+        append(div6, t24);
       },
       p: noop,
       d(detaching) {
@@ -16620,46 +16601,52 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   );
   function instance8($self) {
     const msPerDay = 1e3 * 60 * 60 * 24;
-    function getRemainingDaysProgress(data) {
+    function getOccupancyProgress(data) {
       const now2 = new Date();
-      const startDate = new Date(data.dateStart);
-      const daysOccupied = Math.floor((now2 - startDate) / msPerDay);
+      const dateStart = new Date(data.dateStart);
+      const dateEnd = new Date(data.dateEnd);
+      const daysOccupied = Math.floor((now2 - dateStart) / msPerDay);
+      const totalDays = (dateEnd - dateStart) / msPerDay;
+      let percentage = daysOccupied / totalDays * 100;
+      if (daysOccupied <= 0) {
+        percentage = 0;
+      }
       const daysPaid = data.totalPaid / data.totalPrice * 30;
-      const remainingDays = Math.ceil(daysPaid - daysOccupied);
-      let percentage = daysOccupied / daysPaid * 100;
-      percentage = Math.min(Math.max(percentage, 0), 100);
       let color = (
         /** @type {ProgressColor} */
         "green"
       );
-      if (remainingDays > 3) {
+      if (daysOccupied < daysPaid) {
         color = "green";
-      } else if (remainingDays >= 0) {
+      }
+      if (daysOccupied >= daysPaid - 3) {
         color = "yellow";
-      } else {
+      }
+      if (daysOccupied > daysPaid) {
         color = "red";
       }
       return {
         percentage: Math.round(percentage),
-        remainingDays,
         color
       };
     }
     function getProgressPaidPercentage(data) {
+      const dateStart = new Date(data.dateStart);
+      const dateEnd = new Date(data.dateEnd);
       if (data.totalPaid >= data.totalPrice) {
         const now2 = new Date();
-        const startDate = new Date(data.dateStart);
-        const daysOccupied2 = Math.floor((now2 - startDate) / msPerDay);
-        return { percentage: 100, daysOccupied: daysOccupied2 };
+        const daysOccupied = Math.floor((now2 - dateStart) / msPerDay);
+        return { percentage: 100, daysPaid: daysOccupied };
       }
+      const totalDays = (dateEnd - dateStart) / msPerDay;
       const percentage = data.totalPaid / data.totalPrice * 100;
-      const daysOccupied = data.totalPaid / data.totalPrice * 30;
+      const daysPaid = data.totalPaid / data.totalPrice * totalDays;
       return {
         percentage: Math.min(percentage, 100),
-        daysOccupied: parseFloat(daysOccupied.toFixed(1))
+        daysPaid: parseFloat(daysPaid.toFixed(1))
       };
     }
-    return [getRemainingDaysProgress, getProgressPaidPercentage];
+    return [getOccupancyProgress, getProgressPaidPercentage];
   }
   var UnpaidBookingTenants = class extends SvelteComponent {
     constructor(options) {
