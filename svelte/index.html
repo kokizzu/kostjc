@@ -16142,7 +16142,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*rooms, formatDateLong, getRelativeDayLabel*/
+        if (dirty & /*rooms, getAvailableDays, formatDateLong, getRelativeDayLabel*/
         0) {
           each_value = ensure_array_like(rooms || []);
           let i;
@@ -16179,7 +16179,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let raw_value = (
       /*r*/
       ctx[0].isAvailableNow || /*r*/
-      ctx[0].availableAt == "" ? "Available Now" : "Available on <b>" + formatDateLong2(
+      ctx[0].availableAt == "" ? `Available Now <b>${getAvailableDays(
+        /*r*/
+        ctx[0].availableAt
+      )}</b>` : "Available on <b>" + formatDateLong2(
         /*r*/
         ctx[0].availableAt,
         1
@@ -16302,6 +16305,15 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     if (diffDays > 0)
       return `H+${diffDays}`;
     return `H${diffDays}`;
+  }
+  function getAvailableDays(availableAt) {
+    const availableDate = new Date(availableAt);
+    const now2 = new Date();
+    const diffMs = now2 - availableDate;
+    const diffDays = Math.floor(diffMs / (1e3 * 60 * 60 * 24));
+    if (diffDays <= 0)
+      return "(today)";
+    return `(since ${diffDays} day${diffDays > 1 ? "s" : ""} ago)`;
   }
   var AvailableRooms = class extends SvelteComponent {
     constructor(options) {

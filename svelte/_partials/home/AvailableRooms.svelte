@@ -37,6 +37,23 @@
     
     return `H${diffDays}`;
   }
+
+  /**
+   * @param {string} availableAt
+   * @returns {string}
+   */ 
+  function getAvailableDays(availableAt) {
+    const availableDate = new Date(availableAt);
+    const now = new Date();
+
+    // @ts-ignore
+    const diffMs = now - availableDate;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (diffDays <= 0) return '(today)';
+
+    return `(since ${diffDays} day${diffDays > 1 ? 's' : ''} ago)`;
+  }
 </script>
 
 <section class="empty-rooms">
@@ -48,7 +65,7 @@
           <h3>Room {r.roomName}</h3>
           <div class="desc">
             <span>{@html r.isAvailableNow || r.availableAt == ''
-              ? 'Available Now'
+              ? `Available Now <b>${getAvailableDays(r.availableAt)}</b>`
               : 'Available on <b>' + formatDateLong(r.availableAt, 1)+' ('+ getRelativeDayLabel(r.availableAt, 1) +') </b>'
             }</span>
             <span>Last Tenant: <b>{r.lastTenant || '--'}</b></span>
