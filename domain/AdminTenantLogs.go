@@ -1,40 +1,40 @@
 package domain
 
 import (
+	"kostjc/model/mAuth/saAuth"
 	"kostjc/model/mProperty"
-	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/zCrud"
 )
 
-//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminWifiDeviceLogs.go
-//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminWifiDeviceLogs.go
-//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminWifiDeviceLogs.go
-//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminWifiDeviceLogs.go
-//go:generate farify doublequote --file AdminWifiDeviceLogs.go
+//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminTenantLogs.go
+//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminTenantLogs.go
+//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminTenantLogs.go
+//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminTenantLogs.go
+//go:generate farify doublequote --file AdminTenantLogs.go
 
 type (
-	AdminWifiDeviceLogsIn struct {
+	AdminTenantLogsIn struct {
 		RequestCommon
 
 		Pager    zCrud.PagerIn `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
 		WithMeta bool          `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
 	}
 
-	AdminWifiDeviceLogsOut struct {
+	AdminTenantLogsOut struct {
 		ResponseCommon
 
-		Pager zCrud.PagerOut              `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-		Logs  []saProperty.WifiDeviceLogs `json:"logs" form:"logs" query:"logs" long:"logs" msg:"logs"`
-		Meta  *zCrud.Meta                 `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
+		Pager zCrud.PagerOut      `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Logs  []saAuth.TenantLogs `json:"logs" form:"logs" query:"logs" long:"logs" msg:"logs"`
+		Meta  *zCrud.Meta         `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
 	}
 )
 
 const (
-	AdminWifiDeviceLogsAction = `admin/wifiDeviceLogs`
+	AdminTenantLogsAction = `admin/tenantLogs`
 )
 
 var (
-	AdminWifiDeviceLogsMeta = zCrud.Meta{
+	AdminTenantLogsMeta = zCrud.Meta{
 		Fields: []zCrud.Field{
 			{
 				Name:      mProperty.Id,
@@ -58,20 +58,6 @@ var (
 				InputType: zCrud.InputTypeCombobox,
 			},
 			{
-				Name:      `tenantBefore`,
-				Label:     `Tenant (Before)`,
-				ReadOnly:  true,
-				DataType:  zCrud.DataTypeInt,
-				InputType: zCrud.InputTypeCombobox,
-			},
-			{
-				Name:      `tenantAfter`,
-				Label:     `Tenant (After)`,
-				ReadOnly:  true,
-				DataType:  zCrud.DataTypeInt,
-				InputType: zCrud.InputTypeCombobox,
-			},
-			{
 				Name:      mProperty.BeforeJSON,
 				Label:     `Before (JSON)`,
 				ReadOnly:  true,
@@ -89,7 +75,7 @@ var (
 	}
 )
 
-func (d *Domain) AdminWifiDeviceLogs(in *AdminWifiDeviceLogsIn) (out AdminWifiDeviceLogsOut) {
+func (d *Domain) AdminTenantLogs(in *AdminTenantLogsIn) (out AdminTenantLogsOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
 
 	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
@@ -98,7 +84,7 @@ func (d *Domain) AdminWifiDeviceLogs(in *AdminWifiDeviceLogsIn) (out AdminWifiDe
 	}
 
 	if in.WithMeta {
-		out.Meta = &AdminWifiDeviceLogsMeta
+		out.Meta = &AdminTenantLogsMeta
 	}
 
 	// if not set, always override by createdAt descending
@@ -106,7 +92,7 @@ func (d *Domain) AdminWifiDeviceLogs(in *AdminWifiDeviceLogsIn) (out AdminWifiDe
 		in.Pager.Order = []string{`-createdAt`}
 	}
 
-	r := saProperty.NewWifiDeviceLogs(d.PropOlap)
+	r := saAuth.NewTenantLogs(d.PropOlap)
 	out.Logs = r.FindByPagination(&in.Pager, &out.Pager)
 
 	return

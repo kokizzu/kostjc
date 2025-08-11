@@ -63,6 +63,11 @@ func RestoreDatabase(tConn *Tt.Adapter, dateTime string) {
 	if err := restoreTableStocks(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
 	}
+
+	fmt.Println(color.GreenString("# Restore Table WifiDevices #"))
+	if err := restoreTableWifiDevices(tConn, dateTime); err != nil {
+		L.LOG.Error(err)
+	}
 }
 
 func restoreTableUsers(tConn *Tt.Adapter, dateTime string) error {
@@ -718,6 +723,81 @@ func restoreTableStocks(tConn *Tt.Adapter, dateTime string) error {
 
 					if !stc.DoUpsert() {
 						errMsg := `Err stc.DoUpsert(): ` + stc.SpaceName()
+						stat.Fail(errMsg)
+						return errors.New(errMsg)
+					}
+
+					stat.Ok(true)
+
+					return nil
+				}()
+				if err != nil {
+					return err
+				}
+			}
+
+			return nil
+		}(); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func restoreTableWifiDevices(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`wifiDevices`, dateTime)
+	if err != nil {
+		return err
+	}
+
+	for idx, f := range backupFiles {
+		filePath := (backupDir + `/` + f)
+		if err := func() error {
+			defer subTaskPrint(color.BlueString("[%d] Restoring file %s", (idx + 1), filePath))()
+
+			file, err := os.Open(filePath)
+			if err != nil {
+				L.LOG.Error("failed to open file: ", err)
+				return err
+			}
+			defer file.Close()
+
+			reader := lz4.NewReader(file)
+			scanner := bufio.NewScanner(reader)
+
+			stat := &ImporterStat{}
+			defer stat.Print(`last`)
+
+			var idxLine int = 0
+			for scanner.Scan() {
+				stat.Total++
+				stat.Print()
+				idxLine++
+
+				line := scanner.Text()
+
+				err := func() error {
+					var row []any
+					err := json.Unmarshal([]byte(line), &row)
+					if err != nil {
+						stat.Fail(`Err json.Unmarshal([]byte(line), &row): ` + err.Error())
+						return err
+					}
+
+					wd := wcProperty.NewWifiDevicesMutator(tConn)
+					wd.FromUncensoredArray(row)
+
+					if wd.FindById() {
+						if !wd.DoOverwriteById() {
+							errMsg := `Err wd.DoOverwriteById(): ` + wd.SpaceName()
+							stat.Fail(errMsg)
+							return errors.New(errMsg)
+						}
+					}
+
+					if !wd.DoUpsert() {
+						errMsg := `Err wd.DoUpsert(): ` + wd.SpaceName()
 						stat.Fail(errMsg)
 						return errors.New(errMsg)
 					}

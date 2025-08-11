@@ -81,6 +81,11 @@ func BackupDatabase(tConn *Tt.Adapter) {
 	if err := backupTable(tConn, rqProperty.NewStocks, `stocks`); err != nil {
 		L.LOG.Fatal(err)
 	}
+
+	fmt.Println(color.BlueString("# Backup Table WifiDevices #"))
+	if err := backupTable(tConn, rqProperty.NewWifiDevices, `wifiDevices`); err != nil {
+		L.LOG.Fatal(err)
+	}
 }
 
 type newTableFunc interface {

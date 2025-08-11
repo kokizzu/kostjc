@@ -3,24 +3,27 @@
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/users.js').Tenant} Tenant */
   /** @typedef {import('./_types/property.js').MissingTenantData} MissingTenantData */
+  /** @typedef {import('./_types/property').PaymentOfBooking} PaymentOfBooking */
+  /** @typedef {import('./_types/property').TenantBookingDetail} TenantBookingDetail */
 
   import LayoutMain from './_layouts/main.svelte';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
-  import { RiDesignBallPenLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import { RiDesignBallPenLine, RiSystemHistoryFill } from './node_modules/svelte-icons-pack/dist/ri';
   import PopUpEditMissingTenant from './_components/PopUpEditMissingTenant.svelte';
   import { AdminTenants, StaffMissingDataReport } from './jsApi.GEN';
-  import { CmdUpsert } from './_components/xConstant';
+  import { CmdForm, CmdUpsert } from './_components/xConstant';
   import { notifier } from './_components/xNotifier';
   import Radio from './_components/Radio.svelte';
   import { onMount } from 'svelte';
   import {checkboxToDate} from './_components/xFormatter';
   import {CmdToggleWaAdded, CmdToggleTeleAdded} from './_components/xConstant';
+    import PopUpShowBookingMissingTenant from './_components/PopUpShowBookingMissingTenant.svelte';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
   let missingData = /** @type {MissingTenantData[]} */ ([/* missingData */]);
 
-  async function RefreshData() {
+  async function RefreshData() { // @ts-ignore
     await StaffMissingDataReport({},
     /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
     /** @returns {Promise<void>} */
@@ -162,7 +165,7 @@
       label: 'Show All'
     },
     {
-       id: 'showNotAddedToWhatsapp',
+      id: 'showNotAddedToWhatsapp',
       name: filterName,
       value: 'showNotAddedToWhatsapp',
       label: 'Show Not Added To Whatsapp'
@@ -217,7 +220,7 @@
           }
           break;
         }
-         case 'showNotAddedToTelegram': {
+        case 'showNotAddedToTelegram': {
           if (!dt.tenantTeleAddedAt) {
             missingDataFiltered = [...missingDataFiltered, dt];
           }
@@ -266,6 +269,33 @@
     toggleCheckboxField(data.tenantId, data.tenantName, isChecked, 'teleAddedAt');
   }
 
+  let popUpShowBookingMissingTenant = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpShowBookingMissingTenant | any} */ (null);
+  let tenantName = '';
+  let bookingsOfTenant = /** @type {TenantBookingDetail[]} */ ([]);
+  let paymentsOfBookingOfTenant = /** @type {PaymentOfBooking[]} */ ([]);
+
+  async function showPopUpShowBookingTenant(/** @type {number} */ tenantId, /** @type {string} */ name) {
+    tenantName = name;
+    popUpShowBookingMissingTenant.Show();
+    await StaffMissingDataReport({
+      tenantId: tenantId,
+      cmd: CmdForm
+    },
+    /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
+    /** @returns {Promise<void>} */
+    function(/** @type {any} */ o) {
+      if (o.error) {
+        console.log(o);
+        notifier.showError(o.error || 'something went wrong');
+        return
+      }
+
+      bookingsOfTenant = (o.bookings || []);
+      paymentsOfBookingOfTenant = (o.payments || []);
+
+      return
+    })
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -273,6 +303,13 @@
     bind:this={popUpEditMissingTenant}
     bind:isSubmitted={isSubmitEditMissingTenant}
     OnSubmit={submitEditMissingTenant}
+  />
+
+  <PopUpShowBookingMissingTenant
+    bind:this={popUpShowBookingMissingTenant}
+    bind:tenantName
+    bind:bookings={bookingsOfTenant}
+    bind:payments={paymentsOfBookingOfTenant}
   />
 {/if}
 
@@ -311,6 +348,17 @@
                       size="15"
                       color="var(--gray-007)"
                       src={RiDesignBallPenLine}
+                    />
+                  </button>
+                  <button
+                    class="btn"
+                    title="Show History"
+                    on:click={() => showPopUpShowBookingTenant(data.tenantId, data.tenantName)}
+                  >
+                    <Icon
+                      size="15"
+                      color="var(--gray-007)"
+                      src={RiSystemHistoryFill}
                     />
                   </button>
                 </div>

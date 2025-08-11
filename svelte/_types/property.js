@@ -184,3 +184,23 @@ module.exports = {};
  * @property {number} revenueIDR
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} PaymentOfBooking
+ * @property {number} bookingId
+ * @property {number} paymentId
+ * @property {string} paymentAt
+ * @property {number} paidIDR
+ */
+module.exports = {};
+
+/**
+ * @typedef {Object} TenantBookingDetail
+ * @property {number} bookingId
+ * @property {number} totalPaidIDR
+ * @property {number} totalPriceIDR
+ * @property {string} dateStart
+ * @property {string} dateEnd
+ * @property {string} roomName
+ */
+module.exports = {};

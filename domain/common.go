@@ -378,7 +378,7 @@ func (d *Domain) segmentsFromSession(s *Session) M.SB {
 }
 
 type insertPropertyLogFunc interface {
-	Insert([]interface{}) bool
+	Insert([]any) bool
 }
 
 var rgxReplaceUpdatedAt = regexp.MustCompile(`"updatedAt":\d+`)

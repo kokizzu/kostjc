@@ -839,7 +839,9 @@ WHERE
     OR
     "bookings"."dateEnd" BETWEEN ` + S.Z(monthStart) + ` AND ` + S.Z(monthEnd) + `
   )
-GROUP BY "rooms"."roomName", "tenants"."tenantName", "bookings"."dateStart", "bookings"."dateEnd", "bookings"."totalPriceIDR"
+GROUP BY
+	"bookings"."id",
+	"rooms"."roomName"
 ORDER BY "rooms"."roomName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
@@ -1189,7 +1191,7 @@ SELECT
 	"roomName",
 	"dateEnd",
 	CASE
-		WHEN "dateEnd" <= '` + dateTimeNow + `'
+		WHEN "dateEnd" < '` + dateTimeNow + `'
 		THEN 'TRUE'
 	ELSE 'FALSE' END AS "isAvailable",
 	"tenantName"
@@ -1227,6 +1229,7 @@ type UnpaidBookingTenant struct {
 	TotalPaid  int64  `json:"totalPaid"`
 	TotalPrice int64  `json:"totalPrice"`
 	DateStart  string `json:"dateStart"`
+	DateEnd    string `json:"dateEnd"`
 }
 
 func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
@@ -1234,40 +1237,52 @@ func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
 
 	queryRows := comment + `
 SELECT
-	t."id" AS "tenantid",
+	t."id",
 	t."tenantName",
 	r."roomName",
 	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
 	b."totalPriceIDR",
-	b."dateStart"
+	b."dateStart",
+	b."dateEnd"
 FROM "bookings" b
-LEFT JOIN "tenants" t
-	ON b."tenantId" = t."id"
-LEFT JOIN "rooms" r
-	ON b."roomId" = r."id"
-LEFT JOIN "payments" p
-	ON b."id" = p."bookingId"
-	AND p."deletedAt" = 0
-WHERE b."deletedAt" = 0
-GROUP BY b."id"
+LEFT JOIN "tenants" t ON b."tenantId" = t."id"
+LEFT JOIN "rooms" r ON b."roomId" = r."id"
+LEFT JOIN "payments" p ON b."id" = p."bookingId"
+WHERE
+	b."deletedAt" = 0
+	AND t."deletedAt" = 0
+	AND r."deletedAt" = 0
+GROUP BY
+	b."id", t."id", t."tenantName", r."roomName"
 HAVING totalPaidIDR <> b."totalPriceIDR"
 ORDER BY t."tenantName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 6 {
-			tenantName := X.ToS(row[1])
-			roomName := X.ToS(row[2])
-			totalPaid := X.ToI(row[3])
-			totalPrice := X.ToI(row[4])
-			dateStart := X.ToS(row[5])
-			out = append(out, UnpaidBookingTenant{
-				TenantName: tenantName,
-				RoomName:   roomName,
-				TotalPaid:  totalPaid,
-				TotalPrice: totalPrice,
-				DateStart:  dateStart,
-			})
+		if len(row) != 7 {
+			return
 		}
+
+		tenantName := X.ToS(row[1])
+		roomName := X.ToS(row[2])
+		totalPaid := X.ToI(row[3])
+		totalPrice := X.ToI(row[4])
+		dateStart := X.ToS(row[5])
+		dateEnd := X.ToS(row[6])
+
+		out = append(out, UnpaidBookingTenant{
+			TenantName: tenantName,
+			RoomName:   roomName,
+			TotalPaid:  totalPaid,
+			TotalPrice: totalPrice,
+			DateStart:  dateStart,
+			DateEnd:    dateEnd,
+		})
+	})
+
+	sort.Slice(out, func(i, j int) bool {
+		t1, _ := time.Parse(time.DateOnly, out[i].DateStart)
+		t2, _ := time.Parse(time.DateOnly, out[j].DateStart)
+		return t1.Before(t2)
 	})
 
 	return
@@ -1392,22 +1407,23 @@ WHERE SUBSTR("endAt", 1, 7) = '` + yearMonth + `'
 `
 
 	w.Adapter.QuerySql(query, func(row []any) {
-		if len(row) == 6 {
-			tenantId := X.ToU(row[0])
-			roomId := X.ToU(row[1])
-			startAt := X.ToS(row[2])
-			endAt := X.ToS(row[3])
-			paidAt := X.ToS(row[4])
-			deletedAt := X.ToI(row[5])
-			out = append(out, WifiDeviceReport{
-				TenantId:  tenantId,
-				RoomId:    roomId,
-				StartAt:   startAt,
-				EndAt:     endAt,
-				PaidAt:    paidAt,
-				DeletedAt: deletedAt,
-			})
+		if len(row) != 6 {
+			return
 		}
+		tenantId := X.ToU(row[0])
+		roomId := X.ToU(row[1])
+		startAt := X.ToS(row[2])
+		endAt := X.ToS(row[3])
+		paidAt := X.ToS(row[4])
+		deletedAt := X.ToI(row[5])
+		out = append(out, WifiDeviceReport{
+			TenantId:  tenantId,
+			RoomId:    roomId,
+			StartAt:   startAt,
+			EndAt:     endAt,
+			PaidAt:    paidAt,
+			DeletedAt: deletedAt,
+		})
 	})
 
 	return
@@ -1433,7 +1449,7 @@ func (b *Bookings) FindDoubleBookingReports() (out []DoubleBookingReport) {
 
 	dtNow := time.Now().Format(time.DateOnly)
 	queryRows := comment + `
-WITH RECURSIVE overlapping_groups AS (
+WITH overlapping_groups AS (
   SELECT 
     b."id" AS booking_id,
     b."roomId" AS room_id,
@@ -1441,37 +1457,21 @@ WITH RECURSIVE overlapping_groups AS (
     b."tenantId" AS tenant_id,
     t."tenantName" AS tenant_name,
     b."dateStart" AS date_start,
-    b."dateEnd" AS date_end,
-    b."id" AS group_id
+    b."dateEnd" AS date_end
   FROM "bookings" b
+	LEFT JOIN "bookings" b2
+		ON b."roomId" = b2."roomId"
+		AND b."id" <> b2."id"
+		AND (
+			b."dateStart" <= b2."dateEnd" AND
+			b."dateEnd" >= b2."dateStart"
+		)
   LEFT JOIN "tenants" t ON b."tenantId" = t."id"
   LEFT JOIN "rooms" r ON b."roomId" = r."id"
 	WHERE b."deletedAt" = 0
-
-  UNION ALL
-
-  SELECT 
-    b2."id" AS booking_id,
-    b2."roomId" AS room_id,
-    r2."roomName" AS room_name,
-    b2."tenantId" AS tenant_id,
-    t2."tenantName" AS tenant_name,
-    b2."dateStart" AS date_start,
-    b2."dateEnd" AS date_end,
-    og.group_id AS group_id
-  FROM "bookings" b2
-  LEFT JOin "tenants" t2 ON b2."tenantId" = t2."id"
-  LEFT JOIN "rooms" r2 ON b2."roomId" = r2."id"
-  JOIN overlapping_groups AS og
-    ON b2."roomId" = og.room_id
-    AND b2."id" <> og.booking_id
-    AND b2."dateStart" <= og.date_end
-    AND b2."dateEnd" >= og.date_start
-    AND b2."id" > og.booking_id
-	WHERE b2."deletedAt" = 0
 )
 
-SELECT DISTINCT
+SELECT 
   room_id,
   room_name,
   tenant_id,
@@ -1501,6 +1501,35 @@ ORDER BY room_name`
 	return
 }
 
+func parseDateYYYYMMDD(dateStr string) time.Time {
+	t, err := time.Parse(time.DateOnly, dateStr)
+	if err != nil {
+		return time.Now()
+	}
+
+	return t
+}
+
+func isOverlapping(a, b DoubleBookingReportData) bool {
+	startA := parseDateYYYYMMDD(a.DateStart)
+	endA := parseDateYYYYMMDD(a.DateEnd)
+	startB := parseDateYYYYMMDD(b.DateStart)
+	endB := parseDateYYYYMMDD(b.DateEnd)
+
+	return startA.Before(endB.Add(24*time.Hour)) && startB.Before(endA.Add(24*time.Hour))
+}
+
+func hasAnyOverlap(data []DoubleBookingReportData) bool {
+	for i := range data {
+		for j := i + 1; j < len(data); j++ {
+			if isOverlapping(data[i], data[j]) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func groupDoubleBookingByRoom(data []DoubleBookingReportData) []DoubleBookingReport {
 	groupMap := make(map[uint64]*DoubleBookingReport)
 
@@ -1523,8 +1552,11 @@ func groupDoubleBookingByRoom(data []DoubleBookingReportData) []DoubleBookingRep
 
 	var filteredResult = []DoubleBookingReport{}
 	for _, report := range result {
-		if len(report.Tenants) > 1 {
-			filteredResult = append(filteredResult, report)
+		totalTenants := len(report.Tenants)
+		if totalTenants > 1 {
+			if hasAnyOverlap(report.Tenants) {
+				filteredResult = append(filteredResult, report)
+			}
 		}
 	}
 	result = nil
@@ -1706,4 +1738,176 @@ GROUP BY "paymentAt"`
 	})
 
 	return
+}
+
+type UpcomingTenant struct {
+	PrevTenant string `json:"prevTenant"`
+	NextTenant string `json:"nextTenant"`
+	RoomName   string `json:"roomName"`
+	DateStart  string `json:"dateStart"`
+	DateEnd    string `json:"dateEnd"`
+}
+
+func (b *Bookings) GetUpcomingTenants() (out []UpcomingTenant) {
+	const comment = `-- Bookings) GetUpcomingTenants`
+
+	dateNow := time.Now().Format(time.DateOnly)
+	query := comment + `
+SELECT
+	r."roomName",
+	(
+		SELECT t2."tenantName"
+		FROM "bookings" b2
+		JOIN "tenants" t2 ON t2."id" = b2."tenantId"
+		WHERE b2."roomId" = b."roomId"
+			AND b2."tenantId" <> b."tenantId"
+			AND b2."dateStart" < b."dateStart"
+		ORDER BY b2."dateStart" DESC
+		LIMIT 1
+	) AS prev_tenant,
+	t."tenantName" AS next_tenant,
+	b."dateStart",
+	b."dateEnd"
+FROM "bookings" b
+LEFT JOIN "rooms" r ON r."id" = b."roomId"
+LEFT JOIN "tenants" t ON t."id" = b."tenantId"
+WHERE b."dateStart" >= ` + S.Z(dateNow) + `
+	AND b."deletedAt" = 0
+	AND NOT EXISTS (
+		SELECT 1
+		FROM "bookings" prev
+		WHERE prev."roomId" = b."roomId"
+			AND prev."tenantId" = b."tenantId"
+			AND prev."dateStart" < b."dateStart"
+  )
+ORDER BY b."dateStart" ASC`
+
+	b.Adapter.QuerySql(query, func(row []any) {
+		if len(row) != 5 {
+			return
+		}
+		out = append(out, UpcomingTenant{
+			RoomName:   X.ToS(row[0]),
+			PrevTenant: X.ToS(row[1]),
+			NextTenant: X.ToS(row[2]),
+			DateStart:  X.ToS(row[3]),
+			DateEnd:    X.ToS(row[4]),
+		})
+	})
+
+	return
+}
+
+type PaymentOfBooking struct {
+	BookingId uint64 `json:"bookingId"`
+	PaymentId uint64 `json:"paymentId"`
+	PaymentAt string `json:"paymentAt"`
+	PaidIDR   int64  `json:"paidIDR"`
+}
+
+func (p *Payments) GetPaymentsByTenantId(tenantId uint64) (out []PaymentOfBooking) {
+	const comment = `-- Payments) GetPaymentsByTenantId`
+
+	query := comment + `
+SELECT
+	p."bookingId",
+	p."id",
+	p."paymentAt",
+	p."paidIDR"
+FROM "payments" p
+LEFT JOIN "bookings" b
+	ON b."id" = p."bookingId"
+	AND b."tenantId" = ` + I.UToS(tenantId) + `
+WHERE p."deletedAt" = 0
+	AND b."deletedAt" = 0`
+
+	p.Adapter.QuerySql(query, func(row []any) {
+		if len(row) != 4 {
+			return
+		}
+
+		out = append(out, PaymentOfBooking{
+			BookingId: X.ToU(row[0]),
+			PaymentId: X.ToU(row[1]),
+			PaymentAt: X.ToS(row[2]),
+			PaidIDR:   X.ToI(row[3]),
+		})
+	})
+
+	return
+}
+
+type TenantBookingDetail struct {
+	BookingId     uint64 `json:"bookingId"`
+	TotalPaidIDR  int64  `json:"totalPaidIDR"`
+	TotalPriceIDR int64  `json:"totalPriceIDR"`
+	DateStart     string `json:"dateStart"`
+	DateEnd       string `json:"dateEnd"`
+	RoomName      string `json:"roomName"`
+}
+
+func (b *Bookings) GetBookingsByTenantId(tenantId uint64) (out []TenantBookingDetail) {
+	const comment = `-- Bookings) GetBookingsByTenantId`
+
+	query := comment + `
+SELECT
+	b."id",
+	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
+	b."totalPriceIDR",
+	b."dateStart",
+	b."dateEnd",
+	r."roomName"
+FROM "bookings" b
+LEFT JOIN "payments" p ON b."id" = p."bookingId"
+LEFT JOIN "rooms" r ON b."roomId" = r."id"
+WHERE b."tenantId" = ` + I.UToS(tenantId) + `
+GROUP BY b."id"
+ORDER BY b."dateStart" ASC`
+
+	b.Adapter.QuerySql(query, func(row []any) {
+		if len(row) != 6 {
+			return
+		}
+
+		out = append(out, TenantBookingDetail{
+			BookingId:     X.ToU(row[0]),
+			TotalPaidIDR:  X.ToI(row[1]),
+			TotalPriceIDR: X.ToI(row[2]),
+			DateStart:     X.ToS(row[3]),
+			DateEnd:       X.ToS(row[4]),
+			RoomName:      X.ToS(row[5]),
+		})
+	})
+
+	return
+}
+
+func (w *WifiDevices) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := w.Adapter.Select(w.SpaceName(), w.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query wifi devices`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (w *WifiDevices) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + w.SqlTableName() + `
+	LIMIT 1`
+
+	w.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (w *WifiDevices) Truncate() bool {
+	return w.Adapter.ExecBoxSpace(w.SpaceName()+`:truncate`, A.X{})
 }

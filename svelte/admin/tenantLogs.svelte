@@ -4,31 +4,32 @@
   /** @typedef {import('../_types/masters.js').PagerIn} PagerIn */
   /** @typedef {import('../_types/masters.js').PagerOut} PagerOut */
   /** @typedef {import('../_types/users.js').User} User */
+  /** @typedef {import('../_types/property.js').Booking} Booking */
+  /** @typedef {import('../_types/property.js').Facility} Facility */
   /** @typedef {import('../_types/masters.js').ExtendedActionButton} ExtendedActionButton */
   
   import LayoutMain from '../_layouts/main.svelte';
-  import { AdminWifiDeviceLogs } from '../jsApi.GEN';
+  import MasterTableActionlog from '../_components/MasterTableActionlog.svelte';
+  import { AdminTenantLogs } from '../jsApi.GEN';
   import { notifier } from '../_components/xNotifier';
   import LogsSubMenu from '../_partials/LogsSubMenu.svelte';
-  import { RiSystemInformationLine } from '../node_modules/svelte-icons-pack/dist/ri';
   import PopUpCompareJson from '../_components/PopUpCompareJson.svelte';
   import { onMount } from 'svelte';
-  import MasterTableWifiDeviceLog from '../_components/MasterTableWifiDeviceLog.svelte';
+  import { RiSystemInformationLine } from '../node_modules/svelte-icons-pack/dist/ri';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
-  let logs        = /** @type {any[][]} */([/* logs */]);
+  let logs    = /** @type {any[][]} */([/* logs */]);
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
-  let users       = /** @type {Record<number, string>} */({/* users */});
+  let users     = /** @type {Record<number, string>} */({/* users */});
 
   async function refreshTableView(/** @type PagerIn */ pagerIn) {
     const i = {
       pager: pagerIn
     };
-    console.log('req:', i)
-    await AdminWifiDeviceLogs( // @ts-ignore
-      i, /** @type {import('../jsApi.GEN').AdminBookingLogsCallback} */
+    await AdminTenantLogs( // @ts-ignore
+      i, /** @type {import('../jsApi.GEN').AdminTenantLogsCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -41,7 +42,7 @@
       }
     );
   }
-  
+
   let isPopUpReady = false;
   onMount(() => {
     isPopUpReady = true;
@@ -86,7 +87,7 @@
 <LayoutMain access={segments} user={user}>
   <div class="logs-container">
     <LogsSubMenu />
-    <MasterTableWifiDeviceLog arrayOfArray={false}
+    <MasterTableActionlog arrayOfArray={false}
       bind:pager={pager}
       {fields}
       onRefreshTableView={refreshTableView}

@@ -2020,6 +2020,81 @@ exports.AdminStockLogs = async function AdminStockLogs( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminTenantLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminTenantLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminTenantLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminTenantLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saAuth.TenantLogs
+  }, // []saAuth.TenantLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminTenantLogsCallback
+ * @param {AdminTenantLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminTenantLogsIn} i
+ * @param {AdminTenantLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminTenantLogs = async function AdminTenantLogs( i, cb ) {
+  return await axios.post( '/admin/tenantLogs', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminTenantsIn
  * @property {String} cmd
  * @property {Object} withMeta
@@ -2054,6 +2129,8 @@ exports.AdminStockLogs = async function AdminStockLogs( i, cb ) {
  * @property {number} tenant.deletedBy
  * @property {number} tenant.restoredBy
  * @property {String} tenant.ktpOccupation
+ * @property {String} tenant.waAddedAt
+ * @property {String} tenant.teleAddedAt
  */
 const AdminTenantsIn = {
   cmd: '', // string
@@ -2093,6 +2170,8 @@ const AdminTenantsIn = {
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
     ktpOccupation: '', // string
+    waAddedAt: '', // string
+    teleAddedAt: '', // string
   }, // rqAuth.Tenants
 }
 /**
@@ -2133,6 +2212,8 @@ const AdminTenantsIn = {
  * @property {number} tenant.deletedBy
  * @property {number} tenant.restoredBy
  * @property {String} tenant.ktpOccupation
+ * @property {String} tenant.waAddedAt
+ * @property {String} tenant.teleAddedAt
  * @property {Object} tenants
  */
 const AdminTenantsOut = {
@@ -2180,6 +2261,8 @@ const AdminTenantsOut = {
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
     ktpOccupation: '', // string
+    waAddedAt: '', // string
+    teleAddedAt: '', // string
   }, // rqAuth.Tenants
   tenants: { // [][]any
   }, // [][]any
@@ -2196,6 +2279,81 @@ const AdminTenantsOut = {
  */
 exports.AdminTenants = async function AdminTenants( i, cb ) {
   return await axios.post( '/admin/tenants', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminUserLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminUserLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminUserLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminUserLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saAuth.UserLogs
+  }, // []saAuth.UserLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminUserLogsCallback
+ * @param {AdminUserLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminUserLogsIn} i
+ * @param {AdminUserLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminUserLogs = async function AdminUserLogs( i, cb ) {
+  return await axios.post( '/admin/userLogs', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
@@ -2950,8 +3108,12 @@ exports.StaffBooking = async function StaffBooking( i, cb ) {
 
 /**
  * @typedef {Object} StaffMissingDataReportIn
+ * @property {String} cmd
+ * @property {number} tenantId
  */
 const StaffMissingDataReportIn = {
+  cmd: '', // string
+  tenantId: 0, // uint64
 }
 /**
  * @typedef {Object} StaffMissingDataReportOut
@@ -2973,6 +3135,8 @@ const StaffMissingDataReportIn = {
  * @property {String} user.role
  * @property {Object} segments
  * @property {Object} missingData
+ * @property {Object} payments
+ * @property {Object} bookings
  */
 const StaffMissingDataReportOut = {
   user: { // rqAuth.Users
@@ -2997,6 +3161,10 @@ const StaffMissingDataReportOut = {
   }, // M.SB
   missingData: { // []rqProperty.RoomMissingTenantData
   }, // []rqProperty.RoomMissingTenantData
+  payments: { // []rqProperty.PaymentOfBooking
+  }, // []rqProperty.PaymentOfBooking
+  bookings: { // []rqProperty.TenantBookingDetail
+  }, // []rqProperty.TenantBookingDetail
 }
 /**
  * @callback StaffMissingDataReportCallback
@@ -3113,6 +3281,7 @@ const StaffRevenueReportIn = {
  * @property {String} user.role
  * @property {Object} segments
  * @property {Object} revenueReports
+ * @property {Object} chartRevenueReports
  */
 const StaffRevenueReportOut = {
   user: { // rqAuth.Users
@@ -3137,6 +3306,8 @@ const StaffRevenueReportOut = {
   }, // M.SB
   revenueReports: { // []rqProperty.RevenueReport
   }, // []rqProperty.RevenueReport
+  chartRevenueReports: { // []rqProperty.ChartRevenueReport
+  }, // []rqProperty.ChartRevenueReport
 }
 /**
  * @callback StaffRevenueReportCallback

@@ -1312,54 +1312,96 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./_partials/home/UnpaidBookingTenants.esbuild-svelte-fake-css */
-.empty-unpaidBookingTenants.svelte-1n9v0lv.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-56jrvm.svelte-56jrvm {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv h1.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-56jrvm h1.svelte-56jrvm {
   margin: 0;
   padding: 0;
   font-size: var(--font-xl);
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv .cards.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-56jrvm .cards.svelte-56jrvm {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv .cards .card.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card.svelte-56jrvm {
   background-color: var(--gray-001);
   padding: 20px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
   position: relative;
   overflow: hidden;
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv .cards .card h3.svelte-1n9v0lv {
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card hr.svelte-56jrvm {
+  height: 1px;
+  background-color: var(--gray-004) !important;
+  border: none;
+}
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card .detail.svelte-56jrvm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card h3.svelte-56jrvm {
   margin: 0;
   padding: 0;
   font-size: var(--font-lg);
   z-index: 20;
 }
-.empty-unpaidBookingTenants.svelte-1n9v0lv .cards .card .desc.svelte-1n9v0lv {
-  padding-top: 10px;
-  border-top: 1px solid var(--gray-004);
+.empty-unpaidBookingTenants.svelte-56jrvm .cards .card .desc.svelte-56jrvm {
   display: flex;
   flex-direction: column;
   gap: 5px;
   z-index: 20;
 }
 @media only screen and (max-width : 768px) {
-  .empty-unpaidBookingTenants.svelte-1n9v0lv .cards.svelte-1n9v0lv {
+  .empty-unpaidBookingTenants.svelte-56jrvm .cards.svelte-56jrvm {
     grid-template-columns: 1fr;
   }
 }
 @media only screen and (max-width: 992px) {
-  .empty-unpaidBookingTenants.svelte-1n9v0lv .cards.svelte-1n9v0lv {
+  .empty-unpaidBookingTenants.svelte-56jrvm .cards.svelte-56jrvm {
     grid-template-columns: 1fr 1fr;
   }
+}
+.progress-container.svelte-56jrvm.svelte-56jrvm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.progress-container.svelte-56jrvm label.svelte-56jrvm {
+  font-size: 12px;
+  margin-left: 5px;
+}
+.progress.svelte-56jrvm.svelte-56jrvm {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  background-color: var(--gray-003);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.progress.svelte-56jrvm span.svelte-56jrvm {
+  height: 100%;
+  display: block;
+}
+.progress span.green {
+  background-image: linear-gradient(var(--green-004), var(--green-006));
+}
+.progress span.yellow {
+  background-image: linear-gradient(var(--yellow-004), var(--yellow-006));
+}
+.progress span.red {
+  background-image: linear-gradient(var(--red-004), var(--red-006));
+}
+.progress span.blue {
+  background-image: linear-gradient(var(--blue-004), var(--blue-006));
 }
 
 /* fakecss:./_partials/home/DoubleBookingReports.esbuild-svelte-fake-css */
@@ -1410,6 +1452,64 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 @media only screen and (max-width: 992px) {
   .empty-doubleBookingReports.svelte-vmi6rx .cards.svelte-vmi6rx {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* fakecss:./_partials/home/UpcomingTenants.esbuild-svelte-fake-css */
+.empty-upcomingTenants.svelte-16ygjvg.svelte-16ygjvg {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.empty-upcomingTenants.svelte-16ygjvg h1.svelte-16ygjvg {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-xl);
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards.svelte-16ygjvg {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards .card.svelte-16ygjvg {
+  background-color: var(--gray-001);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .tenant.svelte-16ygjvg {
+  display: flex;
+  flex-direction: column;
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .tenant span.svelte-16ygjvg {
+  font-size: 12px;
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .tenant h3.svelte-16ygjvg {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-lg);
+  z-index: 20;
+}
+.empty-upcomingTenants.svelte-16ygjvg .cards .card .desc.svelte-16ygjvg {
+  padding-top: 10px;
+  border-top: 1px solid var(--gray-004);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 20;
+}
+@media only screen and (max-width : 768px) {
+  .empty-upcomingTenants.svelte-16ygjvg .cards.svelte-16ygjvg {
+    grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .empty-upcomingTenants.svelte-16ygjvg .cards.svelte-16ygjvg {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -1589,9 +1689,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     mod
   ));
 
-  // node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/browser/axios.cjs
+  // node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs
   var require_axios = __commonJS({
-    "node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
+    "node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
       "use strict";
       function bind2(fn, thisArg) {
         return function wrap() {
@@ -1600,7 +1700,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
       var { toString } = Object.prototype;
       var { getPrototypeOf } = Object;
-      var { iterator, toStringTag } = Symbol;
       var kindOf = ((cache) => (thing) => {
         const str = toString.call(thing);
         return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
@@ -1635,7 +1734,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           return false;
         }
         const prototype2 = getPrototypeOf(val);
-        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
+        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(Symbol.toStringTag in val) && !(Symbol.iterator in val);
       };
       var isDate = kindOfTest("Date");
       var isFile = kindOfTest("File");
@@ -1787,10 +1886,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         };
       })(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
       var forEachEntry = (obj, fn) => {
-        const generator = obj && obj[iterator];
-        const _iterator = generator.call(obj);
+        const generator = obj && obj[Symbol.iterator];
+        const iterator = generator.call(obj);
         let result;
-        while ((result = _iterator.next()) && !result.done) {
+        while ((result = iterator.next()) && !result.done) {
           const pair = result.value;
           fn.call(obj, pair[0], pair[1]);
         }
@@ -1860,8 +1959,23 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       var toFiniteNumber = (value, defaultValue) => {
         return value != null && Number.isFinite(value = +value) ? value : defaultValue;
       };
+      var ALPHA = "abcdefghijklmnopqrstuvwxyz";
+      var DIGIT = "0123456789";
+      var ALPHABET = {
+        DIGIT,
+        ALPHA,
+        ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
+      };
+      var generateString = (size2 = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
+        let str = "";
+        const { length } = alphabet;
+        while (size2--) {
+          str += alphabet[Math.random() * length | 0];
+        }
+        return str;
+      };
       function isSpecCompliantForm(thing) {
-        return !!(thing && isFunction(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
+        return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
       }
       var toJSONObject = (obj) => {
         const stack = new Array(10);
@@ -1907,7 +2021,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         isFunction(_global.postMessage)
       );
       var asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
-      var isIterable = (thing) => thing != null && isFunction(thing[iterator]);
       var utils$1 = {
         isArray,
         isArrayBuffer,
@@ -1959,13 +2072,14 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         findKey,
         global: _global,
         isContextDefined,
+        ALPHABET,
+        generateString,
         isSpecCompliantForm,
         toJSONObject,
         isAsyncFn,
         isThenable,
         setImmediate: _setImmediate,
-        asap,
-        isIterable
+        asap
       };
       function AxiosError(message, code, config, request, response) {
         Error.call(this);
@@ -2190,11 +2304,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           return url;
         }
         const _encode = options && options.encode || encode;
-        if (utils$1.isFunction(options)) {
-          options = {
-            serialize: options
-          };
-        }
         const serializeFn = options && options.serialize;
         let serializedParams;
         if (serializeFn) {
@@ -2595,15 +2704,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             setHeaders(header, valueOrRewrite);
           } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
             setHeaders(parseHeaders(header), valueOrRewrite);
-          } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
-            let obj = {}, dest, key;
-            for (const entry of header) {
-              if (!utils$1.isArray(entry)) {
-                throw TypeError("Object iterator must return a key-value pair");
-              }
-              obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
+          } else if (utils$1.isHeaders(header)) {
+            for (const [key, value] of header.entries()) {
+              setHeader(value, key, rewrite);
             }
-            setHeaders(obj, valueOrRewrite);
           } else {
             header != null && setHeader(valueOrRewrite, header, rewrite);
           }
@@ -2706,9 +2810,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
         toString() {
           return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
-        }
-        getSetCookie() {
-          return this.get("set-cookie") || [];
         }
         get [Symbol.toStringTag]() {
           return "AxiosHeaders";
@@ -2887,13 +2988,45 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }), throttled[1]];
       };
       var asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
-      var isURLSameOrigin = platform2.hasStandardBrowserEnv ? ((origin2, isMSIE) => (url) => {
-        url = new URL(url, platform2.origin);
-        return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
-      })(
-        new URL(platform2.origin),
-        platform2.navigator && /(msie|trident)/i.test(platform2.navigator.userAgent)
-      ) : () => true;
+      var isURLSameOrigin = platform2.hasStandardBrowserEnv ? (
+        // Standard browser envs have full support of the APIs needed to test
+        // whether the request URL is of the same origin as current location.
+        function standardBrowserEnv() {
+          const msie = platform2.navigator && /(msie|trident)/i.test(platform2.navigator.userAgent);
+          const urlParsingNode = document.createElement("a");
+          let originURL;
+          function resolveURL(url) {
+            let href = url;
+            if (msie) {
+              urlParsingNode.setAttribute("href", href);
+              href = urlParsingNode.href;
+            }
+            urlParsingNode.setAttribute("href", href);
+            return {
+              href: urlParsingNode.href,
+              protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
+              host: urlParsingNode.host,
+              search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
+              hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
+              hostname: urlParsingNode.hostname,
+              port: urlParsingNode.port,
+              pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
+            };
+          }
+          originURL = resolveURL(window.location.href);
+          return function isURLSameOrigin2(requestURL) {
+            const parsed = utils$1.isString(requestURL) ? resolveURL(requestURL) : requestURL;
+            return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
+          };
+        }()
+      ) : (
+        // Non standard browser envs (web workers, react-native) lack needed support.
+        function nonStandardBrowserEnv() {
+          return function isURLSameOrigin2() {
+            return true;
+          };
+        }()
+      );
       var cookies = platform2.hasStandardBrowserEnv ? (
         // Standard browser envs support document.cookie
         {
@@ -2931,9 +3064,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       function combineURLs(baseURL, relativeURL) {
         return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
       }
-      function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
-        let isRelativeUrl = !isAbsoluteURL(requestedURL);
-        if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {
+      function buildFullPath(baseURL, requestedURL) {
+        if (baseURL && !isAbsoluteURL(requestedURL)) {
           return combineURLs(baseURL, requestedURL);
         }
         return requestedURL;
@@ -2942,7 +3074,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       function mergeConfig(config1, config2) {
         config2 = config2 || {};
         const config = {};
-        function getMergedValue(target, source, prop, caseless) {
+        function getMergedValue(target, source, caseless) {
           if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
             return utils$1.merge.call({ caseless }, target, source);
           } else if (utils$1.isPlainObject(source)) {
@@ -2952,11 +3084,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           }
           return source;
         }
-        function mergeDeepProperties(a, b, prop, caseless) {
+        function mergeDeepProperties(a, b, caseless) {
           if (!utils$1.isUndefined(b)) {
-            return getMergedValue(a, b, prop, caseless);
+            return getMergedValue(a, b, caseless);
           } else if (!utils$1.isUndefined(a)) {
-            return getMergedValue(void 0, a, prop, caseless);
+            return getMergedValue(void 0, a, caseless);
           }
         }
         function valueFromConfig2(a, b) {
@@ -3007,7 +3139,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           socketPath: defaultToConfig2,
           responseEncoding: defaultToConfig2,
           validateStatus: mergeDirectKeys,
-          headers: (a, b, prop) => mergeDeepProperties(headersToObject(a), headersToObject(b), prop, true)
+          headers: (a, b) => mergeDeepProperties(headersToObject(a), headersToObject(b), true)
         };
         utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
           const merge2 = mergeMap[prop] || mergeDeepProperties;
@@ -3020,7 +3152,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         const newConfig = mergeConfig({}, config);
         let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
         newConfig.headers = headers = AxiosHeaders$1.from(headers);
-        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
+        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url), config.params, config.paramsSerializer);
         if (auth) {
           headers.set(
             "Authorization",
@@ -3244,7 +3376,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       };
       var trackStream = (stream, chunkSize, onProgress, onFinish) => {
-        const iterator2 = readBytes(stream, chunkSize);
+        const iterator = readBytes(stream, chunkSize);
         let bytes = 0;
         let done;
         let _onFinish = (e) => {
@@ -3256,7 +3388,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         return new ReadableStream({
           async pull(controller) {
             try {
-              const { done: done2, value } = await iterator2.next();
+              const { done: done2, value } = await iterator.next();
               if (done2) {
                 _onFinish();
                 controller.close();
@@ -3275,7 +3407,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           },
           cancel(reason) {
             _onFinish(reason);
-            return iterator2.return();
+            return iterator.return();
           }
         }, {
           highWaterMark: 2
@@ -3432,7 +3564,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           });
         } catch (err) {
           unsubscribe && unsubscribe();
-          if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
+          if (err && err.name === "TypeError" && /fetch/i.test(err.message)) {
             throw Object.assign(
               new AxiosError("Network Error", AxiosError.ERR_NETWORK, config, request),
               {
@@ -3538,7 +3670,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           return Promise.reject(reason);
         });
       }
-      var VERSION2 = "1.9.0";
+      var VERSION2 = "1.7.7";
       var validators$1 = {};
       ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
         validators$1[type] = function validator2(thing) {
@@ -3567,12 +3699,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             );
           }
           return validator2 ? validator2(value, opt, opts) : true;
-        };
-      };
-      validators$1.spelling = function spelling(correctSpelling) {
-        return (value, opt) => {
-          console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
-          return true;
         };
       };
       function assertOptions(options, schema, allowUnknown) {
@@ -3604,7 +3730,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       var validators = validator.validators;
       var Axios = class {
         constructor(instanceConfig) {
-          this.defaults = instanceConfig || {};
+          this.defaults = instanceConfig;
           this.interceptors = {
             request: new InterceptorManager$1(),
             response: new InterceptorManager$1()
@@ -3623,8 +3749,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             return await this._request(configOrUrl, config);
           } catch (err) {
             if (err instanceof Error) {
-              let dummy = {};
-              Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
+              let dummy;
+              Error.captureStackTrace ? Error.captureStackTrace(dummy = {}) : dummy = new Error();
               const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
               try {
                 if (!err.stack) {
@@ -3666,17 +3792,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
               }, true);
             }
           }
-          if (config.allowAbsoluteUrls !== void 0)
-            ;
-          else if (this.defaults.allowAbsoluteUrls !== void 0) {
-            config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
-          } else {
-            config.allowAbsoluteUrls = true;
-          }
-          validator.assertOptions(config, {
-            baseUrl: validators.spelling("baseURL"),
-            withXsrfToken: validators.spelling("withXSRFToken")
-          }, true);
           config.method = (config.method || this.defaults.method || "get").toLowerCase();
           let contextHeaders = headers && utils$1.merge(
             headers.common,
@@ -3743,7 +3858,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
         getUri(config) {
           config = mergeConfig(this.defaults, config);
-          const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
+          const fullPath = buildFullPath(config.baseURL, config.url);
           return buildURL(fullPath, config.params, config.paramsSerializer);
         }
       };
@@ -4061,8 +4176,14 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       exports.AdminStockLogs = async function AdminStockLogs(i, cb) {
         return await axios.post("/admin/stockLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminTenantLogs = async function AdminTenantLogs(i, cb) {
+        return await axios.post("/admin/tenantLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminTenants = async function AdminTenants(i, cb) {
         return await axios.post("/admin/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminUserLogs = async function AdminUserLogs(i, cb) {
+        return await axios.post("/admin/userLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminUsersManagement = async function AdminUsersManagement(i, cb) {
         return await axios.post("/admin/usersManagement", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -4288,7 +4409,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
   });
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/utils.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
   function assign(tar, src) {
@@ -4402,13 +4523,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/globals.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/globals.js
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
     // @ts-ignore Node typings have this
     global
   );
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
   var ResizeObserverSingleton = class {
     /**
      * @private
@@ -4454,7 +4575,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   ResizeObserverSingleton.entries = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/dom.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/dom.js
   var is_hydrating = false;
   function start_hydrating() {
     is_hydrating = true;
@@ -4557,6 +4678,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   function set_input_value(input, value) {
     input.value = value == null ? "" : value;
   }
+  function set_style(node, key, value, important) {
+    if (value == null) {
+      node.style.removeProperty(key);
+    } else {
+      node.style.setProperty(key, value, important ? "important" : "");
+    }
+  }
   function toggle_class(element2, name, toggle) {
     element2.classList.toggle(name, !!toggle);
   }
@@ -4574,7 +4702,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return result;
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/lifecycle.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/lifecycle.js
   var current_component;
   function set_current_component(component) {
     current_component = component;
@@ -4619,7 +4747,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/scheduler.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/scheduler.js
   var dirty_components = [];
   var binding_callbacks = [];
   var render_callbacks = [];
@@ -4701,7 +4829,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     render_callbacks = filtered;
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/transitions.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/transitions.js
   var outroing = /* @__PURE__ */ new Set();
   var outros;
   function group_outros() {
@@ -4743,12 +4871,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/each.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/each.js
   function ensure_array_like(array_like_or_iterator) {
     return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/spread.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/spread.js
   function get_spread_update(levels, updates) {
     const update2 = {};
     const to_null_out = {};
@@ -4782,7 +4910,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return update2;
   }
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/shared/boolean_attributes.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/boolean_attributes.js
   var _boolean_attributes = (
     /** @type {const} */
     [
@@ -4815,7 +4943,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   );
   var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/Component.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/Component.js
   function bind(component, name, callback) {
     const index = component.$.props[name];
     if (index !== void 0) {
@@ -4858,7 +4986,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance10, create_fragment16, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance10, create_fragment17, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -4897,7 +5025,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment16 ? create_fragment16($.ctx) : false;
+    $.fragment = create_fragment17 ? create_fragment17($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -4993,7 +5121,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             };
           };
           await Promise.resolve();
-          if (!this.$cn || this.$c) {
+          if (!this.$cn) {
             return;
           }
           const $slots = {};
@@ -5007,12 +5135,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             const name = this.$g_p(attribute.name);
             if (!(name in this.$d)) {
               this.$d[name] = get_custom_element_value(name, attribute.value, this.$p_d, "toProp");
-            }
-          }
-          for (const key in this.$p_d) {
-            if (!(key in this.$d) && this[key] !== void 0) {
-              this.$d[key] = this[key];
-              delete this[key];
             }
           }
           this.$c = new this.$ctor({
@@ -5068,7 +5190,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       disconnectedCallback() {
         this.$cn = false;
         Promise.resolve().then(() => {
-          if (!this.$cn && this.$c) {
+          if (!this.$cn) {
             this.$c.$destroy();
             this.$c = void 0;
           }
@@ -5165,10 +5287,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
   };
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/shared/version.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/version.js
   var PUBLIC_VERSION = "4";
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/disclose-version/index.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/disclose-version/index.js
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
@@ -5248,7 +5370,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }();
   var notifier = new Notifier();
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/Icon.svelte
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/Icon.svelte
   function create_fragment(ctx) {
     let svg;
     let svg_style_value;
@@ -5407,10 +5529,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   var Icon_default = Icon;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/fa/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/fa/index.js
   var FaSolidCircleNotch = { a: { viewBox: "0 0 512 512" }, c: '<path d="M222.7 32.1c5 16.9-4.6 34.8-21.5 39.8C121.8 95.6 64 169.1 64 256c0 106 86 192 192 192s192-86 192-192c0-86.9-57.8-160.4-137.1-184.1c-16.9-5-26.6-22.9-21.5-39.8s22.9-26.6 39.8-21.5C434.9 42.1 512 140 512 256c0 141.4-114.6 256-256 256S0 397.4 0 256C0 140 77.1 42.1 182.9 10.6c16.9-5 34.8 4.6 39.8 21.5z"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/ai/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ai/index.js
   var AiOutlineEyeInvisible = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2Q889.47 375.11 816.7 305l-50.88 50.88C807.31 395.53 843.45 447.4 874.7 512 791.5 684.2 673.4 766 512 766q-72.67 0-133.87-22.38L323 798.75Q408 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5zm-63.57-320.64L836 122.88a8 8 0 0 0-11.32 0L715.31 232.2Q624.86 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.69 119.4 136.5 191.41L112.48 835a8 8 0 0 0 0 11.31L155.17 889a8 8 0 0 0 11.31 0l712.15-712.12a8 8 0 0 0 0-11.32zM149.3 512C232.6 339.8 350.7 258 512 258c54.54 0 104.13 9.36 149.12 28.39l-70.3 70.3a176 176 0 0 0-238.13 238.13l-83.42 83.42C223.1 637.49 183.3 582.28 149.3 512zm246.7 0a112.11 112.11 0 0 1 146.2-106.69L401.31 546.2A112 112 0 0 1 396 512z"></path><path d="M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 0 0 227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 0 1-112 112z"></path>' };
   var AiOutlineEye = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path>' };
 
@@ -6737,7 +6859,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     });
   };
 
-  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/store/index.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/store/index.js
   var subscriber_queue = [];
   function writable(value, start = noop) {
     let stop;
@@ -13551,7 +13673,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   // _partials/SideMenu.svelte
   var import_jsApi = __toESM(require_jsApi_GEN());
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/ri/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHomeWifiLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M6 19H18V9.15745L12 3.7029L6 9.15745V19ZM19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM8 9.99998C11.866 9.99998 15 13.134 15 17H13C13 14.2386 10.7614 12 8 12V9.99998ZM8 14C9.65685 14 11 15.3431 11 17H8V14Z"></path>' };
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
@@ -13571,7 +13693,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var RiFinanceCashLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path>' };
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/lu/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
 
   // _components/xState.js
@@ -15334,7 +15456,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   var SideMenu_default = SideMenu;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/bs/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/bs/index.js
   var BsList = { a: { fill: "currentColor", viewBox: "0 0 16 16" }, c: '<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>' };
 
   // _partials/Navbar.svelte
@@ -15956,6 +16078,21 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   var BirthDayAgenda_default = BirthDayAgenda;
 
+  // _components/xGenerator.js
+  function GetRelativeDayLabel(dateStr) {
+    const inputDate = new Date(dateStr);
+    const currentDate = new Date();
+    inputDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+    const msInDay = 1e3 * 60 * 60 * 24;
+    const diffDays = Math.round((currentDate - inputDate) / msInDay);
+    if (diffDays === 0)
+      return "H";
+    if (diffDays > 0)
+      return `H+${diffDays}`;
+    return `H${diffDays}`;
+  }
+
   // _partials/home/AvailableRooms.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
@@ -16005,7 +16142,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*rooms, formatDateLong*/
+        if (dirty & /*rooms, getAvailableDays, formatDateLong, getRelativeDayLabel*/
         0) {
           each_value = ensure_array_like(rooms || []);
           let i;
@@ -16042,10 +16179,18 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let raw_value = (
       /*r*/
       ctx[0].isAvailableNow || /*r*/
-      ctx[0].availableAt == "" ? "Available Now" : "Available on <b>" + formatDateLong2(
+      ctx[0].availableAt == "" ? `Available Now <b>${getAvailableDays(
         /*r*/
         ctx[0].availableAt
-      ) + "</b>"
+      )}</b>` : "Available on <b>" + formatDateLong2(
+        /*r*/
+        ctx[0].availableAt,
+        1
+      ) + " (" + getRelativeDayLabel(
+        /*r*/
+        ctx[0].availableAt,
+        1
+      ) + ") </b>"
     );
     let t3;
     let span1;
@@ -16137,14 +16282,38 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {AvailableRoom[]} */
     [/* availableRooms */]
   );
-  function formatDateLong2(dateStr) {
+  function formatDateLong2(dateStr, dayTo = 0) {
     const dt = new Date(dateStr);
+    dt.setDate(dt.getDate() + dayTo);
     return dt.toLocaleDateString("en-GB", {
       weekday: "long",
       day: "2-digit",
       month: "long",
       year: "numeric"
     });
+  }
+  function getRelativeDayLabel(dateStr, dayTo = 0) {
+    const inputDate = new Date(dateStr);
+    inputDate.setDate(inputDate.getDate() + dayTo);
+    const currentDate = new Date();
+    inputDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+    const msInDay = 1e3 * 60 * 60 * 24;
+    const diffDays = Math.round((currentDate - inputDate) / msInDay);
+    if (diffDays === 0)
+      return "H";
+    if (diffDays > 0)
+      return `H+${diffDays}`;
+    return `H${diffDays}`;
+  }
+  function getAvailableDays(availableAt) {
+    const availableDate = new Date(availableAt);
+    const now2 = new Date();
+    const diffMs = now2 - availableDate;
+    const diffDays = Math.floor(diffMs / (1e3 * 60 * 60 * 24));
+    if (diffDays <= 0)
+      return "(today)";
+    return `(since ${diffDays} day${diffDays > 1 ? "s" : ""} ago)`;
   }
   var AvailableRooms = class extends SvelteComponent {
     constructor(options) {
@@ -16157,7 +16326,23 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   // _partials/home/UnpaidBookingTenants.svelte
   function get_each_context4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[0] = list[i];
+    child_ctx[3] = list[i];
+    const constants_0 = (
+      /*getOccupancyProgress*/
+      child_ctx[0](
+        /*ub*/
+        child_ctx[3]
+      )
+    );
+    child_ctx[4] = constants_0;
+    const constants_1 = (
+      /*getProgressPaidPercentage*/
+      child_ctx[1](
+        /*ub*/
+        child_ctx[3]
+      )
+    );
+    child_ctx[5] = constants_1;
     return child_ctx;
   }
   function create_else_block5(ctx) {
@@ -16192,7 +16377,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cards svelte-1n9v0lv");
+        attr(div, "class", "cards svelte-56jrvm");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16203,8 +16388,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       },
       p(ctx2, dirty) {
-        if (dirty & /*getRelativeDayLabel, unpaidBookingTenants*/
-        0) {
+        if (dirty & /*getOccupancyProgress, unpaidBookingTenants, getProgressPaidPercentage*/
+        3) {
           each_value = ensure_array_like(unpaidBookingTenants || []);
           let i;
           for (i = 0; i < each_value.length; i += 1) {
@@ -16232,60 +16417,152 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     };
   }
   function create_each_block4(ctx) {
-    let div1;
+    let div6;
     let h3;
     let t1;
+    let div5;
+    let hr0;
+    let t2;
     let div0;
     let span0;
-    let t4;
+    let t5;
     let span1;
-    let t8;
+    let t9;
     let span2;
-    let t13;
+    let t15;
+    let hr1;
+    let t16;
+    let div2;
+    let label0;
+    let t17;
+    let b;
+    let t19;
+    let t20;
+    let div1;
+    let span3;
+    let t21;
+    let div4;
+    let label1;
+    let t23;
+    let div3;
+    let span4;
+    let span4_class_value;
+    let t24;
     return {
       c() {
-        div1 = element("div");
+        div6 = element("div");
         h3 = element("h3");
         h3.textContent = `${/*ub*/
-        ctx[0].tenantName}`;
+        ctx[3].tenantName}`;
         t1 = space();
+        div5 = element("div");
+        hr0 = element("hr");
+        t2 = space();
         div0 = element("div");
         span0 = element("span");
         span0.textContent = `Room ${/*ub*/
-        ctx[0].roomName}`;
-        t4 = space();
+        ctx[3].roomName}`;
+        t5 = space();
         span1 = element("span");
         span1.textContent = `${/*ub*/
-        ctx[0].totalPaid}/${/*ub*/
-        ctx[0].totalPrice}`;
-        t8 = space();
+        ctx[3].totalPaid}/${/*ub*/
+        ctx[3].totalPrice}`;
+        t9 = space();
         span2 = element("span");
-        span2.textContent = `${/*ub*/
-        ctx[0].dateStart} (${getRelativeDayLabel(
+        span2.textContent = `Start at ${/*ub*/
+        ctx[3].dateStart} (${GetRelativeDayLabel(
           /*ub*/
-          ctx[0].dateStart
+          ctx[3].dateStart
         )})`;
-        t13 = space();
-        attr(h3, "class", "svelte-1n9v0lv");
-        attr(div0, "class", "desc svelte-1n9v0lv");
-        attr(div1, "class", "card svelte-1n9v0lv");
+        t15 = space();
+        hr1 = element("hr");
+        t16 = space();
+        div2 = element("div");
+        label0 = element("label");
+        t17 = text("Paid ");
+        b = element("b");
+        b.textContent = `${/*paidPercent*/
+        ctx[5].daysPaid}`;
+        t19 = text(" days");
+        t20 = space();
+        div1 = element("div");
+        span3 = element("span");
+        t21 = space();
+        div4 = element("div");
+        label1 = element("label");
+        label1.textContent = "Occupancy Progress";
+        t23 = space();
+        div3 = element("div");
+        span4 = element("span");
+        t24 = space();
+        attr(h3, "class", "svelte-56jrvm");
+        attr(hr0, "class", "svelte-56jrvm");
+        attr(div0, "class", "desc svelte-56jrvm");
+        attr(hr1, "class", "svelte-56jrvm");
+        attr(label0, "for", "");
+        attr(label0, "class", "svelte-56jrvm");
+        attr(span3, "class", "blue svelte-56jrvm");
+        set_style(
+          span3,
+          "width",
+          /*paidPercent*/
+          ctx[5].percentage + "%"
+        );
+        attr(div1, "class", "progress svelte-56jrvm");
+        attr(div2, "class", "progress-container svelte-56jrvm");
+        attr(label1, "for", "");
+        attr(label1, "class", "svelte-56jrvm");
+        attr(span4, "class", span4_class_value = null_to_empty(
+          /*prog*/
+          ctx[4].color
+        ) + " svelte-56jrvm");
+        set_style(
+          span4,
+          "width",
+          /*prog*/
+          ctx[4].percentage + "%"
+        );
+        attr(div3, "class", "progress svelte-56jrvm");
+        attr(div4, "class", "progress-container svelte-56jrvm");
+        attr(div5, "class", "detail svelte-56jrvm");
+        attr(div6, "class", "card svelte-56jrvm");
       },
       m(target, anchor) {
-        insert(target, div1, anchor);
-        append(div1, h3);
-        append(div1, t1);
-        append(div1, div0);
+        insert(target, div6, anchor);
+        append(div6, h3);
+        append(div6, t1);
+        append(div6, div5);
+        append(div5, hr0);
+        append(div5, t2);
+        append(div5, div0);
         append(div0, span0);
-        append(div0, t4);
+        append(div0, t5);
         append(div0, span1);
-        append(div0, t8);
+        append(div0, t9);
         append(div0, span2);
-        append(div1, t13);
+        append(div5, t15);
+        append(div5, hr1);
+        append(div5, t16);
+        append(div5, div2);
+        append(div2, label0);
+        append(label0, t17);
+        append(label0, b);
+        append(label0, t19);
+        append(div2, t20);
+        append(div2, div1);
+        append(div1, span3);
+        append(div5, t21);
+        append(div5, div4);
+        append(div4, label1);
+        append(div4, t23);
+        append(div4, div3);
+        append(div3, span4);
+        append(div6, t24);
       },
       p: noop,
       d(detaching) {
         if (detaching) {
-          detach(div1);
+          detach(div6);
         }
       }
     };
@@ -16308,8 +16585,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         h1.textContent = "Unpaid Bookings";
         t1 = space();
         if_block.c();
-        attr(h1, "class", "svelte-1n9v0lv");
-        attr(section, "class", "empty-unpaidBookingTenants svelte-1n9v0lv");
+        attr(h1, "class", "svelte-56jrvm");
+        attr(section, "class", "empty-unpaidBookingTenants svelte-56jrvm");
       },
       m(target, anchor) {
         insert(target, section, anchor);
@@ -16334,26 +16611,54 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {UnpaidBookingTenant[]} */
     [/* unpaidBookingTenants */]
   );
-  function getRelativeDayLabel(dateStr) {
-    const inputDate = new Date(dateStr);
-    const currentDate = new Date();
-    inputDate.setHours(0, 0, 0, 0);
-    currentDate.setHours(0, 0, 0, 0);
-    const msInDay = 1e3 * 60 * 60 * 24;
-    const diffDays = Math.round((currentDate - inputDate) / msInDay);
-    if (diffDays === 0)
-      return "H";
-    if (diffDays > 0)
-      return `H+${diffDays}`;
-    return `H${diffDays}`;
-  }
   function instance8($self) {
-    onMount(() => {
-      (unpaidBookingTenants || []).sort((a, b) => {
-        return new Date(a.dateStart).getTime() - new Date(b.dateStart).getTime();
-      });
-    });
-    return [];
+    const msPerDay = 1e3 * 60 * 60 * 24;
+    function getOccupancyProgress(data) {
+      const now2 = new Date();
+      const dateStart = new Date(data.dateStart);
+      const dateEnd = new Date(data.dateEnd);
+      const daysOccupied = Math.floor((now2 - dateStart) / msPerDay);
+      const totalDays = (dateEnd - dateStart) / msPerDay;
+      let percentage = daysOccupied / totalDays * 100;
+      if (daysOccupied <= 0) {
+        percentage = 0;
+      }
+      const daysPaid = data.totalPaid / data.totalPrice * 30;
+      let color = (
+        /** @type {ProgressColor} */
+        "green"
+      );
+      if (daysOccupied < daysPaid) {
+        color = "green";
+      }
+      if (daysOccupied >= daysPaid - 3) {
+        color = "yellow";
+      }
+      if (daysOccupied > daysPaid) {
+        color = "red";
+      }
+      return {
+        percentage: Math.round(percentage),
+        color
+      };
+    }
+    function getProgressPaidPercentage(data) {
+      const dateStart = new Date(data.dateStart);
+      const dateEnd = new Date(data.dateEnd);
+      if (data.totalPaid >= data.totalPrice) {
+        const now2 = new Date();
+        const daysOccupied = Math.floor((now2 - dateStart) / msPerDay);
+        return { percentage: 100, daysPaid: daysOccupied };
+      }
+      const totalDays = (dateEnd - dateStart) / msPerDay;
+      const percentage = data.totalPaid / data.totalPrice * 100;
+      const daysPaid = data.totalPaid / data.totalPrice * totalDays;
+      return {
+        percentage: Math.min(percentage, 100),
+        daysPaid: parseFloat(daysPaid.toFixed(1))
+      };
+    }
+    return [getOccupancyProgress, getProgressPaidPercentage];
   }
   var UnpaidBookingTenants = class extends SvelteComponent {
     constructor(options) {
@@ -16592,9 +16897,221 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   var DoubleBookingReports_default = DoubleBookingReports;
 
+  // _partials/home/UpcomingTenants.svelte
+  function get_each_context6(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[0] = list[i];
+    return child_ctx;
+  }
+  function create_else_block7(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        div.innerHTML = `<p>No Upcoming Tenants</p>`;
+        attr(div, "class", "no-data");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block8(ctx) {
+    let div;
+    let each_value = ensure_array_like(upcomingTenants || []);
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block6(get_each_context6(ctx, each_value, i));
+    }
+    return {
+      c() {
+        div = element("div");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(div, "class", "cards svelte-16ygjvg");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div, null);
+          }
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*upcomingTenants*/
+        0) {
+          each_value = ensure_array_like(upcomingTenants || []);
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context6(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block6(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value.length;
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function create_each_block6(ctx) {
+    let div3;
+    let div0;
+    let span0;
+    let t1;
+    let h30;
+    let t3;
+    let div1;
+    let span1;
+    let t5;
+    let h31;
+    let t7;
+    let div2;
+    let span2;
+    let t10;
+    let span3;
+    let t14;
+    return {
+      c() {
+        div3 = element("div");
+        div0 = element("div");
+        span0 = element("span");
+        span0.textContent = "Previous Tenant:";
+        t1 = space();
+        h30 = element("h3");
+        h30.textContent = `${/*ub*/
+        ctx[0].prevTenant}`;
+        t3 = space();
+        div1 = element("div");
+        span1 = element("span");
+        span1.textContent = "Next Tenant:";
+        t5 = space();
+        h31 = element("h3");
+        h31.textContent = `${/*ub*/
+        ctx[0].nextTenant}`;
+        t7 = space();
+        div2 = element("div");
+        span2 = element("span");
+        span2.textContent = `Room ${/*ub*/
+        ctx[0].roomName}`;
+        t10 = space();
+        span3 = element("span");
+        span3.textContent = `${/*ub*/
+        ctx[0].dateStart} s/d ${/*ub*/
+        ctx[0].dateEnd}`;
+        t14 = space();
+        attr(span0, "class", "svelte-16ygjvg");
+        attr(h30, "class", "svelte-16ygjvg");
+        attr(div0, "class", "tenant svelte-16ygjvg");
+        attr(span1, "class", "svelte-16ygjvg");
+        attr(h31, "class", "svelte-16ygjvg");
+        attr(div1, "class", "tenant svelte-16ygjvg");
+        attr(span2, "class", "svelte-16ygjvg");
+        attr(span3, "class", "svelte-16ygjvg");
+        attr(div2, "class", "desc svelte-16ygjvg");
+        attr(div3, "class", "card svelte-16ygjvg");
+      },
+      m(target, anchor) {
+        insert(target, div3, anchor);
+        append(div3, div0);
+        append(div0, span0);
+        append(div0, t1);
+        append(div0, h30);
+        append(div3, t3);
+        append(div3, div1);
+        append(div1, span1);
+        append(div1, t5);
+        append(div1, h31);
+        append(div3, t7);
+        append(div3, div2);
+        append(div2, span2);
+        append(div2, t10);
+        append(div2, span3);
+        append(div3, t14);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div3);
+        }
+      }
+    };
+  }
+  function create_fragment15(ctx) {
+    let section;
+    let h1;
+    let t1;
+    function select_block_type(ctx2, dirty) {
+      if (upcomingTenants && upcomingTenants.length > 0)
+        return create_if_block8;
+      return create_else_block7;
+    }
+    let current_block_type = select_block_type(ctx, -1);
+    let if_block = current_block_type(ctx);
+    return {
+      c() {
+        section = element("section");
+        h1 = element("h1");
+        h1.textContent = "Upcoming Tenants";
+        t1 = space();
+        if_block.c();
+        attr(h1, "class", "svelte-16ygjvg");
+        attr(section, "class", "empty-upcomingTenants svelte-16ygjvg");
+      },
+      m(target, anchor) {
+        insert(target, section, anchor);
+        append(section, h1);
+        append(section, t1);
+        if_block.m(section, null);
+      },
+      p(ctx2, [dirty]) {
+        if_block.p(ctx2, dirty);
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(section);
+        }
+        if_block.d();
+      }
+    };
+  }
+  var upcomingTenants = (
+    /** @type {UpcomingTenant[]} */
+    [/* upcomingTenants */]
+  );
+  var UpcomingTenants = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, null, create_fragment15, safe_not_equal, {});
+    }
+  };
+  var UpcomingTenants_default = UpcomingTenants;
+
   // index.svelte
   var { window: window_1 } = globals;
-  function create_else_block7(ctx) {
+  function create_else_block8(ctx) {
     let section;
     let div5;
     let div0;
@@ -16955,7 +17472,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_if_block8(ctx) {
+  function create_if_block9(ctx) {
     let layoutmain;
     let current;
     layoutmain = new main_default({
@@ -17593,77 +18110,87 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
   function create_default_slot(ctx) {
     let div;
-    let birthdayagenda;
-    let t0;
-    let availablerooms;
-    let t1;
     let unpaidbookingtenants;
+    let t0;
+    let birthdayagenda;
+    let t1;
+    let availablerooms;
     let t2;
     let doublebookingreports;
+    let t3;
+    let upcomingtenants;
     let current;
+    unpaidbookingtenants = new UnpaidBookingTenants_default({});
     birthdayagenda = new BirthDayAgenda_default({});
     availablerooms = new AvailableRooms_default({});
-    unpaidbookingtenants = new UnpaidBookingTenants_default({});
     doublebookingreports = new DoubleBookingReports_default({});
+    upcomingtenants = new UpcomingTenants_default({});
     return {
       c() {
         div = element("div");
-        create_component(birthdayagenda.$.fragment);
-        t0 = space();
-        create_component(availablerooms.$.fragment);
-        t1 = space();
         create_component(unpaidbookingtenants.$.fragment);
+        t0 = space();
+        create_component(birthdayagenda.$.fragment);
+        t1 = space();
+        create_component(availablerooms.$.fragment);
         t2 = space();
         create_component(doublebookingreports.$.fragment);
+        t3 = space();
+        create_component(upcomingtenants.$.fragment);
         attr(div, "class", "home-container svelte-g4mxpt");
       },
       m(target, anchor) {
         insert(target, div, anchor);
-        mount_component(birthdayagenda, div, null);
-        append(div, t0);
-        mount_component(availablerooms, div, null);
-        append(div, t1);
         mount_component(unpaidbookingtenants, div, null);
+        append(div, t0);
+        mount_component(birthdayagenda, div, null);
+        append(div, t1);
+        mount_component(availablerooms, div, null);
         append(div, t2);
         mount_component(doublebookingreports, div, null);
+        append(div, t3);
+        mount_component(upcomingtenants, div, null);
         current = true;
       },
       p: noop,
       i(local) {
         if (current)
           return;
+        transition_in(unpaidbookingtenants.$.fragment, local);
         transition_in(birthdayagenda.$.fragment, local);
         transition_in(availablerooms.$.fragment, local);
-        transition_in(unpaidbookingtenants.$.fragment, local);
         transition_in(doublebookingreports.$.fragment, local);
+        transition_in(upcomingtenants.$.fragment, local);
         current = true;
       },
       o(local) {
+        transition_out(unpaidbookingtenants.$.fragment, local);
         transition_out(birthdayagenda.$.fragment, local);
         transition_out(availablerooms.$.fragment, local);
-        transition_out(unpaidbookingtenants.$.fragment, local);
         transition_out(doublebookingreports.$.fragment, local);
+        transition_out(upcomingtenants.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
           detach(div);
         }
+        destroy_component(unpaidbookingtenants);
         destroy_component(birthdayagenda);
         destroy_component(availablerooms);
-        destroy_component(unpaidbookingtenants);
         destroy_component(doublebookingreports);
+        destroy_component(upcomingtenants);
       }
     };
   }
-  function create_fragment15(ctx) {
+  function create_fragment16(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
     let current;
     let mounted;
     let dispose;
-    const if_block_creators = [create_if_block8, create_else_block7];
+    const if_block_creators = [create_if_block9, create_else_block8];
     const if_blocks = [];
     function select_block_type(ctx2, dirty) {
       if (
@@ -17893,7 +18420,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var Index = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance9, create_fragment15, safe_not_equal, {});
+      init(this, options, instance9, create_fragment16, safe_not_equal, {});
     }
   };
   var svelte_default = Index;
@@ -17901,10 +18428,5 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   // index.svelte.ts
   var app = new svelte_default({ target: document.getElementById("app") });
 })();
-/*! Bundled license information:
-
-axios/dist/browser/axios.cjs:
-  (*! Axios v1.9.0 Copyright (c) 2025 Matt Zabriskie and contributors *)
-*/
 </script>
 </body></html>

@@ -144,6 +144,8 @@ func (d *Domain) AdminUsersManagement(in *AdminUsersManagementIn) (out AdminUser
 			}
 		}
 
+		defer InsertPropertyLog(usr.Id, d.userLogs, out.ResponseCommon, in.TimeNow(), sess.UserId, usr)()
+
 		if in.User.UserName != `` {
 			usr.SetUserName(S.ValidateIdent(in.User.UserName))
 		}

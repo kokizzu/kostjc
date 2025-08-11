@@ -16,13 +16,13 @@
   import json from 'svelte-highlight/languages/json';
   import atomOneDark from 'svelte-highlight/styles/atom-one-dark';
   
-  export let renderFuncs  = /** @type {Record<string, Function>} */ ({});
   export let arrayOfArray = /** @type {boolean} */ (true);
   export let fields       = /** @type {Field[]} */ ([]);
   export let rows         = /** @type {any[] | Record<string, any>[]} */ ([]);
   export let pager        = /** @type {PagerOut} */ ({});
   export let REFS = {};
   export let EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([]);
+  let tenants     = /** @type {Record<number, string>} */({/* tenants */});
 
   /**
    * @type {Record<string, number>}
@@ -129,6 +129,13 @@
     headingPopUp = TitleHeadingDataAfter;
     isShowPopUpShowData = true;
   }
+
+  function getTenantByObj(objStr) {
+    const obj = JSON.parse(objStr) || {};
+    const tenantId = obj.tenantId || 0;
+
+    return tenants[tenantId] || '';
+  }
 </script>
 
 <svelte:head>
@@ -203,12 +210,14 @@
                       {/each}
                     </div>
                   </td>
-                {:else if field.inputType === 'combobox' && REFS[field.name]}
-                  <td>{REFS[field.name][row[field.name]]}</td>
-                {:else if renderFuncs[ field.name ]}
-                  <td>{renderFuncs[ field.name ]( cell( row, i, field ) ) }</td>
+                {:else if field.name == 'tenantBefore'}
+                  <td>{getTenantByObj(row.beforeJson)}</td>
+                  {:else if field.name == 'tenantAfter'}
+                  <td>{getTenantByObj(row.afterJson)}</td>
                 {:else if field.inputType==='datetime' || field.name==='deletedAt' || field.name==='createdAt' || field.name==='updatedAt'}
                   <td>{localeDatetime( cell( row, i, field ) )}</td>
+                {:else if field.inputType == 'combobox' && REFS[field.name]}
+                  <td>{REFS[field.name][row[field.name]]}</td>
                 {:else if field.name == 'beforeJson'}
                   <td>
                     <button class="show-json" on:click={() => showDataBefore( row )}>Show JSON</button>

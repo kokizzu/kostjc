@@ -56,20 +56,20 @@
   export let FIELD_TO_SEARCH = '';
   export let SINGLE_SELECTED = false;
 
-  MASTER_ROWS = MASTER_ROWS.map(row => {
-  const waIdx = FIELDS.findIndex(f => f.name === 'waAddedAt');
-  const teleIdx = FIELDS.findIndex(f => f.name === 'teleAddedAt');
+  MASTER_ROWS = (MASTER_ROWS || []).map(row => {
+    const waIdx = FIELDS.findIndex(f => f.name === 'waAddedAt');
+    const teleIdx = FIELDS.findIndex(f => f.name === 'teleAddedAt');
 
-  // Convert string dari database ke boolean untuk UI
-  if (waIdx >= 0) {
-    row[waIdx] = row[waIdx] !== '0' && row[waIdx] !== '' && row[waIdx] !== null;
-  }
-  if (teleIdx >= 0) {
-    row[teleIdx] = row[teleIdx] !== '0' && row[teleIdx] !== '' && row[teleIdx] !== null;
-  }
+    // Convert string dari database ke boolean untuk UI
+    if (waIdx >= 0) {
+      row[waIdx] = row[waIdx] !== '0' && row[waIdx] !== '' && row[waIdx] !== null;
+    }
+    if (teleIdx >= 0) {
+      row[teleIdx] = row[teleIdx] !== '0' && row[teleIdx] !== '' && row[teleIdx] !== null;
+    }
 
-  return row;
-});
+    return row;
+  });
 
 
   /**

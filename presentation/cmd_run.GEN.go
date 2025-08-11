@@ -172,12 +172,28 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminStockLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminTenantLogsAction:
+		in := domain.AdminTenantLogsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminTenantLogs(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.AdminTenantsAction:
 		in := domain.AdminTenantsIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
 			return
 		}
 		out := b.AdminTenants(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminUserLogsAction:
+		in := domain.AdminUserLogsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminUserLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.AdminUsersManagementAction:
