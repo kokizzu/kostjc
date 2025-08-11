@@ -92,7 +92,9 @@
       {fields}
       onRefreshTableView={refreshTableView}
       rows={logs}
-      {users}
+      REFS={{
+        'actorId': users
+      }}
       COL_WIDTHS={{
         'actorId': 200
       }}

@@ -97,65 +97,11 @@
   
   $: allowPrevPage = pager.page>1;
   $: allowNextPage = pager.page<pager.pages;
-
-  const TitleHeadingDataBefore = 'Data Before (JSON)'
-  const TitleHeadingDataAfter = 'Data After (JSON)'
-
-  let headingPopUp = TitleHeadingDataBefore;
-  let isShowPopUpShowData = false;
-
-  let dataObjJson = '';
-
-  function showDataBefore(/** @type {any} */ row ) {
-    const toData = (row || {});
-    let toDataJsonStr = toData.beforeJson;
-    if (typeof toData.beforeJson === 'string') {
-      toDataJsonStr = JSON.parse( toData.beforeJson || '{}' );
-    }
-    dataObjJson = JSON.stringify( toDataJsonStr, null, 2 );
-
-    headingPopUp = TitleHeadingDataBefore;
-    isShowPopUpShowData = true;
-  }
-
-  function showDataAfter(/** @type {any} */ row ) {
-    const toData = (row || {});
-    let toDataJsonStr = toData.afterJson;
-    if (typeof toData.afterJson === 'string') {
-      toDataJsonStr = JSON.parse( toData.afterJson || '{}' );
-    }
-    dataObjJson = JSON.stringify( toDataJsonStr, null, 2 );
-    
-    headingPopUp = TitleHeadingDataAfter;
-    isShowPopUpShowData = true;
-  }
 </script>
 
 <svelte:head>
   {@html atomOneDark}
 </svelte:head>
-
-{#if isPopupReady}
-  <div class={`popup-container ${isShowPopUpShowData ? 'show' : ''}`}>
-    <div class="popup">
-      <header class="header">
-        <h2>{headingPopUp}</h2>
-        <button on:click={() => isShowPopUpShowData = false}>
-          <Icon size="22" color="var(--red-005)" src={IoClose}/>
-        </button>
-      </header>
-      <div class="forms">
-        <div
-          class="data-object-container"
-        >
-          <Highlight language={json} code={dataObjJson} let:highlighted>
-            <LineNumbers {highlighted}/>
-          </Highlight>
-        </div>
-      </div>
-    </div>
-  </div>
-{/if}
 
 <section class="table-root">
   <div class="table-container">
@@ -166,7 +112,7 @@
           {#each (fields || []) as field}
             {#if field.name==='id'}
               <th class='a-row'>Action</th>
-            {:else}
+            {:else if !(field.name == 'beforeJson' || field.name == 'afterJson')}
               <th
                 style="{COL_WIDTHS[field.name] ? `min-width: ${COL_WIDTHS[field.name]}px;` : ''}"
                 class="
@@ -209,15 +155,7 @@
                   <td>{renderFuncs[ field.name ]( cell( row, i, field ) ) }</td>
                 {:else if field.inputType==='datetime' || field.name==='deletedAt' || field.name==='createdAt' || field.name==='updatedAt'}
                   <td>{localeDatetime( cell( row, i, field ) )}</td>
-                {:else if field.name == 'beforeJson'}
-                  <td>
-                    <button class="show-json" on:click={() => showDataBefore( row )}>Show JSON</button>
-                  </td>
-                {:else if field.name == 'afterJson'}
-                  <td>
-                    <button class="show-json" on:click={() => showDataAfter( row )}>Show JSON</button>
-                  </td>
-                {:else}
+                {:else if !(field.name == 'beforeJson' || field.name == 'afterJson')}
                   <td>{cell( row, i, field )}</td>
                 {/if}
               {/each}
@@ -300,106 +238,6 @@
 </section>
 
 <style>
-  .popup-container,
-  .popup-container-data-comparison {
-    display: none;
-		position: fixed;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		z-index: 2000;
-		background-color: rgba(0 0 0 / 40%);
-		backdrop-filter: blur(1px);
-		justify-content: center;
-		padding: 50px;
-    overflow: auto;
-	}
-
-  .popup-container.show,
-  .popup-container-data-comparison.show {
-    display: flex;
-  }
-
-	.popup-container .popup,
-  .popup-container-data-comparison .popup {
-		border-radius: 8px;
-		background-color: #FFF;
-		height: fit-content;
-		display: flex;
-		flex-direction: column;
-	}
-
-  .popup-container .popup {
-    width: 600px;
-  }
-
-  .popup-container-data-comparison .popup {
-    width: 70%;
-  }
-
-  .popup-container .popup header,
-  .popup-container-data-comparison .popup header {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		padding: 15px 20px;
-		border-bottom: 1px solid var(--gray-004);
-	}
-
-	.popup-container .popup header h2,
-  .popup-container-data-comparison .popup header h2 {
-		margin: 0;
-	}
-
-	.popup-container .popup header button,
-  .popup-container-data-comparison .popup header button {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 5px;
-		border-radius: 50%;
-		border: none;
-		background-color: transparent;
-		cursor: pointer;
-	}
-
-	.popup-container .popup header button:hover,
-  .popup-container-data-comparison .popup header button:hover {
-		background-color: #ef444420;
-	}
-
-	.popup-container .popup header button:active,
-  .popup-container-data-comparison .popup header button:active {
-		background-color: #ef444430;
-	}
-
-	.popup-container .popup .forms,
-  .popup-container-data-comparison .popup .forms {
-		padding: 20px;
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-  .data-comparison-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
   :global(.action-btn:hover svg) {
     fill: var(--blue-005);
   }
@@ -547,23 +385,6 @@
 
   .table-root .table-container table tbody tr td {
     padding: 8px 12px;
-  }
-
-  .table-root .table-container table tbody tr td .show-json {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: 1px solid var(--gray-002);
-    border-radius: 5px;
-    cursor: pointer;
-    text-transform: capitalize;
-    padding: 3px 8px;
-    color: var(--gray-008);
-    background-color: var(--gray-001);
-  }
-
-  .table-root .table-container table tbody tr td .show-json:hover {
-    background-color: var(--gray-002);
   }
 
 	.table-root .table-container table tbody tr td {
@@ -747,14 +568,6 @@
   }
 
   @media only screen and (max-width: 768px) {
-    .popup-container {
-      padding: 10px;
-    }
-
-    .popup-container .popup {
-      width: 100%;
-    }
-    
     .table-root .table-container {
       overflow-x: scroll;
     }
