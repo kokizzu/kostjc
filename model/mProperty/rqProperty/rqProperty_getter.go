@@ -1289,7 +1289,7 @@ ORDER BY t."tenantName" ASC`
 }
 
 type RevenueReport struct {
-	YearMonth   string `json:"yearMonth"`
+	DateStart   string `json:"dateStart"`
 	BookingId   uint64 `json:"bookingId"`
 	RevenueIDR  int64  `json:"revenueIDR"`
 	DonationIDR int64  `json:"donationIDR"`
@@ -1304,7 +1304,7 @@ func (b *Bookings) FindRevenueReports(yearMonth string) (out []RevenueReport) {
 
 	query := comment + `
 SELECT
-	SUBSTR("bookings"."dateStart", 1, 7) AS "yearMonth",
+	"bookings"."dateStart",
 	"bookings"."id" AS "bookingId",
 	SUM(CASE 
 		WHEN "paymentMethod" != 'Donation'
@@ -1325,12 +1325,12 @@ GROUP BY "bookings"."id"`
 
 	b.Adapter.QuerySql(query, func(row []any) {
 		if len(row) == 4 {
-			yearMonth := X.ToS(row[0])
+			dateStart := X.ToS(row[0])
 			bookingId := X.ToU(row[1])
 			revenueIDR := X.ToI(row[2])
 			donationIDR := X.ToI(row[3])
 			out = append(out, RevenueReport{
-				YearMonth:   yearMonth,
+				DateStart:   dateStart,
 				BookingId:   bookingId,
 				RevenueIDR:  revenueIDR,
 				DonationIDR: donationIDR,

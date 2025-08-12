@@ -1167,6 +1167,126 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   }
 }
 
+/* fakecss:./_components/PopUpDiffLogJson.esbuild-svelte-fake-css */
+.popup-container.svelte-18tn8op.svelte-18tn8op {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+  background-color: rgba(0 0 0 / 40%);
+  backdrop-filter: blur(1px);
+  justify-content: center;
+  padding: 50px;
+  overflow: auto;
+}
+.popup-container.show.svelte-18tn8op.svelte-18tn8op {
+  display: flex;
+}
+.popup-container.svelte-18tn8op .popup.svelte-18tn8op {
+  border-radius: 8px;
+  background-color: #FFF;
+  height: fit-content;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.popup-container.svelte-18tn8op .popup header.svelte-18tn8op {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--gray-004);
+}
+.popup-container.svelte-18tn8op .popup header h2.svelte-18tn8op {
+  margin: 0;
+}
+.popup-container.svelte-18tn8op .popup header button.svelte-18tn8op {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.popup-container.svelte-18tn8op .popup header button.svelte-18tn8op:hover {
+  background-color: #ef444420;
+}
+.popup-container.svelte-18tn8op .popup header button.svelte-18tn8op:active {
+  background-color: #ef444430;
+}
+.popup-container.svelte-18tn8op .popup .forms.svelte-18tn8op {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.popup-container.svelte-18tn8op .popup .forms .data-object-container.svelte-18tn8op {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.data-object-container.svelte-18tn8op .field-container.svelte-18tn8op {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  background-color: var(--gray-002);
+  border-radius: 8px;
+}
+.data-object-container.svelte-18tn8op .field-container .field.svelte-18tn8op {
+  font-weight: 600;
+  font-size: 15px;
+}
+.data-object-container.svelte-18tn8op .field-container .values.svelte-18tn8op {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.data-object-container.svelte-18tn8op .field-container .values .before.svelte-18tn8op {
+  background-color: var(--red-transparent);
+  padding: 3px 5px;
+  border: 1px solid var(--red-005);
+  border-radius: 5px;
+  font-size: 12px;
+  color: var(--red-006);
+}
+.data-object-container.svelte-18tn8op .field-container .values .after.svelte-18tn8op {
+  background-color: var(--green-transparent);
+  padding: 3px 5px;
+  border: 1px solid var(--green-005);
+  border-radius: 5px;
+  font-size: 12px;
+  color: var(--green-006);
+}
+.popup-container.svelte-18tn8op .popup .foot button.svelte-18tn8op {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: none;
+  color: #FFF;
+  cursor: pointer;
+  font-weight: 600;
+}
+@media only screen and (max-width: 768px) {
+  .popup-container.svelte-18tn8op.svelte-18tn8op {
+    padding: 10px;
+  }
+  .popup-container.svelte-18tn8op .popup.svelte-18tn8op {
+    width: 100%;
+  }
+  .popup-container.svelte-18tn8op .popup .forms .data-object-container.svelte-18tn8op {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 /* fakecss:./admin/userLogs.esbuild-svelte-fake-css */
 .logs-container.svelte-9g9cdz {
   display: flex;
@@ -3577,13 +3697,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance13 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance13, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance13, context, null, { allOwnKeys: true });
-        instance13.create = function create(instanceConfig) {
+        const instance14 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance14, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance14, context, null, { allOwnKeys: true });
+        instance14.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance13;
+        return instance14;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -5964,7 +6084,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance13, create_fragment13, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance14, create_fragment14, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -5990,7 +6110,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance13 ? instance13(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance14 ? instance14(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -6003,7 +6123,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment13 ? create_fragment13($.ctx) : false;
+    $.fragment = create_fragment14 ? create_fragment14($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -6508,6 +6628,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   var Icon_default = Icon;
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
+  var RiDesignShadowLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 2C2.44772 2 2 2.44772 2 3V17C2 17.5523 2.44772 18 3 18H6V21C6 21.5523 6.44772 22 7 22H21C21.5523 22 22 21.5523 22 21V7C22 6.44772 21.5523 6 21 6H18V3C18 2.44772 17.5523 2 17 2H3ZM18 11.5607L20 13.5607V16.4393L18 14.4393V11.5607ZM18 9.43934V8H20V11.4393L18 9.43934ZM18 17V16.5607L20 18.5607V20H18.5607L16.5607 18H17C17.5523 18 18 17.5523 18 17ZM14.4393 18L16.4393 20H13.5607L11.5607 18H14.4393ZM9.43934 18L11.4393 20H8V18H9.43934ZM4 16V4H16V16H4Z"></path>' };
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHomeWifiLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M6 19H18V9.15745L12 3.7029L6 9.15745V19ZM19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM8 9.99998C11.866 9.99998 15 13.134 15 17H13C13 14.2386 10.7614 12 8 12V9.99998ZM8 14C9.65685 14 11 15.3431 11 17H8V14Z"></path>' };
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
@@ -6527,6 +6648,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
   var RiFinanceCashLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path>' };
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
+  var RiArrowsArrowRightLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>' };
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
@@ -11787,76 +11909,489 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var PopUpCompareJson_default = PopUpCompareJson;
 
+  // _components/PopUpDiffLogJson.svelte
+  function get_each_context3(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[7] = list[i];
+    return child_ctx;
+  }
+  function create_each_block3(ctx) {
+    let div1;
+    let span0;
+    let t0_value = (
+      /*dif*/
+      ctx[7].field + ""
+    );
+    let t0;
+    let t1;
+    let div0;
+    let span1;
+    let t2_value = (
+      /*dif*/
+      (ctx[7].before ? (
+        /*dif*/
+        ctx[7].before
+      ) : "(not present)") + ""
+    );
+    let t2;
+    let t3;
+    let icon;
+    let t4;
+    let span2;
+    let t5_value = (
+      /*dif*/
+      (ctx[7].after ? (
+        /*dif*/
+        ctx[7].after
+      ) : "(removed)") + ""
+    );
+    let t5;
+    let t6;
+    let current;
+    icon = new Icon_default({
+      props: { src: RiArrowsArrowRightLine, size: "20" }
+    });
+    return {
+      c() {
+        div1 = element("div");
+        span0 = element("span");
+        t0 = text(t0_value);
+        t1 = space();
+        div0 = element("div");
+        span1 = element("span");
+        t2 = text(t2_value);
+        t3 = space();
+        create_component(icon.$.fragment);
+        t4 = space();
+        span2 = element("span");
+        t5 = text(t5_value);
+        t6 = space();
+        attr(span0, "class", "field svelte-18tn8op");
+        attr(span1, "class", "before svelte-18tn8op");
+        attr(span2, "class", "after svelte-18tn8op");
+        attr(div0, "class", "values svelte-18tn8op");
+        attr(div1, "class", "field-container svelte-18tn8op");
+      },
+      m(target, anchor) {
+        insert(target, div1, anchor);
+        append(div1, span0);
+        append(span0, t0);
+        append(div1, t1);
+        append(div1, div0);
+        append(div0, span1);
+        append(span1, t2);
+        append(div0, t3);
+        mount_component(icon, div0, null);
+        append(div0, t4);
+        append(div0, span2);
+        append(span2, t5);
+        append(div1, t6);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        if ((!current || dirty & /*differences*/
+        4) && t0_value !== (t0_value = /*dif*/
+        ctx2[7].field + ""))
+          set_data(t0, t0_value);
+        if ((!current || dirty & /*differences*/
+        4) && t2_value !== (t2_value = /*dif*/
+        (ctx2[7].before ? (
+          /*dif*/
+          ctx2[7].before
+        ) : "(not present)") + ""))
+          set_data(t2, t2_value);
+        if ((!current || dirty & /*differences*/
+        4) && t5_value !== (t5_value = /*dif*/
+        (ctx2[7].after ? (
+          /*dif*/
+          ctx2[7].after
+        ) : "(removed)") + ""))
+          set_data(t5, t5_value);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div1);
+        }
+        destroy_component(icon);
+      }
+    };
+  }
+  function create_fragment12(ctx) {
+    let div3;
+    let div2;
+    let header;
+    let h2;
+    let t1;
+    let button;
+    let icon;
+    let t2;
+    let div1;
+    let div0;
+    let div3_class_value;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        size: "22",
+        color: "var(--red-005)",
+        src: IoClose
+      }
+    });
+    let each_value = ensure_array_like(
+      /*differences*/
+      ctx[2]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block3(get_each_context3(ctx, each_value, i));
+    }
+    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
+      each_blocks[i] = null;
+    });
+    return {
+      c() {
+        div3 = element("div");
+        div2 = element("div");
+        header = element("header");
+        h2 = element("h2");
+        h2.textContent = "Diff data";
+        t1 = space();
+        button = element("button");
+        create_component(icon.$.fragment);
+        t2 = space();
+        div1 = element("div");
+        div0 = element("div");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(h2, "class", "svelte-18tn8op");
+        attr(button, "class", "svelte-18tn8op");
+        attr(header, "class", "header svelte-18tn8op");
+        attr(div0, "class", "data-object-container svelte-18tn8op");
+        attr(div1, "class", "forms svelte-18tn8op");
+        attr(div2, "class", "popup svelte-18tn8op");
+        attr(div3, "class", div3_class_value = "popup-container " + /*isShow*/
+        (ctx[1] ? "show" : "") + " svelte-18tn8op");
+      },
+      m(target, anchor) {
+        insert(target, div3, anchor);
+        append(div3, div2);
+        append(div2, header);
+        append(header, h2);
+        append(header, t1);
+        append(header, button);
+        mount_component(icon, button, null);
+        append(div2, t2);
+        append(div2, div1);
+        append(div1, div0);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div0, null);
+          }
+        }
+        current = true;
+        if (!mounted) {
+          dispose = listen(
+            button,
+            "click",
+            /*Hide*/
+            ctx[0]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (dirty & /*differences*/
+        4) {
+          each_value = ensure_array_like(
+            /*differences*/
+            ctx2[2]
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context3(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+              transition_in(each_blocks[i], 1);
+            } else {
+              each_blocks[i] = create_each_block3(child_ctx);
+              each_blocks[i].c();
+              transition_in(each_blocks[i], 1);
+              each_blocks[i].m(div0, null);
+            }
+          }
+          group_outros();
+          for (i = each_value.length; i < each_blocks.length; i += 1) {
+            out(i);
+          }
+          check_outros();
+        }
+        if (!current || dirty & /*isShow*/
+        2 && div3_class_value !== (div3_class_value = "popup-container " + /*isShow*/
+        (ctx2[1] ? "show" : "") + " svelte-18tn8op")) {
+          attr(div3, "class", div3_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        for (let i = 0; i < each_value.length; i += 1) {
+          transition_in(each_blocks[i]);
+        }
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        each_blocks = each_blocks.filter(Boolean);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          transition_out(each_blocks[i]);
+        }
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div3);
+        }
+        destroy_component(icon);
+        destroy_each(each_blocks, detaching);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function findDifferences(before, after) {
+    const differences = (
+      /** @type {ObjDifference[]} */
+      []
+    );
+    const allKeys = /* @__PURE__ */ new Set([...Object.keys(before), ...Object.keys(after)]);
+    (allKeys || []).forEach(
+      /** @type {string} */
+      (key) => {
+        const beforeValue = before[key];
+        const afterValue = after[key];
+        if (beforeValue !== void 0 && afterValue !== void 0) {
+          if (JSON.stringify(beforeValue) !== JSON.stringify(afterValue)) {
+            differences.push({
+              field: key,
+              before: beforeValue,
+              after: afterValue,
+              type: "modified"
+            });
+          }
+        } else if (beforeValue !== void 0 && afterValue === void 0) {
+          differences.push({
+            field: key,
+            before: beforeValue,
+            after: null,
+            type: "removed"
+          });
+        } else if (beforeValue === void 0 && afterValue !== void 0) {
+          differences.push({
+            field: key,
+            before: null,
+            after: afterValue,
+            type: "added"
+          });
+        }
+      }
+    );
+    return differences;
+  }
+  function instance12($self, $props, $invalidate) {
+    let isShow = (
+      /** @type {boolean} */
+      false
+    );
+    let differences = (
+      /** @type {ObjDifference[]} */
+      []
+    );
+    const Show = () => {
+      compareJson();
+      $invalidate(1, isShow = true);
+    };
+    const Hide = () => {
+      $invalidate(1, isShow = false);
+      $invalidate(2, differences = []);
+    };
+    let { beforeJson = "" } = $props;
+    let { afterJson = "" } = $props;
+    function compareJson() {
+      try {
+        const objBeforeJson = JSON.parse(beforeJson || "{}");
+        const objAfterJson = JSON.parse(afterJson || "{}");
+        $invalidate(2, differences = findDifferences(objBeforeJson, objAfterJson));
+      } catch (error) {
+        console.error(error);
+        notifier.showError(error);
+      }
+    }
+    $self.$set = ($props2) => {
+      if ("beforeJson" in $props2)
+        $invalidate(4, beforeJson = $props2.beforeJson);
+      if ("afterJson" in $props2)
+        $invalidate(5, afterJson = $props2.afterJson);
+    };
+    return [Hide, isShow, differences, Show, beforeJson, afterJson];
+  }
+  var PopUpDiffLogJson = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance12, create_fragment12, safe_not_equal, {
+        Show: 3,
+        Hide: 0,
+        beforeJson: 4,
+        afterJson: 5
+      });
+    }
+    get Show() {
+      return this.$.ctx[3];
+    }
+    get Hide() {
+      return this.$.ctx[0];
+    }
+  };
+  var PopUpDiffLogJson_default = PopUpDiffLogJson;
+
   // admin/userLogs.svelte
   function create_if_block5(ctx) {
     let popupcomparejson;
     let updating_beforeJson;
     let updating_afterJson;
+    let t;
+    let popupdifflogjson;
+    let updating_beforeJson_1;
+    let updating_afterJson_1;
     let current;
     function popupcomparejson_beforeJson_binding(value) {
-      ctx[9](value);
+      ctx[10](value);
     }
     function popupcomparejson_afterJson_binding(value) {
-      ctx[10](value);
+      ctx[11](value);
     }
     let popupcomparejson_props = {};
     if (
       /*beforeJson*/
-      ctx[4] !== void 0
+      ctx[5] !== void 0
     ) {
       popupcomparejson_props.beforeJson = /*beforeJson*/
-      ctx[4];
+      ctx[5];
     }
     if (
       /*afterJson*/
-      ctx[5] !== void 0
+      ctx[6] !== void 0
     ) {
       popupcomparejson_props.afterJson = /*afterJson*/
-      ctx[5];
+      ctx[6];
     }
     popupcomparejson = new PopUpCompareJson_default({ props: popupcomparejson_props });
-    ctx[8](popupcomparejson);
+    ctx[9](popupcomparejson);
     binding_callbacks.push(() => bind(popupcomparejson, "beforeJson", popupcomparejson_beforeJson_binding));
     binding_callbacks.push(() => bind(popupcomparejson, "afterJson", popupcomparejson_afterJson_binding));
+    function popupdifflogjson_beforeJson_binding(value) {
+      ctx[13](value);
+    }
+    function popupdifflogjson_afterJson_binding(value) {
+      ctx[14](value);
+    }
+    let popupdifflogjson_props = {};
+    if (
+      /*beforeJson*/
+      ctx[5] !== void 0
+    ) {
+      popupdifflogjson_props.beforeJson = /*beforeJson*/
+      ctx[5];
+    }
+    if (
+      /*afterJson*/
+      ctx[6] !== void 0
+    ) {
+      popupdifflogjson_props.afterJson = /*afterJson*/
+      ctx[6];
+    }
+    popupdifflogjson = new PopUpDiffLogJson_default({ props: popupdifflogjson_props });
+    ctx[12](popupdifflogjson);
+    binding_callbacks.push(() => bind(popupdifflogjson, "beforeJson", popupdifflogjson_beforeJson_binding));
+    binding_callbacks.push(() => bind(popupdifflogjson, "afterJson", popupdifflogjson_afterJson_binding));
     return {
       c() {
         create_component(popupcomparejson.$.fragment);
+        t = space();
+        create_component(popupdifflogjson.$.fragment);
       },
       m(target, anchor) {
         mount_component(popupcomparejson, target, anchor);
+        insert(target, t, anchor);
+        mount_component(popupdifflogjson, target, anchor);
         current = true;
       },
       p(ctx2, dirty) {
         const popupcomparejson_changes = {};
         if (!updating_beforeJson && dirty & /*beforeJson*/
-        16) {
+        32) {
           updating_beforeJson = true;
           popupcomparejson_changes.beforeJson = /*beforeJson*/
-          ctx2[4];
+          ctx2[5];
           add_flush_callback(() => updating_beforeJson = false);
         }
         if (!updating_afterJson && dirty & /*afterJson*/
-        32) {
+        64) {
           updating_afterJson = true;
           popupcomparejson_changes.afterJson = /*afterJson*/
-          ctx2[5];
+          ctx2[6];
           add_flush_callback(() => updating_afterJson = false);
         }
         popupcomparejson.$set(popupcomparejson_changes);
+        const popupdifflogjson_changes = {};
+        if (!updating_beforeJson_1 && dirty & /*beforeJson*/
+        32) {
+          updating_beforeJson_1 = true;
+          popupdifflogjson_changes.beforeJson = /*beforeJson*/
+          ctx2[5];
+          add_flush_callback(() => updating_beforeJson_1 = false);
+        }
+        if (!updating_afterJson_1 && dirty & /*afterJson*/
+        64) {
+          updating_afterJson_1 = true;
+          popupdifflogjson_changes.afterJson = /*afterJson*/
+          ctx2[6];
+          add_flush_callback(() => updating_afterJson_1 = false);
+        }
+        popupdifflogjson.$set(popupdifflogjson_changes);
       },
       i(local) {
         if (current)
           return;
         transition_in(popupcomparejson.$.fragment, local);
+        transition_in(popupdifflogjson.$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(popupcomparejson.$.fragment, local);
+        transition_out(popupdifflogjson.$.fragment, local);
         current = false;
       },
       d(detaching) {
-        ctx[8](null);
+        if (detaching) {
+          detach(t);
+        }
+        ctx[9](null);
         destroy_component(popupcomparejson, detaching);
+        ctx[12](null);
+        destroy_component(popupdifflogjson, detaching);
       }
     };
   }
@@ -11869,14 +12404,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let current;
     logssubmenu = new LogsSubMenu_default({});
     function mastertableactionlog_pager_binding(value) {
-      ctx[11](value);
+      ctx[15](value);
     }
     let mastertableactionlog_props = {
       arrayOfArray: false,
       fields,
       onRefreshTableView: (
         /*refreshTableView*/
-        ctx[6]
+        ctx[7]
       ),
       rows: (
         /*logs*/
@@ -11886,7 +12421,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       COL_WIDTHS: { "actorId": 200 },
       EXTENDED_BUTTONS: (
         /*EXTENDED_BUTTONS*/
-        ctx[7]
+        ctx[8]
       )
     };
     if (
@@ -11949,7 +12484,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
     };
   }
-  function create_fragment12(ctx) {
+  function create_fragment13(ctx) {
     let t;
     let layoutmain;
     let current;
@@ -12005,7 +12540,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         const layoutmain_changes = {};
         if (dirty & /*$scope, logs, pager*/
-        4099) {
+        65539) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -12048,7 +12583,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     /** @type {Record<number, string>} */
     {/* users */}
   );
-  function instance12($self, $props, $invalidate) {
+  function instance13($self, $props, $invalidate) {
     let logs = (
       /** @type {any[][]} */
       [/* logs */]
@@ -12080,6 +12615,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       $invalidate(2, isPopUpReady = true);
     });
     let popUpCompareJson;
+    let popUpDiffLogJson;
     let beforeJson = "";
     let afterJson = "";
     const EXTENDED_BUTTONS = (
@@ -12096,12 +12632,29 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               if (typeof row.beforeJson === "string") {
                 dataBeforeJsonObj = JSON.parse(row.beforeJson || "{}");
               }
-              $invalidate(4, beforeJson = JSON.stringify(dataBeforeJsonObj, null, 2));
+              $invalidate(5, beforeJson = JSON.stringify(dataBeforeJsonObj, null, 2));
               if (typeof row.afterJson === "string") {
                 dataAfterJsonObj = JSON.parse(row.afterJson || "{}");
               }
-              $invalidate(5, afterJson = JSON.stringify(dataAfterJsonObj, null, 2));
+              $invalidate(6, afterJson = JSON.stringify(dataAfterJsonObj, null, 2));
               popUpCompareJson.Show();
+            }
+          )
+        },
+        {
+          icon: RiDesignShadowLine,
+          tooltip: "Show Diff",
+          action: (
+            /** @type {Object} */
+            (row) => {
+              $invalidate(5, beforeJson = row.beforeJson);
+              $invalidate(6, afterJson = row.afterJson);
+              setTimeout(
+                () => {
+                  popUpDiffLogJson.Show();
+                },
+                500
+              );
             }
           )
         }
@@ -12115,11 +12668,25 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
     function popupcomparejson_beforeJson_binding(value) {
       beforeJson = value;
-      $invalidate(4, beforeJson);
+      $invalidate(5, beforeJson);
     }
     function popupcomparejson_afterJson_binding(value) {
       afterJson = value;
-      $invalidate(5, afterJson);
+      $invalidate(6, afterJson);
+    }
+    function popupdifflogjson_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        popUpDiffLogJson = $value;
+        $invalidate(4, popUpDiffLogJson);
+      });
+    }
+    function popupdifflogjson_beforeJson_binding(value) {
+      beforeJson = value;
+      $invalidate(5, beforeJson);
+    }
+    function popupdifflogjson_afterJson_binding(value) {
+      afterJson = value;
+      $invalidate(6, afterJson);
     }
     function mastertableactionlog_pager_binding(value) {
       pager = value;
@@ -12130,6 +12697,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       pager,
       isPopUpReady,
       popUpCompareJson,
+      popUpDiffLogJson,
       beforeJson,
       afterJson,
       refreshTableView,
@@ -12137,13 +12705,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       popupcomparejson_binding,
       popupcomparejson_beforeJson_binding,
       popupcomparejson_afterJson_binding,
+      popupdifflogjson_binding,
+      popupdifflogjson_beforeJson_binding,
+      popupdifflogjson_afterJson_binding,
       mastertableactionlog_pager_binding
     ];
   }
   var UserLogs = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance12, create_fragment12, safe_not_equal, {});
+      init(this, options, instance13, create_fragment13, safe_not_equal, {});
     }
   };
   var userLogs_default = UserLogs;

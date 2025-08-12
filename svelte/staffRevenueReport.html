@@ -695,13 +695,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./staffRevenueReport.esbuild-svelte-fake-css */
-.report-container.svelte-10bsppk.svelte-10bsppk {
+.report-container.svelte-ryj44j.svelte-ryj44j {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.report-container.svelte-10bsppk .actions.svelte-10bsppk {
+.report-container.svelte-ryj44j .actions.svelte-ryj44j {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -710,34 +710,34 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 .report-container .actions .year-month {
   width: 300px;
 }
-.table-container.svelte-10bsppk.svelte-10bsppk {
+.table-container.svelte-ryj44j.svelte-ryj44j {
   overflow-x: auto;
 }
-table.svelte-10bsppk.svelte-10bsppk {
+table.svelte-ryj44j.svelte-ryj44j {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-10bsppk thead.svelte-10bsppk {
+table.svelte-ryj44j thead.svelte-ryj44j {
   position: sticky;
   top: 0;
   background-color: var(--gray-002);
   z-index: 10;
   border: none;
 }
-table.svelte-10bsppk thead tr th.svelte-10bsppk {
+table.svelte-ryj44j thead tr th.svelte-ryj44j {
   text-align: left;
   padding: 8px 12px;
   text-wrap: nowrap;
 }
-table.svelte-10bsppk tbody tr.svelte-10bsppk {
+table.svelte-ryj44j tbody tr.svelte-ryj44j {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-10bsppk tr td.svelte-10bsppk,
-table.svelte-10bsppk tr th.svelte-10bsppk {
+table.svelte-ryj44j tr td.svelte-ryj44j,
+table.svelte-ryj44j tr th.svelte-ryj44j {
   padding: 4px 12px;
 }
 @media only screen and (max-width : 768px) {
-  .report-container.svelte-10bsppk .actions.svelte-10bsppk {
+  .report-container.svelte-ryj44j .actions.svelte-ryj44j {
     flex-direction: column;
   }
   .report-container .actions .year-month {
@@ -747,8 +747,8 @@ table.svelte-10bsppk tr th.svelte-10bsppk {
     width: 100% !important;
   }
 }
-td.r.svelte-10bsppk.svelte-10bsppk,
-th.r.svelte-10bsppk.svelte-10bsppk {
+td.r.svelte-ryj44j.svelte-ryj44j,
+th.r.svelte-ryj44j.svelte-ryj44j {
   text-align: right;
 }
 </style>
@@ -783,170 +783,6 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
     return value;
   };
-
-  // _components/xFormatter.js
-  var require_xFormatter = __commonJS({
-    "_components/xFormatter.js"(exports, module) {
-      function datetime(unixSec, humanize) {
-        if (!unixSec)
-          return "";
-        if (typeof unixSec === "string")
-          return unixSec;
-        const dt = new Date(unixSec * 1e3);
-        if (!humanize) {
-          const year = dt.getFullYear();
-          const month = String(dt.getMonth() + 1).padStart(2, "0");
-          const day = String(dt.getDate()).padStart(2, "0");
-          const hours = String(dt.getHours()).padStart(2, "0");
-          const minutes = String(dt.getMinutes()).padStart(2, "0");
-          return `${year}-${month}-${day} ${hours}:${minutes}`;
-        }
-        const options = { day: "2-digit", month: "long", year: "numeric" };
-        return dt.toLocaleDateString(void 0, options);
-      }
-      function localeDatetime(unixSec) {
-        if (!unixSec)
-          return "";
-        const dt = new Date(unixSec * 1e3);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = dt.getDate();
-        const month = dt.toLocaleDateString("default", { month: "short" });
-        const year = dt.getFullYear();
-        let hh = dt.getHours();
-        if (hh < 10)
-          hh = "0" + hh;
-        let mm = dt.getMinutes();
-        if (mm < 10)
-          mm = "0" + mm;
-        const formattedDate = `${date} ${month} ${year} - ${hh}:${mm}`;
-        return formattedDate;
-      }
-      function utcDatetime(unixSec) {
-        if (!unixSec)
-          return "";
-        let dt = new Date(unixSec * 1e3);
-        if (typeof unixSec !== "number")
-          dt = new Date(unixSec);
-        const year = dt.toLocaleDateString("id-ID", { year: "2-digit", timeZone: "UTC" });
-        const month = dt.toLocaleDateString("id-ID", { month: "2-digit", timeZone: "UTC" });
-        const date = dt.getUTCDate();
-        let hh = dt.getUTCHours();
-        if (hh < 10)
-          hh = "0" + hh;
-        let mm = dt.getUTCMinutes();
-        if (mm < 10)
-          mm = "0" + mm;
-        const formattedDate = `${date}/${month}/${year} - ${hh}:${mm}`;
-        return formattedDate;
-      }
-      function isoTime(unixSec) {
-        if (!unixSec)
-          return "";
-        const dt = new Date(unixSec * 1e3);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = dt.getDate();
-        const month = dt.toLocaleDateString("default", { month: "2-digit" });
-        const year = dt.getFullYear();
-        let hh = dt.getHours();
-        if (hh < 10)
-          hh = "0" + hh;
-        let mm = dt.getMinutes();
-        if (mm < 10)
-          mm = "0" + mm;
-        const formattedDate = `${year}-${month}-${date} ${hh}:${mm}`;
-        return formattedDate;
-      }
-      function isoDate(unixSec) {
-        if (!unixSec)
-          return "";
-        const dt = new Date(unixSec * 1e3);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = dt.getDate();
-        const month = dt.toLocaleDateString("default", { month: "2-digit" });
-        const year = dt.getFullYear();
-        const formattedDate = `${year}-${month}-${date}`;
-        return formattedDate;
-      }
-      function dateISOFormat(dayTo = 0) {
-        const dt = new Date();
-        dt.setDate(dt.getDate() + dayTo);
-        const date = String(dt.getDate()).padStart(2, "0");
-        const month = String(dt.getMonth() + 1).padStart(2, "0");
-        const year = dt.getFullYear();
-        return `${year}-${month}-${date}`;
-      }
-      function dateISOFormatFromYYYYMMDD(dateStr, dayTo = 0) {
-        if (!dateStr)
-          return "";
-        const dt = new Date(dateStr);
-        dt.setDate(dt.getDate() + dayTo);
-        const date = String(dt.getDate()).padStart(2, "0");
-        const month = String(dt.getMonth() + 1).padStart(2, "0");
-        const year = dt.getFullYear();
-        return `${year}-${month}-${date}`;
-      }
-      function loadScript(url, callback2) {
-        let script = (
-          /** @type {HTMLScriptElement} */
-          document.createElement("script")
-        );
-        script.type = "text/javascript";
-        script.src = url;
-        script.onload = () => callback2();
-        document.getElementsByTagName("head")[0].appendChild(script);
-      }
-      function formatPrice(price, currency) {
-        try {
-          return new Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency,
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-          }).format(price);
-        } catch (err) {
-          console.log("formatPrice failed", err, price, currency);
-          return `${currency} ${price}`;
-        }
-      }
-      function arrToArrNum(arr) {
-        return arr.map(Number);
-      }
-      function formatYearMonth2(ym) {
-        const [year, month] = ym.split("-");
-        const date = new Date(`${ym}-01`);
-        const monthName = date.toLocaleString("id-ID", { month: "long" });
-        return `${monthName} ${year}`;
-      }
-      function localeDateFromYYYYMMDD(dateStr) {
-        if (!dateStr)
-          return "";
-        const dt = new Date(dateStr);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = String(dt.getDate()).padStart(2, "0");
-        const month = dt.toLocaleDateString("default", { month: "long" });
-        const year = dt.getFullYear();
-        return `${day}, ${date} ${month} ${year}`;
-      }
-      function checkboxToDate(value) {
-        return value === true || value === "true" ? new Date().toISOString().split("T")[0] : "";
-      }
-      module.exports = {
-        datetime,
-        localeDatetime,
-        utcDatetime,
-        isoTime,
-        isoDate,
-        dateISOFormat,
-        dateISOFormatFromYYYYMMDD,
-        loadScript,
-        formatPrice,
-        arrToArrNum,
-        formatYearMonth: formatYearMonth2,
-        localeDateFromYYYYMMDD,
-        checkboxToDate
-      };
-    }
-  });
 
   // node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs
   var require_axios = __commonJS({
@@ -4496,9 +4332,13 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         t2 = space();
         button1 = element("button");
         create_component(icon1.$.fragment);
+        button0.disabled = /*isLoading*/
+        ctx[1];
         attr(button0, "class", "btn svelte-1ys0ow3");
         attr(button0, "aria-label", "Previous");
         attr(span, "class", "month-text svelte-1ys0ow3");
+        button1.disabled = /*isLoading*/
+        ctx[1];
         attr(button1, "class", "btn svelte-1ys0ow3");
         attr(button1, "aria-label", "Next");
         attr(div, "class", "month-shifter svelte-1ys0ow3");
@@ -4520,25 +4360,35 @@ th.r.svelte-10bsppk.svelte-10bsppk {
               button0,
               "click",
               /*click_handler*/
-              ctx[3]
+              ctx[4]
             ),
             listen(
               button1,
               "click",
               /*click_handler_1*/
-              ctx[4]
+              ctx[5]
             )
           ];
           mounted = true;
         }
       },
       p(ctx2, [dirty]) {
+        if (!current || dirty & /*isLoading*/
+        2) {
+          button0.disabled = /*isLoading*/
+          ctx2[1];
+        }
         if ((!current || dirty & /*yearMonth*/
         1) && t1_value !== (t1_value = formatMonthYear(
           /*yearMonth*/
           ctx2[0]
         ) + ""))
           set_data(t1, t1_value);
+        if (!current || dirty & /*isLoading*/
+        2) {
+          button1.disabled = /*isLoading*/
+          ctx2[1];
+        }
       },
       i(local) {
         if (current)
@@ -4582,6 +4432,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     let { yearMonth = formatYM(initialMonth) } = $props;
     let { OnChanges = async () => {
     } } = $props;
+    let { isLoading = false } = $props;
     async function shiftMonth(direction) {
       const end = parseYM(yearMonth);
       end.setMonth(end.getMonth() + direction);
@@ -4594,20 +4445,19 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       if ("yearMonth" in $props2)
         $invalidate(0, yearMonth = $props2.yearMonth);
       if ("OnChanges" in $props2)
-        $invalidate(2, OnChanges = $props2.OnChanges);
+        $invalidate(3, OnChanges = $props2.OnChanges);
+      if ("isLoading" in $props2)
+        $invalidate(1, isLoading = $props2.isLoading);
     };
-    return [yearMonth, shiftMonth, OnChanges, click_handler, click_handler_1];
+    return [yearMonth, isLoading, shiftMonth, OnChanges, click_handler, click_handler_1];
   }
   var MonthShifter = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance2, create_fragment2, safe_not_equal, { yearMonth: 0, OnChanges: 2 });
+      init(this, options, instance2, create_fragment2, safe_not_equal, { yearMonth: 0, OnChanges: 3, isLoading: 1 });
     }
   };
   var MonthShifter_default = MonthShifter;
-
-  // staffRevenueReport.svelte
-  var import_xFormatter = __toESM(require_xFormatter());
 
   // _components/xNotifier.js
   var Notifier = function() {
@@ -21309,36 +21159,36 @@ th.r.svelte-10bsppk.svelte-10bsppk {
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[11] = list[i];
+    child_ctx[12] = list[i];
     return child_ctx;
   }
   function create_each_block(ctx) {
     let tr;
     let td0;
-    let t0_value = (0, import_xFormatter.formatYearMonth)(
+    let t0_value = formatDateLong(
       /*data*/
-      ctx[11].yearMonth
+      ctx[12].dateStart
     ) + "";
     let t0;
     let t1;
     let td1;
     let t2_value = bookings[
       /*data*/
-      ctx[11].bookingId
+      ctx[12].bookingId
     ] + "";
     let t2;
     let t3;
     let td2;
     let t4_value = (
       /*data*/
-      ctx[11].revenueIDR + ""
+      ctx[12].revenueIDR + ""
     );
     let t4;
     let t5;
     let td3;
     let t6_value = (
       /*data*/
-      ctx[11].donationIDR + ""
+      ctx[12].donationIDR + ""
     );
     let t6;
     return {
@@ -21355,11 +21205,11 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         t5 = space();
         td3 = element("td");
         t6 = text(t6_value);
-        attr(td0, "class", "svelte-10bsppk");
-        attr(td1, "class", "svelte-10bsppk");
-        attr(td2, "class", "r svelte-10bsppk");
-        attr(td3, "class", "r svelte-10bsppk");
-        attr(tr, "class", "svelte-10bsppk");
+        attr(td0, "class", "svelte-ryj44j");
+        attr(td1, "class", "svelte-ryj44j");
+        attr(td2, "class", "r svelte-ryj44j");
+        attr(td3, "class", "r svelte-ryj44j");
+        attr(tr, "class", "svelte-ryj44j");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -21377,24 +21227,24 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       },
       p(ctx2, dirty) {
         if (dirty & /*revenueReports*/
-        1 && t0_value !== (t0_value = (0, import_xFormatter.formatYearMonth)(
+        1 && t0_value !== (t0_value = formatDateLong(
           /*data*/
-          ctx2[11].yearMonth
+          ctx2[12].dateStart
         ) + ""))
           set_data(t0, t0_value);
         if (dirty & /*revenueReports*/
         1 && t2_value !== (t2_value = bookings[
           /*data*/
-          ctx2[11].bookingId
+          ctx2[12].bookingId
         ] + ""))
           set_data(t2, t2_value);
         if (dirty & /*revenueReports*/
         1 && t4_value !== (t4_value = /*data*/
-        ctx2[11].revenueIDR + ""))
+        ctx2[12].revenueIDR + ""))
           set_data(t4, t4_value);
         if (dirty & /*revenueReports*/
         1 && t6_value !== (t6_value = /*data*/
-        ctx2[11].donationIDR + ""))
+        ctx2[12].donationIDR + ""))
           set_data(t6, t6_value);
       },
       d(detaching) {
@@ -21409,8 +21259,8 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     return {
       c() {
         tr = element("tr");
-        tr.innerHTML = `<td class="svelte-10bsppk">No data</td>`;
-        attr(tr, "class", "svelte-10bsppk");
+        tr.innerHTML = `<td class="svelte-ryj44j">No data</td>`;
+        attr(tr, "class", "svelte-ryj44j");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -21427,6 +21277,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     let div0;
     let monthshifter;
     let updating_yearMonth;
+    let updating_isLoading;
     let t0;
     let chartrevenuemonthly;
     let updating_chartRevenueReports;
@@ -21451,11 +21302,14 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     let t16;
     let current;
     function monthshifter_yearMonth_binding(value) {
-      ctx[7](value);
+      ctx[8](value);
+    }
+    function monthshifter_isLoading_binding(value) {
+      ctx[9](value);
     }
     let monthshifter_props = { OnChanges: (
       /*getRevenueReports*/
-      ctx[6]
+      ctx[7]
     ) };
     if (
       /*yearMonth*/
@@ -21464,10 +21318,18 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       monthshifter_props.yearMonth = /*yearMonth*/
       ctx[3];
     }
+    if (
+      /*isLoading*/
+      ctx[4] !== void 0
+    ) {
+      monthshifter_props.isLoading = /*isLoading*/
+      ctx[4];
+    }
     monthshifter = new MonthShifter_default({ props: monthshifter_props });
     binding_callbacks.push(() => bind(monthshifter, "yearMonth", monthshifter_yearMonth_binding));
+    binding_callbacks.push(() => bind(monthshifter, "isLoading", monthshifter_isLoading_binding));
     function chartrevenuemonthly_chartRevenueReports_binding(value) {
-      ctx[8](value);
+      ctx[10](value);
     }
     let chartrevenuemonthly_props = {};
     if (
@@ -21479,7 +21341,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     }
     chartrevenuemonthly = new ChartRevenueMonthly_default({ props: chartrevenuemonthly_props });
     binding_callbacks.push(() => bind(chartrevenuemonthly, "chartRevenueReports", chartrevenuemonthly_chartRevenueReports_binding));
-    ctx[9](chartrevenuemonthly);
+    ctx[11](chartrevenuemonthly);
     let each_value = ensure_array_like(
       /*revenueReports*/
       ctx[0] || []
@@ -21502,7 +21364,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         div1 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-10bsppk"><th style="min-width: 100px;" class="svelte-10bsppk">Month</th> <th style="min-width: 170px;" class="svelte-10bsppk">Booking</th> <th class="svelte-10bsppk">Revenue (IDR)</th> <th class="svelte-10bsppk">Donation (IDR)</th></tr>`;
+        thead.innerHTML = `<tr class="svelte-ryj44j"><th style="min-width: 100px;" class="svelte-ryj44j">Date Start</th> <th style="min-width: 170px;" class="svelte-ryj44j">Booking</th> <th class="svelte-ryj44j">Revenue (IDR)</th> <th class="svelte-ryj44j">Donation (IDR)</th></tr>`;
         t9 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
@@ -21521,24 +21383,24 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         th6 = element("th");
         t14 = text(
           /*sumRevenueIDR*/
-          ctx[4]
+          ctx[5]
         );
         t15 = space();
         th7 = element("th");
         t16 = text(
           /*sumDonationIDR*/
-          ctx[5]
+          ctx[6]
         );
-        attr(div0, "class", "actions svelte-10bsppk");
-        attr(thead, "class", "svelte-10bsppk");
-        attr(th4, "class", "svelte-10bsppk");
-        attr(th5, "class", "svelte-10bsppk");
-        attr(th6, "class", "r svelte-10bsppk");
-        attr(th7, "class", "r svelte-10bsppk");
-        attr(tr1, "class", "svelte-10bsppk");
-        attr(table, "class", "svelte-10bsppk");
-        attr(div1, "class", "table-container svelte-10bsppk");
-        attr(div2, "class", "report-container svelte-10bsppk");
+        attr(div0, "class", "actions svelte-ryj44j");
+        attr(thead, "class", "svelte-ryj44j");
+        attr(th4, "class", "svelte-ryj44j");
+        attr(th5, "class", "svelte-ryj44j");
+        attr(th6, "class", "r svelte-ryj44j");
+        attr(th7, "class", "r svelte-ryj44j");
+        attr(tr1, "class", "svelte-ryj44j");
+        attr(table, "class", "svelte-ryj44j");
+        attr(div1, "class", "table-container svelte-ryj44j");
+        attr(div2, "class", "report-container svelte-ryj44j");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -21583,6 +21445,13 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           ctx2[3];
           add_flush_callback(() => updating_yearMonth = false);
         }
+        if (!updating_isLoading && dirty & /*isLoading*/
+        16) {
+          updating_isLoading = true;
+          monthshifter_changes.isLoading = /*isLoading*/
+          ctx2[4];
+          add_flush_callback(() => updating_isLoading = false);
+        }
         monthshifter.$set(monthshifter_changes);
         const chartrevenuemonthly_changes = {};
         if (!updating_chartRevenueReports && dirty & /*chartRevenueReports*/
@@ -21593,7 +21462,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           add_flush_callback(() => updating_chartRevenueReports = false);
         }
         chartrevenuemonthly.$set(chartrevenuemonthly_changes);
-        if (dirty & /*revenueReports, bookings*/
+        if (dirty & /*revenueReports, bookings, formatDateLong*/
         1) {
           each_value = ensure_array_like(
             /*revenueReports*/
@@ -21629,18 +21498,18 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           if_block = null;
         }
         if (!current || dirty & /*sumRevenueIDR*/
-        16)
+        32)
           set_data(
             t14,
             /*sumRevenueIDR*/
-            ctx2[4]
+            ctx2[5]
           );
         if (!current || dirty & /*sumDonationIDR*/
-        32)
+        64)
           set_data(
             t16,
             /*sumDonationIDR*/
-            ctx2[5]
+            ctx2[6]
           );
       },
       i(local) {
@@ -21660,7 +21529,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           detach(div2);
         }
         destroy_component(monthshifter);
-        ctx[9](null);
+        ctx[11](null);
         destroy_component(chartrevenuemonthly);
         destroy_each(each_blocks, detaching);
         if (if_block)
@@ -21689,8 +21558,8 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, sumDonationIDR, sumRevenueIDR, revenueReports, chartRevenueReports, chartRevenueMonthly, yearMonth*/
-        16447) {
+        if (dirty & /*$scope, sumDonationIDR, sumRevenueIDR, revenueReports, chartRevenueReports, chartRevenueMonthly, yearMonth, isLoading*/
+        32895) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -21722,6 +21591,15 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     /** @type {Record<Number, string>} */
     {/* bookings */}
   );
+  function formatDateLong(dateStr) {
+    const dt = new Date(dateStr);
+    return dt.toLocaleDateString("en-GB", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    });
+  }
   function instance8($self, $props, $invalidate) {
     let revenueReports = (
       /** @type {RevenueReport[]} */
@@ -21739,13 +21617,12 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       /** @type {string} */
       new Date().toISOString().slice(0, 7)
     );
-    let isFiltering = (
+    let isLoading = (
       /** @type {boolean} */
       false
     );
     async function getRevenueReports() {
-      isFiltering = true;
-      console.log("YearMonth:", yearMonth);
+      $invalidate(4, isLoading = true);
       await (0, import_jsApi2.StaffRevenueReport)(
         // @ts-ignore
         { yearMonth },
@@ -21762,13 +21639,17 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           chartRevenueMonthly.updateData(chartRevenueReports);
         }
       );
-      isFiltering = false;
+      $invalidate(4, isLoading = false);
     }
     let sumRevenueIDR = 0;
     let sumDonationIDR = 0;
     function monthshifter_yearMonth_binding(value) {
       yearMonth = value;
       $invalidate(3, yearMonth);
+    }
+    function monthshifter_isLoading_binding(value) {
+      isLoading = value;
+      $invalidate(4, isLoading);
     }
     function chartrevenuemonthly_chartRevenueReports_binding(value) {
       chartRevenueReports = value;
@@ -21782,13 +21663,13 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     }
     $self.$.update = () => {
       if ($self.$.dirty & /*revenueReports, sumRevenueIDR, sumDonationIDR*/
-      49) {
+      97) {
         $: {
-          $invalidate(4, sumRevenueIDR = 0);
-          $invalidate(5, sumDonationIDR = 0);
+          $invalidate(5, sumRevenueIDR = 0);
+          $invalidate(6, sumDonationIDR = 0);
           for (let i = 0; i < (revenueReports || []).length; i++) {
-            $invalidate(4, sumRevenueIDR += revenueReports[i].revenueIDR | 0);
-            $invalidate(5, sumDonationIDR += revenueReports[i].donationIDR | 0);
+            $invalidate(5, sumRevenueIDR += revenueReports[i].revenueIDR | 0);
+            $invalidate(6, sumDonationIDR += revenueReports[i].donationIDR | 0);
           }
         }
       }
@@ -21798,10 +21679,12 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       chartRevenueReports,
       chartRevenueMonthly,
       yearMonth,
+      isLoading,
       sumRevenueIDR,
       sumDonationIDR,
       getRevenueReports,
       monthshifter_yearMonth_binding,
+      monthshifter_isLoading_binding,
       chartrevenuemonthly_chartRevenueReports_binding,
       chartrevenuemonthly_binding
     ];

@@ -28,6 +28,7 @@
   
   export let yearMonth = formatYM(initialMonth);
   export let OnChanges = async () => {};
+  export let isLoading = false;
 
   function formatMonthYear(/** @type {string} */ ym) {
     const date = new Date(ym + "-01");
@@ -44,11 +45,11 @@
 </script>
 
 <div class="month-shifter">
-  <button on:click={() => shiftMonth(-1)} class="btn" aria-label="Previous">
+  <button disabled={isLoading} on:click={() => shiftMonth(-1)} class="btn" aria-label="Previous">
     <Icon size="20" src={RiArrowsArrowLeftSLine} />
   </button>
   <span class="month-text">{formatMonthYear(yearMonth)}</span>
-  <button on:click={() => shiftMonth(1)} class="btn" aria-label="Next">
+  <button disabled={isLoading} on:click={() => shiftMonth(1)} class="btn" aria-label="Next">
     <Icon size="20" src={RiArrowsArrowRightSLine} />
   </button>
 </div>

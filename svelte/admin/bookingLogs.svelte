@@ -79,20 +79,12 @@
       icon: RiDesignShadowLine,
       tooltip: 'Show Diff',
       action: (/** @type {Object} */ row) => {
-        let dataBeforeJsonObj = row.beforeJson;
-        let dataAfterJsonObj = row.afterJson;
+        beforeJson = row.beforeJson;
+        afterJson = row.afterJson;
 
-        if (typeof row.beforeJson === 'string') {
-          dataBeforeJsonObj = JSON.parse(row.beforeJson || '{}');
-        }
-        beforeJson = JSON.stringify(dataBeforeJsonObj, null, 2);
-
-        if (typeof row.afterJson === 'string') {
-          dataAfterJsonObj = JSON.parse(row.afterJson || '{}');
-        }
-        afterJson = JSON.stringify(dataAfterJsonObj, null, 2);
-
-        popUpDiffLogJson.Show();
+        setTimeout(() => {
+          popUpDiffLogJson.Show();
+        }, 500);
       }
     }
   ]);
