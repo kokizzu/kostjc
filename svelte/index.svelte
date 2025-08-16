@@ -144,10 +144,10 @@
   <LayoutMain access={segments} user={user}>
     <div class="home-container">
       <UnpaidBookingTenants />
-      <BirthDayAgenda />
       <AvailableRooms />
-      <DoubleBookingReports />
       <UpcomingTenants />
+      <DoubleBookingReports />
+      <BirthDayAgenda />
     </div>
   </LayoutMain>
 {:else}
