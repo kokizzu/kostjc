@@ -24,6 +24,7 @@
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
   let users     = /** @type {Record<number, string>} */({/* users */});
+  let tenants     = /** @type {Record<number, string>} */({/* tenants */});
 
   async function refreshTableView(/** @type PagerIn */ pagerIn) {
     const i = {
@@ -102,6 +103,7 @@
     bind:this={popUpDiffLogJson}
     bind:beforeJson
     bind:afterJson
+    {users} {tenants}
   />
 {/if}
 

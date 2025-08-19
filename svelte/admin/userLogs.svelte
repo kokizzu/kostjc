@@ -16,7 +16,7 @@
   import PopUpCompareJson from '../_components/PopUpCompareJson.svelte';
   import { onMount } from 'svelte';
   import { RiDesignShadowLine, RiSystemInformationLine } from '../node_modules/svelte-icons-pack/dist/ri';
-    import PopUpDiffLogJson from '../_components/PopUpDiffLogJson.svelte';
+  import PopUpDiffLogJson from '../_components/PopUpDiffLogJson.svelte';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -102,6 +102,7 @@
     bind:this={popUpDiffLogJson}
     bind:beforeJson
     bind:afterJson
+    {users}
   />
 {/if}
 

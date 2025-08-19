@@ -2,10 +2,14 @@
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
 	import { RiArrowsArrowRightLine } from '../node_modules/svelte-icons-pack/dist/ri';
+	import { localeDatetime } from './xFormatter';
 	import { notifier } from './xNotifier';
 
   let isShow = /** @type {boolean} */ (false);
 	let differences = /** @type {ObjDifference[]} */ ([]);
+
+	export let users = /** @type {Record<number, string>} */ ({});
+	export let tenants = /** @type {Record<number, string>} */ ({});
 
   export const Show = () => {
 		compareJson();
@@ -18,6 +22,104 @@
 
   export let beforeJson = '';
   export let afterJson = '';
+
+	// Obtain it from file:
+	// auth_tables.go
+	// property_tables.go
+	// cafe_tables.go
+	const KeyMap = {
+		'id': 'ID',
+		'createdAt': 'Created At',
+		'createdBy': 'Created By',
+		'updatedAt': 'Updated At',
+		'updatedBy': 'Updated By',
+		'deletedAt': 'Deleted At',
+		'deletedBy': 'Deleted By',
+		'restoredBy': 'Restored By',
+		'name': 'Name',
+		'address': 'Address',
+		'gmapLocation': 'Google Map Location',
+		'facilityName': 'Facility Name',
+		'extraChargeIDR': 'Extra Charge IDR',
+		'facilityType': 'Facility Type',
+		'descriptionEN': 'Description (EN)',
+		'buildingName': 'Building Name',
+		'locationId': 'Location',
+		'facilities': 'Facilities',
+		'roomName': 'Room Name',
+		'currentTenantId': 'Current Tenant',
+		'firstUseAt': 'First Use At',
+		'lastUseAt': 'Last Use At',
+		'buildingId': 'Building',
+		'roomSize': 'Room Size',
+		'imageUrl': 'Image URL',
+		'dateStart': 'Date Start',
+		'dateEnd': 'Date End',
+		'basePriceIDR': 'Base Price IDR',
+		'totalPriceIDR': 'Total Price IDR',
+		'paidAt': 'Paid At',
+		'facilitiesObj': 'Facilities',
+		'tenantId': 'Tenant',
+		'extraTenants': 'Extra Tenants',
+		'roomId': 'Room',
+		'totalPaidIDR': 'Total Paid IDR',
+		'bookingId': 'Booking',
+		'paymentAt': 'Payment At',
+		'paidIDR': 'Paid IDR',
+		'paymentMethod': 'Payment Method',
+		'paymentStatus': 'Payment Status',
+		'note': 'Note',
+		'stockName': 'Stock Name',
+		'stockAddedAt': 'Stock Added At',
+		'quantity': 'Quantity',
+		'priceIDR': 'Price IDR',
+		'startAt': 'Start At',
+		'endAt': 'End At',
+		'macAddress': 'MAC Address',
+		'hppIDR': 'HPP IDR',
+		'salePriceIDR': 'Sale Price IDR',
+		'detail': 'Detail',
+		'cashier': 'Cashier',
+		'buyerName': 'Buyer Name',
+		'menuIds': 'Menus',
+		'qrisIDR': 'QRIS IDR',
+		'cashIDR': 'Cash IDR',
+		'debtIDR': 'Debt IDR',
+		'topupIDR': 'Topup IDR',
+		'salesDate': 'Sales Date',
+		'donation': 'Donation',
+		'transferIDR': 'Transfer IDR',
+		'email': 'Email',
+		'password': 'Password',
+		'passwordSetAt': 'Password Set At',
+		'secretCode': 'Secret Code',
+		'secretCodeAt': 'Secret Code At',
+		'verifiedAt': 'Verified At',
+		'lastLoginAt': 'Last Login At',
+		'fullName': 'Full Name',
+		'userName': 'Username',
+		'role': 'Role',
+		'tenantName': 'Tenant Name',
+		'ktpRegion': 'KTP Region',
+		'ktpNumber': 'KTP Number',
+		'ktpName': 'KTP Name',
+		'ktpPlaceBirth': 'KTP Place of Birth',
+		'ktpDateBirth': 'KTP Date of Birth',
+		'ktpGender': 'KTP Gender',
+		'ktpAddress': 'KTP Address',
+		'ktpRtRw': 'KTP RT/RW',
+		'ktpKelurahanDesa': 'KTP Kelurahan/Desa',
+		'ktpKecamatan': 'KTP Kecamatan',
+		'ktpReligion': 'KTP Religion',
+		'ktpMaritalStatus': 'KTP Marital Status',
+		'ktpCitizenship': 'KTP Citizenship',
+		'ktpOccupation': 'KTP Occupation',
+		'telegramUsername': 'Telegram Username',
+		'whatsappNumber': 'WhatsApp Number',
+		'waAddedAt': 'WhatsApp Added At',
+		'teleAddedAt': 'Telegram Added At',
+		'userId': 'User',
+	}
 
 	function compareJson() {
 		try {
@@ -54,27 +156,56 @@
 			const beforeValue = before[key];
 			const afterValue = after[key];
 
+			// +====== BEFORE VALUE ======+
+			let beforeValueFinal = beforeValue;
+			let afterValueFinal = afterValue;
+
+			if (String(key).includes('At')) {
+				beforeValueFinal = Number(beforeValue) == 0 ? '--' : localeDatetime(beforeValue);
+				afterValueFinal =  Number(afterValue) == 0 ? '--' : localeDatetime(afterValue);
+			}
+
+			if (String(key) == 'extraTenants') {
+				beforeValueFinal = (beforeValue || []).map((/** @type {string | number} */ id) => tenants[id]).join(', ');
+				afterValueFinal = (afterValue || []).map((/** @type {string | number} */ id) => tenants[id]).join(', ');
+			}
+
+			if (String(key) == 'tenantId' || String(key) == 'currentTenantId') {
+				beforeValueFinal = tenants[beforeValue] || beforeValue;
+				afterValueFinal = tenants[afterValue] || afterValue;
+			}
+
+			if (String(key) == 'userId') {
+				beforeValueFinal = users[beforeValue] || beforeValue;
+				afterValueFinal = users[afterValue] || afterValue;
+			}
+
+			if (String(key).includes('By')) {
+				beforeValueFinal = users[beforeValue] || beforeValue;
+				afterValueFinal = users[afterValue] || afterValue;
+			}
+
 			if (beforeValue !== undefined && afterValue !== undefined) {
 				if (JSON.stringify(beforeValue) !== JSON.stringify(afterValue)) {
 					differences.push({
-						field: key,
-						before: beforeValue,
-						after: afterValue,
+						field: KeyMap[key] || key,
+						before: beforeValueFinal,
+						after: afterValueFinal,
 						type: 'modified',
 					});
 				}
 			} else if (beforeValue !== undefined && afterValue === undefined) {
 				differences.push({
-					field: key,
-					before: beforeValue,
+					field: KeyMap[key] || key,
+					before: beforeValueFinal,
 					after: null,
 					type: 'removed',
 				});
 			} else if (beforeValue === undefined && afterValue !== undefined) {
 				differences.push({
-					field: key,
+					field: KeyMap[key] || key,
 					before: null,
-					after: afterValue,
+					after: afterValueFinal,
 					type: 'added'
 				});
 			}
@@ -138,7 +269,7 @@
 		border-radius: 8px;
 		background-color: #FFF;
 		height: fit-content;
-		width: 500px;
+		width: 700px;
 		display: flex;
 		flex-direction: column;
 	}

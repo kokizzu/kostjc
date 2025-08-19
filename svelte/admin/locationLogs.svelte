@@ -102,6 +102,7 @@
     bind:this={popUpDiffLogJson}
     bind:beforeJson
     bind:afterJson
+    {users}
   />
 {/if}
 
