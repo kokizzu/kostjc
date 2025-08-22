@@ -17,7 +17,8 @@
   import { onMount } from 'svelte';
   import {checkboxToDate} from './_components/xFormatter';
   import {CmdToggleWaAdded, CmdToggleTeleAdded} from './_components/xConstant';
-    import PopUpShowBookingMissingTenant from './_components/PopUpShowBookingMissingTenant.svelte';
+  import PopUpShowBookingMissingTenant from './_components/PopUpShowBookingMissingTenant.svelte';
+  import DateShifter from './_components/DateShifter.svelte';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -315,6 +316,7 @@
 
 <LayoutMain access={segments} user={user}>
   <div class="report-container">
+    <DateShifter />
     <Radio
       className="filters"
       options={filterOptions}

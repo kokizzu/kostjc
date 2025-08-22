@@ -19,6 +19,11 @@
   export let label;
   export let placeholder = '';
   export let isObject = false;
+  export let onEnter = async () => {};
+
+  function handleEnter(/** @type {KeyboardEvent} */ e) {
+    if (e.key === 'Enter') onEnter();
+  }
 
   if (isObject) value = value+'';
   let isShowPassword = false;
@@ -196,7 +201,14 @@
       <input type="date" bind:value={value} {id} {placeholder}/>
     {:else if type === 'password'}
       <label class="label" for={id}>{label}</label>
-      <input bind:value={value} {id} bind:this={inputElm} {placeholder} autocomplete="off"/>
+      <input
+        bind:this={inputElm}
+        bind:value={value}
+        id={id}
+        placeholder={placeholder}
+        autocomplete="off"
+        on:keydown={handleEnter}
+      />
       {#if type === 'password'}
         <button class="eye" on:click={toggleShowPassword}>
           {#if !isShowPassword}

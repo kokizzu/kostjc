@@ -154,6 +154,11 @@
         --shadow-md: rgba(0, 0, 0, 0.06) 0px 8px 20px;
       }
 
+      input[type="checkbox"] {
+        accent-color: var(--blue-005);
+        cursor: pointer;
+      }
+
       *::selection {
         background: var(--blue-005);
         color: #ffff;
@@ -1479,6 +1484,34 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   .popup-container.svelte-1urvuz7 .popup.svelte-1urvuz7 {
     width: 100%;
   }
+}
+
+/* fakecss:./_components/DateShifter.esbuild-svelte-fake-css */
+.date-shifter.svelte-1qvnngv.svelte-1qvnngv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.date-shifter.svelte-1qvnngv .btn.svelte-1qvnngv {
+  background-color: var(--gray-002);
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-008);
+  padding: 8px;
+}
+.date-shifter.svelte-1qvnngv .btn.svelte-1qvnngv:hover {
+  background-color: var(--blue-transparent);
+  color: var(--blue-006);
+}
+.date-shifter.svelte-1qvnngv .date-text.svelte-1qvnngv {
+  font-weight: 600;
+  font-size: 18px;
+  user-select: none;
 }
 
 /* fakecss:./staffMissingDataReport.esbuild-svelte-fake-css */
@@ -3950,13 +3983,13 @@ table tbody tr td .actions .btn:hover svg {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance12 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance12, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance12, context, null, { allOwnKeys: true });
-        instance12.create = function create(instanceConfig) {
+        const instance13 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance13, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance13, context, null, { allOwnKeys: true });
+        instance13.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance12;
+        return instance13;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -4264,7 +4297,7 @@ table tbody tr td .actions .btn:hover svg {
         const monthName = date.toLocaleString("id-ID", { month: "long" });
         return `${monthName} ${year}`;
       }
-      function localeDateFromYYYYMMDD(dateStr) {
+      function localeDateFromYYYYMMDD2(dateStr) {
         if (!dateStr)
           return "";
         const dt = new Date(dateStr);
@@ -4289,7 +4322,7 @@ table tbody tr td .actions .btn:hover svg {
         formatPrice,
         arrToArrNum,
         formatYearMonth,
-        localeDateFromYYYYMMDD,
+        localeDateFromYYYYMMDD: localeDateFromYYYYMMDD2,
         checkboxToDate: checkboxToDate2
       };
     }
@@ -4888,7 +4921,7 @@ table tbody tr td .actions .btn:hover svg {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance12, create_fragment15, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance13, create_fragment16, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -4914,7 +4947,7 @@ table tbody tr td .actions .btn:hover svg {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance12 ? instance12(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance13 ? instance13(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -4927,7 +4960,7 @@ table tbody tr td .actions .btn:hover svg {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment15 ? create_fragment15($.ctx) : false;
+    $.fragment = create_fragment16 ? create_fragment16($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -5452,6 +5485,8 @@ table tbody tr td .actions .btn:hover svg {
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
   var RiFinanceCashLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path>' };
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
+  var RiArrowsArrowRightSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path>' };
+  var RiArrowsArrowLeftSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>' };
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
@@ -13136,7 +13171,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler_10*/
-            ctx[33]
+            ctx[35]
           );
           mounted = true;
         }
@@ -13259,7 +13294,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler_9*/
-            ctx[32]
+            ctx[34]
           );
           mounted = true;
         }
@@ -13366,24 +13401,32 @@ table tbody tr td .actions .btn:hover svg {
         append(label_1, t0);
         insert(target, t1, anchor);
         insert(target, input, anchor);
+        ctx[32](input);
         set_input_value(
           input,
           /*value*/
           ctx[0]
         );
-        ctx[31](input);
         insert(target, t2, anchor);
         if (if_block)
           if_block.m(target, anchor);
         insert(target, if_block_anchor, anchor);
         current = true;
         if (!mounted) {
-          dispose = listen(
-            input,
-            "input",
-            /*input_input_handler_8*/
-            ctx[30]
-          );
+          dispose = [
+            listen(
+              input,
+              "input",
+              /*input_input_handler_8*/
+              ctx[33]
+            ),
+            listen(
+              input,
+              "keydown",
+              /*handleEnter*/
+              ctx[13]
+            )
+          ];
           mounted = true;
         }
       },
@@ -13473,11 +13516,11 @@ table tbody tr td .actions .btn:hover svg {
           detach(t2);
           detach(if_block_anchor);
         }
-        ctx[31](null);
+        ctx[32](null);
         if (if_block)
           if_block.d(detaching);
         mounted = false;
-        dispose();
+        run_all(dispose);
       }
     };
   }
@@ -13534,7 +13577,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler_7*/
-            ctx[29]
+            ctx[31]
           );
           mounted = true;
         }
@@ -13655,7 +13698,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler_6*/
-            ctx[28]
+            ctx[30]
           );
           mounted = true;
         }
@@ -13786,7 +13829,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler_5*/
-            ctx[27]
+            ctx[29]
           );
           mounted = true;
         }
@@ -13910,7 +13953,7 @@ table tbody tr td .actions .btn:hover svg {
             textarea,
             "input",
             /*textarea_input_handler*/
-            ctx[26]
+            ctx[28]
           );
           mounted = true;
         }
@@ -14031,7 +14074,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler_4*/
-            ctx[25]
+            ctx[27]
           );
           mounted = true;
         }
@@ -14168,7 +14211,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler_3*/
-            ctx[24]
+            ctx[26]
           );
           mounted = true;
         }
@@ -14276,7 +14319,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler_2*/
-            ctx[23]
+            ctx[25]
           );
           mounted = true;
         }
@@ -14391,7 +14434,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler_1*/
-            ctx[22]
+            ctx[24]
           );
           mounted = true;
         }
@@ -14512,7 +14555,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "input",
             /*input_input_handler*/
-            ctx[21]
+            ctx[23]
           );
           mounted = true;
         }
@@ -14659,7 +14702,7 @@ table tbody tr td .actions .btn:hover svg {
     let updating_value;
     let current;
     function select_value_binding(value) {
-      ctx[18](value);
+      ctx[20](value);
     }
     let select_props = {
       items: (
@@ -14683,12 +14726,12 @@ table tbody tr td .actions .btn:hover svg {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[14]
+      ctx[15]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[15]
+      ctx[16]
     );
     return {
       c() {
@@ -14829,7 +14872,7 @@ table tbody tr td .actions .btn:hover svg {
             input,
             "change",
             /*input_change_handler*/
-            ctx[17]
+            ctx[19]
           );
           mounted = true;
         }
@@ -14923,7 +14966,7 @@ table tbody tr td .actions .btn:hover svg {
             button,
             "click",
             /*toggleShowPassword*/
-            ctx[13]
+            ctx[14]
           );
           mounted = true;
         }
@@ -15118,7 +15161,7 @@ table tbody tr td .actions .btn:hover svg {
     let updating_value;
     let current;
     function select_value_binding_2(value) {
-      ctx[20](value);
+      ctx[22](value);
     }
     let select_props = {
       items: (
@@ -15142,12 +15185,12 @@ table tbody tr td .actions .btn:hover svg {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[14]
+      ctx[15]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[15]
+      ctx[16]
     );
     return {
       c() {
@@ -15235,7 +15278,7 @@ table tbody tr td .actions .btn:hover svg {
     let updating_value;
     let current;
     function select_value_binding_1(value) {
-      ctx[19](value);
+      ctx[21](value);
     }
     let select_props = {
       items: (
@@ -15259,12 +15302,12 @@ table tbody tr td .actions .btn:hover svg {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[14]
+      ctx[15]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[15]
+      ctx[16]
     );
     return {
       c() {
@@ -15537,6 +15580,12 @@ table tbody tr td .actions .btn:hover svg {
     let { label } = $props;
     let { placeholder = "" } = $props;
     let { isObject = false } = $props;
+    let { onEnter = async () => {
+    } } = $props;
+    function handleEnter(e) {
+      if (e.key === "Enter")
+        onEnter();
+    }
     if (isObject)
       value = value + "";
     let isShowPassword = false;
@@ -15663,15 +15712,15 @@ table tbody tr td .actions .btn:hover svg {
       value = this.value;
       $invalidate(0, value);
     }
-    function input_input_handler_8() {
-      value = this.value;
-      $invalidate(0, value);
-    }
     function input_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         inputElm = $value;
         $invalidate(9, inputElm);
       });
+    }
+    function input_input_handler_8() {
+      value = this.value;
+      $invalidate(0, value);
     }
     function input_input_handler_9() {
       value = this.value;
@@ -15693,13 +15742,15 @@ table tbody tr td .actions .btn:hover svg {
       if ("autocomplete" in $props2)
         $invalidate(4, autocomplete = $props2.autocomplete);
       if ("values" in $props2)
-        $invalidate(16, values = $props2.values);
+        $invalidate(17, values = $props2.values);
       if ("label" in $props2)
         $invalidate(5, label = $props2.label);
       if ("placeholder" in $props2)
         $invalidate(6, placeholder = $props2.placeholder);
       if ("isObject" in $props2)
         $invalidate(7, isObject = $props2.isObject);
+      if ("onEnter" in $props2)
+        $invalidate(18, onEnter = $props2.onEnter);
     };
     $self.$.update = () => {
       if ($self.$.dirty[0] & /*value*/
@@ -15724,10 +15775,12 @@ table tbody tr td .actions .btn:hover svg {
       itemsArr,
       itemsArrObj,
       svelteSelectValue,
+      handleEnter,
       toggleShowPassword,
       handleSelect,
       handleClear,
       values,
+      onEnter,
       input_change_handler,
       select_value_binding,
       select_value_binding_1,
@@ -15741,8 +15794,8 @@ table tbody tr td .actions .btn:hover svg {
       input_input_handler_5,
       input_input_handler_6,
       input_input_handler_7,
-      input_input_handler_8,
       input_binding,
+      input_input_handler_8,
       input_input_handler_9,
       input_input_handler_10
     ];
@@ -15762,10 +15815,11 @@ table tbody tr td .actions .btn:hover svg {
           id: 1,
           value: 0,
           autocomplete: 4,
-          values: 16,
+          values: 17,
           label: 5,
           placeholder: 6,
-          isObject: 7
+          isObject: 7,
+          onEnter: 18
         },
         null,
         [-1, -1]
@@ -17220,7 +17274,7 @@ table tbody tr td .actions .btn:hover svg {
   var Radio_default = Radio;
 
   // staffMissingDataReport.svelte
-  var import_xFormatter2 = __toESM(require_xFormatter());
+  var import_xFormatter3 = __toESM(require_xFormatter());
   var import_xConstant2 = __toESM(require_xConstant());
 
   // _components/PopUpShowBookingMissingTenant.svelte
@@ -17658,6 +17712,177 @@ table tbody tr td .actions .btn:hover svg {
   };
   var PopUpShowBookingMissingTenant_default = PopUpShowBookingMissingTenant;
 
+  // _components/DateShifter.svelte
+  var import_xFormatter2 = __toESM(require_xFormatter());
+  function create_fragment14(ctx) {
+    let div;
+    let button0;
+    let icon0;
+    let t0;
+    let span;
+    let t1;
+    let t2;
+    let button1;
+    let icon1;
+    let current;
+    let mounted;
+    let dispose;
+    icon0 = new Icon_default({
+      props: { size: "20", src: RiArrowsArrowLeftSLine }
+    });
+    icon1 = new Icon_default({
+      props: { size: "20", src: RiArrowsArrowRightSLine }
+    });
+    return {
+      c() {
+        div = element("div");
+        button0 = element("button");
+        create_component(icon0.$.fragment);
+        t0 = space();
+        span = element("span");
+        t1 = text(
+          /*dateToShow*/
+          ctx[1]
+        );
+        t2 = space();
+        button1 = element("button");
+        create_component(icon1.$.fragment);
+        button0.disabled = /*isLoading*/
+        ctx[0];
+        attr(button0, "class", "btn svelte-1qvnngv");
+        attr(button0, "aria-label", "Previous");
+        attr(span, "class", "date-text svelte-1qvnngv");
+        button1.disabled = /*isLoading*/
+        ctx[0];
+        attr(button1, "class", "btn svelte-1qvnngv");
+        attr(button1, "aria-label", "Next");
+        attr(div, "class", "date-shifter svelte-1qvnngv");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, button0);
+        mount_component(icon0, button0, null);
+        append(div, t0);
+        append(div, span);
+        append(span, t1);
+        append(div, t2);
+        append(div, button1);
+        mount_component(icon1, button1, null);
+        current = true;
+        if (!mounted) {
+          dispose = [
+            listen(
+              button0,
+              "click",
+              /*click_handler*/
+              ctx[6]
+            ),
+            listen(
+              button1,
+              "click",
+              /*click_handler_1*/
+              ctx[7]
+            )
+          ];
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (!current || dirty & /*isLoading*/
+        1) {
+          button0.disabled = /*isLoading*/
+          ctx2[0];
+        }
+        if (!current || dirty & /*dateToShow*/
+        2)
+          set_data(
+            t1,
+            /*dateToShow*/
+            ctx2[1]
+          );
+        if (!current || dirty & /*isLoading*/
+        1) {
+          button1.disabled = /*isLoading*/
+          ctx2[0];
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon0.$.fragment, local);
+        transition_in(icon1.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon0.$.fragment, local);
+        transition_out(icon1.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        destroy_component(icon0);
+        destroy_component(icon1);
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function instance11($self, $props, $invalidate) {
+    let dateObj;
+    let dateToShow;
+    let { date = "" } = $props;
+    let { onChanges = async () => {
+    } } = $props;
+    let { isLoading = false } = $props;
+    async function shiftDate(direction) {
+      const shifted = new Date(dateObj);
+      shifted.setDate(shifted.getDate() + direction);
+      $invalidate(3, date = shifted.toISOString().split("T")[0]);
+      await onChanges();
+    }
+    const click_handler = () => shiftDate(-1);
+    const click_handler_1 = () => shiftDate(1);
+    $self.$set = ($props2) => {
+      if ("date" in $props2)
+        $invalidate(3, date = $props2.date);
+      if ("onChanges" in $props2)
+        $invalidate(4, onChanges = $props2.onChanges);
+      if ("isLoading" in $props2)
+        $invalidate(0, isLoading = $props2.isLoading);
+    };
+    $self.$.update = () => {
+      if ($self.$.dirty & /*date*/
+      8) {
+        $:
+          $invalidate(5, dateObj = date ? new Date(date) : new Date());
+      }
+      if ($self.$.dirty & /*dateObj*/
+      32) {
+        $:
+          $invalidate(1, dateToShow = (0, import_xFormatter2.localeDateFromYYYYMMDD)(dateObj.toISOString()));
+      }
+    };
+    return [
+      isLoading,
+      dateToShow,
+      shiftDate,
+      date,
+      onChanges,
+      dateObj,
+      click_handler,
+      click_handler_1
+    ];
+  }
+  var DateShifter = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance11, create_fragment14, safe_not_equal, { date: 3, onChanges: 4, isLoading: 0 });
+    }
+  };
+  var DateShifter_default = DateShifter;
+
   // staffMissingDataReport.svelte
   function get_each_context4(ctx, list, i) {
     const child_ctx = ctx.slice();
@@ -18062,15 +18287,18 @@ table tbody tr td .actions .btn:hover svg {
   }
   function create_default_slot(ctx) {
     let div1;
+    let dateshifter;
+    let t0;
     let radio;
     let updating_selected;
-    let t0;
+    let t1;
     let div0;
     let table;
     let thead;
-    let t16;
+    let t17;
     let tbody;
     let current;
+    dateshifter = new DateShifter_default({});
     function radio_selected_binding(value) {
       ctx[21](value);
     }
@@ -18104,13 +18332,15 @@ table tbody tr td .actions .btn:hover svg {
     return {
       c() {
         div1 = element("div");
-        create_component(radio.$.fragment);
+        create_component(dateshifter.$.fragment);
         t0 = space();
+        create_component(radio.$.fragment);
+        t1 = space();
         div0 = element("div");
         table = element("table");
         thead = element("thead");
         thead.innerHTML = `<tr class="svelte-lch0hh"><th class="svelte-lch0hh">Actions</th> <th class="svelte-lch0hh">Room</th> <th style="min-width: 170px;" class="svelte-lch0hh">Tenant Name</th> <th class="svelte-lch0hh">Telegram</th> <th class="svelte-lch0hh">Tele Added</th> <th style="min-width: 180px;" class="svelte-lch0hh">WhatsApp</th> <th class="svelte-lch0hh">Wa Added</th> <th style="min-width: 140px;" class="svelte-lch0hh">Last Use At</th></tr>`;
-        t16 = space();
+        t17 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
@@ -18122,12 +18352,14 @@ table tbody tr td .actions .btn:hover svg {
       },
       m(target, anchor) {
         insert(target, div1, anchor);
-        mount_component(radio, div1, null);
+        mount_component(dateshifter, div1, null);
         append(div1, t0);
+        mount_component(radio, div1, null);
+        append(div1, t1);
         append(div1, div0);
         append(div0, table);
         append(table, thead);
-        append(table, t16);
+        append(table, t17);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -18175,6 +18407,7 @@ table tbody tr td .actions .btn:hover svg {
       i(local) {
         if (current)
           return;
+        transition_in(dateshifter.$.fragment, local);
         transition_in(radio.$.fragment, local);
         for (let i = 0; i < each_value.length; i += 1) {
           transition_in(each_blocks[i]);
@@ -18182,6 +18415,7 @@ table tbody tr td .actions .btn:hover svg {
         current = true;
       },
       o(local) {
+        transition_out(dateshifter.$.fragment, local);
         transition_out(radio.$.fragment, local);
         each_blocks = each_blocks.filter(Boolean);
         for (let i = 0; i < each_blocks.length; i += 1) {
@@ -18193,12 +18427,13 @@ table tbody tr td .actions .btn:hover svg {
         if (detaching) {
           detach(div1);
         }
+        destroy_component(dateshifter);
         destroy_component(radio);
         destroy_each(each_blocks, detaching);
       }
     };
   }
-  function create_fragment14(ctx) {
+  function create_fragment15(ctx) {
     let t;
     let layoutmain;
     let current;
@@ -18294,7 +18529,7 @@ table tbody tr td .actions .btn:hover svg {
     /** @type {string} */
     "show-filter"
   );
-  function instance11($self, $props, $invalidate) {
+  function instance12($self, $props, $invalidate) {
     let missingData = (
       /** @type {MissingTenantData[]} */
       [/* missingData */]
@@ -18363,7 +18598,7 @@ table tbody tr td .actions .btn:hover svg {
           tenant: {
             id: payloads[0] + "",
             /** @type any[]*/
-            waAddedAt: (0, import_xFormatter2.checkboxToDate)(payloads[2])
+            waAddedAt: (0, import_xFormatter3.checkboxToDate)(payloads[2])
           },
           cmd: import_xConstant2.CmdToggleWaAdded
         }
@@ -18391,7 +18626,7 @@ table tbody tr td .actions .btn:hover svg {
           tenant: {
             id: payloads[0] + "",
             /** @type any[]*/
-            teleAddedAt: (0, import_xFormatter2.checkboxToDate)(payloads[2])
+            teleAddedAt: (0, import_xFormatter3.checkboxToDate)(payloads[2])
           },
           cmd: import_xConstant2.CmdToggleTeleAdded
         }
@@ -18661,7 +18896,7 @@ table tbody tr td .actions .btn:hover svg {
   var StaffMissingDataReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance11, create_fragment14, safe_not_equal, {}, null, [-1, -1]);
+      init(this, options, instance12, create_fragment15, safe_not_equal, {}, null, [-1, -1]);
     }
   };
   var staffMissingDataReport_default = StaffMissingDataReport_1;

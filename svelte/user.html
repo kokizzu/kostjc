@@ -154,6 +154,11 @@
         --shadow-md: rgba(0, 0, 0, 0.06) 0px 8px 20px;
       }
 
+      input[type="checkbox"] {
+        accent-color: var(--blue-005);
+        cursor: pointer;
+      }
+
       *::selection {
         background: var(--blue-005);
         color: #ffff;
@@ -13001,7 +13006,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_10*/
-            ctx[33]
+            ctx[35]
           );
           mounted = true;
         }
@@ -13124,7 +13129,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_9*/
-            ctx[32]
+            ctx[34]
           );
           mounted = true;
         }
@@ -13231,24 +13236,32 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         append(label_1, t0);
         insert(target, t1, anchor);
         insert(target, input, anchor);
+        ctx[32](input);
         set_input_value(
           input,
           /*value*/
           ctx[0]
         );
-        ctx[31](input);
         insert(target, t2, anchor);
         if (if_block)
           if_block.m(target, anchor);
         insert(target, if_block_anchor, anchor);
         current = true;
         if (!mounted) {
-          dispose = listen(
-            input,
-            "input",
-            /*input_input_handler_8*/
-            ctx[30]
-          );
+          dispose = [
+            listen(
+              input,
+              "input",
+              /*input_input_handler_8*/
+              ctx[33]
+            ),
+            listen(
+              input,
+              "keydown",
+              /*handleEnter*/
+              ctx[13]
+            )
+          ];
           mounted = true;
         }
       },
@@ -13338,11 +13351,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           detach(t2);
           detach(if_block_anchor);
         }
-        ctx[31](null);
+        ctx[32](null);
         if (if_block)
           if_block.d(detaching);
         mounted = false;
-        dispose();
+        run_all(dispose);
       }
     };
   }
@@ -13399,7 +13412,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_7*/
-            ctx[29]
+            ctx[31]
           );
           mounted = true;
         }
@@ -13520,7 +13533,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_6*/
-            ctx[28]
+            ctx[30]
           );
           mounted = true;
         }
@@ -13651,7 +13664,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_5*/
-            ctx[27]
+            ctx[29]
           );
           mounted = true;
         }
@@ -13775,7 +13788,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             textarea,
             "input",
             /*textarea_input_handler*/
-            ctx[26]
+            ctx[28]
           );
           mounted = true;
         }
@@ -13896,7 +13909,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_4*/
-            ctx[25]
+            ctx[27]
           );
           mounted = true;
         }
@@ -14033,7 +14046,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_3*/
-            ctx[24]
+            ctx[26]
           );
           mounted = true;
         }
@@ -14141,7 +14154,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_2*/
-            ctx[23]
+            ctx[25]
           );
           mounted = true;
         }
@@ -14256,7 +14269,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_1*/
-            ctx[22]
+            ctx[24]
           );
           mounted = true;
         }
@@ -14377,7 +14390,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler*/
-            ctx[21]
+            ctx[23]
           );
           mounted = true;
         }
@@ -14524,7 +14537,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function select_value_binding(value) {
-      ctx[18](value);
+      ctx[20](value);
     }
     let select_props = {
       items: (
@@ -14548,12 +14561,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[14]
+      ctx[15]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[15]
+      ctx[16]
     );
     return {
       c() {
@@ -14694,7 +14707,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "change",
             /*input_change_handler*/
-            ctx[17]
+            ctx[19]
           );
           mounted = true;
         }
@@ -14788,7 +14801,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             button,
             "click",
             /*toggleShowPassword*/
-            ctx[13]
+            ctx[14]
           );
           mounted = true;
         }
@@ -14983,7 +14996,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function select_value_binding_2(value) {
-      ctx[20](value);
+      ctx[22](value);
     }
     let select_props = {
       items: (
@@ -15007,12 +15020,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[14]
+      ctx[15]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[15]
+      ctx[16]
     );
     return {
       c() {
@@ -15100,7 +15113,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function select_value_binding_1(value) {
-      ctx[19](value);
+      ctx[21](value);
     }
     let select_props = {
       items: (
@@ -15124,12 +15137,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[14]
+      ctx[15]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[15]
+      ctx[16]
     );
     return {
       c() {
@@ -15402,6 +15415,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let { label } = $props;
     let { placeholder = "" } = $props;
     let { isObject = false } = $props;
+    let { onEnter = async () => {
+    } } = $props;
+    function handleEnter(e) {
+      if (e.key === "Enter")
+        onEnter();
+    }
     if (isObject)
       value = value + "";
     let isShowPassword = false;
@@ -15528,15 +15547,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       value = this.value;
       $invalidate(0, value);
     }
-    function input_input_handler_8() {
-      value = this.value;
-      $invalidate(0, value);
-    }
     function input_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         inputElm = $value;
         $invalidate(9, inputElm);
       });
+    }
+    function input_input_handler_8() {
+      value = this.value;
+      $invalidate(0, value);
     }
     function input_input_handler_9() {
       value = this.value;
@@ -15558,13 +15577,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("autocomplete" in $props2)
         $invalidate(4, autocomplete = $props2.autocomplete);
       if ("values" in $props2)
-        $invalidate(16, values = $props2.values);
+        $invalidate(17, values = $props2.values);
       if ("label" in $props2)
         $invalidate(5, label = $props2.label);
       if ("placeholder" in $props2)
         $invalidate(6, placeholder = $props2.placeholder);
       if ("isObject" in $props2)
         $invalidate(7, isObject = $props2.isObject);
+      if ("onEnter" in $props2)
+        $invalidate(18, onEnter = $props2.onEnter);
     };
     $self.$.update = () => {
       if ($self.$.dirty[0] & /*value*/
@@ -15589,10 +15610,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       itemsArr,
       itemsArrObj,
       svelteSelectValue,
+      handleEnter,
       toggleShowPassword,
       handleSelect,
       handleClear,
       values,
+      onEnter,
       input_change_handler,
       select_value_binding,
       select_value_binding_1,
@@ -15606,8 +15629,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       input_input_handler_5,
       input_input_handler_6,
       input_input_handler_7,
-      input_input_handler_8,
       input_binding,
+      input_input_handler_8,
       input_input_handler_9,
       input_input_handler_10
     ];
@@ -15627,10 +15650,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           id: 1,
           value: 0,
           autocomplete: 4,
-          values: 16,
+          values: 17,
           label: 5,
           placeholder: 6,
-          isObject: 7
+          isObject: 7,
+          onEnter: 18
         },
         null,
         [-1, -1]
