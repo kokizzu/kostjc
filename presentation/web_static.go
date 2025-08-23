@@ -155,19 +155,17 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	})
 
 	fw.Get(`/`+domain.StaffMissingDataReportAction, func(ctx *fiber.Ctx) error {
-		var in domain.StaffMissingDataReportIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffMissingDataReportAction)
-		if err != nil {
-			return err
-		}
+		in, user, segments := userInfoFromContext(ctx, d)
 
 		if notLogin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-
-		out := d.StaffMissingDataReport(&in)
+		in.RequestCommon.Action = domain.StaffMissingDataReportAction
+		out := d.StaffMissingDataReport(&domain.StaffMissingDataReportIn{
+			RequestCommon: in.RequestCommon,
+			YearMonth:     time.Now().Format(rqProperty.DateFormatYYYYMM),
+		})
 
 		return views.RenderStaffMissingDataReport(ctx, M.SX{
 			`title`:       conf.PROJECT_NAME + ` | Missing Data Report`,

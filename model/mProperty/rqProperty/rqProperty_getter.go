@@ -1025,8 +1025,21 @@ type RoomMissingTenantData struct {
 	LastUseAt              string `json:"lastUseAt"`
 }
 
-func (r *Rooms) FindMissingTenantsData() (out []RoomMissingTenantData) {
+func (r *Rooms) FindMissingTenantsData(yearMonth string) (out []RoomMissingTenantData) {
 	const comment = `-- Rooms) FindMissingTenantsData`
+
+	var startDate string // YYYY-MM-DD
+	var endDate string   // YYYY-MM-DD
+
+	year, month, isValid := isValidMonthYear(yearMonth)
+	if !isValid {
+		now := time.Now()
+		startDate = startOfYearMonth(now.Year(), now.Month())
+		endDate = endOfYearMonth(now.Year(), now.Month())
+	} else {
+		startDate = startOfYearMonth(year, month)
+		endDate = endOfYearMonth(year, month)
+	}
 
 	queryRows := comment + `
 SELECT 
@@ -1042,7 +1055,10 @@ SELECT
 FROM "rooms"
 LEFT JOIN "tenants"
 	ON "rooms"."currentTenantId" = "tenants"."id"
-WHERE "rooms"."deletedAt" = 0
+WHERE
+	"rooms"."deletedAt" = 0
+	AND "rooms"."lastUseAt" >= ` + S.Z(startDate) + `
+	AND "rooms"."lastUseAt" <= ` + S.Z(endDate) + `
 ORDER BY "rooms"."updatedAt"`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {

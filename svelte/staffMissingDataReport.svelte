@@ -18,14 +18,17 @@
   import {checkboxToDate} from './_components/xFormatter';
   import {CmdToggleWaAdded, CmdToggleTeleAdded} from './_components/xConstant';
   import PopUpShowBookingMissingTenant from './_components/PopUpShowBookingMissingTenant.svelte';
-  import DateShifter from './_components/DateShifter.svelte';
+  import MonthShifter from './_components/MonthShifter.svelte';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
   let missingData = /** @type {MissingTenantData[]} */ ([/* missingData */]);
 
+  let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
+  let isLoading = /** @type {boolean} */ (false);
+
   async function RefreshData() { // @ts-ignore
-    await StaffMissingDataReport({},
+    await StaffMissingDataReport({ yearMonth },
     /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
     /** @returns {Promise<void>} */
     function(/** @type {any} */ o) {
@@ -316,7 +319,11 @@
 
 <LayoutMain access={segments} user={user}>
   <div class="report-container">
-    <DateShifter />
+    <MonthShifter
+      bind:yearMonth
+      bind:isLoading
+      OnChanges={RefreshData}
+    />
     <Radio
       className="filters"
       options={filterOptions}
