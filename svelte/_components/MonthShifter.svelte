@@ -30,11 +30,6 @@
   export let OnChanges = async () => {};
   export let isLoading = false;
 
-  function formatMonthYear(/** @type {string} */ ym) {
-    const date = new Date(ym + "-01");
-    return date.toLocaleString('default', { month: 'long', year: 'numeric' });
-  }
-
   async function shiftMonth(/** @type {number} */ direction) {
     const end = parseYM(yearMonth);
     end.setMonth(end.getMonth() + direction);
@@ -48,9 +43,18 @@
   <button disabled={isLoading} on:click={() => shiftMonth(-1)} class="btn" aria-label="Previous">
     <Icon size="20" src={RiArrowsArrowLeftSLine} />
   </button>
-  <span class="month-text">{formatMonthYear(yearMonth)}</span>
   <button disabled={isLoading} on:click={() => shiftMonth(1)} class="btn" aria-label="Next">
     <Icon size="20" src={RiArrowsArrowRightSLine} />
+  </button>
+  <input
+    class="year-month"
+    type="month"
+    name="year-month"
+    id="year-month"
+    bind:value={yearMonth}
+  />
+  <button class="apply" on:click={OnChanges}>
+    Apply
   </button>
 </div>
 
@@ -79,9 +83,24 @@
     color: var(--blue-006);
   }
 
-  .month-shifter .month-text {
+  .month-shifter input.year-month {
+    border: 1px solid var(--gray-003);
+    padding: 10px 15px;
+    border-radius: 8px;
+  }
+
+  .month-shifter button.apply {
+    background-color: var(--blue-006);
+    color: #FFF;
+    border: none;
+    padding: 10px 23px;
+    border-radius: 8px;
+    font-size: var(--font-base);
     font-weight: 600;
-    font-size: 18px;
-    user-select: none;
+    cursor: pointer;
+  }
+
+  .month-shifter button.apply:hover {
+    background-color: var(--blue-005);
   }
 </style>
