@@ -18,13 +18,83 @@
 
   export let access = /** @type {Access} */ ({});
 
-  onMount( () => {
-    console.log( access );
-  } );
-
   const pathAll = /** @type {string}*/ (window.location.pathname);
   const pathLv1 = /** @type {string}*/ (window.location.pathname.split( '/' )[ 1 ]);
   const pathLv2 = /** @type {string}*/ (window.location.pathname.split( '/' )[ 2 ]);
+
+  function sideMenuScrollIntoView() {
+    let linkId = /** @type {string} */ ('');
+
+    if (pathLv1 === 'admin' && pathLv2 === 'booking') {
+      linkId = 'link-admin-booking';
+    }
+
+    if (pathLv1 === 'staff' && pathLv2 === 'booking') {
+      linkId = 'link-staff-booking';
+    }
+
+    switch (pathLv2) {
+      case 'menu': {
+        linkId = 'link-admin-menu';
+        break;
+      }
+      case 'sale': {
+        linkId = 'link-admin-sale';
+        break;
+      }
+      case 'location': {
+        linkId = 'link-admin-location';
+        break;
+      }
+      case 'facility': {
+        linkId = 'link-admin-facility';
+        break;
+      }
+      case 'building': {
+        linkId = 'link-admin-building';
+        break;
+      }
+      case 'room': {
+        linkId = 'link-admin-room';
+        break;
+      }
+      case 'payment': {
+        linkId = 'link-admin-payment';
+        break;
+      }
+      case 'stock': {
+        linkId = 'link-admin-stock';
+        break;
+      }
+      case 'wifiDevice': {
+        linkId = 'link-admin-wifiDevice';
+        break;
+      }
+      case 'tenants': {
+        linkId = 'link-admin-tenants';
+        break;
+      }
+      case 'usersManagement': {
+        linkId = 'link-admin-userManagement';
+        break;
+      }
+    }
+
+    if (String(pathLv2).includes('Logs')) {
+      linkId = 'link-admin-logs';
+    }
+
+    if (String(pathLv2).includes('setting')) {
+      linkId = 'link-admin-setting';
+    }
+
+    if (linkId != '') {
+      const linkElm = /** @type {HTMLAnchorElement} */ (document.getElementById(linkId))
+      if (linkElm) {
+        linkElm.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
 
   async function logout() {
     await UserLogout( {}, function( /** @type any */ o ) {
@@ -44,6 +114,10 @@
       });
     });
   }
+
+  onMount( () => {
+    sideMenuScrollIntoView();
+  } );
 </script>
 
 <aside class="side-menu-desktop">
@@ -53,7 +127,7 @@
         <Icon src={RiBuildingsHome2Line} size="20" />
         <span>Home</span>
       </a>
-      <a href="/staff/occupancyReport" class:active={pathAll === '/staff/occupancyReport'}>
+      <a href="/staff/occupancyReport" class:active={pathAll === '/staff/occupancyReport'} >
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Occupancy Report</span>
       </a>
@@ -77,7 +151,7 @@
     {#if !access.admin}
       <h3 class="nav-menu-title">Staff</h3>
       <nav class="nav-menu">
-        <a href="/staff/booking" class:active={pathLv2 === 'booking'}>
+        <a id="link-staff-booking" href="/staff/booking" class:active={pathLv2 === 'booking'}>
           <Icon src={RiBusinessCalendarScheduleLine} size="20" />
           <span>Bookings</span>
         </a>
@@ -86,59 +160,59 @@
     {#if access.admin}
       <h3 class="nav-menu-title">Admin</h3>
       <nav class="nav-menu">
-        <a href="/admin/menu" class:active={pathLv2 === 'menu'}>
+        <a id="link-admin-menu" href="/admin/menu" class:active={pathLv2 === 'menu'}>
           <Icon src={RiSystemMenu2Line} size="20" />
           <span>Menu</span>
         </a>
-        <a href="/admin/sale" class:active={pathLv2 === 'sale'}>
+        <a id="link-admin-sale" href="/admin/sale" class:active={pathLv2 === 'sale'}>
           <Icon src={RiFinanceCashLine} size="20" />
           <span>Sales</span>
         </a>
-        <a href="/admin/location" class:active={pathLv2 === 'location'}>
+        <a id="link-admin-location" href="/admin/location" class:active={pathLv2 === 'location'}>
           <Icon src={RiMapMapPin2Line} size="20" />
           <span>Locations</span>
         </a>
-        <a href="/admin/facility" class:active={pathLv2 === 'facility'}>
+        <a id="link-admin-facility" href="/admin/facility" class:active={pathLv2 === 'facility'}>
           <Icon src={LuHandPlatter} size="20" />
           <span>Facilities</span>
         </a>
-        <a href="/admin/building" class:active={pathLv2 === 'building'}>
+        <a id="link-admin-building" href="/admin/building" class:active={pathLv2 === 'building'}>
           <Icon src={RiBuildingsHotelLine} size="20" />
           <span>Buildings</span>
         </a>
-        <a href="/admin/room" class:active={pathLv2 === 'room'}>
+        <a id="link-admin-room" href="/admin/room" class:active={pathLv2 === 'room'}>
           <Icon src={RiOthersDoorOpenLine} size="20" />
           <span>Rooms</span>
         </a>
-        <a href="/admin/booking" class:active={(pathLv1 === 'admin') && (pathLv2 === 'booking')}>
+        <a id="link-admin-booking" href="/admin/booking" class:active={(pathLv1 === 'admin') && (pathLv2 === 'booking')}>
           <Icon src={RiBusinessCalendarScheduleLine} size="20" />
           <span>Bookings</span>
         </a>
-        <a href="/admin/payment" class:active={pathLv2 === 'payment'}>
+        <a id="link-admin-payment" href="/admin/payment" class:active={pathLv2 === 'payment'}>
           <Icon src={RiFinanceWallet3Line} size="20" />
           <span>Payments</span>
         </a>
-        <a href="/admin/stock" class:active={pathLv2 === 'stock'}>
+        <a id="link-admin-stock" href="/admin/stock" class:active={pathLv2 === 'stock'}>
           <Icon src={RiBusinessInboxUnarchiveLine} size="20" />
           <span>Stocks</span>
         </a>
-        <a href="/admin/wifiDevice" class:active={pathLv2 === 'wifiDevice'}>
+        <a id="link-admin-wifiDevice" href="/admin/wifiDevice" class:active={pathLv2 === 'wifiDevice'}>
           <Icon src={RiBuildingsHomeWifiLine} size="20" />
           <span>Wifi Devices</span>
         </a>
-        <a href="/admin/tenants" class:active={pathLv2 === 'tenants'}>
+        <a id="link-admin-tenants" href="/admin/tenants" class:active={pathLv2 === 'tenants'}>
           <Icon src={RiUserFacesUserFollowLine} size="20" />
           <span>Tenants</span>
         </a>
-        <a href="/admin/usersManagement" class:active={pathLv2 === 'usersManagement'}>
+        <a id="link-admin-userManagement" href="/admin/usersManagement" class:active={pathLv2 === 'usersManagement'} >
           <Icon src={RiUserFacesGroupLine} size="20" />
           <span>Users</span>
         </a>
-        <a href="/admin/bookingLogs" class:active={String(pathLv2).includes('Logs')||false}>
+        <a id="link-admin-logs" href="/admin/bookingLogs" class:active={String(pathLv2).includes('Logs')||false}>
           <Icon src={RiBusinessBarChartBoxLine} size="20" />
           <span>Logs</span>
         </a>
-        <a href="/admin/settingFixInconsistencies" class:active={String(pathLv2).includes('setting')||false}>
+        <a id="link-admin-setting" href="/admin/settingFixInconsistencies" class:active={String(pathLv2).includes('setting')||false}>
           <Icon src={RiSystemSettingsLine} size="20" />
           <span>Settings</span>
         </a>

@@ -5566,6 +5566,7 @@ table tbody tr td .actions .btn:hover svg {
         span = element("span");
         span.textContent = "Bookings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
+        attr(a, "id", "link-staff-booking");
         attr(a, "href", "/staff/booking");
         attr(a, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5825,6 +5826,7 @@ table tbody tr td .actions .btn:hover svg {
         span13 = element("span");
         span13.textContent = "Settings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
+        attr(a0, "id", "link-admin-menu");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5833,6 +5835,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "menu"
         );
+        attr(a1, "id", "link-admin-sale");
         attr(a1, "href", "/admin/sale");
         attr(a1, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5841,6 +5844,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "sale"
         );
+        attr(a2, "id", "link-admin-location");
         attr(a2, "href", "/admin/location");
         attr(a2, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5849,6 +5853,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "location"
         );
+        attr(a3, "id", "link-admin-facility");
         attr(a3, "href", "/admin/facility");
         attr(a3, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5857,6 +5862,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "facility"
         );
+        attr(a4, "id", "link-admin-building");
         attr(a4, "href", "/admin/building");
         attr(a4, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5865,6 +5871,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "building"
         );
+        attr(a5, "id", "link-admin-room");
         attr(a5, "href", "/admin/room");
         attr(a5, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5873,6 +5880,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "room"
         );
+        attr(a6, "id", "link-admin-booking");
         attr(a6, "href", "/admin/booking");
         attr(a6, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5882,6 +5890,7 @@ table tbody tr td .actions .btn:hover svg {
           ctx[3] === "admin" && /*pathLv2*/
           ctx[4] === "booking"
         );
+        attr(a7, "id", "link-admin-payment");
         attr(a7, "href", "/admin/payment");
         attr(a7, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5890,6 +5899,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "payment"
         );
+        attr(a8, "id", "link-admin-stock");
         attr(a8, "href", "/admin/stock");
         attr(a8, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5898,6 +5908,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "stock"
         );
+        attr(a9, "id", "link-admin-wifiDevice");
         attr(a9, "href", "/admin/wifiDevice");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5906,6 +5917,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "wifiDevice"
         );
+        attr(a10, "id", "link-admin-tenants");
         attr(a10, "href", "/admin/tenants");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5914,6 +5926,7 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "tenants"
         );
+        attr(a11, "id", "link-admin-userManagement");
         attr(a11, "href", "/admin/usersManagement");
         attr(a11, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5922,12 +5935,14 @@ table tbody tr td .actions .btn:hover svg {
           /*pathLv2*/
           ctx[4] === "usersManagement"
         );
+        attr(a12, "id", "link-admin-logs");
         attr(a12, "href", "/admin/bookingLogs");
         attr(a12, "class", "svelte-1fwsz8h");
         toggle_class(a12, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
+        attr(a13, "id", "link-admin-setting");
         attr(a13, "href", "/admin/settingFixInconsistencies");
         attr(a13, "class", "svelte-1fwsz8h");
         toggle_class(a13, "active", String(
@@ -6011,22 +6026,7 @@ table tbody tr td .actions .btn:hover svg {
         append(a13, span13);
         current = true;
       },
-      p(ctx2, dirty) {
-        if (!current || dirty & /*String, pathLv2*/
-        16) {
-          toggle_class(a12, "active", String(
-            /*pathLv2*/
-            ctx2[4]
-          ).includes("Logs") || false);
-        }
-        if (!current || dirty & /*String, pathLv2*/
-        16) {
-          toggle_class(a13, "active", String(
-            /*pathLv2*/
-            ctx2[4]
-          ).includes("setting") || false);
-        }
-      },
+      p: noop,
       i(local) {
         if (current)
           return;
@@ -6533,15 +6533,7 @@ table tbody tr td .actions .btn:hover svg {
         append(a12, span12);
         current = true;
       },
-      p(ctx2, dirty) {
-        if (!current || dirty & /*String, pathLv2*/
-        16) {
-          toggle_class(a12, "active", String(
-            /*pathLv2*/
-            ctx2[4]
-          ).includes("Logs") || false);
-        }
-      },
+      p: noop,
       i(local) {
         if (current)
           return;
@@ -7246,9 +7238,6 @@ table tbody tr td .actions .btn:hover svg {
       /** @type {Access} */
       {}
     ) } = $props;
-    onMount(() => {
-      console.log(access);
-    });
     const pathAll = (
       /** @type {string}*/
       window.location.pathname
@@ -7261,6 +7250,79 @@ table tbody tr td .actions .btn:hover svg {
       /** @type {string}*/
       window.location.pathname.split("/")[2]
     );
+    function sideMenuScrollIntoView() {
+      let linkId = (
+        /** @type {string} */
+        ""
+      );
+      if (pathLv1 === "admin" && pathLv2 === "booking") {
+        linkId = "link-admin-booking";
+      }
+      if (pathLv1 === "staff" && pathLv2 === "booking") {
+        linkId = "link-staff-booking";
+      }
+      switch (pathLv2) {
+        case "menu": {
+          linkId = "link-admin-menu";
+          break;
+        }
+        case "sale": {
+          linkId = "link-admin-sale";
+          break;
+        }
+        case "location": {
+          linkId = "link-admin-location";
+          break;
+        }
+        case "facility": {
+          linkId = "link-admin-facility";
+          break;
+        }
+        case "building": {
+          linkId = "link-admin-building";
+          break;
+        }
+        case "room": {
+          linkId = "link-admin-room";
+          break;
+        }
+        case "payment": {
+          linkId = "link-admin-payment";
+          break;
+        }
+        case "stock": {
+          linkId = "link-admin-stock";
+          break;
+        }
+        case "wifiDevice": {
+          linkId = "link-admin-wifiDevice";
+          break;
+        }
+        case "tenants": {
+          linkId = "link-admin-tenants";
+          break;
+        }
+        case "usersManagement": {
+          linkId = "link-admin-userManagement";
+          break;
+        }
+      }
+      if (String(pathLv2).includes("Logs")) {
+        linkId = "link-admin-logs";
+      }
+      if (String(pathLv2).includes("setting")) {
+        linkId = "link-admin-setting";
+      }
+      if (linkId != "") {
+        const linkElm = (
+          /** @type {HTMLAnchorElement} */
+          document.getElementById(linkId)
+        );
+        if (linkElm) {
+          linkElm.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
     async function logout() {
       await (0, import_jsApi.UserLogout)({}, function(o) {
         if (o.error) {
@@ -7280,6 +7342,9 @@ table tbody tr td .actions .btn:hover svg {
         });
       });
     }
+    onMount(() => {
+      sideMenuScrollIntoView();
+    });
     const click_handler = () => set_store_value(isOpenSideMenu, $isOpenSideMenu = !$isOpenSideMenu, $isOpenSideMenu);
     $self.$set = ($props2) => {
       if ("access" in $props2)
