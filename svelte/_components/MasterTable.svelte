@@ -71,14 +71,10 @@
     return row;
   });
 
-
-  /**
-   * @type {Record<string, number>}
-   */
-  export let COL_WIDTHS = {}
+  export let COL_WIDTHS = /** @type {Record<string, number>} */ ({});
 
   // State for loading if hit ajax
-  let isAjaxSubmitted = false;
+  let isAjaxSubmitted = /** @type {boolean} */ (false);
 
   // Binding component FilterTable.svelte
   let filterTable = null;
@@ -98,9 +94,9 @@
   // Pagination total, based on total pages
   let paginationTotal = 1;
   // Pagination all, based on total pages
-  let paginationsAll = /** @type number[] */ ([]);
+  let paginationsAll = /** @type {number[]} */ ([]);
   // Pagination to show, based on total pagination
-  let paginationShow = /** @type number[] */ ([]);
+  let paginationShow = /** @type {number[]} */ ([]);
   // Current page describe which page is currently rendered
   let currentPage = 1;
   // State for sort, wheter is ascending or descending
@@ -215,13 +211,13 @@
   });
 
   // Export function, forward parameter to parent
-  export let OnRestore = async function (/** @type any[]*/ row) {};
-  export let OnDelete = async function (/** @type any[]*/ row) {};
-  export let OnEdit = async function (/** @type any */ id, /** @type any[]*/ payloads) {};
-  export let OnRefresh = async function (/** @type PagerIn */ pagerIn) {};
-  export let OnInfo = async function (/** @type any[] */ row) {};
-  export let OnEditWaAddedAt = async function (/** @type any */ id, /** @type any[]*/ payloads) {};
-  export let OnEditTeleAddedAt = async function (/** @type any */ id, /** @type any[]*/ payloads) {};
+  export let OnRestore = async function (/** @type {any[]} */ row) {};
+  export let OnDelete = async function (/** @type {any[]} */ row) {};
+  export let OnEdit = async function (/** @type {any} */ id, /** @type {any[]} */ payloads) {};
+  export let OnRefresh = async function (/** @type {PagerIn} */ pagerIn) {};
+  export let OnInfo = async function (/** @type {any[]} */ row) {};
+  export let OnEditWaAddedAt = async function (/** @type {any} */ id, /** @type {any[]} */ payloads) {};
+  export let OnEditTeleAddedAt = async function (/** @type {any} */ id, /** @type {any[]} */ payloads) {};
 
   function ApplyFilter() {
     // Hide FilterTable.svelte
@@ -289,9 +285,15 @@
     showPopUp = false;
   }
 
+  /**
+   * @description Format array of facilities to readable string
+   * @param {number[]} facArrInt
+   * @param {Object} facObjs
+   * @returns {string}
+   */
   function formatFacilities(facArrInt, facObjs) {
     if (!facArrInt.length) return '--';
-    return facArrInt.map(fId => facObjs[Number(fId)]).join(', ');
+    return facArrInt.map((/** @type {number | string} */ fId) => facObjs[Number(fId)]).join(', ');
   }
 
   async function OnSort(/** @type {Field} */ field) {
@@ -321,26 +323,29 @@
     }
   }
 
-function toggleCheckboxField(fieldName, rowIndex) {
-  const fieldIdx = FIELDS.findIndex(f => f.name === fieldName);
-  if (fieldIdx === -1) return;
+  /**
+   * @description Toggle checkbox
+   * @param {string} fieldName
+   * @param {number} rowIndex
+   */
+  function toggleCheckboxField(fieldName, rowIndex) {
+    const fieldIdx = FIELDS.findIndex(f => f.name === fieldName);
+    if (fieldIdx === -1) return;
 
-  const row = MASTER_ROWS[rowIndex];
-  row[fieldIdx] = !row[fieldIdx];
-  const payload = [...row];
-  const idIdx = FIELDS.findIndex(f => f.name === 'id');
-  const id = row[idIdx];
+    const row = MASTER_ROWS[rowIndex];
+    row[fieldIdx] = !row[fieldIdx];
+    const payload = [...row];
+    const idIdx = FIELDS.findIndex(f => f.name === 'id');
+    const id = row[idIdx];
 
-  if (fieldName === 'waAddedAt' && OnEditWaAddedAt) {
-    OnEditWaAddedAt(id, payload);
+    if (fieldName === 'waAddedAt' && OnEditWaAddedAt) {
+      OnEditWaAddedAt(id, payload);
+    }
+
+    if (fieldName === 'teleAddedAt' && OnEditTeleAddedAt) {
+      OnEditTeleAddedAt(id, payload);
+    }
   }
-
-  if (fieldName === 'teleAddedAt' && OnEditTeleAddedAt) {
-    OnEditTeleAddedAt(id, payload);
-  }
-}
-
-
 </script>
 
 {#if filterTableReady}
@@ -458,47 +463,44 @@ function toggleCheckboxField(fieldName, rowIndex) {
       <thead>
         <tr>
           <th class="no sticky">No</th>
+          <th class="a-row">Actions</th>
           {#each FIELDS || [] as f, _ (f.name)}
-            {#if f.name === 'id'}
-              <th class="a-row">Actions</th>
-            {:else}
-              <th
-                style="{COL_WIDTHS[f.name] ? `min-width: ${COL_WIDTHS[f.name]}px;` : ''}"
-                class="
-                  {f.inputType === 'textarea' ? 'textarea' : ''}
-                  {f.inputType === 'datetime' ? 'datetime' : ''}
-                ">
-                <button class="heading" on:click={() => OnSort(f)} disabled={UNSORTED_ROWS.includes(f.name)}>
-                  <span>{f.label}</span>
-                  {#if !UNSORTED_ROWS.includes(f.name)}
-                    {#if isSortTableAsc && f.name === fieldNameToSort}
-                      <Icon
-                        className="sort-icon"
-                        size="13"
-                        color="var(--gray-007)"
-                        src={RiArrowsArrowDownSFill}
-                      />
-                    {/if}
-                    {#if !isSortTableAsc && f.name === fieldNameToSort}
-                      <Icon
-                        className="sort-icon"
-                        size="13"
-                        color="var(--gray-007)"
-                        src={RiArrowsArrowUpSFill}
-                      />
-                    {/if}
-                    {#if f.name !== fieldNameToSort}
-                      <Icon
-                        className="sort-icon"
-                        size="13"
-                        color="var(--gray-007)"
-                        src={RiArrowsExpandUpDownFill}
-                      />
-                    {/if}
+            <th
+              style="{COL_WIDTHS[f.name] ? `min-width: ${COL_WIDTHS[f.name]}px;` : ''}"
+              class="
+                {f.inputType === 'textarea' ? 'textarea' : ''}
+                {f.inputType === 'datetime' ? 'datetime' : ''}
+              ">
+              <button class="heading" on:click={() => OnSort(f)} disabled={UNSORTED_ROWS.includes(f.name)}>
+                <span>{f.label}</span>
+                {#if !UNSORTED_ROWS.includes(f.name)}
+                  {#if isSortTableAsc && f.name === fieldNameToSort}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsArrowDownSFill}
+                    />
                   {/if}
-                </button>
-              </th>
-            {/if}
+                  {#if !isSortTableAsc && f.name === fieldNameToSort}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsArrowUpSFill}
+                    />
+                  {/if}
+                  {#if f.name !== fieldNameToSort}
+                    <Icon
+                      className="sort-icon"
+                      size="13"
+                      color="var(--gray-007)"
+                      src={RiArrowsExpandUpDownFill}
+                    />
+                  {/if}
+                {/if}
+              </button>
+            </th>
           {/each}
         </tr>
       </thead>
@@ -578,11 +580,12 @@ function toggleCheckboxField(fieldName, rowIndex) {
                       <span>--</span>
                     {/if}
                   </td>
+                  <td>#{row[idx]}</td>
                 {:else if f.name === 'facilities'}
                   <td class="textarea">{formatFacilities(row[idx], REFS['facilities'])}</td>
                 {:else if f.type == 'intArr'}  
                   <td class="intArr">{row[idx] && row[idx].length > 0 ? (
-                  row[idx].map(id => REFS[f.name][id]).join(', ')
+                  row[idx].map((/** @type {number|string} */ id) => REFS[f.name][id]).join(', ')
                 ) : '--'}</td>
                 {:else if f.type == 'currency'}
                   <td class="currency">{row[idx] ? formatPrice(row[idx], (f.mapping || 'IDR')) : '--'}</td>
