@@ -99,6 +99,27 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.StaffPricePerDayReportAction, func(ctx *fiber.Ctx) error {
+		in, user, segments := userInfoFromContext(ctx, d)
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		in.RequestCommon.Action = domain.StaffPricePerDayReportAction
+		out := d.StaffPricePerDayReport(&domain.StaffPricePerDayReportIn{
+			RequestCommon: in.RequestCommon,
+			YearMonth:     time.Now().Format(rqProperty.DateFormatYYYYMM),
+		})
+
+		return views.RenderStaffPricePerDayReport(ctx, M.SX{
+			`title`:       conf.PROJECT_NAME + ` | Price per day Report`,
+			`user`:        user,
+			`segments`:    segments,
+			`pricePerDay`: out.PricePerDay,
+		})
+	})
+
 	fw.Get(`/`+domain.StaffRevenueReportAction, func(ctx *fiber.Ctx) error {
 		in, user, segments := userInfoFromContext(ctx, d)
 

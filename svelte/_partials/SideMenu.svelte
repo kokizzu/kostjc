@@ -91,7 +91,7 @@
     if (linkId != '') {
       const linkElm = /** @type {HTMLAnchorElement} */ (document.getElementById(linkId))
       if (linkElm) {
-        linkElm.scrollIntoView({ behavior: 'smooth' });
+        linkElm.scrollIntoView({ behavior: 'instant' });
       }
     }
   }
@@ -142,6 +142,10 @@
       <a href="/staff/wifiDeviceReport" class:active={pathAll === '/staff/wifiDeviceReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Wifi Device Report</span>
+      </a>
+      <a href="/staff/pricePerDayReport" class:active={pathAll === '/staff/pricePerDayReport'}>
+        <Icon src={RiDocumentFileChartLine} size="20" />
+        <span>Price per day Report</span>
       </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />
@@ -253,6 +257,14 @@
       <a href="/staff/revenueReport" class:active={pathAll === '/staff/revenueReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Revenue Report</span>
+      </a>
+      <a href="/staff/wifiDeviceReport" class:active={pathAll === '/staff/wifiDeviceReport'}>
+        <Icon src={RiDocumentFileChartLine} size="20" />
+        <span>Wifi Device Report</span>
+      </a>
+      <a href="/staff/pricePerDayReport" class:active={pathAll === '/staff/pricePerDayReport'}>
+        <Icon src={RiDocumentFileChartLine} size="20" />
+        <span>Price per day Report</span>
       </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />

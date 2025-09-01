@@ -656,148 +656,80 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
 }
 
-/* fakecss:./_components/SubmitButton.esbuild-svelte-fake-css */
-@keyframes svelte-1qdkqv5-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.spin {
-  animation: svelte-1qdkqv5-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-.full-width.svelte-1qdkqv5 {
-  width: 100% !important;
-  justify-content: center;
-}
-.submit-btn.svelte-1qdkqv5 {
-  border: none;
-  width: fit-content;
-  padding: 8px 15px;
-  border-radius: 8px;
-  background-color: var(--blue-006);
-  color: #fff;
+/* fakecss:./_components/MonthShifter.esbuild-svelte-fake-css */
+.month-shifter.svelte-1kdw2kw.svelte-1kdw2kw {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  font-weight: 600;
+  gap: 16px;
 }
-.submit-btn.svelte-1qdkqv5:hover {
+.month-shifter.svelte-1kdw2kw .btn.svelte-1kdw2kw {
+  background-color: var(--gray-002);
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-008);
+  padding: 8px;
+}
+.month-shifter.svelte-1kdw2kw .btn.svelte-1kdw2kw:hover {
+  background-color: var(--blue-transparent);
+  color: var(--blue-006);
+}
+.month-shifter.svelte-1kdw2kw input.year-month.svelte-1kdw2kw {
+  border: 1px solid var(--gray-003);
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+.month-shifter.svelte-1kdw2kw button.apply.svelte-1kdw2kw {
+  background-color: var(--blue-006);
+  color: #FFF;
+  border: none;
+  padding: 10px 23px;
+  border-radius: 8px;
+  font-size: var(--font-base);
+  font-weight: 600;
+  cursor: pointer;
+}
+.month-shifter.svelte-1kdw2kw button.apply.svelte-1kdw2kw:hover {
   background-color: var(--blue-005);
 }
-.submit-btn.svelte-1qdkqv5:disabled {
-  background-color: var(--gray-004);
-  cursor: not-allowed;
-}
 
-/* fakecss:./_partials/setting/RoomsInconsistencies.esbuild-svelte-fake-css */
-.container.svelte-1qjrffn.svelte-1qjrffn {
+/* fakecss:./staffPricePerDayReport.esbuild-svelte-fake-css */
+.report-container.svelte-gq920t.svelte-gq920t {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  padding: 20px;
 }
-.container.svelte-1qjrffn .heading.svelte-1qjrffn {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  justify-content: space-between;
-}
-.container.svelte-1qjrffn .heading h1.svelte-1qjrffn {
-  margin: 0;
-}
-.table-container.svelte-1qjrffn.svelte-1qjrffn {
+.table-container.svelte-gq920t.svelte-gq920t {
   overflow-x: auto;
 }
-table.svelte-1qjrffn.svelte-1qjrffn {
+table.svelte-gq920t.svelte-gq920t {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-1qjrffn thead.svelte-1qjrffn {
+table.svelte-gq920t thead.svelte-gq920t {
   position: sticky;
   top: 0;
   background-color: var(--gray-002);
   z-index: 10;
   border: none;
 }
-table.svelte-1qjrffn thead tr th.svelte-1qjrffn {
+table.svelte-gq920t thead tr th.svelte-gq920t {
   text-align: left;
   padding: 8px 12px;
   text-wrap: nowrap;
 }
-table.svelte-1qjrffn tbody tr.svelte-1qjrffn {
+table.svelte-gq920t tbody tr.svelte-gq920t {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-1qjrffn tr td.svelte-1qjrffn,
-table.svelte-1qjrffn tr th.svelte-1qjrffn {
-  padding: 4px 12px;
+table.svelte-gq920t tbody tr td.svelte-gq920t {
+  padding: 8px 12px;
 }
 @media only screen and (max-width : 768px) {
-  .container.svelte-1qjrffn .heading.svelte-1qjrffn {
-    flex-direction: column;
-  }
-  .container .heading .submit-btn {
-    width: 100% !important;
-  }
-}
-
-/* fakecss:./_partials/SettingsSubMenu.esbuild-svelte-fake-css */
-.admin-submenu.svelte-5qqpzn.svelte-5qqpzn {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: fit-content;
-}
-.admin-submenu.svelte-5qqpzn nav.svelte-5qqpzn {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  height: fit-content;
-  gap: 10px;
-}
-.admin-submenu.svelte-5qqpzn nav a.svelte-5qqpzn {
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: var(--gray-008);
-}
-.admin-submenu.svelte-5qqpzn nav a.svelte-5qqpzn:hover {
-  background-color: var(--gray-001);
-}
-.admin-submenu.svelte-5qqpzn nav a.active.svelte-5qqpzn {
-  color: var(--blue-005);
-}
-.admin-submenu.svelte-5qqpzn nav a .title.svelte-5qqpzn {
-  flex-grow: 1;
-  padding: 15px 10px;
-  display: flex;
-  align-items: center;
-}
-.admin-submenu.svelte-5qqpzn nav a .block.svelte-5qqpzn {
-  height: 3px;
-  background-color: transparent;
-  width: 100%;
-}
-.admin-submenu.svelte-5qqpzn nav a:hover .block.svelte-5qqpzn {
-  background-color: var(--gray-005);
-}
-.admin-submenu.svelte-5qqpzn nav a.active .block.svelte-5qqpzn {
-  background-color: var(--blue-005);
-}
-@media only screen and (max-width: 768px) {
-}
-
-/* fakecss:./admin/settingFixInconsistencies.esbuild-svelte-fake-css */
-.setting-container.svelte-d41ngw {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
 }
 </style>
 <script>(() => {
@@ -831,7 +763,7 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
   var require_axios = __commonJS({
     "node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
       "use strict";
-      function bind(fn, thisArg) {
+      function bind2(fn, thisArg) {
         return function wrap() {
           return fn.apply(thisArg, arguments);
         };
@@ -952,7 +884,7 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
       var extend = (a, b, thisArg, { allOwnKeys } = {}) => {
         forEach(b, (val, key) => {
           if (thisArg && isFunction(val)) {
-            a[key] = bind(val, thisArg);
+            a[key] = bind2(val, thisArg);
           } else {
             a[key] = val;
           }
@@ -3202,13 +3134,13 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance9 = bind(Axios$1.prototype.request, context);
-        utils$1.extend(instance9, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance9, context, null, { allOwnKeys: true });
-        instance9.create = function create(instanceConfig) {
+        const instance8 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance8, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance8, context, null, { allOwnKeys: true });
+        instance8.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance9;
+        return instance8;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -3302,7 +3234,7 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
       exports.AdminSaleLogs = async function AdminSaleLogs(i, cb) {
         return await axios.post("/admin/saleLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminSettingFixInconsistencies = async function AdminSettingFixInconsistencies2(i, cb) {
+      exports.AdminSettingFixInconsistencies = async function AdminSettingFixInconsistencies(i, cb) {
         return await axios.post("/admin/settingFixInconsistencies", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminSettings = async function AdminSettings(i, cb) {
@@ -3356,7 +3288,7 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
       exports.StaffOccupancyReport = async function StaffOccupancyReport(i, cb) {
         return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
+      exports.StaffPricePerDayReport = async function StaffPricePerDayReport2(i, cb) {
         return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.StaffRevenueReport = async function StaffRevenueReport(i, cb) {
@@ -3382,192 +3314,6 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
       };
       exports.UserUpdateProfile = async function UserUpdateProfile(i, cb) {
         return await axios.post("/user/updateProfile", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-    }
-  });
-
-  // _components/xConstant.js
-  var require_xConstant = __commonJS({
-    "_components/xConstant.js"(exports, module) {
-      var CmdList = `list`;
-      var CmdForm = `form`;
-      var CmdUpsert2 = `upsert`;
-      var CmdRestore = `restore`;
-      var CmdDelete = `delete`;
-      var CmdToggleWaAdded = `toggle_wa_added`;
-      var CmdToggleTeleAdded = `toggle_tele_added`;
-      module.exports = {
-        CmdList,
-        CmdForm,
-        CmdUpsert: CmdUpsert2,
-        CmdRestore,
-        CmdDelete,
-        CmdToggleWaAdded,
-        CmdToggleTeleAdded
-      };
-    }
-  });
-
-  // _components/xFormatter.js
-  var require_xFormatter = __commonJS({
-    "_components/xFormatter.js"(exports, module) {
-      function datetime(unixSec, humanize) {
-        if (!unixSec)
-          return "";
-        if (typeof unixSec === "string")
-          return unixSec;
-        const dt = new Date(unixSec * 1e3);
-        if (!humanize) {
-          const year = dt.getFullYear();
-          const month = String(dt.getMonth() + 1).padStart(2, "0");
-          const day = String(dt.getDate()).padStart(2, "0");
-          const hours = String(dt.getHours()).padStart(2, "0");
-          const minutes = String(dt.getMinutes()).padStart(2, "0");
-          return `${year}-${month}-${day} ${hours}:${minutes}`;
-        }
-        const options = { day: "2-digit", month: "long", year: "numeric" };
-        return dt.toLocaleDateString(void 0, options);
-      }
-      function localeDatetime(unixSec) {
-        if (!unixSec)
-          return "";
-        const dt = new Date(unixSec * 1e3);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = dt.getDate();
-        const month = dt.toLocaleDateString("default", { month: "short" });
-        const year = dt.getFullYear();
-        let hh = dt.getHours();
-        if (hh < 10)
-          hh = "0" + hh;
-        let mm = dt.getMinutes();
-        if (mm < 10)
-          mm = "0" + mm;
-        const formattedDate = `${date} ${month} ${year} - ${hh}:${mm}`;
-        return formattedDate;
-      }
-      function utcDatetime(unixSec) {
-        if (!unixSec)
-          return "";
-        let dt = new Date(unixSec * 1e3);
-        if (typeof unixSec !== "number")
-          dt = new Date(unixSec);
-        const year = dt.toLocaleDateString("id-ID", { year: "2-digit", timeZone: "UTC" });
-        const month = dt.toLocaleDateString("id-ID", { month: "2-digit", timeZone: "UTC" });
-        const date = dt.getUTCDate();
-        let hh = dt.getUTCHours();
-        if (hh < 10)
-          hh = "0" + hh;
-        let mm = dt.getUTCMinutes();
-        if (mm < 10)
-          mm = "0" + mm;
-        const formattedDate = `${date}/${month}/${year} - ${hh}:${mm}`;
-        return formattedDate;
-      }
-      function isoTime(unixSec) {
-        if (!unixSec)
-          return "";
-        const dt = new Date(unixSec * 1e3);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = dt.getDate();
-        const month = dt.toLocaleDateString("default", { month: "2-digit" });
-        const year = dt.getFullYear();
-        let hh = dt.getHours();
-        if (hh < 10)
-          hh = "0" + hh;
-        let mm = dt.getMinutes();
-        if (mm < 10)
-          mm = "0" + mm;
-        const formattedDate = `${year}-${month}-${date} ${hh}:${mm}`;
-        return formattedDate;
-      }
-      function isoDate(unixSec) {
-        if (!unixSec)
-          return "";
-        const dt = new Date(unixSec * 1e3);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = dt.getDate();
-        const month = dt.toLocaleDateString("default", { month: "2-digit" });
-        const year = dt.getFullYear();
-        const formattedDate = `${year}-${month}-${date}`;
-        return formattedDate;
-      }
-      function dateISOFormat(dayTo = 0) {
-        const dt = new Date();
-        dt.setDate(dt.getDate() + dayTo);
-        const date = String(dt.getDate()).padStart(2, "0");
-        const month = String(dt.getMonth() + 1).padStart(2, "0");
-        const year = dt.getFullYear();
-        return `${year}-${month}-${date}`;
-      }
-      function dateISOFormatFromYYYYMMDD(dateStr, dayTo = 0) {
-        if (!dateStr)
-          return "";
-        const dt = new Date(dateStr);
-        dt.setDate(dt.getDate() + dayTo);
-        const date = String(dt.getDate()).padStart(2, "0");
-        const month = String(dt.getMonth() + 1).padStart(2, "0");
-        const year = dt.getFullYear();
-        return `${year}-${month}-${date}`;
-      }
-      function loadScript(url, callback) {
-        let script = (
-          /** @type {HTMLScriptElement} */
-          document.createElement("script")
-        );
-        script.type = "text/javascript";
-        script.src = url;
-        script.onload = () => callback();
-        document.getElementsByTagName("head")[0].appendChild(script);
-      }
-      function formatPrice(price, currency) {
-        try {
-          return new Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency,
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-          }).format(price);
-        } catch (err) {
-          console.log("formatPrice failed", err, price, currency);
-          return `${currency} ${price}`;
-        }
-      }
-      function arrToArrNum(arr) {
-        return arr.map(Number);
-      }
-      function formatYearMonth(ym) {
-        const [year, month] = ym.split("-");
-        const date = new Date(`${ym}-01`);
-        const monthName = date.toLocaleString("id-ID", { month: "long" });
-        return `${monthName} ${year}`;
-      }
-      function localeDateFromYYYYMMDD2(dateStr) {
-        if (!dateStr)
-          return "";
-        const dt = new Date(dateStr);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = String(dt.getDate()).padStart(2, "0");
-        const month = dt.toLocaleDateString("default", { month: "long" });
-        const year = dt.getFullYear();
-        return `${day}, ${date} ${month} ${year}`;
-      }
-      function checkboxToDate(value) {
-        return value === true || value === "true" ? new Date().toISOString().split("T")[0] : "";
-      }
-      module.exports = {
-        datetime,
-        localeDatetime,
-        utcDatetime,
-        isoTime,
-        isoDate,
-        dateISOFormat,
-        dateISOFormatFromYYYYMMDD,
-        loadScript,
-        formatPrice,
-        arrToArrNum,
-        formatYearMonth,
-        localeDateFromYYYYMMDD: localeDateFromYYYYMMDD2,
-        checkboxToDate
       };
     }
   });
@@ -3657,9 +3403,6 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
       return dirty;
     }
     return -1;
-  }
-  function null_to_empty(value) {
-    return value == null ? "" : value;
   }
   function set_store_value(store, ret, value) {
     store.set(value);
@@ -3759,12 +3502,6 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
     node.addEventListener(event, handler, options);
     return () => node.removeEventListener(event, handler, options);
   }
-  function prevent_default(fn) {
-    return function(event) {
-      event.preventDefault();
-      return fn.call(this, event);
-    };
-  }
   function attr(node, attribute, value) {
     if (value == null)
       node.removeAttribute(attribute);
@@ -3785,6 +3522,9 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
       return;
     text2.data = /** @type {string} */
     data;
+  }
+  function set_input_value(input, value) {
+    input.value = value == null ? "" : value;
   }
   function toggle_class(element2, name, toggle) {
     element2.classList.toggle(name, !!toggle);
@@ -3813,12 +3553,6 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
   function onMount(fn) {
     get_current_component().$.on_mount.push(fn);
   }
-  function bubble(component, event) {
-    const callbacks = component.$.callbacks[event.type];
-    if (callbacks) {
-      callbacks.slice().forEach((fn) => fn.call(this, event));
-    }
-  }
 
   // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/scheduler.js
   var dirty_components = [];
@@ -3835,6 +3569,9 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
   }
   function add_render_callback(fn) {
     render_callbacks.push(fn);
+  }
+  function add_flush_callback(fn) {
+    flush_callbacks.push(fn);
   }
   var seen_callbacks = /* @__PURE__ */ new Set();
   var flushidx = 0;
@@ -4010,6 +3747,13 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
   var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
 
   // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/Component.js
+  function bind(component, name, callback) {
+    const index = component.$.props[name];
+    if (index !== void 0) {
+      component.$.bound[index] = callback;
+      callback(component.$.ctx[index]);
+    }
+  }
   function create_component(block) {
     block && block.c();
   }
@@ -4045,7 +3789,7 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance9, create_fragment10, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance8, create_fragment8, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -4071,7 +3815,7 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance9 ? instance9(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance8 ? instance8(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -4084,7 +3828,7 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment10 ? create_fragment10($.ctx) : false;
+    $.fragment = create_fragment8 ? create_fragment8($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -4603,12 +4347,12 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
   var RiUserFacesGroupLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>' };
   var RiSystemMenu2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 4H21V6H3V4ZM3 11H15V13H3V11ZM3 18H21V20H3V18Z"></path>' };
   var RiSystemSettingsLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"></path>' };
-  var RiSystemLoaderLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M11.9995 2C12.5518 2 12.9995 2.44772 12.9995 3V6C12.9995 6.55228 12.5518 7 11.9995 7C11.4472 7 10.9995 6.55228 10.9995 6V3C10.9995 2.44772 11.4472 2 11.9995 2ZM11.9995 17C12.5518 17 12.9995 17.4477 12.9995 18V21C12.9995 21.5523 12.5518 22 11.9995 22C11.4472 22 10.9995 21.5523 10.9995 21V18C10.9995 17.4477 11.4472 17 11.9995 17ZM20.6597 7C20.9359 7.47829 20.772 8.08988 20.2937 8.36602L17.6956 9.86602C17.2173 10.1422 16.6057 9.97829 16.3296 9.5C16.0535 9.02171 16.2173 8.41012 16.6956 8.13398L19.2937 6.63397C19.772 6.35783 20.3836 6.52171 20.6597 7ZM7.66935 14.5C7.94549 14.9783 7.78161 15.5899 7.30332 15.866L4.70525 17.366C4.22695 17.6422 3.61536 17.4783 3.33922 17C3.06308 16.5217 3.22695 15.9101 3.70525 15.634L6.30332 14.134C6.78161 13.8578 7.3932 14.0217 7.66935 14.5ZM20.6597 17C20.3836 17.4783 19.772 17.6422 19.2937 17.366L16.6956 15.866C16.2173 15.5899 16.0535 14.9783 16.3296 14.5C16.6057 14.0217 17.2173 13.8578 17.6956 14.134L20.2937 15.634C20.772 15.9101 20.9359 16.5217 20.6597 17ZM7.66935 9.5C7.3932 9.97829 6.78161 10.1422 6.30332 9.86602L3.70525 8.36602C3.22695 8.08988 3.06308 7.47829 3.33922 7C3.61536 6.52171 4.22695 6.35783 4.70525 6.63397L7.30332 8.13398C7.78161 8.41012 7.94549 9.02171 7.66935 9.5Z"></path>' };
-  var RiSystemCheckboxFill = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z"></path>' };
   var RiSystemLogoutBoxRLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path>' };
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
   var RiFinanceCashLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path>' };
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
+  var RiArrowsArrowRightSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path>' };
+  var RiArrowsArrowLeftSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>' };
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
@@ -6983,247 +6727,273 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
   };
   var main_default = Main;
 
-  // _components/SubmitButton.svelte
-  function create_if_block2(ctx) {
-    let icon;
-    let current;
-    icon = new Icon_default({
-      props: {
-        className: "spin",
-        color: "#FFF",
-        size: "15",
-        src: RiSystemLoaderLine
-      }
-    });
-    return {
-      c() {
-        create_component(icon.$.fragment);
-      },
-      m(target, anchor) {
-        mount_component(icon, target, anchor);
-        current = true;
-      },
-      i(local) {
-        if (current)
-          return;
-        transition_in(icon.$.fragment, local);
-        current = true;
-      },
-      o(local) {
-        transition_out(icon.$.fragment, local);
-        current = false;
-      },
-      d(detaching) {
-        destroy_component(icon, detaching);
-      }
-    };
-  }
+  // _components/MonthShifter.svelte
   function create_fragment6(ctx) {
-    let button;
+    let div;
+    let button0;
+    let icon0;
     let t0;
-    let span;
+    let button1;
+    let icon1;
     let t1;
-    let button_class_value;
+    let input;
+    let t2;
+    let button2;
     let current;
     let mounted;
     let dispose;
-    let if_block = (
-      /*isSubmitted*/
-      ctx[0] && create_if_block2(ctx)
-    );
+    icon0 = new Icon_default({
+      props: { size: "20", src: RiArrowsArrowLeftSLine }
+    });
+    icon1 = new Icon_default({
+      props: { size: "20", src: RiArrowsArrowRightSLine }
+    });
     return {
       c() {
-        button = element("button");
-        if (if_block)
-          if_block.c();
+        div = element("div");
+        button0 = element("button");
+        create_component(icon0.$.fragment);
         t0 = space();
-        span = element("span");
-        t1 = text(
-          /*label*/
-          ctx[2]
-        );
-        attr(button, "class", button_class_value = null_to_empty(
-          /*isFullWidth*/
-          ctx[1] ? "submit-btn full-width" : "submit-btn"
-        ) + " svelte-1qdkqv5");
-        button.disabled = /*isSubmitted*/
-        ctx[0];
+        button1 = element("button");
+        create_component(icon1.$.fragment);
+        t1 = space();
+        input = element("input");
+        t2 = space();
+        button2 = element("button");
+        button2.textContent = "Apply";
+        button0.disabled = /*isLoading*/
+        ctx[2];
+        attr(button0, "class", "btn svelte-1kdw2kw");
+        attr(button0, "aria-label", "Previous");
+        button1.disabled = /*isLoading*/
+        ctx[2];
+        attr(button1, "class", "btn svelte-1kdw2kw");
+        attr(button1, "aria-label", "Next");
+        attr(input, "class", "year-month svelte-1kdw2kw");
+        attr(input, "type", "month");
+        attr(input, "name", "year-month");
+        attr(input, "id", "year-month");
+        attr(button2, "class", "apply svelte-1kdw2kw");
+        attr(div, "class", "month-shifter svelte-1kdw2kw");
       },
       m(target, anchor) {
-        insert(target, button, anchor);
-        if (if_block)
-          if_block.m(button, null);
-        append(button, t0);
-        append(button, span);
-        append(span, t1);
+        insert(target, div, anchor);
+        append(div, button0);
+        mount_component(icon0, button0, null);
+        append(div, t0);
+        append(div, button1);
+        mount_component(icon1, button1, null);
+        append(div, t1);
+        append(div, input);
+        set_input_value(
+          input,
+          /*yearMonth*/
+          ctx[0]
+        );
+        append(div, t2);
+        append(div, button2);
         current = true;
         if (!mounted) {
-          dispose = listen(button, "click", prevent_default(
-            /*click_handler*/
-            ctx[3]
-          ));
+          dispose = [
+            listen(
+              button0,
+              "click",
+              /*click_handler*/
+              ctx[4]
+            ),
+            listen(
+              button1,
+              "click",
+              /*click_handler_1*/
+              ctx[5]
+            ),
+            listen(
+              input,
+              "input",
+              /*input_input_handler*/
+              ctx[6]
+            ),
+            listen(button2, "click", function() {
+              if (is_function(
+                /*OnChanges*/
+                ctx[1]
+              ))
+                ctx[1].apply(this, arguments);
+            })
+          ];
           mounted = true;
         }
       },
-      p(ctx2, [dirty]) {
-        if (
-          /*isSubmitted*/
-          ctx2[0]
-        ) {
-          if (if_block) {
-            if (dirty & /*isSubmitted*/
-            1) {
-              transition_in(if_block, 1);
-            }
-          } else {
-            if_block = create_if_block2(ctx2);
-            if_block.c();
-            transition_in(if_block, 1);
-            if_block.m(button, t0);
-          }
-        } else if (if_block) {
-          group_outros();
-          transition_out(if_block, 1, 1, () => {
-            if_block = null;
-          });
-          check_outros();
+      p(new_ctx, [dirty]) {
+        ctx = new_ctx;
+        if (!current || dirty & /*isLoading*/
+        4) {
+          button0.disabled = /*isLoading*/
+          ctx[2];
         }
-        if (!current || dirty & /*label*/
-        4)
-          set_data(
-            t1,
-            /*label*/
-            ctx2[2]
-          );
-        if (!current || dirty & /*isFullWidth*/
-        2 && button_class_value !== (button_class_value = null_to_empty(
-          /*isFullWidth*/
-          ctx2[1] ? "submit-btn full-width" : "submit-btn"
-        ) + " svelte-1qdkqv5")) {
-          attr(button, "class", button_class_value);
+        if (!current || dirty & /*isLoading*/
+        4) {
+          button1.disabled = /*isLoading*/
+          ctx[2];
         }
-        if (!current || dirty & /*isSubmitted*/
+        if (dirty & /*yearMonth*/
         1) {
-          button.disabled = /*isSubmitted*/
-          ctx2[0];
+          set_input_value(
+            input,
+            /*yearMonth*/
+            ctx[0]
+          );
         }
       },
       i(local) {
         if (current)
           return;
-        transition_in(if_block);
+        transition_in(icon0.$.fragment, local);
+        transition_in(icon1.$.fragment, local);
         current = true;
       },
       o(local) {
-        transition_out(if_block);
+        transition_out(icon0.$.fragment, local);
+        transition_out(icon1.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
-          detach(button);
+          detach(div);
         }
-        if (if_block)
-          if_block.d();
+        destroy_component(icon0);
+        destroy_component(icon1);
         mounted = false;
-        dispose();
+        run_all(dispose);
       }
     };
   }
+  function formatYM(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    return `${y}-${m}`;
+  }
+  function parseYM(ym) {
+    const [y, m] = ym.split("-").map(Number);
+    return new Date(y, m - 1);
+  }
   function instance6($self, $props, $invalidate) {
-    let { isSubmitted = (
-      /** @type {boolean} */
-      false
-    ) } = $props;
-    let { isFullWidth = (
-      /** @type {boolean} */
-      false
-    ) } = $props;
-    let { label = (
-      /** @type {string} */
-      "Submit"
-    ) } = $props;
-    function click_handler(event) {
-      bubble.call(this, $self, event);
+    const now2 = new Date();
+    const initialMonth = new Date(now2.getFullYear(), now2.getMonth());
+    let { yearMonth = formatYM(initialMonth) } = $props;
+    let { OnChanges = async () => {
+    } } = $props;
+    let { isLoading = false } = $props;
+    async function shiftMonth(direction) {
+      const end = parseYM(yearMonth);
+      end.setMonth(end.getMonth() + direction);
+      $invalidate(0, yearMonth = formatYM(end));
+      await OnChanges();
+    }
+    const click_handler = () => shiftMonth(-1);
+    const click_handler_1 = () => shiftMonth(1);
+    function input_input_handler() {
+      yearMonth = this.value;
+      $invalidate(0, yearMonth);
     }
     $self.$set = ($props2) => {
-      if ("isSubmitted" in $props2)
-        $invalidate(0, isSubmitted = $props2.isSubmitted);
-      if ("isFullWidth" in $props2)
-        $invalidate(1, isFullWidth = $props2.isFullWidth);
-      if ("label" in $props2)
-        $invalidate(2, label = $props2.label);
+      if ("yearMonth" in $props2)
+        $invalidate(0, yearMonth = $props2.yearMonth);
+      if ("OnChanges" in $props2)
+        $invalidate(1, OnChanges = $props2.OnChanges);
+      if ("isLoading" in $props2)
+        $invalidate(2, isLoading = $props2.isLoading);
     };
-    return [isSubmitted, isFullWidth, label, click_handler];
+    return [
+      yearMonth,
+      OnChanges,
+      isLoading,
+      shiftMonth,
+      click_handler,
+      click_handler_1,
+      input_input_handler
+    ];
   }
-  var SubmitButton = class extends SvelteComponent {
+  var MonthShifter = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance6, create_fragment6, safe_not_equal, { isSubmitted: 0, isFullWidth: 1, label: 2 });
+      init(this, options, instance6, create_fragment6, safe_not_equal, { yearMonth: 0, OnChanges: 1, isLoading: 2 });
     }
   };
-  var SubmitButton_default = SubmitButton;
+  var MonthShifter_default = MonthShifter;
 
-  // _partials/setting/RoomsInconsistencies.svelte
-  var import_xConstant = __toESM(require_xConstant());
-  var import_xFormatter = __toESM(require_xFormatter());
+  // staffPricePerDayReport.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[5] = list[i];
+    child_ctx[6] = list[i];
     return child_ctx;
   }
   function create_each_block(ctx) {
     let tr;
     let td0;
     let t0_value = (
-      /*rooms*/
-      ctx[1][
-        /*data*/
-        ctx[5].roomId
-      ] + ""
+      /*data*/
+      ctx[6].roomName + ""
     );
     let t0;
     let t1;
     let td1;
     let t2_value = (
-      /*tenants*/
-      ctx[0][
-        /*data*/
-        ctx[5].tenantId
-      ] + ""
+      /*data*/
+      (ctx[6].tenantName || "--") + ""
     );
     let t2;
     let t3;
     let td2;
     let t4_value = (
-      /*tenants*/
-      ctx[0][
-        /*data*/
-        ctx[5].currentTenantId
-      ] + ""
+      /*data*/
+      (ctx[6].dateStart || "--") + ""
     );
     let t4;
     let t5;
     let td3;
-    let t6_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
+    let t6_value = (
       /*data*/
-      ctx[5].dateEnd
-    ) + "";
+      (ctx[6].dateEnd || "--") + ""
+    );
     let t6;
     let t7;
     let td4;
-    let icon;
-    let current;
-    icon = new Icon_default({
-      props: {
-        src: RiSystemCheckboxFill,
-        size: "20",
-        color: (
-          /*data*/
-          ctx[5].isInconsistent ? "var(--gray-004)" : "var(--green-005)"
-        )
-      }
-    });
+    let t8_value = (calculateDurationDay(
+      /*data*/
+      ctx[6].dateStart,
+      /*data*/
+      ctx[6].dateEnd
+    ) || "0") + "";
+    let t8;
+    let t9;
+    let t10;
+    let td5;
+    let t11_value = (calculatePricePerDay(
+      /*data*/
+      ctx[6].totalPrice,
+      /*data*/
+      ctx[6].dateStart,
+      /*data*/
+      ctx[6].dateEnd
+    ) || "0") + "";
+    let t11;
+    let t12;
+    let td6;
+    let t13_value = (
+      /*data*/
+      (ctx[6].totalPaid || "0") + ""
+    );
+    let t13;
+    let t14;
+    let td7;
+    let t15_value = (
+      /*data*/
+      (ctx[6].totalPrice || "0") + ""
+    );
+    let t15;
+    let t16;
     return {
       c() {
         tr = element("tr");
@@ -7240,13 +7010,27 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
         t6 = text(t6_value);
         t7 = space();
         td4 = element("td");
-        create_component(icon.$.fragment);
-        attr(td0, "class", "svelte-1qjrffn");
-        attr(td1, "class", "svelte-1qjrffn");
-        attr(td2, "class", "svelte-1qjrffn");
-        attr(td3, "class", "svelte-1qjrffn");
-        attr(td4, "class", "svelte-1qjrffn");
-        attr(tr, "class", " svelte-1qjrffn");
+        t8 = text(t8_value);
+        t9 = text(" Days");
+        t10 = space();
+        td5 = element("td");
+        t11 = text(t11_value);
+        t12 = space();
+        td6 = element("td");
+        t13 = text(t13_value);
+        t14 = space();
+        td7 = element("td");
+        t15 = text(t15_value);
+        t16 = space();
+        attr(td0, "class", "svelte-gq920t");
+        attr(td1, "class", "svelte-gq920t");
+        attr(td2, "class", "svelte-gq920t");
+        attr(td3, "class", "svelte-gq920t");
+        attr(td4, "class", "svelte-gq920t");
+        attr(td5, "class", "svelte-gq920t");
+        attr(td6, "class", "svelte-gq920t");
+        attr(td7, "class", "svelte-gq920t");
+        attr(tr, "class", "svelte-gq920t");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -7263,72 +7047,62 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
         append(td3, t6);
         append(tr, t7);
         append(tr, td4);
-        mount_component(icon, td4, null);
-        current = true;
+        append(td4, t8);
+        append(td4, t9);
+        append(tr, t10);
+        append(tr, td5);
+        append(td5, t11);
+        append(tr, t12);
+        append(tr, td6);
+        append(td6, t13);
+        append(tr, t14);
+        append(tr, td7);
+        append(td7, t15);
+        append(tr, t16);
       },
       p(ctx2, dirty) {
-        if ((!current || dirty & /*rooms, roomIncosistencies*/
-        6) && t0_value !== (t0_value = /*rooms*/
-        ctx2[1][
-          /*data*/
-          ctx2[5].roomId
-        ] + ""))
+        if (dirty & /*pricePerDay*/
+        1 && t0_value !== (t0_value = /*data*/
+        ctx2[6].roomName + ""))
           set_data(t0, t0_value);
-        if ((!current || dirty & /*tenants, roomIncosistencies*/
-        5) && t2_value !== (t2_value = /*tenants*/
-        ctx2[0][
-          /*data*/
-          ctx2[5].tenantId
-        ] + ""))
+        if (dirty & /*pricePerDay*/
+        1 && t2_value !== (t2_value = /*data*/
+        (ctx2[6].tenantName || "--") + ""))
           set_data(t2, t2_value);
-        if ((!current || dirty & /*tenants, roomIncosistencies*/
-        5) && t4_value !== (t4_value = /*tenants*/
-        ctx2[0][
-          /*data*/
-          ctx2[5].currentTenantId
-        ] + ""))
+        if (dirty & /*pricePerDay*/
+        1 && t4_value !== (t4_value = /*data*/
+        (ctx2[6].dateStart || "--") + ""))
           set_data(t4, t4_value);
-        if ((!current || dirty & /*roomIncosistencies*/
-        4) && t6_value !== (t6_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
-          /*data*/
-          ctx2[5].dateEnd
-        ) + ""))
+        if (dirty & /*pricePerDay*/
+        1 && t6_value !== (t6_value = /*data*/
+        (ctx2[6].dateEnd || "--") + ""))
           set_data(t6, t6_value);
-        const icon_changes = {};
-        if (dirty & /*roomIncosistencies*/
-        4)
-          icon_changes.color = /*data*/
-          ctx2[5].isInconsistent ? "var(--gray-004)" : "var(--green-005)";
-        icon.$set(icon_changes);
-      },
-      i(local) {
-        if (current)
-          return;
-        transition_in(icon.$.fragment, local);
-        current = true;
-      },
-      o(local) {
-        transition_out(icon.$.fragment, local);
-        current = false;
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(tr);
-        }
-        destroy_component(icon);
-      }
-    };
-  }
-  function create_if_block3(ctx) {
-    let tr;
-    return {
-      c() {
-        tr = element("tr");
-        tr.innerHTML = `<td class="svelte-1qjrffn">No data</td>`;
-        attr(tr, "class", "svelte-1qjrffn");
-      },
-      m(target, anchor) {
-        insert(target, tr, anchor);
+        if (dirty & /*pricePerDay*/
+        1 && t8_value !== (t8_value = (calculateDurationDay(
+          /*data*/
+          ctx2[6].dateStart,
+          /*data*/
+          ctx2[6].dateEnd
+        ) || "0") + ""))
+          set_data(t8, t8_value);
+        if (dirty & /*pricePerDay*/
+        1 && t11_value !== (t11_value = (calculatePricePerDay(
+          /*data*/
+          ctx2[6].totalPrice,
+          /*data*/
+          ctx2[6].dateStart,
+          /*data*/
+          ctx2[6].dateEnd
+        ) || "0") + ""))
+          set_data(t11, t11_value);
+        if (dirty & /*pricePerDay*/
+        1 && t13_value !== (t13_value = /*data*/
+        (ctx2[6].totalPaid || "0") + ""))
+          set_data(t13, t13_value);
+        if (dirty & /*pricePerDay*/
+        1 && t15_value !== (t15_value = /*data*/
+        (ctx2[6].totalPrice || "0") + ""))
+          set_data(t15, t15_value);
       },
       d(detaching) {
         if (detaching) {
@@ -7337,335 +7111,148 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
       }
     };
   }
-  function create_fragment7(ctx) {
-    let div2;
-    let div0;
-    let h1;
-    let t1;
-    let submitbutton;
-    let t2;
+  function create_default_slot(ctx) {
     let div1;
+    let monthshifter;
+    let updating_yearMonth;
+    let updating_isLoading;
+    let t0;
+    let div0;
     let table;
     let thead;
-    let t12;
+    let t16;
     let tbody;
-    let t13;
     let current;
-    submitbutton = new SubmitButton_default({
-      props: {
-        label: "Fix Now",
-        isSubmitted: (
-          /*isFixing*/
-          ctx[3]
-        )
-      }
-    });
-    submitbutton.$on(
-      "click",
-      /*fixInconsistencies*/
-      ctx[4]
-    );
+    function monthshifter_yearMonth_binding(value) {
+      ctx[4](value);
+    }
+    function monthshifter_isLoading_binding(value) {
+      ctx[5](value);
+    }
+    let monthshifter_props = { OnChanges: (
+      /*RefreshData*/
+      ctx[3]
+    ) };
+    if (
+      /*yearMonth*/
+      ctx[1] !== void 0
+    ) {
+      monthshifter_props.yearMonth = /*yearMonth*/
+      ctx[1];
+    }
+    if (
+      /*isLoading*/
+      ctx[2] !== void 0
+    ) {
+      monthshifter_props.isLoading = /*isLoading*/
+      ctx[2];
+    }
+    monthshifter = new MonthShifter_default({ props: monthshifter_props });
+    binding_callbacks.push(() => bind(monthshifter, "yearMonth", monthshifter_yearMonth_binding));
+    binding_callbacks.push(() => bind(monthshifter, "isLoading", monthshifter_isLoading_binding));
     let each_value = ensure_array_like(
-      /*roomIncosistencies*/
-      ctx[2] || []
+      /*pricePerDay*/
+      ctx[0] || []
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
       each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
     }
-    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
-      each_blocks[i] = null;
-    });
-    let if_block = (!/*roomIncosistencies*/
-    ctx[2] || /*roomIncosistencies*/
-    (ctx[2] || []).length == 0) && create_if_block3(ctx);
     return {
       c() {
-        div2 = element("div");
-        div0 = element("div");
-        h1 = element("h1");
-        h1.textContent = "Rooms Inconsistencies";
-        t1 = space();
-        create_component(submitbutton.$.fragment);
-        t2 = space();
         div1 = element("div");
+        create_component(monthshifter.$.fragment);
+        t0 = space();
+        div0 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-1qjrffn"><th class="svelte-1qjrffn">Room</th> <th class="svelte-1qjrffn">Tenant</th> <th class="svelte-1qjrffn">Current Tenant</th> <th class="svelte-1qjrffn">Date End</th> <th class="svelte-1qjrffn">Consistent</th></tr>`;
-        t12 = space();
+        thead.innerHTML = `<tr class="svelte-gq920t"><th class="svelte-gq920t">Room</th> <th class="svelte-gq920t">Tenant</th> <th class="svelte-gq920t">Date Start</th> <th class="svelte-gq920t">Date End</th> <th class="svelte-gq920t">Duration</th> <th class="svelte-gq920t">Price Per Day</th> <th class="svelte-gq920t">Total Paid</th> <th class="svelte-gq920t">Total Price</th></tr>`;
+        t16 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        t13 = space();
-        if (if_block)
-          if_block.c();
-        attr(h1, "class", "svelte-1qjrffn");
-        attr(div0, "class", "heading svelte-1qjrffn");
-        attr(thead, "class", "svelte-1qjrffn");
-        attr(table, "class", "svelte-1qjrffn");
-        attr(div1, "class", "table-container svelte-1qjrffn");
-        attr(div2, "class", "container svelte-1qjrffn");
+        attr(thead, "class", "svelte-gq920t");
+        attr(table, "class", "svelte-gq920t");
+        attr(div0, "class", "table-container svelte-gq920t");
+        attr(div1, "class", "report-container svelte-gq920t");
       },
       m(target, anchor) {
-        insert(target, div2, anchor);
-        append(div2, div0);
-        append(div0, h1);
-        append(div0, t1);
-        mount_component(submitbutton, div0, null);
-        append(div2, t2);
-        append(div2, div1);
-        append(div1, table);
+        insert(target, div1, anchor);
+        mount_component(monthshifter, div1, null);
+        append(div1, t0);
+        append(div1, div0);
+        append(div0, table);
         append(table, thead);
-        append(table, t12);
+        append(table, t16);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
             each_blocks[i].m(tbody, null);
           }
         }
-        append(tbody, t13);
-        if (if_block)
-          if_block.m(tbody, null);
         current = true;
       },
-      p(ctx2, [dirty]) {
-        const submitbutton_changes = {};
-        if (dirty & /*isFixing*/
-        8)
-          submitbutton_changes.isSubmitted = /*isFixing*/
-          ctx2[3];
-        submitbutton.$set(submitbutton_changes);
-        if (dirty & /*roomIncosistencies, tenants, rooms*/
-        7) {
+      p(ctx2, dirty) {
+        const monthshifter_changes = {};
+        if (!updating_yearMonth && dirty & /*yearMonth*/
+        2) {
+          updating_yearMonth = true;
+          monthshifter_changes.yearMonth = /*yearMonth*/
+          ctx2[1];
+          add_flush_callback(() => updating_yearMonth = false);
+        }
+        if (!updating_isLoading && dirty & /*isLoading*/
+        4) {
+          updating_isLoading = true;
+          monthshifter_changes.isLoading = /*isLoading*/
+          ctx2[2];
+          add_flush_callback(() => updating_isLoading = false);
+        }
+        monthshifter.$set(monthshifter_changes);
+        if (dirty & /*pricePerDay, calculatePricePerDay, calculateDurationDay*/
+        1) {
           each_value = ensure_array_like(
-            /*roomIncosistencies*/
-            ctx2[2] || []
+            /*pricePerDay*/
+            ctx2[0] || []
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
             const child_ctx = get_each_context(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
-              transition_in(each_blocks[i], 1);
             } else {
               each_blocks[i] = create_each_block(child_ctx);
               each_blocks[i].c();
-              transition_in(each_blocks[i], 1);
-              each_blocks[i].m(tbody, t13);
+              each_blocks[i].m(tbody, null);
             }
           }
-          group_outros();
-          for (i = each_value.length; i < each_blocks.length; i += 1) {
-            out(i);
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
           }
-          check_outros();
-        }
-        if (!/*roomIncosistencies*/
-        ctx2[2] || /*roomIncosistencies*/
-        (ctx2[2] || []).length == 0) {
-          if (if_block) {
-          } else {
-            if_block = create_if_block3(ctx2);
-            if_block.c();
-            if_block.m(tbody, null);
-          }
-        } else if (if_block) {
-          if_block.d(1);
-          if_block = null;
+          each_blocks.length = each_value.length;
         }
       },
       i(local) {
         if (current)
           return;
-        transition_in(submitbutton.$.fragment, local);
-        for (let i = 0; i < each_value.length; i += 1) {
-          transition_in(each_blocks[i]);
-        }
+        transition_in(monthshifter.$.fragment, local);
         current = true;
       },
       o(local) {
-        transition_out(submitbutton.$.fragment, local);
-        each_blocks = each_blocks.filter(Boolean);
-        for (let i = 0; i < each_blocks.length; i += 1) {
-          transition_out(each_blocks[i]);
-        }
+        transition_out(monthshifter.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
-          detach(div2);
+          detach(div1);
         }
-        destroy_component(submitbutton);
+        destroy_component(monthshifter);
         destroy_each(each_blocks, detaching);
-        if (if_block)
-          if_block.d();
       }
     };
   }
-  function instance7($self, $props, $invalidate) {
-    let { tenants: tenants2 = (
-      /** @type {Record<number, string>} */
-      {/* tenants */}
-    ) } = $props;
-    let { rooms: rooms2 = (
-      /** @type {Record<number, string>} */
-      {/* rooms */}
-    ) } = $props;
-    let roomIncosistencies = (
-      /** @type {RoomBookingInconsistency[]} */
-      [/* roomIncosistencies */]
-    );
-    let isFixing = false;
-    async function fixInconsistencies() {
-      $invalidate(3, isFixing = true);
-      await (0, import_jsApi2.AdminSettingFixInconsistencies)(
-        {
-          // @ts-ignore
-          cmd: import_xConstant.CmdUpsert
-        },
-        /** @type {import('./jsApi.GEN').AdminSettingFixInconsistenciesCallback} */
-        /** @returns {Promise<void>} */
-        function(o) {
-          if (o.error) {
-            console.log(o);
-            notifier.showError(o.error || "failed to fix inconsistencies");
-            return;
-          }
-          $invalidate(2, roomIncosistencies = o.roomIncosistencies);
-        }
-      );
-    }
-    $self.$set = ($props2) => {
-      if ("tenants" in $props2)
-        $invalidate(0, tenants2 = $props2.tenants);
-      if ("rooms" in $props2)
-        $invalidate(1, rooms2 = $props2.rooms);
-    };
-    return [tenants2, rooms2, roomIncosistencies, isFixing, fixInconsistencies];
-  }
-  var RoomsInconsistencies = class extends SvelteComponent {
-    constructor(options) {
-      super();
-      init(this, options, instance7, create_fragment7, safe_not_equal, { tenants: 0, rooms: 1 });
-    }
-  };
-  var RoomsInconsistencies_default = RoomsInconsistencies;
-
-  // _partials/SettingsSubMenu.svelte
-  function create_fragment8(ctx) {
-    let div;
-    let nav;
-    let a0;
-    let t2;
-    let a1;
-    return {
-      c() {
-        div = element("div");
-        nav = element("nav");
-        a0 = element("a");
-        a0.innerHTML = `<span class="title svelte-5qqpzn">Fix Inconsistencies</span> <span class="block svelte-5qqpzn"></span>`;
-        t2 = space();
-        a1 = element("a");
-        a1.innerHTML = `<span class="title svelte-5qqpzn">--</span> <span class="block svelte-5qqpzn"></span>`;
-        attr(a0, "href", "/admin/settingFixInconsistencies");
-        attr(a0, "class", "svelte-5qqpzn");
-        toggle_class(
-          a0,
-          "active",
-          /*segment2*/
-          ctx[0] === "settingFixInconsistencies"
-        );
-        attr(a1, "href", "/admin/settingDatabase");
-        attr(a1, "class", "svelte-5qqpzn");
-        toggle_class(
-          a1,
-          "active",
-          /*segment2*/
-          ctx[0] === "settingDatabase"
-        );
-        attr(nav, "class", "svelte-5qqpzn");
-        attr(div, "class", "admin-submenu svelte-5qqpzn");
-      },
-      m(target, anchor) {
-        insert(target, div, anchor);
-        append(div, nav);
-        append(nav, a0);
-        append(nav, t2);
-        append(nav, a1);
-      },
-      p: noop,
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-      }
-    };
-  }
-  function instance8($self) {
-    let segment2 = (
-      /** @type {string} */
-      window.location.pathname.split("/").pop() || ""
-    );
-    return [segment2];
-  }
-  var SettingsSubMenu = class extends SvelteComponent {
-    constructor(options) {
-      super();
-      init(this, options, instance8, create_fragment8, safe_not_equal, {});
-    }
-  };
-  var SettingsSubMenu_default = SettingsSubMenu;
-
-  // admin/settingFixInconsistencies.svelte
-  function create_default_slot(ctx) {
-    let div;
-    let settingssubmenu;
-    let t;
-    let roomsinconsistencies;
-    let current;
-    settingssubmenu = new SettingsSubMenu_default({});
-    roomsinconsistencies = new RoomsInconsistencies_default({ props: { tenants, rooms } });
-    return {
-      c() {
-        div = element("div");
-        create_component(settingssubmenu.$.fragment);
-        t = space();
-        create_component(roomsinconsistencies.$.fragment);
-        attr(div, "class", "setting-container svelte-d41ngw");
-      },
-      m(target, anchor) {
-        insert(target, div, anchor);
-        mount_component(settingssubmenu, div, null);
-        append(div, t);
-        mount_component(roomsinconsistencies, div, null);
-        current = true;
-      },
-      p: noop,
-      i(local) {
-        if (current)
-          return;
-        transition_in(settingssubmenu.$.fragment, local);
-        transition_in(roomsinconsistencies.$.fragment, local);
-        current = true;
-      },
-      o(local) {
-        transition_out(settingssubmenu.$.fragment, local);
-        transition_out(roomsinconsistencies.$.fragment, local);
-        current = false;
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-        destroy_component(settingssubmenu);
-        destroy_component(roomsinconsistencies);
-      }
-    };
-  }
-  function create_fragment9(ctx) {
+  function create_fragment7(ctx) {
     let layoutmain;
     let current;
     layoutmain = new main_default({
@@ -7686,8 +7273,8 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope*/
-        1) {
+        if (dirty & /*$scope, pricePerDay, yearMonth, isLoading*/
+        519) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -7715,24 +7302,71 @@ table.svelte-1qjrffn tr th.svelte-1qjrffn {
     /** @type {Access} */
     {/* segments */}
   );
-  var tenants = (
-    /** @type {Record<number, string>} */
-    {/* tenants */}
-  );
-  var rooms = (
-    /** @type {Record<number, string>} */
-    {/* rooms */}
-  );
-  var SettingFixInconsistencies = class extends SvelteComponent {
+  function calculateDurationDay(dateStart, dateEnd) {
+    return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / (1e3 * 60 * 60 * 24));
+  }
+  function calculatePricePerDay(totalPrice, dateStart, dateEnd) {
+    return Number((totalPrice / calculateDurationDay(dateStart, dateEnd)).toFixed(2));
+  }
+  function instance7($self, $props, $invalidate) {
+    let pricePerDay = (
+      /** @type {PricePerDayReport[]} */
+      [ /* pricePerDay */ ]
+    );
+    onMount(() => {
+      console.log("Price per day report:", pricePerDay);
+    });
+    let yearMonth = (
+      /** @type {string} */
+      new Date().toISOString().slice(0, 7)
+    );
+    let isLoading = (
+      /** @type {boolean} */
+      false
+    );
+    async function RefreshData() {
+      await (0, import_jsApi2.StaffPricePerDayReport)(
+        { yearMonth },
+        /** @type {import('./jsApi.GEN').StaffPricePerDayReportCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error || "something went wrong");
+            return;
+          }
+          $invalidate(0, pricePerDay = o.pricePerDay);
+          return;
+        }
+      );
+    }
+    function monthshifter_yearMonth_binding(value) {
+      yearMonth = value;
+      $invalidate(1, yearMonth);
+    }
+    function monthshifter_isLoading_binding(value) {
+      isLoading = value;
+      $invalidate(2, isLoading);
+    }
+    return [
+      pricePerDay,
+      yearMonth,
+      isLoading,
+      RefreshData,
+      monthshifter_yearMonth_binding,
+      monthshifter_isLoading_binding
+    ];
+  }
+  var StaffPricePerDayReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment9, safe_not_equal, {});
+      init(this, options, instance7, create_fragment7, safe_not_equal, {});
     }
   };
-  var settingFixInconsistencies_default = SettingFixInconsistencies;
+  var staffPricePerDayReport_default = StaffPricePerDayReport_1;
 
-  // admin/settingFixInconsistencies.svelte.ts
-  var app = new settingFixInconsistencies_default({ target: document.getElementById("app") });
+  // staffPricePerDayReport.svelte.ts
+  var app = new staffPricePerDayReport_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

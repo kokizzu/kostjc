@@ -283,7 +283,8 @@
     popUpShowBookingMissingTenant.Show();
     await StaffMissingDataReport({
       tenantId: tenantId,
-      cmd: CmdForm
+      cmd: CmdForm,
+      yearMonth: ''
     },
     /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
     /** @returns {Promise<void>} */

@@ -1927,3 +1927,57 @@ func (w *WifiDevices) CountTotalAllRows() (total uint64) {
 func (w *WifiDevices) Truncate() bool {
 	return w.Adapter.ExecBoxSpace(w.SpaceName()+`:truncate`, A.X{})
 }
+
+type PricePerDayReport struct {
+	RoomName    string  `json:"roomName"`
+	TenantName  string  `json:"tenantName"`
+	DateStart   string  `json:"dateStart"`
+	DateEnd     string  `json:"dateEnd"`
+	PricePerDay float64 `json:"pricePerDay"`
+	TotalPaid   int64   `json:"totalPaid"`
+	TotalPrice  int64   `json:"totalPrice"`
+}
+
+func (b *Bookings) FindPricePerDayReport(yearMonth string) (out []PricePerDayReport) {
+	const comment = `-- Bookings) FindPricePerDayReport`
+
+	_, _, isValid := isValidMonthYear(yearMonth)
+	if !isValid {
+		now := time.Now()
+		yearMonth = startOfYearMonth(now.Year(), now.Month())
+	}
+
+	query := comment + `
+SELECT
+	r."roomName",
+	t."tenantName",
+	b."dateStart",
+	b."dateEnd",
+	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
+	b."totalPriceIDR"
+FROM "bookings" b
+LEFT JOIN "payments" p ON b."id" = p."bookingId"
+LEFT JOIN "rooms" r ON b."roomId" = r."id"
+LEFT JOIN "tenants" t ON r."currentTenantId" = t."id"
+WHERE
+	b."deletedAt" = 0
+	AND SUBSTR(b."dateStart", 1, 7) = '` + yearMonth + `'
+GROUP BY b."id"`
+
+	b.Adapter.QuerySql(query, func(row []any) {
+		if len(row) != 6 {
+			return
+		}
+
+		out = append(out, PricePerDayReport{
+			RoomName:   X.ToS(row[0]),
+			TenantName: X.ToS(row[1]),
+			DateStart:  X.ToS(row[2]),
+			DateEnd:    X.ToS(row[3]),
+			TotalPaid:  X.ToI(row[4]),
+			TotalPrice: X.ToI(row[5]),
+		})
+	})
+
+	return
+}
