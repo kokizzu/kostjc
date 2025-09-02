@@ -1936,6 +1936,7 @@ type PricePerDayReport struct {
 	PricePerDay float64 `json:"pricePerDay"`
 	TotalPaid   int64   `json:"totalPaid"`
 	TotalPrice  int64   `json:"totalPrice"`
+	RoomSize    string  `json:"roomSize"`
 }
 
 func (b *Bookings) FindPricePerDayReport(yearMonth string) (out []PricePerDayReport) {
@@ -1954,7 +1955,8 @@ SELECT
 	b."dateStart",
 	b."dateEnd",
 	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
-	b."totalPriceIDR"
+	b."totalPriceIDR",
+	r."roomSize"
 FROM "bookings" b
 LEFT JOIN "payments" p ON b."id" = p."bookingId"
 LEFT JOIN "rooms" r ON b."roomId" = r."id"
@@ -1965,7 +1967,7 @@ WHERE
 GROUP BY b."id"`
 
 	b.Adapter.QuerySql(query, func(row []any) {
-		if len(row) != 6 {
+		if len(row) != 7 {
 			return
 		}
 
@@ -1976,6 +1978,7 @@ GROUP BY b."id"`
 			DateEnd:    X.ToS(row[3]),
 			TotalPaid:  X.ToI(row[4]),
 			TotalPrice: X.ToI(row[5]),
+			RoomSize:   X.ToS(row[6]),
 		})
 	})
 

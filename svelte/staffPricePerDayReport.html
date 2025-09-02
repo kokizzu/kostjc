@@ -6941,36 +6941,43 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
     let td1;
     let t2_value = (
       /*data*/
-      (ctx[6].tenantName || "--") + ""
+      (ctx[6].roomSize || "--") + ""
     );
     let t2;
     let t3;
     let td2;
     let t4_value = (
       /*data*/
-      (ctx[6].dateStart || "--") + ""
+      (ctx[6].tenantName || "--") + ""
     );
     let t4;
     let t5;
     let td3;
     let t6_value = (
       /*data*/
-      (ctx[6].dateEnd || "--") + ""
+      (ctx[6].dateStart || "--") + ""
     );
     let t6;
     let t7;
     let td4;
-    let t8_value = (calculateDurationDay(
+    let t8_value = (
+      /*data*/
+      (ctx[6].dateEnd || "--") + ""
+    );
+    let t8;
+    let t9;
+    let td5;
+    let t10_value = (calculateDurationDay(
       /*data*/
       ctx[6].dateStart,
       /*data*/
       ctx[6].dateEnd
     ) || "0") + "";
-    let t8;
-    let t9;
     let t10;
-    let td5;
-    let t11_value = (calculatePricePerDay(
+    let t11;
+    let t12;
+    let td6;
+    let t13_value = (calculatePricePerDay(
       /*data*/
       ctx[6].totalPrice,
       /*data*/
@@ -6978,22 +6985,35 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
       /*data*/
       ctx[6].dateEnd
     ) || "0") + "";
-    let t11;
-    let t12;
-    let td6;
-    let t13_value = (
-      /*data*/
-      (ctx[6].totalPaid || "0") + ""
-    );
     let t13;
     let t14;
     let td7;
-    let t15_value = (
+    let t15_value = (calculatePricePerDayPerRoom(
+      /*data*/
+      ctx[6].totalPrice,
+      /*data*/
+      ctx[6].dateStart,
+      /*data*/
+      ctx[6].dateEnd,
+      /*data*/
+      ctx[6].roomSize
+    ) || "0") + "";
+    let t15;
+    let t16;
+    let td8;
+    let t17_value = (
+      /*data*/
+      (ctx[6].totalPaid || "0") + ""
+    );
+    let t17;
+    let t18;
+    let td9;
+    let t19_value = (
       /*data*/
       (ctx[6].totalPrice || "0") + ""
     );
-    let t15;
-    let t16;
+    let t19;
+    let t20;
     return {
       c() {
         tr = element("tr");
@@ -7011,10 +7031,10 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
         t7 = space();
         td4 = element("td");
         t8 = text(t8_value);
-        t9 = text(" Days");
-        t10 = space();
+        t9 = space();
         td5 = element("td");
-        t11 = text(t11_value);
+        t10 = text(t10_value);
+        t11 = text(" Days");
         t12 = space();
         td6 = element("td");
         t13 = text(t13_value);
@@ -7022,6 +7042,12 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
         td7 = element("td");
         t15 = text(t15_value);
         t16 = space();
+        td8 = element("td");
+        t17 = text(t17_value);
+        t18 = space();
+        td9 = element("td");
+        t19 = text(t19_value);
+        t20 = space();
         attr(td0, "class", "svelte-gq920t");
         attr(td1, "class", "svelte-gq920t");
         attr(td2, "class", "svelte-gq920t");
@@ -7030,6 +7056,8 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
         attr(td5, "class", "svelte-gq920t");
         attr(td6, "class", "svelte-gq920t");
         attr(td7, "class", "svelte-gq920t");
+        attr(td8, "class", "svelte-gq920t");
+        attr(td9, "class", "svelte-gq920t");
         attr(tr, "class", "svelte-gq920t");
       },
       m(target, anchor) {
@@ -7048,9 +7076,9 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
         append(tr, t7);
         append(tr, td4);
         append(td4, t8);
-        append(td4, t9);
-        append(tr, t10);
+        append(tr, t9);
         append(tr, td5);
+        append(td5, t10);
         append(td5, t11);
         append(tr, t12);
         append(tr, td6);
@@ -7059,6 +7087,12 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
         append(tr, td7);
         append(td7, t15);
         append(tr, t16);
+        append(tr, td8);
+        append(td8, t17);
+        append(tr, t18);
+        append(tr, td9);
+        append(td9, t19);
+        append(tr, t20);
       },
       p(ctx2, dirty) {
         if (dirty & /*pricePerDay*/
@@ -7067,26 +7101,30 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
           set_data(t0, t0_value);
         if (dirty & /*pricePerDay*/
         1 && t2_value !== (t2_value = /*data*/
-        (ctx2[6].tenantName || "--") + ""))
+        (ctx2[6].roomSize || "--") + ""))
           set_data(t2, t2_value);
         if (dirty & /*pricePerDay*/
         1 && t4_value !== (t4_value = /*data*/
-        (ctx2[6].dateStart || "--") + ""))
+        (ctx2[6].tenantName || "--") + ""))
           set_data(t4, t4_value);
         if (dirty & /*pricePerDay*/
         1 && t6_value !== (t6_value = /*data*/
-        (ctx2[6].dateEnd || "--") + ""))
+        (ctx2[6].dateStart || "--") + ""))
           set_data(t6, t6_value);
         if (dirty & /*pricePerDay*/
-        1 && t8_value !== (t8_value = (calculateDurationDay(
+        1 && t8_value !== (t8_value = /*data*/
+        (ctx2[6].dateEnd || "--") + ""))
+          set_data(t8, t8_value);
+        if (dirty & /*pricePerDay*/
+        1 && t10_value !== (t10_value = (calculateDurationDay(
           /*data*/
           ctx2[6].dateStart,
           /*data*/
           ctx2[6].dateEnd
         ) || "0") + ""))
-          set_data(t8, t8_value);
+          set_data(t10, t10_value);
         if (dirty & /*pricePerDay*/
-        1 && t11_value !== (t11_value = (calculatePricePerDay(
+        1 && t13_value !== (t13_value = (calculatePricePerDay(
           /*data*/
           ctx2[6].totalPrice,
           /*data*/
@@ -7094,15 +7132,27 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
           /*data*/
           ctx2[6].dateEnd
         ) || "0") + ""))
-          set_data(t11, t11_value);
-        if (dirty & /*pricePerDay*/
-        1 && t13_value !== (t13_value = /*data*/
-        (ctx2[6].totalPaid || "0") + ""))
           set_data(t13, t13_value);
         if (dirty & /*pricePerDay*/
-        1 && t15_value !== (t15_value = /*data*/
-        (ctx2[6].totalPrice || "0") + ""))
+        1 && t15_value !== (t15_value = (calculatePricePerDayPerRoom(
+          /*data*/
+          ctx2[6].totalPrice,
+          /*data*/
+          ctx2[6].dateStart,
+          /*data*/
+          ctx2[6].dateEnd,
+          /*data*/
+          ctx2[6].roomSize
+        ) || "0") + ""))
           set_data(t15, t15_value);
+        if (dirty & /*pricePerDay*/
+        1 && t17_value !== (t17_value = /*data*/
+        (ctx2[6].totalPaid || "0") + ""))
+          set_data(t17, t17_value);
+        if (dirty & /*pricePerDay*/
+        1 && t19_value !== (t19_value = /*data*/
+        (ctx2[6].totalPrice || "0") + ""))
+          set_data(t19, t19_value);
       },
       d(detaching) {
         if (detaching) {
@@ -7120,7 +7170,7 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
     let div0;
     let table;
     let thead;
-    let t16;
+    let t20;
     let tbody;
     let current;
     function monthshifter_yearMonth_binding(value) {
@@ -7166,8 +7216,8 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
         div0 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-gq920t"><th class="svelte-gq920t">Room</th> <th class="svelte-gq920t">Tenant</th> <th class="svelte-gq920t">Date Start</th> <th class="svelte-gq920t">Date End</th> <th class="svelte-gq920t">Duration</th> <th class="svelte-gq920t">Price Per Day</th> <th class="svelte-gq920t">Total Paid</th> <th class="svelte-gq920t">Total Price</th></tr>`;
-        t16 = space();
+        thead.innerHTML = `<tr class="svelte-gq920t"><th class="svelte-gq920t">Room</th> <th class="svelte-gq920t">Room Size</th> <th class="svelte-gq920t">Tenant</th> <th class="svelte-gq920t">Date Start</th> <th class="svelte-gq920t">Date End</th> <th class="svelte-gq920t">Duration</th> <th class="svelte-gq920t">Price Per Day</th> <th class="svelte-gq920t">Price Per Day / Room</th> <th class="svelte-gq920t">Total Paid</th> <th class="svelte-gq920t">Total Price</th></tr>`;
+        t20 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
@@ -7184,7 +7234,7 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
         append(div1, div0);
         append(div0, table);
         append(table, thead);
-        append(table, t16);
+        append(table, t20);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -7210,7 +7260,7 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
           add_flush_callback(() => updating_isLoading = false);
         }
         monthshifter.$set(monthshifter_changes);
-        if (dirty & /*pricePerDay, calculatePricePerDay, calculateDurationDay*/
+        if (dirty & /*pricePerDay, calculatePricePerDayPerRoom, calculatePricePerDay, calculateDurationDay*/
         1) {
           each_value = ensure_array_like(
             /*pricePerDay*/
@@ -7306,16 +7356,18 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
     return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / (1e3 * 60 * 60 * 24));
   }
   function calculatePricePerDay(totalPrice, dateStart, dateEnd) {
-    return Number((totalPrice / calculateDurationDay(dateStart, dateEnd)).toFixed(2));
+    return Number((totalPrice / calculateDurationDay(dateStart, dateEnd)).toFixed(1));
+  }
+  function calculatePricePerDayPerRoom(totalPrice, dateStart, dateEnd, roomSize) {
+    const [roomSize1, roomSize2] = roomSize.split("x");
+    const duration = calculateDurationDay(dateStart, dateEnd);
+    return Number((totalPrice / duration / (Number(roomSize1) * Number(roomSize2))).toFixed(1));
   }
   function instance7($self, $props, $invalidate) {
     let pricePerDay = (
       /** @type {PricePerDayReport[]} */
       [ /* pricePerDay */ ]
     );
-    onMount(() => {
-      console.log("Price per day report:", pricePerDay);
-    });
     let yearMonth = (
       /** @type {string} */
       new Date().toISOString().slice(0, 7)
@@ -7336,6 +7388,7 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
             return;
           }
           $invalidate(0, pricePerDay = o.pricePerDay);
+          console.log("Price per day report:", pricePerDay);
           return;
         }
       );

@@ -11,6 +11,7 @@
    * @property {number} pricePerDay
    * @property {number} totalPaid
    * @property {number} totalPrice
+   * @property {string} roomSize
    */
 
   import LayoutMain from './_layouts/main.svelte';
@@ -22,10 +23,6 @@
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
   let pricePerDay = /** @type {PricePerDayReport[]} */ ([ /* pricePerDay */ ]);
-
-  onMount(() => {
-    console.log('Price per day report:', pricePerDay);
-  })
 
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
   let isLoading = /** @type {boolean} */ (false);
@@ -42,6 +39,7 @@
       }
 
       pricePerDay = o.pricePerDay;
+      console.log('Price per day report:', pricePerDay);
 
       return
     })
@@ -65,7 +63,22 @@
    * @returns {number}
    */
   function calculatePricePerDay(totalPrice, dateStart, dateEnd) {
-    return Number((totalPrice / calculateDurationDay(dateStart, dateEnd)).toFixed(2));
+    return Number((totalPrice / calculateDurationDay(dateStart, dateEnd)).toFixed(1));
+  }
+
+  /**
+   * @description Calculate price per day per room
+   * @param {number} totalPrice
+   * @param {string} dateStart
+   * @param {string} dateEnd
+   * @param {string} roomSize
+   * @returns {number}
+   */
+  function calculatePricePerDayPerRoom(totalPrice, dateStart, dateEnd, roomSize) {
+    const [ roomSize1, roomSize2 ] = roomSize.split('x');
+    const duration = calculateDurationDay(dateStart, dateEnd);
+
+    return Number((totalPrice / duration / (Number(roomSize1) * Number(roomSize2))).toFixed(1));
   }
 </script>
 
@@ -81,11 +94,13 @@
         <thead>
           <tr>
             <th>Room</th>
+            <th>Room Size</th>
             <th>Tenant</th>
             <th>Date Start</th>
             <th>Date End</th>
             <th>Duration</th>
             <th>Price Per Day</th>
+            <th>Price Per Day / Room</th>
             <th>Total Paid</th>
             <th>Total Price</th>
           </tr>
@@ -94,11 +109,13 @@
           {#each (pricePerDay || []) as data}
             <tr>
               <td>{data.roomName}</td>
+              <td>{data.roomSize || '--'}</td>
               <td>{data.tenantName || '--'}</td>
               <td>{data.dateStart || '--'}</td>
               <td>{data.dateEnd || '--'}</td>
               <td>{calculateDurationDay(data.dateStart, data.dateEnd) || '0'} Days</td>
               <td>{calculatePricePerDay(data.totalPrice, data.dateStart, data.dateEnd) || '0'}</td>
+              <td>{calculatePricePerDayPerRoom(data.totalPrice, data.dateStart, data.dateEnd, data.roomSize) || '0'}</td>
               <td>{data.totalPaid || '0'}</td>
               <td>{data.totalPrice || '0'}</td>
             </tr>
