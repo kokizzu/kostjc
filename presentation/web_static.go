@@ -99,6 +99,27 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.StaffPricePerDayReportAction, func(ctx *fiber.Ctx) error {
+		in, user, segments := userInfoFromContext(ctx, d)
+
+		if notLogin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		in.RequestCommon.Action = domain.StaffPricePerDayReportAction
+		out := d.StaffPricePerDayReport(&domain.StaffPricePerDayReportIn{
+			RequestCommon: in.RequestCommon,
+			YearMonth:     time.Now().Format(rqProperty.DateFormatYYYYMM),
+		})
+
+		return views.RenderStaffPricePerDayReport(ctx, M.SX{
+			`title`:       conf.PROJECT_NAME + ` | Price per day Report`,
+			`user`:        user,
+			`segments`:    segments,
+			`pricePerDay`: out.PricePerDay,
+		})
+	})
+
 	fw.Get(`/`+domain.StaffRevenueReportAction, func(ctx *fiber.Ctx) error {
 		in, user, segments := userInfoFromContext(ctx, d)
 
@@ -155,19 +176,17 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	})
 
 	fw.Get(`/`+domain.StaffMissingDataReportAction, func(ctx *fiber.Ctx) error {
-		var in domain.StaffMissingDataReportIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffMissingDataReportAction)
-		if err != nil {
-			return err
-		}
+		in, user, segments := userInfoFromContext(ctx, d)
 
 		if notLogin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-
-		out := d.StaffMissingDataReport(&in)
+		in.RequestCommon.Action = domain.StaffMissingDataReportAction
+		out := d.StaffMissingDataReport(&domain.StaffMissingDataReportIn{
+			RequestCommon: in.RequestCommon,
+			YearMonth:     time.Now().Format(rqProperty.DateFormatYYYYMM),
+		})
 
 		return views.RenderStaffMissingDataReport(ctx, M.SX{
 			`title`:       conf.PROJECT_NAME + ` | Missing Data Report`,
@@ -613,6 +632,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		usr := rqAuth.NewUsers(d.AuthOltp)
 		users := usr.FindUserChoices()
 
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminBookingLogs(&in)
@@ -624,6 +646,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 			`users`:    users,
+			`tenants`:  tenants,
 		})
 	})
 
@@ -640,6 +663,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		usr := rqAuth.NewUsers(d.AuthOltp)
 		users := usr.FindUserChoices()
 
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminBuildingLogs(&in)
@@ -651,6 +677,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 			`users`:    users,
+			`tenants`:  tenants,
 		})
 	})
 
@@ -667,6 +694,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		usr := rqAuth.NewUsers(d.AuthOltp)
 		users := usr.FindUserChoices()
 
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminFacilityLogs(&in)
@@ -678,6 +708,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 			`users`:    users,
+			`tenants`:  tenants,
 		})
 	})
 
@@ -748,6 +779,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		usr := rqAuth.NewUsers(d.AuthOltp)
 		users := usr.FindUserChoices()
 
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminRoomLogs(&in)
@@ -759,6 +793,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 			`users`:    users,
+			`tenants`:  tenants,
 		})
 	})
 
@@ -775,6 +810,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		usr := rqAuth.NewUsers(d.AuthOltp)
 		users := usr.FindUserChoices()
 
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminStockLogs(&in)
@@ -786,6 +824,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 			`users`:    users,
+			`tenants`:  tenants,
 		})
 	})
 
@@ -829,6 +868,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		usr := rqAuth.NewUsers(d.AuthOltp)
 		users := usr.FindUserChoices()
 
+		tnt := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tnt.FindTenantChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 		in.WithMeta = true
 		out := d.AdminSaleLogs(&in)
@@ -840,6 +882,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`fields`:   out.Meta.Fields,
 			`pager`:    out.Pager,
 			`users`:    users,
+			`tenants`:  tenants,
 		})
 	})
 

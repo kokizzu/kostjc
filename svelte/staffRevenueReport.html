@@ -154,6 +154,11 @@
         --shadow-md: rgba(0, 0, 0, 0.06) 0px 8px 20px;
       }
 
+      input[type="checkbox"] {
+        accent-color: var(--blue-005);
+        cursor: pointer;
+      }
+
       *::selection {
         background: var(--blue-005);
         color: #ffff;
@@ -350,13 +355,13 @@
 
 
 <style>/* fakecss:./_components/MonthShifter.esbuild-svelte-fake-css */
-.month-shifter.svelte-1ys0ow3.svelte-1ys0ow3 {
+.month-shifter.svelte-1kdw2kw.svelte-1kdw2kw {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
 }
-.month-shifter.svelte-1ys0ow3 .btn.svelte-1ys0ow3 {
+.month-shifter.svelte-1kdw2kw .btn.svelte-1kdw2kw {
   background-color: var(--gray-002);
   border: none;
   border-radius: 9999px;
@@ -367,14 +372,27 @@
   color: var(--gray-008);
   padding: 8px;
 }
-.month-shifter.svelte-1ys0ow3 .btn.svelte-1ys0ow3:hover {
+.month-shifter.svelte-1kdw2kw .btn.svelte-1kdw2kw:hover {
   background-color: var(--blue-transparent);
   color: var(--blue-006);
 }
-.month-shifter.svelte-1ys0ow3 .month-text.svelte-1ys0ow3 {
+.month-shifter.svelte-1kdw2kw input.year-month.svelte-1kdw2kw {
+  border: 1px solid var(--gray-003);
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+.month-shifter.svelte-1kdw2kw button.apply.svelte-1kdw2kw {
+  background-color: var(--blue-006);
+  color: #FFF;
+  border: none;
+  padding: 10px 23px;
+  border-radius: 8px;
+  font-size: var(--font-base);
   font-weight: 600;
-  font-size: 18px;
-  user-select: none;
+  cursor: pointer;
+}
+.month-shifter.svelte-1kdw2kw button.apply.svelte-1kdw2kw:hover {
+  background-color: var(--blue-005);
 }
 
 /* fakecss:./_partials/SideMenu.esbuild-svelte-fake-css */
@@ -695,13 +713,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./staffRevenueReport.esbuild-svelte-fake-css */
-.report-container.svelte-10bsppk.svelte-10bsppk {
+.report-container.svelte-ryj44j.svelte-ryj44j {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.report-container.svelte-10bsppk .actions.svelte-10bsppk {
+.report-container.svelte-ryj44j .actions.svelte-ryj44j {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -710,34 +728,34 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 .report-container .actions .year-month {
   width: 300px;
 }
-.table-container.svelte-10bsppk.svelte-10bsppk {
+.table-container.svelte-ryj44j.svelte-ryj44j {
   overflow-x: auto;
 }
-table.svelte-10bsppk.svelte-10bsppk {
+table.svelte-ryj44j.svelte-ryj44j {
   width: 100%;
   border-collapse: collapse;
 }
-table.svelte-10bsppk thead.svelte-10bsppk {
+table.svelte-ryj44j thead.svelte-ryj44j {
   position: sticky;
   top: 0;
   background-color: var(--gray-002);
   z-index: 10;
   border: none;
 }
-table.svelte-10bsppk thead tr th.svelte-10bsppk {
+table.svelte-ryj44j thead tr th.svelte-ryj44j {
   text-align: left;
   padding: 8px 12px;
   text-wrap: nowrap;
 }
-table.svelte-10bsppk tbody tr.svelte-10bsppk {
+table.svelte-ryj44j tbody tr.svelte-ryj44j {
   border-bottom: 1px solid var(--gray-004);
 }
-table.svelte-10bsppk tr td.svelte-10bsppk,
-table.svelte-10bsppk tr th.svelte-10bsppk {
+table.svelte-ryj44j tr td.svelte-ryj44j,
+table.svelte-ryj44j tr th.svelte-ryj44j {
   padding: 4px 12px;
 }
 @media only screen and (max-width : 768px) {
-  .report-container.svelte-10bsppk .actions.svelte-10bsppk {
+  .report-container.svelte-ryj44j .actions.svelte-ryj44j {
     flex-direction: column;
   }
   .report-container .actions .year-month {
@@ -747,8 +765,8 @@ table.svelte-10bsppk tr th.svelte-10bsppk {
     width: 100% !important;
   }
 }
-td.r.svelte-10bsppk.svelte-10bsppk,
-th.r.svelte-10bsppk.svelte-10bsppk {
+td.r.svelte-ryj44j.svelte-ryj44j,
+th.r.svelte-ryj44j.svelte-ryj44j {
   text-align: right;
 }
 </style>
@@ -783,170 +801,6 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
     return value;
   };
-
-  // _components/xFormatter.js
-  var require_xFormatter = __commonJS({
-    "_components/xFormatter.js"(exports, module) {
-      function datetime(unixSec, humanize) {
-        if (!unixSec)
-          return "";
-        if (typeof unixSec === "string")
-          return unixSec;
-        const dt = new Date(unixSec * 1e3);
-        if (!humanize) {
-          const year = dt.getFullYear();
-          const month = String(dt.getMonth() + 1).padStart(2, "0");
-          const day = String(dt.getDate()).padStart(2, "0");
-          const hours = String(dt.getHours()).padStart(2, "0");
-          const minutes = String(dt.getMinutes()).padStart(2, "0");
-          return `${year}-${month}-${day} ${hours}:${minutes}`;
-        }
-        const options = { day: "2-digit", month: "long", year: "numeric" };
-        return dt.toLocaleDateString(void 0, options);
-      }
-      function localeDatetime(unixSec) {
-        if (!unixSec)
-          return "";
-        const dt = new Date(unixSec * 1e3);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = dt.getDate();
-        const month = dt.toLocaleDateString("default", { month: "short" });
-        const year = dt.getFullYear();
-        let hh = dt.getHours();
-        if (hh < 10)
-          hh = "0" + hh;
-        let mm = dt.getMinutes();
-        if (mm < 10)
-          mm = "0" + mm;
-        const formattedDate = `${date} ${month} ${year} - ${hh}:${mm}`;
-        return formattedDate;
-      }
-      function utcDatetime(unixSec) {
-        if (!unixSec)
-          return "";
-        let dt = new Date(unixSec * 1e3);
-        if (typeof unixSec !== "number")
-          dt = new Date(unixSec);
-        const year = dt.toLocaleDateString("id-ID", { year: "2-digit", timeZone: "UTC" });
-        const month = dt.toLocaleDateString("id-ID", { month: "2-digit", timeZone: "UTC" });
-        const date = dt.getUTCDate();
-        let hh = dt.getUTCHours();
-        if (hh < 10)
-          hh = "0" + hh;
-        let mm = dt.getUTCMinutes();
-        if (mm < 10)
-          mm = "0" + mm;
-        const formattedDate = `${date}/${month}/${year} - ${hh}:${mm}`;
-        return formattedDate;
-      }
-      function isoTime(unixSec) {
-        if (!unixSec)
-          return "";
-        const dt = new Date(unixSec * 1e3);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = dt.getDate();
-        const month = dt.toLocaleDateString("default", { month: "2-digit" });
-        const year = dt.getFullYear();
-        let hh = dt.getHours();
-        if (hh < 10)
-          hh = "0" + hh;
-        let mm = dt.getMinutes();
-        if (mm < 10)
-          mm = "0" + mm;
-        const formattedDate = `${year}-${month}-${date} ${hh}:${mm}`;
-        return formattedDate;
-      }
-      function isoDate(unixSec) {
-        if (!unixSec)
-          return "";
-        const dt = new Date(unixSec * 1e3);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = dt.getDate();
-        const month = dt.toLocaleDateString("default", { month: "2-digit" });
-        const year = dt.getFullYear();
-        const formattedDate = `${year}-${month}-${date}`;
-        return formattedDate;
-      }
-      function dateISOFormat(dayTo = 0) {
-        const dt = new Date();
-        dt.setDate(dt.getDate() + dayTo);
-        const date = String(dt.getDate()).padStart(2, "0");
-        const month = String(dt.getMonth() + 1).padStart(2, "0");
-        const year = dt.getFullYear();
-        return `${year}-${month}-${date}`;
-      }
-      function dateISOFormatFromYYYYMMDD(dateStr, dayTo = 0) {
-        if (!dateStr)
-          return "";
-        const dt = new Date(dateStr);
-        dt.setDate(dt.getDate() + dayTo);
-        const date = String(dt.getDate()).padStart(2, "0");
-        const month = String(dt.getMonth() + 1).padStart(2, "0");
-        const year = dt.getFullYear();
-        return `${year}-${month}-${date}`;
-      }
-      function loadScript(url, callback2) {
-        let script = (
-          /** @type {HTMLScriptElement} */
-          document.createElement("script")
-        );
-        script.type = "text/javascript";
-        script.src = url;
-        script.onload = () => callback2();
-        document.getElementsByTagName("head")[0].appendChild(script);
-      }
-      function formatPrice(price, currency) {
-        try {
-          return new Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency,
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-          }).format(price);
-        } catch (err) {
-          console.log("formatPrice failed", err, price, currency);
-          return `${currency} ${price}`;
-        }
-      }
-      function arrToArrNum(arr) {
-        return arr.map(Number);
-      }
-      function formatYearMonth2(ym) {
-        const [year, month] = ym.split("-");
-        const date = new Date(`${ym}-01`);
-        const monthName = date.toLocaleString("id-ID", { month: "long" });
-        return `${monthName} ${year}`;
-      }
-      function localeDateFromYYYYMMDD(dateStr) {
-        if (!dateStr)
-          return "";
-        const dt = new Date(dateStr);
-        const day = dt.toLocaleDateString("default", { weekday: "long" });
-        const date = String(dt.getDate()).padStart(2, "0");
-        const month = dt.toLocaleDateString("default", { month: "long" });
-        const year = dt.getFullYear();
-        return `${day}, ${date} ${month} ${year}`;
-      }
-      function checkboxToDate(value) {
-        return value === true || value === "true" ? new Date().toISOString().split("T")[0] : "";
-      }
-      module.exports = {
-        datetime,
-        localeDatetime,
-        utcDatetime,
-        isoTime,
-        isoDate,
-        dateISOFormat,
-        dateISOFormatFromYYYYMMDD,
-        loadScript,
-        formatPrice,
-        arrToArrNum,
-        formatYearMonth: formatYearMonth2,
-        localeDateFromYYYYMMDD,
-        checkboxToDate
-      };
-    }
-  });
 
   // node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs
   var require_axios = __commonJS({
@@ -3477,6 +3331,9 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       exports.StaffOccupancyReport = async function StaffOccupancyReport(i, cb) {
         return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
+        return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.StaffRevenueReport = async function StaffRevenueReport2(i, cb) {
         return await axios.post("/staff/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -3708,6 +3565,9 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       return;
     text2.data = /** @type {string} */
     data;
+  }
+  function set_input_value(input, value) {
+    input.value = value == null ? "" : value;
   }
   function toggle_class(element2, name, toggle) {
     element2.classList.toggle(name, !!toggle);
@@ -4474,15 +4334,12 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     let button0;
     let icon0;
     let t0;
-    let span;
-    let t1_value = formatMonthYear(
-      /*yearMonth*/
-      ctx[0]
-    ) + "";
-    let t1;
-    let t2;
     let button1;
     let icon1;
+    let t1;
+    let input;
+    let t2;
+    let button2;
     let current;
     let mounted;
     let dispose;
@@ -4498,28 +4355,44 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         button0 = element("button");
         create_component(icon0.$.fragment);
         t0 = space();
-        span = element("span");
-        t1 = text(t1_value);
-        t2 = space();
         button1 = element("button");
         create_component(icon1.$.fragment);
-        attr(button0, "class", "btn svelte-1ys0ow3");
+        t1 = space();
+        input = element("input");
+        t2 = space();
+        button2 = element("button");
+        button2.textContent = "Apply";
+        button0.disabled = /*isLoading*/
+        ctx[2];
+        attr(button0, "class", "btn svelte-1kdw2kw");
         attr(button0, "aria-label", "Previous");
-        attr(span, "class", "month-text svelte-1ys0ow3");
-        attr(button1, "class", "btn svelte-1ys0ow3");
+        button1.disabled = /*isLoading*/
+        ctx[2];
+        attr(button1, "class", "btn svelte-1kdw2kw");
         attr(button1, "aria-label", "Next");
-        attr(div, "class", "month-shifter svelte-1ys0ow3");
+        attr(input, "class", "year-month svelte-1kdw2kw");
+        attr(input, "type", "month");
+        attr(input, "name", "year-month");
+        attr(input, "id", "year-month");
+        attr(button2, "class", "apply svelte-1kdw2kw");
+        attr(div, "class", "month-shifter svelte-1kdw2kw");
       },
       m(target, anchor) {
         insert(target, div, anchor);
         append(div, button0);
         mount_component(icon0, button0, null);
         append(div, t0);
-        append(div, span);
-        append(span, t1);
-        append(div, t2);
         append(div, button1);
         mount_component(icon1, button1, null);
+        append(div, t1);
+        append(div, input);
+        set_input_value(
+          input,
+          /*yearMonth*/
+          ctx[0]
+        );
+        append(div, t2);
+        append(div, button2);
         current = true;
         if (!mounted) {
           dispose = [
@@ -4527,25 +4400,51 @@ th.r.svelte-10bsppk.svelte-10bsppk {
               button0,
               "click",
               /*click_handler*/
-              ctx[3]
+              ctx[4]
             ),
             listen(
               button1,
               "click",
               /*click_handler_1*/
-              ctx[4]
-            )
+              ctx[5]
+            ),
+            listen(
+              input,
+              "input",
+              /*input_input_handler*/
+              ctx[6]
+            ),
+            listen(button2, "click", function() {
+              if (is_function(
+                /*OnChanges*/
+                ctx[1]
+              ))
+                ctx[1].apply(this, arguments);
+            })
           ];
           mounted = true;
         }
       },
-      p(ctx2, [dirty]) {
-        if ((!current || dirty & /*yearMonth*/
-        1) && t1_value !== (t1_value = formatMonthYear(
-          /*yearMonth*/
-          ctx2[0]
-        ) + ""))
-          set_data(t1, t1_value);
+      p(new_ctx, [dirty]) {
+        ctx = new_ctx;
+        if (!current || dirty & /*isLoading*/
+        4) {
+          button0.disabled = /*isLoading*/
+          ctx[2];
+        }
+        if (!current || dirty & /*isLoading*/
+        4) {
+          button1.disabled = /*isLoading*/
+          ctx[2];
+        }
+        if (dirty & /*yearMonth*/
+        1) {
+          set_input_value(
+            input,
+            /*yearMonth*/
+            ctx[0]
+          );
+        }
       },
       i(local) {
         if (current)
@@ -4579,16 +4478,13 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     const [y, m] = ym.split("-").map(Number);
     return new Date(y, m - 1);
   }
-  function formatMonthYear(ym) {
-    const date = new Date(ym + "-01");
-    return date.toLocaleString("default", { month: "long", year: "numeric" });
-  }
   function instance2($self, $props, $invalidate) {
     const now2 = new Date();
     const initialMonth = new Date(now2.getFullYear(), now2.getMonth());
     let { yearMonth = formatYM(initialMonth) } = $props;
     let { OnChanges = async () => {
     } } = $props;
+    let { isLoading = false } = $props;
     async function shiftMonth(direction) {
       const end = parseYM(yearMonth);
       end.setMonth(end.getMonth() + direction);
@@ -4597,24 +4493,35 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     }
     const click_handler = () => shiftMonth(-1);
     const click_handler_1 = () => shiftMonth(1);
+    function input_input_handler() {
+      yearMonth = this.value;
+      $invalidate(0, yearMonth);
+    }
     $self.$set = ($props2) => {
       if ("yearMonth" in $props2)
         $invalidate(0, yearMonth = $props2.yearMonth);
       if ("OnChanges" in $props2)
-        $invalidate(2, OnChanges = $props2.OnChanges);
+        $invalidate(1, OnChanges = $props2.OnChanges);
+      if ("isLoading" in $props2)
+        $invalidate(2, isLoading = $props2.isLoading);
     };
-    return [yearMonth, shiftMonth, OnChanges, click_handler, click_handler_1];
+    return [
+      yearMonth,
+      OnChanges,
+      isLoading,
+      shiftMonth,
+      click_handler,
+      click_handler_1,
+      input_input_handler
+    ];
   }
   var MonthShifter = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance2, create_fragment2, safe_not_equal, { yearMonth: 0, OnChanges: 2 });
+      init(this, options, instance2, create_fragment2, safe_not_equal, { yearMonth: 0, OnChanges: 1, isLoading: 2 });
     }
   };
   var MonthShifter_default = MonthShifter;
-
-  // staffRevenueReport.svelte
-  var import_xFormatter = __toESM(require_xFormatter());
 
   // _components/xNotifier.js
   var Notifier = function() {
@@ -4770,6 +4677,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         span = element("span");
         span.textContent = "Bookings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
+        attr(a, "id", "link-staff-booking");
         attr(a, "href", "/staff/booking");
         attr(a, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5029,6 +4937,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         span13 = element("span");
         span13.textContent = "Settings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
+        attr(a0, "id", "link-admin-menu");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5037,6 +4946,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "menu"
         );
+        attr(a1, "id", "link-admin-sale");
         attr(a1, "href", "/admin/sale");
         attr(a1, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5045,6 +4955,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "sale"
         );
+        attr(a2, "id", "link-admin-location");
         attr(a2, "href", "/admin/location");
         attr(a2, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5053,6 +4964,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "location"
         );
+        attr(a3, "id", "link-admin-facility");
         attr(a3, "href", "/admin/facility");
         attr(a3, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5061,6 +4973,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "facility"
         );
+        attr(a4, "id", "link-admin-building");
         attr(a4, "href", "/admin/building");
         attr(a4, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5069,6 +4982,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "building"
         );
+        attr(a5, "id", "link-admin-room");
         attr(a5, "href", "/admin/room");
         attr(a5, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5077,6 +4991,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "room"
         );
+        attr(a6, "id", "link-admin-booking");
         attr(a6, "href", "/admin/booking");
         attr(a6, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5086,6 +5001,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           ctx[3] === "admin" && /*pathLv2*/
           ctx[4] === "booking"
         );
+        attr(a7, "id", "link-admin-payment");
         attr(a7, "href", "/admin/payment");
         attr(a7, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5094,6 +5010,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "payment"
         );
+        attr(a8, "id", "link-admin-stock");
         attr(a8, "href", "/admin/stock");
         attr(a8, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5102,6 +5019,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "stock"
         );
+        attr(a9, "id", "link-admin-wifiDevice");
         attr(a9, "href", "/admin/wifiDevice");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5110,6 +5028,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "wifiDevice"
         );
+        attr(a10, "id", "link-admin-tenants");
         attr(a10, "href", "/admin/tenants");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5118,6 +5037,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "tenants"
         );
+        attr(a11, "id", "link-admin-userManagement");
         attr(a11, "href", "/admin/usersManagement");
         attr(a11, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -5126,12 +5046,14 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathLv2*/
           ctx[4] === "usersManagement"
         );
+        attr(a12, "id", "link-admin-logs");
         attr(a12, "href", "/admin/bookingLogs");
         attr(a12, "class", "svelte-1fwsz8h");
         toggle_class(a12, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
+        attr(a13, "id", "link-admin-setting");
         attr(a13, "href", "/admin/settingFixInconsistencies");
         attr(a13, "class", "svelte-1fwsz8h");
         toggle_class(a13, "active", String(
@@ -5215,22 +5137,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         append(a13, span13);
         current = true;
       },
-      p(ctx2, dirty) {
-        if (!current || dirty & /*String, pathLv2*/
-        16) {
-          toggle_class(a12, "active", String(
-            /*pathLv2*/
-            ctx2[4]
-          ).includes("Logs") || false);
-        }
-        if (!current || dirty & /*String, pathLv2*/
-        16) {
-          toggle_class(a13, "active", String(
-            /*pathLv2*/
-            ctx2[4]
-          ).includes("setting") || false);
-        }
-      },
+      p: noop,
       i(local) {
         if (current)
           return;
@@ -5737,15 +5644,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         append(a12, span12);
         current = true;
       },
-      p(ctx2, dirty) {
-        if (!current || dirty & /*String, pathLv2*/
-        16) {
-          toggle_class(a12, "active", String(
-            /*pathLv2*/
-            ctx2[4]
-          ).includes("Logs") || false);
-        }
-      },
+      p: noop,
       i(local) {
         if (current)
           return;
@@ -5887,15 +5786,20 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     let t43;
     let span14;
     let t45;
+    let a13;
+    let icon14;
     let t46;
-    let t47;
     let span15;
     let t48;
+    let t49;
+    let t50;
+    let span16;
+    let t51;
     let nav3;
     let button2;
-    let icon14;
-    let t49;
-    let span16;
+    let icon15;
+    let t52;
+    let span17;
     let aside1_class_value;
     let current;
     let mounted;
@@ -5916,10 +5820,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon5 = new Icon_default({
-      props: {
-        src: RiFinanceShoppingBag2Line,
-        size: "20"
-      }
+      props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon6 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
@@ -5946,12 +5847,12 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon12 = new Icon_default({
-      props: {
-        src: RiFinanceShoppingBag2Line,
-        size: "20"
-      }
+      props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon13 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon14 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block2 = !/*access*/
@@ -5960,7 +5861,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       /*access*/
       ctx[0].admin && create_if_block(ctx)
     );
-    icon14 = new Icon_default({
+    icon15 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
     return {
@@ -6002,7 +5903,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         create_component(icon5.$.fragment);
         t15 = space();
         span5 = element("span");
-        span5.textContent = "Sales";
+        span5.textContent = "Price per day Report";
         t17 = space();
         a6 = element("a");
         create_component(icon6.$.fragment);
@@ -6058,28 +5959,34 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         create_component(icon12.$.fragment);
         t40 = space();
         span13 = element("span");
-        span13.textContent = "Sales";
+        span13.textContent = "Wifi Device Report";
         t42 = space();
         a12 = element("a");
         create_component(icon13.$.fragment);
         t43 = space();
         span14 = element("span");
-        span14.textContent = "Profile";
+        span14.textContent = "Price per day Report";
         t45 = space();
+        a13 = element("a");
+        create_component(icon14.$.fragment);
+        t46 = space();
+        span15 = element("span");
+        span15.textContent = "Profile";
+        t48 = space();
         if (if_block2)
           if_block2.c();
-        t46 = space();
+        t49 = space();
         if (if_block3)
           if_block3.c();
-        t47 = space();
-        span15 = element("span");
-        t48 = space();
+        t50 = space();
+        span16 = element("span");
+        t51 = space();
         nav3 = element("nav");
         button2 = element("button");
-        create_component(icon14.$.fragment);
-        t49 = space();
-        span16 = element("span");
-        span16.textContent = "Logout";
+        create_component(icon15.$.fragment);
+        t52 = space();
+        span17 = element("span");
+        span17.textContent = "Logout";
         attr(a0, "href", "/");
         attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6120,13 +6027,13 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathAll*/
           ctx[2] === "/staff/wifiDeviceReport"
         );
-        attr(a5, "href", "/staff/sales");
+        attr(a5, "href", "/staff/pricePerDayReport");
         attr(a5, "class", "svelte-1fwsz8h");
         toggle_class(
           a5,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/sales"
+          ctx[2] === "/staff/pricePerDayReport"
         );
         attr(a6, "href", "/user");
         attr(a6, "class", "svelte-1fwsz8h");
@@ -6177,24 +6084,32 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           /*pathAll*/
           ctx[2] === "/staff/revenueReport"
         );
-        attr(a11, "href", "/staff/sales");
+        attr(a11, "href", "/staff/wifiDeviceReport");
         attr(a11, "class", "svelte-1fwsz8h");
         toggle_class(
           a11,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/sales"
+          ctx[2] === "/staff/wifiDeviceReport"
         );
-        attr(a12, "href", "/user");
+        attr(a12, "href", "/staff/pricePerDayReport");
         attr(a12, "class", "svelte-1fwsz8h");
         toggle_class(
           a12,
           "active",
           /*pathAll*/
+          ctx[2] === "/staff/pricePerDayReport"
+        );
+        attr(a13, "href", "/user");
+        attr(a13, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a13,
+          "active",
+          /*pathAll*/
           ctx[2] === "/user"
         );
         attr(nav2, "class", "nav-menu svelte-1fwsz8h");
-        attr(span15, "class", "separator svelte-1fwsz8h");
+        attr(span16, "class", "separator svelte-1fwsz8h");
         attr(button2, "class", "red svelte-1fwsz8h");
         attr(nav3, "class", "nav-menu svelte-1fwsz8h");
         attr(div1, "class", "container svelte-1fwsz8h");
@@ -6288,20 +6203,25 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         mount_component(icon13, a12, null);
         append(a12, t43);
         append(a12, span14);
-        append(div1, t45);
+        append(nav2, t45);
+        append(nav2, a13);
+        mount_component(icon14, a13, null);
+        append(a13, t46);
+        append(a13, span15);
+        append(div1, t48);
         if (if_block2)
           if_block2.m(div1, null);
-        append(div1, t46);
+        append(div1, t49);
         if (if_block3)
           if_block3.m(div1, null);
-        append(div1, t47);
-        append(div1, span15);
-        append(div1, t48);
+        append(div1, t50);
+        append(div1, span16);
+        append(div1, t51);
         append(div1, nav3);
         append(nav3, button2);
-        mount_component(icon14, button2, null);
-        append(button2, t49);
-        append(button2, span16);
+        mount_component(icon15, button2, null);
+        append(button2, t52);
+        append(button2, span17);
         current = true;
         if (!mounted) {
           dispose = [
@@ -6389,7 +6309,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
             if_block2 = create_if_block_1(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
-            if_block2.m(div1, t46);
+            if_block2.m(div1, t49);
           }
         } else if (if_block2) {
           group_outros();
@@ -6412,7 +6332,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
             if_block3 = create_if_block(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
-            if_block3.m(div1, t47);
+            if_block3.m(div1, t50);
           }
         } else if (if_block3) {
           group_outros();
@@ -6446,9 +6366,10 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         transition_in(icon11.$.fragment, local);
         transition_in(icon12.$.fragment, local);
         transition_in(icon13.$.fragment, local);
+        transition_in(icon14.$.fragment, local);
         transition_in(if_block2);
         transition_in(if_block3);
-        transition_in(icon14.$.fragment, local);
+        transition_in(icon15.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -6468,9 +6389,10 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         transition_out(icon11.$.fragment, local);
         transition_out(icon12.$.fragment, local);
         transition_out(icon13.$.fragment, local);
+        transition_out(icon14.$.fragment, local);
         transition_out(if_block2);
         transition_out(if_block3);
-        transition_out(icon14.$.fragment, local);
+        transition_out(icon15.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -6499,11 +6421,12 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         destroy_component(icon11);
         destroy_component(icon12);
         destroy_component(icon13);
+        destroy_component(icon14);
         if (if_block2)
           if_block2.d();
         if (if_block3)
           if_block3.d();
-        destroy_component(icon14);
+        destroy_component(icon15);
         mounted = false;
         run_all(dispose);
       }
@@ -6516,9 +6439,6 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       /** @type {Access} */
       {}
     ) } = $props;
-    onMount(() => {
-      console.log(access);
-    });
     const pathAll = (
       /** @type {string}*/
       window.location.pathname
@@ -6531,6 +6451,79 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       /** @type {string}*/
       window.location.pathname.split("/")[2]
     );
+    function sideMenuScrollIntoView() {
+      let linkId = (
+        /** @type {string} */
+        ""
+      );
+      if (pathLv1 === "admin" && pathLv2 === "booking") {
+        linkId = "link-admin-booking";
+      }
+      if (pathLv1 === "staff" && pathLv2 === "booking") {
+        linkId = "link-staff-booking";
+      }
+      switch (pathLv2) {
+        case "menu": {
+          linkId = "link-admin-menu";
+          break;
+        }
+        case "sale": {
+          linkId = "link-admin-sale";
+          break;
+        }
+        case "location": {
+          linkId = "link-admin-location";
+          break;
+        }
+        case "facility": {
+          linkId = "link-admin-facility";
+          break;
+        }
+        case "building": {
+          linkId = "link-admin-building";
+          break;
+        }
+        case "room": {
+          linkId = "link-admin-room";
+          break;
+        }
+        case "payment": {
+          linkId = "link-admin-payment";
+          break;
+        }
+        case "stock": {
+          linkId = "link-admin-stock";
+          break;
+        }
+        case "wifiDevice": {
+          linkId = "link-admin-wifiDevice";
+          break;
+        }
+        case "tenants": {
+          linkId = "link-admin-tenants";
+          break;
+        }
+        case "usersManagement": {
+          linkId = "link-admin-userManagement";
+          break;
+        }
+      }
+      if (String(pathLv2).includes("Logs")) {
+        linkId = "link-admin-logs";
+      }
+      if (String(pathLv2).includes("setting")) {
+        linkId = "link-admin-setting";
+      }
+      if (linkId != "") {
+        const linkElm = (
+          /** @type {HTMLAnchorElement} */
+          document.getElementById(linkId)
+        );
+        if (linkElm) {
+          linkElm.scrollIntoView({ behavior: "instant" });
+        }
+      }
+    }
     async function logout() {
       await (0, import_jsApi.UserLogout)({}, function(o) {
         if (o.error) {
@@ -6550,6 +6543,9 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         });
       });
     }
+    onMount(() => {
+      sideMenuScrollIntoView();
+    });
     const click_handler = () => set_store_value(isOpenSideMenu, $isOpenSideMenu = !$isOpenSideMenu, $isOpenSideMenu);
     $self.$set = ($props2) => {
       if ("access" in $props2)
@@ -21382,36 +21378,36 @@ th.r.svelte-10bsppk.svelte-10bsppk {
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[11] = list[i];
+    child_ctx[12] = list[i];
     return child_ctx;
   }
   function create_each_block(ctx) {
     let tr;
     let td0;
-    let t0_value = (0, import_xFormatter.formatYearMonth)(
+    let t0_value = formatDateLong(
       /*data*/
-      ctx[11].yearMonth
+      ctx[12].dateStart
     ) + "";
     let t0;
     let t1;
     let td1;
     let t2_value = bookings[
       /*data*/
-      ctx[11].bookingId
+      ctx[12].bookingId
     ] + "";
     let t2;
     let t3;
     let td2;
     let t4_value = (
       /*data*/
-      ctx[11].revenueIDR + ""
+      ctx[12].revenueIDR + ""
     );
     let t4;
     let t5;
     let td3;
     let t6_value = (
       /*data*/
-      ctx[11].donationIDR + ""
+      ctx[12].donationIDR + ""
     );
     let t6;
     return {
@@ -21428,11 +21424,11 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         t5 = space();
         td3 = element("td");
         t6 = text(t6_value);
-        attr(td0, "class", "svelte-10bsppk");
-        attr(td1, "class", "svelte-10bsppk");
-        attr(td2, "class", "r svelte-10bsppk");
-        attr(td3, "class", "r svelte-10bsppk");
-        attr(tr, "class", "svelte-10bsppk");
+        attr(td0, "class", "svelte-ryj44j");
+        attr(td1, "class", "svelte-ryj44j");
+        attr(td2, "class", "r svelte-ryj44j");
+        attr(td3, "class", "r svelte-ryj44j");
+        attr(tr, "class", "svelte-ryj44j");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -21450,24 +21446,24 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       },
       p(ctx2, dirty) {
         if (dirty & /*revenueReports*/
-        1 && t0_value !== (t0_value = (0, import_xFormatter.formatYearMonth)(
+        1 && t0_value !== (t0_value = formatDateLong(
           /*data*/
-          ctx2[11].yearMonth
+          ctx2[12].dateStart
         ) + ""))
           set_data(t0, t0_value);
         if (dirty & /*revenueReports*/
         1 && t2_value !== (t2_value = bookings[
           /*data*/
-          ctx2[11].bookingId
+          ctx2[12].bookingId
         ] + ""))
           set_data(t2, t2_value);
         if (dirty & /*revenueReports*/
         1 && t4_value !== (t4_value = /*data*/
-        ctx2[11].revenueIDR + ""))
+        ctx2[12].revenueIDR + ""))
           set_data(t4, t4_value);
         if (dirty & /*revenueReports*/
         1 && t6_value !== (t6_value = /*data*/
-        ctx2[11].donationIDR + ""))
+        ctx2[12].donationIDR + ""))
           set_data(t6, t6_value);
       },
       d(detaching) {
@@ -21482,8 +21478,8 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     return {
       c() {
         tr = element("tr");
-        tr.innerHTML = `<td class="svelte-10bsppk">No data</td>`;
-        attr(tr, "class", "svelte-10bsppk");
+        tr.innerHTML = `<td class="svelte-ryj44j">No data</td>`;
+        attr(tr, "class", "svelte-ryj44j");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -21500,6 +21496,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     let div0;
     let monthshifter;
     let updating_yearMonth;
+    let updating_isLoading;
     let t0;
     let chartrevenuemonthly;
     let updating_chartRevenueReports;
@@ -21524,11 +21521,14 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     let t16;
     let current;
     function monthshifter_yearMonth_binding(value) {
-      ctx[7](value);
+      ctx[8](value);
+    }
+    function monthshifter_isLoading_binding(value) {
+      ctx[9](value);
     }
     let monthshifter_props = { OnChanges: (
       /*getRevenueReports*/
-      ctx[6]
+      ctx[7]
     ) };
     if (
       /*yearMonth*/
@@ -21537,10 +21537,18 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       monthshifter_props.yearMonth = /*yearMonth*/
       ctx[3];
     }
+    if (
+      /*isLoading*/
+      ctx[4] !== void 0
+    ) {
+      monthshifter_props.isLoading = /*isLoading*/
+      ctx[4];
+    }
     monthshifter = new MonthShifter_default({ props: monthshifter_props });
     binding_callbacks.push(() => bind(monthshifter, "yearMonth", monthshifter_yearMonth_binding));
+    binding_callbacks.push(() => bind(monthshifter, "isLoading", monthshifter_isLoading_binding));
     function chartrevenuemonthly_chartRevenueReports_binding(value) {
-      ctx[8](value);
+      ctx[10](value);
     }
     let chartrevenuemonthly_props = {};
     if (
@@ -21552,7 +21560,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     }
     chartrevenuemonthly = new ChartRevenueMonthly_default({ props: chartrevenuemonthly_props });
     binding_callbacks.push(() => bind(chartrevenuemonthly, "chartRevenueReports", chartrevenuemonthly_chartRevenueReports_binding));
-    ctx[9](chartrevenuemonthly);
+    ctx[11](chartrevenuemonthly);
     let each_value = ensure_array_like(
       /*revenueReports*/
       ctx[0] || []
@@ -21575,7 +21583,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         div1 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-10bsppk"><th style="min-width: 100px;" class="svelte-10bsppk">Month</th> <th style="min-width: 170px;" class="svelte-10bsppk">Booking</th> <th class="svelte-10bsppk">Revenue (IDR)</th> <th class="svelte-10bsppk">Donation (IDR)</th></tr>`;
+        thead.innerHTML = `<tr class="svelte-ryj44j"><th style="min-width: 100px;" class="svelte-ryj44j">Date Start</th> <th style="min-width: 170px;" class="svelte-ryj44j">Booking</th> <th class="svelte-ryj44j">Revenue (IDR)</th> <th class="svelte-ryj44j">Donation (IDR)</th></tr>`;
         t9 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
@@ -21594,24 +21602,24 @@ th.r.svelte-10bsppk.svelte-10bsppk {
         th6 = element("th");
         t14 = text(
           /*sumRevenueIDR*/
-          ctx[4]
+          ctx[5]
         );
         t15 = space();
         th7 = element("th");
         t16 = text(
           /*sumDonationIDR*/
-          ctx[5]
+          ctx[6]
         );
-        attr(div0, "class", "actions svelte-10bsppk");
-        attr(thead, "class", "svelte-10bsppk");
-        attr(th4, "class", "svelte-10bsppk");
-        attr(th5, "class", "svelte-10bsppk");
-        attr(th6, "class", "r svelte-10bsppk");
-        attr(th7, "class", "r svelte-10bsppk");
-        attr(tr1, "class", "svelte-10bsppk");
-        attr(table, "class", "svelte-10bsppk");
-        attr(div1, "class", "table-container svelte-10bsppk");
-        attr(div2, "class", "report-container svelte-10bsppk");
+        attr(div0, "class", "actions svelte-ryj44j");
+        attr(thead, "class", "svelte-ryj44j");
+        attr(th4, "class", "svelte-ryj44j");
+        attr(th5, "class", "svelte-ryj44j");
+        attr(th6, "class", "r svelte-ryj44j");
+        attr(th7, "class", "r svelte-ryj44j");
+        attr(tr1, "class", "svelte-ryj44j");
+        attr(table, "class", "svelte-ryj44j");
+        attr(div1, "class", "table-container svelte-ryj44j");
+        attr(div2, "class", "report-container svelte-ryj44j");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -21656,6 +21664,13 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           ctx2[3];
           add_flush_callback(() => updating_yearMonth = false);
         }
+        if (!updating_isLoading && dirty & /*isLoading*/
+        16) {
+          updating_isLoading = true;
+          monthshifter_changes.isLoading = /*isLoading*/
+          ctx2[4];
+          add_flush_callback(() => updating_isLoading = false);
+        }
         monthshifter.$set(monthshifter_changes);
         const chartrevenuemonthly_changes = {};
         if (!updating_chartRevenueReports && dirty & /*chartRevenueReports*/
@@ -21666,7 +21681,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           add_flush_callback(() => updating_chartRevenueReports = false);
         }
         chartrevenuemonthly.$set(chartrevenuemonthly_changes);
-        if (dirty & /*revenueReports, bookings*/
+        if (dirty & /*revenueReports, bookings, formatDateLong*/
         1) {
           each_value = ensure_array_like(
             /*revenueReports*/
@@ -21702,18 +21717,18 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           if_block = null;
         }
         if (!current || dirty & /*sumRevenueIDR*/
-        16)
+        32)
           set_data(
             t14,
             /*sumRevenueIDR*/
-            ctx2[4]
+            ctx2[5]
           );
         if (!current || dirty & /*sumDonationIDR*/
-        32)
+        64)
           set_data(
             t16,
             /*sumDonationIDR*/
-            ctx2[5]
+            ctx2[6]
           );
       },
       i(local) {
@@ -21733,7 +21748,7 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           detach(div2);
         }
         destroy_component(monthshifter);
-        ctx[9](null);
+        ctx[11](null);
         destroy_component(chartrevenuemonthly);
         destroy_each(each_blocks, detaching);
         if (if_block)
@@ -21762,8 +21777,8 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, sumDonationIDR, sumRevenueIDR, revenueReports, chartRevenueReports, chartRevenueMonthly, yearMonth*/
-        16447) {
+        if (dirty & /*$scope, sumDonationIDR, sumRevenueIDR, revenueReports, chartRevenueReports, chartRevenueMonthly, yearMonth, isLoading*/
+        32895) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -21795,6 +21810,15 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     /** @type {Record<Number, string>} */
     {/* bookings */}
   );
+  function formatDateLong(dateStr) {
+    const dt = new Date(dateStr);
+    return dt.toLocaleDateString("en-GB", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    });
+  }
   function instance8($self, $props, $invalidate) {
     let revenueReports = (
       /** @type {RevenueReport[]} */
@@ -21812,13 +21836,12 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       /** @type {string} */
       new Date().toISOString().slice(0, 7)
     );
-    let isFiltering = (
+    let isLoading = (
       /** @type {boolean} */
       false
     );
     async function getRevenueReports() {
-      isFiltering = true;
-      console.log("YearMonth:", yearMonth);
+      $invalidate(4, isLoading = true);
       await (0, import_jsApi2.StaffRevenueReport)(
         // @ts-ignore
         { yearMonth },
@@ -21835,13 +21858,17 @@ th.r.svelte-10bsppk.svelte-10bsppk {
           chartRevenueMonthly.updateData(chartRevenueReports);
         }
       );
-      isFiltering = false;
+      $invalidate(4, isLoading = false);
     }
     let sumRevenueIDR = 0;
     let sumDonationIDR = 0;
     function monthshifter_yearMonth_binding(value) {
       yearMonth = value;
       $invalidate(3, yearMonth);
+    }
+    function monthshifter_isLoading_binding(value) {
+      isLoading = value;
+      $invalidate(4, isLoading);
     }
     function chartrevenuemonthly_chartRevenueReports_binding(value) {
       chartRevenueReports = value;
@@ -21855,13 +21882,13 @@ th.r.svelte-10bsppk.svelte-10bsppk {
     }
     $self.$.update = () => {
       if ($self.$.dirty & /*revenueReports, sumRevenueIDR, sumDonationIDR*/
-      49) {
+      97) {
         $: {
-          $invalidate(4, sumRevenueIDR = 0);
-          $invalidate(5, sumDonationIDR = 0);
+          $invalidate(5, sumRevenueIDR = 0);
+          $invalidate(6, sumDonationIDR = 0);
           for (let i = 0; i < (revenueReports || []).length; i++) {
-            $invalidate(4, sumRevenueIDR += revenueReports[i].revenueIDR | 0);
-            $invalidate(5, sumDonationIDR += revenueReports[i].donationIDR | 0);
+            $invalidate(5, sumRevenueIDR += revenueReports[i].revenueIDR | 0);
+            $invalidate(6, sumDonationIDR += revenueReports[i].donationIDR | 0);
           }
         }
       }
@@ -21871,10 +21898,12 @@ th.r.svelte-10bsppk.svelte-10bsppk {
       chartRevenueReports,
       chartRevenueMonthly,
       yearMonth,
+      isLoading,
       sumRevenueIDR,
       sumDonationIDR,
       getRevenueReports,
       monthshifter_yearMonth_binding,
+      monthshifter_isLoading_binding,
       chartrevenuemonthly_chartRevenueReports_binding,
       chartrevenuemonthly_binding
     ];

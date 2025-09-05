@@ -4,14 +4,13 @@
   /** @typedef {import('./_types/property.js').ChartRevenueReport} ChartRevenueReport */
   /**
    * @typedef {Object} RevenueReport
-   * @property {string} yearMonth
+   * @property {string} dateStart
    * @property {number} bookingId
    * @property {number} revenueIDR
    * @property {number} donationIDR
    */
 
   import MonthShifter from './_components/MonthShifter.svelte';
-  import { formatYearMonth } from './_components/xFormatter';
   import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
   import ChartRevenueMonthly from './_partials/ChartRevenueMonthly.svelte';
@@ -26,11 +25,10 @@
   let chartRevenueMonthly = /** @type {ChartRevenueMonthly|import('svelte').SvelteComponent} */ (null);
 
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
-  let isFiltering = /** @type {boolean} */ (false);
+  let isLoading = /** @type {boolean} */ (false);
 
   async function getRevenueReports() {
-    isFiltering = true;
-    console.log('YearMonth:', yearMonth);
+    isLoading = true;
     await StaffRevenueReport(// @ts-ignore
       { yearMonth }, /** @type {import('./jsApi.GEN').StaffRevenueReportCallback} */
       /** @returns {Promise<void>} */
@@ -47,7 +45,7 @@
         chartRevenueMonthly.updateData(chartRevenueReports);
       }
     );
-    isFiltering = false;
+    isLoading = false;
   }
 
   let sumRevenueIDR = 0;
@@ -61,6 +59,16 @@
       sumDonationIDR += revenueReports[i].donationIDR|0
     }
   }
+
+  function formatDateLong(/** @type {string} */ dateStr) {
+    const dt = new Date(dateStr);
+    return dt.toLocaleDateString('en-GB', {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+  }
 </script>
 
 <LayoutMain access={segments} user={user}>
@@ -68,6 +76,7 @@
     <div class="actions">
       <MonthShifter
         bind:yearMonth
+        bind:isLoading
         OnChanges={getRevenueReports}
       />
     </div>
@@ -79,7 +88,7 @@
       <table>
         <thead>
           <tr>
-            <th style="min-width: 100px;">Month</th>
+            <th style="min-width: 100px;">Date Start</th>
             <th style="min-width: 170px;">Booking</th>
             <th>Revenue (IDR)</th>
             <th>Donation (IDR)</th>
@@ -88,7 +97,7 @@
         <tbody>
           {#each (revenueReports || []) as data}
             <tr>
-              <td>{formatYearMonth(data.yearMonth)}</td>
+              <td>{formatDateLong(data.dateStart)}</td>
               <td>{bookings[data.bookingId]}</td>
               <td class="r">{data.revenueIDR}</td>
               <td class="r">{data.donationIDR}</td>
@@ -180,6 +189,6 @@
 
   /* align right */
   td.r, th.r {
-	 text-align: right;
+    text-align: right;
   }
 </style>

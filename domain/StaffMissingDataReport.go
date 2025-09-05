@@ -17,8 +17,9 @@ import (
 type (
 	StaffMissingDataReportIn struct {
 		RequestCommon
-		Cmd      string `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
-		TenantId uint64 `json:"tenantId" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
+		Cmd       string `json:"cmd" form:"cmd" query:"cmd" long:"cmd" msg:"cmd"`
+		TenantId  uint64 `json:"tenantId" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
+		YearMonth string `json:"yearMonth" form:"yearMonth" query:"yearMonth" long:"yearMonth" msg:"yearMonth"`
 	}
 	StaffMissingDataReportOut struct {
 		ResponseCommon
@@ -57,7 +58,7 @@ func (d *Domain) StaffMissingDataReport(in *StaffMissingDataReportIn) (out Staff
 		out.Payments = payments
 	default:
 		room := rqProperty.NewRooms(d.PropOltp)
-		out.MissingData = room.FindMissingTenantsData()
+		out.MissingData = room.FindMissingTenantsData(in.YearMonth)
 	}
 
 	return

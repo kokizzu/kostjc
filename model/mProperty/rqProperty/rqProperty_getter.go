@@ -1022,28 +1022,44 @@ type RoomMissingTenantData struct {
 	TenantWhatsappNumber   string `json:"tenantWhatsappNumber"`
 	TenantWaAddedAt        bool   `json:"tenantWaAddedAt"`
 	TenantTeleAddedAt      bool   `json:"tenantTeleAddedAt"`
-	LastUseAt              string `json:"lastUseAt"`
+	DateStart              string `json:"dateStart"`
 }
 
-func (r *Rooms) FindMissingTenantsData() (out []RoomMissingTenantData) {
+func (r *Rooms) FindMissingTenantsData(yearMonth string) (out []RoomMissingTenantData) {
 	const comment = `-- Rooms) FindMissingTenantsData`
+
+	var startDate string // YYYY-MM-DD
+	var endDate string   // YYYY-MM-DD
+
+	year, month, isValid := isValidMonthYear(yearMonth)
+	if !isValid {
+		now := time.Now()
+		startDate = startOfYearMonth(now.Year(), now.Month())
+		endDate = endOfYearMonth(now.Year(), now.Month())
+	} else {
+		startDate = startOfYearMonth(year, month)
+		endDate = endOfYearMonth(year, month)
+	}
 
 	queryRows := comment + `
 SELECT 
-  "rooms"."id",
-  "rooms"."roomName",
-  "tenants"."id",
-  "tenants"."tenantName",
-  "tenants"."telegramUsername",
-  "tenants"."whatsappNumber",
-  "tenants"."waAddedAt",
-  "tenants"."teleAddedAt",
-	"rooms"."lastUseAt"
-FROM "rooms"
-LEFT JOIN "tenants"
-	ON "rooms"."currentTenantId" = "tenants"."id"
-WHERE "rooms"."deletedAt" = 0
-ORDER BY "rooms"."updatedAt"`
+  r."id",
+  r."roomName",
+  t."id",
+  t."tenantName",
+  t."telegramUsername",
+  t."whatsappNumber",
+  t."waAddedAt",
+  t."teleAddedAt",
+	b."dateStart"
+FROM "bookings" b
+LEFT JOIN "rooms" r ON b."roomId" = r."id"
+LEFT JOIN "tenants" t ON b."tenantId" = t."id"
+WHERE
+	b."deletedAt" = 0
+	AND b."dateStart" >= ` + S.Z(startDate) + `
+	AND b."dateStart" <= ` + S.Z(endDate) + `
+ORDER BY b."dateStart" DESC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) != 9 {
@@ -1058,7 +1074,7 @@ ORDER BY "rooms"."updatedAt"`
 			TenantWhatsappNumber:   X.ToS(row[5]),
 			TenantWaAddedAt:        X.ToBool(row[6]),
 			TenantTeleAddedAt:      X.ToBool(row[7]),
-			LastUseAt:              X.ToS(row[8]),
+			DateStart:              X.ToS(row[8]),
 		})
 	})
 
@@ -1289,7 +1305,7 @@ ORDER BY t."tenantName" ASC`
 }
 
 type RevenueReport struct {
-	YearMonth   string `json:"yearMonth"`
+	DateStart   string `json:"dateStart"`
 	BookingId   uint64 `json:"bookingId"`
 	RevenueIDR  int64  `json:"revenueIDR"`
 	DonationIDR int64  `json:"donationIDR"`
@@ -1304,7 +1320,7 @@ func (b *Bookings) FindRevenueReports(yearMonth string) (out []RevenueReport) {
 
 	query := comment + `
 SELECT
-	SUBSTR("bookings"."dateStart", 1, 7) AS "yearMonth",
+	"bookings"."dateStart",
 	"bookings"."id" AS "bookingId",
 	SUM(CASE 
 		WHEN "paymentMethod" != 'Donation'
@@ -1325,12 +1341,12 @@ GROUP BY "bookings"."id"`
 
 	b.Adapter.QuerySql(query, func(row []any) {
 		if len(row) == 4 {
-			yearMonth := X.ToS(row[0])
+			dateStart := X.ToS(row[0])
 			bookingId := X.ToU(row[1])
 			revenueIDR := X.ToI(row[2])
 			donationIDR := X.ToI(row[3])
 			out = append(out, RevenueReport{
-				YearMonth:   yearMonth,
+				DateStart:   dateStart,
 				BookingId:   bookingId,
 				RevenueIDR:  revenueIDR,
 				DonationIDR: donationIDR,
@@ -1910,4 +1926,61 @@ func (w *WifiDevices) CountTotalAllRows() (total uint64) {
 
 func (w *WifiDevices) Truncate() bool {
 	return w.Adapter.ExecBoxSpace(w.SpaceName()+`:truncate`, A.X{})
+}
+
+type PricePerDayReport struct {
+	RoomName    string  `json:"roomName"`
+	TenantName  string  `json:"tenantName"`
+	DateStart   string  `json:"dateStart"`
+	DateEnd     string  `json:"dateEnd"`
+	PricePerDay float64 `json:"pricePerDay"`
+	TotalPaid   int64   `json:"totalPaid"`
+	TotalPrice  int64   `json:"totalPrice"`
+	RoomSize    string  `json:"roomSize"`
+}
+
+func (b *Bookings) FindPricePerDayReport(yearMonth string) (out []PricePerDayReport) {
+	const comment = `-- Bookings) FindPricePerDayReport`
+
+	_, _, isValid := isValidMonthYear(yearMonth)
+	if !isValid {
+		now := time.Now()
+		yearMonth = startOfYearMonth(now.Year(), now.Month())
+	}
+
+	query := comment + `
+SELECT
+	r."roomName",
+	t."tenantName",
+	b."dateStart",
+	b."dateEnd",
+	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
+	b."totalPriceIDR",
+	r."roomSize"
+FROM "bookings" b
+LEFT JOIN "payments" p ON b."id" = p."bookingId"
+LEFT JOIN "rooms" r ON b."roomId" = r."id"
+LEFT JOIN "tenants" t ON r."currentTenantId" = t."id"
+WHERE
+	b."deletedAt" = 0
+	AND SUBSTR(b."dateStart", 1, 7) = '` + yearMonth + `'
+GROUP BY b."id"`
+
+	b.Adapter.QuerySql(query, func(row []any) {
+		if len(row) != 7 {
+			return
+		}
+
+		out = append(out, PricePerDayReport{
+			RoomName:   X.ToS(row[0]),
+			TenantName: X.ToS(row[1]),
+			DateStart:  X.ToS(row[2]),
+			DateEnd:    X.ToS(row[3]),
+			TotalPaid:  X.ToI(row[4]),
+			TotalPrice: X.ToI(row[5]),
+			RoomSize:   X.ToS(row[6]),
+		})
+	})
+
+	return
 }

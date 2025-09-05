@@ -17,14 +17,18 @@
   import { onMount } from 'svelte';
   import {checkboxToDate} from './_components/xFormatter';
   import {CmdToggleWaAdded, CmdToggleTeleAdded} from './_components/xConstant';
-    import PopUpShowBookingMissingTenant from './_components/PopUpShowBookingMissingTenant.svelte';
+  import PopUpShowBookingMissingTenant from './_components/PopUpShowBookingMissingTenant.svelte';
+  import MonthShifter from './_components/MonthShifter.svelte';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
   let missingData = /** @type {MissingTenantData[]} */ ([/* missingData */]);
 
+  let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
+  let isLoading = /** @type {boolean} */ (false);
+
   async function RefreshData() { // @ts-ignore
-    await StaffMissingDataReport({},
+    await StaffMissingDataReport({ yearMonth },
     /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
     /** @returns {Promise<void>} */
     function(/** @type {any} */ o) {
@@ -279,7 +283,8 @@
     popUpShowBookingMissingTenant.Show();
     await StaffMissingDataReport({
       tenantId: tenantId,
-      cmd: CmdForm
+      cmd: CmdForm,
+      yearMonth: ''
     },
     /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
     /** @returns {Promise<void>} */
@@ -315,6 +320,11 @@
 
 <LayoutMain access={segments} user={user}>
   <div class="report-container">
+    <MonthShifter
+      bind:yearMonth
+      bind:isLoading
+      OnChanges={RefreshData}
+    />
     <Radio
       className="filters"
       options={filterOptions}
@@ -331,7 +341,7 @@
             <th>Tele Added</th>
             <th style="min-width: 180px;">WhatsApp</th>
             <th>Wa Added</th>
-            <th style="min-width: 140px;">Last Use At</th>
+            <th style="min-width: 140px;">Date Start</th>
           </tr>
         </thead>
         <tbody>
@@ -381,7 +391,7 @@
                   on:change={(e) => handleToggleWaAddedAt(e, data)}
                 />
               </td>
-              <td>{data.lastUseAt || '--'}</td>
+              <td>{data.dateStart || '--'}</td>
             </tr>
           {/each}
         </tbody>

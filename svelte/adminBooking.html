@@ -154,6 +154,11 @@
         --shadow-md: rgba(0, 0, 0, 0.06) 0px 8px 20px;
       }
 
+      input[type="checkbox"] {
+        accent-color: var(--blue-005);
+        cursor: pointer;
+      }
+
       *::selection {
         background: var(--blue-005);
         color: #ffff;
@@ -4735,6 +4740,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       exports.StaffOccupancyReport = async function StaffOccupancyReport(i, cb) {
         return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
+        return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.StaffRevenueReport = async function StaffRevenueReport(i, cb) {
         return await axios.post("/staff/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -6240,6 +6248,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         span = element("span");
         span.textContent = "Bookings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
+        attr(a, "id", "link-staff-booking");
         attr(a, "href", "/staff/booking");
         attr(a, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6499,6 +6508,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         span13 = element("span");
         span13.textContent = "Settings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
+        attr(a0, "id", "link-admin-menu");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6507,6 +6517,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "menu"
         );
+        attr(a1, "id", "link-admin-sale");
         attr(a1, "href", "/admin/sale");
         attr(a1, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6515,6 +6526,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "sale"
         );
+        attr(a2, "id", "link-admin-location");
         attr(a2, "href", "/admin/location");
         attr(a2, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6523,6 +6535,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "location"
         );
+        attr(a3, "id", "link-admin-facility");
         attr(a3, "href", "/admin/facility");
         attr(a3, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6531,6 +6544,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "facility"
         );
+        attr(a4, "id", "link-admin-building");
         attr(a4, "href", "/admin/building");
         attr(a4, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6539,6 +6553,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "building"
         );
+        attr(a5, "id", "link-admin-room");
         attr(a5, "href", "/admin/room");
         attr(a5, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6547,6 +6562,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "room"
         );
+        attr(a6, "id", "link-admin-booking");
         attr(a6, "href", "/admin/booking");
         attr(a6, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6556,6 +6572,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[3] === "admin" && /*pathLv2*/
           ctx[4] === "booking"
         );
+        attr(a7, "id", "link-admin-payment");
         attr(a7, "href", "/admin/payment");
         attr(a7, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6564,6 +6581,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "payment"
         );
+        attr(a8, "id", "link-admin-stock");
         attr(a8, "href", "/admin/stock");
         attr(a8, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6572,6 +6590,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "stock"
         );
+        attr(a9, "id", "link-admin-wifiDevice");
         attr(a9, "href", "/admin/wifiDevice");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6580,6 +6599,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "wifiDevice"
         );
+        attr(a10, "id", "link-admin-tenants");
         attr(a10, "href", "/admin/tenants");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6588,6 +6608,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "tenants"
         );
+        attr(a11, "id", "link-admin-userManagement");
         attr(a11, "href", "/admin/usersManagement");
         attr(a11, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -6596,12 +6617,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathLv2*/
           ctx[4] === "usersManagement"
         );
+        attr(a12, "id", "link-admin-logs");
         attr(a12, "href", "/admin/bookingLogs");
         attr(a12, "class", "svelte-1fwsz8h");
         toggle_class(a12, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
+        attr(a13, "id", "link-admin-setting");
         attr(a13, "href", "/admin/settingFixInconsistencies");
         attr(a13, "class", "svelte-1fwsz8h");
         toggle_class(a13, "active", String(
@@ -6685,22 +6708,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         append(a13, span13);
         current = true;
       },
-      p(ctx2, dirty) {
-        if (!current || dirty & /*String, pathLv2*/
-        16) {
-          toggle_class(a12, "active", String(
-            /*pathLv2*/
-            ctx2[4]
-          ).includes("Logs") || false);
-        }
-        if (!current || dirty & /*String, pathLv2*/
-        16) {
-          toggle_class(a13, "active", String(
-            /*pathLv2*/
-            ctx2[4]
-          ).includes("setting") || false);
-        }
-      },
+      p: noop,
       i(local) {
         if (current)
           return;
@@ -7207,15 +7215,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         append(a12, span12);
         current = true;
       },
-      p(ctx2, dirty) {
-        if (!current || dirty & /*String, pathLv2*/
-        16) {
-          toggle_class(a12, "active", String(
-            /*pathLv2*/
-            ctx2[4]
-          ).includes("Logs") || false);
-        }
-      },
+      p: noop,
       i(local) {
         if (current)
           return;
@@ -7357,15 +7357,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t43;
     let span14;
     let t45;
+    let a13;
+    let icon14;
     let t46;
-    let t47;
     let span15;
     let t48;
+    let t49;
+    let t50;
+    let span16;
+    let t51;
     let nav3;
     let button2;
-    let icon14;
-    let t49;
-    let span16;
+    let icon15;
+    let t52;
+    let span17;
     let aside1_class_value;
     let current;
     let mounted;
@@ -7386,10 +7391,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon5 = new Icon_default({
-      props: {
-        src: RiFinanceShoppingBag2Line,
-        size: "20"
-      }
+      props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon6 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
@@ -7416,12 +7418,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon12 = new Icon_default({
-      props: {
-        src: RiFinanceShoppingBag2Line,
-        size: "20"
-      }
+      props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon13 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon14 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block2 = !/*access*/
@@ -7430,7 +7432,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*access*/
       ctx[0].admin && create_if_block(ctx)
     );
-    icon14 = new Icon_default({
+    icon15 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
     return {
@@ -7472,7 +7474,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon5.$.fragment);
         t15 = space();
         span5 = element("span");
-        span5.textContent = "Sales";
+        span5.textContent = "Price per day Report";
         t17 = space();
         a6 = element("a");
         create_component(icon6.$.fragment);
@@ -7528,28 +7530,34 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         create_component(icon12.$.fragment);
         t40 = space();
         span13 = element("span");
-        span13.textContent = "Sales";
+        span13.textContent = "Wifi Device Report";
         t42 = space();
         a12 = element("a");
         create_component(icon13.$.fragment);
         t43 = space();
         span14 = element("span");
-        span14.textContent = "Profile";
+        span14.textContent = "Price per day Report";
         t45 = space();
+        a13 = element("a");
+        create_component(icon14.$.fragment);
+        t46 = space();
+        span15 = element("span");
+        span15.textContent = "Profile";
+        t48 = space();
         if (if_block2)
           if_block2.c();
-        t46 = space();
+        t49 = space();
         if (if_block3)
           if_block3.c();
-        t47 = space();
-        span15 = element("span");
-        t48 = space();
+        t50 = space();
+        span16 = element("span");
+        t51 = space();
         nav3 = element("nav");
         button2 = element("button");
-        create_component(icon14.$.fragment);
-        t49 = space();
-        span16 = element("span");
-        span16.textContent = "Logout";
+        create_component(icon15.$.fragment);
+        t52 = space();
+        span17 = element("span");
+        span17.textContent = "Logout";
         attr(a0, "href", "/");
         attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -7590,13 +7598,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathAll*/
           ctx[2] === "/staff/wifiDeviceReport"
         );
-        attr(a5, "href", "/staff/sales");
+        attr(a5, "href", "/staff/pricePerDayReport");
         attr(a5, "class", "svelte-1fwsz8h");
         toggle_class(
           a5,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/sales"
+          ctx[2] === "/staff/pricePerDayReport"
         );
         attr(a6, "href", "/user");
         attr(a6, "class", "svelte-1fwsz8h");
@@ -7647,24 +7655,32 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*pathAll*/
           ctx[2] === "/staff/revenueReport"
         );
-        attr(a11, "href", "/staff/sales");
+        attr(a11, "href", "/staff/wifiDeviceReport");
         attr(a11, "class", "svelte-1fwsz8h");
         toggle_class(
           a11,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/sales"
+          ctx[2] === "/staff/wifiDeviceReport"
         );
-        attr(a12, "href", "/user");
+        attr(a12, "href", "/staff/pricePerDayReport");
         attr(a12, "class", "svelte-1fwsz8h");
         toggle_class(
           a12,
           "active",
           /*pathAll*/
+          ctx[2] === "/staff/pricePerDayReport"
+        );
+        attr(a13, "href", "/user");
+        attr(a13, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a13,
+          "active",
+          /*pathAll*/
           ctx[2] === "/user"
         );
         attr(nav2, "class", "nav-menu svelte-1fwsz8h");
-        attr(span15, "class", "separator svelte-1fwsz8h");
+        attr(span16, "class", "separator svelte-1fwsz8h");
         attr(button2, "class", "red svelte-1fwsz8h");
         attr(nav3, "class", "nav-menu svelte-1fwsz8h");
         attr(div1, "class", "container svelte-1fwsz8h");
@@ -7758,20 +7774,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         mount_component(icon13, a12, null);
         append(a12, t43);
         append(a12, span14);
-        append(div1, t45);
+        append(nav2, t45);
+        append(nav2, a13);
+        mount_component(icon14, a13, null);
+        append(a13, t46);
+        append(a13, span15);
+        append(div1, t48);
         if (if_block2)
           if_block2.m(div1, null);
-        append(div1, t46);
+        append(div1, t49);
         if (if_block3)
           if_block3.m(div1, null);
-        append(div1, t47);
-        append(div1, span15);
-        append(div1, t48);
+        append(div1, t50);
+        append(div1, span16);
+        append(div1, t51);
         append(div1, nav3);
         append(nav3, button2);
-        mount_component(icon14, button2, null);
-        append(button2, t49);
-        append(button2, span16);
+        mount_component(icon15, button2, null);
+        append(button2, t52);
+        append(button2, span17);
         current = true;
         if (!mounted) {
           dispose = [
@@ -7859,7 +7880,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block2 = create_if_block_1(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
-            if_block2.m(div1, t46);
+            if_block2.m(div1, t49);
           }
         } else if (if_block2) {
           group_outros();
@@ -7882,7 +7903,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             if_block3 = create_if_block(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
-            if_block3.m(div1, t47);
+            if_block3.m(div1, t50);
           }
         } else if (if_block3) {
           group_outros();
@@ -7916,9 +7937,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_in(icon11.$.fragment, local);
         transition_in(icon12.$.fragment, local);
         transition_in(icon13.$.fragment, local);
+        transition_in(icon14.$.fragment, local);
         transition_in(if_block2);
         transition_in(if_block3);
-        transition_in(icon14.$.fragment, local);
+        transition_in(icon15.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -7938,9 +7960,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         transition_out(icon11.$.fragment, local);
         transition_out(icon12.$.fragment, local);
         transition_out(icon13.$.fragment, local);
+        transition_out(icon14.$.fragment, local);
         transition_out(if_block2);
         transition_out(if_block3);
-        transition_out(icon14.$.fragment, local);
+        transition_out(icon15.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -7969,11 +7992,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         destroy_component(icon11);
         destroy_component(icon12);
         destroy_component(icon13);
+        destroy_component(icon14);
         if (if_block2)
           if_block2.d();
         if (if_block3)
           if_block3.d();
-        destroy_component(icon14);
+        destroy_component(icon15);
         mounted = false;
         run_all(dispose);
       }
@@ -7986,9 +8010,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /** @type {Access} */
       {}
     ) } = $props;
-    onMount(() => {
-      console.log(access);
-    });
     const pathAll = (
       /** @type {string}*/
       window.location.pathname
@@ -8001,6 +8022,79 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /** @type {string}*/
       window.location.pathname.split("/")[2]
     );
+    function sideMenuScrollIntoView() {
+      let linkId = (
+        /** @type {string} */
+        ""
+      );
+      if (pathLv1 === "admin" && pathLv2 === "booking") {
+        linkId = "link-admin-booking";
+      }
+      if (pathLv1 === "staff" && pathLv2 === "booking") {
+        linkId = "link-staff-booking";
+      }
+      switch (pathLv2) {
+        case "menu": {
+          linkId = "link-admin-menu";
+          break;
+        }
+        case "sale": {
+          linkId = "link-admin-sale";
+          break;
+        }
+        case "location": {
+          linkId = "link-admin-location";
+          break;
+        }
+        case "facility": {
+          linkId = "link-admin-facility";
+          break;
+        }
+        case "building": {
+          linkId = "link-admin-building";
+          break;
+        }
+        case "room": {
+          linkId = "link-admin-room";
+          break;
+        }
+        case "payment": {
+          linkId = "link-admin-payment";
+          break;
+        }
+        case "stock": {
+          linkId = "link-admin-stock";
+          break;
+        }
+        case "wifiDevice": {
+          linkId = "link-admin-wifiDevice";
+          break;
+        }
+        case "tenants": {
+          linkId = "link-admin-tenants";
+          break;
+        }
+        case "usersManagement": {
+          linkId = "link-admin-userManagement";
+          break;
+        }
+      }
+      if (String(pathLv2).includes("Logs")) {
+        linkId = "link-admin-logs";
+      }
+      if (String(pathLv2).includes("setting")) {
+        linkId = "link-admin-setting";
+      }
+      if (linkId != "") {
+        const linkElm = (
+          /** @type {HTMLAnchorElement} */
+          document.getElementById(linkId)
+        );
+        if (linkElm) {
+          linkElm.scrollIntoView({ behavior: "instant" });
+        }
+      }
+    }
     async function logout() {
       await (0, import_jsApi.UserLogout)({}, function(o) {
         if (o.error) {
@@ -8020,6 +8114,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         });
       });
     }
+    onMount(() => {
+      sideMenuScrollIntoView();
+    });
     const click_handler = () => set_store_value(isOpenSideMenu, $isOpenSideMenu = !$isOpenSideMenu, $isOpenSideMenu);
     $self.$set = ($props2) => {
       if ("access" in $props2)
@@ -13915,7 +14012,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_10*/
-            ctx[33]
+            ctx[35]
           );
           mounted = true;
         }
@@ -14038,7 +14135,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_9*/
-            ctx[32]
+            ctx[34]
           );
           mounted = true;
         }
@@ -14145,24 +14242,32 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         append(label_1, t0);
         insert(target, t1, anchor);
         insert(target, input, anchor);
+        ctx[32](input);
         set_input_value(
           input,
           /*value*/
           ctx[0]
         );
-        ctx[31](input);
         insert(target, t2, anchor);
         if (if_block)
           if_block.m(target, anchor);
         insert(target, if_block_anchor, anchor);
         current = true;
         if (!mounted) {
-          dispose = listen(
-            input,
-            "input",
-            /*input_input_handler_8*/
-            ctx[30]
-          );
+          dispose = [
+            listen(
+              input,
+              "input",
+              /*input_input_handler_8*/
+              ctx[33]
+            ),
+            listen(
+              input,
+              "keydown",
+              /*handleEnter*/
+              ctx[13]
+            )
+          ];
           mounted = true;
         }
       },
@@ -14252,11 +14357,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           detach(t2);
           detach(if_block_anchor);
         }
-        ctx[31](null);
+        ctx[32](null);
         if (if_block)
           if_block.d(detaching);
         mounted = false;
-        dispose();
+        run_all(dispose);
       }
     };
   }
@@ -14313,7 +14418,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_7*/
-            ctx[29]
+            ctx[31]
           );
           mounted = true;
         }
@@ -14434,7 +14539,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_6*/
-            ctx[28]
+            ctx[30]
           );
           mounted = true;
         }
@@ -14565,7 +14670,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_5*/
-            ctx[27]
+            ctx[29]
           );
           mounted = true;
         }
@@ -14689,7 +14794,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             textarea,
             "input",
             /*textarea_input_handler*/
-            ctx[26]
+            ctx[28]
           );
           mounted = true;
         }
@@ -14810,7 +14915,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_4*/
-            ctx[25]
+            ctx[27]
           );
           mounted = true;
         }
@@ -14947,7 +15052,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_3*/
-            ctx[24]
+            ctx[26]
           );
           mounted = true;
         }
@@ -15055,7 +15160,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_2*/
-            ctx[23]
+            ctx[25]
           );
           mounted = true;
         }
@@ -15170,7 +15275,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler_1*/
-            ctx[22]
+            ctx[24]
           );
           mounted = true;
         }
@@ -15291,7 +15396,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "input",
             /*input_input_handler*/
-            ctx[21]
+            ctx[23]
           );
           mounted = true;
         }
@@ -15438,7 +15543,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function select_value_binding(value) {
-      ctx[18](value);
+      ctx[20](value);
     }
     let select_props = {
       items: (
@@ -15462,12 +15567,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[14]
+      ctx[15]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[15]
+      ctx[16]
     );
     return {
       c() {
@@ -15608,7 +15713,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             input,
             "change",
             /*input_change_handler*/
-            ctx[17]
+            ctx[19]
           );
           mounted = true;
         }
@@ -15702,7 +15807,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             button,
             "click",
             /*toggleShowPassword*/
-            ctx[13]
+            ctx[14]
           );
           mounted = true;
         }
@@ -15897,7 +16002,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function select_value_binding_2(value) {
-      ctx[20](value);
+      ctx[22](value);
     }
     let select_props = {
       items: (
@@ -15921,12 +16026,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[14]
+      ctx[15]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[15]
+      ctx[16]
     );
     return {
       c() {
@@ -16014,7 +16119,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function select_value_binding_1(value) {
-      ctx[19](value);
+      ctx[21](value);
     }
     let select_props = {
       items: (
@@ -16038,12 +16143,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     select.$on(
       "select",
       /*handleSelect*/
-      ctx[14]
+      ctx[15]
     );
     select.$on(
       "clear",
       /*handleClear*/
-      ctx[15]
+      ctx[16]
     );
     return {
       c() {
@@ -16316,6 +16421,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let { label } = $props;
     let { placeholder = "" } = $props;
     let { isObject = false } = $props;
+    let { onEnter = async () => {
+    } } = $props;
+    function handleEnter(e) {
+      if (e.key === "Enter")
+        onEnter();
+    }
     if (isObject)
       value = value + "";
     let isShowPassword = false;
@@ -16442,15 +16553,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       value = this.value;
       $invalidate(0, value);
     }
-    function input_input_handler_8() {
-      value = this.value;
-      $invalidate(0, value);
-    }
     function input_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         inputElm = $value;
         $invalidate(9, inputElm);
       });
+    }
+    function input_input_handler_8() {
+      value = this.value;
+      $invalidate(0, value);
     }
     function input_input_handler_9() {
       value = this.value;
@@ -16472,13 +16583,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("autocomplete" in $props2)
         $invalidate(4, autocomplete = $props2.autocomplete);
       if ("values" in $props2)
-        $invalidate(16, values = $props2.values);
+        $invalidate(17, values = $props2.values);
       if ("label" in $props2)
         $invalidate(5, label = $props2.label);
       if ("placeholder" in $props2)
         $invalidate(6, placeholder = $props2.placeholder);
       if ("isObject" in $props2)
         $invalidate(7, isObject = $props2.isObject);
+      if ("onEnter" in $props2)
+        $invalidate(18, onEnter = $props2.onEnter);
     };
     $self.$.update = () => {
       if ($self.$.dirty[0] & /*value*/
@@ -16503,10 +16616,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       itemsArr,
       itemsArrObj,
       svelteSelectValue,
+      handleEnter,
       toggleShowPassword,
       handleSelect,
       handleClear,
       values,
+      onEnter,
       input_change_handler,
       select_value_binding,
       select_value_binding_1,
@@ -16520,8 +16635,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       input_input_handler_5,
       input_input_handler_6,
       input_input_handler_7,
-      input_input_handler_8,
       input_binding,
+      input_input_handler_8,
       input_input_handler_9,
       input_input_handler_10
     ];
@@ -16541,10 +16656,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           id: 1,
           value: 0,
           autocomplete: 4,
-          values: 16,
+          values: 17,
           label: 5,
           placeholder: 6,
-          isObject: 7
+          isObject: 7,
+          onEnter: 18
         },
         null,
         [-1, -1]

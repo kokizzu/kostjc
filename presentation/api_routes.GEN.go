@@ -350,6 +350,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// StaffPricePerDayReport
+	fw.Post("/"+domain.StaffPricePerDayReportAction, func(c *fiber.Ctx) error {
+		in := domain.StaffPricePerDayReportIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.StaffPricePerDayReportAction); err != nil {
+			return nil
+		}
+		out := d.StaffPricePerDayReport(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// StaffRevenueReport
 	fw.Post("/"+domain.StaffRevenueReportAction, func(c *fiber.Ctx) error {
 		in := domain.StaffRevenueReportIn{}

@@ -15,7 +15,8 @@
   import LogsSubMenu from '../_partials/LogsSubMenu.svelte';
   import PopUpCompareJson from '../_components/PopUpCompareJson.svelte';
   import { onMount } from 'svelte';
-  import { RiSystemInformationLine } from '../node_modules/svelte-icons-pack/dist/ri';
+  import { RiSystemInformationLine, RiDesignShadowLine } from '../node_modules/svelte-icons-pack/dist/ri';
+    import PopUpDiffLogJson from '../_components/PopUpDiffLogJson.svelte';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -23,6 +24,7 @@
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
   let users     = /** @type {Record<number, string>} */({/* users */});
+  let tenants = /** @type {Record<number, string>} */({/* tenants */});
 
   async function refreshTableView(/** @type PagerIn */ pagerIn) {
     const i = {
@@ -49,6 +51,8 @@
   })
 
   let popUpCompareJson;
+  let popUpDiffLogJson;
+
   let beforeJson = '';
   let afterJson = '';
 
@@ -72,6 +76,18 @@
 
         popUpCompareJson.Show();
       }
+    },
+    {
+      icon: RiDesignShadowLine,
+      tooltip: 'Show Diff',
+      action: (/** @type {Object} */ row) => {
+        beforeJson = row.beforeJson;
+        afterJson = row.afterJson;
+
+        setTimeout(() => {
+          popUpDiffLogJson.Show();
+        }, 500);
+      }
     }
   ]);
 </script>
@@ -81,6 +97,13 @@
     bind:this={popUpCompareJson}
     bind:beforeJson
     bind:afterJson
+  />
+
+  <PopUpDiffLogJson
+    bind:this={popUpDiffLogJson}
+    bind:beforeJson
+    bind:afterJson
+    {users} {tenants}
   />
 {/if}
 
