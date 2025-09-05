@@ -269,6 +269,9 @@ $: console.log("Final Total Payments:", totalPayments);
                     <div class="item-row item-orange">
                       <div class="item-info">
                         <p class="item-name">{item.customer}</p>
+                        <p class="item-details">
+                          {item.method} • {item.time}
+                        </p>
                         <p class="item-date">{item.date}</p>
                       </div>
                       <p class="item-price price-orange">+Rp {formatCurrency(item.excess)}</p>

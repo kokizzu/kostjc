@@ -70,87 +70,32 @@ export function convertSalesToTodaySales(sales, menuOptions) {
   return new Intl.NumberFormat('id-ID').format(amount);
 }
 
-
-// export function getBuyerOptions(sales, tenants) {
-//   const result = {};
-//   for (const sale of sales) {
-//     const saleId = sale[0];
-//     const buyerName = sale[3];
-//     const tenantId = sale[2];
-//     const totalPrice = sale[13];
-
-//     let label = `#${saleId} / ${buyerName} / (Rp ${formatCurrency(totalPrice)})`;
-
-//     if (tenantId > 0) {
-//       const tenantName = tenants[tenantId];
-//       if (tenantName) {
-//         label = `#${saleId} / ${tenantName} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
-//       } else {
-//         label = `#${saleId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
-//       }
-//     }
-
-//     result[saleId] = label;
-//   }
-//   return result;
-// }
-
-// export function getBuyerOptions(sales, tenants) {
-//   const result = {};
-//   for (const sale of sales) {
-//     const saleId = sale[0];
-//     const buyerName = sale[3];
-//     const tenantId = sale[2];
-//     const totalPrice = sale[13];
-
-//     let label = ` #${saleId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
-
-//     if (tenantId > 0) {
-//       const fullTenantInfo = tenants[tenantId]; // contoh: "Ardianyur Arkom / +62 812-3456-7890"
-//       if (fullTenantInfo) {
-//         // ambil hanya nama + nomor WA, potong berdasarkan ' / '
-//         const [tenantName, teleNumber, waNumber] = fullTenantInfo.split(' / ');
-//         const info = waNumber ? `${tenantName} / ${waNumber}` : tenantName;
-//         label = `#${saleId} / ${info} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
-//       } else {
-//         label = `#${saleId} / ${tenantId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
-//       }
-//     }
-
-//     result[saleId] = label;
-//   }
-//   return result;
-// }
-
 export function getBuyerOptions(sales, tenants) {
   const result = {};
   
-  // Get today's date in YYYY-MM-DD format
   const today = new Date().toISOString().split('T')[0];
   
   for (const sale of sales) {
     const saleId = sale[0];
     const buyerName = sale[3];
     const tenantId = sale[2];
-    const totalPrice = sale[13]; // totalPriceIDR is at index 13
-    const salesDate = sale[14]; // salesDate is at index 14
-    const paymentStatus = sale[6]; // paymentStatus is at index 6
+    const totalPrice = sale[13];
+    const salesDate = sale[14];
+    const paymentStatus = sale[6];
     
-    // Filter: hanya tampilkan data hari ini dan payment status Unpaid
     if (salesDate !== today) {
-      continue; // Skip jika bukan hari ini
+      continue;
     }
     
     if (paymentStatus !== 'Unpaid') {
-      continue; // Skip jika bukan status Unpaid
+      continue;
     }
 
     let label = ` #${saleId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
 
     if (tenantId > 0) {
-      const fullTenantInfo = tenants[tenantId]; // contoh: "Ardianyur Arkom / +62 812-3456-7890"
+      const fullTenantInfo = tenants[tenantId];
       if (fullTenantInfo) {
-        // ambil hanya nama + nomor WA, potong berdasarkan ' / '
         const [tenantName, teleNumber, waNumber] = fullTenantInfo.split(' / ');
         const info = waNumber ? `${tenantName} / ${waNumber}` : tenantName;
         label = `#${saleId} / ${info} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
@@ -165,47 +110,41 @@ export function getBuyerOptions(sales, tenants) {
   return result;
 }
 
-
-// export function parseSalesPerItem(sales, menusAsObject) {
-//   const todaySales = [];
+export function getBuyerOptionsForUnpaidItems(sales, tenants) {
+  const result = {};
   
-//   // Get today's date in YYYY-MM-DD format
-//   const today = new Date().toISOString().split('T')[0];
-
-//   for (const sale of sales) {
-//     const salesDate = sale[14]; // salesDate at index 10
+  
+  for (const sale of sales) {
+    const saleId = sale[0];
+    const buyerName = sale[3];
+    const tenantId = sale[2];
+    const totalPrice = sale[13];
+    const paymentStatus = sale[6];
     
-//     // Filter: hanya proses pembelian hari ini
-//     if (salesDate !== today) {
-//       continue; // Skip jika bukan hari ini
-//     }
+    
+    if (paymentStatus !== 'Unpaid') {
+      continue;
+    }
 
-//     const menuIds = sale[4];
-//     const totalPrice = sale[13]; // totalPriceIDR at index 13
+    let label = ` #${saleId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
 
-//     const perItemPrice = Math.floor(totalPrice / menuIds.length);
+    if (tenantId > 0) {
+      const fullTenantInfo = tenants[tenantId];
+      if (fullTenantInfo) {
+        const [tenantName, teleNumber, waNumber] = fullTenantInfo.split(' / ');
+        const info = waNumber ? `${tenantName} / ${waNumber}` : tenantName;
+        label = `#${saleId} / ${info} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
+      } else {
+        label = `#${saleId} / ${tenantId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
+      }
+    }
 
-//     for (const id of menuIds) {
-//       if (!todaySales[id]) {
-//         todaySales[id] = {
-//           name: menusAsObject[id]?.name,
-//           qty: 0,
-//           total: 0,
-//           times: '',
-//         };
-//       }
+    result[saleId] = label;
+  }
+  
+  return result;
+}
 
-//       todaySales[id].qty += 1;
-//       todaySales[id].total += menusAsObject[id]?.price || perItemPrice;
-//       todaySales[id].times = new Date(sale[17] * 1000).toLocaleTimeString("id-ID", {
-//           hour: "2-digit",
-//           minute: "2-digit",
-//           hour12: false
-//         });
-//     }
-//   }
-//   return todaySales;
-// }
 
 export function parseSalesToTodaySales(sales, menusAsObject) {
   const salesObj = {};
@@ -259,7 +198,6 @@ export function convertMenusToObject(menus) {
 export function parseSalesToTodayPayment(salesData, tenants) {
   const todayPayments = [];
   
-  // Validasi input
   if (!Array.isArray(salesData) || salesData.length === 0) {
       console.log('Data sales kosong atau tidak valid');
       return todayPayments;
@@ -267,25 +205,21 @@ export function parseSalesToTodayPayment(salesData, tenants) {
   
   salesData.forEach((salesArray, index) => {
       try {
-          // Pastikan salesArray adalah array dan memiliki minimal 20 element
           if (!Array.isArray(salesArray) || salesArray.length < 20) {
               console.warn(`Sales data index ${index} tidak valid atau kurang lengkap`);
               return;
           }
           
-          // Ambil status dari index 6
           const status = salesArray[6];
           
-          // Filter hanya yang berstatus "Paid"
           if (status === "Paid" || status === "Overpaid") {
-              // Parse data ke format Payment
               const payment = {
-                  id: parseInt(salesArray[0]) || 0, // Index 0: ID
-                  customer: getCleanCustomerName(salesArray, tenants) || '', // Index 1: Customer name
-                  amount: calculateSaleTotal(salesArray)|| 0, // Index 13: Total amount
-                  method: salesArray[5] || '', // Index 5: Payment method
-                  status: salesArray[6] || '', // Index 6: Status
-                  time: formatTimestamp(salesArray[17]) // Index 17: Timestamp
+                  id: parseInt(salesArray[0]) || 0,
+                  customer: getCleanCustomerName(salesArray, tenants) || '',
+                  amount: calculateSaleTotal(salesArray)|| 0,
+                  method: salesArray[5] || '',
+                  status: salesArray[6] || '',
+                  time: formatTimestamp(salesArray[17])
               };
               
               todayPayments.push(payment);
@@ -302,7 +236,6 @@ export function parseSalesToTodayPayment(salesData, tenants) {
 export function parseSalesToOverpaid(salesData, tenants) {
   const overpaidData = [];
   
-  // Validasi input
   if (!Array.isArray(salesData) || salesData.length === 0) {
       console.log('Data sales kosong atau tidak valid');
       return overpaidData;
@@ -310,29 +243,25 @@ export function parseSalesToOverpaid(salesData, tenants) {
   
   salesData.forEach((salesArray, index) => {
       try {
-          // Pastikan salesArray adalah array dan memiliki minimal 20 element
           if (!Array.isArray(salesArray) || salesArray.length < 20) {
               console.warn(`Sales data index ${index} tidak valid atau kurang lengkap`);
               return;
           }
           
-          // Ambil status dari index 6
           const status = salesArray[6];
           
-          // Filter hanya yang berstatus "Overpaid"
           if (status === "Overpaid") {
-              // Untuk overpaid, kita perlu hitung excess amount
-              // Asumsi: index 8 adalah amount yang dibayar, index 13 adalah total yang seharusnya
               const paidAmount = calculateSaleTotal(salesArray) || 0;
               const totalAmount = parseInt(salesArray[13]) || 0;
               const excess = Math.max(0, paidAmount - totalAmount);
               
-              // Parse data ke format Overpaid
               const overpaid = {
-                  id: parseInt(salesArray[0]) || 0, // Index 0: ID
-                  customer: getCleanCustomerName(salesArray, tenants) || '', // Index 1: Customer name
-                  excess: excess, // Kelebihan pembayaran
-                  date: salesArray[15] || '' // Index 15: Date
+                  id: parseInt(salesArray[0]) || 0,
+                  customer: getCleanCustomerName(salesArray, tenants) || '',
+                  excess: excess,
+                  method: salesArray[5] || '',
+                  time: formatTimestamp(salesArray[17]),
+                  date: salesArray[15] || ''
               };
               
               overpaidData.push(overpaid);
@@ -350,7 +279,6 @@ export function parseSalesToOverpaid(salesData, tenants) {
 export function parseSalesToUnpaid(salesData, menus, tenants) {
   const unpaidData = [];
   
-  // Validasi input
   if (!Array.isArray(salesData) || salesData.length === 0) {
       console.log('Data sales kosong atau tidak valid');
       return unpaidData;
@@ -358,24 +286,20 @@ export function parseSalesToUnpaid(salesData, menus, tenants) {
   
   salesData.forEach((salesArray, index) => {
       try {
-          // Pastikan salesArray adalah array dan memiliki minimal 20 element
           if (!Array.isArray(salesArray) || salesArray.length < 20) {
               console.warn(`Sales data index ${index} tidak valid atau kurang lengkap`);
               return;
           }
           
-          // Ambil status dari index 6
           const status = salesArray[6];
           
-          // Filter hanya yang berstatus "Unpaid"
           if (status === "Unpaid") {
-              // Parse data ke format Unpaid
               const unpaid = {
-                  id: parseInt(salesArray[0]) || 0, // Index 0: ID
-                  customer: getCleanCustomerName(salesArray, tenants) || '', // Index 1: Customer name
-                  item: getMenuStringFromSale(salesArray, menus) || '', // Index 3: Item description (pembeli pertama, etc)
-                  amount: parseInt(salesArray[13]) || 0, // Index 13: Total amount
-                  date: salesArray[14] || '' // Index 14: Date
+                  id: parseInt(salesArray[0]) || 0,
+                  customer: getCleanCustomerName(salesArray, tenants) || '',
+                  item: getMenuStringFromSale(salesArray, menus) || '',
+                  amount: parseInt(salesArray[13]) || 0,
+                  date: salesArray[14] || ''
               };
               
               unpaidData.push(unpaid);
@@ -408,18 +332,15 @@ function formatTimestamp(timestamp) {
 
 function calculateSaleTotal(saleArray) {
   try {
-      // Validasi array
       if (!Array.isArray(saleArray) || saleArray.length < 20) {
           return 0;
       }
-
-      // Ambil nilai dari setiap metode pembayaran dan jumlahkan
-      const transferAmount = parseInt(saleArray[7]) || 0;  // TransferIDR
-      const qrisAmount = parseInt(saleArray[8]) || 0;      // QrisIDR
-      const cashAmount = parseInt(saleArray[9]) || 0;      // CashIDR
-      const debtAmount = parseInt(saleArray[10]) || 0;     // DebtIDR
-      const topupAmount = parseInt(saleArray[11]) || 0;    // TopupIDR
-      const donationAmount = parseInt(saleArray[12]) || 0; // Donation
+      const transferAmount = parseInt(saleArray[7]) || 0;
+      const qrisAmount = parseInt(saleArray[8]) || 0;
+      const cashAmount = parseInt(saleArray[9]) || 0;
+      const debtAmount = parseInt(saleArray[10]) || 0;
+      const topupAmount = parseInt(saleArray[11]) || 0;
+      const donationAmount = parseInt(saleArray[12]) || 0;
 
       return transferAmount + qrisAmount + cashAmount + debtAmount + topupAmount + donationAmount;
       
@@ -432,25 +353,20 @@ function calculateSaleTotal(saleArray) {
 
 function getCustomerName(saleArray, tenants) {
   try {
-      // Validasi array
       if (!Array.isArray(saleArray) || saleArray.length < 20) {
           return '';
       }
 
-      const tenantId = parseInt(saleArray[2]) || 0; // Index 2: TenantId
-      const buyerName = saleArray[3] || ''; // Index 3: BuyerName
+      const tenantId = parseInt(saleArray[2]) || 0;
+      const buyerName = saleArray[3] || '';
 
-      // Jika tenantId = 0, return buyerName
       if (tenantId === 0) {
           return buyerName;
       }
 
-      // Jika tenantId != 0, return nama dari tenants object
       if (tenants && tenants[tenantId]) {
           return tenants[tenantId];
       }
-
-      // Fallback jika tenant tidak ditemukan
       return `Tenant ${tenantId} (Not Found)`;
 
   } catch (error) {
@@ -463,7 +379,6 @@ function getCleanCustomerName(saleArray, tenants) {
   try {
       const fullName = getCustomerName(saleArray, tenants);
       
-      // Potong nama jika ada info tambahan (sebelum " / " atau " @")
       const cleanName = fullName.split(' / ')[0].split(' @')[0].trim();
       
       return cleanName;
@@ -478,7 +393,6 @@ function getCleanCustomerName(saleArray, tenants) {
 
 function getMenuString(menuIds, menus) {
   try {
-      // Validasi input
       if (!Array.isArray(menuIds) || menuIds.length === 0) {
           return '';
       }
@@ -487,35 +401,29 @@ function getMenuString(menuIds, menus) {
           return '';
       }
 
-      // Untuk performance terbaik, gunakan Object of Object
       let menusObject = menus;
       
-      // Convert array ke object hanya jika diperlukan (performance cost)
       if (Array.isArray(menus)) {
           menusObject = convertMenusToObject(menus);
       }
 
-      // Hitung quantity untuk setiap menu - O(n) where n = menuIds.length
       const menuCount = {};
       menuIds.forEach(menuId => {
           const id = parseInt(menuId);
           menuCount[id] = (menuCount[id] || 0) + 1;
       });
 
-      // Buat string menu dengan quantity - O(k) where k = unique menus
       const menuStrings = [];
       
       for (const menuId of Object.keys(menuCount)) {
           const id = parseInt(menuId);
           const quantity = menuCount[id];
           
-          // O(1) lookup dengan object, O(n) dengan array
           let menuName = `Menu ${id}`;
           if (menusObject[id]?.name) {
               menuName = menusObject[id].name;
           }
 
-          // Format berdasarkan quantity
           menuStrings.push(quantity > 1 ? `${menuName} x${quantity}` : menuName);
       }
 
@@ -529,12 +437,9 @@ function getMenuString(menuIds, menus) {
 
 function getMenuStringFromSale(saleArray, menus) {
   try {
-      // Validasi array
       if (!Array.isArray(saleArray) || saleArray.length < 20) {
           return '';
       }
-
-      // Ambil menuIds dari index 4
       const menuIds = saleArray[4];
       
       return getMenuString(menuIds, menus);

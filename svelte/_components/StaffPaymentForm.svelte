@@ -5,13 +5,13 @@
     import { createEventDispatcher } from 'svelte';
     import { dateISOFormat } from './xFormatter';
     import InputBox from './InputBox.svelte';
-    import { formatCurrency, getBuyerOptions } from '../_helper/sale';
+    import { formatCurrency, getBuyerOptionsForUnpaidItems } from '../_helper/sale';
 
      const dispatch = createEventDispatcher();
 
      export let sales;
      export let tenants;
-     let buyerOptions = getBuyerOptions(sales, tenants);
+     let buyerOptions = getBuyerOptionsForUnpaidItems(sales, tenants);
 
     const PaymentMethods = [
       'Cash',

@@ -3397,9 +3397,81 @@ exports.StaffRevenueReport = async function StaffRevenueReport( i, cb ) {
 
 /**
  * @typedef {Object} StaffSalesIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} sale.id
+ * @property {String} sale.cashier
+ * @property {number} sale.tenantId
+ * @property {String} sale.buyerName
+ * @property {Object} sale.menuIds
+ * @property {number} sale.qrisIDR
+ * @property {number} sale.cashIDR
+ * @property {number} sale.debtIDR
+ * @property {number} sale.topupIDR
+ * @property {number} sale.totalPriceIDR
+ * @property {String} sale.salesDate
+ * @property {String} sale.paidAt
+ * @property {String} sale.note
+ * @property {number} sale.donation
+ * @property {number} sale.transferIDR
+ * @property {String} sale.paymentMethod
+ * @property {String} sale.paymentStatus
+ * @property {number} sale.createdAt
+ * @property {number} sale.createdBy
+ * @property {number} sale.updatedAt
+ * @property {number} sale.updatedBy
+ * @property {number} sale.deletedAt
+ * @property {number} sale.deletedBy
+ * @property {number} sale.restoredBy
+ * @property {number} tenantID
  * @property {String} staffData
  */
 const StaffSalesIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  sale: { // rqCafe.Sales
+    id: 0, // uint64
+    cashier: '', // string
+    tenantId: 0, // uint64
+    buyerName: '', // string
+    menuIds: { // []any
+    }, // []any
+    qrisIDR: 0, // int64
+    cashIDR: 0, // int64
+    debtIDR: 0, // int64
+    topupIDR: 0, // int64
+    totalPriceIDR: 0, // int64
+    salesDate: '', // string
+    paidAt: '', // string
+    note: '', // string
+    donation: 0, // int64
+    transferIDR: 0, // int64
+    paymentMethod: '', // string
+    paymentStatus: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.Sales
+  tenantID: 0, // uint64
   staffData: '', // string
 }
 /**
@@ -3420,6 +3492,42 @@ const StaffSalesIn = {
  * @property {String} user.fullName
  * @property {String} user.userName
  * @property {String} user.role
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} sale.id
+ * @property {String} sale.cashier
+ * @property {number} sale.tenantId
+ * @property {String} sale.buyerName
+ * @property {Object} sale.menuIds
+ * @property {number} sale.qrisIDR
+ * @property {number} sale.cashIDR
+ * @property {number} sale.debtIDR
+ * @property {number} sale.topupIDR
+ * @property {number} sale.totalPriceIDR
+ * @property {String} sale.salesDate
+ * @property {String} sale.paidAt
+ * @property {String} sale.note
+ * @property {number} sale.donation
+ * @property {number} sale.transferIDR
+ * @property {String} sale.paymentMethod
+ * @property {String} sale.paymentStatus
+ * @property {number} sale.createdAt
+ * @property {number} sale.createdBy
+ * @property {number} sale.updatedAt
+ * @property {number} sale.updatedBy
+ * @property {number} sale.deletedAt
+ * @property {number} sale.deletedBy
+ * @property {number} sale.restoredBy
+ * @property {Object} sales
  * @property {Object} segments
  */
 const StaffSalesOut = {
@@ -3441,6 +3549,53 @@ const StaffSalesOut = {
     userName: '', // string
     role: '', // string
   }, // rqAuth.Users
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  sale: { // rqCafe.Sales
+    id: 0, // uint64
+    cashier: '', // string
+    tenantId: 0, // uint64
+    buyerName: '', // string
+    menuIds: { // []any
+    }, // []any
+    qrisIDR: 0, // int64
+    cashIDR: 0, // int64
+    debtIDR: 0, // int64
+    topupIDR: 0, // int64
+    totalPriceIDR: 0, // int64
+    salesDate: '', // string
+    paidAt: '', // string
+    note: '', // string
+    donation: 0, // int64
+    transferIDR: 0, // int64
+    paymentMethod: '', // string
+    paymentStatus: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.Sales
+  sales: { // [][]any
+  }, // [][]any
   segments: { // M.SB
   }, // M.SB
 }

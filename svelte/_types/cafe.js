@@ -82,6 +82,8 @@ module.exports = {};
  * @typedef {Object} Overpaid
  * @property {number} id
  * @property {string} customer
+ * @property {string} method
+ * @property {string} time
  * @property {number} excess
  * @property {string} date
  */
