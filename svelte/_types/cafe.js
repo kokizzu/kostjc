@@ -47,6 +47,16 @@ module.exports = {};
 
 
 /**
+ * @typedef {Object} TodaySales
+ * @property {number} id
+ * @property {string} item
+ * @property {string} qty
+ * @property {number} price
+ * @property {string} times
+ */
+module.exports = {};
+
+/**
  * @typedef {Object} Payment
  * @property {number} id
  * @property {string} customer
@@ -59,11 +69,20 @@ module.exports = {};
 
 
 /**
- * @typedef {Object} UnpaidItem
+ * @typedef {Object} Unpaid
  * @property {number} id
  * @property {string} customer
  * @property {string} item
  * @property {number} amount
+ * @property {string} date
+ */
+module.exports = {};
+
+/**
+ * @typedef {Object} Overpaid
+ * @property {number} id
+ * @property {string} customer
+ * @property {number} excess
  * @property {string} date
  */
 module.exports = {};

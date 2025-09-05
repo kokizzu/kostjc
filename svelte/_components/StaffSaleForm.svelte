@@ -5,37 +5,21 @@
   import { dateISOFormat } from './xFormatter';
   import { createEventDispatcher } from 'svelte';
   import InputBox from './InputBox.svelte';
+  import { parseMenuMapToOptions } from '../_helper/sale';
+
 
   const dispatch = createEventDispatcher();
 
   export let tenants;
 
   let menuChoices = /** @type {Record<Number, string>} */({/* menuChoices */});
-  let menuOptions = convertMapToMenuOptions(menuChoices);
+  $: menuOptions = parseMenuMapToOptions(menuChoices);
 
-  console.log('menuOptions:', menuOptions);
-
-  function convertMapToMenuOptions(mapData) {
-    const menuOptions = [];
-
-    Object.keys(mapData).forEach(key => {
-      const value = mapData[key];
-      const match = value.match(/^(.*)\s\((\d+)\)$/);
-
-      if (match) {
-        const name = match[1].trim();
-        const price = parseInt(match[2], 10);
-
-        menuOptions.push({
-          id: parseInt(key, 10),
-          name,
-          price,
-        });
-      }
-    });
-
-    return menuOptions;
-  }
+  const PaymentStatuses = {
+      Unpaid: 'Unpaid',
+      Paid: 'Paid',
+      Overpaid: 'Overpaid',
+    };
 
   let cashier = '';
   let tenantId = 0;
@@ -53,7 +37,8 @@
   // Calculate total price when selected menus change
  // @ts-ignore
   // @ts-ignore
-    $: if (selectedMenusValue.length > 0) {
+   // @ts-ignore
+     $: if (selectedMenusValue.length > 0) {
     totalPriceIDR = selectedMenusValue.reduce((total, menuId) => {
       const menu = menuOptions.find(m => m.id === menuId);
       return total + (menu ? menu.price : 0);
@@ -135,6 +120,7 @@ function decrementMenu(menuId) {
       tenantId: tenantId+'',
       buyerName: buyerName,
       menuIds: menuIds,
+      paymentStatus: PaymentStatuses.Unpaid,
       salesDate: salesDate,
       note: note,
       totalPriceIDR: totalPriceIDR,
@@ -142,6 +128,8 @@ function decrementMenu(menuId) {
 
     dispatch('saleSubmit', saleData);
   }
+
+  console.log(menuOptions)
 </script>
 
 <div class="form">
@@ -171,7 +159,7 @@ function decrementMenu(menuId) {
     <div class="menu-grid">
       {#each menuOptions as menu}
   <div class="menu-card">
-    <div class="menu-image">Image</div>
+    <div class="menu-image-with-photo" style="background-image: url('{menu.imageUrl}')"></div>
     <div class="menu-info">
       <p class="menu-name">{menu.name}</p>
       <p class="menu-price">Rp {formatCurrency(menu.price)}</p>
@@ -256,9 +244,9 @@ function decrementMenu(menuId) {
 
   .menu-card {
   all: unset; /* Menghapus default style button */
-  background-color: #fef9c3;
   padding: 1rem;
   border-radius: 1rem;
+  border-color: #374151;
   box-shadow: 0 0 0 2px transparent;
   transition: box-shadow 0.2s ease;
   cursor: pointer;
@@ -270,18 +258,6 @@ function decrementMenu(menuId) {
   .menu-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .menu-image {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 0.75rem;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
   }
 
   .menu-info {
@@ -296,7 +272,7 @@ function decrementMenu(menuId) {
   }
 
   .menu-price {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 500;
     margin: 0;
     color: #6b7280;
@@ -314,11 +290,6 @@ function decrementMenu(menuId) {
       padding: 0.75rem;
     }
 
-    .menu-image {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 0.5rem;
-    }
   }
 
   .total-price {
@@ -392,5 +363,29 @@ function decrementMenu(menuId) {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.menu-image-with-photo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 0.75rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.menu-image-with-photo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0,0,0,0.2), rgba(255,255,255,0.1));
 }
 </style>

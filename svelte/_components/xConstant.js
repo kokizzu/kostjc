@@ -6,6 +6,7 @@ const CmdRestore = `restore`
 const CmdDelete  = `delete`
 const CmdToggleWaAdded   = `toggle_wa_added`
 const CmdToggleTeleAdded = `toggle_tele_added`
+const CmdUpdatePayment   = `update_payment`
 module.exports = {
   CmdList,
   CmdForm,
@@ -13,5 +14,6 @@ module.exports = {
   CmdRestore,
   CmdDelete,
   CmdToggleWaAdded,
-  CmdToggleTeleAdded
+  CmdToggleTeleAdded,
+  CmdUpdatePayment
 }

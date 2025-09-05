@@ -54,8 +54,8 @@ WHERE "deletedAt" = 0`
 	return rows
 }
 
-func (f *Menus) FindMenusSalesChoices() map[uint64]string {
-	const comment = `-- Menus) FindMenusSaleChoices`
+func (f *Menus) FindMenus() map[uint64]string {
+	const comment = `-- Menus) FindMenus`
 
 	queryRows := comment + `
 SELECT ` + f.SqlId() + `, ` + f.SqlName() + `, ` + f.SqlSalePriceIDR() + ` FROM ` + f.SqlTableName() + `
@@ -68,6 +68,27 @@ ORDER BY ` + f.SqlId() + ` ASC`
 			menuName := X.ToS(row[1])
 			price := X.ToS(row[2])
 			out[X.ToU(row[0])] = menuName + " (" + price + ")"
+		}
+	})
+
+	return out
+}
+
+func (f *Menus) FindMenusSalesChoices() map[uint64]string {
+	const comment = `-- Menus) FindMenusSaleChoices`
+
+	queryRows := comment + `
+SELECT ` + f.SqlId() + `, ` + f.SqlName() + `, ` + f.SqlSalePriceIDR() + `, ` + f.SqlImageUrl() + ` FROM ` + f.SqlTableName() + `
+WHERE "deletedAt" = 0
+ORDER BY ` + f.SqlId() + ` ASC`
+
+	out := make(map[uint64]string)
+	f.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 4 {
+			menuName := X.ToS(row[1])
+			price := X.ToS(row[2])
+			imageUrl := X.ToS(row[3])
+			out[X.ToU(row[0])] = menuName + " (" + price + ")" + " (" + imageUrl + ")"
 		}
 	})
 

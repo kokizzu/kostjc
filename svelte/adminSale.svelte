@@ -43,12 +43,14 @@
     'Transfer',
     'Donation',
     'TopUp',
-    'Debt'
+    'Debt',
+    'Split Payment'
   ];
+
   const PaymentStatuses = [
     'Paid',
     'Unpaid',
-    'Refunded'
+    'Overpaid'
   ];
 
   let isPopUpFormReady = /** @type boolean */ (false);

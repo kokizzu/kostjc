@@ -10,10 +10,9 @@
   import LayoutMain from './_layouts/main.svelte';
   import MasterSales from './_components/MasterSales.svelte';
   import { AdminSale } from './jsApi.GEN';
-  import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
+  import { CmdList, CmdUpsert, CmdUpdatePayment } from './_components/xConstant';
   import { notifier } from './_components/xNotifier';
-  import { convertMenuChoicesToMenuOptions, convertSalesToTodaySales } from './_helper/sale';
-  
+    
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
   let sale  = /** @type {Sale} */ ({/* sale */});
@@ -45,7 +44,6 @@
 
 
   async function OnAddSale(/** @type {Sale} */ sale) {
-    console.info('OnAddSale :::', sale);
     const i = /** @type {any} */ ({
       pager,
       sale,
@@ -64,8 +62,46 @@
         
         pager = o.pager;
         sales = o.sales;
-        notifier.showSuccess(`Penjualan: ${sale.buyerName} berhasil di simpan, lanjutkan pembayaran !!`);
-        
+        notifier.showSuccess(`Penjualan berhasil disimpan. Lanjut ke pembayaran.`);
+        OnRefresh(pager);
+      }
+    );
+  }
+
+  async function OnEdit(/** @type {Sale} */ saleData) {
+    const sale = {
+        id: String(saleData.id),
+        transferIDR: Number(saleData.transferIDR || 0),
+        qrisIDR: Number(saleData.qrisIDR || 0),
+        cashIDR: Number(saleData.cashIDR || 0),
+        debtIDR: Number(saleData.debtIDR || 0),
+        topupIDR: Number(saleData.topupIDR || 0),
+        totalPriceIDR: Number(saleData.totalPriceIDR || 0),
+        paidAt: String(saleData.paidAt || ''),
+        paymentMethod: String(saleData.paymentMethod || ''),
+        paymentStatus: String(saleData.paymentStatus || ''),
+    };
+
+    const i = /** @type {any}*/ ({
+      pager,
+      sale,
+      cmd: CmdUpdatePayment
+    });
+    await AdminSale(i,
+      /** @type {import('./jsApi.GEN').AdminSaleCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        pager = o.pager;
+        sales = o.sales;
+    
+        notifier.showSuccess(`Pembayaran berhasil disimpan.`);
+
         OnRefresh(pager);
       }
     );
@@ -76,6 +112,7 @@
   <MasterSales
   sales={sales}
   OnSubmit={OnAddSale}
+  OnEdit={OnEdit}
   tenants={tenants}
   />
 </LayoutMain>

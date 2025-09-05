@@ -21,7 +21,6 @@ import (
 //go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type saAuth__ORM.GEN.go
 //go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type saAuth__ORM.GEN.go
 //go:generate replacer -afterprefix "By\" form" "By,string\" form" type saAuth__ORM.GEN.go
-//go:generate msgp -tests=false -file saAuth__ORM.GEN.go -o saAuth__MSG.GEN.go
 
 var actionLogsDummy = ActionLogs{}
 var tenantLogsDummy = TenantLogs{}

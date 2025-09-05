@@ -544,7 +544,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		tenants := rqTenants.FindTenantChoices()
 
 		men := rqCafe.NewMenus(d.PropOltp)
-		menus := men.FindMenusSalesChoices()
+		menus := men.FindMenus()
 
 		tenants[0] = "Bukan tenant"
 

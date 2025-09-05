@@ -1,12 +1,13 @@
 <script>
   /** @typedef {import('../_types/cafe').Sale} Sale */
   /** @typedef {import('../_types/cafe').Payment} Payment */
-  /** @typedef {import('../_types/cafe').UnpaidItem} UnpaidItem */
+  /** @typedef {import('../_types/cafe').Unpaid} Unpaid */
+  /** @typedef {import('../_types/cafe').Overpaid} Overpaid */
+    /** @typedef {import('../_types/cafe').TodaySales} TodaySales */
 
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import SaleForm from './StaffSaleForm.svelte';
   import PaymentForm from './StaffPaymentForm.svelte';
-  import { notifier } from '../_components/xNotifier';
   import {
     FiShoppingCart,
     FiCreditCard,
@@ -19,85 +20,41 @@
   } from '../node_modules/svelte-icons-pack/dist/fi';
 
   import { FaSolidUtensils, FaSolidShirt, FaSolidGamepad } from '../node_modules/svelte-icons-pack/dist/fa';
-  import { convertMenuChoicesToMenuOptions } from '../_helper/sale';
+  import { parseMenuMapToOptions, convertMenusToObject, parseSalesToTodaySales, parseSalesToTodayPayment, parseSalesToOverpaid, parseSalesToUnpaid} from '../_helper/sale.js';
 
   let menuChoices = /** @type {Record<Number, string>} */ ({/* menuChoices */});
 
-  let menus = convertMenuChoicesToMenuOptions(menuChoices);
-
-  function convertMenusToObject(menus) {
-    const obj = {};
-    for (const menu of menus) {
-      obj[menu.id] = menu;
-    }
-    return obj;
-  }
-  let menusAsObject = convertMenusToObject(menus);
-
-
   export let sales;
+  console.log("Sales", sales);
   export let tenants;
 
   if (sales == undefined || sales == null) {
     sales = [];
   }
 
-  function parseSalesPerItem(sales) {
-    const result = {};
+  let menus = parseMenuMapToOptions(menuChoices);
+  let menusAsObject = convertMenusToObject(menus);
 
-    for (const sale of sales) {
-      const menuIds = sale[4];
-      const totalPrice = sale[11];
+  console.log("Menus", menus);
+  console.log("Menus As Object", menusAsObject);
 
-      const perItemPrice = Math.floor(totalPrice / menuIds.length);
-
-      for (const id of menuIds) {
-        if (!result[id]) {
-          result[id] = {
-            name: menusAsObject[id]?.name,
-            qty: 0,
-            total: 0,
-            times: '',
-          };
-        }
-
-        result[id].qty += 1;
-        result[id].total += menusAsObject[id]?.price || perItemPrice;
-        result[id].times = new Date(sale[17] * 1000).toLocaleTimeString("id-ID", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false
-          });
-      }
-    }
-    return Object.values(result);
-  }
-
-  $: parsedItems = parseSalesPerItem(sales);
-
+  $: todaySales = parseSalesToTodaySales(sales, menusAsObject);
+  $: console.log("Today Sales", todaySales);
+ 
   let todayPayments = /** @type {Payment[]} */ ([]);
+  $: todayPayments = parseSalesToTodayPayment(sales, tenants)
+  $: console.log("Today Payments", todayPayments);
 
-  let unpaidItems = /** @type {UnpaidItem[]} */ ([]);
+  let unpaidItems = /** @type {Unpaid[]} */ ([]);
+  $: unpaidItems = parseSalesToUnpaid(sales, menusAsObject, tenants)
+  $: console.log("Unpaid Items", unpaidItems);
 
-  function addUnpaidItem(/** @type {Sale|any} */ sale) {
-    unpaidItems = [
-      ...unpaidItems,
-      {
-        id: unpaidItems.length + 1,
-        customer: sale.buyerName,
-        item: sale.menuIds,
-        amount: sale.totalPriceIDR,
-        date: sale.salesDate,
-      },
-    ];
+  let overpaidItems = /** @type {Overpaid[]} */ ([]);
+  $: overpaidItems = parseSalesToOverpaid(sales, tenants)
+  $: console.log("Overpaid Items", overpaidItems);
 
-    console.log('Unpaid items:', unpaidItems);
-  }
-
-  let overpaidItems = [
-    { id: 1, customer: 'Rini', excess: 5000, date: '2024-01-10' },
-    { id: 2, customer: 'Doni', excess: 10000, date: '2024-01-08' },
-  ];
+  let totalSales = 0;
+  let totalPayments = 0;
 
   let borrowedUtensils = [
     { id: 1, customer: 'Tono', item: 'Piring', qty: 2, date: '2024-01-10' },
@@ -114,57 +71,31 @@
     { id: 2, customer: 'Lia', game: 'PS5', duration: '1 jam', status: 'Waiting' },
   ];
 
-  // Computed values
-  let totalSales = 0;
-  let totalPayments = 0;
+//ini reaktif
+$: totalSales =
+  Array.isArray(sales)
+    ? sales.reduce((sum, s) => {
+        const v = s?.[13] ?? 0;
+        return sum + (typeof v === 'number' ? v : 0);
+      }, 0)
+    : 0;
 
-console.log("Today Sales:", sales);
-console.log("Today Payments:", todayPayments);
+$: console.log("Final Total Sales:", totalSales);
 
-if (sales && Array.isArray(sales) && sales.length > 0) {
-  totalSales = sales.reduce((sum, sale) => {
-    const saleAmount = sale[13] || 0;
-    return sum + (typeof saleAmount === 'number' ? saleAmount : 0);
-  }, 0);
-  
-  console.log("Calculated Total Sales:", totalSales);
-}
+// reaktif how to sum totalPayments
+$: totalPayments =
+  Array.isArray(todayPayments)
+    ? todayPayments.reduce((sum, p) => {
+        const v = p?.amount ?? 0;
+        return sum + (typeof v === 'number' ? v : 0);
+      }, 0)
+    : 0;
 
-if (todayPayments && Array.isArray(todayPayments) && todayPayments.length > 0) {
-  totalPayments = todayPayments.reduce((sum, payment) => {
-    const paymentAmount = payment.amount || 0;
-    return sum + (typeof paymentAmount === 'number' ? paymentAmount : 0);
-  }, 0);
-  
-  console.log("Calculated Total Payments:", totalPayments);
-}
-
-console.log("Final Total Sales:", totalSales);
-console.log("Final Total Payments:", totalPayments);
+$: console.log("Final Total Payments:", totalPayments);
 
   // State for modals
   let showSaleForm = false;
   let showPaymentForm = false;
-
-  // Current sale data (shared between forms)
-  let currentSale = /** @type {Sale|any} */ ({
-    cashier: '',
-    tenantId: '0',
-    buyerName: '',
-    menuIds: [],
-    paymentMethod: '',
-    paymentStatus: '',
-    transferIDR: 0,
-    qrisIDR: 0,
-    cashIDR: 0,
-    debtIDR: 0,
-    topupIDR: 0,
-    totalPriceIDR: 0,
-    donation: 0,
-    salesDate: '',
-    paidAt: '',
-    note: '',
-  });
 
   // Event handlers
   export function addSale() {
@@ -187,51 +118,22 @@ console.log("Final Total Payments:", totalPayments);
     console.log('OnSubmit :::', sale);
   };
 
+  export let OnEdit = async function (/** @type {Sale} */ saleData) {
+    console.log('OnEdit :::', saleData);
+  };
+
   async function handleSaleSubmit(event) {
     event.preventDefault();
     const saleData = event.detail;
-    // Merge with current sale data
-    currentSale = { ...currentSale, ...saleData };
-    console.log('Sale data submitted:', currentSale);
-
-    await OnSubmit(currentSale);
-
+    await OnSubmit(saleData);
     closeSaleForm();
-
-    // showPaymentForm = true;
   }
 
   async function handlePaymentSubmit(event) {
     event.preventDefault();
     const paymentData = event.detail;
-    // Merge with current sale data
-    currentSale = { ...currentSale, ...paymentData, paidAt: new Date().toISOString() };
-    console.log('Complete sale data to submit to API:', currentSale);
-
-    // Here you would submit the complete data to your API
-
-    // submitToAPI(currentSale);
-
+    await OnEdit(paymentData);
     closePaymentForm();
-
-    // Reset current sale after submission
-    currentSale = /** @type {Sale|any} */ ({
-      id: '',
-      cashier: '',
-      tenantId: '0',
-      buyerName: '',
-      menuIds: [],
-      transferIDR: 0,
-      qrisIDR: 0,
-      cashIDR: 0,
-      debtIDR: 0,
-      topupIDR: 0,
-      totalPriceIDR: 0,
-      donation: 0,
-      salesDate: '',
-      paidAt: '',
-      note: '',
-    });
   }
 
   function formatCurrency(amount) {
@@ -258,24 +160,26 @@ console.log("Final Total Payments:", totalPayments);
               Add
             </button>
           </div>
-          <div class="card-content">
-            <div class="items-list">
-              {#each parsedItems as sale (sale.name)}
-                <div class="item-row item-blue">
-                  <div class="item-info">
-                    <p class="item-name">{sale.name}</p>
-                    <p class="item-details">
-                      Qty: {sale.qty} • {sale.times}
-                    </p>
+          <div class="card-content-sale">
+            <div class="items-scroll">
+              <div class="items-list">
+                {#each todaySales as sale (sale.id)}
+                  <div class="item-row item-blue">
+                    <div class="item-info">
+                      <p class="item-name">{sale.name}</p>
+                      <p class="item-details">
+                        Qty: {sale.qty} • {sale.times}
+                      </p>
+                    </div>
+                    <p class="item-price price-blue">Rp {formatCurrency(sale.total)}</p>
                   </div>
-                  <p class="item-price price-blue">Rp {formatCurrency(sale.total)}</p>
-                </div>
-              {/each}
-              <div class="total-section">
-                <div class="total-row">
-                  <span>Total Hari Ini:</span>
-                  <span class="total-amount total-blue">Rp {formatCurrency(totalSales)}</span>
-                </div>
+                {/each}
+              </div>
+            </div>
+            <div class="total-section total-sticky">
+              <div class="total-row">
+                <span>Total Hari Ini:</span>
+                <span class="total-amount total-blue">Rp {formatCurrency(totalSales)}</span>
               </div>
             </div>
           </div>
@@ -293,24 +197,26 @@ console.log("Final Total Payments:", totalPayments);
               Add
             </button>
           </div>
-          <div class="card-content">
-            <div class="items-list">
-              {#each todayPayments as payment (payment.id)}
-                <div class="item-row item-green">
-                  <div class="item-info">
-                    <p class="item-name">{payment.customer}</p>
-                    <p class="item-details">
-                      {payment.method} • {payment.time}
-                    </p>
+          <div class="card-content-payment">
+            <div class="items-scroll">
+              <div class="items-list">
+                {#each todayPayments as payment (payment.id)}
+                  <div class="item-row item-green">
+                    <div class="item-info">
+                      <p class="item-name">{payment.customer}</p>
+                      <p class="item-details">
+                        {payment.method} • {payment.time}
+                      </p>
+                    </div>
+                    <p class="item-price price-green">Rp {formatCurrency(payment.amount)}</p>
                   </div>
-                  <p class="item-price price-green">Rp {formatCurrency(payment.amount)}</p>
-                </div>
-              {/each}
-              <div class="total-section">
-                <div class="total-row">
-                  <span>Total Pembayaran:</span>
-                  <span class="total-amount total-green">Rp {formatCurrency(totalPayments)}</span>
-                </div>
+                {/each}
+              </div>
+            </div>
+            <div class="total-section total-sticky">
+              <div class="total-row">
+                <span>Total Pembayaran:</span>
+                <span class="total-amount total-green">Rp {formatCurrency(totalPayments)}</span>
               </div>
             </div>
           </div>
@@ -329,18 +235,20 @@ console.log("Final Total Payments:", totalPayments);
                 <span class="badge badge-red">{unpaidItems.length}</span>
               </div>
             </div>
-            <div class="card-content">
-              <div class="items-list">
-                {#each unpaidItems as item (item.id)}
-                  <div class="item-row item-red">
-                    <div class="item-info">
-                      <p class="item-name">{item.customer}</p>
-                      <p class="item-details">{item.item}</p>
-                      <p class="item-date">{item.date}</p>
+            <div class="card-content-unpaid">
+              <div class="items-scroll">
+                <div class="items-list">
+                  {#each unpaidItems as item (item.id)}
+                    <div class="item-row item-red">
+                      <div class="item-info">
+                        <p class="item-name">{item.customer}</p>
+                        <p class="item-details">{item.item}</p>
+                        <p class="item-date">{item.date}</p>
+                      </div>
+                      <p class="item-price price-red">Rp {formatCurrency(item.amount)}</p>
                     </div>
-                    <p class="item-price price-red">Rp {formatCurrency(item.amount)}</p>
-                  </div>
-                {/each}
+                  {/each}
+                </div>
               </div>
             </div>
           </div>
@@ -354,17 +262,19 @@ console.log("Final Total Payments:", totalPayments);
                 <span class="badge badge-orange">{overpaidItems.length}</span>
               </div>
             </div>
-            <div class="card-content">
-              <div class="items-list">
-                {#each overpaidItems as item (item.id)}
-                  <div class="item-row item-orange">
-                    <div class="item-info">
-                      <p class="item-name">{item.customer}</p>
-                      <p class="item-date">{item.date}</p>
+            <div class="card-content-overpaid">
+              <div class="items-scroll">
+                <div class="items-list">
+                  {#each overpaidItems as item (item.id)}
+                    <div class="item-row item-orange">
+                      <div class="item-info">
+                        <p class="item-name">{item.customer}</p>
+                        <p class="item-date">{item.date}</p>
+                      </div>
+                      <p class="item-price price-orange">+Rp {formatCurrency(item.excess)}</p>
                     </div>
-                    <p class="item-price price-orange">+Rp {formatCurrency(item.excess)}</p>
-                  </div>
-                {/each}
+                  {/each}
+                </div>
               </div>
             </div>
           </div>
@@ -379,7 +289,8 @@ console.log("Final Total Payments:", totalPayments);
               </div>
             </div>
             <div class="card-content">
-              <div class="items-list">
+              <div class="items-scroll">
+                <div class="items-list">
                 {#each borrowedUtensils as item (item.id)}
                   <div class="item-row item-purple">
                     <div class="item-info">
@@ -395,6 +306,7 @@ console.log("Final Total Payments:", totalPayments);
                     </span>
                   </div>
                 {/each}
+                </div>
               </div>
             </div>
           </div>
@@ -409,7 +321,8 @@ console.log("Final Total Payments:", totalPayments);
               </div>
             </div>
             <div class="card-content">
-              <div class="items-list">
+              <div class="items-scroll">
+                <div class="items-list">
                 {#each laundryItems as item (item.id)}
                   <div class="item-row item-cyan">
                     <div class="item-info">
@@ -420,8 +333,9 @@ console.log("Final Total Payments:", totalPayments);
                     <span class="status-badge {item.status === 'Cuci' ? 'status-blue' : 'status-yellow'}">
                       {item.status}
                     </span>
-                  </div>
+                    </div>
                 {/each}
+                </div>
               </div>
             </div>
           </div>
@@ -437,25 +351,29 @@ console.log("Final Total Payments:", totalPayments);
             </div>
           </div>
           <div class="card-content">
-            <div class="game-grid">
-              {#each gameItems as item (item.id)}
-                <div class="game-item">
-                  <div class="game-info">
-                    <p class="item-name">{item.customer}</p>
-                    <p class="item-details">
-                      {item.game} • {item.duration}
-                    </p>
-                  </div>
-                  <span class="status-badge {item.status === 'Playing' ? 'status-green' : 'status-yellow'}">
-                    {#if item.status === 'Playing'}
-                      <Icon src={FiCheckCircle} className="icon-tiny" />
-                    {:else}
-                      <Icon src={FiClock} className="icon-tiny" />
-                    {/if}
-                    {item.status}
-                  </span>
+            <div class="items-scroll">
+              <div class="items-list">
+                <div class="game-grid">
+                  {#each gameItems as item (item.id)}
+                    <div class="game-item">
+                      <div class="game-info">
+                        <p class="item-name">{item.customer}</p>
+                        <p class="item-details">
+                          {item.game} • {item.duration}
+                        </p>
+                      </div>
+                      <span class="status-badge {item.status === 'Playing' ? 'status-green' : 'status-yellow'}">
+                        {#if item.status === 'Playing'}
+                          <Icon src={FiCheckCircle} className="icon-tiny" />
+                        {:else}
+                          <Icon src={FiClock} className="icon-tiny" />
+                        {/if}
+                        {item.status}
+                      </span>
+                    </div>
+                  {/each}
                 </div>
-              {/each}
+              </div>
             </div>
           </div>
         </div>
@@ -489,9 +407,9 @@ console.log("Final Total Payments:", totalPayments);
           </button>
         </div>
         <PaymentForm
-          on:submit={handlePaymentSubmit}
-          buyerName={currentSale.buyerName}
-          totalPriceIDR={currentSale.totalPriceIDR}
+          on:paymentSubmit={handlePaymentSubmit}
+          sales={sales}
+          tenants={tenants}
         />
       </div>
     </div>
@@ -505,7 +423,7 @@ console.log("Final Total Payments:", totalPayments);
   }
 
   .dashboard {
-    min-height: 100vh;
+    flex: 1;
     background-color: #f9fafb;
     padding: 1rem;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -592,8 +510,47 @@ console.log("Final Total Payments:", totalPayments);
     color: #111827;
   }
 
-  .card-content {
-    padding: 1rem;
+  /* Pastikan card-content jadi column dan punya tinggi maksimum */
+  .card-content-sale, .card-content-payment {
+    display: flex;
+    flex-direction: column;
+    /* sesuaikan tinggi max-nya dengan layout kamu */
+    max-height: 300px;              /* atau pakai calc/60vh */
+    padding: 0;                     /* biar sticky nempel rapi, padding bisa dipindah ke child */
+  }
+
+  .card-content-unpaid, .card-content-overpaid {
+    display: flex;
+    flex-direction: column;
+    /* sesuaikan tinggi max-nya dengan layout kamu */
+    max-height: 210px;              /* atau pakai calc/60vh */
+    padding: 0;                     /* biar sticky nempel rapi, padding bisa dipindah ke child */
+  }
+
+  /* Area yang di-scroll khusus list */
+  .items-scroll {
+    overflow: auto;                 /* scroll hanya di sini */
+    padding: 1rem;                  /* padding untuk isi list */
+    flex: 1;                        /* ambil ruang tersisa */
+    min-height: 0;                  /* penting untuk flex container yang scroll */
+  }
+
+  /* List tetap seperti semula */
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Total sticky di bawah kartu */
+  .total-sticky {
+    position: sticky;
+    bottom: 0;
+    background: white;              /* tutup konten di belakang saat scroll */
+    border-top: 1px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+    /* opsional: bayangan tipis */
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
   }
 
   /* Buttons */

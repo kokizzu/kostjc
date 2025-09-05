@@ -215,7 +215,7 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 
 	switch in.Cmd {
 	case zCrud.CmdForm:
-	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
+	case zCrud.CmdUpsert, zCrud.CmdUpdatePayment, zCrud.CmdDelete, zCrud.CmdRestore:
 		sale := wcCafe.NewSalesMutator(d.PropOltp)
 		sale.Id = in.Sale.Id
 		if sale.Id > 0 {
@@ -236,6 +236,30 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 					sale.SetDeletedAt(0)
 					sale.SetRestoredBy(sess.UserId)
 				}
+			}
+
+			if in.Cmd == zCrud.CmdUpdatePayment {
+				if in.Sale.PaymentMethod != "" {
+					sale.SetPaymentMethod(in.Sale.PaymentMethod)
+				}
+				if in.Sale.PaymentStatus != "" {
+					sale.SetPaymentStatus(in.Sale.PaymentStatus)
+				}
+
+				sale.SetTransferIDR(in.Sale.TransferIDR)
+				sale.SetQrisIDR(in.Sale.QrisIDR)
+				sale.SetCashIDR(in.Sale.CashIDR)
+				sale.SetDebtIDR(in.Sale.DebtIDR)
+				sale.SetTopupIDR(in.Sale.TopupIDR)
+				sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
+
+				if mCafe.IsValidDate(in.Sale.PaidAt, time.DateOnly) {
+					sale.SetPaidAt(in.Sale.PaidAt)
+				}
+
+				sale.SetUpdatedAt(in.UnixNow())
+				sale.SetUpdatedBy(sess.UserId)
+
 			}
 		}
 
@@ -293,27 +317,13 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 			sale.SetNote(in.Sale.Note)
 		}
 
-		if in.Sale.QrisIDR != 0 {
-			sale.SetQrisIDR(in.Sale.QrisIDR)
-		}
-		if in.Sale.CashIDR != 0 {
-			sale.SetCashIDR(in.Sale.CashIDR)
-		}
-		if in.Sale.DebtIDR != 0 {
-			sale.SetDebtIDR(in.Sale.DebtIDR)
-		}
-		if in.Sale.TopupIDR != 0 {
-			sale.SetTopupIDR(in.Sale.TopupIDR)
-		}
-		if in.Sale.TotalPriceIDR != 0 {
-			sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
-		}
-		if in.Sale.Donation != 0 {
-			sale.SetDonation(in.Sale.Donation)
-		}
-		if in.Sale.TransferIDR != 0 {
-			sale.SetTransferIDR(in.Sale.TransferIDR)
-		}
+		sale.SetQrisIDR(in.Sale.QrisIDR)
+		sale.SetCashIDR(in.Sale.CashIDR)
+		sale.SetDebtIDR(in.Sale.DebtIDR)
+		sale.SetTopupIDR(in.Sale.TopupIDR)
+		sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
+		sale.SetDonation(in.Sale.Donation)
+		sale.SetTransferIDR(in.Sale.TransferIDR)
 
 		if sale.Id == 0 {
 			sale.SetCreatedAt(in.UnixNow())
@@ -324,7 +334,7 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 		sale.SetUpdatedBy(sess.UserId)
 
 		if !sale.DoUpsert() {
-			out.SetError(500, ErrAdminRoomSaveFailed)
+			out.SetError(500, ErrAdminSaleSaveFailed)
 			return
 		}
 
