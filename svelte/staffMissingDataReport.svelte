@@ -341,7 +341,7 @@
             <th>Tele Added</th>
             <th style="min-width: 180px;">WhatsApp</th>
             <th>Wa Added</th>
-            <th style="min-width: 140px;">Last Use At</th>
+            <th style="min-width: 140px;">Date Start</th>
           </tr>
         </thead>
         <tbody>
@@ -391,7 +391,7 @@
                   on:change={(e) => handleToggleWaAddedAt(e, data)}
                 />
               </td>
-              <td>{data.lastUseAt || '--'}</td>
+              <td>{data.dateStart || '--'}</td>
             </tr>
           {/each}
         </tbody>

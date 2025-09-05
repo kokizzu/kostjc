@@ -154,7 +154,7 @@ module.exports = {};
  * @property {string} tenantWhatsappNumber
  * @property {boolean} tenantWaAddedAt
  * @property {boolean} tenantTeleAddedAt
- * @property {string} lastUseAt
+ * @property {string} dateStart
  */
 module.exports = {};
 

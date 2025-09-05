@@ -1022,7 +1022,7 @@ type RoomMissingTenantData struct {
 	TenantWhatsappNumber   string `json:"tenantWhatsappNumber"`
 	TenantWaAddedAt        bool   `json:"tenantWaAddedAt"`
 	TenantTeleAddedAt      bool   `json:"tenantTeleAddedAt"`
-	LastUseAt              string `json:"lastUseAt"`
+	DateStart              string `json:"dateStart"`
 }
 
 func (r *Rooms) FindMissingTenantsData(yearMonth string) (out []RoomMissingTenantData) {
@@ -1043,23 +1043,23 @@ func (r *Rooms) FindMissingTenantsData(yearMonth string) (out []RoomMissingTenan
 
 	queryRows := comment + `
 SELECT 
-  "rooms"."id",
-  "rooms"."roomName",
-  "tenants"."id",
-  "tenants"."tenantName",
-  "tenants"."telegramUsername",
-  "tenants"."whatsappNumber",
-  "tenants"."waAddedAt",
-  "tenants"."teleAddedAt",
-	"rooms"."lastUseAt"
-FROM "rooms"
-LEFT JOIN "tenants"
-	ON "rooms"."currentTenantId" = "tenants"."id"
+  r."id",
+  r."roomName",
+  t."id",
+  t."tenantName",
+  t."telegramUsername",
+  t."whatsappNumber",
+  t."waAddedAt",
+  t."teleAddedAt",
+	b."dateStart"
+FROM "bookings" b
+LEFT JOIN "rooms" r ON b."roomId" = r."id"
+LEFT JOIN "tenants" t ON b."tenantId" = t."id"
 WHERE
-	"rooms"."deletedAt" = 0
-	AND "rooms"."lastUseAt" >= ` + S.Z(startDate) + `
-	AND "rooms"."lastUseAt" <= ` + S.Z(endDate) + `
-ORDER BY "rooms"."updatedAt"`
+	b."deletedAt" = 0
+	AND b."dateStart" >= ` + S.Z(startDate) + `
+	AND b."dateStart" <= ` + S.Z(endDate) + `
+ORDER BY b."dateStart" DESC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
 		if len(row) != 9 {
@@ -1074,7 +1074,7 @@ ORDER BY "rooms"."updatedAt"`
 			TenantWhatsappNumber:   X.ToS(row[5]),
 			TenantWaAddedAt:        X.ToBool(row[6]),
 			TenantTeleAddedAt:      X.ToBool(row[7]),
-			LastUseAt:              X.ToS(row[8]),
+			DateStart:              X.ToS(row[8]),
 		})
 	})
 
