@@ -33,18 +33,24 @@
   let tenants = /** @type {Record<Number, string>} */ ({/* tenants */});
   let menus     = /** @type {Record<Number, string>} */({/* menus */});
 
+  if (sales === undefined || sales === null) {
+    sales = [];
+  }
+
   const PaymentMethods = [
     'Cash',
     'QRIS',
     'Transfer',
     'Donation',
     'TopUp',
-    'Debt'
+    'Debt',
+    'Split Payment'
   ];
+
   const PaymentStatuses = [
     'Paid',
     'Unpaid',
-    'Refunded'
+    'Overpaid'
   ];
 
   let isPopUpFormReady = /** @type boolean */ (false);

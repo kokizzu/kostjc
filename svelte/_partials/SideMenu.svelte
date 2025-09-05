@@ -11,7 +11,7 @@
     RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
     RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine, RiUserFacesGroupLine,
     RiDocumentFileChartLine, RiSystemMenu2Line, RiFinanceCashLine, RiBusinessBarChartBoxLine,
-    RiBuildingsHomeWifiLine, RiSystemSettingsLine
+    RiBuildingsHomeWifiLine, RiSystemSettingsLine, RiFinanceShoppingBag2Line
   } from '../node_modules/svelte-icons-pack/dist/ri';
   import { LuHandPlatter } from '../node_modules/svelte-icons-pack/dist/lu';
   import { isOpenSideMenu } from '../_components/xState';
@@ -147,6 +147,10 @@
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Price per day Report</span>
       </a>
+      <a href="/staff/sales" class:active={pathAll === '/staff/sales'}>
+       <Icon src={RiFinanceShoppingBag2Line} size="20" />
+       <span>Sales</span>
+      </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />
         <span>Profile</span>
@@ -265,6 +269,10 @@
       <a href="/staff/pricePerDayReport" class:active={pathAll === '/staff/pricePerDayReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Price per day Report</span>
+      </a>
+      <a href="/staff/sales" class:active={pathAll === '/staff/sales'}>
+       <Icon src={RiFinanceShoppingBag2Line} size="20" />
+       <span>Sales</span>
       </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />

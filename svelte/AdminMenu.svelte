@@ -38,6 +38,10 @@
     isPopUpFormReady = true;
   });
 
+  if (menus === undefined || menus === null) {
+    menus = [];
+  }
+
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
     const i = {
       pager: pagerIn,

@@ -8,4 +8,5 @@ const (
 	CmdDelete          = `delete`  // same as upsert but also set deletedAt, deletedBy
 	CmdToggleWaAdded   = `toggle_wa_added`
 	CmdToggleTeleAdded = `toggle_tele_added`
+	CmdUpdatePayment   = `update_payment`
 )

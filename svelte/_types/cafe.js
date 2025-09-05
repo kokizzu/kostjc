@@ -23,6 +23,8 @@ module.exports = {};
  * @property {string|number} tenantId
  * @property {string} buyerName
  * @property {number[]} menuIds
+ * @property {string} paymentMethod
+ * @property {string} paymentStatus
  * @property {number} transferIDR
  * @property {number} qrisIDR
  * @property {number} cashIDR
@@ -40,5 +42,49 @@ module.exports = {};
  * @property {number} deletedAt
  * @property {string} deletedBy
  * @property {string} restoredBy
+ */
+module.exports = {};
+
+
+/**
+ * @typedef {Object} TodaySales
+ * @property {number} id
+ * @property {string} item
+ * @property {string} qty
+ * @property {number} price
+ * @property {string} times
+ */
+module.exports = {};
+
+/**
+ * @typedef {Object} Payment
+ * @property {number} id
+ * @property {string} customer
+ * @property {number} amount
+ * @property {string} method
+ * @property {string} status
+ * @property {string} time
+ */
+module.exports = {};
+
+
+/**
+ * @typedef {Object} Unpaid
+ * @property {number} id
+ * @property {string} customer
+ * @property {string} item
+ * @property {number} amount
+ * @property {string} date
+ */
+module.exports = {};
+
+/**
+ * @typedef {Object} Overpaid
+ * @property {number} id
+ * @property {string} customer
+ * @property {string} method
+ * @property {string} time
+ * @property {number} excess
+ * @property {string} date
  */
 module.exports = {};
