@@ -155,6 +155,7 @@ module.exports = {};
  * @property {boolean} tenantWaAddedAt
  * @property {boolean} tenantTeleAddedAt
  * @property {string} dateStart
+ * @property {string} dateEnd
  */
 module.exports = {};
 

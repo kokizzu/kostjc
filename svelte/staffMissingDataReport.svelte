@@ -341,7 +341,8 @@
             <th>Tele Added</th>
             <th style="min-width: 180px;">WhatsApp</th>
             <th>Wa Added</th>
-            <th style="min-width: 140px;">Date Start</th>
+            <th>Date Start</th>
+            <th>Date End</th>
           </tr>
         </thead>
         <tbody>
@@ -392,6 +393,7 @@
                 />
               </td>
               <td>{data.dateStart || '--'}</td>
+              <td>{data.dateEnd || '--'}</td>
             </tr>
           {/each}
         </tbody>

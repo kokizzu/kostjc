@@ -997,7 +997,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 @media only screen and (max-width: 768px) {
 }
 
-/* fakecss:./node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/LangTag.esbuild-svelte-fake-css */
+/* fakecss:./node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/LangTag.esbuild-svelte-fake-css */
 .langtag.svelte-1w9vok {
   position: relative;
 }
@@ -1015,7 +1015,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   padding: var(--langtag-padding, 1em);
 }
 
-/* fakecss:./node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/LineNumbers.esbuild-svelte-fake-css */
+/* fakecss:./node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/LineNumbers.esbuild-svelte-fake-css */
 pre.svelte-1vh31p0.svelte-1vh31p0 {
   margin: 0;
 }
@@ -1327,9 +1327,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     mod
   ));
 
-  // node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs
+  // node_modules/.pnpm/axios@1.11.0/node_modules/axios/dist/browser/axios.cjs
   var require_axios = __commonJS({
-    "node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
+    "node_modules/.pnpm/axios@1.11.0/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
       "use strict";
       function bind2(fn, thisArg) {
         return function wrap() {
@@ -1338,6 +1338,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
       var { toString } = Object.prototype;
       var { getPrototypeOf } = Object;
+      var { iterator, toStringTag } = Symbol;
       var kindOf = ((cache) => (thing) => {
         const str = toString.call(thing);
         return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
@@ -1372,7 +1373,17 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           return false;
         }
         const prototype2 = getPrototypeOf(val);
-        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(Symbol.toStringTag in val) && !(Symbol.iterator in val);
+        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
+      };
+      var isEmptyObject = (val) => {
+        if (!isObject(val) || isBuffer(val)) {
+          return false;
+        }
+        try {
+          return Object.keys(val).length === 0 && Object.getPrototypeOf(val) === Object.prototype;
+        } catch (e) {
+          return false;
+        }
       };
       var isDate = kindOfTest("Date");
       var isFile = kindOfTest("File");
@@ -1401,6 +1412,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             fn.call(null, obj[i], i, obj);
           }
         } else {
+          if (isBuffer(obj)) {
+            return;
+          }
           const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
           const len = keys.length;
           let key;
@@ -1411,6 +1425,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
       }
       function findKey(obj, key) {
+        if (isBuffer(obj)) {
+          return null;
+        }
         key = key.toLowerCase();
         const keys = Object.keys(obj);
         let i = keys.length;
@@ -1524,10 +1541,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         };
       })(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
       var forEachEntry = (obj, fn) => {
-        const generator = obj && obj[Symbol.iterator];
-        const iterator = generator.call(obj);
+        const generator = obj && obj[iterator];
+        const _iterator = generator.call(obj);
         let result;
-        while ((result = iterator.next()) && !result.done) {
+        while ((result = _iterator.next()) && !result.done) {
           const pair = result.value;
           fn.call(obj, pair[0], pair[1]);
         }
@@ -1597,23 +1614,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       var toFiniteNumber = (value, defaultValue) => {
         return value != null && Number.isFinite(value = +value) ? value : defaultValue;
       };
-      var ALPHA = "abcdefghijklmnopqrstuvwxyz";
-      var DIGIT = "0123456789";
-      var ALPHABET = {
-        DIGIT,
-        ALPHA,
-        ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
-      };
-      var generateString = (size = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
-        let str = "";
-        const { length } = alphabet;
-        while (size--) {
-          str += alphabet[Math.random() * length | 0];
-        }
-        return str;
-      };
       function isSpecCompliantForm(thing) {
-        return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
+        return !!(thing && isFunction(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
       }
       var toJSONObject = (obj) => {
         const stack = new Array(10);
@@ -1621,6 +1623,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           if (isObject(source)) {
             if (stack.indexOf(source) >= 0) {
               return;
+            }
+            if (isBuffer(source)) {
+              return source;
             }
             if (!("toJSON" in source)) {
               stack[i] = source;
@@ -1659,6 +1664,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         isFunction(_global.postMessage)
       );
       var asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
+      var isIterable = (thing) => thing != null && isFunction(thing[iterator]);
       var utils$1 = {
         isArray,
         isArrayBuffer,
@@ -1670,6 +1676,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         isBoolean,
         isObject,
         isPlainObject,
+        isEmptyObject,
         isReadableStream,
         isRequest,
         isResponse,
@@ -1710,14 +1717,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         findKey,
         global: _global,
         isContextDefined,
-        ALPHABET,
-        generateString,
         isSpecCompliantForm,
         toJSONObject,
         isAsyncFn,
         isThenable,
         setImmediate: _setImmediate,
-        asap
+        asap,
+        isIterable
       };
       function AxiosError(message, code, config, request, response) {
         Error.call(this);
@@ -1839,6 +1845,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           if (utils$1.isDate(value)) {
             return value.toISOString();
           }
+          if (utils$1.isBoolean(value)) {
+            return value.toString();
+          }
           if (!useBlob && utils$1.isBlob(value)) {
             throw new AxiosError("Blob is not supported. Use a Buffer instead.");
           }
@@ -1942,6 +1951,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           return url;
         }
         const _encode = options && options.encode || encode;
+        if (utils$1.isFunction(options)) {
+          options = {
+            serialize: options
+          };
+        }
         const serializeFn = options && options.serialize;
         let serializedParams;
         if (serializeFn) {
@@ -2058,15 +2072,16 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ...platform$1
       };
       function toURLEncodedForm(data, options) {
-        return toFormData(data, new platform.classes.URLSearchParams(), Object.assign({
+        return toFormData(data, new platform.classes.URLSearchParams(), {
           visitor: function(value, key, path, helpers) {
             if (platform.isNode && utils$1.isBuffer(value)) {
               this.append(key, value.toString("base64"));
               return false;
             }
             return helpers.defaultVisitor.apply(this, arguments);
-          }
-        }, options));
+          },
+          ...options
+        });
       }
       function parsePropPath(name) {
         return utils$1.matchAll(/\w+|\[(\w*)]/g, name).map((match) => {
@@ -2342,10 +2357,15 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             setHeaders(header, valueOrRewrite);
           } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
             setHeaders(parseHeaders(header), valueOrRewrite);
-          } else if (utils$1.isHeaders(header)) {
-            for (const [key, value] of header.entries()) {
-              setHeader(value, key, rewrite);
+          } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
+            let obj = {}, dest, key;
+            for (const entry of header) {
+              if (!utils$1.isArray(entry)) {
+                throw TypeError("Object iterator must return a key-value pair");
+              }
+              obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
             }
+            setHeaders(obj, valueOrRewrite);
           } else {
             header != null && setHeader(valueOrRewrite, header, rewrite);
           }
@@ -2448,6 +2468,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         toString() {
           return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
+        }
+        getSetCookie() {
+          return this.get("set-cookie") || [];
         }
         get [Symbol.toStringTag]() {
           return "AxiosHeaders";
@@ -2573,7 +2596,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             clearTimeout(timer);
             timer = null;
           }
-          fn.apply(null, args);
+          fn(...args);
         };
         const throttled = (...args) => {
           const now2 = Date.now();
@@ -2626,45 +2649,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }), throttled[1]];
       };
       var asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
-      var isURLSameOrigin = platform.hasStandardBrowserEnv ? (
-        // Standard browser envs have full support of the APIs needed to test
-        // whether the request URL is of the same origin as current location.
-        function standardBrowserEnv() {
-          const msie = platform.navigator && /(msie|trident)/i.test(platform.navigator.userAgent);
-          const urlParsingNode = document.createElement("a");
-          let originURL;
-          function resolveURL(url) {
-            let href = url;
-            if (msie) {
-              urlParsingNode.setAttribute("href", href);
-              href = urlParsingNode.href;
-            }
-            urlParsingNode.setAttribute("href", href);
-            return {
-              href: urlParsingNode.href,
-              protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
-              host: urlParsingNode.host,
-              search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
-              hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
-              hostname: urlParsingNode.hostname,
-              port: urlParsingNode.port,
-              pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
-            };
-          }
-          originURL = resolveURL(window.location.href);
-          return function isURLSameOrigin2(requestURL) {
-            const parsed = utils$1.isString(requestURL) ? resolveURL(requestURL) : requestURL;
-            return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
-          };
-        }()
-      ) : (
-        // Non standard browser envs (web workers, react-native) lack needed support.
-        function nonStandardBrowserEnv() {
-          return function isURLSameOrigin2() {
-            return true;
-          };
-        }()
-      );
+      var isURLSameOrigin = platform.hasStandardBrowserEnv ? ((origin2, isMSIE) => (url) => {
+        url = new URL(url, platform.origin);
+        return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
+      })(
+        new URL(platform.origin),
+        platform.navigator && /(msie|trident)/i.test(platform.navigator.userAgent)
+      ) : () => true;
       var cookies = platform.hasStandardBrowserEnv ? (
         // Standard browser envs support document.cookie
         {
@@ -2702,8 +2693,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       function combineURLs(baseURL, relativeURL) {
         return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
       }
-      function buildFullPath(baseURL, requestedURL) {
-        if (baseURL && !isAbsoluteURL(requestedURL)) {
+      function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
+        let isRelativeUrl = !isAbsoluteURL(requestedURL);
+        if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {
           return combineURLs(baseURL, requestedURL);
         }
         return requestedURL;
@@ -2712,7 +2704,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       function mergeConfig(config1, config2) {
         config2 = config2 || {};
         const config = {};
-        function getMergedValue(target, source, caseless) {
+        function getMergedValue(target, source, prop, caseless) {
           if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
             return utils$1.merge.call({ caseless }, target, source);
           } else if (utils$1.isPlainObject(source)) {
@@ -2722,11 +2714,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           }
           return source;
         }
-        function mergeDeepProperties(a, b, caseless) {
+        function mergeDeepProperties(a, b, prop, caseless) {
           if (!utils$1.isUndefined(b)) {
-            return getMergedValue(a, b, caseless);
+            return getMergedValue(a, b, prop, caseless);
           } else if (!utils$1.isUndefined(a)) {
-            return getMergedValue(void 0, a, caseless);
+            return getMergedValue(void 0, a, prop, caseless);
           }
         }
         function valueFromConfig2(a, b) {
@@ -2777,9 +2769,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           socketPath: defaultToConfig2,
           responseEncoding: defaultToConfig2,
           validateStatus: mergeDirectKeys,
-          headers: (a, b) => mergeDeepProperties(headersToObject(a), headersToObject(b), true)
+          headers: (a, b, prop) => mergeDeepProperties(headersToObject(a), headersToObject(b), prop, true)
         };
-        utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
+        utils$1.forEach(Object.keys({ ...config1, ...config2 }), function computeConfigValue(prop) {
           const merge2 = mergeMap[prop] || mergeDeepProperties;
           const configValue = merge2(config1[prop], config2[prop], prop);
           utils$1.isUndefined(configValue) && merge2 !== mergeDirectKeys || (config[prop] = configValue);
@@ -2790,7 +2782,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         const newConfig = mergeConfig({}, config);
         let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
         newConfig.headers = headers = AxiosHeaders$1.from(headers);
-        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url), config.params, config.paramsSerializer);
+        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
         if (auth) {
           headers.set(
             "Authorization",
@@ -3014,7 +3006,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
       };
       var trackStream = (stream, chunkSize, onProgress, onFinish) => {
-        const iterator = readBytes(stream, chunkSize);
+        const iterator2 = readBytes(stream, chunkSize);
         let bytes = 0;
         let done;
         let _onFinish = (e) => {
@@ -3026,7 +3018,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         return new ReadableStream({
           async pull(controller) {
             try {
-              const { done: done2, value } = await iterator.next();
+              const { done: done2, value } = await iterator2.next();
               if (done2) {
                 _onFinish();
                 controller.close();
@@ -3045,7 +3037,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           },
           cancel(reason) {
             _onFinish(reason);
-            return iterator.return();
+            return iterator2.return();
           }
         }, {
           highWaterMark: 2
@@ -3167,7 +3159,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             duplex: "half",
             credentials: isCredentialsSupported ? withCredentials : void 0
           });
-          let response = await fetch(request);
+          let response = await fetch(request, fetchOptions);
           const isStreamResponse = supportsResponseStream && (responseType === "stream" || responseType === "response");
           if (supportsResponseStream && (onDownloadProgress || isStreamResponse && unsubscribe)) {
             const options = {};
@@ -3202,7 +3194,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           });
         } catch (err) {
           unsubscribe && unsubscribe();
-          if (err && err.name === "TypeError" && /fetch/i.test(err.message)) {
+          if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
             throw Object.assign(
               new AxiosError("Network Error", AxiosError.ERR_NETWORK, config, request),
               {
@@ -3308,7 +3300,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           return Promise.reject(reason);
         });
       }
-      var VERSION2 = "1.7.7";
+      var VERSION2 = "1.11.0";
       var validators$1 = {};
       ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
         validators$1[type] = function validator2(thing) {
@@ -3337,6 +3329,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             );
           }
           return validator2 ? validator2(value, opt, opts) : true;
+        };
+      };
+      validators$1.spelling = function spelling(correctSpelling) {
+        return (value, opt) => {
+          console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
+          return true;
         };
       };
       function assertOptions(options, schema, allowUnknown) {
@@ -3368,7 +3366,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       var validators = validator.validators;
       var Axios = class {
         constructor(instanceConfig) {
-          this.defaults = instanceConfig;
+          this.defaults = instanceConfig || {};
           this.interceptors = {
             request: new InterceptorManager$1(),
             response: new InterceptorManager$1()
@@ -3387,8 +3385,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             return await this._request(configOrUrl, config);
           } catch (err) {
             if (err instanceof Error) {
-              let dummy;
-              Error.captureStackTrace ? Error.captureStackTrace(dummy = {}) : dummy = new Error();
+              let dummy = {};
+              Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
               const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
               try {
                 if (!err.stack) {
@@ -3430,6 +3428,17 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               }, true);
             }
           }
+          if (config.allowAbsoluteUrls !== void 0)
+            ;
+          else if (this.defaults.allowAbsoluteUrls !== void 0) {
+            config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
+          } else {
+            config.allowAbsoluteUrls = true;
+          }
+          validator.assertOptions(config, {
+            baseUrl: validators.spelling("baseURL"),
+            withXsrfToken: validators.spelling("withXSRFToken")
+          }, true);
           config.method = (config.method || this.defaults.method || "get").toLowerCase();
           let contextHeaders = headers && utils$1.merge(
             headers.common,
@@ -3460,8 +3469,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           let len;
           if (!synchronousRequestInterceptors) {
             const chain = [dispatchRequest.bind(this), void 0];
-            chain.unshift.apply(chain, requestInterceptorChain);
-            chain.push.apply(chain, responseInterceptorChain);
+            chain.unshift(...requestInterceptorChain);
+            chain.push(...responseInterceptorChain);
             len = chain.length;
             promise = Promise.resolve(config);
             while (i < len) {
@@ -3496,7 +3505,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         getUri(config) {
           config = mergeConfig(this.defaults, config);
-          const fullPath = buildFullPath(config.baseURL, config.url);
+          const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
           return buildURL(fullPath, config.params, config.paramsSerializer);
         }
       };
@@ -4816,7 +4825,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           this.html = html;
         }
       };
-      var escape = escapeHTML;
+      var escape2 = escapeHTML;
       var inherit = inherit$1;
       var NO_MATCH = Symbol("nomatch");
       var MAX_KEYWORD_HITS = 7;
@@ -5190,7 +5199,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             if (err.message && err.message.includes("Illegal")) {
               return {
                 language: languageName,
-                value: escape(codeToHighlight),
+                value: escape2(codeToHighlight),
                 illegal: true,
                 relevance: 0,
                 _illegalBy: {
@@ -5205,7 +5214,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             } else if (SAFE_MODE) {
               return {
                 language: languageName,
-                value: escape(codeToHighlight),
+                value: escape2(codeToHighlight),
                 illegal: false,
                 relevance: 0,
                 errorRaised: err,
@@ -5219,7 +5228,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         function justTextHighlightResult(code) {
           const result = {
-            value: escape(code),
+            value: escape2(code),
             illegal: false,
             relevance: 0,
             _top: PLAINTEXT_LANGUAGE,
@@ -5632,7 +5641,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
   });
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
   function assign(tar, src) {
@@ -5738,13 +5747,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     return ret;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/globals.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/globals.js
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
     // @ts-ignore Node typings have this
     global
   );
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
   var ResizeObserverSingleton = class {
     /**
      * @private
@@ -5790,7 +5799,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   ResizeObserverSingleton.entries = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/dom.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/dom.js
   var is_hydrating = false;
   function start_hydrating() {
     is_hydrating = true;
@@ -5982,7 +5991,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     return result;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/lifecycle.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/lifecycle.js
   var current_component;
   function set_current_component(component) {
     current_component = component;
@@ -6018,7 +6027,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     };
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/scheduler.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/scheduler.js
   var dirty_components = [];
   var binding_callbacks = [];
   var render_callbacks = [];
@@ -6096,7 +6105,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     render_callbacks = filtered;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/transitions.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/transitions.js
   var outroing = /* @__PURE__ */ new Set();
   var outros;
   function group_outros() {
@@ -6138,12 +6147,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/each.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/each.js
   function ensure_array_like(array_like_or_iterator) {
     return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/spread.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/spread.js
   function get_spread_update(levels, updates) {
     const update2 = {};
     const to_null_out = {};
@@ -6180,7 +6189,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     return typeof spread_props === "object" && spread_props !== null ? spread_props : {};
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/boolean_attributes.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/shared/boolean_attributes.js
   var _boolean_attributes = (
     /** @type {const} */
     [
@@ -6213,7 +6222,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   );
   var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/Component.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/Component.js
   function bind(component, name, callback) {
     const index = component.$.props[name];
     if (index !== void 0) {
@@ -6360,6 +6369,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             this.$l_u.delete(listener);
           }
         }
+        if (this.$l[type]) {
+          const idx = this.$l[type].indexOf(listener);
+          if (idx >= 0) {
+            this.$l[type].splice(idx, 1);
+          }
+        }
       }
       async connectedCallback() {
         this.$cn = true;
@@ -6391,7 +6406,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             };
           };
           await Promise.resolve();
-          if (!this.$cn) {
+          if (!this.$cn || this.$c) {
             return;
           }
           const $slots = {};
@@ -6405,6 +6420,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             const name = this.$g_p(attribute.name);
             if (!(name in this.$d)) {
               this.$d[name] = get_custom_element_value(name, attribute.value, this.$p_d, "toProp");
+            }
+          }
+          for (const key in this.$p_d) {
+            if (!(key in this.$d) && this[key] !== void 0) {
+              this.$d[key] = this[key];
+              delete this[key];
             }
           }
           this.$c = new this.$ctor({
@@ -6460,7 +6481,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       disconnectedCallback() {
         this.$cn = false;
         Promise.resolve().then(() => {
-          if (!this.$cn) {
+          if (!this.$cn && this.$c) {
             this.$c.$destroy();
             this.$c = void 0;
           }
@@ -6557,10 +6578,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
   };
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/version.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/shared/version.js
   var PUBLIC_VERSION = "4";
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/disclose-version/index.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/disclose-version/index.js
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
@@ -6640,7 +6661,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   }();
   var notifier = new Notifier();
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/Icon.svelte
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/Icon.svelte
   function create_fragment(ctx) {
     let svg;
     let svg_style_value;
@@ -6799,7 +6820,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var Icon_default = Icon;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/ri/index.js
   var RiDesignShadowLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 2C2.44772 2 2 2.44772 2 3V17C2 17.5523 2.44772 18 3 18H6V21C6 21.5523 6.44772 22 7 22H21C21.5523 22 22 21.5523 22 21V7C22 6.44772 21.5523 6 21 6H18V3C18 2.44772 17.5523 2 17 2H3ZM18 11.5607L20 13.5607V16.4393L18 14.4393V11.5607ZM18 9.43934V8H20V11.4393L18 9.43934ZM18 17V16.5607L20 18.5607V20H18.5607L16.5607 18H17C17.5523 18 18 17.5523 18 17ZM14.4393 18L16.4393 20H13.5607L11.5607 18H14.4393ZM9.43934 18L11.4393 20H8V18H9.43934ZM4 16V4H16V16H4Z"></path>' };
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHomeWifiLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M6 19H18V9.15745L12 3.7029L6 9.15745V19ZM19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM8 9.99998C11.866 9.99998 15 13.134 15 17H13C13 14.2386 10.7614 12 8 12V9.99998ZM8 14C9.65685 14 11 15.3431 11 17H8V14Z"></path>' };
@@ -6819,13 +6840,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   var RiSystemLogoutBoxRLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path>' };
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
   var RiFinanceCashLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path>' };
+  var RiFinanceShoppingBag2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20.0049 22H4.00488C3.4526 22 3.00488 21.5523 3.00488 21V3C3.00488 2.44772 3.4526 2 4.00488 2H20.0049C20.5572 2 21.0049 2.44772 21.0049 3V21C21.0049 21.5523 20.5572 22 20.0049 22ZM19.0049 20V4H5.00488V20H19.0049ZM9.00488 6V8C9.00488 9.65685 10.348 11 12.0049 11C13.6617 11 15.0049 9.65685 15.0049 8V6H17.0049V8C17.0049 10.7614 14.7663 13 12.0049 13C9.24346 13 7.00488 10.7614 7.00488 8V6H9.00488Z"></path>' };
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
   var RiArrowsArrowRightLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/store/index.js
+  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/store/index.js
   var subscriber_queue = [];
   function writable(value, start = noop) {
     let stop;
@@ -7963,27 +7985,27 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let t18;
     let span6;
     let t20;
+    let a7;
+    let icon7;
     let t21;
-    let t22;
     let span7;
     let t23;
-    let nav1;
-    let button0;
-    let icon7;
     let t24;
+    let t25;
     let span8;
     let t26;
+    let nav1;
+    let button0;
+    let icon8;
+    let t27;
+    let span9;
+    let t29;
     let button1;
     let button1_class_value;
-    let t27;
+    let t30;
     let aside1;
     let div1;
     let nav2;
-    let a7;
-    let icon8;
-    let t28;
-    let span9;
-    let t30;
     let a8;
     let icon9;
     let t31;
@@ -8014,15 +8036,25 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let t46;
     let span15;
     let t48;
+    let a14;
+    let icon15;
     let t49;
-    let t50;
     let span16;
     let t51;
-    let nav3;
-    let button2;
-    let icon15;
+    let a15;
+    let icon16;
     let t52;
     let span17;
+    let t54;
+    let t55;
+    let t56;
+    let span18;
+    let t57;
+    let nav3;
+    let button2;
+    let icon17;
+    let t58;
+    let span19;
     let aside1_class_value;
     let current;
     let mounted;
@@ -8046,6 +8078,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon6 = new Icon_default({
+      props: {
+        src: RiFinanceShoppingBag2Line,
+        size: "20"
+      }
+    });
+    icon7 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block0 = !/*access*/
@@ -8054,14 +8092,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       /*access*/
       ctx[0].admin && create_if_block_2(ctx)
     );
-    icon7 = new Icon_default({
+    icon8 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
-    icon8 = new Icon_default({
-      props: { src: RiBuildingsHome2Line, size: "20" }
-    });
     icon9 = new Icon_default({
-      props: { src: RiDocumentFileChartLine, size: "20" }
+      props: { src: RiBuildingsHome2Line, size: "20" }
     });
     icon10 = new Icon_default({
       props: { src: RiDocumentFileChartLine, size: "20" }
@@ -8076,6 +8111,15 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       props: { src: RiDocumentFileChartLine, size: "20" }
     });
     icon14 = new Icon_default({
+      props: { src: RiDocumentFileChartLine, size: "20" }
+    });
+    icon15 = new Icon_default({
+      props: {
+        src: RiFinanceShoppingBag2Line,
+        size: "20"
+      }
+    });
+    icon16 = new Icon_default({
       props: { src: RiUserFacesUser3Line, size: "20" }
     });
     let if_block2 = !/*access*/
@@ -8084,7 +8128,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       /*access*/
       ctx[0].admin && create_if_block(ctx)
     );
-    icon15 = new Icon_default({
+    icon17 = new Icon_default({
       props: { src: RiSystemLogoutBoxRLine, size: "20" }
     });
     return {
@@ -8132,84 +8176,96 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         create_component(icon6.$.fragment);
         t18 = space();
         span6 = element("span");
-        span6.textContent = "Profile";
+        span6.textContent = "Sales";
         t20 = space();
+        a7 = element("a");
+        create_component(icon7.$.fragment);
+        t21 = space();
+        span7 = element("span");
+        span7.textContent = "Profile";
+        t23 = space();
         if (if_block0)
           if_block0.c();
-        t21 = space();
+        t24 = space();
         if (if_block1)
           if_block1.c();
-        t22 = space();
-        span7 = element("span");
-        t23 = space();
+        t25 = space();
+        span8 = element("span");
+        t26 = space();
         nav1 = element("nav");
         button0 = element("button");
-        create_component(icon7.$.fragment);
-        t24 = space();
-        span8 = element("span");
-        span8.textContent = "Logout";
-        t26 = space();
-        button1 = element("button");
+        create_component(icon8.$.fragment);
         t27 = space();
+        span9 = element("span");
+        span9.textContent = "Logout";
+        t29 = space();
+        button1 = element("button");
+        t30 = space();
         aside1 = element("aside");
         div1 = element("div");
         nav2 = element("nav");
-        a7 = element("a");
-        create_component(icon8.$.fragment);
-        t28 = space();
-        span9 = element("span");
-        span9.textContent = "Home";
-        t30 = space();
         a8 = element("a");
         create_component(icon9.$.fragment);
         t31 = space();
         span10 = element("span");
-        span10.textContent = "Occupancy Report";
+        span10.textContent = "Home";
         t33 = space();
         a9 = element("a");
         create_component(icon10.$.fragment);
         t34 = space();
         span11 = element("span");
-        span11.textContent = "Missing Data Report";
+        span11.textContent = "Occupancy Report";
         t36 = space();
         a10 = element("a");
         create_component(icon11.$.fragment);
         t37 = space();
         span12 = element("span");
-        span12.textContent = "Revenue Report";
+        span12.textContent = "Missing Data Report";
         t39 = space();
         a11 = element("a");
         create_component(icon12.$.fragment);
         t40 = space();
         span13 = element("span");
-        span13.textContent = "Wifi Device Report";
+        span13.textContent = "Revenue Report";
         t42 = space();
         a12 = element("a");
         create_component(icon13.$.fragment);
         t43 = space();
         span14 = element("span");
-        span14.textContent = "Price per day Report";
+        span14.textContent = "Wifi Device Report";
         t45 = space();
         a13 = element("a");
         create_component(icon14.$.fragment);
         t46 = space();
         span15 = element("span");
-        span15.textContent = "Profile";
+        span15.textContent = "Price per day Report";
         t48 = space();
-        if (if_block2)
-          if_block2.c();
-        t49 = space();
-        if (if_block3)
-          if_block3.c();
-        t50 = space();
-        span16 = element("span");
-        t51 = space();
-        nav3 = element("nav");
-        button2 = element("button");
+        a14 = element("a");
         create_component(icon15.$.fragment);
+        t49 = space();
+        span16 = element("span");
+        span16.textContent = "Sales";
+        t51 = space();
+        a15 = element("a");
+        create_component(icon16.$.fragment);
         t52 = space();
         span17 = element("span");
-        span17.textContent = "Logout";
+        span17.textContent = "Profile";
+        t54 = space();
+        if (if_block2)
+          if_block2.c();
+        t55 = space();
+        if (if_block3)
+          if_block3.c();
+        t56 = space();
+        span18 = element("span");
+        t57 = space();
+        nav3 = element("nav");
+        button2 = element("button");
+        create_component(icon17.$.fragment);
+        t58 = space();
+        span19 = element("span");
+        span19.textContent = "Logout";
         attr(a0, "href", "/");
         attr(a0, "class", "svelte-1fwsz8h");
         toggle_class(
@@ -8258,16 +8314,24 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           /*pathAll*/
           ctx[2] === "/staff/pricePerDayReport"
         );
-        attr(a6, "href", "/user");
+        attr(a6, "href", "/staff/sales");
         attr(a6, "class", "svelte-1fwsz8h");
         toggle_class(
           a6,
           "active",
           /*pathAll*/
+          ctx[2] === "/staff/sales"
+        );
+        attr(a7, "href", "/user");
+        attr(a7, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a7,
+          "active",
+          /*pathAll*/
           ctx[2] === "/user"
         );
         attr(nav0, "class", "nav-menu svelte-1fwsz8h");
-        attr(span7, "class", "separator svelte-1fwsz8h");
+        attr(span8, "class", "separator svelte-1fwsz8h");
         attr(button0, "class", "red svelte-1fwsz8h");
         attr(nav1, "class", "nav-menu svelte-1fwsz8h");
         attr(div0, "class", "container svelte-1fwsz8h");
@@ -8275,64 +8339,72 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         attr(button1, "aria-label", "backdrop toggle menu");
         attr(button1, "class", button1_class_value = "backdrop " + /*$isOpenSideMenu*/
         (ctx[1] ? "open" : "") + " svelte-1fwsz8h");
-        attr(a7, "href", "/");
-        attr(a7, "class", "svelte-1fwsz8h");
-        toggle_class(
-          a7,
-          "active",
-          /*pathLv1*/
-          ctx[3] === ""
-        );
-        attr(a8, "href", "/staff/occupancyReport");
+        attr(a8, "href", "/");
         attr(a8, "class", "svelte-1fwsz8h");
         toggle_class(
           a8,
           "active",
-          /*pathAll*/
-          ctx[2] === "/staff/occupancyReport"
+          /*pathLv1*/
+          ctx[3] === ""
         );
-        attr(a9, "href", "/staff/missingDataReport");
+        attr(a9, "href", "/staff/occupancyReport");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
           a9,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/missingDataReport"
+          ctx[2] === "/staff/occupancyReport"
         );
-        attr(a10, "href", "/staff/revenueReport");
+        attr(a10, "href", "/staff/missingDataReport");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
           a10,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/revenueReport"
+          ctx[2] === "/staff/missingDataReport"
         );
-        attr(a11, "href", "/staff/wifiDeviceReport");
+        attr(a11, "href", "/staff/revenueReport");
         attr(a11, "class", "svelte-1fwsz8h");
         toggle_class(
           a11,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/wifiDeviceReport"
+          ctx[2] === "/staff/revenueReport"
         );
-        attr(a12, "href", "/staff/pricePerDayReport");
+        attr(a12, "href", "/staff/wifiDeviceReport");
         attr(a12, "class", "svelte-1fwsz8h");
         toggle_class(
           a12,
           "active",
           /*pathAll*/
-          ctx[2] === "/staff/pricePerDayReport"
+          ctx[2] === "/staff/wifiDeviceReport"
         );
-        attr(a13, "href", "/user");
+        attr(a13, "href", "/staff/pricePerDayReport");
         attr(a13, "class", "svelte-1fwsz8h");
         toggle_class(
           a13,
           "active",
           /*pathAll*/
+          ctx[2] === "/staff/pricePerDayReport"
+        );
+        attr(a14, "href", "/staff/sales");
+        attr(a14, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a14,
+          "active",
+          /*pathAll*/
+          ctx[2] === "/staff/sales"
+        );
+        attr(a15, "href", "/user");
+        attr(a15, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a15,
+          "active",
+          /*pathAll*/
           ctx[2] === "/user"
         );
         attr(nav2, "class", "nav-menu svelte-1fwsz8h");
-        attr(span16, "class", "separator svelte-1fwsz8h");
+        attr(span18, "class", "separator svelte-1fwsz8h");
         attr(button2, "class", "red svelte-1fwsz8h");
         attr(nav3, "class", "nav-menu svelte-1fwsz8h");
         attr(div1, "class", "container svelte-1fwsz8h");
@@ -8377,31 +8449,31 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         mount_component(icon6, a6, null);
         append(a6, t18);
         append(a6, span6);
-        append(div0, t20);
+        append(nav0, t20);
+        append(nav0, a7);
+        mount_component(icon7, a7, null);
+        append(a7, t21);
+        append(a7, span7);
+        append(div0, t23);
         if (if_block0)
           if_block0.m(div0, null);
-        append(div0, t21);
+        append(div0, t24);
         if (if_block1)
           if_block1.m(div0, null);
-        append(div0, t22);
-        append(div0, span7);
-        append(div0, t23);
+        append(div0, t25);
+        append(div0, span8);
+        append(div0, t26);
         append(div0, nav1);
         append(nav1, button0);
-        mount_component(icon7, button0, null);
-        append(button0, t24);
-        append(button0, span8);
-        insert(target, t26, anchor);
+        mount_component(icon8, button0, null);
+        append(button0, t27);
+        append(button0, span9);
+        insert(target, t29, anchor);
         insert(target, button1, anchor);
-        insert(target, t27, anchor);
+        insert(target, t30, anchor);
         insert(target, aside1, anchor);
         append(aside1, div1);
         append(div1, nav2);
-        append(nav2, a7);
-        mount_component(icon8, a7, null);
-        append(a7, t28);
-        append(a7, span9);
-        append(nav2, t30);
         append(nav2, a8);
         mount_component(icon9, a8, null);
         append(a8, t31);
@@ -8431,20 +8503,30 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         mount_component(icon14, a13, null);
         append(a13, t46);
         append(a13, span15);
-        append(div1, t48);
+        append(nav2, t48);
+        append(nav2, a14);
+        mount_component(icon15, a14, null);
+        append(a14, t49);
+        append(a14, span16);
+        append(nav2, t51);
+        append(nav2, a15);
+        mount_component(icon16, a15, null);
+        append(a15, t52);
+        append(a15, span17);
+        append(div1, t54);
         if (if_block2)
           if_block2.m(div1, null);
-        append(div1, t49);
+        append(div1, t55);
         if (if_block3)
           if_block3.m(div1, null);
-        append(div1, t50);
-        append(div1, span16);
-        append(div1, t51);
+        append(div1, t56);
+        append(div1, span18);
+        append(div1, t57);
         append(div1, nav3);
         append(nav3, button2);
-        mount_component(icon15, button2, null);
-        append(button2, t52);
-        append(button2, span17);
+        mount_component(icon17, button2, null);
+        append(button2, t58);
+        append(button2, span19);
         current = true;
         if (!mounted) {
           dispose = [
@@ -8483,7 +8565,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             if_block0 = create_if_block_3(ctx2);
             if_block0.c();
             transition_in(if_block0, 1);
-            if_block0.m(div0, t21);
+            if_block0.m(div0, t24);
           }
         } else if (if_block0) {
           group_outros();
@@ -8506,7 +8588,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             if_block1 = create_if_block_2(ctx2);
             if_block1.c();
             transition_in(if_block1, 1);
-            if_block1.m(div0, t22);
+            if_block1.m(div0, t25);
           }
         } else if (if_block1) {
           group_outros();
@@ -8532,7 +8614,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             if_block2 = create_if_block_1(ctx2);
             if_block2.c();
             transition_in(if_block2, 1);
-            if_block2.m(div1, t49);
+            if_block2.m(div1, t55);
           }
         } else if (if_block2) {
           group_outros();
@@ -8555,7 +8637,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             if_block3 = create_if_block(ctx2);
             if_block3.c();
             transition_in(if_block3, 1);
-            if_block3.m(div1, t50);
+            if_block3.m(div1, t56);
           }
         } else if (if_block3) {
           group_outros();
@@ -8580,9 +8662,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_in(icon4.$.fragment, local);
         transition_in(icon5.$.fragment, local);
         transition_in(icon6.$.fragment, local);
+        transition_in(icon7.$.fragment, local);
         transition_in(if_block0);
         transition_in(if_block1);
-        transition_in(icon7.$.fragment, local);
         transition_in(icon8.$.fragment, local);
         transition_in(icon9.$.fragment, local);
         transition_in(icon10.$.fragment, local);
@@ -8590,9 +8672,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_in(icon12.$.fragment, local);
         transition_in(icon13.$.fragment, local);
         transition_in(icon14.$.fragment, local);
+        transition_in(icon15.$.fragment, local);
+        transition_in(icon16.$.fragment, local);
         transition_in(if_block2);
         transition_in(if_block3);
-        transition_in(icon15.$.fragment, local);
+        transition_in(icon17.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -8603,9 +8687,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_out(icon4.$.fragment, local);
         transition_out(icon5.$.fragment, local);
         transition_out(icon6.$.fragment, local);
+        transition_out(icon7.$.fragment, local);
         transition_out(if_block0);
         transition_out(if_block1);
-        transition_out(icon7.$.fragment, local);
         transition_out(icon8.$.fragment, local);
         transition_out(icon9.$.fragment, local);
         transition_out(icon10.$.fragment, local);
@@ -8613,17 +8697,19 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_out(icon12.$.fragment, local);
         transition_out(icon13.$.fragment, local);
         transition_out(icon14.$.fragment, local);
+        transition_out(icon15.$.fragment, local);
+        transition_out(icon16.$.fragment, local);
         transition_out(if_block2);
         transition_out(if_block3);
-        transition_out(icon15.$.fragment, local);
+        transition_out(icon17.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
           detach(aside0);
-          detach(t26);
+          detach(t29);
           detach(button1);
-          detach(t27);
+          detach(t30);
           detach(aside1);
         }
         destroy_component(icon0);
@@ -8633,11 +8719,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         destroy_component(icon4);
         destroy_component(icon5);
         destroy_component(icon6);
+        destroy_component(icon7);
         if (if_block0)
           if_block0.d();
         if (if_block1)
           if_block1.d();
-        destroy_component(icon7);
         destroy_component(icon8);
         destroy_component(icon9);
         destroy_component(icon10);
@@ -8645,11 +8731,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         destroy_component(icon12);
         destroy_component(icon13);
         destroy_component(icon14);
+        destroy_component(icon15);
+        destroy_component(icon16);
         if (if_block2)
           if_block2.d();
         if (if_block3)
           if_block3.d();
-        destroy_component(icon15);
+        destroy_component(icon17);
         mounted = false;
         run_all(dispose);
       }
@@ -8784,7 +8872,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var SideMenu_default = SideMenu;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/bs/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/bs/index.js
   var BsList = { a: { fill: "currentColor", viewBox: "0 0 16 16" }, c: '<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>' };
 
   // _partials/Navbar.svelte
@@ -9195,20 +9283,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var main_default = Main;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/cg/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/cg/index.js
   var CgChevronDoubleRight = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M5.63605 7.75735L7.05026 6.34314L12.7071 12L7.05029 17.6568L5.63608 16.2426L9.87869 12L5.63605 7.75735Z" fill="currentColor"></path><path d="M12.7071 6.34314L11.2929 7.75735L15.5356 12L11.2929 16.2426L12.7072 17.6568L18.364 12L12.7071 6.34314Z" fill="currentColor"></path>' };
   var CgChevronDoubleLeft = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M18.3639 7.75735L16.9497 6.34314L11.2929 12L16.9497 17.6568L18.3639 16.2426L14.1213 12L18.3639 7.75735Z" fill="currentColor"></path><path d="M11.2929 6.34314L12.7071 7.75735L8.46447 12L12.7071 16.2426L11.2929 17.6568L5.63605 12L11.2929 6.34314Z" fill="currentColor"></path>' };
   var CgChevronRight = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M10.5858 6.34317L12 4.92896L19.0711 12L12 19.0711L10.5858 17.6569L16.2427 12L10.5858 6.34317Z" fill="currentColor"></path>' };
   var CgChevronLeft = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M16.2426 6.34317L14.8284 4.92896L7.75739 12L14.8285 19.0711L16.2427 17.6569L10.5858 12L16.2426 6.34317Z" fill="currentColor"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/io/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/io/index.js
   var IoClose = { a: { viewBox: "0 0 512 512" }, c: '<path d="M289.94,256l95-95A24,24,0,0,0,351,127l-95,95-95-95A24,24,0,0,0,127,161l95,95-95,95A24,24,0,1,0,161,385l95-95,95,95A24,24,0,0,0,385,351Z"></path>' };
 
   // node_modules/.pnpm/highlight.js@11.11.1/node_modules/highlight.js/es/core.js
   var import_core = __toESM(require_core(), 1);
   var core_default = import_core.default;
 
-  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/LangTag.svelte
+  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/LangTag.svelte
   function create_else_block(ctx) {
     let t;
     return {
@@ -9389,7 +9477,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var LangTag_default = LangTag;
 
-  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/Highlight.svelte
+  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/Highlight.svelte
   var get_default_slot_changes = (dirty) => ({ highlighted: dirty & /*highlighted*/
   8 });
   var get_default_slot_context = (ctx) => ({ highlighted: (
@@ -9593,7 +9681,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var Highlight_default = Highlight;
 
-  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/LineNumbers.svelte
+  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/LineNumbers.svelte
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[10] = list[i];
@@ -10037,11 +10125,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     };
   }
 
-  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/languages/json.js
+  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/languages/json.js
   var json2 = { name: "json", register: json };
   var json_default = json2;
 
-  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/styles/atom-one-dark.js
+  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/styles/atom-one-dark.js
   var atomOneDark = `<style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{color:#abb2bf;background:#282c34}.hljs-comment,
 .hljs-quote{color:#5c6370;font-style:italic}.hljs-doctag,
 .hljs-keyword,
@@ -13189,5 +13277,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   // admin/tenantLogs.svelte.ts
   var app = new tenantLogs_default({ target: document.getElementById("app") });
 })();
+/*! Bundled license information:
+
+axios/dist/browser/axios.cjs:
+  (*! Axios v1.11.0 Copyright (c) 2025 Matt Zabriskie and contributors *)
+*/
 </script>
 </body></html>
