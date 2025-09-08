@@ -54,6 +54,28 @@ const (
 	PaymentStatus = `paymentStatus`
 )
 
+const (
+	TableBorrowedUtensils Tt.TableName = `borrowedUtensils`
+
+	BorrowedCustomer = `customer`
+	BorrowedItems    = `items`
+	BorrowedQty      = `qty`
+	BorrowedStatus   = `status`
+	BorrowedAt       = `borrowedAt`
+)
+
+const (
+	TableLaundry Tt.TableName = `laundry`
+
+	LaundryCustomer = `customer`
+	LaundryItems    = `items`
+	LaundryWeight   = `weight`
+	LaundryStatus   = `status`
+	LaundryPrice    = `price`
+	LaundryNote     = `note`
+	LaundryAt       = `laundryAt`
+)
+
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 	TableMenus: {
 		Fields: []Tt.Field{
@@ -105,11 +127,51 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,
 	},
+	TableBorrowedUtensils: {
+		Fields: []Tt.Field{
+			{Id, Tt.Unsigned},
+			{BorrowedCustomer, Tt.String},
+			{BorrowedItems, Tt.String},
+			{BorrowedQty, Tt.Integer},
+			{BorrowedStatus, Tt.String},
+			{BorrowedAt, Tt.String},
+			{CreatedAt, Tt.Integer},
+			{CreatedBy, Tt.Unsigned},
+			{UpdatedAt, Tt.Integer},
+			{UpdatedBy, Tt.Unsigned},
+			{DeletedAt, Tt.Integer},
+			{DeletedBy, Tt.Unsigned},
+			{RestoredBy, Tt.Unsigned},
+		},
+		AutoIncrementId: true,
+		Engine:          Tt.Memtx,
+	},
+	TableLaundry: {
+		Fields: []Tt.Field{
+			{Id, Tt.Unsigned},
+			{LaundryCustomer, Tt.String},
+			{LaundryItems, Tt.String},
+			{LaundryStatus, Tt.String},
+			{LaundryNote, Tt.String},
+			{LaundryAt, Tt.String},
+			{CreatedAt, Tt.Integer},
+			{CreatedBy, Tt.Unsigned},
+			{UpdatedAt, Tt.Integer},
+			{UpdatedBy, Tt.Unsigned},
+			{DeletedAt, Tt.Integer},
+			{DeletedBy, Tt.Unsigned},
+			{RestoredBy, Tt.Unsigned},
+		},
+		AutoIncrementId: true,
+		Engine:          Tt.Memtx,
+	},
 }
 
 const (
-	TableMenuLogs Ch.TableName = `menuLogs`
-	TableSaleLogs Ch.TableName = `saleLogs`
+	TableMenuLogs            Ch.TableName = `menuLogs`
+	TableSaleLogs            Ch.TableName = `saleLogs`
+	TableBorrowedUtensilLogs Ch.TableName = `borrowedUtensilLogs`
+	TableLaundryLogs         Ch.TableName = `laundryLogs`
 )
 
 const (
@@ -129,6 +191,24 @@ var ClickhouseTables = map[Ch.TableName]*Ch.TableProp{
 		Orders: []string{CreatedAt, ActorId},
 	},
 	TableSaleLogs: {
+		Fields: []Ch.Field{
+			{CreatedAt, Ch.DateTime},
+			{ActorId, Ch.UInt64},
+			{BeforeJSON, Ch.String},
+			{AfterJSON, Ch.String},
+		},
+		Orders: []string{CreatedAt, ActorId},
+	},
+	TableBorrowedUtensilLogs: {
+		Fields: []Ch.Field{
+			{CreatedAt, Ch.DateTime},
+			{ActorId, Ch.UInt64},
+			{BeforeJSON, Ch.String},
+			{AfterJSON, Ch.String},
+		},
+		Orders: []string{CreatedAt, ActorId},
+	},
+	TableLaundryLogs: {
 		Fields: []Ch.Field{
 			{CreatedAt, Ch.DateTime},
 			{ActorId, Ch.UInt64},

@@ -13,12 +13,624 @@ import (
 	"github.com/kokizzu/gotro/X"
 )
 
-// MenusMutator DAO writer/command struct
+// BorrowedUtensilsMutator DAO writer/command struct
 //
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file wcCafe__ORM.GEN.go
 //go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type wcCafe__ORM.GEN.go
 //go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type wcCafe__ORM.GEN.go
 //go:generate replacer -afterprefix "By\" form" "By,string\" form" type wcCafe__ORM.GEN.go
+type BorrowedUtensilsMutator struct {
+	rqCafe.BorrowedUtensils
+	mutations []A.X
+	logs      []A.X
+}
+
+// NewBorrowedUtensilsMutator create new ORM writer/command object
+func NewBorrowedUtensilsMutator(adapter *Tt.Adapter) (res *BorrowedUtensilsMutator) {
+	res = &BorrowedUtensilsMutator{BorrowedUtensils: rqCafe.BorrowedUtensils{Adapter: adapter}}
+	return
+}
+
+// Logs get array of logs [field, old, new]
+func (b *BorrowedUtensilsMutator) Logs() []A.X { //nolint:dupl false positive
+	return b.logs
+}
+
+// HaveMutation check whether Set* methods ever called
+func (b *BorrowedUtensilsMutator) HaveMutation() bool { //nolint:dupl false positive
+	return len(b.mutations) > 0
+}
+
+// ClearMutations clear all previously called Set* methods
+func (b *BorrowedUtensilsMutator) ClearMutations() { //nolint:dupl false positive
+	b.mutations = []A.X{}
+	b.logs = []A.X{}
+}
+
+// DoOverwriteById update all columns, error if not exists, not using mutations/Set*
+func (b *BorrowedUtensilsMutator) DoOverwriteById() bool { //nolint:dupl false positive
+	_, err := b.Adapter.Update(b.SpaceName(), b.UniqueIndexId(), A.X{b.Id}, b.ToUpdateArray())
+	return !L.IsError(err, `BorrowedUtensils.DoOverwriteById failed: `+b.SpaceName())
+}
+
+// DoUpdateById update only mutated fields, error if not exists, use Find* and Set* methods instead of direct assignment
+func (b *BorrowedUtensilsMutator) DoUpdateById() bool { //nolint:dupl false positive
+	if !b.HaveMutation() {
+		return true
+	}
+	_, err := b.Adapter.Update(b.SpaceName(), b.UniqueIndexId(), A.X{b.Id}, b.mutations)
+	return !L.IsError(err, `BorrowedUtensils.DoUpdateById failed: `+b.SpaceName())
+}
+
+// DoDeletePermanentById permanent delete
+func (b *BorrowedUtensilsMutator) DoDeletePermanentById() bool { //nolint:dupl false positive
+	_, err := b.Adapter.Delete(b.SpaceName(), b.UniqueIndexId(), A.X{b.Id})
+	return !L.IsError(err, `BorrowedUtensils.DoDeletePermanentById failed: `+b.SpaceName())
+}
+
+// func (b *BorrowedUtensilsMutator) DoUpsert() bool { //nolint:dupl false positive
+//	arr := b.ToArray()
+//	_, err := b.Adapter.Upsert(b.SpaceName(), arr, A.X{
+//		A.X{`=`, 0, b.Id},
+//		A.X{`=`, 1, b.Customer},
+//		A.X{`=`, 2, b.Items},
+//		A.X{`=`, 3, b.Qty},
+//		A.X{`=`, 4, b.Status},
+//		A.X{`=`, 5, b.BorrowedAt},
+//		A.X{`=`, 6, b.CreatedAt},
+//		A.X{`=`, 7, b.CreatedBy},
+//		A.X{`=`, 8, b.UpdatedAt},
+//		A.X{`=`, 9, b.UpdatedBy},
+//		A.X{`=`, 10, b.DeletedAt},
+//		A.X{`=`, 11, b.DeletedBy},
+//		A.X{`=`, 12, b.RestoredBy},
+//	})
+//	return !L.IsError(err, `BorrowedUtensils.DoUpsert failed: `+b.SpaceName()+ `\n%#v`, arr)
+// }
+
+// DoInsert insert, error if already exists
+func (b *BorrowedUtensilsMutator) DoInsert() bool { //nolint:dupl false positive
+	arr := b.ToArray()
+	row, err := b.Adapter.Insert(b.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			b.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `BorrowedUtensils.DoInsert failed: `+b.SpaceName()+`\n%#v`, arr)
+}
+
+// DoUpsert upsert, insert or overwrite, will error only when there's unique secondary key being violated
+// replace = upsert, only error when there's unique secondary key
+// previous name: DoReplace
+func (b *BorrowedUtensilsMutator) DoUpsert() bool { //nolint:dupl false positive
+	arr := b.ToArray()
+	row, err := b.Adapter.Replace(b.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			b.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `BorrowedUtensils.DoUpsert failed: `+b.SpaceName()+`\n%#v`, arr)
+}
+
+// SetId create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetId(val uint64) bool { //nolint:dupl false positive
+	if val != b.Id {
+		b.mutations = append(b.mutations, A.X{`=`, 0, val})
+		b.logs = append(b.logs, A.X{`id`, b.Id, val})
+		b.Id = val
+		return true
+	}
+	return false
+}
+
+// SetCustomer create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetCustomer(val string) bool { //nolint:dupl false positive
+	if val != b.Customer {
+		b.mutations = append(b.mutations, A.X{`=`, 1, val})
+		b.logs = append(b.logs, A.X{`customer`, b.Customer, val})
+		b.Customer = val
+		return true
+	}
+	return false
+}
+
+// SetItems create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetItems(val string) bool { //nolint:dupl false positive
+	if val != b.Items {
+		b.mutations = append(b.mutations, A.X{`=`, 2, val})
+		b.logs = append(b.logs, A.X{`items`, b.Items, val})
+		b.Items = val
+		return true
+	}
+	return false
+}
+
+// SetQty create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetQty(val int64) bool { //nolint:dupl false positive
+	if val != b.Qty {
+		b.mutations = append(b.mutations, A.X{`=`, 3, val})
+		b.logs = append(b.logs, A.X{`qty`, b.Qty, val})
+		b.Qty = val
+		return true
+	}
+	return false
+}
+
+// SetStatus create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetStatus(val string) bool { //nolint:dupl false positive
+	if val != b.Status {
+		b.mutations = append(b.mutations, A.X{`=`, 4, val})
+		b.logs = append(b.logs, A.X{`status`, b.Status, val})
+		b.Status = val
+		return true
+	}
+	return false
+}
+
+// SetBorrowedAt create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetBorrowedAt(val string) bool { //nolint:dupl false positive
+	if val != b.BorrowedAt {
+		b.mutations = append(b.mutations, A.X{`=`, 5, val})
+		b.logs = append(b.logs, A.X{`borrowedAt`, b.BorrowedAt, val})
+		b.BorrowedAt = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedAt create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positive
+	if val != b.CreatedAt {
+		b.mutations = append(b.mutations, A.X{`=`, 6, val})
+		b.logs = append(b.logs, A.X{`createdAt`, b.CreatedAt, val})
+		b.CreatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedBy create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != b.CreatedBy {
+		b.mutations = append(b.mutations, A.X{`=`, 7, val})
+		b.logs = append(b.logs, A.X{`createdBy`, b.CreatedBy, val})
+		b.CreatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedAt create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positive
+	if val != b.UpdatedAt {
+		b.mutations = append(b.mutations, A.X{`=`, 8, val})
+		b.logs = append(b.logs, A.X{`updatedAt`, b.UpdatedAt, val})
+		b.UpdatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedBy create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != b.UpdatedBy {
+		b.mutations = append(b.mutations, A.X{`=`, 9, val})
+		b.logs = append(b.logs, A.X{`updatedBy`, b.UpdatedBy, val})
+		b.UpdatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedAt create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positive
+	if val != b.DeletedAt {
+		b.mutations = append(b.mutations, A.X{`=`, 10, val})
+		b.logs = append(b.logs, A.X{`deletedAt`, b.DeletedAt, val})
+		b.DeletedAt = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedBy create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetDeletedBy(val uint64) bool { //nolint:dupl false positive
+	if val != b.DeletedBy {
+		b.mutations = append(b.mutations, A.X{`=`, 11, val})
+		b.logs = append(b.logs, A.X{`deletedBy`, b.DeletedBy, val})
+		b.DeletedBy = val
+		return true
+	}
+	return false
+}
+
+// SetRestoredBy create mutations, should not duplicate
+func (b *BorrowedUtensilsMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false positive
+	if val != b.RestoredBy {
+		b.mutations = append(b.mutations, A.X{`=`, 12, val})
+		b.logs = append(b.logs, A.X{`restoredBy`, b.RestoredBy, val})
+		b.RestoredBy = val
+		return true
+	}
+	return false
+}
+
+// SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
+func (b *BorrowedUtensilsMutator) SetAll(from rqCafe.BorrowedUtensils, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
+	if excludeMap == nil { // list of fields to exclude
+		excludeMap = M.SB{}
+	}
+	if forceMap == nil { // list of fields to force overwrite
+		forceMap = M.SB{}
+	}
+	if !excludeMap[`id`] && (forceMap[`id`] || from.Id != 0) {
+		b.Id = from.Id
+		changed = true
+	}
+	if !excludeMap[`customer`] && (forceMap[`customer`] || from.Customer != ``) {
+		b.Customer = S.Trim(from.Customer)
+		changed = true
+	}
+	if !excludeMap[`items`] && (forceMap[`items`] || from.Items != ``) {
+		b.Items = S.Trim(from.Items)
+		changed = true
+	}
+	if !excludeMap[`qty`] && (forceMap[`qty`] || from.Qty != 0) {
+		b.Qty = from.Qty
+		changed = true
+	}
+	if !excludeMap[`status`] && (forceMap[`status`] || from.Status != ``) {
+		b.Status = S.Trim(from.Status)
+		changed = true
+	}
+	if !excludeMap[`borrowedAt`] && (forceMap[`borrowedAt`] || from.BorrowedAt != ``) {
+		b.BorrowedAt = S.Trim(from.BorrowedAt)
+		changed = true
+	}
+	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {
+		b.CreatedAt = from.CreatedAt
+		changed = true
+	}
+	if !excludeMap[`createdBy`] && (forceMap[`createdBy`] || from.CreatedBy != 0) {
+		b.CreatedBy = from.CreatedBy
+		changed = true
+	}
+	if !excludeMap[`updatedAt`] && (forceMap[`updatedAt`] || from.UpdatedAt != 0) {
+		b.UpdatedAt = from.UpdatedAt
+		changed = true
+	}
+	if !excludeMap[`updatedBy`] && (forceMap[`updatedBy`] || from.UpdatedBy != 0) {
+		b.UpdatedBy = from.UpdatedBy
+		changed = true
+	}
+	if !excludeMap[`deletedAt`] && (forceMap[`deletedAt`] || from.DeletedAt != 0) {
+		b.DeletedAt = from.DeletedAt
+		changed = true
+	}
+	if !excludeMap[`deletedBy`] && (forceMap[`deletedBy`] || from.DeletedBy != 0) {
+		b.DeletedBy = from.DeletedBy
+		changed = true
+	}
+	if !excludeMap[`restoredBy`] && (forceMap[`restoredBy`] || from.RestoredBy != 0) {
+		b.RestoredBy = from.RestoredBy
+		changed = true
+	}
+	return
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
+// LaundryMutator DAO writer/command struct
+type LaundryMutator struct {
+	rqCafe.Laundry
+	mutations []A.X
+	logs      []A.X
+}
+
+// NewLaundryMutator create new ORM writer/command object
+func NewLaundryMutator(adapter *Tt.Adapter) (res *LaundryMutator) {
+	res = &LaundryMutator{Laundry: rqCafe.Laundry{Adapter: adapter}}
+	return
+}
+
+// Logs get array of logs [field, old, new]
+func (l *LaundryMutator) Logs() []A.X { //nolint:dupl false positive
+	return l.logs
+}
+
+// HaveMutation check whether Set* methods ever called
+func (l *LaundryMutator) HaveMutation() bool { //nolint:dupl false positive
+	return len(l.mutations) > 0
+}
+
+// ClearMutations clear all previously called Set* methods
+func (l *LaundryMutator) ClearMutations() { //nolint:dupl false positive
+	l.mutations = []A.X{}
+	l.logs = []A.X{}
+}
+
+// DoOverwriteById update all columns, error if not exists, not using mutations/Set*
+func (l *LaundryMutator) DoOverwriteById() bool { //nolint:dupl false positive
+	_, err := l.Adapter.Update(l.SpaceName(), l.UniqueIndexId(), A.X{l.Id}, l.ToUpdateArray())
+	return !L.IsError(err, `Laundry.DoOverwriteById failed: `+l.SpaceName())
+}
+
+// DoUpdateById update only mutated fields, error if not exists, use Find* and Set* methods instead of direct assignment
+func (l *LaundryMutator) DoUpdateById() bool { //nolint:dupl false positive
+	if !l.HaveMutation() {
+		return true
+	}
+	_, err := l.Adapter.Update(l.SpaceName(), l.UniqueIndexId(), A.X{l.Id}, l.mutations)
+	return !L.IsError(err, `Laundry.DoUpdateById failed: `+l.SpaceName())
+}
+
+// DoDeletePermanentById permanent delete
+func (l *LaundryMutator) DoDeletePermanentById() bool { //nolint:dupl false positive
+	_, err := l.Adapter.Delete(l.SpaceName(), l.UniqueIndexId(), A.X{l.Id})
+	return !L.IsError(err, `Laundry.DoDeletePermanentById failed: `+l.SpaceName())
+}
+
+// func (l *LaundryMutator) DoUpsert() bool { //nolint:dupl false positive
+//	arr := l.ToArray()
+//	_, err := l.Adapter.Upsert(l.SpaceName(), arr, A.X{
+//		A.X{`=`, 0, l.Id},
+//		A.X{`=`, 1, l.Customer},
+//		A.X{`=`, 2, l.Items},
+//		A.X{`=`, 3, l.Status},
+//		A.X{`=`, 4, l.Note},
+//		A.X{`=`, 5, l.LaundryAt},
+//		A.X{`=`, 6, l.CreatedAt},
+//		A.X{`=`, 7, l.CreatedBy},
+//		A.X{`=`, 8, l.UpdatedAt},
+//		A.X{`=`, 9, l.UpdatedBy},
+//		A.X{`=`, 10, l.DeletedAt},
+//		A.X{`=`, 11, l.DeletedBy},
+//		A.X{`=`, 12, l.RestoredBy},
+//	})
+//	return !L.IsError(err, `Laundry.DoUpsert failed: `+l.SpaceName()+ `\n%#v`, arr)
+// }
+
+// DoInsert insert, error if already exists
+func (l *LaundryMutator) DoInsert() bool { //nolint:dupl false positive
+	arr := l.ToArray()
+	row, err := l.Adapter.Insert(l.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			l.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `Laundry.DoInsert failed: `+l.SpaceName()+`\n%#v`, arr)
+}
+
+// DoUpsert upsert, insert or overwrite, will error only when there's unique secondary key being violated
+// replace = upsert, only error when there's unique secondary key
+// previous name: DoReplace
+func (l *LaundryMutator) DoUpsert() bool { //nolint:dupl false positive
+	arr := l.ToArray()
+	row, err := l.Adapter.Replace(l.SpaceName(), arr)
+	if err == nil {
+		tup := row.Tuples()
+		if len(tup) > 0 && len(tup[0]) > 0 && tup[0][0] != nil {
+			l.Id = X.ToU(tup[0][0])
+		}
+	}
+	return !L.IsError(err, `Laundry.DoUpsert failed: `+l.SpaceName()+`\n%#v`, arr)
+}
+
+// SetId create mutations, should not duplicate
+func (l *LaundryMutator) SetId(val uint64) bool { //nolint:dupl false positive
+	if val != l.Id {
+		l.mutations = append(l.mutations, A.X{`=`, 0, val})
+		l.logs = append(l.logs, A.X{`id`, l.Id, val})
+		l.Id = val
+		return true
+	}
+	return false
+}
+
+// SetCustomer create mutations, should not duplicate
+func (l *LaundryMutator) SetCustomer(val string) bool { //nolint:dupl false positive
+	if val != l.Customer {
+		l.mutations = append(l.mutations, A.X{`=`, 1, val})
+		l.logs = append(l.logs, A.X{`customer`, l.Customer, val})
+		l.Customer = val
+		return true
+	}
+	return false
+}
+
+// SetItems create mutations, should not duplicate
+func (l *LaundryMutator) SetItems(val string) bool { //nolint:dupl false positive
+	if val != l.Items {
+		l.mutations = append(l.mutations, A.X{`=`, 2, val})
+		l.logs = append(l.logs, A.X{`items`, l.Items, val})
+		l.Items = val
+		return true
+	}
+	return false
+}
+
+// SetStatus create mutations, should not duplicate
+func (l *LaundryMutator) SetStatus(val string) bool { //nolint:dupl false positive
+	if val != l.Status {
+		l.mutations = append(l.mutations, A.X{`=`, 3, val})
+		l.logs = append(l.logs, A.X{`status`, l.Status, val})
+		l.Status = val
+		return true
+	}
+	return false
+}
+
+// SetNote create mutations, should not duplicate
+func (l *LaundryMutator) SetNote(val string) bool { //nolint:dupl false positive
+	if val != l.Note {
+		l.mutations = append(l.mutations, A.X{`=`, 4, val})
+		l.logs = append(l.logs, A.X{`note`, l.Note, val})
+		l.Note = val
+		return true
+	}
+	return false
+}
+
+// SetLaundryAt create mutations, should not duplicate
+func (l *LaundryMutator) SetLaundryAt(val string) bool { //nolint:dupl false positive
+	if val != l.LaundryAt {
+		l.mutations = append(l.mutations, A.X{`=`, 5, val})
+		l.logs = append(l.logs, A.X{`laundryAt`, l.LaundryAt, val})
+		l.LaundryAt = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedAt create mutations, should not duplicate
+func (l *LaundryMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positive
+	if val != l.CreatedAt {
+		l.mutations = append(l.mutations, A.X{`=`, 6, val})
+		l.logs = append(l.logs, A.X{`createdAt`, l.CreatedAt, val})
+		l.CreatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetCreatedBy create mutations, should not duplicate
+func (l *LaundryMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != l.CreatedBy {
+		l.mutations = append(l.mutations, A.X{`=`, 7, val})
+		l.logs = append(l.logs, A.X{`createdBy`, l.CreatedBy, val})
+		l.CreatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedAt create mutations, should not duplicate
+func (l *LaundryMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positive
+	if val != l.UpdatedAt {
+		l.mutations = append(l.mutations, A.X{`=`, 8, val})
+		l.logs = append(l.logs, A.X{`updatedAt`, l.UpdatedAt, val})
+		l.UpdatedAt = val
+		return true
+	}
+	return false
+}
+
+// SetUpdatedBy create mutations, should not duplicate
+func (l *LaundryMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false positive
+	if val != l.UpdatedBy {
+		l.mutations = append(l.mutations, A.X{`=`, 9, val})
+		l.logs = append(l.logs, A.X{`updatedBy`, l.UpdatedBy, val})
+		l.UpdatedBy = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedAt create mutations, should not duplicate
+func (l *LaundryMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positive
+	if val != l.DeletedAt {
+		l.mutations = append(l.mutations, A.X{`=`, 10, val})
+		l.logs = append(l.logs, A.X{`deletedAt`, l.DeletedAt, val})
+		l.DeletedAt = val
+		return true
+	}
+	return false
+}
+
+// SetDeletedBy create mutations, should not duplicate
+func (l *LaundryMutator) SetDeletedBy(val uint64) bool { //nolint:dupl false positive
+	if val != l.DeletedBy {
+		l.mutations = append(l.mutations, A.X{`=`, 11, val})
+		l.logs = append(l.logs, A.X{`deletedBy`, l.DeletedBy, val})
+		l.DeletedBy = val
+		return true
+	}
+	return false
+}
+
+// SetRestoredBy create mutations, should not duplicate
+func (l *LaundryMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false positive
+	if val != l.RestoredBy {
+		l.mutations = append(l.mutations, A.X{`=`, 12, val})
+		l.logs = append(l.logs, A.X{`restoredBy`, l.RestoredBy, val})
+		l.RestoredBy = val
+		return true
+	}
+	return false
+}
+
+// SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
+func (l *LaundryMutator) SetAll(from rqCafe.Laundry, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
+	if excludeMap == nil { // list of fields to exclude
+		excludeMap = M.SB{}
+	}
+	if forceMap == nil { // list of fields to force overwrite
+		forceMap = M.SB{}
+	}
+	if !excludeMap[`id`] && (forceMap[`id`] || from.Id != 0) {
+		l.Id = from.Id
+		changed = true
+	}
+	if !excludeMap[`customer`] && (forceMap[`customer`] || from.Customer != ``) {
+		l.Customer = S.Trim(from.Customer)
+		changed = true
+	}
+	if !excludeMap[`items`] && (forceMap[`items`] || from.Items != ``) {
+		l.Items = S.Trim(from.Items)
+		changed = true
+	}
+	if !excludeMap[`status`] && (forceMap[`status`] || from.Status != ``) {
+		l.Status = S.Trim(from.Status)
+		changed = true
+	}
+	if !excludeMap[`note`] && (forceMap[`note`] || from.Note != ``) {
+		l.Note = S.Trim(from.Note)
+		changed = true
+	}
+	if !excludeMap[`laundryAt`] && (forceMap[`laundryAt`] || from.LaundryAt != ``) {
+		l.LaundryAt = S.Trim(from.LaundryAt)
+		changed = true
+	}
+	if !excludeMap[`createdAt`] && (forceMap[`createdAt`] || from.CreatedAt != 0) {
+		l.CreatedAt = from.CreatedAt
+		changed = true
+	}
+	if !excludeMap[`createdBy`] && (forceMap[`createdBy`] || from.CreatedBy != 0) {
+		l.CreatedBy = from.CreatedBy
+		changed = true
+	}
+	if !excludeMap[`updatedAt`] && (forceMap[`updatedAt`] || from.UpdatedAt != 0) {
+		l.UpdatedAt = from.UpdatedAt
+		changed = true
+	}
+	if !excludeMap[`updatedBy`] && (forceMap[`updatedBy`] || from.UpdatedBy != 0) {
+		l.UpdatedBy = from.UpdatedBy
+		changed = true
+	}
+	if !excludeMap[`deletedAt`] && (forceMap[`deletedAt`] || from.DeletedAt != 0) {
+		l.DeletedAt = from.DeletedAt
+		changed = true
+	}
+	if !excludeMap[`deletedBy`] && (forceMap[`deletedBy`] || from.DeletedBy != 0) {
+		l.DeletedBy = from.DeletedBy
+		changed = true
+	}
+	if !excludeMap[`restoredBy`] && (forceMap[`restoredBy`] || from.RestoredBy != 0) {
+		l.RestoredBy = from.RestoredBy
+		changed = true
+	}
+	return
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
+// MenusMutator DAO writer/command struct
 type MenusMutator struct {
 	rqCafe.Menus
 	mutations []A.X

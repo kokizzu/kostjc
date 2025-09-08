@@ -22,9 +22,23 @@ import (
 //go:generate replacer -afterprefix "By\" form" "By,string\" form" type saCafe__ORM.GEN.go
 // go:generate msgp -tests=false -file saCafe__ORM.GEN.go -o saCafe__MSG.GEN.go
 
+var borrowedUtensilLogsDummy = BorrowedUtensilLogs{}
+var laundryLogsDummy = LaundryLogs{}
 var menuLogsDummy = MenuLogs{}
 var saleLogsDummy = SaleLogs{}
 var Preparators = map[Ch.TableName]chBuffer.Preparator{
+	mCafe.TableBorrowedUtensilLogs: func(tx *sql.Tx) *sql.Stmt {
+		query := borrowedUtensilLogsDummy.SqlInsert()
+		stmt, err := tx.Prepare(query)
+		L.IsError(err, `failed to tx.Prepare: `+query)
+		return stmt
+	},
+	mCafe.TableLaundryLogs: func(tx *sql.Tx) *sql.Stmt {
+		query := laundryLogsDummy.SqlInsert()
+		stmt, err := tx.Prepare(query)
+		L.IsError(err, `failed to tx.Prepare: `+query)
+		return stmt
+	},
 	mCafe.TableMenuLogs: func(tx *sql.Tx) *sql.Stmt {
 		query := menuLogsDummy.SqlInsert()
 		stmt, err := tx.Prepare(query)
@@ -38,6 +52,254 @@ var Preparators = map[Ch.TableName]chBuffer.Preparator{
 		return stmt
 	},
 }
+
+type BorrowedUtensilLogs struct {
+	Adapter    *Ch.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	CreatedAt  time.Time   `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	ActorId    uint64      `json:"actorId,string" form:"actorId" query:"actorId" long:"actorId" msg:"actorId"`
+	BeforeJson string      `json:"beforeJson" form:"beforeJson" query:"beforeJson" long:"beforeJson" msg:"beforeJson"`
+	AfterJson  string      `json:"afterJson" form:"afterJson" query:"afterJson" long:"afterJson" msg:"afterJson"`
+}
+
+func NewBorrowedUtensilLogs(adapter *Ch.Adapter) *BorrowedUtensilLogs {
+	return &BorrowedUtensilLogs{Adapter: adapter}
+}
+
+// BorrowedUtensilLogsFieldTypeMap returns key value of field name and key
+var BorrowedUtensilLogsFieldTypeMap = map[string]Ch.DataType{ //nolint:dupl false positive
+	`createdAt`:  Ch.DateTime,
+	`actorId`:    Ch.UInt64,
+	`beforeJson`: Ch.String,
+	`afterJson`:  Ch.String,
+}
+
+func (b *BorrowedUtensilLogs) TableName() Ch.TableName { //nolint:dupl false positive
+	return mCafe.TableBorrowedUtensilLogs
+}
+
+func (b *BorrowedUtensilLogs) SqlTableName() string { //nolint:dupl false positive
+	return `"borrowedUtensilLogs"`
+}
+
+func (b *BorrowedUtensilLogs) ScanRowAllCols(rows *sql.Rows) (err error) { //nolint:dupl false positive
+	return rows.Scan(
+		&b.CreatedAt,
+		&b.ActorId,
+		&b.BeforeJson,
+		&b.AfterJson,
+	)
+}
+
+func (b *BorrowedUtensilLogs) ScanRowsAllCols(rows *sql.Rows, estimateRows int) (res []BorrowedUtensilLogs, err error) { //nolint:dupl false positive
+	res = make([]BorrowedUtensilLogs, 0, estimateRows)
+	defer rows.Close()
+	for rows.Next() {
+		var row BorrowedUtensilLogs
+		err = row.ScanRowAllCols(rows)
+		if err != nil {
+			return
+		}
+		res = append(res, row)
+	}
+	return
+}
+
+// insert, error if exists
+func (b *BorrowedUtensilLogs) SqlInsert() string { //nolint:dupl false positive
+	return `INSERT INTO ` + b.SqlTableName() + `(` + b.SqlAllFields() + `) VALUES (?,?,?,?)`
+}
+
+func (b *BorrowedUtensilLogs) SqlCount() string { //nolint:dupl false positive
+	return `SELECT COUNT(*) FROM ` + b.SqlTableName()
+}
+
+func (b *BorrowedUtensilLogs) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` createdAt
+	, actorId
+	, beforeJson
+	, afterJson
+	`
+}
+
+func (b *BorrowedUtensilLogs) SqlAllFields() string { //nolint:dupl false positive
+	return `createdAt, actorId, beforeJson, afterJson`
+}
+
+func (b BorrowedUtensilLogs) SqlInsertParam() []any { //nolint:dupl false positive
+	return []any{
+		b.CreatedAt,  // 0
+		b.ActorId,    // 1
+		b.BeforeJson, // 2
+		b.AfterJson,  // 3
+	}
+}
+
+func (b *BorrowedUtensilLogs) IdxCreatedAt() int { //nolint:dupl false positive
+	return 0
+}
+
+func (b *BorrowedUtensilLogs) SqlCreatedAt() string { //nolint:dupl false positive
+	return `createdAt`
+}
+
+func (b *BorrowedUtensilLogs) IdxActorId() int { //nolint:dupl false positive
+	return 1
+}
+
+func (b *BorrowedUtensilLogs) SqlActorId() string { //nolint:dupl false positive
+	return `actorId`
+}
+
+func (b *BorrowedUtensilLogs) IdxBeforeJson() int { //nolint:dupl false positive
+	return 2
+}
+
+func (b *BorrowedUtensilLogs) SqlBeforeJson() string { //nolint:dupl false positive
+	return `beforeJson`
+}
+
+func (b *BorrowedUtensilLogs) IdxAfterJson() int { //nolint:dupl false positive
+	return 3
+}
+
+func (b *BorrowedUtensilLogs) SqlAfterJson() string { //nolint:dupl false positive
+	return `afterJson`
+}
+
+func (b *BorrowedUtensilLogs) ToArray() A.X { //nolint:dupl false positive
+	return A.X{
+		b.CreatedAt,  // 0
+		b.ActorId,    // 1
+		b.BeforeJson, // 2
+		b.AfterJson,  // 3
+	}
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/Ch/clickhouse_orm_generator.go
+
+type LaundryLogs struct {
+	Adapter    *Ch.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	CreatedAt  time.Time   `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	ActorId    uint64      `json:"actorId,string" form:"actorId" query:"actorId" long:"actorId" msg:"actorId"`
+	BeforeJson string      `json:"beforeJson" form:"beforeJson" query:"beforeJson" long:"beforeJson" msg:"beforeJson"`
+	AfterJson  string      `json:"afterJson" form:"afterJson" query:"afterJson" long:"afterJson" msg:"afterJson"`
+}
+
+func NewLaundryLogs(adapter *Ch.Adapter) *LaundryLogs {
+	return &LaundryLogs{Adapter: adapter}
+}
+
+// LaundryLogsFieldTypeMap returns key value of field name and key
+var LaundryLogsFieldTypeMap = map[string]Ch.DataType{ //nolint:dupl false positive
+	`createdAt`:  Ch.DateTime,
+	`actorId`:    Ch.UInt64,
+	`beforeJson`: Ch.String,
+	`afterJson`:  Ch.String,
+}
+
+func (l *LaundryLogs) TableName() Ch.TableName { //nolint:dupl false positive
+	return mCafe.TableLaundryLogs
+}
+
+func (l *LaundryLogs) SqlTableName() string { //nolint:dupl false positive
+	return `"laundryLogs"`
+}
+
+func (l *LaundryLogs) ScanRowAllCols(rows *sql.Rows) (err error) { //nolint:dupl false positive
+	return rows.Scan(
+		&l.CreatedAt,
+		&l.ActorId,
+		&l.BeforeJson,
+		&l.AfterJson,
+	)
+}
+
+func (l *LaundryLogs) ScanRowsAllCols(rows *sql.Rows, estimateRows int) (res []LaundryLogs, err error) { //nolint:dupl false positive
+	res = make([]LaundryLogs, 0, estimateRows)
+	defer rows.Close()
+	for rows.Next() {
+		var row LaundryLogs
+		err = row.ScanRowAllCols(rows)
+		if err != nil {
+			return
+		}
+		res = append(res, row)
+	}
+	return
+}
+
+// insert, error if exists
+func (l *LaundryLogs) SqlInsert() string { //nolint:dupl false positive
+	return `INSERT INTO ` + l.SqlTableName() + `(` + l.SqlAllFields() + `) VALUES (?,?,?,?)`
+}
+
+func (l *LaundryLogs) SqlCount() string { //nolint:dupl false positive
+	return `SELECT COUNT(*) FROM ` + l.SqlTableName()
+}
+
+func (l *LaundryLogs) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` createdAt
+	, actorId
+	, beforeJson
+	, afterJson
+	`
+}
+
+func (l *LaundryLogs) SqlAllFields() string { //nolint:dupl false positive
+	return `createdAt, actorId, beforeJson, afterJson`
+}
+
+func (l LaundryLogs) SqlInsertParam() []any { //nolint:dupl false positive
+	return []any{
+		l.CreatedAt,  // 0
+		l.ActorId,    // 1
+		l.BeforeJson, // 2
+		l.AfterJson,  // 3
+	}
+}
+
+func (l *LaundryLogs) IdxCreatedAt() int { //nolint:dupl false positive
+	return 0
+}
+
+func (l *LaundryLogs) SqlCreatedAt() string { //nolint:dupl false positive
+	return `createdAt`
+}
+
+func (l *LaundryLogs) IdxActorId() int { //nolint:dupl false positive
+	return 1
+}
+
+func (l *LaundryLogs) SqlActorId() string { //nolint:dupl false positive
+	return `actorId`
+}
+
+func (l *LaundryLogs) IdxBeforeJson() int { //nolint:dupl false positive
+	return 2
+}
+
+func (l *LaundryLogs) SqlBeforeJson() string { //nolint:dupl false positive
+	return `beforeJson`
+}
+
+func (l *LaundryLogs) IdxAfterJson() int { //nolint:dupl false positive
+	return 3
+}
+
+func (l *LaundryLogs) SqlAfterJson() string { //nolint:dupl false positive
+	return `afterJson`
+}
+
+func (l *LaundryLogs) ToArray() A.X { //nolint:dupl false positive
+	return A.X{
+		l.CreatedAt,  // 0
+		l.ActorId,    // 1
+		l.BeforeJson, // 2
+		l.AfterJson,  // 3
+	}
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/Ch/clickhouse_orm_generator.go
 
 type MenuLogs struct {
 	Adapter    *Ch.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`

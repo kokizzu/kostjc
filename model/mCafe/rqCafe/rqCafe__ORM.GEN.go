@@ -13,12 +13,716 @@ import (
 	"github.com/kokizzu/gotro/X"
 )
 
-// Menus DAO reader/query struct
+// BorrowedUtensils DAO reader/query struct
 //
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file rqCafe__ORM.GEN.go
 //go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type rqCafe__ORM.GEN.go
 //go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type rqCafe__ORM.GEN.go
 //go:generate replacer -afterprefix "By\" form" "By,string\" form" type rqCafe__ORM.GEN.go
+type BorrowedUtensils struct {
+	Adapter    *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id         uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	Customer   string      `json:"customer" form:"customer" query:"customer" long:"customer" msg:"customer"`
+	Items      string      `json:"items" form:"items" query:"items" long:"items" msg:"items"`
+	Qty        int64       `json:"qty" form:"qty" query:"qty" long:"qty" msg:"qty"`
+	Status     string      `json:"status" form:"status" query:"status" long:"status" msg:"status"`
+	BorrowedAt string      `json:"borrowedAt" form:"borrowedAt" query:"borrowedAt" long:"borrowedAt" msg:"borrowedAt"`
+	CreatedAt  int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy  uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt  int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy  uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt  int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy  uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+}
+
+// NewBorrowedUtensils create new ORM reader/query object
+func NewBorrowedUtensils(adapter *Tt.Adapter) *BorrowedUtensils {
+	return &BorrowedUtensils{Adapter: adapter}
+}
+
+// SpaceName returns full package and table name
+func (b *BorrowedUtensils) SpaceName() string { //nolint:dupl false positive
+	return string(mCafe.TableBorrowedUtensils) // casting required to string from Tt.TableName
+}
+
+// SqlTableName returns quoted table name
+func (b *BorrowedUtensils) SqlTableName() string { //nolint:dupl false positive
+	return `"borrowedUtensils"`
+}
+
+func (b *BorrowedUtensils) UniqueIndexId() string { //nolint:dupl false positive
+	return `id`
+}
+
+// FindById Find one by Id
+func (b *BorrowedUtensils) FindById() bool { //nolint:dupl false positive
+	res, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), 0, 1, tarantool.IterEq, A.X{b.Id})
+	if L.IsError(err, `BorrowedUtensils.FindById failed: `+b.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		b.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
+// SqlSelectAllFields generate Sql select fields
+func (b *BorrowedUtensils) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "customer"
+	, "items"
+	, "qty"
+	, "status"
+	, "borrowedAt"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// SqlSelectAllUncensoredFields generate Sql select fields
+func (b *BorrowedUtensils) SqlSelectAllUncensoredFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "customer"
+	, "items"
+	, "qty"
+	, "status"
+	, "borrowedAt"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// ToUpdateArray generate slice of update command
+func (b *BorrowedUtensils) ToUpdateArray() A.X { //nolint:dupl false positive
+	return A.X{
+		A.X{`=`, 0, b.Id},
+		A.X{`=`, 1, b.Customer},
+		A.X{`=`, 2, b.Items},
+		A.X{`=`, 3, b.Qty},
+		A.X{`=`, 4, b.Status},
+		A.X{`=`, 5, b.BorrowedAt},
+		A.X{`=`, 6, b.CreatedAt},
+		A.X{`=`, 7, b.CreatedBy},
+		A.X{`=`, 8, b.UpdatedAt},
+		A.X{`=`, 9, b.UpdatedBy},
+		A.X{`=`, 10, b.DeletedAt},
+		A.X{`=`, 11, b.DeletedBy},
+		A.X{`=`, 12, b.RestoredBy},
+	}
+}
+
+// IdxId return name of the index
+func (b *BorrowedUtensils) IdxId() int { //nolint:dupl false positive
+	return 0
+}
+
+// SqlId return name of the column being indexed
+func (b *BorrowedUtensils) SqlId() string { //nolint:dupl false positive
+	return `"id"`
+}
+
+// IdxCustomer return name of the index
+func (b *BorrowedUtensils) IdxCustomer() int { //nolint:dupl false positive
+	return 1
+}
+
+// SqlCustomer return name of the column being indexed
+func (b *BorrowedUtensils) SqlCustomer() string { //nolint:dupl false positive
+	return `"customer"`
+}
+
+// IdxItems return name of the index
+func (b *BorrowedUtensils) IdxItems() int { //nolint:dupl false positive
+	return 2
+}
+
+// SqlItems return name of the column being indexed
+func (b *BorrowedUtensils) SqlItems() string { //nolint:dupl false positive
+	return `"items"`
+}
+
+// IdxQty return name of the index
+func (b *BorrowedUtensils) IdxQty() int { //nolint:dupl false positive
+	return 3
+}
+
+// SqlQty return name of the column being indexed
+func (b *BorrowedUtensils) SqlQty() string { //nolint:dupl false positive
+	return `"qty"`
+}
+
+// IdxStatus return name of the index
+func (b *BorrowedUtensils) IdxStatus() int { //nolint:dupl false positive
+	return 4
+}
+
+// SqlStatus return name of the column being indexed
+func (b *BorrowedUtensils) SqlStatus() string { //nolint:dupl false positive
+	return `"status"`
+}
+
+// IdxBorrowedAt return name of the index
+func (b *BorrowedUtensils) IdxBorrowedAt() int { //nolint:dupl false positive
+	return 5
+}
+
+// SqlBorrowedAt return name of the column being indexed
+func (b *BorrowedUtensils) SqlBorrowedAt() string { //nolint:dupl false positive
+	return `"borrowedAt"`
+}
+
+// IdxCreatedAt return name of the index
+func (b *BorrowedUtensils) IdxCreatedAt() int { //nolint:dupl false positive
+	return 6
+}
+
+// SqlCreatedAt return name of the column being indexed
+func (b *BorrowedUtensils) SqlCreatedAt() string { //nolint:dupl false positive
+	return `"createdAt"`
+}
+
+// IdxCreatedBy return name of the index
+func (b *BorrowedUtensils) IdxCreatedBy() int { //nolint:dupl false positive
+	return 7
+}
+
+// SqlCreatedBy return name of the column being indexed
+func (b *BorrowedUtensils) SqlCreatedBy() string { //nolint:dupl false positive
+	return `"createdBy"`
+}
+
+// IdxUpdatedAt return name of the index
+func (b *BorrowedUtensils) IdxUpdatedAt() int { //nolint:dupl false positive
+	return 8
+}
+
+// SqlUpdatedAt return name of the column being indexed
+func (b *BorrowedUtensils) SqlUpdatedAt() string { //nolint:dupl false positive
+	return `"updatedAt"`
+}
+
+// IdxUpdatedBy return name of the index
+func (b *BorrowedUtensils) IdxUpdatedBy() int { //nolint:dupl false positive
+	return 9
+}
+
+// SqlUpdatedBy return name of the column being indexed
+func (b *BorrowedUtensils) SqlUpdatedBy() string { //nolint:dupl false positive
+	return `"updatedBy"`
+}
+
+// IdxDeletedAt return name of the index
+func (b *BorrowedUtensils) IdxDeletedAt() int { //nolint:dupl false positive
+	return 10
+}
+
+// SqlDeletedAt return name of the column being indexed
+func (b *BorrowedUtensils) SqlDeletedAt() string { //nolint:dupl false positive
+	return `"deletedAt"`
+}
+
+// IdxDeletedBy return name of the index
+func (b *BorrowedUtensils) IdxDeletedBy() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlDeletedBy return name of the column being indexed
+func (b *BorrowedUtensils) SqlDeletedBy() string { //nolint:dupl false positive
+	return `"deletedBy"`
+}
+
+// IdxRestoredBy return name of the index
+func (b *BorrowedUtensils) IdxRestoredBy() int { //nolint:dupl false positive
+	return 12
+}
+
+// SqlRestoredBy return name of the column being indexed
+func (b *BorrowedUtensils) SqlRestoredBy() string { //nolint:dupl false positive
+	return `"restoredBy"`
+}
+
+// ToArray receiver fields to slice
+func (b *BorrowedUtensils) ToArray() A.X { //nolint:dupl false positive
+	var id any = nil
+	if b.Id != 0 {
+		id = b.Id
+	}
+	return A.X{
+		id,
+		b.Customer,   // 1
+		b.Items,      // 2
+		b.Qty,        // 3
+		b.Status,     // 4
+		b.BorrowedAt, // 5
+		b.CreatedAt,  // 6
+		b.CreatedBy,  // 7
+		b.UpdatedAt,  // 8
+		b.UpdatedBy,  // 9
+		b.DeletedAt,  // 10
+		b.DeletedBy,  // 11
+		b.RestoredBy, // 12
+	}
+}
+
+// FromArray convert slice to receiver fields
+func (b *BorrowedUtensils) FromArray(a A.X) *BorrowedUtensils { //nolint:dupl false positive
+	b.Id = X.ToU(a[0])
+	b.Customer = X.ToS(a[1])
+	b.Items = X.ToS(a[2])
+	b.Qty = X.ToI(a[3])
+	b.Status = X.ToS(a[4])
+	b.BorrowedAt = X.ToS(a[5])
+	b.CreatedAt = X.ToI(a[6])
+	b.CreatedBy = X.ToU(a[7])
+	b.UpdatedAt = X.ToI(a[8])
+	b.UpdatedBy = X.ToU(a[9])
+	b.DeletedAt = X.ToI(a[10])
+	b.DeletedBy = X.ToU(a[11])
+	b.RestoredBy = X.ToU(a[12])
+	return b
+}
+
+// FromUncensoredArray convert slice to receiver fields
+func (b *BorrowedUtensils) FromUncensoredArray(a A.X) *BorrowedUtensils { //nolint:dupl false positive
+	b.Id = X.ToU(a[0])
+	b.Customer = X.ToS(a[1])
+	b.Items = X.ToS(a[2])
+	b.Qty = X.ToI(a[3])
+	b.Status = X.ToS(a[4])
+	b.BorrowedAt = X.ToS(a[5])
+	b.CreatedAt = X.ToI(a[6])
+	b.CreatedBy = X.ToU(a[7])
+	b.UpdatedAt = X.ToI(a[8])
+	b.UpdatedBy = X.ToU(a[9])
+	b.DeletedAt = X.ToI(a[10])
+	b.DeletedBy = X.ToU(a[11])
+	b.RestoredBy = X.ToU(a[12])
+	return b
+}
+
+// FindOffsetLimit returns slice of struct, order by idx, eg. .UniqueIndex*()
+func (b *BorrowedUtensils) FindOffsetLimit(offset, limit uint32, idx string) []BorrowedUtensils { //nolint:dupl false positive
+	var rows []BorrowedUtensils
+	res, err := b.Adapter.Select(b.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `BorrowedUtensils.FindOffsetLimit failed: `+b.SpaceName()) {
+		return rows
+	}
+	for _, row := range res.Tuples() {
+		item := BorrowedUtensils{}
+		rows = append(rows, *item.FromArray(row))
+	}
+	return rows
+}
+
+// FindArrOffsetLimit returns as slice of slice order by idx eg. .UniqueIndex*()
+func (b *BorrowedUtensils) FindArrOffsetLimit(offset, limit uint32, idx string) ([]A.X, Tt.QueryMeta) { //nolint:dupl false positive
+	var rows []A.X
+	res, err := b.Adapter.Select(b.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `BorrowedUtensils.FindOffsetLimit failed: `+b.SpaceName()) {
+		return rows, Tt.QueryMetaFrom(res, err)
+	}
+	tuples := res.Tuples()
+	rows = make([]A.X, len(tuples))
+	for z, row := range tuples {
+		rows[z] = row
+	}
+	return rows, Tt.QueryMetaFrom(res, nil)
+}
+
+// Total count number of rows
+func (b *BorrowedUtensils) Total() int64 { //nolint:dupl false positive
+	rows := b.Adapter.CallBoxSpace(b.SpaceName()+`:count`, A.X{})
+	if len(rows) > 0 && len(rows[0]) > 0 {
+		return X.ToI(rows[0][0])
+	}
+	return 0
+}
+
+// BorrowedUtensilsFieldTypeMap returns key value of field name and key
+var BorrowedUtensilsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
+	`id`:         Tt.Unsigned,
+	`customer`:   Tt.String,
+	`items`:      Tt.String,
+	`qty`:        Tt.Integer,
+	`status`:     Tt.String,
+	`borrowedAt`: Tt.String,
+	`createdAt`:  Tt.Integer,
+	`createdBy`:  Tt.Unsigned,
+	`updatedAt`:  Tt.Integer,
+	`updatedBy`:  Tt.Unsigned,
+	`deletedAt`:  Tt.Integer,
+	`deletedBy`:  Tt.Unsigned,
+	`restoredBy`: Tt.Unsigned,
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
+// Laundry DAO reader/query struct
+type Laundry struct {
+	Adapter    *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id         uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	Customer   string      `json:"customer" form:"customer" query:"customer" long:"customer" msg:"customer"`
+	Items      string      `json:"items" form:"items" query:"items" long:"items" msg:"items"`
+	Status     string      `json:"status" form:"status" query:"status" long:"status" msg:"status"`
+	Note       string      `json:"note" form:"note" query:"note" long:"note" msg:"note"`
+	LaundryAt  string      `json:"laundryAt" form:"laundryAt" query:"laundryAt" long:"laundryAt" msg:"laundryAt"`
+	CreatedAt  int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy  uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt  int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy  uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt  int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy  uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+}
+
+// NewLaundry create new ORM reader/query object
+func NewLaundry(adapter *Tt.Adapter) *Laundry {
+	return &Laundry{Adapter: adapter}
+}
+
+// SpaceName returns full package and table name
+func (l *Laundry) SpaceName() string { //nolint:dupl false positive
+	return string(mCafe.TableLaundry) // casting required to string from Tt.TableName
+}
+
+// SqlTableName returns quoted table name
+func (l *Laundry) SqlTableName() string { //nolint:dupl false positive
+	return `"laundry"`
+}
+
+func (l *Laundry) UniqueIndexId() string { //nolint:dupl false positive
+	return `id`
+}
+
+// FindById Find one by Id
+func (l *Laundry) FindById() bool { //nolint:dupl false positive
+	res, err := l.Adapter.Select(l.SpaceName(), l.UniqueIndexId(), 0, 1, tarantool.IterEq, A.X{l.Id})
+	if L.IsError(err, `Laundry.FindById failed: `+l.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		l.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
+// SqlSelectAllFields generate Sql select fields
+func (l *Laundry) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "customer"
+	, "items"
+	, "status"
+	, "note"
+	, "laundryAt"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// SqlSelectAllUncensoredFields generate Sql select fields
+func (l *Laundry) SqlSelectAllUncensoredFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "customer"
+	, "items"
+	, "status"
+	, "note"
+	, "laundryAt"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	`
+}
+
+// ToUpdateArray generate slice of update command
+func (l *Laundry) ToUpdateArray() A.X { //nolint:dupl false positive
+	return A.X{
+		A.X{`=`, 0, l.Id},
+		A.X{`=`, 1, l.Customer},
+		A.X{`=`, 2, l.Items},
+		A.X{`=`, 3, l.Status},
+		A.X{`=`, 4, l.Note},
+		A.X{`=`, 5, l.LaundryAt},
+		A.X{`=`, 6, l.CreatedAt},
+		A.X{`=`, 7, l.CreatedBy},
+		A.X{`=`, 8, l.UpdatedAt},
+		A.X{`=`, 9, l.UpdatedBy},
+		A.X{`=`, 10, l.DeletedAt},
+		A.X{`=`, 11, l.DeletedBy},
+		A.X{`=`, 12, l.RestoredBy},
+	}
+}
+
+// IdxId return name of the index
+func (l *Laundry) IdxId() int { //nolint:dupl false positive
+	return 0
+}
+
+// SqlId return name of the column being indexed
+func (l *Laundry) SqlId() string { //nolint:dupl false positive
+	return `"id"`
+}
+
+// IdxCustomer return name of the index
+func (l *Laundry) IdxCustomer() int { //nolint:dupl false positive
+	return 1
+}
+
+// SqlCustomer return name of the column being indexed
+func (l *Laundry) SqlCustomer() string { //nolint:dupl false positive
+	return `"customer"`
+}
+
+// IdxItems return name of the index
+func (l *Laundry) IdxItems() int { //nolint:dupl false positive
+	return 2
+}
+
+// SqlItems return name of the column being indexed
+func (l *Laundry) SqlItems() string { //nolint:dupl false positive
+	return `"items"`
+}
+
+// IdxStatus return name of the index
+func (l *Laundry) IdxStatus() int { //nolint:dupl false positive
+	return 3
+}
+
+// SqlStatus return name of the column being indexed
+func (l *Laundry) SqlStatus() string { //nolint:dupl false positive
+	return `"status"`
+}
+
+// IdxNote return name of the index
+func (l *Laundry) IdxNote() int { //nolint:dupl false positive
+	return 4
+}
+
+// SqlNote return name of the column being indexed
+func (l *Laundry) SqlNote() string { //nolint:dupl false positive
+	return `"note"`
+}
+
+// IdxLaundryAt return name of the index
+func (l *Laundry) IdxLaundryAt() int { //nolint:dupl false positive
+	return 5
+}
+
+// SqlLaundryAt return name of the column being indexed
+func (l *Laundry) SqlLaundryAt() string { //nolint:dupl false positive
+	return `"laundryAt"`
+}
+
+// IdxCreatedAt return name of the index
+func (l *Laundry) IdxCreatedAt() int { //nolint:dupl false positive
+	return 6
+}
+
+// SqlCreatedAt return name of the column being indexed
+func (l *Laundry) SqlCreatedAt() string { //nolint:dupl false positive
+	return `"createdAt"`
+}
+
+// IdxCreatedBy return name of the index
+func (l *Laundry) IdxCreatedBy() int { //nolint:dupl false positive
+	return 7
+}
+
+// SqlCreatedBy return name of the column being indexed
+func (l *Laundry) SqlCreatedBy() string { //nolint:dupl false positive
+	return `"createdBy"`
+}
+
+// IdxUpdatedAt return name of the index
+func (l *Laundry) IdxUpdatedAt() int { //nolint:dupl false positive
+	return 8
+}
+
+// SqlUpdatedAt return name of the column being indexed
+func (l *Laundry) SqlUpdatedAt() string { //nolint:dupl false positive
+	return `"updatedAt"`
+}
+
+// IdxUpdatedBy return name of the index
+func (l *Laundry) IdxUpdatedBy() int { //nolint:dupl false positive
+	return 9
+}
+
+// SqlUpdatedBy return name of the column being indexed
+func (l *Laundry) SqlUpdatedBy() string { //nolint:dupl false positive
+	return `"updatedBy"`
+}
+
+// IdxDeletedAt return name of the index
+func (l *Laundry) IdxDeletedAt() int { //nolint:dupl false positive
+	return 10
+}
+
+// SqlDeletedAt return name of the column being indexed
+func (l *Laundry) SqlDeletedAt() string { //nolint:dupl false positive
+	return `"deletedAt"`
+}
+
+// IdxDeletedBy return name of the index
+func (l *Laundry) IdxDeletedBy() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlDeletedBy return name of the column being indexed
+func (l *Laundry) SqlDeletedBy() string { //nolint:dupl false positive
+	return `"deletedBy"`
+}
+
+// IdxRestoredBy return name of the index
+func (l *Laundry) IdxRestoredBy() int { //nolint:dupl false positive
+	return 12
+}
+
+// SqlRestoredBy return name of the column being indexed
+func (l *Laundry) SqlRestoredBy() string { //nolint:dupl false positive
+	return `"restoredBy"`
+}
+
+// ToArray receiver fields to slice
+func (l *Laundry) ToArray() A.X { //nolint:dupl false positive
+	var id any = nil
+	if l.Id != 0 {
+		id = l.Id
+	}
+	return A.X{
+		id,
+		l.Customer,   // 1
+		l.Items,      // 2
+		l.Status,     // 3
+		l.Note,       // 4
+		l.LaundryAt,  // 5
+		l.CreatedAt,  // 6
+		l.CreatedBy,  // 7
+		l.UpdatedAt,  // 8
+		l.UpdatedBy,  // 9
+		l.DeletedAt,  // 10
+		l.DeletedBy,  // 11
+		l.RestoredBy, // 12
+	}
+}
+
+// FromArray convert slice to receiver fields
+func (l *Laundry) FromArray(a A.X) *Laundry { //nolint:dupl false positive
+	l.Id = X.ToU(a[0])
+	l.Customer = X.ToS(a[1])
+	l.Items = X.ToS(a[2])
+	l.Status = X.ToS(a[3])
+	l.Note = X.ToS(a[4])
+	l.LaundryAt = X.ToS(a[5])
+	l.CreatedAt = X.ToI(a[6])
+	l.CreatedBy = X.ToU(a[7])
+	l.UpdatedAt = X.ToI(a[8])
+	l.UpdatedBy = X.ToU(a[9])
+	l.DeletedAt = X.ToI(a[10])
+	l.DeletedBy = X.ToU(a[11])
+	l.RestoredBy = X.ToU(a[12])
+	return l
+}
+
+// FromUncensoredArray convert slice to receiver fields
+func (l *Laundry) FromUncensoredArray(a A.X) *Laundry { //nolint:dupl false positive
+	l.Id = X.ToU(a[0])
+	l.Customer = X.ToS(a[1])
+	l.Items = X.ToS(a[2])
+	l.Status = X.ToS(a[3])
+	l.Note = X.ToS(a[4])
+	l.LaundryAt = X.ToS(a[5])
+	l.CreatedAt = X.ToI(a[6])
+	l.CreatedBy = X.ToU(a[7])
+	l.UpdatedAt = X.ToI(a[8])
+	l.UpdatedBy = X.ToU(a[9])
+	l.DeletedAt = X.ToI(a[10])
+	l.DeletedBy = X.ToU(a[11])
+	l.RestoredBy = X.ToU(a[12])
+	return l
+}
+
+// FindOffsetLimit returns slice of struct, order by idx, eg. .UniqueIndex*()
+func (l *Laundry) FindOffsetLimit(offset, limit uint32, idx string) []Laundry { //nolint:dupl false positive
+	var rows []Laundry
+	res, err := l.Adapter.Select(l.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Laundry.FindOffsetLimit failed: `+l.SpaceName()) {
+		return rows
+	}
+	for _, row := range res.Tuples() {
+		item := Laundry{}
+		rows = append(rows, *item.FromArray(row))
+	}
+	return rows
+}
+
+// FindArrOffsetLimit returns as slice of slice order by idx eg. .UniqueIndex*()
+func (l *Laundry) FindArrOffsetLimit(offset, limit uint32, idx string) ([]A.X, Tt.QueryMeta) { //nolint:dupl false positive
+	var rows []A.X
+	res, err := l.Adapter.Select(l.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `Laundry.FindOffsetLimit failed: `+l.SpaceName()) {
+		return rows, Tt.QueryMetaFrom(res, err)
+	}
+	tuples := res.Tuples()
+	rows = make([]A.X, len(tuples))
+	for z, row := range tuples {
+		rows[z] = row
+	}
+	return rows, Tt.QueryMetaFrom(res, nil)
+}
+
+// Total count number of rows
+func (l *Laundry) Total() int64 { //nolint:dupl false positive
+	rows := l.Adapter.CallBoxSpace(l.SpaceName()+`:count`, A.X{})
+	if len(rows) > 0 && len(rows[0]) > 0 {
+		return X.ToI(rows[0][0])
+	}
+	return 0
+}
+
+// LaundryFieldTypeMap returns key value of field name and key
+var LaundryFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
+	`id`:         Tt.Unsigned,
+	`customer`:   Tt.String,
+	`items`:      Tt.String,
+	`status`:     Tt.String,
+	`note`:       Tt.String,
+	`laundryAt`:  Tt.String,
+	`createdAt`:  Tt.Integer,
+	`createdBy`:  Tt.Unsigned,
+	`updatedAt`:  Tt.Integer,
+	`updatedBy`:  Tt.Unsigned,
+	`deletedAt`:  Tt.Integer,
+	`deletedBy`:  Tt.Unsigned,
+	`restoredBy`: Tt.Unsigned,
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
+// Menus DAO reader/query struct
 type Menus struct {
 	Adapter      *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
 	Id           uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`

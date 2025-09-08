@@ -32,19 +32,21 @@ type Domain struct {
 	IsBgSvc bool // long-running program
 
 	// timed buffer
-	authLogs       *chBuffer.TimedBuffer
-	userLogs       *chBuffer.TimedBuffer
-	tenantLogs     *chBuffer.TimedBuffer
-	locationLogs   *chBuffer.TimedBuffer
-	facilityLogs   *chBuffer.TimedBuffer
-	buildingLogs   *chBuffer.TimedBuffer
-	roomLogs       *chBuffer.TimedBuffer
-	bookingLogs    *chBuffer.TimedBuffer
-	paymentLogs    *chBuffer.TimedBuffer
-	stockLogs      *chBuffer.TimedBuffer
-	menuLogs       *chBuffer.TimedBuffer
-	saleLogs       *chBuffer.TimedBuffer
-	wifiDeviceLogs *chBuffer.TimedBuffer
+	authLogs            *chBuffer.TimedBuffer
+	userLogs            *chBuffer.TimedBuffer
+	tenantLogs          *chBuffer.TimedBuffer
+	locationLogs        *chBuffer.TimedBuffer
+	facilityLogs        *chBuffer.TimedBuffer
+	buildingLogs        *chBuffer.TimedBuffer
+	roomLogs            *chBuffer.TimedBuffer
+	bookingLogs         *chBuffer.TimedBuffer
+	paymentLogs         *chBuffer.TimedBuffer
+	stockLogs           *chBuffer.TimedBuffer
+	menuLogs            *chBuffer.TimedBuffer
+	saleLogs            *chBuffer.TimedBuffer
+	wifiDeviceLogs      *chBuffer.TimedBuffer
+	borrowedUtensilLogs *chBuffer.TimedBuffer
+	laundryLogs         *chBuffer.TimedBuffer
 
 	// logger
 	Log *zerolog.Logger
@@ -79,6 +81,8 @@ func (d *Domain) InitTimedBuffer() {
 	d.menuLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableMenuLogs])
 	d.saleLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableSaleLogs])
 	d.wifiDeviceLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableWifiDeviceLogs])
+	d.borrowedUtensilLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableBorrowedUtensilLogs])
+	d.laundryLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableLaundryLogs])
 }
 
 func (d *Domain) WaitTimedBufferFinalFlush() {
