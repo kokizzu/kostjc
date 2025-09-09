@@ -252,6 +252,216 @@ exports.AdminBookingLogs = async function AdminBookingLogs( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminBorrowedUtensilLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminBorrowedUtensilLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminBorrowedUtensilLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminBorrowedUtensilLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saCafe.BorrowedUtensilLogs
+  }, // []saCafe.BorrowedUtensilLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminBorrowedUtensilLogsCallback
+ * @param {AdminBorrowedUtensilLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminBorrowedUtensilLogsIn} i
+ * @param {AdminBorrowedUtensilLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminBorrowedUtensilLogs = async function AdminBorrowedUtensilLogs( i, cb ) {
+  return await axios.post( '/admin/borrowedUtensilLogs', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminBorrowedUtensilsIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} borrowedUtensil.id
+ * @property {String} borrowedUtensil.customer
+ * @property {String} borrowedUtensil.items
+ * @property {number} borrowedUtensil.qty
+ * @property {String} borrowedUtensil.status
+ * @property {String} borrowedUtensil.borrowedAt
+ * @property {number} borrowedUtensil.createdAt
+ * @property {number} borrowedUtensil.createdBy
+ * @property {number} borrowedUtensil.updatedAt
+ * @property {number} borrowedUtensil.updatedBy
+ * @property {number} borrowedUtensil.deletedAt
+ * @property {number} borrowedUtensil.deletedBy
+ * @property {number} borrowedUtensil.restoredBy
+ * @property {number} tenantID
+ */
+const AdminBorrowedUtensilsIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  borrowedUtensil: { // rqCafe.BorrowedUtensils
+    id: 0, // uint64
+    customer: '', // string
+    items: '', // string
+    qty: 0, // int64
+    status: '', // string
+    borrowedAt: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.BorrowedUtensils
+  tenantID: 0, // uint64
+}
+/**
+ * @typedef {Object} AdminBorrowedUtensilsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} borrowedUtensil.id
+ * @property {String} borrowedUtensil.customer
+ * @property {String} borrowedUtensil.items
+ * @property {number} borrowedUtensil.qty
+ * @property {String} borrowedUtensil.status
+ * @property {String} borrowedUtensil.borrowedAt
+ * @property {number} borrowedUtensil.createdAt
+ * @property {number} borrowedUtensil.createdBy
+ * @property {number} borrowedUtensil.updatedAt
+ * @property {number} borrowedUtensil.updatedBy
+ * @property {number} borrowedUtensil.deletedAt
+ * @property {number} borrowedUtensil.deletedBy
+ * @property {number} borrowedUtensil.restoredBy
+ * @property {Object} borrowedUtensils
+ */
+const AdminBorrowedUtensilsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  borrowedUtensil: { // rqCafe.BorrowedUtensils
+    id: 0, // uint64
+    customer: '', // string
+    items: '', // string
+    qty: 0, // int64
+    status: '', // string
+    borrowedAt: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.BorrowedUtensils
+  borrowedUtensils: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback AdminBorrowedUtensilsCallback
+ * @param {AdminBorrowedUtensilsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminBorrowedUtensilsIn} i
+ * @param {AdminBorrowedUtensilsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminBorrowedUtensils = async function AdminBorrowedUtensils( i, cb ) {
+  return await axios.post( '/admin/borrowedUtensils', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminBuildingIn
  * @property {String} cmd
  * @property {Object} withMeta
@@ -653,6 +863,214 @@ const AdminFacilityLogsOut = {
  */
 exports.AdminFacilityLogs = async function AdminFacilityLogs( i, cb ) {
   return await axios.post( '/admin/facilityLogs', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminLaundryIn
+ * @property {String} cmd
+ * @property {Object} withMeta
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {number} laundry.id
+ * @property {String} laundry.customer
+ * @property {String} laundry.items
+ * @property {String} laundry.status
+ * @property {String} laundry.note
+ * @property {String} laundry.laundryAt
+ * @property {number} laundry.createdAt
+ * @property {number} laundry.createdBy
+ * @property {number} laundry.updatedAt
+ * @property {number} laundry.updatedBy
+ * @property {number} laundry.deletedAt
+ * @property {number} laundry.deletedBy
+ * @property {number} laundry.restoredBy
+ */
+const AdminLaundryIn = {
+  cmd: '', // string
+  withMeta: false, // bool
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  laundry: { // rqCafe.Laundry
+    id: 0, // uint64
+    customer: '', // string
+    items: '', // string
+    status: '', // string
+    note: '', // string
+    laundryAt: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.Laundry
+}
+/**
+ * @typedef {Object} AdminLaundryOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ * @property {number} laundry.id
+ * @property {String} laundry.customer
+ * @property {String} laundry.items
+ * @property {String} laundry.status
+ * @property {String} laundry.note
+ * @property {String} laundry.laundryAt
+ * @property {number} laundry.createdAt
+ * @property {number} laundry.createdBy
+ * @property {number} laundry.updatedAt
+ * @property {number} laundry.updatedBy
+ * @property {number} laundry.deletedAt
+ * @property {number} laundry.deletedBy
+ * @property {number} laundry.restoredBy
+ * @property {Object} laundries
+ */
+const AdminLaundryOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+  laundry: { // rqCafe.Laundry
+    id: 0, // uint64
+    customer: '', // string
+    items: '', // string
+    status: '', // string
+    note: '', // string
+    laundryAt: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+  }, // rqCafe.Laundry
+  laundries: { // [][]any
+  }, // [][]any
+}
+/**
+ * @callback AdminLaundryCallback
+ * @param {AdminLaundryOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminLaundryIn} i
+ * @param {AdminLaundryCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminLaundry = async function AdminLaundry( i, cb ) {
+  return await axios.post( '/admin/laundry', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
+ * @typedef {Object} AdminLaundryLogsIn
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} withMeta
+ */
+const AdminLaundryLogsIn = {
+  pager: { // zCrud.PagerIn
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerIn
+  withMeta: false, // bool
+}
+/**
+ * @typedef {Object} AdminLaundryLogsOut
+ * @property {String} pager.search
+ * @property {String} pager.searchBy
+ * @property {number} pager.page
+ * @property {number} pager.perPage
+ * @property {number} pager.pages
+ * @property {number} pager.total
+ * @property {Object} pager.filters
+ * @property {Array<String>} pager.order
+ * @property {Object} logs
+ * @property {Object} meta.fields
+ * @property {Object} meta.mutex
+ * @property {String} meta.cachedSelect
+ */
+const AdminLaundryLogsOut = {
+  pager: { // zCrud.PagerOut
+    search: '', // string
+    searchBy: '', // string
+    page: 0, // int
+    perPage: 0, // int
+    pages: 0, // int
+    total: 0, // int
+    filters: { // map[string][]string
+    }, // map[string][]string
+    order: [], // []string
+  }, // zCrud.PagerOut
+  logs: { // []saCafe.LaundryLogs
+  }, // []saCafe.LaundryLogs
+  meta: { // zCrud.Meta
+    fields: { // []Field
+    }, // []Field
+    mutex: { // sync.Mutex
+    }, // sync.Mutex
+    cachedSelect: '', // string
+  }, // zCrud.Meta
+}
+/**
+ * @callback AdminLaundryLogsCallback
+ * @param {AdminLaundryLogsOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminLaundryLogsIn} i
+ * @param {AdminLaundryLogsCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminLaundryLogs = async function AdminLaundryLogs( i, cb ) {
+  return await axios.post( '/admin/laundryLogs', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }

@@ -88,3 +88,21 @@ module.exports = {};
  * @property {string} date
  */
 module.exports = {};
+
+/**
+ * @typedef {Object} Laundry
+ * @property {string|number} id
+ * @property {string} customer
+ * @property {string} items
+ * @property {string} status
+ * @property {string} note
+ * @property {string} laundryAt
+ * @property {number} createdAt
+ * @property {string} createdBy
+ * @property {number} updatedAt
+ * @property {string} updatedBy
+ * @property {number} deletedAt
+ * @property {string} deletedBy
+ * @property {string} restoredBy
+ */
+module.exports = {};

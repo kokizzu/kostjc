@@ -13,14 +13,16 @@
     RiDocumentFileChartLine, RiSystemMenu2Line, RiFinanceCashLine, RiBusinessBarChartBoxLine,
     RiBuildingsHomeWifiLine, RiSystemSettingsLine, RiFinanceShoppingBag2Line
   } from '../node_modules/svelte-icons-pack/dist/ri';
-  import { LuHandPlatter } from '../node_modules/svelte-icons-pack/dist/lu';
+  import { LuHandPlatter, LuWashingMachine } from '../node_modules/svelte-icons-pack/dist/lu';
   import { isOpenSideMenu } from '../_components/xState';
 
   export let access = /** @type {Access} */ ({});
 
   const pathAll = /** @type {string}*/ (window.location.pathname);
-  const pathLv1 = /** @type {string}*/ (window.location.pathname.split( '/' )[ 1 ]);
-  const pathLv2 = /** @type {string}*/ (window.location.pathname.split( '/' )[ 2 ]);
+  const pathsArray = /** @type {string[]}*/ (pathAll.split('/'));
+
+  const pathLv1 = /** @type {string}*/ (pathsArray[1]);
+  const pathLv2 = /** @type {string}*/ (pathsArray[2]);
 
   function sideMenuScrollIntoView() {
     let linkId = /** @type {string} */ ('');
@@ -40,6 +42,10 @@
       }
       case 'sale': {
         linkId = 'link-admin-sale';
+        break;
+      }
+      case 'laundry': {
+        linkId = 'link-admin-laundry';
         break;
       }
       case 'location': {
@@ -148,8 +154,8 @@
         <span>Price per day Report</span>
       </a>
       <a href="/staff/sales" class:active={pathAll === '/staff/sales'}>
-       <Icon src={RiFinanceShoppingBag2Line} size="20" />
-       <span>Sales</span>
+        <Icon src={RiFinanceShoppingBag2Line} size="20" />
+        <span>Sales</span>
       </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />
@@ -175,6 +181,10 @@
         <a id="link-admin-sale" href="/admin/sale" class:active={pathLv2 === 'sale'}>
           <Icon src={RiFinanceCashLine} size="20" />
           <span>Sales</span>
+        </a>
+        <a id="link-admin-laundry" href="/admin/laundry" class:active={pathLv2 === 'laundry'}>
+          <Icon src={LuWashingMachine} size="20" />
+          <span>Laundry</span>
         </a>
         <a id="link-admin-location" href="/admin/location" class:active={pathLv2 === 'location'}>
           <Icon src={RiMapMapPin2Line} size="20" />
@@ -298,6 +308,10 @@
         <a href="/admin/sale" class:active={pathLv2 === 'sale'}>
           <Icon src={RiFinanceCashLine} size="20" />
           <span>Sales</span>
+        </a>
+        <a href="/admin/laundry" class:active={pathLv2 === 'laundry'}>
+          <Icon src={LuWashingMachine} size="20" />
+          <span>Laundry</span>
         </a>
         <a href="/admin/location" class:active={pathLv2 === 'location'}>
           <Icon src={RiMapMapPin2Line} size="20" />

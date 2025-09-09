@@ -28,6 +28,22 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminBookingLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminBorrowedUtensilLogsAction:
+		in := domain.AdminBorrowedUtensilLogsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminBorrowedUtensilLogs(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminBorrowedUtensilsAction:
+		in := domain.AdminBorrowedUtensilsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminBorrowedUtensils(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.AdminBuildingAction:
 		in := domain.AdminBuildingIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -58,6 +74,22 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 			return
 		}
 		out := b.AdminFacilityLogs(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminLaundryAction:
+		in := domain.AdminLaundryIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminLaundry(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
+	case domain.AdminLaundryLogsAction:
+		in := domain.AdminLaundryLogsIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminLaundryLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.AdminLocationAction:

@@ -315,6 +315,34 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
+	fw.Get(`/`+domain.AdminLaundryAction, func(ctx *fiber.Ctx) error {
+		var in domain.AdminLaundryIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminLaundryAction)
+		if err != nil {
+			return err
+		}
+
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.AdminLaundry(&in)
+
+		return views.RenderAdminLaundry(ctx, M.SX{
+			`title`:     conf.PROJECT_NAME + ` | Laundry Management`,
+			`user`:      user,
+			`segments`:  segments,
+			`laundry`:   out.Laundry,
+			`laundries`: out.Laundries,
+			`fields`:    out.Meta.Fields,
+			`pager`:     out.Pager,
+		})
+	})
+
 	fw.Get(`/`+domain.AdminRoomAction, func(ctx *fiber.Ctx) error {
 		var in domain.AdminRoomIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminRoomAction)

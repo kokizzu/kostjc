@@ -997,7 +997,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 @media only screen and (max-width: 768px) {
 }
 
-/* fakecss:./node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/LangTag.esbuild-svelte-fake-css */
+/* fakecss:./node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/LangTag.esbuild-svelte-fake-css */
 .langtag.svelte-1w9vok {
   position: relative;
 }
@@ -1015,7 +1015,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   padding: var(--langtag-padding, 1em);
 }
 
-/* fakecss:./node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/LineNumbers.esbuild-svelte-fake-css */
+/* fakecss:./node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/LineNumbers.esbuild-svelte-fake-css */
 pre.svelte-1vh31p0.svelte-1vh31p0 {
   margin: 0;
 }
@@ -1327,9 +1327,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     mod
   ));
 
-  // node_modules/.pnpm/axios@1.11.0/node_modules/axios/dist/browser/axios.cjs
+  // node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs
   var require_axios = __commonJS({
-    "node_modules/.pnpm/axios@1.11.0/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
+    "node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
       "use strict";
       function bind2(fn, thisArg) {
         return function wrap() {
@@ -1338,7 +1338,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       }
       var { toString } = Object.prototype;
       var { getPrototypeOf } = Object;
-      var { iterator, toStringTag } = Symbol;
       var kindOf = ((cache) => (thing) => {
         const str = toString.call(thing);
         return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
@@ -1373,17 +1372,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           return false;
         }
         const prototype2 = getPrototypeOf(val);
-        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
-      };
-      var isEmptyObject = (val) => {
-        if (!isObject(val) || isBuffer(val)) {
-          return false;
-        }
-        try {
-          return Object.keys(val).length === 0 && Object.getPrototypeOf(val) === Object.prototype;
-        } catch (e) {
-          return false;
-        }
+        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(Symbol.toStringTag in val) && !(Symbol.iterator in val);
       };
       var isDate = kindOfTest("Date");
       var isFile = kindOfTest("File");
@@ -1412,9 +1401,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             fn.call(null, obj[i], i, obj);
           }
         } else {
-          if (isBuffer(obj)) {
-            return;
-          }
           const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
           const len = keys.length;
           let key;
@@ -1425,9 +1411,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
       }
       function findKey(obj, key) {
-        if (isBuffer(obj)) {
-          return null;
-        }
         key = key.toLowerCase();
         const keys = Object.keys(obj);
         let i = keys.length;
@@ -1541,10 +1524,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         };
       })(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
       var forEachEntry = (obj, fn) => {
-        const generator = obj && obj[iterator];
-        const _iterator = generator.call(obj);
+        const generator = obj && obj[Symbol.iterator];
+        const iterator = generator.call(obj);
         let result;
-        while ((result = _iterator.next()) && !result.done) {
+        while ((result = iterator.next()) && !result.done) {
           const pair = result.value;
           fn.call(obj, pair[0], pair[1]);
         }
@@ -1614,8 +1597,23 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       var toFiniteNumber = (value, defaultValue) => {
         return value != null && Number.isFinite(value = +value) ? value : defaultValue;
       };
+      var ALPHA = "abcdefghijklmnopqrstuvwxyz";
+      var DIGIT = "0123456789";
+      var ALPHABET = {
+        DIGIT,
+        ALPHA,
+        ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
+      };
+      var generateString = (size = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
+        let str = "";
+        const { length } = alphabet;
+        while (size--) {
+          str += alphabet[Math.random() * length | 0];
+        }
+        return str;
+      };
       function isSpecCompliantForm(thing) {
-        return !!(thing && isFunction(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
+        return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
       }
       var toJSONObject = (obj) => {
         const stack = new Array(10);
@@ -1623,9 +1621,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           if (isObject(source)) {
             if (stack.indexOf(source) >= 0) {
               return;
-            }
-            if (isBuffer(source)) {
-              return source;
             }
             if (!("toJSON" in source)) {
               stack[i] = source;
@@ -1664,7 +1659,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         isFunction(_global.postMessage)
       );
       var asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
-      var isIterable = (thing) => thing != null && isFunction(thing[iterator]);
       var utils$1 = {
         isArray,
         isArrayBuffer,
@@ -1676,7 +1670,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         isBoolean,
         isObject,
         isPlainObject,
-        isEmptyObject,
         isReadableStream,
         isRequest,
         isResponse,
@@ -1717,13 +1710,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         findKey,
         global: _global,
         isContextDefined,
+        ALPHABET,
+        generateString,
         isSpecCompliantForm,
         toJSONObject,
         isAsyncFn,
         isThenable,
         setImmediate: _setImmediate,
-        asap,
-        isIterable
+        asap
       };
       function AxiosError(message, code, config, request, response) {
         Error.call(this);
@@ -1845,9 +1839,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           if (utils$1.isDate(value)) {
             return value.toISOString();
           }
-          if (utils$1.isBoolean(value)) {
-            return value.toString();
-          }
           if (!useBlob && utils$1.isBlob(value)) {
             throw new AxiosError("Blob is not supported. Use a Buffer instead.");
           }
@@ -1951,11 +1942,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           return url;
         }
         const _encode = options && options.encode || encode;
-        if (utils$1.isFunction(options)) {
-          options = {
-            serialize: options
-          };
-        }
         const serializeFn = options && options.serialize;
         let serializedParams;
         if (serializeFn) {
@@ -2072,16 +2058,15 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         ...platform$1
       };
       function toURLEncodedForm(data, options) {
-        return toFormData(data, new platform.classes.URLSearchParams(), {
+        return toFormData(data, new platform.classes.URLSearchParams(), Object.assign({
           visitor: function(value, key, path, helpers) {
             if (platform.isNode && utils$1.isBuffer(value)) {
               this.append(key, value.toString("base64"));
               return false;
             }
             return helpers.defaultVisitor.apply(this, arguments);
-          },
-          ...options
-        });
+          }
+        }, options));
       }
       function parsePropPath(name) {
         return utils$1.matchAll(/\w+|\[(\w*)]/g, name).map((match) => {
@@ -2357,15 +2342,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             setHeaders(header, valueOrRewrite);
           } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
             setHeaders(parseHeaders(header), valueOrRewrite);
-          } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
-            let obj = {}, dest, key;
-            for (const entry of header) {
-              if (!utils$1.isArray(entry)) {
-                throw TypeError("Object iterator must return a key-value pair");
-              }
-              obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
+          } else if (utils$1.isHeaders(header)) {
+            for (const [key, value] of header.entries()) {
+              setHeader(value, key, rewrite);
             }
-            setHeaders(obj, valueOrRewrite);
           } else {
             header != null && setHeader(valueOrRewrite, header, rewrite);
           }
@@ -2468,9 +2448,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         toString() {
           return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
-        }
-        getSetCookie() {
-          return this.get("set-cookie") || [];
         }
         get [Symbol.toStringTag]() {
           return "AxiosHeaders";
@@ -2596,7 +2573,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             clearTimeout(timer);
             timer = null;
           }
-          fn(...args);
+          fn.apply(null, args);
         };
         const throttled = (...args) => {
           const now2 = Date.now();
@@ -2649,13 +2626,45 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }), throttled[1]];
       };
       var asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
-      var isURLSameOrigin = platform.hasStandardBrowserEnv ? ((origin2, isMSIE) => (url) => {
-        url = new URL(url, platform.origin);
-        return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
-      })(
-        new URL(platform.origin),
-        platform.navigator && /(msie|trident)/i.test(platform.navigator.userAgent)
-      ) : () => true;
+      var isURLSameOrigin = platform.hasStandardBrowserEnv ? (
+        // Standard browser envs have full support of the APIs needed to test
+        // whether the request URL is of the same origin as current location.
+        function standardBrowserEnv() {
+          const msie = platform.navigator && /(msie|trident)/i.test(platform.navigator.userAgent);
+          const urlParsingNode = document.createElement("a");
+          let originURL;
+          function resolveURL(url) {
+            let href = url;
+            if (msie) {
+              urlParsingNode.setAttribute("href", href);
+              href = urlParsingNode.href;
+            }
+            urlParsingNode.setAttribute("href", href);
+            return {
+              href: urlParsingNode.href,
+              protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
+              host: urlParsingNode.host,
+              search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
+              hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
+              hostname: urlParsingNode.hostname,
+              port: urlParsingNode.port,
+              pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
+            };
+          }
+          originURL = resolveURL(window.location.href);
+          return function isURLSameOrigin2(requestURL) {
+            const parsed = utils$1.isString(requestURL) ? resolveURL(requestURL) : requestURL;
+            return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
+          };
+        }()
+      ) : (
+        // Non standard browser envs (web workers, react-native) lack needed support.
+        function nonStandardBrowserEnv() {
+          return function isURLSameOrigin2() {
+            return true;
+          };
+        }()
+      );
       var cookies = platform.hasStandardBrowserEnv ? (
         // Standard browser envs support document.cookie
         {
@@ -2693,9 +2702,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       function combineURLs(baseURL, relativeURL) {
         return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
       }
-      function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
-        let isRelativeUrl = !isAbsoluteURL(requestedURL);
-        if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {
+      function buildFullPath(baseURL, requestedURL) {
+        if (baseURL && !isAbsoluteURL(requestedURL)) {
           return combineURLs(baseURL, requestedURL);
         }
         return requestedURL;
@@ -2704,7 +2712,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       function mergeConfig(config1, config2) {
         config2 = config2 || {};
         const config = {};
-        function getMergedValue(target, source, prop, caseless) {
+        function getMergedValue(target, source, caseless) {
           if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
             return utils$1.merge.call({ caseless }, target, source);
           } else if (utils$1.isPlainObject(source)) {
@@ -2714,11 +2722,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           }
           return source;
         }
-        function mergeDeepProperties(a, b, prop, caseless) {
+        function mergeDeepProperties(a, b, caseless) {
           if (!utils$1.isUndefined(b)) {
-            return getMergedValue(a, b, prop, caseless);
+            return getMergedValue(a, b, caseless);
           } else if (!utils$1.isUndefined(a)) {
-            return getMergedValue(void 0, a, prop, caseless);
+            return getMergedValue(void 0, a, caseless);
           }
         }
         function valueFromConfig2(a, b) {
@@ -2769,9 +2777,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           socketPath: defaultToConfig2,
           responseEncoding: defaultToConfig2,
           validateStatus: mergeDirectKeys,
-          headers: (a, b, prop) => mergeDeepProperties(headersToObject(a), headersToObject(b), prop, true)
+          headers: (a, b) => mergeDeepProperties(headersToObject(a), headersToObject(b), true)
         };
-        utils$1.forEach(Object.keys({ ...config1, ...config2 }), function computeConfigValue(prop) {
+        utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
           const merge2 = mergeMap[prop] || mergeDeepProperties;
           const configValue = merge2(config1[prop], config2[prop], prop);
           utils$1.isUndefined(configValue) && merge2 !== mergeDirectKeys || (config[prop] = configValue);
@@ -2782,7 +2790,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         const newConfig = mergeConfig({}, config);
         let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
         newConfig.headers = headers = AxiosHeaders$1.from(headers);
-        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
+        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url), config.params, config.paramsSerializer);
         if (auth) {
           headers.set(
             "Authorization",
@@ -3006,7 +3014,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
       };
       var trackStream = (stream, chunkSize, onProgress, onFinish) => {
-        const iterator2 = readBytes(stream, chunkSize);
+        const iterator = readBytes(stream, chunkSize);
         let bytes = 0;
         let done;
         let _onFinish = (e) => {
@@ -3018,7 +3026,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         return new ReadableStream({
           async pull(controller) {
             try {
-              const { done: done2, value } = await iterator2.next();
+              const { done: done2, value } = await iterator.next();
               if (done2) {
                 _onFinish();
                 controller.close();
@@ -3037,7 +3045,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           },
           cancel(reason) {
             _onFinish(reason);
-            return iterator2.return();
+            return iterator.return();
           }
         }, {
           highWaterMark: 2
@@ -3159,7 +3167,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             duplex: "half",
             credentials: isCredentialsSupported ? withCredentials : void 0
           });
-          let response = await fetch(request, fetchOptions);
+          let response = await fetch(request);
           const isStreamResponse = supportsResponseStream && (responseType === "stream" || responseType === "response");
           if (supportsResponseStream && (onDownloadProgress || isStreamResponse && unsubscribe)) {
             const options = {};
@@ -3194,7 +3202,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           });
         } catch (err) {
           unsubscribe && unsubscribe();
-          if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
+          if (err && err.name === "TypeError" && /fetch/i.test(err.message)) {
             throw Object.assign(
               new AxiosError("Network Error", AxiosError.ERR_NETWORK, config, request),
               {
@@ -3300,7 +3308,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           return Promise.reject(reason);
         });
       }
-      var VERSION2 = "1.11.0";
+      var VERSION2 = "1.7.7";
       var validators$1 = {};
       ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
         validators$1[type] = function validator2(thing) {
@@ -3329,12 +3337,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             );
           }
           return validator2 ? validator2(value, opt, opts) : true;
-        };
-      };
-      validators$1.spelling = function spelling(correctSpelling) {
-        return (value, opt) => {
-          console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
-          return true;
         };
       };
       function assertOptions(options, schema, allowUnknown) {
@@ -3366,7 +3368,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       var validators = validator.validators;
       var Axios = class {
         constructor(instanceConfig) {
-          this.defaults = instanceConfig || {};
+          this.defaults = instanceConfig;
           this.interceptors = {
             request: new InterceptorManager$1(),
             response: new InterceptorManager$1()
@@ -3385,8 +3387,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             return await this._request(configOrUrl, config);
           } catch (err) {
             if (err instanceof Error) {
-              let dummy = {};
-              Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
+              let dummy;
+              Error.captureStackTrace ? Error.captureStackTrace(dummy = {}) : dummy = new Error();
               const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
               try {
                 if (!err.stack) {
@@ -3428,17 +3430,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
               }, true);
             }
           }
-          if (config.allowAbsoluteUrls !== void 0)
-            ;
-          else if (this.defaults.allowAbsoluteUrls !== void 0) {
-            config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
-          } else {
-            config.allowAbsoluteUrls = true;
-          }
-          validator.assertOptions(config, {
-            baseUrl: validators.spelling("baseURL"),
-            withXsrfToken: validators.spelling("withXSRFToken")
-          }, true);
           config.method = (config.method || this.defaults.method || "get").toLowerCase();
           let contextHeaders = headers && utils$1.merge(
             headers.common,
@@ -3469,8 +3460,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           let len;
           if (!synchronousRequestInterceptors) {
             const chain = [dispatchRequest.bind(this), void 0];
-            chain.unshift(...requestInterceptorChain);
-            chain.push(...responseInterceptorChain);
+            chain.unshift.apply(chain, requestInterceptorChain);
+            chain.push.apply(chain, responseInterceptorChain);
             len = chain.length;
             promise = Promise.resolve(config);
             while (i < len) {
@@ -3505,7 +3496,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         getUri(config) {
           config = mergeConfig(this.defaults, config);
-          const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
+          const fullPath = buildFullPath(config.baseURL, config.url);
           return buildURL(fullPath, config.params, config.paramsSerializer);
         }
       };
@@ -3769,6 +3760,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       exports.AdminBookingLogs = async function AdminBookingLogs(i, cb) {
         return await axios.post("/admin/bookingLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminBorrowedUtensilLogs = async function AdminBorrowedUtensilLogs(i, cb) {
+        return await axios.post("/admin/borrowedUtensilLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminBorrowedUtensils = async function AdminBorrowedUtensils(i, cb) {
+        return await axios.post("/admin/borrowedUtensils", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminBuilding = async function AdminBuilding(i, cb) {
         return await axios.post("/admin/building", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -3780,6 +3777,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       };
       exports.AdminFacilityLogs = async function AdminFacilityLogs(i, cb) {
         return await axios.post("/admin/facilityLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminLaundry = async function AdminLaundry(i, cb) {
+        return await axios.post("/admin/laundry", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+      exports.AdminLaundryLogs = async function AdminLaundryLogs(i, cb) {
+        return await axios.post("/admin/laundryLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminLocation = async function AdminLocation(i, cb) {
         return await axios.post("/admin/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -4825,7 +4828,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           this.html = html;
         }
       };
-      var escape2 = escapeHTML;
+      var escape = escapeHTML;
       var inherit = inherit$1;
       var NO_MATCH = Symbol("nomatch");
       var MAX_KEYWORD_HITS = 7;
@@ -5199,7 +5202,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             if (err.message && err.message.includes("Illegal")) {
               return {
                 language: languageName,
-                value: escape2(codeToHighlight),
+                value: escape(codeToHighlight),
                 illegal: true,
                 relevance: 0,
                 _illegalBy: {
@@ -5214,7 +5217,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             } else if (SAFE_MODE) {
               return {
                 language: languageName,
-                value: escape2(codeToHighlight),
+                value: escape(codeToHighlight),
                 illegal: false,
                 relevance: 0,
                 errorRaised: err,
@@ -5228,7 +5231,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         function justTextHighlightResult(code) {
           const result = {
-            value: escape2(code),
+            value: escape(code),
             illegal: false,
             relevance: 0,
             _top: PLAINTEXT_LANGUAGE,
@@ -5641,7 +5644,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
   });
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/utils.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
   function assign(tar, src) {
@@ -5747,13 +5750,13 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     return ret;
   }
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/globals.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/globals.js
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
     // @ts-ignore Node typings have this
     global
   );
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
   var ResizeObserverSingleton = class {
     /**
      * @private
@@ -5799,7 +5802,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   ResizeObserverSingleton.entries = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/dom.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/dom.js
   var is_hydrating = false;
   function start_hydrating() {
     is_hydrating = true;
@@ -5991,7 +5994,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     return result;
   }
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/lifecycle.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/lifecycle.js
   var current_component;
   function set_current_component(component) {
     current_component = component;
@@ -6027,7 +6030,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     };
   }
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/scheduler.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/scheduler.js
   var dirty_components = [];
   var binding_callbacks = [];
   var render_callbacks = [];
@@ -6105,7 +6108,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     render_callbacks = filtered;
   }
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/transitions.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/transitions.js
   var outroing = /* @__PURE__ */ new Set();
   var outros;
   function group_outros() {
@@ -6147,12 +6150,12 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/each.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/each.js
   function ensure_array_like(array_like_or_iterator) {
     return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
   }
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/spread.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/spread.js
   function get_spread_update(levels, updates) {
     const update2 = {};
     const to_null_out = {};
@@ -6189,7 +6192,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     return typeof spread_props === "object" && spread_props !== null ? spread_props : {};
   }
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/shared/boolean_attributes.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/boolean_attributes.js
   var _boolean_attributes = (
     /** @type {const} */
     [
@@ -6222,7 +6225,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   );
   var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/Component.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/Component.js
   function bind(component, name, callback) {
     const index = component.$.props[name];
     if (index !== void 0) {
@@ -6369,12 +6372,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             this.$l_u.delete(listener);
           }
         }
-        if (this.$l[type]) {
-          const idx = this.$l[type].indexOf(listener);
-          if (idx >= 0) {
-            this.$l[type].splice(idx, 1);
-          }
-        }
       }
       async connectedCallback() {
         this.$cn = true;
@@ -6406,7 +6403,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             };
           };
           await Promise.resolve();
-          if (!this.$cn || this.$c) {
+          if (!this.$cn) {
             return;
           }
           const $slots = {};
@@ -6420,12 +6417,6 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
             const name = this.$g_p(attribute.name);
             if (!(name in this.$d)) {
               this.$d[name] = get_custom_element_value(name, attribute.value, this.$p_d, "toProp");
-            }
-          }
-          for (const key in this.$p_d) {
-            if (!(key in this.$d) && this[key] !== void 0) {
-              this.$d[key] = this[key];
-              delete this[key];
             }
           }
           this.$c = new this.$ctor({
@@ -6481,7 +6472,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       disconnectedCallback() {
         this.$cn = false;
         Promise.resolve().then(() => {
-          if (!this.$cn && this.$c) {
+          if (!this.$cn) {
             this.$c.$destroy();
             this.$c = void 0;
           }
@@ -6578,10 +6569,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     }
   };
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/shared/version.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/version.js
   var PUBLIC_VERSION = "4";
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/internal/disclose-version/index.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/disclose-version/index.js
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
@@ -6661,7 +6652,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   }();
   var notifier = new Notifier();
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/Icon.svelte
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/Icon.svelte
   function create_fragment(ctx) {
     let svg;
     let svg_style_value;
@@ -6820,7 +6811,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var Icon_default = Icon;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/ri/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
   var RiDesignShadowLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 2C2.44772 2 2 2.44772 2 3V17C2 17.5523 2.44772 18 3 18H6V21C6 21.5523 6.44772 22 7 22H21C21.5523 22 22 21.5523 22 21V7C22 6.44772 21.5523 6 21 6H18V3C18 2.44772 17.5523 2 17 2H3ZM18 11.5607L20 13.5607V16.4393L18 14.4393V11.5607ZM18 9.43934V8H20V11.4393L18 9.43934ZM18 17V16.5607L20 18.5607V20H18.5607L16.5607 18H17C17.5523 18 18 17.5523 18 17ZM14.4393 18L16.4393 20H13.5607L11.5607 18H14.4393ZM9.43934 18L11.4393 20H8V18H9.43934ZM4 16V4H16V16H4Z"></path>' };
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHomeWifiLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M6 19H18V9.15745L12 3.7029L6 9.15745V19ZM19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM8 9.99998C11.866 9.99998 15 13.134 15 17H13C13 14.2386 10.7614 12 8 12V9.99998ZM8 14C9.65685 14 11 15.3431 11 17H8V14Z"></path>' };
@@ -6844,10 +6835,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
   var RiArrowsArrowRightLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/lu/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
+  var LuWashingMachine = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M3 6h3"></path><path d="M17 6h.01"></path><path d="M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5"></path><rect width="18" height="20" x="3" y="2" rx="2"></rect><circle cx="12" cy="13" r="5"></circle>' };
 
-  // node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/store/index.js
+  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/store/index.js
   var subscriber_queue = [];
   function writable(value, start = noop) {
     let stop;
@@ -7037,6 +7029,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let icon13;
     let t41;
     let span13;
+    let t43;
+    let a14;
+    let icon14;
+    let t44;
+    let span14;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -7045,51 +7042,54 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       props: { src: RiFinanceCashLine, size: "20" }
     });
     icon2 = new Icon_default({
-      props: { src: RiMapMapPin2Line, size: "20" }
+      props: { src: LuWashingMachine, size: "20" }
     });
     icon3 = new Icon_default({
-      props: { src: LuHandPlatter, size: "20" }
+      props: { src: RiMapMapPin2Line, size: "20" }
     });
     icon4 = new Icon_default({
-      props: { src: RiBuildingsHotelLine, size: "20" }
+      props: { src: LuHandPlatter, size: "20" }
     });
     icon5 = new Icon_default({
-      props: { src: RiOthersDoorOpenLine, size: "20" }
+      props: { src: RiBuildingsHotelLine, size: "20" }
     });
     icon6 = new Icon_default({
+      props: { src: RiOthersDoorOpenLine, size: "20" }
+    });
+    icon7 = new Icon_default({
       props: {
         src: RiBusinessCalendarScheduleLine,
         size: "20"
       }
     });
-    icon7 = new Icon_default({
+    icon8 = new Icon_default({
       props: { src: RiFinanceWallet3Line, size: "20" }
     });
-    icon8 = new Icon_default({
+    icon9 = new Icon_default({
       props: {
         src: RiBusinessInboxUnarchiveLine,
         size: "20"
       }
     });
-    icon9 = new Icon_default({
+    icon10 = new Icon_default({
       props: { src: RiBuildingsHomeWifiLine, size: "20" }
     });
-    icon10 = new Icon_default({
+    icon11 = new Icon_default({
       props: {
         src: RiUserFacesUserFollowLine,
         size: "20"
       }
     });
-    icon11 = new Icon_default({
+    icon12 = new Icon_default({
       props: { src: RiUserFacesGroupLine, size: "20" }
     });
-    icon12 = new Icon_default({
+    icon13 = new Icon_default({
       props: {
         src: RiBusinessBarChartBoxLine,
         size: "20"
       }
     });
-    icon13 = new Icon_default({
+    icon14 = new Icon_default({
       props: { src: RiSystemSettingsLine, size: "20" }
     });
     return {
@@ -7114,73 +7114,79 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         create_component(icon2.$.fragment);
         t8 = space();
         span2 = element("span");
-        span2.textContent = "Locations";
+        span2.textContent = "Laundry";
         t10 = space();
         a3 = element("a");
         create_component(icon3.$.fragment);
         t11 = space();
         span3 = element("span");
-        span3.textContent = "Facilities";
+        span3.textContent = "Locations";
         t13 = space();
         a4 = element("a");
         create_component(icon4.$.fragment);
         t14 = space();
         span4 = element("span");
-        span4.textContent = "Buildings";
+        span4.textContent = "Facilities";
         t16 = space();
         a5 = element("a");
         create_component(icon5.$.fragment);
         t17 = space();
         span5 = element("span");
-        span5.textContent = "Rooms";
+        span5.textContent = "Buildings";
         t19 = space();
         a6 = element("a");
         create_component(icon6.$.fragment);
         t20 = space();
         span6 = element("span");
-        span6.textContent = "Bookings";
+        span6.textContent = "Rooms";
         t22 = space();
         a7 = element("a");
         create_component(icon7.$.fragment);
         t23 = space();
         span7 = element("span");
-        span7.textContent = "Payments";
+        span7.textContent = "Bookings";
         t25 = space();
         a8 = element("a");
         create_component(icon8.$.fragment);
         t26 = space();
         span8 = element("span");
-        span8.textContent = "Stocks";
+        span8.textContent = "Payments";
         t28 = space();
         a9 = element("a");
         create_component(icon9.$.fragment);
         t29 = space();
         span9 = element("span");
-        span9.textContent = "Wifi Devices";
+        span9.textContent = "Stocks";
         t31 = space();
         a10 = element("a");
         create_component(icon10.$.fragment);
         t32 = space();
         span10 = element("span");
-        span10.textContent = "Tenants";
+        span10.textContent = "Wifi Devices";
         t34 = space();
         a11 = element("a");
         create_component(icon11.$.fragment);
         t35 = space();
         span11 = element("span");
-        span11.textContent = "Users";
+        span11.textContent = "Tenants";
         t37 = space();
         a12 = element("a");
         create_component(icon12.$.fragment);
         t38 = space();
         span12 = element("span");
-        span12.textContent = "Logs";
+        span12.textContent = "Users";
         t40 = space();
         a13 = element("a");
         create_component(icon13.$.fragment);
         t41 = space();
         span13 = element("span");
-        span13.textContent = "Settings";
+        span13.textContent = "Logs";
+        t43 = space();
+        a14 = element("a");
+        create_component(icon14.$.fragment);
+        t44 = space();
+        span14 = element("span");
+        span14.textContent = "Settings";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "id", "link-admin-menu");
         attr(a0, "href", "/admin/menu");
@@ -7200,108 +7206,117 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           /*pathLv2*/
           ctx[4] === "sale"
         );
-        attr(a2, "id", "link-admin-location");
-        attr(a2, "href", "/admin/location");
+        attr(a2, "id", "link-admin-laundry");
+        attr(a2, "href", "/admin/laundry");
         attr(a2, "class", "svelte-1fwsz8h");
         toggle_class(
           a2,
           "active",
           /*pathLv2*/
-          ctx[4] === "location"
+          ctx[4] === "laundry"
         );
-        attr(a3, "id", "link-admin-facility");
-        attr(a3, "href", "/admin/facility");
+        attr(a3, "id", "link-admin-location");
+        attr(a3, "href", "/admin/location");
         attr(a3, "class", "svelte-1fwsz8h");
         toggle_class(
           a3,
           "active",
           /*pathLv2*/
-          ctx[4] === "facility"
+          ctx[4] === "location"
         );
-        attr(a4, "id", "link-admin-building");
-        attr(a4, "href", "/admin/building");
+        attr(a4, "id", "link-admin-facility");
+        attr(a4, "href", "/admin/facility");
         attr(a4, "class", "svelte-1fwsz8h");
         toggle_class(
           a4,
           "active",
           /*pathLv2*/
-          ctx[4] === "building"
+          ctx[4] === "facility"
         );
-        attr(a5, "id", "link-admin-room");
-        attr(a5, "href", "/admin/room");
+        attr(a5, "id", "link-admin-building");
+        attr(a5, "href", "/admin/building");
         attr(a5, "class", "svelte-1fwsz8h");
         toggle_class(
           a5,
           "active",
           /*pathLv2*/
-          ctx[4] === "room"
+          ctx[4] === "building"
         );
-        attr(a6, "id", "link-admin-booking");
-        attr(a6, "href", "/admin/booking");
+        attr(a6, "id", "link-admin-room");
+        attr(a6, "href", "/admin/room");
         attr(a6, "class", "svelte-1fwsz8h");
         toggle_class(
           a6,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "room"
+        );
+        attr(a7, "id", "link-admin-booking");
+        attr(a7, "href", "/admin/booking");
+        attr(a7, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a7,
           "active",
           /*pathLv1*/
           ctx[3] === "admin" && /*pathLv2*/
           ctx[4] === "booking"
         );
-        attr(a7, "id", "link-admin-payment");
-        attr(a7, "href", "/admin/payment");
-        attr(a7, "class", "svelte-1fwsz8h");
-        toggle_class(
-          a7,
-          "active",
-          /*pathLv2*/
-          ctx[4] === "payment"
-        );
-        attr(a8, "id", "link-admin-stock");
-        attr(a8, "href", "/admin/stock");
+        attr(a8, "id", "link-admin-payment");
+        attr(a8, "href", "/admin/payment");
         attr(a8, "class", "svelte-1fwsz8h");
         toggle_class(
           a8,
           "active",
           /*pathLv2*/
-          ctx[4] === "stock"
+          ctx[4] === "payment"
         );
-        attr(a9, "id", "link-admin-wifiDevice");
-        attr(a9, "href", "/admin/wifiDevice");
+        attr(a9, "id", "link-admin-stock");
+        attr(a9, "href", "/admin/stock");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
           a9,
           "active",
           /*pathLv2*/
-          ctx[4] === "wifiDevice"
+          ctx[4] === "stock"
         );
-        attr(a10, "id", "link-admin-tenants");
-        attr(a10, "href", "/admin/tenants");
+        attr(a10, "id", "link-admin-wifiDevice");
+        attr(a10, "href", "/admin/wifiDevice");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
           a10,
           "active",
           /*pathLv2*/
-          ctx[4] === "tenants"
+          ctx[4] === "wifiDevice"
         );
-        attr(a11, "id", "link-admin-userManagement");
-        attr(a11, "href", "/admin/usersManagement");
+        attr(a11, "id", "link-admin-tenants");
+        attr(a11, "href", "/admin/tenants");
         attr(a11, "class", "svelte-1fwsz8h");
         toggle_class(
           a11,
           "active",
           /*pathLv2*/
+          ctx[4] === "tenants"
+        );
+        attr(a12, "id", "link-admin-userManagement");
+        attr(a12, "href", "/admin/usersManagement");
+        attr(a12, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a12,
+          "active",
+          /*pathLv2*/
           ctx[4] === "usersManagement"
         );
-        attr(a12, "id", "link-admin-logs");
-        attr(a12, "href", "/admin/bookingLogs");
-        attr(a12, "class", "svelte-1fwsz8h");
-        toggle_class(a12, "active", String(
+        attr(a13, "id", "link-admin-logs");
+        attr(a13, "href", "/admin/bookingLogs");
+        attr(a13, "class", "svelte-1fwsz8h");
+        toggle_class(a13, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
-        attr(a13, "id", "link-admin-setting");
-        attr(a13, "href", "/admin/settingFixInconsistencies");
-        attr(a13, "class", "svelte-1fwsz8h");
-        toggle_class(a13, "active", String(
+        attr(a14, "id", "link-admin-setting");
+        attr(a14, "href", "/admin/settingFixInconsistencies");
+        attr(a14, "class", "svelte-1fwsz8h");
+        toggle_class(a14, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("setting") || false);
@@ -7380,6 +7395,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         mount_component(icon13, a13, null);
         append(a13, t41);
         append(a13, span13);
+        append(nav, t43);
+        append(nav, a14);
+        mount_component(icon14, a14, null);
+        append(a14, t44);
+        append(a14, span14);
         current = true;
       },
       p: noop,
@@ -7400,6 +7420,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_in(icon11.$.fragment, local);
         transition_in(icon12.$.fragment, local);
         transition_in(icon13.$.fragment, local);
+        transition_in(icon14.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -7417,6 +7438,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_out(icon11.$.fragment, local);
         transition_out(icon12.$.fragment, local);
         transition_out(icon13.$.fragment, local);
+        transition_out(icon14.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -7439,6 +7461,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         destroy_component(icon11);
         destroy_component(icon12);
         destroy_component(icon13);
+        destroy_component(icon14);
       }
     };
   }
@@ -7578,6 +7601,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let icon12;
     let t38;
     let span12;
+    let t40;
+    let a13;
+    let icon13;
+    let t41;
+    let span13;
     let current;
     icon0 = new Icon_default({
       props: { src: RiSystemMenu2Line, size: "20" }
@@ -7586,45 +7614,48 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       props: { src: RiFinanceCashLine, size: "20" }
     });
     icon2 = new Icon_default({
-      props: { src: RiMapMapPin2Line, size: "20" }
+      props: { src: LuWashingMachine, size: "20" }
     });
     icon3 = new Icon_default({
-      props: { src: LuHandPlatter, size: "20" }
+      props: { src: RiMapMapPin2Line, size: "20" }
     });
     icon4 = new Icon_default({
-      props: { src: RiBuildingsHotelLine, size: "20" }
+      props: { src: LuHandPlatter, size: "20" }
     });
     icon5 = new Icon_default({
-      props: { src: RiOthersDoorOpenLine, size: "20" }
+      props: { src: RiBuildingsHotelLine, size: "20" }
     });
     icon6 = new Icon_default({
+      props: { src: RiOthersDoorOpenLine, size: "20" }
+    });
+    icon7 = new Icon_default({
       props: {
         src: RiBusinessCalendarScheduleLine,
         size: "20"
       }
     });
-    icon7 = new Icon_default({
+    icon8 = new Icon_default({
       props: { src: RiFinanceWallet3Line, size: "20" }
     });
-    icon8 = new Icon_default({
+    icon9 = new Icon_default({
       props: {
         src: RiBusinessInboxUnarchiveLine,
         size: "20"
       }
     });
-    icon9 = new Icon_default({
+    icon10 = new Icon_default({
       props: { src: RiBuildingsHomeWifiLine, size: "20" }
     });
-    icon10 = new Icon_default({
+    icon11 = new Icon_default({
       props: {
         src: RiUserFacesUserFollowLine,
         size: "20"
       }
     });
-    icon11 = new Icon_default({
+    icon12 = new Icon_default({
       props: { src: RiUserFacesGroupLine, size: "20" }
     });
-    icon12 = new Icon_default({
+    icon13 = new Icon_default({
       props: {
         src: RiBusinessBarChartBoxLine,
         size: "20"
@@ -7652,67 +7683,73 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         create_component(icon2.$.fragment);
         t8 = space();
         span2 = element("span");
-        span2.textContent = "Locations";
+        span2.textContent = "Laundry";
         t10 = space();
         a3 = element("a");
         create_component(icon3.$.fragment);
         t11 = space();
         span3 = element("span");
-        span3.textContent = "Facilities";
+        span3.textContent = "Locations";
         t13 = space();
         a4 = element("a");
         create_component(icon4.$.fragment);
         t14 = space();
         span4 = element("span");
-        span4.textContent = "Buildings";
+        span4.textContent = "Facilities";
         t16 = space();
         a5 = element("a");
         create_component(icon5.$.fragment);
         t17 = space();
         span5 = element("span");
-        span5.textContent = "Rooms";
+        span5.textContent = "Buildings";
         t19 = space();
         a6 = element("a");
         create_component(icon6.$.fragment);
         t20 = space();
         span6 = element("span");
-        span6.textContent = "Bookings";
+        span6.textContent = "Rooms";
         t22 = space();
         a7 = element("a");
         create_component(icon7.$.fragment);
         t23 = space();
         span7 = element("span");
-        span7.textContent = "Payments";
+        span7.textContent = "Bookings";
         t25 = space();
         a8 = element("a");
         create_component(icon8.$.fragment);
         t26 = space();
         span8 = element("span");
-        span8.textContent = "Stocks";
+        span8.textContent = "Payments";
         t28 = space();
         a9 = element("a");
         create_component(icon9.$.fragment);
         t29 = space();
         span9 = element("span");
-        span9.textContent = "Wifi Devices";
+        span9.textContent = "Stocks";
         t31 = space();
         a10 = element("a");
         create_component(icon10.$.fragment);
         t32 = space();
         span10 = element("span");
-        span10.textContent = "Tenants";
+        span10.textContent = "Wifi Devices";
         t34 = space();
         a11 = element("a");
         create_component(icon11.$.fragment);
         t35 = space();
         span11 = element("span");
-        span11.textContent = "Users";
+        span11.textContent = "Tenants";
         t37 = space();
         a12 = element("a");
         create_component(icon12.$.fragment);
         t38 = space();
         span12 = element("span");
-        span12.textContent = "Logs";
+        span12.textContent = "Users";
+        t40 = space();
+        a13 = element("a");
+        create_component(icon13.$.fragment);
+        t41 = space();
+        span13 = element("span");
+        span13.textContent = "Logs";
         attr(h3, "class", "nav-menu-title svelte-1fwsz8h");
         attr(a0, "href", "/admin/menu");
         attr(a0, "class", "svelte-1fwsz8h");
@@ -7730,90 +7767,98 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           /*pathLv2*/
           ctx[4] === "sale"
         );
-        attr(a2, "href", "/admin/location");
+        attr(a2, "href", "/admin/laundry");
         attr(a2, "class", "svelte-1fwsz8h");
         toggle_class(
           a2,
           "active",
           /*pathLv2*/
-          ctx[4] === "location"
+          ctx[4] === "laundry"
         );
-        attr(a3, "href", "/admin/facility");
+        attr(a3, "href", "/admin/location");
         attr(a3, "class", "svelte-1fwsz8h");
         toggle_class(
           a3,
           "active",
           /*pathLv2*/
-          ctx[4] === "facility"
+          ctx[4] === "location"
         );
-        attr(a4, "href", "/admin/building");
+        attr(a4, "href", "/admin/facility");
         attr(a4, "class", "svelte-1fwsz8h");
         toggle_class(
           a4,
           "active",
           /*pathLv2*/
-          ctx[4] === "building"
+          ctx[4] === "facility"
         );
-        attr(a5, "href", "/admin/room");
+        attr(a5, "href", "/admin/building");
         attr(a5, "class", "svelte-1fwsz8h");
         toggle_class(
           a5,
           "active",
           /*pathLv2*/
-          ctx[4] === "room"
+          ctx[4] === "building"
         );
-        attr(a6, "href", "/admin/booking");
+        attr(a6, "href", "/admin/room");
         attr(a6, "class", "svelte-1fwsz8h");
         toggle_class(
           a6,
+          "active",
+          /*pathLv2*/
+          ctx[4] === "room"
+        );
+        attr(a7, "href", "/admin/booking");
+        attr(a7, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a7,
           "active",
           /*pathLv1*/
           ctx[3] === "admin" && /*pathLv2*/
           ctx[4] === "booking"
         );
-        attr(a7, "href", "/admin/payment");
-        attr(a7, "class", "svelte-1fwsz8h");
-        toggle_class(
-          a7,
-          "active",
-          /*pathLv2*/
-          ctx[4] === "payment"
-        );
-        attr(a8, "href", "/admin/stock");
+        attr(a8, "href", "/admin/payment");
         attr(a8, "class", "svelte-1fwsz8h");
         toggle_class(
           a8,
           "active",
           /*pathLv2*/
-          ctx[4] === "stock"
+          ctx[4] === "payment"
         );
-        attr(a9, "href", "/admin/wifiDevice");
+        attr(a9, "href", "/admin/stock");
         attr(a9, "class", "svelte-1fwsz8h");
         toggle_class(
           a9,
           "active",
           /*pathLv2*/
-          ctx[4] === "wifiDevice"
+          ctx[4] === "stock"
         );
-        attr(a10, "href", "/admin/tenants");
+        attr(a10, "href", "/admin/wifiDevice");
         attr(a10, "class", "svelte-1fwsz8h");
         toggle_class(
           a10,
           "active",
           /*pathLv2*/
-          ctx[4] === "tenants"
+          ctx[4] === "wifiDevice"
         );
-        attr(a11, "href", "/admin/usersManagement");
+        attr(a11, "href", "/admin/tenants");
         attr(a11, "class", "svelte-1fwsz8h");
         toggle_class(
           a11,
           "active",
           /*pathLv2*/
+          ctx[4] === "tenants"
+        );
+        attr(a12, "href", "/admin/usersManagement");
+        attr(a12, "class", "svelte-1fwsz8h");
+        toggle_class(
+          a12,
+          "active",
+          /*pathLv2*/
           ctx[4] === "usersManagement"
         );
-        attr(a12, "href", "/admin/bookingLogs");
-        attr(a12, "class", "svelte-1fwsz8h");
-        toggle_class(a12, "active", String(
+        attr(a13, "href", "/admin/bookingLogs");
+        attr(a13, "class", "svelte-1fwsz8h");
+        toggle_class(a13, "active", String(
           /*pathLv2*/
           ctx[4]
         ).includes("Logs") || false);
@@ -7887,6 +7932,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         mount_component(icon12, a12, null);
         append(a12, t38);
         append(a12, span12);
+        append(nav, t40);
+        append(nav, a13);
+        mount_component(icon13, a13, null);
+        append(a13, t41);
+        append(a13, span13);
         current = true;
       },
       p: noop,
@@ -7906,6 +7956,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_in(icon10.$.fragment, local);
         transition_in(icon11.$.fragment, local);
         transition_in(icon12.$.fragment, local);
+        transition_in(icon13.$.fragment, local);
         current = true;
       },
       o(local) {
@@ -7922,6 +7973,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         transition_out(icon10.$.fragment, local);
         transition_out(icon11.$.fragment, local);
         transition_out(icon12.$.fragment, local);
+        transition_out(icon13.$.fragment, local);
         current = false;
       },
       d(detaching) {
@@ -7943,6 +7995,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         destroy_component(icon10);
         destroy_component(icon11);
         destroy_component(icon12);
+        destroy_component(icon13);
       }
     };
   }
@@ -8754,13 +8807,17 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
       /** @type {string}*/
       window.location.pathname
     );
+    const pathsArray = (
+      /** @type {string[]}*/
+      pathAll.split("/")
+    );
     const pathLv1 = (
       /** @type {string}*/
-      window.location.pathname.split("/")[1]
+      pathsArray[1]
     );
     const pathLv2 = (
       /** @type {string}*/
-      window.location.pathname.split("/")[2]
+      pathsArray[2]
     );
     function sideMenuScrollIntoView() {
       let linkId = (
@@ -8780,6 +8837,10 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         }
         case "sale": {
           linkId = "link-admin-sale";
+          break;
+        }
+        case "laundry": {
+          linkId = "link-admin-laundry";
           break;
         }
         case "location": {
@@ -8872,7 +8933,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var SideMenu_default = SideMenu;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/bs/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/bs/index.js
   var BsList = { a: { fill: "currentColor", viewBox: "0 0 16 16" }, c: '<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>' };
 
   // _partials/Navbar.svelte
@@ -9283,20 +9344,20 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var main_default = Main;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/cg/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/cg/index.js
   var CgChevronDoubleRight = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M5.63605 7.75735L7.05026 6.34314L12.7071 12L7.05029 17.6568L5.63608 16.2426L9.87869 12L5.63605 7.75735Z" fill="currentColor"></path><path d="M12.7071 6.34314L11.2929 7.75735L15.5356 12L11.2929 16.2426L12.7072 17.6568L18.364 12L12.7071 6.34314Z" fill="currentColor"></path>' };
   var CgChevronDoubleLeft = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M18.3639 7.75735L16.9497 6.34314L11.2929 12L16.9497 17.6568L18.3639 16.2426L14.1213 12L18.3639 7.75735Z" fill="currentColor"></path><path d="M11.2929 6.34314L12.7071 7.75735L8.46447 12L12.7071 16.2426L11.2929 17.6568L5.63605 12L11.2929 6.34314Z" fill="currentColor"></path>' };
   var CgChevronRight = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M10.5858 6.34317L12 4.92896L19.0711 12L12 19.0711L10.5858 17.6569L16.2427 12L10.5858 6.34317Z" fill="currentColor"></path>' };
   var CgChevronLeft = { a: { viewBox: "0 0 24 24", fill: "none" }, c: '<path d="M16.2426 6.34317L14.8284 4.92896L7.75739 12L14.8285 19.0711L16.2427 17.6569L10.5858 12L16.2426 6.34317Z" fill="currentColor"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.20/node_modules/svelte-icons-pack/dist/io/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/io/index.js
   var IoClose = { a: { viewBox: "0 0 512 512" }, c: '<path d="M289.94,256l95-95A24,24,0,0,0,351,127l-95,95-95-95A24,24,0,0,0,127,161l95,95-95,95A24,24,0,1,0,161,385l95-95,95,95A24,24,0,0,0,385,351Z"></path>' };
 
   // node_modules/.pnpm/highlight.js@11.11.1/node_modules/highlight.js/es/core.js
   var import_core = __toESM(require_core(), 1);
   var core_default = import_core.default;
 
-  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/LangTag.svelte
+  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/LangTag.svelte
   function create_else_block(ctx) {
     let t;
     return {
@@ -9477,7 +9538,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var LangTag_default = LangTag;
 
-  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/Highlight.svelte
+  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/Highlight.svelte
   var get_default_slot_changes = (dirty) => ({ highlighted: dirty & /*highlighted*/
   8 });
   var get_default_slot_context = (ctx) => ({ highlighted: (
@@ -9681,7 +9742,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   };
   var Highlight_default = Highlight;
 
-  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/LineNumbers.svelte
+  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/LineNumbers.svelte
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[10] = list[i];
@@ -10125,11 +10186,11 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     };
   }
 
-  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/languages/json.js
+  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/languages/json.js
   var json2 = { name: "json", register: json };
   var json_default = json2;
 
-  // node_modules/.pnpm/svelte-highlight@7.8.4/node_modules/svelte-highlight/styles/atom-one-dark.js
+  // node_modules/.pnpm/svelte-highlight@7.8.3/node_modules/svelte-highlight/styles/atom-one-dark.js
   var atomOneDark = `<style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{color:#abb2bf;background:#282c34}.hljs-comment,
 .hljs-quote{color:#5c6370;font-style:italic}.hljs-doctag,
 .hljs-keyword,
@@ -13277,10 +13338,5 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
   // admin/tenantLogs.svelte.ts
   var app = new tenantLogs_default({ target: document.getElementById("app") });
 })();
-/*! Bundled license information:
-
-axios/dist/browser/axios.cjs:
-  (*! Axios v1.11.0 Copyright (c) 2025 Matt Zabriskie and contributors *)
-*/
 </script>
 </body></html>

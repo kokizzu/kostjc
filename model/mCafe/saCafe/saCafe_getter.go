@@ -119,3 +119,41 @@ FROM ` + s.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 
 	return
 }
+
+func (s LaundryLogs) FindByPagination(in *zCrud.PagerIn, out *zCrud.PagerOut) (res []LaundryLogs) {
+	const comment = `-- LaundryLogs) FindByPagination`
+
+	validFields := BorrowedUtensilLogsFieldTypeMap
+	whereAndSql := out.WhereAndSqlCh(in.Filters, validFields)
+
+	queryCount := comment + `
+SELECT COUNT(1)
+FROM ` + s.SqlTableName() + whereAndSql + `
+LIMIT 1`
+	row := s.Adapter.QueryRow(queryCount)
+	err := row.Err()
+	if L.IsError(err, `FindByPagination.Adapter.QueryRow error: `+queryCount) {
+		return
+	}
+	err = row.Scan(&out.Total)
+	L.IsError(err, comment+`: error while scanning total`)
+	out.CalculatePages(in.Page, in.PerPage, out.Total)
+
+	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	limitOffsetSql := out.LimitOffsetSql()
+
+	queryRows := comment + `
+SELECT ` + s.SqlAllFields() + `
+FROM ` + s.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
+	rows, err := s.Adapter.Query(queryRows)
+	if L.IsError(err, `FindByPagination.Adapter.Query error: `+queryRows) {
+		return
+	}
+
+	res, err = s.ScanRowsAllCols(rows, out.PerPage)
+	if L.IsError(err, `FindByPagination.ScanRowsAllCols error: `+queryRows) {
+		return
+	}
+
+	return
+}

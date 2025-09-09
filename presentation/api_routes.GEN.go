@@ -30,6 +30,26 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// AdminBorrowedUtensilLogs
+	fw.Post("/"+domain.AdminBorrowedUtensilLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminBorrowedUtensilLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminBorrowedUtensilLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminBorrowedUtensilLogs(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// AdminBorrowedUtensils
+	fw.Post("/"+domain.AdminBorrowedUtensilsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminBorrowedUtensilsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminBorrowedUtensilsAction); err != nil {
+			return nil
+		}
+		out := d.AdminBorrowedUtensils(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// AdminBuilding
 	fw.Post("/"+domain.AdminBuildingAction, func(c *fiber.Ctx) error {
 		in := domain.AdminBuildingIn{}
@@ -67,6 +87,26 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 			return nil
 		}
 		out := d.AdminFacilityLogs(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// AdminLaundry
+	fw.Post("/"+domain.AdminLaundryAction, func(c *fiber.Ctx) error {
+		in := domain.AdminLaundryIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminLaundryAction); err != nil {
+			return nil
+		}
+		out := d.AdminLaundry(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
+	// AdminLaundryLogs
+	fw.Post("/"+domain.AdminLaundryLogsAction, func(c *fiber.Ctx) error {
+		in := domain.AdminLaundryLogsIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminLaundryLogsAction); err != nil {
+			return nil
+		}
+		out := d.AdminLaundryLogs(&in)
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 

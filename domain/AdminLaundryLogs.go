@@ -1,99 +1,99 @@
 package domain
 
-// import (
-// 	"kostjc/model/mCafe"
-// 	"kostjc/model/mCafe/saCafe"
-// 	"kostjc/model/zCrud"
-// )
+import (
+	"kostjc/model/mCafe/saCafe"
+	"kostjc/model/mProperty"
+	"kostjc/model/zCrud"
+)
 
-//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminMenuLogs.go
-//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminMenuLogs.go
-//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminMenuLogs.go
-//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminMenuLogs.go
-//go:generate farify doublequote --file AdminMenuLogs.go
+//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminLaundryLogs.go
+//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminLaundryLogs.go
+//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminLaundryLogs.go
+//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminLaundryLogs.go
+//go:generate farify doublequote --file AdminLaundryLogs.go
 
-// type (
-// 	AdminBorrowedUtensilLogsIn struct {
-// 		RequestCommon
+type (
+	AdminLaundryLogsIn struct {
+		RequestCommon
 
-// 		Pager    zCrud.PagerIn `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-// 		WithMeta bool          `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
-// 	}
+		Pager    zCrud.PagerIn `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		WithMeta bool          `json:"withMeta" form:"withMeta" query:"withMeta" long:"withMeta" msg:"withMeta"`
+	}
 
-// 	AdminBorrowedUtensilLogsOut struct {
-// 		ResponseCommon
+	AdminLaundryLogsOut struct {
+		ResponseCommon
 
-// 		Pager zCrud.PagerOut               `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-// 		Logs  []saCafe.BorrowedUtensilLogs `json:"logs" form:"logs" query:"logs" long:"logs" msg:"logs"`
-// 		Meta  *zCrud.Meta                  `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
-// 	}
-// )
+		Pager zCrud.PagerOut       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Logs  []saCafe.LaundryLogs `json:"logs" form:"logs" query:"logs" long:"logs" msg:"logs"`
+		Meta  *zCrud.Meta          `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
+	}
+)
 
-// const (
-// 	AdminBorrowedUtensilLogsAction = `admin/borrowedUtensilLogs`
-// )
+const (
+	AdminLaundryLogsAction = `admin/laundryLogs`
+)
 
-// var (
-// 	AdminBorrowedUtensilLogsMeta = zCrud.Meta{
-// 		Fields: []zCrud.Field{
-// 			{
-// 				Name:      mCafe.Id,
-// 				Label:     `Id`,
-// 				ReadOnly:  true,
-// 				DataType:  zCrud.DataTypeInt,
-// 				InputType: zCrud.InputTypeHidden,
-// 			},
-// 			{
-// 				Name:      mCafe.CreatedAt,
-// 				Label:     `Datetime`,
-// 				ReadOnly:  true,
-// 				DataType:  zCrud.DataTypeString,
-// 				InputType: zCrud.InputTypeDateTime,
-// 			},
-// 			{
-// 				Name:      mCafe.ActorId,
-// 				Label:     `Actor`,
-// 				ReadOnly:  true,
-// 				DataType:  zCrud.DataTypeInt,
-// 				InputType: zCrud.InputTypeCombobox,
-// 			},
-// 			{
-// 				Name:      mCafe.BeforeJSON,
-// 				Label:     `Before (JSON)`,
-// 				ReadOnly:  true,
-// 				DataType:  zCrud.DataTypeJSON,
-// 				InputType: zCrud.InputTypeTextArea,
-// 			},
-// 			{
-// 				Name:      mCafe.AfterJSON,
-// 				Label:     `After (JSON)`,
-// 				ReadOnly:  true,
-// 				DataType:  zCrud.DataTypeJSON,
-// 				InputType: zCrud.InputTypeTextArea,
-// 			},
-// 		},
-// 	}
-// )
+var (
+	AdminLaundryLogsMeta = zCrud.Meta{
+		Fields: []zCrud.Field{
+			{
+				Name:      mProperty.Id,
+				Label:     `Id`,
+				ReadOnly:  true,
+				DataType:  zCrud.DataTypeInt,
+				InputType: zCrud.InputTypeHidden,
+			},
+			{
+				Name:      mProperty.CreatedAt,
+				Label:     `Datetime`,
+				ReadOnly:  true,
+				DataType:  zCrud.DataTypeString,
+				InputType: zCrud.InputTypeDateTime,
+			},
+			{
+				Name:      mProperty.ActorId,
+				Label:     `Actor`,
+				ReadOnly:  true,
+				DataType:  zCrud.DataTypeInt,
+				InputType: zCrud.InputTypeCombobox,
+			},
+			{
+				Name:      mProperty.BeforeJSON,
+				Label:     `Before (JSON)`,
+				ReadOnly:  true,
+				DataType:  zCrud.DataTypeJSON,
+				InputType: zCrud.InputTypeTextArea,
+			},
+			{
+				Name:      mProperty.AfterJSON,
+				Label:     `After (JSON)`,
+				ReadOnly:  true,
+				DataType:  zCrud.DataTypeJSON,
+				InputType: zCrud.InputTypeTextArea,
+			},
+		},
+	}
+)
 
-// func (d *Domain) AdminBorrowedUtensilLogs(in *AdminBorrowedUtensilLogsIn) (out AdminBorrowedUtensilLogsOut) {
-// 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
+func (d *Domain) AdminLaundryLogs(in *AdminLaundryLogsIn) (out AdminLaundryLogsOut) {
+	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
 
-// 	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
-// 	if sess == nil {
-// 		return
-// 	}
+	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
+	if sess == nil {
+		return
+	}
 
-// 	if in.WithMeta {
-// 		out.Meta = &AdminBorrowedUtensilLogsMeta
-// 	}
+	if in.WithMeta {
+		out.Meta = &AdminLaundryLogsMeta
+	}
 
-// 	// if not set, always override by createdAt descending
-// 	if len(in.Pager.Order) == 0 {
-// 		in.Pager.Order = []string{`-createdAt`}
-// 	}
+	// if not set, always override by createdAt descending
+	if len(in.Pager.Order) == 0 {
+		in.Pager.Order = []string{`-createdAt`}
+	}
 
-// 	r := saCafe.NewBorrowedUtensilLogs(d.PropOlap)
-// 	out.Logs = r.FindByPagination(&in.Pager, &out.Pager)
+	r := saCafe.NewLaundryLogs(d.PropOlap)
+	out.Logs = r.FindByPagination(&in.Pager, &out.Pager)
 
-// 	return
-// }
+	return
+}

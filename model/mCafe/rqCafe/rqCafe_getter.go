@@ -190,3 +190,40 @@ WHERE "deletedAt" = 0`
 
 	return rows
 }
+
+func (l *Laundry) FindByPagination(meta *zCrud.Meta, in *zCrud.PagerIn, out *zCrud.PagerOut) (res [][]any) {
+	const comment = `-- Laundry) FindByPagination`
+
+	validFields := LaundryFieldTypeMap
+	whereAndSql := ``
+	if in.Search != `` {
+		whereAndSql = out.SearchBySqlTt(in.Search, in.SearchBy, validFields)
+	} else {
+		whereAndSql = out.WhereAndSqlTt(in.Filters, validFields)
+	}
+
+	queryCount := comment + `
+SELECT COUNT(1)
+FROM ` + l.SqlTableName() + whereAndSql + `
+LIMIT 1`
+	l.Adapter.QuerySql(queryCount, func(row []any) {
+		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
+	})
+
+	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	limitOffsetSql := out.LimitOffsetSql()
+
+	queryRows := comment + `
+SELECT ` + meta.ToSelect() + `
+FROM ` + l.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
+
+	l.Adapter.QuerySql(queryRows, func(row []any) {
+		row[0] = X.ToS(row[0]) // ensure id is string
+		res = append(res, row)
+	})
+
+	out.Order = in.Order
+	out.Filters = in.Filters
+
+	return
+}
