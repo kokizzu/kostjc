@@ -74,6 +74,18 @@ const (
 	LaundryPrice    = `price`
 	LaundryNote     = `note`
 	LaundryAt       = `laundryAt`
+	LaundryPaidAt   = `paidAt`
+	LaundryPaidBy   = `paidBy`
+	LaundryWashAt   = `washAt`
+	LaundryWashBy   = `washBy`
+	LaundryDryAt    = `dryAt`
+	LaundryDryBy    = `dryBy`
+	LaundryFoldAt   = `foldAt`
+	LaundryFoldBy   = `foldBy`
+	LaundryNotifyAt = `notifyAt`
+	LaundryNotifyBy = `notifyBy`
+	LaundryGivenAt  = `givenAt`
+	LaundryGivenBys = `givenBys`
 )
 
 var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
@@ -161,6 +173,19 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{DeletedAt, Tt.Integer},
 			{DeletedBy, Tt.Unsigned},
 			{RestoredBy, Tt.Unsigned},
+			{LaundryPaidAt, Tt.String},
+			{LaundryPaidBy, Tt.Unsigned},
+			{LaundryWashAt, Tt.String},
+			{LaundryWashBy, Tt.Unsigned},
+			{LaundryDryAt, Tt.String},
+			{LaundryDryBy, Tt.Unsigned},
+			{LaundryFoldAt, Tt.String},
+			{LaundryFoldBy, Tt.Unsigned},
+			{LaundryNotifyAt, Tt.String},
+			{LaundryNotifyBy, Tt.Unsigned},
+			{LaundryGivenAt, Tt.String},
+			{LaundryGivenBys, Tt.String},
+			{LaundryWeight, Tt.Double},
 		},
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,

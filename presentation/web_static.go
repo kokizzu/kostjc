@@ -326,6 +326,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return ctx.Redirect(`/`, 302)
 		}
 
+		usr := rqAuth.NewUsers(d.AuthOltp)
+		users := usr.FindUserChoices()
+
 		user, segments := userInfoFromRequest(in.RequestCommon, d)
 
 		in.WithMeta = true
@@ -340,6 +343,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`laundries`: out.Laundries,
 			`fields`:    out.Meta.Fields,
 			`pager`:     out.Pager,
+			`users`:     users,
 		})
 	})
 

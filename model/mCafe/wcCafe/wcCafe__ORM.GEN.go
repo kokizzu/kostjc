@@ -390,6 +390,19 @@ func (l *LaundryMutator) DoDeletePermanentById() bool { //nolint:dupl false posi
 //		A.X{`=`, 10, l.DeletedAt},
 //		A.X{`=`, 11, l.DeletedBy},
 //		A.X{`=`, 12, l.RestoredBy},
+//		A.X{`=`, 13, l.PaidAt},
+//		A.X{`=`, 14, l.PaidBy},
+//		A.X{`=`, 15, l.WashAt},
+//		A.X{`=`, 16, l.WashBy},
+//		A.X{`=`, 17, l.DryAt},
+//		A.X{`=`, 18, l.DryBy},
+//		A.X{`=`, 19, l.FoldAt},
+//		A.X{`=`, 20, l.FoldBy},
+//		A.X{`=`, 21, l.NotifyAt},
+//		A.X{`=`, 22, l.NotifyBy},
+//		A.X{`=`, 23, l.GivenAt},
+//		A.X{`=`, 24, l.GivenBys},
+//		A.X{`=`, 25, l.Weight},
 //	})
 //	return !L.IsError(err, `Laundry.DoUpsert failed: `+l.SpaceName()+ `\n%#v`, arr)
 // }
@@ -565,6 +578,149 @@ func (l *LaundryMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false po
 	return false
 }
 
+// SetPaidAt create mutations, should not duplicate
+func (l *LaundryMutator) SetPaidAt(val string) bool { //nolint:dupl false positive
+	if val != l.PaidAt {
+		l.mutations = append(l.mutations, A.X{`=`, 13, val})
+		l.logs = append(l.logs, A.X{`paidAt`, l.PaidAt, val})
+		l.PaidAt = val
+		return true
+	}
+	return false
+}
+
+// SetPaidBy create mutations, should not duplicate
+func (l *LaundryMutator) SetPaidBy(val uint64) bool { //nolint:dupl false positive
+	if val != l.PaidBy {
+		l.mutations = append(l.mutations, A.X{`=`, 14, val})
+		l.logs = append(l.logs, A.X{`paidBy`, l.PaidBy, val})
+		l.PaidBy = val
+		return true
+	}
+	return false
+}
+
+// SetWashAt create mutations, should not duplicate
+func (l *LaundryMutator) SetWashAt(val string) bool { //nolint:dupl false positive
+	if val != l.WashAt {
+		l.mutations = append(l.mutations, A.X{`=`, 15, val})
+		l.logs = append(l.logs, A.X{`washAt`, l.WashAt, val})
+		l.WashAt = val
+		return true
+	}
+	return false
+}
+
+// SetWashBy create mutations, should not duplicate
+func (l *LaundryMutator) SetWashBy(val uint64) bool { //nolint:dupl false positive
+	if val != l.WashBy {
+		l.mutations = append(l.mutations, A.X{`=`, 16, val})
+		l.logs = append(l.logs, A.X{`washBy`, l.WashBy, val})
+		l.WashBy = val
+		return true
+	}
+	return false
+}
+
+// SetDryAt create mutations, should not duplicate
+func (l *LaundryMutator) SetDryAt(val string) bool { //nolint:dupl false positive
+	if val != l.DryAt {
+		l.mutations = append(l.mutations, A.X{`=`, 17, val})
+		l.logs = append(l.logs, A.X{`dryAt`, l.DryAt, val})
+		l.DryAt = val
+		return true
+	}
+	return false
+}
+
+// SetDryBy create mutations, should not duplicate
+func (l *LaundryMutator) SetDryBy(val uint64) bool { //nolint:dupl false positive
+	if val != l.DryBy {
+		l.mutations = append(l.mutations, A.X{`=`, 18, val})
+		l.logs = append(l.logs, A.X{`dryBy`, l.DryBy, val})
+		l.DryBy = val
+		return true
+	}
+	return false
+}
+
+// SetFoldAt create mutations, should not duplicate
+func (l *LaundryMutator) SetFoldAt(val string) bool { //nolint:dupl false positive
+	if val != l.FoldAt {
+		l.mutations = append(l.mutations, A.X{`=`, 19, val})
+		l.logs = append(l.logs, A.X{`foldAt`, l.FoldAt, val})
+		l.FoldAt = val
+		return true
+	}
+	return false
+}
+
+// SetFoldBy create mutations, should not duplicate
+func (l *LaundryMutator) SetFoldBy(val uint64) bool { //nolint:dupl false positive
+	if val != l.FoldBy {
+		l.mutations = append(l.mutations, A.X{`=`, 20, val})
+		l.logs = append(l.logs, A.X{`foldBy`, l.FoldBy, val})
+		l.FoldBy = val
+		return true
+	}
+	return false
+}
+
+// SetNotifyAt create mutations, should not duplicate
+func (l *LaundryMutator) SetNotifyAt(val string) bool { //nolint:dupl false positive
+	if val != l.NotifyAt {
+		l.mutations = append(l.mutations, A.X{`=`, 21, val})
+		l.logs = append(l.logs, A.X{`notifyAt`, l.NotifyAt, val})
+		l.NotifyAt = val
+		return true
+	}
+	return false
+}
+
+// SetNotifyBy create mutations, should not duplicate
+func (l *LaundryMutator) SetNotifyBy(val uint64) bool { //nolint:dupl false positive
+	if val != l.NotifyBy {
+		l.mutations = append(l.mutations, A.X{`=`, 22, val})
+		l.logs = append(l.logs, A.X{`notifyBy`, l.NotifyBy, val})
+		l.NotifyBy = val
+		return true
+	}
+	return false
+}
+
+// SetGivenAt create mutations, should not duplicate
+func (l *LaundryMutator) SetGivenAt(val string) bool { //nolint:dupl false positive
+	if val != l.GivenAt {
+		l.mutations = append(l.mutations, A.X{`=`, 23, val})
+		l.logs = append(l.logs, A.X{`givenAt`, l.GivenAt, val})
+		l.GivenAt = val
+		return true
+	}
+	return false
+}
+
+// SetGivenBys create mutations, should not duplicate
+func (l *LaundryMutator) SetGivenBys(val string) bool { //nolint:dupl false positive
+	if val != l.GivenBys {
+		l.mutations = append(l.mutations, A.X{`=`, 24, val})
+		l.logs = append(l.logs, A.X{`givenBys`, l.GivenBys, val})
+		l.GivenBys = val
+		return true
+	}
+	return false
+}
+
+// SetWeight create mutations, should not duplicate
+func (l *LaundryMutator) SetWeight(val float64) bool { //nolint:dupl false positive
+	if val != l.Weight {
+		l.mutations = append(l.mutations, A.X{`=`, 25, val})
+		l.logs = append(l.logs, A.X{`weight`, l.Weight, val})
+		l.Weight = val
+		return true
+	}
+	return false
+}
+
 // SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
 func (l *LaundryMutator) SetAll(from rqCafe.Laundry, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
 	if excludeMap == nil { // list of fields to exclude
@@ -623,6 +779,58 @@ func (l *LaundryMutator) SetAll(from rqCafe.Laundry, excludeMap, forceMap M.SB) 
 	}
 	if !excludeMap[`restoredBy`] && (forceMap[`restoredBy`] || from.RestoredBy != 0) {
 		l.RestoredBy = from.RestoredBy
+		changed = true
+	}
+	if !excludeMap[`paidAt`] && (forceMap[`paidAt`] || from.PaidAt != ``) {
+		l.PaidAt = S.Trim(from.PaidAt)
+		changed = true
+	}
+	if !excludeMap[`paidBy`] && (forceMap[`paidBy`] || from.PaidBy != 0) {
+		l.PaidBy = from.PaidBy
+		changed = true
+	}
+	if !excludeMap[`washAt`] && (forceMap[`washAt`] || from.WashAt != ``) {
+		l.WashAt = S.Trim(from.WashAt)
+		changed = true
+	}
+	if !excludeMap[`washBy`] && (forceMap[`washBy`] || from.WashBy != 0) {
+		l.WashBy = from.WashBy
+		changed = true
+	}
+	if !excludeMap[`dryAt`] && (forceMap[`dryAt`] || from.DryAt != ``) {
+		l.DryAt = S.Trim(from.DryAt)
+		changed = true
+	}
+	if !excludeMap[`dryBy`] && (forceMap[`dryBy`] || from.DryBy != 0) {
+		l.DryBy = from.DryBy
+		changed = true
+	}
+	if !excludeMap[`foldAt`] && (forceMap[`foldAt`] || from.FoldAt != ``) {
+		l.FoldAt = S.Trim(from.FoldAt)
+		changed = true
+	}
+	if !excludeMap[`foldBy`] && (forceMap[`foldBy`] || from.FoldBy != 0) {
+		l.FoldBy = from.FoldBy
+		changed = true
+	}
+	if !excludeMap[`notifyAt`] && (forceMap[`notifyAt`] || from.NotifyAt != ``) {
+		l.NotifyAt = S.Trim(from.NotifyAt)
+		changed = true
+	}
+	if !excludeMap[`notifyBy`] && (forceMap[`notifyBy`] || from.NotifyBy != 0) {
+		l.NotifyBy = from.NotifyBy
+		changed = true
+	}
+	if !excludeMap[`givenAt`] && (forceMap[`givenAt`] || from.GivenAt != ``) {
+		l.GivenAt = S.Trim(from.GivenAt)
+		changed = true
+	}
+	if !excludeMap[`givenBys`] && (forceMap[`givenBys`] || from.GivenBys != ``) {
+		l.GivenBys = S.Trim(from.GivenBys)
+		changed = true
+	}
+	if !excludeMap[`weight`] && (forceMap[`weight`] || from.Weight != 0) {
+		l.Weight = from.Weight
 		changed = true
 	}
 	return

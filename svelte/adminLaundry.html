@@ -4711,7 +4711,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         const formattedDate = `${year}-${month}-${date}`;
         return formattedDate;
       }
-      function dateISOFormat4(dayTo = 0) {
+      function dateISOFormat5(dayTo = 0) {
         const dt = new Date();
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -4780,7 +4780,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         utcDatetime,
         isoTime,
         isoDate,
-        dateISOFormat: dateISOFormat4,
+        dateISOFormat: dateISOFormat5,
         dateISOFormatFromYYYYMMDD,
         loadScript,
         formatPrice: formatPrice2,
@@ -23124,6 +23124,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*field*/
           ctx[15].ref
         )
+      ),
+      isObject: (
+        /*REFS*/
+        ctx[2] && /*REFS*/
+        ctx[2][
+          /*field*/
+          ctx[15].name
+        ] ? true : false
       )
     };
     if (
@@ -23185,6 +23193,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             /*field*/
             ctx[15].ref
           );
+        if (dirty & /*REFS, FIELDS*/
+        6)
+          inputbox_changes.isObject = /*REFS*/
+          ctx[2] && /*REFS*/
+          ctx[2][
+            /*field*/
+            ctx[15].name
+          ] ? true : false;
         if (!updating_value && dirty & /*payloads*/
         128) {
           updating_value = true;
@@ -23603,13 +23619,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       console.log("OnSubmit :::", payloads2);
     } } = $props;
     const Show = () => {
-      $invalidate(6, isShow = true);
       if (FIELDS && FIELDS.length > 0) {
         FIELDS.forEach((f) => {
           if (INITIAL_VALUES[f.name]) {
             $invalidate(7, payloads = [...payloads, INITIAL_VALUES[f.name]]);
           } else {
-            let initialPayload;
+            let initialPayload = "";
             switch (f.inputType) {
               case "combobox":
                 initialPayload = REFS[f.name] ? REFS[f.name][0] : f.ref[0] || "";
@@ -23628,6 +23643,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           }
         });
       }
+      $invalidate(6, isShow = true);
     };
     const Hide = () => $invalidate(6, isShow = false);
     const Reset = () => {
@@ -23710,12 +23726,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
 
   // adminLaundry.svelte
   var import_xConstant = __toESM(require_xConstant());
+  var import_xFormatter4 = __toESM(require_xFormatter());
   function create_if_block8(ctx) {
     let popupforms;
     let updating_isSubmitted;
     let current;
     function popupforms_isSubmitted_binding(value) {
-      ctx[13](value);
+      ctx[12](value);
     }
     let popupforms_props = {
       heading: "Add Laundry",
@@ -23723,10 +23740,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         /*fields*/
         ctx[1]
       ),
-      REFS: { "status": (
-        /*laundryStatus*/
-        ctx[11]
-      ) },
+      REFS: {
+        "paidBy": users,
+        "washBy": users,
+        "dryBy": users,
+        "foldBy": users,
+        "notifyBy": users
+      },
       OnSubmit: (
         /*OnAddlaundry*/
         ctx[10]
@@ -23740,7 +23760,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       ctx[5];
     }
     popupforms = new PopUpForms_default({ props: popupforms_props });
-    ctx[12](popupforms);
+    ctx[11](popupforms);
     binding_callbacks.push(() => bind(popupforms, "isSubmitted", popupforms_isSubmitted_binding));
     return {
       c() {
@@ -23776,7 +23796,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         current = false;
       },
       d(detaching) {
-        ctx[12](null);
+        ctx[11](null);
         destroy_component(popupforms, detaching);
       }
     };
@@ -23810,7 +23830,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             button,
             "click",
             /*click_handler*/
-            ctx[14]
+            ctx[13]
           );
           mounted = true;
         }
@@ -23846,22 +23866,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_MASTER_ROWS;
     let current;
     function mastertable_FIELDS_binding(value) {
-      ctx[15](value);
+      ctx[14](value);
     }
     function mastertable_PAGER_binding(value) {
-      ctx[16](value);
+      ctx[15](value);
     }
     function mastertable_MASTER_ROWS_binding(value) {
-      ctx[17](value);
+      ctx[16](value);
     }
     let mastertable_props = {
       NAME: "Laundry",
       ACCESS: segments,
-      REFS: { "status": (
-        /*laundryStatus*/
-        ctx[11]
-      ) },
       FIELD_TO_SEARCH: "items",
+      REFS: {
+        "paidBy": users,
+        "washBy": users,
+        "dryBy": users,
+        "foldBy": users,
+        "notifyBy": users
+      },
       CAN_EDIT_ROW: true,
       CAN_SEARCH_ROW: true,
       CAN_DELETE_ROW: true,
@@ -23930,7 +23953,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         const mastertable_changes = {};
         if (dirty & /*$scope, popUpForms*/
-        262160) {
+        131088) {
           mastertable_changes.$scope = { dirty, ctx: ctx2 };
         }
         if (!updating_FIELDS && dirty & /*fields*/
@@ -24030,7 +24053,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         const layoutmain_changes = {};
         if (dirty & /*$scope, fields, pager, laundries, popUpForms*/
-        262167) {
+        131095) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -24065,6 +24088,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     /** @type {Access} */
     {/* segments */}
   );
+  var users = (
+    /** @type {Record<number, string>} */
+    {/* users */}
+  );
   function instance13($self, $props, $invalidate) {
     let laundries = (
       /** @type {any[][]} */
@@ -24084,7 +24111,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     );
     let popUpForms = (
       /** @type {
-        import('svelte').SvelteComponent | HTMLElement | PopUpForms |any
+        import('svelte').SvelteComponent | HTMLElement | PopUpForms | any
       } */
       null
     );
@@ -24133,7 +24160,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           }
           $invalidate(2, pager = o.pager);
           $invalidate(0, laundries = o.laundries);
-          notifier.showSuccess(`Laundry '${row[1]}' restored !!`);
+          notifier.showSuccess(`Laundry #${row[1]} restored !!`);
           OnRefresh(pager);
         }
       );
@@ -24159,7 +24186,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           }
           $invalidate(2, pager = o.pager);
           $invalidate(0, laundries = o.laundries);
-          notifier.showSuccess(`Laundry '${row[1]}' deleted !!`);
+          notifier.showSuccess(`Laundry #${row[1]} deleted !!`);
           OnRefresh(pager);
         }
       );
@@ -24170,9 +24197,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         /** @type any[]*/
         customer: payloads[1],
         items: payloads[2],
-        status: payloads[3],
+        weight: payloads[3],
         note: payloads[4],
-        laundryAt: payloads[5]
+        laundryAt: payloads[5],
+        paidAt: payloads[6],
+        paidBy: payloads[7] || 0 + "",
+        washAt: payloads[8],
+        washBy: payloads[9] || 0 + "",
+        dryAt: payloads[10],
+        dryBy: payloads[11] || 0 + "",
+        foldAt: payloads[12],
+        foldBy: payloads[13] || 0 + "",
+        notifyAt: payloads[14],
+        notifyBy: payloads[15] || 0 + "",
+        givenAt: payloads[16],
+        givenBys: String(payloads[17])
       };
       const i = (
         /** @type {any}*/
@@ -24202,9 +24241,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         {
           customer: payloads[1],
           items: payloads[2],
-          status: payloads[3],
+          weight: Number(payloads[3]),
           note: payloads[4],
-          laundryAt: payloads[5]
+          laundryAt: payloads[5],
+          paidAt: payloads[6],
+          paidBy: (payloads[7] | 0) + "",
+          washAt: payloads[8],
+          washBy: (payloads[9] | 0) + "",
+          dryAt: payloads[10],
+          dryBy: (payloads[11] | 0) + "",
+          foldAt: payloads[12],
+          foldBy: (payloads[13] | 0) + "",
+          notifyAt: payloads[14],
+          notifyBy: (payloads[15] | 0) + "",
+          givenAt: payloads[16],
+          givenBys: String(payloads[17])
         }
       );
       const i = (
@@ -24231,7 +24282,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
       );
     }
-    const laundryStatus = ["Pending", "In-Progress", "Completed"];
     function popupforms_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {
         popUpForms = $value;
@@ -24267,7 +24317,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       OnDelete,
       OnEdit,
       OnAddlaundry,
-      laundryStatus,
       popupforms_binding,
       popupforms_isSubmitted_binding,
       click_handler,

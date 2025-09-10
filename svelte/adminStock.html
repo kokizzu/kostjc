@@ -23124,6 +23124,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*field*/
           ctx[15].ref
         )
+      ),
+      isObject: (
+        /*REFS*/
+        ctx[2] && /*REFS*/
+        ctx[2][
+          /*field*/
+          ctx[15].name
+        ] ? true : false
       )
     };
     if (
@@ -23185,6 +23193,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             /*field*/
             ctx[15].ref
           );
+        if (dirty & /*REFS, FIELDS*/
+        6)
+          inputbox_changes.isObject = /*REFS*/
+          ctx[2] && /*REFS*/
+          ctx[2][
+            /*field*/
+            ctx[15].name
+          ] ? true : false;
         if (!updating_value && dirty & /*payloads*/
         128) {
           updating_value = true;
@@ -23603,13 +23619,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       console.log("OnSubmit :::", payloads2);
     } } = $props;
     const Show = () => {
-      $invalidate(6, isShow = true);
       if (FIELDS && FIELDS.length > 0) {
         FIELDS.forEach((f) => {
           if (INITIAL_VALUES[f.name]) {
             $invalidate(7, payloads = [...payloads, INITIAL_VALUES[f.name]]);
           } else {
-            let initialPayload;
+            let initialPayload = "";
             switch (f.inputType) {
               case "combobox":
                 initialPayload = REFS[f.name] ? REFS[f.name][0] : f.ref[0] || "";
@@ -23628,6 +23643,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           }
         });
       }
+      $invalidate(6, isShow = true);
     };
     const Hide = () => $invalidate(6, isShow = false);
     const Reset = () => {

@@ -62,10 +62,10 @@ var AdminLaundryMeta = zCrud.Meta{
 			InputType: zCrud.InputTypeText,
 		},
 		{
-			Name:      mCafe.LaundryStatus,
-			Label:     `Status`,
-			DataType:  zCrud.DataTypeString,
-			InputType: zCrud.InputTypeComboboxArr,
+			Name:      mCafe.LaundryWeight,
+			Label:     `Weight (kg)`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeNumber,
 		},
 		{
 			Name:      mCafe.LaundryNote,
@@ -78,6 +78,78 @@ var AdminLaundryMeta = zCrud.Meta{
 			Label:     `Laudry At`,
 			DataType:  zCrud.DataTypeString,
 			InputType: zCrud.InputTypeDateTime,
+		},
+		{
+			Name:      mCafe.LaundryPaidAt,
+			Label:     `Paid At`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeDateTime,
+		},
+		{
+			Name:      mCafe.LaundryPaidBy,
+			Label:     `Paid By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+		},
+		{
+			Name:      mCafe.LaundryWashAt,
+			Label:     `Wash At`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeDateTime,
+		},
+		{
+			Name:      mCafe.LaundryWashBy,
+			Label:     `Wash By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+		},
+		{
+			Name:      mCafe.LaundryDryAt,
+			Label:     `Dry At`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeDateTime,
+		},
+		{
+			Name:      mCafe.LaundryDryBy,
+			Label:     `Dry By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+		},
+		{
+			Name:      mCafe.LaundryFoldAt,
+			Label:     `Fold At`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeDateTime,
+		},
+		{
+			Name:      mCafe.LaundryFoldBy,
+			Label:     `Fold By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+		},
+		{
+			Name:      mCafe.LaundryNotifyAt,
+			Label:     `Notify At`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeDateTime,
+		},
+		{
+			Name:      mCafe.LaundryNotifyBy,
+			Label:     `Notify By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+		},
+		{
+			Name:      mCafe.LaundryGivenAt,
+			Label:     `Given At`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeDateTime,
+		},
+		{
+			Name:      mCafe.LaundryGivenBys,
+			Label:     `Given By`,
+			DataType:  zCrud.DataTypeString,
+			InputType: zCrud.InputTypeText,
 		},
 		{
 			Name:      mCafe.CreatedAt,
@@ -147,12 +219,35 @@ func (d *Domain) AdminLaundry(in *AdminLaundryIn) (out AdminLaundryOut) {
 
 		lnd.SetCustomer(in.Laundry.Customer)
 		lnd.SetItems(in.Laundry.Items)
-		lnd.SetStatus(in.Laundry.Status)
+		lnd.SetWeight(in.Laundry.Weight)
 		lnd.SetNote(in.Laundry.Note)
-
 		if mCafe.IsValidDate(in.Laundry.LaundryAt, time.DateOnly) {
 			lnd.SetLaundryAt(in.Laundry.LaundryAt)
 		}
+		if mCafe.IsValidDate(in.Laundry.PaidAt, time.DateOnly) {
+			lnd.SetPaidAt(in.Laundry.PaidAt)
+		}
+		lnd.SetPaidBy(in.Laundry.PaidBy)
+		if mCafe.IsValidDate(in.Laundry.WashAt, time.DateOnly) {
+			lnd.SetWashAt(in.Laundry.WashAt)
+		}
+		lnd.SetWashBy(in.Laundry.WashBy)
+		if mCafe.IsValidDate(in.Laundry.DryAt, time.DateOnly) {
+			lnd.SetDryAt(in.Laundry.DryAt)
+		}
+		lnd.SetDryBy(in.Laundry.DryBy)
+		if mCafe.IsValidDate(in.Laundry.FoldAt, time.DateOnly) {
+			lnd.SetFoldAt(in.Laundry.FoldAt)
+		}
+		lnd.SetFoldBy(in.Laundry.FoldBy)
+		if mCafe.IsValidDate(in.Laundry.NotifyAt, time.DateOnly) {
+			lnd.SetNotifyAt(in.Laundry.NotifyAt)
+		}
+		lnd.SetNotifyBy(in.Laundry.NotifyBy)
+		if mCafe.IsValidDate(in.Laundry.GivenAt, time.DateOnly) {
+			lnd.SetGivenAt(in.Laundry.GivenAt)
+		}
+		lnd.SetGivenBys(in.Laundry.GivenBys)
 
 		if lnd.Id == 0 {
 			lnd.SetCreatedAt(in.UnixNow())

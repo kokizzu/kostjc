@@ -94,9 +94,20 @@ module.exports = {};
  * @property {string|number} id
  * @property {string} customer
  * @property {string} items
- * @property {string} status
  * @property {string} note
  * @property {string} laundryAt
+ * @property {string} paidAt
+ * @property {number} paidBy
+ * @property {string} washAt
+ * @property {number} washBy
+ * @property {string} dryAt
+ * @property {number} dryBy
+ * @property {string} foldAt
+ * @property {number} foldBy
+ * @property {string} notifyAt
+ * @property {number} notifyBy
+ * @property {string} givenAt
+ * @property {string} givenBy
  * @property {number} createdAt
  * @property {string} createdBy
  * @property {number} updatedAt

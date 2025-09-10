@@ -21,13 +21,12 @@
   }  
 
   export const Show = () => {
-    isShow = true;
     if (FIELDS && FIELDS.length > 0) {
       FIELDS.forEach((f) => {
         if (INITIAL_VALUES[f.name]) {
           payloads = [...payloads, INITIAL_VALUES[f.name]];
         } else {
-          let initialPayload;
+          let initialPayload = '';
           switch (f.inputType) {
             case 'combobox':
               initialPayload = REFS[f.name] ? REFS[f.name][0] : (f.ref[0] || '');
@@ -46,6 +45,7 @@
         }
       });
 		}
+    isShow = true;
   }
   export const Hide = () => isShow = false;
 
@@ -79,6 +79,7 @@
                 bind:value={payloads[idx]}
                 type={field.inputType}
                 values={REFS && REFS[field.name] ? REFS[field.name] : field.ref}
+                isObject={REFS && REFS[field.name] ? true : false}
               />
             {:else}
               <InputBox

@@ -890,6 +890,19 @@ exports.AdminFacilityLogs = async function AdminFacilityLogs( i, cb ) {
  * @property {number} laundry.deletedAt
  * @property {number} laundry.deletedBy
  * @property {number} laundry.restoredBy
+ * @property {String} laundry.paidAt
+ * @property {number} laundry.paidBy
+ * @property {String} laundry.washAt
+ * @property {number} laundry.washBy
+ * @property {String} laundry.dryAt
+ * @property {number} laundry.dryBy
+ * @property {String} laundry.foldAt
+ * @property {number} laundry.foldBy
+ * @property {String} laundry.notifyAt
+ * @property {number} laundry.notifyBy
+ * @property {String} laundry.givenAt
+ * @property {String} laundry.givenBys
+ * @property {number} laundry.weight
  */
 const AdminLaundryIn = {
   cmd: '', // string
@@ -917,6 +930,19 @@ const AdminLaundryIn = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    paidAt: '', // string
+    paidBy: 0, // uint64
+    washAt: '', // string
+    washBy: 0, // uint64
+    dryAt: '', // string
+    dryBy: 0, // uint64
+    foldAt: '', // string
+    foldBy: 0, // uint64
+    notifyAt: '', // string
+    notifyBy: 0, // uint64
+    givenAt: '', // string
+    givenBys: '', // string
+    weight: 0, // float64
   }, // rqCafe.Laundry
 }
 /**
@@ -945,6 +971,19 @@ const AdminLaundryIn = {
  * @property {number} laundry.deletedAt
  * @property {number} laundry.deletedBy
  * @property {number} laundry.restoredBy
+ * @property {String} laundry.paidAt
+ * @property {number} laundry.paidBy
+ * @property {String} laundry.washAt
+ * @property {number} laundry.washBy
+ * @property {String} laundry.dryAt
+ * @property {number} laundry.dryBy
+ * @property {String} laundry.foldAt
+ * @property {number} laundry.foldBy
+ * @property {String} laundry.notifyAt
+ * @property {number} laundry.notifyBy
+ * @property {String} laundry.givenAt
+ * @property {String} laundry.givenBys
+ * @property {number} laundry.weight
  * @property {Object} laundries
  */
 const AdminLaundryOut = {
@@ -980,6 +1019,19 @@ const AdminLaundryOut = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    paidAt: '', // string
+    paidBy: 0, // uint64
+    washAt: '', // string
+    washBy: 0, // uint64
+    dryAt: '', // string
+    dryBy: 0, // uint64
+    foldAt: '', // string
+    foldBy: 0, // uint64
+    notifyAt: '', // string
+    notifyBy: 0, // uint64
+    givenAt: '', // string
+    givenBys: '', // string
+    weight: 0, // float64
   }, // rqCafe.Laundry
   laundries: { // [][]any
   }, // [][]any

@@ -1,10 +1,12 @@
 package presentation
 
 import (
+	"fmt"
 	"kostjc/conf"
 	"kostjc/domain"
 	"time"
 
+	"github.com/fatih/color"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
@@ -13,6 +15,7 @@ import (
 	"github.com/kokizzu/gotro/L"
 	"github.com/kokizzu/gotro/M"
 	"github.com/kokizzu/gotro/S"
+	"github.com/kokizzu/gotro/X"
 	"github.com/kokizzu/gotro/Z"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -54,6 +57,7 @@ func webApiParseInput(ctx *fiber.Ctx, reqCommon *domain.RequestCommon, in any, u
 		// multipart/form-data
 		if retry {
 			if err := ctx.BodyParser(in); L.IsError(err, `ctx.BodyParser failed: `+url) {
+				fmt.Println(color.RedString(X.ToJsonPretty(in)))
 				_ = ctx.JSON(M.SX{
 					`error`: err.Error(),
 				})

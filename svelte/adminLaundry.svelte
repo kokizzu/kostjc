@@ -15,6 +15,7 @@
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
   import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
+    import { dateISOFormat } from './_components/xFormatter';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -22,10 +23,11 @@
   let laundries   = /** @type {any[][]} */([/* laundries */]);
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
+  let users       = /** @type {Record<number, string>} */ ({/* users */});
 
   let isPopUpFormReady = /** @type boolean */ (false);
   let popUpForms = /** @type {
-    import('svelte').SvelteComponent | HTMLElement | PopUpForms |any
+    import('svelte').SvelteComponent | HTMLElement | PopUpForms | any
   } */ (null);
   let isSubmitAddLaundry = /** @type boolean */ (false);
 
@@ -52,7 +54,7 @@
     );
   }
 
-  async function OnRestore(/** @type any[] */ row) {
+  async function OnRestore(/** @type {any[]} */ row) {
     const i = /** @type {any}*/ ({
       pager,
       laundry: {
@@ -72,14 +74,14 @@
 
         pager = o.pager;
         laundries = o.laundries;
-        notifier.showSuccess(`Laundry '${row[1]}' restored !!`);
+        notifier.showSuccess(`Laundry #${row[1]} restored !!`);
 
         OnRefresh(pager);
       }
     );
   }
 
-  async function OnDelete(/** @type any[] */ row) {
+  async function OnDelete(/** @type {any[]} */ row) {
     const i = /** @type {any}*/ ({
       pager,
       laundry: {
@@ -99,7 +101,7 @@
 
         pager = o.pager;
         laundries = o.laundries;
-        notifier.showSuccess(`Laundry '${row[1]}' deleted !!`);
+        notifier.showSuccess(`Laundry #${row[1]} deleted !!`);
 
         OnRefresh(pager);
       }
@@ -111,9 +113,21 @@
       id: id,
       customer: payloads[1],
       items: payloads[2],
-      status: payloads[3],
+      weight: payloads[3],
       note: payloads[4],
       laundryAt: payloads[5],
+      paidAt: payloads[6],
+      paidBy: payloads[7]||0+'',
+      washAt: payloads[8],
+      washBy: payloads[9]||0+'',
+      dryAt: payloads[10],
+      dryBy: payloads[11]||0+'',
+      foldAt: payloads[12],
+      foldBy: payloads[13]||0+'',
+      notifyAt: payloads[14],
+      notifyBy: payloads[15]||0+'',
+      givenAt: payloads[16],
+      givenBys: String(payloads[17]),
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -145,9 +159,21 @@
     const laundry = /** @type {any} */ ({
       customer: payloads[1],
       items: payloads[2],
-      status: payloads[3],
+      weight: Number(payloads[3]),
       note: payloads[4],
-      laundryAt: payloads[5]
+      laundryAt: payloads[5],
+      paidAt: payloads[6],
+      paidBy: (payloads[7]|0)+'',
+      washAt: payloads[8],
+      washBy: (payloads[9]|0)+'',
+      dryAt: payloads[10],
+      dryBy: (payloads[11]|0)+'',
+      foldAt: payloads[12],
+      foldBy: (payloads[13]|0)+'',
+      notifyAt: payloads[14],
+      notifyBy: (payloads[15]|0)+'',
+      givenAt: payloads[16],
+      givenBys: String(payloads[17]),
     });
     const i = /** @type {any} */ ({
       pager,
@@ -176,12 +202,6 @@
       }
     );
   }
-
-  const laundryStatus = [
-    'Pending',
-    'In-Progress',
-    'Completed'
-  ]
 </script>
 
 {#if isPopUpFormReady}
@@ -190,7 +210,11 @@
     heading="Add Laundry"
     FIELDS={fields}
     REFS={{
-      'status': laundryStatus
+      'paidBy': users,
+      'washBy': users,
+      'dryBy': users,
+      'foldBy': users,
+      'notifyBy': users
     }}
     bind:isSubmitted={isSubmitAddLaundry}
     OnSubmit={OnAddlaundry}
@@ -206,10 +230,15 @@
       bind:FIELDS={fields}
       bind:PAGER={pager}
       bind:MASTER_ROWS={laundries}
-      REFS={{
-        'status': laundryStatus
-      }}
       FIELD_TO_SEARCH="items"
+
+      REFS={{
+        'paidBy': users,
+        'washBy': users,
+        'dryBy': users,
+        'foldBy': users,
+        'notifyBy': users
+      }}
 
       CAN_EDIT_ROW
       CAN_SEARCH_ROW
