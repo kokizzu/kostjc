@@ -880,7 +880,6 @@ exports.AdminFacilityLogs = async function AdminFacilityLogs( i, cb ) {
  * @property {number} laundry.id
  * @property {String} laundry.customer
  * @property {String} laundry.items
- * @property {String} laundry.status
  * @property {String} laundry.note
  * @property {String} laundry.laundryAt
  * @property {number} laundry.createdAt
@@ -920,7 +919,6 @@ const AdminLaundryIn = {
     id: 0, // uint64
     customer: '', // string
     items: '', // string
-    status: '', // string
     note: '', // string
     laundryAt: '', // string
     createdAt: 0, // int64
@@ -961,7 +959,6 @@ const AdminLaundryIn = {
  * @property {number} laundry.id
  * @property {String} laundry.customer
  * @property {String} laundry.items
- * @property {String} laundry.status
  * @property {String} laundry.note
  * @property {String} laundry.laundryAt
  * @property {number} laundry.createdAt
@@ -1009,7 +1006,6 @@ const AdminLaundryOut = {
     id: 0, // uint64
     customer: '', // string
     items: '', // string
-    status: '', // string
     note: '', // string
     laundryAt: '', // string
     createdAt: 0, // int64

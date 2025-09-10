@@ -376,7 +376,6 @@ type Laundry struct {
 	Id         uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
 	Customer   string      `json:"customer" form:"customer" query:"customer" long:"customer" msg:"customer"`
 	Items      string      `json:"items" form:"items" query:"items" long:"items" msg:"items"`
-	Status     string      `json:"status" form:"status" query:"status" long:"status" msg:"status"`
 	Note       string      `json:"note" form:"note" query:"note" long:"note" msg:"note"`
 	LaundryAt  string      `json:"laundryAt" form:"laundryAt" query:"laundryAt" long:"laundryAt" msg:"laundryAt"`
 	CreatedAt  int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
@@ -439,7 +438,6 @@ func (l *Laundry) SqlSelectAllFields() string { //nolint:dupl false positive
 	return ` "id"
 	, "customer"
 	, "items"
-	, "status"
 	, "note"
 	, "laundryAt"
 	, "createdAt"
@@ -470,7 +468,6 @@ func (l *Laundry) SqlSelectAllUncensoredFields() string { //nolint:dupl false po
 	return ` "id"
 	, "customer"
 	, "items"
-	, "status"
 	, "note"
 	, "laundryAt"
 	, "createdAt"
@@ -502,29 +499,28 @@ func (l *Laundry) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 0, l.Id},
 		A.X{`=`, 1, l.Customer},
 		A.X{`=`, 2, l.Items},
-		A.X{`=`, 3, l.Status},
-		A.X{`=`, 4, l.Note},
-		A.X{`=`, 5, l.LaundryAt},
-		A.X{`=`, 6, l.CreatedAt},
-		A.X{`=`, 7, l.CreatedBy},
-		A.X{`=`, 8, l.UpdatedAt},
-		A.X{`=`, 9, l.UpdatedBy},
-		A.X{`=`, 10, l.DeletedAt},
-		A.X{`=`, 11, l.DeletedBy},
-		A.X{`=`, 12, l.RestoredBy},
-		A.X{`=`, 13, l.PaidAt},
-		A.X{`=`, 14, l.PaidBy},
-		A.X{`=`, 15, l.WashAt},
-		A.X{`=`, 16, l.WashBy},
-		A.X{`=`, 17, l.DryAt},
-		A.X{`=`, 18, l.DryBy},
-		A.X{`=`, 19, l.FoldAt},
-		A.X{`=`, 20, l.FoldBy},
-		A.X{`=`, 21, l.NotifyAt},
-		A.X{`=`, 22, l.NotifyBy},
-		A.X{`=`, 23, l.GivenAt},
-		A.X{`=`, 24, l.GivenBys},
-		A.X{`=`, 25, l.Weight},
+		A.X{`=`, 3, l.Note},
+		A.X{`=`, 4, l.LaundryAt},
+		A.X{`=`, 5, l.CreatedAt},
+		A.X{`=`, 6, l.CreatedBy},
+		A.X{`=`, 7, l.UpdatedAt},
+		A.X{`=`, 8, l.UpdatedBy},
+		A.X{`=`, 9, l.DeletedAt},
+		A.X{`=`, 10, l.DeletedBy},
+		A.X{`=`, 11, l.RestoredBy},
+		A.X{`=`, 12, l.PaidAt},
+		A.X{`=`, 13, l.PaidBy},
+		A.X{`=`, 14, l.WashAt},
+		A.X{`=`, 15, l.WashBy},
+		A.X{`=`, 16, l.DryAt},
+		A.X{`=`, 17, l.DryBy},
+		A.X{`=`, 18, l.FoldAt},
+		A.X{`=`, 19, l.FoldBy},
+		A.X{`=`, 20, l.NotifyAt},
+		A.X{`=`, 21, l.NotifyBy},
+		A.X{`=`, 22, l.GivenAt},
+		A.X{`=`, 23, l.GivenBys},
+		A.X{`=`, 24, l.Weight},
 	}
 }
 
@@ -558,19 +554,9 @@ func (l *Laundry) SqlItems() string { //nolint:dupl false positive
 	return `"items"`
 }
 
-// IdxStatus return name of the index
-func (l *Laundry) IdxStatus() int { //nolint:dupl false positive
-	return 3
-}
-
-// SqlStatus return name of the column being indexed
-func (l *Laundry) SqlStatus() string { //nolint:dupl false positive
-	return `"status"`
-}
-
 // IdxNote return name of the index
 func (l *Laundry) IdxNote() int { //nolint:dupl false positive
-	return 4
+	return 3
 }
 
 // SqlNote return name of the column being indexed
@@ -580,7 +566,7 @@ func (l *Laundry) SqlNote() string { //nolint:dupl false positive
 
 // IdxLaundryAt return name of the index
 func (l *Laundry) IdxLaundryAt() int { //nolint:dupl false positive
-	return 5
+	return 4
 }
 
 // SqlLaundryAt return name of the column being indexed
@@ -590,7 +576,7 @@ func (l *Laundry) SqlLaundryAt() string { //nolint:dupl false positive
 
 // IdxCreatedAt return name of the index
 func (l *Laundry) IdxCreatedAt() int { //nolint:dupl false positive
-	return 6
+	return 5
 }
 
 // SqlCreatedAt return name of the column being indexed
@@ -600,7 +586,7 @@ func (l *Laundry) SqlCreatedAt() string { //nolint:dupl false positive
 
 // IdxCreatedBy return name of the index
 func (l *Laundry) IdxCreatedBy() int { //nolint:dupl false positive
-	return 7
+	return 6
 }
 
 // SqlCreatedBy return name of the column being indexed
@@ -610,7 +596,7 @@ func (l *Laundry) SqlCreatedBy() string { //nolint:dupl false positive
 
 // IdxUpdatedAt return name of the index
 func (l *Laundry) IdxUpdatedAt() int { //nolint:dupl false positive
-	return 8
+	return 7
 }
 
 // SqlUpdatedAt return name of the column being indexed
@@ -620,7 +606,7 @@ func (l *Laundry) SqlUpdatedAt() string { //nolint:dupl false positive
 
 // IdxUpdatedBy return name of the index
 func (l *Laundry) IdxUpdatedBy() int { //nolint:dupl false positive
-	return 9
+	return 8
 }
 
 // SqlUpdatedBy return name of the column being indexed
@@ -630,7 +616,7 @@ func (l *Laundry) SqlUpdatedBy() string { //nolint:dupl false positive
 
 // IdxDeletedAt return name of the index
 func (l *Laundry) IdxDeletedAt() int { //nolint:dupl false positive
-	return 10
+	return 9
 }
 
 // SqlDeletedAt return name of the column being indexed
@@ -640,7 +626,7 @@ func (l *Laundry) SqlDeletedAt() string { //nolint:dupl false positive
 
 // IdxDeletedBy return name of the index
 func (l *Laundry) IdxDeletedBy() int { //nolint:dupl false positive
-	return 11
+	return 10
 }
 
 // SqlDeletedBy return name of the column being indexed
@@ -650,7 +636,7 @@ func (l *Laundry) SqlDeletedBy() string { //nolint:dupl false positive
 
 // IdxRestoredBy return name of the index
 func (l *Laundry) IdxRestoredBy() int { //nolint:dupl false positive
-	return 12
+	return 11
 }
 
 // SqlRestoredBy return name of the column being indexed
@@ -660,7 +646,7 @@ func (l *Laundry) SqlRestoredBy() string { //nolint:dupl false positive
 
 // IdxPaidAt return name of the index
 func (l *Laundry) IdxPaidAt() int { //nolint:dupl false positive
-	return 13
+	return 12
 }
 
 // SqlPaidAt return name of the column being indexed
@@ -670,7 +656,7 @@ func (l *Laundry) SqlPaidAt() string { //nolint:dupl false positive
 
 // IdxPaidBy return name of the index
 func (l *Laundry) IdxPaidBy() int { //nolint:dupl false positive
-	return 14
+	return 13
 }
 
 // SqlPaidBy return name of the column being indexed
@@ -680,7 +666,7 @@ func (l *Laundry) SqlPaidBy() string { //nolint:dupl false positive
 
 // IdxWashAt return name of the index
 func (l *Laundry) IdxWashAt() int { //nolint:dupl false positive
-	return 15
+	return 14
 }
 
 // SqlWashAt return name of the column being indexed
@@ -690,7 +676,7 @@ func (l *Laundry) SqlWashAt() string { //nolint:dupl false positive
 
 // IdxWashBy return name of the index
 func (l *Laundry) IdxWashBy() int { //nolint:dupl false positive
-	return 16
+	return 15
 }
 
 // SqlWashBy return name of the column being indexed
@@ -700,7 +686,7 @@ func (l *Laundry) SqlWashBy() string { //nolint:dupl false positive
 
 // IdxDryAt return name of the index
 func (l *Laundry) IdxDryAt() int { //nolint:dupl false positive
-	return 17
+	return 16
 }
 
 // SqlDryAt return name of the column being indexed
@@ -710,7 +696,7 @@ func (l *Laundry) SqlDryAt() string { //nolint:dupl false positive
 
 // IdxDryBy return name of the index
 func (l *Laundry) IdxDryBy() int { //nolint:dupl false positive
-	return 18
+	return 17
 }
 
 // SqlDryBy return name of the column being indexed
@@ -720,7 +706,7 @@ func (l *Laundry) SqlDryBy() string { //nolint:dupl false positive
 
 // IdxFoldAt return name of the index
 func (l *Laundry) IdxFoldAt() int { //nolint:dupl false positive
-	return 19
+	return 18
 }
 
 // SqlFoldAt return name of the column being indexed
@@ -730,7 +716,7 @@ func (l *Laundry) SqlFoldAt() string { //nolint:dupl false positive
 
 // IdxFoldBy return name of the index
 func (l *Laundry) IdxFoldBy() int { //nolint:dupl false positive
-	return 20
+	return 19
 }
 
 // SqlFoldBy return name of the column being indexed
@@ -740,7 +726,7 @@ func (l *Laundry) SqlFoldBy() string { //nolint:dupl false positive
 
 // IdxNotifyAt return name of the index
 func (l *Laundry) IdxNotifyAt() int { //nolint:dupl false positive
-	return 21
+	return 20
 }
 
 // SqlNotifyAt return name of the column being indexed
@@ -750,7 +736,7 @@ func (l *Laundry) SqlNotifyAt() string { //nolint:dupl false positive
 
 // IdxNotifyBy return name of the index
 func (l *Laundry) IdxNotifyBy() int { //nolint:dupl false positive
-	return 22
+	return 21
 }
 
 // SqlNotifyBy return name of the column being indexed
@@ -760,7 +746,7 @@ func (l *Laundry) SqlNotifyBy() string { //nolint:dupl false positive
 
 // IdxGivenAt return name of the index
 func (l *Laundry) IdxGivenAt() int { //nolint:dupl false positive
-	return 23
+	return 22
 }
 
 // SqlGivenAt return name of the column being indexed
@@ -770,7 +756,7 @@ func (l *Laundry) SqlGivenAt() string { //nolint:dupl false positive
 
 // IdxGivenBys return name of the index
 func (l *Laundry) IdxGivenBys() int { //nolint:dupl false positive
-	return 24
+	return 23
 }
 
 // SqlGivenBys return name of the column being indexed
@@ -780,7 +766,7 @@ func (l *Laundry) SqlGivenBys() string { //nolint:dupl false positive
 
 // IdxWeight return name of the index
 func (l *Laundry) IdxWeight() int { //nolint:dupl false positive
-	return 25
+	return 24
 }
 
 // SqlWeight return name of the column being indexed
@@ -798,29 +784,28 @@ func (l *Laundry) ToArray() A.X { //nolint:dupl false positive
 		id,
 		l.Customer,   // 1
 		l.Items,      // 2
-		l.Status,     // 3
-		l.Note,       // 4
-		l.LaundryAt,  // 5
-		l.CreatedAt,  // 6
-		l.CreatedBy,  // 7
-		l.UpdatedAt,  // 8
-		l.UpdatedBy,  // 9
-		l.DeletedAt,  // 10
-		l.DeletedBy,  // 11
-		l.RestoredBy, // 12
-		l.PaidAt,     // 13
-		l.PaidBy,     // 14
-		l.WashAt,     // 15
-		l.WashBy,     // 16
-		l.DryAt,      // 17
-		l.DryBy,      // 18
-		l.FoldAt,     // 19
-		l.FoldBy,     // 20
-		l.NotifyAt,   // 21
-		l.NotifyBy,   // 22
-		l.GivenAt,    // 23
-		l.GivenBys,   // 24
-		l.Weight,     // 25
+		l.Note,       // 3
+		l.LaundryAt,  // 4
+		l.CreatedAt,  // 5
+		l.CreatedBy,  // 6
+		l.UpdatedAt,  // 7
+		l.UpdatedBy,  // 8
+		l.DeletedAt,  // 9
+		l.DeletedBy,  // 10
+		l.RestoredBy, // 11
+		l.PaidAt,     // 12
+		l.PaidBy,     // 13
+		l.WashAt,     // 14
+		l.WashBy,     // 15
+		l.DryAt,      // 16
+		l.DryBy,      // 17
+		l.FoldAt,     // 18
+		l.FoldBy,     // 19
+		l.NotifyAt,   // 20
+		l.NotifyBy,   // 21
+		l.GivenAt,    // 22
+		l.GivenBys,   // 23
+		l.Weight,     // 24
 	}
 }
 
@@ -829,29 +814,28 @@ func (l *Laundry) FromArray(a A.X) *Laundry { //nolint:dupl false positive
 	l.Id = X.ToU(a[0])
 	l.Customer = X.ToS(a[1])
 	l.Items = X.ToS(a[2])
-	l.Status = X.ToS(a[3])
-	l.Note = X.ToS(a[4])
-	l.LaundryAt = X.ToS(a[5])
-	l.CreatedAt = X.ToI(a[6])
-	l.CreatedBy = X.ToU(a[7])
-	l.UpdatedAt = X.ToI(a[8])
-	l.UpdatedBy = X.ToU(a[9])
-	l.DeletedAt = X.ToI(a[10])
-	l.DeletedBy = X.ToU(a[11])
-	l.RestoredBy = X.ToU(a[12])
-	l.PaidAt = X.ToS(a[13])
-	l.PaidBy = X.ToU(a[14])
-	l.WashAt = X.ToS(a[15])
-	l.WashBy = X.ToU(a[16])
-	l.DryAt = X.ToS(a[17])
-	l.DryBy = X.ToU(a[18])
-	l.FoldAt = X.ToS(a[19])
-	l.FoldBy = X.ToU(a[20])
-	l.NotifyAt = X.ToS(a[21])
-	l.NotifyBy = X.ToU(a[22])
-	l.GivenAt = X.ToS(a[23])
-	l.GivenBys = X.ToS(a[24])
-	l.Weight = X.ToF(a[25])
+	l.Note = X.ToS(a[3])
+	l.LaundryAt = X.ToS(a[4])
+	l.CreatedAt = X.ToI(a[5])
+	l.CreatedBy = X.ToU(a[6])
+	l.UpdatedAt = X.ToI(a[7])
+	l.UpdatedBy = X.ToU(a[8])
+	l.DeletedAt = X.ToI(a[9])
+	l.DeletedBy = X.ToU(a[10])
+	l.RestoredBy = X.ToU(a[11])
+	l.PaidAt = X.ToS(a[12])
+	l.PaidBy = X.ToU(a[13])
+	l.WashAt = X.ToS(a[14])
+	l.WashBy = X.ToU(a[15])
+	l.DryAt = X.ToS(a[16])
+	l.DryBy = X.ToU(a[17])
+	l.FoldAt = X.ToS(a[18])
+	l.FoldBy = X.ToU(a[19])
+	l.NotifyAt = X.ToS(a[20])
+	l.NotifyBy = X.ToU(a[21])
+	l.GivenAt = X.ToS(a[22])
+	l.GivenBys = X.ToS(a[23])
+	l.Weight = X.ToF(a[24])
 	return l
 }
 
@@ -860,29 +844,28 @@ func (l *Laundry) FromUncensoredArray(a A.X) *Laundry { //nolint:dupl false posi
 	l.Id = X.ToU(a[0])
 	l.Customer = X.ToS(a[1])
 	l.Items = X.ToS(a[2])
-	l.Status = X.ToS(a[3])
-	l.Note = X.ToS(a[4])
-	l.LaundryAt = X.ToS(a[5])
-	l.CreatedAt = X.ToI(a[6])
-	l.CreatedBy = X.ToU(a[7])
-	l.UpdatedAt = X.ToI(a[8])
-	l.UpdatedBy = X.ToU(a[9])
-	l.DeletedAt = X.ToI(a[10])
-	l.DeletedBy = X.ToU(a[11])
-	l.RestoredBy = X.ToU(a[12])
-	l.PaidAt = X.ToS(a[13])
-	l.PaidBy = X.ToU(a[14])
-	l.WashAt = X.ToS(a[15])
-	l.WashBy = X.ToU(a[16])
-	l.DryAt = X.ToS(a[17])
-	l.DryBy = X.ToU(a[18])
-	l.FoldAt = X.ToS(a[19])
-	l.FoldBy = X.ToU(a[20])
-	l.NotifyAt = X.ToS(a[21])
-	l.NotifyBy = X.ToU(a[22])
-	l.GivenAt = X.ToS(a[23])
-	l.GivenBys = X.ToS(a[24])
-	l.Weight = X.ToF(a[25])
+	l.Note = X.ToS(a[3])
+	l.LaundryAt = X.ToS(a[4])
+	l.CreatedAt = X.ToI(a[5])
+	l.CreatedBy = X.ToU(a[6])
+	l.UpdatedAt = X.ToI(a[7])
+	l.UpdatedBy = X.ToU(a[8])
+	l.DeletedAt = X.ToI(a[9])
+	l.DeletedBy = X.ToU(a[10])
+	l.RestoredBy = X.ToU(a[11])
+	l.PaidAt = X.ToS(a[12])
+	l.PaidBy = X.ToU(a[13])
+	l.WashAt = X.ToS(a[14])
+	l.WashBy = X.ToU(a[15])
+	l.DryAt = X.ToS(a[16])
+	l.DryBy = X.ToU(a[17])
+	l.FoldAt = X.ToS(a[18])
+	l.FoldBy = X.ToU(a[19])
+	l.NotifyAt = X.ToS(a[20])
+	l.NotifyBy = X.ToU(a[21])
+	l.GivenAt = X.ToS(a[22])
+	l.GivenBys = X.ToS(a[23])
+	l.Weight = X.ToF(a[24])
 	return l
 }
 
@@ -929,7 +912,6 @@ var LaundryFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`id`:         Tt.Unsigned,
 	`customer`:   Tt.String,
 	`items`:      Tt.String,
-	`status`:     Tt.String,
 	`note`:       Tt.String,
 	`laundryAt`:  Tt.String,
 	`createdAt`:  Tt.Integer,

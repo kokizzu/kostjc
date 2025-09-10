@@ -380,29 +380,28 @@ func (l *LaundryMutator) DoDeletePermanentById() bool { //nolint:dupl false posi
 //		A.X{`=`, 0, l.Id},
 //		A.X{`=`, 1, l.Customer},
 //		A.X{`=`, 2, l.Items},
-//		A.X{`=`, 3, l.Status},
-//		A.X{`=`, 4, l.Note},
-//		A.X{`=`, 5, l.LaundryAt},
-//		A.X{`=`, 6, l.CreatedAt},
-//		A.X{`=`, 7, l.CreatedBy},
-//		A.X{`=`, 8, l.UpdatedAt},
-//		A.X{`=`, 9, l.UpdatedBy},
-//		A.X{`=`, 10, l.DeletedAt},
-//		A.X{`=`, 11, l.DeletedBy},
-//		A.X{`=`, 12, l.RestoredBy},
-//		A.X{`=`, 13, l.PaidAt},
-//		A.X{`=`, 14, l.PaidBy},
-//		A.X{`=`, 15, l.WashAt},
-//		A.X{`=`, 16, l.WashBy},
-//		A.X{`=`, 17, l.DryAt},
-//		A.X{`=`, 18, l.DryBy},
-//		A.X{`=`, 19, l.FoldAt},
-//		A.X{`=`, 20, l.FoldBy},
-//		A.X{`=`, 21, l.NotifyAt},
-//		A.X{`=`, 22, l.NotifyBy},
-//		A.X{`=`, 23, l.GivenAt},
-//		A.X{`=`, 24, l.GivenBys},
-//		A.X{`=`, 25, l.Weight},
+//		A.X{`=`, 3, l.Note},
+//		A.X{`=`, 4, l.LaundryAt},
+//		A.X{`=`, 5, l.CreatedAt},
+//		A.X{`=`, 6, l.CreatedBy},
+//		A.X{`=`, 7, l.UpdatedAt},
+//		A.X{`=`, 8, l.UpdatedBy},
+//		A.X{`=`, 9, l.DeletedAt},
+//		A.X{`=`, 10, l.DeletedBy},
+//		A.X{`=`, 11, l.RestoredBy},
+//		A.X{`=`, 12, l.PaidAt},
+//		A.X{`=`, 13, l.PaidBy},
+//		A.X{`=`, 14, l.WashAt},
+//		A.X{`=`, 15, l.WashBy},
+//		A.X{`=`, 16, l.DryAt},
+//		A.X{`=`, 17, l.DryBy},
+//		A.X{`=`, 18, l.FoldAt},
+//		A.X{`=`, 19, l.FoldBy},
+//		A.X{`=`, 20, l.NotifyAt},
+//		A.X{`=`, 21, l.NotifyBy},
+//		A.X{`=`, 22, l.GivenAt},
+//		A.X{`=`, 23, l.GivenBys},
+//		A.X{`=`, 24, l.Weight},
 //	})
 //	return !L.IsError(err, `Laundry.DoUpsert failed: `+l.SpaceName()+ `\n%#v`, arr)
 // }
@@ -468,21 +467,10 @@ func (l *LaundryMutator) SetItems(val string) bool { //nolint:dupl false positiv
 	return false
 }
 
-// SetStatus create mutations, should not duplicate
-func (l *LaundryMutator) SetStatus(val string) bool { //nolint:dupl false positive
-	if val != l.Status {
-		l.mutations = append(l.mutations, A.X{`=`, 3, val})
-		l.logs = append(l.logs, A.X{`status`, l.Status, val})
-		l.Status = val
-		return true
-	}
-	return false
-}
-
 // SetNote create mutations, should not duplicate
 func (l *LaundryMutator) SetNote(val string) bool { //nolint:dupl false positive
 	if val != l.Note {
-		l.mutations = append(l.mutations, A.X{`=`, 4, val})
+		l.mutations = append(l.mutations, A.X{`=`, 3, val})
 		l.logs = append(l.logs, A.X{`note`, l.Note, val})
 		l.Note = val
 		return true
@@ -493,7 +481,7 @@ func (l *LaundryMutator) SetNote(val string) bool { //nolint:dupl false positive
 // SetLaundryAt create mutations, should not duplicate
 func (l *LaundryMutator) SetLaundryAt(val string) bool { //nolint:dupl false positive
 	if val != l.LaundryAt {
-		l.mutations = append(l.mutations, A.X{`=`, 5, val})
+		l.mutations = append(l.mutations, A.X{`=`, 4, val})
 		l.logs = append(l.logs, A.X{`laundryAt`, l.LaundryAt, val})
 		l.LaundryAt = val
 		return true
@@ -504,7 +492,7 @@ func (l *LaundryMutator) SetLaundryAt(val string) bool { //nolint:dupl false pos
 // SetCreatedAt create mutations, should not duplicate
 func (l *LaundryMutator) SetCreatedAt(val int64) bool { //nolint:dupl false positive
 	if val != l.CreatedAt {
-		l.mutations = append(l.mutations, A.X{`=`, 6, val})
+		l.mutations = append(l.mutations, A.X{`=`, 5, val})
 		l.logs = append(l.logs, A.X{`createdAt`, l.CreatedAt, val})
 		l.CreatedAt = val
 		return true
@@ -515,7 +503,7 @@ func (l *LaundryMutator) SetCreatedAt(val int64) bool { //nolint:dupl false posi
 // SetCreatedBy create mutations, should not duplicate
 func (l *LaundryMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false positive
 	if val != l.CreatedBy {
-		l.mutations = append(l.mutations, A.X{`=`, 7, val})
+		l.mutations = append(l.mutations, A.X{`=`, 6, val})
 		l.logs = append(l.logs, A.X{`createdBy`, l.CreatedBy, val})
 		l.CreatedBy = val
 		return true
@@ -526,7 +514,7 @@ func (l *LaundryMutator) SetCreatedBy(val uint64) bool { //nolint:dupl false pos
 // SetUpdatedAt create mutations, should not duplicate
 func (l *LaundryMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false positive
 	if val != l.UpdatedAt {
-		l.mutations = append(l.mutations, A.X{`=`, 8, val})
+		l.mutations = append(l.mutations, A.X{`=`, 7, val})
 		l.logs = append(l.logs, A.X{`updatedAt`, l.UpdatedAt, val})
 		l.UpdatedAt = val
 		return true
@@ -537,7 +525,7 @@ func (l *LaundryMutator) SetUpdatedAt(val int64) bool { //nolint:dupl false posi
 // SetUpdatedBy create mutations, should not duplicate
 func (l *LaundryMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false positive
 	if val != l.UpdatedBy {
-		l.mutations = append(l.mutations, A.X{`=`, 9, val})
+		l.mutations = append(l.mutations, A.X{`=`, 8, val})
 		l.logs = append(l.logs, A.X{`updatedBy`, l.UpdatedBy, val})
 		l.UpdatedBy = val
 		return true
@@ -548,7 +536,7 @@ func (l *LaundryMutator) SetUpdatedBy(val uint64) bool { //nolint:dupl false pos
 // SetDeletedAt create mutations, should not duplicate
 func (l *LaundryMutator) SetDeletedAt(val int64) bool { //nolint:dupl false positive
 	if val != l.DeletedAt {
-		l.mutations = append(l.mutations, A.X{`=`, 10, val})
+		l.mutations = append(l.mutations, A.X{`=`, 9, val})
 		l.logs = append(l.logs, A.X{`deletedAt`, l.DeletedAt, val})
 		l.DeletedAt = val
 		return true
@@ -559,7 +547,7 @@ func (l *LaundryMutator) SetDeletedAt(val int64) bool { //nolint:dupl false posi
 // SetDeletedBy create mutations, should not duplicate
 func (l *LaundryMutator) SetDeletedBy(val uint64) bool { //nolint:dupl false positive
 	if val != l.DeletedBy {
-		l.mutations = append(l.mutations, A.X{`=`, 11, val})
+		l.mutations = append(l.mutations, A.X{`=`, 10, val})
 		l.logs = append(l.logs, A.X{`deletedBy`, l.DeletedBy, val})
 		l.DeletedBy = val
 		return true
@@ -570,7 +558,7 @@ func (l *LaundryMutator) SetDeletedBy(val uint64) bool { //nolint:dupl false pos
 // SetRestoredBy create mutations, should not duplicate
 func (l *LaundryMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false positive
 	if val != l.RestoredBy {
-		l.mutations = append(l.mutations, A.X{`=`, 12, val})
+		l.mutations = append(l.mutations, A.X{`=`, 11, val})
 		l.logs = append(l.logs, A.X{`restoredBy`, l.RestoredBy, val})
 		l.RestoredBy = val
 		return true
@@ -581,7 +569,7 @@ func (l *LaundryMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false po
 // SetPaidAt create mutations, should not duplicate
 func (l *LaundryMutator) SetPaidAt(val string) bool { //nolint:dupl false positive
 	if val != l.PaidAt {
-		l.mutations = append(l.mutations, A.X{`=`, 13, val})
+		l.mutations = append(l.mutations, A.X{`=`, 12, val})
 		l.logs = append(l.logs, A.X{`paidAt`, l.PaidAt, val})
 		l.PaidAt = val
 		return true
@@ -592,7 +580,7 @@ func (l *LaundryMutator) SetPaidAt(val string) bool { //nolint:dupl false positi
 // SetPaidBy create mutations, should not duplicate
 func (l *LaundryMutator) SetPaidBy(val uint64) bool { //nolint:dupl false positive
 	if val != l.PaidBy {
-		l.mutations = append(l.mutations, A.X{`=`, 14, val})
+		l.mutations = append(l.mutations, A.X{`=`, 13, val})
 		l.logs = append(l.logs, A.X{`paidBy`, l.PaidBy, val})
 		l.PaidBy = val
 		return true
@@ -603,7 +591,7 @@ func (l *LaundryMutator) SetPaidBy(val uint64) bool { //nolint:dupl false positi
 // SetWashAt create mutations, should not duplicate
 func (l *LaundryMutator) SetWashAt(val string) bool { //nolint:dupl false positive
 	if val != l.WashAt {
-		l.mutations = append(l.mutations, A.X{`=`, 15, val})
+		l.mutations = append(l.mutations, A.X{`=`, 14, val})
 		l.logs = append(l.logs, A.X{`washAt`, l.WashAt, val})
 		l.WashAt = val
 		return true
@@ -614,7 +602,7 @@ func (l *LaundryMutator) SetWashAt(val string) bool { //nolint:dupl false positi
 // SetWashBy create mutations, should not duplicate
 func (l *LaundryMutator) SetWashBy(val uint64) bool { //nolint:dupl false positive
 	if val != l.WashBy {
-		l.mutations = append(l.mutations, A.X{`=`, 16, val})
+		l.mutations = append(l.mutations, A.X{`=`, 15, val})
 		l.logs = append(l.logs, A.X{`washBy`, l.WashBy, val})
 		l.WashBy = val
 		return true
@@ -625,7 +613,7 @@ func (l *LaundryMutator) SetWashBy(val uint64) bool { //nolint:dupl false positi
 // SetDryAt create mutations, should not duplicate
 func (l *LaundryMutator) SetDryAt(val string) bool { //nolint:dupl false positive
 	if val != l.DryAt {
-		l.mutations = append(l.mutations, A.X{`=`, 17, val})
+		l.mutations = append(l.mutations, A.X{`=`, 16, val})
 		l.logs = append(l.logs, A.X{`dryAt`, l.DryAt, val})
 		l.DryAt = val
 		return true
@@ -636,7 +624,7 @@ func (l *LaundryMutator) SetDryAt(val string) bool { //nolint:dupl false positiv
 // SetDryBy create mutations, should not duplicate
 func (l *LaundryMutator) SetDryBy(val uint64) bool { //nolint:dupl false positive
 	if val != l.DryBy {
-		l.mutations = append(l.mutations, A.X{`=`, 18, val})
+		l.mutations = append(l.mutations, A.X{`=`, 17, val})
 		l.logs = append(l.logs, A.X{`dryBy`, l.DryBy, val})
 		l.DryBy = val
 		return true
@@ -647,7 +635,7 @@ func (l *LaundryMutator) SetDryBy(val uint64) bool { //nolint:dupl false positiv
 // SetFoldAt create mutations, should not duplicate
 func (l *LaundryMutator) SetFoldAt(val string) bool { //nolint:dupl false positive
 	if val != l.FoldAt {
-		l.mutations = append(l.mutations, A.X{`=`, 19, val})
+		l.mutations = append(l.mutations, A.X{`=`, 18, val})
 		l.logs = append(l.logs, A.X{`foldAt`, l.FoldAt, val})
 		l.FoldAt = val
 		return true
@@ -658,7 +646,7 @@ func (l *LaundryMutator) SetFoldAt(val string) bool { //nolint:dupl false positi
 // SetFoldBy create mutations, should not duplicate
 func (l *LaundryMutator) SetFoldBy(val uint64) bool { //nolint:dupl false positive
 	if val != l.FoldBy {
-		l.mutations = append(l.mutations, A.X{`=`, 20, val})
+		l.mutations = append(l.mutations, A.X{`=`, 19, val})
 		l.logs = append(l.logs, A.X{`foldBy`, l.FoldBy, val})
 		l.FoldBy = val
 		return true
@@ -669,7 +657,7 @@ func (l *LaundryMutator) SetFoldBy(val uint64) bool { //nolint:dupl false positi
 // SetNotifyAt create mutations, should not duplicate
 func (l *LaundryMutator) SetNotifyAt(val string) bool { //nolint:dupl false positive
 	if val != l.NotifyAt {
-		l.mutations = append(l.mutations, A.X{`=`, 21, val})
+		l.mutations = append(l.mutations, A.X{`=`, 20, val})
 		l.logs = append(l.logs, A.X{`notifyAt`, l.NotifyAt, val})
 		l.NotifyAt = val
 		return true
@@ -680,7 +668,7 @@ func (l *LaundryMutator) SetNotifyAt(val string) bool { //nolint:dupl false posi
 // SetNotifyBy create mutations, should not duplicate
 func (l *LaundryMutator) SetNotifyBy(val uint64) bool { //nolint:dupl false positive
 	if val != l.NotifyBy {
-		l.mutations = append(l.mutations, A.X{`=`, 22, val})
+		l.mutations = append(l.mutations, A.X{`=`, 21, val})
 		l.logs = append(l.logs, A.X{`notifyBy`, l.NotifyBy, val})
 		l.NotifyBy = val
 		return true
@@ -691,7 +679,7 @@ func (l *LaundryMutator) SetNotifyBy(val uint64) bool { //nolint:dupl false posi
 // SetGivenAt create mutations, should not duplicate
 func (l *LaundryMutator) SetGivenAt(val string) bool { //nolint:dupl false positive
 	if val != l.GivenAt {
-		l.mutations = append(l.mutations, A.X{`=`, 23, val})
+		l.mutations = append(l.mutations, A.X{`=`, 22, val})
 		l.logs = append(l.logs, A.X{`givenAt`, l.GivenAt, val})
 		l.GivenAt = val
 		return true
@@ -702,7 +690,7 @@ func (l *LaundryMutator) SetGivenAt(val string) bool { //nolint:dupl false posit
 // SetGivenBys create mutations, should not duplicate
 func (l *LaundryMutator) SetGivenBys(val string) bool { //nolint:dupl false positive
 	if val != l.GivenBys {
-		l.mutations = append(l.mutations, A.X{`=`, 24, val})
+		l.mutations = append(l.mutations, A.X{`=`, 23, val})
 		l.logs = append(l.logs, A.X{`givenBys`, l.GivenBys, val})
 		l.GivenBys = val
 		return true
@@ -713,7 +701,7 @@ func (l *LaundryMutator) SetGivenBys(val string) bool { //nolint:dupl false posi
 // SetWeight create mutations, should not duplicate
 func (l *LaundryMutator) SetWeight(val float64) bool { //nolint:dupl false positive
 	if val != l.Weight {
-		l.mutations = append(l.mutations, A.X{`=`, 25, val})
+		l.mutations = append(l.mutations, A.X{`=`, 24, val})
 		l.logs = append(l.logs, A.X{`weight`, l.Weight, val})
 		l.Weight = val
 		return true
@@ -739,10 +727,6 @@ func (l *LaundryMutator) SetAll(from rqCafe.Laundry, excludeMap, forceMap M.SB) 
 	}
 	if !excludeMap[`items`] && (forceMap[`items`] || from.Items != ``) {
 		l.Items = S.Trim(from.Items)
-		changed = true
-	}
-	if !excludeMap[`status`] && (forceMap[`status`] || from.Status != ``) {
-		l.Status = S.Trim(from.Status)
 		changed = true
 	}
 	if !excludeMap[`note`] && (forceMap[`note`] || from.Note != ``) {

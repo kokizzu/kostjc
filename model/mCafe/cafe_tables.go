@@ -70,7 +70,6 @@ const (
 	LaundryCustomer = `customer`
 	LaundryItems    = `items`
 	LaundryWeight   = `weight`
-	LaundryStatus   = `status`
 	LaundryPrice    = `price`
 	LaundryNote     = `note`
 	LaundryAt       = `laundryAt`
@@ -163,7 +162,6 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{Id, Tt.Unsigned},
 			{LaundryCustomer, Tt.String},
 			{LaundryItems, Tt.String},
-			{LaundryStatus, Tt.String},
 			{LaundryNote, Tt.String},
 			{LaundryAt, Tt.String},
 			{CreatedAt, Tt.Integer},
