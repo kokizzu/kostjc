@@ -2002,6 +2002,7 @@ exports.AdminRoomLogs = async function AdminRoomLogs( i, cb ) {
  * @property {number} sale.deletedAt
  * @property {number} sale.deletedBy
  * @property {number} sale.restoredBy
+ * @property {number} sale.changeIDR
  * @property {number} tenantID
  */
 const AdminSaleIn = {
@@ -2042,6 +2043,7 @@ const AdminSaleIn = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    changeIDR: 0, // int64
   }, // rqCafe.Sales
   tenantID: 0, // uint64
 }
@@ -2082,6 +2084,7 @@ const AdminSaleIn = {
  * @property {number} sale.deletedAt
  * @property {number} sale.deletedBy
  * @property {number} sale.restoredBy
+ * @property {number} sale.changeIDR
  * @property {Object} sales
  */
 const AdminSaleOut = {
@@ -2129,6 +2132,7 @@ const AdminSaleOut = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    changeIDR: 0, // int64
   }, // rqCafe.Sales
   sales: { // [][]any
   }, // [][]any
@@ -3895,6 +3899,7 @@ exports.StaffRevenueReport = async function StaffRevenueReport( i, cb ) {
  * @property {number} sale.deletedAt
  * @property {number} sale.deletedBy
  * @property {number} sale.restoredBy
+ * @property {number} sale.changeIDR
  * @property {number} tenantID
  * @property {String} staffData
  */
@@ -3936,6 +3941,7 @@ const StaffSalesIn = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    changeIDR: 0, // int64
   }, // rqCafe.Sales
   tenantID: 0, // uint64
   staffData: '', // string
@@ -3993,6 +3999,7 @@ const StaffSalesIn = {
  * @property {number} sale.deletedAt
  * @property {number} sale.deletedBy
  * @property {number} sale.restoredBy
+ * @property {number} sale.changeIDR
  * @property {Object} sales
  * @property {Object} segments
  */
@@ -4059,6 +4066,7 @@ const StaffSalesOut = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
+    changeIDR: 0, // int64
   }, // rqCafe.Sales
   sales: { // [][]any
   }, // [][]any
