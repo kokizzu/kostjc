@@ -168,8 +168,22 @@ func (d *Domain) StaffSales(in *StaffSalesIn) (out StaffSalesOut) {
 			sale.SetPaymentStatus(in.Sale.PaymentStatus)
 		}
 
+		// ensure cashier is set from session if not provided
 		if in.Sale.Cashier != `` {
 			sale.SetCashier(in.Sale.Cashier)
+		} else {
+			// fallback to session user name
+			usr := rqAuth.NewUsers(d.AuthOltp)
+			usr.Id = sess.UserId
+			if usr.FindById() {
+				name := usr.FullName
+				if name == `` {
+					name = usr.UserName
+				}
+				if name != `` {
+					sale.SetCashier(name)
+				}
+			}
 		}
 
 		if in.Sale.BuyerName != `` {

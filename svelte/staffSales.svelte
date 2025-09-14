@@ -114,5 +114,6 @@
   OnSubmit={OnAddSale}
   OnEdit={OnEdit}
   tenants={tenants}
+  {user}
   />
 </LayoutMain>

@@ -16774,7 +16774,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   // _components/StaffSaleForm.svelte
   function get_each_context2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[26] = list[i];
+    child_ctx[27] = list[i];
     return child_ctx;
   }
   function create_each_block2(ctx) {
@@ -16785,7 +16785,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let p0;
     let t1_value = (
       /*menu*/
-      ctx[26].name + ""
+      ctx[27].name + ""
     );
     let t1;
     let t2;
@@ -16793,7 +16793,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t3;
     let t4_value = formatCurrency2(
       /*menu*/
-      ctx[26].price
+      ctx[27].price
     ) + "";
     let t4;
     let t5;
@@ -16803,9 +16803,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let span;
     let t8_value = (
       /*$selectedMenus*/
-      (ctx[2][
+      (ctx[3][
         /*menu*/
-        ctx[26].id
+        ctx[27].id
       ] || 0) + ""
     );
     let t8;
@@ -16817,18 +16817,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function click_handler() {
       return (
         /*click_handler*/
-        ctx[17](
+        ctx[18](
           /*menu*/
-          ctx[26]
+          ctx[27]
         )
       );
     }
     function click_handler_1() {
       return (
         /*click_handler_1*/
-        ctx[18](
+        ctx[19](
           /*menu*/
-          ctx[26]
+          ctx[27]
         )
       );
     }
@@ -16857,7 +16857,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t11 = space();
         attr(div0, "class", "menu-image-with-photo svelte-159z0wd");
         set_style(div0, "background-image", "url('" + /*menu*/
-        ctx[26].imageUrl + "')");
+        ctx[27].imageUrl + "')");
         attr(p0, "class", "menu-name svelte-159z0wd");
         attr(p1, "class", "menu-price svelte-159z0wd");
         attr(button0, "class", "svelte-159z0wd");
@@ -16898,25 +16898,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(new_ctx, dirty) {
         ctx = new_ctx;
         if (dirty & /*menuOptions*/
-        2) {
+        4) {
           set_style(div0, "background-image", "url('" + /*menu*/
-          ctx[26].imageUrl + "')");
+          ctx[27].imageUrl + "')");
         }
         if (dirty & /*menuOptions*/
-        2 && t1_value !== (t1_value = /*menu*/
-        ctx[26].name + ""))
+        4 && t1_value !== (t1_value = /*menu*/
+        ctx[27].name + ""))
           set_data(t1, t1_value);
         if (dirty & /*menuOptions*/
-        2 && t4_value !== (t4_value = formatCurrency2(
+        4 && t4_value !== (t4_value = formatCurrency2(
           /*menu*/
-          ctx[26].price
+          ctx[27].price
         ) + ""))
           set_data(t4, t4_value);
         if (dirty & /*$selectedMenus, menuOptions*/
-        6 && t8_value !== (t8_value = /*$selectedMenus*/
-        (ctx[2][
+        12 && t8_value !== (t8_value = /*$selectedMenus*/
+        (ctx[3][
           /*menu*/
-          ctx[26].id
+          ctx[27].id
         ] || 0) + ""))
           set_data(t8, t8_value);
       },
@@ -16977,7 +16977,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let mounted;
     let dispose;
     function inputbox_value_binding(value) {
-      ctx[15](value);
+      ctx[16](value);
     }
     let inputbox_props = {
       id: "tenantId",
@@ -17000,7 +17000,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     binding_callbacks.push(() => bind(inputbox, "value", inputbox_value_binding));
     let each_value = ensure_array_like(
       /*menuOptions*/
-      ctx[1]
+      ctx[2]
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
@@ -17062,6 +17062,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(input0, "id", "cashier");
         input0.required = true;
         attr(input0, "placeholder", "Nama Kasir");
+        input0.readOnly = true;
         attr(input0, "class", "svelte-159z0wd");
         attr(div0, "class", "form-group svelte-159z0wd");
         attr(div1, "class", "form-group svelte-159z0wd");
@@ -17106,7 +17107,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         set_input_value(
           input0,
           /*cashier*/
-          ctx[3]
+          ctx[1]
         );
         append(div9, t2);
         append(div9, div1);
@@ -17168,25 +17169,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               input0,
               "input",
               /*input0_input_handler*/
-              ctx[14]
+              ctx[15]
             ),
             listen(
               input1,
               "input",
               /*input1_input_handler*/
-              ctx[16]
+              ctx[17]
             ),
             listen(
               input2,
               "input",
               /*input2_input_handler*/
-              ctx[19]
+              ctx[20]
             ),
             listen(
               textarea,
               "input",
               /*textarea_input_handler*/
-              ctx[20]
+              ctx[21]
             ),
             listen(
               button,
@@ -17200,12 +17201,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, [dirty]) {
         if (dirty & /*cashier*/
-        8 && input0.value !== /*cashier*/
-        ctx2[3]) {
+        2 && input0.value !== /*cashier*/
+        ctx2[1]) {
           set_input_value(
             input0,
             /*cashier*/
-            ctx2[3]
+            ctx2[1]
           );
         }
         const inputbox_changes = {};
@@ -17231,10 +17232,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           );
         }
         if (dirty & /*incrementMenu, menuOptions, $selectedMenus, decrementMenu, formatCurrency*/
-        3078) {
+        3084) {
           each_value = ensure_array_like(
             /*menuOptions*/
-            ctx2[1]
+            ctx2[2]
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
@@ -17309,6 +17310,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let $selectedMenus;
     const dispatch = createEventDispatcher();
     let { tenants: tenants2 } = $props;
+    let { user: user2 } = $props;
     const PaymentStatuses = {
       Unpaid: "Unpaid",
       Paid: "Paid",
@@ -17322,7 +17324,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let menuIds = [];
     let totalPriceIDR = 0;
     let selectedMenus = writable([]);
-    component_subscribe($self, selectedMenus, (value) => $invalidate(2, $selectedMenus = value));
+    component_subscribe($self, selectedMenus, (value) => $invalidate(3, $selectedMenus = value));
     function toggleMenu(menuId) {
       selectedMenus.update((value) => {
         if (value.includes(menuId)) {
@@ -17368,7 +17370,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     console.log(menuOptions);
     function input0_input_handler() {
       cashier = this.value;
-      $invalidate(3, cashier);
+      $invalidate(1, cashier), $invalidate(13, user2);
     }
     function inputbox_value_binding(value) {
       tenantId = value;
@@ -17391,15 +17393,24 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     $self.$set = ($props2) => {
       if ("tenants" in $props2)
         $invalidate(0, tenants2 = $props2.tenants);
+      if ("user" in $props2)
+        $invalidate(13, user2 = $props2.user);
     };
     $self.$.update = () => {
-      if ($self.$.dirty & /*$selectedMenus*/
-      4) {
+      if ($self.$.dirty & /*cashier, user*/
+      8194) {
         $:
-          $invalidate(13, selectedMenusValue = $selectedMenus);
+          if (!cashier && user2) {
+            $invalidate(1, cashier = user2.fullName || user2.userName || "");
+          }
+      }
+      if ($self.$.dirty & /*$selectedMenus*/
+      8) {
+        $:
+          $invalidate(14, selectedMenusValue = $selectedMenus);
       }
       if ($self.$.dirty & /*selectedMenusValue, menuOptions*/
-      8194) {
+      16388) {
         $:
           if (selectedMenusValue.length > 0) {
             $invalidate(8, totalPriceIDR = selectedMenusValue.reduce(
@@ -17416,7 +17427,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           }
       }
       if ($self.$.dirty & /*$selectedMenus, menuOptions, totalPriceIDR*/
-      262) {
+      268) {
         $: {
           let result = [];
           $invalidate(8, totalPriceIDR = 0);
@@ -17433,12 +17444,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
     };
     $:
-      $invalidate(1, menuOptions = parseMenuMapToOptions(menuChoices));
+      $invalidate(2, menuOptions = parseMenuMapToOptions(menuChoices));
     return [
       tenants2,
+      cashier,
       menuOptions,
       $selectedMenus,
-      cashier,
       tenantId,
       buyerName,
       salesDate,
@@ -17448,6 +17459,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       incrementMenu,
       decrementMenu,
       submitFormSale,
+      user2,
       selectedMenusValue,
       input0_input_handler,
       inputbox_value_binding,
@@ -17461,7 +17473,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   var StaffSaleForm = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance8, create_fragment11, safe_not_equal, { tenants: 0 });
+      init(this, options, instance8, create_fragment11, safe_not_equal, { tenants: 0, user: 13 });
     }
   };
   var StaffSaleForm_default = StaffSaleForm;
@@ -18306,37 +18318,37 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   // _components/MasterSales.svelte
   function get_each_context3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[23] = list[i];
+    child_ctx[24] = list[i];
     return child_ctx;
   }
   function get_each_context_12(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[23] = list[i];
+    child_ctx[24] = list[i];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[23] = list[i];
+    child_ctx[24] = list[i];
     return child_ctx;
   }
   function get_each_context_3(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[23] = list[i];
+    child_ctx[24] = list[i];
     return child_ctx;
   }
   function get_each_context_4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[23] = list[i];
+    child_ctx[24] = list[i];
     return child_ctx;
   }
   function get_each_context_5(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[34] = list[i];
+    child_ctx[35] = list[i];
     return child_ctx;
   }
   function get_each_context_6(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[37] = list[i];
+    child_ctx[38] = list[i];
     return child_ctx;
   }
   function create_each_block_6(key_1, ctx) {
@@ -18345,7 +18357,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let p0;
     let t0_value = (
       /*sale*/
-      ctx[37].name + ""
+      ctx[38].name + ""
     );
     let t0;
     let t1;
@@ -18353,13 +18365,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t2;
     let t3_value = (
       /*sale*/
-      ctx[37].qty + ""
+      ctx[38].qty + ""
     );
     let t3;
     let t4;
     let t5_value = (
       /*sale*/
-      ctx[37].times + ""
+      ctx[38].times + ""
     );
     let t5;
     let t6;
@@ -18367,7 +18379,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t7;
     let t8_value = formatCurrency3(
       /*sale*/
-      ctx[37].total
+      ctx[38].total
     ) + "";
     let t8;
     let t9;
@@ -18417,21 +18429,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(new_ctx, dirty) {
         ctx = new_ctx;
         if (dirty[0] & /*todaySales*/
-        512 && t0_value !== (t0_value = /*sale*/
-        ctx[37].name + ""))
+        1024 && t0_value !== (t0_value = /*sale*/
+        ctx[38].name + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*todaySales*/
-        512 && t3_value !== (t3_value = /*sale*/
-        ctx[37].qty + ""))
+        1024 && t3_value !== (t3_value = /*sale*/
+        ctx[38].qty + ""))
           set_data(t3, t3_value);
         if (dirty[0] & /*todaySales*/
-        512 && t5_value !== (t5_value = /*sale*/
-        ctx[37].times + ""))
+        1024 && t5_value !== (t5_value = /*sale*/
+        ctx[38].times + ""))
           set_data(t5, t5_value);
         if (dirty[0] & /*todaySales*/
-        512 && t8_value !== (t8_value = formatCurrency3(
+        1024 && t8_value !== (t8_value = formatCurrency3(
           /*sale*/
-          ctx[37].total
+          ctx[38].total
         ) + ""))
           set_data(t8, t8_value);
       },
@@ -18448,20 +18460,20 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let p0;
     let t0_value = (
       /*payment*/
-      ctx[34].customer + ""
+      ctx[35].customer + ""
     );
     let t0;
     let t1;
     let p1;
     let t2_value = (
       /*payment*/
-      ctx[34].method + ""
+      ctx[35].method + ""
     );
     let t2;
     let t3;
     let t4_value = (
       /*payment*/
-      ctx[34].time + ""
+      ctx[35].time + ""
     );
     let t4;
     let t5;
@@ -18469,7 +18481,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t6;
     let t7_value = formatCurrency3(
       /*payment*/
-      ctx[34].amount
+      ctx[35].amount
     ) + "";
     let t7;
     let t8;
@@ -18517,21 +18529,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(new_ctx, dirty) {
         ctx = new_ctx;
         if (dirty[0] & /*todayPayments*/
-        16 && t0_value !== (t0_value = /*payment*/
-        ctx[34].customer + ""))
+        32 && t0_value !== (t0_value = /*payment*/
+        ctx[35].customer + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*todayPayments*/
-        16 && t2_value !== (t2_value = /*payment*/
-        ctx[34].method + ""))
+        32 && t2_value !== (t2_value = /*payment*/
+        ctx[35].method + ""))
           set_data(t2, t2_value);
         if (dirty[0] & /*todayPayments*/
-        16 && t4_value !== (t4_value = /*payment*/
-        ctx[34].time + ""))
+        32 && t4_value !== (t4_value = /*payment*/
+        ctx[35].time + ""))
           set_data(t4, t4_value);
         if (dirty[0] & /*todayPayments*/
-        16 && t7_value !== (t7_value = formatCurrency3(
+        32 && t7_value !== (t7_value = formatCurrency3(
           /*payment*/
-          ctx[34].amount
+          ctx[35].amount
         ) + ""))
           set_data(t7, t7_value);
       },
@@ -18548,21 +18560,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let p0;
     let t0_value = (
       /*item*/
-      ctx[23].customer + ""
+      ctx[24].customer + ""
     );
     let t0;
     let t1;
     let p1;
     let t2_value = (
       /*item*/
-      ctx[23].item + ""
+      ctx[24].item + ""
     );
     let t2;
     let t3;
     let p2;
     let t4_value = (
       /*item*/
-      ctx[23].date + ""
+      ctx[24].date + ""
     );
     let t4;
     let t5;
@@ -18570,7 +18582,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t6;
     let t7_value = formatCurrency3(
       /*item*/
-      ctx[23].amount
+      ctx[24].amount
     ) + "";
     let t7;
     let t8;
@@ -18621,21 +18633,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(new_ctx, dirty) {
         ctx = new_ctx;
         if (dirty[0] & /*unpaidItems*/
-        32 && t0_value !== (t0_value = /*item*/
-        ctx[23].customer + ""))
+        64 && t0_value !== (t0_value = /*item*/
+        ctx[24].customer + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*unpaidItems*/
-        32 && t2_value !== (t2_value = /*item*/
-        ctx[23].item + ""))
+        64 && t2_value !== (t2_value = /*item*/
+        ctx[24].item + ""))
           set_data(t2, t2_value);
         if (dirty[0] & /*unpaidItems*/
-        32 && t4_value !== (t4_value = /*item*/
-        ctx[23].date + ""))
+        64 && t4_value !== (t4_value = /*item*/
+        ctx[24].date + ""))
           set_data(t4, t4_value);
         if (dirty[0] & /*unpaidItems*/
-        32 && t7_value !== (t7_value = formatCurrency3(
+        64 && t7_value !== (t7_value = formatCurrency3(
           /*item*/
-          ctx[23].amount
+          ctx[24].amount
         ) + ""))
           set_data(t7, t7_value);
       },
@@ -18652,27 +18664,27 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let p0;
     let t0_value = (
       /*item*/
-      ctx[23].customer + ""
+      ctx[24].customer + ""
     );
     let t0;
     let t1;
     let p1;
     let t2_value = (
       /*item*/
-      ctx[23].method + ""
+      ctx[24].method + ""
     );
     let t2;
     let t3;
     let t4_value = (
       /*item*/
-      ctx[23].time + ""
+      ctx[24].time + ""
     );
     let t4;
     let t5;
     let p2;
     let t6_value = (
       /*item*/
-      ctx[23].date + ""
+      ctx[24].date + ""
     );
     let t6;
     let t7;
@@ -18680,7 +18692,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t8;
     let t9_value = formatCurrency3(
       /*item*/
-      ctx[23].excess
+      ctx[24].excess
     ) + "";
     let t9;
     let t10;
@@ -18735,25 +18747,25 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(new_ctx, dirty) {
         ctx = new_ctx;
         if (dirty[0] & /*overpaidItems*/
-        64 && t0_value !== (t0_value = /*item*/
-        ctx[23].customer + ""))
+        128 && t0_value !== (t0_value = /*item*/
+        ctx[24].customer + ""))
           set_data(t0, t0_value);
         if (dirty[0] & /*overpaidItems*/
-        64 && t2_value !== (t2_value = /*item*/
-        ctx[23].method + ""))
+        128 && t2_value !== (t2_value = /*item*/
+        ctx[24].method + ""))
           set_data(t2, t2_value);
         if (dirty[0] & /*overpaidItems*/
-        64 && t4_value !== (t4_value = /*item*/
-        ctx[23].time + ""))
+        128 && t4_value !== (t4_value = /*item*/
+        ctx[24].time + ""))
           set_data(t4, t4_value);
         if (dirty[0] & /*overpaidItems*/
-        64 && t6_value !== (t6_value = /*item*/
-        ctx[23].date + ""))
+        128 && t6_value !== (t6_value = /*item*/
+        ctx[24].date + ""))
           set_data(t6, t6_value);
         if (dirty[0] & /*overpaidItems*/
-        64 && t9_value !== (t9_value = formatCurrency3(
+        128 && t9_value !== (t9_value = formatCurrency3(
           /*item*/
-          ctx[23].excess
+          ctx[24].excess
         ) + ""))
           set_data(t9, t9_value);
       },
@@ -18789,16 +18801,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         div0 = element("div");
         p0 = element("p");
         p0.textContent = `${/*item*/
-        ctx[23].customer}`;
+        ctx[24].customer}`;
         t1 = space();
         p1 = element("p");
         p1.textContent = `${/*item*/
-        ctx[23].item} (${/*item*/
-        ctx[23].qty}x)`;
+        ctx[24].item} (${/*item*/
+        ctx[24].qty}x)`;
         t6 = space();
         p2 = element("p");
         p2.textContent = `${/*item*/
-        ctx[23].date}`;
+        ctx[24].date}`;
         t8 = space();
         span = element("span");
         create_component(icon.$.fragment);
@@ -18860,7 +18872,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let span;
     let t6_value = (
       /*item*/
-      ctx[23].status + ""
+      ctx[24].status + ""
     );
     let t6;
     let span_class_value;
@@ -18873,15 +18885,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         div0 = element("div");
         p0 = element("p");
         p0.textContent = `${/*item*/
-        ctx[23].customer}`;
+        ctx[24].customer}`;
         t1 = space();
         p1 = element("p");
         p1.textContent = `${/*item*/
-        ctx[23].items}`;
+        ctx[24].items}`;
         t3 = space();
         p2 = element("p");
         p2.textContent = `${/*item*/
-        ctx[23].date}`;
+        ctx[24].date}`;
         t5 = space();
         span = element("span");
         t6 = text(t6_value);
@@ -18891,7 +18903,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(p2, "class", "item-date svelte-12p40xj");
         attr(div0, "class", "item-info svelte-12p40xj");
         attr(span, "class", span_class_value = "status-badge " + /*item*/
-        (ctx[23].status === "Cuci" ? "status-blue" : "status-yellow") + " svelte-12p40xj");
+        (ctx[24].status === "Cuci" ? "status-blue" : "status-yellow") + " svelte-12p40xj");
         attr(div1, "class", "item-row item-cyan svelte-12p40xj");
         this.first = div1;
       },
@@ -18992,7 +19004,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t6;
     let t7_value = (
       /*item*/
-      ctx[23].status + ""
+      ctx[24].status + ""
     );
     let t7;
     let span_class_value;
@@ -19003,7 +19015,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type(ctx2, dirty) {
       if (
         /*item*/
-        ctx2[23].status === "Playing"
+        ctx2[24].status === "Playing"
       )
         return 0;
       return 1;
@@ -19018,12 +19030,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         div0 = element("div");
         p0 = element("p");
         p0.textContent = `${/*item*/
-        ctx[23].customer}`;
+        ctx[24].customer}`;
         t1 = space();
         p1 = element("p");
         p1.textContent = `${/*item*/
-        ctx[23].game} \u2022 ${/*item*/
-        ctx[23].duration}`;
+        ctx[24].game} \u2022 ${/*item*/
+        ctx[24].duration}`;
         t5 = space();
         span = element("span");
         if_block.c();
@@ -19034,7 +19046,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         attr(p1, "class", "item-details svelte-12p40xj");
         attr(div0, "class", "game-info svelte-12p40xj");
         attr(span, "class", span_class_value = "status-badge " + /*item*/
-        (ctx[23].status === "Playing" ? "status-green" : "status-yellow") + " svelte-12p40xj");
+        (ctx[24].status === "Playing" ? "status-green" : "status-yellow") + " svelte-12p40xj");
         attr(div1, "class", "game-item svelte-12p40xj");
         this.first = div1;
       },
@@ -19087,14 +19099,22 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let mounted;
     let dispose;
     icon = new Icon_default({ props: { src: FiX, size: 18 } });
-    saleform = new StaffSaleForm_default({ props: { tenants: (
-      /*tenants*/
-      ctx[1]
-    ) } });
+    saleform = new StaffSaleForm_default({
+      props: {
+        tenants: (
+          /*tenants*/
+          ctx[1]
+        ),
+        user: (
+          /*user*/
+          ctx[2]
+        )
+      }
+    });
     saleform.$on(
       "saleSubmit",
       /*handleSaleSubmit*/
-      ctx[17]
+      ctx[18]
     );
     return {
       c() {
@@ -19130,7 +19150,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             button,
             "click",
             /*closeSaleForm*/
-            ctx[15]
+            ctx[16]
           );
           mounted = true;
         }
@@ -19141,6 +19161,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         2)
           saleform_changes.tenants = /*tenants*/
           ctx2[1];
+        if (dirty[0] & /*user*/
+        4)
+          saleform_changes.user = /*user*/
+          ctx2[2];
         saleform.$set(saleform_changes);
       },
       i(local) {
@@ -19195,7 +19219,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     paymentform.$on(
       "paymentSubmit",
       /*handlePaymentSubmit*/
-      ctx[18]
+      ctx[19]
     );
     return {
       c() {
@@ -19231,7 +19255,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             button,
             "click",
             /*closePaymentForm*/
-            ctx[16]
+            ctx[17]
           );
           mounted = true;
         }
@@ -19307,7 +19331,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t12;
     let t13_value = formatCurrency3(
       /*totalSales*/
-      ctx[7]
+      ctx[8]
     ) + "";
     let t13;
     let t14;
@@ -19338,7 +19362,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let t24;
     let t25_value = formatCurrency3(
       /*totalPayments*/
-      ctx[8]
+      ctx[9]
     ) + "";
     let t25;
     let t26;
@@ -19358,7 +19382,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let span4;
     let t32_value = (
       /*unpaidItems*/
-      ctx[5].length + ""
+      ctx[6].length + ""
     );
     let t32;
     let t33;
@@ -19380,7 +19404,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let span5;
     let t39_value = (
       /*overpaidItems*/
-      ctx[6].length + ""
+      ctx[7].length + ""
     );
     let t39;
     let t40;
@@ -19462,11 +19486,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     let each_value_6 = ensure_array_like(
       /*todaySales*/
-      ctx[9]
+      ctx[10]
     );
     const get_key = (ctx2) => (
       /*sale*/
-      ctx2[37].id
+      ctx2[38].id
     );
     for (let i = 0; i < each_value_6.length; i += 1) {
       let child_ctx = get_each_context_6(ctx, each_value_6, i);
@@ -19485,11 +19509,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     let each_value_5 = ensure_array_like(
       /*todayPayments*/
-      ctx[4]
+      ctx[5]
     );
     const get_key_1 = (ctx2) => (
       /*payment*/
-      ctx2[34].id
+      ctx2[35].id
     );
     for (let i = 0; i < each_value_5.length; i += 1) {
       let child_ctx = get_each_context_5(ctx, each_value_5, i);
@@ -19505,11 +19529,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     let each_value_4 = ensure_array_like(
       /*unpaidItems*/
-      ctx[5]
+      ctx[6]
     );
     const get_key_2 = (ctx2) => (
       /*item*/
-      ctx2[23].id
+      ctx2[24].id
     );
     for (let i = 0; i < each_value_4.length; i += 1) {
       let child_ctx = get_each_context_4(ctx, each_value_4, i);
@@ -19525,11 +19549,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     let each_value_3 = ensure_array_like(
       /*overpaidItems*/
-      ctx[6]
+      ctx[7]
     );
     const get_key_3 = (ctx2) => (
       /*item*/
-      ctx2[23].id
+      ctx2[24].id
     );
     for (let i = 0; i < each_value_3.length; i += 1) {
       let child_ctx = get_each_context_3(ctx, each_value_3, i);
@@ -19545,11 +19569,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     let each_value_2 = ensure_array_like(
       /*borrowedUtensils*/
-      ctx[12]
+      ctx[13]
     );
     const get_key_4 = (ctx2) => (
       /*item*/
-      ctx2[23].id
+      ctx2[24].id
     );
     for (let i = 0; i < each_value_2.length; i += 1) {
       let child_ctx = get_each_context_2(ctx, each_value_2, i);
@@ -19565,11 +19589,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     let each_value_1 = ensure_array_like(
       /*laundryItems*/
-      ctx[13]
+      ctx[14]
     );
     const get_key_5 = (ctx2) => (
       /*item*/
-      ctx2[23].id
+      ctx2[24].id
     );
     for (let i = 0; i < each_value_1.length; i += 1) {
       let child_ctx = get_each_context_12(ctx, each_value_1, i);
@@ -19585,11 +19609,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
     let each_value = ensure_array_like(
       /*gameItems*/
-      ctx[14]
+      ctx[15]
     );
     const get_key_6 = (ctx2) => (
       /*item*/
-      ctx2[23].id
+      ctx2[24].id
     );
     for (let i = 0; i < each_value.length; i += 1) {
       let child_ctx = get_each_context3(ctx, each_value, i);
@@ -19598,11 +19622,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
     let if_block0 = (
       /*showSaleForm*/
-      ctx[10] && create_if_block_110(ctx)
+      ctx[11] && create_if_block_110(ctx)
     );
     let if_block1 = (
       /*showPaymentForm*/
-      ctx[11] && create_if_block5(ctx)
+      ctx[12] && create_if_block5(ctx)
     );
     return {
       c() {
@@ -19731,7 +19755,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t45 = space();
         span6 = element("span");
         span6.textContent = `${/*borrowedUtensils*/
-        ctx[12].length}`;
+        ctx[13].length}`;
         t47 = space();
         div33 = element("div");
         div32 = element("div");
@@ -19752,7 +19776,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t52 = space();
         span7 = element("span");
         span7.textContent = `${/*laundryItems*/
-        ctx[13].length}`;
+        ctx[14].length}`;
         t54 = space();
         div39 = element("div");
         div38 = element("div");
@@ -19773,7 +19797,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         t59 = space();
         span8 = element("span");
         span8.textContent = `${/*gameItems*/
-        ctx[14].length}`;
+        ctx[15].length}`;
         t61 = space();
         div47 = element("div");
         div46 = element("div");
@@ -20057,13 +20081,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               button0,
               "click",
               /*addSale*/
-              ctx[2]
+              ctx[3]
             ),
             listen(
               button1,
               "click",
               /*addPayment*/
-              ctx[3]
+              ctx[4]
             )
           ];
           mounted = true;
@@ -20071,80 +20095,80 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         if (dirty[0] & /*todaySales*/
-        512) {
+        1024) {
           each_value_6 = ensure_array_like(
             /*todaySales*/
-            ctx2[9]
+            ctx2[10]
           );
           each_blocks_6 = update_keyed_each(each_blocks_6, dirty, get_key, 1, ctx2, each_value_6, each0_lookup, div2, destroy_block, create_each_block_6, null, get_each_context_6);
         }
         if ((!current || dirty[0] & /*totalSales*/
-        128) && t13_value !== (t13_value = formatCurrency3(
+        256) && t13_value !== (t13_value = formatCurrency3(
           /*totalSales*/
-          ctx2[7]
+          ctx2[8]
         ) + ""))
           set_data(t13, t13_value);
         if (dirty[0] & /*todayPayments*/
-        16) {
+        32) {
           each_value_5 = ensure_array_like(
             /*todayPayments*/
-            ctx2[4]
+            ctx2[5]
           );
           each_blocks_5 = update_keyed_each(each_blocks_5, dirty, get_key_1, 1, ctx2, each_value_5, each1_lookup, div10, destroy_block, create_each_block_5, null, get_each_context_5);
         }
         if ((!current || dirty[0] & /*totalPayments*/
-        256) && t25_value !== (t25_value = formatCurrency3(
+        512) && t25_value !== (t25_value = formatCurrency3(
           /*totalPayments*/
-          ctx2[8]
+          ctx2[9]
         ) + ""))
           set_data(t25, t25_value);
         if ((!current || dirty[0] & /*unpaidItems*/
-        32) && t32_value !== (t32_value = /*unpaidItems*/
-        ctx2[5].length + ""))
+        64) && t32_value !== (t32_value = /*unpaidItems*/
+        ctx2[6].length + ""))
           set_data(t32, t32_value);
         if (dirty[0] & /*unpaidItems*/
-        32) {
+        64) {
           each_value_4 = ensure_array_like(
             /*unpaidItems*/
-            ctx2[5]
+            ctx2[6]
           );
           each_blocks_4 = update_keyed_each(each_blocks_4, dirty, get_key_2, 1, ctx2, each_value_4, each2_lookup, div19, destroy_block, create_each_block_4, null, get_each_context_4);
         }
         if ((!current || dirty[0] & /*overpaidItems*/
-        64) && t39_value !== (t39_value = /*overpaidItems*/
-        ctx2[6].length + ""))
+        128) && t39_value !== (t39_value = /*overpaidItems*/
+        ctx2[7].length + ""))
           set_data(t39, t39_value);
         if (dirty[0] & /*overpaidItems*/
-        64) {
+        128) {
           each_value_3 = ensure_array_like(
             /*overpaidItems*/
-            ctx2[6]
+            ctx2[7]
           );
           each_blocks_3 = update_keyed_each(each_blocks_3, dirty, get_key_3, 1, ctx2, each_value_3, each3_lookup, div25, destroy_block, create_each_block_3, null, get_each_context_3);
         }
         if (dirty[0] & /*borrowedUtensils*/
-        4096) {
+        8192) {
           each_value_2 = ensure_array_like(
             /*borrowedUtensils*/
-            ctx2[12]
+            ctx2[13]
           );
           group_outros();
           each_blocks_2 = update_keyed_each(each_blocks_2, dirty, get_key_4, 1, ctx2, each_value_2, each4_lookup, div31, outro_and_destroy_block, create_each_block_2, null, get_each_context_2);
           check_outros();
         }
         if (dirty[0] & /*laundryItems*/
-        8192) {
+        16384) {
           each_value_1 = ensure_array_like(
             /*laundryItems*/
-            ctx2[13]
+            ctx2[14]
           );
           each_blocks_1 = update_keyed_each(each_blocks_1, dirty, get_key_5, 1, ctx2, each_value_1, each5_lookup, div37, destroy_block, create_each_block_12, null, get_each_context_12);
         }
         if (dirty[0] & /*gameItems*/
-        16384) {
+        32768) {
           each_value = ensure_array_like(
             /*gameItems*/
-            ctx2[14]
+            ctx2[15]
           );
           group_outros();
           each_blocks = update_keyed_each(each_blocks, dirty, get_key_6, 1, ctx2, each_value, each6_lookup, div44, outro_and_destroy_block, create_each_block3, null, get_each_context3);
@@ -20152,12 +20176,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (
           /*showSaleForm*/
-          ctx2[10]
+          ctx2[11]
         ) {
           if (if_block0) {
             if_block0.p(ctx2, dirty);
             if (dirty[0] & /*showSaleForm*/
-            1024) {
+            2048) {
               transition_in(if_block0, 1);
             }
           } else {
@@ -20175,12 +20199,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         if (
           /*showPaymentForm*/
-          ctx2[11]
+          ctx2[12]
         ) {
           if (if_block1) {
             if_block1.p(ctx2, dirty);
             if (dirty[0] & /*showPaymentForm*/
-            2048) {
+            4096) {
               transition_in(if_block1, 1);
             }
           } else {
@@ -20294,6 +20318,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let { sales } = $props;
     console.log("Sales", sales);
     let { tenants: tenants2 } = $props;
+    let { user: user2 } = $props;
     if (sales == void 0 || sales == null) {
       sales = [];
     }
@@ -20366,16 +20391,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let showSaleForm = false;
     let showPaymentForm = false;
     function addSale() {
-      $invalidate(10, showSaleForm = true);
+      $invalidate(11, showSaleForm = true);
     }
     function addPayment() {
-      $invalidate(11, showPaymentForm = true);
+      $invalidate(12, showPaymentForm = true);
     }
     function closeSaleForm() {
-      $invalidate(10, showSaleForm = false);
+      $invalidate(11, showSaleForm = false);
     }
     function closePaymentForm() {
-      $invalidate(11, showPaymentForm = false);
+      $invalidate(12, showPaymentForm = false);
     }
     let { OnSubmit = async function(sale) {
       console.log("OnSubmit :::", sale);
@@ -20400,56 +20425,58 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         $invalidate(0, sales = $props2.sales);
       if ("tenants" in $props2)
         $invalidate(1, tenants2 = $props2.tenants);
+      if ("user" in $props2)
+        $invalidate(2, user2 = $props2.user);
       if ("OnSubmit" in $props2)
-        $invalidate(19, OnSubmit = $props2.OnSubmit);
+        $invalidate(20, OnSubmit = $props2.OnSubmit);
       if ("OnEdit" in $props2)
-        $invalidate(20, OnEdit = $props2.OnEdit);
+        $invalidate(21, OnEdit = $props2.OnEdit);
     };
     $self.$.update = () => {
       if ($self.$.dirty[0] & /*sales*/
       1) {
         $:
-          $invalidate(9, todaySales = parseSalesToTodaySales(sales, menusAsObject));
+          $invalidate(10, todaySales = parseSalesToTodaySales(sales, menusAsObject));
       }
       if ($self.$.dirty[0] & /*todaySales*/
-      512) {
+      1024) {
         $:
           console.log("Today Sales", todaySales);
       }
       if ($self.$.dirty[0] & /*sales, tenants*/
       3) {
         $:
-          $invalidate(4, todayPayments = parseSalesToTodayPayment(sales, tenants2));
+          $invalidate(5, todayPayments = parseSalesToTodayPayment(sales, tenants2));
       }
       if ($self.$.dirty[0] & /*todayPayments*/
-      16) {
+      32) {
         $:
           console.log("Today Payments", todayPayments);
       }
       if ($self.$.dirty[0] & /*sales, tenants*/
       3) {
         $:
-          $invalidate(5, unpaidItems = parseSalesToUnpaid(sales, menusAsObject, tenants2));
+          $invalidate(6, unpaidItems = parseSalesToUnpaid(sales, menusAsObject, tenants2));
       }
       if ($self.$.dirty[0] & /*unpaidItems*/
-      32) {
+      64) {
         $:
           console.log("Unpaid Items", unpaidItems);
       }
       if ($self.$.dirty[0] & /*sales, tenants*/
       3) {
         $:
-          $invalidate(6, overpaidItems = parseSalesToOverpaid(sales, tenants2));
+          $invalidate(7, overpaidItems = parseSalesToOverpaid(sales, tenants2));
       }
       if ($self.$.dirty[0] & /*overpaidItems*/
-      64) {
+      128) {
         $:
           console.log("Overpaid Items", overpaidItems);
       }
       if ($self.$.dirty[0] & /*sales*/
       1) {
         $:
-          $invalidate(7, totalSales = Array.isArray(sales) ? sales.reduce(
+          $invalidate(8, totalSales = Array.isArray(sales) ? sales.reduce(
             (sum, s) => {
               const v = s?.[13] ?? 0;
               return sum + (typeof v === "number" ? v : 0);
@@ -20458,14 +20485,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ) : 0);
       }
       if ($self.$.dirty[0] & /*totalSales*/
-      128) {
+      256) {
         $:
           console.log("Final Total Sales:", totalSales);
       }
       if ($self.$.dirty[0] & /*todayPayments*/
-      16) {
+      32) {
         $:
-          $invalidate(8, totalPayments = Array.isArray(todayPayments) ? todayPayments.reduce(
+          $invalidate(9, totalPayments = Array.isArray(todayPayments) ? todayPayments.reduce(
             (sum, p) => {
               const v = p?.amount ?? 0;
               return sum + (typeof v === "number" ? v : 0);
@@ -20474,7 +20501,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ) : 0);
       }
       if ($self.$.dirty[0] & /*totalPayments*/
-      256) {
+      512) {
         $:
           console.log("Final Total Payments:", totalPayments);
       }
@@ -20482,6 +20509,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return [
       sales,
       tenants2,
+      user2,
       addSale,
       addPayment,
       todayPayments,
@@ -20515,20 +20543,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         {
           sales: 0,
           tenants: 1,
-          addSale: 2,
-          addPayment: 3,
-          OnSubmit: 19,
-          OnEdit: 20
+          user: 2,
+          addSale: 3,
+          addPayment: 4,
+          OnSubmit: 20,
+          OnEdit: 21
         },
         null,
         [-1, -1]
       );
     }
     get addSale() {
-      return this.$.ctx[2];
+      return this.$.ctx[3];
     }
     get addPayment() {
-      return this.$.ctx[3];
+      return this.$.ctx[4];
     }
   };
   var MasterSales_default = MasterSales;
@@ -20553,7 +20582,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           /*OnEdit*/
           ctx[2]
         ),
-        tenants
+        tenants,
+        user
       }
     });
     return {

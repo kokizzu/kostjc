@@ -27,6 +27,7 @@
   export let sales;
   console.log("Sales", sales);
   export let tenants;
+  export let user; // logged-in user passed from page
 
   if (sales == undefined || sales == null) {
     sales = [];
@@ -394,7 +395,7 @@ $: console.log("Final Total Payments:", totalPayments);
             <Icon src={FiX} size={18} />
           </button>
         </div>
-        <SaleForm on:saleSubmit={handleSaleSubmit} tenants={tenants} />
+        <SaleForm on:saleSubmit={handleSaleSubmit} tenants={tenants} {user} />
       </div>
     </div>
   {/if}

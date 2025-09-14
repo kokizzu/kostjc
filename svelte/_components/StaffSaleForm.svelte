@@ -11,6 +11,7 @@
   const dispatch = createEventDispatcher();
 
   export let tenants;
+  export let user;
 
   let menuChoices = /** @type {Record<Number, string>} */({/* menuChoices */});
   $: menuOptions = parseMenuMapToOptions(menuChoices);
@@ -22,6 +23,9 @@
     };
 
   let cashier = '';
+  $: if (!cashier && user) {
+    cashier = user.fullName || user.userName || '';
+  }
   let tenantId = 0;
   let buyerName = '';
   let salesDate = dateISOFormat(0);
@@ -135,7 +139,7 @@ function decrementMenu(menuId) {
 <div class="form">
   <div class="form-group">
     <label for="cashier">Kasir</label>
-    <input type="text" id="cashier" bind:value={cashier} required placeholder="Nama Kasir" />
+    <input type="text" id="cashier" bind:value={cashier} required placeholder="Nama Kasir" readonly />
   </div>
 
   <div class="form-group">
