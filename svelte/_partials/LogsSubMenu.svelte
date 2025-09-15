@@ -52,6 +52,10 @@
 			<span class="title">Wifi Device</span>
 			<span class="block"></span>
 		</a>
+		<a href="/admin/laundryLogs" class:active={segment2==='laundryLogs'}>
+			<span class="title">Laundry</span>
+			<span class="block"></span>
+		</a>
 	</nav>
 </div>
 

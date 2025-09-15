@@ -12,6 +12,7 @@ var viewList = map[string]string{
 	`AdminBookingLogs`:               `../svelte/admin/bookingLogs.html`,               // ../svelte/admin/bookingLogs.svelte
 	`AdminBuildingLogs`:              `../svelte/admin/buildingLogs.html`,              // ../svelte/admin/buildingLogs.svelte
 	`AdminFacilityLogs`:              `../svelte/admin/facilityLogs.html`,              // ../svelte/admin/facilityLogs.svelte
+	`AdminLaundryLogs`:               `../svelte/admin/laundryLogs.html`,               // ../svelte/admin/laundryLogs.svelte
 	`AdminLocationLogs`:              `../svelte/admin/locationLogs.html`,              // ../svelte/admin/locationLogs.svelte
 	`AdminMenuLogs`:                  `../svelte/admin/menuLogs.html`,                  // ../svelte/admin/menuLogs.svelte
 	`AdminPaymentLogs`:               `../svelte/admin/paymentLogs.html`,               // ../svelte/admin/paymentLogs.svelte
@@ -65,6 +66,11 @@ func (v *Views) RenderAdminBuildingLogs(c *fiber.Ctx, m M.SX) error {
 func (v *Views) RenderAdminFacilityLogs(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`AdminFacilityLogs`].Str(m))
+}
+
+func (v *Views) RenderAdminLaundryLogs(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`AdminLaundryLogs`].Str(m))
 }
 
 func (v *Views) RenderAdminLocationLogs(c *fiber.Ctx, m M.SX) error {

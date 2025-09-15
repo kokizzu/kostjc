@@ -5500,10 +5500,23 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         const options = { day: "2-digit", month: "long", year: "numeric" };
         return dt.toLocaleDateString(void 0, options);
       }
-      function localeDatetime3(unixSec) {
-        if (!unixSec)
+      function isYYYYMMDD(str) {
+        return /^\d{4}-\d{2}-\d{2}$/.test(String(str));
+      }
+      function localeDatetime3(mustBeTime) {
+        if (!mustBeTime)
           return "";
-        const dt = new Date(unixSec * 1e3);
+        let dt = new Date(mustBeTime * 1e3);
+        if (typeof mustBeTime !== "number")
+          dt = new Date(mustBeTime);
+        if (isYYYYMMDD(mustBeTime)) {
+          dt = new Date(mustBeTime);
+          const day2 = dt.toLocaleDateString("default", { weekday: "long" });
+          const date2 = dt.getDate();
+          const month2 = dt.toLocaleDateString("default", { month: "short" });
+          const year2 = dt.getFullYear();
+          return `${day2}, ${date2} ${month2} ${year2}`;
+        }
         const day = dt.toLocaleDateString("default", { weekday: "long" });
         const date = dt.getDate();
         const month = dt.toLocaleDateString("default", { month: "short" });
@@ -11867,6 +11880,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
     let a10;
     let t32;
     let a11;
+    let t35;
+    let a12;
     return {
       c() {
         div = element("div");
@@ -11906,6 +11921,9 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         t32 = space();
         a11 = element("a");
         a11.innerHTML = `<span class="title svelte-5qqpzn">Wifi Device</span> <span class="block svelte-5qqpzn"></span>`;
+        t35 = space();
+        a12 = element("a");
+        a12.innerHTML = `<span class="title svelte-5qqpzn">Laundry</span> <span class="block svelte-5qqpzn"></span>`;
         attr(a0, "href", "/admin/userLogs");
         attr(a0, "class", "svelte-5qqpzn");
         toggle_class(
@@ -12002,6 +12020,14 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           /*segment2*/
           ctx[0] === "wifiDeviceLogs"
         );
+        attr(a12, "href", "/admin/laundryLogs");
+        attr(a12, "class", "svelte-5qqpzn");
+        toggle_class(
+          a12,
+          "active",
+          /*segment2*/
+          ctx[0] === "laundryLogs"
+        );
         attr(nav, "class", "svelte-5qqpzn");
         attr(div, "class", "admin-submenu svelte-5qqpzn");
       },
@@ -12031,6 +12057,8 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
         append(nav, a10);
         append(nav, t32);
         append(nav, a11);
+        append(nav, t35);
+        append(nav, a12);
       },
       p: noop,
       i: noop,
@@ -12792,6 +12820,7 @@ tr.svelte-1vh31p0:last-of-type td .line-background.svelte-1vh31p0 {
           let beforeValueFinal = beforeValue;
           let afterValueFinal = afterValue;
           if (String(key).includes("At")) {
+            console.log(key, beforeValue, afterValue);
             beforeValueFinal = Number(beforeValue) == 0 ? "--" : (0, import_xFormatter.localeDatetime)(beforeValue);
             afterValueFinal = Number(afterValue) == 0 ? "--" : (0, import_xFormatter.localeDatetime)(afterValue);
           }
