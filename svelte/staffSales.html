@@ -656,21 +656,21 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
 }
 
-/* fakecss:./node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/ChevronIcon.esbuild-svelte-fake-css */
+/* fakecss:./node_modules/svelte-select/ChevronIcon.esbuild-svelte-fake-css */
 svg.svelte-qbd276 {
   width: var(--chevron-icon-width, 20px);
   height: var(--chevron-icon-width, 20px);
   color: var(--chevron-icon-colour, currentColor);
 }
 
-/* fakecss:./node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/ClearIcon.esbuild-svelte-fake-css */
+/* fakecss:./node_modules/svelte-select/ClearIcon.esbuild-svelte-fake-css */
 svg.svelte-whdbu1 {
   width: var(--clear-icon-width, 20px);
   height: var(--clear-icon-width, 20px);
   color: var(--clear-icon-color, currentColor);
 }
 
-/* fakecss:./node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/LoadingIcon.esbuild-svelte-fake-css */
+/* fakecss:./node_modules/svelte-select/LoadingIcon.esbuild-svelte-fake-css */
 .loading.svelte-1p3nqvd {
   width: var(--spinner-width, 20px);
   height: var(--spinner-height, 20px);
@@ -689,7 +689,7 @@ svg.svelte-whdbu1 {
   }
 }
 
-/* fakecss:./node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/Select.esbuild-svelte-fake-css */
+/* fakecss:./node_modules/svelte-select/Select.esbuild-svelte-fake-css */
 .svelte-select.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8 {
   --borderRadius:var(--border-radius);
   --clearSelectColor:var(--clear-select-color);
@@ -1890,9 +1890,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     mod
   ));
 
-  // node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs
+  // node_modules/axios/dist/browser/axios.cjs
   var require_axios = __commonJS({
-    "node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
+    "node_modules/axios/dist/browser/axios.cjs"(exports, module) {
       "use strict";
       function bind2(fn, thisArg) {
         return function wrap() {
@@ -1901,6 +1901,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
       var { toString } = Object.prototype;
       var { getPrototypeOf } = Object;
+      var { iterator, toStringTag } = Symbol;
       var kindOf = ((cache) => (thing) => {
         const str = toString.call(thing);
         return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
@@ -1935,7 +1936,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return false;
         }
         const prototype2 = getPrototypeOf(val);
-        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(Symbol.toStringTag in val) && !(Symbol.iterator in val);
+        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
       };
       var isDate = kindOfTest("Date");
       var isFile = kindOfTest("File");
@@ -2087,10 +2088,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         };
       })(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
       var forEachEntry = (obj, fn) => {
-        const generator = obj && obj[Symbol.iterator];
-        const iterator = generator.call(obj);
+        const generator = obj && obj[iterator];
+        const _iterator = generator.call(obj);
         let result;
-        while ((result = iterator.next()) && !result.done) {
+        while ((result = _iterator.next()) && !result.done) {
           const pair = result.value;
           fn.call(obj, pair[0], pair[1]);
         }
@@ -2160,23 +2161,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       var toFiniteNumber = (value, defaultValue) => {
         return value != null && Number.isFinite(value = +value) ? value : defaultValue;
       };
-      var ALPHA = "abcdefghijklmnopqrstuvwxyz";
-      var DIGIT = "0123456789";
-      var ALPHABET = {
-        DIGIT,
-        ALPHA,
-        ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
-      };
-      var generateString = (size2 = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
-        let str = "";
-        const { length } = alphabet;
-        while (size2--) {
-          str += alphabet[Math.random() * length | 0];
-        }
-        return str;
-      };
       function isSpecCompliantForm(thing) {
-        return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
+        return !!(thing && isFunction(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
       }
       var toJSONObject = (obj) => {
         const stack = new Array(10);
@@ -2222,6 +2208,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         isFunction(_global.postMessage)
       );
       var asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
+      var isIterable = (thing) => thing != null && isFunction(thing[iterator]);
       var utils$1 = {
         isArray,
         isArrayBuffer,
@@ -2273,14 +2260,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         findKey,
         global: _global,
         isContextDefined,
-        ALPHABET,
-        generateString,
         isSpecCompliantForm,
         toJSONObject,
         isAsyncFn,
         isThenable,
         setImmediate: _setImmediate,
-        asap
+        asap,
+        isIterable
       };
       function AxiosError(message, code, config, request, response) {
         Error.call(this);
@@ -2505,6 +2491,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return url;
         }
         const _encode = options && options.encode || encode;
+        if (utils$1.isFunction(options)) {
+          options = {
+            serialize: options
+          };
+        }
         const serializeFn = options && options.serialize;
         let serializedParams;
         if (serializeFn) {
@@ -2905,10 +2896,15 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             setHeaders(header, valueOrRewrite);
           } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
             setHeaders(parseHeaders(header), valueOrRewrite);
-          } else if (utils$1.isHeaders(header)) {
-            for (const [key, value] of header.entries()) {
-              setHeader(value, key, rewrite);
+          } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
+            let obj = {}, dest, key;
+            for (const entry of header) {
+              if (!utils$1.isArray(entry)) {
+                throw TypeError("Object iterator must return a key-value pair");
+              }
+              obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
             }
+            setHeaders(obj, valueOrRewrite);
           } else {
             header != null && setHeader(valueOrRewrite, header, rewrite);
           }
@@ -3011,6 +3007,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         toString() {
           return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
+        }
+        getSetCookie() {
+          return this.get("set-cookie") || [];
         }
         get [Symbol.toStringTag]() {
           return "AxiosHeaders";
@@ -3189,45 +3188,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }), throttled[1]];
       };
       var asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
-      var isURLSameOrigin = platform2.hasStandardBrowserEnv ? (
-        // Standard browser envs have full support of the APIs needed to test
-        // whether the request URL is of the same origin as current location.
-        function standardBrowserEnv() {
-          const msie = platform2.navigator && /(msie|trident)/i.test(platform2.navigator.userAgent);
-          const urlParsingNode = document.createElement("a");
-          let originURL;
-          function resolveURL(url) {
-            let href = url;
-            if (msie) {
-              urlParsingNode.setAttribute("href", href);
-              href = urlParsingNode.href;
-            }
-            urlParsingNode.setAttribute("href", href);
-            return {
-              href: urlParsingNode.href,
-              protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
-              host: urlParsingNode.host,
-              search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
-              hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
-              hostname: urlParsingNode.hostname,
-              port: urlParsingNode.port,
-              pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
-            };
-          }
-          originURL = resolveURL(window.location.href);
-          return function isURLSameOrigin2(requestURL) {
-            const parsed = utils$1.isString(requestURL) ? resolveURL(requestURL) : requestURL;
-            return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
-          };
-        }()
-      ) : (
-        // Non standard browser envs (web workers, react-native) lack needed support.
-        function nonStandardBrowserEnv() {
-          return function isURLSameOrigin2() {
-            return true;
-          };
-        }()
-      );
+      var isURLSameOrigin = platform2.hasStandardBrowserEnv ? ((origin2, isMSIE) => (url) => {
+        url = new URL(url, platform2.origin);
+        return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
+      })(
+        new URL(platform2.origin),
+        platform2.navigator && /(msie|trident)/i.test(platform2.navigator.userAgent)
+      ) : () => true;
       var cookies = platform2.hasStandardBrowserEnv ? (
         // Standard browser envs support document.cookie
         {
@@ -3265,8 +3232,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       function combineURLs(baseURL, relativeURL) {
         return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
       }
-      function buildFullPath(baseURL, requestedURL) {
-        if (baseURL && !isAbsoluteURL(requestedURL)) {
+      function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
+        let isRelativeUrl = !isAbsoluteURL(requestedURL);
+        if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {
           return combineURLs(baseURL, requestedURL);
         }
         return requestedURL;
@@ -3275,7 +3243,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       function mergeConfig(config1, config2) {
         config2 = config2 || {};
         const config = {};
-        function getMergedValue(target, source, caseless) {
+        function getMergedValue(target, source, prop, caseless) {
           if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
             return utils$1.merge.call({ caseless }, target, source);
           } else if (utils$1.isPlainObject(source)) {
@@ -3285,11 +3253,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           }
           return source;
         }
-        function mergeDeepProperties(a, b, caseless) {
+        function mergeDeepProperties(a, b, prop, caseless) {
           if (!utils$1.isUndefined(b)) {
-            return getMergedValue(a, b, caseless);
+            return getMergedValue(a, b, prop, caseless);
           } else if (!utils$1.isUndefined(a)) {
-            return getMergedValue(void 0, a, caseless);
+            return getMergedValue(void 0, a, prop, caseless);
           }
         }
         function valueFromConfig2(a, b) {
@@ -3340,7 +3308,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           socketPath: defaultToConfig2,
           responseEncoding: defaultToConfig2,
           validateStatus: mergeDirectKeys,
-          headers: (a, b) => mergeDeepProperties(headersToObject(a), headersToObject(b), true)
+          headers: (a, b, prop) => mergeDeepProperties(headersToObject(a), headersToObject(b), prop, true)
         };
         utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
           const merge2 = mergeMap[prop] || mergeDeepProperties;
@@ -3353,7 +3321,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         const newConfig = mergeConfig({}, config);
         let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
         newConfig.headers = headers = AxiosHeaders$1.from(headers);
-        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url), config.params, config.paramsSerializer);
+        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
         if (auth) {
           headers.set(
             "Authorization",
@@ -3577,7 +3545,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
       };
       var trackStream = (stream, chunkSize, onProgress, onFinish) => {
-        const iterator = readBytes(stream, chunkSize);
+        const iterator2 = readBytes(stream, chunkSize);
         let bytes = 0;
         let done;
         let _onFinish = (e) => {
@@ -3589,7 +3557,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         return new ReadableStream({
           async pull(controller) {
             try {
-              const { done: done2, value } = await iterator.next();
+              const { done: done2, value } = await iterator2.next();
               if (done2) {
                 _onFinish();
                 controller.close();
@@ -3608,7 +3576,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           },
           cancel(reason) {
             _onFinish(reason);
-            return iterator.return();
+            return iterator2.return();
           }
         }, {
           highWaterMark: 2
@@ -3765,7 +3733,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           });
         } catch (err) {
           unsubscribe && unsubscribe();
-          if (err && err.name === "TypeError" && /fetch/i.test(err.message)) {
+          if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
             throw Object.assign(
               new AxiosError("Network Error", AxiosError.ERR_NETWORK, config, request),
               {
@@ -3871,7 +3839,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           return Promise.reject(reason);
         });
       }
-      var VERSION2 = "1.7.7";
+      var VERSION2 = "1.9.0";
       var validators$1 = {};
       ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
         validators$1[type] = function validator2(thing) {
@@ -3900,6 +3868,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             );
           }
           return validator2 ? validator2(value, opt, opts) : true;
+        };
+      };
+      validators$1.spelling = function spelling(correctSpelling) {
+        return (value, opt) => {
+          console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
+          return true;
         };
       };
       function assertOptions(options, schema, allowUnknown) {
@@ -3931,7 +3905,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       var validators = validator.validators;
       var Axios = class {
         constructor(instanceConfig) {
-          this.defaults = instanceConfig;
+          this.defaults = instanceConfig || {};
           this.interceptors = {
             request: new InterceptorManager$1(),
             response: new InterceptorManager$1()
@@ -3950,8 +3924,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             return await this._request(configOrUrl, config);
           } catch (err) {
             if (err instanceof Error) {
-              let dummy;
-              Error.captureStackTrace ? Error.captureStackTrace(dummy = {}) : dummy = new Error();
+              let dummy = {};
+              Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
               const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
               try {
                 if (!err.stack) {
@@ -3993,6 +3967,17 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               }, true);
             }
           }
+          if (config.allowAbsoluteUrls !== void 0)
+            ;
+          else if (this.defaults.allowAbsoluteUrls !== void 0) {
+            config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
+          } else {
+            config.allowAbsoluteUrls = true;
+          }
+          validator.assertOptions(config, {
+            baseUrl: validators.spelling("baseURL"),
+            withXsrfToken: validators.spelling("withXSRFToken")
+          }, true);
           config.method = (config.method || this.defaults.method || "get").toLowerCase();
           let contextHeaders = headers && utils$1.merge(
             headers.common,
@@ -4059,7 +4044,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         }
         getUri(config) {
           config = mergeConfig(this.defaults, config);
-          const fullPath = buildFullPath(config.baseURL, config.url);
+          const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
           return buildURL(fullPath, config.params, config.paramsSerializer);
         }
       };
@@ -4649,7 +4634,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
   });
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
+  // node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
   function assign(tar, src) {
@@ -4753,13 +4738,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/globals.js
+  // node_modules/svelte/src/runtime/internal/globals.js
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
     // @ts-ignore Node typings have this
     global
   );
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
+  // node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
   var ResizeObserverSingleton = class {
     /**
      * @private
@@ -4805,7 +4790,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   ResizeObserverSingleton.entries = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/dom.js
+  // node_modules/svelte/src/runtime/internal/dom.js
   var is_hydrating = false;
   function start_hydrating() {
     is_hydrating = true;
@@ -4932,7 +4917,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return result;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/lifecycle.js
+  // node_modules/svelte/src/runtime/internal/lifecycle.js
   var current_component;
   function set_current_component(component) {
     current_component = component;
@@ -4977,7 +4962,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/scheduler.js
+  // node_modules/svelte/src/runtime/internal/scheduler.js
   var dirty_components = [];
   var binding_callbacks = [];
   var render_callbacks = [];
@@ -5059,7 +5044,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     render_callbacks = filtered;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/transitions.js
+  // node_modules/svelte/src/runtime/internal/transitions.js
   var outroing = /* @__PURE__ */ new Set();
   var outros;
   function group_outros() {
@@ -5101,7 +5086,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/each.js
+  // node_modules/svelte/src/runtime/internal/each.js
   function ensure_array_like(array_like_or_iterator) {
     return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
   }
@@ -5184,7 +5169,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return new_blocks;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/spread.js
+  // node_modules/svelte/src/runtime/internal/spread.js
   function get_spread_update(levels, updates) {
     const update2 = {};
     const to_null_out = {};
@@ -5218,7 +5203,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return update2;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/boolean_attributes.js
+  // node_modules/svelte/src/shared/boolean_attributes.js
   var _boolean_attributes = (
     /** @type {const} */
     [
@@ -5251,7 +5236,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   );
   var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/Component.js
+  // node_modules/svelte/src/runtime/internal/Component.js
   function bind(component, name, callback) {
     const index = component.$.props[name];
     if (index !== void 0) {
@@ -5398,6 +5383,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             this.$l_u.delete(listener);
           }
         }
+        if (this.$l[type]) {
+          const idx = this.$l[type].indexOf(listener);
+          if (idx >= 0) {
+            this.$l[type].splice(idx, 1);
+          }
+        }
       }
       async connectedCallback() {
         this.$cn = true;
@@ -5429,7 +5420,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             };
           };
           await Promise.resolve();
-          if (!this.$cn) {
+          if (!this.$cn || this.$c) {
             return;
           }
           const $slots = {};
@@ -5443,6 +5434,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
             const name = this.$g_p(attribute.name);
             if (!(name in this.$d)) {
               this.$d[name] = get_custom_element_value(name, attribute.value, this.$p_d, "toProp");
+            }
+          }
+          for (const key in this.$p_d) {
+            if (!(key in this.$d) && this[key] !== void 0) {
+              this.$d[key] = this[key];
+              delete this[key];
             }
           }
           this.$c = new this.$ctor({
@@ -5498,7 +5495,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       disconnectedCallback() {
         this.$cn = false;
         Promise.resolve().then(() => {
-          if (!this.$cn) {
+          if (!this.$cn && this.$c) {
             this.$c.$destroy();
             this.$c = void 0;
           }
@@ -5595,10 +5592,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
   };
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/version.js
+  // node_modules/svelte/src/shared/version.js
   var PUBLIC_VERSION = "4";
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/disclose-version/index.js
+  // node_modules/svelte/src/runtime/internal/disclose-version/index.js
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
@@ -5678,7 +5675,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   }();
   var notifier = new Notifier();
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/Icon.svelte
+  // node_modules/svelte-icons-pack/dist/Icon.svelte
   function create_fragment(ctx) {
     let svg;
     let svg_style_value;
@@ -5837,7 +5834,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   var Icon_default = Icon;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
+  // node_modules/svelte-icons-pack/dist/ri/index.js
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHomeWifiLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M6 19H18V9.15745L12 3.7029L6 9.15745V19ZM19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM8 9.99998C11.866 9.99998 15 13.134 15 17H13C13 14.2386 10.7614 12 8 12V9.99998ZM8 14C9.65685 14 11 15.3431 11 17H8V14Z"></path>' };
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
@@ -5858,11 +5855,11 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   var RiFinanceShoppingBag2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20.0049 22H4.00488C3.4526 22 3.00488 21.5523 3.00488 21V3C3.00488 2.44772 3.4526 2 4.00488 2H20.0049C20.5572 2 21.0049 2.44772 21.0049 3V21C21.0049 21.5523 20.5572 22 20.0049 22ZM19.0049 20V4H5.00488V20H19.0049ZM9.00488 6V8C9.00488 9.65685 10.348 11 12.0049 11C13.6617 11 15.0049 9.65685 15.0049 8V6H17.0049V8C17.0049 10.7614 14.7663 13 12.0049 13C9.24346 13 7.00488 10.7614 7.00488 8V6H9.00488Z"></path>' };
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
+  // node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
   var LuWashingMachine = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M3 6h3"></path><path d="M17 6h.01"></path><path d="M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5"></path><rect width="18" height="20" x="3" y="2" rx="2"></rect><circle cx="12" cy="13" r="5"></circle>' };
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/store/index.js
+  // node_modules/svelte/src/runtime/store/index.js
   var subscriber_queue = [];
   function writable(value, start = noop) {
     let stop;
@@ -7956,7 +7953,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   var SideMenu_default = SideMenu;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/bs/index.js
+  // node_modules/svelte-icons-pack/dist/bs/index.js
   var BsList = { a: { fill: "currentColor", viewBox: "0 0 16 16" }, c: '<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>' };
 
   // _partials/Navbar.svelte
@@ -8370,14 +8367,14 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   // _components/StaffSaleForm.svelte
   var import_xFormatter2 = __toESM(require_xFormatter());
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ai/index.js
+  // node_modules/svelte-icons-pack/dist/ai/index.js
   var AiOutlineEyeInvisible = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2Q889.47 375.11 816.7 305l-50.88 50.88C807.31 395.53 843.45 447.4 874.7 512 791.5 684.2 673.4 766 512 766q-72.67 0-133.87-22.38L323 798.75Q408 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5zm-63.57-320.64L836 122.88a8 8 0 0 0-11.32 0L715.31 232.2Q624.86 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.69 119.4 136.5 191.41L112.48 835a8 8 0 0 0 0 11.31L155.17 889a8 8 0 0 0 11.31 0l712.15-712.12a8 8 0 0 0 0-11.32zM149.3 512C232.6 339.8 350.7 258 512 258c54.54 0 104.13 9.36 149.12 28.39l-70.3 70.3a176 176 0 0 0-238.13 238.13l-83.42 83.42C223.1 637.49 183.3 582.28 149.3 512zm246.7 0a112.11 112.11 0 0 1 146.2-106.69L401.31 546.2A112 112 0 0 1 396 512z"></path><path d="M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 0 0 227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 0 1-112 112z"></path>' };
   var AiOutlineEye = { a: { viewBox: "0 0 1024 1024" }, c: '<path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path>' };
 
   // _components/InputBox.svelte
   var import_xFormatter = __toESM(require_xFormatter());
 
-  // node_modules/.pnpm/@floating-ui+utils@0.2.9/node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
+  // node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
   var min = Math.min;
   var max = Math.max;
   var round = Math.round;
@@ -8508,7 +8505,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
   }
 
-  // node_modules/.pnpm/@floating-ui+core@1.7.0/node_modules/@floating-ui/core/dist/floating-ui.core.mjs
+  // node_modules/@floating-ui/core/dist/floating-ui.core.mjs
   function computeCoordsFromPlacement(_ref, placement, rtl) {
     let {
       reference,
@@ -8952,7 +8949,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     };
   };
 
-  // node_modules/.pnpm/@floating-ui+utils@0.2.9/node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs
+  // node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs
   function hasWindow() {
     return typeof window !== "undefined";
   }
@@ -9099,7 +9096,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return win.parent && Object.getPrototypeOf(win.parent) ? win.frameElement : null;
   }
 
-  // node_modules/.pnpm/@floating-ui+dom@1.7.0/node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
+  // node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
   function getCssDimensions(element2) {
     const css = getComputedStyle2(element2);
     let width = parseFloat(css.width) || 0;
@@ -9697,7 +9694,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     });
   };
 
-  // node_modules/.pnpm/svelte-floating-ui@1.5.8/node_modules/svelte-floating-ui/index.js
+  // node_modules/svelte-floating-ui/index.js
   function createFloatingActions(initOptions) {
     let referenceElement;
     let floatingElement;
@@ -9781,7 +9778,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     ];
   }
 
-  // node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/filter.js
+  // node_modules/svelte-select/filter.js
   function filter({
     loadOptions,
     filterText,
@@ -9818,7 +9815,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     return filterResults;
   }
 
-  // node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/get-items.js
+  // node_modules/svelte-select/get-items.js
   async function getItems({ dispatch, loadOptions, convertStringItemsToObjects: convertStringItemsToObjects2, filterText }) {
     let res = await loadOptions(filterText).catch((err) => {
       console.warn("svelte-select loadOptions error :>> ", err);
@@ -9842,7 +9839,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
   }
 
-  // node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/ChevronIcon.svelte
+  // node_modules/svelte-select/ChevronIcon.svelte
   function create_fragment6(ctx) {
     let svg;
     let path;
@@ -9881,7 +9878,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   var ChevronIcon_default = ChevronIcon;
 
-  // node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/ClearIcon.svelte
+  // node_modules/svelte-select/ClearIcon.svelte
   function create_fragment7(ctx) {
     let svg;
     let path;
@@ -9921,7 +9918,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   var ClearIcon_default = ClearIcon;
 
-  // node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/LoadingIcon.svelte
+  // node_modules/svelte-select/LoadingIcon.svelte
   function create_fragment8(ctx) {
     let svg;
     let circle;
@@ -9962,7 +9959,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   var LoadingIcon_default = LoadingIcon;
 
-  // node_modules/.pnpm/svelte-select@5.8.3/node_modules/svelte-select/Select.svelte
+  // node_modules/svelte-select/Select.svelte
   var get_required_slot_changes = (dirty) => ({ value: dirty[0] & /*value*/
   8 });
   var get_required_slot_context = (ctx) => ({ value: (
@@ -18291,7 +18288,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   };
   var StaffPaymentForm_default = StaffPaymentForm;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/fi/index.js
+  // node_modules/svelte-icons-pack/dist/fi/index.js
   var FiX = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>' };
   var FiPlus = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>' };
   var FiCheckCircle = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>' };
@@ -18301,7 +18298,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   var FiShoppingCart = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>' };
   var FiTrendingUp = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/fa/index.js
+  // node_modules/svelte-icons-pack/dist/fa/index.js
   var FaSolidShirt = { a: { viewBox: "0 0 640 512" }, c: '<path d="M211.8 0c7.8 0 14.3 5.7 16.7 13.2C240.8 51.9 277.1 80 320 80s79.2-28.1 91.5-66.8C413.9 5.7 420.4 0 428.2 0h12.6c22.5 0 44.2 7.9 61.5 22.3L628.5 127.4c6.6 5.5 10.7 13.5 11.4 22.1s-2.1 17.1-7.8 23.6l-56 64c-11.4 13.1-31.2 14.6-44.6 3.5L480 197.7V448c0 35.3-28.7 64-64 64H224c-35.3 0-64-28.7-64-64V197.7l-51.5 42.9c-13.3 11.1-33.1 9.6-44.6-3.5l-56-64c-5.7-6.5-8.5-15-7.8-23.6s4.8-16.6 11.4-22.1L137.7 22.3C155 7.9 176.7 0 199.2 0h12.6z"></path>' };
   var FaSolidUtensils = { a: { viewBox: "0 0 448 512" }, c: '<path d="M416 0C400 0 288 32 288 176V288c0 35.3 28.7 64 64 64h32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V352 240 32c0-17.7-14.3-32-32-32zM64 16C64 7.8 57.9 1 49.7 .1S34.2 4.6 32.4 12.5L2.1 148.8C.7 155.1 0 161.5 0 167.9c0 45.9 35.1 83.6 80 87.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V255.6c44.9-4.1 80-41.8 80-87.7c0-6.4-.7-12.8-2.1-19.1L191.6 12.5c-1.8-8-9.3-13.3-17.4-12.4S160 7.8 160 16V150.2c0 5.4-4.4 9.8-9.8 9.8c-5.1 0-9.3-3.9-9.8-9L127.9 14.6C127.2 6.3 120.3 0 112 0s-15.2 6.3-15.9 14.6L83.7 151c-.5 5.1-4.7 9-9.8 9c-5.4 0-9.8-4.4-9.8-9.8V16zm48.3 152l-.3 0-.3 0 .3-.7 .3 .7z"></path>' };
   var FaSolidGamepad = { a: { viewBox: "0 0 640 512" }, c: '<path d="M192 64C86 64 0 150 0 256S86 448 192 448H448c106 0 192-86 192-192s-86-192-192-192H192zM496 168a40 40 0 1 1 0 80 40 40 0 1 1 0-80zM392 304a40 40 0 1 1 80 0 40 40 0 1 1 -80 0zM168 200c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H216v32c0 13.3-10.7 24-24 24s-24-10.7-24-24V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h32V200z"></path>' };
@@ -20655,10 +20652,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     );
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: import_xConstant.CmdList };
-      await (0, import_jsApi2.AdminSale)(
+      await (0, import_jsApi2.StaffSales)(
         // @ts-ignore
         i,
-        /** @type {import('./jsApi.GEN').AdminSaleCallback} */
+        /** @type {import('./jsApi.GEN').StaffSalesCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -20676,9 +20673,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         /** @type {any} */
         { pager, sale, cmd: import_xConstant.CmdUpsert }
       );
-      await (0, import_jsApi2.AdminSale)(
+      await (0, import_jsApi2.StaffSales)(
         i,
-        /** @type {import('../jsApi.GEN').AdminSaleCallback} */
+        /** @type {import('../jsApi.GEN').StaffSalesCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -20710,9 +20707,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         /** @type {any}*/
         { pager, sale, cmd: import_xConstant.CmdUpdatePayment }
       );
-      await (0, import_jsApi2.AdminSale)(
+      await (0, import_jsApi2.StaffSales)(
         i,
-        /** @type {import('./jsApi.GEN').AdminSaleCallback} */
+        /** @type {import('./jsApi.GEN').StaffSalesCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
@@ -20729,16 +20726,21 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     }
     return [sales, OnAddSale, OnEdit];
   }
-  var StaffSales = class extends SvelteComponent {
+  var StaffSales_1 = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance11, create_fragment14, safe_not_equal, {});
     }
   };
-  var staffSales_default = StaffSales;
+  var staffSales_default = StaffSales_1;
 
   // staffSales.svelte.ts
   var app = new staffSales_default({ target: document.getElementById("app") });
 })();
+/*! Bundled license information:
+
+axios/dist/browser/axios.cjs:
+  (*! Axios v1.9.0 Copyright (c) 2025 Matt Zabriskie and contributors *)
+*/
 </script>
 </body></html>
