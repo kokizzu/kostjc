@@ -397,11 +397,17 @@ func InsertPropertyLog(
 			return
 		}
 
+		afterJson, _ := json.Marshal(data)
+
 		if refId == 0 {
+			insertFunc.Insert([]any{
+				createdAt,
+				actorId,
+				beforeJson,
+				afterJson,
+			})
 			return
 		}
-
-		afterJson, _ := json.Marshal(data)
 
 		tempBeforeJson := rgxReplaceUpdatedAt.ReplaceAllString(string(beforeJson), `"updatedAt":0`)
 		tempAfterJson := rgxReplaceUpdatedAt.ReplaceAllString(string(afterJson), `"updatedAt":0`)
