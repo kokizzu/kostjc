@@ -121,7 +121,6 @@ function decrementMenu(menuId) {
   function submitFormSale() {
     const saleData = /** @type {Sale|any} */ ({
       cashier: cashier,
-      tenantId: tenantId+'',
       buyerName: buyerName,
       menuIds: menuIds,
       paymentStatus: PaymentStatuses.Unpaid,
@@ -130,6 +129,11 @@ function decrementMenu(menuId) {
       totalPriceIDR: totalPriceIDR,
     });
 
+    if (Number(tenantId) > 0) {
+      saleData.tenantId = String(tenantId);
+    }
+
+    console.log('saleData submitt :::', saleData);
     dispatch('saleSubmit', saleData);
   }
 
