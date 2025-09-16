@@ -346,7 +346,7 @@ $: console.log("Final Total Payments:", totalPayments);
         </div>
 
         <!-- Main Dingdong - Full Width -->
-        <div class="card">
+        <!-- <div class="card">
           <div class="card-header">
             <div class="header-title">
               <Icon src={FaSolidGamepad} className="icon" color="#4f46e5;" />
@@ -380,7 +380,8 @@ $: console.log("Final Total Payments:", totalPayments);
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+
       </div>
     </div>
   </div>
