@@ -133,7 +133,6 @@ function decrementMenu(menuId) {
       saleData.tenantId = String(tenantId);
     }
 
-    console.log('saleData submitt :::', saleData);
     dispatch('saleSubmit', saleData);
   }
 

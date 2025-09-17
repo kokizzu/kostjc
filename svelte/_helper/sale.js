@@ -79,8 +79,8 @@ export function getBuyerOptions(sales, tenants) {
     const saleId = sale[0];
     const buyerName = sale[3];
     const tenantId = sale[2];
-    const totalPrice = sale[13];
-    const salesDate = sale[14];
+    const totalPrice = sale[14];
+    const salesDate = sale[15];
     const paymentStatus = sale[6];
     
     if (salesDate !== today) {
@@ -91,16 +91,16 @@ export function getBuyerOptions(sales, tenants) {
       continue;
     }
 
-    let label = ` #${saleId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
+    let label = `${saleId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
 
     if (tenantId > 0) {
       const fullTenantInfo = tenants[tenantId];
       if (fullTenantInfo) {
         const [tenantName, teleNumber, waNumber] = fullTenantInfo.split(' / ');
         const info = waNumber ? `${tenantName} / ${waNumber}` : tenantName;
-        label = `#${saleId} / ${info} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
+        label = `${saleId} / ${info} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
       } else {
-        label = `#${saleId} / ${tenantId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
+        label = `${saleId} / ${tenantId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
       }
     }
 
@@ -118,7 +118,7 @@ export function getBuyerOptionsForUnpaidItems(sales, tenants) {
     const saleId = sale[0];
     const buyerName = sale[3];
     const tenantId = sale[2];
-    const totalPrice = sale[13];
+    const totalPrice = sale[14];
     const paymentStatus = sale[6];
     
     
@@ -126,16 +126,16 @@ export function getBuyerOptionsForUnpaidItems(sales, tenants) {
       continue;
     }
 
-    let label = ` #${saleId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
+    let label = `${saleId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
 
     if (tenantId > 0) {
       const fullTenantInfo = tenants[tenantId];
       if (fullTenantInfo) {
         const [tenantName, teleNumber, waNumber] = fullTenantInfo.split(' / ');
         const info = waNumber ? `${tenantName} / ${waNumber}` : tenantName;
-        label = `#${saleId} / ${info} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
+        label = `${saleId} / ${info} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
       } else {
-        label = `#${saleId} / ${tenantId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
+        label = `${saleId} / ${tenantId} / ${buyerName} (Rp ${formatCurrency(totalPrice)})`;
       }
     }
 
@@ -152,12 +152,12 @@ export function parseSalesToTodaySales(sales, menusAsObject) {
   const today = new Date().toISOString().split('T')[0];
 
   for (const sale of sales) {
-    const salesDate = sale[14];
+    const salesDate = sale[15];
     
     if (salesDate !== today) continue;
 
     const menuIds = sale[4];
-    const totalPrice = sale[13];
+    const totalPrice = sale[14];
     const perItemPrice = Math.floor(totalPrice / menuIds.length);
     const timeString = new Date(sale[17] * 1000).toLocaleTimeString("id-ID", {
       hour: "2-digit",
@@ -205,7 +205,7 @@ export function parseSalesToTodayPayment(salesData, tenants) {
   
   salesData.forEach((salesArray, index) => {
       try {
-          if (!Array.isArray(salesArray) || salesArray.length < 20) {
+          if (!Array.isArray(salesArray) || salesArray.length < 21) {
               console.warn(`Sales data index ${index} tidak valid atau kurang lengkap`);
               return;
           }
@@ -219,7 +219,7 @@ export function parseSalesToTodayPayment(salesData, tenants) {
                   amount: calculateSaleTotal(salesArray)|| 0,
                   method: salesArray[5] || '',
                   status: salesArray[6] || '',
-                  time: formatTimestamp(salesArray[17])
+                  time: formatTimestamp(salesArray[18])
               };
               
               todayPayments.push(payment);
@@ -243,7 +243,7 @@ export function parseSalesToOverpaid(salesData, tenants) {
   
   salesData.forEach((salesArray, index) => {
       try {
-          if (!Array.isArray(salesArray) || salesArray.length < 20) {
+          if (!Array.isArray(salesArray) || salesArray.length < 21) {
               console.warn(`Sales data index ${index} tidak valid atau kurang lengkap`);
               return;
           }
@@ -252,7 +252,7 @@ export function parseSalesToOverpaid(salesData, tenants) {
           
           if (status === "Overpaid") {
               const paidAmount = calculateSaleTotal(salesArray) || 0;
-              const totalAmount = parseInt(salesArray[13]) || 0;
+              const totalAmount = parseInt(salesArray[14]) || 0;
               const excess = Math.max(0, paidAmount - totalAmount);
               
               const overpaid = {
@@ -260,8 +260,8 @@ export function parseSalesToOverpaid(salesData, tenants) {
                   customer: getCleanCustomerName(salesArray, tenants) || '',
                   excess: excess,
                   method: salesArray[5] || '',
-                  time: formatTimestamp(salesArray[17]),
-                  date: salesArray[15] || ''
+                  time: formatTimestamp(salesArray[18]),
+                  date: salesArray[16] || ''
               };
               
               overpaidData.push(overpaid);
@@ -286,7 +286,7 @@ export function parseSalesToUnpaid(salesData, menus, tenants) {
   
   salesData.forEach((salesArray, index) => {
       try {
-          if (!Array.isArray(salesArray) || salesArray.length < 20) {
+          if (!Array.isArray(salesArray) || salesArray.length < 21) {
               console.warn(`Sales data index ${index} tidak valid atau kurang lengkap`);
               return;
           }
@@ -298,8 +298,8 @@ export function parseSalesToUnpaid(salesData, menus, tenants) {
                   id: parseInt(salesArray[0]) || 0,
                   customer: getCleanCustomerName(salesArray, tenants) || '',
                   item: getMenuStringFromSale(salesArray, menus) || '',
-                  amount: parseInt(salesArray[13]) || 0,
-                  date: salesArray[14] || ''
+                  amount: parseInt(salesArray[14]) || 0,
+                  date: salesArray[15] || ''
               };
               
               unpaidData.push(unpaid);
@@ -353,7 +353,7 @@ function calculateSaleTotal(saleArray) {
 
 function getCustomerName(saleArray, tenants) {
   try {
-      if (!Array.isArray(saleArray) || saleArray.length < 20) {
+      if (!Array.isArray(saleArray) || saleArray.length < 21) {
           return '';
       }
 
@@ -437,7 +437,7 @@ function getMenuString(menuIds, menus) {
 
 function getMenuStringFromSale(saleArray, menus) {
   try {
-      if (!Array.isArray(saleArray) || saleArray.length < 20) {
+      if (!Array.isArray(saleArray) || saleArray.length < 21) {
           return '';
       }
       const menuIds = saleArray[4];
