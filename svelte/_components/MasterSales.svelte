@@ -76,7 +76,7 @@
 $: totalSales =
   Array.isArray(sales)
     ? sales.reduce((sum, s) => {
-        const v = s?.[13] ?? 0;
+        const v = s?.[14] ?? 0;
         return sum + (typeof v === 'number' ? v : 0);
       }, 0)
     : 0;

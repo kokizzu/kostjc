@@ -74,6 +74,7 @@
         transferIDR: Number(saleData.transferIDR || 0),
         qrisIDR: Number(saleData.qrisIDR || 0),
         cashIDR: Number(saleData.cashIDR || 0),
+        changeIDR: Number(saleData.changeIDR || 0),
         debtIDR: Number(saleData.debtIDR || 0),
         topupIDR: Number(saleData.topupIDR || 0),
         totalPriceIDR: Number(saleData.totalPriceIDR || 0),

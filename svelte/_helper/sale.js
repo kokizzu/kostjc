@@ -159,7 +159,7 @@ export function parseSalesToTodaySales(sales, menusAsObject) {
     const menuIds = sale[4];
     const totalPrice = sale[14];
     const perItemPrice = Math.floor(totalPrice / menuIds.length);
-    const timeString = new Date(sale[17] * 1000).toLocaleTimeString("id-ID", {
+    const timeString = new Date(sale[18] * 1000).toLocaleTimeString("id-ID", {
       hour: "2-digit",
       minute: "2-digit", 
       hour12: false
@@ -335,14 +335,32 @@ function calculateSaleTotal(saleArray) {
       if (!Array.isArray(saleArray) || saleArray.length < 20) {
           return 0;
       }
+      
+      const paymentMethod = saleArray[5];
+      const totalPrice = parseInt(saleArray[14]) || 0; // Total Price IDR
+      const paymentStatus = saleArray[6]; // Payment Status
+      
+      // Jika transaksi sudah Paid/Overpaid, gunakan total price
+      // karena ini adalah nilai aktual yang dibayar customer
+      if (paymentStatus === "Paid" || paymentStatus === "Overpaid") {
+          return totalPrice;
+      }
+      
+      // Jika belum paid, hitung dari komponen payment
       const transferAmount = parseInt(saleArray[7]) || 0;
       const qrisAmount = parseInt(saleArray[8]) || 0;
-      const cashAmount = parseInt(saleArray[9]) || 0;
-      const debtAmount = parseInt(saleArray[10]) || 0;
-      const topupAmount = parseInt(saleArray[11]) || 0;
-      const donationAmount = parseInt(saleArray[12]) || 0;
-
-      return transferAmount + qrisAmount + cashAmount + debtAmount + topupAmount + donationAmount;
+      const cashGiven = parseInt(saleArray[9]) || 0;
+      const changeGiven = parseInt(saleArray[10]) || 0;
+      const debtAmount = parseInt(saleArray[11]) || 0;
+      const topupAmount = parseInt(saleArray[12]) || 0;
+      const donationAmount = parseInt(saleArray[13]) || 0;
+      
+      let actualCashAmount = 0;
+      if (paymentMethod === "Cash") {
+          actualCashAmount = cashGiven - changeGiven;
+      }
+      
+      return transferAmount + qrisAmount + actualCashAmount + debtAmount + topupAmount + donationAmount;
       
   } catch (error) {
       console.error('Error calculating sale total:', error);
