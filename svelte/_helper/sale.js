@@ -197,39 +197,43 @@ export function convertMenusToObject(menus) {
 
 export function parseSalesToTodayPayment(salesData, tenants) {
   const todayPayments = [];
-  
+  const today = new Date().toISOString().split("T")[0];
+
   if (!Array.isArray(salesData) || salesData.length === 0) {
-      console.log('Data sales kosong atau tidak valid');
-      return todayPayments;
+    console.log("Data sales kosong atau tidak valid");
+    return todayPayments;
   }
-  
+
   salesData.forEach((salesArray, index) => {
-      try {
-          if (!Array.isArray(salesArray) || salesArray.length < 21) {
-              console.warn(`Sales data index ${index} tidak valid atau kurang lengkap`);
-              return;
-          }
-          
-          const status = salesArray[6];
-          
-          if (status === "Paid" || status === "Overpaid") {
-              const payment = {
-                  id: parseInt(salesArray[0]) || 0,
-                  customer: getCleanCustomerName(salesArray, tenants) || '',
-                  amount: calculateSaleTotal(salesArray)|| 0,
-                  method: salesArray[5] || '',
-                  status: salesArray[6] || '',
-                  time: formatTimestamp(salesArray[18])
-              };
-              
-              todayPayments.push(payment);
-              console.log(`Added payment: ID ${payment.id}, Customer: ${payment.customer}, Amount: ${payment.amount}`);
-          }
-      } catch (error) {
-          console.error(`Error parsing sales data at index ${index}:`, error);
+    try {
+      if (!Array.isArray(salesArray) || salesArray.length < 21) {
+        console.warn(`Sales data index ${index} tidak valid atau kurang lengkap`);
+        return;
       }
+
+      const status = salesArray[6];
+      const saleDate = String(salesArray[15]).slice(0, 10);
+
+      if ((status === "Paid" || status === "Overpaid") && saleDate === today) {
+        const payment = {
+          id: parseInt(salesArray[0]) || 0,
+          customer: getCleanCustomerName(salesArray, tenants) || "",
+          amount: calculateSaleTotal(salesArray) || 0,
+          method: salesArray[5] || "",
+          status: salesArray[6] || "",
+          time: formatTimestamp(salesArray[18]),
+        };
+
+        todayPayments.push(payment);
+        console.log(
+          `Added payment: ID ${payment.id}, Customer: ${payment.customer}, Amount: ${payment.amount}, Date: ${saleDate}`
+        );
+      }
+    } catch (error) {
+      console.error(`Error parsing sales data at index ${index}:`, error);
+    }
   });
-  
+
   return todayPayments;
 }
 

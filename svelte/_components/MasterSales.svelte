@@ -73,9 +73,22 @@
   ];
 
 //ini reaktif
+// $: totalSales =
+//   Array.isArray(sales)
+//     ? sales.reduce((sum, s) => {
+//         const v = s?.[14] ?? 0;
+//         return sum + (typeof v === 'number' ? v : 0);
+//       }, 0)
+//     : 0;
+
 $: totalSales =
   Array.isArray(sales)
     ? sales.reduce((sum, s) => {
+        const salesDate = s?.[15]; 
+        const today = new Date().toISOString().split('T')[0];
+
+        if (salesDate !== today) return sum;
+
         const v = s?.[14] ?? 0;
         return sum + (typeof v === 'number' ? v : 0);
       }, 0)
@@ -140,6 +153,97 @@ $: console.log("Final Total Payments:", totalPayments);
   function formatCurrency(amount) {
     return new Intl.NumberFormat('id-ID').format(amount);
   }
+
+  // Helpers: find sale by payment id and convert to typed Sale object
+  function findSaleRowByPaymentId(paymentId) {
+    return Array.isArray(sales)
+      ? sales.find(s => String(s?.[0]) === String(paymentId))
+      : null;
+  }
+
+  /** @returns {import('../_types/cafe').Sale} */
+  function mapSaleRowToSale(row) {
+    if (!Array.isArray(row)) return /** @type {any} */ ({});
+    return /** @type {any} */ ({
+    id: row[0],                              // Direct assignment (likely string/number)
+    cashier: row[1] ?? '',                   // String with fallback
+    tenantId: row[2] ?? 0,                   // Number with fallback
+    buyerName: row[3] ?? '',                 // String with fallback
+    menuIds: Array.isArray(row[4]) ? row[4] : [], // Safe array handling
+    paymentMethod: row[5] ?? '',             // String with fallback
+    paymentStatus: row[6] ?? '',             // String with fallback
+    
+    // Proper Number() casting for currency fields
+    transferIDR: Number(row[7] ?? 0),
+    qrisIDR: Number(row[8] ?? 0), 
+    cashIDR: Number(row[9] ?? 0),
+    changeIDR: Number(row[10] ?? 0),
+    debtIDR: Number(row[11] ?? 0),
+    topupIDR: Number(row[12] ?? 0),
+    donation: Number(row[13] ?? 0),
+    totalPriceIDR: Number(row[14] ?? 0),
+    
+    // String casting for date fields
+    salesDate: String(row[15] ?? ''),
+    paidAt: String(row[15] ?? ''),           // Note: Same index as salesDate
+    note: String(row[17] ?? ''),
+    
+    // Number casting for timestamps
+    createdAt: Number(row[18] ?? 0),
+    updatedAt: Number(row[19] ?? 0),
+    deletedAt: Number(row[20] ?? 0),
+    });
+
+  }
+
+  let showDetailModal = false;
+  let selectedPayment = null;
+  // $:selectedSale = null;
+
+  // Function untuk menampilkan detail
+  function showPaymentDetail(payment) {
+    const row = findSaleRowByPaymentId(payment?.id);
+    const sale = mapSaleRowToSale(row);
+    selectedPayment = {
+      id: sale.id,
+      customer: payment?.customer ?? 'Walk-in',
+      cashier: sale.cashier || user?.fullName || user?.userName || 'Staff',
+      salesDate: sale.salesDate,
+      paidAt: sale.paidAt,
+      menuIds: sale.menuIds,
+      paymentMethod: sale.paymentMethod,
+      paymentStatus: sale.paymentStatus,
+      transferIDR: sale.transferIDR,
+      qrisIDR: sale.qrisIDR,
+      totalPriceIDR: sale.totalPriceIDR,
+      cashIDR: sale.cashIDR,
+      debtIDR: sale.debtIDR,
+      topupIDR: sale.topupIDR,
+      donation: sale.donation,
+      changeIDR: sale.changeIDR,
+      note: sale.note,
+    };
+    showDetailModal = true;
+
+    console.log("Selected Payment", selectedPayment);
+  }
+
+  // function showSaleDetail(sale) {
+
+  //   console.log("Payment detail id", sale.id);
+  //   console.log("Sales detail", sales);
+
+  //    // Cari data sale yang sesuai berdasarkan payment
+  //   selectedSale = sales.find(sales => sales[0] === sale.id);
+  //   selectedPayment = null;
+  //   showDetailModal = true;
+  // }
+
+  function closeDetailModal() {
+    showDetailModal = false;
+    selectedPayment = null;
+    // selectedSale = null;
+  }
 </script>
 
 <div class="dashboard">
@@ -202,7 +306,7 @@ $: console.log("Final Total Payments:", totalPayments);
             <div class="items-scroll">
               <div class="items-list">
                 {#each todayPayments as payment (payment.id)}
-                  <div class="item-row item-green">
+                  <div class="item-row item-green clickable-card" on:click={() => showPaymentDetail(payment)}>
                     <div class="item-info">
                       <p class="item-name">{payment.customer}</p>
                       <p class="item-details">
@@ -385,6 +489,129 @@ $: console.log("Final Total Payments:", totalPayments);
       </div>
     </div>
   </div>
+
+
+  <!-- Detail Modal -->
+  {#if showDetailModal}
+  <div class="modal-overlay">
+    <div class="modal detail-modal">
+      <div class="modal-header">
+        <h2>Detail Transaksi</h2>
+        <button class="close-btn" on:click={closeDetailModal}>
+          <Icon src={FiX} size={18} />
+        </button>
+      </div>
+      
+      <div class="modal-content">
+        {#if selectedPayment}
+          <!-- Receipt-like layout -->
+          <div class="receipt">
+            <div class="receipt-header">
+              <h3>STRUK PEMBELIAN</h3>
+              <p class="receipt-date">{selectedPayment.salesDate}</p>
+            </div>
+            
+            <div class="receipt-customer">
+              <p><strong>Pelanggan:</strong> {selectedPayment.customer || selectedPayment?.customer || 'Walk-in'}</p>
+              <p><strong>Kasir:</strong> {selectedPayment.cashier || user?.name || 'Staff'}</p>
+            </div>
+            
+            <div class="receipt-items">
+              <div class="items-header">
+                <span>Item</span>
+                <span>Qty</span>
+                <span>Harga</span>
+                <span>Total</span>
+              </div>
+              
+              <!-- Parse menu items dari selectedPayment -->
+              {#if selectedPayment.menuIds && Array.isArray(selectedPayment.menuIds)}
+                {#each selectedPayment.menuIds as menuId}
+                  {@const menuItem = menusAsObject[menuId]}
+                  {#if menuItem}
+                    <div class="receipt-item">
+                      <span class="item-name">{menuItem.name}</span>
+                      <span class="item-qty">1</span>
+                      <span class="item-price">Rp {formatCurrency(menuItem.price || 0)}</span>
+                      <span class="item-total">Rp {formatCurrency(menuItem.price || 0)}</span>
+                    </div>
+                  {/if}
+                {/each}
+              {:else}
+                <div class="receipt-item">
+                  <span class="item-name">{selectedPayment.name || 'Item'}</span>
+                  <span class="item-qty">{selectedPayment.qty || 1}</span>
+                  <span class="item-price">Rp {formatCurrency(selectedPayment.total || 0)}</span>
+                  <span class="item-total">Rp {formatCurrency(selectedPayment.total || 0)}</span>
+                </div>
+              {/if}
+            </div>
+            
+            <div class="receipt-summary">
+              <div class="summary-line">
+                <span>Subtotal:</span>
+                <span>Rp {formatCurrency(selectedPayment.totalPriceIDR || selectedPayment.total || 0)}</span>
+              </div>
+              
+              {#if selectedPayment}
+                <div class="summary-line">
+                  <span>Metode Bayar:</span>
+                  <span>{selectedPayment.paymentMethod}</span>
+                </div>
+                <div class="summary-line">
+                  <span>Jumlah Bayar:</span>
+                  {#if selectedPayment.paymentMethod === 'Cash'}
+                    <span>Rp {formatCurrency(selectedPayment.cashIDR)}</span>
+                  {:else if selectedPayment.paymentMethod === 'QRIS'}
+                    <span>Rp {formatCurrency(selectedPayment.qrisIDR)}</span>
+                  {:else if selectedPayment.paymentMethod === 'Transfer'}
+                    <span>Rp {formatCurrency(selectedPayment.transferIDR)}</span>
+                  {:else if selectedPayment.paymentMethod === 'Debt'}
+                    <span>Rp {formatCurrency(selectedPayment.debtIDR)}</span>
+                  {:else if selectedPayment.paymentMethod === 'Topup'}
+                    <span>Rp {formatCurrency(selectedPayment.topupIDR)}</span>
+                  {:else if selectedPayment.paymentMethod === 'Donation'}
+                    <span>Rp {formatCurrency(selectedPayment.donationIDR)}</span>
+                  {:else}
+                    <span>Rp {formatCurrency(selectedPayment.totalPriceIDR)}</span>
+                  {/if}
+                </div>
+                {#if selectedPayment.paymentMethod === 'Cash'}
+                  <div class="summary-line">
+                    <span>Kembalian:</span>
+                    <span>Rp {formatCurrency(selectedPayment.changeIDR)}</span>
+                  </div>
+                {/if}
+              {/if}
+              
+              <div class="summary-total">
+                <span><strong>TOTAL:</strong></span>
+                <span><strong>Rp {formatCurrency(selectedPayment.totalPriceIDR || selectedPayment.total || 0)}</strong></span>
+              </div>
+            </div>
+            
+            {#if selectedPayment.note}
+              <div class="receipt-note">
+                <p><strong>Catatan:</strong> {selectedPayment.note}</p>
+              </div>
+            {/if}
+            
+            <div class="receipt-footer">
+              <p>Terima kasih atas kunjungan Anda!</p>
+              <p>ID Transaksi: {selectedPayment.id}</p>
+            </div>
+          </div>
+        {/if}
+      </div>
+      
+      <div class="modal-actions">
+        <button class="btn btn-secondary" on:click={closeDetailModal}>Tutup</button>
+        <!-- <button class="btn btn-primary">Print Struk</button> -->
+      </div>
+    </div>
+  </div>
+  {/if}
+
 
   <!-- Sale Form Modal -->
   {#if showSaleForm}
@@ -867,4 +1094,131 @@ $: console.log("Final Total Payments:", totalPayments);
       max-height: 80vh;
     }
   }
+
+  .clickable-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .clickable-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .detail-modal {
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .receipt {
+    font-family: 'Courier New', monospace;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    background: white;
+  }
+
+  .receipt-header {
+    text-align: center;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+
+  .receipt-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .receipt-date {
+    margin: 5px 0 0 0;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .receipt-customer {
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+
+  .receipt-customer p {
+    margin: 5px 0;
+  }
+
+  .items-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .receipt-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dotted #ddd;
+    font-size: 12px;
+  }
+
+  .receipt-summary {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+  }
+
+  .summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    font-size: 14px;
+  }
+
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+    font-size: 16px;
+  }
+
+  .receipt-note {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-left: 3px solid #007bff;
+    font-size: 12px;
+  }
+
+  .receipt-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+    font-size: 11px;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding: 20px;
+    border-top: 1px solid #eee;
+  }
+
+  .btn-secondary {
+    background: #6c757d;
+    color: white;
+  }
+
+  .btn-primary {
+    background: #007bff;
+    color: white;
+  }
+
 </style>
