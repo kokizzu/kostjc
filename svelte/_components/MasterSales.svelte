@@ -572,6 +572,27 @@ $: console.log("Final Total Payments:", totalPayments);
                     <span>Rp {formatCurrency(selectedPayment.topupIDR)}</span>
                   {:else if selectedPayment.paymentMethod === 'Donation'}
                     <span>Rp {formatCurrency(selectedPayment.donationIDR)}</span>
+                  {:else if selectedPayment.paymentMethod === 'Split Payment'}
+                  <div class="payment-list">
+                    {#if selectedPayment.cashIDR > 0}
+                      <span>Cash: Rp {formatCurrency(selectedPayment.cashIDR)}</span>
+                    {/if}
+                    {#if selectedPayment.qrisIDR > 0}
+                      <span>QRIS: Rp {formatCurrency(selectedPayment.qrisIDR)}</span>
+                    {/if}
+                    {#if selectedPayment.transferIDR > 0}
+                      <span>Transfer: Rp {formatCurrency(selectedPayment.transferIDR)}</span>
+                    {/if}
+                    {#if selectedPayment.debtIDR > 0}
+                      <span>Debt: Rp {formatCurrency(selectedPayment.debtIDR)}</span>
+                    {/if}
+                    {#if selectedPayment.topupIDR > 0}
+                      <span>Topup: Rp {formatCurrency(selectedPayment.topupIDR)}</span>
+                    {/if}
+                    {#if selectedPayment.donationIDR > 0}
+                      <span>Donation: Rp {formatCurrency(selectedPayment.donationIDR)}</span>
+                    {/if}
+                  </div>
                   {:else}
                     <span>Rp {formatCurrency(selectedPayment.totalPriceIDR)}</span>
                   {/if}
@@ -1220,5 +1241,15 @@ $: console.log("Final Total Payments:", totalPayments);
     background: #007bff;
     color: white;
   }
+
+  .payment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;               /* jarak antar baris */
+  margin-left: auto;      /* biar nempel ke kanan kayak value normal */
+  text-align: right;      /* rata kanan */
+  font-size: 14px;
+}
+
 
 </style>
