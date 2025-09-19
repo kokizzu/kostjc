@@ -4698,10 +4698,23 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         const options = { day: "2-digit", month: "long", year: "numeric" };
         return dt.toLocaleDateString(void 0, options);
       }
-      function localeDatetime(unixSec) {
-        if (!unixSec)
+      function isYYYYMMDD(str) {
+        return /^\d{4}-\d{2}-\d{2}$/.test(String(str));
+      }
+      function localeDatetime(mustBeTime) {
+        if (!mustBeTime)
           return "";
-        const dt = new Date(unixSec * 1e3);
+        let dt = new Date(mustBeTime * 1e3);
+        if (typeof mustBeTime !== "number")
+          dt = new Date(mustBeTime);
+        if (isYYYYMMDD(mustBeTime)) {
+          dt = new Date(mustBeTime);
+          const day2 = dt.toLocaleDateString("default", { weekday: "long" });
+          const date2 = dt.getDate();
+          const month2 = dt.toLocaleDateString("default", { month: "short" });
+          const year2 = dt.getFullYear();
+          return `${day2}, ${date2} ${month2} ${year2}`;
+        }
         const day = dt.toLocaleDateString("default", { weekday: "long" });
         const date = dt.getDate();
         const month = dt.toLocaleDateString("default", { month: "short" });

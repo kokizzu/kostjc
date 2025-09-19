@@ -19,9 +19,27 @@ function datetime(unixSec, humanize) {
   return dt.toLocaleDateString(undefined, options);
 }
 
-function localeDatetime(unixSec) {
-  if (!unixSec) return '';
-  const dt = new Date(unixSec * 1000);
+function isYYYYMMDD(/** @type {string} */ str) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(str));
+}
+
+function localeDatetime(/** @type {number|string} */ mustBeTime) {
+  if (!mustBeTime) return '';
+  let dt = new Date(mustBeTime * 1000);
+
+  if (typeof mustBeTime !== 'number') dt = new Date(mustBeTime);
+
+  if (isYYYYMMDD(mustBeTime)) {
+    dt = new Date(mustBeTime);
+
+    const day = dt.toLocaleDateString('default', { weekday: 'long' });
+    const date = dt.getDate();
+    const month = dt.toLocaleDateString('default', { month: 'short' });
+    const year = dt.getFullYear();
+
+    return `${day}, ${date} ${month} ${year}`;
+  }
+
   const day = dt.toLocaleDateString('default', { weekday: 'long' });
   const date = dt.getDate();
   const month = dt.toLocaleDateString('default', { month: 'short' });

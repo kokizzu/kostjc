@@ -295,8 +295,9 @@ func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 					return
 				}
 			}
-
 		}
+
+		defer InsertPropertyLog(tenant.Id, d.tenantLogs, out.ResponseCommon, in.TimeNow(), sess.UserId, tenant)()
 
 		// Ini semua biar mirip di KTP
 		in.Tenant.KtpPlaceBirth = S.ToUpper(in.Tenant.KtpPlaceBirth)

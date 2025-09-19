@@ -161,6 +161,7 @@
 			let afterValueFinal = afterValue;
 
 			if (String(key).includes('At')) {
+				console.log(key, beforeValue, afterValue);
 				beforeValueFinal = Number(beforeValue) == 0 ? '--' : localeDatetime(beforeValue);
 				afterValueFinal =  Number(afterValue) == 0 ? '--' : localeDatetime(afterValue);
 			}
