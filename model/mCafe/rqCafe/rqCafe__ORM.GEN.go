@@ -1336,6 +1336,7 @@ type Sales struct {
 	DeletedAt     int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
 	DeletedBy     uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
 	RestoredBy    uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+	ChangeIDR     int64       `json:"changeIDR" form:"changeIDR" query:"changeIDR" long:"changeIDR" msg:"changeIDR"`
 }
 
 // NewSales create new ORM reader/query object
@@ -1397,6 +1398,7 @@ func (s *Sales) SqlSelectAllFields() string { //nolint:dupl false positive
 	, "deletedAt"
 	, "deletedBy"
 	, "restoredBy"
+	, "changeIDR"
 	`
 }
 
@@ -1426,6 +1428,7 @@ func (s *Sales) SqlSelectAllUncensoredFields() string { //nolint:dupl false posi
 	, "deletedAt"
 	, "deletedBy"
 	, "restoredBy"
+	, "changeIDR"
 	`
 }
 
@@ -1456,6 +1459,7 @@ func (s *Sales) ToUpdateArray() A.X { //nolint:dupl false positive
 		A.X{`=`, 21, s.DeletedAt},
 		A.X{`=`, 22, s.DeletedBy},
 		A.X{`=`, 23, s.RestoredBy},
+		A.X{`=`, 24, s.ChangeIDR},
 	}
 }
 
@@ -1699,6 +1703,16 @@ func (s *Sales) SqlRestoredBy() string { //nolint:dupl false positive
 	return `"restoredBy"`
 }
 
+// IdxChangeIDR return name of the index
+func (s *Sales) IdxChangeIDR() int { //nolint:dupl false positive
+	return 24
+}
+
+// SqlChangeIDR return name of the column being indexed
+func (s *Sales) SqlChangeIDR() string { //nolint:dupl false positive
+	return `"changeIDR"`
+}
+
 // ToArray receiver fields to slice
 func (s *Sales) ToArray() A.X { //nolint:dupl false positive
 	var id any = nil
@@ -1730,6 +1744,7 @@ func (s *Sales) ToArray() A.X { //nolint:dupl false positive
 		s.DeletedAt,     // 21
 		s.DeletedBy,     // 22
 		s.RestoredBy,    // 23
+		s.ChangeIDR,     // 24
 	}
 }
 
@@ -1759,6 +1774,7 @@ func (s *Sales) FromArray(a A.X) *Sales { //nolint:dupl false positive
 	s.DeletedAt = X.ToI(a[21])
 	s.DeletedBy = X.ToU(a[22])
 	s.RestoredBy = X.ToU(a[23])
+	s.ChangeIDR = X.ToI(a[24])
 	return s
 }
 
@@ -1788,6 +1804,7 @@ func (s *Sales) FromUncensoredArray(a A.X) *Sales { //nolint:dupl false positive
 	s.DeletedAt = X.ToI(a[21])
 	s.DeletedBy = X.ToU(a[22])
 	s.RestoredBy = X.ToU(a[23])
+	s.ChangeIDR = X.ToI(a[24])
 	return s
 }
 
@@ -1855,6 +1872,7 @@ var SalesFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 	`deletedAt`:     Tt.Integer,
 	`deletedBy`:     Tt.Unsigned,
 	`restoredBy`:    Tt.Unsigned,
+	`changeIDR`:     Tt.Integer,
 }
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go

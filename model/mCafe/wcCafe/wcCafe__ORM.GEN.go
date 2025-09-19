@@ -1227,6 +1227,7 @@ func (s *SalesMutator) DoDeletePermanentById() bool { //nolint:dupl false positi
 //		A.X{`=`, 21, s.DeletedAt},
 //		A.X{`=`, 22, s.DeletedBy},
 //		A.X{`=`, 23, s.RestoredBy},
+//		A.X{`=`, 24, s.ChangeIDR},
 //	})
 //	return !L.IsError(err, `Sales.DoUpsert failed: `+s.SpaceName()+ `\n%#v`, arr)
 // }
@@ -1520,6 +1521,17 @@ func (s *SalesMutator) SetRestoredBy(val uint64) bool { //nolint:dupl false posi
 	return false
 }
 
+// SetChangeIDR create mutations, should not duplicate
+func (s *SalesMutator) SetChangeIDR(val int64) bool { //nolint:dupl false positive
+	if val != s.ChangeIDR {
+		s.mutations = append(s.mutations, A.X{`=`, 24, val})
+		s.logs = append(s.logs, A.X{`changeIDR`, s.ChangeIDR, val})
+		s.ChangeIDR = val
+		return true
+	}
+	return false
+}
+
 // SetAll set all from another source, only if another property is not empty/nil/zero or in forceMap
 func (s *SalesMutator) SetAll(from rqCafe.Sales, excludeMap, forceMap M.SB) (changed bool) { //nolint:dupl false positive
 	if excludeMap == nil { // list of fields to exclude
@@ -1622,6 +1634,10 @@ func (s *SalesMutator) SetAll(from rqCafe.Sales, excludeMap, forceMap M.SB) (cha
 	}
 	if !excludeMap[`restoredBy`] && (forceMap[`restoredBy`] || from.RestoredBy != 0) {
 		s.RestoredBy = from.RestoredBy
+		changed = true
+	}
+	if !excludeMap[`changeIDR`] && (forceMap[`changeIDR`] || from.ChangeIDR != 0) {
+		s.ChangeIDR = from.ChangeIDR
 		changed = true
 	}
 	return

@@ -28,6 +28,7 @@ module.exports = {};
  * @property {number} transferIDR
  * @property {number} qrisIDR
  * @property {number} cashIDR
+ * @property {number} changeIDR
  * @property {number} debtIDR
  * @property {number} topupIDR
  * @property {number} totalPriceIDR

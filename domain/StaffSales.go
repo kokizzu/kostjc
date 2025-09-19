@@ -2,10 +2,14 @@ package domain
 
 import (
 	"kostjc/model/mAuth/rqAuth"
+	"kostjc/model/mCafe"
 	"kostjc/model/mCafe/rqCafe"
+	"kostjc/model/mCafe/wcCafe"
 	"kostjc/model/zCrud"
+	"time"
 
 	"github.com/kokizzu/gotro/M"
+	"github.com/kokizzu/gotro/X"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file StaffSales.go
@@ -42,6 +46,30 @@ const (
 	ErrStaffSalesNotFound = `user not found`
 )
 
+// func (d *Domain) StaffSales(in *StaffSalesIn) (out StaffSalesOut) {
+// 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
+// 	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+// 	if sess == nil {
+// 		return
+// 	}
+
+// 	if in.WithMeta {
+// 		out.Meta = &AdminSaleMeta
+// 	}
+
+// 	switch in.Cmd {
+// 	case zCrud.CmdList:
+// 		sale := rqCafe.NewSales(d.PropOltp)
+// 		out.Sales = sale.FindByPagination(
+// 			&AdminSaleMeta,
+// 			&in.Pager,
+// 			&out.Pager,
+// 		)
+// 	}
+
+// 	return
+// }
+
 func (d *Domain) StaffSales(in *StaffSalesIn) (out StaffSalesOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
 	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
@@ -49,11 +77,158 @@ func (d *Domain) StaffSales(in *StaffSalesIn) (out StaffSalesOut) {
 		return
 	}
 
+	out.actor = sess.UserId
+	out.refId = in.Sale.Id
+
 	if in.WithMeta {
 		out.Meta = &AdminSaleMeta
 	}
 
 	switch in.Cmd {
+	case zCrud.CmdForm:
+	case zCrud.CmdUpsert, zCrud.CmdUpdatePayment, zCrud.CmdDelete, zCrud.CmdRestore:
+		sale := wcCafe.NewSalesMutator(d.PropOltp)
+		sale.Id = in.Sale.Id
+		if sale.Id > 0 {
+			if !sale.FindById() {
+				out.SetError(400, ErrAdminSaleNotFound)
+				return
+			}
+
+			if in.Cmd == zCrud.CmdDelete {
+				if sale.DeletedAt == 0 {
+					sale.SetDeletedAt(in.UnixNow())
+					sale.SetDeletedBy(sess.UserId)
+				}
+			}
+
+			if in.Cmd == zCrud.CmdRestore {
+				if sale.DeletedAt > 0 {
+					sale.SetDeletedAt(0)
+					sale.SetRestoredBy(sess.UserId)
+				}
+			}
+
+			if in.Cmd == zCrud.CmdUpdatePayment {
+				if in.Sale.PaymentMethod != "" {
+					sale.SetPaymentMethod(in.Sale.PaymentMethod)
+				}
+				if in.Sale.PaymentStatus != "" {
+					sale.SetPaymentStatus(in.Sale.PaymentStatus)
+				}
+
+				sale.SetTransferIDR(in.Sale.TransferIDR)
+				sale.SetQrisIDR(in.Sale.QrisIDR)
+				sale.SetCashIDR(in.Sale.CashIDR)
+				sale.SetDebtIDR(in.Sale.DebtIDR)
+				sale.SetTopupIDR(in.Sale.TopupIDR)
+				sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
+				sale.SetChangeIDR(in.Sale.ChangeIDR)
+				if mCafe.IsValidDate(in.Sale.PaidAt, time.DateOnly) {
+					sale.SetPaidAt(in.Sale.PaidAt)
+				}
+
+				sale.SetUpdatedAt(in.UnixNow())
+				sale.SetUpdatedBy(sess.UserId)
+
+			}
+		}
+
+		defer InsertCafeLog(sale.Id, d.saleLogs, out.ResponseCommon, in.TimeNow(), sess.UserId, sale)()
+
+		if in.Sale.TenantId > 0 {
+			bkd := rqAuth.NewTenants(d.PropOltp)
+			bkd.Id = in.Sale.TenantId
+			if !bkd.FindById() {
+				out.SetError(400, ErrAdminSaleTenantIdNotFound)
+				return
+			}
+
+			sale.SetTenantId(in.Sale.TenantId)
+		}
+
+		for _, id := range in.Sale.MenuIds {
+			men := rqCafe.NewMenus(d.PropOltp)
+			men.Id = X.ToU(id)
+			if !men.FindById() {
+				out.SetError(400, ErrAdminSaleInvalidMenu)
+				return
+			}
+		}
+
+		if in.Cmd == zCrud.CmdUpsert {
+			sale.SetMenuIds(in.Sale.MenuIds)
+		}
+
+		if in.Sale.PaymentMethod != `` {
+			sale.SetPaymentMethod(in.Sale.PaymentMethod)
+		}
+
+		if in.Sale.PaymentStatus != `` {
+			sale.SetPaymentStatus(in.Sale.PaymentStatus)
+		}
+
+		// ensure cashier is set from session if not provided
+		if in.Sale.Cashier != `` {
+			sale.SetCashier(in.Sale.Cashier)
+		} else {
+			// fallback to session user name
+			usr := rqAuth.NewUsers(d.AuthOltp)
+			usr.Id = sess.UserId
+			if usr.FindById() {
+				name := usr.FullName
+				if name == `` {
+					name = usr.UserName
+				}
+				if name != `` {
+					sale.SetCashier(name)
+				}
+			}
+		}
+
+		if in.Sale.BuyerName != `` {
+			sale.SetBuyerName(in.Sale.BuyerName)
+		}
+
+		if mCafe.IsValidDate(in.Sale.SalesDate, time.DateOnly) {
+			sale.SetSalesDate(in.Sale.SalesDate)
+		}
+
+		if mCafe.IsValidDate(in.Sale.PaidAt, time.DateOnly) {
+			sale.SetPaidAt(in.Sale.PaidAt)
+		}
+
+		if in.Sale.Note != `` {
+			sale.SetNote(in.Sale.Note)
+		}
+
+		sale.SetQrisIDR(in.Sale.QrisIDR)
+		sale.SetCashIDR(in.Sale.CashIDR)
+		sale.SetDebtIDR(in.Sale.DebtIDR)
+		sale.SetTopupIDR(in.Sale.TopupIDR)
+		sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
+		sale.SetDonation(in.Sale.Donation)
+		sale.SetTransferIDR(in.Sale.TransferIDR)
+		sale.SetChangeIDR(in.Sale.ChangeIDR)
+
+		if sale.Id == 0 {
+			sale.SetCreatedAt(in.UnixNow())
+			sale.SetCreatedBy(sess.UserId)
+		}
+
+		sale.SetUpdatedAt(in.UnixNow())
+		sale.SetUpdatedBy(sess.UserId)
+
+		if !sale.DoUpsert() {
+			out.SetError(500, ErrAdminSaleSaveFailed)
+			return
+		}
+
+		if in.Pager.Page == 0 {
+			break
+		}
+
+		fallthrough
 	case zCrud.CmdList:
 		sale := rqCafe.NewSales(d.PropOltp)
 		out.Sales = sale.FindByPagination(

@@ -9,7 +9,7 @@
 
   import LayoutMain from './_layouts/main.svelte';
   import MasterSales from './_components/MasterSales.svelte';
-  import { AdminSale } from './jsApi.GEN';
+  import { AdminSale, StaffSales } from './jsApi.GEN';
   import { CmdList, CmdUpsert, CmdUpdatePayment } from './_components/xConstant';
   import { notifier } from './_components/xNotifier';
     
@@ -26,8 +26,8 @@
       pager: pagerIn,
       cmd: CmdList
     };
-    await AdminSale( // @ts-ignore
-      i, /** @type {import('./jsApi.GEN').AdminSaleCallback} */
+    await StaffSales( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').StaffSalesCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -50,8 +50,8 @@
       cmd: CmdUpsert
     });
 
-    await AdminSale(i,
-      /** @type {import('../jsApi.GEN').AdminSaleCallback} */
+    await StaffSales(i,
+      /** @type {import('../jsApi.GEN').StaffSalesCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -74,6 +74,7 @@
         transferIDR: Number(saleData.transferIDR || 0),
         qrisIDR: Number(saleData.qrisIDR || 0),
         cashIDR: Number(saleData.cashIDR || 0),
+        changeIDR: Number(saleData.changeIDR || 0),
         debtIDR: Number(saleData.debtIDR || 0),
         topupIDR: Number(saleData.topupIDR || 0),
         totalPriceIDR: Number(saleData.totalPriceIDR || 0),
@@ -87,8 +88,8 @@
       sale,
       cmd: CmdUpdatePayment
     });
-    await AdminSale(i,
-      /** @type {import('./jsApi.GEN').AdminSaleCallback} */
+    await StaffSales(i,
+      /** @type {import('./jsApi.GEN').StaffSalesCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {
@@ -114,5 +115,6 @@
   OnSubmit={OnAddSale}
   OnEdit={OnEdit}
   tenants={tenants}
+  {user}
   />
 </LayoutMain>
