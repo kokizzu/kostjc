@@ -326,6 +326,23 @@
 
     return inputDay > todayDay && inputDay > plus3Day;
   }
+
+  const msPerDay = 1000 * 60 * 60 * 24;
+
+  /**
+   * @param {BookingDetail} booking
+   * @returns {number}
+   */
+  function daysPaid(booking) {
+    const dateStart = new Date(booking.dateStart);
+    const dateEnd = new Date(booking.dateEnd);
+
+    // @ts-ignore
+    const totalDays = (dateEnd - dateStart) / msPerDay;
+    const daysPaid = (booking.amountPaid / booking.totalPrice) * totalDays;
+
+    return parseFloat(daysPaid.toFixed(1))
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -481,6 +498,7 @@
                             <span class="{showPaid ? '' : 'hidden'}">{booking.amountPaid}</span>
                             <span>/</span>
                             <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
+                            <span>({daysPaid(booking)}d)</span>
                           </span>
                           <div class="actions">
                             <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking)}>
