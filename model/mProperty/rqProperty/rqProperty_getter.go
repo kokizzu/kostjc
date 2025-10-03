@@ -2001,3 +2001,23 @@ GROUP BY b."id"`
 
 	return
 }
+
+func (b *Bookings) GetLastDateStartById(bookingId uint64) (dateStart string) {
+	const comment = `-- Bookings) GetLastDateStartById`
+
+	query := comment + `
+SELECT "dateStart"
+FROM "bookings"
+WHERE "id" = ` + I.UToS(bookingId) + `
+ORDER BY "dateStart" DESC
+LIMIT 1`
+
+	b.Adapter.QuerySql(query, func(row []any) {
+		if len(row) != 1 {
+			return
+		}
+		dateStart = X.ToS(row[0])
+	})
+
+	return
+}
