@@ -23472,7 +23472,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       const dateEnd2 = new Date(booking.dateEnd);
       const totalDays = (dateEnd2 - dateStart2) / msPerDay;
       const daysPaid2 = booking.amountPaid / booking.totalPrice * totalDays;
-      return parseFloat(daysPaid2.toFixed(1));
+      return parseFloat((daysPaid2 || 0).toFixed(1));
     }
     function popupextendbooking_binding($value) {
       binding_callbacks[$value ? "unshift" : "push"](() => {

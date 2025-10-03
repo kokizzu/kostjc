@@ -838,6 +838,11 @@ WHERE
     "bookings"."dateStart" BETWEEN ` + S.Z(monthStart) + ` AND ` + S.Z(monthEnd) + `
     OR
     "bookings"."dateEnd" BETWEEN ` + S.Z(monthStart) + ` AND ` + S.Z(monthEnd) + `
+		OR
+		(
+			"bookings"."dateStart" < ` + S.Z(monthStart) + `
+			AND "bookings"."dateEnd" > ` + S.Z(monthEnd) + `
+		)
   )
 GROUP BY
 	"bookings"."id",
