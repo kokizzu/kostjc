@@ -43,7 +43,7 @@
       percentage = 0;
     }
 
-    const daysPaid = (data.totalPaid / data.totalPrice) * 30;
+    const daysPaid = (data.totalPaid / data.totalPrice) * totalDays;
 
     let color = /** @type {ProgressColor} */ ('green');
 

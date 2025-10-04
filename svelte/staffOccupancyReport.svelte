@@ -339,7 +339,7 @@
 
     // @ts-ignore
     const totalDays = (dateEnd - dateStart) / msPerDay;
-    const daysPaid = (booking.amountPaid / booking.totalPrice) * totalDays;
+    const daysPaid = ((booking.amountPaid / booking.totalPrice) * totalDays) + 1;
 
     return parseFloat((daysPaid || 0).toFixed(1))
   }
