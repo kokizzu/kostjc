@@ -123,6 +123,14 @@ var AdminSaleMeta = zCrud.Meta{
 			Mapping:   `IDR`,
 		},
 		{
+			Name:      mCafe.ChangeIDR,
+			Label:     `Change IDR`,
+			DataType:  zCrud.DataTypeCurrency,
+			InputType: zCrud.InputTypeNumber,
+			ReadOnly:  false,
+			Mapping:   `IDR`,
+		},
+		{
 			Name:      mCafe.DebtIDR,
 			Label:     `Debt IDR`,
 			DataType:  zCrud.DataTypeCurrency,
@@ -252,7 +260,7 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 				sale.SetDebtIDR(in.Sale.DebtIDR)
 				sale.SetTopupIDR(in.Sale.TopupIDR)
 				sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
-
+				sale.SetChangeIDR(in.Sale.ChangeIDR)
 				if mCafe.IsValidDate(in.Sale.PaidAt, time.DateOnly) {
 					sale.SetPaidAt(in.Sale.PaidAt)
 				}
@@ -324,6 +332,7 @@ func (d *Domain) AdminSale(in *AdminSaleIn) (out AdminSaleOut) {
 		sale.SetTotalPriceIDR(in.Sale.TotalPriceIDR)
 		sale.SetDonation(in.Sale.Donation)
 		sale.SetTransferIDR(in.Sale.TransferIDR)
+		sale.SetChangeIDR(in.Sale.ChangeIDR)
 
 		if sale.Id == 0 {
 			sale.SetCreatedAt(in.UnixNow())

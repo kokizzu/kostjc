@@ -52,6 +52,7 @@ const (
 	TransferIDR   = `transferIDR`
 	PaymentMethod = `paymentMethod`
 	PaymentStatus = `paymentStatus`
+	ChangeIDR     = `changeIDR`
 )
 
 const (
@@ -134,6 +135,7 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{DeletedAt, Tt.Integer},
 			{DeletedBy, Tt.Unsigned},
 			{RestoredBy, Tt.Unsigned},
+			{ChangeIDR, Tt.Integer},
 		},
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,

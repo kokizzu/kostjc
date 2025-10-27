@@ -40,6 +40,7 @@
   let transferIDR = 0;
   let qrisIDR = 0;
   let cashIDR = 0;
+  let changeIDR = 0;
   let debtIDR = 0;
   let topupIDR = 0;
   let donation = 0;
@@ -63,10 +64,12 @@
       note: note,
       qrisIDR: qrisIDR,
       cashIDR: cashIDR,
+      changeIDR: changeIDR,
       debtIDR: debtIDR,
       topupIDR: topupIDR,
       transferIDR: transferIDR,
       donation: donation,
+      totalPriceIDR: totalPriceIDR,
     });
 
     console.log('sale data yang disimpan :::', sale);
@@ -89,6 +92,7 @@
   transferIDR = 0;
   qrisIDR = 0;
   cashIDR = 0;
+  changeIDR = 0;
   debtIDR = 0;
   topupIDR = 0;
   donation = 0;
@@ -171,6 +175,13 @@
       id="cashIDR"
       label="Cash IDR"
       bind:value={cashIDR}
+      type="number"
+      placeholder="0"
+      />
+      <InputBox
+      id="changeIDR"
+      label="Change IDR"
+      bind:value={changeIDR}
       type="number"
       placeholder="0"
       />
