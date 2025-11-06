@@ -30,31 +30,33 @@
   } from '../node_modules/svelte-icons-pack/dist/cg';
   import InputBox from './InputBox.svelte';
   import { onMount } from 'svelte';
-  import { dateISOFormat, datetime, formatPrice } from './xFormatter.js';
+  import { datetime, formatPrice } from './xFormatter.js';
   import FilterTable from './FilterTable.svelte';
   import MultiSelect from './MultiSelect.svelte';
   import SingleSelect from './SingleSelected.svelte';
 
-  export let FIELDS = /** @type Field[] */ ([]); // bind
-  export let PAGER = /** @type PagerOut */ ({}); // bind
-  export let MASTER_ROWS = /** @type any[][] */ ([]); // bind
-  export let REFS = {};
+  export let FIELDS       = /** @type {Field[]} */ ([]); // bind
+  export let PAGER        = /** @type {PagerOut} */ ({}); // bind
+  export let MASTER_ROWS  = /** @type {any[][]} */ ([]); // bind
 
-  export let NAME = ''
-  export let ACCESS = /** @type Access */ ({});
-  export let ARRAY_OF_ARRAY = true;
-  export let CAN_SEARCH_ROW = true;
-  export let CAN_EDIT_ROW = true;
-  export let CAN_DELETE_ROW = false;
-  export let CAN_RESTORE_ROW = false;
-  export let CAN_SHOW_INFO = false;
-  export let CAN_OPEN_LINK = false;
-  export let LINKS = /** @type ExtendedAction[] */ ([]);
-  export let IS_CUSTOM_EDIT = false;
-  export let UNSORTED_ROWS = [];
+  export let REFS             = /** @type {Record<string, Record<number, string>>} */ ({});
+  export let NAME             = /** @type {string} */ ('');
+  export let ACCESS           = /** @type {Access} */ ({});
+  export let ARRAY_OF_ARRAY   = /** @type {boolean} */ (true);
+  export let CAN_SEARCH_ROW   = /** @type {boolean} */ (true);
+  export let CAN_EDIT_ROW     = /** @type {boolean} */ (true);
+  export let CAN_DELETE_ROW   = /** @type {boolean} */ (false);
+  export let CAN_RESTORE_ROW  = /** @type {boolean} */ (false);
+  export let CAN_SHOW_INFO    = /** @type {boolean} */ (false);
+  export let CAN_OPEN_LINK    = /** @type {boolean} */ (false);
+  export let LINKS            = /** @type {ExtendedAction[]} */ ([]);
+  export let IS_CUSTOM_EDIT   = /** @type {boolean} */ (false);
+  export let UNSORTED_ROWS    = /** @type {string[]} */ ([]);
   export let EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([]);
-  export let FIELD_TO_SEARCH = '';
-  export let SINGLE_SELECTED = false;
+  export let FIELD_TO_SEARCH  = /** @type {string} */ ('');
+  export let SINGLE_SELECTED  = /** @type {boolean} */ (false);
+
+  export let COL_WIDTHS = /** @type {Record<string, number>} */ ({});
 
   MASTER_ROWS = (MASTER_ROWS || []).map(row => {
     const waIdx = FIELDS.findIndex(f => f.name === 'waAddedAt');
@@ -70,8 +72,6 @@
 
     return row;
   });
-
-  export let COL_WIDTHS = /** @type {Record<string, number>} */ ({});
 
   // State for loading if hit ajax
   let isAjaxSubmitted = /** @type {boolean} */ (false);

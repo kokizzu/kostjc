@@ -1,8 +1,17 @@
 <script>
+  /** @typedef {import('../../_types/property.js').Payment} Payment */
+
+  import { Icon } from '../../node_modules/svelte-icons-pack/dist';
+  import { AiOutlineEye } from '../../node_modules/svelte-icons-pack/dist/ai';
   import { GetRelativeDayLabel } from "../../_components/xGenerator";
+  import PopUpShowBookingPayments from '../../_components/PopUpShowBookingPayments.svelte';
+  import { CmdForm } from '../../_components/xConstant';
+  import { notifier } from '../../_components/xNotifier';
+  import { AdminPayment } from '../../jsApi.GEN';
 
   /**
    * @typedef {Object} UnpaidBookingTenant
+   * @property {number} bookingId
    * @property {string} tenantName
    * @property {string} roomName
    * @property {number} totalPaid
@@ -96,7 +105,38 @@
       daysPaid: parseFloat(daysPaid.toFixed(1))
     }
   }
+
+  let popUpShowPayments = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpShowBookingPayments | any} */ (null);
+  let bookingIdToShowPayment = /** @type {number} */ (0);
+  let paymentsForBooking = /** @type {Payment[]} */ ([]);
+
+  async function showPaymentsForBooking(/** @type {number} */ bookingId) {
+    bookingIdToShowPayment = bookingId;  // @ts-ignore
+    await AdminPayment({
+      cmd: CmdForm,
+      bookingId: bookingId
+    }, /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+    /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+      if (o.error) {
+        console.log(o);
+        notifier.showError(o.error);
+        return
+      }
+
+      paymentsForBooking = o.paymentsByBooking;
+      console.log(paymentsForBooking);
+    });
+
+    popUpShowPayments.Show();
+  }
 </script>
+
+<PopUpShowBookingPayments
+  bind:bookingId={bookingIdToShowPayment}
+  bind:payments={paymentsForBooking}
+  bind:this={popUpShowPayments}
+/>
 
 <section class="empty-unpaidBookingTenants">
   <h1>Unpaid Bookings</h1>
@@ -126,6 +166,16 @@
               <div class="progress">
                 <span class={prog.color} style="width: {prog.percentage}%;"></span>
               </div>
+            </div>
+            <div class="actions">
+              <button class="btn" title="Show Payments" on:click={() => showPaymentsForBooking(ub.bookingId)}>
+                <Icon
+                  src={AiOutlineEye}
+                  color="#FFF"
+                  size="17"
+                />
+                <span>Show Payments</span>
+              </button>
             </div>
           </div>
         </div>
@@ -193,6 +243,30 @@
     flex-direction: column;
     gap: 5px;
     z-index: 20;
+  }
+
+  .empty-unpaidBookingTenants .cards .card .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .empty-unpaidBookingTenants .cards .card .actions .btn {
+    background-color: var(--blue-006);
+    color: #FFF;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 9999px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .empty-unpaidBookingTenants .cards .card .actions .btn:hover {
+    background-color: var(--blue-005);
   }
 
   @media only screen and (max-width : 768px) {

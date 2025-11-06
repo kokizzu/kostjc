@@ -1257,6 +1257,7 @@ ORDER BY "dateEnd" ASC`
 }
 
 type UnpaidBookingTenant struct {
+	BookingId  uint64 `json:"bookingId"`
 	TenantName string `json:"tenantName"`
 	RoomName   string `json:"roomName"`
 	TotalPaid  int64  `json:"totalPaid"`
@@ -1270,6 +1271,7 @@ func (b *Bookings) FindUnpaidBookingTenants() (out []UnpaidBookingTenant) {
 
 	queryRows := comment + `
 SELECT
+	b."id",
 	t."id",
 	t."tenantName",
 	r."roomName",
@@ -1291,18 +1293,20 @@ HAVING totalPaidIDR <> b."totalPriceIDR"
 ORDER BY t."tenantName" ASC`
 
 	b.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) != 7 {
+		if len(row) != 8 {
 			return
 		}
 
-		tenantName := X.ToS(row[1])
-		roomName := X.ToS(row[2])
-		totalPaid := X.ToI(row[3])
-		totalPrice := X.ToI(row[4])
-		dateStart := X.ToS(row[5])
-		dateEnd := X.ToS(row[6])
+		bookingId := X.ToU(row[0])
+		tenantName := X.ToS(row[2])
+		roomName := X.ToS(row[3])
+		totalPaid := X.ToI(row[4])
+		totalPrice := X.ToI(row[5])
+		dateStart := X.ToS(row[6])
+		dateEnd := X.ToS(row[7])
 
 		out = append(out, UnpaidBookingTenant{
+			BookingId:  bookingId,
 			TenantName: tenantName,
 			RoomName:   roomName,
 			TotalPaid:  totalPaid,

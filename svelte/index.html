@@ -1316,23 +1316,368 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
 }
 
+/* fakecss:./_components/PopUpEditPayment.esbuild-svelte-fake-css */
+.rotate-b {
+  transition: all 0.2s ease-in-out;
+  transform: rotate(90deg);
+}
+@keyframes svelte-x1cc2e-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+.spin {
+  animation: svelte-x1cc2e-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.popup-container.svelte-x1cc2e.svelte-x1cc2e {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2001;
+  background-color: rgba(0 0 0 / 40%);
+  backdrop-filter: blur(1px);
+  justify-content: center;
+  padding: 50px;
+  overflow: auto;
+}
+.popup-container.show.svelte-x1cc2e.svelte-x1cc2e {
+  display: flex;
+}
+.popup-container.svelte-x1cc2e .popup.svelte-x1cc2e {
+  border-radius: 8px;
+  background-color: #FFF;
+  height: fit-content;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.popup-container.svelte-x1cc2e .popup header.svelte-x1cc2e {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--gray-004);
+}
+.popup-container.svelte-x1cc2e .popup header h2.svelte-x1cc2e {
+  margin: 0;
+}
+.popup-container.svelte-x1cc2e .popup header button.svelte-x1cc2e {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.popup-container.svelte-x1cc2e .popup header button.svelte-x1cc2e:hover {
+  background-color: #ef444420;
+}
+.popup-container.svelte-x1cc2e .popup header button.svelte-x1cc2e:active {
+  background-color: #ef444430;
+}
+.popup-container.svelte-x1cc2e .popup .forms.svelte-x1cc2e {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.popup-container.svelte-x1cc2e .popup .foot.svelte-x1cc2e {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  padding: 15px 20px;
+  border-top: 1px solid var(--gray-004);
+}
+.popup-container.svelte-x1cc2e .popup .foot .right.svelte-x1cc2e {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.popup-container.svelte-x1cc2e .popup .foot button.svelte-x1cc2e {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: none;
+  color: #FFF;
+  cursor: pointer;
+  font-weight: 600;
+}
+.popup-container.svelte-x1cc2e .popup .foot button.ok.svelte-x1cc2e {
+  background-color: var(--green-006);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-container.svelte-x1cc2e .popup .foot button.ok.svelte-x1cc2e:hover {
+  background-color: var(--green-005);
+}
+.popup-container.svelte-x1cc2e .popup .foot button.ok.svelte-x1cc2e:disabled {
+  cursor: not-allowed;
+  background-color: var(--gray-003);
+  color: var(--gray-007);
+}
+.popup-container.svelte-x1cc2e .popup .foot button.cancel.svelte-x1cc2e {
+  background-color: transparent;
+  color: var(--gray-007);
+}
+.popup-container.svelte-x1cc2e .popup .foot button.cancel.svelte-x1cc2e:hover {
+  background-color: var(--gray-001);
+}
+.input-totalprice.svelte-x1cc2e.svelte-x1cc2e {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--gray-007);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.input-box.svelte-x1cc2e.svelte-x1cc2e {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--gray-007);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.input-box.svelte-x1cc2e .label.svelte-x1cc2e {
+  font-size: var(--font-base);
+  margin-left: 10px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+
+/* fakecss:./_components/PopUpShowBookingPayments.esbuild-svelte-fake-css */
+.rotate-b {
+  transition: all 0.2s ease-in-out;
+  transform: rotate(90deg);
+}
+@keyframes svelte-1wo2ksq-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+.spin {
+  animation: svelte-1wo2ksq-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.popup-container.svelte-1wo2ksq.svelte-1wo2ksq {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+  background-color: rgba(0 0 0 / 40%);
+  backdrop-filter: blur(1px);
+  justify-content: center;
+  padding: 50px;
+  overflow: auto;
+}
+.popup-container.show.svelte-1wo2ksq.svelte-1wo2ksq {
+  display: flex;
+}
+.popup-container.svelte-1wo2ksq .popup.svelte-1wo2ksq {
+  border-radius: 8px;
+  background-color: #FFF;
+  height: fit-content;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.popup-container.svelte-1wo2ksq .popup header.svelte-1wo2ksq {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--gray-004);
+}
+.popup-container.svelte-1wo2ksq .popup header h2.svelte-1wo2ksq {
+  margin: 0;
+}
+.popup-container.svelte-1wo2ksq .popup header button.svelte-1wo2ksq {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.popup-container.svelte-1wo2ksq .popup header button.svelte-1wo2ksq:hover {
+  background-color: #ef444420;
+}
+.popup-container.svelte-1wo2ksq .popup header button.svelte-1wo2ksq:active {
+  background-color: #ef444430;
+}
+.popup-container.svelte-1wo2ksq .popup .forms.svelte-1wo2ksq {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.table-root.svelte-1wo2ksq.svelte-1wo2ksq {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-left: 1px solid var(--gray-003);
+  border-right: 1px solid var(--gray-003);
+  padding: 0;
+  font-size: var(--font-base);
+}
+.table-root.svelte-1wo2ksq .table-container.svelte-1wo2ksq {
+  overflow-x: auto;
+  scrollbar-color: var(--gray-003) transparent;
+  scrollbar-width: calc(100% - 20px);
+}
+.table-root.svelte-1wo2ksq .table-container table.svelte-1wo2ksq {
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid var(--gray-003);
+  border-bottom: 1px solid var(--gray-003);
+  box-shadow: none;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: var(--font-base);
+}
+.table-root.svelte-1wo2ksq .table-container table thead.svelte-1wo2ksq {
+  box-shadow: none;
+  border-bottom: 1px solid var(--gray-003);
+}
+.table-root.svelte-1wo2ksq .table-container table thead tr th.svelte-1wo2ksq {
+  padding: 12px;
+  background-color: var(--gray-001);
+  text-transform: capitalize;
+  border-right: 1px solid var(--gray-004);
+  border-bottom: 1px solid var(--gray-003);
+  min-width: fit-content;
+  width: auto;
+  text-wrap: nowrap;
+}
+.table-root.svelte-1wo2ksq .table-container table thead tr th.svelte-1wo2ksq:last-child {
+  border-right: none;
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr td.svelte-1wo2ksq {
+  padding: 8px 12px;
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr.deleted.svelte-1wo2ksq {
+  color: var(--red-005);
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr td.svelte-1wo2ksq {
+  padding: 8px 12px;
+  border-right: 1px solid var(--gray-004);
+  border-bottom: 1px solid var(--gray-004);
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr td .actions.svelte-1wo2ksq {
+  display: flex;
+  flex-direction: row;
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr td .actions .btn.svelte-1wo2ksq {
+  border: none;
+  padding: 6px;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.table-root .table-container table tbody tr td .actions .btn:hover svg {
+  fill: var(--blue-005);
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr td .actions .btn.svelte-1wo2ksq:hover {
+  background-color: var(--blue-transparent);
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr td .actions .btn.delete.svelte-1wo2ksq:hover {
+  background-color: var(--red-transparent);
+}
+.table-root .table-container table tbody tr td .actions .btn.delete:hover svg {
+  fill: var(--red-005);
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr:last-child td.svelte-1wo2ksq,
+.table-root.svelte-1wo2ksq .table-container table tbody tr:last-child th.svelte-1wo2ksq {
+  border-bottom: none !important;
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr:last-child td.svelte-1wo2ksq:last-child {
+  border-right: none !important;
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr td.num-row.svelte-1wo2ksq {
+  border-right: 1px solid var(--gray-003);
+  font-weight: 600;
+  text-align: center;
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr:last-child td.svelte-1wo2ksq,
+.table-root.svelte-1wo2ksq .table-container table tbody tr:last-child th.svelte-1wo2ksq {
+  border-bottom: none !important;
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr:last-child td.svelte-1wo2ksq:last-child {
+  border-right: none !important;
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr td.svelte-1wo2ksq:last-child {
+  border-right: none !important;
+}
+.table-root.svelte-1wo2ksq .table-container table tbody tr th.svelte-1wo2ksq {
+  text-align: center;
+  border-right: 1px solid var(--gray-004);
+  border-bottom: 1px solid var(--gray-004);
+}
+.table-root.svelte-1wo2ksq .table-container table thead tr th.textarea.svelte-1wo2ksq {
+  min-width: 280px !important;
+}
+@media only screen and (max-width : 768px) {
+  .popup-container.svelte-1wo2ksq.svelte-1wo2ksq {
+    padding: 10px;
+  }
+  .popup-container.svelte-1wo2ksq .popup.svelte-1wo2ksq {
+    width: 100%;
+  }
+}
+
 /* fakecss:./_partials/home/UnpaidBookingTenants.esbuild-svelte-fake-css */
-.empty-unpaidBookingTenants.svelte-56jrvm.svelte-56jrvm {
+.empty-unpaidBookingTenants.svelte-8c2jk6.svelte-8c2jk6 {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.empty-unpaidBookingTenants.svelte-56jrvm h1.svelte-56jrvm {
+.empty-unpaidBookingTenants.svelte-8c2jk6 h1.svelte-8c2jk6 {
   margin: 0;
   padding: 0;
   font-size: var(--font-xl);
 }
-.empty-unpaidBookingTenants.svelte-56jrvm .cards.svelte-56jrvm {
+.empty-unpaidBookingTenants.svelte-8c2jk6 .cards.svelte-8c2jk6 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
-.empty-unpaidBookingTenants.svelte-56jrvm .cards .card.svelte-56jrvm {
+.empty-unpaidBookingTenants.svelte-8c2jk6 .cards .card.svelte-8c2jk6 {
   background-color: var(--gray-001);
   padding: 20px;
   border-radius: 8px;
@@ -1343,48 +1688,69 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   position: relative;
   overflow: hidden;
 }
-.empty-unpaidBookingTenants.svelte-56jrvm .cards .card hr.svelte-56jrvm {
+.empty-unpaidBookingTenants.svelte-8c2jk6 .cards .card hr.svelte-8c2jk6 {
   height: 1px;
   background-color: var(--gray-004) !important;
   border: none;
 }
-.empty-unpaidBookingTenants.svelte-56jrvm .cards .card .detail.svelte-56jrvm {
+.empty-unpaidBookingTenants.svelte-8c2jk6 .cards .card .detail.svelte-8c2jk6 {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.empty-unpaidBookingTenants.svelte-56jrvm .cards .card h3.svelte-56jrvm {
+.empty-unpaidBookingTenants.svelte-8c2jk6 .cards .card h3.svelte-8c2jk6 {
   margin: 0;
   padding: 0;
   font-size: var(--font-lg);
   z-index: 20;
 }
-.empty-unpaidBookingTenants.svelte-56jrvm .cards .card .desc.svelte-56jrvm {
+.empty-unpaidBookingTenants.svelte-8c2jk6 .cards .card .desc.svelte-8c2jk6 {
   display: flex;
   flex-direction: column;
   gap: 5px;
   z-index: 20;
 }
+.empty-unpaidBookingTenants.svelte-8c2jk6 .cards .card .actions.svelte-8c2jk6 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.empty-unpaidBookingTenants.svelte-8c2jk6 .cards .card .actions .btn.svelte-8c2jk6 {
+  background-color: var(--blue-006);
+  color: #FFF;
+  padding: 5px 12px;
+  border: none;
+  border-radius: 9999px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
+}
+.empty-unpaidBookingTenants.svelte-8c2jk6 .cards .card .actions .btn.svelte-8c2jk6:hover {
+  background-color: var(--blue-005);
+}
 @media only screen and (max-width : 768px) {
-  .empty-unpaidBookingTenants.svelte-56jrvm .cards.svelte-56jrvm {
+  .empty-unpaidBookingTenants.svelte-8c2jk6 .cards.svelte-8c2jk6 {
     grid-template-columns: 1fr;
   }
 }
 @media only screen and (max-width: 992px) {
-  .empty-unpaidBookingTenants.svelte-56jrvm .cards.svelte-56jrvm {
+  .empty-unpaidBookingTenants.svelte-8c2jk6 .cards.svelte-8c2jk6 {
     grid-template-columns: 1fr 1fr;
   }
 }
-.progress-container.svelte-56jrvm.svelte-56jrvm {
+.progress-container.svelte-8c2jk6.svelte-8c2jk6 {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-.progress-container.svelte-56jrvm label.svelte-56jrvm {
+.progress-container.svelte-8c2jk6 label.svelte-8c2jk6 {
   font-size: 12px;
   margin-left: 5px;
 }
-.progress.svelte-56jrvm.svelte-56jrvm {
+.progress.svelte-8c2jk6.svelte-8c2jk6 {
   position: relative;
   width: 100%;
   height: 14px;
@@ -1392,7 +1758,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   border-radius: 9999px;
   overflow: hidden;
 }
-.progress.svelte-56jrvm span.svelte-56jrvm {
+.progress.svelte-8c2jk6 span.svelte-8c2jk6 {
   height: 100%;
   display: block;
 }
@@ -4069,13 +4435,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance10 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance10, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance10, context, null, { allOwnKeys: true });
-        instance10.create = function create(instanceConfig) {
+        const instance12 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance12, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance12, context, null, { allOwnKeys: true });
+        instance12.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance10;
+        return instance12;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -4163,7 +4529,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       exports.AdminMenuLogs = async function AdminMenuLogs(i, cb) {
         return await axios.post("/admin/menuLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminPayment = async function AdminPayment(i, cb) {
+      exports.AdminPayment = async function AdminPayment3(i, cb) {
         return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminPaymentLogs = async function AdminPaymentLogs(i, cb) {
@@ -4361,7 +4727,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         const formattedDate = `${year}-${month}-${date}`;
         return formattedDate;
       }
-      function dateISOFormat2(dayTo = 0) {
+      function dateISOFormat4(dayTo = 0) {
         const dt = new Date();
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -4389,7 +4755,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         script.onload = () => callback();
         document.getElementsByTagName("head")[0].appendChild(script);
       }
-      function formatPrice(price, currency) {
+      function formatPrice2(price, currency) {
         try {
           return new Intl.NumberFormat("id-ID", {
             style: "currency",
@@ -4430,14 +4796,38 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         utcDatetime,
         isoTime,
         isoDate,
-        dateISOFormat: dateISOFormat2,
+        dateISOFormat: dateISOFormat4,
         dateISOFormatFromYYYYMMDD,
         loadScript,
-        formatPrice,
+        formatPrice: formatPrice2,
         arrToArrNum,
         formatYearMonth,
         localeDateFromYYYYMMDD,
         checkboxToDate
+      };
+    }
+  });
+
+  // _components/xConstant.js
+  var require_xConstant = __commonJS({
+    "_components/xConstant.js"(exports, module) {
+      var CmdList = `list`;
+      var CmdForm3 = `form`;
+      var CmdUpsert2 = `upsert`;
+      var CmdRestore2 = `restore`;
+      var CmdDelete2 = `delete`;
+      var CmdToggleWaAdded = `toggle_wa_added`;
+      var CmdToggleTeleAdded = `toggle_tele_added`;
+      var CmdUpdatePayment = `update_payment`;
+      module.exports = {
+        CmdList,
+        CmdForm: CmdForm3,
+        CmdUpsert: CmdUpsert2,
+        CmdRestore: CmdRestore2,
+        CmdDelete: CmdDelete2,
+        CmdToggleWaAdded,
+        CmdToggleTeleAdded,
+        CmdUpdatePayment
       };
     }
   });
@@ -5019,7 +5409,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance10, create_fragment17, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance12, create_fragment19, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -5045,7 +5435,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance10 ? instance10(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance12 ? instance12(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -5058,7 +5448,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment17 ? create_fragment17($.ctx) : false;
+    $.fragment = create_fragment19 ? create_fragment19($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -5328,7 +5718,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
   // index.svelte
-  var import_jsApi2 = __toESM(require_jsApi_GEN());
+  var import_jsApi4 = __toESM(require_jsApi_GEN());
 
   // _components/xNotifier.js
   var Notifier = function() {
@@ -13726,6 +14116,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var import_jsApi = __toESM(require_jsApi_GEN());
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
+  var RiDesignBallPenLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M17.8492 11.6983L17.1421 10.9912L7.24264 20.8907H3V16.648L14.3137 5.33432L19.9706 10.9912C20.3611 11.3817 20.3611 12.0149 19.9706 12.4054L12.8995 19.4765L11.4853 18.0622L17.8492 11.6983ZM15.7279 9.57696L14.3137 8.16274L5 17.4765V18.8907H6.41421L15.7279 9.57696ZM18.5563 2.50589L21.3848 5.33432C21.7753 5.72484 21.7753 6.35801 21.3848 6.74853L19.9706 8.16274L15.7279 3.9201L17.1421 2.50589C17.5327 2.11537 18.1658 2.11537 18.5563 2.50589Z"></path>' };
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHomeWifiLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M6 19H18V9.15745L12 3.7029L6 9.15745V19ZM19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM8 9.99998C11.866 9.99998 15 13.134 15 17H13C13 14.2386 10.7614 12 8 12V9.99998ZM8 14C9.65685 14 11 15.3431 11 17H8V14Z"></path>' };
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
@@ -13738,6 +14129,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var RiUserFacesUserFollowLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M14 14.252V16.3414C13.3744 16.1203 12.7013 16 12 16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM17.7929 19.9142L21.3284 16.3787L22.7426 17.7929L17.7929 22.7426L14.2574 19.2071L15.6716 17.7929L17.7929 19.9142Z"></path>' };
   var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
   var RiUserFacesGroupLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>' };
+  var RiSystemDeleteBin5Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8ZM6 10V20H18V10H6ZM9 12H11V18H9V12ZM13 12H15V18H13V12ZM7 5V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V5H22V7H2V5H7ZM9 4V5H15V4H9Z"></path>' };
   var RiSystemMenu2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 4H21V6H3V4ZM3 11H15V13H3V11ZM3 18H21V20H3V18Z"></path>' };
   var RiSystemSettingsLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"></path>' };
   var RiSystemLogoutBoxRLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path>' };
@@ -13745,6 +14137,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var RiFinanceCashLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path>' };
   var RiFinanceShoppingBag2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20.0049 22H4.00488C3.4526 22 3.00488 21.5523 3.00488 21V3C3.00488 2.44772 3.4526 2 4.00488 2H20.0049C20.5572 2 21.0049 2.44772 21.0049 3V21C21.0049 21.5523 20.5572 22 20.0049 22ZM19.0049 20V4H5.00488V20H19.0049ZM9.00488 6V8C9.00488 9.65685 10.348 11 12.0049 11C13.6617 11 15.0049 9.65685 15.0049 8V6H17.0049V8C17.0049 10.7614 14.7663 13 12.0049 13C9.24346 13 7.00488 10.7614 7.00488 8V6H9.00488Z"></path>' };
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
+  var RiArrowsArrowGoBackLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5.82843 6.99955L8.36396 9.53509L6.94975 10.9493L2 5.99955L6.94975 1.0498L8.36396 2.46402L5.82843 4.99955H13C17.4183 4.99955 21 8.58127 21 12.9996C21 17.4178 17.4183 20.9996 13 20.9996H4V18.9996H13C16.3137 18.9996 19 16.3133 19 12.9996C19 9.68584 16.3137 6.99955 13 6.99955H5.82843Z"></path>' };
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
@@ -16667,29 +17060,1615 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   var AvailableRooms_default = AvailableRooms;
 
-  // _partials/home/UnpaidBookingTenants.svelte
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/io/index.js
+  var IoClose = { a: { viewBox: "0 0 512 512" }, c: '<path d="M289.94,256l95-95A24,24,0,0,0,351,127l-95,95-95-95A24,24,0,0,0,127,161l95,95-95,95A24,24,0,1,0,161,385l95-95,95,95A24,24,0,0,0,385,351Z"></path>' };
+
+  // _components/PopUpShowBookingPayments.svelte
+  var import_xFormatter3 = __toESM(require_xFormatter());
+
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/fi/index.js
+  var FiLoader = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>' };
+
+  // _components/PopUpEditPayment.svelte
+  var import_xFormatter2 = __toESM(require_xFormatter());
+  function create_if_block_110(ctx) {
+    let span;
+    return {
+      c() {
+        span = element("span");
+        span.textContent = "Submit";
+      },
+      m(target, anchor) {
+        insert(target, span, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(span);
+        }
+      }
+    };
+  }
+  function create_if_block6(ctx) {
+    let icon;
+    let current;
+    icon = new Icon_default({
+      props: {
+        className: "spin",
+        color: "#FFF",
+        size: "14",
+        src: FiLoader
+      }
+    });
+    return {
+      c() {
+        create_component(icon.$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(icon, target, anchor);
+        current = true;
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(icon, detaching);
+      }
+    };
+  }
+  function create_fragment13(ctx) {
+    let div7;
+    let div6;
+    let header;
+    let h2;
+    let t0;
+    let t1_value = `#${/*paymentId*/
+    ctx[5]}`;
+    let t1;
+    let t2;
+    let button0;
+    let icon;
+    let t3;
+    let div2;
+    let inputbox0;
+    let updating_value;
+    let t4;
+    let inputbox1;
+    let updating_value_1;
+    let t5;
+    let div0;
+    let label0;
+    let t7;
+    let select0;
+    let updating_value_2;
+    let t8;
+    let div1;
+    let label1;
+    let t10;
+    let select1;
+    let updating_value_3;
+    let t11;
+    let inputbox2;
+    let updating_value_4;
+    let t12;
+    let div5;
+    let div3;
+    let t13;
+    let div4;
+    let button1;
+    let t15;
+    let button2;
+    let t16;
+    let div7_class_value;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        size: "22",
+        color: "var(--red-005)",
+        src: IoClose
+      }
+    });
+    function inputbox0_value_binding(value) {
+      ctx[19](value);
+    }
+    let inputbox0_props = {
+      id: "paymentAt",
+      label: "Payment At",
+      type: "datetime"
+    };
+    if (
+      /*paymentAt*/
+      ctx[2] !== void 0
+    ) {
+      inputbox0_props.value = /*paymentAt*/
+      ctx[2];
+    }
+    inputbox0 = new InputBox_default({ props: inputbox0_props });
+    binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
+    function inputbox1_value_binding(value) {
+      ctx[20](value);
+    }
+    let inputbox1_props = {
+      id: "totalPaidIDR",
+      label: "Total Paid",
+      type: "number"
+    };
+    if (
+      /*totalPaidIDR*/
+      ctx[3] !== void 0
+    ) {
+      inputbox1_props.value = /*totalPaidIDR*/
+      ctx[3];
+    }
+    inputbox1 = new InputBox_default({ props: inputbox1_props });
+    binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
+    function select0_value_binding(value) {
+      ctx[21](value);
+    }
+    let select0_props = { items: (
+      /*PaymentStatuses*/
+      ctx[10]
+    ) };
+    if (
+      /*paymentStatus*/
+      ctx[8] !== void 0
+    ) {
+      select0_props.value = /*paymentStatus*/
+      ctx[8];
+    }
+    select0 = new Select_default({ props: select0_props });
+    binding_callbacks.push(() => bind(select0, "value", select0_value_binding));
+    select0.$on(
+      "select",
+      /*handleSelectPyStatus*/
+      ctx[15]
+    );
+    select0.$on(
+      "clear",
+      /*handleClearPyStatus*/
+      ctx[16]
+    );
+    function select1_value_binding(value) {
+      ctx[22](value);
+    }
+    let select1_props = { items: (
+      /*PaymentMethods*/
+      ctx[9]
+    ) };
+    if (
+      /*paymentMethod*/
+      ctx[7] !== void 0
+    ) {
+      select1_props.value = /*paymentMethod*/
+      ctx[7];
+    }
+    select1 = new Select_default({ props: select1_props });
+    binding_callbacks.push(() => bind(select1, "value", select1_value_binding));
+    select1.$on(
+      "select",
+      /*handleSelectPyMethod*/
+      ctx[13]
+    );
+    select1.$on(
+      "clear",
+      /*handleClearPyMethod*/
+      ctx[14]
+    );
+    function inputbox2_value_binding(value) {
+      ctx[23](value);
+    }
+    let inputbox2_props = {
+      id: "note",
+      label: "Note",
+      type: "textarea"
+    };
+    if (
+      /*note*/
+      ctx[4] !== void 0
+    ) {
+      inputbox2_props.value = /*note*/
+      ctx[4];
+    }
+    inputbox2 = new InputBox_default({ props: inputbox2_props });
+    binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
+    let if_block0 = !/*isSubmitted*/
+    ctx[1] && create_if_block_110(ctx);
+    let if_block1 = (
+      /*isSubmitted*/
+      ctx[1] && create_if_block6(ctx)
+    );
+    return {
+      c() {
+        div7 = element("div");
+        div6 = element("div");
+        header = element("header");
+        h2 = element("h2");
+        t0 = text("Edit Payment ");
+        t1 = text(t1_value);
+        t2 = space();
+        button0 = element("button");
+        create_component(icon.$.fragment);
+        t3 = space();
+        div2 = element("div");
+        create_component(inputbox0.$.fragment);
+        t4 = space();
+        create_component(inputbox1.$.fragment);
+        t5 = space();
+        div0 = element("div");
+        label0 = element("label");
+        label0.textContent = "Payment Status";
+        t7 = space();
+        create_component(select0.$.fragment);
+        t8 = space();
+        div1 = element("div");
+        label1 = element("label");
+        label1.textContent = "Payment Method";
+        t10 = space();
+        create_component(select1.$.fragment);
+        t11 = space();
+        create_component(inputbox2.$.fragment);
+        t12 = space();
+        div5 = element("div");
+        div3 = element("div");
+        div3.innerHTML = ``;
+        t13 = space();
+        div4 = element("div");
+        button1 = element("button");
+        button1.textContent = "Cancel";
+        t15 = space();
+        button2 = element("button");
+        if (if_block0)
+          if_block0.c();
+        t16 = space();
+        if (if_block1)
+          if_block1.c();
+        attr(h2, "class", "svelte-x1cc2e");
+        attr(button0, "class", "svelte-x1cc2e");
+        attr(header, "class", "header svelte-x1cc2e");
+        attr(label0, "class", "label svelte-x1cc2e");
+        attr(label0, "for", "paymentStatus");
+        attr(div0, "class", "input-box svelte-x1cc2e");
+        attr(label1, "class", "label svelte-x1cc2e");
+        attr(label1, "for", "paymentMethod");
+        attr(div1, "class", "input-box svelte-x1cc2e");
+        attr(div2, "class", "forms svelte-x1cc2e");
+        attr(div3, "class", "left");
+        attr(button1, "class", "cancel svelte-x1cc2e");
+        attr(button2, "class", "ok svelte-x1cc2e");
+        button2.disabled = /*isSubmitted*/
+        ctx[1];
+        attr(div4, "class", "right svelte-x1cc2e");
+        attr(div5, "class", "foot svelte-x1cc2e");
+        attr(div6, "class", "popup svelte-x1cc2e");
+        attr(div7, "class", div7_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx[0] ? "show" : ""}`) + " svelte-x1cc2e");
+      },
+      m(target, anchor) {
+        insert(target, div7, anchor);
+        append(div7, div6);
+        append(div6, header);
+        append(header, h2);
+        append(h2, t0);
+        append(h2, t1);
+        append(header, t2);
+        append(header, button0);
+        mount_component(icon, button0, null);
+        append(div6, t3);
+        append(div6, div2);
+        mount_component(inputbox0, div2, null);
+        append(div2, t4);
+        mount_component(inputbox1, div2, null);
+        append(div2, t5);
+        append(div2, div0);
+        append(div0, label0);
+        append(div0, t7);
+        mount_component(select0, div0, null);
+        append(div2, t8);
+        append(div2, div1);
+        append(div1, label1);
+        append(div1, t10);
+        mount_component(select1, div1, null);
+        append(div2, t11);
+        mount_component(inputbox2, div2, null);
+        append(div6, t12);
+        append(div6, div5);
+        append(div5, div3);
+        append(div5, t13);
+        append(div5, div4);
+        append(div4, button1);
+        append(div4, t15);
+        append(div4, button2);
+        if (if_block0)
+          if_block0.m(button2, null);
+        append(button2, t16);
+        if (if_block1)
+          if_block1.m(button2, null);
+        current = true;
+        if (!mounted) {
+          dispose = [
+            listen(
+              button0,
+              "click",
+              /*Hide*/
+              ctx[6]
+            ),
+            listen(button1, "click", prevent_default(
+              /*cancel*/
+              ctx[11]
+            )),
+            listen(button2, "click", prevent_default(
+              /*handleSubmit*/
+              ctx[12]
+            ))
+          ];
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if ((!current || dirty & /*paymentId*/
+        32) && t1_value !== (t1_value = `#${/*paymentId*/
+        ctx2[5]}`))
+          set_data(t1, t1_value);
+        const inputbox0_changes = {};
+        if (!updating_value && dirty & /*paymentAt*/
+        4) {
+          updating_value = true;
+          inputbox0_changes.value = /*paymentAt*/
+          ctx2[2];
+          add_flush_callback(() => updating_value = false);
+        }
+        inputbox0.$set(inputbox0_changes);
+        const inputbox1_changes = {};
+        if (!updating_value_1 && dirty & /*totalPaidIDR*/
+        8) {
+          updating_value_1 = true;
+          inputbox1_changes.value = /*totalPaidIDR*/
+          ctx2[3];
+          add_flush_callback(() => updating_value_1 = false);
+        }
+        inputbox1.$set(inputbox1_changes);
+        const select0_changes = {};
+        if (!updating_value_2 && dirty & /*paymentStatus*/
+        256) {
+          updating_value_2 = true;
+          select0_changes.value = /*paymentStatus*/
+          ctx2[8];
+          add_flush_callback(() => updating_value_2 = false);
+        }
+        select0.$set(select0_changes);
+        const select1_changes = {};
+        if (!updating_value_3 && dirty & /*paymentMethod*/
+        128) {
+          updating_value_3 = true;
+          select1_changes.value = /*paymentMethod*/
+          ctx2[7];
+          add_flush_callback(() => updating_value_3 = false);
+        }
+        select1.$set(select1_changes);
+        const inputbox2_changes = {};
+        if (!updating_value_4 && dirty & /*note*/
+        16) {
+          updating_value_4 = true;
+          inputbox2_changes.value = /*note*/
+          ctx2[4];
+          add_flush_callback(() => updating_value_4 = false);
+        }
+        inputbox2.$set(inputbox2_changes);
+        if (!/*isSubmitted*/
+        ctx2[1]) {
+          if (if_block0) {
+          } else {
+            if_block0 = create_if_block_110(ctx2);
+            if_block0.c();
+            if_block0.m(button2, t16);
+          }
+        } else if (if_block0) {
+          if_block0.d(1);
+          if_block0 = null;
+        }
+        if (
+          /*isSubmitted*/
+          ctx2[1]
+        ) {
+          if (if_block1) {
+            if (dirty & /*isSubmitted*/
+            2) {
+              transition_in(if_block1, 1);
+            }
+          } else {
+            if_block1 = create_if_block6(ctx2);
+            if_block1.c();
+            transition_in(if_block1, 1);
+            if_block1.m(button2, null);
+          }
+        } else if (if_block1) {
+          group_outros();
+          transition_out(if_block1, 1, 1, () => {
+            if_block1 = null;
+          });
+          check_outros();
+        }
+        if (!current || dirty & /*isSubmitted*/
+        2) {
+          button2.disabled = /*isSubmitted*/
+          ctx2[1];
+        }
+        if (!current || dirty & /*isShow*/
+        1 && div7_class_value !== (div7_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[0] ? "show" : ""}`) + " svelte-x1cc2e")) {
+          attr(div7, "class", div7_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        transition_in(inputbox0.$.fragment, local);
+        transition_in(inputbox1.$.fragment, local);
+        transition_in(select0.$.fragment, local);
+        transition_in(select1.$.fragment, local);
+        transition_in(inputbox2.$.fragment, local);
+        transition_in(if_block1);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        transition_out(inputbox0.$.fragment, local);
+        transition_out(inputbox1.$.fragment, local);
+        transition_out(select0.$.fragment, local);
+        transition_out(select1.$.fragment, local);
+        transition_out(inputbox2.$.fragment, local);
+        transition_out(if_block1);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div7);
+        }
+        destroy_component(icon);
+        destroy_component(inputbox0);
+        destroy_component(inputbox1);
+        destroy_component(select0);
+        destroy_component(select1);
+        destroy_component(inputbox2);
+        if (if_block0)
+          if_block0.d();
+        if (if_block1)
+          if_block1.d();
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function instance8($self, $props, $invalidate) {
+    let { isShow = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    const PaymentMethods = ["Cash", "QRIS", "Transfer", "Donation"];
+    const PaymentStatuses = ["Paid", "Unpaid", "Refunded"];
+    let { isSubmitted = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    let { paymentId = 0 } = $props;
+    let { paymentAt = (0, import_xFormatter2.dateISOFormat)(0) } = $props;
+    let { totalPaidIDR = 0 } = $props;
+    let paymentMethod = "";
+    let paymentStatus = "";
+    let { note = "" } = $props;
+    let { OnSubmit = async function(payment) {
+      console.log("OnSubmit :::", payment);
+    } } = $props;
+    const Show = (pyMeyhod, pyStatus) => {
+      $invalidate(0, isShow = true);
+      $invalidate(7, paymentMethod = pyMeyhod);
+      $invalidate(8, paymentStatus = pyStatus);
+    };
+    const Hide = () => $invalidate(0, isShow = false);
+    const cancel = () => $invalidate(0, isShow = false);
+    function handleSubmit() {
+      $invalidate(1, isSubmitted = true);
+      const py = (
+        /** @type {Payment|any} */
+        {
+          paymentAt,
+          paidIDR: totalPaidIDR,
+          paymentMethod,
+          paymentStatus,
+          note
+        }
+      );
+      OnSubmit(py);
+    }
+    function handleSelectPyMethod(e) {
+      $invalidate(7, paymentMethod = e.detail.value);
+    }
+    function handleClearPyMethod(e) {
+      $invalidate(7, paymentMethod = "");
+    }
+    function handleSelectPyStatus(e) {
+      $invalidate(8, paymentStatus = e.detail.value);
+    }
+    function handleClearPyStatus(e) {
+      $invalidate(8, paymentStatus = "");
+    }
+    function inputbox0_value_binding(value) {
+      paymentAt = value;
+      $invalidate(2, paymentAt);
+    }
+    function inputbox1_value_binding(value) {
+      totalPaidIDR = value;
+      $invalidate(3, totalPaidIDR);
+    }
+    function select0_value_binding(value) {
+      paymentStatus = value;
+      $invalidate(8, paymentStatus);
+    }
+    function select1_value_binding(value) {
+      paymentMethod = value;
+      $invalidate(7, paymentMethod);
+    }
+    function inputbox2_value_binding(value) {
+      note = value;
+      $invalidate(4, note);
+    }
+    $self.$set = ($props2) => {
+      if ("isShow" in $props2)
+        $invalidate(0, isShow = $props2.isShow);
+      if ("isSubmitted" in $props2)
+        $invalidate(1, isSubmitted = $props2.isSubmitted);
+      if ("paymentId" in $props2)
+        $invalidate(5, paymentId = $props2.paymentId);
+      if ("paymentAt" in $props2)
+        $invalidate(2, paymentAt = $props2.paymentAt);
+      if ("totalPaidIDR" in $props2)
+        $invalidate(3, totalPaidIDR = $props2.totalPaidIDR);
+      if ("note" in $props2)
+        $invalidate(4, note = $props2.note);
+      if ("OnSubmit" in $props2)
+        $invalidate(17, OnSubmit = $props2.OnSubmit);
+    };
+    return [
+      isShow,
+      isSubmitted,
+      paymentAt,
+      totalPaidIDR,
+      note,
+      paymentId,
+      Hide,
+      paymentMethod,
+      paymentStatus,
+      PaymentMethods,
+      PaymentStatuses,
+      cancel,
+      handleSubmit,
+      handleSelectPyMethod,
+      handleClearPyMethod,
+      handleSelectPyStatus,
+      handleClearPyStatus,
+      OnSubmit,
+      Show,
+      inputbox0_value_binding,
+      inputbox1_value_binding,
+      select0_value_binding,
+      select1_value_binding,
+      inputbox2_value_binding
+    ];
+  }
+  var PopUpEditPayment = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance8, create_fragment13, safe_not_equal, {
+        isShow: 0,
+        isSubmitted: 1,
+        paymentId: 5,
+        paymentAt: 2,
+        totalPaidIDR: 3,
+        note: 4,
+        OnSubmit: 17,
+        Show: 18,
+        Hide: 6
+      });
+    }
+    get Show() {
+      return this.$.ctx[18];
+    }
+    get Hide() {
+      return this.$.ctx[6];
+    }
+  };
+  var PopUpEditPayment_default = PopUpEditPayment;
+
+  // _components/PopUpShowBookingPayments.svelte
+  var import_jsApi2 = __toESM(require_jsApi_GEN());
+  var import_xConstant = __toESM(require_xConstant());
   function get_each_context4(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[3] = list[i];
-    const constants_0 = (
-      /*getOccupancyProgress*/
-      child_ctx[0](
-        /*ub*/
-        child_ctx[3]
-      )
-    );
-    child_ctx[4] = constants_0;
-    const constants_1 = (
-      /*getProgressPaidPercentage*/
-      child_ctx[1](
-        /*ub*/
-        child_ctx[3]
-      )
-    );
-    child_ctx[5] = constants_1;
+    child_ctx[29] = list[i];
+    child_ctx[31] = i;
     return child_ctx;
   }
   function create_else_block5(ctx) {
+    let button;
+    let icon;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        size: "15",
+        color: "var(--gray-007)",
+        src: RiSystemDeleteBin5Line
+      }
+    });
+    function click_handler_2() {
+      return (
+        /*click_handler_2*/
+        ctx[27](
+          /*py*/
+          ctx[29]
+        )
+      );
+    }
+    return {
+      c() {
+        button = element("button");
+        create_component(icon.$.fragment);
+        attr(button, "class", "btn delete svelte-1wo2ksq");
+        attr(button, "title", "Delete");
+      },
+      m(target, anchor) {
+        insert(target, button, anchor);
+        mount_component(icon, button, null);
+        current = true;
+        if (!mounted) {
+          dispose = listen(button, "click", click_handler_2);
+          mounted = true;
+        }
+      },
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(button);
+        }
+        destroy_component(icon);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block_111(ctx) {
+    let button;
+    let icon;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        size: "15",
+        color: "var(--gray-007)",
+        src: RiArrowsArrowGoBackLine
+      }
+    });
+    function click_handler_1() {
+      return (
+        /*click_handler_1*/
+        ctx[26](
+          /*py*/
+          ctx[29]
+        )
+      );
+    }
+    return {
+      c() {
+        button = element("button");
+        create_component(icon.$.fragment);
+        attr(button, "class", "btn svelte-1wo2ksq");
+        attr(button, "title", "Restore");
+      },
+      m(target, anchor) {
+        insert(target, button, anchor);
+        mount_component(icon, button, null);
+        current = true;
+        if (!mounted) {
+          dispose = listen(button, "click", click_handler_1);
+          mounted = true;
+        }
+      },
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(button);
+        }
+        destroy_component(icon);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_each_block4(ctx) {
+    let tr;
+    let td0;
+    let t1;
+    let td1;
+    let div;
+    let button;
+    let icon;
+    let t2;
+    let current_block_type_index;
+    let if_block;
+    let t3;
+    let td2;
+    let t4;
+    let t5_value = (
+      /*py*/
+      ctx[29].id + ""
+    );
+    let t5;
+    let t6;
+    let td3;
+    let t7_value = (
+      /*py*/
+      ctx[29].paymentAt + ""
+    );
+    let t7;
+    let t8;
+    let td4;
+    let t9_value = (0, import_xFormatter3.formatPrice)(
+      /*py*/
+      ctx[29].paidIDR,
+      "IDR"
+    ) + "";
+    let t9;
+    let t10;
+    let td5;
+    let t11_value = (
+      /*py*/
+      ctx[29].paymentMethod + ""
+    );
+    let t11;
+    let t12;
+    let td6;
+    let t13_value = (
+      /*py*/
+      ctx[29].paymentStatus + ""
+    );
+    let t13;
+    let t14;
+    let td7;
+    let t15_value = (
+      /*py*/
+      ctx[29].note + ""
+    );
+    let t15;
+    let tr_class_value;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        size: "15",
+        color: "var(--gray-007)",
+        src: RiDesignBallPenLine
+      }
+    });
+    function click_handler() {
+      return (
+        /*click_handler*/
+        ctx[25](
+          /*py*/
+          ctx[29]
+        )
+      );
+    }
+    const if_block_creators = [create_if_block_111, create_else_block5];
+    const if_blocks = [];
+    function select_block_type(ctx2, dirty) {
+      if (
+        /*py*/
+        ctx2[29].deletedAt > 0
+      )
+        return 0;
+      return 1;
+    }
+    current_block_type_index = select_block_type(ctx, [-1, -1]);
+    if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    return {
+      c() {
+        tr = element("tr");
+        td0 = element("td");
+        td0.textContent = `${/*idx*/
+        ctx[31] + 1}`;
+        t1 = space();
+        td1 = element("td");
+        div = element("div");
+        button = element("button");
+        create_component(icon.$.fragment);
+        t2 = space();
+        if_block.c();
+        t3 = space();
+        td2 = element("td");
+        t4 = text("#");
+        t5 = text(t5_value);
+        t6 = space();
+        td3 = element("td");
+        t7 = text(t7_value);
+        t8 = space();
+        td4 = element("td");
+        t9 = text(t9_value);
+        t10 = space();
+        td5 = element("td");
+        t11 = text(t11_value);
+        t12 = space();
+        td6 = element("td");
+        t13 = text(t13_value);
+        t14 = space();
+        td7 = element("td");
+        t15 = text(t15_value);
+        attr(td0, "class", "num-row svelte-1wo2ksq");
+        attr(button, "class", "btn edit svelte-1wo2ksq");
+        attr(button, "title", "Edit");
+        attr(div, "class", "actions svelte-1wo2ksq");
+        attr(td1, "class", "a-row svelte-1wo2ksq");
+        attr(td2, "class", "svelte-1wo2ksq");
+        attr(td3, "class", "svelte-1wo2ksq");
+        attr(td4, "class", "svelte-1wo2ksq");
+        attr(td5, "class", "svelte-1wo2ksq");
+        attr(td6, "class", "svelte-1wo2ksq");
+        attr(td7, "class", "svelte-1wo2ksq");
+        attr(tr, "class", tr_class_value = null_to_empty(
+          /*py*/
+          ctx[29].deletedAt > 0 ? "deleted" : ""
+        ) + " svelte-1wo2ksq");
+      },
+      m(target, anchor) {
+        insert(target, tr, anchor);
+        append(tr, td0);
+        append(tr, t1);
+        append(tr, td1);
+        append(td1, div);
+        append(div, button);
+        mount_component(icon, button, null);
+        append(div, t2);
+        if_blocks[current_block_type_index].m(div, null);
+        append(tr, t3);
+        append(tr, td2);
+        append(td2, t4);
+        append(td2, t5);
+        append(tr, t6);
+        append(tr, td3);
+        append(td3, t7);
+        append(tr, t8);
+        append(tr, td4);
+        append(td4, t9);
+        append(tr, t10);
+        append(tr, td5);
+        append(td5, t11);
+        append(tr, t12);
+        append(tr, td6);
+        append(td6, t13);
+        append(tr, t14);
+        append(tr, td7);
+        append(td7, t15);
+        current = true;
+        if (!mounted) {
+          dispose = listen(button, "click", click_handler);
+          mounted = true;
+        }
+      },
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+        let previous_block_index = current_block_type_index;
+        current_block_type_index = select_block_type(ctx, dirty);
+        if (current_block_type_index === previous_block_index) {
+          if_blocks[current_block_type_index].p(ctx, dirty);
+        } else {
+          group_outros();
+          transition_out(if_blocks[previous_block_index], 1, 1, () => {
+            if_blocks[previous_block_index] = null;
+          });
+          check_outros();
+          if_block = if_blocks[current_block_type_index];
+          if (!if_block) {
+            if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+            if_block.c();
+          } else {
+            if_block.p(ctx, dirty);
+          }
+          transition_in(if_block, 1);
+          if_block.m(div, null);
+        }
+        if ((!current || dirty[0] & /*payments*/
+        1) && t5_value !== (t5_value = /*py*/
+        ctx[29].id + ""))
+          set_data(t5, t5_value);
+        if ((!current || dirty[0] & /*payments*/
+        1) && t7_value !== (t7_value = /*py*/
+        ctx[29].paymentAt + ""))
+          set_data(t7, t7_value);
+        if ((!current || dirty[0] & /*payments*/
+        1) && t9_value !== (t9_value = (0, import_xFormatter3.formatPrice)(
+          /*py*/
+          ctx[29].paidIDR,
+          "IDR"
+        ) + ""))
+          set_data(t9, t9_value);
+        if ((!current || dirty[0] & /*payments*/
+        1) && t11_value !== (t11_value = /*py*/
+        ctx[29].paymentMethod + ""))
+          set_data(t11, t11_value);
+        if ((!current || dirty[0] & /*payments*/
+        1) && t13_value !== (t13_value = /*py*/
+        ctx[29].paymentStatus + ""))
+          set_data(t13, t13_value);
+        if ((!current || dirty[0] & /*payments*/
+        1) && t15_value !== (t15_value = /*py*/
+        ctx[29].note + ""))
+          set_data(t15, t15_value);
+        if (!current || dirty[0] & /*payments*/
+        1 && tr_class_value !== (tr_class_value = null_to_empty(
+          /*py*/
+          ctx[29].deletedAt > 0 ? "deleted" : ""
+        ) + " svelte-1wo2ksq")) {
+          attr(tr, "class", tr_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        transition_in(if_block);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        transition_out(if_block);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(tr);
+        }
+        destroy_component(icon);
+        if_blocks[current_block_type_index].d();
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_if_block7(ctx) {
+    let tr;
+    return {
+      c() {
+        tr = element("tr");
+        tr.innerHTML = `<td class="num-row svelte-1wo2ksq">0</td> <td colspan="6" class="svelte-1wo2ksq">no-data</td>`;
+      },
+      m(target, anchor) {
+        insert(target, tr, anchor);
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(tr);
+        }
+      }
+    };
+  }
+  function create_fragment14(ctx) {
+    let popupeditpayment;
+    let updating_isShow;
+    let updating_paymentId;
+    let updating_isSubmitted;
+    let updating_paymentAt;
+    let updating_totalPaidIDR;
+    let updating_note;
+    let t0;
+    let div4;
+    let div3;
+    let header;
+    let h2;
+    let t1;
+    let t2_value = `#${/*bookingId*/
+    ctx[1]}`;
+    let t2;
+    let t3;
+    let button;
+    let icon;
+    let t4;
+    let div2;
+    let div1;
+    let div0;
+    let table;
+    let thead;
+    let t20;
+    let tbody;
+    let t21;
+    let div4_class_value;
+    let current;
+    let mounted;
+    let dispose;
+    function popupeditpayment_isShow_binding(value) {
+      ctx[18](value);
+    }
+    function popupeditpayment_paymentId_binding(value) {
+      ctx[20](value);
+    }
+    function popupeditpayment_isSubmitted_binding(value) {
+      ctx[21](value);
+    }
+    function popupeditpayment_paymentAt_binding(value) {
+      ctx[22](value);
+    }
+    function popupeditpayment_totalPaidIDR_binding(value) {
+      ctx[23](value);
+    }
+    function popupeditpayment_note_binding(value) {
+      ctx[24](value);
+    }
+    let popupeditpayment_props = { OnSubmit: (
+      /*OnEditPayment*/
+      ctx[12]
+    ) };
+    if (
+      /*isShowPopUpEditPayment*/
+      ctx[5] !== void 0
+    ) {
+      popupeditpayment_props.isShow = /*isShowPopUpEditPayment*/
+      ctx[5];
+    }
+    if (
+      /*editPaymentId*/
+      ctx[7] !== void 0
+    ) {
+      popupeditpayment_props.paymentId = /*editPaymentId*/
+      ctx[7];
+    }
+    if (
+      /*isSubmitEditPayment*/
+      ctx[6] !== void 0
+    ) {
+      popupeditpayment_props.isSubmitted = /*isSubmitEditPayment*/
+      ctx[6];
+    }
+    if (
+      /*editPaymentAt*/
+      ctx[8] !== void 0
+    ) {
+      popupeditpayment_props.paymentAt = /*editPaymentAt*/
+      ctx[8];
+    }
+    if (
+      /*editTotalPaidIDR*/
+      ctx[9] !== void 0
+    ) {
+      popupeditpayment_props.totalPaidIDR = /*editTotalPaidIDR*/
+      ctx[9];
+    }
+    if (
+      /*editNote*/
+      ctx[10] !== void 0
+    ) {
+      popupeditpayment_props.note = /*editNote*/
+      ctx[10];
+    }
+    popupeditpayment = new PopUpEditPayment_default({ props: popupeditpayment_props });
+    binding_callbacks.push(() => bind(popupeditpayment, "isShow", popupeditpayment_isShow_binding));
+    ctx[19](popupeditpayment);
+    binding_callbacks.push(() => bind(popupeditpayment, "paymentId", popupeditpayment_paymentId_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "isSubmitted", popupeditpayment_isSubmitted_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "paymentAt", popupeditpayment_paymentAt_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "totalPaidIDR", popupeditpayment_totalPaidIDR_binding));
+    binding_callbacks.push(() => bind(popupeditpayment, "note", popupeditpayment_note_binding));
+    icon = new Icon_default({
+      props: {
+        size: "22",
+        color: "var(--red-005)",
+        src: IoClose
+      }
+    });
+    let each_value = ensure_array_like(
+      /*payments*/
+      ctx[0] || []
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block4(get_each_context4(ctx, each_value, i));
+    }
+    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
+      each_blocks[i] = null;
+    });
+    let if_block = (
+      /*payments*/
+      (ctx[0] || []).length === 0 && create_if_block7(ctx)
+    );
+    return {
+      c() {
+        create_component(popupeditpayment.$.fragment);
+        t0 = space();
+        div4 = element("div");
+        div3 = element("div");
+        header = element("header");
+        h2 = element("h2");
+        t1 = text("Payments for Booking ");
+        t2 = text(t2_value);
+        t3 = space();
+        button = element("button");
+        create_component(icon.$.fragment);
+        t4 = space();
+        div2 = element("div");
+        div1 = element("div");
+        div0 = element("div");
+        table = element("table");
+        thead = element("thead");
+        thead.innerHTML = `<tr><th style="width: 40px;" class="svelte-1wo2ksq">No</th> <th class="a-row svelte-1wo2ksq" style="width: 70px;">Actions</th> <th class="svelte-1wo2ksq">ID</th> <th class="svelte-1wo2ksq">Payment At</th> <th class="svelte-1wo2ksq">Total Paid</th> <th class="svelte-1wo2ksq">Payment Method</th> <th class="svelte-1wo2ksq">Payment Status</th> <th class="textarea svelte-1wo2ksq">Note</th></tr>`;
+        t20 = space();
+        tbody = element("tbody");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        t21 = space();
+        if (if_block)
+          if_block.c();
+        attr(h2, "class", "svelte-1wo2ksq");
+        attr(button, "class", "svelte-1wo2ksq");
+        attr(header, "class", "header svelte-1wo2ksq");
+        attr(thead, "class", "svelte-1wo2ksq");
+        attr(table, "class", "svelte-1wo2ksq");
+        attr(div0, "class", "table-container svelte-1wo2ksq");
+        attr(div1, "class", "table-root svelte-1wo2ksq");
+        attr(div2, "class", "forms svelte-1wo2ksq");
+        attr(div3, "class", "popup svelte-1wo2ksq");
+        attr(div4, "class", div4_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx[3] ? "show" : ""}`) + " svelte-1wo2ksq");
+      },
+      m(target, anchor) {
+        mount_component(popupeditpayment, target, anchor);
+        insert(target, t0, anchor);
+        insert(target, div4, anchor);
+        append(div4, div3);
+        append(div3, header);
+        append(header, h2);
+        append(h2, t1);
+        append(h2, t2);
+        append(header, t3);
+        append(header, button);
+        mount_component(icon, button, null);
+        append(div3, t4);
+        append(div3, div2);
+        append(div2, div1);
+        append(div1, div0);
+        append(div0, table);
+        append(table, thead);
+        append(table, t20);
+        append(table, tbody);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(tbody, null);
+          }
+        }
+        append(tbody, t21);
+        if (if_block)
+          if_block.m(tbody, null);
+        current = true;
+        if (!mounted) {
+          dispose = listen(
+            button,
+            "click",
+            /*Hide*/
+            ctx[2]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        const popupeditpayment_changes = {};
+        if (!updating_isShow && dirty[0] & /*isShowPopUpEditPayment*/
+        32) {
+          updating_isShow = true;
+          popupeditpayment_changes.isShow = /*isShowPopUpEditPayment*/
+          ctx2[5];
+          add_flush_callback(() => updating_isShow = false);
+        }
+        if (!updating_paymentId && dirty[0] & /*editPaymentId*/
+        128) {
+          updating_paymentId = true;
+          popupeditpayment_changes.paymentId = /*editPaymentId*/
+          ctx2[7];
+          add_flush_callback(() => updating_paymentId = false);
+        }
+        if (!updating_isSubmitted && dirty[0] & /*isSubmitEditPayment*/
+        64) {
+          updating_isSubmitted = true;
+          popupeditpayment_changes.isSubmitted = /*isSubmitEditPayment*/
+          ctx2[6];
+          add_flush_callback(() => updating_isSubmitted = false);
+        }
+        if (!updating_paymentAt && dirty[0] & /*editPaymentAt*/
+        256) {
+          updating_paymentAt = true;
+          popupeditpayment_changes.paymentAt = /*editPaymentAt*/
+          ctx2[8];
+          add_flush_callback(() => updating_paymentAt = false);
+        }
+        if (!updating_totalPaidIDR && dirty[0] & /*editTotalPaidIDR*/
+        512) {
+          updating_totalPaidIDR = true;
+          popupeditpayment_changes.totalPaidIDR = /*editTotalPaidIDR*/
+          ctx2[9];
+          add_flush_callback(() => updating_totalPaidIDR = false);
+        }
+        if (!updating_note && dirty[0] & /*editNote*/
+        1024) {
+          updating_note = true;
+          popupeditpayment_changes.note = /*editNote*/
+          ctx2[10];
+          add_flush_callback(() => updating_note = false);
+        }
+        popupeditpayment.$set(popupeditpayment_changes);
+        if ((!current || dirty[0] & /*bookingId*/
+        2) && t2_value !== (t2_value = `#${/*bookingId*/
+        ctx2[1]}`))
+          set_data(t2, t2_value);
+        if (dirty[0] & /*payments, OnRestorePayment, OnDeletePayment, onPopUpEditPayment*/
+        26625) {
+          each_value = ensure_array_like(
+            /*payments*/
+            ctx2[0] || []
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context4(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+              transition_in(each_blocks[i], 1);
+            } else {
+              each_blocks[i] = create_each_block4(child_ctx);
+              each_blocks[i].c();
+              transition_in(each_blocks[i], 1);
+              each_blocks[i].m(tbody, t21);
+            }
+          }
+          group_outros();
+          for (i = each_value.length; i < each_blocks.length; i += 1) {
+            out(i);
+          }
+          check_outros();
+        }
+        if (
+          /*payments*/
+          (ctx2[0] || []).length === 0
+        ) {
+          if (if_block) {
+          } else {
+            if_block = create_if_block7(ctx2);
+            if_block.c();
+            if_block.m(tbody, null);
+          }
+        } else if (if_block) {
+          if_block.d(1);
+          if_block = null;
+        }
+        if (!current || dirty[0] & /*isShow*/
+        8 && div4_class_value !== (div4_class_value = null_to_empty(`popup-container ${/*isShow*/
+        ctx2[3] ? "show" : ""}`) + " svelte-1wo2ksq")) {
+          attr(div4, "class", div4_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(popupeditpayment.$.fragment, local);
+        transition_in(icon.$.fragment, local);
+        for (let i = 0; i < each_value.length; i += 1) {
+          transition_in(each_blocks[i]);
+        }
+        current = true;
+      },
+      o(local) {
+        transition_out(popupeditpayment.$.fragment, local);
+        transition_out(icon.$.fragment, local);
+        each_blocks = each_blocks.filter(Boolean);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          transition_out(each_blocks[i]);
+        }
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(t0);
+          detach(div4);
+        }
+        ctx[19](null);
+        destroy_component(popupeditpayment, detaching);
+        destroy_component(icon);
+        destroy_each(each_blocks, detaching);
+        if (if_block)
+          if_block.d();
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function instance9($self, $props, $invalidate) {
+    let isShow = (
+      /** @type {boolean} */
+      false
+    );
+    let { bookingId = (
+      /** @type {number} */
+      0
+    ) } = $props;
+    let { payments = (
+      /** @type {Payment[]} */
+      []
+    ) } = $props;
+    const Show = () => $invalidate(3, isShow = true);
+    const Hide = () => $invalidate(3, isShow = false);
+    const Reset = () => {
+    };
+    let { Refresh = async () => {
+    } } = $props;
+    let popUpEditPayment = null;
+    let isShowPopUpEditPayment = false;
+    let isSubmitEditPayment = false;
+    let editPaymentId;
+    let editPaymentAt = (0, import_xFormatter3.dateISOFormat)(0);
+    let editTotalPaidIDR = 0;
+    let editNote = "";
+    function onPopUpEditPayment(payment) {
+      $invalidate(7, editPaymentId = payment.id);
+      $invalidate(8, editPaymentAt = payment.paymentAt);
+      $invalidate(9, editTotalPaidIDR = payment.paidIDR);
+      $invalidate(10, editNote = payment.note);
+      popUpEditPayment.Show(payment.paymentMethod, payment.paymentStatus);
+    }
+    async function refreshPayments() {
+      await (0, import_jsApi2.AdminPayment)(
+        { cmd: import_xConstant.CmdForm, bookingId },
+        /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          $invalidate(0, payments = o.paymentsByBooking);
+        }
+      );
+    }
+    async function OnEditPayment(payment) {
+      payment.id = editPaymentId;
+      payment.paymentMethod = payment.paymentMethod.value;
+      payment.paymentStatus = payment.paymentStatus.value;
+      const i = (
+        /** @type {any}*/
+        { payment, cmd: import_xConstant.CmdUpsert }
+      );
+      await (0, import_jsApi2.AdminPayment)(
+        i,
+        /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          refreshPayments();
+          Refresh();
+          notifier.showSuccess(`Payment #${payment.id} updated !!`);
+          popUpEditPayment.Hide();
+        }
+      );
+      $invalidate(6, isSubmitEditPayment = false);
+    }
+    async function OnDeletePayment(payment) {
+      payment.id = payment.id + "";
+      const i = (
+        /** @type {any}*/
+        { payment, cmd: import_xConstant.CmdDelete }
+      );
+      await (0, import_jsApi2.AdminPayment)(
+        i,
+        /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          refreshPayments();
+          Refresh();
+          notifier.showSuccess(`Payment #${payment.id} deleted !!`);
+        }
+      );
+    }
+    async function OnRestorePayment(payment) {
+      payment.id = payment.id + "";
+      const i = (
+        /** @type {any}*/
+        { payment, cmd: import_xConstant.CmdRestore }
+      );
+      await (0, import_jsApi2.AdminPayment)(
+        i,
+        /** @type {import('./jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          refreshPayments();
+          Refresh();
+          notifier.showSuccess(`Payment #${payment.id} restored !!`);
+        }
+      );
+    }
+    function popupeditpayment_isShow_binding(value) {
+      isShowPopUpEditPayment = value;
+      $invalidate(5, isShowPopUpEditPayment);
+    }
+    function popupeditpayment_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        popUpEditPayment = $value;
+        $invalidate(4, popUpEditPayment);
+      });
+    }
+    function popupeditpayment_paymentId_binding(value) {
+      editPaymentId = value;
+      $invalidate(7, editPaymentId);
+    }
+    function popupeditpayment_isSubmitted_binding(value) {
+      isSubmitEditPayment = value;
+      $invalidate(6, isSubmitEditPayment);
+    }
+    function popupeditpayment_paymentAt_binding(value) {
+      editPaymentAt = value;
+      $invalidate(8, editPaymentAt);
+    }
+    function popupeditpayment_totalPaidIDR_binding(value) {
+      editTotalPaidIDR = value;
+      $invalidate(9, editTotalPaidIDR);
+    }
+    function popupeditpayment_note_binding(value) {
+      editNote = value;
+      $invalidate(10, editNote);
+    }
+    const click_handler = (py) => onPopUpEditPayment(py);
+    const click_handler_1 = (py) => OnRestorePayment(py);
+    const click_handler_2 = (py) => OnDeletePayment(py);
+    $self.$set = ($props2) => {
+      if ("bookingId" in $props2)
+        $invalidate(1, bookingId = $props2.bookingId);
+      if ("payments" in $props2)
+        $invalidate(0, payments = $props2.payments);
+      if ("Refresh" in $props2)
+        $invalidate(17, Refresh = $props2.Refresh);
+    };
+    return [
+      payments,
+      bookingId,
+      Hide,
+      isShow,
+      popUpEditPayment,
+      isShowPopUpEditPayment,
+      isSubmitEditPayment,
+      editPaymentId,
+      editPaymentAt,
+      editTotalPaidIDR,
+      editNote,
+      onPopUpEditPayment,
+      OnEditPayment,
+      OnDeletePayment,
+      OnRestorePayment,
+      Show,
+      Reset,
+      Refresh,
+      popupeditpayment_isShow_binding,
+      popupeditpayment_binding,
+      popupeditpayment_paymentId_binding,
+      popupeditpayment_isSubmitted_binding,
+      popupeditpayment_paymentAt_binding,
+      popupeditpayment_totalPaidIDR_binding,
+      popupeditpayment_note_binding,
+      click_handler,
+      click_handler_1,
+      click_handler_2
+    ];
+  }
+  var PopUpShowBookingPayments = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(
+        this,
+        options,
+        instance9,
+        create_fragment14,
+        safe_not_equal,
+        {
+          bookingId: 1,
+          payments: 0,
+          Show: 15,
+          Hide: 2,
+          Reset: 16,
+          Refresh: 17
+        },
+        null,
+        [-1, -1]
+      );
+    }
+    get Show() {
+      return this.$.ctx[15];
+    }
+    get Hide() {
+      return this.$.ctx[2];
+    }
+    get Reset() {
+      return this.$.ctx[16];
+    }
+  };
+  var PopUpShowBookingPayments_default = PopUpShowBookingPayments;
+
+  // _partials/home/UnpaidBookingTenants.svelte
+  var import_xConstant2 = __toESM(require_xConstant());
+  var import_jsApi3 = __toESM(require_jsApi_GEN());
+  function get_each_context5(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[11] = list[i];
+    const constants_0 = (
+      /*getOccupancyProgress*/
+      child_ctx[3](
+        /*ub*/
+        child_ctx[11]
+      )
+    );
+    child_ctx[12] = constants_0;
+    const constants_1 = (
+      /*getProgressPaidPercentage*/
+      child_ctx[4](
+        /*ub*/
+        child_ctx[11]
+      )
+    );
+    child_ctx[13] = constants_1;
+    return child_ctx;
+  }
+  function create_else_block6(ctx) {
     let div;
     return {
       c() {
@@ -16701,6 +18680,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         insert(target, div, anchor);
       },
       p: noop,
+      i: noop,
+      o: noop,
       d(detaching) {
         if (detaching) {
           detach(div);
@@ -16708,20 +18689,24 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_if_block6(ctx) {
+  function create_if_block8(ctx) {
     let div;
+    let current;
     let each_value = ensure_array_like(unpaidBookingTenants || []);
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block4(get_each_context4(ctx, each_value, i));
+      each_blocks[i] = create_each_block5(get_each_context5(ctx, each_value, i));
     }
+    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
+      each_blocks[i] = null;
+    });
     return {
       c() {
         div = element("div");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div, "class", "cards svelte-56jrvm");
+        attr(div, "class", "cards svelte-8c2jk6");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -16730,27 +18715,46 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             each_blocks[i].m(div, null);
           }
         }
+        current = true;
       },
       p(ctx2, dirty) {
-        if (dirty & /*getOccupancyProgress, unpaidBookingTenants, getProgressPaidPercentage*/
-        3) {
+        if (dirty & /*showPaymentsForBooking, unpaidBookingTenants, getOccupancyProgress, getProgressPaidPercentage*/
+        56) {
           each_value = ensure_array_like(unpaidBookingTenants || []);
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context4(ctx2, each_value, i);
+            const child_ctx = get_each_context5(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
+              transition_in(each_blocks[i], 1);
             } else {
-              each_blocks[i] = create_each_block4(child_ctx);
+              each_blocks[i] = create_each_block5(child_ctx);
               each_blocks[i].c();
+              transition_in(each_blocks[i], 1);
               each_blocks[i].m(div, null);
             }
           }
-          for (; i < each_blocks.length; i += 1) {
-            each_blocks[i].d(1);
+          group_outros();
+          for (i = each_value.length; i < each_blocks.length; i += 1) {
+            out(i);
           }
-          each_blocks.length = each_value.length;
+          check_outros();
         }
+      },
+      i(local) {
+        if (current)
+          return;
+        for (let i = 0; i < each_value.length; i += 1) {
+          transition_in(each_blocks[i]);
+        }
+        current = true;
+      },
+      o(local) {
+        each_blocks = each_blocks.filter(Boolean);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          transition_out(each_blocks[i]);
+        }
+        current = false;
       },
       d(detaching) {
         if (detaching) {
@@ -16760,11 +18764,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_each_block4(ctx) {
-    let div6;
+  function create_each_block5(ctx) {
+    let div7;
     let h3;
     let t1;
-    let div5;
+    let div6;
     let hr0;
     let t2;
     let div0;
@@ -16792,31 +18796,56 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let span4;
     let span4_class_value;
     let t24;
+    let div5;
+    let button;
+    let icon;
+    let t25;
+    let span5;
+    let t27;
+    let current;
+    let mounted;
+    let dispose;
+    icon = new Icon_default({
+      props: {
+        src: AiOutlineEye,
+        color: "#FFF",
+        size: "17"
+      }
+    });
+    function click_handler() {
+      return (
+        /*click_handler*/
+        ctx[9](
+          /*ub*/
+          ctx[11]
+        )
+      );
+    }
     return {
       c() {
-        div6 = element("div");
+        div7 = element("div");
         h3 = element("h3");
         h3.textContent = `${/*ub*/
-        ctx[3].tenantName}`;
+        ctx[11].tenantName}`;
         t1 = space();
-        div5 = element("div");
+        div6 = element("div");
         hr0 = element("hr");
         t2 = space();
         div0 = element("div");
         span0 = element("span");
         span0.textContent = `Room ${/*ub*/
-        ctx[3].roomName}`;
+        ctx[11].roomName}`;
         t5 = space();
         span1 = element("span");
         span1.textContent = `${/*ub*/
-        ctx[3].totalPaid}/${/*ub*/
-        ctx[3].totalPrice}`;
+        ctx[11].totalPaid}/${/*ub*/
+        ctx[11].totalPrice}`;
         t9 = space();
         span2 = element("span");
         span2.textContent = `Start at ${/*ub*/
-        ctx[3].dateStart} (${GetRelativeDayLabel(
+        ctx[11].dateStart} (${GetRelativeDayLabel(
           /*ub*/
-          ctx[3].dateStart
+          ctx[11].dateStart
         )})`;
         t15 = space();
         hr1 = element("hr");
@@ -16826,7 +18855,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         t17 = text("Paid ");
         b = element("b");
         b.textContent = `${/*paidPercent*/
-        ctx[5].daysPaid}`;
+        ctx[13].daysPaid}`;
         t19 = text(" days");
         t20 = space();
         div1 = element("div");
@@ -16839,55 +18868,65 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         div3 = element("div");
         span4 = element("span");
         t24 = space();
-        attr(h3, "class", "svelte-56jrvm");
-        attr(hr0, "class", "svelte-56jrvm");
-        attr(div0, "class", "desc svelte-56jrvm");
-        attr(hr1, "class", "svelte-56jrvm");
+        div5 = element("div");
+        button = element("button");
+        create_component(icon.$.fragment);
+        t25 = space();
+        span5 = element("span");
+        span5.textContent = "Show Payments";
+        t27 = space();
+        attr(h3, "class", "svelte-8c2jk6");
+        attr(hr0, "class", "svelte-8c2jk6");
+        attr(div0, "class", "desc svelte-8c2jk6");
+        attr(hr1, "class", "svelte-8c2jk6");
         attr(label0, "for", "");
-        attr(label0, "class", "svelte-56jrvm");
-        attr(span3, "class", "blue svelte-56jrvm");
+        attr(label0, "class", "svelte-8c2jk6");
+        attr(span3, "class", "blue svelte-8c2jk6");
         set_style(
           span3,
           "width",
           /*paidPercent*/
-          ctx[5].percentage + "%"
+          ctx[13].percentage + "%"
         );
-        attr(div1, "class", "progress svelte-56jrvm");
-        attr(div2, "class", "progress-container svelte-56jrvm");
+        attr(div1, "class", "progress svelte-8c2jk6");
+        attr(div2, "class", "progress-container svelte-8c2jk6");
         attr(label1, "for", "");
-        attr(label1, "class", "svelte-56jrvm");
+        attr(label1, "class", "svelte-8c2jk6");
         attr(span4, "class", span4_class_value = null_to_empty(
           /*prog*/
-          ctx[4].color
-        ) + " svelte-56jrvm");
+          ctx[12].color
+        ) + " svelte-8c2jk6");
         set_style(
           span4,
           "width",
           /*prog*/
-          ctx[4].percentage + "%"
+          ctx[12].percentage + "%"
         );
-        attr(div3, "class", "progress svelte-56jrvm");
-        attr(div4, "class", "progress-container svelte-56jrvm");
-        attr(div5, "class", "detail svelte-56jrvm");
-        attr(div6, "class", "card svelte-56jrvm");
+        attr(div3, "class", "progress svelte-8c2jk6");
+        attr(div4, "class", "progress-container svelte-8c2jk6");
+        attr(button, "class", "btn svelte-8c2jk6");
+        attr(button, "title", "Show Payments");
+        attr(div5, "class", "actions svelte-8c2jk6");
+        attr(div6, "class", "detail svelte-8c2jk6");
+        attr(div7, "class", "card svelte-8c2jk6");
       },
       m(target, anchor) {
-        insert(target, div6, anchor);
-        append(div6, h3);
-        append(div6, t1);
-        append(div6, div5);
-        append(div5, hr0);
-        append(div5, t2);
-        append(div5, div0);
+        insert(target, div7, anchor);
+        append(div7, h3);
+        append(div7, t1);
+        append(div7, div6);
+        append(div6, hr0);
+        append(div6, t2);
+        append(div6, div0);
         append(div0, span0);
         append(div0, t5);
         append(div0, span1);
         append(div0, t9);
         append(div0, span2);
-        append(div5, t15);
-        append(div5, hr1);
-        append(div5, t16);
-        append(div5, div2);
+        append(div6, t15);
+        append(div6, hr1);
+        append(div6, t16);
+        append(div6, div2);
         append(div2, label0);
         append(label0, t17);
         append(label0, b);
@@ -16895,59 +18934,153 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         append(div2, t20);
         append(div2, div1);
         append(div1, span3);
-        append(div5, t21);
-        append(div5, div4);
+        append(div6, t21);
+        append(div6, div4);
         append(div4, label1);
         append(div4, t23);
         append(div4, div3);
         append(div3, span4);
         append(div6, t24);
+        append(div6, div5);
+        append(div5, button);
+        mount_component(icon, button, null);
+        append(button, t25);
+        append(button, span5);
+        append(div7, t27);
+        current = true;
+        if (!mounted) {
+          dispose = listen(button, "click", click_handler);
+          mounted = true;
+        }
       },
-      p: noop,
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon.$.fragment, local);
+        current = false;
+      },
       d(detaching) {
         if (detaching) {
-          detach(div6);
+          detach(div7);
         }
+        destroy_component(icon);
+        mounted = false;
+        dispose();
       }
     };
   }
-  function create_fragment13(ctx) {
+  function create_fragment15(ctx) {
+    let popupshowbookingpayments;
+    let updating_bookingId;
+    let updating_payments;
+    let t0;
     let section;
     let h1;
-    let t1;
+    let t2;
+    let current_block_type_index;
+    let if_block;
+    let current;
+    function popupshowbookingpayments_bookingId_binding(value) {
+      ctx[6](value);
+    }
+    function popupshowbookingpayments_payments_binding(value) {
+      ctx[7](value);
+    }
+    let popupshowbookingpayments_props = {};
+    if (
+      /*bookingIdToShowPayment*/
+      ctx[1] !== void 0
+    ) {
+      popupshowbookingpayments_props.bookingId = /*bookingIdToShowPayment*/
+      ctx[1];
+    }
+    if (
+      /*paymentsForBooking*/
+      ctx[2] !== void 0
+    ) {
+      popupshowbookingpayments_props.payments = /*paymentsForBooking*/
+      ctx[2];
+    }
+    popupshowbookingpayments = new PopUpShowBookingPayments_default({ props: popupshowbookingpayments_props });
+    binding_callbacks.push(() => bind(popupshowbookingpayments, "bookingId", popupshowbookingpayments_bookingId_binding));
+    binding_callbacks.push(() => bind(popupshowbookingpayments, "payments", popupshowbookingpayments_payments_binding));
+    ctx[8](popupshowbookingpayments);
+    const if_block_creators = [create_if_block8, create_else_block6];
+    const if_blocks = [];
     function select_block_type(ctx2, dirty) {
       if (unpaidBookingTenants && unpaidBookingTenants.length > 0)
-        return create_if_block6;
-      return create_else_block5;
+        return 0;
+      return 1;
     }
-    let current_block_type = select_block_type(ctx, -1);
-    let if_block = current_block_type(ctx);
+    current_block_type_index = select_block_type(ctx, -1);
+    if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
     return {
       c() {
+        create_component(popupshowbookingpayments.$.fragment);
+        t0 = space();
         section = element("section");
         h1 = element("h1");
         h1.textContent = "Unpaid Bookings";
-        t1 = space();
+        t2 = space();
         if_block.c();
-        attr(h1, "class", "svelte-56jrvm");
-        attr(section, "class", "empty-unpaidBookingTenants svelte-56jrvm");
+        attr(h1, "class", "svelte-8c2jk6");
+        attr(section, "class", "empty-unpaidBookingTenants svelte-8c2jk6");
       },
       m(target, anchor) {
+        mount_component(popupshowbookingpayments, target, anchor);
+        insert(target, t0, anchor);
         insert(target, section, anchor);
         append(section, h1);
-        append(section, t1);
-        if_block.m(section, null);
+        append(section, t2);
+        if_blocks[current_block_type_index].m(section, null);
+        current = true;
       },
       p(ctx2, [dirty]) {
+        const popupshowbookingpayments_changes = {};
+        if (!updating_bookingId && dirty & /*bookingIdToShowPayment*/
+        2) {
+          updating_bookingId = true;
+          popupshowbookingpayments_changes.bookingId = /*bookingIdToShowPayment*/
+          ctx2[1];
+          add_flush_callback(() => updating_bookingId = false);
+        }
+        if (!updating_payments && dirty & /*paymentsForBooking*/
+        4) {
+          updating_payments = true;
+          popupshowbookingpayments_changes.payments = /*paymentsForBooking*/
+          ctx2[2];
+          add_flush_callback(() => updating_payments = false);
+        }
+        popupshowbookingpayments.$set(popupshowbookingpayments_changes);
         if_block.p(ctx2, dirty);
       },
-      i: noop,
-      o: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(popupshowbookingpayments.$.fragment, local);
+        transition_in(if_block);
+        current = true;
+      },
+      o(local) {
+        transition_out(popupshowbookingpayments.$.fragment, local);
+        transition_out(if_block);
+        current = false;
+      },
       d(detaching) {
         if (detaching) {
+          detach(t0);
           detach(section);
         }
-        if_block.d();
+        ctx[8](null);
+        destroy_component(popupshowbookingpayments, detaching);
+        if_blocks[current_block_type_index].d();
       }
     };
   }
@@ -16955,7 +19088,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {UnpaidBookingTenant[]} */
     [/* unpaidBookingTenants */]
   );
-  function instance8($self) {
+  function instance10($self, $props, $invalidate) {
     const msPerDay = 1e3 * 60 * 60 * 24;
     function getOccupancyProgress(data) {
       const now2 = new Date();
@@ -17002,18 +19135,74 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         daysPaid: parseFloat(daysPaid.toFixed(1))
       };
     }
-    return [getOccupancyProgress, getProgressPaidPercentage];
+    let popUpShowPayments = (
+      /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpShowBookingPayments | any} */
+      null
+    );
+    let bookingIdToShowPayment = (
+      /** @type {number} */
+      0
+    );
+    let paymentsForBooking = (
+      /** @type {Payment[]} */
+      []
+    );
+    async function showPaymentsForBooking(bookingId) {
+      $invalidate(1, bookingIdToShowPayment = bookingId);
+      await (0, import_jsApi3.AdminPayment)(
+        { cmd: import_xConstant2.CmdForm, bookingId },
+        /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          $invalidate(2, paymentsForBooking = o.paymentsByBooking);
+          console.log(paymentsForBooking);
+        }
+      );
+      popUpShowPayments.Show();
+    }
+    function popupshowbookingpayments_bookingId_binding(value) {
+      bookingIdToShowPayment = value;
+      $invalidate(1, bookingIdToShowPayment);
+    }
+    function popupshowbookingpayments_payments_binding(value) {
+      paymentsForBooking = value;
+      $invalidate(2, paymentsForBooking);
+    }
+    function popupshowbookingpayments_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        popUpShowPayments = $value;
+        $invalidate(0, popUpShowPayments);
+      });
+    }
+    const click_handler = (ub) => showPaymentsForBooking(ub.bookingId);
+    return [
+      popUpShowPayments,
+      bookingIdToShowPayment,
+      paymentsForBooking,
+      getOccupancyProgress,
+      getProgressPaidPercentage,
+      showPaymentsForBooking,
+      popupshowbookingpayments_bookingId_binding,
+      popupshowbookingpayments_payments_binding,
+      popupshowbookingpayments_binding,
+      click_handler
+    ];
   }
   var UnpaidBookingTenants = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance8, create_fragment13, safe_not_equal, {});
+      init(this, options, instance10, create_fragment15, safe_not_equal, {});
     }
   };
   var UnpaidBookingTenants_default = UnpaidBookingTenants;
 
   // _partials/home/DoubleBookingReports.svelte
-  function get_each_context5(ctx, list, i) {
+  function get_each_context6(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[0] = list[i];
     return child_ctx;
@@ -17023,7 +19212,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     child_ctx[3] = list[i];
     return child_ctx;
   }
-  function create_else_block6(ctx) {
+  function create_else_block7(ctx) {
     let div;
     return {
       c() {
@@ -17042,12 +19231,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_if_block7(ctx) {
+  function create_if_block9(ctx) {
     let div;
     let each_value = ensure_array_like(doubleBookingReports || []);
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block5(get_each_context5(ctx, each_value, i));
+      each_blocks[i] = create_each_block6(get_each_context6(ctx, each_value, i));
     }
     return {
       c() {
@@ -17071,11 +19260,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           each_value = ensure_array_like(doubleBookingReports || []);
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context5(ctx2, each_value, i);
+            const child_ctx = get_each_context6(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
             } else {
-              each_blocks[i] = create_each_block5(child_ctx);
+              each_blocks[i] = create_each_block6(child_ctx);
               each_blocks[i].c();
               each_blocks[i].m(div, null);
             }
@@ -17115,7 +19304,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_each_block5(ctx) {
+  function create_each_block6(ctx) {
     let div1;
     let h3;
     let t2;
@@ -17189,14 +19378,14 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_fragment14(ctx) {
+  function create_fragment16(ctx) {
     let section;
     let h1;
     let t1;
     function select_block_type(ctx2, dirty) {
       if (doubleBookingReports && doubleBookingReports.length > 0)
-        return create_if_block7;
-      return create_else_block6;
+        return create_if_block9;
+      return create_else_block7;
     }
     let current_block_type = select_block_type(ctx, -1);
     let if_block = current_block_type(ctx);
@@ -17236,18 +19425,18 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var DoubleBookingReports = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment14, safe_not_equal, {});
+      init(this, options, null, create_fragment16, safe_not_equal, {});
     }
   };
   var DoubleBookingReports_default = DoubleBookingReports;
 
   // _partials/home/UpcomingTenants.svelte
-  function get_each_context6(ctx, list, i) {
+  function get_each_context7(ctx, list, i) {
     const child_ctx = ctx.slice();
     child_ctx[0] = list[i];
     return child_ctx;
   }
-  function create_else_block7(ctx) {
+  function create_else_block8(ctx) {
     let div;
     return {
       c() {
@@ -17266,12 +19455,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_if_block8(ctx) {
+  function create_if_block10(ctx) {
     let div;
     let each_value = ensure_array_like(upcomingTenants || []);
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block6(get_each_context6(ctx, each_value, i));
+      each_blocks[i] = create_each_block7(get_each_context7(ctx, each_value, i));
     }
     return {
       c() {
@@ -17295,11 +19484,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           each_value = ensure_array_like(upcomingTenants || []);
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context6(ctx2, each_value, i);
+            const child_ctx = get_each_context7(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
             } else {
-              each_blocks[i] = create_each_block6(child_ctx);
+              each_blocks[i] = create_each_block7(child_ctx);
               each_blocks[i].c();
               each_blocks[i].m(div, null);
             }
@@ -17318,7 +19507,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_each_block6(ctx) {
+  function create_each_block7(ctx) {
     let div3;
     let div0;
     let span0;
@@ -17401,14 +19590,14 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_fragment15(ctx) {
+  function create_fragment17(ctx) {
     let section;
     let h1;
     let t1;
     function select_block_type(ctx2, dirty) {
       if (upcomingTenants && upcomingTenants.length > 0)
-        return create_if_block8;
-      return create_else_block7;
+        return create_if_block10;
+      return create_else_block8;
     }
     let current_block_type = select_block_type(ctx, -1);
     let if_block = current_block_type(ctx);
@@ -17448,14 +19637,14 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var UpcomingTenants = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, null, create_fragment15, safe_not_equal, {});
+      init(this, options, null, create_fragment17, safe_not_equal, {});
     }
   };
   var UpcomingTenants_default = UpcomingTenants;
 
   // index.svelte
   var { window: window_1 } = globals;
-  function create_else_block8(ctx) {
+  function create_else_block9(ctx) {
     let section;
     let div5;
     let div0;
@@ -17515,7 +19704,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     );
     let if_block7 = (
       /*Mode*/
-      ctx[5] !== ModeLogin && create_if_block_110(ctx)
+      ctx[5] !== ModeLogin && create_if_block_114(ctx)
     );
     return {
       c() {
@@ -17766,7 +19955,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           if (if_block7) {
             if_block7.p(ctx2, dirty);
           } else {
-            if_block7 = create_if_block_110(ctx2);
+            if_block7 = create_if_block_114(ctx2);
             if_block7.c();
             if_block7.m(div3, null);
           }
@@ -17816,7 +20005,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_if_block9(ctx) {
+  function create_if_block11(ctx) {
     let layoutmain;
     let current;
     layoutmain = new main_default({
@@ -18421,7 +20610,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_if_block_110(ctx) {
+  function create_if_block_114(ctx) {
     let p;
     let t0;
     let a;
@@ -18539,14 +20728,14 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_fragment16(ctx) {
+  function create_fragment18(ctx) {
     let current_block_type_index;
     let if_block;
     let if_block_anchor;
     let current;
     let mounted;
     let dispose;
-    const if_block_creators = [create_if_block9, create_else_block8];
+    const if_block_creators = [create_if_block11, create_else_block9];
     const if_blocks = [];
     function select_block_type(ctx2, dirty) {
       if (
@@ -18628,7 +20817,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     if (match)
       return match[2];
   }
-  function instance9($self, $props, $invalidate) {
+  function instance11($self, $props, $invalidate) {
     let user = (
       /** @type {User} */
       {/* user */}
@@ -18695,7 +20884,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         return;
       }
       const i = { email, password };
-      await (0, import_jsApi2.GuestRegister)(i, async function(o) {
+      await (0, import_jsApi4.GuestRegister)(i, async function(o) {
         if (o.error) {
           $invalidate(6, isSubmitting = false);
           notifier.showError(o.error);
@@ -18722,7 +20911,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         return;
       }
       const i = { email, password };
-      await (0, import_jsApi2.GuestLogin)(i, async function(o) {
+      await (0, import_jsApi4.GuestLogin)(i, async function(o) {
         if (o.error) {
           $invalidate(6, isSubmitting = false);
           notifier.showError(o.error);
@@ -18787,7 +20976,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var Index = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance9, create_fragment16, safe_not_equal, {});
+      init(this, options, instance11, create_fragment18, safe_not_equal, {});
     }
   };
   var svelte_default = Index;

@@ -4716,7 +4716,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         const formattedDate = `${year}-${month}-${date}`;
         return formattedDate;
       }
-      function dateISOFormat3(dayTo = 0) {
+      function dateISOFormat2(dayTo = 0) {
         const dt = new Date();
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -4785,7 +4785,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         utcDatetime,
         isoTime,
         isoDate,
-        dateISOFormat: dateISOFormat3,
+        dateISOFormat: dateISOFormat2,
         dateISOFormatFromYYYYMMDD,
         loadScript,
         formatPrice: formatPrice2,
@@ -22335,42 +22335,85 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   function instance11($self, $props, $invalidate) {
     let { $slots: slots = {}, $scope } = $props;
     let { FIELDS = (
-      /** @type Field[] */
+      /** @type {Field[]} */
       []
     ) } = $props;
     let { PAGER = (
-      /** @type PagerOut */
+      /** @type {PagerOut} */
       {}
     ) } = $props;
     let { MASTER_ROWS = (
-      /** @type any[][] */
+      /** @type {any[][]} */
       []
     ) } = $props;
-    let { REFS = {} } = $props;
-    let { NAME = "" } = $props;
-    let { ACCESS = (
-      /** @type Access */
+    let { REFS = (
+      /** @type {Record<string, Record<number, string>>} */
       {}
     ) } = $props;
-    let { ARRAY_OF_ARRAY = true } = $props;
-    let { CAN_SEARCH_ROW = true } = $props;
-    let { CAN_EDIT_ROW = true } = $props;
-    let { CAN_DELETE_ROW = false } = $props;
-    let { CAN_RESTORE_ROW = false } = $props;
-    let { CAN_SHOW_INFO = false } = $props;
-    let { CAN_OPEN_LINK = false } = $props;
+    let { NAME = (
+      /** @type {string} */
+      ""
+    ) } = $props;
+    let { ACCESS = (
+      /** @type {Access} */
+      {}
+    ) } = $props;
+    let { ARRAY_OF_ARRAY = (
+      /** @type {boolean} */
+      true
+    ) } = $props;
+    let { CAN_SEARCH_ROW = (
+      /** @type {boolean} */
+      true
+    ) } = $props;
+    let { CAN_EDIT_ROW = (
+      /** @type {boolean} */
+      true
+    ) } = $props;
+    let { CAN_DELETE_ROW = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    let { CAN_RESTORE_ROW = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    let { CAN_SHOW_INFO = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    let { CAN_OPEN_LINK = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
     let { LINKS = (
-      /** @type ExtendedAction[] */
+      /** @type {ExtendedAction[]} */
       []
     ) } = $props;
-    let { IS_CUSTOM_EDIT = false } = $props;
-    let { UNSORTED_ROWS = [] } = $props;
+    let { IS_CUSTOM_EDIT = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    let { UNSORTED_ROWS = (
+      /** @type {string[]} */
+      []
+    ) } = $props;
     let { EXTENDED_BUTTONS = (
       /** @type {ExtendedActionButton[]} */
       []
     ) } = $props;
-    let { FIELD_TO_SEARCH = "" } = $props;
-    let { SINGLE_SELECTED = false } = $props;
+    let { FIELD_TO_SEARCH = (
+      /** @type {string} */
+      ""
+    ) } = $props;
+    let { SINGLE_SELECTED = (
+      /** @type {boolean} */
+      false
+    ) } = $props;
+    let { COL_WIDTHS = (
+      /** @type {Record<string, number>} */
+      {}
+    ) } = $props;
     MASTER_ROWS = (MASTER_ROWS || []).map((row) => {
       const waIdx = FIELDS.findIndex((f) => f.name === "waAddedAt");
       const teleIdx = FIELDS.findIndex((f) => f.name === "teleAddedAt");
@@ -22382,10 +22425,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
       return row;
     });
-    let { COL_WIDTHS = (
-      /** @type {Record<string, number>} */
-      {}
-    ) } = $props;
     let filterTable = null;
     let filterTableReady = false;
     let filterColumns = [];
