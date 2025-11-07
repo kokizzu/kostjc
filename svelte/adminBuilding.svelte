@@ -168,7 +168,6 @@
         buildings = o.buildings;
         notifier.showSuccess(`Building '${building.buildingName}' created !!`);
 
-        popUpForms.Reset();
         popUpForms.Hide();
         OnRefresh(pager);
       }

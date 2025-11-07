@@ -217,8 +217,6 @@
         tenants = o.tenants;
         notifier.showSuccess(`Tenant '${tenant.tenantName}' created !!`);
 
-        popUpForms.Reset();
-
         OnRefresh(pager);
         popUpForms.Hide();
       }

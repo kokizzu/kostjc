@@ -367,7 +367,6 @@
         }
         notifier.showSuccess(`Payment created !!`);
 
-        popUpAddPayment.Reset();
         popUpAddPayment.Hide();
         OnRefresh(PAGER);
       }

@@ -169,7 +169,6 @@
         notifier.showSuccess(`Facility '${facility.facilityName}' created !!`);
         
         OnRefresh(pager);
-        popUpForms.Reset();
         popUpForms.Hide();
       }
     );

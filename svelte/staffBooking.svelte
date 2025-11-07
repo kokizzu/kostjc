@@ -166,7 +166,6 @@
         bookings = o.bookings;
         notifier.showSuccess(`Booking created !!`);
 
-        popUpForms.Reset();
         popUpForms.Hide();
         OnRefresh(pager);
       }

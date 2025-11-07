@@ -47,14 +47,10 @@
 		}
     isShow = true;
   }
-  export const Hide = () => isShow = false;
 
-  export const Reset = () => {
-    payloads = [];
-  }
-  
-  const cancel = () => {
+  export const Hide = () => {
     isShow = false;
+    payloads = [];
   }
   
 </script>
@@ -98,7 +94,7 @@
       <div class="left">
       </div>
       <div class="right">
-        <button class="cancel" on:click|preventDefault={cancel}>Cancel</button>
+        <button class="cancel" on:click|preventDefault={Hide}>Cancel</button>
         <button class="ok" on:click|preventDefault={() => OnSubmit(payloads)} disabled={isSubmitted}>
           {#if !isSubmitted}
             <span>Submit</span>

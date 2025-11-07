@@ -170,7 +170,6 @@
         notifier.showSuccess(`Location '${location.name}' created !!`);
 
         OnRefresh(pager);
-        popUpForms.Reset();
         popUpForms.Hide();
       }
     );

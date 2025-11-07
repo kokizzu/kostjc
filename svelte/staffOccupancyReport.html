@@ -17248,7 +17248,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     let updating_valuesTarget;
     let current;
     function multiselect_valuesTarget_binding(value) {
-      ctx[23](value);
+      ctx[21](value);
     }
     let multiselect_props = {
       id: "facilities",
@@ -17459,7 +17459,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       }
     });
     function inputbox0_value_binding(value) {
-      ctx[20](value);
+      ctx[18](value);
     }
     let inputbox0_props = {
       id: "dateStart",
@@ -17477,7 +17477,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
     function inputbox1_value_binding(value) {
-      ctx[21](value);
+      ctx[19](value);
     }
     let inputbox1_props = {
       id: "dateEnd",
@@ -17495,7 +17495,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     inputbox1 = new InputBox_default({ props: inputbox1_props });
     binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
     function inputbox2_value_binding(value) {
-      ctx[22](value);
+      ctx[20](value);
     }
     let inputbox2_props = {
       id: "basePriceIDR",
@@ -17517,7 +17517,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       ctx[13] && create_if_block_24(ctx)
     );
     function inputbox3_value_binding(value) {
-      ctx[24](value);
+      ctx[22](value);
     }
     let inputbox3_props = {
       id: "paidAt",
@@ -17535,7 +17535,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     inputbox3 = new InputBox_default({ props: inputbox3_props });
     binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
     function multiselect_valuesTarget_binding_1(value) {
-      ctx[25](value);
+      ctx[23](value);
     }
     let multiselect_props = {
       id: "extraTenants",
@@ -17735,8 +17735,8 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
               ctx[5]
             ),
             listen(button1, "click", prevent_default(
-              /*cancel*/
-              ctx[15]
+              /*Hide*/
+              ctx[5]
             )),
             listen(button2, "click", prevent_default(
               /*SubmitExtendBooking*/
@@ -18011,9 +18011,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       await OnSubmit(booking, facilitiesNums);
       $invalidate(10, extraTenantsIds = []);
     }
-    const Show = () => $invalidate(7, isShow = true);
-    const Hide = () => $invalidate(7, isShow = false);
-    const Reset = () => {
+    const reset = () => {
       $invalidate(0, dateStart = (0, import_xFormatter2.dateISOFormat)(0));
       $invalidate(1, dateEnd = (0, import_xFormatter2.dateISOFormat)(30));
       $invalidate(8, basePriceIDR = 0);
@@ -18023,7 +18021,11 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       $invalidate(10, extraTenantsIds = []);
       $invalidate(10, extraTenantsIds = []);
     };
-    const cancel = () => $invalidate(7, isShow = false);
+    const Show = () => $invalidate(7, isShow = true);
+    const Hide = () => {
+      $invalidate(7, isShow = false);
+      reset();
+    };
     let facilitiesObj = {};
     let isFacilitiesReady = false;
     onMount(() => {
@@ -18064,17 +18066,17 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       if ("tenants" in $props2)
         $invalidate(4, tenants2 = $props2.tenants);
       if ("facilities" in $props2)
-        $invalidate(16, facilities2 = $props2.facilities);
+        $invalidate(15, facilities2 = $props2.facilities);
       if ("dateStart" in $props2)
         $invalidate(0, dateStart = $props2.dateStart);
       if ("dateEnd" in $props2)
         $invalidate(1, dateEnd = $props2.dateEnd);
       if ("OnSubmit" in $props2)
-        $invalidate(17, OnSubmit = $props2.OnSubmit);
+        $invalidate(16, OnSubmit = $props2.OnSubmit);
     };
     $self.$.update = () => {
       if ($self.$.dirty & /*facilitiesNums, facilities, facilitiesPrice*/
-      67648) {
+      34880) {
         $: {
           if (facilitiesNums) {
             facilitiesNums.forEach((id) => {
@@ -18103,11 +18105,9 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       facilitiesObj,
       isFacilitiesReady,
       SubmitExtendBooking,
-      cancel,
       facilities2,
       OnSubmit,
       Show,
-      Reset,
       inputbox0_value_binding,
       inputbox1_value_binding,
       inputbox2_value_binding,
@@ -18123,23 +18123,19 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
         bookingToExtend: 2,
         isSubmitted: 3,
         tenants: 4,
-        facilities: 16,
+        facilities: 15,
         dateStart: 0,
         dateEnd: 1,
-        OnSubmit: 17,
-        Show: 18,
-        Hide: 5,
-        Reset: 19
+        OnSubmit: 16,
+        Show: 17,
+        Hide: 5
       });
     }
     get Show() {
-      return this.$.ctx[18];
+      return this.$.ctx[17];
     }
     get Hide() {
       return this.$.ctx[5];
-    }
-    get Reset() {
-      return this.$.ctx[19];
     }
   };
   var PopUpExtendBooking_default = PopUpExtendBooking;
@@ -19912,7 +19908,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     let updating_value;
     let current;
     function inputbox_value_binding(value) {
-      ctx[18](value);
+      ctx[16](value);
     }
     let inputbox_props = {
       id: "booking",
@@ -20077,7 +20073,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     let if_block0 = !/*isBookingReadOnly*/
     ctx[4] && create_if_block_25(ctx);
     function inputbox0_value_binding(value) {
-      ctx[19](value);
+      ctx[17](value);
     }
     let inputbox0_props = {
       id: "paymentAt",
@@ -20095,7 +20091,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
     function inputbox1_value_binding(value) {
-      ctx[20](value);
+      ctx[18](value);
     }
     let inputbox1_props = {
       id: "paidIDR",
@@ -20113,7 +20109,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     inputbox1 = new InputBox_default({ props: inputbox1_props });
     binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
     function inputbox2_value_binding(value) {
-      ctx[21](value);
+      ctx[19](value);
     }
     let inputbox2_props = {
       id: "paymentMethod",
@@ -20134,7 +20130,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     inputbox2 = new InputBox_default({ props: inputbox2_props });
     binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
     function inputbox3_value_binding(value) {
-      ctx[22](value);
+      ctx[20](value);
     }
     let inputbox3_props = {
       id: "paymentStatus",
@@ -20156,7 +20152,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     inputbox3 = new InputBox_default({ props: inputbox3_props });
     binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
     function inputbox4_value_binding(value) {
-      ctx[23](value);
+      ctx[21](value);
     }
     let inputbox4_props = {
       id: "note",
@@ -20281,8 +20277,8 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
               ctx[5]
             ),
             listen(button1, "click", prevent_default(
-              /*cancel*/
-              ctx[14]
+              /*Hide*/
+              ctx[5]
             )),
             listen(button2, "click", prevent_default(
               /*submitAdd*/
@@ -20493,9 +20489,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       );
       await OnSubmit(payment);
     }
-    const Show = () => $invalidate(6, isShow = true);
-    const Hide = () => $invalidate(6, isShow = false);
-    const Reset = () => {
+    const reset = () => {
       $invalidate(0, bookingId = 0);
       $invalidate(1, paymentAt = (0, import_xFormatter5.dateISOFormat)(0));
       $invalidate(7, paidIDR = 0);
@@ -20503,8 +20497,10 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       $invalidate(9, paymentStatus = PaymentStatuses[0]);
       $invalidate(10, note = "");
     };
-    const cancel = () => {
+    const Show = () => $invalidate(6, isShow = true);
+    const Hide = () => {
       $invalidate(6, isShow = false);
+      reset();
     };
     function inputbox_value_binding(value) {
       bookingId = value;
@@ -20542,7 +20538,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       if ("paymentAt" in $props2)
         $invalidate(1, paymentAt = $props2.paymentAt);
       if ("OnSubmit" in $props2)
-        $invalidate(15, OnSubmit = $props2.OnSubmit);
+        $invalidate(14, OnSubmit = $props2.OnSubmit);
     };
     return [
       bookingId,
@@ -20559,10 +20555,8 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
       PaymentMethods,
       PaymentStatuses,
       submitAdd,
-      cancel,
       OnSubmit,
       Show,
-      Reset,
       inputbox_value_binding,
       inputbox0_value_binding,
       inputbox1_value_binding,
@@ -20580,20 +20574,16 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
         bookingId: 0,
         isBookingReadOnly: 4,
         paymentAt: 1,
-        OnSubmit: 15,
-        Show: 16,
-        Hide: 5,
-        Reset: 17
+        OnSubmit: 14,
+        Show: 15,
+        Hide: 5
       });
     }
     get Show() {
-      return this.$.ctx[16];
+      return this.$.ctx[15];
     }
     get Hide() {
       return this.$.ctx[5];
-    }
-    get Reset() {
-      return this.$.ctx[17];
     }
   };
   var PopUpAddPayment_default = PopUpAddPayment;
@@ -23347,7 +23337,6 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
             return;
           }
           notifier.showSuccess(`Booking extended to '${booking.dateEnd}'`);
-          popupExtendBooking.Reset();
           popupExtendBooking.Hide();
           refreshBookings();
         }
@@ -23415,7 +23404,6 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
             return;
           }
           notifier.showSuccess(`Payment created for booking #${bookingIdToPay} !!`);
-          popUpAddPayment.Reset();
           popUpAddPayment.Hide();
           refreshBookings();
         }

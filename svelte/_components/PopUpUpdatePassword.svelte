@@ -26,12 +26,10 @@
   }
 
   export const Show = () => isShow = true;
-  export const Hide = () => isShow = false;
-
-  export const Reset = () => {
+  export const Hide = () => {
+    isShow = false;
     newPassword = '';
   }
-const cancel = () => isShow = false;
 </script>
 
 <div class={`popup-container ${isShow ? 'show' : ''}`}>
@@ -55,7 +53,7 @@ const cancel = () => isShow = false;
     <div class="left">
     </div>
     <div class="right">
-      <button class="cancel" on:click|preventDefault={cancel}>Cancel</button>
+      <button class="cancel" on:click|preventDefault={Hide}>Cancel</button>
       <button class="ok" on:click|preventDefault={submitAdd} disabled={isSubmitted}>
         {#if !isSubmitted}
           <span>Submit</span>

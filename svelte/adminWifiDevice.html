@@ -23005,7 +23005,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
     });
     function inputbox0_value_binding(value) {
-      ctx[17](value);
+      ctx[15](value);
     }
     let inputbox0_props = {
       id: "startAt",
@@ -23022,7 +23022,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
     function inputbox1_value_binding(value) {
-      ctx[18](value);
+      ctx[16](value);
     }
     let inputbox1_props = {
       id: "endAt",
@@ -23039,7 +23039,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox1 = new InputBox_default({ props: inputbox1_props });
     binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
     function inputbox2_value_binding(value) {
-      ctx[19](value);
+      ctx[17](value);
     }
     let inputbox2_props = {
       id: "paidAt",
@@ -23056,7 +23056,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox2 = new InputBox_default({ props: inputbox2_props });
     binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
     function inputbox3_value_binding(value) {
-      ctx[20](value);
+      ctx[18](value);
     }
     let inputbox3_props = {
       id: "priceIDR",
@@ -23073,7 +23073,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox3 = new InputBox_default({ props: inputbox3_props });
     binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
     function inputbox4_value_binding(value) {
-      ctx[21](value);
+      ctx[19](value);
     }
     let inputbox4_props = {
       id: "macAddress",
@@ -23090,7 +23090,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox4 = new InputBox_default({ props: inputbox4_props });
     binding_callbacks.push(() => bind(inputbox4, "value", inputbox4_value_binding));
     function inputbox5_value_binding(value) {
-      ctx[22](value);
+      ctx[20](value);
     }
     let inputbox5_props = {
       id: "tenantId",
@@ -23112,7 +23112,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox5 = new InputBox_default({ props: inputbox5_props });
     binding_callbacks.push(() => bind(inputbox5, "value", inputbox5_value_binding));
     function inputbox6_value_binding(value) {
-      ctx[23](value);
+      ctx[21](value);
     }
     let inputbox6_props = {
       id: "roomId",
@@ -23240,8 +23240,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               ctx[3]
             ),
             listen(button1, "click", prevent_default(
-              /*cancel*/
-              ctx[13]
+              /*Hide*/
+              ctx[3]
             )),
             listen(button2, "click", prevent_default(
               /*submitAdd*/
@@ -23457,9 +23457,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       );
       await OnSubmit(room);
     }
-    const Show = () => $invalidate(4, isShow = true);
-    const Hide = () => $invalidate(4, isShow = false);
-    const Reset = () => {
+    const reset = () => {
       $invalidate(5, startAt = (0, import_xFormatter3.dateISOFormat)(0));
       $invalidate(6, endAt = (0, import_xFormatter3.dateISOFormat)(30));
       $invalidate(7, paidAt = (0, import_xFormatter3.dateISOFormat)(0));
@@ -23468,8 +23466,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       $invalidate(10, tenantId = 0);
       $invalidate(11, roomId = 0);
     };
-    const cancel = () => {
+    const Show = () => $invalidate(4, isShow = true);
+    const Hide = () => {
       $invalidate(4, isShow = false);
+      reset();
     };
     function inputbox0_value_binding(value) {
       startAt = value;
@@ -23507,7 +23507,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("tenants" in $props2)
         $invalidate(2, tenants2 = $props2.tenants);
       if ("OnSubmit" in $props2)
-        $invalidate(14, OnSubmit = $props2.OnSubmit);
+        $invalidate(13, OnSubmit = $props2.OnSubmit);
     };
     return [
       isSubmitted,
@@ -23523,10 +23523,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       tenantId,
       roomId,
       submitAdd,
-      cancel,
       OnSubmit,
       Show,
-      Reset,
       inputbox0_value_binding,
       inputbox1_value_binding,
       inputbox2_value_binding,
@@ -23543,20 +23541,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         isSubmitted: 0,
         rooms: 1,
         tenants: 2,
-        OnSubmit: 14,
-        Show: 15,
-        Hide: 3,
-        Reset: 16
+        OnSubmit: 13,
+        Show: 14,
+        Hide: 3
       });
     }
     get Show() {
-      return this.$.ctx[15];
+      return this.$.ctx[14];
     }
     get Hide() {
       return this.$.ctx[3];
-    }
-    get Reset() {
-      return this.$.ctx[16];
     }
   };
   var PopUpAddWifiDevice_default = PopUpAddWifiDevice;
@@ -24063,7 +24057,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           $invalidate(0, wifiDevices = o.wifiDevices);
           notifier.showSuccess(`Wifi Device created !!`);
           OnRefresh(pager);
-          popUpWifiDevice.Reset();
           popUpWifiDevice.Hide();
         }
       );

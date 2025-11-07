@@ -30,6 +30,10 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		doubleBookingReports := booking.FindDoubleBookingReports()
 		upcomingTenants := booking.GetUpcomingTenants()
 
+		tenant := rqAuth.NewTenants(d.AuthOltp)
+		tenants := tenant.FindTenantChoices()
+		rooms := room.FindRoomChoices()
+
 		return views.RenderIndex(ctx, M.SX{
 			`title`:                  conf.PROJECT_NAME + ` | Home`,
 			`user`:                   user,
@@ -39,6 +43,8 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`unpaidBookingTenants`:   unpaidBookingTenants,
 			`doubleBookingReports`:   doubleBookingReports,
 			`upcomingTenants`:        upcomingTenants,
+			`tenants`:                tenants,
+			`rooms`:                  rooms,
 		})
 	})
 

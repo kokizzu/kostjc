@@ -204,7 +204,6 @@
         sales = o.sales;
         notifier.showSuccess(`Sale created !!`);
 
-        popUpForms.Reset();
         popUpForms.Hide();
         OnRefresh(pager);
       }

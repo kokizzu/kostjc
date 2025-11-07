@@ -167,7 +167,6 @@
         notifier.showSuccess(`Wifi Device created !!`);
         
         OnRefresh(pager);
-        popUpWifiDevice.Reset();
         popUpWifiDevice.Hide();
       }
     );

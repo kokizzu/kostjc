@@ -172,7 +172,6 @@
         notifier.showSuccess(`User created !!`);
         
         OnRefresh(pager);
-        popUpForms.Reset();
         popUpForms.Hide();
       }
     );
@@ -200,7 +199,6 @@
       pager = o.pager;
       users = o.users;
       notifier.showSuccess(`User #${user.id} password updated !!`);
-      popUpUpdatePassword.Reset();
       popUpUpdatePassword.Hide();
     })
   }

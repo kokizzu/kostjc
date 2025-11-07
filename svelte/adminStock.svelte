@@ -168,7 +168,7 @@
         stocks = o.stocks;
         notifier.showSuccess(`Stock '${stock.facilityName}' created !!`);
 
-        popUpForms.Reset();
+        popUpForms.Hide();
 
         OnRefresh(pager);
       }

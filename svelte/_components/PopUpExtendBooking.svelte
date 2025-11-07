@@ -59,10 +59,7 @@
     extraTenantsIds = [];
   }
 
-  export const Show = () => isShow = true;
-  export const Hide = () => isShow = false;
-
-  export const Reset = () => {
+  const reset = () => {
     dateStart = dateISOFormat(0);
     dateEnd = dateISOFormat(30);
     basePriceIDR = 0;
@@ -72,8 +69,12 @@
     extraTenantsIds = [];
     extraTenantsIds = [];
   }
-  
-  const cancel = () => isShow = false;
+
+  export const Show = () => isShow = true;
+  export const Hide = () => {
+    isShow = false;
+    reset();
+  }
 
   let facilitiesObj = {};
   let isFacilitiesReady = false;
@@ -156,7 +157,7 @@
       <div class="left">
       </div>
       <div class="right">
-        <button class="cancel" on:click|preventDefault={cancel}>Cancel</button>
+        <button class="cancel" on:click|preventDefault={Hide}>Cancel</button>
         <button class="ok" on:click|preventDefault={SubmitExtendBooking} disabled={isSubmitted}>
           {#if !isSubmitted}
             <span>Submit</span>

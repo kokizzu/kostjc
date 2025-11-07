@@ -178,7 +178,6 @@
         
         notifier.showSuccess(`Booking extended to '${booking.dateEnd}'`);
 
-        popupExtendBooking.Reset();
         popupExtendBooking.Hide();
         refreshBookings();
       }
@@ -245,7 +244,6 @@
         }
         notifier.showSuccess(`Payment created for booking #${bookingIdToPay} !!`);
 
-        popUpAddPayment.Reset();
         popUpAddPayment.Hide();
         refreshBookings();
       }

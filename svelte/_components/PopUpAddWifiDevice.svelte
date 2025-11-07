@@ -39,10 +39,7 @@
     await OnSubmit(room);
   }
 
-  export const Show = () => isShow = true;
-  export const Hide = () => isShow = false;
-
-  export const Reset = () => {
+  const reset = () => {
     startAt = dateISOFormat(0);
     endAt = dateISOFormat(30);
     paidAt = dateISOFormat(0);
@@ -51,9 +48,11 @@
     tenantId = 0;
     roomId = 0
   }
-  
-  const cancel = () => {
+
+  export const Show = () => isShow = true;
+  export const Hide = () => {
     isShow = false;
+    reset();
   }
 </script>
 
@@ -117,7 +116,7 @@
       <div class="left">
       </div>
       <div class="right">
-        <button class="cancel" on:click|preventDefault={cancel}>Cancel</button>
+        <button class="cancel" on:click|preventDefault={Hide}>Cancel</button>
         <button class="ok" on:click|preventDefault={submitAdd} disabled={isSubmitted}>
           {#if !isSubmitted}
             <span>Submit</span>

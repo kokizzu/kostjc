@@ -197,7 +197,6 @@
         notifier.showSuccess(`Laundry '${laundry.items}' created !!`);
         
         OnRefresh(pager);
-        popUpForms.Reset();
         popUpForms.Hide();
       }
     );

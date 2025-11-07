@@ -22914,7 +22914,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding(value) {
-      ctx[18](value);
+      ctx[16](value);
     }
     let inputbox_props = {
       id: "booking",
@@ -23079,7 +23079,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let if_block0 = !/*isBookingReadOnly*/
     ctx[4] && create_if_block_211(ctx);
     function inputbox0_value_binding(value) {
-      ctx[19](value);
+      ctx[17](value);
     }
     let inputbox0_props = {
       id: "paymentAt",
@@ -23097,7 +23097,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox0 = new InputBox_default({ props: inputbox0_props });
     binding_callbacks.push(() => bind(inputbox0, "value", inputbox0_value_binding));
     function inputbox1_value_binding(value) {
-      ctx[20](value);
+      ctx[18](value);
     }
     let inputbox1_props = {
       id: "paidIDR",
@@ -23115,7 +23115,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox1 = new InputBox_default({ props: inputbox1_props });
     binding_callbacks.push(() => bind(inputbox1, "value", inputbox1_value_binding));
     function inputbox2_value_binding(value) {
-      ctx[21](value);
+      ctx[19](value);
     }
     let inputbox2_props = {
       id: "paymentMethod",
@@ -23136,7 +23136,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox2 = new InputBox_default({ props: inputbox2_props });
     binding_callbacks.push(() => bind(inputbox2, "value", inputbox2_value_binding));
     function inputbox3_value_binding(value) {
-      ctx[22](value);
+      ctx[20](value);
     }
     let inputbox3_props = {
       id: "paymentStatus",
@@ -23158,7 +23158,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     inputbox3 = new InputBox_default({ props: inputbox3_props });
     binding_callbacks.push(() => bind(inputbox3, "value", inputbox3_value_binding));
     function inputbox4_value_binding(value) {
-      ctx[23](value);
+      ctx[21](value);
     }
     let inputbox4_props = {
       id: "note",
@@ -23283,8 +23283,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               ctx[5]
             ),
             listen(button1, "click", prevent_default(
-              /*cancel*/
-              ctx[14]
+              /*Hide*/
+              ctx[5]
             )),
             listen(button2, "click", prevent_default(
               /*submitAdd*/
@@ -23495,9 +23495,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       );
       await OnSubmit(payment);
     }
-    const Show = () => $invalidate(6, isShow = true);
-    const Hide = () => $invalidate(6, isShow = false);
-    const Reset = () => {
+    const reset = () => {
       $invalidate(0, bookingId = 0);
       $invalidate(1, paymentAt = (0, import_xFormatter3.dateISOFormat)(0));
       $invalidate(7, paidIDR = 0);
@@ -23505,8 +23503,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       $invalidate(9, paymentStatus = PaymentStatuses[0]);
       $invalidate(10, note = "");
     };
-    const cancel = () => {
+    const Show = () => $invalidate(6, isShow = true);
+    const Hide = () => {
       $invalidate(6, isShow = false);
+      reset();
     };
     function inputbox_value_binding(value) {
       bookingId = value;
@@ -23544,7 +23544,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("paymentAt" in $props2)
         $invalidate(1, paymentAt = $props2.paymentAt);
       if ("OnSubmit" in $props2)
-        $invalidate(15, OnSubmit = $props2.OnSubmit);
+        $invalidate(14, OnSubmit = $props2.OnSubmit);
     };
     return [
       bookingId,
@@ -23561,10 +23561,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       PaymentMethods,
       PaymentStatuses,
       submitAdd,
-      cancel,
       OnSubmit,
       Show,
-      Reset,
       inputbox_value_binding,
       inputbox0_value_binding,
       inputbox1_value_binding,
@@ -23582,20 +23580,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         bookingId: 0,
         isBookingReadOnly: 4,
         paymentAt: 1,
-        OnSubmit: 15,
-        Show: 16,
-        Hide: 5,
-        Reset: 17
+        OnSubmit: 14,
+        Show: 15,
+        Hide: 5
       });
     }
     get Show() {
-      return this.$.ctx[16];
+      return this.$.ctx[15];
     }
     get Hide() {
       return this.$.ctx[5];
-    }
-    get Reset() {
-      return this.$.ctx[17];
     }
   };
   var PopUpAddPayment_default = PopUpAddPayment;
@@ -26641,7 +26635,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           $invalidate(2, pager = o.pager);
           $invalidate(0, payments = o.payments);
           notifier.showSuccess(`Payment created !!`);
-          popUpForms.Reset();
           popUpForms.Hide();
           OnRefresh(pager);
         }

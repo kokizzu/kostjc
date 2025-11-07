@@ -178,7 +178,6 @@
         payments = o.payments;
         notifier.showSuccess(`Payment created !!`);
 
-        popUpForms.Reset();
         popUpForms.Hide();
         OnRefresh(pager);
       }

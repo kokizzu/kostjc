@@ -23033,16 +23033,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
   var import_xFormatter3 = __toESM(require_xFormatter());
   function get_each_context5(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[15] = list[i];
-    child_ctx[16] = list;
-    child_ctx[17] = i;
+    child_ctx[13] = list[i];
+    child_ctx[14] = list;
+    child_ctx[15] = i;
     return child_ctx;
   }
   function create_if_block_211(ctx) {
     let if_block_anchor;
     let current;
     let if_block = !/*field*/
-    ctx[15].readOnly && create_if_block_35(ctx);
+    ctx[13].readOnly && create_if_block_35(ctx);
     return {
       c() {
         if (if_block)
@@ -23057,7 +23057,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       },
       p(ctx2, dirty) {
         if (!/*field*/
-        ctx2[15].readOnly) {
+        ctx2[13].readOnly) {
           if (if_block) {
             if_block.p(ctx2, dirty);
             if (dirty & /*FIELDS*/
@@ -23107,8 +23107,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     function select_block_type(ctx2, dirty) {
       if (
         /*field*/
-        ctx2[15].inputType === "combobox" || /*field*/
-        ctx2[15].inputType === "combobox-arr"
+        ctx2[13].inputType === "combobox" || /*field*/
+        ctx2[13].inputType === "combobox-arr"
       )
         return 0;
       return 1;
@@ -23170,41 +23170,41 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding_1(value) {
-      ctx[13](
+      ctx[11](
         value,
         /*idx*/
-        ctx[17]
+        ctx[15]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[15].name
+        ctx[13].name
       ),
       label: (
         /*field*/
-        ctx[15].label
+        ctx[13].label
       ),
       placeholder: (
         /*field*/
-        ctx[15].description
+        ctx[13].description
       ),
       type: (
         /*field*/
-        ctx[15].inputType
+        ctx[13].inputType
       )
     };
     if (
       /*payloads*/
       ctx[7][
         /*idx*/
-        ctx[17]
+        ctx[15]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[7][
         /*idx*/
-        ctx[17]
+        ctx[15]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -23223,26 +23223,26 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[15].name;
+          ctx[13].name;
         if (dirty & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[15].label;
+          ctx[13].label;
         if (dirty & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[15].description;
+          ctx[13].description;
         if (dirty & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[15].inputType;
+          ctx[13].inputType;
         if (!updating_value && dirty & /*payloads*/
         128) {
           updating_value = true;
           inputbox_changes.value = /*payloads*/
           ctx[7][
             /*idx*/
-            ctx[17]
+            ctx[15]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -23268,44 +23268,44 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let updating_value;
     let current;
     function inputbox_value_binding(value) {
-      ctx[12](
+      ctx[10](
         value,
         /*idx*/
-        ctx[17]
+        ctx[15]
       );
     }
     let inputbox_props = {
       id: (
         /*field*/
-        ctx[15].name
+        ctx[13].name
       ),
       label: (
         /*field*/
-        ctx[15].label
+        ctx[13].label
       ),
       placeholder: (
         /*field*/
-        ctx[15].description
+        ctx[13].description
       ),
       type: (
         /*field*/
-        ctx[15].inputType
+        ctx[13].inputType
       ),
       values: (
         /*REFS*/
         ctx[2] && /*REFS*/
         ctx[2][
           /*field*/
-          ctx[15].name
+          ctx[13].name
         ] ? (
           /*REFS*/
           ctx[2][
             /*field*/
-            ctx[15].name
+            ctx[13].name
           ]
         ) : (
           /*field*/
-          ctx[15].ref
+          ctx[13].ref
         )
       ),
       isObject: (
@@ -23313,7 +23313,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         ctx[2] && /*REFS*/
         ctx[2][
           /*field*/
-          ctx[15].name
+          ctx[13].name
         ] ? true : false
       )
     };
@@ -23321,13 +23321,13 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       /*payloads*/
       ctx[7][
         /*idx*/
-        ctx[17]
+        ctx[15]
       ] !== void 0
     ) {
       inputbox_props.value = /*payloads*/
       ctx[7][
         /*idx*/
-        ctx[17]
+        ctx[15]
       ];
     }
     inputbox = new InputBox_default({ props: inputbox_props });
@@ -23346,35 +23346,35 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         if (dirty & /*FIELDS*/
         2)
           inputbox_changes.id = /*field*/
-          ctx[15].name;
+          ctx[13].name;
         if (dirty & /*FIELDS*/
         2)
           inputbox_changes.label = /*field*/
-          ctx[15].label;
+          ctx[13].label;
         if (dirty & /*FIELDS*/
         2)
           inputbox_changes.placeholder = /*field*/
-          ctx[15].description;
+          ctx[13].description;
         if (dirty & /*FIELDS*/
         2)
           inputbox_changes.type = /*field*/
-          ctx[15].inputType;
+          ctx[13].inputType;
         if (dirty & /*REFS, FIELDS*/
         6)
           inputbox_changes.values = /*REFS*/
           ctx[2] && /*REFS*/
           ctx[2][
             /*field*/
-            ctx[15].name
+            ctx[13].name
           ] ? (
             /*REFS*/
             ctx[2][
               /*field*/
-              ctx[15].name
+              ctx[13].name
             ]
           ) : (
             /*field*/
-            ctx[15].ref
+            ctx[13].ref
           );
         if (dirty & /*REFS, FIELDS*/
         6)
@@ -23382,7 +23382,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           ctx[2] && /*REFS*/
           ctx[2][
             /*field*/
-            ctx[15].name
+            ctx[13].name
           ] ? true : false;
         if (!updating_value && dirty & /*payloads*/
         128) {
@@ -23390,7 +23390,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           inputbox_changes.value = /*payloads*/
           ctx[7][
             /*idx*/
-            ctx[17]
+            ctx[15]
           ];
           add_flush_callback(() => updating_value = false);
         }
@@ -23416,9 +23416,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
     let current;
     let if_block = (
       /*field*/
-      ctx[15].name !== "id" && /*field*/
-      ctx[15].name !== "waAddedAt" && /*field*/
-      ctx[15].name !== "teleAddedAt" && create_if_block_211(ctx)
+      ctx[13].name !== "id" && /*field*/
+      ctx[13].name !== "waAddedAt" && /*field*/
+      ctx[13].name !== "teleAddedAt" && create_if_block_211(ctx)
     );
     return {
       c() {
@@ -23435,9 +23435,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       p(ctx2, dirty) {
         if (
           /*field*/
-          ctx2[15].name !== "id" && /*field*/
-          ctx2[15].name !== "waAddedAt" && /*field*/
-          ctx2[15].name !== "teleAddedAt"
+          ctx2[13].name !== "id" && /*field*/
+          ctx2[13].name !== "waAddedAt" && /*field*/
+          ctx2[13].name !== "teleAddedAt"
         ) {
           if (if_block) {
             if_block.p(ctx2, dirty);
@@ -23664,12 +23664,12 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               ctx[5]
             ),
             listen(button1, "click", prevent_default(
-              /*cancel*/
-              ctx[8]
+              /*Hide*/
+              ctx[5]
             )),
             listen(button2, "click", prevent_default(
               /*click_handler*/
-              ctx[14]
+              ctx[12]
             ))
           ];
           mounted = true;
@@ -23828,12 +23828,9 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
       $invalidate(6, isShow = true);
     };
-    const Hide = () => $invalidate(6, isShow = false);
-    const Reset = () => {
-      $invalidate(7, payloads = []);
-    };
-    const cancel = () => {
+    const Hide = () => {
       $invalidate(6, isShow = false);
+      $invalidate(7, payloads = []);
     };
     function inputbox_value_binding(value, idx) {
       if ($self.$.not_equal(payloads[idx], value)) {
@@ -23856,7 +23853,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("REFS" in $props2)
         $invalidate(2, REFS = $props2.REFS);
       if ("INITIAL_VALUES" in $props2)
-        $invalidate(9, INITIAL_VALUES = $props2.INITIAL_VALUES);
+        $invalidate(8, INITIAL_VALUES = $props2.INITIAL_VALUES);
       if ("isSubmitted" in $props2)
         $invalidate(3, isSubmitted = $props2.isSubmitted);
       if ("OnSubmit" in $props2)
@@ -23871,10 +23868,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       Hide,
       isShow,
       payloads,
-      cancel,
       INITIAL_VALUES,
       Show,
-      Reset,
       inputbox_value_binding,
       inputbox_value_binding_1,
       click_handler
@@ -23887,22 +23882,18 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
         heading: 0,
         FIELDS: 1,
         REFS: 2,
-        INITIAL_VALUES: 9,
+        INITIAL_VALUES: 8,
         isSubmitted: 3,
         OnSubmit: 4,
-        Show: 10,
-        Hide: 5,
-        Reset: 11
+        Show: 9,
+        Hide: 5
       });
     }
     get Show() {
-      return this.$.ctx[10];
+      return this.$.ctx[9];
     }
     get Hide() {
       return this.$.ctx[5];
-    }
-    get Reset() {
-      return this.$.ctx[11];
     }
   };
   var PopUpForms_default = PopUpForms;
@@ -23999,7 +23990,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       }
     });
     function inputbox_value_binding(value) {
-      ctx[10](value);
+      ctx[8](value);
     }
     let inputbox_props = {
       id: "newPassword",
@@ -24102,8 +24093,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
               ctx[2]
             ),
             listen(button1, "click", prevent_default(
-              /*cancel*/
-              ctx[6]
+              /*Hide*/
+              ctx[2]
             )),
             listen(button2, "click", prevent_default(
               /*submitAdd*/
@@ -24229,11 +24220,10 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       await OnSubmit(user2);
     }
     const Show = () => $invalidate(3, isShow = true);
-    const Hide = () => $invalidate(3, isShow = false);
-    const Reset = () => {
+    const Hide = () => {
+      $invalidate(3, isShow = false);
       $invalidate(4, newPassword = "");
     };
-    const cancel = () => $invalidate(3, isShow = false);
     function inputbox_value_binding(value) {
       newPassword = value;
       $invalidate(4, newPassword);
@@ -24244,7 +24234,7 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       if ("userId" in $props2)
         $invalidate(1, userId = $props2.userId);
       if ("OnSubmit" in $props2)
-        $invalidate(7, OnSubmit = $props2.OnSubmit);
+        $invalidate(6, OnSubmit = $props2.OnSubmit);
     };
     return [
       isSubmitted,
@@ -24253,10 +24243,8 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       isShow,
       newPassword,
       submitAdd,
-      cancel,
       OnSubmit,
       Show,
-      Reset,
       inputbox_value_binding
     ];
   }
@@ -24266,20 +24254,16 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
       init(this, options, instance13, create_fragment16, safe_not_equal, {
         isSubmitted: 0,
         userId: 1,
-        OnSubmit: 7,
-        Show: 8,
-        Hide: 2,
-        Reset: 9
+        OnSubmit: 6,
+        Show: 7,
+        Hide: 2
       });
     }
     get Show() {
-      return this.$.ctx[8];
+      return this.$.ctx[7];
     }
     get Hide() {
       return this.$.ctx[2];
-    }
-    get Reset() {
-      return this.$.ctx[9];
     }
   };
   var PopUpUpdatePassword_default = PopUpUpdatePassword;
@@ -24862,7 +24846,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           $invalidate(0, users = o.users);
           notifier.showSuccess(`User created !!`);
           OnRefresh(pager);
-          popUpForms.Reset();
           popUpForms.Hide();
         }
       );
@@ -24900,7 +24883,6 @@ input.svelte-82qwg8.svelte-82qwg8.svelte-82qwg8:focus {
           $invalidate(2, pager = o.pager);
           $invalidate(0, users = o.users);
           notifier.showSuccess(`User #${user2.id} password updated !!`);
-          popUpUpdatePassword.Reset();
           popUpUpdatePassword.Hide();
         }
       );
