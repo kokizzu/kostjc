@@ -143,8 +143,8 @@
         return
       }
       paymentsForBooking = o.paymentsByBooking;
+      popUpShowPayments.Show();
     });
-    popUpShowPayments.Show();
   }
 
   let popUpAddPayment = null;

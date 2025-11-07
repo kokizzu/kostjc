@@ -21743,9 +21743,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             return;
           }
           $invalidate(3, paymentsForBooking = o.paymentsByBooking);
+          popUpShowPayments.Show();
         }
       );
-      popUpShowPayments.Show();
     }
     let popUpAddPayment = null;
     let bookingIdToPay = 0;
