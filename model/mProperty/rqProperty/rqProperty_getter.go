@@ -2025,3 +2025,23 @@ LIMIT 1`
 
 	return
 }
+
+// TODO
+
+type BookingDetailPerMonth struct {
+	Id           uint64 `json:"id"`
+	RoomId       uint64 `json:"roomId"`
+	RoomName     string `json:"roomName"`
+	TenantId     uint64 `json:"tenantId"`
+	TenantName   string `json:"tenantName"`
+	DateStart    string `json:"dateStart"`
+	DateEnd      string `json:"dateEnd"`
+	AmountPaid   int64  `json:"amountPaid"`
+	TotalPrice   int64  `json:"totalPrice"`
+	DeletedAt    int64  `json:"deletedAt"`
+	ExtraTenants []any  `json:"extraTenants"`
+}
+
+func (b *Bookings) FindBookingsPerMonth(yearMonth string) (out []BookingDetailPerMonth) {
+	return
+}

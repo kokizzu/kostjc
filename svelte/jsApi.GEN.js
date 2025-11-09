@@ -3651,6 +3651,76 @@ exports.StaffMissingDataReport = async function StaffMissingDataReport( i, cb ) 
 }
 
 /**
+ * @typedef {Object} StaffOccupancyHeatmapIn
+ * @property {String} yearMonth
+ */
+const StaffOccupancyHeatmapIn = {
+  yearMonth: '', // string
+}
+/**
+ * @typedef {Object} StaffOccupancyHeatmapOut
+ * @property {number} user.id
+ * @property {String} user.email
+ * @property {String} user.password
+ * @property {number} user.createdAt
+ * @property {number} user.createdBy
+ * @property {number} user.updatedAt
+ * @property {number} user.updatedBy
+ * @property {number} user.deletedAt
+ * @property {number} user.passwordSetAt
+ * @property {String} user.secretCode
+ * @property {number} user.secretCodeAt
+ * @property {number} user.verifiedAt
+ * @property {number} user.lastLoginAt
+ * @property {String} user.fullName
+ * @property {String} user.userName
+ * @property {String} user.role
+ * @property {Object} segments
+ * @property {Array<String>} roomNames
+ * @property {Object} bookings
+ */
+const StaffOccupancyHeatmapOut = {
+  user: { // rqAuth.Users
+    id: 0, // uint64
+    email: '', // string
+    password: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    passwordSetAt: 0, // int64
+    secretCode: '', // string
+    secretCodeAt: 0, // int64
+    verifiedAt: 0, // int64
+    lastLoginAt: 0, // int64
+    fullName: '', // string
+    userName: '', // string
+    role: '', // string
+  }, // rqAuth.Users
+  segments: { // M.SB
+  }, // M.SB
+  roomNames: [], // []string
+  bookings: { // []rqProperty.BookingDetailPerMonth
+  }, // []rqProperty.BookingDetailPerMonth
+}
+/**
+ * @callback StaffOccupancyHeatmapCallback
+ * @param {StaffOccupancyHeatmapOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {StaffOccupancyHeatmapIn} i
+ * @param {StaffOccupancyHeatmapCallback} cb
+ * @returns {Promise}
+ */
+exports.StaffOccupancyHeatmap = async function StaffOccupancyHeatmap( i, cb ) {
+  return await axios.post( '/staff/occupancyHeatmap', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} StaffOccupancyReportIn
  * @property {String} monthStart
  * @property {String} monthEnd

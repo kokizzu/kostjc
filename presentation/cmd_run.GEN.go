@@ -308,6 +308,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.StaffMissingDataReport(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.StaffOccupancyHeatmapAction:
+		in := domain.StaffOccupancyHeatmapIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.StaffOccupancyHeatmap(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.StaffOccupancyReportAction:
 		in := domain.StaffOccupancyReportIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

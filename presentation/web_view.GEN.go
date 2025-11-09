@@ -40,6 +40,7 @@ var viewList = map[string]string{
 	`Index`:                          `../svelte/index.html`,                           // ../svelte/index.svelte
 	`StaffBooking`:                   `../svelte/staffBooking.html`,                    // ../svelte/staffBooking.svelte
 	`StaffMissingDataReport`:         `../svelte/staffMissingDataReport.html`,          // ../svelte/staffMissingDataReport.svelte
+	`StaffOccupancyHeatmap`:          `../svelte/staffOccupancyHeatmap.html`,           // ../svelte/staffOccupancyHeatmap.svelte
 	`StaffOccupancyReport`:           `../svelte/staffOccupancyReport.html`,            // ../svelte/staffOccupancyReport.svelte
 	`StaffPricePerDayReport`:         `../svelte/staffPricePerDayReport.html`,          // ../svelte/staffPricePerDayReport.svelte
 	`StaffRevenueReport`:             `../svelte/staffRevenueReport.html`,              // ../svelte/staffRevenueReport.svelte
@@ -206,6 +207,11 @@ func (v *Views) RenderStaffBooking(c *fiber.Ctx, m M.SX) error {
 func (v *Views) RenderStaffMissingDataReport(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
 	return c.SendString(v.cache[`StaffMissingDataReport`].Str(m))
+}
+
+func (v *Views) RenderStaffOccupancyHeatmap(c *fiber.Ctx, m M.SX) error {
+	c.Set("Content-Type", "text/html; charset=utf-8")
+	return c.SendString(v.cache[`StaffOccupancyHeatmap`].Str(m))
 }
 
 func (v *Views) RenderStaffOccupancyReport(c *fiber.Ctx, m M.SX) error {
