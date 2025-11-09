@@ -128,13 +128,13 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.StaffOccupancyHeatmap(&in)
 
 		return views.RenderStaffOccupancyHeatmap(ctx, M.SX{
-			`title`:              conf.PROJECT_NAME + ` | Occupancy Heatmap`,
-			`user`:               user,
-			`segments`:           segments,
-			`bookingsPerQuartal`: out.Bookings,
-			`roomNames`:          out.RoomNames,
-			`rooms`:              rooms,
-			`tenants`:            tenants,
+			`title`:            conf.PROJECT_NAME + ` | Occupancy Heatmap`,
+			`user`:             user,
+			`segments`:         segments,
+			`bookingsPerMonth`: out.Bookings,
+			`roomNames`:        out.RoomNames,
+			`rooms`:            rooms,
+			`tenants`:          tenants,
 		})
 	})
 

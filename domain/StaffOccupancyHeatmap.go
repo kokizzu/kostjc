@@ -24,7 +24,7 @@ type (
 
 		Segments  M.SB                               `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
 		RoomNames []string                           `json:"roomNames" form:"roomNames" query:"roomNames" long:"roomNames" msg:"roomNames"`
-		Bookings  []rqProperty.BookingDetailPerMonth `json:"bookingsPerQuartal" form:"bookingsPerQuartal" query:"bookingsPerQuartal" long:"bookingsPerQuartal" msg:"bookingsPerQuartal"`
+		Bookings  []rqProperty.BookingDetailPerMonth `json:"bookingsPerMonth" form:"bookingsPerMonth" query:"bookingsPerMonth" long:"bookingsPerMonth" msg:"bookingsPerMonth"`
 	}
 )
 

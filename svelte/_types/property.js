@@ -145,6 +145,21 @@ module.exports = {};
 module.exports = {};
 
 /**
+ * @typedef {Object} BookingDetailPerMonth
+ * @property {number} id
+ * @property {number} roomId
+ * @property {string} roomName
+ * @property {number} tenantId
+ * @property {string} tenantName
+ * @property {string} dateStart
+ * @property {string} dateEnd
+ * @property {number} totalPaid
+ * @property {number} totalPrice
+ * @property {any[]} extraTenants
+ */
+module.exports = {};
+
+/**
  * @typedef {Object} MissingTenantData
  * @property {number} roomId
  * @property {string} roomName

@@ -354,48 +354,7 @@
 <main id="app"></main><script>document.getElementById('app').innerHTML=''</script><!---->
 
 
-<style>/* fakecss:./_components/MonthShifter.esbuild-svelte-fake-css */
-.month-shifter.svelte-1kdw2kw.svelte-1kdw2kw {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-}
-.month-shifter.svelte-1kdw2kw .btn.svelte-1kdw2kw {
-  background-color: var(--gray-002);
-  border: none;
-  border-radius: 9999px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--gray-008);
-  padding: 8px;
-}
-.month-shifter.svelte-1kdw2kw .btn.svelte-1kdw2kw:hover {
-  background-color: var(--blue-transparent);
-  color: var(--blue-006);
-}
-.month-shifter.svelte-1kdw2kw input.year-month.svelte-1kdw2kw {
-  border: 1px solid var(--gray-003);
-  padding: 10px 15px;
-  border-radius: 8px;
-}
-.month-shifter.svelte-1kdw2kw button.apply.svelte-1kdw2kw {
-  background-color: var(--blue-006);
-  color: #FFF;
-  border: none;
-  padding: 10px 23px;
-  border-radius: 8px;
-  font-size: var(--font-base);
-  font-weight: 600;
-  cursor: pointer;
-}
-.month-shifter.svelte-1kdw2kw button.apply.svelte-1kdw2kw:hover {
-  background-color: var(--blue-005);
-}
-
-/* fakecss:./_partials/SideMenu.esbuild-svelte-fake-css */
+<style>/* fakecss:./_partials/SideMenu.esbuild-svelte-fake-css */
 aside.side-menu-desktop.svelte-17l1x92.svelte-17l1x92 {
   position: fixed;
   top: var(--navbar-height);
@@ -697,19 +656,60 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }
 }
 
+/* fakecss:./_components/MonthShifter.esbuild-svelte-fake-css */
+.month-shifter.svelte-1kdw2kw.svelte-1kdw2kw {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.month-shifter.svelte-1kdw2kw .btn.svelte-1kdw2kw {
+  background-color: var(--gray-002);
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-008);
+  padding: 8px;
+}
+.month-shifter.svelte-1kdw2kw .btn.svelte-1kdw2kw:hover {
+  background-color: var(--blue-transparent);
+  color: var(--blue-006);
+}
+.month-shifter.svelte-1kdw2kw input.year-month.svelte-1kdw2kw {
+  border: 1px solid var(--gray-003);
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+.month-shifter.svelte-1kdw2kw button.apply.svelte-1kdw2kw {
+  background-color: var(--blue-006);
+  color: #FFF;
+  border: none;
+  padding: 10px 23px;
+  border-radius: 8px;
+  font-size: var(--font-base);
+  font-weight: 600;
+  cursor: pointer;
+}
+.month-shifter.svelte-1kdw2kw button.apply.svelte-1kdw2kw:hover {
+  background-color: var(--blue-005);
+}
+
 /* fakecss:./staffOccupancyHeatmap.esbuild-svelte-fake-css */
-.occupancy-heatmap-container.svelte-1orqvid.svelte-1orqvid {
+.occupancy-heatmap-container.svelte-1in9by3.svelte-1in9by3 {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.rooms-heatmap.svelte-1orqvid.svelte-1orqvid {
+.rooms-heatmap.svelte-1in9by3.svelte-1in9by3 {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.heatmap-container.svelte-1orqvid.svelte-1orqvid {
+.heatmap-container.svelte-1in9by3.svelte-1in9by3 {
   display: grid;
   grid-template-columns: 100px 1fr;
   align-items: center;
@@ -717,27 +717,35 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   width: 100%;
   height: fit-content;
 }
-.heatmap-container.svelte-1orqvid h2.svelte-1orqvid {
+.heatmap-container.svelte-1in9by3 h2.svelte-1in9by3 {
   margin: 0;
 }
-.heatmap-container.svelte-1orqvid .heatmap-grid.svelte-1orqvid {
+.heatmap-container.svelte-1in9by3 .heatmap-grid.svelte-1in9by3 {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   gap: 5px;
   flex-grow: 1;
 }
-.heatmap-container.svelte-1orqvid .heatmap-grid .heatmap-cell.svelte-1orqvid {
+.heatmap-container.svelte-1in9by3 .heatmap-grid .heatmap-cell.svelte-1in9by3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--gray-002);
-  background-color: var(--gray-001);
   padding: 10px;
   border-radius: 4px;
   width: 100%;
   font-size: var(--font-lg);
   font-weight: 600;
   cursor: pointer;
+}
+.heatmap-container.svelte-1in9by3 .heatmap-grid .heatmap-cell.occupied.svelte-1in9by3 {
+  border: 1px solid var(--blue-005);
+  background-color: var(--blue-transparent);
+  color: var(--blue-006);
+}
+.heatmap-container.svelte-1in9by3 .heatmap-grid .heatmap-cell.not-occupied.svelte-1in9by3 {
+  border: 1px solid var(--gray-002);
+  background-color: var(--gray-001);
+  color: var(--gray-008);
 }
 </style>
 <script>(() => {
@@ -4120,6 +4128,82 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
+  // _partials/SideMenu.svelte
+  var import_jsApi = __toESM(require_jsApi_GEN());
+
+  // _components/xNotifier.js
+  var Notifier = function() {
+    let a = {
+      container: null,
+      default_time: 4500,
+      vanish_time: 300,
+      fps: 30,
+      success: {
+        classes: "alert-success",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M6.41 0l-.69.72-2.78 2.78-.81-.78-.72-.72-1.41 1.41.72.72 1.5 1.5.69.72.72-.72 3.5-3.5.72-.72-1.44-1.41z" transform="translate(0 1)" /></svg>'
+      },
+      error: {
+        classes: "alert-danger",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg>'
+      },
+      warning: {
+        classes: "alert-warning",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M3.09 0c-.06 0-.1.04-.13.09l-2.94 6.81c-.02.05-.03.13-.03.19v.81c0 .05.04.09.09.09h6.81c.05 0 .09-.04.09-.09v-.81c0-.05-.01-.14-.03-.19l-2.94-6.81c-.02-.05-.07-.09-.13-.09h-.81zm-.09 3h1v2h-1v-2zm0 3h1v1h-1v-1z" /></svg>'
+      },
+      info: {
+        classes: "alert-info",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M3 0c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-1.5 2.5c-.83 0-1.5.67-1.5 1.5h1c0-.28.22-.5.5-.5s.5.22.5.5-1 1.64-1 2.5c0 .86.67 1.5 1.5 1.5s1.5-.67 1.5-1.5h-1c0 .28-.22.5-.5.5s-.5-.22-.5-.5c0-.36 1-1.84 1-2.5 0-.81-.67-1.5-1.5-1.5z" transform="translate(2)"/></svg>'
+      }
+    }, b = function(a2, b2, c, d, e, f, g) {
+      this.pushed = false, this.element = document.createElement("div"), this.element.className = "notifyjs-notification " + c.classes, this.element.innerHTML = "<div class='notifyjs-icon'>" + c.icon + "</div>" + b2, a2.appendChild(this.element);
+      let h = document.createElement("p");
+      h.className = "progress", this.element.appendChild(h), this.callback = g;
+      let j = this;
+      this.push = function() {
+        if (!j.pushed) {
+          j.pushed = true;
+          let a3 = 0, b3 = 1e3 / f;
+          j.element.style.display = "block", j.interval = setInterval(function() {
+            a3++;
+            let c2 = 100 * (1 - b3 * a3 / d);
+            h.style.right = c2 + "%", 0 >= c2 && ("function" == typeof g && g(), j.clear());
+          }, b3);
+        }
+      }, this.clear = function() {
+        if (j.pushed) {
+          let a3 = 1e3 / f, b3 = 1;
+          "undefined" != typeof j.interval && clearInterval(j.interval), j.interval = setInterval(function() {
+            b3 -= 1 / (e / a3), j.element.style.opacity = b3, 0 >= b3 && (clearInterval(j.interval), j.destroy());
+          }, a3);
+        }
+      }, this.destroy = function() {
+        j.pushed && (j.pushed = false, "undefined" != typeof j.interval && clearInterval(j.interval), a2.removeChild(j.element));
+      };
+    };
+    return function Notifier2(c) {
+      this.options = Object.assign({}, a), this.options = Object.assign(this.options, c), null === this.options.container && (this.options.container = document.createElement("div"), document.getElementsByTagName("body")[0].appendChild(this.options.container)), this.options.container.className += " notifyjs-container", this.notify = function(a2, c2, d, e) {
+        return "undefined" == typeof this.options[a2] ? void console.error("Notify.js: Error, undefined '" + a2 + "' notification type") : ("undefined" == typeof d && (d = this.options.default_time), new b(this.options.container, c2, this.options[a2], d, this.options.vanish_time, this.options.fps, e));
+      };
+      this.showInfo = function(infoMsg) {
+        let notification = this.notify("info", infoMsg);
+        notification.push();
+      };
+      this.showSuccess = function(okMsg) {
+        let notification = this.notify("success", okMsg);
+        notification.push();
+      };
+      this.showError = function(errMsg) {
+        let notification = this.notify("error", errMsg);
+        notification.push();
+      };
+      this.showWarning = function(warnMsg) {
+        let notification = this.notify("warning", warnMsg);
+        notification.push();
+      };
+    };
+  }();
+  var notifier = new Notifier();
+
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/Icon.svelte
   function create_fragment(ctx) {
     let svg;
@@ -4302,277 +4386,6 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
   var RiArrowsArrowRightSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path>' };
   var RiArrowsArrowLeftSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>' };
-
-  // _components/MonthShifter.svelte
-  function create_fragment2(ctx) {
-    let div;
-    let button0;
-    let icon0;
-    let t0;
-    let button1;
-    let icon1;
-    let t1;
-    let input;
-    let t2;
-    let button2;
-    let current;
-    let mounted;
-    let dispose;
-    icon0 = new Icon_default({
-      props: { size: "20", src: RiArrowsArrowLeftSLine }
-    });
-    icon1 = new Icon_default({
-      props: { size: "20", src: RiArrowsArrowRightSLine }
-    });
-    return {
-      c() {
-        div = element("div");
-        button0 = element("button");
-        create_component(icon0.$.fragment);
-        t0 = space();
-        button1 = element("button");
-        create_component(icon1.$.fragment);
-        t1 = space();
-        input = element("input");
-        t2 = space();
-        button2 = element("button");
-        button2.textContent = "Apply";
-        button0.disabled = /*isLoading*/
-        ctx[2];
-        attr(button0, "class", "btn svelte-1kdw2kw");
-        attr(button0, "aria-label", "Previous");
-        button1.disabled = /*isLoading*/
-        ctx[2];
-        attr(button1, "class", "btn svelte-1kdw2kw");
-        attr(button1, "aria-label", "Next");
-        attr(input, "class", "year-month svelte-1kdw2kw");
-        attr(input, "type", "month");
-        attr(input, "name", "year-month");
-        attr(input, "id", "year-month");
-        attr(button2, "class", "apply svelte-1kdw2kw");
-        attr(div, "class", "month-shifter svelte-1kdw2kw");
-      },
-      m(target, anchor) {
-        insert(target, div, anchor);
-        append(div, button0);
-        mount_component(icon0, button0, null);
-        append(div, t0);
-        append(div, button1);
-        mount_component(icon1, button1, null);
-        append(div, t1);
-        append(div, input);
-        set_input_value(
-          input,
-          /*yearMonth*/
-          ctx[0]
-        );
-        append(div, t2);
-        append(div, button2);
-        current = true;
-        if (!mounted) {
-          dispose = [
-            listen(
-              button0,
-              "click",
-              /*click_handler*/
-              ctx[4]
-            ),
-            listen(
-              button1,
-              "click",
-              /*click_handler_1*/
-              ctx[5]
-            ),
-            listen(
-              input,
-              "input",
-              /*input_input_handler*/
-              ctx[6]
-            ),
-            listen(button2, "click", function() {
-              if (is_function(
-                /*OnChanges*/
-                ctx[1]
-              ))
-                ctx[1].apply(this, arguments);
-            })
-          ];
-          mounted = true;
-        }
-      },
-      p(new_ctx, [dirty]) {
-        ctx = new_ctx;
-        if (!current || dirty & /*isLoading*/
-        4) {
-          button0.disabled = /*isLoading*/
-          ctx[2];
-        }
-        if (!current || dirty & /*isLoading*/
-        4) {
-          button1.disabled = /*isLoading*/
-          ctx[2];
-        }
-        if (dirty & /*yearMonth*/
-        1) {
-          set_input_value(
-            input,
-            /*yearMonth*/
-            ctx[0]
-          );
-        }
-      },
-      i(local) {
-        if (current)
-          return;
-        transition_in(icon0.$.fragment, local);
-        transition_in(icon1.$.fragment, local);
-        current = true;
-      },
-      o(local) {
-        transition_out(icon0.$.fragment, local);
-        transition_out(icon1.$.fragment, local);
-        current = false;
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(div);
-        }
-        destroy_component(icon0);
-        destroy_component(icon1);
-        mounted = false;
-        run_all(dispose);
-      }
-    };
-  }
-  function formatYM(date) {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, "0");
-    return `${y}-${m}`;
-  }
-  function parseYM(ym) {
-    const [y, m] = ym.split("-").map(Number);
-    return new Date(y, m - 1);
-  }
-  function instance2($self, $props, $invalidate) {
-    const now2 = new Date();
-    const initialMonth = new Date(now2.getFullYear(), now2.getMonth());
-    let { yearMonth = formatYM(initialMonth) } = $props;
-    let { OnChanges = async () => {
-    } } = $props;
-    let { isLoading = false } = $props;
-    async function shiftMonth(direction) {
-      const end = parseYM(yearMonth);
-      end.setMonth(end.getMonth() + direction);
-      $invalidate(0, yearMonth = formatYM(end));
-      await OnChanges();
-    }
-    const click_handler = () => shiftMonth(-1);
-    const click_handler_1 = () => shiftMonth(1);
-    function input_input_handler() {
-      yearMonth = this.value;
-      $invalidate(0, yearMonth);
-    }
-    $self.$set = ($props2) => {
-      if ("yearMonth" in $props2)
-        $invalidate(0, yearMonth = $props2.yearMonth);
-      if ("OnChanges" in $props2)
-        $invalidate(1, OnChanges = $props2.OnChanges);
-      if ("isLoading" in $props2)
-        $invalidate(2, isLoading = $props2.isLoading);
-    };
-    return [
-      yearMonth,
-      OnChanges,
-      isLoading,
-      shiftMonth,
-      click_handler,
-      click_handler_1,
-      input_input_handler
-    ];
-  }
-  var MonthShifter = class extends SvelteComponent {
-    constructor(options) {
-      super();
-      init(this, options, instance2, create_fragment2, safe_not_equal, { yearMonth: 0, OnChanges: 1, isLoading: 2 });
-    }
-  };
-  var MonthShifter_default = MonthShifter;
-
-  // _partials/SideMenu.svelte
-  var import_jsApi = __toESM(require_jsApi_GEN());
-
-  // _components/xNotifier.js
-  var Notifier = function() {
-    let a = {
-      container: null,
-      default_time: 4500,
-      vanish_time: 300,
-      fps: 30,
-      success: {
-        classes: "alert-success",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M6.41 0l-.69.72-2.78 2.78-.81-.78-.72-.72-1.41 1.41.72.72 1.5 1.5.69.72.72-.72 3.5-3.5.72-.72-1.44-1.41z" transform="translate(0 1)" /></svg>'
-      },
-      error: {
-        classes: "alert-danger",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" /></svg>'
-      },
-      warning: {
-        classes: "alert-warning",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M3.09 0c-.06 0-.1.04-.13.09l-2.94 6.81c-.02.05-.03.13-.03.19v.81c0 .05.04.09.09.09h6.81c.05 0 .09-.04.09-.09v-.81c0-.05-.01-.14-.03-.19l-2.94-6.81c-.02-.05-.07-.09-.13-.09h-.81zm-.09 3h1v2h-1v-2zm0 3h1v1h-1v-1z" /></svg>'
-      },
-      info: {
-        classes: "alert-info",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path d="M3 0c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-1.5 2.5c-.83 0-1.5.67-1.5 1.5h1c0-.28.22-.5.5-.5s.5.22.5.5-1 1.64-1 2.5c0 .86.67 1.5 1.5 1.5s1.5-.67 1.5-1.5h-1c0 .28-.22.5-.5.5s-.5-.22-.5-.5c0-.36 1-1.84 1-2.5 0-.81-.67-1.5-1.5-1.5z" transform="translate(2)"/></svg>'
-      }
-    }, b = function(a2, b2, c, d, e, f, g) {
-      this.pushed = false, this.element = document.createElement("div"), this.element.className = "notifyjs-notification " + c.classes, this.element.innerHTML = "<div class='notifyjs-icon'>" + c.icon + "</div>" + b2, a2.appendChild(this.element);
-      let h = document.createElement("p");
-      h.className = "progress", this.element.appendChild(h), this.callback = g;
-      let j = this;
-      this.push = function() {
-        if (!j.pushed) {
-          j.pushed = true;
-          let a3 = 0, b3 = 1e3 / f;
-          j.element.style.display = "block", j.interval = setInterval(function() {
-            a3++;
-            let c2 = 100 * (1 - b3 * a3 / d);
-            h.style.right = c2 + "%", 0 >= c2 && ("function" == typeof g && g(), j.clear());
-          }, b3);
-        }
-      }, this.clear = function() {
-        if (j.pushed) {
-          let a3 = 1e3 / f, b3 = 1;
-          "undefined" != typeof j.interval && clearInterval(j.interval), j.interval = setInterval(function() {
-            b3 -= 1 / (e / a3), j.element.style.opacity = b3, 0 >= b3 && (clearInterval(j.interval), j.destroy());
-          }, a3);
-        }
-      }, this.destroy = function() {
-        j.pushed && (j.pushed = false, "undefined" != typeof j.interval && clearInterval(j.interval), a2.removeChild(j.element));
-      };
-    };
-    return function Notifier2(c) {
-      this.options = Object.assign({}, a), this.options = Object.assign(this.options, c), null === this.options.container && (this.options.container = document.createElement("div"), document.getElementsByTagName("body")[0].appendChild(this.options.container)), this.options.container.className += " notifyjs-container", this.notify = function(a2, c2, d, e) {
-        return "undefined" == typeof this.options[a2] ? void console.error("Notify.js: Error, undefined '" + a2 + "' notification type") : ("undefined" == typeof d && (d = this.options.default_time), new b(this.options.container, c2, this.options[a2], d, this.options.vanish_time, this.options.fps, e));
-      };
-      this.showInfo = function(infoMsg) {
-        let notification = this.notify("info", infoMsg);
-        notification.push();
-      };
-      this.showSuccess = function(okMsg) {
-        let notification = this.notify("success", okMsg);
-        notification.push();
-      };
-      this.showError = function(errMsg) {
-        let notification = this.notify("error", errMsg);
-        notification.push();
-      };
-      this.showWarning = function(warnMsg) {
-        let notification = this.notify("warning", warnMsg);
-        notification.push();
-      };
-    };
-  }();
-  var notifier = new Notifier();
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
@@ -5738,7 +5551,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_fragment3(ctx) {
+  function create_fragment2(ctx) {
     let aside0;
     let div0;
     let nav0;
@@ -6565,7 +6378,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function instance3($self, $props, $invalidate) {
+  function instance2($self, $props, $invalidate) {
     let $isOpenSideMenu;
     component_subscribe($self, isOpenSideMenu, ($value) => $invalidate(1, $isOpenSideMenu = $value));
     let { access = (
@@ -6697,7 +6510,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var SideMenu = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance3, create_fragment3, safe_not_equal, { access: 0 });
+      init(this, options, instance2, create_fragment2, safe_not_equal, { access: 0 });
     }
   };
   var SideMenu_default = SideMenu;
@@ -6706,7 +6519,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var BsList = { a: { fill: "currentColor", viewBox: "0 0 16 16" }, c: '<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>' };
 
   // _partials/Navbar.svelte
-  function create_fragment4(ctx) {
+  function create_fragment3(ctx) {
     let header;
     let div0;
     let button;
@@ -6848,7 +6661,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function instance4($self, $props, $invalidate) {
+  function instance3($self, $props, $invalidate) {
     let $isOpenSideMenu;
     component_subscribe($self, isOpenSideMenu, ($value) => $invalidate(2, $isOpenSideMenu = $value));
     let { username = (
@@ -6871,13 +6684,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var Navbar = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance4, create_fragment4, safe_not_equal, { username: 0, role: 1 });
+      init(this, options, instance3, create_fragment3, safe_not_equal, { username: 0, role: 1 });
     }
   };
   var Navbar_default = Navbar;
 
   // _partials/Footer.svelte
-  function create_fragment5(ctx) {
+  function create_fragment4(ctx) {
     let footer;
     let p;
     let t2;
@@ -6910,7 +6723,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function instance5($self) {
+  function instance4($self) {
     const year = (
       /** @type {number} */
       new Date().getFullYear()
@@ -6920,7 +6733,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var Footer = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance5, create_fragment5, safe_not_equal, {});
+      init(this, options, instance4, create_fragment4, safe_not_equal, {});
     }
   };
   var Footer_default = Footer;
@@ -6932,7 +6745,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   );
 
   // _layouts/main.svelte
-  function create_fragment6(ctx) {
+  function create_fragment5(ctx) {
     let div2;
     let div1;
     let navbar;
@@ -7083,7 +6896,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function instance6($self, $props, $invalidate) {
+  function instance5($self, $props, $invalidate) {
     let $isShrinkMenu;
     component_subscribe($self, isShrinkMenu, ($value) => $invalidate(2, $isShrinkMenu = $value));
     let { $slots: slots = {}, $scope } = $props;
@@ -7108,36 +6921,270 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var Main = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance6, create_fragment6, safe_not_equal, { user: 0, access: 1 });
+      init(this, options, instance5, create_fragment5, safe_not_equal, { user: 0, access: 1 });
     }
   };
   var main_default = Main;
 
+  // _components/MonthShifter.svelte
+  function create_fragment6(ctx) {
+    let div;
+    let button0;
+    let icon0;
+    let t0;
+    let button1;
+    let icon1;
+    let t1;
+    let input;
+    let t2;
+    let button2;
+    let current;
+    let mounted;
+    let dispose;
+    icon0 = new Icon_default({
+      props: { size: "20", src: RiArrowsArrowLeftSLine }
+    });
+    icon1 = new Icon_default({
+      props: { size: "20", src: RiArrowsArrowRightSLine }
+    });
+    return {
+      c() {
+        div = element("div");
+        button0 = element("button");
+        create_component(icon0.$.fragment);
+        t0 = space();
+        button1 = element("button");
+        create_component(icon1.$.fragment);
+        t1 = space();
+        input = element("input");
+        t2 = space();
+        button2 = element("button");
+        button2.textContent = "Apply";
+        button0.disabled = /*isLoading*/
+        ctx[2];
+        attr(button0, "class", "btn svelte-1kdw2kw");
+        attr(button0, "aria-label", "Previous");
+        button1.disabled = /*isLoading*/
+        ctx[2];
+        attr(button1, "class", "btn svelte-1kdw2kw");
+        attr(button1, "aria-label", "Next");
+        attr(input, "class", "year-month svelte-1kdw2kw");
+        attr(input, "type", "month");
+        attr(input, "name", "year-month");
+        attr(input, "id", "year-month");
+        attr(button2, "class", "apply svelte-1kdw2kw");
+        attr(div, "class", "month-shifter svelte-1kdw2kw");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, button0);
+        mount_component(icon0, button0, null);
+        append(div, t0);
+        append(div, button1);
+        mount_component(icon1, button1, null);
+        append(div, t1);
+        append(div, input);
+        set_input_value(
+          input,
+          /*yearMonth*/
+          ctx[0]
+        );
+        append(div, t2);
+        append(div, button2);
+        current = true;
+        if (!mounted) {
+          dispose = [
+            listen(
+              button0,
+              "click",
+              /*click_handler*/
+              ctx[4]
+            ),
+            listen(
+              button1,
+              "click",
+              /*click_handler_1*/
+              ctx[5]
+            ),
+            listen(
+              input,
+              "input",
+              /*input_input_handler*/
+              ctx[6]
+            ),
+            listen(button2, "click", function() {
+              if (is_function(
+                /*OnChanges*/
+                ctx[1]
+              ))
+                ctx[1].apply(this, arguments);
+            })
+          ];
+          mounted = true;
+        }
+      },
+      p(new_ctx, [dirty]) {
+        ctx = new_ctx;
+        if (!current || dirty & /*isLoading*/
+        4) {
+          button0.disabled = /*isLoading*/
+          ctx[2];
+        }
+        if (!current || dirty & /*isLoading*/
+        4) {
+          button1.disabled = /*isLoading*/
+          ctx[2];
+        }
+        if (dirty & /*yearMonth*/
+        1) {
+          set_input_value(
+            input,
+            /*yearMonth*/
+            ctx[0]
+          );
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(icon0.$.fragment, local);
+        transition_in(icon1.$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(icon0.$.fragment, local);
+        transition_out(icon1.$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        destroy_component(icon0);
+        destroy_component(icon1);
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function formatYM(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    return `${y}-${m}`;
+  }
+  function parseYM(ym) {
+    const [y, m] = ym.split("-").map(Number);
+    return new Date(y, m - 1);
+  }
+  function instance6($self, $props, $invalidate) {
+    const now2 = new Date();
+    const initialMonth = new Date(now2.getFullYear(), now2.getMonth());
+    let { yearMonth = formatYM(initialMonth) } = $props;
+    let { OnChanges = async () => {
+    } } = $props;
+    let { isLoading = false } = $props;
+    async function shiftMonth(direction) {
+      const end = parseYM(yearMonth);
+      end.setMonth(end.getMonth() + direction);
+      $invalidate(0, yearMonth = formatYM(end));
+      await OnChanges();
+    }
+    const click_handler = () => shiftMonth(-1);
+    const click_handler_1 = () => shiftMonth(1);
+    function input_input_handler() {
+      yearMonth = this.value;
+      $invalidate(0, yearMonth);
+    }
+    $self.$set = ($props2) => {
+      if ("yearMonth" in $props2)
+        $invalidate(0, yearMonth = $props2.yearMonth);
+      if ("OnChanges" in $props2)
+        $invalidate(1, OnChanges = $props2.OnChanges);
+      if ("isLoading" in $props2)
+        $invalidate(2, isLoading = $props2.isLoading);
+    };
+    return [
+      yearMonth,
+      OnChanges,
+      isLoading,
+      shiftMonth,
+      click_handler,
+      click_handler_1,
+      input_input_handler
+    ];
+  }
+  var MonthShifter = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance6, create_fragment6, safe_not_equal, { yearMonth: 0, OnChanges: 1, isLoading: 2 });
+    }
+  };
+  var MonthShifter_default = MonthShifter;
+
   // staffOccupancyHeatmap.svelte
+  var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[4] = list[i];
+    child_ctx[11] = list[i];
+    const constants_0 = (
+      /*getBookingByRoomName*/
+      child_ctx[5](
+        /*room*/
+        child_ctx[11]
+      )
+    );
+    child_ctx[12] = constants_0;
     return child_ctx;
   }
   function get_each_context_1(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[7] = list[i];
-    child_ctx[9] = i;
+    child_ctx[15] = list[i];
+    child_ctx[17] = i;
     return child_ctx;
   }
   function create_each_block_1(ctx) {
     let span;
+    let t0_value = (
+      /*day*/
+      ctx[17] + 1 + ""
+    );
+    let t0;
+    let t1;
+    let span_class_value;
     return {
       c() {
         span = element("span");
-        span.textContent = `${/*day*/
-        ctx[9] + 1} `;
-        attr(span, "class", "heatmap-cell svelte-1orqvid");
+        t0 = text(t0_value);
+        t1 = space();
+        attr(span, "class", span_class_value = "heatmap-cell " + /*isDateIncludeInDay*/
+        (ctx[4](
+          /*day*/
+          ctx[17],
+          /*bk*/
+          (ctx[12] || {})["dateStart"] || "",
+          /*bk*/
+          (ctx[12] || {})["dateEnd"] || ""
+        ) ? "occupied" : "not-occupied") + " svelte-1in9by3");
       },
       m(target, anchor) {
         insert(target, span, anchor);
+        append(span, t0);
+        append(span, t1);
       },
-      p: noop,
+      p(ctx2, dirty) {
+        if (dirty & /*roomNames*/
+        1 && span_class_value !== (span_class_value = "heatmap-cell " + /*isDateIncludeInDay*/
+        (ctx2[4](
+          /*day*/
+          ctx2[17],
+          /*bk*/
+          (ctx2[12] || {})["dateStart"] || "",
+          /*bk*/
+          (ctx2[12] || {})["dateEnd"] || ""
+        ) ? "occupied" : "not-occupied") + " svelte-1in9by3")) {
+          attr(span, "class", span_class_value);
+        }
+      },
       d(detaching) {
         if (detaching) {
           detach(span);
@@ -7148,10 +7195,21 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   function create_each_block(ctx) {
     let div1;
     let h2;
+    let t0;
+    let t1_value = (
+      /*room*/
+      ctx[11] + ""
+    );
+    let t1;
     let t2;
     let div0;
     let t3;
-    let each_value_1 = ensure_array_like(Array.from({ length: 31 }));
+    let each_value_1 = ensure_array_like(Array.from({
+      length: (
+        /*totalDaysInSelectedMonth*/
+        ctx[3]
+      )
+    }));
     let each_blocks = [];
     for (let i = 0; i < each_value_1.length; i += 1) {
       each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
@@ -7160,21 +7218,23 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       c() {
         div1 = element("div");
         h2 = element("h2");
-        h2.textContent = `Room ${/*room*/
-        ctx[4]}`;
+        t0 = text("Room ");
+        t1 = text(t1_value);
         t2 = space();
         div0 = element("div");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
         t3 = space();
-        attr(h2, "class", "svelte-1orqvid");
-        attr(div0, "class", "heatmap-grid svelte-1orqvid");
-        attr(div1, "class", "heatmap-container svelte-1orqvid");
+        attr(h2, "class", "svelte-1in9by3");
+        attr(div0, "class", "heatmap-grid svelte-1in9by3");
+        attr(div1, "class", "heatmap-container svelte-1in9by3");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
         append(div1, h2);
+        append(h2, t0);
+        append(h2, t1);
         append(div1, t2);
         append(div1, div0);
         for (let i = 0; i < each_blocks.length; i += 1) {
@@ -7184,7 +7244,36 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
         append(div1, t3);
       },
-      p: noop,
+      p(ctx2, dirty) {
+        if (dirty & /*roomNames*/
+        1 && t1_value !== (t1_value = /*room*/
+        ctx2[11] + ""))
+          set_data(t1, t1_value);
+        if (dirty & /*isDateIncludeInDay, getBookingByRoomName, roomNames, totalDaysInSelectedMonth*/
+        57) {
+          each_value_1 = ensure_array_like(Array.from({
+            length: (
+              /*totalDaysInSelectedMonth*/
+              ctx2[3]
+            )
+          }));
+          let i;
+          for (i = 0; i < each_value_1.length; i += 1) {
+            const child_ctx = get_each_context_1(ctx2, each_value_1, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block_1(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div0, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value_1.length;
+        }
+      },
       d(detaching) {
         if (detaching) {
           detach(div1);
@@ -7202,30 +7291,36 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let div0;
     let current;
     function monthshifter_yearMonth_binding(value) {
-      ctx[2](value);
+      ctx[7](value);
     }
     function monthshifter_isLoading_binding(value) {
-      ctx[3](value);
+      ctx[8](value);
     }
-    let monthshifter_props = { OnChanges: RefreshData };
+    let monthshifter_props = { OnChanges: (
+      /*RefreshData*/
+      ctx[6]
+    ) };
     if (
       /*yearMonth*/
-      ctx[0] !== void 0
+      ctx[1] !== void 0
     ) {
       monthshifter_props.yearMonth = /*yearMonth*/
-      ctx[0];
+      ctx[1];
     }
     if (
       /*isLoading*/
-      ctx[1] !== void 0
+      ctx[2] !== void 0
     ) {
       monthshifter_props.isLoading = /*isLoading*/
-      ctx[1];
+      ctx[2];
     }
     monthshifter = new MonthShifter_default({ props: monthshifter_props });
     binding_callbacks.push(() => bind(monthshifter, "yearMonth", monthshifter_yearMonth_binding));
     binding_callbacks.push(() => bind(monthshifter, "isLoading", monthshifter_isLoading_binding));
-    let each_value = ensure_array_like(roomNames);
+    let each_value = ensure_array_like(
+      /*roomNames*/
+      ctx[0]
+    );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
       each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
@@ -7239,8 +7334,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div0, "class", "rooms-heatmap svelte-1orqvid");
-        attr(div1, "class", "occupancy-heatmap-container svelte-1orqvid");
+        attr(div0, "class", "rooms-heatmap svelte-1in9by3");
+        attr(div1, "class", "occupancy-heatmap-container svelte-1in9by3");
       },
       m(target, anchor) {
         insert(target, div1, anchor);
@@ -7257,23 +7352,26 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       p(ctx2, dirty) {
         const monthshifter_changes = {};
         if (!updating_yearMonth && dirty & /*yearMonth*/
-        1) {
+        2) {
           updating_yearMonth = true;
           monthshifter_changes.yearMonth = /*yearMonth*/
-          ctx2[0];
+          ctx2[1];
           add_flush_callback(() => updating_yearMonth = false);
         }
         if (!updating_isLoading && dirty & /*isLoading*/
-        2) {
+        4) {
           updating_isLoading = true;
           monthshifter_changes.isLoading = /*isLoading*/
-          ctx2[1];
+          ctx2[2];
           add_flush_callback(() => updating_isLoading = false);
         }
         monthshifter.$set(monthshifter_changes);
-        if (dirty & /*Array, roomNames*/
-        0) {
-          each_value = ensure_array_like(roomNames);
+        if (dirty & /*Array, totalDaysInSelectedMonth, isDateIncludeInDay, getBookingByRoomName, roomNames*/
+        57) {
+          each_value = ensure_array_like(
+            /*roomNames*/
+            ctx2[0]
+          );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
             const child_ctx = get_each_context(ctx2, each_value, i);
@@ -7331,8 +7429,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, yearMonth, isLoading*/
-        1027) {
+        if (dirty & /*$scope, roomNames, totalDaysInSelectedMonth, yearMonth, isLoading*/
+        262159) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -7360,13 +7458,16 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {Access} */
     {/* segments */}
   );
-  var roomNames = (
-    /** @type {string[]} */
-    [/* roomNames */]
-  );
-  async function RefreshData() {
-  }
   function instance7($self, $props, $invalidate) {
+    let bookingsPerMonth = (
+      /** @type {any[]} */
+      [/* bookingsPerMonth */]
+    );
+    let roomNames = (
+      /** @type {string[]} */
+      [/* roomNames */]
+    );
+    console.log("Bookings: ", bookingsPerMonth);
     let yearMonth = (
       /** @type {string} */
       new Date().toISOString().slice(0, 7)
@@ -7375,28 +7476,78 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       /** @type {boolean} */
       false
     );
+    let totalDaysInSelectedMonth = (
+      /** @type {number} */
+      31
+    );
+    function refreshTotalDaysInMonth() {
+      const date = new Date(yearMonth + "-01");
+      $invalidate(3, totalDaysInSelectedMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate());
+    }
+    function isDateIncludeInDay(day, dateStart, dateEnd) {
+      if (!dateStart || !dateEnd) {
+        return false;
+      }
+      const date = new Date(yearMonth + "-" + (day < 10 ? "0" + day : day));
+      [];
+      return date >= new Date(dateStart) && date <= new Date(dateEnd);
+    }
+    function getBookingByRoomName(roomName) {
+      for (let i = 0; i < bookingsPerMonth.length; i++) {
+        if (bookingsPerMonth[i].roomName === roomName) {
+          return bookingsPerMonth[i];
+        }
+      }
+      return null;
+    }
+    onMount(() => {
+      refreshTotalDaysInMonth();
+    });
+    async function RefreshData() {
+      await (0, import_jsApi2.StaffOccupancyHeatmap)(
+        // @ts-ignore
+        { yearMonth },
+        /** @type {import('./jsApi.GEN').StaffOccupancyHeatmapCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          bookingsPerMonth = o.bookingsPerMonth;
+          $invalidate(0, roomNames = o.roomNames);
+          refreshTotalDaysInMonth();
+        }
+      );
+    }
     function monthshifter_yearMonth_binding(value) {
       yearMonth = value;
-      $invalidate(0, yearMonth);
+      $invalidate(1, yearMonth);
     }
     function monthshifter_isLoading_binding(value) {
       isLoading = value;
-      $invalidate(1, isLoading);
+      $invalidate(2, isLoading);
     }
     return [
+      roomNames,
       yearMonth,
       isLoading,
+      totalDaysInSelectedMonth,
+      isDateIncludeInDay,
+      getBookingByRoomName,
+      RefreshData,
       monthshifter_yearMonth_binding,
       monthshifter_isLoading_binding
     ];
   }
-  var StaffOccupancyHeatmap = class extends SvelteComponent {
+  var StaffOccupancyHeatmap_1 = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance7, create_fragment7, safe_not_equal, {});
     }
   };
-  var staffOccupancyHeatmap_default = StaffOccupancyHeatmap;
+  var staffOccupancyHeatmap_default = StaffOccupancyHeatmap_1;
 
   // staffOccupancyHeatmap.svelte.ts
   var app = new staffOccupancyHeatmap_default({ target: document.getElementById("app") });

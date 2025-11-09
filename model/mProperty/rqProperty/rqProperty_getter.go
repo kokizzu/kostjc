@@ -2026,8 +2026,6 @@ LIMIT 1`
 	return
 }
 
-// TODO
-
 type BookingDetailPerMonth struct {
 	Id           uint64 `json:"id"`
 	RoomId       uint64 `json:"roomId"`
@@ -2036,12 +2034,72 @@ type BookingDetailPerMonth struct {
 	TenantName   string `json:"tenantName"`
 	DateStart    string `json:"dateStart"`
 	DateEnd      string `json:"dateEnd"`
-	AmountPaid   int64  `json:"amountPaid"`
+	TotalPaid    int64  `json:"totalPaid"`
 	TotalPrice   int64  `json:"totalPrice"`
-	DeletedAt    int64  `json:"deletedAt"`
 	ExtraTenants []any  `json:"extraTenants"`
 }
 
 func (b *Bookings) FindBookingsPerMonth(yearMonth string) (out []BookingDetailPerMonth) {
+	const comment = `-- Bookings) FindBookingsPerMonth`
+
+	if !isValidYearMonth(yearMonth) {
+		yearMonth = time.Now().Format(DateFormatYYYYMM)
+	}
+
+	dateStart := yearMonth + `-01`
+	dateEnd := getEndOfMonth(yearMonth)
+
+	queryRows := comment + `
+SELECT 
+	"bookings"."id" AS "id",
+	"rooms"."id" AS "roomId",
+  "rooms"."roomName",
+	"bookings"."tenantId",
+  COALESCE("tenants"."tenantName", '') AS "tenantName",
+  COALESCE("bookings"."dateStart", '') AS "dateStart",
+  COALESCE("bookings"."dateEnd", '') AS "dateEnd",
+  COALESCE(
+		SUM(CASE
+			WHEN "payments"."deletedAt" = 0
+			THEN "payments"."paidIDR"
+			ELSE 0 END
+		),
+	0) AS "totalPaidIDR",
+  "bookings"."totalPriceIDR",
+	"bookings"."extraTenants"
+FROM "bookings"
+LEFT JOIN "tenants" ON "bookings"."tenantId" = "tenants"."id"
+LEFT JOIN "rooms" ON "bookings"."roomId" = "rooms"."id"
+LEFT JOIN "payments" ON "bookings"."id" = "payments"."bookingId"
+WHERE
+	(
+    "bookings"."dateStart" BETWEEN ` + S.Z(dateStart) + ` AND ` + S.Z(dateEnd) + `
+    OR
+    "bookings"."dateEnd" BETWEEN ` + S.Z(dateStart) + ` AND ` + S.Z(dateEnd) + `
+  ) AND "bookings"."deletedAt" = 0
+GROUP BY
+	"bookings"."id",
+	"rooms"."roomName"
+ORDER BY "rooms"."roomName" ASC`
+
+	b.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) != 10 {
+			return
+		}
+
+		out = append(out, BookingDetailPerMonth{
+			Id:           X.ToU(row[0]),
+			RoomId:       X.ToU(row[1]),
+			RoomName:     X.ToS(row[2]),
+			TenantId:     X.ToU(row[3]),
+			TenantName:   X.ToS(row[4]),
+			DateStart:    X.ToS(row[5]),
+			DateEnd:      X.ToS(row[6]),
+			TotalPaid:    X.ToI(row[7]),
+			TotalPrice:   X.ToI(row[8]),
+			ExtraTenants: X.ToArr(row[9]),
+		})
+
+	})
 	return
 }
