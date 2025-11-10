@@ -17,12 +17,19 @@
   let bookingsPerMonth  = /** @type {any[]} */ ([/* bookingsPerMonth */]);
   let roomNames         = /** @type {string[]} */ ([/* roomNames */]);
   let tenants           = /** @type {Record<Number, string>} */({/* tenants */});
-  let rooms             = /** @type {Record<Number, string>} */({/* rooms */});
-
-  console.log('Bookings: ', bookingsPerMonth);
 
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
   let isLoading = /** @type {boolean} */ (false);
+
+  function reColorBookings() {
+    const total = bookingsPerMonth.length || 0;
+    (bookingsPerMonth || []).forEach((booking, idx) => {
+      const degree = Math.floor( (360 * idx) / (total + 1) ); // since 360 in hsl = 0
+      const color = 'hsl(' + degree + ', 100%, 47%)';
+
+      booking.color = color;
+    })
+  }
 
   let totalDaysInSelectedMonth = /** @type {number} */ (31);
 
@@ -30,8 +37,6 @@
     const date = new Date(yearMonth + '-01');
     totalDaysInSelectedMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   }
-
-  console.log('Total days in selected month: ', totalDaysInSelectedMonth);
 
   /**
    * @description Check if date is include in n-day
@@ -45,7 +50,7 @@
       return false
     }
 
-    const date = new Date(yearMonth + '-' + (day < 10 ? '0' + day : day));[]
+    const date = new Date(yearMonth + '-' + (day < 10 ? '0' + day : day));
     return date >= new Date(dateStart) && date <= new Date(dateEnd);
   }
 
@@ -61,11 +66,24 @@
       }
     }
 
-    return null;
+    return {
+      id: 0,
+      roomId: 0,
+      roomName: '',
+      tenantId: 0,
+      tenantName: '',
+      dateStart: '',
+      dateEnd: '',
+      totalPaid: 0,
+      totalPrice: 0,
+      extraTenants: [],
+      color: ''
+    };
   }
 
   onMount(() => {
     refreshTotalDaysInMonth();
+    reColorBookings();
   });
 
   async function RefreshData() {
@@ -84,6 +102,7 @@
         roomNames = o.roomNames;
 
         refreshTotalDaysInMonth();
+        reColorBookings();
       }
     )
   }
@@ -91,33 +110,39 @@
 
   let tooltipData = null;
   let tooltipPosition = { x: 0, y: 0 };
-
- function showTooltip(event, booking, day, room) {
-  console.log('Hover triggered:', { booking, day, room });
   
-  if (!booking) {
-    console.log('No booking data');
-    return;
+  /**
+   * @param {MouseEvent} event
+   * @param {BookingDetailPerMonth} booking
+   * @param {number} day
+   * @param {string} room
+   */
+  function showTooltip(event, booking, day, room) {
+    console.log('Hover triggered:', { booking, day, room });
+    
+    if (!booking) {
+      console.log('No booking data');
+      return;
+    }
+    
+    console.log('Tenant ID:', booking.tenantId);
+    console.log('Tenants data:', tenants);
+    
+    tooltipData = {
+      tenant: tenants[booking.tenantId] || 'Unknown',
+      room: room,
+      dateStart: booking.dateStart,
+      dateEnd: booking.dateEnd,
+      day: day
+    };
+    
+    tooltipPosition = {
+      x: event.clientX,
+      y: event.clientY
+    };
+    
+    console.log('Tooltip data set:', tooltipData);
   }
-  
-  console.log('Tenant ID:', booking.tenantId);
-  console.log('Tenants data:', tenants);
-  
-  tooltipData = {
-    tenant: tenants[booking.tenantId] || 'Unknown',
-    room: room,
-    dateStart: booking.dateStart,
-    dateEnd: booking.dateEnd,
-    day: day
-  };
-  
-  tooltipPosition = {
-    x: event.clientX,
-    y: event.clientY
-  };
-  
-  console.log('Tooltip data set:', tooltipData);
-}
 
   function hideTooltip() {
     tooltipData = null;
@@ -139,13 +164,14 @@
             <div class="date-header">{day + 1}</div>
           {/each}
         </div>
-       
+
         {#each roomNames as room}
           {@const bk = getBookingByRoomName(room)}
           <div class="table-row">
             <div class="room-name sticky-room">Room {room}</div>
             {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
-                {@const isOccupied = isDateIncludeInDay(day + 1, (bk || {})['dateStart'] || '', (bk || {})['dateEnd'] || '')}
+                {@const isOccupied = isDateIncludeInDay(day + 1, bk.dateStart || '', (bk || {})['dateEnd'] || '')}
+                <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <div 
                   class="date-cell {isOccupied ? 'occupied' : 'not-occupied'}"
                   on:mouseenter={(e) => {
@@ -155,6 +181,7 @@
                   }}
                   on:mouseleave={hideTooltip}
                   aria-label="tool-tip"
+                  style="--bg-from-hsl: {bk.color}"
                 >
                 </div>
               {/each}
@@ -258,8 +285,7 @@
   }
 
   .date-cell.occupied {
-    border: 1px solid var(--blue-005);
-    background-color: var(--blue-transparent);
+    background: var(--bg-from-hsl);
   }
 
   .date-cell.occupied:hover {
@@ -271,13 +297,14 @@
   }
 
   .date-cell.not-occupied {
-    border: 1px solid var(--gray-002);
-    background-color: var(--gray-001);
+    border: 1px solid var(--gray-002) !important;
+    background-color: var(--gray-001) !important;
     cursor: default;
+
   }
 
   .date-cell.not-occupied:hover {
-    background-color: var(--gray-002);
+    background-color: var(--gray-002) !important;
   }
 
   .table-row:hover {

@@ -156,6 +156,7 @@ module.exports = {};
  * @property {number} totalPaid
  * @property {number} totalPrice
  * @property {any[]} extraTenants
+ * @property {string?} color
  */
 module.exports = {};
 

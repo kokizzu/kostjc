@@ -121,9 +121,6 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		tenant := rqAuth.NewTenants(d.AuthOltp)
 		tenants := tenant.FindTenantChoices()
 
-		room := rqProperty.NewRooms(d.PropOltp)
-		rooms := room.FindRoomChoices()
-
 		in.YearMonth = time.Now().Format(rqProperty.DateFormatYYYYMM)
 		out := d.StaffOccupancyHeatmap(&in)
 
@@ -133,7 +130,6 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`segments`:         segments,
 			`bookingsPerMonth`: out.Bookings,
 			`roomNames`:        out.RoomNames,
-			`rooms`:            rooms,
 			`tenants`:          tenants,
 		})
 	})
