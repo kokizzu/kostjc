@@ -94,20 +94,26 @@
       bind:isLoading
       OnChanges={RefreshData}
     />
-    <div class="rooms-heatmap">
-      {#each roomNames as room}
-      {@const bk = getBookingByRoomName(room)}
-        <div class="heatmap-container">
-          <h2>Room {room}</h2>
-          <div class="heatmap-grid">
+    <div class="rooms-heatmap-wrapper">
+      <div class="rooms-heatmap-table">
+        <div class="table-header">
+          <div class="room-label sticky-corner">Room</div>
+          {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
+            <div class="date-header">{day + 1}</div>
+          {/each}
+        </div>
+       
+        {#each roomNames as room}
+          {@const bk = getBookingByRoomName(room)}
+          <div class="table-row">
+            <div class="room-name sticky-room">Room {room}</div>
             {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
-              <span class="heatmap-cell {isDateIncludeInDay(day, (bk || {})['dateStart'] || '', (bk || {})['dateEnd'] || '') ? 'occupied' : 'not-occupied'}">
-                {day+1}
-              </span>
+              <div class="date-cell {isDateIncludeInDay(day + 1, (bk || {})['dateStart'] || '', (bk || {})['dateEnd'] || '') ? 'occupied' : 'not-occupied'}">
+              </div>
             {/each}
           </div>
-        </div>
-      {/each}
+        {/each}
+      </div>
     </div>
   </div>
 </LayoutMain>
@@ -120,53 +126,89 @@
     padding: 20px;
   }
 
-  .rooms-heatmap {
+  .rooms-heatmap-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: auto;
+    max-height: calc(100vh - 200px);
+  }
+
+  .rooms-heatmap-table {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 2px;
+    width: fit-content;
+    min-width: 100%;
   }
 
-  .heatmap-container {
+  .table-header,
+  .table-row {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 120px repeat(31, minmax(40px, 1fr));
+    gap: 2px;
     align-items: center;
-    gap: 20px;
-    width: 100%;
-    height: fit-content;
   }
 
-  .heatmap-container h2 {
-    margin: 0;
+  .table-header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 20;
+    font-weight: 700;
+    border-bottom: 2px solid var(--gray-004);
+    padding-bottom: 10px;
   }
 
-  .heatmap-container .heatmap-grid {
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
-    gap: 5px;
-    flex-grow: 1;
-  }
-
-  .heatmap-container .heatmap-grid .heatmap-cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border-radius: 4px;
-    width: 100%;
-    font-size: var(--font-lg);
+  .room-label,
+  .room-name {
+    padding: 15px;
     font-weight: 600;
+    text-align: left;
+  }
+
+  .sticky-corner {
+  position: sticky;
+  left: 0;
+  z-index: 30;
+  background-color: white;
+}
+
+.sticky-room {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background-color: white;
+}
+
+  .date-header {
+    text-align: center;
+    font-size: var(--font-sm);
+    color: var(--gray-008);
+    padding: 5px;
+    background-color: white;
+  }
+
+  .date-cell {
+    height: 40px;
+    border-radius: 4px;
     cursor: pointer;
   }
 
-  .heatmap-container .heatmap-grid .heatmap-cell.occupied {
+  .date-cell.occupied {
     border: 1px solid var(--blue-005);
     background-color: var(--blue-transparent);
-    color: var(--blue-006);
   }
 
-  .heatmap-container .heatmap-grid .heatmap-cell.not-occupied {
+  .date-cell.not-occupied {
     border: 1px solid var(--gray-002);
     background-color: var(--gray-001);
-    color: var(--gray-008);
+  }
+
+  .table-row:hover {
+    background-color: var(--gray-001);
+  }
+
+  .table-row:hover .sticky-room {
+    background-color: var(--gray-001);
   }
 </style>
