@@ -380,6 +380,16 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
+	// StaffOccupancyHeatmap
+	fw.Post("/"+domain.StaffOccupancyHeatmapAction, func(c *fiber.Ctx) error {
+		in := domain.StaffOccupancyHeatmapIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.StaffOccupancyHeatmapAction); err != nil {
+			return nil
+		}
+		out := d.StaffOccupancyHeatmap(&in)
+		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
+	})
+
 	// StaffOccupancyReport
 	fw.Post("/"+domain.StaffOccupancyReportAction, func(c *fiber.Ctx) error {
 		in := domain.StaffOccupancyReportIn{}

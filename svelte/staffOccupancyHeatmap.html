@@ -697,39 +697,120 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   background-color: var(--blue-005);
 }
 
-/* fakecss:./staffPricePerDayReport.esbuild-svelte-fake-css */
-.report-container.svelte-gq920t.svelte-gq920t {
+/* fakecss:./staffOccupancyHeatmap.esbuild-svelte-fake-css */
+.occupancy-heatmap-container.svelte-uqixgf.svelte-uqixgf {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.table-container.svelte-gq920t.svelte-gq920t {
-  overflow-x: auto;
-}
-table.svelte-gq920t.svelte-gq920t {
+.rooms-heatmap-wrapper.svelte-uqixgf.svelte-uqixgf {
+  position: relative;
   width: 100%;
-  border-collapse: collapse;
+  overflow: auto;
+  max-height: calc(100vh - 200px);
 }
-table.svelte-gq920t thead.svelte-gq920t {
+.rooms-heatmap-table.svelte-uqixgf.svelte-uqixgf {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+.table-header.svelte-uqixgf.svelte-uqixgf,
+.table-row.svelte-uqixgf.svelte-uqixgf {
+  display: grid;
+  grid-template-columns: 100px repeat(auto-fit, minmax(25px, 1fr));
+  gap: 2px;
+  align-items: center;
+}
+.table-header.svelte-uqixgf.svelte-uqixgf {
   position: sticky;
   top: 0;
-  background-color: var(--gray-002);
-  z-index: 10;
-  border: none;
+  background-color: white;
+  z-index: 20;
+  font-weight: 700;
+  border-bottom: 2px solid var(--gray-004);
+  padding-bottom: 10px;
 }
-table.svelte-gq920t thead tr th.svelte-gq920t {
+.room-label.svelte-uqixgf.svelte-uqixgf,
+.room-name.svelte-uqixgf.svelte-uqixgf {
+  padding: 8px;
+  font-weight: 600;
   text-align: left;
-  padding: 8px 12px;
-  text-wrap: nowrap;
+  font-size: var(--font-md);
 }
-table.svelte-gq920t tbody tr.svelte-gq920t {
-  border-bottom: 1px solid var(--gray-004);
+.sticky-corner.svelte-uqixgf.svelte-uqixgf {
+  position: sticky;
+  left: 0;
+  z-index: 30;
+  background-color: white;
 }
-table.svelte-gq920t tbody tr td.svelte-gq920t {
-  padding: 8px 12px;
+.sticky-room.svelte-uqixgf.svelte-uqixgf {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background-color: white;
 }
-@media only screen and (max-width : 768px) {
+.date-header.svelte-uqixgf.svelte-uqixgf {
+  text-align: center;
+  font-size: 10px;
+  color: var(--gray-008);
+  padding: 2px;
+  background-color: white;
+}
+.date-cell.svelte-uqixgf.svelte-uqixgf {
+  height: 28px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.date-cell.occupied.svelte-uqixgf.svelte-uqixgf {
+  background: var(--bg-from-hsl);
+}
+.date-cell.occupied.svelte-uqixgf.svelte-uqixgf:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(0, 100, 255, 0.3);
+  z-index: 5;
+  border-color: var(--blue-007);
+  background-color: var(--blue-004);
+}
+.date-cell.not-occupied.svelte-uqixgf.svelte-uqixgf {
+  border: 1px solid var(--gray-002) !important;
+  background-color: var(--gray-001) !important;
+  cursor: default;
+}
+.date-cell.not-occupied.svelte-uqixgf.svelte-uqixgf:hover {
+  background-color: var(--gray-002) !important;
+}
+.table-row.svelte-uqixgf.svelte-uqixgf:hover {
+  background-color: var(--gray-001);
+}
+.table-row.svelte-uqixgf:hover .sticky-room.svelte-uqixgf {
+  background-color: var(--gray-001);
+}
+.tooltip.svelte-uqixgf.svelte-uqixgf {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  animation: svelte-uqixgf-fadeIn 0.2s;
+}
+.tooltip-content.svelte-uqixgf.svelte-uqixgf {
+  background-color: white;
+  color: black;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+@keyframes svelte-uqixgf-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
 <script>(() => {
@@ -3297,13 +3378,13 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
       exports.StaffMissingDataReport = async function StaffMissingDataReport(i, cb) {
         return await axios.post("/staff/missingDataReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.StaffOccupancyHeatmap = async function StaffOccupancyHeatmap(i, cb) {
+      exports.StaffOccupancyHeatmap = async function StaffOccupancyHeatmap2(i, cb) {
         return await axios.post("/staff/occupancyHeatmap", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.StaffOccupancyReport = async function StaffOccupancyReport(i, cb) {
         return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.StaffPricePerDayReport = async function StaffPricePerDayReport2(i, cb) {
+      exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
         return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.StaffRevenueReport = async function StaffRevenueReport(i, cb) {
@@ -3513,6 +3594,12 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
   function space() {
     return text(" ");
   }
+  function empty() {
+    return text("");
+  }
+  function comment(content) {
+    return document.createComment(content);
+  }
   function listen(node, event, handler, options) {
     node.addEventListener(event, handler, options);
     return () => node.removeEventListener(event, handler, options);
@@ -3540,6 +3627,13 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
   }
   function set_input_value(input, value) {
     input.value = value == null ? "" : value;
+  }
+  function set_style(node, key, value, important) {
+    if (value == null) {
+      node.style.removeProperty(key);
+    } else {
+      node.style.setProperty(key, value, important ? "important" : "");
+    }
   }
   function toggle_class(element2, name, toggle) {
     element2.classList.toggle(name, !!toggle);
@@ -7105,266 +7199,256 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
   };
   var MonthShifter_default = MonthShifter;
 
-  // staffPricePerDayReport.svelte
+  // staffOccupancyHeatmap.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[6] = list[i];
+    child_ctx[17] = list[i];
+    const constants_0 = (
+      /*getBookingByRoomName*/
+      child_ctx[7](
+        /*room*/
+        child_ctx[17]
+      )
+    );
+    child_ctx[18] = constants_0;
     return child_ctx;
   }
-  function create_each_block(ctx) {
-    let tr;
-    let td0;
-    let t0_value = (
-      /*data*/
-      ctx[6].roomName + ""
+  function get_each_context_1(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[21] = list[i];
+    child_ctx[24] = i;
+    const constants_0 = (
+      /*isDateIncludeInDay*/
+      child_ctx[6](
+        /*day*/
+        child_ctx[24] + 1,
+        /*bk*/
+        child_ctx[18].dateStart || "",
+        /*bk*/
+        (child_ctx[18] || {})["dateEnd"] || ""
+      )
     );
-    let t0;
-    let t1;
-    let td1;
-    let t2_value = (
-      /*data*/
-      (ctx[6].roomSize || "--") + ""
-    );
-    let t2;
-    let t3;
-    let td2;
-    let t4_value = (
-      /*data*/
-      (ctx[6].tenantName || "--") + ""
-    );
-    let t4;
-    let t5;
-    let td3;
-    let t6_value = (
-      /*data*/
-      (ctx[6].dateStart || "--") + ""
-    );
-    let t6;
-    let t7;
-    let td4;
-    let t8_value = (
-      /*data*/
-      (ctx[6].dateEnd || "--") + ""
-    );
-    let t8;
-    let t9;
-    let td5;
-    let t10_value = (calculateDurationDay(
-      /*data*/
-      ctx[6].dateStart,
-      /*data*/
-      ctx[6].dateEnd
-    ) || "0") + "";
-    let t10;
-    let t11;
-    let t12;
-    let td6;
-    let t13_value = (calculatePricePerDay(
-      /*data*/
-      ctx[6].totalPrice,
-      /*data*/
-      ctx[6].dateStart,
-      /*data*/
-      ctx[6].dateEnd
-    ) || "0") + "";
-    let t13;
-    let t14;
-    let td7;
-    let t15_value = (calculatePricePerDayPerRoom(
-      /*data*/
-      ctx[6].totalPrice,
-      /*data*/
-      ctx[6].dateStart,
-      /*data*/
-      ctx[6].dateEnd,
-      /*data*/
-      ctx[6].roomSize
-    ) || "0") + "";
-    let t15;
-    let t16;
-    let td8;
-    let t17_value = (
-      /*data*/
-      (ctx[6].totalPaid || "0") + ""
-    );
-    let t17;
-    let t18;
-    let td9;
-    let t19_value = (
-      /*data*/
-      (ctx[6].totalPrice || "0") + ""
-    );
-    let t19;
-    let t20;
+    child_ctx[22] = constants_0;
+    return child_ctx;
+  }
+  function get_each_context_2(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[21] = list[i];
+    child_ctx[24] = i;
+    return child_ctx;
+  }
+  function create_each_block_2(ctx) {
+    let div;
     return {
       c() {
-        tr = element("tr");
-        td0 = element("td");
-        t0 = text(t0_value);
-        t1 = space();
-        td1 = element("td");
-        t2 = text(t2_value);
-        t3 = space();
-        td2 = element("td");
-        t4 = text(t4_value);
-        t5 = space();
-        td3 = element("td");
-        t6 = text(t6_value);
-        t7 = space();
-        td4 = element("td");
-        t8 = text(t8_value);
-        t9 = space();
-        td5 = element("td");
-        t10 = text(t10_value);
-        t11 = text(" Days");
-        t12 = space();
-        td6 = element("td");
-        t13 = text(t13_value);
-        t14 = space();
-        td7 = element("td");
-        t15 = text(t15_value);
-        t16 = space();
-        td8 = element("td");
-        t17 = text(t17_value);
-        t18 = space();
-        td9 = element("td");
-        t19 = text(t19_value);
-        t20 = space();
-        attr(td0, "class", "svelte-gq920t");
-        attr(td1, "class", "svelte-gq920t");
-        attr(td2, "class", "svelte-gq920t");
-        attr(td3, "class", "svelte-gq920t");
-        attr(td4, "class", "svelte-gq920t");
-        attr(td5, "class", "svelte-gq920t");
-        attr(td6, "class", "svelte-gq920t");
-        attr(td7, "class", "svelte-gq920t");
-        attr(td8, "class", "svelte-gq920t");
-        attr(td9, "class", "svelte-gq920t");
-        attr(tr, "class", "svelte-gq920t");
+        div = element("div");
+        div.textContent = `${/*day*/
+        ctx[24] + 1}`;
+        attr(div, "class", "date-header svelte-uqixgf");
       },
       m(target, anchor) {
-        insert(target, tr, anchor);
-        append(tr, td0);
-        append(td0, t0);
-        append(tr, t1);
-        append(tr, td1);
-        append(td1, t2);
-        append(tr, t3);
-        append(tr, td2);
-        append(td2, t4);
-        append(tr, t5);
-        append(tr, td3);
-        append(td3, t6);
-        append(tr, t7);
-        append(tr, td4);
-        append(td4, t8);
-        append(tr, t9);
-        append(tr, td5);
-        append(td5, t10);
-        append(td5, t11);
-        append(tr, t12);
-        append(tr, td6);
-        append(td6, t13);
-        append(tr, t14);
-        append(tr, td7);
-        append(td7, t15);
-        append(tr, t16);
-        append(tr, td8);
-        append(td8, t17);
-        append(tr, t18);
-        append(tr, td9);
-        append(td9, t19);
-        append(tr, t20);
+        insert(target, div, anchor);
       },
-      p(ctx2, dirty) {
-        if (dirty & /*pricePerDay*/
-        1 && t0_value !== (t0_value = /*data*/
-        ctx2[6].roomName + ""))
-          set_data(t0, t0_value);
-        if (dirty & /*pricePerDay*/
-        1 && t2_value !== (t2_value = /*data*/
-        (ctx2[6].roomSize || "--") + ""))
-          set_data(t2, t2_value);
-        if (dirty & /*pricePerDay*/
-        1 && t4_value !== (t4_value = /*data*/
-        (ctx2[6].tenantName || "--") + ""))
-          set_data(t4, t4_value);
-        if (dirty & /*pricePerDay*/
-        1 && t6_value !== (t6_value = /*data*/
-        (ctx2[6].dateStart || "--") + ""))
-          set_data(t6, t6_value);
-        if (dirty & /*pricePerDay*/
-        1 && t8_value !== (t8_value = /*data*/
-        (ctx2[6].dateEnd || "--") + ""))
-          set_data(t8, t8_value);
-        if (dirty & /*pricePerDay*/
-        1 && t10_value !== (t10_value = (calculateDurationDay(
-          /*data*/
-          ctx2[6].dateStart,
-          /*data*/
-          ctx2[6].dateEnd
-        ) || "0") + ""))
-          set_data(t10, t10_value);
-        if (dirty & /*pricePerDay*/
-        1 && t13_value !== (t13_value = (calculatePricePerDay(
-          /*data*/
-          ctx2[6].totalPrice,
-          /*data*/
-          ctx2[6].dateStart,
-          /*data*/
-          ctx2[6].dateEnd
-        ) || "0") + ""))
-          set_data(t13, t13_value);
-        if (dirty & /*pricePerDay*/
-        1 && t15_value !== (t15_value = (calculatePricePerDayPerRoom(
-          /*data*/
-          ctx2[6].totalPrice,
-          /*data*/
-          ctx2[6].dateStart,
-          /*data*/
-          ctx2[6].dateEnd,
-          /*data*/
-          ctx2[6].roomSize
-        ) || "0") + ""))
-          set_data(t15, t15_value);
-        if (dirty & /*pricePerDay*/
-        1 && t17_value !== (t17_value = /*data*/
-        (ctx2[6].totalPaid || "0") + ""))
-          set_data(t17, t17_value);
-        if (dirty & /*pricePerDay*/
-        1 && t19_value !== (t19_value = /*data*/
-        (ctx2[6].totalPrice || "0") + ""))
-          set_data(t19, t19_value);
-      },
+      p: noop,
       d(detaching) {
         if (detaching) {
-          detach(tr);
+          detach(div);
         }
       }
     };
   }
-  function create_default_slot(ctx) {
+  function create_each_block_1(ctx) {
+    let c;
+    let t;
+    let div;
+    let div_class_value;
+    let mounted;
+    let dispose;
+    function mouseenter_handler(...args) {
+      return (
+        /*mouseenter_handler*/
+        ctx[13](
+          /*isOccupied*/
+          ctx[22],
+          /*bk*/
+          ctx[18],
+          /*day*/
+          ctx[24],
+          /*room*/
+          ctx[17],
+          ...args
+        )
+      );
+    }
+    return {
+      c() {
+        c = comment(" svelte-ignore a11y-no-static-element-interactions ");
+        t = space();
+        div = element("div");
+        attr(div, "class", div_class_value = "date-cell " + /*isOccupied*/
+        (ctx[22] ? "occupied" : "not-occupied") + " svelte-uqixgf");
+        attr(div, "aria-label", "tool-tip");
+        set_style(
+          div,
+          "--bg-from-hsl",
+          /*bk*/
+          ctx[18].color
+        );
+      },
+      m(target, anchor) {
+        insert(target, c, anchor);
+        insert(target, t, anchor);
+        insert(target, div, anchor);
+        if (!mounted) {
+          dispose = [
+            listen(div, "mouseenter", mouseenter_handler),
+            listen(
+              div,
+              "mouseleave",
+              /*hideTooltip*/
+              ctx[10]
+            )
+          ];
+          mounted = true;
+        }
+      },
+      p(new_ctx, dirty) {
+        ctx = new_ctx;
+        if (dirty & /*roomNames*/
+        1 && div_class_value !== (div_class_value = "date-cell " + /*isOccupied*/
+        (ctx[22] ? "occupied" : "not-occupied") + " svelte-uqixgf")) {
+          attr(div, "class", div_class_value);
+        }
+        if (dirty & /*roomNames*/
+        1) {
+          set_style(
+            div,
+            "--bg-from-hsl",
+            /*bk*/
+            ctx[18].color
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(c);
+          detach(t);
+          detach(div);
+        }
+        mounted = false;
+        run_all(dispose);
+      }
+    };
+  }
+  function create_each_block(ctx) {
     let div1;
+    let div0;
+    let t0;
+    let t1_value = (
+      /*room*/
+      ctx[17] + ""
+    );
+    let t1;
+    let t2;
+    let t3;
+    let each_value_1 = ensure_array_like(Array.from({
+      length: (
+        /*totalDaysInSelectedMonth*/
+        ctx[3]
+      )
+    }));
+    let each_blocks = [];
+    for (let i = 0; i < each_value_1.length; i += 1) {
+      each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    }
+    return {
+      c() {
+        div1 = element("div");
+        div0 = element("div");
+        t0 = text("Room ");
+        t1 = text(t1_value);
+        t2 = space();
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        t3 = space();
+        attr(div0, "class", "room-name sticky-room svelte-uqixgf");
+        attr(div1, "class", "table-row svelte-uqixgf");
+      },
+      m(target, anchor) {
+        insert(target, div1, anchor);
+        append(div1, div0);
+        append(div0, t0);
+        append(div0, t1);
+        append(div1, t2);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div1, null);
+          }
+        }
+        append(div1, t3);
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*roomNames*/
+        1 && t1_value !== (t1_value = /*room*/
+        ctx2[17] + ""))
+          set_data(t1, t1_value);
+        if (dirty & /*isDateIncludeInDay, getBookingByRoomName, roomNames, showTooltip, hideTooltip, totalDaysInSelectedMonth*/
+        1737) {
+          each_value_1 = ensure_array_like(Array.from({
+            length: (
+              /*totalDaysInSelectedMonth*/
+              ctx2[3]
+            )
+          }));
+          let i;
+          for (i = 0; i < each_value_1.length; i += 1) {
+            const child_ctx = get_each_context_1(ctx2, each_value_1, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block_1(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div1, t3);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value_1.length;
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div1);
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function create_default_slot(ctx) {
+    let div4;
     let monthshifter;
     let updating_yearMonth;
     let updating_isLoading;
     let t0;
+    let div3;
+    let div2;
+    let div1;
     let div0;
-    let table;
-    let thead;
-    let t20;
-    let tbody;
+    let t2;
+    let t3;
     let current;
     function monthshifter_yearMonth_binding(value) {
-      ctx[4](value);
+      ctx[11](value);
     }
     function monthshifter_isLoading_binding(value) {
-      ctx[5](value);
+      ctx[12](value);
     }
     let monthshifter_props = { OnChanges: (
       /*RefreshData*/
-      ctx[3]
+      ctx[8]
     ) };
     if (
       /*yearMonth*/
@@ -7383,9 +7467,19 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
     monthshifter = new MonthShifter_default({ props: monthshifter_props });
     binding_callbacks.push(() => bind(monthshifter, "yearMonth", monthshifter_yearMonth_binding));
     binding_callbacks.push(() => bind(monthshifter, "isLoading", monthshifter_isLoading_binding));
+    let each_value_2 = ensure_array_like(Array.from({
+      length: (
+        /*totalDaysInSelectedMonth*/
+        ctx[3]
+      )
+    }));
+    let each_blocks_1 = [];
+    for (let i = 0; i < each_value_2.length; i += 1) {
+      each_blocks_1[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
+    }
     let each_value = ensure_array_like(
-      /*pricePerDay*/
-      ctx[0] || []
+      /*roomNames*/
+      ctx[0]
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
@@ -7393,35 +7487,46 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
     }
     return {
       c() {
-        div1 = element("div");
+        div4 = element("div");
         create_component(monthshifter.$.fragment);
         t0 = space();
+        div3 = element("div");
+        div2 = element("div");
+        div1 = element("div");
         div0 = element("div");
-        table = element("table");
-        thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-gq920t"><th class="svelte-gq920t">Room</th> <th class="svelte-gq920t">Room Size</th> <th class="svelte-gq920t">Tenant</th> <th class="svelte-gq920t">Date Start</th> <th class="svelte-gq920t">Date End</th> <th class="svelte-gq920t">Duration</th> <th class="svelte-gq920t">Price Per Day</th> <th class="svelte-gq920t">Price Per Day / Room</th> <th class="svelte-gq920t">Total Paid</th> <th class="svelte-gq920t">Total Price</th></tr>`;
-        t20 = space();
-        tbody = element("tbody");
+        div0.textContent = "Room";
+        t2 = space();
+        for (let i = 0; i < each_blocks_1.length; i += 1) {
+          each_blocks_1[i].c();
+        }
+        t3 = space();
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(thead, "class", "svelte-gq920t");
-        attr(table, "class", "svelte-gq920t");
-        attr(div0, "class", "table-container svelte-gq920t");
-        attr(div1, "class", "report-container svelte-gq920t");
+        attr(div0, "class", "room-label sticky-corner svelte-uqixgf");
+        attr(div1, "class", "table-header svelte-uqixgf");
+        attr(div2, "class", "rooms-heatmap-table svelte-uqixgf");
+        attr(div3, "class", "rooms-heatmap-wrapper svelte-uqixgf");
+        attr(div4, "class", "occupancy-heatmap-container svelte-uqixgf");
       },
       m(target, anchor) {
-        insert(target, div1, anchor);
-        mount_component(monthshifter, div1, null);
-        append(div1, t0);
+        insert(target, div4, anchor);
+        mount_component(monthshifter, div4, null);
+        append(div4, t0);
+        append(div4, div3);
+        append(div3, div2);
+        append(div2, div1);
         append(div1, div0);
-        append(div0, table);
-        append(table, thead);
-        append(table, t20);
-        append(table, tbody);
+        append(div1, t2);
+        for (let i = 0; i < each_blocks_1.length; i += 1) {
+          if (each_blocks_1[i]) {
+            each_blocks_1[i].m(div1, null);
+          }
+        }
+        append(div2, t3);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
-            each_blocks[i].m(tbody, null);
+            each_blocks[i].m(div2, null);
           }
         }
         current = true;
@@ -7443,11 +7548,35 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
           add_flush_callback(() => updating_isLoading = false);
         }
         monthshifter.$set(monthshifter_changes);
-        if (dirty & /*pricePerDay, calculatePricePerDayPerRoom, calculatePricePerDay, calculateDurationDay*/
-        1) {
+        if (dirty & /*totalDaysInSelectedMonth*/
+        8) {
+          each_value_2 = ensure_array_like(Array.from({
+            length: (
+              /*totalDaysInSelectedMonth*/
+              ctx2[3]
+            )
+          }));
+          let i;
+          for (i = 0; i < each_value_2.length; i += 1) {
+            const child_ctx = get_each_context_2(ctx2, each_value_2, i);
+            if (each_blocks_1[i]) {
+              each_blocks_1[i].p(child_ctx, dirty);
+            } else {
+              each_blocks_1[i] = create_each_block_2(child_ctx);
+              each_blocks_1[i].c();
+              each_blocks_1[i].m(div1, null);
+            }
+          }
+          for (; i < each_blocks_1.length; i += 1) {
+            each_blocks_1[i].d(1);
+          }
+          each_blocks_1.length = each_value_2.length;
+        }
+        if (dirty & /*Array, totalDaysInSelectedMonth, isDateIncludeInDay, getBookingByRoomName, roomNames, showTooltip, hideTooltip*/
+        1737) {
           each_value = ensure_array_like(
-            /*pricePerDay*/
-            ctx2[0] || []
+            /*roomNames*/
+            ctx2[0]
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
@@ -7457,7 +7586,7 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
             } else {
               each_blocks[i] = create_each_block(child_ctx);
               each_blocks[i].c();
-              each_blocks[i].m(tbody, null);
+              each_blocks[i].m(div2, null);
             }
           }
           for (; i < each_blocks.length; i += 1) {
@@ -7478,15 +7607,161 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
       },
       d(detaching) {
         if (detaching) {
-          detach(div1);
+          detach(div4);
         }
         destroy_component(monthshifter);
+        destroy_each(each_blocks_1, detaching);
         destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function create_if_block2(ctx) {
+    let div1;
+    let div0;
+    let strong0;
+    let t1;
+    let t2_value = (
+      /*tooltipData*/
+      ctx[4].tenant + ""
+    );
+    let t2;
+    let br0;
+    let t3;
+    let strong1;
+    let t5;
+    let t6_value = (
+      /*tooltipData*/
+      ctx[4].room + ""
+    );
+    let t6;
+    let br1;
+    let t7;
+    let strong2;
+    let t9;
+    let t10_value = (
+      /*tooltipData*/
+      ctx[4].dateStart + ""
+    );
+    let t10;
+    let br2;
+    let t11;
+    let strong3;
+    let t13;
+    let t14_value = (
+      /*tooltipData*/
+      ctx[4].dateEnd + ""
+    );
+    let t14;
+    return {
+      c() {
+        div1 = element("div");
+        div0 = element("div");
+        strong0 = element("strong");
+        strong0.textContent = "Penghuni:";
+        t1 = space();
+        t2 = text(t2_value);
+        br0 = element("br");
+        t3 = space();
+        strong1 = element("strong");
+        strong1.textContent = "Kamar:";
+        t5 = space();
+        t6 = text(t6_value);
+        br1 = element("br");
+        t7 = space();
+        strong2 = element("strong");
+        strong2.textContent = "Check-in:";
+        t9 = space();
+        t10 = text(t10_value);
+        br2 = element("br");
+        t11 = space();
+        strong3 = element("strong");
+        strong3.textContent = "Check-out:";
+        t13 = space();
+        t14 = text(t14_value);
+        attr(div0, "class", "tooltip-content svelte-uqixgf");
+        attr(div1, "class", "tooltip svelte-uqixgf");
+        set_style(
+          div1,
+          "left",
+          /*tooltipPosition*/
+          ctx[5].x + 10 + "px"
+        );
+        set_style(
+          div1,
+          "top",
+          /*tooltipPosition*/
+          ctx[5].y + 10 + "px"
+        );
+      },
+      m(target, anchor) {
+        insert(target, div1, anchor);
+        append(div1, div0);
+        append(div0, strong0);
+        append(div0, t1);
+        append(div0, t2);
+        append(div0, br0);
+        append(div0, t3);
+        append(div0, strong1);
+        append(div0, t5);
+        append(div0, t6);
+        append(div0, br1);
+        append(div0, t7);
+        append(div0, strong2);
+        append(div0, t9);
+        append(div0, t10);
+        append(div0, br2);
+        append(div0, t11);
+        append(div0, strong3);
+        append(div0, t13);
+        append(div0, t14);
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*tooltipData*/
+        16 && t2_value !== (t2_value = /*tooltipData*/
+        ctx2[4].tenant + ""))
+          set_data(t2, t2_value);
+        if (dirty & /*tooltipData*/
+        16 && t6_value !== (t6_value = /*tooltipData*/
+        ctx2[4].room + ""))
+          set_data(t6, t6_value);
+        if (dirty & /*tooltipData*/
+        16 && t10_value !== (t10_value = /*tooltipData*/
+        ctx2[4].dateStart + ""))
+          set_data(t10, t10_value);
+        if (dirty & /*tooltipData*/
+        16 && t14_value !== (t14_value = /*tooltipData*/
+        ctx2[4].dateEnd + ""))
+          set_data(t14, t14_value);
+        if (dirty & /*tooltipPosition*/
+        32) {
+          set_style(
+            div1,
+            "left",
+            /*tooltipPosition*/
+            ctx2[5].x + 10 + "px"
+          );
+        }
+        if (dirty & /*tooltipPosition*/
+        32) {
+          set_style(
+            div1,
+            "top",
+            /*tooltipPosition*/
+            ctx2[5].y + 10 + "px"
+          );
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div1);
+        }
       }
     };
   }
   function create_fragment7(ctx) {
     let layoutmain;
+    let t;
+    let if_block_anchor;
     let current;
     layoutmain = new main_default({
       props: {
@@ -7496,21 +7771,48 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
         $scope: { ctx }
       }
     });
+    let if_block = (
+      /*tooltipData*/
+      ctx[4] && create_if_block2(ctx)
+    );
     return {
       c() {
         create_component(layoutmain.$.fragment);
+        t = space();
+        if (if_block)
+          if_block.c();
+        if_block_anchor = empty();
       },
       m(target, anchor) {
         mount_component(layoutmain, target, anchor);
+        insert(target, t, anchor);
+        if (if_block)
+          if_block.m(target, anchor);
+        insert(target, if_block_anchor, anchor);
         current = true;
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, pricePerDay, yearMonth, isLoading*/
-        519) {
+        if (dirty & /*$scope, roomNames, totalDaysInSelectedMonth, yearMonth, isLoading*/
+        67108879) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
+        if (
+          /*tooltipData*/
+          ctx2[4]
+        ) {
+          if (if_block) {
+            if_block.p(ctx2, dirty);
+          } else {
+            if_block = create_if_block2(ctx2);
+            if_block.c();
+            if_block.m(if_block_anchor.parentNode, if_block_anchor);
+          }
+        } else if (if_block) {
+          if_block.d(1);
+          if_block = null;
+        }
       },
       i(local) {
         if (current)
@@ -7523,7 +7825,13 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
         current = false;
       },
       d(detaching) {
+        if (detaching) {
+          detach(t);
+          detach(if_block_anchor);
+        }
         destroy_component(layoutmain, detaching);
+        if (if_block)
+          if_block.d(detaching);
       }
     };
   }
@@ -7535,21 +7843,18 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
     /** @type {Access} */
     {/* segments */}
   );
-  function calculateDurationDay(dateStart, dateEnd) {
-    return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / (1e3 * 60 * 60 * 24));
-  }
-  function calculatePricePerDay(totalPrice, dateStart, dateEnd) {
-    return Number((totalPrice / calculateDurationDay(dateStart, dateEnd)).toFixed(1));
-  }
-  function calculatePricePerDayPerRoom(totalPrice, dateStart, dateEnd, roomSize) {
-    const [roomSize1, roomSize2] = roomSize.split("x");
-    const duration = calculateDurationDay(dateStart, dateEnd);
-    return Number((totalPrice / duration / (Number(roomSize1) * Number(roomSize2))).toFixed(1));
-  }
+  var tenants = (
+    /** @type {Record<Number, string>} */
+    {/* tenants */}
+  );
   function instance7($self, $props, $invalidate) {
-    let pricePerDay = (
-      /** @type {PricePerDayReport[]} */
-      [ /* pricePerDay */ ]
+    let bookingsPerMonth = (
+      /** @type {any[]} */
+      [/* bookingsPerMonth */]
+    );
+    let roomNames = (
+      /** @type {string[]} */
+      [/* roomNames */]
     );
     let yearMonth = (
       /** @type {string} */
@@ -7559,22 +7864,94 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
       /** @type {boolean} */
       false
     );
+    function reColorBookings() {
+      const total = bookingsPerMonth.length || 0;
+      (bookingsPerMonth || []).forEach((booking, idx) => {
+        const degree = Math.floor(360 * idx / (total + 1));
+        const color = "hsl(" + degree + ", 100%, 47%)";
+        booking.color = color;
+      });
+    }
+    let totalDaysInSelectedMonth = (
+      /** @type {number} */
+      31
+    );
+    function refreshTotalDaysInMonth() {
+      const date = new Date(yearMonth + "-01");
+      $invalidate(3, totalDaysInSelectedMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate());
+    }
+    function isDateIncludeInDay(day, dateStart, dateEnd) {
+      if (!dateStart || !dateEnd) {
+        return false;
+      }
+      const date = new Date(yearMonth + "-" + (day < 10 ? "0" + day : day));
+      return date >= new Date(dateStart) && date <= new Date(dateEnd);
+    }
+    function getBookingByRoomName(roomName) {
+      for (let i = 0; i < bookingsPerMonth.length; i++) {
+        if (bookingsPerMonth[i].roomName === roomName) {
+          return bookingsPerMonth[i];
+        }
+      }
+      return {
+        id: 0,
+        roomId: 0,
+        roomName: "",
+        tenantId: 0,
+        tenantName: "",
+        dateStart: "",
+        dateEnd: "",
+        totalPaid: 0,
+        totalPrice: 0,
+        extraTenants: [],
+        color: ""
+      };
+    }
+    onMount(() => {
+      refreshTotalDaysInMonth();
+      reColorBookings();
+    });
     async function RefreshData() {
-      await (0, import_jsApi2.StaffPricePerDayReport)(
+      await (0, import_jsApi2.StaffOccupancyHeatmap)(
+        // @ts-ignore
         { yearMonth },
-        /** @type {import('./jsApi.GEN').StaffPricePerDayReportCallback} */
+        /** @type {import('./jsApi.GEN').StaffOccupancyHeatmapCallback} */
         /** @returns {Promise<void>} */
         function(o) {
           if (o.error) {
             console.log(o);
-            notifier.showError(o.error || "something went wrong");
+            notifier.showError(o.error);
             return;
           }
-          $invalidate(0, pricePerDay = o.pricePerDay);
-          console.log("Price per day report:", pricePerDay);
-          return;
+          bookingsPerMonth = o.bookingsPerMonth;
+          $invalidate(0, roomNames = o.roomNames);
+          refreshTotalDaysInMonth();
+          reColorBookings();
         }
       );
+    }
+    let tooltipData = null;
+    let tooltipPosition = { x: 0, y: 0 };
+    function showTooltip(event, booking, day, room) {
+      console.log("Hover triggered:", { booking, day, room });
+      if (!booking) {
+        console.log("No booking data");
+        return;
+      }
+      console.log("Tenant ID:", booking.tenantId);
+      console.log("Tenants data:", tenants);
+      $invalidate(4, tooltipData = {
+        tenant: tenants[booking.tenantId] || "Unknown",
+        room,
+        dateStart: booking.dateStart,
+        dateEnd: booking.dateEnd,
+        day
+      });
+      $invalidate(5, tooltipPosition = { x: event.clientX, y: event.clientY });
+      console.log("Tooltip data set:", tooltipData);
+    }
+    function hideTooltip() {
+      $invalidate(4, tooltipData = null);
     }
     function monthshifter_yearMonth_binding(value) {
       yearMonth = value;
@@ -7584,25 +7961,38 @@ table.svelte-gq920t tbody tr td.svelte-gq920t {
       isLoading = value;
       $invalidate(2, isLoading);
     }
+    const mouseenter_handler = (isOccupied, bk, day, room, e) => {
+      if (isOccupied && bk) {
+        showTooltip(e, bk, day + 1, room);
+      }
+    };
     return [
-      pricePerDay,
+      roomNames,
       yearMonth,
       isLoading,
+      totalDaysInSelectedMonth,
+      tooltipData,
+      tooltipPosition,
+      isDateIncludeInDay,
+      getBookingByRoomName,
       RefreshData,
+      showTooltip,
+      hideTooltip,
       monthshifter_yearMonth_binding,
-      monthshifter_isLoading_binding
+      monthshifter_isLoading_binding,
+      mouseenter_handler
     ];
   }
-  var StaffPricePerDayReport_1 = class extends SvelteComponent {
+  var StaffOccupancyHeatmap_1 = class extends SvelteComponent {
     constructor(options) {
       super();
       init(this, options, instance7, create_fragment7, safe_not_equal, {});
     }
   };
-  var staffPricePerDayReport_default = StaffPricePerDayReport_1;
+  var staffOccupancyHeatmap_default = StaffOccupancyHeatmap_1;
 
-  // staffPricePerDayReport.svelte.ts
-  var app = new staffPricePerDayReport_default({ target: document.getElementById("app") });
+  // staffOccupancyHeatmap.svelte.ts
+  var app = new staffOccupancyHeatmap_default({ target: document.getElementById("app") });
 })();
 </script>
 </body></html>

@@ -44,6 +44,7 @@ var allCommands = []string{
 	domain.GuestVerifyEmailAction,
 	domain.StaffBookingAction,
 	domain.StaffMissingDataReportAction,
+	domain.StaffOccupancyHeatmapAction,
 	domain.StaffOccupancyReportAction,
 	domain.StaffPricePerDayReportAction,
 	domain.StaffRevenueReportAction,

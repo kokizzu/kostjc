@@ -8,7 +8,7 @@
   import {
     RiBuildingsHome2Line, RiMapMapPin2Line, RiUserFacesUser3Line,
     RiUserFacesUserFollowLine, RiBuildingsHotelLine, RiBusinessCalendarScheduleLine,
-    RiSystemLogoutBoxRLine, RiFinanceWallet3Line,
+    RiSystemLogoutBoxRLine, RiFinanceWallet3Line, RiDesignLayoutGrid2Line,
     RiBusinessInboxUnarchiveLine, RiOthersDoorOpenLine, RiUserFacesGroupLine,
     RiDocumentFileChartLine, RiSystemMenu2Line, RiFinanceCashLine, RiBusinessBarChartBoxLine,
     RiBuildingsHomeWifiLine, RiSystemSettingsLine, RiFinanceShoppingBag2Line
@@ -136,6 +136,10 @@
       <a href="/staff/occupancyReport" class:active={pathAll === '/staff/occupancyReport'} >
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Occupancy Report</span>
+      </a>
+      <a href="/staff/occupancyHeatmap" class:active={pathAll === '/staff/occupancyHeatmap'} >
+        <Icon src={RiDesignLayoutGrid2Line} size="20" />
+        <span>Occupancy Heatmap</span>
       </a>
       <a href="/staff/missingDataReport" class:active={pathAll === '/staff/missingDataReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
@@ -281,8 +285,8 @@
         <span>Price per day Report</span>
       </a>
       <a href="/staff/sales" class:active={pathAll === '/staff/sales'}>
-       <Icon src={RiFinanceShoppingBag2Line} size="20" />
-       <span>Sales</span>
+        <Icon src={RiFinanceShoppingBag2Line} size="20" />
+        <span>Sales</span>
       </a>
       <a href="/user" class:active={pathAll === '/user'}>
         <Icon src={RiUserFacesUser3Line} size="20" />
@@ -418,7 +422,7 @@
     flex-wrap: nowrap;
     width: 100%;
     margin: 0;
-    padding: 0 10px 0 50px;
+    padding: 0 10px 0 40px;
   }
 
   aside .container .nav-menu a,
