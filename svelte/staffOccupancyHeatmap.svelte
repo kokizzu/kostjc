@@ -87,6 +87,41 @@
       }
     )
   }
+
+
+  let tooltipData = null;
+  let tooltipPosition = { x: 0, y: 0 };
+
+ function showTooltip(event, booking, day, room) {
+  console.log('Hover triggered:', { booking, day, room });
+  
+  if (!booking) {
+    console.log('No booking data');
+    return;
+  }
+  
+  console.log('Tenant ID:', booking.tenantId);
+  console.log('Tenants data:', tenants);
+  
+  tooltipData = {
+    tenant: tenants[booking.tenantId] || 'Unknown',
+    room: room,
+    dateStart: booking.dateStart,
+    dateEnd: booking.dateEnd,
+    day: day
+  };
+  
+  tooltipPosition = {
+    x: event.clientX,
+    y: event.clientY
+  };
+  
+  console.log('Tooltip data set:', tooltipData);
+}
+
+  function hideTooltip() {
+    tooltipData = null;
+  }
 </script>
 
 <LayoutMain access={segments} user={user}>
@@ -110,15 +145,39 @@
           <div class="table-row">
             <div class="room-name sticky-room">Room {room}</div>
             {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
-              <div class="date-cell {isDateIncludeInDay(day + 1, (bk || {})['dateStart'] || '', (bk || {})['dateEnd'] || '') ? 'occupied' : 'not-occupied'}">
-              </div>
-            {/each}
+                {@const isOccupied = isDateIncludeInDay(day + 1, (bk || {})['dateStart'] || '', (bk || {})['dateEnd'] || '')}
+                <div 
+                  class="date-cell {isOccupied ? 'occupied' : 'not-occupied'}"
+                  on:mouseenter={(e) => {
+                    if (isOccupied && bk) {
+                      showTooltip(e, bk, day + 1, room);
+                    }
+                  }}
+                  on:mouseleave={hideTooltip}
+                  aria-label="tool-tip"
+                >
+                </div>
+              {/each}
           </div>
         {/each}
       </div>
     </div>
   </div>
 </LayoutMain>
+
+{#if tooltipData}
+  <div 
+    class="tooltip" 
+    style="left: {tooltipPosition.x + 10}px; top: {tooltipPosition.y + 10}px"
+  >
+    <div class="tooltip-content">
+      <strong>Penghuni:</strong> {tooltipData.tenant}<br/>
+      <strong>Kamar:</strong> {tooltipData.room}<br/>
+      <strong>Check-in:</strong> {tooltipData.dateStart}<br/>
+      <strong>Check-out:</strong> {tooltipData.dateEnd}
+    </div>
+  </div>
+{/if}
 
 <style>
   .occupancy-heatmap-container {
@@ -163,7 +222,6 @@
   .room-label,
   .room-name {
     padding: 8px;
-    padding-right: 15px;
     font-weight: 600;
     text-align: left;
     font-size: var(--font-md);
@@ -195,6 +253,8 @@
     height: 28px;
     border-radius: 3px;
     cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
   }
 
   .date-cell.occupied {
@@ -202,9 +262,22 @@
     background-color: var(--blue-transparent);
   }
 
+  .date-cell.occupied:hover {
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(0, 100, 255, 0.3);
+    z-index: 5;
+    border-color: var(--blue-007);
+    background-color: var(--blue-004);
+  }
+
   .date-cell.not-occupied {
     border: 1px solid var(--gray-002);
     background-color: var(--gray-001);
+    cursor: default;
+  }
+
+  .date-cell.not-occupied:hover {
+    background-color: var(--gray-002);
   }
 
   .table-row:hover {
@@ -213,5 +286,27 @@
 
   .table-row:hover .sticky-room {
     background-color: var(--gray-001);
+  }
+
+  .tooltip {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    animation: fadeIn 0.2s;
+  }
+
+  .tooltip-content {
+    background-color: white;
+    color: black;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 </style>
