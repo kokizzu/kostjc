@@ -118,15 +118,9 @@
    * @param {string} room
    */
   function showTooltip(event, booking, day, room) {
-    console.log('Hover triggered:', { booking, day, room });
-    
     if (!booking) {
-      console.log('No booking data');
       return;
     }
-    
-    console.log('Tenant ID:', booking.tenantId);
-    console.log('Tenants data:', tenants);
     
     tooltipData = {
       tenant: tenants[booking.tenantId] || 'Unknown',
@@ -140,8 +134,6 @@
       x: event.clientX,
       y: event.clientY
     };
-    
-    console.log('Tooltip data set:', tooltipData);
   }
 
   function hideTooltip() {
@@ -181,7 +173,7 @@
                   }}
                   on:mouseleave={hideTooltip}
                   aria-label="tool-tip"
-                  style="--bg-from-hsl: {bk.color}"
+                  style="background-color: {bk.color}"
                 >
                 </div>
               {/each}
@@ -282,10 +274,6 @@
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
-  }
-
-  .date-cell.occupied {
-    background: var(--bg-from-hsl);
   }
 
   .date-cell.occupied:hover {
