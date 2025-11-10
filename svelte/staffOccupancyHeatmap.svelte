@@ -31,6 +31,8 @@
     totalDaysInSelectedMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   }
 
+  console.log('Total days in selected month: ', totalDaysInSelectedMonth);
+
   /**
    * @description Check if date is include in n-day
    * @param {number} day
@@ -137,14 +139,13 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
-    width: fit-content;
-    min-width: 100%;
+    width: 100%;
   }
 
   .table-header,
   .table-row {
     display: grid;
-    grid-template-columns: 120px repeat(31, minmax(40px, 1fr));
+    grid-template-columns: 100px repeat(auto-fit, minmax(25px, 1fr));
     gap: 2px;
     align-items: center;
   }
@@ -161,36 +162,38 @@
 
   .room-label,
   .room-name {
-    padding: 15px;
+    padding: 8px;
+    padding-right: 15px;
     font-weight: 600;
     text-align: left;
+    font-size: var(--font-md);
   }
 
   .sticky-corner {
-  position: sticky;
-  left: 0;
-  z-index: 30;
-  background-color: white;
-}
+    position: sticky;
+    left: 0;
+    z-index: 30;
+    background-color: white;
+  }
 
-.sticky-room {
-  position: sticky;
-  left: 0;
-  z-index: 10;
-  background-color: white;
-}
+  .sticky-room {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    background-color: white;
+  }
 
   .date-header {
     text-align: center;
-    font-size: var(--font-sm);
+    font-size: 10px;
     color: var(--gray-008);
-    padding: 5px;
+    padding: 2px;
     background-color: white;
   }
 
   .date-cell {
-    height: 40px;
-    border-radius: 4px;
+    height: 28px;
+    border-radius: 3px;
     cursor: pointer;
   }
 
