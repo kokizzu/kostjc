@@ -698,32 +698,29 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./staffOccupancyHeatmap.esbuild-svelte-fake-css */
-.occupancy-heatmap-container.svelte-13vrnlh.svelte-13vrnlh {
+.occupancy-heatmap-container.svelte-bxg9fe.svelte-bxg9fe {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.rooms-heatmap-wrapper.svelte-13vrnlh.svelte-13vrnlh {
+.rooms-heatmap-wrapper.svelte-bxg9fe.svelte-bxg9fe {
   position: relative;
   width: 100%;
   overflow: auto;
   max-height: calc(100vh - 200px);
 }
-.rooms-heatmap-table.svelte-13vrnlh.svelte-13vrnlh {
+.rooms-heatmap-table.svelte-bxg9fe.svelte-bxg9fe {
   display: flex;
   flex-direction: column;
   gap: 2px;
   width: 100%;
 }
-.table-header.svelte-13vrnlh.svelte-13vrnlh,
-.table-row.svelte-13vrnlh.svelte-13vrnlh {
-  display: grid;
-  grid-template-columns: 100px repeat(auto-fit, minmax(25px, 1fr));
-  gap: 2px;
+.table-header.svelte-bxg9fe.svelte-bxg9fe {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
   align-items: center;
-}
-.table-header.svelte-13vrnlh.svelte-13vrnlh {
   position: sticky;
   top: 0;
   background-color: white;
@@ -732,67 +729,91 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   border-bottom: 2px solid var(--gray-004);
   padding-bottom: 10px;
 }
-.room-label.svelte-13vrnlh.svelte-13vrnlh,
-.room-name.svelte-13vrnlh.svelte-13vrnlh {
+.table-header.svelte-bxg9fe .days.svelte-bxg9fe {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+  gap: 2px;
+}
+.room-label.svelte-bxg9fe.svelte-bxg9fe {
   padding: 8px;
   font-weight: 600;
   text-align: left;
   font-size: var(--font-md);
+  width: 100px;
 }
-.sticky-corner.svelte-13vrnlh.svelte-13vrnlh {
+.sticky-corner.svelte-bxg9fe.svelte-bxg9fe {
   position: sticky;
   left: 0;
   z-index: 30;
   background-color: white;
 }
-.sticky-room.svelte-13vrnlh.svelte-13vrnlh {
+.sticky-room.svelte-bxg9fe.svelte-bxg9fe {
   position: sticky;
   left: 0;
   z-index: 10;
   background-color: white;
 }
-.date-header.svelte-13vrnlh.svelte-13vrnlh {
+.date-header.svelte-bxg9fe.svelte-bxg9fe {
   text-align: center;
   font-size: 10px;
   color: var(--gray-008);
   padding: 2px;
   background-color: white;
 }
-.date-cell.svelte-13vrnlh.svelte-13vrnlh {
+.date-cell.svelte-bxg9fe.svelte-bxg9fe {
   height: 28px;
   border-radius: 3px;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
 }
-.date-cell.occupied.svelte-13vrnlh.svelte-13vrnlh:hover {
+.date-cell.occupied.svelte-bxg9fe.svelte-bxg9fe:hover {
   transform: scale(1.15);
   box-shadow: 0 2px 8px rgba(0, 100, 255, 0.3);
   z-index: 5;
   border-color: var(--blue-007);
   background-color: var(--blue-004);
 }
-.date-cell.not-occupied.svelte-13vrnlh.svelte-13vrnlh {
+.date-cell.not-occupied.svelte-bxg9fe.svelte-bxg9fe {
   border: 1px solid var(--gray-002) !important;
   background-color: var(--gray-001) !important;
   cursor: default;
 }
-.date-cell.not-occupied.svelte-13vrnlh.svelte-13vrnlh:hover {
+.date-cell.not-occupied.svelte-bxg9fe.svelte-bxg9fe:hover {
   background-color: var(--gray-002) !important;
 }
-.table-row.svelte-13vrnlh.svelte-13vrnlh:hover {
+.table-row.svelte-bxg9fe.svelte-bxg9fe {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.table-row.svelte-bxg9fe .room-name.svelte-bxg9fe {
+  padding: 8px;
+  font-weight: 600;
+  text-align: left;
+  font-size: var(--font-md);
+  width: 100px;
+}
+.table-row.svelte-bxg9fe.svelte-bxg9fe:hover {
   background-color: var(--gray-001);
 }
-.table-row.svelte-13vrnlh:hover .sticky-room.svelte-13vrnlh {
+.table-row.svelte-bxg9fe:hover .sticky-room.svelte-bxg9fe {
   background-color: var(--gray-001);
 }
-.tooltip.svelte-13vrnlh.svelte-13vrnlh {
+.table-row.svelte-bxg9fe .blocks.svelte-bxg9fe {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+  gap: 2px;
+}
+.tooltip.svelte-bxg9fe.svelte-bxg9fe {
   position: fixed;
   z-index: 1000;
   pointer-events: none;
-  animation: svelte-13vrnlh-fadeIn 0.2s;
+  animation: svelte-bxg9fe-fadeIn 0.2s;
 }
-.tooltip-content.svelte-13vrnlh.svelte-13vrnlh {
+.tooltip-content.svelte-bxg9fe.svelte-bxg9fe {
   background-color: white;
   color: black;
   padding: 10px 12px;
@@ -801,7 +822,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   white-space: nowrap;
 }
-@keyframes svelte-13vrnlh-fadeIn {
+@keyframes svelte-bxg9fe-fadeIn {
   from {
     opacity: 0;
   }
@@ -3407,6 +3428,183 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       };
       exports.UserUpdateProfile = async function UserUpdateProfile(i, cb) {
         return await axios.post("/user/updateProfile", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
+    }
+  });
+
+  // _components/xFormatter.js
+  var require_xFormatter = __commonJS({
+    "_components/xFormatter.js"(exports, module) {
+      function datetime(unixSec, humanize) {
+        if (!unixSec)
+          return "";
+        if (typeof unixSec === "string")
+          return unixSec;
+        const dt = new Date(unixSec * 1e3);
+        if (!humanize) {
+          const year = dt.getFullYear();
+          const month = String(dt.getMonth() + 1).padStart(2, "0");
+          const day = String(dt.getDate()).padStart(2, "0");
+          const hours = String(dt.getHours()).padStart(2, "0");
+          const minutes = String(dt.getMinutes()).padStart(2, "0");
+          return `${year}-${month}-${day} ${hours}:${minutes}`;
+        }
+        const options = { day: "2-digit", month: "long", year: "numeric" };
+        return dt.toLocaleDateString(void 0, options);
+      }
+      function isYYYYMMDD(str) {
+        return /^\d{4}-\d{2}-\d{2}$/.test(String(str));
+      }
+      function localeDatetime(mustBeTime) {
+        if (!mustBeTime)
+          return "";
+        let dt = new Date(mustBeTime * 1e3);
+        if (typeof mustBeTime !== "number")
+          dt = new Date(mustBeTime);
+        if (isYYYYMMDD(mustBeTime)) {
+          dt = new Date(mustBeTime);
+          const day2 = dt.toLocaleDateString("default", { weekday: "long" });
+          const date2 = dt.getDate();
+          const month2 = dt.toLocaleDateString("default", { month: "short" });
+          const year2 = dt.getFullYear();
+          return `${day2}, ${date2} ${month2} ${year2}`;
+        }
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = dt.getDate();
+        const month = dt.toLocaleDateString("default", { month: "short" });
+        const year = dt.getFullYear();
+        let hh = dt.getHours();
+        if (hh < 10)
+          hh = "0" + hh;
+        let mm = dt.getMinutes();
+        if (mm < 10)
+          mm = "0" + mm;
+        const formattedDate = `${date} ${month} ${year} - ${hh}:${mm}`;
+        return formattedDate;
+      }
+      function utcDatetime(unixSec) {
+        if (!unixSec)
+          return "";
+        let dt = new Date(unixSec * 1e3);
+        if (typeof unixSec !== "number")
+          dt = new Date(unixSec);
+        const year = dt.toLocaleDateString("id-ID", { year: "2-digit", timeZone: "UTC" });
+        const month = dt.toLocaleDateString("id-ID", { month: "2-digit", timeZone: "UTC" });
+        const date = dt.getUTCDate();
+        let hh = dt.getUTCHours();
+        if (hh < 10)
+          hh = "0" + hh;
+        let mm = dt.getUTCMinutes();
+        if (mm < 10)
+          mm = "0" + mm;
+        const formattedDate = `${date}/${month}/${year} - ${hh}:${mm}`;
+        return formattedDate;
+      }
+      function isoTime(unixSec) {
+        if (!unixSec)
+          return "";
+        const dt = new Date(unixSec * 1e3);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = dt.getDate();
+        const month = dt.toLocaleDateString("default", { month: "2-digit" });
+        const year = dt.getFullYear();
+        let hh = dt.getHours();
+        if (hh < 10)
+          hh = "0" + hh;
+        let mm = dt.getMinutes();
+        if (mm < 10)
+          mm = "0" + mm;
+        const formattedDate = `${year}-${month}-${date} ${hh}:${mm}`;
+        return formattedDate;
+      }
+      function isoDate(unixSec) {
+        if (!unixSec)
+          return "";
+        const dt = new Date(unixSec * 1e3);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = dt.getDate();
+        const month = dt.toLocaleDateString("default", { month: "2-digit" });
+        const year = dt.getFullYear();
+        const formattedDate = `${year}-${month}-${date}`;
+        return formattedDate;
+      }
+      function dateISOFormat(dayTo = 0) {
+        const dt = new Date();
+        dt.setDate(dt.getDate() + dayTo);
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = String(dt.getMonth() + 1).padStart(2, "0");
+        const year = dt.getFullYear();
+        return `${year}-${month}-${date}`;
+      }
+      function dateISOFormatFromYYYYMMDD(dateStr, dayTo = 0) {
+        if (!dateStr)
+          return "";
+        const dt = new Date(dateStr);
+        dt.setDate(dt.getDate() + dayTo);
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = String(dt.getMonth() + 1).padStart(2, "0");
+        const year = dt.getFullYear();
+        return `${year}-${month}-${date}`;
+      }
+      function loadScript(url, callback) {
+        let script = (
+          /** @type {HTMLScriptElement} */
+          document.createElement("script")
+        );
+        script.type = "text/javascript";
+        script.src = url;
+        script.onload = () => callback();
+        document.getElementsByTagName("head")[0].appendChild(script);
+      }
+      function formatPrice(price, currency) {
+        try {
+          return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(price);
+        } catch (err) {
+          console.log("formatPrice failed", err, price, currency);
+          return `${currency} ${price}`;
+        }
+      }
+      function arrToArrNum(arr) {
+        return arr.map(Number);
+      }
+      function formatYearMonth(ym) {
+        const [year, month] = ym.split("-");
+        const date = new Date(`${ym}-01`);
+        const monthName = date.toLocaleString("id-ID", { month: "long" });
+        return `${monthName} ${year}`;
+      }
+      function localeDateFromYYYYMMDD2(dateStr) {
+        if (!dateStr)
+          return "";
+        const dt = new Date(dateStr);
+        const day = dt.toLocaleDateString("default", { weekday: "long" });
+        const date = String(dt.getDate()).padStart(2, "0");
+        const month = dt.toLocaleDateString("default", { month: "long" });
+        const year = dt.getFullYear();
+        return `${day}, ${date} ${month} ${year}`;
+      }
+      function checkboxToDate(value) {
+        return value === true || value === "true" ? new Date().toISOString().split("T")[0] : "";
+      }
+      module.exports = {
+        datetime,
+        localeDatetime,
+        utcDatetime,
+        isoTime,
+        isoDate,
+        dateISOFormat,
+        dateISOFormatFromYYYYMMDD,
+        loadScript,
+        formatPrice,
+        arrToArrNum,
+        formatYearMonth,
+        localeDateFromYYYYMMDD: localeDateFromYYYYMMDD2,
+        checkboxToDate
       };
     }
   });
@@ -7198,41 +7396,41 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 
   // staffOccupancyHeatmap.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
+  var import_xFormatter = __toESM(require_xFormatter());
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[17] = list[i];
+    child_ctx[18] = list[i];
     const constants_0 = (
-      /*getBookingByRoomName*/
-      child_ctx[7](
+      /*getBookingsByRoomName*/
+      child_ctx[6](
         /*room*/
-        child_ctx[17]
+        child_ctx[18]
       )
     );
-    child_ctx[18] = constants_0;
+    child_ctx[19] = constants_0;
     return child_ctx;
   }
   function get_each_context_1(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[21] = list[i];
-    child_ctx[24] = i;
+    child_ctx[22] = list[i];
+    child_ctx[26] = i;
     const constants_0 = (
-      /*isDateIncludeInDay*/
-      child_ctx[6](
+      /*getBookingIsOccupied*/
+      child_ctx[10](
+        /*bookings*/
+        child_ctx[19],
         /*day*/
-        child_ctx[24] + 1,
-        /*bk*/
-        child_ctx[18].dateStart || "",
-        /*bk*/
-        (child_ctx[18] || {})["dateEnd"] || ""
+        child_ctx[26] + 1
       )
     );
-    child_ctx[22] = constants_0;
+    child_ctx[23] = constants_0[0];
+    child_ctx[24] = constants_0[1];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[21] = list[i];
-    child_ctx[24] = i;
+    child_ctx[22] = list[i];
+    child_ctx[26] = i;
     return child_ctx;
   }
   function create_each_block_2(ctx) {
@@ -7241,8 +7439,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       c() {
         div = element("div");
         div.textContent = `${/*day*/
-        ctx[24] + 1}`;
-        attr(div, "class", "date-header svelte-13vrnlh");
+        ctx[26] + 1}`;
+        attr(div, "class", "date-header svelte-bxg9fe");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -7255,47 +7453,55 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_each_block_1(ctx) {
-    let c;
-    let t;
+  function create_else_block(ctx) {
     let div;
-    let div_class_value;
+    return {
+      c() {
+        div = element("div");
+        attr(div, "class", "date-cell not-occupied svelte-bxg9fe");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+      }
+    };
+  }
+  function create_if_block_12(ctx) {
+    let div;
     let mounted;
     let dispose;
     function mouseenter_handler(...args) {
       return (
         /*mouseenter_handler*/
         ctx[13](
-          /*isOccupied*/
-          ctx[22],
           /*bk*/
-          ctx[18],
+          ctx[23],
           /*day*/
-          ctx[24],
+          ctx[26],
           /*room*/
-          ctx[17],
+          ctx[18],
           ...args
         )
       );
     }
     return {
       c() {
-        c = comment(" svelte-ignore a11y-no-static-element-interactions ");
-        t = space();
         div = element("div");
-        attr(div, "class", div_class_value = "date-cell " + /*isOccupied*/
-        (ctx[22] ? "occupied" : "not-occupied") + " svelte-13vrnlh");
+        attr(div, "class", "date-cell occupied svelte-bxg9fe");
         attr(div, "aria-label", "tool-tip");
         set_style(
           div,
           "background-color",
           /*bk*/
-          ctx[18].color
+          ctx[23].color
         );
       },
       m(target, anchor) {
-        insert(target, c, anchor);
-        insert(target, t, anchor);
         insert(target, div, anchor);
         if (!mounted) {
           dispose = [
@@ -7304,7 +7510,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
               div,
               "mouseleave",
               /*hideTooltip*/
-              ctx[10]
+              ctx[9]
             )
           ];
           mounted = true;
@@ -7313,24 +7519,17 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       p(new_ctx, dirty) {
         ctx = new_ctx;
         if (dirty & /*roomNames*/
-        1 && div_class_value !== (div_class_value = "date-cell " + /*isOccupied*/
-        (ctx[22] ? "occupied" : "not-occupied") + " svelte-13vrnlh")) {
-          attr(div, "class", div_class_value);
-        }
-        if (dirty & /*roomNames*/
         1) {
           set_style(
             div,
             "background-color",
             /*bk*/
-            ctx[18].color
+            ctx[23].color
           );
         }
       },
       d(detaching) {
         if (detaching) {
-          detach(c);
-          detach(t);
           detach(div);
         }
         mounted = false;
@@ -7338,16 +7537,66 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
+  function create_each_block_1(ctx) {
+    let c;
+    let t;
+    let if_block_anchor;
+    function select_block_type(ctx2, dirty) {
+      if (
+        /*avail*/
+        ctx2[24]
+      )
+        return create_if_block_12;
+      return create_else_block;
+    }
+    let current_block_type = select_block_type(ctx, -1);
+    let if_block = current_block_type(ctx);
+    return {
+      c() {
+        c = comment(" svelte-ignore a11y-no-static-element-interactions ");
+        t = space();
+        if_block.c();
+        if_block_anchor = empty();
+      },
+      m(target, anchor) {
+        insert(target, c, anchor);
+        insert(target, t, anchor);
+        if_block.m(target, anchor);
+        insert(target, if_block_anchor, anchor);
+      },
+      p(ctx2, dirty) {
+        if (current_block_type === (current_block_type = select_block_type(ctx2, dirty)) && if_block) {
+          if_block.p(ctx2, dirty);
+        } else {
+          if_block.d(1);
+          if_block = current_block_type(ctx2);
+          if (if_block) {
+            if_block.c();
+            if_block.m(if_block_anchor.parentNode, if_block_anchor);
+          }
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(c);
+          detach(t);
+          detach(if_block_anchor);
+        }
+        if_block.d(detaching);
+      }
+    };
+  }
   function create_each_block(ctx) {
-    let div1;
+    let div2;
     let div0;
     let t0;
     let t1_value = (
       /*room*/
-      ctx[17] + ""
+      ctx[18] + ""
     );
     let t1;
     let t2;
+    let div1;
     let t3;
     let each_value_1 = ensure_array_like(Array.from({
       length: (
@@ -7361,38 +7610,41 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
     return {
       c() {
-        div1 = element("div");
+        div2 = element("div");
         div0 = element("div");
         t0 = text("Room ");
         t1 = text(t1_value);
         t2 = space();
+        div1 = element("div");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
         t3 = space();
-        attr(div0, "class", "room-name sticky-room svelte-13vrnlh");
-        attr(div1, "class", "table-row svelte-13vrnlh");
+        attr(div0, "class", "room-name sticky-room svelte-bxg9fe");
+        attr(div1, "class", "blocks svelte-bxg9fe");
+        attr(div2, "class", "table-row svelte-bxg9fe");
       },
       m(target, anchor) {
-        insert(target, div1, anchor);
-        append(div1, div0);
+        insert(target, div2, anchor);
+        append(div2, div0);
         append(div0, t0);
         append(div0, t1);
-        append(div1, t2);
+        append(div2, t2);
+        append(div2, div1);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
             each_blocks[i].m(div1, null);
           }
         }
-        append(div1, t3);
+        append(div2, t3);
       },
       p(ctx2, dirty) {
         if (dirty & /*roomNames*/
         1 && t1_value !== (t1_value = /*room*/
-        ctx2[17] + ""))
+        ctx2[18] + ""))
           set_data(t1, t1_value);
-        if (dirty & /*isDateIncludeInDay, getBookingByRoomName, roomNames, showTooltip, hideTooltip, totalDaysInSelectedMonth*/
-        1737) {
+        if (dirty & /*getBookingIsOccupied, getBookingsByRoomName, roomNames, showTooltip, hideTooltip, totalDaysInSelectedMonth*/
+        1865) {
           each_value_1 = ensure_array_like(Array.from({
             length: (
               /*totalDaysInSelectedMonth*/
@@ -7407,7 +7659,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             } else {
               each_blocks[i] = create_each_block_1(child_ctx);
               each_blocks[i].c();
-              each_blocks[i].m(div1, t3);
+              each_blocks[i].m(div1, null);
             }
           }
           for (; i < each_blocks.length; i += 1) {
@@ -7418,23 +7670,24 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       },
       d(detaching) {
         if (detaching) {
-          detach(div1);
+          detach(div2);
         }
         destroy_each(each_blocks, detaching);
       }
     };
   }
   function create_default_slot(ctx) {
-    let div4;
+    let div5;
     let monthshifter;
     let updating_yearMonth;
     let updating_isLoading;
     let t0;
+    let div4;
     let div3;
     let div2;
-    let div1;
     let div0;
     let t2;
+    let div1;
     let t3;
     let current;
     function monthshifter_yearMonth_binding(value) {
@@ -7445,7 +7698,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
     let monthshifter_props = { OnChanges: (
       /*RefreshData*/
-      ctx[8]
+      ctx[7]
     ) };
     if (
       /*yearMonth*/
@@ -7484,15 +7737,16 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
     return {
       c() {
-        div4 = element("div");
+        div5 = element("div");
         create_component(monthshifter.$.fragment);
         t0 = space();
+        div4 = element("div");
         div3 = element("div");
         div2 = element("div");
-        div1 = element("div");
         div0 = element("div");
         div0.textContent = "Room";
         t2 = space();
+        div1 = element("div");
         for (let i = 0; i < each_blocks_1.length; i += 1) {
           each_blocks_1[i].c();
         }
@@ -7500,30 +7754,32 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div0, "class", "room-label sticky-corner svelte-13vrnlh");
-        attr(div1, "class", "table-header svelte-13vrnlh");
-        attr(div2, "class", "rooms-heatmap-table svelte-13vrnlh");
-        attr(div3, "class", "rooms-heatmap-wrapper svelte-13vrnlh");
-        attr(div4, "class", "occupancy-heatmap-container svelte-13vrnlh");
+        attr(div0, "class", "room-label sticky-corner svelte-bxg9fe");
+        attr(div1, "class", "days svelte-bxg9fe");
+        attr(div2, "class", "table-header svelte-bxg9fe");
+        attr(div3, "class", "rooms-heatmap-table svelte-bxg9fe");
+        attr(div4, "class", "rooms-heatmap-wrapper svelte-bxg9fe");
+        attr(div5, "class", "occupancy-heatmap-container svelte-bxg9fe");
       },
       m(target, anchor) {
-        insert(target, div4, anchor);
-        mount_component(monthshifter, div4, null);
-        append(div4, t0);
+        insert(target, div5, anchor);
+        mount_component(monthshifter, div5, null);
+        append(div5, t0);
+        append(div5, div4);
         append(div4, div3);
         append(div3, div2);
+        append(div2, div0);
+        append(div2, t2);
         append(div2, div1);
-        append(div1, div0);
-        append(div1, t2);
         for (let i = 0; i < each_blocks_1.length; i += 1) {
           if (each_blocks_1[i]) {
             each_blocks_1[i].m(div1, null);
           }
         }
-        append(div2, t3);
+        append(div3, t3);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
-            each_blocks[i].m(div2, null);
+            each_blocks[i].m(div3, null);
           }
         }
         current = true;
@@ -7569,8 +7825,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           }
           each_blocks_1.length = each_value_2.length;
         }
-        if (dirty & /*Array, totalDaysInSelectedMonth, isDateIncludeInDay, getBookingByRoomName, roomNames, showTooltip, hideTooltip*/
-        1737) {
+        if (dirty & /*Array, totalDaysInSelectedMonth, getBookingIsOccupied, getBookingsByRoomName, roomNames, showTooltip, hideTooltip*/
+        1865) {
           each_value = ensure_array_like(
             /*roomNames*/
             ctx2[0]
@@ -7583,7 +7839,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             } else {
               each_blocks[i] = create_each_block(child_ctx);
               each_blocks[i].c();
-              each_blocks[i].m(div2, null);
+              each_blocks[i].m(div3, null);
             }
           }
           for (; i < each_blocks.length; i += 1) {
@@ -7604,7 +7860,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       },
       d(detaching) {
         if (detaching) {
-          detach(div4);
+          detach(div5);
         }
         destroy_component(monthshifter);
         destroy_each(each_blocks_1, detaching);
@@ -7635,19 +7891,19 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let t7;
     let strong2;
     let t9;
-    let t10_value = (
+    let t10_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
       /*tooltipData*/
-      ctx[4].dateStart + ""
-    );
+      ctx[4].dateStart
+    ) + "";
     let t10;
     let br2;
     let t11;
     let strong3;
     let t13;
-    let t14_value = (
+    let t14_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
       /*tooltipData*/
-      ctx[4].dateEnd + ""
-    );
+      ctx[4].dateEnd
+    ) + "";
     let t14;
     return {
       c() {
@@ -7675,8 +7931,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         strong3.textContent = "Check-out:";
         t13 = space();
         t14 = text(t14_value);
-        attr(div0, "class", "tooltip-content svelte-13vrnlh");
-        attr(div1, "class", "tooltip svelte-13vrnlh");
+        attr(div0, "class", "tooltip-content svelte-bxg9fe");
+        attr(div1, "class", "tooltip svelte-bxg9fe");
         set_style(
           div1,
           "left",
@@ -7722,12 +7978,16 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         ctx2[4].room + ""))
           set_data(t6, t6_value);
         if (dirty & /*tooltipData*/
-        16 && t10_value !== (t10_value = /*tooltipData*/
-        ctx2[4].dateStart + ""))
+        16 && t10_value !== (t10_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
+          /*tooltipData*/
+          ctx2[4].dateStart
+        ) + ""))
           set_data(t10, t10_value);
         if (dirty & /*tooltipData*/
-        16 && t14_value !== (t14_value = /*tooltipData*/
-        ctx2[4].dateEnd + ""))
+        16 && t14_value !== (t14_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
+          /*tooltipData*/
+          ctx2[4].dateEnd
+        ) + ""))
           set_data(t14, t14_value);
         if (dirty & /*tooltipPosition*/
         32) {
@@ -7791,7 +8051,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
         if (dirty & /*$scope, roomNames, totalDaysInSelectedMonth, yearMonth, isLoading*/
-        67108879) {
+        268435471) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -7884,25 +8144,17 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       const date = new Date(yearMonth + "-" + (day < 10 ? "0" + day : day));
       return date >= new Date(dateStart) && date <= new Date(dateEnd);
     }
-    function getBookingByRoomName(roomName) {
+    function getBookingsByRoomName(roomName) {
+      let bookings = (
+        /** @type {BookingDetailPerMonth[]} */
+        []
+      );
       for (let i = 0; i < bookingsPerMonth.length; i++) {
         if (bookingsPerMonth[i].roomName === roomName) {
-          return bookingsPerMonth[i];
+          bookings.push(bookingsPerMonth[i]);
         }
       }
-      return {
-        id: 0,
-        roomId: 0,
-        roomName: "",
-        tenantId: 0,
-        tenantName: "",
-        dateStart: "",
-        dateEnd: "",
-        totalPaid: 0,
-        totalPrice: 0,
-        extraTenants: [],
-        color: ""
-      };
+      return bookings;
     }
     onMount(() => {
       refreshTotalDaysInMonth();
@@ -7945,6 +8197,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     function hideTooltip() {
       $invalidate(4, tooltipData = null);
     }
+    function getBookingIsOccupied(bks, day) {
+      const bk = bks.find((b) => {
+        return isDateIncludeInDay(day, b.dateStart, b.dateEnd);
+      });
+      return [bk, !!bk];
+    }
     function monthshifter_yearMonth_binding(value) {
       yearMonth = value;
       $invalidate(1, yearMonth);
@@ -7953,10 +8211,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       isLoading = value;
       $invalidate(2, isLoading);
     }
-    const mouseenter_handler = (isOccupied, bk, day, room, e) => {
-      if (isOccupied && bk) {
+    const mouseenter_handler = (bk, day, room, e) => {
+      if (bk)
         showTooltip(e, bk, day + 1, room);
-      }
     };
     return [
       roomNames,
@@ -7965,11 +8222,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       totalDaysInSelectedMonth,
       tooltipData,
       tooltipPosition,
-      isDateIncludeInDay,
-      getBookingByRoomName,
+      getBookingsByRoomName,
       RefreshData,
       showTooltip,
       hideTooltip,
+      getBookingIsOccupied,
       monthshifter_yearMonth_binding,
       monthshifter_isLoading_binding,
       mouseenter_handler

@@ -11,6 +11,7 @@
   import { StaffOccupancyHeatmap } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import { onMount } from 'svelte';
+    import { localeDateFromYYYYMMDD } from './_components/xFormatter';
 
   let user              = /** @type {User} */ ({/* user */});
   let segments          = /** @type {Access} */ ({/* segments */});
@@ -57,28 +58,18 @@
   /**
    * @description Get booking by room name
    * @param {string} roomName
-   * @returns {BookingDetailPerMonth}
+   * @returns {BookingDetailPerMonth[]}
    */
-  function getBookingByRoomName(roomName) {
+  function getBookingsByRoomName(roomName) {
+    let bookings = /** @type {BookingDetailPerMonth[]} */ ([]);
+
     for (let i = 0; i < bookingsPerMonth.length; i++) {
       if (bookingsPerMonth[i].roomName === roomName) {
-        return bookingsPerMonth[i];
+        bookings.push(bookingsPerMonth[i]);
       }
     }
 
-    return {
-      id: 0,
-      roomId: 0,
-      roomName: '',
-      tenantId: 0,
-      tenantName: '',
-      dateStart: '',
-      dateEnd: '',
-      totalPaid: 0,
-      totalPrice: 0,
-      extraTenants: [],
-      color: ''
-    };
+    return bookings;
   }
 
   onMount(() => {
@@ -139,6 +130,19 @@
   function hideTooltip() {
     tooltipData = null;
   }
+
+  /**
+   * @param {BookingDetailPerMonth[]} bks
+   * @param {number} day
+   * @returns {[BookingDetailPerMonth|null, boolean]}
+   */
+  function getBookingIsOccupied(bks, day) {
+    const bk = bks.find(b => {
+      return isDateIncludeInDay(day, b.dateStart, b.dateEnd);
+    });
+
+    return [bk, !!bk];
+  }
 </script>
 
 <LayoutMain access={segments} user={user}>
@@ -152,31 +156,34 @@
       <div class="rooms-heatmap-table">
         <div class="table-header">
           <div class="room-label sticky-corner">Room</div>
-          {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
-            <div class="date-header">{day + 1}</div>
-          {/each}
+          <div class="days">
+            {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
+              <div class="date-header">{day + 1}</div>
+            {/each}
+          </div>
         </div>
 
         {#each roomNames as room}
-          {@const bk = getBookingByRoomName(room)}
+          {@const bookings = getBookingsByRoomName(room)}
           <div class="table-row">
             <div class="room-name sticky-room">Room {room}</div>
-            {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
-                {@const isOccupied = isDateIncludeInDay(day + 1, bk.dateStart || '', (bk || {})['dateEnd'] || '')}
+            <div class="blocks">
+              {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
+                {@const [bk, avail] = getBookingIsOccupied(bookings, day + 1)}
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
-                <div 
-                  class="date-cell {isOccupied ? 'occupied' : 'not-occupied'}"
-                  on:mouseenter={(e) => {
-                    if (isOccupied && bk) {
-                      showTooltip(e, bk, day + 1, room);
-                    }
-                  }}
-                  on:mouseleave={hideTooltip}
-                  aria-label="tool-tip"
-                  style="background-color: {bk.color}"
-                >
-                </div>
+                {#if avail}
+                  <div 
+                    class="date-cell occupied"
+                    on:mouseenter={(e) => { if (bk) showTooltip(e, bk, day + 1, room) }}
+                    on:mouseleave={hideTooltip}
+                    aria-label="tool-tip"
+                    style="background-color: {bk.color}"
+                  ></div>
+                {:else}
+                  <div class="date-cell not-occupied"></div>
+                {/if}
               {/each}
+            </div>
           </div>
         {/each}
       </div>
@@ -192,8 +199,8 @@
     <div class="tooltip-content">
       <strong>Penghuni:</strong> {tooltipData.tenant}<br/>
       <strong>Kamar:</strong> {tooltipData.room}<br/>
-      <strong>Check-in:</strong> {tooltipData.dateStart}<br/>
-      <strong>Check-out:</strong> {tooltipData.dateEnd}
+      <strong>Check-in:</strong> {localeDateFromYYYYMMDD(tooltipData.dateStart)}<br/>
+      <strong>Check-out:</strong> {localeDateFromYYYYMMDD(tooltipData.dateEnd)}
     </div>
   </div>
 {/if}
@@ -220,15 +227,11 @@
     width: 100%;
   }
 
-  .table-header,
-  .table-row {
-    display: grid;
-    grid-template-columns: 100px repeat(auto-fit, minmax(25px, 1fr));
-    gap: 2px;
-    align-items: center;
-  }
-
   .table-header {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
     position: sticky;
     top: 0;
     background-color: white;
@@ -238,12 +241,19 @@
     padding-bottom: 10px;
   }
 
-  .room-label,
-  .room-name {
+  .table-header .days {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+    gap: 2px;
+  }
+
+  .room-label{
     padding: 8px;
     font-weight: 600;
     text-align: left;
     font-size: var(--font-md);
+    width: 100px;
   }
 
   .sticky-corner {
@@ -295,12 +305,33 @@
     background-color: var(--gray-002) !important;
   }
 
+  .table-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .table-row .room-name {
+    padding: 8px;
+    font-weight: 600;
+    text-align: left;
+    font-size: var(--font-md);
+    width: 100px;
+  }
+
   .table-row:hover {
     background-color: var(--gray-001);
   }
 
   .table-row:hover .sticky-room {
     background-color: var(--gray-001);
+  }
+
+  .table-row .blocks {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+    gap: 2px;
   }
 
   .tooltip {
