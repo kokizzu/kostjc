@@ -12,6 +12,7 @@
   import { notifier } from './_components/xNotifier';
   import { onMount } from 'svelte';
     import { localeDateFromYYYYMMDD } from './_components/xFormatter';
+    import Tooltip from './_components/Tooltip.svelte';
 
   let user              = /** @type {User} */ ({/* user */});
   let segments          = /** @type {Access} */ ({/* segments */});
@@ -98,37 +99,30 @@
     )
   }
 
+  let tooltipComp = /** @type {Tooltip} */ (null);
+  let tooltipData = /** @type {{tenant: string; room: string; dateStart: string; dateEnd: string}} */ ({
+    tenant: '',
+    dateStart: '',
+    dateEnd: '',
+    room: ''
+  });
 
-  let tooltipData = null;
-  let tooltipPosition = { x: 0, y: 0 };
-  
   /**
-   * @param {MouseEvent} event
-   * @param {BookingDetailPerMonth} booking
-   * @param {number} day
-   * @param {string} room
+   * @Description Show tooltip
+   * @param {MouseEvent & { currentTarget: EventTarget & HTMLDivElement }} event
+   * @param {BookingDetailPerMonth} bk
+   * @param {string} roomName
    */
-  function showTooltip(event, booking, day, room) {
-    if (!booking) {
-      return;
-    }
-    
+  function showTooltip(event, bk, roomName) {
     tooltipData = {
-      tenant: tenants[booking.tenantId] || 'Unknown',
-      room: room,
-      dateStart: booking.dateStart,
-      dateEnd: booking.dateEnd,
-      day: day
-    };
-    
-    tooltipPosition = {
-      x: event.clientX,
-      y: event.clientY
-    };
-  }
+      tenant: tenants[bk.tenantId],
+      room: roomName,
+      dateStart: localeDateFromYYYYMMDD(bk.dateStart),
+      dateEnd: localeDateFromYYYYMMDD(bk.dateEnd)
+    }
+    const rect = event.currentTarget.getBoundingClientRect();
 
-  function hideTooltip() {
-    tooltipData = null;
+    tooltipComp.Show(rect);
   }
 
   /**
@@ -174,8 +168,8 @@
                 {#if avail}
                   <div 
                     class="date-cell occupied"
-                    on:mouseenter={(e) => { if (bk) showTooltip(e, bk, day + 1, room) }}
-                    on:mouseleave={hideTooltip}
+                    on:mouseenter={(e) => { if (bk) showTooltip(e, bk, room) }}
+                    on:mouseleave={() => tooltipComp.Hide()}
                     aria-label="tool-tip"
                     style="background-color: {bk.color}"
                   ></div>
@@ -191,19 +185,14 @@
   </div>
 </LayoutMain>
 
-{#if tooltipData}
-  <div 
-    class="tooltip" 
-    style="left: {tooltipPosition.x + 10}px; top: {tooltipPosition.y + 10}px"
-  >
-    <div class="tooltip-content">
-      <strong>Penghuni:</strong> {tooltipData.tenant}<br/>
-      <strong>Kamar:</strong> {tooltipData.room}<br/>
-      <strong>Check-in:</strong> {localeDateFromYYYYMMDD(tooltipData.dateStart)}<br/>
-      <strong>Check-out:</strong> {localeDateFromYYYYMMDD(tooltipData.dateEnd)}
-    </div>
+<Tooltip bind:this={tooltipComp}>
+  <div class="tooltip-content">
+    <strong>Penghuni:</strong> {tooltipData.tenant}<br/>
+    <strong>Kamar:</strong> {tooltipData.room}<br/>
+    <strong>Check-in:</strong> {tooltipData.dateStart}<br/>
+    <strong>Check-out:</strong> {tooltipData.dateEnd}
   </div>
-{/if}
+</Tooltip>
 
 <style>
   .occupancy-heatmap-container {
@@ -334,20 +323,11 @@
     gap: 2px;
   }
 
-  .tooltip {
-    position: fixed;
-    z-index: 1000;
-    pointer-events: none;
-    animation: fadeIn 0.2s;
-  }
-
   .tooltip-content {
-    background-color: white;
-    color: black;
+    color: var(--gray-008);
     padding: 10px 12px;
     border-radius: 6px;
     font-size: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
   }
 

@@ -355,16 +355,20 @@
 
 
 <style>/* fakecss:./_components/Tooltip.esbuild-svelte-fake-css */
-.tooltip.svelte-dadm4w {
+.tooltip.svelte-ei4lrq {
   border: 2px solid var(--gray-003);
   box-shadow: 1px 1px 1px var(--gray-006);
-  background: #FFF;
+  background-color: #FFF;
   border-radius: 5px;
   padding: 10px;
-  position: absolute;
-  display: flex;
+  position: fixed;
+  z-index: 101;
+  display: none;
   flex-direction: column;
   gap: 5px;
+}
+.tooltip.show.svelte-ei4lrq {
+  display: flex;
 }
 
 /* fakecss:./debug.esbuild-svelte-fake-css */
@@ -535,9 +539,6 @@
   function space() {
     return text(" ");
   }
-  function empty() {
-    return text("");
-  }
   function listen(node, event, handler, options) {
     node.addEventListener(event, handler, options);
     return () => node.removeEventListener(event, handler, options);
@@ -557,6 +558,9 @@
     } else {
       node.style.setProperty(key, value, important ? "important" : "");
     }
+  }
+  function toggle_class(element2, name, toggle) {
+    element2.classList.toggle(name, !!toggle);
   }
   function get_custom_elements_slots(element2) {
     const result = {};
@@ -587,6 +591,10 @@
       update_scheduled = true;
       resolved_promise.then(flush);
     }
+  }
+  function tick() {
+    schedule_update();
+    return resolved_promise;
   }
   function add_render_callback(fn) {
     render_callbacks.push(fn);
@@ -653,20 +661,6 @@
   // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/transitions.js
   var outroing = /* @__PURE__ */ new Set();
   var outros;
-  function group_outros() {
-    outros = {
-      r: 0,
-      c: [],
-      p: outros
-      // parent group
-    };
-  }
-  function check_outros() {
-    if (!outros.r) {
-      run_all(outros.c);
-    }
-    outros = outros.p;
-  }
   function transition_in(block, local) {
     if (block && block.i) {
       outroing.delete(block);
@@ -1070,18 +1064,18 @@
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
   // _components/Tooltip.svelte
-  function create_if_block(ctx) {
+  function create_fragment(ctx) {
     let div;
     let current;
     const default_slot_template = (
       /*#slots*/
-      ctx[6].default
+      ctx[7].default
     );
     const default_slot = create_slot(
       default_slot_template,
       ctx,
       /*$scope*/
-      ctx[5],
+      ctx[6],
       null
     );
     return {
@@ -1093,40 +1087,47 @@
           div,
           "top",
           /*y*/
-          ctx[1] + "px"
+          ctx[2] + "px"
         );
         set_style(
           div,
           "left",
           /*x*/
-          ctx[0] + "px"
+          ctx[1] + "px"
         );
-        attr(div, "class", "tooltip svelte-dadm4w");
+        attr(div, "class", "tooltip svelte-ei4lrq");
+        toggle_class(
+          div,
+          "show",
+          /*isHovered*/
+          ctx[3]
+        );
       },
       m(target, anchor) {
         insert(target, div, anchor);
         if (default_slot) {
           default_slot.m(div, null);
         }
+        ctx[8](div);
         current = true;
       },
-      p(ctx2, dirty) {
+      p(ctx2, [dirty]) {
         if (default_slot) {
           if (default_slot.p && (!current || dirty & /*$scope*/
-          32)) {
+          64)) {
             update_slot_base(
               default_slot,
               default_slot_template,
               ctx2,
               /*$scope*/
-              ctx2[5],
+              ctx2[6],
               !current ? get_all_dirty_from_scope(
                 /*$scope*/
-                ctx2[5]
+                ctx2[6]
               ) : get_slot_changes(
                 default_slot_template,
                 /*$scope*/
-                ctx2[5],
+                ctx2[6],
                 dirty,
                 null
               ),
@@ -1135,21 +1136,30 @@
           }
         }
         if (!current || dirty & /*y*/
-        2) {
+        4) {
           set_style(
             div,
             "top",
             /*y*/
-            ctx2[1] + "px"
+            ctx2[2] + "px"
           );
         }
         if (!current || dirty & /*x*/
-        1) {
+        2) {
           set_style(
             div,
             "left",
             /*x*/
-            ctx2[0] + "px"
+            ctx2[1] + "px"
+          );
+        }
+        if (!current || dirty & /*isHovered*/
+        8) {
+          toggle_class(
+            div,
+            "show",
+            /*isHovered*/
+            ctx2[3]
           );
         }
       },
@@ -1169,101 +1179,59 @@
         }
         if (default_slot)
           default_slot.d(detaching);
-      }
-    };
-  }
-  function create_fragment(ctx) {
-    let if_block_anchor;
-    let current;
-    let if_block = (
-      /*isHovered*/
-      ctx[2] && create_if_block(ctx)
-    );
-    return {
-      c() {
-        if (if_block)
-          if_block.c();
-        if_block_anchor = empty();
-      },
-      m(target, anchor) {
-        if (if_block)
-          if_block.m(target, anchor);
-        insert(target, if_block_anchor, anchor);
-        current = true;
-      },
-      p(ctx2, [dirty]) {
-        if (
-          /*isHovered*/
-          ctx2[2]
-        ) {
-          if (if_block) {
-            if_block.p(ctx2, dirty);
-            if (dirty & /*isHovered*/
-            4) {
-              transition_in(if_block, 1);
-            }
-          } else {
-            if_block = create_if_block(ctx2);
-            if_block.c();
-            transition_in(if_block, 1);
-            if_block.m(if_block_anchor.parentNode, if_block_anchor);
-          }
-        } else if (if_block) {
-          group_outros();
-          transition_out(if_block, 1, 1, () => {
-            if_block = null;
-          });
-          check_outros();
-        }
-      },
-      i(local) {
-        if (current)
-          return;
-        transition_in(if_block);
-        current = true;
-      },
-      o(local) {
-        transition_out(if_block);
-        current = false;
-      },
-      d(detaching) {
-        if (detaching) {
-          detach(if_block_anchor);
-        }
-        if (if_block)
-          if_block.d(detaching);
+        ctx[8](null);
       }
     };
   }
   function instance($self, $props, $invalidate) {
     let { $slots: slots = {}, $scope } = $props;
+    let tooltip = (
+      /** @type {HTMLDivElement} */
+      null
+    );
     let x = 0;
     let y = 0;
     let isHovered = false;
-    function Show(rect) {
-      $invalidate(2, isHovered = true);
-      $invalidate(0, x = rect.left + 10);
-      $invalidate(1, y = rect.top + 10);
+    async function Show(rect) {
+      $invalidate(3, isHovered = true);
+      await tick();
+      const tooltipRect = tooltip.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const windowWidth = window.innerWidth;
+      $invalidate(1, x = rect.left + 10);
+      $invalidate(2, y = rect.top + 10);
+      if (y + tooltipRect.height > windowHeight) {
+        $invalidate(2, y = rect.top - tooltipRect.height - 40);
+      }
+      if (x + tooltipRect.width > windowWidth) {
+        $invalidate(1, x = rect.left - tooltipRect.width - 40);
+      }
     }
     function Hide() {
-      $invalidate(2, isHovered = false);
+      $invalidate(3, isHovered = false);
+    }
+    function div_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        tooltip = $value;
+        $invalidate(0, tooltip);
+      });
     }
     $self.$set = ($props2) => {
       if ("$scope" in $props2)
-        $invalidate(5, $scope = $props2.$scope);
+        $invalidate(6, $scope = $props2.$scope);
     };
-    return [x, y, isHovered, Show, Hide, $scope, slots];
+    return [tooltip, x, y, isHovered, Show, Hide, $scope, slots, div_binding];
   }
   var Tooltip = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance, create_fragment, safe_not_equal, { Show: 3, Hide: 4 });
+      init(this, options, instance, create_fragment, safe_not_equal, { Show: 4, Hide: 5 });
     }
     get Show() {
-      return this.$.ctx[3];
+      return this.$.ctx[4];
     }
     get Hide() {
-      return this.$.ctx[4];
+      return this.$.ctx[5];
     }
   };
   var Tooltip_default = Tooltip;

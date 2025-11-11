@@ -697,26 +697,43 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   background-color: var(--blue-005);
 }
 
+/* fakecss:./_components/Tooltip.esbuild-svelte-fake-css */
+.tooltip.svelte-ei4lrq {
+  border: 2px solid var(--gray-003);
+  box-shadow: 1px 1px 1px var(--gray-006);
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 10px;
+  position: fixed;
+  z-index: 101;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+.tooltip.show.svelte-ei4lrq {
+  display: flex;
+}
+
 /* fakecss:./staffOccupancyHeatmap.esbuild-svelte-fake-css */
-.occupancy-heatmap-container.svelte-bxg9fe.svelte-bxg9fe {
+.occupancy-heatmap-container.svelte-1tv7yzj.svelte-1tv7yzj {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.rooms-heatmap-wrapper.svelte-bxg9fe.svelte-bxg9fe {
+.rooms-heatmap-wrapper.svelte-1tv7yzj.svelte-1tv7yzj {
   position: relative;
   width: 100%;
   overflow: auto;
   max-height: calc(100vh - 200px);
 }
-.rooms-heatmap-table.svelte-bxg9fe.svelte-bxg9fe {
+.rooms-heatmap-table.svelte-1tv7yzj.svelte-1tv7yzj {
   display: flex;
   flex-direction: column;
   gap: 2px;
   width: 100%;
 }
-.table-header.svelte-bxg9fe.svelte-bxg9fe {
+.table-header.svelte-1tv7yzj.svelte-1tv7yzj {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -729,100 +746,92 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   border-bottom: 2px solid var(--gray-004);
   padding-bottom: 10px;
 }
-.table-header.svelte-bxg9fe .days.svelte-bxg9fe {
+.table-header.svelte-1tv7yzj .days.svelte-1tv7yzj {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
   gap: 2px;
 }
-.room-label.svelte-bxg9fe.svelte-bxg9fe {
+.room-label.svelte-1tv7yzj.svelte-1tv7yzj {
   padding: 8px;
   font-weight: 600;
   text-align: left;
   font-size: var(--font-md);
   width: 100px;
 }
-.sticky-corner.svelte-bxg9fe.svelte-bxg9fe {
+.sticky-corner.svelte-1tv7yzj.svelte-1tv7yzj {
   position: sticky;
   left: 0;
   z-index: 30;
   background-color: white;
 }
-.sticky-room.svelte-bxg9fe.svelte-bxg9fe {
+.sticky-room.svelte-1tv7yzj.svelte-1tv7yzj {
   position: sticky;
   left: 0;
   z-index: 10;
   background-color: white;
 }
-.date-header.svelte-bxg9fe.svelte-bxg9fe {
+.date-header.svelte-1tv7yzj.svelte-1tv7yzj {
   text-align: center;
   font-size: 10px;
   color: var(--gray-008);
   padding: 2px;
   background-color: white;
 }
-.date-cell.svelte-bxg9fe.svelte-bxg9fe {
+.date-cell.svelte-1tv7yzj.svelte-1tv7yzj {
   height: 28px;
   border-radius: 3px;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
 }
-.date-cell.occupied.svelte-bxg9fe.svelte-bxg9fe:hover {
+.date-cell.occupied.svelte-1tv7yzj.svelte-1tv7yzj:hover {
   transform: scale(1.15);
   box-shadow: 0 2px 8px rgba(0, 100, 255, 0.3);
   z-index: 5;
   border-color: var(--blue-007);
   background-color: var(--blue-004);
 }
-.date-cell.not-occupied.svelte-bxg9fe.svelte-bxg9fe {
+.date-cell.not-occupied.svelte-1tv7yzj.svelte-1tv7yzj {
   border: 1px solid var(--gray-002) !important;
   background-color: var(--gray-001) !important;
   cursor: default;
 }
-.date-cell.not-occupied.svelte-bxg9fe.svelte-bxg9fe:hover {
+.date-cell.not-occupied.svelte-1tv7yzj.svelte-1tv7yzj:hover {
   background-color: var(--gray-002) !important;
 }
-.table-row.svelte-bxg9fe.svelte-bxg9fe {
+.table-row.svelte-1tv7yzj.svelte-1tv7yzj {
   display: flex;
   flex-direction: row;
   gap: 10px;
 }
-.table-row.svelte-bxg9fe .room-name.svelte-bxg9fe {
+.table-row.svelte-1tv7yzj .room-name.svelte-1tv7yzj {
   padding: 8px;
   font-weight: 600;
   text-align: left;
   font-size: var(--font-md);
   width: 100px;
 }
-.table-row.svelte-bxg9fe.svelte-bxg9fe:hover {
+.table-row.svelte-1tv7yzj.svelte-1tv7yzj:hover {
   background-color: var(--gray-001);
 }
-.table-row.svelte-bxg9fe:hover .sticky-room.svelte-bxg9fe {
+.table-row.svelte-1tv7yzj:hover .sticky-room.svelte-1tv7yzj {
   background-color: var(--gray-001);
 }
-.table-row.svelte-bxg9fe .blocks.svelte-bxg9fe {
+.table-row.svelte-1tv7yzj .blocks.svelte-1tv7yzj {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
   gap: 2px;
 }
-.tooltip.svelte-bxg9fe.svelte-bxg9fe {
-  position: fixed;
-  z-index: 1000;
-  pointer-events: none;
-  animation: svelte-bxg9fe-fadeIn 0.2s;
-}
-.tooltip-content.svelte-bxg9fe.svelte-bxg9fe {
-  background-color: white;
-  color: black;
+.tooltip-content.svelte-1tv7yzj.svelte-1tv7yzj {
+  color: var(--gray-008);
   padding: 10px 12px;
   border-radius: 6px;
   font-size: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   white-space: nowrap;
 }
-@keyframes svelte-bxg9fe-fadeIn {
+@keyframes svelte-1tv7yzj-fadeIn {
   from {
     opacity: 0;
   }
@@ -3233,13 +3242,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance8 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance8, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance8, context, null, { allOwnKeys: true });
-        instance8.create = function create(instanceConfig) {
+        const instance9 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance9, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance9, context, null, { allOwnKeys: true });
+        instance9.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance8;
+        return instance9;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -3871,6 +3880,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       resolved_promise.then(flush);
     }
   }
+  function tick() {
+    schedule_update();
+    return resolved_promise;
+  }
   function add_render_callback(fn) {
     render_callbacks.push(fn);
   }
@@ -4093,7 +4106,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance8, create_fragment8, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance9, create_fragment9, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -4119,7 +4132,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance8 ? instance8(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance9 ? instance9(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -4132,7 +4145,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment8 ? create_fragment8($.ctx) : false;
+    $.fragment = create_fragment9 ? create_fragment9($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -7397,40 +7410,215 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   // staffOccupancyHeatmap.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   var import_xFormatter = __toESM(require_xFormatter());
+
+  // _components/Tooltip.svelte
+  function create_fragment7(ctx) {
+    let div;
+    let current;
+    const default_slot_template = (
+      /*#slots*/
+      ctx[7].default
+    );
+    const default_slot = create_slot(
+      default_slot_template,
+      ctx,
+      /*$scope*/
+      ctx[6],
+      null
+    );
+    return {
+      c() {
+        div = element("div");
+        if (default_slot)
+          default_slot.c();
+        set_style(
+          div,
+          "top",
+          /*y*/
+          ctx[2] + "px"
+        );
+        set_style(
+          div,
+          "left",
+          /*x*/
+          ctx[1] + "px"
+        );
+        attr(div, "class", "tooltip svelte-ei4lrq");
+        toggle_class(
+          div,
+          "show",
+          /*isHovered*/
+          ctx[3]
+        );
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        if (default_slot) {
+          default_slot.m(div, null);
+        }
+        ctx[8](div);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        if (default_slot) {
+          if (default_slot.p && (!current || dirty & /*$scope*/
+          64)) {
+            update_slot_base(
+              default_slot,
+              default_slot_template,
+              ctx2,
+              /*$scope*/
+              ctx2[6],
+              !current ? get_all_dirty_from_scope(
+                /*$scope*/
+                ctx2[6]
+              ) : get_slot_changes(
+                default_slot_template,
+                /*$scope*/
+                ctx2[6],
+                dirty,
+                null
+              ),
+              null
+            );
+          }
+        }
+        if (!current || dirty & /*y*/
+        4) {
+          set_style(
+            div,
+            "top",
+            /*y*/
+            ctx2[2] + "px"
+          );
+        }
+        if (!current || dirty & /*x*/
+        2) {
+          set_style(
+            div,
+            "left",
+            /*x*/
+            ctx2[1] + "px"
+          );
+        }
+        if (!current || dirty & /*isHovered*/
+        8) {
+          toggle_class(
+            div,
+            "show",
+            /*isHovered*/
+            ctx2[3]
+          );
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(default_slot, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(default_slot, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        if (default_slot)
+          default_slot.d(detaching);
+        ctx[8](null);
+      }
+    };
+  }
+  function instance7($self, $props, $invalidate) {
+    let { $slots: slots = {}, $scope } = $props;
+    let tooltip = (
+      /** @type {HTMLDivElement} */
+      null
+    );
+    let x = 0;
+    let y = 0;
+    let isHovered = false;
+    async function Show(rect) {
+      $invalidate(3, isHovered = true);
+      await tick();
+      const tooltipRect = tooltip.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const windowWidth = window.innerWidth;
+      $invalidate(1, x = rect.left + 10);
+      $invalidate(2, y = rect.top + 10);
+      if (y + tooltipRect.height > windowHeight) {
+        $invalidate(2, y = rect.top - tooltipRect.height - 40);
+      }
+      if (x + tooltipRect.width > windowWidth) {
+        $invalidate(1, x = rect.left - tooltipRect.width - 40);
+      }
+    }
+    function Hide() {
+      $invalidate(3, isHovered = false);
+    }
+    function div_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        tooltip = $value;
+        $invalidate(0, tooltip);
+      });
+    }
+    $self.$set = ($props2) => {
+      if ("$scope" in $props2)
+        $invalidate(6, $scope = $props2.$scope);
+    };
+    return [tooltip, x, y, isHovered, Show, Hide, $scope, slots, div_binding];
+  }
+  var Tooltip = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance7, create_fragment7, safe_not_equal, { Show: 4, Hide: 5 });
+    }
+    get Show() {
+      return this.$.ctx[4];
+    }
+    get Hide() {
+      return this.$.ctx[5];
+    }
+  };
+  var Tooltip_default = Tooltip;
+
+  // staffOccupancyHeatmap.svelte
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[18] = list[i];
+    child_ctx[19] = list[i];
     const constants_0 = (
       /*getBookingsByRoomName*/
       child_ctx[6](
         /*room*/
-        child_ctx[18]
+        child_ctx[19]
       )
     );
-    child_ctx[19] = constants_0;
+    child_ctx[20] = constants_0;
     return child_ctx;
   }
   function get_each_context_1(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[22] = list[i];
-    child_ctx[26] = i;
+    child_ctx[23] = list[i];
+    child_ctx[27] = i;
     const constants_0 = (
       /*getBookingIsOccupied*/
-      child_ctx[10](
+      child_ctx[9](
         /*bookings*/
-        child_ctx[19],
+        child_ctx[20],
         /*day*/
-        child_ctx[26] + 1
+        child_ctx[27] + 1
       )
     );
-    child_ctx[23] = constants_0[0];
-    child_ctx[24] = constants_0[1];
+    child_ctx[24] = constants_0[0];
+    child_ctx[25] = constants_0[1];
     return child_ctx;
   }
   function get_each_context_2(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[22] = list[i];
-    child_ctx[26] = i;
+    child_ctx[23] = list[i];
+    child_ctx[27] = i;
     return child_ctx;
   }
   function create_each_block_2(ctx) {
@@ -7439,8 +7627,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       c() {
         div = element("div");
         div.textContent = `${/*day*/
-        ctx[26] + 1}`;
-        attr(div, "class", "date-header svelte-bxg9fe");
+        ctx[27] + 1}`;
+        attr(div, "class", "date-header svelte-1tv7yzj");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -7458,7 +7646,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return {
       c() {
         div = element("div");
-        attr(div, "class", "date-cell not-occupied svelte-bxg9fe");
+        attr(div, "class", "date-cell not-occupied svelte-1tv7yzj");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -7471,20 +7659,18 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_if_block_12(ctx) {
+  function create_if_block2(ctx) {
     let div;
     let mounted;
     let dispose;
     function mouseenter_handler(...args) {
       return (
         /*mouseenter_handler*/
-        ctx[13](
+        ctx[12](
           /*bk*/
-          ctx[23],
-          /*day*/
-          ctx[26],
+          ctx[24],
           /*room*/
-          ctx[18],
+          ctx[19],
           ...args
         )
       );
@@ -7492,13 +7678,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return {
       c() {
         div = element("div");
-        attr(div, "class", "date-cell occupied svelte-bxg9fe");
+        attr(div, "class", "date-cell occupied svelte-1tv7yzj");
         attr(div, "aria-label", "tool-tip");
         set_style(
           div,
           "background-color",
           /*bk*/
-          ctx[23].color
+          ctx[24].color
         );
       },
       m(target, anchor) {
@@ -7509,8 +7695,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             listen(
               div,
               "mouseleave",
-              /*hideTooltip*/
-              ctx[9]
+              /*mouseleave_handler*/
+              ctx[13]
             )
           ];
           mounted = true;
@@ -7524,7 +7710,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             div,
             "background-color",
             /*bk*/
-            ctx[23].color
+            ctx[24].color
           );
         }
       },
@@ -7544,9 +7730,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     function select_block_type(ctx2, dirty) {
       if (
         /*avail*/
-        ctx2[24]
+        ctx2[25]
       )
-        return create_if_block_12;
+        return create_if_block2;
       return create_else_block;
     }
     let current_block_type = select_block_type(ctx, -1);
@@ -7592,7 +7778,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let t0;
     let t1_value = (
       /*room*/
-      ctx[18] + ""
+      ctx[19] + ""
     );
     let t1;
     let t2;
@@ -7620,9 +7806,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           each_blocks[i].c();
         }
         t3 = space();
-        attr(div0, "class", "room-name sticky-room svelte-bxg9fe");
-        attr(div1, "class", "blocks svelte-bxg9fe");
-        attr(div2, "class", "table-row svelte-bxg9fe");
+        attr(div0, "class", "room-name sticky-room svelte-1tv7yzj");
+        attr(div1, "class", "blocks svelte-1tv7yzj");
+        attr(div2, "class", "table-row svelte-1tv7yzj");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
@@ -7641,10 +7827,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       p(ctx2, dirty) {
         if (dirty & /*roomNames*/
         1 && t1_value !== (t1_value = /*room*/
-        ctx2[18] + ""))
+        ctx2[19] + ""))
           set_data(t1, t1_value);
-        if (dirty & /*getBookingIsOccupied, getBookingsByRoomName, roomNames, showTooltip, hideTooltip, totalDaysInSelectedMonth*/
-        1865) {
+        if (dirty & /*getBookingIsOccupied, getBookingsByRoomName, roomNames, showTooltip, tooltipComp, totalDaysInSelectedMonth*/
+        857) {
           each_value_1 = ensure_array_like(Array.from({
             length: (
               /*totalDaysInSelectedMonth*/
@@ -7676,7 +7862,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_default_slot(ctx) {
+  function create_default_slot_1(ctx) {
     let div5;
     let monthshifter;
     let updating_yearMonth;
@@ -7691,10 +7877,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let t3;
     let current;
     function monthshifter_yearMonth_binding(value) {
-      ctx[11](value);
+      ctx[10](value);
     }
     function monthshifter_isLoading_binding(value) {
-      ctx[12](value);
+      ctx[11](value);
     }
     let monthshifter_props = { OnChanges: (
       /*RefreshData*/
@@ -7754,12 +7940,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div0, "class", "room-label sticky-corner svelte-bxg9fe");
-        attr(div1, "class", "days svelte-bxg9fe");
-        attr(div2, "class", "table-header svelte-bxg9fe");
-        attr(div3, "class", "rooms-heatmap-table svelte-bxg9fe");
-        attr(div4, "class", "rooms-heatmap-wrapper svelte-bxg9fe");
-        attr(div5, "class", "occupancy-heatmap-container svelte-bxg9fe");
+        attr(div0, "class", "room-label sticky-corner svelte-1tv7yzj");
+        attr(div1, "class", "days svelte-1tv7yzj");
+        attr(div2, "class", "table-header svelte-1tv7yzj");
+        attr(div3, "class", "rooms-heatmap-table svelte-1tv7yzj");
+        attr(div4, "class", "rooms-heatmap-wrapper svelte-1tv7yzj");
+        attr(div5, "class", "occupancy-heatmap-container svelte-1tv7yzj");
       },
       m(target, anchor) {
         insert(target, div5, anchor);
@@ -7825,8 +8011,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           }
           each_blocks_1.length = each_value_2.length;
         }
-        if (dirty & /*Array, totalDaysInSelectedMonth, getBookingIsOccupied, getBookingsByRoomName, roomNames, showTooltip, hideTooltip*/
-        1865) {
+        if (dirty & /*Array, totalDaysInSelectedMonth, getBookingIsOccupied, getBookingsByRoomName, roomNames, showTooltip, tooltipComp*/
+        857) {
           each_value = ensure_array_like(
             /*roomNames*/
             ctx2[0]
@@ -7868,14 +8054,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
     };
   }
-  function create_if_block2(ctx) {
-    let div1;
-    let div0;
+  function create_default_slot(ctx) {
+    let div;
     let strong0;
     let t1;
     let t2_value = (
       /*tooltipData*/
-      ctx[4].tenant + ""
+      ctx[5].tenant + ""
     );
     let t2;
     let br0;
@@ -7884,31 +8069,30 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     let t5;
     let t6_value = (
       /*tooltipData*/
-      ctx[4].room + ""
+      ctx[5].room + ""
     );
     let t6;
     let br1;
     let t7;
     let strong2;
     let t9;
-    let t10_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
+    let t10_value = (
       /*tooltipData*/
-      ctx[4].dateStart
-    ) + "";
+      ctx[5].dateStart + ""
+    );
     let t10;
     let br2;
     let t11;
     let strong3;
     let t13;
-    let t14_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
+    let t14_value = (
       /*tooltipData*/
-      ctx[4].dateEnd
-    ) + "";
+      ctx[5].dateEnd + ""
+    );
     let t14;
     return {
       c() {
-        div1 = element("div");
-        div0 = element("div");
+        div = element("div");
         strong0 = element("strong");
         strong0.textContent = "Penghuni:";
         t1 = space();
@@ -7931,164 +8115,118 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         strong3.textContent = "Check-out:";
         t13 = space();
         t14 = text(t14_value);
-        attr(div0, "class", "tooltip-content svelte-bxg9fe");
-        attr(div1, "class", "tooltip svelte-bxg9fe");
-        set_style(
-          div1,
-          "left",
-          /*tooltipPosition*/
-          ctx[5].x + 10 + "px"
-        );
-        set_style(
-          div1,
-          "top",
-          /*tooltipPosition*/
-          ctx[5].y + 10 + "px"
-        );
+        attr(div, "class", "tooltip-content svelte-1tv7yzj");
       },
       m(target, anchor) {
-        insert(target, div1, anchor);
-        append(div1, div0);
-        append(div0, strong0);
-        append(div0, t1);
-        append(div0, t2);
-        append(div0, br0);
-        append(div0, t3);
-        append(div0, strong1);
-        append(div0, t5);
-        append(div0, t6);
-        append(div0, br1);
-        append(div0, t7);
-        append(div0, strong2);
-        append(div0, t9);
-        append(div0, t10);
-        append(div0, br2);
-        append(div0, t11);
-        append(div0, strong3);
-        append(div0, t13);
-        append(div0, t14);
+        insert(target, div, anchor);
+        append(div, strong0);
+        append(div, t1);
+        append(div, t2);
+        append(div, br0);
+        append(div, t3);
+        append(div, strong1);
+        append(div, t5);
+        append(div, t6);
+        append(div, br1);
+        append(div, t7);
+        append(div, strong2);
+        append(div, t9);
+        append(div, t10);
+        append(div, br2);
+        append(div, t11);
+        append(div, strong3);
+        append(div, t13);
+        append(div, t14);
       },
       p(ctx2, dirty) {
         if (dirty & /*tooltipData*/
-        16 && t2_value !== (t2_value = /*tooltipData*/
-        ctx2[4].tenant + ""))
+        32 && t2_value !== (t2_value = /*tooltipData*/
+        ctx2[5].tenant + ""))
           set_data(t2, t2_value);
         if (dirty & /*tooltipData*/
-        16 && t6_value !== (t6_value = /*tooltipData*/
-        ctx2[4].room + ""))
+        32 && t6_value !== (t6_value = /*tooltipData*/
+        ctx2[5].room + ""))
           set_data(t6, t6_value);
         if (dirty & /*tooltipData*/
-        16 && t10_value !== (t10_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
-          /*tooltipData*/
-          ctx2[4].dateStart
-        ) + ""))
+        32 && t10_value !== (t10_value = /*tooltipData*/
+        ctx2[5].dateStart + ""))
           set_data(t10, t10_value);
         if (dirty & /*tooltipData*/
-        16 && t14_value !== (t14_value = (0, import_xFormatter.localeDateFromYYYYMMDD)(
-          /*tooltipData*/
-          ctx2[4].dateEnd
-        ) + ""))
+        32 && t14_value !== (t14_value = /*tooltipData*/
+        ctx2[5].dateEnd + ""))
           set_data(t14, t14_value);
-        if (dirty & /*tooltipPosition*/
-        32) {
-          set_style(
-            div1,
-            "left",
-            /*tooltipPosition*/
-            ctx2[5].x + 10 + "px"
-          );
-        }
-        if (dirty & /*tooltipPosition*/
-        32) {
-          set_style(
-            div1,
-            "top",
-            /*tooltipPosition*/
-            ctx2[5].y + 10 + "px"
-          );
-        }
       },
       d(detaching) {
         if (detaching) {
-          detach(div1);
+          detach(div);
         }
       }
     };
   }
-  function create_fragment7(ctx) {
+  function create_fragment8(ctx) {
     let layoutmain;
     let t;
-    let if_block_anchor;
+    let tooltip;
     let current;
     layoutmain = new main_default({
       props: {
         access: segments,
         user,
-        $slots: { default: [create_default_slot] },
+        $slots: { default: [create_default_slot_1] },
         $scope: { ctx }
       }
     });
-    let if_block = (
-      /*tooltipData*/
-      ctx[4] && create_if_block2(ctx)
-    );
+    let tooltip_props = {
+      $slots: { default: [create_default_slot] },
+      $scope: { ctx }
+    };
+    tooltip = new Tooltip_default({ props: tooltip_props });
+    ctx[14](tooltip);
     return {
       c() {
         create_component(layoutmain.$.fragment);
         t = space();
-        if (if_block)
-          if_block.c();
-        if_block_anchor = empty();
+        create_component(tooltip.$.fragment);
       },
       m(target, anchor) {
         mount_component(layoutmain, target, anchor);
         insert(target, t, anchor);
-        if (if_block)
-          if_block.m(target, anchor);
-        insert(target, if_block_anchor, anchor);
+        mount_component(tooltip, target, anchor);
         current = true;
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, roomNames, totalDaysInSelectedMonth, yearMonth, isLoading*/
-        268435471) {
+        if (dirty & /*$scope, roomNames, totalDaysInSelectedMonth, tooltipComp, yearMonth, isLoading*/
+        536870943) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
-        if (
-          /*tooltipData*/
-          ctx2[4]
-        ) {
-          if (if_block) {
-            if_block.p(ctx2, dirty);
-          } else {
-            if_block = create_if_block2(ctx2);
-            if_block.c();
-            if_block.m(if_block_anchor.parentNode, if_block_anchor);
-          }
-        } else if (if_block) {
-          if_block.d(1);
-          if_block = null;
+        const tooltip_changes = {};
+        if (dirty & /*$scope, tooltipData*/
+        536870944) {
+          tooltip_changes.$scope = { dirty, ctx: ctx2 };
         }
+        tooltip.$set(tooltip_changes);
       },
       i(local) {
         if (current)
           return;
         transition_in(layoutmain.$.fragment, local);
+        transition_in(tooltip.$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(layoutmain.$.fragment, local);
+        transition_out(tooltip.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
           detach(t);
-          detach(if_block_anchor);
         }
         destroy_component(layoutmain, detaching);
-        if (if_block)
-          if_block.d(detaching);
+        ctx[14](null);
+        destroy_component(tooltip, detaching);
       }
     };
   }
@@ -8104,7 +8242,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     /** @type {Record<Number, string>} */
     {/* tenants */}
   );
-  function instance7($self, $props, $invalidate) {
+  function instance8($self, $props, $invalidate) {
     let bookingsPerMonth = (
       /** @type {any[]} */
       [/* bookingsPerMonth */]
@@ -8179,23 +8317,28 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       );
     }
-    let tooltipData = null;
-    let tooltipPosition = { x: 0, y: 0 };
-    function showTooltip(event, booking, day, room) {
-      if (!booking) {
-        return;
+    let tooltipComp = (
+      /** @type {Tooltip} */
+      null
+    );
+    let tooltipData = (
+      /** @type {{tenant: string; room: string; dateStart: string; dateEnd: string}} */
+      {
+        tenant: "",
+        dateStart: "",
+        dateEnd: "",
+        room: ""
       }
-      $invalidate(4, tooltipData = {
-        tenant: tenants[booking.tenantId] || "Unknown",
-        room,
-        dateStart: booking.dateStart,
-        dateEnd: booking.dateEnd,
-        day
+    );
+    function showTooltip(event, bk, roomName) {
+      $invalidate(5, tooltipData = {
+        tenant: tenants[bk.tenantId],
+        room: roomName,
+        dateStart: (0, import_xFormatter.localeDateFromYYYYMMDD)(bk.dateStart),
+        dateEnd: (0, import_xFormatter.localeDateFromYYYYMMDD)(bk.dateEnd)
       });
-      $invalidate(5, tooltipPosition = { x: event.clientX, y: event.clientY });
-    }
-    function hideTooltip() {
-      $invalidate(4, tooltipData = null);
+      const rect = event.currentTarget.getBoundingClientRect();
+      tooltipComp.Show(rect);
     }
     function getBookingIsOccupied(bks, day) {
       const bk = bks.find((b) => {
@@ -8211,31 +8354,39 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       isLoading = value;
       $invalidate(2, isLoading);
     }
-    const mouseenter_handler = (bk, day, room, e) => {
+    const mouseenter_handler = (bk, room, e) => {
       if (bk)
-        showTooltip(e, bk, day + 1, room);
+        showTooltip(e, bk, room);
     };
+    const mouseleave_handler = () => tooltipComp.Hide();
+    function tooltip_binding($value) {
+      binding_callbacks[$value ? "unshift" : "push"](() => {
+        tooltipComp = $value;
+        $invalidate(4, tooltipComp);
+      });
+    }
     return [
       roomNames,
       yearMonth,
       isLoading,
       totalDaysInSelectedMonth,
+      tooltipComp,
       tooltipData,
-      tooltipPosition,
       getBookingsByRoomName,
       RefreshData,
       showTooltip,
-      hideTooltip,
       getBookingIsOccupied,
       monthshifter_yearMonth_binding,
       monthshifter_isLoading_binding,
-      mouseenter_handler
+      mouseenter_handler,
+      mouseleave_handler,
+      tooltip_binding
     ];
   }
   var StaffOccupancyHeatmap_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance7, create_fragment7, safe_not_equal, {});
+      init(this, options, instance8, create_fragment8, safe_not_equal, {});
     }
   };
   var staffOccupancyHeatmap_default = StaffOccupancyHeatmap_1;
