@@ -1152,7 +1152,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	})
 
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {
-		return views.RenderDebug(ctx, M.SX{})
+		return views.RenderDebug(ctx, M.SX{
+			`title`: `Debug Page`,
+		})
 	})
 }
 
