@@ -25,52 +25,26 @@
 
 	function reColorBookings() {
 		const tenantColors = {};
-		const usedColors = new Set();
 
-		const baseColors = [
-			{h: 0, s: 75, l: 50},     // Red
-			{h: 210, s: 80, l: 50},   // Blue
-			{h: 120, s: 70, l: 45},   // Green
-			{h: 280, s: 70, l: 55},   // Purple
-			{h: 30, s: 80, l: 50},    // Orange
-			{h: 180, s: 65, l: 45},   // Cyan
-			{h: 340, s: 75, l: 50},   // Pink
-			{h: 60, s: 75, l: 50},    // Yellow
-			{h: 150, s: 65, l: 45},   // Teal
-			{h: 250, s: 70, l: 55},   // Indigo
-			{h: 15, s: 75, l: 50},    // Red-Orange
-			{h: 90, s: 65, l: 50},    // Yellow-Green
-			{h: 200, s: 75, l: 50},   // Light Blue
-			{h: 320, s: 70, l: 50},   // Magenta
-			{h: 45, s: 70, l: 50},    // Amber
-		];
-
-		const getUniqueColor = (tenantId) => {
-			const hash = tenantId;
-			const baseIndex = hash % baseColors.length;
-			let selectedBase = baseColors[baseIndex];
-
-			const colorKey = `${selectedBase.h}-${selectedBase.s}-${selectedBase.l}`;
-			let variation = 0;
-
-			while(usedColors.has(`${colorKey}-${variation}`)) {
-				variation++;
-				if (variation > 10) break;
+		// make list of tenantIds
+		(() => {
+			const uniqTenantIds = {}
+			bookingsPerMonth.forEach((booking) => {
+				uniqTenantIds[booking.tenantId] = '';
+			})
+			const tenantIds = []
+			for(const tenantId in uniqTenantIds) {
+				tenantIds.push(tenantId)
 			}
+			tenantIds.sort((a, b) => a - b);
+			for(const [index, tenantId] of tenantIds.entries()) {
+				const degree = Math.floor((360 * index) / (tenantIds.length + 1));
+				tenantColors[tenantId] = `hsl(${degree}, 100%, 47%)`;
+			}
+		})()
 
-			usedColors.add(`${colorKey}-${variation}`);
-
-			const hue = (selectedBase.h + (variation * 25)) % 360;
-			const sat = selectedBase.s + ((hash % 3) - 1) * 10;
-			const light = selectedBase.l + ((hash % 5) - 2) * 5;
-
-			return `hsl(${hue}, ${Math.max(50, Math.min(90, sat))}%, ${Math.max(35, Math.min(65, light))}%)`;
-		};
 
 		bookingsPerMonth.forEach((booking) => {
-			if (!tenantColors[booking.tenantId]) {
-				tenantColors[booking.tenantId] = getUniqueColor(booking.tenantId);
-			}
 			booking.color = tenantColors[booking.tenantId];
 		});
 	}

@@ -8252,115 +8252,22 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     );
     function reColorBookings() {
       const tenantColors = {};
-      const usedColors = /* @__PURE__ */ new Set();
-      const baseColors = [
-        { h: 0, s: 75, l: 50 },
-        {
-          h: 210,
-          // Red
-          s: 80,
-          l: 50
-        },
-        {
-          h: 120,
-          // Blue
-          s: 70,
-          l: 45
-        },
-        {
-          h: 280,
-          // Green
-          s: 70,
-          l: 55
-        },
-        {
-          h: 30,
-          // Purple
-          s: 80,
-          l: 50
-        },
-        {
-          h: 180,
-          // Orange
-          s: 65,
-          l: 45
-        },
-        {
-          h: 340,
-          // Cyan
-          s: 75,
-          l: 50
-        },
-        {
-          h: 60,
-          // Pink
-          s: 75,
-          l: 50
-        },
-        {
-          h: 150,
-          // Yellow
-          s: 65,
-          l: 45
-        },
-        {
-          h: 250,
-          // Teal
-          s: 70,
-          l: 55
-        },
-        {
-          h: 15,
-          // Indigo
-          s: 75,
-          l: 50
-        },
-        {
-          h: 90,
-          // Red-Orange
-          s: 65,
-          l: 50
-        },
-        {
-          h: 200,
-          // Yellow-Green
-          s: 75,
-          l: 50
-        },
-        {
-          h: 320,
-          // Light Blue
-          s: 70,
-          l: 50
-        },
-        {
-          h: 45,
-          // Magenta
-          s: 70,
-          l: 50
+      (() => {
+        const uniqTenantIds = {};
+        bookingsPerMonth.forEach((booking) => {
+          uniqTenantIds[booking.tenantId] = "";
+        });
+        const tenantIds = [];
+        for (const tenantId in uniqTenantIds) {
+          tenantIds.push(tenantId);
         }
-      ];
-      const getUniqueColor = (tenantId) => {
-        const hash = tenantId;
-        const baseIndex = hash % baseColors.length;
-        let selectedBase = baseColors[baseIndex];
-        const colorKey = `${selectedBase.h}-${selectedBase.s}-${selectedBase.l}`;
-        let variation = 0;
-        while (usedColors.has(`${colorKey}-${variation}`)) {
-          variation++;
-          if (variation > 10)
-            break;
+        tenantIds.sort((a, b) => a - b);
+        for (const [index, tenantId] of tenantIds.entries()) {
+          const degree = Math.floor(360 * index / (tenantIds.length + 1));
+          tenantColors[tenantId] = `hsl(${degree}, 100%, 47%)`;
         }
-        usedColors.add(`${colorKey}-${variation}`);
-        const hue = (selectedBase.h + variation * 25) % 360;
-        const sat = selectedBase.s + (hash % 3 - 1) * 10;
-        const light = selectedBase.l + (hash % 5 - 2) * 5;
-        return `hsl(${hue}, ${Math.max(50, Math.min(90, sat))}%, ${Math.max(35, Math.min(65, light))}%)`;
-      };
+      })();
       bookingsPerMonth.forEach((booking) => {
-        if (!tenantColors[booking.tenantId]) {
-          tenantColors[booking.tenantId] = getUniqueColor(booking.tenantId);
-        }
         booking.color = tenantColors[booking.tenantId];
       });
     }
