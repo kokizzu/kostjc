@@ -715,25 +715,25 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./staffOccupancyHeatmap.esbuild-svelte-fake-css */
-.occupancy-heatmap-container.svelte-1tv7yzj.svelte-1tv7yzj {
+.occupancy-heatmap-container.svelte-1wltjwo.svelte-1wltjwo {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 20px;
 }
-.rooms-heatmap-wrapper.svelte-1tv7yzj.svelte-1tv7yzj {
+.rooms-heatmap-wrapper.svelte-1wltjwo.svelte-1wltjwo {
   position: relative;
   width: 100%;
   overflow: auto;
   max-height: calc(100vh - 200px);
 }
-.rooms-heatmap-table.svelte-1tv7yzj.svelte-1tv7yzj {
+.rooms-heatmap-table.svelte-1wltjwo.svelte-1wltjwo {
   display: flex;
   flex-direction: column;
   gap: 2px;
   width: 100%;
 }
-.table-header.svelte-1tv7yzj.svelte-1tv7yzj {
+.table-header.svelte-1wltjwo.svelte-1wltjwo {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -746,92 +746,95 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   border-bottom: 2px solid var(--gray-004);
   padding-bottom: 10px;
 }
-.table-header.svelte-1tv7yzj .days.svelte-1tv7yzj {
+.table-header.svelte-1wltjwo .days.svelte-1wltjwo {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
   gap: 2px;
 }
-.room-label.svelte-1tv7yzj.svelte-1tv7yzj {
+.room-label.svelte-1wltjwo.svelte-1wltjwo {
   padding: 8px;
   font-weight: 600;
   text-align: left;
   font-size: var(--font-md);
-  width: 100px;
+  width: 70px;
+  text-overflow: ellipsis;
 }
-.sticky-corner.svelte-1tv7yzj.svelte-1tv7yzj {
+.sticky-corner.svelte-1wltjwo.svelte-1wltjwo {
   position: sticky;
   left: 0;
   z-index: 30;
   background-color: white;
 }
-.sticky-room.svelte-1tv7yzj.svelte-1tv7yzj {
+.sticky-room.svelte-1wltjwo.svelte-1wltjwo {
   position: sticky;
   left: 0;
   z-index: 10;
   background-color: white;
 }
-.date-header.svelte-1tv7yzj.svelte-1tv7yzj {
+.date-header.svelte-1wltjwo.svelte-1wltjwo {
   text-align: center;
   font-size: 10px;
   color: var(--gray-008);
   padding: 2px;
   background-color: white;
 }
-.date-cell.svelte-1tv7yzj.svelte-1tv7yzj {
+.date-cell.svelte-1wltjwo.svelte-1wltjwo {
+  min-width: 28px;
+  width: 28px;
   height: 28px;
   border-radius: 3px;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
 }
-.date-cell.occupied.svelte-1tv7yzj.svelte-1tv7yzj:hover {
+.date-cell.occupied.svelte-1wltjwo.svelte-1wltjwo:hover {
   transform: scale(1.15);
   box-shadow: 0 2px 8px rgba(0, 100, 255, 0.3);
   z-index: 5;
   border-color: var(--blue-007);
   background-color: var(--blue-004);
 }
-.date-cell.not-occupied.svelte-1tv7yzj.svelte-1tv7yzj {
+.date-cell.not-occupied.svelte-1wltjwo.svelte-1wltjwo {
   border: 1px solid var(--gray-002) !important;
   background-color: var(--gray-001) !important;
   cursor: default;
 }
-.date-cell.not-occupied.svelte-1tv7yzj.svelte-1tv7yzj:hover {
+.date-cell.not-occupied.svelte-1wltjwo.svelte-1wltjwo:hover {
   background-color: var(--gray-002) !important;
 }
-.table-row.svelte-1tv7yzj.svelte-1tv7yzj {
+.table-row.svelte-1wltjwo.svelte-1wltjwo {
   display: flex;
   flex-direction: row;
   gap: 10px;
 }
-.table-row.svelte-1tv7yzj .room-name.svelte-1tv7yzj {
+.table-row.svelte-1wltjwo .room-name.svelte-1wltjwo {
   padding: 8px;
   font-weight: 600;
   text-align: left;
   font-size: var(--font-md);
-  width: 100px;
+  width: 70px;
 }
-.table-row.svelte-1tv7yzj.svelte-1tv7yzj:hover {
+.table-row.svelte-1wltjwo.svelte-1wltjwo:hover {
   background-color: var(--gray-001);
 }
-.table-row.svelte-1tv7yzj:hover .sticky-room.svelte-1tv7yzj {
+.table-row.svelte-1wltjwo:hover .sticky-room.svelte-1wltjwo {
   background-color: var(--gray-001);
 }
-.table-row.svelte-1tv7yzj .blocks.svelte-1tv7yzj {
+.table-row.svelte-1wltjwo .blocks.svelte-1wltjwo {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
   gap: 2px;
 }
-.tooltip-content.svelte-1tv7yzj.svelte-1tv7yzj {
+.tooltip-content.svelte-1wltjwo.svelte-1wltjwo {
   color: var(--gray-008);
   padding: 10px 12px;
   border-radius: 6px;
   font-size: 12px;
   white-space: nowrap;
 }
-@keyframes svelte-1tv7yzj-fadeIn {
+@keyframes svelte-1wltjwo-fadeIn {
   from {
     opacity: 0;
   }
@@ -867,9 +870,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     mod
   ));
 
-  // node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs
+  // node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/browser/axios.cjs
   var require_axios = __commonJS({
-    "node_modules/.pnpm/axios@1.7.7/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
+    "node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/browser/axios.cjs"(exports, module) {
       "use strict";
       function bind2(fn, thisArg) {
         return function wrap() {
@@ -878,6 +881,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
       var { toString } = Object.prototype;
       var { getPrototypeOf } = Object;
+      var { iterator, toStringTag } = Symbol;
       var kindOf = ((cache) => (thing) => {
         const str = toString.call(thing);
         return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
@@ -912,7 +916,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           return false;
         }
         const prototype2 = getPrototypeOf(val);
-        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(Symbol.toStringTag in val) && !(Symbol.iterator in val);
+        return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
       };
       var isDate = kindOfTest("Date");
       var isFile = kindOfTest("File");
@@ -1064,10 +1068,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         };
       })(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
       var forEachEntry = (obj, fn) => {
-        const generator = obj && obj[Symbol.iterator];
-        const iterator = generator.call(obj);
+        const generator = obj && obj[iterator];
+        const _iterator = generator.call(obj);
         let result;
-        while ((result = iterator.next()) && !result.done) {
+        while ((result = _iterator.next()) && !result.done) {
           const pair = result.value;
           fn.call(obj, pair[0], pair[1]);
         }
@@ -1137,23 +1141,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       var toFiniteNumber = (value, defaultValue) => {
         return value != null && Number.isFinite(value = +value) ? value : defaultValue;
       };
-      var ALPHA = "abcdefghijklmnopqrstuvwxyz";
-      var DIGIT = "0123456789";
-      var ALPHABET = {
-        DIGIT,
-        ALPHA,
-        ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
-      };
-      var generateString = (size = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
-        let str = "";
-        const { length } = alphabet;
-        while (size--) {
-          str += alphabet[Math.random() * length | 0];
-        }
-        return str;
-      };
       function isSpecCompliantForm(thing) {
-        return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
+        return !!(thing && isFunction(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
       }
       var toJSONObject = (obj) => {
         const stack = new Array(10);
@@ -1199,6 +1188,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         isFunction(_global.postMessage)
       );
       var asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
+      var isIterable = (thing) => thing != null && isFunction(thing[iterator]);
       var utils$1 = {
         isArray,
         isArrayBuffer,
@@ -1250,14 +1240,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         findKey,
         global: _global,
         isContextDefined,
-        ALPHABET,
-        generateString,
         isSpecCompliantForm,
         toJSONObject,
         isAsyncFn,
         isThenable,
         setImmediate: _setImmediate,
-        asap
+        asap,
+        isIterable
       };
       function AxiosError(message, code, config, request, response) {
         Error.call(this);
@@ -1482,6 +1471,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           return url;
         }
         const _encode = options && options.encode || encode;
+        if (utils$1.isFunction(options)) {
+          options = {
+            serialize: options
+          };
+        }
         const serializeFn = options && options.serialize;
         let serializedParams;
         if (serializeFn) {
@@ -1882,10 +1876,15 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             setHeaders(header, valueOrRewrite);
           } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
             setHeaders(parseHeaders(header), valueOrRewrite);
-          } else if (utils$1.isHeaders(header)) {
-            for (const [key, value] of header.entries()) {
-              setHeader(value, key, rewrite);
+          } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
+            let obj = {}, dest, key;
+            for (const entry of header) {
+              if (!utils$1.isArray(entry)) {
+                throw TypeError("Object iterator must return a key-value pair");
+              }
+              obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
             }
+            setHeaders(obj, valueOrRewrite);
           } else {
             header != null && setHeader(valueOrRewrite, header, rewrite);
           }
@@ -1988,6 +1987,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
         toString() {
           return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
+        }
+        getSetCookie() {
+          return this.get("set-cookie") || [];
         }
         get [Symbol.toStringTag]() {
           return "AxiosHeaders";
@@ -2166,45 +2168,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }), throttled[1]];
       };
       var asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
-      var isURLSameOrigin = platform.hasStandardBrowserEnv ? (
-        // Standard browser envs have full support of the APIs needed to test
-        // whether the request URL is of the same origin as current location.
-        function standardBrowserEnv() {
-          const msie = platform.navigator && /(msie|trident)/i.test(platform.navigator.userAgent);
-          const urlParsingNode = document.createElement("a");
-          let originURL;
-          function resolveURL(url) {
-            let href = url;
-            if (msie) {
-              urlParsingNode.setAttribute("href", href);
-              href = urlParsingNode.href;
-            }
-            urlParsingNode.setAttribute("href", href);
-            return {
-              href: urlParsingNode.href,
-              protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
-              host: urlParsingNode.host,
-              search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
-              hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
-              hostname: urlParsingNode.hostname,
-              port: urlParsingNode.port,
-              pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
-            };
-          }
-          originURL = resolveURL(window.location.href);
-          return function isURLSameOrigin2(requestURL) {
-            const parsed = utils$1.isString(requestURL) ? resolveURL(requestURL) : requestURL;
-            return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
-          };
-        }()
-      ) : (
-        // Non standard browser envs (web workers, react-native) lack needed support.
-        function nonStandardBrowserEnv() {
-          return function isURLSameOrigin2() {
-            return true;
-          };
-        }()
-      );
+      var isURLSameOrigin = platform.hasStandardBrowserEnv ? ((origin2, isMSIE) => (url) => {
+        url = new URL(url, platform.origin);
+        return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
+      })(
+        new URL(platform.origin),
+        platform.navigator && /(msie|trident)/i.test(platform.navigator.userAgent)
+      ) : () => true;
       var cookies = platform.hasStandardBrowserEnv ? (
         // Standard browser envs support document.cookie
         {
@@ -2242,8 +2212,9 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       function combineURLs(baseURL, relativeURL) {
         return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
       }
-      function buildFullPath(baseURL, requestedURL) {
-        if (baseURL && !isAbsoluteURL(requestedURL)) {
+      function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
+        let isRelativeUrl = !isAbsoluteURL(requestedURL);
+        if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) {
           return combineURLs(baseURL, requestedURL);
         }
         return requestedURL;
@@ -2252,7 +2223,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       function mergeConfig(config1, config2) {
         config2 = config2 || {};
         const config = {};
-        function getMergedValue(target, source, caseless) {
+        function getMergedValue(target, source, prop, caseless) {
           if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
             return utils$1.merge.call({ caseless }, target, source);
           } else if (utils$1.isPlainObject(source)) {
@@ -2262,11 +2233,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           }
           return source;
         }
-        function mergeDeepProperties(a, b, caseless) {
+        function mergeDeepProperties(a, b, prop, caseless) {
           if (!utils$1.isUndefined(b)) {
-            return getMergedValue(a, b, caseless);
+            return getMergedValue(a, b, prop, caseless);
           } else if (!utils$1.isUndefined(a)) {
-            return getMergedValue(void 0, a, caseless);
+            return getMergedValue(void 0, a, prop, caseless);
           }
         }
         function valueFromConfig2(a, b) {
@@ -2317,7 +2288,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           socketPath: defaultToConfig2,
           responseEncoding: defaultToConfig2,
           validateStatus: mergeDirectKeys,
-          headers: (a, b) => mergeDeepProperties(headersToObject(a), headersToObject(b), true)
+          headers: (a, b, prop) => mergeDeepProperties(headersToObject(a), headersToObject(b), prop, true)
         };
         utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
           const merge2 = mergeMap[prop] || mergeDeepProperties;
@@ -2330,7 +2301,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         const newConfig = mergeConfig({}, config);
         let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
         newConfig.headers = headers = AxiosHeaders$1.from(headers);
-        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url), config.params, config.paramsSerializer);
+        newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
         if (auth) {
           headers.set(
             "Authorization",
@@ -2554,7 +2525,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
       };
       var trackStream = (stream, chunkSize, onProgress, onFinish) => {
-        const iterator = readBytes(stream, chunkSize);
+        const iterator2 = readBytes(stream, chunkSize);
         let bytes = 0;
         let done;
         let _onFinish = (e) => {
@@ -2566,7 +2537,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         return new ReadableStream({
           async pull(controller) {
             try {
-              const { done: done2, value } = await iterator.next();
+              const { done: done2, value } = await iterator2.next();
               if (done2) {
                 _onFinish();
                 controller.close();
@@ -2585,7 +2556,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           },
           cancel(reason) {
             _onFinish(reason);
-            return iterator.return();
+            return iterator2.return();
           }
         }, {
           highWaterMark: 2
@@ -2742,7 +2713,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           });
         } catch (err) {
           unsubscribe && unsubscribe();
-          if (err && err.name === "TypeError" && /fetch/i.test(err.message)) {
+          if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
             throw Object.assign(
               new AxiosError("Network Error", AxiosError.ERR_NETWORK, config, request),
               {
@@ -2848,7 +2819,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
           return Promise.reject(reason);
         });
       }
-      var VERSION2 = "1.7.7";
+      var VERSION2 = "1.9.0";
       var validators$1 = {};
       ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
         validators$1[type] = function validator2(thing) {
@@ -2877,6 +2848,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             );
           }
           return validator2 ? validator2(value, opt, opts) : true;
+        };
+      };
+      validators$1.spelling = function spelling(correctSpelling) {
+        return (value, opt) => {
+          console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
+          return true;
         };
       };
       function assertOptions(options, schema, allowUnknown) {
@@ -2908,7 +2885,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       var validators = validator.validators;
       var Axios = class {
         constructor(instanceConfig) {
-          this.defaults = instanceConfig;
+          this.defaults = instanceConfig || {};
           this.interceptors = {
             request: new InterceptorManager$1(),
             response: new InterceptorManager$1()
@@ -2927,8 +2904,8 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             return await this._request(configOrUrl, config);
           } catch (err) {
             if (err instanceof Error) {
-              let dummy;
-              Error.captureStackTrace ? Error.captureStackTrace(dummy = {}) : dummy = new Error();
+              let dummy = {};
+              Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
               const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
               try {
                 if (!err.stack) {
@@ -2970,6 +2947,17 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
               }, true);
             }
           }
+          if (config.allowAbsoluteUrls !== void 0)
+            ;
+          else if (this.defaults.allowAbsoluteUrls !== void 0) {
+            config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
+          } else {
+            config.allowAbsoluteUrls = true;
+          }
+          validator.assertOptions(config, {
+            baseUrl: validators.spelling("baseURL"),
+            withXsrfToken: validators.spelling("withXSRFToken")
+          }, true);
           config.method = (config.method || this.defaults.method || "get").toLowerCase();
           let contextHeaders = headers && utils$1.merge(
             headers.common,
@@ -3036,7 +3024,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         }
         getUri(config) {
           config = mergeConfig(this.defaults, config);
-          const fullPath = buildFullPath(config.baseURL, config.url);
+          const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
           return buildURL(fullPath, config.params, config.paramsSerializer);
         }
       };
@@ -3618,7 +3606,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
   });
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/utils.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/utils.js
   function noop() {
   }
   function assign(tar, src) {
@@ -3709,13 +3697,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return ret;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/globals.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/globals.js
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
     // @ts-ignore Node typings have this
     global
   );
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js
   var ResizeObserverSingleton = class {
     /**
      * @private
@@ -3761,7 +3749,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   ResizeObserverSingleton.entries = "WeakMap" in globals ? /* @__PURE__ */ new WeakMap() : void 0;
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/dom.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/dom.js
   var is_hydrating = false;
   function start_hydrating() {
     is_hydrating = true;
@@ -3853,7 +3841,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return result;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/lifecycle.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/lifecycle.js
   var current_component;
   function set_current_component(component) {
     current_component = component;
@@ -3867,7 +3855,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     get_current_component().$.on_mount.push(fn);
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/scheduler.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/scheduler.js
   var dirty_components = [];
   var binding_callbacks = [];
   var render_callbacks = [];
@@ -3949,7 +3937,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     render_callbacks = filtered;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/transitions.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/transitions.js
   var outroing = /* @__PURE__ */ new Set();
   var outros;
   function group_outros() {
@@ -3991,12 +3979,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/each.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/each.js
   function ensure_array_like(array_like_or_iterator) {
     return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/spread.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/spread.js
   function get_spread_update(levels, updates) {
     const update2 = {};
     const to_null_out = {};
@@ -4030,7 +4018,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return update2;
   }
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/boolean_attributes.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/shared/boolean_attributes.js
   var _boolean_attributes = (
     /** @type {const} */
     [
@@ -4063,7 +4051,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   );
   var boolean_attributes = /* @__PURE__ */ new Set([..._boolean_attributes]);
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/Component.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/Component.js
   function bind(component, name, callback) {
     const index = component.$.props[name];
     if (index !== void 0) {
@@ -4241,7 +4229,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             };
           };
           await Promise.resolve();
-          if (!this.$cn) {
+          if (!this.$cn || this.$c) {
             return;
           }
           const $slots = {};
@@ -4255,6 +4243,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
             const name = this.$g_p(attribute.name);
             if (!(name in this.$d)) {
               this.$d[name] = get_custom_element_value(name, attribute.value, this.$p_d, "toProp");
+            }
+          }
+          for (const key in this.$p_d) {
+            if (!(key in this.$d) && this[key] !== void 0) {
+              this.$d[key] = this[key];
+              delete this[key];
             }
           }
           this.$c = new this.$ctor({
@@ -4310,7 +4304,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       disconnectedCallback() {
         this.$cn = false;
         Promise.resolve().then(() => {
-          if (!this.$cn) {
+          if (!this.$cn && this.$c) {
             this.$c.$destroy();
             this.$c = void 0;
           }
@@ -4407,10 +4401,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     }
   };
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/shared/version.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/shared/version.js
   var PUBLIC_VERSION = "4";
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/internal/disclose-version/index.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/internal/disclose-version/index.js
   if (typeof window !== "undefined")
     (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
@@ -4490,7 +4484,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   }();
   var notifier = new Notifier();
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/Icon.svelte
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/Icon.svelte
   function create_fragment(ctx) {
     let svg;
     let svg_style_value;
@@ -4649,7 +4643,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   var Icon_default = Icon;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/ri/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/ri/index.js
   var RiDesignLayoutGrid2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 10L8 10V14H4V10ZM4 19V16H8V19H4ZM10 19V16H14V19H10ZM16 19V16H20V19H16ZM16 14V10H20V14H16ZM16 8V5H20V8H16ZM14 5V8H10V5H14ZM14 10V14H10V10H14ZM4 8V5H8V8L4 8ZM3 3C2.44772 3 2 3.44772 2 4V20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20V4C22 3.44772 21.5523 3 21 3H3Z"></path>' };
   var RiBuildingsHome2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19Z"></path>' };
   var RiBuildingsHomeWifiLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M6 19H18V9.15745L12 3.7029L6 9.15745V19ZM19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM8 9.99998C11.866 9.99998 15 13.134 15 17H13C13 14.2386 10.7614 12 8 12V9.99998ZM8 14C9.65685 14 11 15.3431 11 17H8V14Z"></path>' };
@@ -4673,11 +4667,11 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   var RiArrowsArrowRightSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path>' };
   var RiArrowsArrowLeftSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>' };
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/lu/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
   var LuWashingMachine = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M3 6h3"></path><path d="M17 6h.01"></path><path d="M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5"></path><rect width="18" height="20" x="3" y="2" rx="2"></rect><circle cx="12" cy="13" r="5"></circle>' };
 
-  // node_modules/.pnpm/svelte@4.2.2/node_modules/svelte/src/runtime/store/index.js
+  // node_modules/.pnpm/svelte@4.2.19/node_modules/svelte/src/runtime/store/index.js
   var subscriber_queue = [];
   function writable(value, start = noop) {
     let stop;
@@ -6801,7 +6795,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   };
   var SideMenu_default = SideMenu;
 
-  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.2/node_modules/svelte-icons-pack/dist/bs/index.js
+  // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@4.2.19/node_modules/svelte-icons-pack/dist/bs/index.js
   var BsList = { a: { fill: "currentColor", viewBox: "0 0 16 16" }, c: '<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>' };
 
   // _partials/Navbar.svelte
@@ -7628,7 +7622,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         div = element("div");
         div.textContent = `${/*day*/
         ctx[27] + 1}`;
-        attr(div, "class", "date-header svelte-1tv7yzj");
+        attr(div, "class", "date-header svelte-1wltjwo");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -7646,7 +7640,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return {
       c() {
         div = element("div");
-        attr(div, "class", "date-cell not-occupied svelte-1tv7yzj");
+        attr(div, "class", "date-cell not-occupied svelte-1wltjwo");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -7678,7 +7672,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
     return {
       c() {
         div = element("div");
-        attr(div, "class", "date-cell occupied svelte-1tv7yzj");
+        attr(div, "class", "date-cell occupied svelte-1wltjwo");
         attr(div, "aria-label", "tool-tip");
         set_style(
           div,
@@ -7775,15 +7769,14 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   function create_each_block(ctx) {
     let div2;
     let div0;
-    let t0;
-    let t1_value = (
+    let t0_value = (
       /*room*/
       ctx[19] + ""
     );
+    let t0;
     let t1;
-    let t2;
     let div1;
-    let t3;
+    let t2;
     let each_value_1 = ensure_array_like(Array.from({
       length: (
         /*totalDaysInSelectedMonth*/
@@ -7798,37 +7791,35 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       c() {
         div2 = element("div");
         div0 = element("div");
-        t0 = text("Room ");
-        t1 = text(t1_value);
-        t2 = space();
+        t0 = text(t0_value);
+        t1 = space();
         div1 = element("div");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        t3 = space();
-        attr(div0, "class", "room-name sticky-room svelte-1tv7yzj");
-        attr(div1, "class", "blocks svelte-1tv7yzj");
-        attr(div2, "class", "table-row svelte-1tv7yzj");
+        t2 = space();
+        attr(div0, "class", "room-name sticky-room svelte-1wltjwo");
+        attr(div1, "class", "blocks svelte-1wltjwo");
+        attr(div2, "class", "table-row svelte-1wltjwo");
       },
       m(target, anchor) {
         insert(target, div2, anchor);
         append(div2, div0);
         append(div0, t0);
-        append(div0, t1);
-        append(div2, t2);
+        append(div2, t1);
         append(div2, div1);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
             each_blocks[i].m(div1, null);
           }
         }
-        append(div2, t3);
+        append(div2, t2);
       },
       p(ctx2, dirty) {
         if (dirty & /*roomNames*/
-        1 && t1_value !== (t1_value = /*room*/
+        1 && t0_value !== (t0_value = /*room*/
         ctx2[19] + ""))
-          set_data(t1, t1_value);
+          set_data(t0, t0_value);
         if (dirty & /*getBookingIsOccupied, getBookingsByRoomName, roomNames, showTooltip, tooltipComp, totalDaysInSelectedMonth*/
         857) {
           each_value_1 = ensure_array_like(Array.from({
@@ -7930,7 +7921,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         div3 = element("div");
         div2 = element("div");
         div0 = element("div");
-        div0.textContent = "Room";
+        div0.textContent = "Room / Day";
         t2 = space();
         div1 = element("div");
         for (let i = 0; i < each_blocks_1.length; i += 1) {
@@ -7940,12 +7931,12 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div0, "class", "room-label sticky-corner svelte-1tv7yzj");
-        attr(div1, "class", "days svelte-1tv7yzj");
-        attr(div2, "class", "table-header svelte-1tv7yzj");
-        attr(div3, "class", "rooms-heatmap-table svelte-1tv7yzj");
-        attr(div4, "class", "rooms-heatmap-wrapper svelte-1tv7yzj");
-        attr(div5, "class", "occupancy-heatmap-container svelte-1tv7yzj");
+        attr(div0, "class", "room-label sticky-corner svelte-1wltjwo");
+        attr(div1, "class", "days svelte-1wltjwo");
+        attr(div2, "class", "table-header svelte-1wltjwo");
+        attr(div3, "class", "rooms-heatmap-table svelte-1wltjwo");
+        attr(div4, "class", "rooms-heatmap-wrapper svelte-1wltjwo");
+        attr(div5, "class", "occupancy-heatmap-container svelte-1wltjwo");
       },
       m(target, anchor) {
         insert(target, div5, anchor);
@@ -8094,13 +8085,13 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       c() {
         div = element("div");
         strong0 = element("strong");
-        strong0.textContent = "Penghuni:";
+        strong0.textContent = "Tenant:";
         t1 = space();
         t2 = text(t2_value);
         br0 = element("br");
         t3 = space();
         strong1 = element("strong");
-        strong1.textContent = "Kamar:";
+        strong1.textContent = "Room:";
         t5 = space();
         t6 = text(t6_value);
         br1 = element("br");
@@ -8115,7 +8106,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
         strong3.textContent = "Check-out:";
         t13 = space();
         t14 = text(t14_value);
-        attr(div, "class", "tooltip-content svelte-1tv7yzj");
+        attr(div, "class", "tooltip-content svelte-1wltjwo");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -8260,11 +8251,122 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       false
     );
     function reColorBookings() {
-      const total = bookingsPerMonth.length || 0;
-      (bookingsPerMonth || []).forEach((booking, idx) => {
-        const degree = Math.floor(360 * idx / (total + 1));
-        const color = "hsl(" + degree + ", 100%, 47%)";
-        booking.color = color;
+      const tenantColors = {};
+      const usedColors = /* @__PURE__ */ new Set();
+      const baseColors = [
+        { h: 0, s: 75, l: 50 },
+        {
+          h: 210,
+          // Red
+          s: 80,
+          l: 50
+        },
+        {
+          h: 120,
+          // Blue
+          s: 70,
+          l: 45
+        },
+        {
+          h: 280,
+          // Green
+          s: 70,
+          l: 55
+        },
+        {
+          h: 30,
+          // Purple
+          s: 80,
+          l: 50
+        },
+        {
+          h: 180,
+          // Orange
+          s: 65,
+          l: 45
+        },
+        {
+          h: 340,
+          // Cyan
+          s: 75,
+          l: 50
+        },
+        {
+          h: 60,
+          // Pink
+          s: 75,
+          l: 50
+        },
+        {
+          h: 150,
+          // Yellow
+          s: 65,
+          l: 45
+        },
+        {
+          h: 250,
+          // Teal
+          s: 70,
+          l: 55
+        },
+        {
+          h: 15,
+          // Indigo
+          s: 75,
+          l: 50
+        },
+        {
+          h: 90,
+          // Red-Orange
+          s: 65,
+          l: 50
+        },
+        {
+          h: 200,
+          // Yellow-Green
+          s: 75,
+          l: 50
+        },
+        {
+          h: 320,
+          // Light Blue
+          s: 70,
+          l: 50
+        },
+        {
+          h: 45,
+          // Magenta
+          s: 70,
+          l: 50
+        }
+      ];
+      const getUniqueColor = (tenantId) => {
+        let hash = 0;
+        for (let i = 0; i < String(tenantId).length; i++) {
+          hash = (hash << 5) - hash + String(tenantId).charCodeAt(i);
+          hash = hash & hash;
+        }
+        hash = Math.abs(hash);
+        const baseIndex = hash % baseColors.length;
+        let selectedBase = baseColors[baseIndex];
+        const colorKey = `${selectedBase.h}-${selectedBase.s}-${selectedBase.l}`;
+        let variation = 0;
+        while (usedColors.has(`${colorKey}-${variation}`)) {
+          variation++;
+          if (variation > 10)
+            break;
+        }
+        usedColors.add(`${colorKey}-${variation}`);
+        const hue = (selectedBase.h + variation * 25) % 360;
+        const sat = selectedBase.s + (hash % 3 - 1) * 10;
+        const light = selectedBase.l + (hash % 5 - 2) * 5;
+        return `hsl(${hue}, ${Math.max(50, Math.min(90, sat))}%, ${Math.max(35, Math.min(65, light))}%)`;
+      };
+      bookingsPerMonth.forEach((booking) => {
+        if (!tenantColors[booking.tenantId]) {
+          tenantColors[booking.tenantId] = getUniqueColor(booking.tenantId);
+        }
+        booking.color = tenantColors[booking.tenantId];
       });
     }
     let totalDaysInSelectedMonth = (
@@ -8294,28 +8396,37 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       }
       return bookings;
     }
-    onMount(() => {
+    onMount(async () => {
       refreshTotalDaysInMonth();
+      await RefreshData();
       reColorBookings();
     });
     async function RefreshData() {
-      await (0, import_jsApi2.StaffOccupancyHeatmap)(
-        // @ts-ignore
-        { yearMonth },
-        /** @type {import('./jsApi.GEN').StaffOccupancyHeatmapCallback} */
-        /** @returns {Promise<void>} */
-        function(o) {
-          if (o.error) {
-            console.log(o);
-            notifier.showError(o.error);
-            return;
+      try {
+        $invalidate(2, isLoading = true);
+        await (0, import_jsApi2.StaffOccupancyHeatmap)(
+          // @ts-ignore
+          { yearMonth },
+          /** @type {import('./jsApi.GEN').StaffOccupancyHeatmapCallback} */
+          /** @returns {Promise<void>} */
+          function(o) {
+            if (o.error) {
+              console.log(o);
+              notifier.showError(o.error);
+              return;
+            }
+            bookingsPerMonth = o.bookingsPerMonth;
+            $invalidate(0, roomNames = o.roomNames);
+            refreshTotalDaysInMonth();
+            reColorBookings();
           }
-          bookingsPerMonth = o.bookingsPerMonth;
-          $invalidate(0, roomNames = o.roomNames);
-          refreshTotalDaysInMonth();
-          reColorBookings();
-        }
-      );
+        );
+      } catch (error) {
+        console.error("Failed to load data:", error);
+        notifier.showError("Failed to load data");
+      } finally {
+        $invalidate(2, isLoading = false);
+      }
     }
     let tooltipComp = (
       /** @type {Tooltip} */
@@ -8394,5 +8505,10 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   // staffOccupancyHeatmap.svelte.ts
   var app = new staffOccupancyHeatmap_default({ target: document.getElementById("app") });
 })();
+/*! Bundled license information:
+
+axios/dist/browser/axios.cjs:
+  (*! Axios v1.9.0 Copyright (c) 2025 Matt Zabriskie and contributors *)
+*/
 </script>
 </body></html>
