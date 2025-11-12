@@ -23,14 +23,62 @@
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
   let isLoading = /** @type {boolean} */ (false);
 
-  function reColorBookings() {
-    const total = bookingsPerMonth.length || 0;
-    (bookingsPerMonth || []).forEach((booking, idx) => {
-      const degree = Math.floor( (360 * idx) / (total + 1) ); // since 360 in hsl = 0
-      const color = 'hsl(' + degree + ', 100%, 47%)';
+function reColorBookings() {
+    const tenantColors = {};
+    const usedColors = new Set();
+    
+    const baseColors = [
+      { h: 0, s: 75, l: 50 },     // Red
+      { h: 210, s: 80, l: 50 },   // Blue
+      { h: 120, s: 70, l: 45 },   // Green
+      { h: 280, s: 70, l: 55 },   // Purple
+      { h: 30, s: 80, l: 50 },    // Orange
+      { h: 180, s: 65, l: 45 },   // Cyan
+      { h: 340, s: 75, l: 50 },   // Pink
+      { h: 60, s: 75, l: 50 },    // Yellow
+      { h: 150, s: 65, l: 45 },   // Teal
+      { h: 250, s: 70, l: 55 },   // Indigo
+      { h: 15, s: 75, l: 50 },    // Red-Orange
+      { h: 90, s: 65, l: 50 },    // Yellow-Green
+      { h: 200, s: 75, l: 50 },   // Light Blue
+      { h: 320, s: 70, l: 50 },   // Magenta
+      { h: 45, s: 70, l: 50 },    // Amber
+    ];
+    
+    const getUniqueColor = (tenantId) => {
+      let hash = 0;
+      for (let i = 0; i < String(tenantId).length; i++) {
+        hash = ((hash << 5) - hash) + String(tenantId).charCodeAt(i);
+        hash = hash & hash;
+      }
+      hash = Math.abs(hash);
+      
+      const baseIndex = hash % baseColors.length;
+      let selectedBase = baseColors[baseIndex];
+      
+      const colorKey = `${selectedBase.h}-${selectedBase.s}-${selectedBase.l}`;
+      let variation = 0;
+      
+      while (usedColors.has(`${colorKey}-${variation}`)) {
+        variation++;
+        if (variation > 10) break;
+      }
+      
+      usedColors.add(`${colorKey}-${variation}`);
+      
+      const hue = (selectedBase.h + (variation * 25)) % 360;
+      const sat = selectedBase.s + ((hash % 3) - 1) * 10;
+      const light = selectedBase.l + ((hash % 5) - 2) * 5;
+      
+      return `hsl(${hue}, ${Math.max(50, Math.min(90, sat))}%, ${Math.max(35, Math.min(65, light))}%)`;
+    };
 
-      booking.color = color;
-    })
+    bookingsPerMonth.forEach((booking) => {
+      if (!tenantColors[booking.tenantId]) {
+        tenantColors[booking.tenantId] = getUniqueColor(booking.tenantId);
+      }
+      booking.color = tenantColors[booking.tenantId];
+    });
   }
 
   let totalDaysInSelectedMonth = /** @type {number} */ (31);
@@ -73,17 +121,20 @@
     return bookings;
   }
 
-  onMount(() => {
+  onMount(async() => {
     refreshTotalDaysInMonth();
+    await RefreshData();
     reColorBookings();
   });
 
   async function RefreshData() {
-    await StaffOccupancyHeatmap(// @ts-ignore
-      { yearMonth },
-      /** @type {import('./jsApi.GEN').StaffOccupancyHeatmapCallback} */
-      /** @returns {Promise<void>} */
-      function(/** @type any */ o) {
+    try {
+      isLoading = true;
+      await StaffOccupancyHeatmap(// @ts-ignore
+        { yearMonth },
+        /** @type {import('./jsApi.GEN').StaffOccupancyHeatmapCallback} */
+        /** @returns {Promise<void>} */
+        function(/** @type any */ o) {
         if (o.error) {
           console.log(o);
           notifier.showError(o.error);
@@ -97,7 +148,13 @@
         reColorBookings();
       }
     )
+  } catch (error) {
+    console.error('Failed to load data:', error);
+    notifier.showError('Failed to load data');
+  } finally {
+    isLoading = false;
   }
+}
 
   let tooltipComp = /** @type {Tooltip} */ (null);
   let tooltipData = /** @type {{tenant: string; room: string; dateStart: string; dateEnd: string}} */ ({
@@ -149,7 +206,7 @@
     <div class="rooms-heatmap-wrapper">
       <div class="rooms-heatmap-table">
         <div class="table-header">
-          <div class="room-label sticky-corner">Room</div>
+          <div class="room-label sticky-corner">Room / Day</div>
           <div class="days">
             {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
               <div class="date-header">{day + 1}</div>
@@ -160,7 +217,7 @@
         {#each roomNames as room}
           {@const bookings = getBookingsByRoomName(room)}
           <div class="table-row">
-            <div class="room-name sticky-room">Room {room}</div>
+            <div class="room-name sticky-room">{room}</div>
             <div class="blocks">
               {#each Array.from({ length: totalDaysInSelectedMonth }) as _, day}
                 {@const [bk, avail] = getBookingIsOccupied(bookings, day + 1)}
@@ -187,8 +244,8 @@
 
 <Tooltip bind:this={tooltipComp}>
   <div class="tooltip-content">
-    <strong>Penghuni:</strong> {tooltipData.tenant}<br/>
-    <strong>Kamar:</strong> {tooltipData.room}<br/>
+    <strong>Tenant:</strong> {tooltipData.tenant}<br/>
+    <strong>Room:</strong> {tooltipData.room}<br/>
     <strong>Check-in:</strong> {tooltipData.dateStart}<br/>
     <strong>Check-out:</strong> {tooltipData.dateEnd}
   </div>
@@ -242,7 +299,8 @@
     font-weight: 600;
     text-align: left;
     font-size: var(--font-md);
-    width: 100px;
+    width: 70px;
+    text-overflow: ellipsis;
   }
 
   .sticky-corner {
@@ -268,6 +326,8 @@
   }
 
   .date-cell {
+    min-width: 28px;
+    width: 28px;
     height: 28px;
     border-radius: 3px;
     cursor: pointer;
@@ -305,7 +365,7 @@
     font-weight: 600;
     text-align: left;
     font-size: var(--font-md);
-    width: 100px;
+    width: 70px;
   }
 
   .table-row:hover {
