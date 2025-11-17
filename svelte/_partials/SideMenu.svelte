@@ -268,6 +268,10 @@
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Occupancy Report</span>
       </a>
+      <a href="/staff/occupancyHeatmap" class:active={pathAll === '/staff/occupancyHeatmap'} >
+        <Icon src={RiDesignLayoutGrid2Line} size="20" />
+        <span>Occupancy Heatmap</span>
+      </a>
       <a href="/staff/missingDataReport" class:active={pathAll === '/staff/missingDataReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Missing Data Report</span>

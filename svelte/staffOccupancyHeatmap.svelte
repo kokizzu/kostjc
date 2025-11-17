@@ -359,6 +359,30 @@
 		white-space: nowrap;
 	}
 
+	@media (max-width: 768px) {
+	.date-cell {
+		min-width: 24px;
+		width: 24px;
+		height: 24px;
+		border-radius: 2px;
+	}
+	
+	.table-row .blocks {
+		gap: 1px;
+	}
+	
+	.table-header .days {
+		gap: 1px;
+	}
+	
+	
+	.room-label,
+	.table-row .room-name {
+		width: 50px;
+		font-size: 12px;
+		padding: 6px;
+	}
+	}
 	@keyframes fadeIn {
 		from {
 			opacity: 0;
