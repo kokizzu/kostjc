@@ -2,16 +2,20 @@
   /** @typedef {import('./_types/masters.js').Access} Access */
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/users.js').Tenant} Tenant */
+
   /**
    * @typedef {Object} PricePerDayReport
    * @property {string} roomName
    * @property {string} tenantName
    * @property {string} dateStart
    * @property {string} dateEnd
-   * @property {number} pricePerDay
    * @property {number} totalPaid
    * @property {number} totalPrice
    * @property {string} roomSize
+   * @property {number} pricePerDayValue
+   * @property {number} pricePerDayPercentage
+   * @property {number} pricePerRoomValue
+   * @property {number} pricePerRoomPercentage
    */
 
   import LayoutMain from './_layouts/main.svelte';
@@ -45,6 +49,10 @@
     })
   }
 
+  function formatNumber(num) {
+    return Number(num).toFixed(1);
+  }
+
   /**
    * @description Calculate duration (days)
    * @param {string} dateStart
@@ -53,32 +61,6 @@
    */
   function calculateDurationDay(dateStart, dateEnd) {
     return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / (1000 * 60 * 60 * 24));
-  }
-
-  /**
-   * @description Calculate price per day
-   * @param {number} totalPrice
-   * @param {string} dateStart
-   * @param {string} dateEnd
-   * @returns {number}
-   */
-  function calculatePricePerDay(totalPrice, dateStart, dateEnd) {
-    return Number((totalPrice / calculateDurationDay(dateStart, dateEnd)).toFixed(1));
-  }
-
-  /**
-   * @description Calculate price per day per room
-   * @param {number} totalPrice
-   * @param {string} dateStart
-   * @param {string} dateEnd
-   * @param {string} roomSize
-   * @returns {number}
-   */
-  function calculatePricePerDayPerRoom(totalPrice, dateStart, dateEnd, roomSize) {
-    const [ roomSize1, roomSize2 ] = roomSize.split('x');
-    const duration = calculateDurationDay(dateStart, dateEnd);
-
-    return Number((totalPrice / duration / (Number(roomSize1) * Number(roomSize2))).toFixed(1));
   }
 </script>
 
@@ -100,7 +82,9 @@
             <th>Date End</th>
             <th>Duration</th>
             <th>Price Per Day</th>
+            <th>Price Per Day Chart</th>
             <th>Price Per Day / Room</th>
+            <th>Price Per Room Chart</th>
             <th>Total Paid</th>
             <th>Total Price</th>
           </tr>
@@ -114,8 +98,26 @@
               <td>{data.dateStart || '--'}</td>
               <td>{data.dateEnd || '--'}</td>
               <td>{calculateDurationDay(data.dateStart, data.dateEnd) || '0'} Days</td>
-              <td>{calculatePricePerDay(data.totalPrice, data.dateStart, data.dateEnd) || '0'}</td>
-              <td>{calculatePricePerDayPerRoom(data.totalPrice, data.dateStart, data.dateEnd, data.roomSize) || '0'}</td>
+              <td>{formatNumber(data.pricePerDayValue || 0)}</td>
+              <td>
+                <div class="bar-container">
+                  <div 
+                    class="bar bar-price-per-day" 
+                    style="width: {data.pricePerDayPercentage || 0}%"
+                    title="{formatNumber(data.pricePerDayValue)} ({formatNumber(data.pricePerDayPercentage)}%)"
+                  ><span class="bar-label">{formatNumber(data.pricePerDayPercentage)}%</span></div>
+                </div>
+              </td>
+              <td>{formatNumber(data.pricePerRoomValue || 0)}</td>
+              <td>
+                <div class="bar-container">
+                  <div 
+                    class="bar bar-price-per-room" 
+                    style="width: {data.pricePerRoomPercentage || 0}%"
+                    title="{formatNumber(data.pricePerRoomValue)} ({formatNumber(data.pricePerRoomPercentage)}%)"
+                  ><span class="bar-label">{formatNumber(data.pricePerRoomPercentage)}%</span></div>
+                </div>
+              </td>
               <td>{data.totalPaid || '0'}</td>
               <td>{data.totalPrice || '0'}</td>
             </tr>
@@ -165,7 +167,51 @@
     padding: 8px 12px;
   }
 
-  @media only screen and (max-width : 768px) {
+  /* Bar chart styles */
+  .bar-container {
+    width: 100px;
+    height: 20px;
+    background-color: var(--gray-003, #f0f0f0);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
 
+  .bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bar-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    /* Hide jika bar terlalu kecil */
+    display: none;
+  }
+
+  .bar:hover .bar-label {
+    display: block;
+  }
+
+  .bar-price-per-day {
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+  }
+
+  .bar-price-per-room {
+    background: linear-gradient(90deg, #2196F3, #1976D2);
+  }
+
+  @media only screen and (max-width : 768px) {
+    .bar-container {
+      width: 80px;
+    }
   }
 </style>

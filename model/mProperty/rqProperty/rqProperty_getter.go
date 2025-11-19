@@ -2,8 +2,10 @@ package rqProperty
 
 import (
 	"fmt"
+	"math"
 	"sort"
 	"strconv"
+	"strings"
 	"time"
 
 	"kostjc/model/zCrud"
@@ -1950,14 +1952,18 @@ func (w *WifiDevices) Truncate() bool {
 }
 
 type PricePerDayReport struct {
-	RoomName    string  `json:"roomName"`
-	TenantName  string  `json:"tenantName"`
-	DateStart   string  `json:"dateStart"`
-	DateEnd     string  `json:"dateEnd"`
-	PricePerDay float64 `json:"pricePerDay"`
-	TotalPaid   int64   `json:"totalPaid"`
-	TotalPrice  int64   `json:"totalPrice"`
-	RoomSize    string  `json:"roomSize"`
+	RoomName   string `json:"roomName"`
+	TenantName string `json:"tenantName"`
+	DateStart  string `json:"dateStart"`
+	DateEnd    string `json:"dateEnd"`
+	TotalPaid  int64  `json:"totalPaid"`
+	TotalPrice int64  `json:"totalPrice"`
+	RoomSize   string `json:"roomSize"`
+
+	PricePerDayValue       float64 `json:"pricePerDayValue"`
+	PricePerDayPercentage  float64 `json:"pricePerDayPercentage"`
+	PricePerRoomValue      float64 `json:"pricePerRoomValue"`
+	PricePerRoomPercentage float64 `json:"pricePerRoomPercentage"`
 }
 
 func (b *Bookings) FindPricePerDayReport(yearMonth string) (out []PricePerDayReport) {
@@ -2003,7 +2009,125 @@ GROUP BY b."id"`
 		})
 	})
 
+	sort.Slice(out, func(i, j int) bool {
+		return compareRoomName(out[i].RoomName, out[j].RoomName)
+	})
+
+	for i := range out {
+		duration := calculateDuration(out[i].DateStart, out[i].DateEnd)
+		if duration > 0 {
+			out[i].PricePerDayValue = float64(out[i].TotalPrice) / float64(duration)
+		}
+
+		if out[i].RoomSize != "" {
+			roomArea := calculateRoomArea(out[i].RoomSize)
+			if roomArea > 0 && duration > 0 {
+				out[i].PricePerRoomValue = float64(out[i].TotalPrice) / float64(duration) / roomArea
+			}
+		}
+	}
+
+	var maxPricePerDay float64
+	var maxPricePerRoom float64
+
+	for _, item := range out {
+		if item.PricePerDayValue > maxPricePerDay {
+			maxPricePerDay = item.PricePerDayValue
+		}
+		if item.PricePerRoomValue > maxPricePerRoom {
+			maxPricePerRoom = item.PricePerRoomValue
+		}
+	}
+
+	for i := range out {
+		if maxPricePerDay > 0 {
+			out[i].PricePerDayPercentage = (out[i].PricePerDayValue / maxPricePerDay) * 100
+		}
+		if maxPricePerRoom > 0 {
+			out[i].PricePerRoomPercentage = (out[i].PricePerRoomValue / maxPricePerRoom) * 100
+		}
+	}
+
 	return
+}
+
+func compareRoomName(room1, room2 string) bool {
+	if room1 == "" || room2 == "" {
+		return room1 < room2
+	}
+
+	building1, floor1, number1 := parseRoomName(room1)
+	building2, floor2, number2 := parseRoomName(room2)
+
+	if building1 != building2 {
+		return building1 < building2
+	}
+
+	if floor1 != floor2 {
+		return floor1 < floor2
+	}
+
+	return number1 < number2
+}
+
+func parseRoomName(roomName string) (building rune, floor int, number int) {
+	if len(roomName) < 2 {
+		return 0, 0, 0
+	}
+
+	building = rune(roomName[0])
+	digits := roomName[1:]
+
+	if len(digits) == 0 {
+		return building, 0, 0
+	}
+
+	if len(digits) == 2 {
+		floor = int(digits[0] - '0')
+		number = int(digits[1] - '0')
+	} else if len(digits) == 3 {
+		floor = int(digits[0]-'0')*10 + int(digits[1]-'0')
+		number = int(digits[2] - '0')
+	} else {
+		floorStr := digits[:len(digits)-1]
+		numberChar := digits[len(digits)-1]
+
+		floorVal, err := strconv.Atoi(floorStr)
+		if err == nil {
+			floor = floorVal
+		}
+		number = int(numberChar - '0')
+	}
+
+	return building, floor, number
+}
+
+func calculateDuration(dateStart, dateEnd string) int {
+	start, err1 := time.Parse("2006-01-02", dateStart)
+	end, err2 := time.Parse("2006-01-02", dateEnd)
+
+	if err1 != nil || err2 != nil {
+		return 0
+	}
+
+	duration := end.Sub(start).Hours() / 24
+	return int(math.Ceil(duration))
+}
+
+func calculateRoomArea(roomSize string) float64 {
+	parts := strings.Split(roomSize, "x")
+	if len(parts) != 2 {
+		return 0
+	}
+
+	width, err1 := strconv.ParseFloat(parts[0], 64)
+	height, err2 := strconv.ParseFloat(parts[1], 64)
+
+	if err1 != nil || err2 != nil {
+		return 0
+	}
+
+	return width * height
 }
 
 func (b *Bookings) GetLastDateStartById(bookingId uint64) (dateStart string) {
