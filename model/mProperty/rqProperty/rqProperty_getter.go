@@ -1987,7 +1987,7 @@ SELECT
 FROM "bookings" b
 LEFT JOIN "payments" p ON b."id" = p."bookingId"
 LEFT JOIN "rooms" r ON b."roomId" = r."id"
-LEFT JOIN "tenants" t ON r."currentTenantId" = t."id"
+LEFT JOIN "tenants" t ON b."tenantId" = t."id"
 WHERE
 	b."deletedAt" = 0
 	AND SUBSTR(b."dateStart", 1, 7) = '` + yearMonth + `'
