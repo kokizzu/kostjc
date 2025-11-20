@@ -698,74 +698,161 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
 }
 
 /* fakecss:./staffPricePerDayReport.esbuild-svelte-fake-css */
-.report-container.svelte-3kevk0.svelte-3kevk0 {
+.report-container.svelte-yr12gi.svelte-yr12gi {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   padding: 20px;
 }
-.table-container.svelte-3kevk0.svelte-3kevk0 {
+.header-section.svelte-yr12gi.svelte-yr12gi {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sort-controls.svelte-yr12gi.svelte-yr12gi {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.sort-controls.svelte-yr12gi label.svelte-yr12gi {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--gray-007, #333);
+}
+.sort-buttons.svelte-yr12gi.svelte-yr12gi {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sort-btn.svelte-yr12gi.svelte-yr12gi {
+  padding: 8px 16px;
+  border: 1px solid var(--gray-004, #ddd);
+  background: white;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.sort-btn.svelte-yr12gi.svelte-yr12gi:hover {
+  background: var(--gray-002, #f5f5f5);
+  border-color: var(--gray-005, #ccc);
+}
+.sort-btn.active.svelte-yr12gi.svelte-yr12gi {
+  background: var(--primary-color, #4CAF50);
+  color: white;
+  border-color: var(--primary-color, #4CAF50);
+}
+.table-container.svelte-yr12gi.svelte-yr12gi {
   overflow-x: auto;
 }
-table.svelte-3kevk0.svelte-3kevk0 {
+table.svelte-yr12gi.svelte-yr12gi {
   width: 100%;
   border-collapse: collapse;
+  min-width: 1200px;
 }
-table.svelte-3kevk0 thead.svelte-3kevk0 {
+table.svelte-yr12gi thead.svelte-yr12gi {
   position: sticky;
   top: 0;
-  background-color: var(--gray-002);
+  background-color: var(--gray-002, #f8f9fa);
   z-index: 10;
   border: none;
 }
-table.svelte-3kevk0 thead tr th.svelte-3kevk0 {
+table.svelte-yr12gi thead tr th.svelte-yr12gi {
   text-align: left;
-  padding: 8px 12px;
-  text-wrap: nowrap;
+  padding: 12px;
+  white-space: normal;
+  word-wrap: nowrap;
+  max-width: 120px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
 }
-table.svelte-3kevk0 tbody tr.svelte-3kevk0 {
-  border-bottom: 1px solid var(--gray-004);
+table.svelte-yr12gi tbody tr.svelte-yr12gi {
+  border-bottom: 1px solid var(--gray-004, #e0e0e0);
 }
-table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
-  padding: 8px 12px;
+table.svelte-yr12gi tbody tr.svelte-yr12gi:hover {
+  background-color: var(--gray-001, #fafafa);
 }
-.bar-container.svelte-3kevk0.svelte-3kevk0 {
+table.svelte-yr12gi tbody tr td.svelte-yr12gi {
+  padding: 12px;
+  font-size: 14px;
+}
+.bar-container.svelte-yr12gi.svelte-yr12gi {
   width: 100px;
-  height: 20px;
+  height: 24px;
   background-color: var(--gray-003, #f0f0f0);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
 }
-.bar.svelte-3kevk0.svelte-3kevk0 {
+.bar.svelte-yr12gi.svelte-yr12gi {
   height: 100%;
   border-radius: 4px;
-  transition: width 0.3s ease;
+  transition: width 0.3s ease, opacity 0.2s ease;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
-.bar-label.svelte-3kevk0.svelte-3kevk0 {
+.bar.svelte-yr12gi.svelte-yr12gi:hover {
+  opacity: 0.85;
+}
+.bar-label.svelte-yr12gi.svelte-yr12gi {
   font-size: 11px;
   font-weight: 600;
   color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   white-space: nowrap;
   display: none;
 }
-.bar.svelte-3kevk0:hover .bar-label.svelte-3kevk0 {
+.bar.svelte-yr12gi:hover .bar-label.svelte-yr12gi {
   display: block;
 }
-.bar-price-per-day.svelte-3kevk0.svelte-3kevk0 {
+.bar-price-per-day.svelte-yr12gi.svelte-yr12gi {
   background: linear-gradient(90deg, #4CAF50, #45a049);
 }
-.bar-price-per-room.svelte-3kevk0.svelte-3kevk0 {
+.bar-price-per-room.svelte-yr12gi.svelte-yr12gi {
   background: linear-gradient(90deg, #2196F3, #1976D2);
 }
 @media only screen and (max-width : 768px) {
-  .bar-container.svelte-3kevk0.svelte-3kevk0 {
+  .report-container.svelte-yr12gi.svelte-yr12gi {
+    padding: 12px;
+  }
+  .header-section.svelte-yr12gi.svelte-yr12gi {
+    gap: 16px;
+  }
+  .sort-controls.svelte-yr12gi.svelte-yr12gi {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .sort-buttons.svelte-yr12gi.svelte-yr12gi {
+    width: 100%;
+  }
+  .sort-btn.svelte-yr12gi.svelte-yr12gi {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  .bar-container.svelte-yr12gi.svelte-yr12gi {
     width: 80px;
+    height: 20px;
+  }
+  table.svelte-yr12gi.svelte-yr12gi {
+    min-width: 1000px;
+  }
+  table.svelte-yr12gi thead tr th.svelte-yr12gi {
+    padding: 10px 8px;
+    font-size: 12px;
+    max-width: 100px;
+  }
+  table.svelte-yr12gi tbody tr td.svelte-yr12gi {
+    padding: 10px 8px;
+    font-size: 13px;
   }
 }
 </style>
@@ -7180,7 +7267,7 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[6] = list[i];
+    child_ctx[14] = list[i];
     return child_ctx;
   }
   function create_each_block(ctx) {
@@ -7188,44 +7275,44 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     let td0;
     let t0_value = (
       /*data*/
-      ctx[6].roomName + ""
+      ctx[14].roomName + ""
     );
     let t0;
     let t1;
     let td1;
     let t2_value = (
       /*data*/
-      (ctx[6].roomSize || "--") + ""
+      (ctx[14].roomSize || "--") + ""
     );
     let t2;
     let t3;
     let td2;
     let t4_value = (
       /*data*/
-      (ctx[6].tenantName || "--") + ""
+      (ctx[14].tenantName || "--") + ""
     );
     let t4;
     let t5;
     let td3;
     let t6_value = (
       /*data*/
-      (ctx[6].dateStart || "--") + ""
+      (ctx[14].dateStart || "--") + ""
     );
     let t6;
     let t7;
     let td4;
     let t8_value = (
       /*data*/
-      (ctx[6].dateEnd || "--") + ""
+      (ctx[14].dateEnd || "--") + ""
     );
     let t8;
     let t9;
     let td5;
     let t10_value = (calculateDurationDay(
       /*data*/
-      ctx[6].dateStart,
+      ctx[14].dateStart,
       /*data*/
-      ctx[6].dateEnd
+      ctx[14].dateEnd
     ) || "0") + "";
     let t10;
     let t11;
@@ -7233,7 +7320,7 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     let td6;
     let t13_value = formatNumber(
       /*data*/
-      ctx[6].pricePerDayValue || 0
+      ctx[14].pricePerDayValue || 0
     ) + "";
     let t13;
     let t14;
@@ -7243,7 +7330,7 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     let span0;
     let t15_value = formatNumber(
       /*data*/
-      ctx[6].pricePerDayPercentage
+      ctx[14].pricePerDayPercentage
     ) + "";
     let t15;
     let t16;
@@ -7252,7 +7339,7 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     let td8;
     let t18_value = formatNumber(
       /*data*/
-      ctx[6].pricePerRoomValue || 0
+      ctx[14].pricePerRoomValue || 0
     ) + "";
     let t18;
     let t19;
@@ -7262,7 +7349,7 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     let span1;
     let t20_value = formatNumber(
       /*data*/
-      ctx[6].pricePerRoomPercentage
+      ctx[14].pricePerRoomPercentage
     ) + "";
     let t20;
     let t21;
@@ -7271,14 +7358,14 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     let td10;
     let t23_value = (
       /*data*/
-      (ctx[6].totalPaid || "0") + ""
+      (ctx[14].totalPaid || "0") + ""
     );
     let t23;
     let t24;
     let td11;
     let t25_value = (
       /*data*/
-      (ctx[6].totalPrice || "0") + ""
+      (ctx[14].totalPrice || "0") + ""
     );
     let t25;
     let t26;
@@ -7330,51 +7417,51 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
         td11 = element("td");
         t25 = text(t25_value);
         t26 = space();
-        attr(td0, "class", "svelte-3kevk0");
-        attr(td1, "class", "svelte-3kevk0");
-        attr(td2, "class", "svelte-3kevk0");
-        attr(td3, "class", "svelte-3kevk0");
-        attr(td4, "class", "svelte-3kevk0");
-        attr(td5, "class", "svelte-3kevk0");
-        attr(td6, "class", "svelte-3kevk0");
-        attr(span0, "class", "bar-label svelte-3kevk0");
-        attr(div0, "class", "bar bar-price-per-day svelte-3kevk0");
+        attr(td0, "class", "svelte-yr12gi");
+        attr(td1, "class", "svelte-yr12gi");
+        attr(td2, "class", "svelte-yr12gi");
+        attr(td3, "class", "svelte-yr12gi");
+        attr(td4, "class", "svelte-yr12gi");
+        attr(td5, "class", "svelte-yr12gi");
+        attr(td6, "class", "svelte-yr12gi");
+        attr(span0, "class", "bar-label svelte-yr12gi");
+        attr(div0, "class", "bar bar-price-per-day svelte-yr12gi");
         set_style(
           div0,
           "width",
           /*data*/
-          (ctx[6].pricePerDayPercentage || 0) + "%"
+          (ctx[14].pricePerDayPercentage || 0) + "%"
         );
         attr(div0, "title", div0_title_value = formatNumber(
           /*data*/
-          ctx[6].pricePerDayValue
+          ctx[14].pricePerDayValue
         ) + " (" + formatNumber(
           /*data*/
-          ctx[6].pricePerDayPercentage
+          ctx[14].pricePerDayPercentage
         ) + "%)");
-        attr(div1, "class", "bar-container svelte-3kevk0");
-        attr(td7, "class", "svelte-3kevk0");
-        attr(td8, "class", "svelte-3kevk0");
-        attr(span1, "class", "bar-label svelte-3kevk0");
-        attr(div2, "class", "bar bar-price-per-room svelte-3kevk0");
+        attr(div1, "class", "bar-container svelte-yr12gi");
+        attr(td7, "class", "svelte-yr12gi");
+        attr(td8, "class", "svelte-yr12gi");
+        attr(span1, "class", "bar-label svelte-yr12gi");
+        attr(div2, "class", "bar bar-price-per-room svelte-yr12gi");
         set_style(
           div2,
           "width",
           /*data*/
-          (ctx[6].pricePerRoomPercentage || 0) + "%"
+          (ctx[14].pricePerRoomPercentage || 0) + "%"
         );
         attr(div2, "title", div2_title_value = formatNumber(
           /*data*/
-          ctx[6].pricePerRoomValue
+          ctx[14].pricePerRoomValue
         ) + " (" + formatNumber(
           /*data*/
-          ctx[6].pricePerRoomPercentage
+          ctx[14].pricePerRoomPercentage
         ) + "%)");
-        attr(div3, "class", "bar-container svelte-3kevk0");
-        attr(td9, "class", "svelte-3kevk0");
-        attr(td10, "class", "svelte-3kevk0");
-        attr(td11, "class", "svelte-3kevk0");
-        attr(tr, "class", "svelte-3kevk0");
+        attr(div3, "class", "bar-container svelte-yr12gi");
+        attr(td9, "class", "svelte-yr12gi");
+        attr(td10, "class", "svelte-yr12gi");
+        attr(td11, "class", "svelte-yr12gi");
+        attr(tr, "class", "svelte-yr12gi");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -7425,103 +7512,103 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
         append(tr, t26);
       },
       p(ctx2, dirty) {
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t0_value !== (t0_value = /*data*/
-        ctx2[6].roomName + ""))
+        ctx2[14].roomName + ""))
           set_data(t0, t0_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t2_value !== (t2_value = /*data*/
-        (ctx2[6].roomSize || "--") + ""))
+        (ctx2[14].roomSize || "--") + ""))
           set_data(t2, t2_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t4_value !== (t4_value = /*data*/
-        (ctx2[6].tenantName || "--") + ""))
+        (ctx2[14].tenantName || "--") + ""))
           set_data(t4, t4_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t6_value !== (t6_value = /*data*/
-        (ctx2[6].dateStart || "--") + ""))
+        (ctx2[14].dateStart || "--") + ""))
           set_data(t6, t6_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t8_value !== (t8_value = /*data*/
-        (ctx2[6].dateEnd || "--") + ""))
+        (ctx2[14].dateEnd || "--") + ""))
           set_data(t8, t8_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t10_value !== (t10_value = (calculateDurationDay(
           /*data*/
-          ctx2[6].dateStart,
+          ctx2[14].dateStart,
           /*data*/
-          ctx2[6].dateEnd
+          ctx2[14].dateEnd
         ) || "0") + ""))
           set_data(t10, t10_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t13_value !== (t13_value = formatNumber(
           /*data*/
-          ctx2[6].pricePerDayValue || 0
+          ctx2[14].pricePerDayValue || 0
         ) + ""))
           set_data(t13, t13_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t15_value !== (t15_value = formatNumber(
           /*data*/
-          ctx2[6].pricePerDayPercentage
+          ctx2[14].pricePerDayPercentage
         ) + ""))
           set_data(t15, t15_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1) {
           set_style(
             div0,
             "width",
             /*data*/
-            (ctx2[6].pricePerDayPercentage || 0) + "%"
+            (ctx2[14].pricePerDayPercentage || 0) + "%"
           );
         }
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && div0_title_value !== (div0_title_value = formatNumber(
           /*data*/
-          ctx2[6].pricePerDayValue
+          ctx2[14].pricePerDayValue
         ) + " (" + formatNumber(
           /*data*/
-          ctx2[6].pricePerDayPercentage
+          ctx2[14].pricePerDayPercentage
         ) + "%)")) {
           attr(div0, "title", div0_title_value);
         }
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t18_value !== (t18_value = formatNumber(
           /*data*/
-          ctx2[6].pricePerRoomValue || 0
+          ctx2[14].pricePerRoomValue || 0
         ) + ""))
           set_data(t18, t18_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t20_value !== (t20_value = formatNumber(
           /*data*/
-          ctx2[6].pricePerRoomPercentage
+          ctx2[14].pricePerRoomPercentage
         ) + ""))
           set_data(t20, t20_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1) {
           set_style(
             div2,
             "width",
             /*data*/
-            (ctx2[6].pricePerRoomPercentage || 0) + "%"
+            (ctx2[14].pricePerRoomPercentage || 0) + "%"
           );
         }
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && div2_title_value !== (div2_title_value = formatNumber(
           /*data*/
-          ctx2[6].pricePerRoomValue
+          ctx2[14].pricePerRoomValue
         ) + " (" + formatNumber(
           /*data*/
-          ctx2[6].pricePerRoomPercentage
+          ctx2[14].pricePerRoomPercentage
         ) + "%)")) {
           attr(div2, "title", div2_title_value);
         }
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t23_value !== (t23_value = /*data*/
-        (ctx2[6].totalPaid || "0") + ""))
+        (ctx2[14].totalPaid || "0") + ""))
           set_data(t23, t23_value);
-        if (dirty & /*pricePerDay*/
+        if (dirty & /*sortedData*/
         1 && t25_value !== (t25_value = /*data*/
-        (ctx2[6].totalPrice || "0") + ""))
+        (ctx2[14].totalPrice || "0") + ""))
           set_data(t25, t25_value);
       },
       d(detaching) {
@@ -7532,26 +7619,41 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     };
   }
   function create_default_slot(ctx) {
-    let div1;
+    let div4;
+    let div2;
     let monthshifter;
     let updating_yearMonth;
     let updating_isLoading;
     let t0;
+    let div1;
+    let label;
+    let t2;
     let div0;
+    let button0;
+    let t4;
+    let button1;
+    let t6;
+    let button2;
+    let t8;
+    let button3;
+    let t10;
+    let div3;
     let table;
     let thead;
-    let t24;
+    let t34;
     let tbody;
     let current;
+    let mounted;
+    let dispose;
     function monthshifter_yearMonth_binding(value) {
-      ctx[4](value);
+      ctx[7](value);
     }
     function monthshifter_isLoading_binding(value) {
-      ctx[5](value);
+      ctx[8](value);
     }
     let monthshifter_props = { OnChanges: (
       /*RefreshData*/
-      ctx[3]
+      ctx[4]
     ) };
     if (
       /*yearMonth*/
@@ -7571,8 +7673,8 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     binding_callbacks.push(() => bind(monthshifter, "yearMonth", monthshifter_yearMonth_binding));
     binding_callbacks.push(() => bind(monthshifter, "isLoading", monthshifter_isLoading_binding));
     let each_value = ensure_array_like(
-      /*pricePerDay*/
-      ctx[0] || []
+      /*sortedData*/
+      ctx[0]
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
@@ -7580,31 +7682,94 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     }
     return {
       c() {
-        div1 = element("div");
+        div4 = element("div");
+        div2 = element("div");
         create_component(monthshifter.$.fragment);
         t0 = space();
+        div1 = element("div");
+        label = element("label");
+        label.textContent = "Sort by:";
+        t2 = space();
         div0 = element("div");
+        button0 = element("button");
+        button0.textContent = "Room Name";
+        t4 = space();
+        button1 = element("button");
+        button1.textContent = "Price/Day";
+        t6 = space();
+        button2 = element("button");
+        button2.textContent = "Price/Day %";
+        t8 = space();
+        button3 = element("button");
+        button3.textContent = "Price/Room %";
+        t10 = space();
+        div3 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-3kevk0"><th class="svelte-3kevk0">Room</th> <th class="svelte-3kevk0">Room Size</th> <th class="svelte-3kevk0">Tenant</th> <th class="svelte-3kevk0">Date Start</th> <th class="svelte-3kevk0">Date End</th> <th class="svelte-3kevk0">Duration</th> <th class="svelte-3kevk0">Price Per Day</th> <th class="svelte-3kevk0">Price Per Day Chart</th> <th class="svelte-3kevk0">Price Per Day / Room</th> <th class="svelte-3kevk0">Price Per Room Chart</th> <th class="svelte-3kevk0">Total Paid</th> <th class="svelte-3kevk0">Total Price</th></tr>`;
-        t24 = space();
+        thead.innerHTML = `<tr class="svelte-yr12gi"><th class="svelte-yr12gi">Room</th> <th class="svelte-yr12gi">Room Size</th> <th class="svelte-yr12gi">Tenant</th> <th class="svelte-yr12gi">Date Start</th> <th class="svelte-yr12gi">Date End</th> <th class="svelte-yr12gi">Duration</th> <th class="svelte-yr12gi">Price Per Day</th> <th class="svelte-yr12gi">Price Per Day Chart</th> <th class="svelte-yr12gi">Price Per Day / Room</th> <th class="svelte-yr12gi">Price Per Room Chart</th> <th class="svelte-yr12gi">Total Paid</th> <th class="svelte-yr12gi">Total Price</th></tr>`;
+        t34 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(thead, "class", "svelte-3kevk0");
-        attr(table, "class", "svelte-3kevk0");
-        attr(div0, "class", "table-container svelte-3kevk0");
-        attr(div1, "class", "report-container svelte-3kevk0");
+        attr(label, "class", "svelte-yr12gi");
+        attr(button0, "class", "sort-btn svelte-yr12gi");
+        toggle_class(
+          button0,
+          "active",
+          /*sortBy*/
+          ctx[3] === "room"
+        );
+        attr(button1, "class", "sort-btn svelte-yr12gi");
+        toggle_class(
+          button1,
+          "active",
+          /*sortBy*/
+          ctx[3] === "pricePerDayValue"
+        );
+        attr(button2, "class", "sort-btn svelte-yr12gi");
+        toggle_class(
+          button2,
+          "active",
+          /*sortBy*/
+          ctx[3] === "pricePerDayPercent"
+        );
+        attr(button3, "class", "sort-btn svelte-yr12gi");
+        toggle_class(
+          button3,
+          "active",
+          /*sortBy*/
+          ctx[3] === "pricePerRoomPercent"
+        );
+        attr(div0, "class", "sort-buttons svelte-yr12gi");
+        attr(div1, "class", "sort-controls svelte-yr12gi");
+        attr(div2, "class", "header-section svelte-yr12gi");
+        attr(thead, "class", "svelte-yr12gi");
+        attr(table, "class", "svelte-yr12gi");
+        attr(div3, "class", "table-container svelte-yr12gi");
+        attr(div4, "class", "report-container svelte-yr12gi");
       },
       m(target, anchor) {
-        insert(target, div1, anchor);
-        mount_component(monthshifter, div1, null);
-        append(div1, t0);
+        insert(target, div4, anchor);
+        append(div4, div2);
+        mount_component(monthshifter, div2, null);
+        append(div2, t0);
+        append(div2, div1);
+        append(div1, label);
+        append(div1, t2);
         append(div1, div0);
-        append(div0, table);
+        append(div0, button0);
+        append(div0, t4);
+        append(div0, button1);
+        append(div0, t6);
+        append(div0, button2);
+        append(div0, t8);
+        append(div0, button3);
+        append(div4, t10);
+        append(div4, div3);
+        append(div3, table);
         append(table, thead);
-        append(table, t24);
+        append(table, t34);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -7612,6 +7777,35 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
           }
         }
         current = true;
+        if (!mounted) {
+          dispose = [
+            listen(
+              button0,
+              "click",
+              /*click_handler*/
+              ctx[9]
+            ),
+            listen(
+              button1,
+              "click",
+              /*click_handler_1*/
+              ctx[10]
+            ),
+            listen(
+              button2,
+              "click",
+              /*click_handler_2*/
+              ctx[11]
+            ),
+            listen(
+              button3,
+              "click",
+              /*click_handler_3*/
+              ctx[12]
+            )
+          ];
+          mounted = true;
+        }
       },
       p(ctx2, dirty) {
         const monthshifter_changes = {};
@@ -7630,11 +7824,47 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
           add_flush_callback(() => updating_isLoading = false);
         }
         monthshifter.$set(monthshifter_changes);
-        if (dirty & /*pricePerDay, formatNumber, calculateDurationDay*/
+        if (!current || dirty & /*sortBy*/
+        8) {
+          toggle_class(
+            button0,
+            "active",
+            /*sortBy*/
+            ctx2[3] === "room"
+          );
+        }
+        if (!current || dirty & /*sortBy*/
+        8) {
+          toggle_class(
+            button1,
+            "active",
+            /*sortBy*/
+            ctx2[3] === "pricePerDayValue"
+          );
+        }
+        if (!current || dirty & /*sortBy*/
+        8) {
+          toggle_class(
+            button2,
+            "active",
+            /*sortBy*/
+            ctx2[3] === "pricePerDayPercent"
+          );
+        }
+        if (!current || dirty & /*sortBy*/
+        8) {
+          toggle_class(
+            button3,
+            "active",
+            /*sortBy*/
+            ctx2[3] === "pricePerRoomPercent"
+          );
+        }
+        if (dirty & /*sortedData, formatNumber, calculateDurationDay*/
         1) {
           each_value = ensure_array_like(
-            /*pricePerDay*/
-            ctx2[0] || []
+            /*sortedData*/
+            ctx2[0]
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
@@ -7665,10 +7895,12 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
       },
       d(detaching) {
         if (detaching) {
-          detach(div1);
+          detach(div4);
         }
         destroy_component(monthshifter);
         destroy_each(each_blocks, detaching);
+        mounted = false;
+        run_all(dispose);
       }
     };
   }
@@ -7693,8 +7925,8 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, pricePerDay, yearMonth, isLoading*/
-        519) {
+        if (dirty & /*$scope, sortedData, sortBy, yearMonth, isLoading*/
+        131087) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -7722,6 +7954,41 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
     /** @type {Access} */
     {/* segments */}
   );
+  function compareRoomName(room1, room2) {
+    if (!room1 || !room2)
+      return room1 < room2 ? -1 : 1;
+    const { building: b1, floor: f1, number: n1 } = parseRoomName(room1);
+    const { building: b2, floor: f2, number: n2 } = parseRoomName(room2);
+    if (b1 !== b2)
+      return b1 < b2 ? -1 : 1;
+    if (f1 !== f2)
+      return f1 - f2;
+    return n1 - n2;
+  }
+  function parseRoomName(roomName) {
+    if (!roomName || roomName.length < 2) {
+      return { building: "", floor: 0, number: 0 };
+    }
+    const building = roomName[0];
+    const digits = roomName.slice(1);
+    if (digits.length === 0) {
+      return { building, floor: 0, number: 0 };
+    }
+    let floor = 0;
+    let number = 0;
+    if (digits.length === 2) {
+      floor = parseInt(digits[0], 10);
+      number = parseInt(digits[1], 10);
+    } else if (digits.length === 3) {
+      floor = parseInt(digits.substring(0, 2), 10);
+      number = parseInt(digits[2], 10);
+    } else {
+      const floorStr = digits.substring(0, digits.length - 1);
+      floor = parseInt(floorStr, 10) || 0;
+      number = parseInt(digits[digits.length - 1], 10) || 0;
+    }
+    return { building, floor, number };
+  }
   function formatNumber(num) {
     return Number(num).toFixed(1);
   }
@@ -7733,6 +8000,10 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
       /** @type {PricePerDayReport[]} */
       [ /* pricePerDay */ ]
     );
+    let sortedData = (
+      /** @type {PricePerDayReport[]} */
+      []
+    );
     let yearMonth = (
       /** @type {string} */
       new Date().toISOString().slice(0, 7)
@@ -7741,7 +8012,12 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
       /** @type {boolean} */
       false
     );
+    let sortBy = (
+      /** @type {string} */
+      "room"
+    );
     async function RefreshData() {
+      $invalidate(2, isLoading = true);
       await (0, import_jsApi2.StaffPricePerDayReport)(
         { yearMonth },
         /** @type {import('./jsApi.GEN').StaffPricePerDayReportCallback} */
@@ -7750,13 +8026,36 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
           if (o.error) {
             console.log(o);
             notifier.showError(o.error || "something went wrong");
+            $invalidate(2, isLoading = false);
             return;
           }
-          $invalidate(0, pricePerDay = o.pricePerDay);
-          console.log("Price per day report:", pricePerDay);
+          $invalidate(6, pricePerDay = o.pricePerDay || []);
+          sortData();
+          $invalidate(2, isLoading = false);
           return;
         }
       );
+    }
+    function sortData() {
+      $invalidate(0, sortedData = [...pricePerDay]);
+      switch (sortBy) {
+        case "room":
+          sortedData.sort((a, b) => compareRoomName(a.roomName, b.roomName));
+          break;
+        case "pricePerDayPercent":
+          sortedData.sort((a, b) => (b.pricePerDayPercentage || 0) - (a.pricePerDayPercentage || 0));
+          break;
+        case "pricePerRoomPercent":
+          sortedData.sort((a, b) => (b.pricePerRoomPercentage || 0) - (a.pricePerRoomPercentage || 0));
+          break;
+        case "pricePerDayValue":
+          sortedData.sort((a, b) => (b.pricePerDayValue || 0) - (a.pricePerDayValue || 0));
+          break;
+      }
+    }
+    function handleSortChange(newSort) {
+      $invalidate(3, sortBy = newSort);
+      sortData();
     }
     function monthshifter_yearMonth_binding(value) {
       yearMonth = value;
@@ -7766,13 +8065,33 @@ table.svelte-3kevk0 tbody tr td.svelte-3kevk0 {
       isLoading = value;
       $invalidate(2, isLoading);
     }
+    const click_handler = () => handleSortChange("room");
+    const click_handler_1 = () => handleSortChange("pricePerDayValue");
+    const click_handler_2 = () => handleSortChange("pricePerDayPercent");
+    const click_handler_3 = () => handleSortChange("pricePerRoomPercent");
+    $self.$.update = () => {
+      if ($self.$.dirty & /*pricePerDay*/
+      64) {
+        $:
+          if (pricePerDay.length > 0) {
+            sortData();
+          }
+      }
+    };
     return [
-      pricePerDay,
+      sortedData,
       yearMonth,
       isLoading,
+      sortBy,
       RefreshData,
+      handleSortChange,
+      pricePerDay,
       monthshifter_yearMonth_binding,
-      monthshifter_isLoading_binding
+      monthshifter_isLoading_binding,
+      click_handler,
+      click_handler_1,
+      click_handler_2,
+      click_handler_3
     ];
   }
   var StaffPricePerDayReport_1 = class extends SvelteComponent {

@@ -2009,10 +2009,6 @@ GROUP BY b."id"`
 		})
 	})
 
-	sort.Slice(out, func(i, j int) bool {
-		return compareRoomName(out[i].RoomName, out[j].RoomName)
-	})
-
 	for i := range out {
 		duration := calculateDuration(out[i].DateStart, out[i].DateEnd)
 		if duration > 0 {
@@ -2049,57 +2045,6 @@ GROUP BY b."id"`
 	}
 
 	return
-}
-
-func compareRoomName(room1, room2 string) bool {
-	if room1 == "" || room2 == "" {
-		return room1 < room2
-	}
-
-	building1, floor1, number1 := parseRoomName(room1)
-	building2, floor2, number2 := parseRoomName(room2)
-
-	if building1 != building2 {
-		return building1 < building2
-	}
-
-	if floor1 != floor2 {
-		return floor1 < floor2
-	}
-
-	return number1 < number2
-}
-
-func parseRoomName(roomName string) (building rune, floor int, number int) {
-	if len(roomName) < 2 {
-		return 0, 0, 0
-	}
-
-	building = rune(roomName[0])
-	digits := roomName[1:]
-
-	if len(digits) == 0 {
-		return building, 0, 0
-	}
-
-	if len(digits) == 2 {
-		floor = int(digits[0] - '0')
-		number = int(digits[1] - '0')
-	} else if len(digits) == 3 {
-		floor = int(digits[0]-'0')*10 + int(digits[1]-'0')
-		number = int(digits[2] - '0')
-	} else {
-		floorStr := digits[:len(digits)-1]
-		numberChar := digits[len(digits)-1]
-
-		floorVal, err := strconv.Atoi(floorStr)
-		if err == nil {
-			floor = floorVal
-		}
-		number = int(numberChar - '0')
-	}
-
-	return building, floor, number
 }
 
 func calculateDuration(dateStart, dateEnd string) int {
