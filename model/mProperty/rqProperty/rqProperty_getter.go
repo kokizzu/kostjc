@@ -1197,15 +1197,15 @@ type AvailableRoom struct {
 	AvailableAt    string `json:"availableAt"`
 	IsAvailableNow bool   `json:"isAvailableNow"`
 	LastTenant     string `json:"lastTenant"`
+	BasePriceIDR   int64  `json:"basePriceIDR"`
+	TotalPriceIDR  int64  `json:"totalPriceIDR"`
 }
 
 func (r *Rooms) FindAvailableRooms() (out []AvailableRoom) {
 	const comment = `-- Rooms) FindAvailableRooms`
-
 	now := time.Now()
 	dateTimeNow := now.Format(time.DateOnly)
 	sevenDaysLater := now.AddDate(0, 0, 7).Format(time.DateOnly)
-
 	queryRows := comment + `
 WITH "all_rooms" AS (
 	SELECT
@@ -1215,13 +1215,14 @@ WITH "all_rooms" AS (
 		"rooms"."lastUseAt" AS "lastUseAt",
 		"rooms"."currentTenantId" AS "currentTenantId",
 		"rooms"."deletedAt" AS "deletedAt",
-		"tenants"."tenantName" AS "tenantName"
+		"tenants"."tenantName" AS "tenantName",
+		"rooms"."basePriceIDR" AS "basePriceIDR",
+		"bookings"."totalPriceIDR" AS "totalPriceIDR"
 	FROM "rooms"
 	LEFT JOIN "bookings" ON "rooms"."id" = "bookings"."roomId"
 	LEFT JOIN "tenants" ON "rooms"."currentTenantId" = "tenants"."id"
 	GROUP BY "rooms"."roomName"
 )
-
 SELECT
 	"roomName",
 	"dateEnd",
@@ -1229,7 +1230,9 @@ SELECT
 		WHEN "dateEnd" < '` + dateTimeNow + `'
 		THEN 'TRUE'
 	ELSE 'FALSE' END AS "isAvailable",
-	"tenantName"
+	"tenantName",
+	COALESCE("basePriceIDR", 0) AS "basePriceIDR",
+	COALESCE("totalPriceIDR", 0) AS "totalPriceIDR"
 FROM "all_rooms"
 WHERE
 	(
@@ -1239,22 +1242,24 @@ WHERE
 	)
 	AND "deletedAt" = 0
 ORDER BY "dateEnd" ASC`
-
 	r.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 4 {
+		if len(row) == 6 {
 			roomName := X.ToS(row[0])
 			availableAt := X.ToS(row[1])
 			isAvailableNow := X.ToBool(row[2])
 			tenantName := X.ToS(row[3])
+			basePriceIDR := X.ToI(row[4])
+			totalPriceIDR := X.ToI(row[5])
 			out = append(out, AvailableRoom{
 				RoomName:       roomName,
 				AvailableAt:    availableAt,
 				IsAvailableNow: isAvailableNow,
 				LastTenant:     tenantName,
+				BasePriceIDR:   basePriceIDR,
+				TotalPriceIDR:  totalPriceIDR,
 			})
 		}
 	})
-
 	return
 }
 

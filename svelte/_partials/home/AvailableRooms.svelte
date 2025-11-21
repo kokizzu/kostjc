@@ -1,14 +1,43 @@
 <script>
-    import { GetRelativeDayLabel } from "../../_components/xGenerator";
-
   /**
    * @typedef {Object} AvailableRoom
    * @property {string} roomName
    * @property {string} availableAt
    * @property {boolean} isAvailableNow
    * @property {string} lastTenant
+   * @property {number} basePriceIDR
+   * @property {number} totalPriceIDR
    */
   const rooms = /** @type {AvailableRoom[]} */ ([/* availableRooms */]);
+  let sortedRooms = /** @type {AvailableRoom[]} */ ([]);
+  let sortBy = /** @type {'default' | 'basePrice' | 'totalPrice'} */ ('default');
+
+  function sortRooms() {
+    sortedRooms = [...rooms];
+    
+    switch(sortBy) {
+      case 'basePrice':
+        sortedRooms.sort((a, b) => b.basePriceIDR - a.basePriceIDR);
+        break;
+      case 'totalPrice':
+        sortedRooms.sort((a, b) => b.totalPriceIDR - a.totalPriceIDR);
+        break;
+      default:
+        sortedRooms.sort((a, b) => {
+          if (!a.availableAt) return 1;
+          if (!b.availableAt) return -1;
+          return new Date(a.availableAt).getTime() - new Date(b.availableAt).getTime();
+        });
+    }
+  }
+
+  $: if (rooms) {
+    sortRooms();
+  }
+
+  $: if (sortBy) {
+    sortRooms();
+  }
 
   function formatDateLong(/** @type {string} */ dateStr, /** @type {number} */ dayTo = 0) {
     const dt = new Date(dateStr);
@@ -54,13 +83,55 @@
 
     return `(since ${diffDays} day${diffDays > 1 ? 's' : ''} ago)`;
   }
+
+  /**
+   * Format number to IDR currency
+   * @param {number} amount
+   * @returns {string}
+   */
+  function formatIDR(amount) {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0
+    }).format(amount);
+  }
 </script>
 
 <section class="empty-rooms">
-  <h1>Available Rooms</h1>
-  {#if rooms && rooms.length > 0}
+  <div class="header">
+    <h1>Available Rooms</h1>
+    <div class="sort-controls">
+      <label>Sort by:</label>
+      <div class="sort-buttons">
+        <button 
+          class="sort-btn" 
+          class:active={sortBy === 'default'}
+          on:click={() => sortBy = 'default'}
+        >
+          Available Date
+        </button>
+        <button 
+          class="sort-btn" 
+          class:active={sortBy === 'basePrice'}
+          on:click={() => sortBy = 'basePrice'}
+        >
+          Base Price
+        </button>
+        <button 
+          class="sort-btn" 
+          class:active={sortBy === 'totalPrice'}
+          on:click={() => sortBy = 'totalPrice'}
+        >
+          Total Price
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {#if sortedRooms && sortedRooms.length > 0}
     <div class="cards">
-      {#each (rooms || []) as r}
+      {#each (sortedRooms || []) as r}
         <div class="card">
           <h3>Room {r.roomName}</h3>
           <div class="desc">
@@ -69,6 +140,14 @@
               : 'Available on <b>' + formatDateLong(r.availableAt, 1)+' ('+ getRelativeDayLabel(r.availableAt, 1) +') </b>'
             }</span>
             <span>Last Tenant: <b>{r.lastTenant || '--'}</b></span>
+            <div class="price-info">
+              <span class="price-label">Base Price:</span>
+              <span class="price-value">{formatIDR(r.basePriceIDR || 0)}</span>
+            </div>
+            <div class="price-info">
+              <span class="price-label">Total Price:</span>
+              <span class="price-value total">{formatIDR(r.totalPriceIDR || 0)}</span>
+            </div>
           </div>
         </div>
       {/each}
@@ -87,15 +166,64 @@
     gap: 20px;
   }
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
   .empty-rooms h1 {
     margin: 0;
     padding: 0;
     font-size: var(--font-xl);
   }
 
+  .sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .sort-controls label {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--gray-007, #333);
+  }
+
+  .sort-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .sort-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--gray-004, #ddd);
+    background: white;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .sort-btn:hover {
+    background: var(--gray-002, #f5f5f5);
+    border-color: var(--gray-005, #ccc);
+  }
+
+  .sort-btn.active {
+    background: var(--primary-color, #4CAF50);
+    color: white;
+    border-color: var(--primary-color, #4CAF50);
+  }
+
   .empty-rooms .cards {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
   }
 
@@ -122,11 +250,67 @@
     border-top: 1px solid var(--gray-004);
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
     z-index: 20;
   }
 
-  @media only screen and (max-width : 768px) {
+  .price-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+  }
+
+  .price-label {
+    font-size: 13px;
+    color: var(--gray-006, #666);
+  }
+
+  .price-value {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--gray-008, #222);
+  }
+
+  .price-value.total {
+    color: var(--primary-color, #4CAF50);
+    font-size: 15px;
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 40px;
+    color: var(--gray-006, #666);
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .empty-rooms .cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .sort-controls {
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .sort-buttons {
+      width: 100%;
+    }
+
+    .sort-btn {
+      flex: 1;
+      text-align: center;
+    }
+
     .empty-rooms .cards {
       grid-template-columns: 1fr;
     }
