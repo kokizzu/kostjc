@@ -697,89 +697,118 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   background-color: var(--blue-005);
 }
 
+/* fakecss:./_components/Radio.esbuild-svelte-fake-css */
+.switcher-container.svelte-r2nbop.svelte-r2nbop.svelte-r2nbop {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+.switcher.svelte-r2nbop.svelte-r2nbop.svelte-r2nbop {
+  position: relative;
+  display: inline-block;
+  width: 43px;
+  height: 24px;
+  margin-left: 0 !important;
+}
+.switcher.svelte-r2nbop input.svelte-r2nbop.svelte-r2nbop {
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.switcher.svelte-r2nbop .slider.svelte-r2nbop.svelte-r2nbop {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-004);
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.switcher.svelte-r2nbop .slider.svelte-r2nbop.svelte-r2nbop:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.switcher.svelte-r2nbop input.svelte-r2nbop:checked + .slider.svelte-r2nbop {
+  background-color: var(--blue-005) !important;
+}
+.switcher.svelte-r2nbop input.svelte-r2nbop:focus + .slider.svelte-r2nbop {
+  box-shadow: 0 0 1px var(--blue-005) !important;
+}
+.switcher.svelte-r2nbop input.svelte-r2nbop:checked + .slider.svelte-r2nbop:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+}
+.switcher.svelte-r2nbop .slider.svelte-r2nbop.svelte-r2nbop {
+  border-radius: 34px;
+}
+.switcher.svelte-r2nbop .slider.svelte-r2nbop.svelte-r2nbop:before {
+  border-radius: 50%;
+}
+
 /* fakecss:./staffPricePerDayReport.esbuild-svelte-fake-css */
-.report-container.svelte-yr12gi.svelte-yr12gi {
+.filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.report-container.svelte-eff1sb.svelte-eff1sb {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
 }
-.header-section.svelte-yr12gi.svelte-yr12gi {
+.header-section.svelte-eff1sb.svelte-eff1sb {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.sort-controls.svelte-yr12gi.svelte-yr12gi {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.sort-controls.svelte-yr12gi label.svelte-yr12gi {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--gray-007, #333);
-}
-.sort-buttons.svelte-yr12gi.svelte-yr12gi {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.sort-btn.svelte-yr12gi.svelte-yr12gi {
-  padding: 8px 16px;
-  border: 1px solid var(--gray-004, #ddd);
-  background: white;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-.sort-btn.svelte-yr12gi.svelte-yr12gi:hover {
-  background: var(--gray-002, #f5f5f5);
-  border-color: var(--gray-005, #ccc);
-}
-.sort-btn.active.svelte-yr12gi.svelte-yr12gi {
-  background: var(--primary-color, #4CAF50);
-  color: white;
-  border-color: var(--primary-color, #4CAF50);
-}
-.table-container.svelte-yr12gi.svelte-yr12gi {
+.table-container.svelte-eff1sb.svelte-eff1sb {
   overflow-x: auto;
 }
-table.svelte-yr12gi.svelte-yr12gi {
+table.svelte-eff1sb.svelte-eff1sb {
   width: 100%;
   border-collapse: collapse;
   min-width: 1200px;
 }
-table.svelte-yr12gi thead.svelte-yr12gi {
+table.svelte-eff1sb thead.svelte-eff1sb {
   position: sticky;
   top: 0;
   background-color: var(--gray-002, #f8f9fa);
   z-index: 10;
   border: none;
 }
-table.svelte-yr12gi thead tr th.svelte-yr12gi {
+table.svelte-eff1sb thead tr th.svelte-eff1sb {
   text-align: left;
   padding: 12px;
   white-space: normal;
-  word-wrap: nowrap;
   max-width: 120px;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.4;
 }
-table.svelte-yr12gi tbody tr.svelte-yr12gi {
+table.svelte-eff1sb tbody tr.svelte-eff1sb {
   border-bottom: 1px solid var(--gray-004, #e0e0e0);
 }
-table.svelte-yr12gi tbody tr.svelte-yr12gi:hover {
+table.svelte-eff1sb tbody tr.svelte-eff1sb:hover {
   background-color: var(--gray-001, #fafafa);
 }
-table.svelte-yr12gi tbody tr td.svelte-yr12gi {
+table.svelte-eff1sb tbody tr td.svelte-eff1sb {
   padding: 12px;
   font-size: 14px;
 }
-.bar-container.svelte-yr12gi.svelte-yr12gi {
+.bar-container.svelte-eff1sb.svelte-eff1sb {
   width: 100px;
   height: 24px;
   background-color: var(--gray-003, #f0f0f0);
@@ -787,7 +816,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
   overflow: hidden;
   position: relative;
 }
-.bar.svelte-yr12gi.svelte-yr12gi {
+.bar.svelte-eff1sb.svelte-eff1sb {
   height: 100%;
   border-radius: 4px;
   transition: width 0.3s ease, opacity 0.2s ease;
@@ -797,10 +826,10 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
   justify-content: center;
   cursor: pointer;
 }
-.bar.svelte-yr12gi.svelte-yr12gi:hover {
+.bar.svelte-eff1sb.svelte-eff1sb:hover {
   opacity: 0.85;
 }
-.bar-label.svelte-yr12gi.svelte-yr12gi {
+.bar-label.svelte-eff1sb.svelte-eff1sb {
   font-size: 11px;
   font-weight: 600;
   color: white;
@@ -808,49 +837,35 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
   white-space: nowrap;
   display: none;
 }
-.bar.svelte-yr12gi:hover .bar-label.svelte-yr12gi {
+.bar.svelte-eff1sb:hover .bar-label.svelte-eff1sb {
   display: block;
 }
-.bar-price-per-day.svelte-yr12gi.svelte-yr12gi {
+.bar-price-per-day.svelte-eff1sb.svelte-eff1sb {
   background: linear-gradient(90deg, #4CAF50, #45a049);
 }
-.bar-price-per-room.svelte-yr12gi.svelte-yr12gi {
+.bar-price-per-room.svelte-eff1sb.svelte-eff1sb {
   background: linear-gradient(90deg, #2196F3, #1976D2);
 }
 @media only screen and (max-width : 768px) {
-  .report-container.svelte-yr12gi.svelte-yr12gi {
+  .report-container.svelte-eff1sb.svelte-eff1sb {
     padding: 12px;
   }
-  .header-section.svelte-yr12gi.svelte-yr12gi {
+  .header-section.svelte-eff1sb.svelte-eff1sb {
     gap: 16px;
   }
-  .sort-controls.svelte-yr12gi.svelte-yr12gi {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .sort-buttons.svelte-yr12gi.svelte-yr12gi {
-    width: 100%;
-  }
-  .sort-btn.svelte-yr12gi.svelte-yr12gi {
-    flex: 1;
-    min-width: 0;
-    padding: 10px 12px;
-    font-size: 13px;
-  }
-  .bar-container.svelte-yr12gi.svelte-yr12gi {
+  .bar-container.svelte-eff1sb.svelte-eff1sb {
     width: 80px;
     height: 20px;
   }
-  table.svelte-yr12gi.svelte-yr12gi {
+  table.svelte-eff1sb.svelte-eff1sb {
     min-width: 1000px;
   }
-  table.svelte-yr12gi thead tr th.svelte-yr12gi {
+  table.svelte-eff1sb thead tr th.svelte-eff1sb {
     padding: 10px 8px;
     font-size: 12px;
     max-width: 100px;
   }
-  table.svelte-yr12gi tbody tr td.svelte-yr12gi {
+  table.svelte-eff1sb tbody tr td.svelte-eff1sb {
     padding: 10px 8px;
     font-size: 13px;
   }
@@ -3243,13 +3258,13 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
       var HttpStatusCode$1 = HttpStatusCode;
       function createInstance(defaultConfig) {
         const context = new Axios$1(defaultConfig);
-        const instance8 = bind2(Axios$1.prototype.request, context);
-        utils$1.extend(instance8, Axios$1.prototype, context, { allOwnKeys: true });
-        utils$1.extend(instance8, context, null, { allOwnKeys: true });
-        instance8.create = function create(instanceConfig) {
+        const instance9 = bind2(Axios$1.prototype.request, context);
+        utils$1.extend(instance9, Axios$1.prototype, context, { allOwnKeys: true });
+        utils$1.extend(instance9, context, null, { allOwnKeys: true });
+        instance9.create = function create(instanceConfig) {
           return createInstance(mergeConfig(defaultConfig, instanceConfig));
         };
-        return instance8;
+        return instance9;
       }
       var axios = createInstance(defaults$1);
       axios.Axios = Axios$1;
@@ -3528,6 +3543,9 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     }
     return -1;
   }
+  function null_to_empty(value) {
+    return value == null ? "" : value;
+  }
   function set_store_value(store, ret, value) {
     store.set(value);
     return ret;
@@ -3622,6 +3640,9 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
   function space() {
     return text(" ");
   }
+  function comment(content) {
+    return document.createComment(content);
+  }
   function listen(node, event, handler, options) {
     node.addEventListener(event, handler, options);
     return () => node.removeEventListener(event, handler, options);
@@ -3636,6 +3657,20 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     for (const key in attributes) {
       attr(node, key, attributes[key]);
     }
+  }
+  function init_binding_group(group) {
+    let _inputs;
+    return {
+      /* push */
+      p(...inputs) {
+        _inputs = inputs;
+        _inputs.forEach((input) => group.push(input));
+      },
+      /* remove */
+      r() {
+        _inputs.forEach((input) => group.splice(group.indexOf(input), 1));
+      }
+    };
   }
   function children(element2) {
     return Array.from(element2.childNodes);
@@ -3920,7 +3955,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     }
     component.$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance8, create_fragment8, not_equal, props, append_styles = null, dirty = [-1]) {
+  function init(component, options, instance9, create_fragment9, not_equal, props, append_styles = null, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $ = component.$ = {
@@ -3946,7 +3981,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     };
     append_styles && append_styles($.root);
     let ready = false;
-    $.ctx = instance8 ? instance8(component, options.props || {}, (i, ret, ...rest) => {
+    $.ctx = instance9 ? instance9(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($.ctx && not_equal($.ctx[i], $.ctx[i] = value)) {
         if (!$.skip_bound && $.bound[i])
@@ -3959,7 +3994,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     $.update();
     ready = true;
     run_all($.before_update);
-    $.fragment = create_fragment8 ? create_fragment8($.ctx) : false;
+    $.fragment = create_fragment9 ? create_fragment9($.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -7265,54 +7300,293 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
 
   // staffPricePerDayReport.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
+
+  // _components/Radio.svelte
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[14] = list[i];
+    child_ctx[5] = list[i];
     return child_ctx;
   }
   function create_each_block(ctx) {
+    let div;
+    let label0;
+    let input;
+    let input_id_value;
+    let input_name_value;
+    let input_value_value;
+    let value_has_changed = false;
+    let t0;
+    let span;
+    let label0_for_value;
+    let t1;
+    let label1;
+    let t2_value = (
+      /*option*/
+      ctx[5].label + ""
+    );
+    let t2;
+    let label1_for_value;
+    let t3;
+    let binding_group;
+    let mounted;
+    let dispose;
+    binding_group = init_binding_group(
+      /*$binding_groups*/
+      ctx[4][0]
+    );
+    return {
+      c() {
+        div = element("div");
+        label0 = element("label");
+        input = element("input");
+        t0 = space();
+        span = element("span");
+        t1 = space();
+        label1 = element("label");
+        t2 = text(t2_value);
+        t3 = space();
+        attr(input, "type", "radio");
+        attr(input, "id", input_id_value = /*option*/
+        ctx[5].id);
+        attr(input, "name", input_name_value = /*option*/
+        ctx[5].name);
+        input.__value = input_value_value = /*option*/
+        ctx[5].value;
+        set_input_value(input, input.__value);
+        attr(input, "class", "svelte-r2nbop");
+        attr(span, "class", "slider svelte-r2nbop");
+        attr(label0, "class", "switcher svelte-r2nbop");
+        attr(label0, "for", label0_for_value = /*option*/
+        ctx[5].id);
+        attr(label1, "for", label1_for_value = /*option*/
+        ctx[5].id);
+        attr(label1, "class", "label");
+        attr(div, "class", "switcher-container svelte-r2nbop");
+        binding_group.p(input);
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        append(div, label0);
+        append(label0, input);
+        input.checked = input.__value === /*selected*/
+        ctx[0];
+        append(label0, t0);
+        append(label0, span);
+        append(div, t1);
+        append(div, label1);
+        append(label1, t2);
+        append(div, t3);
+        if (!mounted) {
+          dispose = listen(
+            input,
+            "change",
+            /*input_change_handler*/
+            ctx[3]
+          );
+          mounted = true;
+        }
+      },
+      p(ctx2, dirty) {
+        if (dirty & /*options*/
+        2 && input_id_value !== (input_id_value = /*option*/
+        ctx2[5].id)) {
+          attr(input, "id", input_id_value);
+        }
+        if (dirty & /*options*/
+        2 && input_name_value !== (input_name_value = /*option*/
+        ctx2[5].name)) {
+          attr(input, "name", input_name_value);
+        }
+        if (dirty & /*options*/
+        2 && input_value_value !== (input_value_value = /*option*/
+        ctx2[5].value)) {
+          input.__value = input_value_value;
+          set_input_value(input, input.__value);
+          value_has_changed = true;
+        }
+        if (value_has_changed || dirty & /*selected, options*/
+        3) {
+          input.checked = input.__value === /*selected*/
+          ctx2[0];
+        }
+        if (dirty & /*options*/
+        2 && label0_for_value !== (label0_for_value = /*option*/
+        ctx2[5].id)) {
+          attr(label0, "for", label0_for_value);
+        }
+        if (dirty & /*options*/
+        2 && t2_value !== (t2_value = /*option*/
+        ctx2[5].label + ""))
+          set_data(t2, t2_value);
+        if (dirty & /*options*/
+        2 && label1_for_value !== (label1_for_value = /*option*/
+        ctx2[5].id)) {
+          attr(label1, "for", label1_for_value);
+        }
+      },
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        binding_group.r();
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function create_fragment7(ctx) {
+    let div;
+    let div_class_value;
+    let each_value = ensure_array_like(
+      /*options*/
+      ctx[1]
+    );
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    }
+    return {
+      c() {
+        div = element("div");
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+        attr(div, "class", div_class_value = null_to_empty(
+          /*className*/
+          ctx[2]
+        ) + " svelte-r2nbop");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          if (each_blocks[i]) {
+            each_blocks[i].m(div, null);
+          }
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (dirty & /*options, selected*/
+        3) {
+          each_value = ensure_array_like(
+            /*options*/
+            ctx2[1]
+          );
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+            } else {
+              each_blocks[i] = create_each_block(child_ctx);
+              each_blocks[i].c();
+              each_blocks[i].m(div, null);
+            }
+          }
+          for (; i < each_blocks.length; i += 1) {
+            each_blocks[i].d(1);
+          }
+          each_blocks.length = each_value.length;
+        }
+        if (dirty & /*className*/
+        4 && div_class_value !== (div_class_value = null_to_empty(
+          /*className*/
+          ctx2[2]
+        ) + " svelte-r2nbop")) {
+          attr(div, "class", div_class_value);
+        }
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching) {
+          detach(div);
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function instance7($self, $props, $invalidate) {
+    let { selected = (
+      /** @type {string} */
+      ""
+    ) } = $props;
+    let { options = (
+      /** @type {RadioOption[]} */
+      []
+    ) } = $props;
+    let { className = "" } = $props;
+    const $binding_groups = [[]];
+    function input_change_handler() {
+      selected = this.__value;
+      $invalidate(0, selected);
+    }
+    $self.$set = ($props2) => {
+      if ("selected" in $props2)
+        $invalidate(0, selected = $props2.selected);
+      if ("options" in $props2)
+        $invalidate(1, options = $props2.options);
+      if ("className" in $props2)
+        $invalidate(2, className = $props2.className);
+    };
+    return [selected, options, className, input_change_handler, $binding_groups];
+  }
+  var Radio = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance7, create_fragment7, safe_not_equal, { selected: 0, options: 1, className: 2 });
+    }
+  };
+  var Radio_default = Radio;
+
+  // staffPricePerDayReport.svelte
+  function get_each_context2(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[13] = list[i];
+    return child_ctx;
+  }
+  function create_each_block2(ctx) {
     let tr;
     let td0;
     let t0_value = (
       /*data*/
-      ctx[14].roomName + ""
+      ctx[13].roomName + ""
     );
     let t0;
     let t1;
     let td1;
     let t2_value = (
       /*data*/
-      (ctx[14].roomSize || "--") + ""
+      (ctx[13].roomSize || "--") + ""
     );
     let t2;
     let t3;
     let td2;
     let t4_value = (
       /*data*/
-      (ctx[14].tenantName || "--") + ""
+      (ctx[13].tenantName || "--") + ""
     );
     let t4;
     let t5;
     let td3;
     let t6_value = (
       /*data*/
-      (ctx[14].dateStart || "--") + ""
+      (ctx[13].dateStart || "--") + ""
     );
     let t6;
     let t7;
     let td4;
     let t8_value = (
       /*data*/
-      (ctx[14].dateEnd || "--") + ""
+      (ctx[13].dateEnd || "--") + ""
     );
     let t8;
     let t9;
     let td5;
     let t10_value = (calculateDurationDay(
       /*data*/
-      ctx[14].dateStart,
+      ctx[13].dateStart,
       /*data*/
-      ctx[14].dateEnd
+      ctx[13].dateEnd
     ) || "0") + "";
     let t10;
     let t11;
@@ -7320,7 +7594,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     let td6;
     let t13_value = formatNumber(
       /*data*/
-      ctx[14].pricePerDayValue || 0
+      ctx[13].pricePerDayValue || 0
     ) + "";
     let t13;
     let t14;
@@ -7330,7 +7604,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     let span0;
     let t15_value = formatNumber(
       /*data*/
-      ctx[14].pricePerDayPercentage
+      ctx[13].pricePerDayPercentage
     ) + "";
     let t15;
     let t16;
@@ -7339,7 +7613,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     let td8;
     let t18_value = formatNumber(
       /*data*/
-      ctx[14].pricePerRoomValue || 0
+      ctx[13].pricePerRoomValue || 0
     ) + "";
     let t18;
     let t19;
@@ -7349,7 +7623,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     let span1;
     let t20_value = formatNumber(
       /*data*/
-      ctx[14].pricePerRoomPercentage
+      ctx[13].pricePerRoomPercentage
     ) + "";
     let t20;
     let t21;
@@ -7358,14 +7632,14 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     let td10;
     let t23_value = (
       /*data*/
-      (ctx[14].totalPaid || "0") + ""
+      (ctx[13].totalPaid || "0") + ""
     );
     let t23;
     let t24;
     let td11;
     let t25_value = (
       /*data*/
-      (ctx[14].totalPrice || "0") + ""
+      (ctx[13].totalPrice || "0") + ""
     );
     let t25;
     let t26;
@@ -7417,51 +7691,51 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
         td11 = element("td");
         t25 = text(t25_value);
         t26 = space();
-        attr(td0, "class", "svelte-yr12gi");
-        attr(td1, "class", "svelte-yr12gi");
-        attr(td2, "class", "svelte-yr12gi");
-        attr(td3, "class", "svelte-yr12gi");
-        attr(td4, "class", "svelte-yr12gi");
-        attr(td5, "class", "svelte-yr12gi");
-        attr(td6, "class", "svelte-yr12gi");
-        attr(span0, "class", "bar-label svelte-yr12gi");
-        attr(div0, "class", "bar bar-price-per-day svelte-yr12gi");
+        attr(td0, "class", "svelte-eff1sb");
+        attr(td1, "class", "svelte-eff1sb");
+        attr(td2, "class", "svelte-eff1sb");
+        attr(td3, "class", "svelte-eff1sb");
+        attr(td4, "class", "svelte-eff1sb");
+        attr(td5, "class", "svelte-eff1sb");
+        attr(td6, "class", "svelte-eff1sb");
+        attr(span0, "class", "bar-label svelte-eff1sb");
+        attr(div0, "class", "bar bar-price-per-day svelte-eff1sb");
         set_style(
           div0,
           "width",
           /*data*/
-          (ctx[14].pricePerDayPercentage || 0) + "%"
+          (ctx[13].pricePerDayPercentage || 0) + "%"
         );
         attr(div0, "title", div0_title_value = formatNumber(
           /*data*/
-          ctx[14].pricePerDayValue
+          ctx[13].pricePerDayValue
         ) + " (" + formatNumber(
           /*data*/
-          ctx[14].pricePerDayPercentage
+          ctx[13].pricePerDayPercentage
         ) + "%)");
-        attr(div1, "class", "bar-container svelte-yr12gi");
-        attr(td7, "class", "svelte-yr12gi");
-        attr(td8, "class", "svelte-yr12gi");
-        attr(span1, "class", "bar-label svelte-yr12gi");
-        attr(div2, "class", "bar bar-price-per-room svelte-yr12gi");
+        attr(div1, "class", "bar-container svelte-eff1sb");
+        attr(td7, "class", "svelte-eff1sb");
+        attr(td8, "class", "svelte-eff1sb");
+        attr(span1, "class", "bar-label svelte-eff1sb");
+        attr(div2, "class", "bar bar-price-per-room svelte-eff1sb");
         set_style(
           div2,
           "width",
           /*data*/
-          (ctx[14].pricePerRoomPercentage || 0) + "%"
+          (ctx[13].pricePerRoomPercentage || 0) + "%"
         );
         attr(div2, "title", div2_title_value = formatNumber(
           /*data*/
-          ctx[14].pricePerRoomValue
+          ctx[13].pricePerRoomValue
         ) + " (" + formatNumber(
           /*data*/
-          ctx[14].pricePerRoomPercentage
+          ctx[13].pricePerRoomPercentage
         ) + "%)");
-        attr(div3, "class", "bar-container svelte-yr12gi");
-        attr(td9, "class", "svelte-yr12gi");
-        attr(td10, "class", "svelte-yr12gi");
-        attr(td11, "class", "svelte-yr12gi");
-        attr(tr, "class", "svelte-yr12gi");
+        attr(div3, "class", "bar-container svelte-eff1sb");
+        attr(td9, "class", "svelte-eff1sb");
+        attr(td10, "class", "svelte-eff1sb");
+        attr(td11, "class", "svelte-eff1sb");
+        attr(tr, "class", "svelte-eff1sb");
       },
       m(target, anchor) {
         insert(target, tr, anchor);
@@ -7513,102 +7787,102 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
       },
       p(ctx2, dirty) {
         if (dirty & /*sortedData*/
-        1 && t0_value !== (t0_value = /*data*/
-        ctx2[14].roomName + ""))
+        2 && t0_value !== (t0_value = /*data*/
+        ctx2[13].roomName + ""))
           set_data(t0, t0_value);
         if (dirty & /*sortedData*/
-        1 && t2_value !== (t2_value = /*data*/
-        (ctx2[14].roomSize || "--") + ""))
+        2 && t2_value !== (t2_value = /*data*/
+        (ctx2[13].roomSize || "--") + ""))
           set_data(t2, t2_value);
         if (dirty & /*sortedData*/
-        1 && t4_value !== (t4_value = /*data*/
-        (ctx2[14].tenantName || "--") + ""))
+        2 && t4_value !== (t4_value = /*data*/
+        (ctx2[13].tenantName || "--") + ""))
           set_data(t4, t4_value);
         if (dirty & /*sortedData*/
-        1 && t6_value !== (t6_value = /*data*/
-        (ctx2[14].dateStart || "--") + ""))
+        2 && t6_value !== (t6_value = /*data*/
+        (ctx2[13].dateStart || "--") + ""))
           set_data(t6, t6_value);
         if (dirty & /*sortedData*/
-        1 && t8_value !== (t8_value = /*data*/
-        (ctx2[14].dateEnd || "--") + ""))
+        2 && t8_value !== (t8_value = /*data*/
+        (ctx2[13].dateEnd || "--") + ""))
           set_data(t8, t8_value);
         if (dirty & /*sortedData*/
-        1 && t10_value !== (t10_value = (calculateDurationDay(
+        2 && t10_value !== (t10_value = (calculateDurationDay(
           /*data*/
-          ctx2[14].dateStart,
+          ctx2[13].dateStart,
           /*data*/
-          ctx2[14].dateEnd
+          ctx2[13].dateEnd
         ) || "0") + ""))
           set_data(t10, t10_value);
         if (dirty & /*sortedData*/
-        1 && t13_value !== (t13_value = formatNumber(
+        2 && t13_value !== (t13_value = formatNumber(
           /*data*/
-          ctx2[14].pricePerDayValue || 0
+          ctx2[13].pricePerDayValue || 0
         ) + ""))
           set_data(t13, t13_value);
         if (dirty & /*sortedData*/
-        1 && t15_value !== (t15_value = formatNumber(
+        2 && t15_value !== (t15_value = formatNumber(
           /*data*/
-          ctx2[14].pricePerDayPercentage
+          ctx2[13].pricePerDayPercentage
         ) + ""))
           set_data(t15, t15_value);
         if (dirty & /*sortedData*/
-        1) {
+        2) {
           set_style(
             div0,
             "width",
             /*data*/
-            (ctx2[14].pricePerDayPercentage || 0) + "%"
+            (ctx2[13].pricePerDayPercentage || 0) + "%"
           );
         }
         if (dirty & /*sortedData*/
-        1 && div0_title_value !== (div0_title_value = formatNumber(
+        2 && div0_title_value !== (div0_title_value = formatNumber(
           /*data*/
-          ctx2[14].pricePerDayValue
+          ctx2[13].pricePerDayValue
         ) + " (" + formatNumber(
           /*data*/
-          ctx2[14].pricePerDayPercentage
+          ctx2[13].pricePerDayPercentage
         ) + "%)")) {
           attr(div0, "title", div0_title_value);
         }
         if (dirty & /*sortedData*/
-        1 && t18_value !== (t18_value = formatNumber(
+        2 && t18_value !== (t18_value = formatNumber(
           /*data*/
-          ctx2[14].pricePerRoomValue || 0
+          ctx2[13].pricePerRoomValue || 0
         ) + ""))
           set_data(t18, t18_value);
         if (dirty & /*sortedData*/
-        1 && t20_value !== (t20_value = formatNumber(
+        2 && t20_value !== (t20_value = formatNumber(
           /*data*/
-          ctx2[14].pricePerRoomPercentage
+          ctx2[13].pricePerRoomPercentage
         ) + ""))
           set_data(t20, t20_value);
         if (dirty & /*sortedData*/
-        1) {
+        2) {
           set_style(
             div2,
             "width",
             /*data*/
-            (ctx2[14].pricePerRoomPercentage || 0) + "%"
+            (ctx2[13].pricePerRoomPercentage || 0) + "%"
           );
         }
         if (dirty & /*sortedData*/
-        1 && div2_title_value !== (div2_title_value = formatNumber(
+        2 && div2_title_value !== (div2_title_value = formatNumber(
           /*data*/
-          ctx2[14].pricePerRoomValue
+          ctx2[13].pricePerRoomValue
         ) + " (" + formatNumber(
           /*data*/
-          ctx2[14].pricePerRoomPercentage
+          ctx2[13].pricePerRoomPercentage
         ) + "%)")) {
           attr(div2, "title", div2_title_value);
         }
         if (dirty & /*sortedData*/
-        1 && t23_value !== (t23_value = /*data*/
-        (ctx2[14].totalPaid || "0") + ""))
+        2 && t23_value !== (t23_value = /*data*/
+        (ctx2[13].totalPaid || "0") + ""))
           set_data(t23, t23_value);
         if (dirty & /*sortedData*/
-        1 && t25_value !== (t25_value = /*data*/
-        (ctx2[14].totalPrice || "0") + ""))
+        2 && t25_value !== (t25_value = /*data*/
+        (ctx2[13].totalPrice || "0") + ""))
           set_data(t25, t25_value);
       },
       d(detaching) {
@@ -7619,32 +7893,23 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     };
   }
   function create_default_slot(ctx) {
-    let div4;
     let div2;
+    let div0;
     let monthshifter;
     let updating_yearMonth;
     let updating_isLoading;
     let t0;
-    let div1;
-    let label;
+    let radio;
+    let updating_selected;
+    let t1;
+    let c;
     let t2;
-    let div0;
-    let button0;
-    let t4;
-    let button1;
-    let t6;
-    let button2;
-    let t8;
-    let button3;
-    let t10;
-    let div3;
+    let div1;
     let table;
     let thead;
-    let t34;
+    let t26;
     let tbody;
     let current;
-    let mounted;
-    let dispose;
     function monthshifter_yearMonth_binding(value) {
       ctx[7](value);
     }
@@ -7657,119 +7922,118 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
     ) };
     if (
       /*yearMonth*/
-      ctx[1] !== void 0
+      ctx[2] !== void 0
     ) {
       monthshifter_props.yearMonth = /*yearMonth*/
-      ctx[1];
+      ctx[2];
     }
     if (
       /*isLoading*/
-      ctx[2] !== void 0
+      ctx[3] !== void 0
     ) {
       monthshifter_props.isLoading = /*isLoading*/
-      ctx[2];
+      ctx[3];
     }
     monthshifter = new MonthShifter_default({ props: monthshifter_props });
     binding_callbacks.push(() => bind(monthshifter, "yearMonth", monthshifter_yearMonth_binding));
     binding_callbacks.push(() => bind(monthshifter, "isLoading", monthshifter_isLoading_binding));
+    function radio_selected_binding(value) {
+      ctx[9](value);
+    }
+    let radio_props = {
+      className: "filters",
+      options: (
+        /*filterOptions*/
+        ctx[5]
+      )
+    };
+    if (
+      /*selectedFilter*/
+      ctx[0] !== void 0
+    ) {
+      radio_props.selected = /*selectedFilter*/
+      ctx[0];
+    }
+    radio = new Radio_default({ props: radio_props });
+    binding_callbacks.push(() => bind(radio, "selected", radio_selected_binding));
     let each_value = ensure_array_like(
       /*sortedData*/
-      ctx[0]
+      ctx[1]
     );
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
     }
     return {
       c() {
-        div4 = element("div");
         div2 = element("div");
+        div0 = element("div");
         create_component(monthshifter.$.fragment);
         t0 = space();
-        div1 = element("div");
-        label = element("label");
-        label.textContent = "Sort by:";
+        create_component(radio.$.fragment);
+        t1 = space();
+        c = comment(` <div class="sort-controls">
+        <label>Sort by:</label>
+        <div class="sort-buttons">
+          <button 
+            class="sort-btn" 
+            class:active={sortBy === 'room'}
+            on:click={() => handleSortChange('room')}
+          >
+            Room Name
+          </button>
+          <button 
+            class="sort-btn" 
+            class:active={sortBy === 'pricePerDayValue'}
+            on:click={() => handleSortChange('pricePerDayValue')}
+          >
+            Price/Day
+          </button>
+          <button 
+            class="sort-btn" 
+            class:active={sortBy === 'pricePerDayPercent'}
+            on:click={() => handleSortChange('pricePerDayPercent')}
+          >
+            Price/Day %
+          </button>
+          <button 
+            class="sort-btn" 
+            class:active={sortBy === 'pricePerRoomPercent'}
+            on:click={() => handleSortChange('pricePerRoomPercent')}
+          >
+            Price/Room %
+          </button>
+        </div>
+      </div> `);
         t2 = space();
-        div0 = element("div");
-        button0 = element("button");
-        button0.textContent = "Room Name";
-        t4 = space();
-        button1 = element("button");
-        button1.textContent = "Price/Day";
-        t6 = space();
-        button2 = element("button");
-        button2.textContent = "Price/Day %";
-        t8 = space();
-        button3 = element("button");
-        button3.textContent = "Price/Room %";
-        t10 = space();
-        div3 = element("div");
+        div1 = element("div");
         table = element("table");
         thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-yr12gi"><th class="svelte-yr12gi">Room</th> <th class="svelte-yr12gi">Room Size</th> <th class="svelte-yr12gi">Tenant</th> <th class="svelte-yr12gi">Date Start</th> <th class="svelte-yr12gi">Date End</th> <th class="svelte-yr12gi">Duration</th> <th class="svelte-yr12gi">Price Per Day</th> <th class="svelte-yr12gi">Price Per Day Chart</th> <th class="svelte-yr12gi">Price Per Day / Room</th> <th class="svelte-yr12gi">Price Per Room Chart</th> <th class="svelte-yr12gi">Total Paid</th> <th class="svelte-yr12gi">Total Price</th></tr>`;
-        t34 = space();
+        thead.innerHTML = `<tr class="svelte-eff1sb"><th class="svelte-eff1sb">Room</th> <th class="svelte-eff1sb">Room Size</th> <th class="svelte-eff1sb">Tenant</th> <th class="svelte-eff1sb">Date Start</th> <th class="svelte-eff1sb">Date End</th> <th class="svelte-eff1sb">Duration</th> <th class="svelte-eff1sb">Price Per Day</th> <th class="svelte-eff1sb">Price Per Day Chart</th> <th class="svelte-eff1sb">Price Per Day / Room</th> <th class="svelte-eff1sb">Price Per Room Chart</th> <th class="svelte-eff1sb">Total Paid</th> <th class="svelte-eff1sb">Total Price</th></tr>`;
+        t26 = space();
         tbody = element("tbody");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(label, "class", "svelte-yr12gi");
-        attr(button0, "class", "sort-btn svelte-yr12gi");
-        toggle_class(
-          button0,
-          "active",
-          /*sortBy*/
-          ctx[3] === "room"
-        );
-        attr(button1, "class", "sort-btn svelte-yr12gi");
-        toggle_class(
-          button1,
-          "active",
-          /*sortBy*/
-          ctx[3] === "pricePerDayValue"
-        );
-        attr(button2, "class", "sort-btn svelte-yr12gi");
-        toggle_class(
-          button2,
-          "active",
-          /*sortBy*/
-          ctx[3] === "pricePerDayPercent"
-        );
-        attr(button3, "class", "sort-btn svelte-yr12gi");
-        toggle_class(
-          button3,
-          "active",
-          /*sortBy*/
-          ctx[3] === "pricePerRoomPercent"
-        );
-        attr(div0, "class", "sort-buttons svelte-yr12gi");
-        attr(div1, "class", "sort-controls svelte-yr12gi");
-        attr(div2, "class", "header-section svelte-yr12gi");
-        attr(thead, "class", "svelte-yr12gi");
-        attr(table, "class", "svelte-yr12gi");
-        attr(div3, "class", "table-container svelte-yr12gi");
-        attr(div4, "class", "report-container svelte-yr12gi");
+        attr(div0, "class", "header-section svelte-eff1sb");
+        attr(thead, "class", "svelte-eff1sb");
+        attr(table, "class", "svelte-eff1sb");
+        attr(div1, "class", "table-container svelte-eff1sb");
+        attr(div2, "class", "report-container svelte-eff1sb");
       },
       m(target, anchor) {
-        insert(target, div4, anchor);
-        append(div4, div2);
-        mount_component(monthshifter, div2, null);
-        append(div2, t0);
+        insert(target, div2, anchor);
+        append(div2, div0);
+        mount_component(monthshifter, div0, null);
+        append(div0, t0);
+        mount_component(radio, div0, null);
+        append(div0, t1);
+        append(div0, c);
+        append(div2, t2);
         append(div2, div1);
-        append(div1, label);
-        append(div1, t2);
-        append(div1, div0);
-        append(div0, button0);
-        append(div0, t4);
-        append(div0, button1);
-        append(div0, t6);
-        append(div0, button2);
-        append(div0, t8);
-        append(div0, button3);
-        append(div4, t10);
-        append(div4, div3);
-        append(div3, table);
+        append(div1, table);
         append(table, thead);
-        append(table, t34);
+        append(table, t26);
         append(table, tbody);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
@@ -7777,102 +8041,46 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
           }
         }
         current = true;
-        if (!mounted) {
-          dispose = [
-            listen(
-              button0,
-              "click",
-              /*click_handler*/
-              ctx[9]
-            ),
-            listen(
-              button1,
-              "click",
-              /*click_handler_1*/
-              ctx[10]
-            ),
-            listen(
-              button2,
-              "click",
-              /*click_handler_2*/
-              ctx[11]
-            ),
-            listen(
-              button3,
-              "click",
-              /*click_handler_3*/
-              ctx[12]
-            )
-          ];
-          mounted = true;
-        }
       },
       p(ctx2, dirty) {
         const monthshifter_changes = {};
         if (!updating_yearMonth && dirty & /*yearMonth*/
-        2) {
+        4) {
           updating_yearMonth = true;
           monthshifter_changes.yearMonth = /*yearMonth*/
-          ctx2[1];
+          ctx2[2];
           add_flush_callback(() => updating_yearMonth = false);
         }
         if (!updating_isLoading && dirty & /*isLoading*/
-        4) {
+        8) {
           updating_isLoading = true;
           monthshifter_changes.isLoading = /*isLoading*/
-          ctx2[2];
+          ctx2[3];
           add_flush_callback(() => updating_isLoading = false);
         }
         monthshifter.$set(monthshifter_changes);
-        if (!current || dirty & /*sortBy*/
-        8) {
-          toggle_class(
-            button0,
-            "active",
-            /*sortBy*/
-            ctx2[3] === "room"
-          );
-        }
-        if (!current || dirty & /*sortBy*/
-        8) {
-          toggle_class(
-            button1,
-            "active",
-            /*sortBy*/
-            ctx2[3] === "pricePerDayValue"
-          );
-        }
-        if (!current || dirty & /*sortBy*/
-        8) {
-          toggle_class(
-            button2,
-            "active",
-            /*sortBy*/
-            ctx2[3] === "pricePerDayPercent"
-          );
-        }
-        if (!current || dirty & /*sortBy*/
-        8) {
-          toggle_class(
-            button3,
-            "active",
-            /*sortBy*/
-            ctx2[3] === "pricePerRoomPercent"
-          );
-        }
-        if (dirty & /*sortedData, formatNumber, calculateDurationDay*/
+        const radio_changes = {};
+        if (!updating_selected && dirty & /*selectedFilter*/
         1) {
+          updating_selected = true;
+          radio_changes.selected = /*selectedFilter*/
+          ctx2[0];
+          add_flush_callback(() => updating_selected = false);
+        }
+        radio.$set(radio_changes);
+        if (dirty & /*sortedData, formatNumber, calculateDurationDay*/
+        2) {
           each_value = ensure_array_like(
             /*sortedData*/
-            ctx2[0]
+            ctx2[1]
           );
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context(ctx2, each_value, i);
+            const child_ctx = get_each_context2(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
             } else {
-              each_blocks[i] = create_each_block(child_ctx);
+              each_blocks[i] = create_each_block2(child_ctx);
               each_blocks[i].c();
               each_blocks[i].m(tbody, null);
             }
@@ -7887,24 +8095,25 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
         if (current)
           return;
         transition_in(monthshifter.$.fragment, local);
+        transition_in(radio.$.fragment, local);
         current = true;
       },
       o(local) {
         transition_out(monthshifter.$.fragment, local);
+        transition_out(radio.$.fragment, local);
         current = false;
       },
       d(detaching) {
         if (detaching) {
-          detach(div4);
+          detach(div2);
         }
         destroy_component(monthshifter);
+        destroy_component(radio);
         destroy_each(each_blocks, detaching);
-        mounted = false;
-        run_all(dispose);
       }
     };
   }
-  function create_fragment7(ctx) {
+  function create_fragment8(ctx) {
     let layoutmain;
     let current;
     layoutmain = new main_default({
@@ -7925,8 +8134,8 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
       },
       p(ctx2, [dirty]) {
         const layoutmain_changes = {};
-        if (dirty & /*$scope, sortedData, sortBy, yearMonth, isLoading*/
-        131087) {
+        if (dirty & /*$scope, sortedData, selectedFilter, yearMonth, isLoading*/
+        65551) {
           layoutmain_changes.$scope = { dirty, ctx: ctx2 };
         }
         layoutmain.$set(layoutmain_changes);
@@ -7953,6 +8162,10 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
   var segments = (
     /** @type {Access} */
     {/* segments */}
+  );
+  var filterName = (
+    /** @type {string} */
+    "show-filter"
   );
   function compareRoomName(room1, room2) {
     if (!room1 || !room2)
@@ -7995,7 +8208,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
   function calculateDurationDay(dateStart, dateEnd) {
     return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / (1e3 * 60 * 60 * 24));
   }
-  function instance7($self, $props, $invalidate) {
+  function instance8($self, $props, $invalidate) {
     let pricePerDay = (
       /** @type {PricePerDayReport[]} */
       [ /* pricePerDay */ ]
@@ -8017,7 +8230,7 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
       "room"
     );
     async function RefreshData() {
-      $invalidate(2, isLoading = true);
+      $invalidate(3, isLoading = true);
       await (0, import_jsApi2.StaffPricePerDayReport)(
         { yearMonth },
         /** @type {import('./jsApi.GEN').StaffPricePerDayReportCallback} */
@@ -8026,50 +8239,81 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
           if (o.error) {
             console.log(o);
             notifier.showError(o.error || "something went wrong");
-            $invalidate(2, isLoading = false);
+            $invalidate(3, isLoading = false);
             return;
           }
           $invalidate(6, pricePerDay = o.pricePerDay || []);
           sortData();
-          $invalidate(2, isLoading = false);
+          $invalidate(3, isLoading = false);
           return;
         }
       );
     }
+    let selectedFilter = (
+      /** @type {FilterValues} */
+      "sortByRoom"
+    );
+    const filterOptions = (
+      /** @type {RadioOption[]} */
+      [
+        {
+          id: "sortByRoom",
+          name: filterName,
+          value: "sortByRoom",
+          label: "Sort By Room"
+        },
+        {
+          id: "sortByPricePerDayPercent",
+          name: filterName,
+          value: "sortByPricePerDayPercent",
+          label: "Sort By Price Per Day Percent"
+        },
+        {
+          id: "sortByPricePerRoomPercent",
+          name: filterName,
+          value: "sortByPricePerRoomPercent",
+          label: "Sort By Price Per Room Percent"
+        }
+      ]
+    );
     function sortData() {
-      $invalidate(0, sortedData = [...pricePerDay]);
+      $invalidate(1, sortedData = [...pricePerDay]);
       switch (sortBy) {
-        case "room":
+        case "sortByRoom":
           sortedData.sort((a, b) => compareRoomName(a.roomName, b.roomName));
           break;
-        case "pricePerDayPercent":
+        case "sortByPricePerDayPercent":
           sortedData.sort((a, b) => (b.pricePerDayPercentage || 0) - (a.pricePerDayPercentage || 0));
           break;
-        case "pricePerRoomPercent":
+        case "sortByPricePerRoomPercent":
           sortedData.sort((a, b) => (b.pricePerRoomPercentage || 0) - (a.pricePerRoomPercentage || 0));
-          break;
-        case "pricePerDayValue":
-          sortedData.sort((a, b) => (b.pricePerDayValue || 0) - (a.pricePerDayValue || 0));
           break;
       }
     }
     function handleSortChange(newSort) {
-      $invalidate(3, sortBy = newSort);
+      sortBy = newSort;
       sortData();
     }
     function monthshifter_yearMonth_binding(value) {
       yearMonth = value;
-      $invalidate(1, yearMonth);
+      $invalidate(2, yearMonth);
     }
     function monthshifter_isLoading_binding(value) {
       isLoading = value;
-      $invalidate(2, isLoading);
+      $invalidate(3, isLoading);
     }
-    const click_handler = () => handleSortChange("room");
-    const click_handler_1 = () => handleSortChange("pricePerDayValue");
-    const click_handler_2 = () => handleSortChange("pricePerDayPercent");
-    const click_handler_3 = () => handleSortChange("pricePerRoomPercent");
+    function radio_selected_binding(value) {
+      selectedFilter = value;
+      $invalidate(0, selectedFilter);
+    }
     $self.$.update = () => {
+      if ($self.$.dirty & /*selectedFilter*/
+      1) {
+        $:
+          if (selectedFilter) {
+            handleSortChange(selectedFilter);
+          }
+      }
       if ($self.$.dirty & /*pricePerDay*/
       64) {
         $:
@@ -8079,25 +8323,22 @@ table.svelte-yr12gi tbody tr td.svelte-yr12gi {
       }
     };
     return [
+      selectedFilter,
       sortedData,
       yearMonth,
       isLoading,
-      sortBy,
       RefreshData,
-      handleSortChange,
+      filterOptions,
       pricePerDay,
       monthshifter_yearMonth_binding,
       monthshifter_isLoading_binding,
-      click_handler,
-      click_handler_1,
-      click_handler_2,
-      click_handler_3
+      radio_selected_binding
     ];
   }
   var StaffPricePerDayReport_1 = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance7, create_fragment7, safe_not_equal, {});
+      init(this, options, instance8, create_fragment8, safe_not_equal, {});
     }
   };
   var staffPricePerDayReport_default = StaffPricePerDayReport_1;

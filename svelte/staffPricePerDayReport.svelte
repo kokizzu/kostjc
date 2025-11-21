@@ -23,6 +23,7 @@
   import { onMount } from 'svelte';
   import { StaffPricePerDayReport } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
+  import Radio from './_components/Radio.svelte';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -53,21 +54,45 @@
     })
   }
 
+
+  /** @typedef {'sortByRoom' | 'sortByPricePerDayPercent' | 'sortByPricePerRoomPercent'} FilterValues */
+  /** @typedef {import('./_types/masters.js').RadioOption<FilterValues>} RadioOption<FilterValues> */
+
+  let selectedFilter = /** @type {FilterValues} */ ('sortByRoom');
+  const filterName = /** @type {string} */ ('show-filter');
+  const filterOptions = /** @type {RadioOption[]} */ ([
+    {
+      id: 'sortByRoom',
+      name: filterName,
+      value: 'sortByRoom',
+      label: 'Sort By Room'
+    },
+    {
+      id: 'sortByPricePerDayPercent',
+      name: filterName,
+      value: 'sortByPricePerDayPercent',
+      label: 'Sort By Price Per Day Percent'
+    },
+    {
+      id: 'sortByPricePerRoomPercent',
+      name: filterName,
+      value: 'sortByPricePerRoomPercent',
+      label: 'Sort By Price Per Room Percent'
+    },
+  ]);
+
   function sortData() {
     sortedData = [...pricePerDay];
 
     switch(sortBy) {
-      case 'room':
+      case 'sortByRoom':
         sortedData.sort((a, b) => compareRoomName(a.roomName, b.roomName));
         break;
-      case 'pricePerDayPercent':
+      case 'sortByPricePerDayPercent':
         sortedData.sort((a, b) => (b.pricePerDayPercentage || 0) - (a.pricePerDayPercentage || 0));
         break;
-      case 'pricePerRoomPercent':
+      case 'sortByPricePerRoomPercent':
         sortedData.sort((a, b) => (b.pricePerRoomPercentage || 0) - (a.pricePerRoomPercentage || 0));
-        break;
-      case 'pricePerDayValue':
-        sortedData.sort((a, b) => (b.pricePerDayValue || 0) - (a.pricePerDayValue || 0));
         break;
     }
   }
@@ -118,6 +143,10 @@
     sortData();
   }
 
+  $: if (selectedFilter) {
+    handleSortChange(selectedFilter);
+  }
+
   function formatNumber(num) {
     return Number(num).toFixed(1);
   }
@@ -140,8 +169,12 @@
         bind:isLoading
         OnChanges={RefreshData}
       />
-      
-      <div class="sort-controls">
+      <Radio
+        className="filters"
+        options={filterOptions}
+        bind:selected={selectedFilter}
+      />
+      <!-- <div class="sort-controls">
         <label>Sort by:</label>
         <div class="sort-buttons">
           <button 
@@ -173,7 +206,7 @@
             Price/Room %
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="table-container">
@@ -238,6 +271,14 @@
 </LayoutMain>
 
 <style>
+
+  :global(.filters) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
   .report-container {
     display: flex;
     flex-direction: column;
@@ -314,7 +355,6 @@
     text-align: left;
     padding: 12px;
     white-space: normal;
-    word-wrap: nowrap;
     max-width: 120px;
     font-size: 13px;
     font-weight: 600;
