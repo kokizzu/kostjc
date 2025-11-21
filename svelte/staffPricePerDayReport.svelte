@@ -155,7 +155,6 @@
     return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / (1000 * 60 * 60 * 24));
   }
 
-  // Initial data sort on mount
   $: if (pricePerDay.length > 0) {
     sortData();
   }
@@ -174,109 +173,73 @@
         options={filterOptions}
         bind:selected={selectedFilter}
       />
-      <!-- <div class="sort-controls">
-        <label>Sort by:</label>
-        <div class="sort-buttons">
-          <button 
-            class="sort-btn" 
-            class:active={sortBy === 'room'}
-            on:click={() => handleSortChange('room')}
-          >
-            Room Name
-          </button>
-          <button 
-            class="sort-btn" 
-            class:active={sortBy === 'pricePerDayValue'}
-            on:click={() => handleSortChange('pricePerDayValue')}
-          >
-            Price/Day
-          </button>
-          <button 
-            class="sort-btn" 
-            class:active={sortBy === 'pricePerDayPercent'}
-            on:click={() => handleSortChange('pricePerDayPercent')}
-          >
-            Price/Day %
-          </button>
-          <button 
-            class="sort-btn" 
-            class:active={sortBy === 'pricePerRoomPercent'}
-            on:click={() => handleSortChange('pricePerRoomPercent')}
-          >
-            Price/Room %
-          </button>
-        </div>
-      </div> -->
     </div>
 
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Room</th>
-            <th>Room Size</th>
-            <th>Tenant</th>
-            <th>Date Start</th>
-            <th>Date End</th>
-            <th>Duration</th>
-            <th>Price Per Day</th>
-            <th>Price Per Day Chart</th>
-            <th>Price Per Day / Room</th>
-            <th>Price Per Room Chart</th>
-            <th>Total Paid</th>
-            <th>Total Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each sortedData as data}
-            <tr>
-              <td>{data.roomName}</td>
-              <td>{data.roomSize || '--'}</td>
-              <td>{data.tenantName || '--'}</td>
-              <td>{data.dateStart || '--'}</td>
-              <td>{data.dateEnd || '--'}</td>
-              <td>{calculateDurationDay(data.dateStart, data.dateEnd) || '0'} Days</td>
-              <td>{formatNumber(data.pricePerDayValue || 0)}</td>
-              <td>
-                <div class="bar-container">
-                  <div 
-                    class="bar bar-price-per-day" 
-                    style="width: {data.pricePerDayPercentage || 0}%"
-                    title="{formatNumber(data.pricePerDayValue)} ({formatNumber(data.pricePerDayPercentage)}%)"
-                  >
-                    <span class="bar-label">{formatNumber(data.pricePerDayPercentage)}%</span>
-                  </div>
+    <div class="table-wrapper">
+      <div class="table-header">
+        <div class="cell">Room</div>
+        <div class="cell">Room Size</div>
+        <div class="cell">Tenant</div>
+        <div class="cell">Date Start</div>
+        <div class="cell">Date End</div>
+        <div class="cell">Duration</div>
+        <div class="cell">Price Per Day</div>
+        <div class="cell">Price Per Day Chart</div>
+        <div class="cell">Price Per Day / Room</div>
+        <div class="cell">Price Per Room Chart</div>
+        <div class="cell">Total Paid</div>
+        <div class="cell">Total Price</div>
+      </div>
+
+      <div class="table-body">
+        {#each sortedData as data}
+          <div class="table-row">
+            <div class="cell">{data.roomName}</div>
+            <div class="cell">{data.roomSize || '--'}</div>
+            <div class="cell">{data.tenantName || '--'}</div>
+            <div class="cell">{data.dateStart || '--'}</div>
+            <div class="cell">{data.dateEnd || '--'}</div>
+            <div class="cell">{calculateDurationDay(data.dateStart, data.dateEnd) || '0'} Days</div>
+            <div class="cell">{formatNumber(data.pricePerDayValue || 0)}</div>
+            <div class="cell">
+              <div class="bar-container">
+                <div 
+                  class="bar bar-price-per-day" 
+                  style="width: {data.pricePerDayPercentage || 0}%"
+                  title="{formatNumber(data.pricePerDayValue)} ({formatNumber(data.pricePerDayPercentage)}%)"
+                >
+                  <span class="bar-label">{formatNumber(data.pricePerDayPercentage)}%</span>
                 </div>
-              </td>
-              <td>{formatNumber(data.pricePerRoomValue || 0)}</td>
-              <td>
-                <div class="bar-container">
-                  <div 
-                    class="bar bar-price-per-room" 
-                    style="width: {data.pricePerRoomPercentage || 0}%"
-                    title="{formatNumber(data.pricePerRoomValue)} ({formatNumber(data.pricePerRoomPercentage)}%)"
-                  >
-                    <span class="bar-label">{formatNumber(data.pricePerRoomPercentage)}%</span>
-                  </div>
+              </div>
+            </div>
+            <div class="cell">{formatNumber(data.pricePerRoomValue || 0)}</div>
+            <div class="cell">
+              <div class="bar-container">
+                <div 
+                  class="bar bar-price-per-room" 
+                  style="width: {data.pricePerRoomPercentage || 0}%"
+                  title="{formatNumber(data.pricePerRoomValue)} ({formatNumber(data.pricePerRoomPercentage)}%)"
+                >
+                  <span class="bar-label">{formatNumber(data.pricePerRoomPercentage)}%</span>
                 </div>
-              </td>
-              <td>{data.totalPaid || '0'}</td>
-              <td>{data.totalPrice || '0'}</td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
+              </div>
+            </div>
+            <div class="cell">{data.totalPaid || '0'}</div>
+            <div class="cell">{data.totalPrice || '0'}</div>
+          </div>
+        {/each}
+      </div>
     </div>
   </div>
 </LayoutMain>
 
 <style>
-
   :global(.filters) {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
+    text-wrap: nowrap;
   }
 
   .report-container {
@@ -292,84 +255,45 @@
     gap: 20px;
   }
 
-  .sort-controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .sort-controls label {
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--gray-007, #333);
-  }
-
-  .sort-buttons {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .sort-btn {
-    padding: 8px 16px;
-    border: 1px solid var(--gray-004, #ddd);
-    background: white;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .sort-btn:hover {
-    background: var(--gray-002, #f5f5f5);
-    border-color: var(--gray-005, #ccc);
-  }
-
-  .sort-btn.active {
-    background: var(--primary-color, #4CAF50);
-    color: white;
-    border-color: var(--primary-color, #4CAF50);
-  }
-
-  .table-container {
+  .table-wrapper {
+    width: 100%;
     overflow-x: auto;
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 1200px;
-  }
-
-  table thead {
+  .table-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    background-color: var(--gray-002, #f8f9fa);
     position: sticky;
     top: 0;
-    background-color: var(--gray-002, #f8f9fa);
     z-index: 10;
-    border: none;
+    border-bottom: 2px solid var(--gray-004, #e0e0e0);
   }
 
-  table thead tr th {
-    text-align: left;
+  .table-header .cell {
     padding: 12px;
-    white-space: normal;
-    max-width: 120px;
     font-size: 13px;
     font-weight: 600;
     line-height: 1.4;
+    text-align: left;
   }
 
-  table tbody tr {
+  .table-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
     border-bottom: 1px solid var(--gray-004, #e0e0e0);
   }
 
-  table tbody tr:hover {
+  .table-row:hover {
     background-color: var(--gray-001, #fafafa);
   }
 
-  table tbody tr td {
+  .table-row .cell {
     padding: 12px;
     font-size: 14px;
   }
@@ -419,7 +343,7 @@
     background: linear-gradient(90deg, #2196F3, #1976D2);
   }
 
-  @media only screen and (max-width : 768px) {
+  @media only screen and (max-width: 1200px) {
     .report-container {
       padding: 12px;
     }
@@ -428,41 +352,53 @@
       gap: 16px;
     }
 
-    .sort-controls {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
+    .table-wrapper {
+      overflow-x: visible;
     }
 
-    .sort-buttons {
-      width: 100%;
+    .table-header {
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: auto auto;
     }
 
-    .sort-btn {
-      flex: 1;
-      min-width: 0;
-      padding: 10px 12px;
-      font-size: 13px;
+    .table-row {
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: auto auto;
+      gap: 8px 0;
+      padding: 8px 0;
+    }
+
+    .table-header .cell,
+    .table-row .cell {
+      padding: 8px 6px;
+      font-size: 11px;
     }
 
     .bar-container {
-      width: 80px;
+      width: 60px;
       height: 20px;
     }
 
-    table {
-      min-width: 1000px;
+    .bar-label {
+      font-size: 9px;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .table-header {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto auto;
     }
 
-    table thead tr th {
-      padding: 10px 8px;
-      font-size: 12px;
-      max-width: 100px;
+    .table-row {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto auto;
     }
 
-    table tbody tr td {
-      padding: 10px 8px;
-      font-size: 13px;
+    .table-header .cell,
+    .table-row .cell {
+      padding: 6px 4px;
+      font-size: 10px;
     }
   }
 </style>

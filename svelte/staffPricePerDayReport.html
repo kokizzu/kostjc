@@ -762,53 +762,56 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
+  text-wrap: nowrap;
 }
-.report-container.svelte-eff1sb.svelte-eff1sb {
+.report-container.svelte-id19m0.svelte-id19m0 {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
 }
-.header-section.svelte-eff1sb.svelte-eff1sb {
+.header-section.svelte-id19m0.svelte-id19m0 {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.table-container.svelte-eff1sb.svelte-eff1sb {
+.table-wrapper.svelte-id19m0.svelte-id19m0 {
+  width: 100%;
   overflow-x: auto;
 }
-table.svelte-eff1sb.svelte-eff1sb {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 1200px;
-}
-table.svelte-eff1sb thead.svelte-eff1sb {
+.table-header.svelte-id19m0.svelte-id19m0 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  background-color: var(--gray-002, #f8f9fa);
   position: sticky;
   top: 0;
-  background-color: var(--gray-002, #f8f9fa);
   z-index: 10;
-  border: none;
+  border-bottom: 2px solid var(--gray-004, #e0e0e0);
 }
-table.svelte-eff1sb thead tr th.svelte-eff1sb {
-  text-align: left;
+.table-header.svelte-id19m0 .cell.svelte-id19m0 {
   padding: 12px;
-  white-space: normal;
-  max-width: 120px;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.4;
+  text-align: left;
 }
-table.svelte-eff1sb tbody tr.svelte-eff1sb {
+.table-body.svelte-id19m0.svelte-id19m0 {
+  display: flex;
+  flex-direction: column;
+}
+.table-row.svelte-id19m0.svelte-id19m0 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
   border-bottom: 1px solid var(--gray-004, #e0e0e0);
 }
-table.svelte-eff1sb tbody tr.svelte-eff1sb:hover {
+.table-row.svelte-id19m0.svelte-id19m0:hover {
   background-color: var(--gray-001, #fafafa);
 }
-table.svelte-eff1sb tbody tr td.svelte-eff1sb {
+.table-row.svelte-id19m0 .cell.svelte-id19m0 {
   padding: 12px;
   font-size: 14px;
 }
-.bar-container.svelte-eff1sb.svelte-eff1sb {
+.bar-container.svelte-id19m0.svelte-id19m0 {
   width: 100px;
   height: 24px;
   background-color: var(--gray-003, #f0f0f0);
@@ -816,7 +819,7 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
   overflow: hidden;
   position: relative;
 }
-.bar.svelte-eff1sb.svelte-eff1sb {
+.bar.svelte-id19m0.svelte-id19m0 {
   height: 100%;
   border-radius: 4px;
   transition: width 0.3s ease, opacity 0.2s ease;
@@ -826,10 +829,10 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
   justify-content: center;
   cursor: pointer;
 }
-.bar.svelte-eff1sb.svelte-eff1sb:hover {
+.bar.svelte-id19m0.svelte-id19m0:hover {
   opacity: 0.85;
 }
-.bar-label.svelte-eff1sb.svelte-eff1sb {
+.bar-label.svelte-id19m0.svelte-id19m0 {
   font-size: 11px;
   font-weight: 600;
   color: white;
@@ -837,37 +840,61 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
   white-space: nowrap;
   display: none;
 }
-.bar.svelte-eff1sb:hover .bar-label.svelte-eff1sb {
+.bar.svelte-id19m0:hover .bar-label.svelte-id19m0 {
   display: block;
 }
-.bar-price-per-day.svelte-eff1sb.svelte-eff1sb {
+.bar-price-per-day.svelte-id19m0.svelte-id19m0 {
   background: linear-gradient(90deg, #4CAF50, #45a049);
 }
-.bar-price-per-room.svelte-eff1sb.svelte-eff1sb {
+.bar-price-per-room.svelte-id19m0.svelte-id19m0 {
   background: linear-gradient(90deg, #2196F3, #1976D2);
 }
-@media only screen and (max-width : 768px) {
-  .report-container.svelte-eff1sb.svelte-eff1sb {
+@media only screen and (max-width: 1200px) {
+  .report-container.svelte-id19m0.svelte-id19m0 {
     padding: 12px;
   }
-  .header-section.svelte-eff1sb.svelte-eff1sb {
+  .header-section.svelte-id19m0.svelte-id19m0 {
     gap: 16px;
   }
-  .bar-container.svelte-eff1sb.svelte-eff1sb {
-    width: 80px;
+  .table-wrapper.svelte-id19m0.svelte-id19m0 {
+    overflow-x: visible;
+  }
+  .table-header.svelte-id19m0.svelte-id19m0 {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto auto;
+  }
+  .table-row.svelte-id19m0.svelte-id19m0 {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto auto;
+    gap: 8px 0;
+    padding: 8px 0;
+  }
+  .table-header.svelte-id19m0 .cell.svelte-id19m0,
+  .table-row.svelte-id19m0 .cell.svelte-id19m0 {
+    padding: 8px 6px;
+    font-size: 11px;
+  }
+  .bar-container.svelte-id19m0.svelte-id19m0 {
+    width: 60px;
     height: 20px;
   }
-  table.svelte-eff1sb.svelte-eff1sb {
-    min-width: 1000px;
+  .bar-label.svelte-id19m0.svelte-id19m0 {
+    font-size: 9px;
   }
-  table.svelte-eff1sb thead tr th.svelte-eff1sb {
-    padding: 10px 8px;
-    font-size: 12px;
-    max-width: 100px;
+}
+@media only screen and (max-width: 480px) {
+  .table-header.svelte-id19m0.svelte-id19m0 {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto auto;
   }
-  table.svelte-eff1sb tbody tr td.svelte-eff1sb {
-    padding: 10px 8px;
-    font-size: 13px;
+  .table-row.svelte-id19m0.svelte-id19m0 {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto auto;
+  }
+  .table-header.svelte-id19m0 .cell.svelte-id19m0,
+  .table-row.svelte-id19m0 .cell.svelte-id19m0 {
+    padding: 6px 4px;
+    font-size: 10px;
   }
 }
 </style>
@@ -3639,9 +3666,6 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
   }
   function space() {
     return text(" ");
-  }
-  function comment(content) {
-    return document.createComment(content);
   }
   function listen(node, event, handler, options) {
     node.addEventListener(event, handler, options);
@@ -7545,43 +7569,43 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
     return child_ctx;
   }
   function create_each_block2(ctx) {
-    let tr;
-    let td0;
+    let div16;
+    let div0;
     let t0_value = (
       /*data*/
       ctx[13].roomName + ""
     );
     let t0;
     let t1;
-    let td1;
+    let div1;
     let t2_value = (
       /*data*/
       (ctx[13].roomSize || "--") + ""
     );
     let t2;
     let t3;
-    let td2;
+    let div2;
     let t4_value = (
       /*data*/
       (ctx[13].tenantName || "--") + ""
     );
     let t4;
     let t5;
-    let td3;
+    let div3;
     let t6_value = (
       /*data*/
       (ctx[13].dateStart || "--") + ""
     );
     let t6;
     let t7;
-    let td4;
+    let div4;
     let t8_value = (
       /*data*/
       (ctx[13].dateEnd || "--") + ""
     );
     let t8;
     let t9;
-    let td5;
+    let div5;
     let t10_value = (calculateDurationDay(
       /*data*/
       ctx[13].dateStart,
@@ -7591,16 +7615,16 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
     let t10;
     let t11;
     let t12;
-    let td6;
+    let div6;
     let t13_value = formatNumber(
       /*data*/
       ctx[13].pricePerDayValue || 0
     ) + "";
     let t13;
     let t14;
-    let td7;
-    let div1;
-    let div0;
+    let div9;
+    let div8;
+    let div7;
     let span0;
     let t15_value = formatNumber(
       /*data*/
@@ -7608,18 +7632,18 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
     ) + "";
     let t15;
     let t16;
-    let div0_title_value;
+    let div7_title_value;
     let t17;
-    let td8;
+    let div10;
     let t18_value = formatNumber(
       /*data*/
       ctx[13].pricePerRoomValue || 0
     ) + "";
     let t18;
     let t19;
-    let td9;
-    let div3;
-    let div2;
+    let div13;
+    let div12;
+    let div11;
     let span1;
     let t20_value = formatNumber(
       /*data*/
@@ -7627,16 +7651,16 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
     ) + "";
     let t20;
     let t21;
-    let div2_title_value;
+    let div11_title_value;
     let t22;
-    let td10;
+    let div14;
     let t23_value = (
       /*data*/
       (ctx[13].totalPaid || "0") + ""
     );
     let t23;
     let t24;
-    let td11;
+    let div15;
     let t25_value = (
       /*data*/
       (ctx[13].totalPrice || "0") + ""
@@ -7645,145 +7669,145 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
     let t26;
     return {
       c() {
-        tr = element("tr");
-        td0 = element("td");
+        div16 = element("div");
+        div0 = element("div");
         t0 = text(t0_value);
         t1 = space();
-        td1 = element("td");
+        div1 = element("div");
         t2 = text(t2_value);
         t3 = space();
-        td2 = element("td");
+        div2 = element("div");
         t4 = text(t4_value);
         t5 = space();
-        td3 = element("td");
+        div3 = element("div");
         t6 = text(t6_value);
         t7 = space();
-        td4 = element("td");
+        div4 = element("div");
         t8 = text(t8_value);
         t9 = space();
-        td5 = element("td");
+        div5 = element("div");
         t10 = text(t10_value);
         t11 = text(" Days");
         t12 = space();
-        td6 = element("td");
+        div6 = element("div");
         t13 = text(t13_value);
         t14 = space();
-        td7 = element("td");
-        div1 = element("div");
-        div0 = element("div");
+        div9 = element("div");
+        div8 = element("div");
+        div7 = element("div");
         span0 = element("span");
         t15 = text(t15_value);
         t16 = text("%");
         t17 = space();
-        td8 = element("td");
+        div10 = element("div");
         t18 = text(t18_value);
         t19 = space();
-        td9 = element("td");
-        div3 = element("div");
-        div2 = element("div");
+        div13 = element("div");
+        div12 = element("div");
+        div11 = element("div");
         span1 = element("span");
         t20 = text(t20_value);
         t21 = text("%");
         t22 = space();
-        td10 = element("td");
+        div14 = element("div");
         t23 = text(t23_value);
         t24 = space();
-        td11 = element("td");
+        div15 = element("div");
         t25 = text(t25_value);
         t26 = space();
-        attr(td0, "class", "svelte-eff1sb");
-        attr(td1, "class", "svelte-eff1sb");
-        attr(td2, "class", "svelte-eff1sb");
-        attr(td3, "class", "svelte-eff1sb");
-        attr(td4, "class", "svelte-eff1sb");
-        attr(td5, "class", "svelte-eff1sb");
-        attr(td6, "class", "svelte-eff1sb");
-        attr(span0, "class", "bar-label svelte-eff1sb");
-        attr(div0, "class", "bar bar-price-per-day svelte-eff1sb");
+        attr(div0, "class", "cell svelte-id19m0");
+        attr(div1, "class", "cell svelte-id19m0");
+        attr(div2, "class", "cell svelte-id19m0");
+        attr(div3, "class", "cell svelte-id19m0");
+        attr(div4, "class", "cell svelte-id19m0");
+        attr(div5, "class", "cell svelte-id19m0");
+        attr(div6, "class", "cell svelte-id19m0");
+        attr(span0, "class", "bar-label svelte-id19m0");
+        attr(div7, "class", "bar bar-price-per-day svelte-id19m0");
         set_style(
-          div0,
+          div7,
           "width",
           /*data*/
           (ctx[13].pricePerDayPercentage || 0) + "%"
         );
-        attr(div0, "title", div0_title_value = formatNumber(
+        attr(div7, "title", div7_title_value = formatNumber(
           /*data*/
           ctx[13].pricePerDayValue
         ) + " (" + formatNumber(
           /*data*/
           ctx[13].pricePerDayPercentage
         ) + "%)");
-        attr(div1, "class", "bar-container svelte-eff1sb");
-        attr(td7, "class", "svelte-eff1sb");
-        attr(td8, "class", "svelte-eff1sb");
-        attr(span1, "class", "bar-label svelte-eff1sb");
-        attr(div2, "class", "bar bar-price-per-room svelte-eff1sb");
+        attr(div8, "class", "bar-container svelte-id19m0");
+        attr(div9, "class", "cell svelte-id19m0");
+        attr(div10, "class", "cell svelte-id19m0");
+        attr(span1, "class", "bar-label svelte-id19m0");
+        attr(div11, "class", "bar bar-price-per-room svelte-id19m0");
         set_style(
-          div2,
+          div11,
           "width",
           /*data*/
           (ctx[13].pricePerRoomPercentage || 0) + "%"
         );
-        attr(div2, "title", div2_title_value = formatNumber(
+        attr(div11, "title", div11_title_value = formatNumber(
           /*data*/
           ctx[13].pricePerRoomValue
         ) + " (" + formatNumber(
           /*data*/
           ctx[13].pricePerRoomPercentage
         ) + "%)");
-        attr(div3, "class", "bar-container svelte-eff1sb");
-        attr(td9, "class", "svelte-eff1sb");
-        attr(td10, "class", "svelte-eff1sb");
-        attr(td11, "class", "svelte-eff1sb");
-        attr(tr, "class", "svelte-eff1sb");
+        attr(div12, "class", "bar-container svelte-id19m0");
+        attr(div13, "class", "cell svelte-id19m0");
+        attr(div14, "class", "cell svelte-id19m0");
+        attr(div15, "class", "cell svelte-id19m0");
+        attr(div16, "class", "table-row svelte-id19m0");
       },
       m(target, anchor) {
-        insert(target, tr, anchor);
-        append(tr, td0);
-        append(td0, t0);
-        append(tr, t1);
-        append(tr, td1);
-        append(td1, t2);
-        append(tr, t3);
-        append(tr, td2);
-        append(td2, t4);
-        append(tr, t5);
-        append(tr, td3);
-        append(td3, t6);
-        append(tr, t7);
-        append(tr, td4);
-        append(td4, t8);
-        append(tr, t9);
-        append(tr, td5);
-        append(td5, t10);
-        append(td5, t11);
-        append(tr, t12);
-        append(tr, td6);
-        append(td6, t13);
-        append(tr, t14);
-        append(tr, td7);
-        append(td7, div1);
-        append(div1, div0);
-        append(div0, span0);
+        insert(target, div16, anchor);
+        append(div16, div0);
+        append(div0, t0);
+        append(div16, t1);
+        append(div16, div1);
+        append(div1, t2);
+        append(div16, t3);
+        append(div16, div2);
+        append(div2, t4);
+        append(div16, t5);
+        append(div16, div3);
+        append(div3, t6);
+        append(div16, t7);
+        append(div16, div4);
+        append(div4, t8);
+        append(div16, t9);
+        append(div16, div5);
+        append(div5, t10);
+        append(div5, t11);
+        append(div16, t12);
+        append(div16, div6);
+        append(div6, t13);
+        append(div16, t14);
+        append(div16, div9);
+        append(div9, div8);
+        append(div8, div7);
+        append(div7, span0);
         append(span0, t15);
         append(span0, t16);
-        append(tr, t17);
-        append(tr, td8);
-        append(td8, t18);
-        append(tr, t19);
-        append(tr, td9);
-        append(td9, div3);
-        append(div3, div2);
-        append(div2, span1);
+        append(div16, t17);
+        append(div16, div10);
+        append(div10, t18);
+        append(div16, t19);
+        append(div16, div13);
+        append(div13, div12);
+        append(div12, div11);
+        append(div11, span1);
         append(span1, t20);
         append(span1, t21);
-        append(tr, t22);
-        append(tr, td10);
-        append(td10, t23);
-        append(tr, t24);
-        append(tr, td11);
-        append(td11, t25);
-        append(tr, t26);
+        append(div16, t22);
+        append(div16, div14);
+        append(div14, t23);
+        append(div16, t24);
+        append(div16, div15);
+        append(div15, t25);
+        append(div16, t26);
       },
       p(ctx2, dirty) {
         if (dirty & /*sortedData*/
@@ -7829,21 +7853,21 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
         if (dirty & /*sortedData*/
         2) {
           set_style(
-            div0,
+            div7,
             "width",
             /*data*/
             (ctx2[13].pricePerDayPercentage || 0) + "%"
           );
         }
         if (dirty & /*sortedData*/
-        2 && div0_title_value !== (div0_title_value = formatNumber(
+        2 && div7_title_value !== (div7_title_value = formatNumber(
           /*data*/
           ctx2[13].pricePerDayValue
         ) + " (" + formatNumber(
           /*data*/
           ctx2[13].pricePerDayPercentage
         ) + "%)")) {
-          attr(div0, "title", div0_title_value);
+          attr(div7, "title", div7_title_value);
         }
         if (dirty & /*sortedData*/
         2 && t18_value !== (t18_value = formatNumber(
@@ -7860,21 +7884,21 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
         if (dirty & /*sortedData*/
         2) {
           set_style(
-            div2,
+            div11,
             "width",
             /*data*/
             (ctx2[13].pricePerRoomPercentage || 0) + "%"
           );
         }
         if (dirty & /*sortedData*/
-        2 && div2_title_value !== (div2_title_value = formatNumber(
+        2 && div11_title_value !== (div11_title_value = formatNumber(
           /*data*/
           ctx2[13].pricePerRoomValue
         ) + " (" + formatNumber(
           /*data*/
           ctx2[13].pricePerRoomPercentage
         ) + "%)")) {
-          attr(div2, "title", div2_title_value);
+          attr(div11, "title", div11_title_value);
         }
         if (dirty & /*sortedData*/
         2 && t23_value !== (t23_value = /*data*/
@@ -7887,13 +7911,13 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
       },
       d(detaching) {
         if (detaching) {
-          detach(tr);
+          detach(div16);
         }
       }
     };
   }
   function create_default_slot(ctx) {
-    let div2;
+    let div16;
     let div0;
     let monthshifter;
     let updating_yearMonth;
@@ -7902,13 +7926,10 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
     let radio;
     let updating_selected;
     let t1;
-    let c;
-    let t2;
-    let div1;
-    let table;
-    let thead;
-    let t26;
-    let tbody;
+    let div15;
+    let div13;
+    let t25;
+    let div14;
     let current;
     function monthshifter_yearMonth_binding(value) {
       ctx[7](value);
@@ -7966,78 +7987,40 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
     }
     return {
       c() {
-        div2 = element("div");
+        div16 = element("div");
         div0 = element("div");
         create_component(monthshifter.$.fragment);
         t0 = space();
         create_component(radio.$.fragment);
         t1 = space();
-        c = comment(` <div class="sort-controls">
-        <label>Sort by:</label>
-        <div class="sort-buttons">
-          <button 
-            class="sort-btn" 
-            class:active={sortBy === 'room'}
-            on:click={() => handleSortChange('room')}
-          >
-            Room Name
-          </button>
-          <button 
-            class="sort-btn" 
-            class:active={sortBy === 'pricePerDayValue'}
-            on:click={() => handleSortChange('pricePerDayValue')}
-          >
-            Price/Day
-          </button>
-          <button 
-            class="sort-btn" 
-            class:active={sortBy === 'pricePerDayPercent'}
-            on:click={() => handleSortChange('pricePerDayPercent')}
-          >
-            Price/Day %
-          </button>
-          <button 
-            class="sort-btn" 
-            class:active={sortBy === 'pricePerRoomPercent'}
-            on:click={() => handleSortChange('pricePerRoomPercent')}
-          >
-            Price/Room %
-          </button>
-        </div>
-      </div> `);
-        t2 = space();
-        div1 = element("div");
-        table = element("table");
-        thead = element("thead");
-        thead.innerHTML = `<tr class="svelte-eff1sb"><th class="svelte-eff1sb">Room</th> <th class="svelte-eff1sb">Room Size</th> <th class="svelte-eff1sb">Tenant</th> <th class="svelte-eff1sb">Date Start</th> <th class="svelte-eff1sb">Date End</th> <th class="svelte-eff1sb">Duration</th> <th class="svelte-eff1sb">Price Per Day</th> <th class="svelte-eff1sb">Price Per Day Chart</th> <th class="svelte-eff1sb">Price Per Day / Room</th> <th class="svelte-eff1sb">Price Per Room Chart</th> <th class="svelte-eff1sb">Total Paid</th> <th class="svelte-eff1sb">Total Price</th></tr>`;
-        t26 = space();
-        tbody = element("tbody");
+        div15 = element("div");
+        div13 = element("div");
+        div13.innerHTML = `<div class="cell svelte-id19m0">Room</div> <div class="cell svelte-id19m0">Room Size</div> <div class="cell svelte-id19m0">Tenant</div> <div class="cell svelte-id19m0">Date Start</div> <div class="cell svelte-id19m0">Date End</div> <div class="cell svelte-id19m0">Duration</div> <div class="cell svelte-id19m0">Price Per Day</div> <div class="cell svelte-id19m0">Price Per Day Chart</div> <div class="cell svelte-id19m0">Price Per Day / Room</div> <div class="cell svelte-id19m0">Price Per Room Chart</div> <div class="cell svelte-id19m0">Total Paid</div> <div class="cell svelte-id19m0">Total Price</div>`;
+        t25 = space();
+        div14 = element("div");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
         }
-        attr(div0, "class", "header-section svelte-eff1sb");
-        attr(thead, "class", "svelte-eff1sb");
-        attr(table, "class", "svelte-eff1sb");
-        attr(div1, "class", "table-container svelte-eff1sb");
-        attr(div2, "class", "report-container svelte-eff1sb");
+        attr(div0, "class", "header-section svelte-id19m0");
+        attr(div13, "class", "table-header svelte-id19m0");
+        attr(div14, "class", "table-body svelte-id19m0");
+        attr(div15, "class", "table-wrapper svelte-id19m0");
+        attr(div16, "class", "report-container svelte-id19m0");
       },
       m(target, anchor) {
-        insert(target, div2, anchor);
-        append(div2, div0);
+        insert(target, div16, anchor);
+        append(div16, div0);
         mount_component(monthshifter, div0, null);
         append(div0, t0);
         mount_component(radio, div0, null);
-        append(div0, t1);
-        append(div0, c);
-        append(div2, t2);
-        append(div2, div1);
-        append(div1, table);
-        append(table, thead);
-        append(table, t26);
-        append(table, tbody);
+        append(div16, t1);
+        append(div16, div15);
+        append(div15, div13);
+        append(div15, t25);
+        append(div15, div14);
         for (let i = 0; i < each_blocks.length; i += 1) {
           if (each_blocks[i]) {
-            each_blocks[i].m(tbody, null);
+            each_blocks[i].m(div14, null);
           }
         }
         current = true;
@@ -8082,7 +8065,7 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
             } else {
               each_blocks[i] = create_each_block2(child_ctx);
               each_blocks[i].c();
-              each_blocks[i].m(tbody, null);
+              each_blocks[i].m(div14, null);
             }
           }
           for (; i < each_blocks.length; i += 1) {
@@ -8105,7 +8088,7 @@ table.svelte-eff1sb tbody tr td.svelte-eff1sb {
       },
       d(detaching) {
         if (detaching) {
-          detach(div2);
+          detach(div16);
         }
         destroy_component(monthshifter);
         destroy_component(radio);
