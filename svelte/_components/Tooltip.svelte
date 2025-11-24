@@ -21,15 +21,15 @@
     const windowWidth = window.innerWidth;
 
 
-    x = rect.left + 10;
-    y = rect.top + 10;
+    x = rect.left + 30;
+    y = rect.top + 30;
 
     if (y + tooltipRect.height > windowHeight) {
-      y = rect.top - tooltipRect.height - 40;
+      y = rect.top - tooltipRect.height - 30;
     }
 
     if (x + tooltipRect.width > windowWidth) {
-      x = rect.left - tooltipRect.width - 40;
+      x = rect.left - tooltipRect.width - 30;
     }
   }
 
