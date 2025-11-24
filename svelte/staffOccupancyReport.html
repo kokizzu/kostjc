@@ -23316,6 +23316,22 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
   function isBookingInThatMonth(booking, yearMonth) {
     return yearMonth >= booking.dateStart.slice(0, 7) && yearMonth <= booking.dateEnd.slice(0, 7);
   }
+  function calculateDateStartEnd(inputDate) {
+    const date = new Date(inputDate);
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDate();
+    if (day === 1) {
+      const endOfMonth = new Date(year, month + 1, 0);
+      return endOfMonth.toISOString().split("T")[0];
+    }
+    console.log("Day:", day);
+    const nextMonthDate = new Date(year, month + 1, day);
+    const dayStr = String(nextMonthDate.getDate()).padStart(2, "0");
+    const monthStr = String(nextMonthDate.getMonth() + 1).padStart(2, "0");
+    const yearStr = nextMonthDate.getFullYear();
+    return `${yearStr}-${monthStr}-${dayStr}`;
+  }
   function isDateToCharge(dateStart) {
     const inputDate = new Date(dateStart);
     const today = new Date();
@@ -23421,7 +23437,7 @@ table.svelte-1vrqgsn tbody tr td .cell.refunded.svelte-1vrqgsn.svelte-1vrqgsn {
     function onExtendBooking(booking) {
       $invalidate(14, bookingToExtend = booking);
       $invalidate(16, dateStart = (0, import_xFormatter7.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 1));
-      $invalidate(17, dateEnd = (0, import_xFormatter7.dateISOFormatFromYYYYMMDD)(booking.dateEnd, 30));
+      $invalidate(17, dateEnd = calculateDateStartEnd(booking.dateEnd));
       popupExtendBooking.Show();
     }
     let popUpShowPayments = (

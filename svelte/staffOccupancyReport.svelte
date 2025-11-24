@@ -184,10 +184,33 @@
     );
   }
 
+  function calculateDateStartEnd(/** @type {string} */ inputDate) {
+    const date = new Date(inputDate);
+
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDate();
+
+    if (day === 1) {
+      const endOfMonth = new Date(year, month + 1, 0);
+      return endOfMonth.toISOString().split("T")[0];
+    }
+
+    console.log('Day:', day)
+
+    const nextMonthDate = new Date(year, month + 1, day);
+    const dayStr = String(nextMonthDate.getDate()).padStart(2, '0');
+    const monthStr = String(nextMonthDate.getMonth() + 1).padStart(2, '0');
+    const yearStr = nextMonthDate.getFullYear();
+
+    return `${yearStr}-${monthStr}-${dayStr}`;
+  }
+
   function onExtendBooking(/** @type {BookingDetail} */ booking) {
     bookingToExtend = booking;
+
     dateStart = dateISOFormatFromYYYYMMDD(booking.dateEnd, 1);
-    dateEnd = dateISOFormatFromYYYYMMDD(booking.dateEnd, 30);
+    dateEnd = calculateDateStartEnd(booking.dateEnd);
     popupExtendBooking.Show();
   }
 
