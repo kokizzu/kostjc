@@ -2,7 +2,6 @@
   /** @typedef {import('./_types/masters.js').Access} Access */
   /** @typedef {import('./_types/users.js').User} User */
   /** @typedef {import('./_types/users.js').Tenant} Tenant */
-
   /**
    * @typedef {Object} PricePerDayReport
    * @property {string} roomName
@@ -17,10 +16,10 @@
    * @property {number} pricePerRoomValue
    * @property {number} pricePerRoomPercentage
    */
+  /** @typedef {'sortByRoom' | 'sortByPricePerDayPercent' | 'sortByPricePerRoomPercent'} SortBy */
 
   import LayoutMain from './_layouts/main.svelte';
   import MonthShifter from './_components/MonthShifter.svelte';
-  import { onMount } from 'svelte';
   import { StaffPricePerDayReport } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
   import Radio from './_components/Radio.svelte';
@@ -32,7 +31,7 @@
 
   let yearMonth = /** @type {string} */ (new Date().toISOString().slice(0, 7));
   let isLoading = /** @type {boolean} */ (false);
-  let sortBy = /** @type {string} */ ('room'); // 'room' | 'pricePerDayPercent' | 'pricePerRoomPercent' | 'pricePerDayValue'
+  let sortBy    = /** @type {SortBy} */ ('sortByRoom');
 
   async function RefreshData() {
     isLoading = true;
@@ -108,7 +107,7 @@
     return n1 - n2;
   }
 
-  function parseRoomName(roomName) {
+  function parseRoomName(/** @type {string} */ roomName) {
     if (!roomName || roomName.length < 2) {
       return { building: '', floor: 0, number: 0 };
     }
@@ -138,7 +137,7 @@
     return { building, floor, number };
   }
 
-  function handleSortChange(newSort) {
+  function handleSortChange(/** @type {SortBy} */ newSort) {
     sortBy = newSort;
     sortData();
   }
@@ -151,8 +150,10 @@
     return Number(num).toFixed(1);
   }
 
-  function calculateDurationDay(dateStart, dateEnd) {
-    return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / (1000 * 60 * 60 * 24));
+  const durationPerDay = (1000 * 60 * 60 * 24)
+
+  function calculateDurationDay(/** @type {string} */ dateStart, /** @type {string} */ dateEnd) {
+    return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / durationPerDay);
   }
 
   $: if (pricePerDay.length > 0) {

@@ -1,5 +1,7 @@
 <script>
   /** @typedef {import('../_types/property').Payment} Payment */
+  /** @typedef {'Transfer' | 'Cash' | 'QRIS' | 'Donation'} PaymentMethod */
+  /** @typedef {'Paid' | 'Unpaid' | 'Refunded'} PaymentStatus */
 
 	import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { FiLoader } from '../node_modules/svelte-icons-pack/dist/fi';
@@ -10,26 +12,26 @@
   let isShow = /** @type {boolean} */ (false);
 
   export let isSubmitted  = /** @type {boolean} */ (false);
-  export let bookings = /** @type {Record<number, string>} */ ({});
-  export let bookingId = 0;
+  export let bookings     = /** @type {Record<number, string>} */ ({});
+  export let bookingId    = 0;
   export let isBookingReadOnly = false;
   export let paymentAt = dateISOFormat(0);
 
-  const PaymentMethods = [
+  const PaymentMethods = /** @type {PaymentMethod[]} */ ([
     'Transfer',
     'Cash',
     'QRIS',
     'Donation'
-  ];
-  const PaymentStatuses = [
+  ]);
+  const PaymentStatuses = /** @type {PaymentStatus[]} */ ([
     'Paid',
     'Unpaid',
     'Refunded'
-  ];
+  ]);
 
   let paidIDR = 0;
-  let paymentMethod = PaymentMethods[0];
-  let paymentStatus = PaymentStatuses[0];
+  let paymentMethod = /** @type {PaymentMethod} */ ('Transfer');
+  let paymentStatus = /** @type {PaymentStatus} */ ('Paid');
   let note = '';
 
   export let OnSubmit = async function(/** @type {Payment} */ payment) {
@@ -53,8 +55,8 @@
     bookingId = 0;
     paymentAt = dateISOFormat(0);
     paidIDR = 0;
-    paymentMethod = PaymentMethods[0];
-    paymentStatus = PaymentStatuses[0];
+    paymentMethod = 'Transfer';
+    paymentStatus = 'Paid';
     note = '';
   }
 
