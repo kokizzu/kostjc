@@ -8283,7 +8283,7 @@ footer.svelte-14solik nav a.svelte-14solik:hover {
       return Math.ceil(
         /** @type {string} */
         (Date.parse(dateEnd) - Date.parse(dateStart)) / durationPerDay
-      );
+      ) + 1;
     }
     function monthshifter_yearMonth_binding(value) {
       yearMonth = value;

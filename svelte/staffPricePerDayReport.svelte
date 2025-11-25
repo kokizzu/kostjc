@@ -153,7 +153,7 @@
   const durationPerDay = (1000 * 60 * 60 * 24)
 
   function calculateDurationDay(/** @type {string} */ dateStart, /** @type {string} */ dateEnd) {
-    return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / durationPerDay);
+      return Math.ceil((Date.parse(dateEnd) - Date.parse(dateStart)) / durationPerDay) + 1;
   }
 
   $: if (pricePerDay.length > 0) {
