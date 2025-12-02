@@ -206,11 +206,27 @@
     return `${yearStr}-${monthStr}-${dayStr}`;
   }
 
-  function onExtendBooking(/** @type {BookingDetail} */ booking) {
-    bookingToExtend = booking;
+  function onExtendBooking(/** @type {number} */ roomId) {
+    let bookingsOnRoomX = /** @type {BookingDetail[]} */ ([]);
+    for (const b of bookingsPerQuartal) {
+      if (b.roomId == roomId) {
+        bookingsOnRoomX.push(b)
+      }
+    }
 
-    dateStart = dateISOFormatFromYYYYMMDD(booking.dateEnd, 1);
-    dateEnd = calculateDateStartEnd(booking.dateEnd);
+    if (bookingsOnRoomX.length == 0) {
+      notifier.showError('Cannot get booking to extend');
+      return;
+    }
+
+    const lastBookingWithByDateEnd = bookingsOnRoomX.reduce((latest, item) => {
+      return new Date(item.dateEnd) > new Date(latest.dateEnd) ? item : latest;
+    })
+
+    bookingToExtend = lastBookingWithByDateEnd;
+
+    dateStart = dateISOFormatFromYYYYMMDD(lastBookingWithByDateEnd.dateEnd, 1);
+    dateEnd = calculateDateStartEnd(lastBookingWithByDateEnd.dateEnd);
     popupExtendBooking.Show();
   }
 
@@ -522,7 +538,7 @@
                             <span>({daysPaid(booking)}d)</span>
                           </span>
                           <div class="actions">
-                            <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking)}>
+                            <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking.roomId)}>
                               <Icon
                                 src={RiSystemExternalLinkLine}
                                 size="17"
