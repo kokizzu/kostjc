@@ -154,12 +154,10 @@
         <Icon src={RiBusinessCalendarScheduleLine} size="20" />
         <span>Bookings</span>
       </a>
-      {#if access.admin}
-        <a id="link-staff-tenants" href="/staff/tenants" class:active={(pathLv1 === 'staff') && (pathLv2 === 'tenants')}>
-          <Icon src={RiUserFacesUserFollowLine} size="20" />
-          <span>Tenants</span>
-        </a>
-      {/if}
+      <a id="link-staff-tenants" href="/staff/tenants" class:active={(pathLv1 === 'staff') && (pathLv2 === 'tenants')}>
+        <Icon src={RiUserFacesUserFollowLine} size="20" />
+        <span>Tenants</span>
+      </a>
     </nav>
     {#if access.admin}
       <h3 class="nav-menu-title">Admin</h3>
@@ -261,12 +259,10 @@
         <Icon src={RiBusinessCalendarScheduleLine} size="20" />
         <span>Bookings</span>
       </a>
-      {#if access.admin}
-        <a id="link-staff-tenants-mobile" href="/staff/tenants" class:active={(pathLv1 === 'staff') && (pathLv2 === 'tenants')}>
-          <Icon src={RiUserFacesUserFollowLine} size="20" />
-          <span>Tenants</span>
-        </a>
-      {/if}
+      <a id="link-staff-tenants-mobile" href="/staff/tenants" class:active={(pathLv1 === 'staff') && (pathLv2 === 'tenants')}>
+        <Icon src={RiUserFacesUserFollowLine} size="20" />
+        <span>Tenants</span>
+      </a>
     </nav>
     {#if access.admin}
       <h3 class="nav-menu-title">Admin</h3>

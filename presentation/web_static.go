@@ -246,6 +246,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		tenant := rqAuth.NewTenants(d.AuthOltp)
 		tenants := tenant.FindTenantChoices()
 
+		room := rqProperty.NewRooms(d.PropOltp)
+		rooms := room.FindRoomChoices()
+
 		fac := rqProperty.NewFacilities(d.PropOltp)
 		facilities := fac.FindAll()
 
@@ -260,6 +263,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`booking`:    out.Booking,
 			`bookings`:   out.Bookings,
 			`tenants`:    tenants,
+			`rooms`:      rooms,
 			`facilities`: facilities,
 			`fields`:     out.Meta.Fields,
 			`pager`:      out.Pager,

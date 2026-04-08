@@ -8,7 +8,7 @@
   /** @typedef {import('./_types/property.js').Facility} Facility */
   
   import LayoutMain from './_layouts/main.svelte';
-  import MasterTable from './_components/MasterTable.svelte';
+  import MasterTable from './_components/MasterTableBooking.svelte';
   import { onMount } from 'svelte';
   import { StaffBooking } from './jsApi.GEN';
   import { notifier } from './_components/xNotifier';
@@ -22,6 +22,7 @@
   let booking     = /** @type {Booking} */ ({/* booking */});
   let bookings    = /** @type {any[][]} */([/* bookings */]);
   let tenants     = /** @type {Record<Number, string>} */({/* tenants */});
+  let rooms       = /** @type {Record<Number, string>} */({/* rooms */});
   let facilities  = /** @type {Facility[]} */ ([/* facilities */]);
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
@@ -180,6 +181,7 @@
     OnSubmit={OnAddBooking}
     facilities={facilities}
     tenants={tenants}
+    rooms={rooms}
   />
 {/if}
 
@@ -188,17 +190,24 @@
     <h2>Booking Management</h2>
     <MasterTable
       ACCESS={segments}
+      NAME="Booking"
       REFS={{
-        'tenantId': tenants
+        'tenantId': tenants,
+        'extraTenants': tenants,
+        'roomId': rooms
       }}
       bind:FIELDS={fields}
       bind:PAGER={pager}
       bind:MASTER_ROWS={bookings}
+      COL_WIDTHS={{
+        'tenantId': 200,
+        'extraTenants': 300
+      }}
 
-      CAN_EDIT_ROW={false}
+      {tenants}
+      {facilities}
+
       CAN_SEARCH_ROW
-      CAN_DELETE_ROW
-      CAN_RESTORE_ROW
 
       {OnDelete}
       {OnRestore}

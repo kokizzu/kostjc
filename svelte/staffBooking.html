@@ -2791,7 +2791,7 @@
           cb(data);
         };
       }
-      exports.AdminBooking = async function AdminBooking(i, cb) {
+      exports.AdminBooking = async function AdminBooking2(i, cb) {
         return await axios.post("/admin/booking", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminBookingLogs = async function AdminBookingLogs(i, cb) {
@@ -2815,7 +2815,7 @@
       exports.AdminLocationLogs = async function AdminLocationLogs(i, cb) {
         return await axios.post("/admin/locationLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminPayment = async function AdminPayment(i, cb) {
+      exports.AdminPayment = async function AdminPayment2(i, cb) {
         return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminPaymentLogs = async function AdminPaymentLogs(i, cb) {
@@ -2990,7 +2990,7 @@
         const formattedDate = `${year}-${month}-${date}`;
         return formattedDate;
       }
-      function dateISOFormat3(dayTo = 0) {
+      function dateISOFormat5(dayTo = 0) {
         const dt = /* @__PURE__ */ new Date();
         dt.setDate(dt.getDate() + dayTo);
         const date = String(dt.getDate()).padStart(2, "0");
@@ -3057,7 +3057,7 @@
         utcDatetime,
         isoTime,
         isoDate,
-        dateISOFormat: dateISOFormat3,
+        dateISOFormat: dateISOFormat5,
         dateISOFormatFromYYYYMMDD,
         loadScript,
         formatPrice: formatPrice2,
@@ -5427,12 +5427,6 @@ ${component_stack}
       }
       next2(promise);
     });
-  }
-  // @__NO_SIDE_EFFECTS__
-  function user_derived(fn) {
-    const d = /* @__PURE__ */ derived(fn);
-    if (!async_mode_flag) push_reaction_value(d);
-    return d;
   }
   // @__NO_SIDE_EFFECTS__
   function derived_safe_equal(fn) {
@@ -9023,14 +9017,6 @@ ${component_stack}
     }
     element2.value = value ?? "";
   }
-  function set_checked(element2, checked) {
-    var attributes = get_attributes(element2);
-    if (attributes.checked === (attributes.checked = // treat null and undefined the same for the initial value
-    checked ?? void 0)) {
-      return;
-    }
-    element2.checked = checked;
-  }
   function set_selected(element2, selected) {
     if (selected) {
       if (!element2.hasAttribute("selected")) {
@@ -10263,6 +10249,7 @@ ${component_stack}
   var RiSystemInformationLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z"></path>' };
   var RiSystemLogoutBoxRLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path>' };
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
+  var RiFinanceBankCardLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979ZM20.0049 10.9998H4.00488V18.9998H20.0049V10.9998ZM20.0049 8.99979V4.99979H4.00488V8.99979H20.0049ZM14.0049 14.9998H18.0049V16.9998H14.0049V14.9998Z"></path>' };
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
   var RiArrowsArrowGoBackLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5.82843 6.99955L8.36396 9.53509L6.94975 10.9493L2 5.99955L6.94975 1.0498L8.36396 2.46402L5.82843 4.99955H13C17.4183 4.99955 21 8.58127 21 12.9996C21 17.4178 17.4183 20.9996 13 20.9996H4V18.9996H13C16.3137 18.9996 19 16.3133 19 12.9996C19 9.68584 16.3137 6.99955 13 6.99955H5.82843Z"></path>' };
   var RiArrowsArrowDownSFill = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 16L6 10H18L12 16Z"></path>' };
@@ -10276,11 +10263,9 @@ ${component_stack}
   var isOpenSideMenu = writable(false);
 
   // _partials/SideMenu.svelte
-  var root_1 = from_html(`<a id="link-staff-tenants" href="/staff/tenants"><!> <span>Tenants</span></a>`);
-  var root_2 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-admin-location" href="/admin/location"><!> <span>Locations</span></a> <a id="link-admin-facility" href="/admin/facility"><!> <span>Facilities</span></a> <a id="link-admin-building" href="/admin/building"><!> <span>Buildings</span></a> <a id="link-admin-room" href="/admin/room"><!> <span>Rooms</span></a> <a id="link-admin-payment" href="/admin/payment"><!> <span>Payments</span></a> <a id="link-admin-wifiDevice" href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a id="link-admin-userManagement" href="/admin/usersManagement"><!> <span>Users</span></a> <a id="link-admin-logs" href="/admin/bookingLogs"><!> <span>Logs</span></a> <a id="link-admin-setting" href="/admin/settingFixInconsistencies"><!> <span>Settings</span></a></nav>`, 1);
-  var root_3 = from_html(`<a id="link-staff-tenants-mobile" href="/staff/tenants"><!> <span>Tenants</span></a>`);
-  var root_4 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/location"><!> <span>Locations</span></a> <a href="/admin/facility"><!> <span>Facilities</span></a> <a href="/admin/building"><!> <span>Buildings</span></a> <a href="/admin/room"><!> <span>Rooms</span></a> <a href="/admin/payment"><!> <span>Payments</span></a> <a href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a href="/admin/usersManagement"><!> <span>Users</span></a> <a href="/admin/bookingLogs"><!> <span>Logs</span></a></nav>`, 1);
-  var root2 = from_html(`<aside class="side-menu-desktop svelte-p7ambs"><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking" href="/staff/booking"><!> <span>Bookings</span></a> <!></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside> <button aria-label="backdrop toggle menu"></button> <aside><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking-mobile" href="/staff/booking"><!> <span>Bookings</span></a> <!></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside>`, 1);
+  var root_1 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-admin-location" href="/admin/location"><!> <span>Locations</span></a> <a id="link-admin-facility" href="/admin/facility"><!> <span>Facilities</span></a> <a id="link-admin-building" href="/admin/building"><!> <span>Buildings</span></a> <a id="link-admin-room" href="/admin/room"><!> <span>Rooms</span></a> <a id="link-admin-payment" href="/admin/payment"><!> <span>Payments</span></a> <a id="link-admin-wifiDevice" href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a id="link-admin-userManagement" href="/admin/usersManagement"><!> <span>Users</span></a> <a id="link-admin-logs" href="/admin/bookingLogs"><!> <span>Logs</span></a> <a id="link-admin-setting" href="/admin/settingFixInconsistencies"><!> <span>Settings</span></a></nav>`, 1);
+  var root_2 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/location"><!> <span>Locations</span></a> <a href="/admin/facility"><!> <span>Facilities</span></a> <a href="/admin/building"><!> <span>Buildings</span></a> <a href="/admin/room"><!> <span>Rooms</span></a> <a href="/admin/payment"><!> <span>Payments</span></a> <a href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a href="/admin/usersManagement"><!> <span>Users</span></a> <a href="/admin/bookingLogs"><!> <span>Logs</span></a></nav>`, 1);
+  var root2 = from_html(`<aside class="side-menu-desktop svelte-p7ambs"><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside> <button aria-label="backdrop toggle menu"></button> <aside><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking-mobile" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants-mobile" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside>`, 1);
   var $css = {
     hash: "svelte-p7ambs",
     code: "aside.side-menu-desktop.svelte-p7ambs {position:fixed;top:var(--navbar-height);left:0;bottom:0;width:var(--sidemenu-width);border-right:1px solid var(--gray-002);background-color:#FFF;font-size:var(--font-md);overflow-y:auto;scrollbar-color:var(--gray-003) transparent;scrollbar-width:calc(100% - 20px);padding:10px 0 20px 0;}aside.svelte-p7ambs .separator:where(.svelte-p7ambs) {width:100%;margin:auto;height:1px;background-color:var(--gray-002);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) {display:flex;flex-direction:column;gap:10px;height:fit-content;width:100%;margin:0;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu-title:where(.svelte-p7ambs) {margin:0;padding:10px 25px 10px 70px;border-bottom:1px solid var(--gray-002);font-weight:600;text-transform:uppercase;font-size:13px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) {display:flex;flex-direction:column;gap:5px;height:fit-content;flex-wrap:nowrap;width:100%;margin:0;padding:0 10px 0 40px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a:where(.svelte-p7ambs),\n  aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button:where(.svelte-p7ambs) {text-decoration:none;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:10px 15px;border-radius:8px;cursor:pointer;color:var(--gray-008);border:none;background-color:transparent;font-size:var(--font-lg);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a:where(.svelte-p7ambs):hover,\n  aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button:where(.svelte-p7ambs):hover {background-color:var(--gray-001);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a.active:where(.svelte-p7ambs) {background-color:var(--blue-transparent);color:var(--blue-007);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button.red:where(.svelte-p7ambs):hover {background-color:var(--red-transparent);color:var(--red-007);}.backdrop.svelte-p7ambs {position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0, 0, 0, 0.5);z-index:999;display:none;height:100dvh;}.backdrop.open.svelte-p7ambs {display:block;}aside.side-menu-mobile.svelte-p7ambs {left:-100%;width:70%;position:fixed;height:100dvh;top:0;bottom:0;z-index:1000;background-color:#FFF;border-top-right-radius:10px;border-bottom-right-radius:10px;overflow-y:auto;}aside.side-menu-mobile.open.svelte-p7ambs {transition:left 0.3s ease-in-out;left:0;}\n\n  @media only screen and (max-width : 768px) {aside.side-menu-desktop.svelte-p7ambs {display:none;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) {padding:20px 0;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) {padding:0 10px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu-title:where(.svelte-p7ambs) {padding:10px 25px;}\n  }"
@@ -10496,37 +10481,27 @@ ${component_stack}
     });
     next(2);
     reset(a_8);
-    var node_9 = sibling(a_8, 2);
+    var a_9 = sibling(a_8, 2);
+    let classes_9;
+    var node_9 = child(a_9);
+    Icon(node_9, {
+      get src() {
+        return RiUserFacesUserFollowLine;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_9);
+    reset(nav_1);
+    var node_10 = sibling(nav_1, 2);
     {
       var consequent = ($anchor2) => {
-        var a_9 = root_1();
-        let classes_9;
-        var node_10 = child(a_9);
-        Icon(node_10, {
-          get src() {
-            return RiUserFacesUserFollowLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_9);
-        template_effect(() => classes_9 = set_class(a_9, 1, "svelte-p7ambs", null, classes_9, { active: pathLv1 === "staff" && pathLv2 === "tenants" }));
-        append($anchor2, a_9);
-      };
-      if_block(node_9, ($render) => {
-        if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent);
-      });
-    }
-    reset(nav_1);
-    var node_11 = sibling(nav_1, 2);
-    {
-      var consequent_1 = ($anchor2) => {
-        var fragment_1 = root_2();
+        var fragment_1 = root_1();
         var nav_2 = sibling(first_child(fragment_1), 2);
         var a_10 = child(nav_2);
         let classes_10;
-        var node_12 = child(a_10);
-        Icon(node_12, {
+        var node_11 = child(a_10);
+        Icon(node_11, {
           get src() {
             return RiMapMapPin2Line;
           },
@@ -10536,8 +10511,8 @@ ${component_stack}
         reset(a_10);
         var a_11 = sibling(a_10, 2);
         let classes_11;
-        var node_13 = child(a_11);
-        Icon(node_13, {
+        var node_12 = child(a_11);
+        Icon(node_12, {
           get src() {
             return LuHandPlatter;
           },
@@ -10547,8 +10522,8 @@ ${component_stack}
         reset(a_11);
         var a_12 = sibling(a_11, 2);
         let classes_12;
-        var node_14 = child(a_12);
-        Icon(node_14, {
+        var node_13 = child(a_12);
+        Icon(node_13, {
           get src() {
             return RiBuildingsHotelLine;
           },
@@ -10558,8 +10533,8 @@ ${component_stack}
         reset(a_12);
         var a_13 = sibling(a_12, 2);
         let classes_13;
-        var node_15 = child(a_13);
-        Icon(node_15, {
+        var node_14 = child(a_13);
+        Icon(node_14, {
           get src() {
             return RiOthersDoorOpenLine;
           },
@@ -10569,8 +10544,8 @@ ${component_stack}
         reset(a_13);
         var a_14 = sibling(a_13, 2);
         let classes_14;
-        var node_16 = child(a_14);
-        Icon(node_16, {
+        var node_15 = child(a_14);
+        Icon(node_15, {
           get src() {
             return RiFinanceWallet3Line;
           },
@@ -10580,8 +10555,8 @@ ${component_stack}
         reset(a_14);
         var a_15 = sibling(a_14, 2);
         let classes_15;
-        var node_17 = child(a_15);
-        Icon(node_17, {
+        var node_16 = child(a_15);
+        Icon(node_16, {
           get src() {
             return RiBuildingsHomeWifiLine;
           },
@@ -10591,8 +10566,8 @@ ${component_stack}
         reset(a_15);
         var a_16 = sibling(a_15, 2);
         let classes_16;
-        var node_18 = child(a_16);
-        Icon(node_18, {
+        var node_17 = child(a_16);
+        Icon(node_17, {
           get src() {
             return RiUserFacesGroupLine;
           },
@@ -10602,8 +10577,8 @@ ${component_stack}
         reset(a_16);
         var a_17 = sibling(a_16, 2);
         let classes_17;
-        var node_19 = child(a_17);
-        Icon(node_19, {
+        var node_18 = child(a_17);
+        Icon(node_18, {
           get src() {
             return RiBusinessBarChartBoxLine;
           },
@@ -10613,8 +10588,8 @@ ${component_stack}
         reset(a_17);
         var a_18 = sibling(a_17, 2);
         let classes_18;
-        var node_20 = child(a_18);
-        Icon(node_20, {
+        var node_19 = child(a_18);
+        Icon(node_19, {
           get src() {
             return RiSystemSettingsLine;
           },
@@ -10642,14 +10617,14 @@ ${component_stack}
         );
         append($anchor2, fragment_1);
       };
-      if_block(node_11, ($render) => {
-        if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent_1);
+      if_block(node_10, ($render) => {
+        if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent);
       });
     }
-    var nav_3 = sibling(node_11, 4);
+    var nav_3 = sibling(node_10, 4);
     var button = child(nav_3);
-    var node_21 = child(button);
-    Icon(node_21, {
+    var node_20 = child(button);
+    Icon(node_20, {
       get src() {
         return RiSystemLogoutBoxRLine;
       },
@@ -10666,8 +10641,8 @@ ${component_stack}
     var nav_4 = child(div_1);
     var a_19 = child(nav_4);
     let classes_19;
-    var node_22 = child(a_19);
-    Icon(node_22, {
+    var node_21 = child(a_19);
+    Icon(node_21, {
       get src() {
         return RiBuildingsHome2Line;
       },
@@ -10677,8 +10652,8 @@ ${component_stack}
     reset(a_19);
     var a_20 = sibling(a_19, 2);
     let classes_20;
-    var node_23 = child(a_20);
-    Icon(node_23, {
+    var node_22 = child(a_20);
+    Icon(node_22, {
       get src() {
         return RiDocumentFileChartLine;
       },
@@ -10688,8 +10663,8 @@ ${component_stack}
     reset(a_20);
     var a_21 = sibling(a_20, 2);
     let classes_21;
-    var node_24 = child(a_21);
-    Icon(node_24, {
+    var node_23 = child(a_21);
+    Icon(node_23, {
       get src() {
         return RiDesignLayoutGrid2Line;
       },
@@ -10699,8 +10674,8 @@ ${component_stack}
     reset(a_21);
     var a_22 = sibling(a_21, 2);
     let classes_22;
-    var node_25 = child(a_22);
-    Icon(node_25, {
+    var node_24 = child(a_22);
+    Icon(node_24, {
       get src() {
         return RiDocumentFileChartLine;
       },
@@ -10710,8 +10685,8 @@ ${component_stack}
     reset(a_22);
     var a_23 = sibling(a_22, 2);
     let classes_23;
-    var node_26 = child(a_23);
-    Icon(node_26, {
+    var node_25 = child(a_23);
+    Icon(node_25, {
       get src() {
         return RiDocumentFileChartLine;
       },
@@ -10721,8 +10696,8 @@ ${component_stack}
     reset(a_23);
     var a_24 = sibling(a_23, 2);
     let classes_24;
-    var node_27 = child(a_24);
-    Icon(node_27, {
+    var node_26 = child(a_24);
+    Icon(node_26, {
       get src() {
         return RiDocumentFileChartLine;
       },
@@ -10732,8 +10707,8 @@ ${component_stack}
     reset(a_24);
     var a_25 = sibling(a_24, 2);
     let classes_25;
-    var node_28 = child(a_25);
-    Icon(node_28, {
+    var node_27 = child(a_25);
+    Icon(node_27, {
       get src() {
         return RiDocumentFileChartLine;
       },
@@ -10743,8 +10718,8 @@ ${component_stack}
     reset(a_25);
     var a_26 = sibling(a_25, 2);
     let classes_26;
-    var node_29 = child(a_26);
-    Icon(node_29, {
+    var node_28 = child(a_26);
+    Icon(node_28, {
       get src() {
         return RiUserFacesUser3Line;
       },
@@ -10756,8 +10731,8 @@ ${component_stack}
     var nav_5 = sibling(nav_4, 4);
     var a_27 = child(nav_5);
     let classes_27;
-    var node_30 = child(a_27);
-    Icon(node_30, {
+    var node_29 = child(a_27);
+    Icon(node_29, {
       get src() {
         return RiBusinessCalendarScheduleLine;
       },
@@ -10765,37 +10740,27 @@ ${component_stack}
     });
     next(2);
     reset(a_27);
-    var node_31 = sibling(a_27, 2);
-    {
-      var consequent_2 = ($anchor2) => {
-        var a_28 = root_3();
-        let classes_28;
-        var node_32 = child(a_28);
-        Icon(node_32, {
-          get src() {
-            return RiUserFacesUserFollowLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_28);
-        template_effect(() => classes_28 = set_class(a_28, 1, "svelte-p7ambs", null, classes_28, { active: pathLv1 === "staff" && pathLv2 === "tenants" }));
-        append($anchor2, a_28);
-      };
-      if_block(node_31, ($render) => {
-        if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent_2);
-      });
-    }
+    var a_28 = sibling(a_27, 2);
+    let classes_28;
+    var node_30 = child(a_28);
+    Icon(node_30, {
+      get src() {
+        return RiUserFacesUserFollowLine;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_28);
     reset(nav_5);
-    var node_33 = sibling(nav_5, 2);
+    var node_31 = sibling(nav_5, 2);
     {
-      var consequent_3 = ($anchor2) => {
-        var fragment_2 = root_4();
+      var consequent_1 = ($anchor2) => {
+        var fragment_2 = root_2();
         var nav_6 = sibling(first_child(fragment_2), 2);
         var a_29 = child(nav_6);
         let classes_29;
-        var node_34 = child(a_29);
-        Icon(node_34, {
+        var node_32 = child(a_29);
+        Icon(node_32, {
           get src() {
             return RiMapMapPin2Line;
           },
@@ -10805,8 +10770,8 @@ ${component_stack}
         reset(a_29);
         var a_30 = sibling(a_29, 2);
         let classes_30;
-        var node_35 = child(a_30);
-        Icon(node_35, {
+        var node_33 = child(a_30);
+        Icon(node_33, {
           get src() {
             return LuHandPlatter;
           },
@@ -10816,8 +10781,8 @@ ${component_stack}
         reset(a_30);
         var a_31 = sibling(a_30, 2);
         let classes_31;
-        var node_36 = child(a_31);
-        Icon(node_36, {
+        var node_34 = child(a_31);
+        Icon(node_34, {
           get src() {
             return RiBuildingsHotelLine;
           },
@@ -10827,8 +10792,8 @@ ${component_stack}
         reset(a_31);
         var a_32 = sibling(a_31, 2);
         let classes_32;
-        var node_37 = child(a_32);
-        Icon(node_37, {
+        var node_35 = child(a_32);
+        Icon(node_35, {
           get src() {
             return RiOthersDoorOpenLine;
           },
@@ -10838,8 +10803,8 @@ ${component_stack}
         reset(a_32);
         var a_33 = sibling(a_32, 2);
         let classes_33;
-        var node_38 = child(a_33);
-        Icon(node_38, {
+        var node_36 = child(a_33);
+        Icon(node_36, {
           get src() {
             return RiFinanceWallet3Line;
           },
@@ -10849,8 +10814,8 @@ ${component_stack}
         reset(a_33);
         var a_34 = sibling(a_33, 2);
         let classes_34;
-        var node_39 = child(a_34);
-        Icon(node_39, {
+        var node_37 = child(a_34);
+        Icon(node_37, {
           get src() {
             return RiBuildingsHomeWifiLine;
           },
@@ -10860,8 +10825,8 @@ ${component_stack}
         reset(a_34);
         var a_35 = sibling(a_34, 2);
         let classes_35;
-        var node_40 = child(a_35);
-        Icon(node_40, {
+        var node_38 = child(a_35);
+        Icon(node_38, {
           get src() {
             return RiUserFacesGroupLine;
           },
@@ -10871,8 +10836,8 @@ ${component_stack}
         reset(a_35);
         var a_36 = sibling(a_35, 2);
         let classes_36;
-        var node_41 = child(a_36);
-        Icon(node_41, {
+        var node_39 = child(a_36);
+        Icon(node_39, {
           get src() {
             return RiBusinessBarChartBoxLine;
           },
@@ -10898,14 +10863,14 @@ ${component_stack}
         );
         append($anchor2, fragment_2);
       };
-      if_block(node_33, ($render) => {
-        if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent_3);
+      if_block(node_31, ($render) => {
+        if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent_1);
       });
     }
-    var nav_7 = sibling(node_33, 4);
+    var nav_7 = sibling(node_31, 4);
     var button_2 = child(nav_7);
-    var node_42 = child(button_2);
-    Icon(node_42, {
+    var node_40 = child(button_2);
+    Icon(node_40, {
       get src() {
         return RiSystemLogoutBoxRLine;
       },
@@ -10926,6 +10891,7 @@ ${component_stack}
       classes_6 = set_class(a_6, 1, "svelte-p7ambs", null, classes_6, { active: pathAll === "/staff/pricePerDayReport" });
       classes_7 = set_class(a_7, 1, "svelte-p7ambs", null, classes_7, { active: pathAll === "/user" });
       classes_8 = set_class(a_8, 1, "svelte-p7ambs", null, classes_8, { active: pathLv1 === "staff" && pathLv2 === "booking" });
+      classes_9 = set_class(a_9, 1, "svelte-p7ambs", null, classes_9, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
       set_class(button_1, 1, `backdrop ${$isOpenSideMenu() ? "open" : ""}`, "svelte-p7ambs");
       set_class(aside_1, 1, `side-menu-mobile ${$isOpenSideMenu() ? "open" : ""}`, "svelte-p7ambs");
       classes_19 = set_class(a_19, 1, "svelte-p7ambs", null, classes_19, { active: pathLv1 === "" });
@@ -10937,6 +10903,7 @@ ${component_stack}
       classes_25 = set_class(a_25, 1, "svelte-p7ambs", null, classes_25, { active: pathAll === "/staff/pricePerDayReport" });
       classes_26 = set_class(a_26, 1, "svelte-p7ambs", null, classes_26, { active: pathAll === "/user" });
       classes_27 = set_class(a_27, 1, "svelte-p7ambs", null, classes_27, { active: pathLv1 === "staff" && pathLv2 === "booking" });
+      classes_28 = set_class(a_28, 1, "svelte-p7ambs", null, classes_28, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
     });
     event("click", button, logout);
     event("click", button_1, () => store_set(isOpenSideMenu, !$isOpenSideMenu()));
@@ -13714,7 +13681,7 @@ ${component_stack}
   // _components/InputBox.svelte
   var root_14 = from_html(`<label class="label svelte-fdu7lb"> </label> <label class="switcher svelte-fdu7lb"><input type="checkbox" class="svelte-fdu7lb"/> <span class="slider svelte-fdu7lb"></span></label>`, 1);
   var root_22 = from_html(`<label class="label svelte-fdu7lb"> </label> <!>`, 1);
-  var root_42 = from_html(`<label class="label svelte-fdu7lb"> </label> <!>`, 1);
+  var root_4 = from_html(`<label class="label svelte-fdu7lb"> </label> <!>`, 1);
   var root_52 = from_html(`<label class="label svelte-fdu7lb"> </label> <!>`, 1);
   var root_6 = from_html(`<label class="label svelte-fdu7lb"> </label> <input type="number" class="svelte-fdu7lb"/>`, 1);
   var root_7 = from_html(`<label class="label svelte-fdu7lb"> </label> <input type="date" class="svelte-fdu7lb"/>`, 1);
@@ -13890,7 +13857,7 @@ ${component_stack}
         var node_2 = first_child(fragment_2);
         {
           var consequent_2 = ($anchor3) => {
-            var fragment_3 = root_42();
+            var fragment_3 = root_4();
             var label_4 = first_child(fragment_3);
             var text_2 = child(label_4, true);
             reset(label_4);
@@ -14236,11 +14203,11 @@ ${component_stack}
     pop();
   }
 
-  // _components/MasterTable.svelte
-  var import_xFormatter2 = __toESM(require_xFormatter());
+  // _components/MasterTableBooking.svelte
+  var import_xFormatter3 = __toESM(require_xFormatter());
 
   // _components/FilterTable.svelte
-  var root_32 = from_html(`<div class="row svelte-nzryzg"><div class="inputs svelte-nzryzg"><label class="svelte-nzryzg"> </label> <input type="text" class="svelte-nzryzg"/></div> <div class="actions svelte-nzryzg"></div></div>`);
+  var root_3 = from_html(`<div class="row svelte-nzryzg"><div class="inputs svelte-nzryzg"><label class="svelte-nzryzg"> </label> <input type="text" class="svelte-nzryzg"/></div> <div class="actions svelte-nzryzg"></div></div>`);
   var root_18 = from_html(`<div class="popup_filter_container svelte-nzryzg"><div class="popup svelte-nzryzg"><header class="svelte-nzryzg"><h2 class="svelte-nzryzg">Visibility and filter for DebugColumns</h2> <button class="svelte-nzryzg"><!></button></header> <div class="filters svelte-nzryzg"><!></div> <div class="foot svelte-nzryzg"><button class="cancel svelte-nzryzg">Cancel</button> <button class="ok svelte-nzryzg">Submit</button></div></div></div>`);
   var $css10 = {
     hash: "svelte-nzryzg",
@@ -14285,7 +14252,7 @@ ${component_stack}
             var fragment_1 = comment();
             var node_3 = first_child(fragment_1);
             each(node_3, 1, filterColumns, index, ($anchor4, col) => {
-              var div_3 = root_32();
+              var div_3 = root_3();
               var div_4 = child(div_3);
               var label = child(div_4);
               var text2 = child(label, true);
@@ -14334,15 +14301,261 @@ ${component_stack}
     return pop($exports);
   }
 
-  // _components/MultiSelect.svelte
-  var root11 = from_html(`<div><div class="input-box svelte-mai12d"><label class="label svelte-mai12d"> </label> <!> <!></div></div>`);
+  // _components/MasterTableBooking.svelte
+  var import_jsApi2 = __toESM(require_jsApi_GEN());
+
+  // _components/PopUpAddPayment.svelte
+  var import_xFormatter2 = __toESM(require_xFormatter());
+  var root_24 = from_html(`<span>Submit</span>`);
+  var root11 = from_html(`<div><div class="popup svelte-14ycs2l"><header class="header svelte-14ycs2l"><h2 class="svelte-14ycs2l"> </h2> <button class="svelte-14ycs2l"><!></button></header> <div class="forms svelte-14ycs2l"><!> <!> <!> <!> <!> <!></div> <div class="foot svelte-14ycs2l"><div class="left"></div> <div class="right svelte-14ycs2l"><button class="cancel svelte-14ycs2l">Cancel</button> <button class="ok svelte-14ycs2l"><!> <!></button></div></div></div></div>`);
   var $css11 = {
+    hash: "svelte-14ycs2l",
+    code: "\n  @keyframes svelte-14ycs2l-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(360deg);\n    }\n  }.spin {\n    animation: svelte-14ycs2l-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.popup-container.svelte-14ycs2l {display:none;position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2000;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);justify-content:center;padding:50px;overflow:auto;}.popup-container.show.svelte-14ycs2l {display:flex;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) {border-radius:8px;background-color:#FFF;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) h2:where(.svelte-14ycs2l) {margin:0;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) button:where(.svelte-14ycs2l) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) button:where(.svelte-14ycs2l):hover {background-color:#ef444420;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) button:where(.svelte-14ycs2l):active {background-color:#ef444430;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .forms:where(.svelte-14ycs2l) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) {display:flex;flex-direction:row;justify-content:space-between;gap:10px;align-items:center;padding:15px 20px;border-top:1px solid var(--gray-004);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) .right:where(.svelte-14ycs2l) {display:flex;flex-direction:row;align-items:center;gap:10px;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button:where(.svelte-14ycs2l) {padding:8px 18px;border-radius:9999px;border:none;color:#FFF;cursor:pointer;font-weight:600;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.ok:where(.svelte-14ycs2l) {background-color:var(--green-006);display:flex;justify-content:center;align-items:center;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.ok:where(.svelte-14ycs2l):hover {background-color:var(--green-005);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.ok:where(.svelte-14ycs2l):disabled {cursor:not-allowed;background-color:var(--gray-003);color:var(--gray-007);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.cancel:where(.svelte-14ycs2l) {background-color:transparent;color:var(--gray-007);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.cancel:where(.svelte-14ycs2l):hover {background-color:var(--gray-001);}.facilities-form.svelte-14ycs2l {display:flex;flex-direction:column;gap:3px;}\n\n  @media only screen and (max-width : 768px) {.popup-container.svelte-14ycs2l {padding:10px;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) {width:100%;}\n  }"
+  };
+  function PopUpAddPayment($anchor, $props) {
+    push($props, false);
+    append_styles($anchor, $css11);
+    let isShow = mutable_source(
+      /** @type {boolean} */
+      false
+    );
+    let isSubmitted = prop(
+      $props,
+      "isSubmitted",
+      8,
+      /** @type {boolean} */
+      false
+    );
+    let bookings = prop($props, "bookings", 24, () => ({}));
+    let bookingId = prop($props, "bookingId", 12, 0);
+    let isBookingReadOnly = prop($props, "isBookingReadOnly", 8, false);
+    let paymentAt = prop($props, "paymentAt", 28, () => (0, import_xFormatter2.dateISOFormat)(0));
+    const PaymentMethods = (
+      /** @type {PaymentMethod[]} */
+      ["Transfer", "Cash", "QRIS", "Donation"]
+    );
+    const PaymentStatuses = (
+      /** @type {PaymentStatus[]} */
+      ["Paid", "Unpaid", "Refunded"]
+    );
+    let paidIDR = mutable_source(0);
+    let paymentMethod = mutable_source(
+      /** @type {PaymentMethod} */
+      "Transfer"
+    );
+    let paymentStatus = mutable_source(
+      /** @type {PaymentStatus} */
+      "Paid"
+    );
+    let note = mutable_source("");
+    let OnSubmit = prop($props, "OnSubmit", 8, async function(payment) {
+      console.log("OnSubmit :::", payment);
+    });
+    async function submitAdd() {
+      const payment = (
+        /** @type {Payment|any} */
+        {
+          bookingId: bookingId(),
+          paymentAt: paymentAt(),
+          paidIDR: get2(paidIDR),
+          paymentMethod: get2(paymentMethod),
+          paymentStatus: get2(paymentStatus),
+          note: get2(note)
+        }
+      );
+      await OnSubmit()(payment);
+    }
+    const reset2 = () => {
+      bookingId(0);
+      paymentAt((0, import_xFormatter2.dateISOFormat)(0));
+      set(paidIDR, 0);
+      set(paymentMethod, "Transfer");
+      set(paymentStatus, "Paid");
+      set(note, "");
+    };
+    const Show = () => set(isShow, true);
+    const Hide = () => {
+      set(isShow, false);
+      reset2();
+    };
+    var $exports = { Show, Hide };
+    init();
+    var div = root11();
+    var div_1 = child(div);
+    var header = child(div_1);
+    var h2 = child(header);
+    var text2 = child(h2);
+    reset(h2);
+    var button = sibling(h2, 2);
+    var node = child(button);
+    Icon(node, {
+      size: "22",
+      color: "var(--red-005)",
+      get src() {
+        return IoClose;
+      }
+    });
+    reset(button);
+    reset(header);
+    var div_2 = sibling(header, 2);
+    var node_1 = child(div_2);
+    {
+      var consequent = ($anchor2) => {
+        InputBox($anchor2, {
+          id: "booking",
+          label: "Booking",
+          isObject: true,
+          type: "combobox",
+          get values() {
+            return bookings();
+          },
+          get value() {
+            return bookingId();
+          },
+          set value($value) {
+            bookingId($value);
+          },
+          $legacy: true
+        });
+      };
+      if_block(node_1, ($render) => {
+        if (!isBookingReadOnly()) $render(consequent);
+      });
+    }
+    var node_2 = sibling(node_1, 2);
+    InputBox(node_2, {
+      id: "paymentAt",
+      label: "Payment At",
+      type: "datetime",
+      placeholder: "YYYY-MM-DD",
+      get value() {
+        return paymentAt();
+      },
+      set value($value) {
+        paymentAt($value);
+      },
+      $legacy: true
+    });
+    var node_3 = sibling(node_2, 2);
+    InputBox(node_3, {
+      id: "paidIDR",
+      label: "Total Paid",
+      type: "number",
+      placeholder: "0",
+      get value() {
+        return get2(paidIDR);
+      },
+      set value($value) {
+        set(paidIDR, $value);
+      },
+      $legacy: true
+    });
+    var node_4 = sibling(node_3, 2);
+    InputBox(node_4, {
+      id: "paymentMethod",
+      label: "Payment Method",
+      type: "combobox-arr",
+      get values() {
+        return PaymentMethods;
+      },
+      get value() {
+        return get2(paymentMethod);
+      },
+      set value($value) {
+        set(paymentMethod, $value);
+      },
+      $legacy: true
+    });
+    var node_5 = sibling(node_4, 2);
+    InputBox(node_5, {
+      id: "paymentStatus",
+      label: "Payment Status",
+      type: "combobox-arr",
+      placeholder: "Paid",
+      get values() {
+        return PaymentStatuses;
+      },
+      get value() {
+        return get2(paymentStatus);
+      },
+      set value($value) {
+        set(paymentStatus, $value);
+      },
+      $legacy: true
+    });
+    var node_6 = sibling(node_5, 2);
+    InputBox(node_6, {
+      id: "note",
+      label: "Note",
+      type: "textarea",
+      placeholder: "Note",
+      get value() {
+        return get2(note);
+      },
+      set value($value) {
+        set(note, $value);
+      },
+      $legacy: true
+    });
+    reset(div_2);
+    var div_3 = sibling(div_2, 2);
+    var div_4 = sibling(child(div_3), 2);
+    var button_1 = child(div_4);
+    var button_2 = sibling(button_1, 2);
+    var node_7 = child(button_2);
+    {
+      var consequent_1 = ($anchor2) => {
+        var span = root_24();
+        append($anchor2, span);
+      };
+      if_block(node_7, ($render) => {
+        if (!isSubmitted()) $render(consequent_1);
+      });
+    }
+    var node_8 = sibling(node_7, 2);
+    {
+      var consequent_2 = ($anchor2) => {
+        Icon($anchor2, {
+          className: "spin",
+          color: "#FFF",
+          size: "14",
+          get src() {
+            return FiLoader;
+          }
+        });
+      };
+      if_block(node_8, ($render) => {
+        if (isSubmitted()) $render(consequent_2);
+      });
+    }
+    reset(button_2);
+    reset(div_4);
+    reset(div_3);
+    reset(div_1);
+    reset(div);
+    template_effect(() => {
+      set_class(div, 1, `popup-container ${get2(isShow) ? "show" : ""}`, "svelte-14ycs2l");
+      set_text(text2, `Add Payment ${isBookingReadOnly() ? `for Booking #${bookingId()}` : ""}`);
+      button_2.disabled = isSubmitted();
+    });
+    event("click", button, Hide);
+    event("click", button_1, preventDefault(Hide));
+    event("click", button_2, preventDefault(submitAdd));
+    append($anchor, div);
+    bind_prop($props, "Show", Show);
+    bind_prop($props, "Hide", Hide);
+    return pop($exports);
+  }
+
+  // _components/MultiSelect.svelte
+  var root12 = from_html(`<div><div class="input-box svelte-mai12d"><label class="label svelte-mai12d"> </label> <!> <!></div></div>`);
+  var $css12 = {
     hash: "svelte-mai12d",
     code: ".input-box.svelte-mai12d {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);display:flex;flex-direction:column;gap:5px;}.input-box.svelte-mai12d .label:where(.svelte-mai12d) {font-size:var(--font-base);margin-left:10px;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;}"
   };
   function MultiSelect($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css11);
+    append_styles($anchor, $css12);
     let className = prop($props, "className", 8, "");
     let valuesSourceType = prop(
       $props,
@@ -14399,7 +14612,7 @@ ${component_stack}
     });
     legacy_pre_effect_reset();
     init();
-    var div = root11();
+    var div = root12();
     var div_1 = child(div);
     var label_1 = child(div_1);
     var text2 = child(label_1, true);
@@ -14458,229 +14671,252 @@ ${component_stack}
     pop();
   }
 
-  // _components/SingleSelected.svelte
-  var root_110 = from_html(`<div class="selected-item svelte-4vgal7"> <button class="svelte-4vgal7">x</button></div>`);
-  var root12 = from_html(`<div class="input-box svelte-4vgal7"><label class="label svelte-4vgal7"> </label> <!> <div class="selected-list svelte-4vgal7"></div></div>`);
-  var $css12 = {
-    hash: "svelte-4vgal7",
-    code: ".input-box.svelte-4vgal7 {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);gap:6px;margin-bottom:1rem;}.input-box.svelte-4vgal7 .label:where(.svelte-4vgal7) {font-size:var(--font-base);margin-left:10px;}.selected-list.svelte-4vgal7 {display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}.selected-item.svelte-4vgal7 {background-color:var(--gray-002, #f2f2f2);padding:4px 8px;border-radius:6px;font-size:var(--font-base);display:flex;align-items:center;gap:4px;border:1px solid #ccc;}.selected-item.svelte-4vgal7 button:where(.svelte-4vgal7) {background:transparent;border:none;cursor:pointer;font-size:large;font-weight:bolder;color:red;padding:0;}"
+  // _components/xGenerator.js
+  function RandString(length) {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters[randomIndex];
+    }
+    return result;
+  }
+
+  // _components/SelectFacilitiesFromJson.svelte
+  var root_110 = from_html(`<div class="input-box svelte-piwmil"><label class="label svelte-piwmil" for="facilities">Facilities</label> <!></div>`);
+  var $css13 = {
+    hash: "svelte-piwmil",
+    code: ".input-box.svelte-piwmil {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);display:flex;flex-direction:column;gap:5px;}.input-box.svelte-piwmil .label:where(.svelte-piwmil) {font-size:var(--font-base);margin-left:10px;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;}"
   };
-  function SingleSelected($anchor, $props) {
+  function SelectFacilitiesFromJson($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css12);
-    const valuesSourceArrayObject = mutable_source();
-    let id = prop($props, "id", 8);
-    let label = prop($props, "label", 8);
-    let placeholder = prop($props, "placeholder", 8, "");
-    let valuesTarget = prop($props, "valuesTarget", 28, () => []);
-    let valuesSourceObj = prop($props, "valuesSourceObj", 24, () => ({}));
-    let selected = mutable_source(null);
-    function handleSelect(e) {
-      const val = Number(e.detail.value);
-      valuesTarget([...valuesTarget(), val]);
-      set(selected, null);
+    append_styles($anchor, $css13);
+    let stringJson = prop($props, "stringJson", 12, "");
+    let facilities = prop($props, "facilities", 24, () => []);
+    let facilitiesIds = (
+      /** @type {number[]} */
+      []
+    );
+    let valuesSvelteSelectFacilities = mutable_source(
+      /** @type {SvelteSelectValue[]} */
+      []
+    );
+    let valueSvelteSelectedFacilities = mutable_source(
+      /** @type {SvelteSelectValue[]} */
+      []
+    );
+    function parseFacilityString(str) {
+      const match = str.match(/^(.+?)\s*\((\d+)\)$/);
+      if (!match) {
+        throw new Error("Invalid format. Expected: 'Name (Number)'");
+      }
+      const facilityName = match[1].trim();
+      const extraChargeIDR = parseInt(match[2], 10);
+      return { facilityName, extraChargeIDR };
     }
-    function removeItem(index2) {
-      valuesTarget().splice(index2, 1);
-      valuesTarget([...valuesTarget()]);
+    function resfreshStringJson() {
+      if (!stringJson()) return;
+      if (stringJson() == "") return;
+      let facilitiesArrOfObj = (
+        /** @type {FacilityJson[]} */
+        []
+      );
+      (get2(valueSvelteSelectedFacilities) || []).forEach((v) => {
+        if (parseInt(v.value)) {
+          for (const f of facilities()) {
+            if (f.id == v.value) {
+              facilitiesArrOfObj = [
+                ...facilitiesArrOfObj,
+                {
+                  extraChargeIDR: f.extraChargeIDR,
+                  facilityName: f.facilityName
+                }
+              ];
+            }
+          }
+          return;
+        }
+        const toObj = parseFacilityString(v.label);
+        facilitiesArrOfObj = [...facilitiesArrOfObj, toObj];
+      });
+      stringJson(JSON.stringify(facilitiesArrOfObj));
     }
-    legacy_pre_effect(() => deep_read_state(valuesSourceObj()), () => {
-      set(valuesSourceArrayObject, Object.entries(valuesSourceObj()).map(([k, v]) => ({ value: Number(k), label: v })));
+    let isFacilitiesReady = mutable_source(false);
+    function handleSelectFacilities(e) {
+      console.log("handleSelectFacilities:", e.detail);
+      facilitiesIds = [...facilitiesIds, e.detail.value];
+    }
+    function handleClearFacilities(e) {
+      const index2 = facilitiesIds.indexOf(Number(e.detail.value));
+      if (index2 !== -1) {
+        facilitiesIds.splice(index2, 1);
+      }
+    }
+    let facilitiesJson = (
+      /** @type {FacilityJson[]} */
+      []
+    );
+    onMount(() => {
+      (facilities() || []).forEach((f) => {
+        set(valuesSvelteSelectFacilities, [
+          ...get2(valuesSvelteSelectFacilities),
+          {
+            value: f.id,
+            label: `${f.facilityName} ${f.facilityType ? `(${f.facilityType})` : ""}`
+          }
+        ]);
+      });
+      console.log("String JSON ::", stringJson());
+      if (stringJson() || stringJson() != "") {
+        try {
+          facilitiesJson = JSON.parse(stringJson());
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      if (facilitiesJson && (facilitiesJson || []).length > 0) {
+        facilitiesJson.forEach((f) => {
+          const valueRand = RandString(8);
+          set(valuesSvelteSelectFacilities, [
+            ...get2(valuesSvelteSelectFacilities),
+            {
+              value: valueRand,
+              label: `${f.facilityName} (${f.extraChargeIDR})`
+            }
+          ]);
+          set(valueSvelteSelectedFacilities, [
+            ...get2(valueSvelteSelectedFacilities),
+            {
+              value: valueRand,
+              label: `${f.facilityName} (${f.extraChargeIDR})`
+            }
+          ]);
+        });
+      }
+      console.log("Facilities JSON ::", facilitiesJson);
+      set(isFacilitiesReady, true);
+    });
+    legacy_pre_effect(() => get2(valueSvelteSelectedFacilities), () => {
+      if (get2(valueSvelteSelectedFacilities)) {
+        setTimeout(
+          () => {
+            resfreshStringJson();
+          },
+          400
+        );
+      }
     });
     legacy_pre_effect_reset();
     init();
-    var div = root12();
-    var label_1 = child(div);
-    var text2 = child(label_1, true);
-    reset(label_1);
-    var node = sibling(label_1, 2);
-    Select(node, {
-      get items() {
-        return get2(valuesSourceArrayObject);
-      },
-      get placeholder() {
-        return placeholder();
-      },
-      clearable: false,
-      get value() {
-        return get2(selected);
-      },
-      set value($value) {
-        set(selected, $value);
-      },
-      $events: { select: handleSelect },
-      $legacy: true
-    });
-    var div_1 = sibling(node, 2);
-    each(div_1, 5, valuesTarget, index, ($anchor2, val, index2) => {
-      var div_2 = root_110();
-      var text_1 = child(div_2);
-      var button = sibling(text_1);
-      reset(div_2);
-      template_effect(() => set_text(text_1, `${(deep_read_state(valuesSourceObj()), get2(val), untrack(() => valuesSourceObj()[get2(val)])) ?? ""} `));
-      event("click", button, () => removeItem(index2));
-      append($anchor2, div_2);
-    });
-    reset(div_1);
-    reset(div);
-    template_effect(() => {
-      set_attribute2(label_1, "for", id());
-      set_text(text2, label());
-    });
-    append($anchor, div);
+    var fragment = comment();
+    var node = first_child(fragment);
+    {
+      var consequent = ($anchor2) => {
+        var div = root_110();
+        var node_1 = sibling(child(div), 2);
+        Select(node_1, {
+          multiple: true,
+          get items() {
+            return get2(valuesSvelteSelectFacilities);
+          },
+          placeholder: "Facilities",
+          get value() {
+            return get2(valueSvelteSelectedFacilities);
+          },
+          set value($value) {
+            set(valueSvelteSelectedFacilities, $value);
+          },
+          $events: { select: handleSelectFacilities, clear: handleClearFacilities },
+          $legacy: true
+        });
+        reset(div);
+        append($anchor2, div);
+      };
+      if_block(node, ($render) => {
+        if (get2(isFacilitiesReady)) $render(consequent);
+      });
+    }
+    append($anchor, fragment);
     pop();
   }
 
-  // _components/MasterTable.svelte
-  var root_24 = from_html(`<div class="popup-container svelte-4f6m80"><div class="popup svelte-4f6m80"><header class="svelte-4f6m80"><h2 class="svelte-4f6m80"> </h2> <button class="svelte-4f6m80"><!></button></header> <div class="forms svelte-4f6m80"></div> <div class="foot svelte-4f6m80"><button class="ok svelte-4f6m80">Submit</button></div></div></div>`);
-  var root_123 = from_html(`<div class="loader"><!></div>`);
-  var root_133 = from_html(`<div class="search-handler svelte-4f6m80"><button class="search-btn svelte-4f6m80" title="Search"><!></button> <input placeholder="Search..." type="text" name="searchRow" id="searchRow" class="search svelte-4f6m80"/></div>`);
-  var root_153 = from_html(`<!> <!> <!>`, 1);
-  var root_143 = from_html(`<th><button class="heading svelte-4f6m80"><span> </span> <!></button></th>`);
-  var root_242 = from_html(`<button class="btn info svelte-4f6m80" title="Info"><!></button>`);
-  var root_26 = from_html(`<button class="btn edit svelte-4f6m80" title="Edit"><!></button>`);
-  var root_28 = from_html(`<button class="btn info svelte-4f6m80" title="Restore"><!></button>`);
-  var root_29 = from_html(`<button class="btn delete svelte-4f6m80" title="Delete"><!></button>`);
-  var root_31 = from_html(`<a class="btn link svelte-4f6m80"><!></a>`);
-  var root_33 = from_html(`<button class="btn svelte-4f6m80"><!></button>`);
-  var root_232 = from_html(`<div class="actions svelte-4f6m80"><!> <!> <!> <!> <!></div>`);
-  var root_34 = from_html(`<span>--</span>`);
-  var root_222 = from_html(`<td class="a-row svelte-4f6m80"><!></td> <td class="svelte-4f6m80"> </td>`, 1);
-  var root_35 = from_html(`<td class="textarea svelte-4f6m80"> </td>`);
-  var root_36 = from_html(`<td class="intArr svelte-4f6m80"> </td>`);
-  var root_37 = from_html(`<td class="currency svelte-4f6m80"> </td>`);
-  var root_38 = from_html(`<td class="datetime svelte-4f6m80"> </td>`);
-  var root_39 = from_html(`<td class="combobox svelte-4f6m80"> </td>`);
-  var root_40 = from_html(`<td class="percentage svelte-4f6m80"> </td>`);
-  var root_41 = from_html(`<td class="checkbox-cell svelte-4f6m80"><input type="checkbox" class="svelte-4f6m80"/></td>`);
-  var root_422 = from_html(`<td> </td>`);
-  var root_202 = from_html(`<tr><td class="num-row sticky svelte-4f6m80"> </td><!></tr>`);
-  var root_43 = from_html(`<tr class="svelte-4f6m80"><td class="num-row svelte-4f6m80">0</td><td class="svelte-4f6m80">no-data</td></tr>`);
-  var root_45 = from_html(`<button class="svelte-4f6m80"> </button>`);
-  var root_44 = from_html(`<div class="rows svelte-4f6m80"></div>`);
-  var root_46 = from_html(`<button> </button>`);
-  var root13 = from_html(`<!> <!> <div class="table-root svelte-4f6m80"><div class="actions-container svelte-4f6m80"><div class="left svelte-4f6m80"><div class="actions-button svelte-4f6m80"><button class="btn" title="filter table"><!></button> <!-- Action buttons --> <!></div> <!></div> <div class="right svelte-4f6m80"><!></div></div> <div class="table-container svelte-4f6m80"><table class="svelte-4f6m80"><thead class="svelte-4f6m80"><tr class="svelte-4f6m80"><th class="no sticky svelte-4f6m80">No</th><th class="a-row svelte-4f6m80">Actions</th><!></tr></thead><tbody class="svelte-4f6m80"><!></tbody></table></div> <div class="pagination-container svelte-4f6m80"><div class="filter svelte-4f6m80"><div class="showing"><p class="svelte-4f6m80">Showing <span class="text-blue svelte-4f6m80"> </span> /</p></div> <div class="row-to-show svelte-4f6m80"><!> <button class="btn svelte-4f6m80"><span> </span> <!></button></div> <p class="svelte-4f6m80">record(s)</p></div> <div><p class="svelte-4f6m80">Total:<span class="text-blue svelte-4f6m80"> </span></p></div> <div class="pagination svelte-4f6m80"><button class="btn to svelte-4f6m80" title="Go to first page"><!></button> <button class="btn to svelte-4f6m80" title="Go to previous page"><!></button> <!> <button class="btn to svelte-4f6m80" title="Go to next page"><!></button> <button class="btn to svelte-4f6m80" title="Go to last page"><!></button></div></div></div>`, 1);
-  var $css13 = {
-    hash: "svelte-4f6m80",
-    code: '.popup-container.svelte-4f6m80 {position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2000;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);display:flex;justify-content:center;padding:50px;overflow:auto;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) {border-radius:8px;background-color:#fff;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) h2:where(.svelte-4f6m80) {margin:0;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) button:where(.svelte-4f6m80) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) button:where(.svelte-4f6m80):hover {background-color:#ef444420;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .forms:where(.svelte-4f6m80) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:flex-end;gap:10px;align-items:center;padding:10px 20px;border-top:1px solid var(--gray-004);}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) button:where(.svelte-4f6m80) {padding:8px 13px;border-radius:9999px;border:none;color:#fff;cursor:pointer;font-weight:600;display:flex;justify-content:center;align-items:center;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) button.ok:where(.svelte-4f6m80) {background-color:var(--green-006);border:1px solid var(--green-006);display:flex;justify-content:center;align-items:center;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) button.ok:where(.svelte-4f6m80):hover {background-color:var(--green-005);}\n\n  @keyframes svelte-4f6m80-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(360deg);\n    }\n  }.action-btn:hover svg {fill:var(--blue-005);}.spin {\n    animation: svelte-4f6m80-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.dropdown {transition:all 0.2s ease-in-out;}.rotate {transition:all 0.2s ease-in-out;transform:rotate(180deg);}.rotate_right {transition:all 0.2s ease-in-out;transform:rotate(-90deg);}.sort_icon {margin-bottom:-5px;}.table-root.svelte-4f6m80 {display:flex;flex-direction:column;background-color:#fff;border-radius:10px;border:1px solid var(--gray-003);padding:0 0 20px 0;font-size:var(--font-base);}.table-root.svelte-4f6m80 .text-blue:where(.svelte-4f6m80) {color:var(--blue-005);font-weight:600;padding:5px;}.table-root.svelte-4f6m80 p:where(.svelte-4f6m80) {margin:0;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:10px 15px;background-color:#fff;border-radius:10px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .left:where(.svelte-4f6m80),\n  .table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:10px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) {display:flex;flex-direction:row;width:fit-content;height:fit-content;position:relative;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) input.search:where(.svelte-4f6m80) {padding:12px 40px 12px 15px;border-radius:8px;border:1px solid var(--gray-003);background-color:transparent;width:370px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) input.search:where(.svelte-4f6m80):focus {border-color:var(--blue-005);outline:1px solid var(--blue-005);}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) .search-btn:where(.svelte-4f6m80) {position:absolute;background-color:transparent;padding:8px;display:flex;justify-content:center;align-items:center;border:none;border-radius:8px;cursor:pointer;right:5px;top:4px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) .search-btn:where(.svelte-4f6m80):hover {background-color:var(--blue-transparent);}.table-root .actions-container .right .search-handler .search-btn:hover svg {fill:var(--blue-005);}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .actions-button:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:5px;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) {overflow-x:auto;scrollbar-color:var(--gray-003) transparent;scrollbar-width:calc(100% - 20px);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) {width:100%;background:#fff;border-top:1px solid var(--gray-003);border-bottom:1px solid var(--gray-003);box-shadow:none;text-align:left;border-collapse:separate;border-spacing:0;font-size:var(--font-base);position:relative;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) .sticky:where(.svelte-4f6m80) {position:sticky;left:0;z-index:10;background-color:var(--gray-001);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) {box-shadow:none;border-bottom:1px solid var(--gray-003);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) {padding:12px;background-color:var(--gray-001);text-transform:capitalize;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-003);min-width:fit-content;width:auto;text-wrap:nowrap;position:relative;z-index:1;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:8px;background-color:transparent;border:none;border-radius:5px;cursor:pointer;text-transform:capitalize;font-weight:600;color:var(--gray-008);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):focus {outline:none;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):hover {background-color:var(--gray-002);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):disabled {color:var(--gray-008);background-color:transparent;cursor:default;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):disabled:hover {background-color:transparent;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.textarea:where(.svelte-4f6m80) {min-width:280px !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.datetime:where(.svelte-4f6m80) {min-width:140px !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr.deleted:where(.svelte-4f6m80) {color:var(--red-005);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.no:where(.svelte-4f6m80) {width:30px;cursor:default;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.a-row:where(.svelte-4f6m80) {max-width:fit-content;min-width:fit-content;width:fit-content;cursor:default;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80):last-child {border-right:none;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) {padding:8px 12px;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) {padding:8px 12px;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-004);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80) {border-bottom:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80):last-child {border-right:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td.num-row:where(.svelte-4f6m80) {border-right:1px solid var(--gray-003);font-weight:600;text-align:center;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80) {border-bottom:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80):last-child {border-right:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80):last-child {border-right:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) {display:flex;flex-direction:row;}.checkbox-cell.svelte-4f6m80 {text-align:center;}.checkbox-cell.svelte-4f6m80 input[type="checkbox"]:where(.svelte-4f6m80) {transform:scale(1.2);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80) {border:none;padding:6px;border-radius:8px;background-color:transparent;cursor:pointer;display:flex;justify-content:center;align-items:center;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80):hover {background-color:var(--blue-transparent);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) .btn.delete:where(.svelte-4f6m80):hover {background-color:var(--red-transparent);}.table-root .table-container table tbody tr td .actions .btn:hover svg {fill:var(--blue-005);}.table-root .table-container table tbody tr td .actions .btn.delete:hover svg {fill:var(--red-005);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 15px 0 15px;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:8px;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) {position:relative;width:fit-content;height:fit-content;z-index:11;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80) {border:none;background-color:var(--blue-transparent);color:var(--blue-005);width:fit-content;padding:3px 3px 3px 6px;font-weight:600;border:1px solid var(--blue-004);border-radius:9999px;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;gap:1px;cursor:pointer;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80):hover {background-color:var(--blue-002);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .rows:where(.svelte-4f6m80) {display:flex;flex-direction:column-reverse;position:absolute;width:100%;top:-200px;border-radius:5px;border:1px solid var(--gray-004);background-color:#fff;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .rows:where(.svelte-4f6m80) button:where(.svelte-4f6m80) {border:none;background-color:transparent;padding:5px;cursor:pointer;color:var(--gray-007);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .rows:where(.svelte-4f6m80) button:where(.svelte-4f6m80):hover {background-color:var(--blue-transparent);color:var(--blue-007);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:5px;overflow:hidden;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80) {border:none;background-color:transparent;display:flex;flex-direction:row;justify-content:center;align-items:center;padding:6px 10px;border-radius:9999px;cursor:pointer;gap:5px;color:var(--gray-007);border:1px solid transparent;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80):hover {border:1px solid var(--gray-004);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.active:where(.svelte-4f6m80) {background-color:var(--blue-transparent);color:var(--blue-006);font-weight:600;border:1px solid var(--blue-004);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.to:where(.svelte-4f6m80) {background-color:var(--blue-006);color:#fff;font-weight:600;border:none;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.to:where(.svelte-4f6m80):hover {background-color:var(--blue-005);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.to:where(.svelte-4f6m80):disabled {background-color:var(--gray-002);color:var(--gray-006);font-weight:600;border:1px solid var(--gray-004);cursor:not-allowed;}\n\n  @media only screen and (max-width: 768px) {.popup-container.svelte-4f6m80 {padding:10px;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) {width:100%;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) {flex-wrap:wrap;gap:10px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .left:where(.svelte-4f6m80),\n    .table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) {flex-wrap:wrap;width:100%;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80),\n    .table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) input.search:where(.svelte-4f6m80) {width:100%;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) {overflow-x:scroll;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) {flex-wrap:wrap;gap:10px;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) {gap:2px;width:100%;justify-content:center;}\n  }'
+  // _components/MasterTableBooking.svelte
+  var root_32 = from_html(`<div class="popup-container svelte-6lkw17"><div class="popup svelte-6lkw17"><header class="svelte-6lkw17"><h2 class="svelte-6lkw17"> </h2> <button class="svelte-6lkw17"><!></button></header> <div class="forms svelte-6lkw17"></div> <div class="foot svelte-6lkw17"><button class="ok svelte-6lkw17">Submit</button></div></div></div>`);
+  var root_112 = from_html(`<div class="loader"><!></div>`);
+  var root_123 = from_html(`<div class="search-handler svelte-6lkw17"><button class="search-btn svelte-6lkw17" title="Search"><!></button> <input placeholder="Search..." type="text" name="searchRow" id="searchRow" class="search svelte-6lkw17"/></div>`);
+  var root_143 = from_html(`<th class="a-row svelte-6lkw17">Actions</th> <th class="svelte-6lkw17"><button class="heading svelte-6lkw17"><span>ID</span> <!> <!> <!></button></th>`, 1);
+  var root_192 = from_html(`<!> <!> <!>`, 1);
+  var root_182 = from_html(`<th><button class="heading svelte-6lkw17"><span> </span> <!></button></th>`);
+  var root_28 = from_html(`<button class="btn info svelte-6lkw17" title="Info"><!></button>`);
+  var root_29 = from_html(`<button class="btn info svelte-6lkw17" title="Restore"><!></button>`);
+  var root_30 = from_html(`<button class="btn delete svelte-6lkw17" title="Delete"><!></button>`);
+  var root_272 = from_html(`<div class="actions svelte-6lkw17"><!> <button class="btn edit svelte-6lkw17" title="Edit"><!></button> <button class="btn payment svelte-6lkw17" title="Input Payment"><!></button> <!></div>`);
+  var root_31 = from_html(`<span>--</span>`);
+  var root_26 = from_html(`<td class="a-row svelte-6lkw17"><!></td> <td class="svelte-6lkw17"> </td>`, 1);
+  var root_322 = from_html(`<td class="currency svelte-6lkw17"> </td>`);
+  var root_33 = from_html(`<td class="datetime svelte-6lkw17"> </td>`);
+  var root_34 = from_html(`<td class="combobox svelte-6lkw17"> </td>`);
+  var root_35 = from_html(`<td class="percentage svelte-6lkw17"> </td>`);
+  var root_36 = from_html(`<td class="textarea svelte-6lkw17"> </td>`);
+  var root_37 = from_html(`<td class="svelte-6lkw17"> </td>`);
+  var root_38 = from_html(`<td> </td>`);
+  var root_242 = from_html(`<tr><td class="num-row sticky svelte-6lkw17"> </td><!></tr>`);
+  var root_39 = from_html(`<tr class="svelte-6lkw17"><td class="num-row svelte-6lkw17">0</td><td class="svelte-6lkw17">no-data</td></tr>`);
+  var root_41 = from_html(`<button class="svelte-6lkw17"> </button>`);
+  var root_40 = from_html(`<div class="rows svelte-6lkw17"></div>`);
+  var root_42 = from_html(`<button> </button>`);
+  var root13 = from_html(`<!> <!> <!> <div class="table-root svelte-6lkw17"><div class="actions-container svelte-6lkw17"><div class="left svelte-6lkw17"><div class="actions-button svelte-6lkw17"><button class="btn" title="filter table"><!></button> <!-- Action buttons --> <!></div> <!></div> <div class="right svelte-6lkw17"><!></div></div> <div class="table-container svelte-6lkw17"><table class="svelte-6lkw17"><thead class="svelte-6lkw17"><tr class="svelte-6lkw17"><th class="no sticky svelte-6lkw17">No</th><!></tr></thead><tbody class="svelte-6lkw17"><!></tbody></table></div> <div class="pagination-container svelte-6lkw17"><div class="filter svelte-6lkw17"><div class="showing"><p class="svelte-6lkw17">Showing <span class="text-blue svelte-6lkw17"> </span> /</p></div> <div class="row-to-show svelte-6lkw17"><!> <button class="btn svelte-6lkw17"><span> </span> <!></button></div> <p class="svelte-6lkw17">record(s)</p></div> <div><p class="svelte-6lkw17">Total:<span class="text-blue svelte-6lkw17"> </span></p></div> <div class="pagination svelte-6lkw17"><button class="btn to svelte-6lkw17" title="Go to first page"><!></button> <button class="btn to svelte-6lkw17" title="Go to previous page"><!></button> <!> <button class="btn to svelte-6lkw17" title="Go to next page"><!></button> <button class="btn to svelte-6lkw17" title="Go to last page"><!></button></div></div></div>`, 1);
+  var $css14 = {
+    hash: "svelte-6lkw17",
+    code: ".popup-container.svelte-6lkw17 {position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2000;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);display:flex;justify-content:center;padding:50px;overflow:auto;}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) {border-radius:8px;background-color:#fff;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) header:where(.svelte-6lkw17) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) header:where(.svelte-6lkw17) h2:where(.svelte-6lkw17) {margin:0;}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) header:where(.svelte-6lkw17) button:where(.svelte-6lkw17) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) header:where(.svelte-6lkw17) button:where(.svelte-6lkw17):hover {background-color:#ef444420;}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) .forms:where(.svelte-6lkw17) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) .foot:where(.svelte-6lkw17) {display:flex;flex-direction:row;justify-content:flex-end;gap:10px;align-items:center;padding:10px 20px;border-top:1px solid var(--gray-004);}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) .foot:where(.svelte-6lkw17) button:where(.svelte-6lkw17) {padding:8px 13px;border-radius:9999px;border:none;color:#fff;cursor:pointer;font-weight:600;display:flex;justify-content:center;align-items:center;}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) .foot:where(.svelte-6lkw17) button.ok:where(.svelte-6lkw17) {background-color:var(--green-006);border:1px solid var(--green-006);display:flex;justify-content:center;align-items:center;}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) .foot:where(.svelte-6lkw17) button.ok:where(.svelte-6lkw17):hover {background-color:var(--green-005);}\n\n  @keyframes svelte-6lkw17-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(360deg);\n    }\n  }.action-btn:hover svg {fill:var(--blue-005);}.spin {\n    animation: svelte-6lkw17-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.dropdown {transition:all 0.2s ease-in-out;}.rotate {transition:all 0.2s ease-in-out;transform:rotate(180deg);}.rotate_right {transition:all 0.2s ease-in-out;transform:rotate(-90deg);}.sort_icon {margin-bottom:-5px;}.table-root.svelte-6lkw17 {display:flex;flex-direction:column;background-color:#fff;border-radius:10px;border:1px solid var(--gray-003);padding:0 0 20px 0;font-size:var(--font-base);}.table-root.svelte-6lkw17 .text-blue:where(.svelte-6lkw17) {color:var(--blue-005);font-weight:600;padding:5px;}.table-root.svelte-6lkw17 p:where(.svelte-6lkw17) {margin:0;}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:10px 15px;background-color:#fff;border-radius:10px;}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .left:where(.svelte-6lkw17),\n  .table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .right:where(.svelte-6lkw17) {display:flex;flex-direction:row;align-items:center;gap:10px;}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .right:where(.svelte-6lkw17) .search-handler:where(.svelte-6lkw17) {display:flex;flex-direction:row;width:fit-content;height:fit-content;position:relative;}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .right:where(.svelte-6lkw17) .search-handler:where(.svelte-6lkw17) input.search:where(.svelte-6lkw17) {padding:12px 40px 12px 15px;border-radius:8px;border:1px solid var(--gray-003);background-color:transparent;width:370px;}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .right:where(.svelte-6lkw17) .search-handler:where(.svelte-6lkw17) input.search:where(.svelte-6lkw17):focus {border-color:var(--blue-005);outline:1px solid var(--blue-005);}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .right:where(.svelte-6lkw17) .search-handler:where(.svelte-6lkw17) .search-btn:where(.svelte-6lkw17) {position:absolute;background-color:transparent;padding:8px;display:flex;justify-content:center;align-items:center;border:none;border-radius:8px;cursor:pointer;right:5px;top:4px;}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .right:where(.svelte-6lkw17) .search-handler:where(.svelte-6lkw17) .search-btn:where(.svelte-6lkw17):hover {background-color:var(--blue-transparent);}.table-root .actions-container .right .search-handler .search-btn:hover svg {fill:var(--blue-005);}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .actions-button:where(.svelte-6lkw17) {display:flex;flex-direction:row;align-items:center;gap:5px;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) {overflow-x:auto;scrollbar-color:var(--gray-003) transparent;scrollbar-width:calc(100% - 20px);}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) {width:100%;background:#fff;border-top:1px solid var(--gray-003);border-bottom:1px solid var(--gray-003);box-shadow:none;text-align:left;border-collapse:separate;border-spacing:0;font-size:var(--font-base);}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) .sticky:where(.svelte-6lkw17) {position:sticky;left:0;z-index:10;background-color:var(--gray-001);}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) {box-shadow:none;border-bottom:1px solid var(--gray-003);}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th:where(.svelte-6lkw17) {padding:12px;background-color:var(--gray-001);text-transform:capitalize;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-003);min-width:fit-content;width:auto;text-wrap:nowrap;position:relative;z-index:1;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th:where(.svelte-6lkw17) .heading:where(.svelte-6lkw17) {display:flex;flex-direction:row;align-items:center;gap:8px;background-color:transparent;border:none;border-radius:5px;cursor:pointer;text-transform:capitalize;font-weight:600;color:var(--gray-008);}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th:where(.svelte-6lkw17) .heading:where(.svelte-6lkw17):focus {outline:none;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th:where(.svelte-6lkw17) .heading:where(.svelte-6lkw17):hover {background-color:var(--gray-002);}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th:where(.svelte-6lkw17) .heading:where(.svelte-6lkw17):disabled {color:var(--gray-008);background-color:transparent;cursor:default;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th:where(.svelte-6lkw17) .heading:where(.svelte-6lkw17):disabled:hover {background-color:transparent;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th.textarea:where(.svelte-6lkw17) {min-width:280px !important;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th.datetime:where(.svelte-6lkw17) {min-width:140px !important;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr.deleted:where(.svelte-6lkw17) {color:var(--red-005);}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th.no:where(.svelte-6lkw17) {width:30px;cursor:default;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th.a-row:where(.svelte-6lkw17) {max-width:fit-content;min-width:fit-content;width:fit-content;cursor:default;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) thead:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) th:where(.svelte-6lkw17):last-child {border-right:none;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) td:where(.svelte-6lkw17) {padding:8px 12px;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) td:where(.svelte-6lkw17) {padding:8px 12px;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-004);}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17):last-child td:where(.svelte-6lkw17) {border-bottom:none !important;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17):last-child td:where(.svelte-6lkw17):last-child {border-right:none !important;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) td.num-row:where(.svelte-6lkw17) {border-right:1px solid var(--gray-003);font-weight:600;text-align:center;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17):last-child td:where(.svelte-6lkw17) {border-bottom:none !important;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17):last-child td:where(.svelte-6lkw17):last-child {border-right:none !important;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) td:where(.svelte-6lkw17):last-child {border-right:none !important;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) td:where(.svelte-6lkw17) .actions:where(.svelte-6lkw17) {display:flex;flex-direction:row;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) td:where(.svelte-6lkw17) .actions:where(.svelte-6lkw17) .btn:where(.svelte-6lkw17) {border:none;padding:6px;border-radius:8px;background-color:transparent;cursor:pointer;display:flex;justify-content:center;align-items:center;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) td:where(.svelte-6lkw17) .actions:where(.svelte-6lkw17) .btn:where(.svelte-6lkw17):hover {background-color:var(--blue-transparent);}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) table:where(.svelte-6lkw17) tbody:where(.svelte-6lkw17) tr:where(.svelte-6lkw17) td:where(.svelte-6lkw17) .actions:where(.svelte-6lkw17) .btn.delete:where(.svelte-6lkw17):hover {background-color:var(--red-transparent);}.table-root .table-container table tbody tr td .actions .btn:hover svg {fill:var(--blue-005);}.table-root .table-container table tbody tr td .actions .btn.delete:hover svg {fill:var(--red-005);}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 15px 0 15px;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .filter:where(.svelte-6lkw17) {display:flex;flex-direction:row;align-items:center;gap:8px;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .filter:where(.svelte-6lkw17) .row-to-show:where(.svelte-6lkw17) {position:relative;width:fit-content;height:fit-content;z-index:11;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .filter:where(.svelte-6lkw17) .row-to-show:where(.svelte-6lkw17) .btn:where(.svelte-6lkw17) {border:none;background-color:var(--blue-transparent);color:var(--blue-005);width:fit-content;padding:3px 3px 3px 6px;font-weight:600;border:1px solid var(--blue-004);border-radius:9999px;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;gap:1px;cursor:pointer;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .filter:where(.svelte-6lkw17) .row-to-show:where(.svelte-6lkw17) .btn:where(.svelte-6lkw17):hover {background-color:var(--blue-002);}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .filter:where(.svelte-6lkw17) .row-to-show:where(.svelte-6lkw17) .rows:where(.svelte-6lkw17) {display:flex;flex-direction:column-reverse;position:absolute;width:100%;top:-200px;border-radius:5px;border:1px solid var(--gray-004);background-color:#fff;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .filter:where(.svelte-6lkw17) .row-to-show:where(.svelte-6lkw17) .rows:where(.svelte-6lkw17) button:where(.svelte-6lkw17) {border:none;background-color:transparent;padding:5px;cursor:pointer;color:var(--gray-007);}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .filter:where(.svelte-6lkw17) .row-to-show:where(.svelte-6lkw17) .rows:where(.svelte-6lkw17) button:where(.svelte-6lkw17):hover {background-color:var(--blue-transparent);color:var(--blue-007);}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .pagination:where(.svelte-6lkw17) {display:flex;flex-direction:row;align-items:center;gap:5px;overflow:hidden;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .pagination:where(.svelte-6lkw17) .btn:where(.svelte-6lkw17) {border:none;background-color:transparent;display:flex;flex-direction:row;justify-content:center;align-items:center;padding:6px 10px;border-radius:9999px;cursor:pointer;gap:5px;color:var(--gray-007);border:1px solid transparent;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .pagination:where(.svelte-6lkw17) .btn:where(.svelte-6lkw17):hover {border:1px solid var(--gray-004);}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .pagination:where(.svelte-6lkw17) .btn.active:where(.svelte-6lkw17) {background-color:var(--blue-transparent);color:var(--blue-006);font-weight:600;border:1px solid var(--blue-004);}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .pagination:where(.svelte-6lkw17) .btn.to:where(.svelte-6lkw17) {background-color:var(--blue-006);color:#fff;font-weight:600;border:none;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .pagination:where(.svelte-6lkw17) .btn.to:where(.svelte-6lkw17):hover {background-color:var(--blue-005);}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .pagination:where(.svelte-6lkw17) .btn.to:where(.svelte-6lkw17):disabled {background-color:var(--gray-002);color:var(--gray-006);font-weight:600;border:1px solid var(--gray-004);cursor:not-allowed;}\n\n  @media only screen and (max-width: 768px) {.popup-container.svelte-6lkw17 {padding:10px;}.popup-container.svelte-6lkw17 .popup:where(.svelte-6lkw17) {width:100%;}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) {flex-wrap:wrap;gap:10px;}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .left:where(.svelte-6lkw17),\n    .table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .right:where(.svelte-6lkw17) {flex-wrap:wrap;width:100%;}.table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .right:where(.svelte-6lkw17) .search-handler:where(.svelte-6lkw17),\n    .table-root.svelte-6lkw17 .actions-container:where(.svelte-6lkw17) .right:where(.svelte-6lkw17) .search-handler:where(.svelte-6lkw17) input.search:where(.svelte-6lkw17) {width:100%;}.table-root.svelte-6lkw17 .table-container:where(.svelte-6lkw17) {overflow-x:scroll;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) {flex-wrap:wrap;gap:10px;}.table-root.svelte-6lkw17 .pagination-container:where(.svelte-6lkw17) .pagination:where(.svelte-6lkw17) {gap:2px;width:100%;justify-content:center;}\n  }"
   };
-  function MasterTable($anchor, $props) {
+  function MasterTableBooking($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css13);
+    append_styles($anchor, $css14);
+    let tenants = prop($props, "tenants", 24, () => ({}));
+    let facilities = prop($props, "facilities", 24, () => []);
+    function getExtraTenants(tenantIds) {
+      if (!tenantIds.length) return "--";
+      return tenantIds.map((tenantId) => tenants()[tenantId]).join(", ");
+    }
+    function formatFacilities(facilities2) {
+      let formattedFacilities = "";
+      let arrFacilities = [];
+      try {
+        arrFacilities = JSON.parse(facilities2);
+      } catch (e) {
+        return facilities2;
+      }
+      try {
+        formattedFacilities = arrFacilities.map((facility) => `${facility.facilityName} (IDR ${facility.extraChargeIDR || 0})`).join(", ");
+      } catch (e) {
+        return formattedFacilities;
+      }
+      return formattedFacilities;
+    }
     let FIELDS = prop($props, "FIELDS", 24, () => []);
     let PAGER = prop($props, "PAGER", 28, () => ({}));
-    let MASTER_ROWS = prop($props, "MASTER_ROWS", 28, () => []);
+    let MASTER_ROWS = prop($props, "MASTER_ROWS", 24, () => []);
     let REFS = prop($props, "REFS", 24, () => ({}));
-    let NAME = prop(
-      $props,
-      "NAME",
-      8,
-      /** @type {string} */
-      ""
-    );
+    let NAME = prop($props, "NAME", 8, "");
+    let CAN_SHOW_INFO = prop($props, "CAN_SHOW_INFO", 8, false);
     let ACCESS = prop($props, "ACCESS", 24, () => ({}));
-    let ARRAY_OF_ARRAY = prop(
-      $props,
-      "ARRAY_OF_ARRAY",
-      8,
-      /** @type {boolean} */
-      true
-    );
-    let CAN_SEARCH_ROW = prop(
-      $props,
-      "CAN_SEARCH_ROW",
-      8,
-      /** @type {boolean} */
-      true
-    );
-    let CAN_EDIT_ROW = prop(
-      $props,
-      "CAN_EDIT_ROW",
-      8,
-      /** @type {boolean} */
-      true
-    );
-    let CAN_DELETE_ROW = prop(
-      $props,
-      "CAN_DELETE_ROW",
-      8,
-      /** @type {boolean} */
-      false
-    );
-    let CAN_RESTORE_ROW = prop(
-      $props,
-      "CAN_RESTORE_ROW",
-      8,
-      /** @type {boolean} */
-      false
-    );
-    let CAN_SHOW_INFO = prop(
-      $props,
-      "CAN_SHOW_INFO",
-      8,
-      /** @type {boolean} */
-      false
-    );
-    let CAN_OPEN_LINK = prop(
-      $props,
-      "CAN_OPEN_LINK",
-      8,
-      /** @type {boolean} */
-      false
-    );
-    let LINKS = prop($props, "LINKS", 24, () => []);
-    let IS_CUSTOM_EDIT = prop(
-      $props,
-      "IS_CUSTOM_EDIT",
-      8,
-      /** @type {boolean} */
-      false
-    );
-    let UNSORTED_ROWS = prop($props, "UNSORTED_ROWS", 24, () => []);
-    let EXTENDED_BUTTONS = prop($props, "EXTENDED_BUTTONS", 24, () => []);
-    let FIELD_TO_SEARCH = prop(
-      $props,
-      "FIELD_TO_SEARCH",
-      8,
-      /** @type {string} */
-      ""
-    );
-    let SINGLE_SELECTED = prop(
-      $props,
-      "SINGLE_SELECTED",
-      8,
-      /** @type {boolean} */
-      false
-    );
+    let ARRAY_OF_ARRAY = prop($props, "ARRAY_OF_ARRAY", 8, true);
+    let CAN_SEARCH_ROW = prop($props, "CAN_SEARCH_ROW", 8, true);
     let COL_WIDTHS = prop($props, "COL_WIDTHS", 24, () => ({}));
-    MASTER_ROWS((MASTER_ROWS() || []).map((row) => {
-      const waIdx = FIELDS().findIndex((f) => f.name === "waAddedAt");
-      const teleIdx = FIELDS().findIndex((f) => f.name === "teleAddedAt");
-      if (waIdx >= 0) {
-        row[waIdx] = row[waIdx] !== "0" && row[waIdx] !== "" && row[waIdx] !== null;
-      }
-      if (teleIdx >= 0) {
-        row[teleIdx] = row[teleIdx] !== "0" && row[teleIdx] !== "" && row[teleIdx] !== null;
-      }
-      return row;
-    }));
-    let isAjaxSubmitted = (
-      /** @type {boolean} */
-      false
-    );
+    let isAjaxSubmitted = false;
     let filterTable = mutable_source(null);
     let filterTableReady = mutable_source(false);
     let filterColumns = mutable_source([]);
     let filtersMap = mutable_source({});
     let deletedIndex = mutable_source(-1);
-    let showPopUp = mutable_source(false);
     let paginationTotal = mutable_source(1);
     let paginationsAll = (
-      /** @type {number[]} */
+      /** @type number[] */
       []
     );
     let paginationShow = mutable_source(
-      /** @type {number[]} */
+      /** @type number[] */
       []
     );
     let currentPage = mutable_source(1);
@@ -14757,10 +14993,6 @@ ${component_stack}
     });
     let OnInfo = prop($props, "OnInfo", 8, async function(row) {
     });
-    let OnEditWaAddedAt = prop($props, "OnEditWaAddedAt", 8, async function(id, payloads2) {
-    });
-    let OnEditTeleAddedAt = prop($props, "OnEditTeleAddedAt", 8, async function(id, payloads2) {
-    });
     function ApplyFilter() {
       get2(filterTable).Hide();
       let filters = (
@@ -14793,24 +15025,93 @@ ${component_stack}
       await OnDelete()(row);
       getPaginationShow();
     }
-    let idToMod = mutable_source("");
-    function toggleShowPopUp(id, row) {
-      set(payloads, []);
-      if (FIELDS() && FIELDS().length > 0) {
-        FIELDS().forEach((f, i) => {
-          set(payloads, [...get2(payloads), row[i]]);
-        });
+    let showPopUpEdit = mutable_source(false);
+    let idToMod = mutable_source(0);
+    let isRowDeleted = mutable_source(false);
+    async function toggleShowPopUpEdit(id, row) {
+      let booking = (
+        /** @type {Booking} */
+        {}
+      );
+      set(idToMod, id);
+      for (let i = 0; i < (FIELDS() || []).length; i++) {
+        if (FIELDS()[i].name === "deletedAt") {
+          if (row[i] > 0) {
+            set(isRowDeleted, true);
+          } else {
+            set(isRowDeleted, false);
+          }
+          break;
+        }
       }
-      set(showPopUp, true);
+      let isErrAjax = false;
+      await (0, import_jsApi2.AdminBooking)({
+        cmd: "form",
+        // @ts-ignore
+        booking: { id }
+      }, function(o) {
+        if (o.error) {
+          isErrAjax = true;
+          return;
+        }
+        booking = o.booking;
+      });
+      set(payloads, []);
+      if (!isErrAjax) {
+        mutate(payloads, get2(payloads)[1] = booking.roomId);
+        mutate(payloads, get2(payloads)[3] = booking.dateStart);
+        mutate(payloads, get2(payloads)[4] = booking.dateEnd);
+        mutate(payloads, get2(payloads)[5] = booking.tenantId);
+        mutate(payloads, get2(payloads)[6] = booking.basePriceIDR);
+        mutate(payloads, get2(payloads)[7] = booking.facilitiesObj);
+        mutate(payloads, get2(payloads)[8] = booking.totalPriceIDR);
+        mutate(payloads, get2(payloads)[9] = booking.paidAt);
+        mutate(payloads, get2(payloads)[10] = booking.extraTenants);
+      }
+      set(showPopUpEdit, true);
       set(idToMod, id);
     }
     function handleSubmitEdit() {
       OnEdit()(get2(idToMod), get2(payloads));
-      set(showPopUp, false);
+      closePopUpEdit();
     }
-    function formatFacilities(facArrInt, facObjs) {
-      if (!facArrInt.length) return "--";
-      return facArrInt.map((fId) => facObjs[Number(fId)]).join(", ");
+    function closePopUpEdit() {
+      set(showPopUpEdit, false);
+    }
+    let popUpAddPayment = mutable_source(null);
+    let isSubmitAddPayment = mutable_source(false);
+    let isPopUpAddPaymentReady = mutable_source(false);
+    let paymentAt = (0, import_xFormatter3.dateISOFormat)(0);
+    onMount(() => {
+      set(isPopUpAddPaymentReady, true);
+    });
+    function showPopUpAddPayment(row) {
+      set(idToMod, row[0]);
+      paymentAt = row[3];
+      get2(popUpAddPayment).Show();
+    }
+    async function submitAddPayment(payment) {
+      set(isSubmitAddPayment, true);
+      const i = (
+        /** @type {any} */
+        { payment, cmd: "upsert" }
+      );
+      await (0, import_jsApi2.AdminPayment)(
+        i,
+        /** @type {import('../jsApi.GEN').AdminPaymentCallback} */
+        /** @returns {Promise<void>} */
+        function(o) {
+          set(isSubmitAddPayment, false);
+          if (o.error) {
+            console.log(o);
+            notifier.showError(o.error);
+            return;
+          }
+          notifier.showSuccess(`Payment created !!`);
+          get2(popUpAddPayment).Hide();
+          OnRefresh()(PAGER());
+        }
+      );
     }
     async function OnSort(field) {
       set(isSortTableAsc, !get2(isSortTableAsc));
@@ -14823,36 +15124,6 @@ ${component_stack}
       await OnRefresh()(PAGER());
       getPaginationShow();
     }
-    let searchValue = mutable_source(
-      /** @type {string} */
-      ""
-    );
-    async function handleSearch() {
-      PAGER(PAGER().search = get2(searchValue), true);
-      PAGER(PAGER().searchBy = FIELD_TO_SEARCH(), true);
-      await OnRefresh()(PAGER());
-    }
-    async function handleSearchOnEnter(event2) {
-      if (event2.key === "Enter") {
-        set(showRowsNum, false);
-        await handleSearch();
-      }
-    }
-    function toggleCheckboxField(fieldName, rowIndex) {
-      const fieldIdx = FIELDS().findIndex((f) => f.name === fieldName);
-      if (fieldIdx === -1) return;
-      const row = MASTER_ROWS()[rowIndex];
-      row[fieldIdx] = !row[fieldIdx];
-      const payload = [...row];
-      const idIdx = FIELDS().findIndex((f) => f.name === "id");
-      const id = row[idIdx];
-      if (fieldName === "waAddedAt" && OnEditWaAddedAt()) {
-        OnEditWaAddedAt()(id, payload);
-      }
-      if (fieldName === "teleAddedAt" && OnEditTeleAddedAt()) {
-        OnEditTeleAddedAt()(id, payload);
-      }
-    }
     legacy_pre_effect(() => deep_read_state(PAGER()), () => {
       if (PAGER()) getPaginationShow();
     });
@@ -14862,6 +15133,35 @@ ${component_stack}
     var node = first_child(fragment);
     {
       var consequent = ($anchor2) => {
+        bind_this(
+          PopUpAddPayment($anchor2, {
+            isBookingReadOnly: true,
+            OnSubmit: submitAddPayment,
+            get bookingId() {
+              return get2(idToMod);
+            },
+            set bookingId($value) {
+              set(idToMod, $value);
+            },
+            get isSubmitted() {
+              return get2(isSubmitAddPayment);
+            },
+            set isSubmitted($value) {
+              set(isSubmitAddPayment, $value);
+            },
+            $legacy: true
+          }),
+          ($value) => set(popUpAddPayment, $value),
+          () => get2(popUpAddPayment)
+        );
+      };
+      if_block(node, ($render) => {
+        if (get2(isPopUpAddPaymentReady)) $render(consequent);
+      });
+    }
+    var node_1 = sibling(node, 2);
+    {
+      var consequent_1 = ($anchor2) => {
         bind_this(
           FilterTable($anchor2, {
             get filterColumns() {
@@ -14883,22 +15183,22 @@ ${component_stack}
           () => get2(filterTable)
         );
       };
-      if_block(node, ($render) => {
-        if (get2(filterTableReady)) $render(consequent);
+      if_block(node_1, ($render) => {
+        if (get2(filterTableReady)) $render(consequent_1);
       });
     }
-    var node_1 = sibling(node, 2);
+    var node_2 = sibling(node_1, 2);
     {
       var consequent_7 = ($anchor2) => {
-        var div = root_24();
+        var div = root_32();
         var div_1 = child(div);
         var header = child(div_1);
         var h2 = child(header);
         var text2 = child(h2);
         reset(h2);
         var button = sibling(h2, 2);
-        var node_2 = child(button);
-        Icon(node_2, {
+        var node_3 = child(button);
+        Icon(node_3, {
           size: "22",
           color: "var(--red-005)",
           get src() {
@@ -14909,186 +15209,154 @@ ${component_stack}
         reset(header);
         var div_2 = sibling(header, 2);
         each(div_2, 5, () => FIELDS() || [], index, ($anchor3, field, idx) => {
-          var fragment_2 = comment();
-          var node_3 = first_child(fragment_2);
+          var fragment_3 = comment();
+          var node_4 = first_child(fragment_3);
           {
             var consequent_6 = ($anchor4) => {
-              var fragment_3 = comment();
-              var node_4 = first_child(fragment_3);
+              var fragment_4 = comment();
+              var node_5 = first_child(fragment_4);
               {
-                var consequent_5 = ($anchor5) => {
-                  var fragment_4 = comment();
-                  var node_5 = first_child(fragment_4);
+                var consequent_2 = ($anchor5) => {
+                  SelectFacilitiesFromJson($anchor5, {
+                    get facilities() {
+                      return facilities();
+                    },
+                    get stringJson() {
+                      return get2(payloads)[idx];
+                    },
+                    set stringJson($value) {
+                      mutate(payloads, get2(payloads)[idx] = $value);
+                    },
+                    $legacy: true
+                  });
+                };
+                var consequent_3 = ($anchor5) => {
                   {
-                    var consequent_1 = ($anchor6) => {
-                      {
-                        let $0 = derived_safe_equal(() => (deep_read_state(REFS()), get2(field), untrack(() => REFS() && REFS()[get2(field).name] ? REFS()[get2(field).name] : get2(field).ref)));
-                        let $1 = derived_safe_equal(() => (deep_read_state(REFS()), get2(field), untrack(() => REFS() && REFS()[get2(field).name] ? true : false)));
-                        InputBox($anchor6, {
-                          get id() {
-                            return get2(field), untrack(() => get2(field).name);
-                          },
-                          get label() {
-                            return get2(field), untrack(() => get2(field).label);
-                          },
-                          get placeholder() {
-                            return get2(field), untrack(() => get2(field).description);
-                          },
-                          get type() {
-                            return get2(field), untrack(() => get2(field).inputType);
-                          },
-                          get values() {
-                            return get2($0);
-                          },
-                          get isObject() {
-                            return get2($1);
-                          },
-                          get value() {
-                            return get2(payloads)[idx];
-                          },
-                          set value($value) {
-                            mutate(payloads, get2(payloads)[idx] = $value);
-                          },
-                          $legacy: true
-                        });
-                      }
-                    };
-                    var consequent_2 = ($anchor6) => {
-                      {
-                        let $0 = derived_safe_equal(() => (deep_read_state(REFS()), get2(field), untrack(() => REFS() && REFS()[get2(field).name] ? REFS()[get2(field).name] : get2(field).ref)));
-                        InputBox($anchor6, {
-                          get id() {
-                            return get2(field), untrack(() => get2(field).name);
-                          },
-                          get label() {
-                            return get2(field), untrack(() => get2(field).label);
-                          },
-                          get placeholder() {
-                            return get2(field), untrack(() => get2(field).description);
-                          },
-                          get type() {
-                            return get2(field), untrack(() => get2(field).inputType);
-                          },
-                          get values() {
-                            return get2($0);
-                          },
-                          get value() {
-                            return get2(payloads)[idx];
-                          },
-                          set value($value) {
-                            mutate(payloads, get2(payloads)[idx] = $value);
-                          },
-                          $legacy: true
-                        });
-                      }
-                    };
-                    var consequent_4 = ($anchor6) => {
-                      var fragment_7 = comment();
-                      var node_6 = first_child(fragment_7);
-                      {
-                        var consequent_3 = ($anchor7) => {
-                          {
-                            let $0 = derived_safe_equal(() => (deep_read_state(REFS()), get2(field), untrack(() => REFS() && REFS()[get2(field).name] ? REFS()[get2(field).name] : get2(field).ref)));
-                            SingleSelected($anchor7, {
-                              get id() {
-                                return get2(field), untrack(() => get2(field).name);
-                              },
-                              get label() {
-                                return get2(field), untrack(() => get2(field).label);
-                              },
-                              get placeholder() {
-                                return get2(field), untrack(() => get2(field).description);
-                              },
-                              get valuesSourceObj() {
-                                return get2($0);
-                              },
-                              get valuesTarget() {
-                                return get2(payloads)[idx];
-                              },
-                              set valuesTarget($value) {
-                                mutate(payloads, get2(payloads)[idx] = $value);
-                              },
-                              $legacy: true
-                            });
-                          }
-                        };
-                        var alternate = ($anchor7) => {
-                          {
-                            let $0 = derived_safe_equal(() => (deep_read_state(REFS()), get2(field), untrack(() => REFS() && REFS()[get2(field).name] ? REFS()[get2(field).name] : get2(field).ref)));
-                            MultiSelect($anchor7, {
-                              get id() {
-                                return get2(field), untrack(() => get2(field).name);
-                              },
-                              get label() {
-                                return get2(field), untrack(() => get2(field).label);
-                              },
-                              get placeholder() {
-                                return get2(field), untrack(() => get2(field).description);
-                              },
-                              valuesSourceType: "object",
-                              get valuesSourceObj() {
-                                return get2($0);
-                              },
-                              get valuesTarget() {
-                                return get2(payloads)[idx];
-                              },
-                              set valuesTarget($value) {
-                                mutate(payloads, get2(payloads)[idx] = $value);
-                              },
-                              $legacy: true
-                            });
-                          }
-                        };
-                        if_block(node_6, ($render) => {
-                          if (SINGLE_SELECTED()) $render(consequent_3);
-                          else $render(alternate, -1);
-                        });
-                      }
-                      append($anchor6, fragment_7);
-                    };
-                    var alternate_1 = ($anchor6) => {
-                      InputBox($anchor6, {
-                        get id() {
-                          return get2(field), untrack(() => get2(field).name);
-                        },
-                        get label() {
-                          return get2(field), untrack(() => get2(field).label);
-                        },
-                        get placeholder() {
-                          return get2(field), untrack(() => get2(field).description);
-                        },
-                        get type() {
-                          return get2(field), untrack(() => get2(field).inputType);
-                        },
-                        get value() {
-                          return get2(payloads)[idx];
-                        },
-                        set value($value) {
-                          mutate(payloads, get2(payloads)[idx] = $value);
-                        },
-                        $legacy: true
-                      });
-                    };
-                    if_block(node_5, ($render) => {
-                      if (get2(field), untrack(() => get2(field).inputType === "combobox")) $render(consequent_1);
-                      else if (get2(field), untrack(() => get2(field).inputType === "combobox-arr")) $render(consequent_2, 1);
-                      else if (get2(field), untrack(() => get2(field).inputType === "multiselect")) $render(consequent_4, 2);
-                      else $render(alternate_1, -1);
+                    let $0 = derived_safe_equal(() => (deep_read_state(REFS()), get2(field), untrack(() => REFS() && REFS()[get2(field).name] ? REFS()[get2(field).name] : get2(field).ref)));
+                    let $1 = derived_safe_equal(() => (deep_read_state(REFS()), get2(field), untrack(() => REFS() && REFS()[get2(field).name] ? true : false)));
+                    InputBox($anchor5, {
+                      get id() {
+                        return get2(field), untrack(() => get2(field).name);
+                      },
+                      get label() {
+                        return get2(field), untrack(() => get2(field).label);
+                      },
+                      get placeholder() {
+                        return get2(field), untrack(() => get2(field).description);
+                      },
+                      get type() {
+                        return get2(field), untrack(() => get2(field).inputType);
+                      },
+                      get values() {
+                        return get2($0);
+                      },
+                      get isObject() {
+                        return get2($1);
+                      },
+                      get value() {
+                        return get2(payloads)[idx];
+                      },
+                      set value($value) {
+                        mutate(payloads, get2(payloads)[idx] = $value);
+                      },
+                      $legacy: true
                     });
                   }
-                  append($anchor5, fragment_4);
                 };
-                if_block(node_4, ($render) => {
-                  if (get2(field), untrack(() => !get2(field).readOnly)) $render(consequent_5);
+                var consequent_4 = ($anchor5) => {
+                  {
+                    let $0 = derived_safe_equal(() => (deep_read_state(REFS()), get2(field), untrack(() => REFS() && REFS()[get2(field).name] ? REFS()[get2(field).name] : get2(field).ref)));
+                    InputBox($anchor5, {
+                      get id() {
+                        return get2(field), untrack(() => get2(field).name);
+                      },
+                      get label() {
+                        return get2(field), untrack(() => get2(field).label);
+                      },
+                      get placeholder() {
+                        return get2(field), untrack(() => get2(field).description);
+                      },
+                      get type() {
+                        return get2(field), untrack(() => get2(field).inputType);
+                      },
+                      get values() {
+                        return get2($0);
+                      },
+                      get value() {
+                        return get2(payloads)[idx];
+                      },
+                      set value($value) {
+                        mutate(payloads, get2(payloads)[idx] = $value);
+                      },
+                      $legacy: true
+                    });
+                  }
+                };
+                var consequent_5 = ($anchor5) => {
+                  {
+                    let $0 = derived_safe_equal(() => (deep_read_state(REFS()), get2(field), untrack(() => REFS() && REFS()[get2(field).name] ? REFS()[get2(field).name] : get2(field).ref)));
+                    MultiSelect($anchor5, {
+                      get id() {
+                        return get2(field), untrack(() => get2(field).name);
+                      },
+                      get label() {
+                        return get2(field), untrack(() => get2(field).label);
+                      },
+                      get placeholder() {
+                        return get2(field), untrack(() => get2(field).description);
+                      },
+                      valuesSourceType: "object",
+                      get valuesSourceObj() {
+                        return get2($0);
+                      },
+                      get valuesTarget() {
+                        return get2(payloads)[idx];
+                      },
+                      set valuesTarget($value) {
+                        mutate(payloads, get2(payloads)[idx] = $value);
+                      },
+                      $legacy: true
+                    });
+                  }
+                };
+                var alternate = ($anchor5) => {
+                  InputBox($anchor5, {
+                    get id() {
+                      return get2(field), untrack(() => get2(field).name);
+                    },
+                    get label() {
+                      return get2(field), untrack(() => get2(field).label);
+                    },
+                    get placeholder() {
+                      return get2(field), untrack(() => get2(field).description);
+                    },
+                    get type() {
+                      return get2(field), untrack(() => get2(field).inputType);
+                    },
+                    get value() {
+                      return get2(payloads)[idx];
+                    },
+                    set value($value) {
+                      mutate(payloads, get2(payloads)[idx] = $value);
+                    },
+                    $legacy: true
+                  });
+                };
+                if_block(node_5, ($render) => {
+                  if (get2(field), untrack(() => get2(field).name == "facilitiesObj")) $render(consequent_2);
+                  else if (get2(field), untrack(() => get2(field).inputType === "combobox")) $render(consequent_3, 1);
+                  else if (get2(field), untrack(() => get2(field).inputType === "combobox-arr")) $render(consequent_4, 2);
+                  else if (get2(field), untrack(() => get2(field).inputType === "multiselect")) $render(consequent_5, 3);
+                  else $render(alternate, -1);
                 });
               }
-              append($anchor4, fragment_3);
+              append($anchor4, fragment_4);
             };
-            if_block(node_3, ($render) => {
-              if (get2(field), untrack(() => get2(field).name !== "id" && get2(field).name !== "waAddedAt" && get2(field).name !== "teleAddedAt")) $render(consequent_6);
+            if_block(node_4, ($render) => {
+              if (get2(field), untrack(() => get2(field).name !== "id" && !get2(field).readOnly)) $render(consequent_6);
             });
           }
-          append($anchor3, fragment_2);
+          append($anchor3, fragment_3);
         });
         reset(div_2);
         var div_3 = sibling(div_2, 2);
@@ -15096,22 +15364,22 @@ ${component_stack}
         reset(div_3);
         reset(div_1);
         reset(div);
-        template_effect(() => set_text(text2, `Edit ${(NAME() ? NAME() : "row") ?? ""} ${`#${get2(idToMod)}`}`));
-        event("click", button, () => set(showPopUp, false));
+        template_effect(() => set_text(text2, `Edit ${(NAME() ? NAME() : "row") ?? ""} ${`#${get2(idToMod)}`} ${get2(isRowDeleted) ? "(Deleted)" : ""}`));
+        event("click", button, closePopUpEdit);
         event("click", button_1, handleSubmitEdit);
         append($anchor2, div);
       };
-      if_block(node_1, ($render) => {
-        if (get2(showPopUp)) $render(consequent_7);
+      if_block(node_2, ($render) => {
+        if (get2(showPopUpEdit)) $render(consequent_7);
       });
     }
-    var div_4 = sibling(node_1, 2);
+    var div_4 = sibling(node_2, 2);
     var div_5 = child(div_4);
     var div_6 = child(div_5);
     var div_7 = child(div_6);
     var button_2 = child(div_7);
-    var node_7 = child(button_2);
-    Icon(node_7, {
+    var node_6 = child(button_2);
+    Icon(node_6, {
       color: "var(--gray-007)",
       size: "18",
       get src() {
@@ -15119,16 +15387,16 @@ ${component_stack}
       }
     });
     reset(button_2);
-    var node_8 = sibling(button_2, 2);
-    var node_9 = sibling(node_8, 2);
-    slot(node_9, $props, "default", {}, null);
+    var node_7 = sibling(button_2, 2);
+    var node_8 = sibling(node_7, 2);
+    slot(node_8, $props, "default", {}, null);
     reset(div_7);
-    var node_10 = sibling(div_7, 2);
+    var node_9 = sibling(div_7, 2);
     {
       var consequent_8 = ($anchor2) => {
-        var div_8 = root_123();
-        var node_11 = child(div_8);
-        Icon(node_11, {
+        var div_8 = root_112();
+        var node_10 = child(div_8);
+        Icon(node_10, {
           className: "spin",
           color: "var(--blue-007)",
           size: "28",
@@ -15139,19 +15407,19 @@ ${component_stack}
         reset(div_8);
         append($anchor2, div_8);
       };
-      if_block(node_10, ($render) => {
+      if_block(node_9, ($render) => {
         if (isAjaxSubmitted) $render(consequent_8);
       });
     }
     reset(div_6);
     var div_9 = sibling(div_6, 2);
-    var node_12 = child(div_9);
+    var node_11 = child(div_9);
     {
       var consequent_9 = ($anchor2) => {
-        var div_10 = root_133();
+        var div_10 = root_123();
         var button_3 = child(div_10);
-        var node_13 = child(button_3);
-        Icon(node_13, {
+        var node_12 = child(button_3);
+        Icon(node_12, {
           color: "var(--gray-007)",
           size: "16",
           get src() {
@@ -15159,15 +15427,11 @@ ${component_stack}
           }
         });
         reset(button_3);
-        var input = sibling(button_3, 2);
-        remove_input_defaults(input);
+        next(2);
         reset(div_10);
-        event("click", button_3, handleSearch);
-        bind_value(input, () => get2(searchValue), ($value) => set(searchValue, $value));
-        event("keydown", input, handleSearchOnEnter);
         append($anchor2, div_10);
       };
-      if_block(node_12, ($render) => {
+      if_block(node_11, ($render) => {
         if (CAN_SEARCH_ROW()) $render(consequent_9);
       });
     }
@@ -15177,18 +15441,16 @@ ${component_stack}
     var table = child(div_11);
     var thead = child(table);
     var tr = child(thead);
-    var node_14 = sibling(child(tr), 2);
-    each(node_14, 3, () => FIELDS() || [], (f) => f.name, ($anchor2, f) => {
-      var th = root_143();
-      var button_4 = child(th);
-      var span = child(button_4);
-      var text_1 = child(span, true);
-      reset(span);
-      var node_15 = sibling(span, 2);
+    var node_13 = sibling(child(tr));
+    each(node_13, 3, () => FIELDS() || [], (f) => f.name, ($anchor2, f) => {
+      var fragment_10 = comment();
+      var node_14 = first_child(fragment_10);
       {
         var consequent_13 = ($anchor3) => {
-          var fragment_11 = root_153();
-          var node_16 = first_child(fragment_11);
+          var fragment_11 = root_143();
+          var th = sibling(first_child(fragment_11), 2);
+          var button_4 = child(th);
+          var node_15 = sibling(child(button_4), 2);
           {
             var consequent_10 = ($anchor4) => {
               Icon($anchor4, {
@@ -15200,11 +15462,11 @@ ${component_stack}
                 }
               });
             };
-            if_block(node_16, ($render) => {
+            if_block(node_15, ($render) => {
               if (get2(isSortTableAsc), get2(f), get2(fieldNameToSort), untrack(() => get2(isSortTableAsc) && get2(f).name === get2(fieldNameToSort))) $render(consequent_10);
             });
           }
-          var node_17 = sibling(node_16, 2);
+          var node_16 = sibling(node_15, 2);
           {
             var consequent_11 = ($anchor4) => {
               Icon($anchor4, {
@@ -15216,11 +15478,11 @@ ${component_stack}
                 }
               });
             };
-            if_block(node_17, ($render) => {
+            if_block(node_16, ($render) => {
               if (get2(isSortTableAsc), get2(f), get2(fieldNameToSort), untrack(() => !get2(isSortTableAsc) && get2(f).name === get2(fieldNameToSort))) $render(consequent_11);
             });
           }
-          var node_18 = sibling(node_17, 2);
+          var node_17 = sibling(node_16, 2);
           {
             var consequent_12 = ($anchor4) => {
               Icon($anchor4, {
@@ -15232,230 +15494,216 @@ ${component_stack}
                 }
               });
             };
-            if_block(node_18, ($render) => {
+            if_block(node_17, ($render) => {
               if (get2(f), get2(fieldNameToSort), untrack(() => get2(f).name !== get2(fieldNameToSort))) $render(consequent_12);
             });
           }
+          reset(button_4);
+          reset(th);
+          event("click", button_4, () => OnSort(get2(f)));
           append($anchor3, fragment_11);
         };
-        var d = user_derived(() => (deep_read_state(UNSORTED_ROWS()), get2(f), untrack(() => !UNSORTED_ROWS().includes(get2(f).name))));
-        if_block(node_15, ($render) => {
-          if (get2(d)) $render(consequent_13);
+        var alternate_1 = ($anchor3) => {
+          var th_1 = root_182();
+          var button_5 = child(th_1);
+          var span = child(button_5);
+          var text_1 = child(span, true);
+          reset(span);
+          var node_18 = sibling(span, 2);
+          {
+            var consequent_17 = ($anchor4) => {
+              var fragment_15 = root_192();
+              var node_19 = first_child(fragment_15);
+              {
+                var consequent_14 = ($anchor5) => {
+                  Icon($anchor5, {
+                    className: "sort-icon",
+                    size: "13",
+                    color: "var(--gray-007)",
+                    get src() {
+                      return RiArrowsArrowDownSFill;
+                    }
+                  });
+                };
+                if_block(node_19, ($render) => {
+                  if (get2(isSortTableAsc), get2(f), get2(fieldNameToSort), untrack(() => get2(isSortTableAsc) && get2(f).name === get2(fieldNameToSort))) $render(consequent_14);
+                });
+              }
+              var node_20 = sibling(node_19, 2);
+              {
+                var consequent_15 = ($anchor5) => {
+                  Icon($anchor5, {
+                    className: "sort-icon",
+                    size: "13",
+                    color: "var(--gray-007)",
+                    get src() {
+                      return RiArrowsArrowUpSFill;
+                    }
+                  });
+                };
+                if_block(node_20, ($render) => {
+                  if (get2(isSortTableAsc), get2(f), get2(fieldNameToSort), untrack(() => !get2(isSortTableAsc) && get2(f).name === get2(fieldNameToSort))) $render(consequent_15);
+                });
+              }
+              var node_21 = sibling(node_20, 2);
+              {
+                var consequent_16 = ($anchor5) => {
+                  Icon($anchor5, {
+                    className: "sort-icon",
+                    size: "13",
+                    color: "var(--gray-007)",
+                    get src() {
+                      return RiArrowsExpandUpDownFill;
+                    }
+                  });
+                };
+                if_block(node_21, ($render) => {
+                  if (get2(f), get2(fieldNameToSort), untrack(() => get2(f).name !== get2(fieldNameToSort))) $render(consequent_16);
+                });
+              }
+              append($anchor4, fragment_15);
+            };
+            if_block(node_18, ($render) => {
+              if (get2(f), untrack(() => !(get2(f).name == "totalPaidIDR" || get2(f).name == "extraTenants"))) $render(consequent_17);
+            });
+          }
+          reset(button_5);
+          reset(th_1);
+          template_effect(() => {
+            set_style(th_1, (deep_read_state(COL_WIDTHS()), get2(f), untrack(() => COL_WIDTHS()[get2(f).name] ? `min-width: ${COL_WIDTHS()[get2(f).name]}px;` : "")));
+            set_class(
+              th_1,
+              1,
+              `
+								${(get2(f), untrack(() => get2(f).inputType === "textarea" ? "textarea" : "")) ?? ""}
+								${(get2(f), untrack(() => get2(f).inputType === "datetime" ? "datetime" : "")) ?? ""}
+							`,
+              "svelte-6lkw17"
+            );
+            button_5.disabled = (get2(f), untrack(() => get2(f).name === "totalPaidIDR" || get2(f).name === "extraTenants"));
+            set_text(text_1, (get2(f), untrack(() => get2(f).label)));
+          });
+          event("click", button_5, () => OnSort(get2(f)));
+          append($anchor3, th_1);
+        };
+        if_block(node_14, ($render) => {
+          if (get2(f), untrack(() => get2(f).name === "id")) $render(consequent_13);
+          else $render(alternate_1, -1);
         });
       }
-      reset(button_4);
-      reset(th);
-      template_effect(
-        ($0) => {
-          set_style(th, (deep_read_state(COL_WIDTHS()), get2(f), untrack(() => COL_WIDTHS()[get2(f).name] ? `min-width: ${COL_WIDTHS()[get2(f).name]}px;` : "")));
-          set_class(
-            th,
-            1,
-            `
-                ${(get2(f), untrack(() => get2(f).inputType === "textarea" ? "textarea" : "")) ?? ""}
-                ${(get2(f), untrack(() => get2(f).inputType === "datetime" ? "datetime" : "")) ?? ""}
-              `,
-            "svelte-4f6m80"
-          );
-          button_4.disabled = $0;
-          set_text(text_1, (get2(f), untrack(() => get2(f).label)));
-        },
-        [
-          () => (deep_read_state(UNSORTED_ROWS()), get2(f), untrack(() => UNSORTED_ROWS().includes(get2(f).name)))
-        ]
-      );
-      event("click", button_4, () => OnSort(get2(f)));
-      append($anchor2, th);
+      append($anchor2, fragment_10);
     });
     reset(tr);
     reset(thead);
     var tbody = sibling(thead);
-    var node_19 = child(tbody);
+    var node_22 = child(tbody);
     {
-      var consequent_30 = ($anchor2) => {
-        var fragment_15 = comment();
-        var node_20 = first_child(fragment_15);
-        each(node_20, 1, MASTER_ROWS, index, ($anchor3, row) => {
-          var tr_1 = root_202();
+      var consequent_28 = ($anchor2) => {
+        var fragment_19 = comment();
+        var node_23 = first_child(fragment_19);
+        each(node_23, 1, MASTER_ROWS, index, ($anchor3, row) => {
+          var tr_1 = root_242();
           var td = child(tr_1);
           var text_2 = child(td, true);
           reset(td);
-          var node_21 = sibling(td);
-          each(node_21, 1, () => FIELDS() || [], index, ($anchor4, f, idx) => {
-            var fragment_16 = comment();
-            var node_22 = first_child(fragment_16);
+          var node_24 = sibling(td);
+          each(node_24, 1, () => FIELDS() || [], index, ($anchor4, f, idx) => {
+            var fragment_20 = comment();
+            var node_25 = first_child(fragment_20);
             {
-              var consequent_22 = ($anchor5) => {
-                var fragment_17 = root_222();
-                var td_1 = first_child(fragment_17);
-                var node_23 = child(td_1);
+              var consequent_21 = ($anchor5) => {
+                var fragment_21 = root_26();
+                var td_1 = first_child(fragment_21);
+                var node_26 = child(td_1);
                 {
-                  var consequent_21 = ($anchor6) => {
-                    var div_12 = root_232();
-                    var node_24 = child(div_12);
+                  var consequent_20 = ($anchor6) => {
+                    var div_12 = root_272();
+                    var node_27 = child(div_12);
                     {
-                      var consequent_14 = ($anchor7) => {
-                        var button_5 = root_242();
-                        var node_25 = child(button_5);
-                        Icon(node_25, {
+                      var consequent_18 = ($anchor7) => {
+                        var button_6 = root_28();
+                        var node_28 = child(button_6);
+                        Icon(node_28, {
                           size: "15",
                           color: "var(--gray-007)",
                           get src() {
                             return RiSystemInformationLine;
                           }
                         });
-                        reset(button_5);
-                        event("click", button_5, () => OnInfo()(get2(row)));
-                        append($anchor7, button_5);
+                        reset(button_6);
+                        event("click", button_6, () => OnInfo()(get2(row)));
+                        append($anchor7, button_6);
                       };
-                      if_block(node_24, ($render) => {
-                        if (CAN_SHOW_INFO()) $render(consequent_14);
+                      if_block(node_27, ($render) => {
+                        if (CAN_SHOW_INFO()) $render(consequent_18);
                       });
                     }
-                    var node_26 = sibling(node_24, 2);
-                    {
-                      var consequent_16 = ($anchor7) => {
-                        var fragment_18 = comment();
-                        var node_27 = first_child(fragment_18);
-                        {
-                          var consequent_15 = ($anchor8) => {
-                            var button_6 = root_26();
-                            var node_28 = child(button_6);
-                            Icon(node_28, {
-                              size: "15",
-                              color: "var(--gray-007)",
-                              get src() {
-                                return RiDesignBallPenLine;
-                              }
-                            });
-                            reset(button_6);
-                            event("click", button_6, () => toggleShowPopUp(Cell(get2(row), idx, get2(f)), get2(row)));
-                            append($anchor8, button_6);
-                          };
-                          if_block(node_27, ($render) => {
-                            if (CAN_EDIT_ROW()) $render(consequent_15);
-                          });
-                        }
-                        append($anchor7, fragment_18);
-                      };
-                      if_block(node_26, ($render) => {
-                        if (!IS_CUSTOM_EDIT()) $render(consequent_16);
-                      });
-                    }
-                    var node_29 = sibling(node_26, 2);
-                    {
-                      var consequent_18 = ($anchor7) => {
-                        var fragment_19 = comment();
-                        var node_30 = first_child(fragment_19);
-                        {
-                          var consequent_17 = ($anchor8) => {
-                            var button_7 = root_28();
-                            var node_31 = child(button_7);
-                            Icon(node_31, {
-                              size: "15",
-                              color: "var(--gray-007)",
-                              get src() {
-                                return RiArrowsArrowGoBackLine;
-                              }
-                            });
-                            reset(button_7);
-                            event("click", button_7, () => restoreRow(get2(row)));
-                            append($anchor8, button_7);
-                          };
-                          var alternate_2 = ($anchor8) => {
-                            var button_8 = root_29();
-                            var node_32 = child(button_8);
-                            Icon(node_32, {
-                              size: "15",
-                              color: "var(--gray-007)",
-                              get src() {
-                                return RiSystemDeleteBin5Line;
-                              }
-                            });
-                            reset(button_8);
-                            event("click", button_8, () => deleteRow(get2(row)));
-                            append($anchor8, button_8);
-                          };
-                          if_block(node_30, ($render) => {
-                            if (get2(row), get2(deletedIndex), untrack(() => get2(row)[get2(deletedIndex)] > 0 || get2(row)[get2(deletedIndex)] === "terminated")) $render(consequent_17);
-                            else $render(alternate_2, -1);
-                          });
-                        }
-                        append($anchor7, fragment_19);
-                      };
-                      if_block(node_29, ($render) => {
-                        if (CAN_DELETE_ROW() || CAN_RESTORE_ROW()) $render(consequent_18);
-                      });
-                    }
-                    var node_33 = sibling(node_29, 2);
+                    var button_7 = sibling(node_27, 2);
+                    var node_29 = child(button_7);
+                    Icon(node_29, {
+                      size: "15",
+                      color: "var(--gray-007)",
+                      get src() {
+                        return RiDesignBallPenLine;
+                      }
+                    });
+                    reset(button_7);
+                    var button_8 = sibling(button_7, 2);
+                    var node_30 = child(button_8);
+                    Icon(node_30, {
+                      size: "15",
+                      color: "var(--gray-007)",
+                      get src() {
+                        return RiFinanceBankCardLine;
+                      }
+                    });
+                    reset(button_8);
+                    var node_31 = sibling(button_8, 2);
                     {
                       var consequent_19 = ($anchor7) => {
-                        var fragment_20 = comment();
-                        var node_34 = first_child(fragment_20);
-                        each(node_34, 1, () => LINKS() || [], index, ($anchor8, l) => {
-                          var a = root_31();
-                          var node_35 = child(a);
-                          Icon(node_35, {
-                            size: "15",
-                            color: "var(--gray-007)",
-                            get src() {
-                              return get2(l), untrack(() => get2(l).icon);
-                            }
-                          });
-                          reset(a);
-                          template_effect(
-                            ($0) => {
-                              set_attribute2(a, "title", (get2(l), untrack(() => get2(l).tooltip)));
-                              set_attribute2(a, "href", $0);
-                              set_attribute2(a, "target", (get2(l), untrack(() => get2(l).isTargetBlank ? "_blank" : "")));
-                            },
-                            [
-                              () => (get2(l), get2(row), untrack(() => get2(l).link(get2(row))))
-                            ]
-                          );
-                          append($anchor8, a);
+                        var button_9 = root_29();
+                        var node_32 = child(button_9);
+                        Icon(node_32, {
+                          size: "15",
+                          color: "var(--gray-007)",
+                          get src() {
+                            return RiArrowsArrowGoBackLine;
+                          }
                         });
-                        append($anchor7, fragment_20);
+                        reset(button_9);
+                        event("click", button_9, () => restoreRow(get2(row)));
+                        append($anchor7, button_9);
                       };
-                      if_block(node_33, ($render) => {
-                        if (CAN_OPEN_LINK()) $render(consequent_19);
-                      });
-                    }
-                    var node_36 = sibling(node_33, 2);
-                    {
-                      var consequent_20 = ($anchor7) => {
-                        var fragment_21 = comment();
-                        var node_37 = first_child(fragment_21);
-                        each(node_37, 1, () => EXTENDED_BUTTONS() || [], index, ($anchor8, b) => {
-                          var button_9 = root_33();
-                          var node_38 = child(button_9);
-                          Icon(node_38, {
-                            size: "15",
-                            color: "var(--gray-007)",
-                            get src() {
-                              return get2(b), untrack(() => get2(b).icon);
-                            }
-                          });
-                          reset(button_9);
-                          template_effect(() => set_attribute2(button_9, "title", (get2(b), untrack(() => get2(b).tooltip))));
-                          event("click", button_9, () => get2(b).action(get2(row)));
-                          append($anchor8, button_9);
+                      var alternate_2 = ($anchor7) => {
+                        var button_10 = root_30();
+                        var node_33 = child(button_10);
+                        Icon(node_33, {
+                          size: "15",
+                          color: "var(--gray-007)",
+                          get src() {
+                            return RiSystemDeleteBin5Line;
+                          }
                         });
-                        append($anchor7, fragment_21);
+                        reset(button_10);
+                        event("click", button_10, () => deleteRow(get2(row)));
+                        append($anchor7, button_10);
                       };
-                      if_block(node_36, ($render) => {
-                        if (deep_read_state(EXTENDED_BUTTONS()), untrack(() => (EXTENDED_BUTTONS() || []).length > 0)) $render(consequent_20);
+                      if_block(node_31, ($render) => {
+                        if (get2(row), get2(deletedIndex), untrack(() => get2(row)[get2(deletedIndex)] > 0 || get2(row)[get2(deletedIndex)] === "terminated")) $render(consequent_19);
+                        else $render(alternate_2, -1);
                       });
                     }
                     reset(div_12);
+                    event("click", button_7, () => toggleShowPopUpEdit(Cell(get2(row), idx, get2(f)), get2(row)));
+                    event("click", button_8, () => showPopUpAddPayment(get2(row)));
                     append($anchor6, div_12);
                   };
                   var alternate_3 = ($anchor6) => {
-                    var span_1 = root_34();
+                    var span_1 = root_31();
                     append($anchor6, span_1);
                   };
-                  if_block(node_23, ($render) => {
-                    if (deep_read_state(ACCESS()), untrack(() => ACCESS().admin || ACCESS().staff || ACCESS().user)) $render(consequent_21);
+                  if_block(node_26, ($render) => {
+                    if (deep_read_state(ACCESS()), untrack(() => ACCESS().admin || ACCESS().staff || ACCESS().user)) $render(consequent_20);
                     else $render(alternate_3, -1);
                   });
                 }
@@ -15463,91 +15711,81 @@ ${component_stack}
                 var td_2 = sibling(td_1, 2);
                 var text_3 = child(td_2);
                 reset(td_2);
-                template_effect(() => set_text(text_3, `#${(get2(row), idx, untrack(() => get2(row)[idx])) ?? ""}`));
-                append($anchor5, fragment_17);
+                template_effect(() => set_text(text_3, `#${(get2(row), idx, untrack(() => get2(row)[idx] || "--")) ?? ""}`));
+                append($anchor5, fragment_21);
               };
-              var consequent_23 = ($anchor5) => {
-                var td_3 = root_35();
+              var consequent_22 = ($anchor5) => {
+                var td_3 = root_322();
                 var text_4 = child(td_3, true);
                 reset(td_3);
                 template_effect(($0) => set_text(text_4, $0), [
-                  () => (get2(row), idx, deep_read_state(REFS()), untrack(() => formatFacilities(get2(row)[idx], REFS()["facilities"])))
+                  () => (get2(row), idx, deep_read_state(import_xFormatter3.formatPrice), get2(f), untrack(() => get2(row)[idx] ? (0, import_xFormatter3.formatPrice)(get2(row)[idx], get2(f).mapping || "IDR") : "--"))
                 ]);
                 append($anchor5, td_3);
               };
-              var consequent_24 = ($anchor5) => {
-                var td_4 = root_36();
+              var consequent_23 = ($anchor5) => {
+                var td_4 = root_33();
                 var text_5 = child(td_4, true);
                 reset(td_4);
                 template_effect(($0) => set_text(text_5, $0), [
-                  () => (get2(row), idx, deep_read_state(REFS()), get2(f), untrack(() => get2(row)[idx] && get2(row)[idx].length > 0 ? get2(row)[idx].map((id) => REFS()[get2(f).name][id]).join(", ") : "--"))
+                  () => (get2(row), idx, deep_read_state(import_xFormatter3.datetime), untrack(() => get2(row)[idx] ? (0, import_xFormatter3.datetime)(get2(row)[idx]) : "--"))
                 ]);
                 append($anchor5, td_4);
               };
-              var consequent_25 = ($anchor5) => {
-                var td_5 = root_37();
+              var consequent_24 = ($anchor5) => {
+                var td_5 = root_34();
                 var text_6 = child(td_5, true);
                 reset(td_5);
-                template_effect(($0) => set_text(text_6, $0), [
-                  () => (get2(row), idx, deep_read_state(import_xFormatter2.formatPrice), get2(f), untrack(() => get2(row)[idx] ? (0, import_xFormatter2.formatPrice)(get2(row)[idx], get2(f).mapping || "IDR") : "--"))
-                ]);
+                template_effect(() => set_text(text_6, (deep_read_state(REFS()), get2(f), get2(row), idx, untrack(() => REFS()[get2(f).name][get2(row)[idx]] || "--"))));
                 append($anchor5, td_5);
               };
-              var consequent_26 = ($anchor5) => {
-                var td_6 = root_38();
-                var text_7 = child(td_6, true);
+              var consequent_25 = ($anchor5) => {
+                var td_6 = root_35();
+                var text_7 = child(td_6);
                 reset(td_6);
-                template_effect(($0) => set_text(text_7, $0), [
-                  () => (get2(row), idx, deep_read_state(import_xFormatter2.datetime), untrack(() => get2(row)[idx] ? (0, import_xFormatter2.datetime)(get2(row)[idx]) : "--"))
-                ]);
+                template_effect(() => set_text(text_7, `${(get2(row), idx, untrack(() => get2(row)[idx] || "0")) ?? ""}%`));
                 append($anchor5, td_6);
               };
-              var consequent_27 = ($anchor5) => {
-                var td_7 = root_39();
+              var consequent_26 = ($anchor5) => {
+                var td_7 = root_36();
                 var text_8 = child(td_7, true);
                 reset(td_7);
-                template_effect(() => set_text(text_8, (deep_read_state(REFS()), get2(f), get2(row), idx, untrack(() => REFS()[get2(f).name][get2(row)[idx]] || "--"))));
+                template_effect(($0) => set_text(text_8, $0), [
+                  () => (get2(row), idx, untrack(() => formatFacilities(get2(row)[idx])))
+                ]);
                 append($anchor5, td_7);
               };
-              var consequent_28 = ($anchor5) => {
-                var td_8 = root_40();
-                var text_9 = child(td_8);
+              var consequent_27 = ($anchor5) => {
+                var td_8 = root_37();
+                var text_9 = child(td_8, true);
                 reset(td_8);
-                template_effect(() => set_text(text_9, `${(get2(row), idx, untrack(() => get2(row)[idx] || "0")) ?? ""}%`));
+                template_effect(($0) => set_text(text_9, $0), [
+                  () => (get2(row), idx, untrack(() => getExtraTenants(get2(row)[idx])))
+                ]);
                 append($anchor5, td_8);
               };
-              var consequent_29 = ($anchor5) => {
-                var td_9 = root_41();
-                var input_1 = child(td_9);
-                remove_input_defaults(input_1);
-                reset(td_9);
-                template_effect(() => set_checked(input_1, (get2(row), idx, untrack(() => get2(row)[idx]))));
-                event("change", input_1, () => toggleCheckboxField(get2(f).name, MASTER_ROWS().indexOf(get2(row))));
-                append($anchor5, td_9);
-              };
               var alternate_4 = ($anchor5) => {
-                var td_10 = root_422();
-                var text_10 = child(td_10, true);
-                reset(td_10);
+                var td_9 = root_38();
+                var text_10 = child(td_9, true);
+                reset(td_9);
                 template_effect(() => {
-                  set_class(td_10, 1, clsx2((get2(f), untrack(() => get2(f).type))), "svelte-4f6m80");
+                  set_class(td_9, 1, clsx2((get2(f), untrack(() => get2(f).type))), "svelte-6lkw17");
                   set_text(text_10, (get2(row), idx, untrack(() => typeof get2(row)[idx] === "boolean" ? get2(row)[idx] ? "Yes" : "No" : get2(row)[idx] || "--")));
                 });
-                append($anchor5, td_10);
+                append($anchor5, td_9);
               };
-              if_block(node_22, ($render) => {
-                if (get2(f), untrack(() => get2(f).name === "id")) $render(consequent_22);
-                else if (get2(f), untrack(() => get2(f).name === "facilities")) $render(consequent_23, 1);
-                else if (get2(f), untrack(() => get2(f).type == "intArr")) $render(consequent_24, 2);
-                else if (get2(f), untrack(() => get2(f).type == "currency")) $render(consequent_25, 3);
-                else if (get2(f), untrack(() => get2(f).inputType === "datetime")) $render(consequent_26, 4);
-                else if (get2(f), deep_read_state(REFS()), untrack(() => get2(f).inputType === "combobox" && REFS()[get2(f).name])) $render(consequent_27, 5);
-                else if (get2(f), untrack(() => get2(f).inputType === "percentage")) $render(consequent_28, 6);
-                else if (get2(f), untrack(() => get2(f).inputType === "checkbox")) $render(consequent_29, 7);
+              if_block(node_25, ($render) => {
+                if (get2(f), untrack(() => get2(f).name === "id")) $render(consequent_21);
+                else if (get2(f), untrack(() => get2(f).type == "currency")) $render(consequent_22, 1);
+                else if (get2(f), untrack(() => get2(f).inputType === "datetime")) $render(consequent_23, 2);
+                else if (get2(f), deep_read_state(REFS()), untrack(() => get2(f).inputType === "combobox" && REFS()[get2(f).name])) $render(consequent_24, 3);
+                else if (get2(f), untrack(() => get2(f).inputType === "percentage")) $render(consequent_25, 4);
+                else if (get2(f), untrack(() => get2(f).name === "facilitiesObj")) $render(consequent_26, 5);
+                else if (get2(f), untrack(() => get2(f).name === "extraTenants")) $render(consequent_27, 6);
                 else $render(alternate_4, -1);
               });
             }
-            append($anchor4, fragment_16);
+            append($anchor4, fragment_20);
           });
           reset(tr_1);
           template_effect(
@@ -15555,8 +15793,8 @@ ${component_stack}
               set_class(
                 tr_1,
                 1,
-                clsx2((deep_read_state(CAN_DELETE_ROW()), get2(row), get2(deletedIndex), untrack(() => CAN_DELETE_ROW() && (get2(row)[get2(deletedIndex)] > 0 || get2(row)[get2(deletedIndex)] === "terminated") ? "deleted" : ""))),
-                "svelte-4f6m80"
+                clsx2((get2(row), get2(deletedIndex), untrack(() => get2(row)[get2(deletedIndex)] > 0 || get2(row)[get2(deletedIndex)] === "terminated" ? "deleted" : ""))),
+                "svelte-6lkw17"
               );
               set_text(text_2, $0);
             },
@@ -15566,14 +15804,14 @@ ${component_stack}
           );
           append($anchor3, tr_1);
         });
-        append($anchor2, fragment_15);
+        append($anchor2, fragment_19);
       };
       var alternate_5 = ($anchor2) => {
-        var tr_2 = root_43();
+        var tr_2 = root_39();
         append($anchor2, tr_2);
       };
-      if_block(node_19, ($render) => {
-        if (deep_read_state(MASTER_ROWS()), untrack(() => MASTER_ROWS() && MASTER_ROWS().length > 0)) $render(consequent_30);
+      if_block(node_22, ($render) => {
+        if (deep_read_state(MASTER_ROWS()), untrack(() => MASTER_ROWS() && MASTER_ROWS().length > 0)) $render(consequent_28);
         else $render(alternate_5, -1);
       });
     }
@@ -15591,33 +15829,33 @@ ${component_stack}
     reset(p);
     reset(div_15);
     var div_16 = sibling(div_15, 2);
-    var node_39 = child(div_16);
+    var node_34 = child(div_16);
     {
-      var consequent_31 = ($anchor2) => {
-        var div_17 = root_44();
+      var consequent_29 = ($anchor2) => {
+        var div_17 = root_40();
         each(div_17, 5, () => rowsToShow, index, ($anchor3, r2) => {
-          var button_10 = root_45();
-          var text_12 = child(button_10, true);
-          reset(button_10);
+          var button_11 = root_41();
+          var text_12 = child(button_11, true);
+          reset(button_11);
           template_effect(() => set_text(text_12, get2(r2)));
-          event("click", button_10, () => toRow(get2(r2)));
-          append($anchor3, button_10);
+          event("click", button_11, () => toRow(get2(r2)));
+          append($anchor3, button_11);
         });
         reset(div_17);
         append($anchor2, div_17);
       };
-      if_block(node_39, ($render) => {
-        if (get2(showRowsNum)) $render(consequent_31);
+      if_block(node_34, ($render) => {
+        if (get2(showRowsNum)) $render(consequent_29);
       });
     }
-    var button_11 = sibling(node_39, 2);
-    var span_3 = child(button_11);
+    var button_12 = sibling(node_34, 2);
+    var span_3 = child(button_12);
     var text_13 = child(span_3, true);
     reset(span_3);
-    var node_40 = sibling(span_3, 2);
+    var node_35 = sibling(span_3, 2);
     {
       let $0 = derived_safe_equal(() => get2(showRowsNum) ? "rotate_right" : "dropdown");
-      Icon(node_40, {
+      Icon(node_35, {
         get className() {
           return get2($0);
         },
@@ -15627,7 +15865,7 @@ ${component_stack}
         }
       });
     }
-    reset(button_11);
+    reset(button_12);
     reset(div_16);
     next(2);
     reset(div_14);
@@ -15639,56 +15877,56 @@ ${component_stack}
     reset(p_1);
     reset(div_18);
     var div_19 = sibling(div_18, 2);
-    var button_12 = child(div_19);
-    var node_41 = child(button_12);
-    Icon(node_41, {
+    var button_13 = child(div_19);
+    var node_36 = child(button_13);
+    Icon(node_36, {
       size: "16",
       get src() {
         return CgChevronDoubleLeft;
       }
     });
-    reset(button_12);
-    var button_13 = sibling(button_12, 2);
-    var node_42 = child(button_13);
-    Icon(node_42, {
+    reset(button_13);
+    var button_14 = sibling(button_13, 2);
+    var node_37 = child(button_14);
+    Icon(node_37, {
       size: "16",
       get src() {
         return CgChevronLeft;
       }
     });
-    reset(button_13);
-    var node_43 = sibling(button_13, 2);
-    each(node_43, 1, () => get2(paginationShow), index, ($anchor2, i) => {
-      var button_14 = root_46();
-      var text_15 = child(button_14, true);
-      reset(button_14);
+    reset(button_14);
+    var node_38 = sibling(button_14, 2);
+    each(node_38, 1, () => get2(paginationShow), index, ($anchor2, i) => {
+      var button_15 = root_42();
+      var text_15 = child(button_15, true);
+      reset(button_15);
       template_effect(() => {
-        button_14.disabled = get2(currentPage) == get2(i);
-        set_class(button_14, 1, clsx2(get2(currentPage) === get2(i) ? "btn active" : "btn"), "svelte-4f6m80");
-        set_attribute2(button_14, "title", `Go to page ${get2(i)}`);
+        button_15.disabled = get2(currentPage) == get2(i);
+        set_class(button_15, 1, clsx2(get2(currentPage) === get2(i) ? "btn active" : "btn"), "svelte-6lkw17");
+        set_attribute2(button_15, "title", `Go to page ${get2(i)}`);
         set_text(text_15, get2(i));
       });
-      event("click", button_14, () => goToPage(get2(i)));
-      append($anchor2, button_14);
+      event("click", button_15, () => goToPage(get2(i)));
+      append($anchor2, button_15);
     });
-    var button_15 = sibling(node_43, 2);
-    var node_44 = child(button_15);
-    Icon(node_44, {
+    var button_16 = sibling(node_38, 2);
+    var node_39 = child(button_16);
+    Icon(node_39, {
       size: "16",
       get src() {
         return CgChevronRight;
       }
     });
-    reset(button_15);
-    var button_16 = sibling(button_15, 2);
-    var node_45 = child(button_16);
-    Icon(node_45, {
+    reset(button_16);
+    var button_17 = sibling(button_16, 2);
+    var node_40 = child(button_17);
+    Icon(node_40, {
       size: "16",
       get src() {
         return CgChevronDoubleRight;
       }
     });
-    reset(button_16);
+    reset(button_17);
     reset(div_19);
     reset(div_13);
     reset(div_4);
@@ -15696,42 +15934,36 @@ ${component_stack}
       set_text(text_11, get2(totalRowsCurrent));
       set_text(text_13, get2(currentRows));
       set_text(text_14, get2(totalRows));
-      button_12.disabled = get2(currentPage) == 1;
       button_13.disabled = get2(currentPage) == 1;
-      button_15.disabled = get2(currentPage) == get2(paginationTotal);
+      button_14.disabled = get2(currentPage) == 1;
       button_16.disabled = get2(currentPage) == get2(paginationTotal);
+      button_17.disabled = get2(currentPage) == get2(paginationTotal);
     });
     event("click", button_2, () => get2(filterTable).Show());
-    event("click", button_11, toggleRowsNum);
-    event("keydown", button_11, (e) => {
-      if (e.key === "Escape") {
-        set(showRowsNum, false);
-        console.log("event:", e);
-      }
-    });
-    event("click", button_12, () => goToPage(1));
-    event("click", button_13, () => goToPage(get2(currentPage) - 1));
-    event("click", button_15, () => goToPage(get2(currentPage) + 1));
-    event("click", button_16, () => goToPage(get2(paginationTotal)));
+    event("click", button_12, toggleRowsNum);
+    event("click", button_13, () => goToPage(1));
+    event("click", button_14, () => goToPage(get2(currentPage) - 1));
+    event("click", button_16, () => goToPage(get2(currentPage) + 1));
+    event("click", button_17, () => goToPage(get2(paginationTotal)));
     append($anchor, fragment);
     pop();
   }
 
   // staffBooking.svelte
-  var import_jsApi2 = __toESM(require_jsApi_GEN());
+  var import_jsApi3 = __toESM(require_jsApi_GEN());
 
   // _components/PopUpAddBooking.svelte
-  var import_xFormatter3 = __toESM(require_xFormatter());
+  var import_xFormatter4 = __toESM(require_xFormatter());
   var root_111 = from_html(`<div class="input-box svelte-1qrg1vu"><label class="label svelte-1qrg1vu" for="facilities">Facilities</label> <!></div>`);
   var root_210 = from_html(`<span>Submit</span>`);
   var root14 = from_html(`<div><div class="popup svelte-1qrg1vu"><header class="header svelte-1qrg1vu"><h2 class="svelte-1qrg1vu">Add Booking</h2> <button class="svelte-1qrg1vu"><!></button></header> <div class="forms svelte-1qrg1vu"><!> <!> <!> <!> <div class="input-totalprice svelte-1qrg1vu"><label class="label svelte-1qrg1vu" for="totalPriceIDR">Total Price</label> <div class="totalprice svelte-1qrg1vu"><span class="baseprice"> </span> <span class="facilityprice"> </span> <span class="total"> </span></div></div> <!> <!> <!> <!></div> <div class="foot svelte-1qrg1vu"><div class="left"></div> <div class="right svelte-1qrg1vu"><button class="cancel svelte-1qrg1vu">Cancel</button> <button class="ok svelte-1qrg1vu"><!> <!></button></div></div></div></div>`);
-  var $css14 = {
+  var $css15 = {
     hash: "svelte-1qrg1vu",
     code: ".rotate-b {transition:all 0.2s ease-in-out;transform:rotate(90deg);}\n\n  @keyframes svelte-1qrg1vu-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(180deg);\n    }\n  }.spin {\n    animation: svelte-1qrg1vu-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.popup-container.svelte-1qrg1vu {display:none;position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2000;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);justify-content:center;padding:50px;overflow:auto;}.popup-container.show.svelte-1qrg1vu {display:flex;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) {border-radius:8px;background-color:#FFF;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) header:where(.svelte-1qrg1vu) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) header:where(.svelte-1qrg1vu) h2:where(.svelte-1qrg1vu) {margin:0;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) header:where(.svelte-1qrg1vu) button:where(.svelte-1qrg1vu) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) header:where(.svelte-1qrg1vu) button:where(.svelte-1qrg1vu):hover {background-color:#ef444420;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) header:where(.svelte-1qrg1vu) button:where(.svelte-1qrg1vu):active {background-color:#ef444430;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) .forms:where(.svelte-1qrg1vu) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) .foot:where(.svelte-1qrg1vu) {display:flex;flex-direction:row;justify-content:space-between;gap:10px;align-items:center;padding:15px 20px;border-top:1px solid var(--gray-004);}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) .foot:where(.svelte-1qrg1vu) .right:where(.svelte-1qrg1vu) {display:flex;flex-direction:row;align-items:center;gap:10px;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) .foot:where(.svelte-1qrg1vu) button:where(.svelte-1qrg1vu) {padding:8px 18px;border-radius:9999px;border:none;color:#FFF;cursor:pointer;font-weight:600;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) .foot:where(.svelte-1qrg1vu) button.ok:where(.svelte-1qrg1vu) {background-color:var(--green-006);display:flex;justify-content:center;align-items:center;}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) .foot:where(.svelte-1qrg1vu) button.ok:where(.svelte-1qrg1vu):hover {background-color:var(--green-005);}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) .foot:where(.svelte-1qrg1vu) button.ok:where(.svelte-1qrg1vu):disabled {cursor:not-allowed;background-color:var(--gray-003);color:var(--gray-007);}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) .foot:where(.svelte-1qrg1vu) button.cancel:where(.svelte-1qrg1vu) {background-color:transparent;color:var(--gray-007);}.popup-container.svelte-1qrg1vu .popup:where(.svelte-1qrg1vu) .foot:where(.svelte-1qrg1vu) button.cancel:where(.svelte-1qrg1vu):hover {background-color:var(--gray-001);}.input-totalprice.svelte-1qrg1vu {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);display:flex;flex-direction:column;gap:5px;}.input-totalprice.svelte-1qrg1vu label:where(.svelte-1qrg1vu) {font-size:var(--font-base);margin-left:10px;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;}.input-totalprice.svelte-1qrg1vu .totalprice:where(.svelte-1qrg1vu) {width:100%;border:1px solid var(--gray-003);border-radius:5px;background-color:var(--gray-001);padding:10px 12px;display:flex;flex-direction:row;align-items:center;gap:5px;}.input-box.svelte-1qrg1vu {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);display:flex;flex-direction:column;gap:5px;}.input-box.svelte-1qrg1vu .label:where(.svelte-1qrg1vu) {font-size:var(--font-base);margin-left:10px;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;}\n\n  @media only screen and (max-width : 768px) {.popup-container.svelte-1qrg1vu {padding:10px;}\n  }"
   };
   function PopUpAddBooking($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css14);
+    append_styles($anchor, $css15);
     let isShow = mutable_source(
       /** @type {boolean} */
       false
@@ -15746,15 +15978,15 @@ ${component_stack}
     let tenants = prop($props, "tenants", 24, () => ({}));
     let facilities = prop($props, "facilities", 24, () => []);
     let rooms = prop($props, "rooms", 24, () => ({}));
-    let dateStart = mutable_source((0, import_xFormatter3.dateISOFormat)(0));
-    let dateEnd = mutable_source((0, import_xFormatter3.dateISOFormat)(30));
+    let dateStart = mutable_source((0, import_xFormatter4.dateISOFormat)(0));
+    let dateEnd = mutable_source((0, import_xFormatter4.dateISOFormat)(30));
     let basePriceIDR = mutable_source(0);
     let facilitiesIds = (
       /** @type {number[]} */
       []
     );
     let totalPriceIDR = 0;
-    let paidAt = mutable_source((0, import_xFormatter3.dateISOFormat)(0));
+    let paidAt = mutable_source((0, import_xFormatter4.dateISOFormat)(0));
     let tenantId = mutable_source(null);
     let extraTenantsIds = mutable_source(
       /** @type {number[]} */
@@ -15780,18 +16012,18 @@ ${component_stack}
           roomId: get2(roomId)
         }
       );
-      facilitiesIds = (0, import_xFormatter3.arrToArrNum)(facilitiesIds);
+      facilitiesIds = (0, import_xFormatter4.arrToArrNum)(facilitiesIds);
       await OnSubmit()(booking, facilitiesIds);
     }
     const Show = () => set(isShow, true);
     const Hide = () => set(isShow, false);
     const Reset = () => {
-      set(dateStart, (0, import_xFormatter3.dateISOFormat)(0));
-      set(dateEnd, (0, import_xFormatter3.dateISOFormat)(30));
+      set(dateStart, (0, import_xFormatter4.dateISOFormat)(0));
+      set(dateEnd, (0, import_xFormatter4.dateISOFormat)(30));
       set(basePriceIDR, 0);
       facilitiesIds = [];
       totalPriceIDR = 0;
-      set(paidAt, (0, import_xFormatter3.dateISOFormat)(0));
+      set(paidAt, (0, import_xFormatter4.dateISOFormat)(0));
       set(tenantId, 0);
       set(extraTenantsIds, []);
       set(roomId, 0);
@@ -16058,13 +16290,13 @@ ${component_stack}
   var root_310 = from_html(`<button class="btn" title="add booking"><!></button>`);
   var root_211 = from_html(`<div class="master-booking svelte-c3sg6d"><h2 class="svelte-c3sg6d">Booking Management</h2> <!></div>`);
   var root15 = from_html(`<!> <!>`, 1);
-  var $css15 = {
+  var $css16 = {
     hash: "svelte-c3sg6d",
     code: ".master-booking.svelte-c3sg6d {display:flex;flex-direction:column;gap:20px;padding:20px;}.master-booking.svelte-c3sg6d h2:where(.svelte-c3sg6d) {margin:0;}"
   };
   function StaffBooking_1($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css15);
+    append_styles($anchor, $css16);
     let user = (
       /** @type {User} */
       {/* user */}
@@ -16084,6 +16316,10 @@ ${component_stack}
     let tenants = (
       /** @type {Record<Number, string>} */
       {/* tenants */}
+    );
+    let rooms = (
+      /** @type {Record<Number, string>} */
+      {/* rooms */}
     );
     let facilities = (
       /** @type {Facility[]} */
@@ -16116,7 +16352,7 @@ ${component_stack}
     });
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: import_xConstant.CmdList };
-      await (0, import_jsApi2.StaffBooking)(
+      await (0, import_jsApi3.StaffBooking)(
         // @ts-ignore
         i,
         /** @type {import('./jsApi.GEN').AdminBookingCallback} */
@@ -16142,7 +16378,7 @@ ${component_stack}
           cmd: import_xConstant.CmdRestore
         }
       );
-      await (0, import_jsApi2.StaffBooking)(
+      await (0, import_jsApi3.StaffBooking)(
         i,
         /** @type {import('./jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */
@@ -16164,7 +16400,7 @@ ${component_stack}
         /** @type {any}*/
         { pager: get2(pager), booking: { id: row[0] }, cmd: import_xConstant.CmdDelete }
       );
-      await (0, import_jsApi2.StaffBooking)(
+      await (0, import_jsApi3.StaffBooking)(
         i,
         /** @type {import('./jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */
@@ -16192,7 +16428,7 @@ ${component_stack}
         /** @type {any}*/
         { pager: get2(pager), booking: booking2, cmd: import_xConstant.CmdUpsert }
       );
-      await (0, import_jsApi2.StaffBooking)(
+      await (0, import_jsApi3.StaffBooking)(
         i,
         /** @type {import('./jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */
@@ -16215,7 +16451,7 @@ ${component_stack}
         /** @type {any} */
         { pager: get2(pager), facilities: facilities2, booking: booking2, cmd: import_xConstant.CmdUpsert }
       );
-      await (0, import_jsApi2.StaffBooking)(
+      await (0, import_jsApi3.StaffBooking)(
         i,
         /** @type {import('../jsApi.GEN').AdminBookingCallback} */
         /** @returns {Promise<void>} */
@@ -16244,6 +16480,7 @@ ${component_stack}
             OnSubmit: OnAddBooking,
             facilities,
             tenants,
+            rooms,
             get isSubmitted() {
               return get2(isSubmitAddBooking);
             },
@@ -16267,13 +16504,18 @@ ${component_stack}
       children: ($anchor2, $slotProps) => {
         var div = root_211();
         var node_2 = sibling(child(div), 2);
-        MasterTable(node_2, {
+        MasterTableBooking(node_2, {
           ACCESS: segments,
-          REFS: { "tenantId": tenants },
-          CAN_EDIT_ROW: false,
+          NAME: "Booking",
+          REFS: {
+            "tenantId": tenants,
+            "extraTenants": tenants,
+            "roomId": rooms
+          },
+          COL_WIDTHS: { "tenantId": 200, "extraTenants": 300 },
+          tenants,
+          facilities,
           CAN_SEARCH_ROW: true,
-          CAN_DELETE_ROW: true,
-          CAN_RESTORE_ROW: true,
           OnDelete,
           OnRestore,
           OnRefresh,
