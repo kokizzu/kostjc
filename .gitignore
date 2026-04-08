@@ -25,3 +25,4 @@ svelte/bun.lockb
 *.lz4
 
 backup
+.codex

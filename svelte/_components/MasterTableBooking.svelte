@@ -883,25 +883,6 @@
     gap: 10px;
   }
 
-  .table-root .actions-container .left .debug .btn {
-    border: none;
-    background-color: var(--blue-006);
-    color: #fff;
-    width: fit-content;
-    padding: 4px 10px;
-    border-radius: 9999px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 3px;
-    cursor: pointer;
-  }
-
-  .table-root .actions-container .left .debug .btn:hover {
-    background-color: var(--blue-005);
-  }
-
   .table-root .actions-container .right .search-handler {
     display: flex;
     flex-direction: row;
@@ -1065,8 +1046,7 @@
 		border-bottom: 1px solid var(--gray-004);
   }
 
-	.table-root .table-container table tbody tr:last-child td,
-	.table-root .table-container table tbody tr:last-child th {
+	.table-root .table-container table tbody tr:last-child td {
 		border-bottom: none !important;
 	}
 
@@ -1080,8 +1060,7 @@
 		text-align: center;
 	}
 
-  .table-root .table-container table tbody tr:last-child td,
-  .table-root .table-container table tbody tr:last-child th {
+  .table-root .table-container table tbody tr:last-child td {
     border-bottom: none !important;
   }
 
@@ -1091,12 +1070,6 @@
 
   .table-root .table-container table tbody tr td:last-child {
     border-right: none !important;
-  }
-
-  .table-root .table-container table tbody tr th {
-    text-align: center;
-    border-right: 1px solid var(--gray-004);
-    border-bottom: 1px solid var(--gray-004);
   }
 
   .table-root .table-container table tbody tr td .actions {

@@ -44,9 +44,10 @@
 		})()
 
 
-		bookingsPerMonth.forEach((booking) => {
-			booking.color = tenantColors[booking.tenantId];
-		});
+		bookingsPerMonth = bookingsPerMonth.map(booking => ({
+			...booking,
+			color: tenantColors[booking.tenantId]
+		}));
 	}
 
 	let totalDaysInSelectedMonth = /** @type {number} */ (31);

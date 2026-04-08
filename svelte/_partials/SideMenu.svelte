@@ -18,11 +18,13 @@
 
   export let access = /** @type {Access} */ ({});
 
-  const pathAll = /** @type {string}*/ (window.location.pathname);
-  const pathsArray = /** @type {string[]}*/ (pathAll.split('/'));
+  const pathAll = /** @type {string} */ (
+    typeof window === 'undefined' ? '' : window.location.pathname
+  );
+  const pathsArray = /** @type {string[]} */ (pathAll.split('/'));
 
-  const pathLv1 = /** @type {string}*/ (pathsArray[1]);
-  const pathLv2 = /** @type {string}*/ (pathsArray[2]);
+  const pathLv1 = /** @type {string} */ (pathsArray[1]);
+  const pathLv2 = /** @type {string} */ (pathsArray[2]);
 
   function sideMenuScrollIntoView() {
     let linkId = /** @type {string} */ ('');
@@ -240,7 +242,7 @@
         </a>
       </nav>
     {/if}
-    <span class="separator" />
+    <span class="separator"></span>
     <nav class="nav-menu">
       <button class="red" on:click={logout}>
         <Icon src={RiSystemLogoutBoxRLine} size="20" />
@@ -367,7 +369,7 @@
         </a>
       </nav>
     {/if}
-    <span class="separator" />
+    <span class="separator"></span>
     <nav class="nav-menu">
       <button class="red" on:click={logout}>
         <Icon src={RiSystemLogoutBoxRLine} size="20" />

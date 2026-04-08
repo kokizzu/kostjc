@@ -102,7 +102,7 @@
   <div class="header">
     <h1>Available Rooms</h1>
     <div class="sort-controls">
-      <label>Sort by:</label>
+      <p>Sort by:</p>
       <div class="sort-buttons">
         <button 
           class="sort-btn" 
@@ -187,10 +187,11 @@
     flex-wrap: wrap;
   }
 
-  .sort-controls label {
+  .sort-controls p {
     font-weight: 600;
     font-size: 14px;
     color: var(--gray-007, #333);
+    margin: 0;
   }
 
   .sort-buttons {

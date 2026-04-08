@@ -224,9 +224,9 @@
         {#if Mode===ModeRegister || Mode===ModeLogin}
           <div class="oauth-container">
             <div class="or-separator">
-              <span/>
+              <span></span>
               <p>or</p>
-              <span/>
+              <span></span>
             </div>
           </div>
         {/if}
@@ -320,16 +320,6 @@
     gap: 15px;
   }
 
-  .auth-section .main-container .form-container .forgot-password a {
-    color: var(--blue-006);
-    text-decoration: none;
-  }
-
-  .auth-section .main-container .form-container .forgot-password a:hover {
-    color: var(--blue-005);
-    text-decoration: underline;
-  }
-
   .auth-section .main-container .form-container .button-container {
     height: fit-content;
     width: 100%;
@@ -378,10 +368,6 @@
     font-weight : 600;
     padding     : 0 10px;
     margin: 0;
-  }
-
-  .auth-section .main-container .form-container .oauth-container .button span {
-    margin-left: 8px;
   }
 
   .auth-section .main-container .form-container .foot-auth {

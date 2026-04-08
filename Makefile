@@ -21,11 +21,11 @@ local-clickhouse:
 
 download-backup:
 	@echo "Downloading backup database at $(timestamp) from Server"
-	rsync -Wav -e 'ssh -p 22 -i ~/.ssh/$(ssh-key)' $(user)@194.233.65.174:../kostjc/backup/*$(timestamp)*.jsonline.lz4 ./backup
+	rsync -Wav -e 'ssh -p 22 -i ~/.ssh/$(ssh-key)' root@benalu.dev:/home/kostjc/backup/*$(timestamp)*.jsonline.lz4 ./backup
 
 upload-backup:
 	@echo "Uploading backup database at $(timestamp) to Server"
-	rsync -avz --progress ./backup/*$(timestamp)*.jsonline.lz4 -e 'ssh -p 22 -i ~/.ssh/$(ssh-key)' $(user)@194.233.65.174:../kostjc/backup/
+	rsync -avz --progress ./backup/*$(timestamp)*.jsonline.lz4 -e 'ssh -p 22 -i ~/.ssh/$(ssh-key)' root@benalu.dev:/home/kostjc/backup/
 
 modtidy:
 	sudo chmod -R a+rwx _tmpdb && go mod tidy

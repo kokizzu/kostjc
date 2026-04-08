@@ -419,8 +419,7 @@
     fill: var(--red-005);
   }
 
-	.table-root .table-container table tbody tr:last-child td,
-	.table-root .table-container table tbody tr:last-child th {
+	.table-root .table-container table tbody tr:last-child td {
 		border-bottom: none !important;
 	}
 
@@ -434,8 +433,7 @@
 		text-align: center;
 	}
 
-  .table-root .table-container table tbody tr:last-child td,
-  .table-root .table-container table tbody tr:last-child th {
+  .table-root .table-container table tbody tr:last-child td {
     border-bottom: none !important;
   }
 
@@ -445,12 +443,6 @@
 
   .table-root .table-container table tbody tr td:last-child {
     border-right: none !important;
-  }
-
-  .table-root .table-container table tbody tr th {
-    text-align: center;
-    border-right: 1px solid var(--gray-004);
-    border-bottom: 1px solid var(--gray-004);
   }
 
 	.table-root .table-container table thead tr th.textarea {

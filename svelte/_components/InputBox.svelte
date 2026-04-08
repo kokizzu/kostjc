@@ -419,7 +419,7 @@
     font-weight: 700;
   }
 
-  .input-box .options-container .input-container input {
+  :global(.input-box .options-container .input-container input) {
     padding-right: 30px !important;
   }
 

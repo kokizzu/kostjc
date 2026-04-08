@@ -31,6 +31,7 @@
   let tenants     = /** @type {Record<Number, string>} */({/* tenants */});
   let rooms       = /** @type {Record<Number, string>} */({/* rooms */});
   let facilities  = /** @type {Facility[]} */ ([/* facilities */]);
+  let bookingsRenderKey = 0;
 
   async function refreshBookings() {
     await StaffOccupancyReport(// @ts-ignore
@@ -43,8 +44,12 @@
           return
         }
         
-        bookingsPerQuartal = o.bookingsPerQuartal
-        roomNames = o.roomNames
+        bookingsPerQuartal = (o.bookingsPerQuartal || []).map(
+          /** @param {BookingDetail & Record<string, any>} booking */
+          booking => ({ ...booking })
+        );
+        roomNames = [...(o.roomNames || [])];
+        bookingsRenderKey += 1;
       }
     );
   }
@@ -485,6 +490,7 @@
       </div>
     </div>
     <div class="table-container">
+      {#key `${bookingsRenderKey}-${monthStart}-${monthEnd}`}
       <table>
         <thead>
           <tr>
@@ -497,13 +503,13 @@
           </tr>
         </thead>
         <tbody>
-          {#each (roomNames || []) as room}
+          {#each (roomNames || []) as room (room)}
             <tr>
               <th>Room {room}</th>
-              {#each (quartals || []) as quartal}
+              {#each (quartals || []) as quartal (`${room}-${quartal}`)}
                 <td>
                   <div class="cells">
-                    {#each reOrderBookingPerQuartal(room, quartal) as booking}
+                    {#each reOrderBookingPerQuartal(room, quartal) as booking (`${booking.id}-${booking.dateStart}-${booking.dateEnd}-${booking.amountPaid}-${booking.totalPrice}-${booking.deletedAt}`)}
                       <div
                         class="cell
                         {booking.deletedAt > 0 ? 'refunded' : ''}
@@ -573,6 +579,7 @@
           {/each}
         </tbody>
       </table>
+      {/key}
     </div>
   </div>
 </LayoutMain>

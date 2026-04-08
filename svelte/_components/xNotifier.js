@@ -62,7 +62,18 @@ let Notifier = function() {
   };
 }();
 
-let notifier = new Notifier();
+const noop = () => {};
+
+let notifier =
+  typeof document === 'undefined'
+    ? {
+        notify: noop,
+        showInfo: noop,
+        showSuccess: noop,
+        showError: noop,
+        showWarning: noop,
+      }
+    : new Notifier();
 
 export {
   notifier,

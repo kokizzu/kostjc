@@ -358,15 +358,6 @@
 		color: var(--green-006);
 	}
 
-	.popup-container .popup .foot button {
-		padding: 8px 18px;
-		border-radius: 9999px;
-		border: none;
-		color: #FFF;
-		cursor: pointer;
-		font-weight: 600;
-	}
-
 	@media only screen and (max-width: 768px) {
 		.popup-container {
       padding: 10px;
