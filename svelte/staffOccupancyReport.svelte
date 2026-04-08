@@ -190,25 +190,29 @@
   }
 
   function calculateDateStartEnd(/** @type {string} */ inputDate) {
-    const date = new Date(inputDate);
+    const [yearStr, monthStr, dayStr] = inputDate.split('-');
+    const year = Number(yearStr);
+    const month = Number(monthStr);
+    const day = Number(dayStr);
 
-    let year = date.getFullYear();
-    let month = date.getMonth();
-    let day = date.getDate();
-
-    if (day === 1) {
-      const endOfMonth = new Date(year, month + 1, 0);
-      return endOfMonth.toISOString().split("T")[0];
+    if (!year || !month || !day) {
+      return inputDate;
     }
 
-    console.log('Day:', day)
+    if (day === 1) {
+      const lastDayOfMonth = new Date(year, month, 0).getDate();
+      return `${yearStr}-${monthStr}-${String(lastDayOfMonth).padStart(2, '0')}`;
+    }
 
-    const nextMonthDate = new Date(year, month + 1, day);
-    const dayStr = String(nextMonthDate.getDate()).padStart(2, '0');
-    const monthStr = String(nextMonthDate.getMonth() + 1).padStart(2, '0');
-    const yearStr = nextMonthDate.getFullYear();
+    let nextYear = year;
+    let nextMonth = month + 1;
+    if (nextMonth === 13) {
+      nextMonth = 1;
+      nextYear += 1;
+    }
 
-    return `${yearStr}-${monthStr}-${dayStr}`;
+    const resultDay = day - 1;
+    return `${String(nextYear).padStart(4, '0')}-${String(nextMonth).padStart(2, '0')}-${String(resultDay).padStart(2, '0')}`;
   }
 
   function onExtendBooking(/** @type {number} */ roomId) {
@@ -231,7 +235,7 @@
     bookingToExtend = lastBookingWithByDateEnd;
 
     dateStart = dateISOFormatFromYYYYMMDD(lastBookingWithByDateEnd.dateEnd, 1);
-    dateEnd = calculateDateStartEnd(lastBookingWithByDateEnd.dateEnd);
+    dateEnd = calculateDateStartEnd(dateStart);
     popupExtendBooking.Show();
   }
 
