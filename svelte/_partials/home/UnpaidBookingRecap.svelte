@@ -66,6 +66,22 @@
     sortBy = key;
   }
 
+  /**
+   * @param {string} roomName
+   * @returns {boolean}
+   */
+  function isPurpleRoom(roomName) {
+    return /^[ABC]/i.test((roomName || '').trim());
+  }
+
+  /**
+   * @param {string[]} roomNames
+   * @returns {boolean}
+   */
+  function hasPurpleRoom(roomNames) {
+    return (roomNames || []).some(isPurpleRoom);
+  }
+
   const recapItems = /** @type {UnpaidBookingRecapItem[]} */ (
     Object.values(
       (unpaidBookingTenants || []).reduce(
@@ -170,7 +186,7 @@
         </thead>
         <tbody>
           {#each sortedRecapItems as item (`${item.tenantName}-${item.earliestStartDate}`)}
-            <tr>
+            <tr class:room-purple={hasPurpleRoom(item.roomNames)} class:room-yellow={!hasPurpleRoom(item.roomNames)}>
               <td>{item.tenantName}</td>
               <td>{formatPrice(item.unpaidAmount, 'IDR')}</td>
               <td>{item.earliestStartDate}</td>
@@ -292,8 +308,12 @@
     outline-offset: -2px;
   }
 
-  tbody tr:nth-child(even) td {
-    background-color: var(--gray-001);
+  tbody tr.room-purple td {
+    background-color: #faf5ff;
+  }
+
+  tbody tr.room-yellow td {
+    background-color: #fffdf2;
   }
 
   tbody tr:hover td {

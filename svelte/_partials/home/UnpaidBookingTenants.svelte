@@ -210,6 +210,14 @@
     bookingIdToPay = bookingId;
     popUpAddPayment.Show();
   }
+
+  /**
+   * @param {string} roomName
+   * @returns {boolean}
+   */
+  function isPurpleRoom(roomName) {
+    return /^[ABC]/i.test((roomName || '').trim());
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -244,7 +252,7 @@
       {#each (unpaidBookingTenants || []) as ub}
         {@const prog = getOccupancyProgress(ub)}
         {@const paidPercent = getProgressPaidPercentage(ub)}
-        <div class="card">
+        <div class="card" class:room-purple={isPurpleRoom(ub.roomName)} class:room-yellow={!isPurpleRoom(ub.roomName)}>
           <div class="heading">
             <h3>{ub.tenantName}</h3>
             <div class="actions">
@@ -320,14 +328,22 @@
 
   .empty-unpaidBookingTenants .cards .card {
     background-color: var(--gray-001);
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 10px;
+    gap: 6px;
     position: relative;
     overflow: hidden;
+  }
+
+  .empty-unpaidBookingTenants .cards .card.room-purple {
+    background-color: #faf5ff;
+  }
+
+  .empty-unpaidBookingTenants .cards .card.room-yellow {
+    background-color: #fffdf2;
   }
 
   .empty-unpaidBookingTenants .cards .card .heading {
@@ -342,12 +358,13 @@
     height: 1px;
     background-color: var(--gray-004) !important;
     border: none;
+    margin: 0;
   }
 
   .empty-unpaidBookingTenants .cards .card .detail {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
   }
 
   .empty-unpaidBookingTenants .cards .card h3 {
@@ -360,7 +377,7 @@
   .empty-unpaidBookingTenants .cards .card .desc {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
     z-index: 20;
   }
 
@@ -412,7 +429,7 @@
   .progress-container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
   }
 
   .progress-container label {

@@ -96,6 +96,14 @@
       minimumFractionDigits: 0
     }).format(amount);
   }
+
+  /**
+   * @param {string} roomName
+   * @returns {boolean}
+   */
+  function isPurpleRoom(roomName) {
+    return /^[ABC]/i.test((roomName || '').trim());
+  }
 </script>
 
 <section class="empty-rooms">
@@ -132,7 +140,7 @@
   {#if sortedRooms && sortedRooms.length > 0}
     <div class="cards">
       {#each (sortedRooms || []) as r}
-        <div class="card">
+        <div class="card" class:room-purple={isPurpleRoom(r.roomName)} class:room-yellow={!isPurpleRoom(r.roomName)}>
           <h3>Room {r.roomName}</h3>
           <div class="desc">
             <span>{@html r.isAvailableNow || r.availableAt == ''
@@ -230,13 +238,21 @@
 
   .empty-rooms .cards .card {
     background-color: var(--gray-001);
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
     position: relative;
     overflow: hidden;
+  }
+
+  .empty-rooms .cards .card.room-purple {
+    background-color: #faf5ff;
+  }
+
+  .empty-rooms .cards .card.room-yellow {
+    background-color: #fffdf2;
   }
 
   .empty-rooms .cards .card h3 {
@@ -247,11 +263,11 @@
   }
 
   .empty-rooms .cards .card .desc {
-    padding-top: 10px;
+    padding-top: 4px;
     border-top: 1px solid var(--gray-004);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
     z-index: 20;
   }
 
@@ -259,7 +275,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 0;
+    padding: 1px 0;
   }
 
   .price-label {
