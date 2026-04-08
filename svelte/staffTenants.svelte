@@ -1,0 +1,370 @@
+<script>
+  /** @typedef {import('./_types/masters.js').Access} Access */
+  /** @typedef {import('./_types/masters.js').Field} Field */
+  /** @typedef {import('./_types/masters.js').PagerIn} PagerIn */
+  /** @typedef {import('./_types/masters.js').PagerOut} PagerOut */
+  /** @typedef {import('./_types/users.js').User} User */
+  /** @typedef {import('./_types/users.js').Tenant} Tenant */
+  
+  import LayoutMain from './_layouts/main.svelte';
+  import MasterTable from './_components/MasterTable.svelte';
+  import { onMount } from 'svelte';
+  import axios from 'axios';
+  import { notifier } from './_components/xNotifier';
+  import PopUpForms from './_components/PopUpForms.svelte';
+  import { Icon } from './node_modules/svelte-icons-pack/dist';
+  import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
+  import { CmdDelete, CmdList, CmdRestore, CmdUpsert, CmdToggleTeleAdded, CmdToggleWaAdded } from './_components/xConstant';
+  import { dateISOFormat, checkboxToDate } from './_components/xFormatter';
+
+  let user      = /** @type {User} */ ({/* user */});
+  let segments  = /** @type {Access} */ ({/* segments */});
+  let tenant  = /** @type {Tenant} */ ({/* tenant */});
+  let tenants = /** @type {any[][]} */([/* tenants */]);
+  let fields    = /** @type {Field[]} */ ([/* fields */]);
+  let pager     = /** @type {PagerOut} */ ({/* pager */});
+
+  let isPopUpFormReady = /** @type boolean */ (false);
+  let popUpForms = /** @type {
+    import('svelte').SvelteComponent | HTMLElement | PopUpForms |any
+  } */ (null);
+  let isSubmitTenant = /** @type boolean */ (false);
+
+  const KtpGenders = [
+    'Laki - Laki',
+    'Perempuan'
+  ];
+  const KtpMaritalStatus = [
+    'Belum Kawin',
+    'Kawin',
+    'Cerai Hidup',
+    'Cerai Mati'
+  ];
+  const KtpReligions = [
+    'Islam',
+    'Hindu',
+    'Kristen',
+    'Katholik',
+    'Buddha',
+    'Konghucu'
+  ];
+
+  /**
+   * @param {any} i
+   * @param {(o: any) => void} cb
+   */
+  async function StaffTenants(i, cb) {
+    return await axios.post('/staff/tenants', i).then(({ data }) => cb(data)).catch(err => cb(err?.response?.data || { error: err?.message || 'request failed' }));
+  }
+
+  onMount(() => isPopUpFormReady = true);
+
+  async function OnRefresh(/** @type PagerIn */ pagerIn) {
+    const i = {
+      pager: pagerIn,
+      cmd: CmdList
+    };
+    await StaffTenants( // @ts-ignore
+      i, /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        isSubmitTenant = false;
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+        pager = o.pager;
+        tenants = o.tenants;
+      }
+    );
+  }
+
+  async function OnRestore(/** @type any[] */ row) {
+    const i = /** @type {any}*/ ({
+      pager,
+      tenant: {
+        id: row[0]
+      },
+      cmd: CmdRestore
+    });
+    await StaffTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        pager = o.pager;
+        tenants = o.tenants;
+        notifier.showSuccess(`Tenant '${row[1]}' restored !!`);
+
+        OnRefresh(pager);
+      }
+    );
+  }
+
+  async function OnDelete(/** @type any[] */ row) {
+    const i = /** @type {any}*/ ({
+      pager,
+      tenant: {
+        id: row[0]
+      },
+      cmd: CmdDelete
+    });
+    await StaffTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        pager = o.pager;
+        tenants = o.tenants;
+        notifier.showSuccess(`Tenant '${row[1]}' deleted !!`);
+
+        OnRefresh(pager);
+      }
+    );
+  }
+
+  async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
+    const tenant = {
+      id: payloads[0],
+      tenantName: payloads[1],
+      ktpRegion: payloads[2],
+      ktpNumber: payloads[3],
+      ktpName: payloads[4],
+      ktpPlaceBirth: payloads[5],
+      ktpDateBirth: payloads[6],
+      ktpGender: payloads[7],
+      ktpAddress: payloads[8],
+      ktpRtRw: payloads[9],
+      ktpKelurahanDesa: payloads[10],
+      ktpKecamatan: payloads[11],
+      ktpReligion: payloads[12],
+      ktpMaritalStatus: payloads[13],
+      ktpOccupation: payloads[14],
+      ktpCitizenship: payloads[15],
+      telegramUsername: payloads[16],
+      whatsappNumber: payloads[17],
+    }
+    const i = /** @type {any}*/ ({
+      pager,
+      tenant,
+      cmd: CmdUpsert
+    });
+    await StaffTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        pager = o.pager;
+        tenants = o.tenants;
+        notifier.showSuccess(`Tenant '${tenant.tenantName}' updated !!`);
+
+        OnRefresh(pager);
+        popUpForms.Hide();
+      }
+    );
+  }
+
+  async function OnAddTenant(/** @type any[] */ payloads) {
+    isSubmitTenant = true;
+
+    const tenant = /** @type {any} */ ({
+      tenantName: payloads[1],
+      ktpRegion: payloads[2],
+      ktpNumber: payloads[3],
+      ktpName: payloads[4],
+      ktpPlaceBirth: payloads[5],
+      ktpDateBirth: payloads[6],
+      ktpGender: payloads[7],
+      ktpAddress: payloads[8],
+      ktpRtRw: payloads[9],
+      ktpKelurahanDesa: payloads[10],
+      ktpKecamatan: payloads[11],
+      ktpReligion: payloads[12],
+      ktpMaritalStatus: payloads[13],
+      ktpOccupation: payloads[14],
+      ktpCitizenship: payloads[15],
+      telegramUsername: payloads[16],
+      whatsappNumber: payloads[17],
+      waAddedAt: '',
+      teleAddedAt: '',
+    });
+    const i = /** @type {any} */ ({
+      pager,
+      tenant,
+      cmd: CmdUpsert
+    });
+
+    await StaffTenants(i,
+      /** @type {import('../jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        isSubmitTenant = false;
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+        
+        pager = o.pager;
+        tenants = o.tenants;
+        notifier.showSuccess(`Tenant '${tenant.tenantName}' created !!`);
+
+        OnRefresh(pager);
+        popUpForms.Hide();
+      }
+    );
+  }
+
+async function OnEditWaAddedAt(/** @type any */ id, /** @type any[]*/ payloads) {
+    const i = /** @type {any}*/ ({
+      pager,
+      tenant: {
+        id: payloads[0],
+        waAddedAt: checkboxToDate(payloads[18]),
+      },
+      cmd: CmdToggleWaAdded
+    });
+    await StaffTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        pager = o.pager;
+        tenants = o.tenants;
+        notifier.showSuccess(`'${payloads[1]}' WaAddedAt updated !!`);
+
+        OnRefresh(pager);
+        popUpForms.Hide();
+      }
+    );
+  }
+
+  async function OnEditTeleAddedAt(/** @type any */ id, /** @type any[]*/ payloads) {
+    const i = /** @type {any}*/ ({
+      pager,
+      tenant: {
+        id: payloads[0],
+        teleAddedAt: checkboxToDate(payloads[19]),
+      },
+      cmd: CmdToggleTeleAdded
+    });
+    await StaffTenants(i,
+      /** @type {import('./jsApi.GEN').AdminTenantsCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type any */ o) {
+        if (o.error) {
+          console.log(o);
+          notifier.showError(o.error);
+          return
+        }
+
+        pager = o.pager;
+        tenants = o.tenants;
+        notifier.showSuccess(`'${payloads[1]}' TeleAddedAt updated !!`);
+
+        OnRefresh(pager);
+        popUpForms.Hide();
+      }
+    );
+  }
+
+</script>
+
+{#if isPopUpFormReady}
+  <PopUpForms
+    bind:this={popUpForms}
+    heading="Add Tenant"
+    FIELDS={fields}
+    INITIAL_VALUES={{
+      'ktpDateBirth': dateISOFormat(-6205)
+    }}
+    REFS={{
+      'ktpGender': KtpGenders,
+      'ktpMaritalStatus': KtpMaritalStatus,
+      'ktpReligion': KtpReligions,
+    }}
+    bind:isSubmitted={isSubmitTenant}
+    OnSubmit={OnAddTenant}
+  />
+{/if}
+
+<LayoutMain access={segments} user={user}>
+  <div class="master-tenants">
+    <h2>Tenant Management</h2>
+    <MasterTable
+      NAME="Tenant"
+      ACCESS={segments}
+      bind:FIELDS={fields}
+      bind:PAGER={pager}
+      bind:MASTER_ROWS={tenants}
+      REFS={{
+        'ktpGender': KtpGenders,
+        'ktpMaritalStatus': KtpMaritalStatus,
+        'ktpReligion': KtpReligions,
+      }}
+      COL_WIDTHS={{
+        'tenantName': 250,
+        'ktpRegion': 300
+      }}
+      FIELD_TO_SEARCH="tenantName"
+
+      CAN_EDIT_ROW
+      CAN_SEARCH_ROW
+      CAN_DELETE_ROW
+      CAN_RESTORE_ROW
+
+      {OnDelete}
+      {OnRestore}
+      {OnRefresh}
+      {OnEdit}
+      {OnEditWaAddedAt}
+      {OnEditTeleAddedAt}
+    >
+    <button
+      class="btn"
+      on:click={() => popUpForms.Show()}
+      title="add tenant"
+    >
+      <Icon
+        color="var(--gray-007)"
+        size="18"
+        src={RiSystemAddBoxLine}
+      />
+    </button>
+    </MasterTable>
+  </div>
+</LayoutMain>
+
+<style>
+  .master-tenants {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .master-tenants h2 {
+    margin: 0;
+  }
+</style>

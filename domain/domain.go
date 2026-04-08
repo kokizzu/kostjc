@@ -13,8 +13,6 @@ import (
 	"kostjc/conf"
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/saAuth"
-	"kostjc/model/mCafe"
-	"kostjc/model/mCafe/saCafe"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/saProperty"
 	"kostjc/model/xMailer"
@@ -32,21 +30,17 @@ type Domain struct {
 	IsBgSvc bool // long-running program
 
 	// timed buffer
-	authLogs            *chBuffer.TimedBuffer
-	userLogs            *chBuffer.TimedBuffer
-	tenantLogs          *chBuffer.TimedBuffer
-	locationLogs        *chBuffer.TimedBuffer
-	facilityLogs        *chBuffer.TimedBuffer
-	buildingLogs        *chBuffer.TimedBuffer
-	roomLogs            *chBuffer.TimedBuffer
-	bookingLogs         *chBuffer.TimedBuffer
-	paymentLogs         *chBuffer.TimedBuffer
-	stockLogs           *chBuffer.TimedBuffer
-	menuLogs            *chBuffer.TimedBuffer
-	saleLogs            *chBuffer.TimedBuffer
-	wifiDeviceLogs      *chBuffer.TimedBuffer
-	borrowedUtensilLogs *chBuffer.TimedBuffer
-	laundryLogs         *chBuffer.TimedBuffer
+	authLogs       *chBuffer.TimedBuffer
+	userLogs       *chBuffer.TimedBuffer
+	tenantLogs     *chBuffer.TimedBuffer
+	locationLogs   *chBuffer.TimedBuffer
+	facilityLogs   *chBuffer.TimedBuffer
+	buildingLogs   *chBuffer.TimedBuffer
+	roomLogs       *chBuffer.TimedBuffer
+	bookingLogs    *chBuffer.TimedBuffer
+	paymentLogs    *chBuffer.TimedBuffer
+	stockLogs      *chBuffer.TimedBuffer
+	wifiDeviceLogs *chBuffer.TimedBuffer
 
 	// logger
 	Log *zerolog.Logger
@@ -78,11 +72,7 @@ func (d *Domain) InitTimedBuffer() {
 	d.bookingLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableBookingLogs])
 	d.paymentLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TablePaymentLogs])
 	d.stockLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableStockLogs])
-	d.menuLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableMenuLogs])
-	d.saleLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableSaleLogs])
 	d.wifiDeviceLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saProperty.Preparators[mProperty.TableWifiDeviceLogs])
-	d.borrowedUtensilLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableBorrowedUtensilLogs])
-	d.laundryLogs = chBuffer.NewTimedBuffer(d.PropOlap.DB, 100_000, 1*time.Second, saCafe.Preparators[mCafe.TableLaundryLogs])
 }
 
 func (d *Domain) WaitTimedBufferFinalFlush() {

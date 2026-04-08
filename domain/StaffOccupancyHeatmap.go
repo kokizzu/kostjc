@@ -36,7 +36,7 @@ const (
 
 func (d *Domain) StaffOccupancyHeatmap(in *StaffOccupancyHeatmapIn) (out StaffOccupancyHeatmapOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustBelowStaff(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

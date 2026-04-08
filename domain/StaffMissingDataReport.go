@@ -38,7 +38,7 @@ const (
 
 func (d *Domain) StaffMissingDataReport(in *StaffMissingDataReportIn) (out StaffMissingDataReportOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustBelowStaff(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

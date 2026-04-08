@@ -190,6 +190,7 @@ const (
 	ErrSessionTokenLoggedOut = `sessionToken already logged out`
 
 	ErrSegmentNotAllowed = `session segment not allowed`
+	ErrRoleNotAllowed    = `session role not allowed`
 
 	ErrSessionUserNotSuperAdmin = `session email is not superadmin`
 
@@ -262,6 +263,21 @@ func (d *Domain) MustAdmin(in RequestCommon, out *ResponseCommon) (sess *Session
 	}
 
 	if sess.Role != mAuth.RoleAdmin {
+		out.SetError(403, ErrRoleNotAllowed)
+		return nil
+	}
+
+	return sess
+}
+
+func (d *Domain) MustBelowStaff(in RequestCommon, out *ResponseCommon) (sess *Session) {
+	sess = d.MustLogin(in, out)
+	if sess == nil {
+		return nil
+	}
+
+	if sess.Role != mAuth.RoleStaff && sess.Role != mAuth.RoleAdmin {
+		out.SetError(403, ErrRoleNotAllowed)
 		return nil
 	}
 

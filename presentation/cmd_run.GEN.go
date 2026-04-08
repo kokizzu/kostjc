@@ -28,22 +28,6 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminBookingLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
-	case domain.AdminBorrowedUtensilLogsAction:
-		in := domain.AdminBorrowedUtensilLogsIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminBorrowedUtensilLogs(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.AdminBorrowedUtensilsAction:
-		in := domain.AdminBorrowedUtensilsIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminBorrowedUtensils(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
 	case domain.AdminBuildingAction:
 		in := domain.AdminBuildingIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -76,22 +60,6 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminFacilityLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
-	case domain.AdminLaundryAction:
-		in := domain.AdminLaundryIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminLaundry(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.AdminLaundryLogsAction:
-		in := domain.AdminLaundryLogsIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminLaundryLogs(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
 	case domain.AdminLocationAction:
 		in := domain.AdminLocationIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -106,22 +74,6 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 			return
 		}
 		out := b.AdminLocationLogs(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.AdminMenuAction:
-		in := domain.AdminMenuIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminMenu(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.AdminMenuLogsAction:
-		in := domain.AdminMenuLogsIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminMenuLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.AdminPaymentAction:
@@ -156,22 +108,6 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminRoomLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
-	case domain.AdminSaleAction:
-		in := domain.AdminSaleIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminSale(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.AdminSaleLogsAction:
-		in := domain.AdminSaleLogsIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminSaleLogs(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
 	case domain.AdminSettingFixInconsistenciesAction:
 		in := domain.AdminSettingFixInconsistenciesIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -186,22 +122,6 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 			return
 		}
 		out := b.AdminSettings(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.AdminStockAction:
-		in := domain.AdminStockIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminStock(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.AdminStockLogsAction:
-		in := domain.AdminStockLogsIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminStockLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.AdminTenantLogsAction:
@@ -340,12 +260,12 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.StaffRevenueReport(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
-	case domain.StaffSalesAction:
-		in := domain.StaffSalesIn{}
+	case domain.StaffTenantsAction:
+		in := domain.StaffTenantsIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
 			return
 		}
-		out := b.StaffSales(&in)
+		out := b.StaffTenants(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.StaffWifiDeviceReportAction:

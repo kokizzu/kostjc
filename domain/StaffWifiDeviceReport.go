@@ -35,7 +35,7 @@ const (
 
 func (d *Domain) StaffWifiDeviceReport(in *StaffWifiDeviceReportIn) (out StaffWifiDeviceReportOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustBelowStaff(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

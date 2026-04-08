@@ -7,7 +7,6 @@ import (
 	"github.com/rs/zerolog"
 
 	"kostjc/model/mAuth/wcAuth"
-	"kostjc/model/mCafe"
 	"kostjc/model/mProperty"
 
 	"kostjc/model/mAuth"
@@ -32,8 +31,6 @@ func RunMigration(logger *zerolog.Logger, oltpConn *Tt.Adapter, olapConn *Ch.Ada
 	m.OlapConn.MigrateTables(mAuth.ClickhouseTables)
 	m.OltpConn.MigrateTables(mProperty.TarantoolTables)
 	m.OlapConn.MigrateTables(mProperty.ClickhouseTables)
-	m.OltpConn.MigrateTables(mCafe.TarantoolTables)
-	m.OlapConn.MigrateTables(mCafe.ClickhouseTables)
 }
 
 // VerifyTables function to check whether tables are there or not
@@ -46,6 +43,4 @@ func VerifyTables(
 	Ch.CheckClickhouseTables(olapConn, mAuth.ClickhouseTables)
 	Tt.CheckTarantoolTables(oltpConn, mProperty.TarantoolTables)
 	Ch.CheckClickhouseTables(olapConn, mProperty.ClickhouseTables)
-	Tt.CheckTarantoolTables(oltpConn, mCafe.TarantoolTables)
-	Ch.CheckClickhouseTables(olapConn, mCafe.ClickhouseTables)
 }

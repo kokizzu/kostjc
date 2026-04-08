@@ -10,7 +10,6 @@ import (
 	"kostjc/domain"
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
-	"kostjc/model/mCafe/rqCafe"
 	"kostjc/model/mProperty"
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/zCrud"
@@ -74,7 +73,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notBelowStaff(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -112,7 +111,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notBelowStaff(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -137,7 +136,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	fw.Get(`/`+domain.StaffPricePerDayReportAction, func(ctx *fiber.Ctx) error {
 		in, user, segments := userInfoFromContext(ctx, d)
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notBelowStaff(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -158,7 +157,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	fw.Get(`/`+domain.StaffRevenueReportAction, func(ctx *fiber.Ctx) error {
 		in, user, segments := userInfoFromContext(ctx, d)
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notBelowStaff(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -184,7 +183,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	fw.Get(`/`+domain.StaffWifiDeviceReportAction, func(ctx *fiber.Ctx) error {
 		in, user, segments := userInfoFromContext(ctx, d)
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notBelowStaff(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -213,7 +212,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 	fw.Get(`/`+domain.StaffMissingDataReportAction, func(ctx *fiber.Ctx) error {
 		in, user, segments := userInfoFromContext(ctx, d)
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notBelowStaff(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -238,7 +237,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			return err
 		}
 
-		if notLogin(ctx, d, in.RequestCommon) {
+		if notBelowStaff(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
@@ -264,6 +263,34 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`facilities`: facilities,
 			`fields`:     out.Meta.Fields,
 			`pager`:      out.Pager,
+		})
+	})
+
+	fw.Get(`/`+domain.StaffTenantsAction, func(ctx *fiber.Ctx) error {
+		var in domain.StaffTenantsIn
+		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.StaffTenantsAction)
+		if err != nil {
+			return err
+		}
+
+		if notBelowStaff(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		user, segments := userInfoFromRequest(in.RequestCommon, d)
+
+		in.WithMeta = true
+		in.Cmd = zCrud.CmdList
+		out := d.StaffTenants(&in)
+
+		return views.RenderStaffTenants(ctx, M.SX{
+			`title`:    conf.PROJECT_NAME + ` | Tenant Management`,
+			`user`:     user,
+			`segments`: segments,
+			`tenant`:   out.Tenant,
+			`tenants`:  out.Tenants,
+			`fields`:   out.Meta.Fields,
+			`pager`:    out.Pager,
 		})
 	})
 
@@ -347,38 +374,6 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`facilities`: out.Facilities,
 			`fields`:     out.Meta.Fields,
 			`pager`:      out.Pager,
-		})
-	})
-
-	fw.Get(`/`+domain.AdminLaundryAction, func(ctx *fiber.Ctx) error {
-		var in domain.AdminLaundryIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminLaundryAction)
-		if err != nil {
-			return err
-		}
-
-		if notAdmin(ctx, d, in.RequestCommon) {
-			return ctx.Redirect(`/`, 302)
-		}
-
-		usr := rqAuth.NewUsers(d.AuthOltp)
-		users := usr.FindUserChoices()
-
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-
-		in.WithMeta = true
-		in.Cmd = zCrud.CmdList
-		out := d.AdminLaundry(&in)
-
-		return views.RenderAdminLaundry(ctx, M.SX{
-			`title`:     conf.PROJECT_NAME + ` | Laundry Management`,
-			`user`:      user,
-			`segments`:  segments,
-			`laundry`:   out.Laundry,
-			`laundries`: out.Laundries,
-			`fields`:    out.Meta.Fields,
-			`pager`:     out.Pager,
-			`users`:     users,
 		})
 	})
 
@@ -554,100 +549,6 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`rooms`:      rooms,
 			`fields`:     out.Meta.Fields,
 			`pager`:      out.Pager,
-		})
-	})
-
-	fw.Get(`/`+domain.AdminStockAction, func(ctx *fiber.Ctx) error {
-		var in domain.AdminStockIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminStockAction)
-		if err != nil {
-			return err
-		}
-
-		if notAdmin(ctx, d, in.RequestCommon) {
-			return ctx.Redirect(`/`, 302)
-		}
-
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-
-		in.WithMeta = true
-		in.Cmd = zCrud.CmdList
-		out := d.AdminStock(&in)
-
-		return views.RenderAdminStock(ctx, M.SX{
-			`title`:    conf.PROJECT_NAME + ` | Stock Management`,
-			`user`:     user,
-			`segments`: segments,
-			`stock`:    out.Stock,
-			`stocks`:   out.Stocks,
-			`fields`:   out.Meta.Fields,
-			`pager`:    out.Pager,
-		})
-	})
-
-	fw.Get(`/`+domain.AdminMenuAction, func(ctx *fiber.Ctx) error {
-		var in domain.AdminMenuIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminMenuAction)
-		if err != nil {
-			return err
-		}
-
-		if notAdmin(ctx, d, in.RequestCommon) {
-			return ctx.Redirect(`/`, 302)
-		}
-
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-
-		in.WithMeta = true
-		in.Cmd = zCrud.CmdList
-		out := d.AdminMenu(&in)
-
-		return views.RenderAdminMenu(ctx, M.SX{
-			`title`:    conf.PROJECT_NAME + ` | Menu Management`,
-			`user`:     user,
-			`segments`: segments,
-			`menu`:     out.Menu,
-			`menus`:    out.Menus,
-			`fields`:   out.Meta.Fields,
-			`pager`:    out.Pager,
-		})
-	})
-
-	fw.Get(`/`+domain.AdminSaleAction, func(ctx *fiber.Ctx) error {
-		var in domain.AdminSaleIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSaleAction)
-		if err != nil {
-			return err
-		}
-
-		if notAdmin(ctx, d, in.RequestCommon) {
-			return ctx.Redirect(`/`, 302)
-		}
-
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-
-		rqTenants := rqAuth.NewTenants(d.PropOltp)
-		tenants := rqTenants.FindTenantChoices()
-
-		men := rqCafe.NewMenus(d.PropOltp)
-		menus := men.FindMenus()
-
-		tenants[0] = "Bukan tenant"
-
-		in.WithMeta = true
-		in.Cmd = zCrud.CmdList
-		out := d.AdminSale(&in)
-
-		return views.RenderAdminSale(ctx, M.SX{
-			`title`:    conf.PROJECT_NAME + ` | Sale Management`,
-			`user`:     user,
-			`segments`: segments,
-			`tenants`:  tenants,
-			`menus`:    menus,
-			`sale`:     out.Sale,
-			`sales`:    out.Sales,
-			`fields`:   out.Meta.Fields,
-			`pager`:    out.Pager,
 		})
 	})
 
@@ -864,95 +765,6 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.AdminStockLogsAction, func(ctx *fiber.Ctx) error {
-		var in domain.AdminStockLogsIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminStockLogsAction)
-		if err != nil {
-			return err
-		}
-		if notAdmin(ctx, d, in.RequestCommon) {
-			return ctx.Redirect(`/`, 302)
-		}
-
-		usr := rqAuth.NewUsers(d.AuthOltp)
-		users := usr.FindUserChoices()
-
-		tnt := rqAuth.NewTenants(d.AuthOltp)
-		tenants := tnt.FindTenantChoices()
-
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-		in.WithMeta = true
-		out := d.AdminStockLogs(&in)
-		return views.RenderAdminStockLogs(ctx, M.SX{
-			`user`:     user,
-			`title`:    conf.PROJECT_NAME + ` | Stock Logs`,
-			`segments`: segments,
-			`logs`:     out.Logs,
-			`fields`:   out.Meta.Fields,
-			`pager`:    out.Pager,
-			`users`:    users,
-			`tenants`:  tenants,
-		})
-	})
-
-	fw.Get(`/`+domain.AdminMenuLogsAction, func(ctx *fiber.Ctx) error {
-		var in domain.AdminMenuLogsIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminMenuLogsAction)
-		if err != nil {
-			return err
-		}
-		if notAdmin(ctx, d, in.RequestCommon) {
-			return ctx.Redirect(`/`, 302)
-		}
-
-		usr := rqAuth.NewUsers(d.AuthOltp)
-		users := usr.FindUserChoices()
-
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-		in.WithMeta = true
-		out := d.AdminMenuLogs(&in)
-		return views.RenderAdminMenuLogs(ctx, M.SX{
-			`user`:     user,
-			`title`:    conf.PROJECT_NAME + ` | Menu Logs`,
-			`segments`: segments,
-			`logs`:     out.Logs,
-			`fields`:   out.Meta.Fields,
-			`pager`:    out.Pager,
-			`users`:    users,
-		})
-	})
-
-	fw.Get(`/`+domain.AdminSaleLogsAction, func(ctx *fiber.Ctx) error {
-		var in domain.AdminSaleLogsIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSaleLogsAction)
-		if err != nil {
-			return err
-		}
-		if notAdmin(ctx, d, in.RequestCommon) {
-			return ctx.Redirect(`/`, 302)
-		}
-
-		usr := rqAuth.NewUsers(d.AuthOltp)
-		users := usr.FindUserChoices()
-
-		tnt := rqAuth.NewTenants(d.AuthOltp)
-		tenants := tnt.FindTenantChoices()
-
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-		in.WithMeta = true
-		out := d.AdminSaleLogs(&in)
-		return views.RenderAdminSaleLogs(ctx, M.SX{
-			`user`:     user,
-			`title`:    conf.PROJECT_NAME + ` | Sale Logs`,
-			`segments`: segments,
-			`logs`:     out.Logs,
-			`fields`:   out.Meta.Fields,
-			`pager`:    out.Pager,
-			`users`:    users,
-			`tenants`:  tenants,
-		})
-	})
-
 	fw.Get(`/`+domain.AdminWifiDeviceLogsAction, func(ctx *fiber.Ctx) error {
 		var in domain.AdminWifiDeviceLogsIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminWifiDeviceLogsAction)
@@ -1046,37 +858,6 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.AdminLaundryLogsAction, func(ctx *fiber.Ctx) error {
-		var in domain.AdminLaundryLogsIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminLaundryLogsAction)
-		if err != nil {
-			return err
-		}
-		if notAdmin(ctx, d, in.RequestCommon) {
-			return ctx.Redirect(`/`, 302)
-		}
-
-		usr := rqAuth.NewUsers(d.AuthOltp)
-		users := usr.FindUserChoices()
-
-		tnt := rqAuth.NewTenants(d.AuthOltp)
-		tenants := tnt.FindTenantChoices()
-
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-		in.WithMeta = true
-		out := d.AdminLaundryLogs(&in)
-		return views.RenderAdminLaundryLogs(ctx, M.SX{
-			`user`:     user,
-			`title`:    conf.PROJECT_NAME + ` | Laundry Logs`,
-			`segments`: segments,
-			`logs`:     out.Logs,
-			`fields`:   out.Meta.Fields,
-			`pager`:    out.Pager,
-			`users`:    users,
-			`tenants`:  tenants,
-		})
-	})
-
 	fw.Get(`/`+domain.AdminSettingFixInconsistenciesAction, func(ctx *fiber.Ctx) error {
 		var in domain.AdminSettingFixInconsistenciesIn
 		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSettingFixInconsistenciesAction)
@@ -1104,50 +885,6 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`tenants`:            tenants,
 			`rooms`:              rooms,
 			`roomIncosistencies`: out.RoomIncosistencies,
-		})
-	})
-
-	fw.Get(`/`+domain.StaffSalesAction, func(ctx *fiber.Ctx) error {
-		var in domain.AdminSaleIn
-		err := webApiParseInput(ctx, &in.RequestCommon, &in, domain.AdminSaleAction)
-		if err != nil {
-			return err
-		}
-
-		if notLogin(ctx, d, in.RequestCommon) {
-			return ctx.Redirect(`/`, 302)
-		}
-
-		user, segments := userInfoFromRequest(in.RequestCommon, d)
-
-		rqTenants := rqAuth.NewTenants(d.PropOltp)
-		tenants := rqTenants.FindTenantChoices()
-
-		menuOrm := rqCafe.NewMenus(d.PropOltp)
-		menuChoices := menuOrm.FindMenusSalesChoices()
-
-		// saleOrm := rqCafe.NewSales(d.PropOltp)
-		// sales := saleOrm.FindAll()
-
-		in.WithMeta = true
-		in.Cmd = zCrud.CmdList
-
-		out := d.AdminSale(&in)
-
-		if out.Meta == nil {
-			return ctx.Status(500).SendString("Internal Server Error: sales output is nil")
-		}
-
-		return views.RenderStaffSales(ctx, M.SX{
-			`title`:       `KostJC | Sales Report`,
-			`user`:        user,
-			`segments`:    segments,
-			`sale`:        out.Sale,
-			`sales`:       out.Sales,
-			`fields`:      out.Meta.Fields,
-			`pager`:       out.Pager,
-			`menuChoices`: menuChoices,
-			`tenants`:     tenants,
 		})
 	})
 
@@ -1182,6 +919,26 @@ func notAdmin(ctx *fiber.Ctx, d *domain.Domain, in domain.RequestCommon) bool {
 	}
 
 	if sess.Role != mAuth.RoleAdmin {
+		return true
+	}
+
+	return false
+}
+
+func notBelowStaff(ctx *fiber.Ctx, d *domain.Domain, in domain.RequestCommon) bool {
+	var check domain.ResponseCommon
+	sess := d.MustBelowStaff(in, &check)
+	if sess == nil {
+		_ = views.RenderError(ctx, M.SX{
+			`error`: check.Error,
+		})
+		return true
+	}
+
+	if sess.Role != mAuth.RoleStaff && sess.Role != mAuth.RoleAdmin {
+		_ = views.RenderError(ctx, M.SX{
+			`error`: `forbidden`,
+		})
 		return true
 	}
 

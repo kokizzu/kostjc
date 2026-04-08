@@ -2854,12 +2854,6 @@
       exports.AdminBookingLogs = async function AdminBookingLogs(i, cb) {
         return await axios.post("/admin/bookingLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminBorrowedUtensilLogs = async function AdminBorrowedUtensilLogs(i, cb) {
-        return await axios.post("/admin/borrowedUtensilLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.AdminBorrowedUtensils = async function AdminBorrowedUtensils(i, cb) {
-        return await axios.post("/admin/borrowedUtensils", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
       exports.AdminBuilding = async function AdminBuilding(i, cb) {
         return await axios.post("/admin/building", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -2872,23 +2866,11 @@
       exports.AdminFacilityLogs = async function AdminFacilityLogs(i, cb) {
         return await axios.post("/admin/facilityLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminLaundry = async function AdminLaundry(i, cb) {
-        return await axios.post("/admin/laundry", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.AdminLaundryLogs = async function AdminLaundryLogs(i, cb) {
-        return await axios.post("/admin/laundryLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
       exports.AdminLocation = async function AdminLocation(i, cb) {
         return await axios.post("/admin/location", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminLocationLogs = async function AdminLocationLogs(i, cb) {
         return await axios.post("/admin/locationLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.AdminMenu = async function AdminMenu(i, cb) {
-        return await axios.post("/admin/menu", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.AdminMenuLogs = async function AdminMenuLogs(i, cb) {
-        return await axios.post("/admin/menuLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminPayment = async function AdminPayment(i, cb) {
         return await axios.post("/admin/payment", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -2902,23 +2884,11 @@
       exports.AdminRoomLogs = async function AdminRoomLogs(i, cb) {
         return await axios.post("/admin/roomLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.AdminSale = async function AdminSale(i, cb) {
-        return await axios.post("/admin/sale", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.AdminSaleLogs = async function AdminSaleLogs(i, cb) {
-        return await axios.post("/admin/saleLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
       exports.AdminSettingFixInconsistencies = async function AdminSettingFixInconsistencies(i, cb) {
         return await axios.post("/admin/settingFixInconsistencies", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminSettings = async function AdminSettings(i, cb) {
         return await axios.post("/admin/settings", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.AdminStock = async function AdminStock(i, cb) {
-        return await axios.post("/admin/stock", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.AdminStockLogs = async function AdminStockLogs(i, cb) {
-        return await axios.post("/admin/stockLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.AdminTenantLogs = async function AdminTenantLogs(i, cb) {
         return await axios.post("/admin/tenantLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -2971,8 +2941,8 @@
       exports.StaffRevenueReport = async function StaffRevenueReport2(i, cb) {
         return await axios.post("/staff/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.StaffSales = async function StaffSales(i, cb) {
-        return await axios.post("/staff/sales", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      exports.StaffTenants = async function StaffTenants(i, cb) {
+        return await axios.post("/staff/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.StaffWifiDeviceReport = async function StaffWifiDeviceReport(i, cb) {
         return await axios.post("/staff/wifiDeviceReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -9859,19 +9829,15 @@ ${component_stack}
   var RiBuildingsHotelLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22 21H2V19H3V4C3 3.44772 3.44772 3 4 3H18C18.5523 3 19 3.44772 19 4V9H21V19H22V21ZM17 19H19V11H13V19H15V13H17V19ZM17 9V5H5V19H11V9H17ZM7 11H9V13H7V11ZM7 15H9V17H7V15ZM7 7H9V9H7V7Z"></path>' };
   var RiBusinessBarChartBoxLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM4 5V19H20V5H4ZM7 13H9V17H7V13ZM11 7H13V17H11V7ZM15 10H17V17H15V10Z"></path>' };
   var RiBusinessCalendarScheduleLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M7 3V1H9V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V9H20V5H17V7H15V5H9V7H7V5H4V19H10V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7ZM17 12C14.7909 12 13 13.7909 13 16C13 18.2091 14.7909 20 17 20C19.2091 20 21 18.2091 21 16C21 13.7909 19.2091 12 17 12ZM11 16C11 12.6863 13.6863 10 17 10C20.3137 10 23 12.6863 23 16C23 19.3137 20.3137 22 17 22C13.6863 22 11 19.3137 11 16ZM16 13V16.4142L18.2929 18.7071L19.7071 17.2929L18 15.5858V13H16Z"></path>' };
-  var RiBusinessInboxUnarchiveLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 3L22 7V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V7.00353L4 3H20ZM20 9H4V19H20V9ZM12 10L16 14H13V18H11V14H8L12 10ZM18.764 5H5.236L4.237 7H19.764L18.764 5Z"></path>' };
   var RiOthersDoorOpenLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M1.99805 21.0001V19.0001L3.99805 18.9999V4.83465C3.99805 4.35136 4.34367 3.93723 4.81916 3.85078L14.2907 2.12868C14.6167 2.0694 14.9291 2.28564 14.9884 2.61167C14.9948 2.64708 14.998 2.68301 14.998 2.719V3.9999L18.998 4.00007C19.5503 4.00007 19.998 4.44779 19.998 5.00007V18.9999L21.998 19.0001V21.0001H17.998V6.00007L14.998 5.9999V21.0001H1.99805ZM12.998 4.3965L5.99805 5.66923V19.0001H12.998V4.3965ZM11.998 11.0001V13.0001H9.99805V11.0001H11.998Z"></path>' };
   var RiDocumentFileChartLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M11 7H13V17H11V7ZM15 11H17V17H15V11ZM7 13H9V17H7V13ZM15 4H5V20H19V8H15V4ZM3 2.9918C3 2.44405 3.44749 2 3.9985 2H16L20.9997 7L21 20.9925C21 21.5489 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918Z"></path>' };
   var RiUserFacesUser3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"></path>' };
   var RiUserFacesUserFollowLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M14 14.252V16.3414C13.3744 16.1203 12.7013 16 12 16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM17.7929 19.9142L21.3284 16.3787L22.7426 17.7929L17.7929 22.7426L14.2574 19.2071L15.6716 17.7929L17.7929 19.9142Z"></path>' };
   var RiUserFacesUserLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path>' };
   var RiUserFacesGroupLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>' };
-  var RiSystemMenu2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M3 4H21V6H3V4ZM3 11H15V13H3V11ZM3 18H21V20H3V18Z"></path>' };
   var RiSystemSettingsLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"></path>' };
   var RiSystemLogoutBoxRLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path>' };
   var RiMapMapPin2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path>' };
-  var RiFinanceCashLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M12.0004 16C14.2095 16 16.0004 14.2091 16.0004 12 16.0004 9.79086 14.2095 8 12.0004 8 9.79123 8 8.00037 9.79086 8.00037 12 8.00037 14.2091 9.79123 16 12.0004 16ZM21.0049 4.00293H3.00488C2.4526 4.00293 2.00488 4.45064 2.00488 5.00293V19.0029C2.00488 19.5552 2.4526 20.0029 3.00488 20.0029H21.0049C21.5572 20.0029 22.0049 19.5552 22.0049 19.0029V5.00293C22.0049 4.45064 21.5572 4.00293 21.0049 4.00293ZM4.00488 15.6463V8.35371C5.13065 8.017 6.01836 7.12892 6.35455 6.00293H17.6462C17.9833 7.13193 18.8748 8.02175 20.0049 8.3564V15.6436C18.8729 15.9788 17.9802 16.8711 17.6444 18.0029H6.3563C6.02144 16.8742 5.13261 15.9836 4.00488 15.6463Z"></path>' };
-  var RiFinanceShoppingBag2Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M20.0049 22H4.00488C3.4526 22 3.00488 21.5523 3.00488 21V3C3.00488 2.44772 3.4526 2 4.00488 2H20.0049C20.5572 2 21.0049 2.44772 21.0049 3V21C21.0049 21.5523 20.5572 22 20.0049 22ZM19.0049 20V4H5.00488V20H19.0049ZM9.00488 6V8C9.00488 9.65685 10.348 11 12.0049 11C13.6617 11 15.0049 9.65685 15.0049 8V6H17.0049V8C17.0049 10.7614 14.7663 13 12.0049 13C9.24346 13 7.00488 10.7614 7.00488 8V6H9.00488Z"></path>' };
   var RiFinanceWallet3Line = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M22.0049 6.99979H23.0049V16.9998H22.0049V19.9998C22.0049 20.5521 21.5572 20.9998 21.0049 20.9998H3.00488C2.4526 20.9998 2.00488 20.5521 2.00488 19.9998V3.99979C2.00488 3.4475 2.4526 2.99979 3.00488 2.99979H21.0049C21.5572 2.99979 22.0049 3.4475 22.0049 3.99979V6.99979ZM20.0049 16.9998H14.0049C11.2435 16.9998 9.00488 14.7612 9.00488 11.9998C9.00488 9.23836 11.2435 6.99979 14.0049 6.99979H20.0049V4.99979H4.00488V18.9998H20.0049V16.9998ZM21.0049 14.9998V8.99979H14.0049C12.348 8.99979 11.0049 10.3429 11.0049 11.9998C11.0049 13.6566 12.348 14.9998 14.0049 14.9998H21.0049ZM14.0049 10.9998H17.0049V12.9998H14.0049V10.9998Z"></path>' };
   var RiArrowsArrowRightSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path>' };
   var RiArrowsArrowLeftSLine = { a: { viewBox: "0 0 24 24", fill: "currentColor" }, c: '<path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path>' };
@@ -10030,17 +9996,16 @@ ${component_stack}
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@5.55.2/node_modules/svelte-icons-pack/dist/lu/index.js
   var LuHandPlatter = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M12 3V2"></path><path d="M5 10a7.1 7.1 0 0 1 14 0"></path><path d="M4 10h16"></path><path d="M2 14h12a2 2 0 1 1 0 4h-2"></path><path d="m15.4 17.4 3.2-2.8a2 2 0 0 1 2.8 2.9l-3.6 3.3c-.7.8-1.7 1.2-2.8 1.2h-4c-1.1 0-2.1-.4-2.8-1.2L5 18"></path><path d="M5 14v7H2"></path>' };
-  var LuWashingMachine = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<path d="M3 6h3"></path><path d="M17 6h.01"></path><path d="M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5"></path><rect width="18" height="20" x="3" y="2" rx="2"></rect><circle cx="12" cy="13" r="5"></circle>' };
 
   // _components/xState.js
   var isOpenSideMenu = writable(false);
 
   // _partials/SideMenu.svelte
-  var root_1 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking" href="/staff/booking"><!> <span>Bookings</span></a></nav>`, 1);
-  var root_2 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-admin-menu" href="/admin/menu"><!> <span>Menu</span></a> <a id="link-admin-sale" href="/admin/sale"><!> <span>Sales</span></a> <a id="link-admin-laundry" href="/admin/laundry"><!> <span>Laundry</span></a> <a id="link-admin-location" href="/admin/location"><!> <span>Locations</span></a> <a id="link-admin-facility" href="/admin/facility"><!> <span>Facilities</span></a> <a id="link-admin-building" href="/admin/building"><!> <span>Buildings</span></a> <a id="link-admin-room" href="/admin/room"><!> <span>Rooms</span></a> <a id="link-admin-booking" href="/admin/booking"><!> <span>Bookings</span></a> <a id="link-admin-payment" href="/admin/payment"><!> <span>Payments</span></a> <a id="link-admin-stock" href="/admin/stock"><!> <span>Stocks</span></a> <a id="link-admin-wifiDevice" href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a id="link-admin-tenants" href="/admin/tenants"><!> <span>Tenants</span></a> <a id="link-admin-userManagement" href="/admin/usersManagement"><!> <span>Users</span></a> <a id="link-admin-logs" href="/admin/bookingLogs"><!> <span>Logs</span></a> <a id="link-admin-setting" href="/admin/settingFixInconsistencies"><!> <span>Settings</span></a></nav>`, 1);
-  var root_3 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a href="/staff/booking"><!> <span>Bookings</span></a></nav>`, 1);
-  var root_4 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/menu"><!> <span>Menu</span></a> <a href="/admin/sale"><!> <span>Sales</span></a> <a href="/admin/laundry"><!> <span>Laundry</span></a> <a href="/admin/location"><!> <span>Locations</span></a> <a href="/admin/facility"><!> <span>Facilities</span></a> <a href="/admin/building"><!> <span>Buildings</span></a> <a href="/admin/room"><!> <span>Rooms</span></a> <a href="/admin/booking"><!> <span>Bookings</span></a> <a href="/admin/payment"><!> <span>Payments</span></a> <a href="/admin/stock"><!> <span>Stocks</span></a> <a href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a href="/admin/tenants"><!> <span>Tenants</span></a> <a href="/admin/usersManagement"><!> <span>Users</span></a> <a href="/admin/bookingLogs"><!> <span>Logs</span></a></nav>`, 1);
-  var root3 = from_html(`<aside class="side-menu-desktop svelte-p7ambs"><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/staff/sales"><!> <span>Sales</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <!> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside> <button aria-label="backdrop toggle menu"></button> <aside><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/staff/sales"><!> <span>Sales</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <!> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside>`, 1);
+  var root_1 = from_html(`<a id="link-staff-tenants" href="/staff/tenants"><!> <span>Tenants</span></a>`);
+  var root_2 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-admin-location" href="/admin/location"><!> <span>Locations</span></a> <a id="link-admin-facility" href="/admin/facility"><!> <span>Facilities</span></a> <a id="link-admin-building" href="/admin/building"><!> <span>Buildings</span></a> <a id="link-admin-room" href="/admin/room"><!> <span>Rooms</span></a> <a id="link-admin-payment" href="/admin/payment"><!> <span>Payments</span></a> <a id="link-admin-wifiDevice" href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a id="link-admin-userManagement" href="/admin/usersManagement"><!> <span>Users</span></a> <a id="link-admin-logs" href="/admin/bookingLogs"><!> <span>Logs</span></a> <a id="link-admin-setting" href="/admin/settingFixInconsistencies"><!> <span>Settings</span></a></nav>`, 1);
+  var root_3 = from_html(`<a id="link-staff-tenants-mobile" href="/staff/tenants"><!> <span>Tenants</span></a>`);
+  var root_4 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/location"><!> <span>Locations</span></a> <a href="/admin/facility"><!> <span>Facilities</span></a> <a href="/admin/building"><!> <span>Buildings</span></a> <a href="/admin/room"><!> <span>Rooms</span></a> <a href="/admin/payment"><!> <span>Payments</span></a> <a href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a href="/admin/usersManagement"><!> <span>Users</span></a> <a href="/admin/bookingLogs"><!> <span>Logs</span></a></nav>`, 1);
+  var root3 = from_html(`<aside class="side-menu-desktop svelte-p7ambs"><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking" href="/staff/booking"><!> <span>Bookings</span></a> <!></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside> <button aria-label="backdrop toggle menu"></button> <aside><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking-mobile" href="/staff/booking"><!> <span>Bookings</span></a> <!></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside>`, 1);
   var $css2 = {
     hash: "svelte-p7ambs",
     code: "aside.side-menu-desktop.svelte-p7ambs {position:fixed;top:var(--navbar-height);left:0;bottom:0;width:var(--sidemenu-width);border-right:1px solid var(--gray-002);background-color:#FFF;font-size:var(--font-md);overflow-y:auto;scrollbar-color:var(--gray-003) transparent;scrollbar-width:calc(100% - 20px);padding:10px 0 20px 0;}aside.svelte-p7ambs .separator:where(.svelte-p7ambs) {width:100%;margin:auto;height:1px;background-color:var(--gray-002);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) {display:flex;flex-direction:column;gap:10px;height:fit-content;width:100%;margin:0;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu-title:where(.svelte-p7ambs) {margin:0;padding:10px 25px 10px 70px;border-bottom:1px solid var(--gray-002);font-weight:600;text-transform:uppercase;font-size:13px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) {display:flex;flex-direction:column;gap:5px;height:fit-content;flex-wrap:nowrap;width:100%;margin:0;padding:0 10px 0 40px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a:where(.svelte-p7ambs),\n  aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button:where(.svelte-p7ambs) {text-decoration:none;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:10px 15px;border-radius:8px;cursor:pointer;color:var(--gray-008);border:none;background-color:transparent;font-size:var(--font-lg);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a:where(.svelte-p7ambs):hover,\n  aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button:where(.svelte-p7ambs):hover {background-color:var(--gray-001);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a.active:where(.svelte-p7ambs) {background-color:var(--blue-transparent);color:var(--blue-007);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button.red:where(.svelte-p7ambs):hover {background-color:var(--red-transparent);color:var(--red-007);}.backdrop.svelte-p7ambs {position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0, 0, 0, 0.5);z-index:999;display:none;height:100dvh;}.backdrop.open.svelte-p7ambs {display:block;}aside.side-menu-mobile.svelte-p7ambs {left:-100%;width:70%;position:fixed;height:100dvh;top:0;bottom:0;z-index:1000;background-color:#FFF;border-top-right-radius:10px;border-bottom-right-radius:10px;overflow-y:auto;}aside.side-menu-mobile.open.svelte-p7ambs {transition:left 0.3s ease-in-out;left:0;}\n\n  @media only screen and (max-width : 768px) {aside.side-menu-desktop.svelte-p7ambs {display:none;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) {padding:20px 0;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) {padding:0 10px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu-title:where(.svelte-p7ambs) {padding:10px 25px;}\n  }"
@@ -10072,25 +10037,13 @@ ${component_stack}
         /** @type {string} */
         ""
       );
-      if (pathLv1 === "admin" && pathLv2 === "booking") {
-        linkId = "link-admin-booking";
+      if ((pathLv1 === "admin" || pathLv1 === "staff") && pathLv2 === "booking") {
+        linkId = "link-staff-booking";
       }
       if (pathLv1 === "staff" && pathLv2 === "booking") {
         linkId = "link-staff-booking";
       }
       switch (pathLv2) {
-        case "menu": {
-          linkId = "link-admin-menu";
-          break;
-        }
-        case "sale": {
-          linkId = "link-admin-sale";
-          break;
-        }
-        case "laundry": {
-          linkId = "link-admin-laundry";
-          break;
-        }
         case "location": {
           linkId = "link-admin-location";
           break;
@@ -10111,16 +10064,12 @@ ${component_stack}
           linkId = "link-admin-payment";
           break;
         }
-        case "stock": {
-          linkId = "link-admin-stock";
-          break;
-        }
         case "wifiDevice": {
           linkId = "link-admin-wifiDevice";
           break;
         }
         case "tenants": {
-          linkId = "link-admin-tenants";
+          linkId = "link-staff-tenants";
           break;
         }
         case "usersManagement": {
@@ -10253,59 +10202,58 @@ ${component_stack}
     var node_7 = child(a_7);
     Icon(node_7, {
       get src() {
-        return RiFinanceShoppingBag2Line;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_7);
-    var a_8 = sibling(a_7, 2);
-    let classes_8;
-    var node_8 = child(a_8);
-    Icon(node_8, {
-      get src() {
         return RiUserFacesUser3Line;
       },
       size: "20"
     });
     next(2);
-    reset(a_8);
+    reset(a_7);
     reset(nav);
-    var node_9 = sibling(nav, 2);
+    var nav_1 = sibling(nav, 4);
+    var a_8 = child(nav_1);
+    let classes_8;
+    var node_8 = child(a_8);
+    Icon(node_8, {
+      get src() {
+        return RiBusinessCalendarScheduleLine;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_8);
+    var node_9 = sibling(a_8, 2);
     {
       var consequent = ($anchor2) => {
-        var fragment_1 = root_1();
-        var nav_1 = sibling(first_child(fragment_1), 2);
-        var a_9 = child(nav_1);
+        var a_9 = root_1();
         let classes_9;
         var node_10 = child(a_9);
         Icon(node_10, {
           get src() {
-            return RiBusinessCalendarScheduleLine;
+            return RiUserFacesUserFollowLine;
           },
           size: "20"
         });
         next(2);
         reset(a_9);
-        reset(nav_1);
-        template_effect(() => classes_9 = set_class(a_9, 1, "svelte-p7ambs", null, classes_9, { active: pathLv2 === "booking" }));
-        append($anchor2, fragment_1);
+        template_effect(() => classes_9 = set_class(a_9, 1, "svelte-p7ambs", null, classes_9, { active: pathLv1 === "staff" && pathLv2 === "tenants" }));
+        append($anchor2, a_9);
       };
       if_block(node_9, ($render) => {
-        if (deep_read_state(access()), untrack(() => !access().admin)) $render(consequent);
+        if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent);
       });
     }
-    var node_11 = sibling(node_9, 2);
+    reset(nav_1);
+    var node_11 = sibling(nav_1, 2);
     {
       var consequent_1 = ($anchor2) => {
-        var fragment_2 = root_2();
-        var nav_2 = sibling(first_child(fragment_2), 2);
+        var fragment_1 = root_2();
+        var nav_2 = sibling(first_child(fragment_1), 2);
         var a_10 = child(nav_2);
         let classes_10;
         var node_12 = child(a_10);
         Icon(node_12, {
           get src() {
-            return RiSystemMenu2Line;
+            return RiMapMapPin2Line;
           },
           size: "20"
         });
@@ -10316,7 +10264,7 @@ ${component_stack}
         var node_13 = child(a_11);
         Icon(node_13, {
           get src() {
-            return RiFinanceCashLine;
+            return LuHandPlatter;
           },
           size: "20"
         });
@@ -10327,7 +10275,7 @@ ${component_stack}
         var node_14 = child(a_12);
         Icon(node_14, {
           get src() {
-            return LuWashingMachine;
+            return RiBuildingsHotelLine;
           },
           size: "20"
         });
@@ -10338,7 +10286,7 @@ ${component_stack}
         var node_15 = child(a_13);
         Icon(node_15, {
           get src() {
-            return RiMapMapPin2Line;
+            return RiOthersDoorOpenLine;
           },
           size: "20"
         });
@@ -10349,7 +10297,7 @@ ${component_stack}
         var node_16 = child(a_14);
         Icon(node_16, {
           get src() {
-            return LuHandPlatter;
+            return RiFinanceWallet3Line;
           },
           size: "20"
         });
@@ -10360,7 +10308,7 @@ ${component_stack}
         var node_17 = child(a_15);
         Icon(node_17, {
           get src() {
-            return RiBuildingsHotelLine;
+            return RiBuildingsHomeWifiLine;
           },
           size: "20"
         });
@@ -10371,7 +10319,7 @@ ${component_stack}
         var node_18 = child(a_16);
         Icon(node_18, {
           get src() {
-            return RiOthersDoorOpenLine;
+            return RiUserFacesGroupLine;
           },
           size: "20"
         });
@@ -10382,7 +10330,7 @@ ${component_stack}
         var node_19 = child(a_17);
         Icon(node_19, {
           get src() {
-            return RiBusinessCalendarScheduleLine;
+            return RiBusinessBarChartBoxLine;
           },
           size: "20"
         });
@@ -10393,103 +10341,31 @@ ${component_stack}
         var node_20 = child(a_18);
         Icon(node_20, {
           get src() {
-            return RiFinanceWallet3Line;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_18);
-        var a_19 = sibling(a_18, 2);
-        let classes_19;
-        var node_21 = child(a_19);
-        Icon(node_21, {
-          get src() {
-            return RiBusinessInboxUnarchiveLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_19);
-        var a_20 = sibling(a_19, 2);
-        let classes_20;
-        var node_22 = child(a_20);
-        Icon(node_22, {
-          get src() {
-            return RiBuildingsHomeWifiLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_20);
-        var a_21 = sibling(a_20, 2);
-        let classes_21;
-        var node_23 = child(a_21);
-        Icon(node_23, {
-          get src() {
-            return RiUserFacesUserFollowLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_21);
-        var a_22 = sibling(a_21, 2);
-        let classes_22;
-        var node_24 = child(a_22);
-        Icon(node_24, {
-          get src() {
-            return RiUserFacesGroupLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_22);
-        var a_23 = sibling(a_22, 2);
-        let classes_23;
-        var node_25 = child(a_23);
-        Icon(node_25, {
-          get src() {
-            return RiBusinessBarChartBoxLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_23);
-        var a_24 = sibling(a_23, 2);
-        let classes_24;
-        var node_26 = child(a_24);
-        Icon(node_26, {
-          get src() {
             return RiSystemSettingsLine;
           },
           size: "20"
         });
         next(2);
-        reset(a_24);
+        reset(a_18);
         reset(nav_2);
         template_effect(
           ($0, $1) => {
-            classes_10 = set_class(a_10, 1, "svelte-p7ambs", null, classes_10, { active: pathLv2 === "menu" });
-            classes_11 = set_class(a_11, 1, "svelte-p7ambs", null, classes_11, { active: pathLv2 === "sale" });
-            classes_12 = set_class(a_12, 1, "svelte-p7ambs", null, classes_12, { active: pathLv2 === "laundry" });
-            classes_13 = set_class(a_13, 1, "svelte-p7ambs", null, classes_13, { active: pathLv2 === "location" });
-            classes_14 = set_class(a_14, 1, "svelte-p7ambs", null, classes_14, { active: pathLv2 === "facility" });
-            classes_15 = set_class(a_15, 1, "svelte-p7ambs", null, classes_15, { active: pathLv2 === "building" });
-            classes_16 = set_class(a_16, 1, "svelte-p7ambs", null, classes_16, { active: pathLv2 === "room" });
-            classes_17 = set_class(a_17, 1, "svelte-p7ambs", null, classes_17, { active: pathLv1 === "admin" && pathLv2 === "booking" });
-            classes_18 = set_class(a_18, 1, "svelte-p7ambs", null, classes_18, { active: pathLv2 === "payment" });
-            classes_19 = set_class(a_19, 1, "svelte-p7ambs", null, classes_19, { active: pathLv2 === "stock" });
-            classes_20 = set_class(a_20, 1, "svelte-p7ambs", null, classes_20, { active: pathLv2 === "wifiDevice" });
-            classes_21 = set_class(a_21, 1, "svelte-p7ambs", null, classes_21, { active: pathLv2 === "tenants" });
-            classes_22 = set_class(a_22, 1, "svelte-p7ambs", null, classes_22, { active: pathLv2 === "usersManagement" });
-            classes_23 = set_class(a_23, 1, "svelte-p7ambs", null, classes_23, $0);
-            classes_24 = set_class(a_24, 1, "svelte-p7ambs", null, classes_24, $1);
+            classes_10 = set_class(a_10, 1, "svelte-p7ambs", null, classes_10, { active: pathLv2 === "location" });
+            classes_11 = set_class(a_11, 1, "svelte-p7ambs", null, classes_11, { active: pathLv2 === "facility" });
+            classes_12 = set_class(a_12, 1, "svelte-p7ambs", null, classes_12, { active: pathLv2 === "building" });
+            classes_13 = set_class(a_13, 1, "svelte-p7ambs", null, classes_13, { active: pathLv2 === "room" });
+            classes_14 = set_class(a_14, 1, "svelte-p7ambs", null, classes_14, { active: pathLv2 === "payment" });
+            classes_15 = set_class(a_15, 1, "svelte-p7ambs", null, classes_15, { active: pathLv2 === "wifiDevice" });
+            classes_16 = set_class(a_16, 1, "svelte-p7ambs", null, classes_16, { active: pathLv2 === "usersManagement" });
+            classes_17 = set_class(a_17, 1, "svelte-p7ambs", null, classes_17, $0);
+            classes_18 = set_class(a_18, 1, "svelte-p7ambs", null, classes_18, $1);
           },
           [
             () => ({ active: String(pathLv2).includes("Logs") || false }),
             () => ({ active: String(pathLv2).includes("setting") || false })
           ]
         );
-        append($anchor2, fragment_2);
+        append($anchor2, fragment_1);
       };
       if_block(node_11, ($render) => {
         if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent_1);
@@ -10497,8 +10373,8 @@ ${component_stack}
     }
     var nav_3 = sibling(node_11, 4);
     var button = child(nav_3);
-    var node_27 = child(button);
-    Icon(node_27, {
+    var node_21 = child(button);
+    Icon(node_21, {
       get src() {
         return RiSystemLogoutBoxRLine;
       },
@@ -10513,12 +10389,78 @@ ${component_stack}
     var aside_1 = sibling(button_1, 2);
     var div_1 = child(aside_1);
     var nav_4 = child(div_1);
-    var a_25 = child(nav_4);
+    var a_19 = child(nav_4);
+    let classes_19;
+    var node_22 = child(a_19);
+    Icon(node_22, {
+      get src() {
+        return RiBuildingsHome2Line;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_19);
+    var a_20 = sibling(a_19, 2);
+    let classes_20;
+    var node_23 = child(a_20);
+    Icon(node_23, {
+      get src() {
+        return RiDocumentFileChartLine;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_20);
+    var a_21 = sibling(a_20, 2);
+    let classes_21;
+    var node_24 = child(a_21);
+    Icon(node_24, {
+      get src() {
+        return RiDesignLayoutGrid2Line;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_21);
+    var a_22 = sibling(a_21, 2);
+    let classes_22;
+    var node_25 = child(a_22);
+    Icon(node_25, {
+      get src() {
+        return RiDocumentFileChartLine;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_22);
+    var a_23 = sibling(a_22, 2);
+    let classes_23;
+    var node_26 = child(a_23);
+    Icon(node_26, {
+      get src() {
+        return RiDocumentFileChartLine;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_23);
+    var a_24 = sibling(a_23, 2);
+    let classes_24;
+    var node_27 = child(a_24);
+    Icon(node_27, {
+      get src() {
+        return RiDocumentFileChartLine;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_24);
+    var a_25 = sibling(a_24, 2);
     let classes_25;
     var node_28 = child(a_25);
     Icon(node_28, {
       get src() {
-        return RiBuildingsHome2Line;
+        return RiDocumentFileChartLine;
       },
       size: "20"
     });
@@ -10529,125 +10471,124 @@ ${component_stack}
     var node_29 = child(a_26);
     Icon(node_29, {
       get src() {
-        return RiDocumentFileChartLine;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_26);
-    var a_27 = sibling(a_26, 2);
-    let classes_27;
-    var node_30 = child(a_27);
-    Icon(node_30, {
-      get src() {
-        return RiDesignLayoutGrid2Line;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_27);
-    var a_28 = sibling(a_27, 2);
-    let classes_28;
-    var node_31 = child(a_28);
-    Icon(node_31, {
-      get src() {
-        return RiDocumentFileChartLine;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_28);
-    var a_29 = sibling(a_28, 2);
-    let classes_29;
-    var node_32 = child(a_29);
-    Icon(node_32, {
-      get src() {
-        return RiDocumentFileChartLine;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_29);
-    var a_30 = sibling(a_29, 2);
-    let classes_30;
-    var node_33 = child(a_30);
-    Icon(node_33, {
-      get src() {
-        return RiDocumentFileChartLine;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_30);
-    var a_31 = sibling(a_30, 2);
-    let classes_31;
-    var node_34 = child(a_31);
-    Icon(node_34, {
-      get src() {
-        return RiDocumentFileChartLine;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_31);
-    var a_32 = sibling(a_31, 2);
-    let classes_32;
-    var node_35 = child(a_32);
-    Icon(node_35, {
-      get src() {
-        return RiFinanceShoppingBag2Line;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_32);
-    var a_33 = sibling(a_32, 2);
-    let classes_33;
-    var node_36 = child(a_33);
-    Icon(node_36, {
-      get src() {
         return RiUserFacesUser3Line;
       },
       size: "20"
     });
     next(2);
-    reset(a_33);
+    reset(a_26);
     reset(nav_4);
-    var node_37 = sibling(nav_4, 2);
+    var nav_5 = sibling(nav_4, 4);
+    var a_27 = child(nav_5);
+    let classes_27;
+    var node_30 = child(a_27);
+    Icon(node_30, {
+      get src() {
+        return RiBusinessCalendarScheduleLine;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_27);
+    var node_31 = sibling(a_27, 2);
     {
       var consequent_2 = ($anchor2) => {
-        var fragment_3 = root_3();
-        var nav_5 = sibling(first_child(fragment_3), 2);
-        var a_34 = child(nav_5);
-        let classes_34;
-        var node_38 = child(a_34);
+        var a_28 = root_3();
+        let classes_28;
+        var node_32 = child(a_28);
+        Icon(node_32, {
+          get src() {
+            return RiUserFacesUserFollowLine;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_28);
+        template_effect(() => classes_28 = set_class(a_28, 1, "svelte-p7ambs", null, classes_28, { active: pathLv1 === "staff" && pathLv2 === "tenants" }));
+        append($anchor2, a_28);
+      };
+      if_block(node_31, ($render) => {
+        if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent_2);
+      });
+    }
+    reset(nav_5);
+    var node_33 = sibling(nav_5, 2);
+    {
+      var consequent_3 = ($anchor2) => {
+        var fragment_2 = root_4();
+        var nav_6 = sibling(first_child(fragment_2), 2);
+        var a_29 = child(nav_6);
+        let classes_29;
+        var node_34 = child(a_29);
+        Icon(node_34, {
+          get src() {
+            return RiMapMapPin2Line;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_29);
+        var a_30 = sibling(a_29, 2);
+        let classes_30;
+        var node_35 = child(a_30);
+        Icon(node_35, {
+          get src() {
+            return LuHandPlatter;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_30);
+        var a_31 = sibling(a_30, 2);
+        let classes_31;
+        var node_36 = child(a_31);
+        Icon(node_36, {
+          get src() {
+            return RiBuildingsHotelLine;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_31);
+        var a_32 = sibling(a_31, 2);
+        let classes_32;
+        var node_37 = child(a_32);
+        Icon(node_37, {
+          get src() {
+            return RiOthersDoorOpenLine;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_32);
+        var a_33 = sibling(a_32, 2);
+        let classes_33;
+        var node_38 = child(a_33);
         Icon(node_38, {
           get src() {
-            return RiBusinessCalendarScheduleLine;
+            return RiFinanceWallet3Line;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_33);
+        var a_34 = sibling(a_33, 2);
+        let classes_34;
+        var node_39 = child(a_34);
+        Icon(node_39, {
+          get src() {
+            return RiBuildingsHomeWifiLine;
           },
           size: "20"
         });
         next(2);
         reset(a_34);
-        reset(nav_5);
-        template_effect(() => classes_34 = set_class(a_34, 1, "svelte-p7ambs", null, classes_34, { active: pathLv2 === "booking" }));
-        append($anchor2, fragment_3);
-      };
-      if_block(node_37, ($render) => {
-        if (deep_read_state(access()), untrack(() => !access().admin)) $render(consequent_2);
-      });
-    }
-    var node_39 = sibling(node_37, 2);
-    {
-      var consequent_3 = ($anchor2) => {
-        var fragment_4 = root_4();
-        var nav_6 = sibling(first_child(fragment_4), 2);
-        var a_35 = child(nav_6);
+        var a_35 = sibling(a_34, 2);
         let classes_35;
         var node_40 = child(a_35);
         Icon(node_40, {
           get src() {
-            return RiSystemMenu2Line;
+            return RiUserFacesGroupLine;
           },
           size: "20"
         });
@@ -10658,176 +10599,38 @@ ${component_stack}
         var node_41 = child(a_36);
         Icon(node_41, {
           get src() {
-            return RiFinanceCashLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_36);
-        var a_37 = sibling(a_36, 2);
-        let classes_37;
-        var node_42 = child(a_37);
-        Icon(node_42, {
-          get src() {
-            return LuWashingMachine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_37);
-        var a_38 = sibling(a_37, 2);
-        let classes_38;
-        var node_43 = child(a_38);
-        Icon(node_43, {
-          get src() {
-            return RiMapMapPin2Line;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_38);
-        var a_39 = sibling(a_38, 2);
-        let classes_39;
-        var node_44 = child(a_39);
-        Icon(node_44, {
-          get src() {
-            return LuHandPlatter;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_39);
-        var a_40 = sibling(a_39, 2);
-        let classes_40;
-        var node_45 = child(a_40);
-        Icon(node_45, {
-          get src() {
-            return RiBuildingsHotelLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_40);
-        var a_41 = sibling(a_40, 2);
-        let classes_41;
-        var node_46 = child(a_41);
-        Icon(node_46, {
-          get src() {
-            return RiOthersDoorOpenLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_41);
-        var a_42 = sibling(a_41, 2);
-        let classes_42;
-        var node_47 = child(a_42);
-        Icon(node_47, {
-          get src() {
-            return RiBusinessCalendarScheduleLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_42);
-        var a_43 = sibling(a_42, 2);
-        let classes_43;
-        var node_48 = child(a_43);
-        Icon(node_48, {
-          get src() {
-            return RiFinanceWallet3Line;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_43);
-        var a_44 = sibling(a_43, 2);
-        let classes_44;
-        var node_49 = child(a_44);
-        Icon(node_49, {
-          get src() {
-            return RiBusinessInboxUnarchiveLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_44);
-        var a_45 = sibling(a_44, 2);
-        let classes_45;
-        var node_50 = child(a_45);
-        Icon(node_50, {
-          get src() {
-            return RiBuildingsHomeWifiLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_45);
-        var a_46 = sibling(a_45, 2);
-        let classes_46;
-        var node_51 = child(a_46);
-        Icon(node_51, {
-          get src() {
-            return RiUserFacesUserFollowLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_46);
-        var a_47 = sibling(a_46, 2);
-        let classes_47;
-        var node_52 = child(a_47);
-        Icon(node_52, {
-          get src() {
-            return RiUserFacesGroupLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_47);
-        var a_48 = sibling(a_47, 2);
-        let classes_48;
-        var node_53 = child(a_48);
-        Icon(node_53, {
-          get src() {
             return RiBusinessBarChartBoxLine;
           },
           size: "20"
         });
         next(2);
-        reset(a_48);
+        reset(a_36);
         reset(nav_6);
         template_effect(
           ($0) => {
-            classes_35 = set_class(a_35, 1, "svelte-p7ambs", null, classes_35, { active: pathLv2 === "menu" });
-            classes_36 = set_class(a_36, 1, "svelte-p7ambs", null, classes_36, { active: pathLv2 === "sale" });
-            classes_37 = set_class(a_37, 1, "svelte-p7ambs", null, classes_37, { active: pathLv2 === "laundry" });
-            classes_38 = set_class(a_38, 1, "svelte-p7ambs", null, classes_38, { active: pathLv2 === "location" });
-            classes_39 = set_class(a_39, 1, "svelte-p7ambs", null, classes_39, { active: pathLv2 === "facility" });
-            classes_40 = set_class(a_40, 1, "svelte-p7ambs", null, classes_40, { active: pathLv2 === "building" });
-            classes_41 = set_class(a_41, 1, "svelte-p7ambs", null, classes_41, { active: pathLv2 === "room" });
-            classes_42 = set_class(a_42, 1, "svelte-p7ambs", null, classes_42, { active: pathLv1 === "admin" && pathLv2 === "booking" });
-            classes_43 = set_class(a_43, 1, "svelte-p7ambs", null, classes_43, { active: pathLv2 === "payment" });
-            classes_44 = set_class(a_44, 1, "svelte-p7ambs", null, classes_44, { active: pathLv2 === "stock" });
-            classes_45 = set_class(a_45, 1, "svelte-p7ambs", null, classes_45, { active: pathLv2 === "wifiDevice" });
-            classes_46 = set_class(a_46, 1, "svelte-p7ambs", null, classes_46, { active: pathLv2 === "tenants" });
-            classes_47 = set_class(a_47, 1, "svelte-p7ambs", null, classes_47, { active: pathLv2 === "usersManagement" });
-            classes_48 = set_class(a_48, 1, "svelte-p7ambs", null, classes_48, $0);
+            classes_29 = set_class(a_29, 1, "svelte-p7ambs", null, classes_29, { active: pathLv2 === "location" });
+            classes_30 = set_class(a_30, 1, "svelte-p7ambs", null, classes_30, { active: pathLv2 === "facility" });
+            classes_31 = set_class(a_31, 1, "svelte-p7ambs", null, classes_31, { active: pathLv2 === "building" });
+            classes_32 = set_class(a_32, 1, "svelte-p7ambs", null, classes_32, { active: pathLv2 === "room" });
+            classes_33 = set_class(a_33, 1, "svelte-p7ambs", null, classes_33, { active: pathLv2 === "payment" });
+            classes_34 = set_class(a_34, 1, "svelte-p7ambs", null, classes_34, { active: pathLv2 === "wifiDevice" });
+            classes_35 = set_class(a_35, 1, "svelte-p7ambs", null, classes_35, { active: pathLv2 === "usersManagement" });
+            classes_36 = set_class(a_36, 1, "svelte-p7ambs", null, classes_36, $0);
           },
           [
             () => ({ active: String(pathLv2).includes("Logs") || false })
           ]
         );
-        append($anchor2, fragment_4);
+        append($anchor2, fragment_2);
       };
-      if_block(node_39, ($render) => {
+      if_block(node_33, ($render) => {
         if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent_3);
       });
     }
-    var nav_7 = sibling(node_39, 4);
+    var nav_7 = sibling(node_33, 4);
     var button_2 = child(nav_7);
-    var node_54 = child(button_2);
-    Icon(node_54, {
+    var node_42 = child(button_2);
+    Icon(node_42, {
       get src() {
         return RiSystemLogoutBoxRLine;
       },
@@ -10846,19 +10649,19 @@ ${component_stack}
       classes_4 = set_class(a_4, 1, "svelte-p7ambs", null, classes_4, { active: pathAll === "/staff/revenueReport" });
       classes_5 = set_class(a_5, 1, "svelte-p7ambs", null, classes_5, { active: pathAll === "/staff/wifiDeviceReport" });
       classes_6 = set_class(a_6, 1, "svelte-p7ambs", null, classes_6, { active: pathAll === "/staff/pricePerDayReport" });
-      classes_7 = set_class(a_7, 1, "svelte-p7ambs", null, classes_7, { active: pathAll === "/staff/sales" });
-      classes_8 = set_class(a_8, 1, "svelte-p7ambs", null, classes_8, { active: pathAll === "/user" });
+      classes_7 = set_class(a_7, 1, "svelte-p7ambs", null, classes_7, { active: pathAll === "/user" });
+      classes_8 = set_class(a_8, 1, "svelte-p7ambs", null, classes_8, { active: pathLv1 === "staff" && pathLv2 === "booking" });
       set_class(button_1, 1, `backdrop ${$isOpenSideMenu() ? "open" : ""}`, "svelte-p7ambs");
       set_class(aside_1, 1, `side-menu-mobile ${$isOpenSideMenu() ? "open" : ""}`, "svelte-p7ambs");
-      classes_25 = set_class(a_25, 1, "svelte-p7ambs", null, classes_25, { active: pathLv1 === "" });
-      classes_26 = set_class(a_26, 1, "svelte-p7ambs", null, classes_26, { active: pathAll === "/staff/occupancyReport" });
-      classes_27 = set_class(a_27, 1, "svelte-p7ambs", null, classes_27, { active: pathAll === "/staff/occupancyHeatmap" });
-      classes_28 = set_class(a_28, 1, "svelte-p7ambs", null, classes_28, { active: pathAll === "/staff/missingDataReport" });
-      classes_29 = set_class(a_29, 1, "svelte-p7ambs", null, classes_29, { active: pathAll === "/staff/revenueReport" });
-      classes_30 = set_class(a_30, 1, "svelte-p7ambs", null, classes_30, { active: pathAll === "/staff/wifiDeviceReport" });
-      classes_31 = set_class(a_31, 1, "svelte-p7ambs", null, classes_31, { active: pathAll === "/staff/pricePerDayReport" });
-      classes_32 = set_class(a_32, 1, "svelte-p7ambs", null, classes_32, { active: pathAll === "/staff/sales" });
-      classes_33 = set_class(a_33, 1, "svelte-p7ambs", null, classes_33, { active: pathAll === "/user" });
+      classes_19 = set_class(a_19, 1, "svelte-p7ambs", null, classes_19, { active: pathLv1 === "" });
+      classes_20 = set_class(a_20, 1, "svelte-p7ambs", null, classes_20, { active: pathAll === "/staff/occupancyReport" });
+      classes_21 = set_class(a_21, 1, "svelte-p7ambs", null, classes_21, { active: pathAll === "/staff/occupancyHeatmap" });
+      classes_22 = set_class(a_22, 1, "svelte-p7ambs", null, classes_22, { active: pathAll === "/staff/missingDataReport" });
+      classes_23 = set_class(a_23, 1, "svelte-p7ambs", null, classes_23, { active: pathAll === "/staff/revenueReport" });
+      classes_24 = set_class(a_24, 1, "svelte-p7ambs", null, classes_24, { active: pathAll === "/staff/wifiDeviceReport" });
+      classes_25 = set_class(a_25, 1, "svelte-p7ambs", null, classes_25, { active: pathAll === "/staff/pricePerDayReport" });
+      classes_26 = set_class(a_26, 1, "svelte-p7ambs", null, classes_26, { active: pathAll === "/user" });
+      classes_27 = set_class(a_27, 1, "svelte-p7ambs", null, classes_27, { active: pathLv1 === "staff" && pathLv2 === "booking" });
     });
     event("click", button, logout);
     event("click", button_1, () => store_set(isOpenSideMenu, !$isOpenSideMenu()));

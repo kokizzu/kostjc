@@ -36,24 +36,8 @@
 			<span class="title">Room</span>
 			<span class="block"></span>
 		</a>
-		<a href="/admin/stockLogs" class:active={segment2==='stockLogs'}>
-			<span class="title">Stock</span>
-			<span class="block"></span>
-		</a>
-		<a href="/admin/saleLogs" class:active={segment2==='saleLogs'}>
-			<span class="title">Sale</span>
-			<span class="block"></span>
-		</a>
-		<a href="/admin/menuLogs" class:active={segment2==='menuLogs'}>
-			<span class="title">Menu</span>
-			<span class="block"></span>
-		</a>
 		<a href="/admin/wifiDeviceLogs" class:active={segment2==='wifiDeviceLogs'}>
 			<span class="title">Wifi Device</span>
-			<span class="block"></span>
-		</a>
-		<a href="/admin/laundryLogs" class:active={segment2==='laundryLogs'}>
-			<span class="title">Laundry</span>
 			<span class="block"></span>
 		</a>
 	</nav>

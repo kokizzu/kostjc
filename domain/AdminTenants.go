@@ -3,11 +3,7 @@ package domain
 import (
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
-	"kostjc/model/mAuth/wcAuth"
 	"kostjc/model/zCrud"
-
-	"github.com/kokizzu/gotro/M"
-	"github.com/kokizzu/gotro/S"
 )
 
 //go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminTenants.go
@@ -236,113 +232,14 @@ func (d *Domain) AdminTenants(in *AdminTenantsIn) (out AdminTenantsOut) {
 		return
 	}
 
-	out.actor = sess.UserId
-	out.refId = in.Tenant.Id
-
-	if in.WithMeta {
-		out.Meta = &AdminTenantsMeta
-	}
-
-	switch in.Cmd {
-	case zCrud.CmdForm:
-		tnt := rqAuth.NewTenants(d.AuthOltp)
-		tnt.Id = in.Tenant.Id
-		if tnt.Id > 0 {
-			if !tnt.FindById() {
-				out.SetError(400, ErrAdminTenantsNotFound)
-				return
-			}
-		}
-		out.Tenant = tnt
-	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore, zCrud.CmdToggleWaAdded, zCrud.CmdToggleTeleAdded:
-		tenant := wcAuth.NewTenantsMutator(d.AuthOltp)
-		tenant.Id = in.Tenant.Id
-		if tenant.Id > 0 {
-			if !tenant.FindById() {
-				out.SetError(400, ErrAdminTenantsNotFound)
-				return
-			}
-
-			if in.Cmd == zCrud.CmdDelete {
-				if tenant.DeletedAt == 0 {
-					tenant.SetDeletedAt(in.UnixNow())
-				}
-			}
-
-			if in.Cmd == zCrud.CmdRestore {
-				if tenant.DeletedAt > 0 {
-					tenant.SetDeletedAt(0)
-					tenant.SetRestoredBy(sess.UserId)
-				}
-			}
-			if in.Cmd == zCrud.CmdToggleWaAdded {
-				tenant.SetWaAddedAt(in.Tenant.WaAddedAt)
-				tenant.SetUpdatedAt(in.UnixNow())
-				tenant.SetUpdatedBy(sess.UserId)
-
-				if !tenant.DoUpsert() {
-					out.SetError(500, ErrAdminTenantsSaveFailed)
-					return
-				}
-			}
-			if in.Cmd == zCrud.CmdToggleTeleAdded {
-				tenant.SetTeleAddedAt(in.Tenant.TeleAddedAt)
-				tenant.SetUpdatedAt(in.UnixNow())
-				tenant.SetUpdatedBy(sess.UserId)
-
-				if !tenant.DoUpsert() {
-					out.SetError(500, ErrAdminTenantsSaveFailed)
-					return
-				}
-			}
-		}
-
-		defer InsertPropertyLog(tenant.Id, d.tenantLogs, out.ResponseCommon, in.TimeNow(), sess.UserId, tenant)()
-
-		// Ini semua biar mirip di KTP
-		in.Tenant.KtpPlaceBirth = S.ToUpper(in.Tenant.KtpPlaceBirth)
-		in.Tenant.KtpRegion = S.ToUpper(in.Tenant.KtpRegion)
-		in.Tenant.KtpOccupation = S.ToTitle(in.Tenant.KtpOccupation)
-		in.Tenant.TenantName = S.ToTitle(in.Tenant.TenantName)
-		in.Tenant.KtpName = S.ToTitle(in.Tenant.KtpName)
-		in.Tenant.KtpGender = S.ToTitle(in.Tenant.KtpGender)
-		in.Tenant.KtpCitizenship = S.ToUpper(in.Tenant.KtpCitizenship)
-		in.Tenant.KtpAddress = S.ToUpper(in.Tenant.KtpAddress)
-		in.Tenant.KtpKelurahanDesa = S.ToTitle(in.Tenant.KtpKelurahanDesa)
-		in.Tenant.KtpKecamatan = S.ToTitle(in.Tenant.KtpKecamatan)
-
-		tenant.SetAll(in.Tenant, M.SB{}, M.SB{})
-
-		if tenant.Id == 0 {
-			if tenant.FindByKtpNumber() {
-				out.SetError(400, ErrAdminTenantsAlreadyExists)
-				return
-			}
-			tenant.SetCreatedAt(in.UnixNow())
-			tenant.SetCreatedBy(sess.UserId)
-		}
-
-		tenant.SetUpdatedAt(in.UnixNow())
-		tenant.SetUpdatedBy(sess.UserId)
-
-		if !tenant.DoUpsert() {
-			out.SetError(500, ErrAdminTenantsSaveFailed)
-			return
-		}
-
-		if in.Pager.Page == 0 {
-			break
-		}
-
-		fallthrough
-	case zCrud.CmdList:
-		tenant := rqAuth.NewTenants(d.AuthOltp)
-		out.Tenants = tenant.FindByPagination(
-			&AdminTenantsMeta,
-			&in.Pager,
-			&out.Pager,
-		)
-	}
-
+	out.Meta, out.Tenant, out.Tenants, out.Pager = d.handleTenants(
+		&in.RequestCommon,
+		in.Cmd,
+		in.WithMeta,
+		&in.Pager,
+		&in.Tenant,
+		&out.ResponseCommon,
+		sess,
+	)
 	return
 }

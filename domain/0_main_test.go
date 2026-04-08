@@ -3,13 +3,12 @@ package domain
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"kostjc/conf"
 	"kostjc/model"
+	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mAuth/wcAuth"
 	"kostjc/model/xMailer"
-	"net"
 	"os"
 	"testing"
 
@@ -32,17 +31,30 @@ var testCh *Ch.Adapter
 var testMailer xMailer.Mailer
 var testTime = fastime.Now()
 var testSuperAdminSessionToken string
+var testStaffSessionToken string
+var testUserSessionToken string
 var testAdmin *rqAuth.Users
+var testStaff *rqAuth.Users
+var testUser *rqAuth.Users
 
 const (
 	testSuperAdminEmail    = `admin@localhost`
 	testSuperAdminUserName = `admin1`
+	testStaffEmail         = `staff@localhost`
+	testStaffUserName      = `staff1`
+	testUserEmail          = `user@localhost`
+	testUserUserName       = `user1`
 )
 
 func TestMain(m *testing.M) {
 	if os.Getenv(`USE_COMPOSE`) != `` {
 		// use local docker compose
 		conf.LoadEnv()
+		testMailer = xMailer.Mailer{
+			SendMailFunc: func(toEmailName map[string]string, subject, text, html string) error {
+				return nil
+			},
+		}
 
 		var err error
 		eg := errgroup.Group{}
@@ -56,14 +68,6 @@ func TestMain(m *testing.M) {
 			testTt, err = ttConf.Connect()
 			return err
 		})
-		eg.Go(func() error {
-			mhConf := conf.EnvMailhog()
-			mailer, err := xMailer.NewMailhog(mhConf)
-			testMailer = xMailer.Mailer{
-				SendMailFunc: mailer.SendEmail,
-			}
-			return err
-		})
 		err = eg.Wait()
 		L.PanicIf(err, `eg.Wait`)
 
@@ -71,6 +75,11 @@ func TestMain(m *testing.M) {
 		// setup dockertest instance
 		dockerPool := D.InitDockerTest("")
 		defer dockerPool.Cleanup()
+		testMailer = xMailer.Mailer{
+			SendMailFunc: func(toEmailName map[string]string, subject, text, html string) error {
+				return nil
+			},
+		}
 
 		eg := errgroup.Group{}
 
@@ -125,29 +134,6 @@ func TestMain(m *testing.M) {
 			return nil
 		})
 
-		// mailer
-		eg.Go(func() error {
-			conf.LoadEnv()
-			mailhogConf := conf.EnvMailhog()
-			mailhogPort := fmt.Sprint(mailhogConf.MailhogPort)
-			dockerPool.Spawn(&dockertest.RunOptions{
-				Name:       `dockertest-mailhog-` + dockerPool.Uniq,
-				Repository: "mailhog/mailhog",
-				Tag:        `latest`,
-				NetworkID:  dockerPool.Network.ID,
-			}, func(res *dockertest.Resource) error {
-				_, err := net.Dial("tcp", res.GetHostPort(mailhogPort+"/tcp"))
-				if err != nil {
-					return err
-				}
-				mailHog, err := xMailer.NewMailhog(mailhogConf)
-				L.PanicIf(err, `xMailer.NewMailhog`)
-				testMailer.SendMailFunc = mailHog.SendEmail
-				return nil
-			})
-			return nil
-		})
-
 		err := eg.Wait()
 		L.PanicIf(err, `eg.Wait`)
 	}
@@ -183,6 +169,7 @@ func testDomain() (*Domain, func()) {
 	admin := wcAuth.NewUsersMutator(testTt)
 	admin.Email = testSuperAdminEmail
 	admin.UserName = testSuperAdminUserName
+	admin.Role = mAuth.RoleAdmin
 	if !admin.FindByEmail() {
 		admin.DoInsert()
 	}
@@ -204,6 +191,54 @@ func testDomain() (*Domain, func()) {
 		session.DoInsert()
 	}
 
+	staff := wcAuth.NewUsersMutator(testTt)
+	staff.Email = testStaffEmail
+	staff.UserName = testStaffUserName
+	staff.Role = mAuth.RoleStaff
+	if !staff.FindByEmail() {
+		staff.DoInsert()
+	}
+	testStaff = &staff.Users
+	testStaff.Adapter = nil
+
+	staffSession := wcAuth.NewSessionsMutator(testTt)
+	staffSession.UserId = staff.Id
+	staffSess := &Session{
+		UserId:    staff.Id,
+		ExpiredAt: testTime.AddDate(0, 0, conf.CookieDays).Unix(),
+		Email:     staff.Email,
+	}
+	testStaffSessionToken = staffSess.Encrypt(``)
+	staffSession.SessionToken = testStaffSessionToken
+	staffSession.ExpiredAt = staffSess.ExpiredAt
+	if !staffSession.FindBySessionToken() {
+		staffSession.DoInsert()
+	}
+
+	user := wcAuth.NewUsersMutator(testTt)
+	user.Email = testUserEmail
+	user.UserName = testUserUserName
+	user.Role = mAuth.RoleUser
+	if !user.FindByEmail() {
+		user.DoInsert()
+	}
+	testUser = &user.Users
+	testUser.Adapter = nil
+
+	userSession := wcAuth.NewSessionsMutator(testTt)
+	userSession.UserId = user.Id
+	userSess := &Session{
+		UserId:    user.Id,
+		ExpiredAt: testTime.AddDate(0, 0, conf.CookieDays).Unix(),
+		Email:     user.Email,
+	}
+	testUserSessionToken = userSess.Encrypt(``)
+	userSession.SessionToken = testUserSessionToken
+	userSession.ExpiredAt = userSess.ExpiredAt
+	if !userSession.FindBySessionToken() {
+		userSession.DoInsert()
+	}
+
 	return d, func() {
 		go d.authLogs.Close()
 		d.WaitTimedBufferFinalFlush()
@@ -217,6 +252,40 @@ func testAdminRequestCommon(action string) RequestCommon {
 		SessionToken:  testSuperAdminSessionToken,
 		UserAgent:     "",
 		IpAddress:     "127.0.2.1",
+		Debug:         true,
+		Host:          "localhost:1234",
+		Action:        action,
+		Lat:           -1,
+		Long:          -2,
+		now:           testTime.Unix(),
+		start:         testTime,
+	}
+}
+
+func testStaffRequestCommon(action string) RequestCommon {
+	return RequestCommon{
+		TracerContext: context.Background(),
+		RequestId:     lexid.ID(),
+		SessionToken:  testStaffSessionToken,
+		UserAgent:     "",
+		IpAddress:     "127.0.2.2",
+		Debug:         true,
+		Host:          "localhost:1234",
+		Action:        action,
+		Lat:           -1,
+		Long:          -2,
+		now:           testTime.Unix(),
+		start:         testTime,
+	}
+}
+
+func testUserRequestCommon(action string) RequestCommon {
+	return RequestCommon{
+		TracerContext: context.Background(),
+		RequestId:     lexid.ID(),
+		SessionToken:  testUserSessionToken,
+		UserAgent:     "",
+		IpAddress:     "127.0.2.3",
 		Debug:         true,
 		Host:          "localhost:1234",
 		Action:        action,

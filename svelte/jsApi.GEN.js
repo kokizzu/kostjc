@@ -252,216 +252,6 @@ exports.AdminBookingLogs = async function AdminBookingLogs( i, cb ) {
 }
 
 /**
- * @typedef {Object} AdminBorrowedUtensilLogsIn
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} withMeta
- */
-const AdminBorrowedUtensilLogsIn = {
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  withMeta: false, // bool
-}
-/**
- * @typedef {Object} AdminBorrowedUtensilLogsOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} logs
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- */
-const AdminBorrowedUtensilLogsOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  logs: { // []saCafe.BorrowedUtensilLogs
-  }, // []saCafe.BorrowedUtensilLogs
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-}
-/**
- * @callback AdminBorrowedUtensilLogsCallback
- * @param {AdminBorrowedUtensilLogsOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminBorrowedUtensilLogsIn} i
- * @param {AdminBorrowedUtensilLogsCallback} cb
- * @returns {Promise}
- */
-exports.AdminBorrowedUtensilLogs = async function AdminBorrowedUtensilLogs( i, cb ) {
-  return await axios.post( '/admin/borrowedUtensilLogs', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
- * @typedef {Object} AdminBorrowedUtensilsIn
- * @property {String} cmd
- * @property {Object} withMeta
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {number} borrowedUtensil.id
- * @property {String} borrowedUtensil.customer
- * @property {String} borrowedUtensil.items
- * @property {number} borrowedUtensil.qty
- * @property {String} borrowedUtensil.status
- * @property {String} borrowedUtensil.borrowedAt
- * @property {number} borrowedUtensil.createdAt
- * @property {number} borrowedUtensil.createdBy
- * @property {number} borrowedUtensil.updatedAt
- * @property {number} borrowedUtensil.updatedBy
- * @property {number} borrowedUtensil.deletedAt
- * @property {number} borrowedUtensil.deletedBy
- * @property {number} borrowedUtensil.restoredBy
- * @property {number} tenantID
- */
-const AdminBorrowedUtensilsIn = {
-  cmd: '', // string
-  withMeta: false, // bool
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  borrowedUtensil: { // rqCafe.BorrowedUtensils
-    id: 0, // uint64
-    customer: '', // string
-    items: '', // string
-    qty: 0, // int64
-    status: '', // string
-    borrowedAt: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-  }, // rqCafe.BorrowedUtensils
-  tenantID: 0, // uint64
-}
-/**
- * @typedef {Object} AdminBorrowedUtensilsOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- * @property {number} borrowedUtensil.id
- * @property {String} borrowedUtensil.customer
- * @property {String} borrowedUtensil.items
- * @property {number} borrowedUtensil.qty
- * @property {String} borrowedUtensil.status
- * @property {String} borrowedUtensil.borrowedAt
- * @property {number} borrowedUtensil.createdAt
- * @property {number} borrowedUtensil.createdBy
- * @property {number} borrowedUtensil.updatedAt
- * @property {number} borrowedUtensil.updatedBy
- * @property {number} borrowedUtensil.deletedAt
- * @property {number} borrowedUtensil.deletedBy
- * @property {number} borrowedUtensil.restoredBy
- * @property {Object} borrowedUtensils
- */
-const AdminBorrowedUtensilsOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-  borrowedUtensil: { // rqCafe.BorrowedUtensils
-    id: 0, // uint64
-    customer: '', // string
-    items: '', // string
-    qty: 0, // int64
-    status: '', // string
-    borrowedAt: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-  }, // rqCafe.BorrowedUtensils
-  borrowedUtensils: { // [][]any
-  }, // [][]any
-}
-/**
- * @callback AdminBorrowedUtensilsCallback
- * @param {AdminBorrowedUtensilsOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminBorrowedUtensilsIn} i
- * @param {AdminBorrowedUtensilsCallback} cb
- * @returns {Promise}
- */
-exports.AdminBorrowedUtensils = async function AdminBorrowedUtensils( i, cb ) {
-  return await axios.post( '/admin/borrowedUtensils', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
  * @typedef {Object} AdminBuildingIn
  * @property {String} cmd
  * @property {Object} withMeta
@@ -868,262 +658,6 @@ exports.AdminFacilityLogs = async function AdminFacilityLogs( i, cb ) {
 }
 
 /**
- * @typedef {Object} AdminLaundryIn
- * @property {String} cmd
- * @property {Object} withMeta
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {number} laundry.id
- * @property {String} laundry.customer
- * @property {String} laundry.items
- * @property {String} laundry.note
- * @property {String} laundry.laundryAt
- * @property {number} laundry.createdAt
- * @property {number} laundry.createdBy
- * @property {number} laundry.updatedAt
- * @property {number} laundry.updatedBy
- * @property {number} laundry.deletedAt
- * @property {number} laundry.deletedBy
- * @property {number} laundry.restoredBy
- * @property {String} laundry.paidAt
- * @property {number} laundry.paidBy
- * @property {String} laundry.washAt
- * @property {number} laundry.washBy
- * @property {String} laundry.dryAt
- * @property {number} laundry.dryBy
- * @property {String} laundry.foldAt
- * @property {number} laundry.foldBy
- * @property {String} laundry.notifyAt
- * @property {number} laundry.notifyBy
- * @property {String} laundry.givenAt
- * @property {String} laundry.givenBys
- * @property {number} laundry.weight
- */
-const AdminLaundryIn = {
-  cmd: '', // string
-  withMeta: false, // bool
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  laundry: { // rqCafe.Laundry
-    id: 0, // uint64
-    customer: '', // string
-    items: '', // string
-    note: '', // string
-    laundryAt: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-    paidAt: '', // string
-    paidBy: 0, // uint64
-    washAt: '', // string
-    washBy: 0, // uint64
-    dryAt: '', // string
-    dryBy: 0, // uint64
-    foldAt: '', // string
-    foldBy: 0, // uint64
-    notifyAt: '', // string
-    notifyBy: 0, // uint64
-    givenAt: '', // string
-    givenBys: '', // string
-    weight: 0, // float64
-  }, // rqCafe.Laundry
-}
-/**
- * @typedef {Object} AdminLaundryOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- * @property {number} laundry.id
- * @property {String} laundry.customer
- * @property {String} laundry.items
- * @property {String} laundry.note
- * @property {String} laundry.laundryAt
- * @property {number} laundry.createdAt
- * @property {number} laundry.createdBy
- * @property {number} laundry.updatedAt
- * @property {number} laundry.updatedBy
- * @property {number} laundry.deletedAt
- * @property {number} laundry.deletedBy
- * @property {number} laundry.restoredBy
- * @property {String} laundry.paidAt
- * @property {number} laundry.paidBy
- * @property {String} laundry.washAt
- * @property {number} laundry.washBy
- * @property {String} laundry.dryAt
- * @property {number} laundry.dryBy
- * @property {String} laundry.foldAt
- * @property {number} laundry.foldBy
- * @property {String} laundry.notifyAt
- * @property {number} laundry.notifyBy
- * @property {String} laundry.givenAt
- * @property {String} laundry.givenBys
- * @property {number} laundry.weight
- * @property {Object} laundries
- */
-const AdminLaundryOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-  laundry: { // rqCafe.Laundry
-    id: 0, // uint64
-    customer: '', // string
-    items: '', // string
-    note: '', // string
-    laundryAt: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-    paidAt: '', // string
-    paidBy: 0, // uint64
-    washAt: '', // string
-    washBy: 0, // uint64
-    dryAt: '', // string
-    dryBy: 0, // uint64
-    foldAt: '', // string
-    foldBy: 0, // uint64
-    notifyAt: '', // string
-    notifyBy: 0, // uint64
-    givenAt: '', // string
-    givenBys: '', // string
-    weight: 0, // float64
-  }, // rqCafe.Laundry
-  laundries: { // [][]any
-  }, // [][]any
-}
-/**
- * @callback AdminLaundryCallback
- * @param {AdminLaundryOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminLaundryIn} i
- * @param {AdminLaundryCallback} cb
- * @returns {Promise}
- */
-exports.AdminLaundry = async function AdminLaundry( i, cb ) {
-  return await axios.post( '/admin/laundry', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
- * @typedef {Object} AdminLaundryLogsIn
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} withMeta
- */
-const AdminLaundryLogsIn = {
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  withMeta: false, // bool
-}
-/**
- * @typedef {Object} AdminLaundryLogsOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} logs
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- */
-const AdminLaundryLogsOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  logs: { // []saCafe.LaundryLogs
-  }, // []saCafe.LaundryLogs
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-}
-/**
- * @callback AdminLaundryLogsCallback
- * @param {AdminLaundryLogsOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminLaundryLogsIn} i
- * @param {AdminLaundryLogsCallback} cb
- * @returns {Promise}
- */
-exports.AdminLaundryLogs = async function AdminLaundryLogs( i, cb ) {
-  return await axios.post( '/admin/laundryLogs', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
  * @typedef {Object} AdminLocationIn
  * @property {String} cmd
  * @property {Object} withMeta
@@ -1319,214 +853,6 @@ const AdminLocationLogsOut = {
  */
 exports.AdminLocationLogs = async function AdminLocationLogs( i, cb ) {
   return await axios.post( '/admin/locationLogs', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
- * @typedef {Object} AdminMenuIn
- * @property {String} cmd
- * @property {Object} withMeta
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {number} menu.id
- * @property {String} menu.name
- * @property {number} menu.hppIDR
- * @property {number} menu.salePriceIDR
- * @property {String} menu.detail
- * @property {String} menu.imageUrl
- * @property {number} menu.createdAt
- * @property {number} menu.createdBy
- * @property {number} menu.updatedAt
- * @property {number} menu.updatedBy
- * @property {number} menu.deletedAt
- * @property {number} menu.deletedBy
- * @property {number} menu.restoredBy
- */
-const AdminMenuIn = {
-  cmd: '', // string
-  withMeta: false, // bool
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  menu: { // rqCafe.Menus
-    id: 0, // uint64
-    name: '', // string
-    hppIDR: 0, // int64
-    salePriceIDR: 0, // int64
-    detail: '', // string
-    imageUrl: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-  }, // rqCafe.Menus
-}
-/**
- * @typedef {Object} AdminMenuOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- * @property {number} menu.id
- * @property {String} menu.name
- * @property {number} menu.hppIDR
- * @property {number} menu.salePriceIDR
- * @property {String} menu.detail
- * @property {String} menu.imageUrl
- * @property {number} menu.createdAt
- * @property {number} menu.createdBy
- * @property {number} menu.updatedAt
- * @property {number} menu.updatedBy
- * @property {number} menu.deletedAt
- * @property {number} menu.deletedBy
- * @property {number} menu.restoredBy
- * @property {Object} menus
- */
-const AdminMenuOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-  menu: { // rqCafe.Menus
-    id: 0, // uint64
-    name: '', // string
-    hppIDR: 0, // int64
-    salePriceIDR: 0, // int64
-    detail: '', // string
-    imageUrl: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-  }, // rqCafe.Menus
-  menus: { // [][]any
-  }, // [][]any
-}
-/**
- * @callback AdminMenuCallback
- * @param {AdminMenuOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminMenuIn} i
- * @param {AdminMenuCallback} cb
- * @returns {Promise}
- */
-exports.AdminMenu = async function AdminMenu( i, cb ) {
-  return await axios.post( '/admin/menu', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
- * @typedef {Object} AdminMenuLogsIn
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} withMeta
- */
-const AdminMenuLogsIn = {
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  withMeta: false, // bool
-}
-/**
- * @typedef {Object} AdminMenuLogsOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} logs
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- */
-const AdminMenuLogsOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  logs: { // []saCafe.MenuLogs
-  }, // []saCafe.MenuLogs
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-}
-/**
- * @callback AdminMenuLogsCallback
- * @param {AdminMenuLogsOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminMenuLogsIn} i
- * @param {AdminMenuLogsCallback} cb
- * @returns {Promise}
- */
-exports.AdminMenuLogs = async function AdminMenuLogs( i, cb ) {
-  return await axios.post( '/admin/menuLogs', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
@@ -1969,262 +1295,6 @@ exports.AdminRoomLogs = async function AdminRoomLogs( i, cb ) {
 }
 
 /**
- * @typedef {Object} AdminSaleIn
- * @property {String} cmd
- * @property {Object} withMeta
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {number} sale.id
- * @property {String} sale.cashier
- * @property {number} sale.tenantId
- * @property {String} sale.buyerName
- * @property {Object} sale.menuIds
- * @property {number} sale.qrisIDR
- * @property {number} sale.cashIDR
- * @property {number} sale.debtIDR
- * @property {number} sale.topupIDR
- * @property {number} sale.totalPriceIDR
- * @property {String} sale.salesDate
- * @property {String} sale.paidAt
- * @property {String} sale.note
- * @property {number} sale.donation
- * @property {number} sale.transferIDR
- * @property {String} sale.paymentMethod
- * @property {String} sale.paymentStatus
- * @property {number} sale.createdAt
- * @property {number} sale.createdBy
- * @property {number} sale.updatedAt
- * @property {number} sale.updatedBy
- * @property {number} sale.deletedAt
- * @property {number} sale.deletedBy
- * @property {number} sale.restoredBy
- * @property {number} tenantID
- */
-const AdminSaleIn = {
-  cmd: '', // string
-  withMeta: false, // bool
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  sale: { // rqCafe.Sales
-    id: 0, // uint64
-    cashier: '', // string
-    tenantId: 0, // uint64
-    buyerName: '', // string
-    menuIds: { // []any
-    }, // []any
-    qrisIDR: 0, // int64
-    cashIDR: 0, // int64
-    debtIDR: 0, // int64
-    topupIDR: 0, // int64
-    totalPriceIDR: 0, // int64
-    salesDate: '', // string
-    paidAt: '', // string
-    note: '', // string
-    donation: 0, // int64
-    transferIDR: 0, // int64
-    paymentMethod: '', // string
-    paymentStatus: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-  }, // rqCafe.Sales
-  tenantID: 0, // uint64
-}
-/**
- * @typedef {Object} AdminSaleOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- * @property {number} sale.id
- * @property {String} sale.cashier
- * @property {number} sale.tenantId
- * @property {String} sale.buyerName
- * @property {Object} sale.menuIds
- * @property {number} sale.qrisIDR
- * @property {number} sale.cashIDR
- * @property {number} sale.debtIDR
- * @property {number} sale.topupIDR
- * @property {number} sale.totalPriceIDR
- * @property {String} sale.salesDate
- * @property {String} sale.paidAt
- * @property {String} sale.note
- * @property {number} sale.donation
- * @property {number} sale.transferIDR
- * @property {String} sale.paymentMethod
- * @property {String} sale.paymentStatus
- * @property {number} sale.createdAt
- * @property {number} sale.createdBy
- * @property {number} sale.updatedAt
- * @property {number} sale.updatedBy
- * @property {number} sale.deletedAt
- * @property {number} sale.deletedBy
- * @property {number} sale.restoredBy
- * @property {Object} sales
- */
-const AdminSaleOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-  sale: { // rqCafe.Sales
-    id: 0, // uint64
-    cashier: '', // string
-    tenantId: 0, // uint64
-    buyerName: '', // string
-    menuIds: { // []any
-    }, // []any
-    qrisIDR: 0, // int64
-    cashIDR: 0, // int64
-    debtIDR: 0, // int64
-    topupIDR: 0, // int64
-    totalPriceIDR: 0, // int64
-    salesDate: '', // string
-    paidAt: '', // string
-    note: '', // string
-    donation: 0, // int64
-    transferIDR: 0, // int64
-    paymentMethod: '', // string
-    paymentStatus: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-  }, // rqCafe.Sales
-  sales: { // [][]any
-  }, // [][]any
-}
-/**
- * @callback AdminSaleCallback
- * @param {AdminSaleOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminSaleIn} i
- * @param {AdminSaleCallback} cb
- * @returns {Promise}
- */
-exports.AdminSale = async function AdminSale( i, cb ) {
-  return await axios.post( '/admin/sale', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
- * @typedef {Object} AdminSaleLogsIn
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} withMeta
- */
-const AdminSaleLogsIn = {
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  withMeta: false, // bool
-}
-/**
- * @typedef {Object} AdminSaleLogsOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} logs
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- */
-const AdminSaleLogsOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  logs: { // []saCafe.SaleLogs
-  }, // []saCafe.SaleLogs
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-}
-/**
- * @callback AdminSaleLogsCallback
- * @param {AdminSaleLogsOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminSaleLogsIn} i
- * @param {AdminSaleLogsCallback} cb
- * @returns {Promise}
- */
-exports.AdminSaleLogs = async function AdminSaleLogs( i, cb ) {
-  return await axios.post( '/admin/saleLogs', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
  * @typedef {Object} AdminSettingFixInconsistenciesIn
  * @property {String} cmd
  */
@@ -2277,210 +1347,6 @@ const AdminSettingsOut = {
  */
 exports.AdminSettings = async function AdminSettings( i, cb ) {
   return await axios.post( '/admin/settings', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
- * @typedef {Object} AdminStockIn
- * @property {String} cmd
- * @property {Object} withMeta
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {number} stock.id
- * @property {String} stock.stockName
- * @property {String} stock.stockAddedAt
- * @property {number} stock.quantity
- * @property {number} stock.priceIDR
- * @property {number} stock.createdAt
- * @property {number} stock.createdBy
- * @property {number} stock.updatedAt
- * @property {number} stock.updatedBy
- * @property {number} stock.deletedAt
- * @property {number} stock.deletedBy
- * @property {number} stock.restoredBy
- */
-const AdminStockIn = {
-  cmd: '', // string
-  withMeta: false, // bool
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  stock: { // rqProperty.Stocks
-    id: 0, // uint64
-    stockName: '', // string
-    stockAddedAt: '', // string
-    quantity: 0, // int64
-    priceIDR: 0, // int64
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-  }, // rqProperty.Stocks
-}
-/**
- * @typedef {Object} AdminStockOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- * @property {number} stock.id
- * @property {String} stock.stockName
- * @property {String} stock.stockAddedAt
- * @property {number} stock.quantity
- * @property {number} stock.priceIDR
- * @property {number} stock.createdAt
- * @property {number} stock.createdBy
- * @property {number} stock.updatedAt
- * @property {number} stock.updatedBy
- * @property {number} stock.deletedAt
- * @property {number} stock.deletedBy
- * @property {number} stock.restoredBy
- * @property {Object} stocks
- */
-const AdminStockOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-  stock: { // rqProperty.Stocks
-    id: 0, // uint64
-    stockName: '', // string
-    stockAddedAt: '', // string
-    quantity: 0, // int64
-    priceIDR: 0, // int64
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    deletedBy: 0, // uint64
-    restoredBy: 0, // uint64
-  }, // rqProperty.Stocks
-  stocks: { // [][]any
-  }, // [][]any
-}
-/**
- * @callback AdminStockCallback
- * @param {AdminStockOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminStockIn} i
- * @param {AdminStockCallback} cb
- * @returns {Promise}
- */
-exports.AdminStock = async function AdminStock( i, cb ) {
-  return await axios.post( '/admin/stock', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
- * @typedef {Object} AdminStockLogsIn
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} withMeta
- */
-const AdminStockLogsIn = {
-  pager: { // zCrud.PagerIn
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerIn
-  withMeta: false, // bool
-}
-/**
- * @typedef {Object} AdminStockLogsOut
- * @property {String} pager.search
- * @property {String} pager.searchBy
- * @property {number} pager.page
- * @property {number} pager.perPage
- * @property {number} pager.pages
- * @property {number} pager.total
- * @property {Object} pager.filters
- * @property {Array<String>} pager.order
- * @property {Object} logs
- * @property {Object} meta.fields
- * @property {Object} meta.mutex
- * @property {String} meta.cachedSelect
- */
-const AdminStockLogsOut = {
-  pager: { // zCrud.PagerOut
-    search: '', // string
-    searchBy: '', // string
-    page: 0, // int
-    perPage: 0, // int
-    pages: 0, // int
-    total: 0, // int
-    filters: { // map[string][]string
-    }, // map[string][]string
-    order: [], // []string
-  }, // zCrud.PagerOut
-  logs: { // []saProperty.StockLogs
-  }, // []saProperty.StockLogs
-  meta: { // zCrud.Meta
-    fields: { // []Field
-    }, // []Field
-    mutex: { // sync.Mutex
-    }, // sync.Mutex
-    cachedSelect: '', // string
-  }, // zCrud.Meta
-}
-/**
- * @callback AdminStockLogsCallback
- * @param {AdminStockLogsOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminStockLogsIn} i
- * @param {AdminStockLogsCallback} cb
- * @returns {Promise}
- */
-exports.AdminStockLogs = async function AdminStockLogs( i, cb ) {
-  return await axios.post( '/admin/stockLogs', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }
@@ -3932,7 +2798,7 @@ exports.StaffRevenueReport = async function StaffRevenueReport( i, cb ) {
 }
 
 /**
- * @typedef {Object} StaffSalesIn
+ * @typedef {Object} StaffTenantsIn
  * @property {String} cmd
  * @property {Object} withMeta
  * @property {String} pager.search
@@ -3941,34 +2807,35 @@ exports.StaffRevenueReport = async function StaffRevenueReport( i, cb ) {
  * @property {number} pager.perPage
  * @property {Object} pager.filters
  * @property {Array<String>} pager.order
- * @property {number} sale.id
- * @property {String} sale.cashier
- * @property {number} sale.tenantId
- * @property {String} sale.buyerName
- * @property {Object} sale.menuIds
- * @property {number} sale.qrisIDR
- * @property {number} sale.cashIDR
- * @property {number} sale.debtIDR
- * @property {number} sale.topupIDR
- * @property {number} sale.totalPriceIDR
- * @property {String} sale.salesDate
- * @property {String} sale.paidAt
- * @property {String} sale.note
- * @property {number} sale.donation
- * @property {number} sale.transferIDR
- * @property {String} sale.paymentMethod
- * @property {String} sale.paymentStatus
- * @property {number} sale.createdAt
- * @property {number} sale.createdBy
- * @property {number} sale.updatedAt
- * @property {number} sale.updatedBy
- * @property {number} sale.deletedAt
- * @property {number} sale.deletedBy
- * @property {number} sale.restoredBy
- * @property {number} tenantID
- * @property {String} staffData
+ * @property {number} tenant.id
+ * @property {String} tenant.tenantName
+ * @property {String} tenant.ktpRegion
+ * @property {String} tenant.ktpNumber
+ * @property {String} tenant.ktpName
+ * @property {String} tenant.ktpPlaceBirth
+ * @property {String} tenant.ktpDateBirth
+ * @property {String} tenant.ktpGender
+ * @property {String} tenant.ktpAddress
+ * @property {String} tenant.ktpRtRw
+ * @property {String} tenant.ktpKelurahanDesa
+ * @property {String} tenant.ktpKecamatan
+ * @property {String} tenant.ktpReligion
+ * @property {String} tenant.ktpMaritalStatus
+ * @property {String} tenant.ktpCitizenship
+ * @property {String} tenant.telegramUsername
+ * @property {String} tenant.whatsappNumber
+ * @property {number} tenant.createdAt
+ * @property {number} tenant.createdBy
+ * @property {number} tenant.updatedAt
+ * @property {number} tenant.updatedBy
+ * @property {number} tenant.deletedAt
+ * @property {number} tenant.deletedBy
+ * @property {number} tenant.restoredBy
+ * @property {String} tenant.ktpOccupation
+ * @property {String} tenant.waAddedAt
+ * @property {String} tenant.teleAddedAt
  */
-const StaffSalesIn = {
+const StaffTenantsIn = {
   cmd: '', // string
   withMeta: false, // bool
   pager: { // zCrud.PagerIn
@@ -3980,25 +2847,24 @@ const StaffSalesIn = {
     }, // map[string][]string
     order: [], // []string
   }, // zCrud.PagerIn
-  sale: { // rqCafe.Sales
+  tenant: { // rqAuth.Tenants
     id: 0, // uint64
-    cashier: '', // string
-    tenantId: 0, // uint64
-    buyerName: '', // string
-    menuIds: { // []any
-    }, // []any
-    qrisIDR: 0, // int64
-    cashIDR: 0, // int64
-    debtIDR: 0, // int64
-    topupIDR: 0, // int64
-    totalPriceIDR: 0, // int64
-    salesDate: '', // string
-    paidAt: '', // string
-    note: '', // string
-    donation: 0, // int64
-    transferIDR: 0, // int64
-    paymentMethod: '', // string
-    paymentStatus: '', // string
+    tenantName: '', // string
+    ktpRegion: '', // string
+    ktpNumber: '', // string
+    ktpName: '', // string
+    ktpPlaceBirth: '', // string
+    ktpDateBirth: '', // string
+    ktpGender: '', // string
+    ktpAddress: '', // string
+    ktpRtRw: '', // string
+    ktpKelurahanDesa: '', // string
+    ktpKecamatan: '', // string
+    ktpReligion: '', // string
+    ktpMaritalStatus: '', // string
+    ktpCitizenship: '', // string
+    telegramUsername: '', // string
+    whatsappNumber: '', // string
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64
@@ -4006,28 +2872,13 @@ const StaffSalesIn = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
-  }, // rqCafe.Sales
-  tenantID: 0, // uint64
-  staffData: '', // string
+    ktpOccupation: '', // string
+    waAddedAt: '', // string
+    teleAddedAt: '', // string
+  }, // rqAuth.Tenants
 }
 /**
- * @typedef {Object} StaffSalesOut
- * @property {number} user.id
- * @property {String} user.email
- * @property {String} user.password
- * @property {number} user.createdAt
- * @property {number} user.createdBy
- * @property {number} user.updatedAt
- * @property {number} user.updatedBy
- * @property {number} user.deletedAt
- * @property {number} user.passwordSetAt
- * @property {String} user.secretCode
- * @property {number} user.secretCodeAt
- * @property {number} user.verifiedAt
- * @property {number} user.lastLoginAt
- * @property {String} user.fullName
- * @property {String} user.userName
- * @property {String} user.role
+ * @typedef {Object} StaffTenantsOut
  * @property {String} pager.search
  * @property {String} pager.searchBy
  * @property {number} pager.page
@@ -4039,52 +2890,36 @@ const StaffSalesIn = {
  * @property {Object} meta.fields
  * @property {Object} meta.mutex
  * @property {String} meta.cachedSelect
- * @property {number} sale.id
- * @property {String} sale.cashier
- * @property {number} sale.tenantId
- * @property {String} sale.buyerName
- * @property {Object} sale.menuIds
- * @property {number} sale.qrisIDR
- * @property {number} sale.cashIDR
- * @property {number} sale.debtIDR
- * @property {number} sale.topupIDR
- * @property {number} sale.totalPriceIDR
- * @property {String} sale.salesDate
- * @property {String} sale.paidAt
- * @property {String} sale.note
- * @property {number} sale.donation
- * @property {number} sale.transferIDR
- * @property {String} sale.paymentMethod
- * @property {String} sale.paymentStatus
- * @property {number} sale.createdAt
- * @property {number} sale.createdBy
- * @property {number} sale.updatedAt
- * @property {number} sale.updatedBy
- * @property {number} sale.deletedAt
- * @property {number} sale.deletedBy
- * @property {number} sale.restoredBy
- * @property {Object} sales
- * @property {Object} segments
+ * @property {number} tenant.id
+ * @property {String} tenant.tenantName
+ * @property {String} tenant.ktpRegion
+ * @property {String} tenant.ktpNumber
+ * @property {String} tenant.ktpName
+ * @property {String} tenant.ktpPlaceBirth
+ * @property {String} tenant.ktpDateBirth
+ * @property {String} tenant.ktpGender
+ * @property {String} tenant.ktpAddress
+ * @property {String} tenant.ktpRtRw
+ * @property {String} tenant.ktpKelurahanDesa
+ * @property {String} tenant.ktpKecamatan
+ * @property {String} tenant.ktpReligion
+ * @property {String} tenant.ktpMaritalStatus
+ * @property {String} tenant.ktpCitizenship
+ * @property {String} tenant.telegramUsername
+ * @property {String} tenant.whatsappNumber
+ * @property {number} tenant.createdAt
+ * @property {number} tenant.createdBy
+ * @property {number} tenant.updatedAt
+ * @property {number} tenant.updatedBy
+ * @property {number} tenant.deletedAt
+ * @property {number} tenant.deletedBy
+ * @property {number} tenant.restoredBy
+ * @property {String} tenant.ktpOccupation
+ * @property {String} tenant.waAddedAt
+ * @property {String} tenant.teleAddedAt
+ * @property {Object} tenants
  */
-const StaffSalesOut = {
-  user: { // rqAuth.Users
-    id: 0, // uint64
-    email: '', // string
-    password: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    passwordSetAt: 0, // int64
-    secretCode: '', // string
-    secretCodeAt: 0, // int64
-    verifiedAt: 0, // int64
-    lastLoginAt: 0, // int64
-    fullName: '', // string
-    userName: '', // string
-    role: '', // string
-  }, // rqAuth.Users
+const StaffTenantsOut = {
   pager: { // zCrud.PagerOut
     search: '', // string
     searchBy: '', // string
@@ -4103,25 +2938,24 @@ const StaffSalesOut = {
     }, // sync.Mutex
     cachedSelect: '', // string
   }, // zCrud.Meta
-  sale: { // rqCafe.Sales
+  tenant: { // rqAuth.Tenants
     id: 0, // uint64
-    cashier: '', // string
-    tenantId: 0, // uint64
-    buyerName: '', // string
-    menuIds: { // []any
-    }, // []any
-    qrisIDR: 0, // int64
-    cashIDR: 0, // int64
-    debtIDR: 0, // int64
-    topupIDR: 0, // int64
-    totalPriceIDR: 0, // int64
-    salesDate: '', // string
-    paidAt: '', // string
-    note: '', // string
-    donation: 0, // int64
-    transferIDR: 0, // int64
-    paymentMethod: '', // string
-    paymentStatus: '', // string
+    tenantName: '', // string
+    ktpRegion: '', // string
+    ktpNumber: '', // string
+    ktpName: '', // string
+    ktpPlaceBirth: '', // string
+    ktpDateBirth: '', // string
+    ktpGender: '', // string
+    ktpAddress: '', // string
+    ktpRtRw: '', // string
+    ktpKelurahanDesa: '', // string
+    ktpKecamatan: '', // string
+    ktpReligion: '', // string
+    ktpMaritalStatus: '', // string
+    ktpCitizenship: '', // string
+    telegramUsername: '', // string
+    whatsappNumber: '', // string
     createdAt: 0, // int64
     createdBy: 0, // uint64
     updatedAt: 0, // int64
@@ -4129,24 +2963,25 @@ const StaffSalesOut = {
     deletedAt: 0, // int64
     deletedBy: 0, // uint64
     restoredBy: 0, // uint64
-  }, // rqCafe.Sales
-  sales: { // [][]any
+    ktpOccupation: '', // string
+    waAddedAt: '', // string
+    teleAddedAt: '', // string
+  }, // rqAuth.Tenants
+  tenants: { // [][]any
   }, // [][]any
-  segments: { // M.SB
-  }, // M.SB
 }
 /**
- * @callback StaffSalesCallback
- * @param {StaffSalesOut} o
+ * @callback StaffTenantsCallback
+ * @param {StaffTenantsOut} o
  * @returns {Promise}
  */
 /**
- * @param  {StaffSalesIn} i
- * @param {StaffSalesCallback} cb
+ * @param  {StaffTenantsIn} i
+ * @param {StaffTenantsCallback} cb
  * @returns {Promise}
  */
-exports.StaffSales = async function StaffSales( i, cb ) {
-  return await axios.post( '/staff/sales', i ).
+exports.StaffTenants = async function StaffTenants( i, cb ) {
+  return await axios.post( '/staff/tenants', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }

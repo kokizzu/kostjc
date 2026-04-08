@@ -130,7 +130,7 @@ var StaffBookingMeta = zCrud.Meta{
 
 func (d *Domain) StaffBooking(in *StaffBookingIn) (out StaffBookingOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustLogin(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustBelowStaff(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

@@ -29,7 +29,7 @@ func TestUpdateFacility(t *testing.T) {
 
 		out := d.AdminFacility(&in)
 
-		assert.True(t, out.HasError(), `failed to add facility: `+out.Error)
+		assert.False(t, out.HasError(), `failed to add facility: `+out.Error)
 		fmt.Println(X.ToJsonPretty(out))
 		t.Run(`updateFacilityMustSucceed`, func(t *testing.T) {
 			in := AdminFacilityIn{
@@ -46,7 +46,7 @@ func TestUpdateFacility(t *testing.T) {
 
 			out := d.AdminFacility(&in)
 
-			assert.True(t, out.HasError(), `failed to update facility: `+out.Error)
+			assert.False(t, out.HasError(), `failed to update facility: `+out.Error)
 			fmt.Println(X.ToJsonPretty(out))
 		})
 	})
