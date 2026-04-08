@@ -433,6 +433,7 @@
 		width: 28px;
 		height: 28px;
 		border-radius: 3px;
+		border: 1px solid transparent;
 		cursor: pointer;
 		transition: all 0.2s ease;
 		position: relative;
@@ -442,8 +443,7 @@
 		transform: scale(1.15);
 		box-shadow: 0 2px 8px rgba(0, 100, 255, 0.3);
 		z-index: 5;
-		border-color: var(--blue-007);
-		background-color: var(--blue-004);
+		filter: brightness(0.92) saturate(1.1);
 	}
 
 	.date-cell.not-occupied.svelte-j6rq8b {
@@ -11150,7 +11150,7 @@ ${component_stack}
   var root8 = from_html(`<!> <!>`, 1);
   var $css7 = {
     hash: "svelte-j6rq8b",
-    code: ".occupancy-heatmap-container.svelte-j6rq8b {display:flex;flex-direction:column;gap:30px;padding:20px;}.rooms-heatmap-wrapper.svelte-j6rq8b {position:relative;width:100%;overflow:auto;max-height:calc(100vh - 200px);}.rooms-heatmap-table.svelte-j6rq8b {display:flex;flex-direction:column;gap:2px;width:100%;}.table-header.svelte-j6rq8b {display:flex;flex-direction:row;gap:10px;align-items:center;position:sticky;top:0;background-color:white;z-index:20;font-weight:700;border-bottom:2px solid var(--gray-004);padding-bottom:10px;}.table-header.svelte-j6rq8b .days:where(.svelte-j6rq8b) {width:100%;display:grid;grid-template-columns:repeat(auto-fit, minmax(25px, 1fr));gap:2px;}.room-label.svelte-j6rq8b {padding:8px;font-weight:600;text-align:left;font-size:var(--font-md);width:70px;text-overflow:ellipsis;}.sticky-corner.svelte-j6rq8b {position:sticky;left:0;z-index:30;background-color:white;}.sticky-room.svelte-j6rq8b {position:sticky;left:0;z-index:10;background-color:white;}.date-header.svelte-j6rq8b {text-align:center;font-size:10px;color:var(--gray-008);padding:2px;background-color:white;}.date-cell.svelte-j6rq8b {min-width:28px;width:28px;height:28px;border-radius:3px;cursor:pointer;transition:all 0.2s ease;position:relative;}.date-cell.occupied.svelte-j6rq8b:hover {transform:scale(1.15);box-shadow:0 2px 8px rgba(0, 100, 255, 0.3);z-index:5;border-color:var(--blue-007);background-color:var(--blue-004);}.date-cell.not-occupied.svelte-j6rq8b {border:1px solid var(--gray-002) !important;background-color:var(--gray-001) !important;cursor:default;}.date-cell.not-occupied.svelte-j6rq8b:hover {background-color:var(--gray-002) !important;}.table-row.svelte-j6rq8b {display:flex;flex-direction:row;gap:10px;}.table-row.svelte-j6rq8b .room-name:where(.svelte-j6rq8b) {padding:8px;font-weight:600;text-align:left;font-size:var(--font-md);width:70px;}.table-row.svelte-j6rq8b:hover {background-color:var(--gray-001);}.table-row.svelte-j6rq8b:hover .sticky-room:where(.svelte-j6rq8b) {background-color:var(--gray-001);}.table-row.svelte-j6rq8b .blocks:where(.svelte-j6rq8b) {width:100%;display:grid;grid-template-columns:repeat(auto-fit, minmax(25px, 1fr));gap:2px;}.tooltip-content.svelte-j6rq8b {color:var(--gray-008);padding:10px 12px;border-radius:6px;font-size:12px;white-space:nowrap;}\n\n	@media (max-width: 768px) {.date-cell.svelte-j6rq8b {min-width:24px;width:24px;height:24px;border-radius:2px;}.table-row.svelte-j6rq8b .blocks:where(.svelte-j6rq8b) {gap:1px;}.table-header.svelte-j6rq8b .days:where(.svelte-j6rq8b) {gap:1px;}.room-label.svelte-j6rq8b,\n	.table-row.svelte-j6rq8b .room-name:where(.svelte-j6rq8b) {width:50px;font-size:12px;padding:6px;}\n	}\n	@keyframes svelte-j6rq8b-fadeIn {\n		from {\n			opacity: 0;\n		}\n		to {\n			opacity: 1;\n		}\n	}"
+    code: ".occupancy-heatmap-container.svelte-j6rq8b {display:flex;flex-direction:column;gap:30px;padding:20px;}.rooms-heatmap-wrapper.svelte-j6rq8b {position:relative;width:100%;overflow:auto;max-height:calc(100vh - 200px);}.rooms-heatmap-table.svelte-j6rq8b {display:flex;flex-direction:column;gap:2px;width:100%;}.table-header.svelte-j6rq8b {display:flex;flex-direction:row;gap:10px;align-items:center;position:sticky;top:0;background-color:white;z-index:20;font-weight:700;border-bottom:2px solid var(--gray-004);padding-bottom:10px;}.table-header.svelte-j6rq8b .days:where(.svelte-j6rq8b) {width:100%;display:grid;grid-template-columns:repeat(auto-fit, minmax(25px, 1fr));gap:2px;}.room-label.svelte-j6rq8b {padding:8px;font-weight:600;text-align:left;font-size:var(--font-md);width:70px;text-overflow:ellipsis;}.sticky-corner.svelte-j6rq8b {position:sticky;left:0;z-index:30;background-color:white;}.sticky-room.svelte-j6rq8b {position:sticky;left:0;z-index:10;background-color:white;}.date-header.svelte-j6rq8b {text-align:center;font-size:10px;color:var(--gray-008);padding:2px;background-color:white;}.date-cell.svelte-j6rq8b {min-width:28px;width:28px;height:28px;border-radius:3px;border:1px solid transparent;cursor:pointer;transition:all 0.2s ease;position:relative;}.date-cell.occupied.svelte-j6rq8b:hover {transform:scale(1.15);box-shadow:0 2px 8px rgba(0, 100, 255, 0.3);z-index:5;filter:brightness(0.92) saturate(1.1);}.date-cell.not-occupied.svelte-j6rq8b {border:1px solid var(--gray-002) !important;background-color:var(--gray-001) !important;cursor:default;}.date-cell.not-occupied.svelte-j6rq8b:hover {background-color:var(--gray-002) !important;}.table-row.svelte-j6rq8b {display:flex;flex-direction:row;gap:10px;}.table-row.svelte-j6rq8b .room-name:where(.svelte-j6rq8b) {padding:8px;font-weight:600;text-align:left;font-size:var(--font-md);width:70px;}.table-row.svelte-j6rq8b:hover {background-color:var(--gray-001);}.table-row.svelte-j6rq8b:hover .sticky-room:where(.svelte-j6rq8b) {background-color:var(--gray-001);}.table-row.svelte-j6rq8b .blocks:where(.svelte-j6rq8b) {width:100%;display:grid;grid-template-columns:repeat(auto-fit, minmax(25px, 1fr));gap:2px;}.tooltip-content.svelte-j6rq8b {color:var(--gray-008);padding:10px 12px;border-radius:6px;font-size:12px;white-space:nowrap;}\n\n	@media (max-width: 768px) {.date-cell.svelte-j6rq8b {min-width:24px;width:24px;height:24px;border-radius:2px;}.table-row.svelte-j6rq8b .blocks:where(.svelte-j6rq8b) {gap:1px;}.table-header.svelte-j6rq8b .days:where(.svelte-j6rq8b) {gap:1px;}.room-label.svelte-j6rq8b,\n	.table-row.svelte-j6rq8b .room-name:where(.svelte-j6rq8b) {width:50px;font-size:12px;padding:6px;}\n	}\n	@keyframes svelte-j6rq8b-fadeIn {\n		from {\n			opacity: 0;\n		}\n		to {\n			opacity: 1;\n		}\n	}"
   };
   function StaffOccupancyHeatmap_1($anchor, $props) {
     push($props, false);
@@ -11163,7 +11163,7 @@ ${component_stack}
       /** @type {Access} */
       {/* segments */}
     );
-    let bookingsPerMonth = (
+    let bookingsPerMonth = mutable_source(
       /** @type {any[]} */
       [/* bookingsPerMonth */]
     );
@@ -11187,7 +11187,7 @@ ${component_stack}
       const tenantColors = {};
       (() => {
         const uniqTenantIds = {};
-        bookingsPerMonth.forEach((booking) => {
+        get2(bookingsPerMonth).forEach((booking) => {
           uniqTenantIds[booking.tenantId] = "";
         });
         const tenantIds = [];
@@ -11200,7 +11200,7 @@ ${component_stack}
           tenantColors[tenantId] = `hsl(${degree}, 100%, 47%)`;
         }
       })();
-      bookingsPerMonth = bookingsPerMonth.map((booking) => ({ ...booking, color: tenantColors[booking.tenantId] }));
+      set(bookingsPerMonth, get2(bookingsPerMonth).map((booking) => ({ ...booking, color: tenantColors[booking.tenantId] })));
     }
     let totalDaysInSelectedMonth = mutable_source(
       /** @type {number} */
@@ -11217,22 +11217,9 @@ ${component_stack}
       const date = /* @__PURE__ */ new Date(get2(yearMonth) + "-" + (day < 10 ? "0" + day : day));
       return date >= new Date(dateStart) && date <= new Date(dateEnd);
     }
-    function getBookingsByRoomName(roomName) {
-      let bookings = (
-        /** @type {BookingDetailPerMonth[]} */
-        []
-      );
-      for (let i = 0; i < bookingsPerMonth.length; i++) {
-        if (bookingsPerMonth[i].roomName === roomName) {
-          bookings.push(bookingsPerMonth[i]);
-        }
-      }
-      return bookings;
-    }
     onMount(async () => {
       refreshTotalDaysInMonth();
       await RefreshData();
-      reColorBookings();
     });
     async function RefreshData() {
       try {
@@ -11248,7 +11235,7 @@ ${component_stack}
               notifier.showError(o.error);
               return;
             }
-            bookingsPerMonth = o.bookingsPerMonth;
+            set(bookingsPerMonth, o.bookingsPerMonth);
             set(roomNames, o.roomNames);
             refreshTotalDaysInMonth();
             reColorBookings();
@@ -11323,7 +11310,7 @@ ${component_stack}
         reset(div_3);
         var node_2 = sibling(div_3, 2);
         each(node_2, 1, () => get2(roomNames), index, ($anchor3, room) => {
-          const bookings = derived_safe_equal(() => getBookingsByRoomName(get2(room)));
+          const bookings = derived_safe_equal(() => get2(bookingsPerMonth).filter((booking) => booking.roomName === get2(room)));
           var div_6 = root_32();
           var div_7 = child(div_6);
           var text2 = child(div_7, true);
@@ -11340,7 +11327,11 @@ ${component_stack}
             {
               var consequent = ($anchor5) => {
                 var div_9 = root_5();
-                template_effect(() => set_style(div_9, `background-color: ${get2(computed_const).bk.color ?? ""}`));
+                let styles;
+                template_effect(() => styles = set_style(div_9, "", styles, {
+                  "background-color": get2(computed_const).bk.color,
+                  "border-color": get2(computed_const).bk.color
+                }));
                 event("mouseenter", div_9, (e) => {
                   if (get2(computed_const).bk) showTooltip(e, get2(computed_const).bk, get2(room));
                 });

@@ -73,27 +73,9 @@
 		return date >= new Date(dateStart) && date <= new Date(dateEnd);
 	}
 
-	/**
-	 * @description Get booking by room name
-	 * @param {string} roomName
-	 * @returns {BookingDetailPerMonth[]}
-	 */
-	function getBookingsByRoomName(roomName) {
-		let bookings = /** @type {BookingDetailPerMonth[]} */ ([]);
-
-		for(let i = 0; i < bookingsPerMonth.length; i++) {
-			if (bookingsPerMonth[i].roomName === roomName) {
-				bookings.push(bookingsPerMonth[i]);
-			}
-		}
-
-		return bookings;
-	}
-
 	onMount(async() => {
 		refreshTotalDaysInMonth();
 		await RefreshData();
-		reColorBookings();
 	});
 
 	async function RefreshData() {
@@ -184,7 +166,7 @@
 				</div>
 
 				{#each roomNames as room}
-					{@const bookings = getBookingsByRoomName(room)}
+					{@const bookings = bookingsPerMonth.filter(booking => booking.roomName === room)}
 					<div class="table-row">
 						<div class="room-name sticky-room">{room}</div>
 						<div class="blocks">
@@ -197,7 +179,8 @@
 										on:mouseenter={(e) => { if (bk) showTooltip(e, bk, room) }}
 										on:mouseleave={() => tooltipComp.Hide()}
 										aria-label="tool-tip"
-										style="background-color: {bk.color}"
+										style:background-color={bk.color}
+										style:border-color={bk.color}
 									></div>
 								{:else}
 									<div class="date-cell not-occupied"></div>
@@ -299,6 +282,7 @@
 		width: 28px;
 		height: 28px;
 		border-radius: 3px;
+		border: 1px solid transparent;
 		cursor: pointer;
 		transition: all 0.2s ease;
 		position: relative;
@@ -308,8 +292,7 @@
 		transform: scale(1.15);
 		box-shadow: 0 2px 8px rgba(0, 100, 255, 0.3);
 		z-index: 5;
-		border-color: var(--blue-007);
-		background-color: var(--blue-004);
+		filter: brightness(0.92) saturate(1.1);
 	}
 
 	.date-cell.not-occupied {
