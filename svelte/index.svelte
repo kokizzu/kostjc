@@ -11,6 +11,7 @@
   import LayoutMain from './_layouts/main.svelte';
   import BirthDayAgenda from './_partials/home/BirthDayAgenda.svelte';
   import AvailableRooms from './_partials/home/AvailableRooms.svelte';
+  import UnpaidBookingRecap from './_partials/home/UnpaidBookingRecap.svelte';
   import UnpaidBookingTenants from './_partials/home/UnpaidBookingTenants.svelte';
   import DoubleBookingReports from './_partials/home/DoubleBookingReports.svelte';
   import UpcomingTenants from './_partials/home/UpcomingTenants.svelte';
@@ -143,6 +144,7 @@
 {#if Mode === ModeUser}
   <LayoutMain access={segments} user={user}>
     <div class="home-container">
+      <UnpaidBookingRecap />
       <UnpaidBookingTenants />
       <AvailableRooms />
       <UpcomingTenants />

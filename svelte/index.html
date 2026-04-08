@@ -3194,7 +3194,7 @@
         script.onload = () => callback();
         document.getElementsByTagName("head")[0].appendChild(script);
       }
-      function formatPrice2(price, currency) {
+      function formatPrice3(price, currency) {
         try {
           return new Intl.NumberFormat("id-ID", {
             style: "currency",
@@ -3237,7 +3237,7 @@
         dateISOFormat: dateISOFormat6,
         dateISOFormatFromYYYYMMDD,
         loadScript,
-        formatPrice: formatPrice2,
+        formatPrice: formatPrice3,
         arrToArrNum,
         formatYearMonth,
         localeDateFromYYYYMMDD,
@@ -4348,11 +4348,11 @@ ${component_stack}
       var effects = collected_effects = [];
       var render_effects = [];
       var updates = legacy_updates = [];
-      for (const root21 of roots) {
+      for (const root22 of roots) {
         try {
-          this.#traverse(root21, effects, render_effects);
+          this.#traverse(root22, effects, render_effects);
         } catch (e) {
-          reset_all(root21);
+          reset_all(root22);
           throw e;
         }
       }
@@ -4414,9 +4414,9 @@ ${component_stack}
      * @param {Effect[]} effects
      * @param {Effect[]} render_effects
      */
-    #traverse(root21, effects, render_effects) {
-      root21.f ^= CLEAN;
-      var effect2 = root21.first;
+    #traverse(root22, effects, render_effects) {
+      root22.f ^= CLEAN;
+      var effect2 = root22.first;
       while (effect2 !== null) {
         var flags2 = effect2.f;
         var is_branch = (flags2 & (BRANCH_EFFECT | ROOT_EFFECT)) !== 0;
@@ -4583,8 +4583,8 @@ ${component_stack}
           }
           if (batch.#roots.length > 0) {
             batch.apply();
-            for (var root21 of batch.#roots) {
-              batch.#traverse(root21, [], []);
+            for (var root22 of batch.#roots) {
+              batch.#traverse(root22, [], []);
             }
             batch.#roots = [];
           }
@@ -6939,7 +6939,7 @@ ${component_stack}
     }
     return false;
   }
-  function schedule_possible_effect_self_invalidation(signal, effect2, root21 = true) {
+  function schedule_possible_effect_self_invalidation(signal, effect2, root22 = true) {
     var reactions = signal.reactions;
     if (reactions === null) return;
     if (!async_mode_flag && current_sources !== null && includes.call(current_sources, signal)) {
@@ -6955,7 +6955,7 @@ ${component_stack}
           false
         );
       } else if (effect2 === reaction) {
-        if (root21) {
+        if (root22) {
           set_signal_status(reaction, DIRTY);
         } else if ((reaction.f & CLEAN) !== 0) {
           set_signal_status(reaction, MAYBE_DIRTY);
@@ -7726,21 +7726,21 @@ ${component_stack}
           /** @type {DocumentFragment} */
           create_fragment_from_html(wrapped)
         );
-        var root21 = (
+        var root22 = (
           /** @type {Element} */
           get_first_child(fragment)
         );
         if (is_fragment) {
           node = document.createDocumentFragment();
-          while (get_first_child(root21)) {
+          while (get_first_child(root22)) {
             node.appendChild(
               /** @type {TemplateNode} */
-              get_first_child(root21)
+              get_first_child(root22)
             );
           }
         } else {
           node = /** @type {Element} */
-          get_first_child(root21);
+          get_first_child(root22);
         }
       }
       var clone = (
@@ -8821,16 +8821,16 @@ ${component_stack}
   // node_modules/.pnpm/svelte@5.55.2/node_modules/svelte/src/internal/client/dom/css.js
   function append_styles(anchor, css) {
     effect(() => {
-      var root21 = anchor.getRootNode();
+      var root22 = anchor.getRootNode();
       var target2 = (
         /** @type {ShadowRoot} */
-        root21.host ? (
+        root22.host ? (
           /** @type {ShadowRoot} */
-          root21
+          root22
         ) : (
           /** @type {Document} */
-          root21.head ?? /** @type {Document} */
-          root21.ownerDocument.head
+          root22.head ?? /** @type {Document} */
+          root22.ownerDocument.head
         )
       );
       if (!target2.querySelector("#" + css.hash)) {
@@ -11575,7 +11575,7 @@ ${component_stack}
   function observeMove(element2, onMove) {
     let io = null;
     let timeoutId;
-    const root21 = getDocumentElement(element2);
+    const root22 = getDocumentElement(element2);
     function cleanup() {
       var _io;
       clearTimeout(timeoutId);
@@ -11604,8 +11604,8 @@ ${component_stack}
         return;
       }
       const insetTop = floor(top);
-      const insetRight = floor(root21.clientWidth - (left + width));
-      const insetBottom = floor(root21.clientHeight - (top + height));
+      const insetRight = floor(root22.clientWidth - (left + width));
+      const insetBottom = floor(root22.clientHeight - (top + height));
       const insetLeft = floor(left);
       const rootMargin = -insetTop + "px " + -insetRight + "px " + -insetBottom + "px " + -insetLeft + "px";
       const options = {
@@ -11636,7 +11636,7 @@ ${component_stack}
         io = new IntersectionObserver(handleObserve, {
           ...options,
           // Handle <iframe>s
-          root: root21.ownerDocument
+          root: root22.ownerDocument
         });
       } catch (_e) {
         io = new IntersectionObserver(handleObserve, options);
@@ -14811,6 +14811,192 @@ ${component_stack}
     pop();
   }
 
+  // _partials/home/UnpaidBookingRecap.svelte
+  var import_xFormatter2 = __toESM(require_xFormatter());
+  var root_28 = from_html(`<tr class="svelte-1x4k5tt"><td class="svelte-1x4k5tt"> </td><td class="svelte-1x4k5tt"> </td><td class="svelte-1x4k5tt"> </td><td class="days svelte-1x4k5tt"> </td><td class="svelte-1x4k5tt"> </td></tr>`);
+  var root_112 = from_html(`<div class="table-wrap svelte-1x4k5tt"><table class="svelte-1x4k5tt"><thead class="svelte-1x4k5tt"><tr><th class="svelte-1x4k5tt"><button><span>Tenant</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th><th class="svelte-1x4k5tt"><button><span>Total Unpaid</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th><th class="svelte-1x4k5tt"><button><span>Earliest Start</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th><th class="svelte-1x4k5tt"><button><span>Days</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th><th class="svelte-1x4k5tt"><button><span>Rooms</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th></tr></thead><tbody class="svelte-1x4k5tt"></tbody></table></div>`);
+  var root_34 = from_html(`<div class="empty-state svelte-1x4k5tt"><p class="svelte-1x4k5tt">No unpaid recap.</p></div>`);
+  var root13 = from_html(`<section class="unpaid-booking-recap svelte-1x4k5tt"><div class="header svelte-1x4k5tt"><h1 class="svelte-1x4k5tt">Unpaid Recap</h1> <p class="svelte-1x4k5tt">Click a header to sort that column descending.</p></div> <!></section>`);
+  var $css12 = {
+    hash: "svelte-1x4k5tt",
+    code: ".unpaid-booking-recap.svelte-1x4k5tt {display:flex;flex-direction:column;gap:20px;}.header.svelte-1x4k5tt {display:flex;flex-direction:column;gap:4px;}.header.svelte-1x4k5tt h1:where(.svelte-1x4k5tt),\n  .header.svelte-1x4k5tt p:where(.svelte-1x4k5tt) {margin:0;}.header.svelte-1x4k5tt h1:where(.svelte-1x4k5tt) {font-size:var(--font-xl);}.header.svelte-1x4k5tt p:where(.svelte-1x4k5tt) {color:var(--gray-007);}.table-wrap.svelte-1x4k5tt {overflow-x:auto;border:1px solid var(--gray-003);border-radius:12px;background-color:#fff;}table.svelte-1x4k5tt {width:100%;border-collapse:collapse;min-width:680px;}thead.svelte-1x4k5tt {background:linear-gradient(135deg, var(--red-transparent), transparent 70%),\n      var(--gray-001);}th.svelte-1x4k5tt,\n  td.svelte-1x4k5tt {padding:3px 14px;text-align:left;border-bottom:1px solid var(--gray-003);vertical-align:top;}th.svelte-1x4k5tt {padding:0;}td.svelte-1x4k5tt {font-weight:500;transition:background-color 0.15s ease;}.sort-header.svelte-1x4k5tt {display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:3px 14px;border:none;background:transparent;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--gray-007);cursor:pointer;transition:color 0.15s ease, background-color 0.15s ease;}.sort-icon.svelte-1x4k5tt {flex:none;font-size:10px;opacity:0.45;transition:opacity 0.15s ease, transform 0.15s ease;}.sort-header.svelte-1x4k5tt:hover,\n  .sort-header.active.svelte-1x4k5tt {color:var(--red-006);}.sort-header.svelte-1x4k5tt:hover .sort-icon:where(.svelte-1x4k5tt),\n  .sort-header.active.svelte-1x4k5tt .sort-icon:where(.svelte-1x4k5tt) {opacity:1;transform:translateY(1px);}.sort-header.svelte-1x4k5tt:focus-visible {outline:2px solid var(--red-005);outline-offset:-2px;}tbody.svelte-1x4k5tt tr:where(.svelte-1x4k5tt):nth-child(even) td:where(.svelte-1x4k5tt) {background-color:var(--gray-001);}tbody.svelte-1x4k5tt tr:where(.svelte-1x4k5tt):hover td:where(.svelte-1x4k5tt) {background-color:var(--red-transparent);}tbody.svelte-1x4k5tt tr:where(.svelte-1x4k5tt):last-child td:where(.svelte-1x4k5tt) {border-bottom:none;}.days.svelte-1x4k5tt {font-weight:700;color:var(--red-006);}.empty-state.svelte-1x4k5tt {padding:18px;border-radius:12px;background-color:var(--gray-001);}.empty-state.svelte-1x4k5tt p:where(.svelte-1x4k5tt) {margin:0;}\n\n  @media only screen and (max-width: 768px) {td.svelte-1x4k5tt {font-size:13px;padding:3px 12px;}th.svelte-1x4k5tt {padding:0;}.sort-header.svelte-1x4k5tt {padding:3px 12px;font-size:13px;}\n  }"
+  };
+  function UnpaidBookingRecap($anchor, $props) {
+    push($props, false);
+    append_styles($anchor, $css12);
+    const unpaidBookingTenants = (
+      /** @type {UnpaidBookingTenant[]} */
+      [/* unpaidBookingTenants */]
+    );
+    let sortBy = mutable_source(
+      /** @type {SortKey} */
+      "overdueDays"
+    );
+    function parseDate(dateStr) {
+      const [year, month, day] = dateStr.split("-").map(Number);
+      return new Date(year, month - 1, day);
+    }
+    function daysSince(dateStr) {
+      const date = parseDate(dateStr);
+      const today = /* @__PURE__ */ new Date();
+      date.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+      const msPerDay = 1e3 * 60 * 60 * 24;
+      return Math.max(0, Math.floor((today.getTime() - date.getTime()) / msPerDay));
+    }
+    function earliestDate(left, right) {
+      if (!left) return right;
+      if (!right) return left;
+      return parseDate(left) <= parseDate(right) ? left : right;
+    }
+    function sortByColumn(key2) {
+      set(sortBy, key2);
+    }
+    const recapItems = (
+      /** @type {UnpaidBookingRecapItem[]} */
+      Object.values((unpaidBookingTenants || []).reduce(
+        /**
+         * @param {Record<string, UnpaidBookingRecapItem>} acc
+         * @param {UnpaidBookingTenant} booking
+         */
+        (acc, booking) => {
+          const unpaidAmount = Math.max(0, (booking.totalPrice || 0) - (booking.totalPaid || 0));
+          if (unpaidAmount <= 0) return acc;
+          const key2 = booking.tenantName || `booking-${booking.bookingId}`;
+          if (!acc[key2]) {
+            acc[key2] = {
+              tenantName: booking.tenantName,
+              unpaidAmount: 0,
+              earliestStartDate: booking.dateStart,
+              overdueDays: 0,
+              roomNames: []
+            };
+          }
+          acc[key2].unpaidAmount += unpaidAmount;
+          acc[key2].earliestStartDate = earliestDate(acc[key2].earliestStartDate, booking.dateStart);
+          if (!acc[key2].roomNames.includes(booking.roomName)) {
+            acc[key2].roomNames = [...acc[key2].roomNames, booking.roomName];
+          }
+          return acc;
+        },
+        {}
+      )).map((item) => ({ ...item, overdueDays: daysSince(item.earliestStartDate) }))
+    );
+    let sortedRecapItems = mutable_source([]);
+    legacy_pre_effect(() => get2(sortBy), () => {
+      set(sortedRecapItems, [...recapItems].sort((a, b) => {
+        switch (get2(sortBy)) {
+          case "tenantName":
+            return (b.tenantName || "").localeCompare(a.tenantName || "");
+          case "unpaidAmount":
+            return b.unpaidAmount - a.unpaidAmount || b.overdueDays - a.overdueDays;
+          case "earliestStartDate":
+            return parseDate(b.earliestStartDate).getTime() - parseDate(a.earliestStartDate).getTime() || b.overdueDays - a.overdueDays;
+          case "roomNames":
+            return b.roomNames.join(", ").localeCompare(a.roomNames.join(", "));
+          case "overdueDays":
+          default:
+            return b.overdueDays - a.overdueDays || b.unpaidAmount - a.unpaidAmount;
+        }
+      }));
+    });
+    legacy_pre_effect_reset();
+    init();
+    var section = root13();
+    var node = sibling(child(section), 2);
+    {
+      var consequent = ($anchor2) => {
+        var div = root_112();
+        var table = child(div);
+        var thead = child(table);
+        var tr = child(thead);
+        var th = child(tr);
+        var button = child(th);
+        let classes;
+        reset(th);
+        var th_1 = sibling(th);
+        var button_1 = child(th_1);
+        let classes_1;
+        reset(th_1);
+        var th_2 = sibling(th_1);
+        var button_2 = child(th_2);
+        let classes_2;
+        reset(th_2);
+        var th_3 = sibling(th_2);
+        var button_3 = child(th_3);
+        let classes_3;
+        reset(th_3);
+        var th_4 = sibling(th_3);
+        var button_4 = child(th_4);
+        let classes_4;
+        reset(th_4);
+        reset(tr);
+        reset(thead);
+        var tbody = sibling(thead);
+        each(tbody, 5, () => get2(sortedRecapItems), (item) => `${item.tenantName}-${item.earliestStartDate}`, ($anchor3, item) => {
+          var tr_1 = root_28();
+          var td = child(tr_1);
+          var text2 = child(td, true);
+          reset(td);
+          var td_1 = sibling(td);
+          var text_1 = child(td_1, true);
+          reset(td_1);
+          var td_2 = sibling(td_1);
+          var text_2 = child(td_2, true);
+          reset(td_2);
+          var td_3 = sibling(td_2);
+          var text_3 = child(td_3, true);
+          reset(td_3);
+          var td_4 = sibling(td_3);
+          var text_4 = child(td_4, true);
+          reset(td_4);
+          reset(tr_1);
+          template_effect(
+            ($0, $1) => {
+              set_text(text2, (get2(item), untrack(() => get2(item).tenantName)));
+              set_text(text_1, $0);
+              set_text(text_2, (get2(item), untrack(() => get2(item).earliestStartDate)));
+              set_text(text_3, (get2(item), untrack(() => get2(item).overdueDays)));
+              set_text(text_4, $1);
+            },
+            [
+              () => (deep_read_state(import_xFormatter2.formatPrice), get2(item), untrack(() => (0, import_xFormatter2.formatPrice)(get2(item).unpaidAmount, "IDR"))),
+              () => (get2(item), untrack(() => get2(item).roomNames.join(", ")))
+            ]
+          );
+          append($anchor3, tr_1);
+        });
+        reset(tbody);
+        reset(table);
+        reset(div);
+        template_effect(() => {
+          classes = set_class(button, 1, "sort-header svelte-1x4k5tt", null, classes, { active: get2(sortBy) === "tenantName" });
+          classes_1 = set_class(button_1, 1, "sort-header svelte-1x4k5tt", null, classes_1, { active: get2(sortBy) === "unpaidAmount" });
+          classes_2 = set_class(button_2, 1, "sort-header svelte-1x4k5tt", null, classes_2, { active: get2(sortBy) === "earliestStartDate" });
+          classes_3 = set_class(button_3, 1, "sort-header svelte-1x4k5tt", null, classes_3, { active: get2(sortBy) === "overdueDays" });
+          classes_4 = set_class(button_4, 1, "sort-header svelte-1x4k5tt", null, classes_4, { active: get2(sortBy) === "roomNames" });
+        });
+        event("click", button, () => sortByColumn("tenantName"));
+        event("click", button_1, () => sortByColumn("unpaidAmount"));
+        event("click", button_2, () => sortByColumn("earliestStartDate"));
+        event("click", button_3, () => sortByColumn("overdueDays"));
+        event("click", button_4, () => sortByColumn("roomNames"));
+        append($anchor2, div);
+      };
+      var alternate = ($anchor2) => {
+        var div_1 = root_34();
+        append($anchor2, div_1);
+      };
+      if_block(node, ($render) => {
+        if (get2(sortedRecapItems), untrack(() => get2(sortedRecapItems).length > 0)) $render(consequent);
+        else $render(alternate, -1);
+      });
+    }
+    reset(section);
+    append($anchor, section);
+    pop();
+  }
+
   // _components/xGenerator.js
   function GetRelativeDayLabel(dateStr) {
     const inputDate = new Date(dateStr);
@@ -14828,22 +15014,22 @@ ${component_stack}
   var IoClose = { a: { viewBox: "0 0 512 512" }, c: '<path d="M289.94,256l95-95A24,24,0,0,0,351,127l-95,95-95-95A24,24,0,0,0,127,161l95,95-95,95A24,24,0,1,0,161,385l95-95,95,95A24,24,0,0,0,385,351Z"></path>' };
 
   // _components/PopUpShowBookingPayments.svelte
-  var import_xFormatter3 = __toESM(require_xFormatter());
+  var import_xFormatter4 = __toESM(require_xFormatter());
 
   // node_modules/.pnpm/svelte-icons-pack@3.1.3_svelte@5.55.2/node_modules/svelte-icons-pack/dist/fi/index.js
   var FiLoader = { a: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, c: '<line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>' };
 
   // _components/PopUpEditPayment.svelte
-  var import_xFormatter2 = __toESM(require_xFormatter());
-  var root_112 = from_html(`<span>Submit</span>`);
-  var root13 = from_html(`<div><div class="popup svelte-1yjjku6"><header class="header svelte-1yjjku6"><h2 class="svelte-1yjjku6"> </h2> <button class="svelte-1yjjku6"><!></button></header> <div class="forms svelte-1yjjku6"><!> <!> <div class="input-box svelte-1yjjku6"><label class="label svelte-1yjjku6" for="paymentStatus">Payment Status</label> <!></div> <div class="input-box svelte-1yjjku6"><label class="label svelte-1yjjku6" for="paymentMethod">Payment Method</label> <!></div> <!></div> <div class="foot svelte-1yjjku6"><div class="left"></div> <div class="right svelte-1yjjku6"><button class="cancel svelte-1yjjku6">Cancel</button> <button class="ok svelte-1yjjku6"><!> <!></button></div></div></div></div>`);
-  var $css12 = {
+  var import_xFormatter3 = __toESM(require_xFormatter());
+  var root_113 = from_html(`<span>Submit</span>`);
+  var root14 = from_html(`<div><div class="popup svelte-1yjjku6"><header class="header svelte-1yjjku6"><h2 class="svelte-1yjjku6"> </h2> <button class="svelte-1yjjku6"><!></button></header> <div class="forms svelte-1yjjku6"><!> <!> <div class="input-box svelte-1yjjku6"><label class="label svelte-1yjjku6" for="paymentStatus">Payment Status</label> <!></div> <div class="input-box svelte-1yjjku6"><label class="label svelte-1yjjku6" for="paymentMethod">Payment Method</label> <!></div> <!></div> <div class="foot svelte-1yjjku6"><div class="left"></div> <div class="right svelte-1yjjku6"><button class="cancel svelte-1yjjku6">Cancel</button> <button class="ok svelte-1yjjku6"><!> <!></button></div></div></div></div>`);
+  var $css13 = {
     hash: "svelte-1yjjku6",
     code: ".rotate-b {transition:all 0.2s ease-in-out;transform:rotate(90deg);}\n\n  @keyframes svelte-1yjjku6-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(180deg);\n    }\n  }.spin {\n    animation: svelte-1yjjku6-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.popup-container.svelte-1yjjku6 {display:none;position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2001;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);justify-content:center;padding:50px;overflow:auto;}.popup-container.show.svelte-1yjjku6 {display:flex;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) {border-radius:8px;background-color:#FFF;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) header:where(.svelte-1yjjku6) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) header:where(.svelte-1yjjku6) h2:where(.svelte-1yjjku6) {margin:0;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) header:where(.svelte-1yjjku6) button:where(.svelte-1yjjku6) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) header:where(.svelte-1yjjku6) button:where(.svelte-1yjjku6):hover {background-color:#ef444420;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) header:where(.svelte-1yjjku6) button:where(.svelte-1yjjku6):active {background-color:#ef444430;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) .forms:where(.svelte-1yjjku6) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) .foot:where(.svelte-1yjjku6) {display:flex;flex-direction:row;justify-content:space-between;gap:10px;align-items:center;padding:15px 20px;border-top:1px solid var(--gray-004);}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) .foot:where(.svelte-1yjjku6) .right:where(.svelte-1yjjku6) {display:flex;flex-direction:row;align-items:center;gap:10px;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) .foot:where(.svelte-1yjjku6) button:where(.svelte-1yjjku6) {padding:8px 18px;border-radius:9999px;border:none;color:#FFF;cursor:pointer;font-weight:600;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) .foot:where(.svelte-1yjjku6) button.ok:where(.svelte-1yjjku6) {background-color:var(--green-006);display:flex;justify-content:center;align-items:center;}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) .foot:where(.svelte-1yjjku6) button.ok:where(.svelte-1yjjku6):hover {background-color:var(--green-005);}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) .foot:where(.svelte-1yjjku6) button.ok:where(.svelte-1yjjku6):disabled {cursor:not-allowed;background-color:var(--gray-003);color:var(--gray-007);}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) .foot:where(.svelte-1yjjku6) button.cancel:where(.svelte-1yjjku6) {background-color:transparent;color:var(--gray-007);}.popup-container.svelte-1yjjku6 .popup:where(.svelte-1yjjku6) .foot:where(.svelte-1yjjku6) button.cancel:where(.svelte-1yjjku6):hover {background-color:var(--gray-001);}.input-totalprice.svelte-1yjjku6 {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);display:flex;flex-direction:column;gap:5px;}.input-box.svelte-1yjjku6 {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);display:flex;flex-direction:column;gap:5px;}.input-box.svelte-1yjjku6 .label:where(.svelte-1yjjku6) {font-size:var(--font-base);margin-left:10px;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;}"
   };
   function PopUpEditPayment($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css12);
+    append_styles($anchor, $css13);
     let isShow = prop(
       $props,
       "isShow",
@@ -14861,7 +15047,7 @@ ${component_stack}
       false
     );
     let paymentId = prop($props, "paymentId", 8, 0);
-    let paymentAt = prop($props, "paymentAt", 28, () => (0, import_xFormatter2.dateISOFormat)(0));
+    let paymentAt = prop($props, "paymentAt", 28, () => (0, import_xFormatter3.dateISOFormat)(0));
     let totalPaidIDR = prop($props, "totalPaidIDR", 12, 0);
     let paymentMethod = mutable_source("");
     let paymentStatus = mutable_source("");
@@ -14904,7 +15090,7 @@ ${component_stack}
     }
     var $exports = { Show, Hide };
     init();
-    var div = root13();
+    var div = root14();
     var div_1 = child(div);
     var header = child(div_1);
     var h2 = child(header);
@@ -15001,7 +15187,7 @@ ${component_stack}
     var node_6 = child(button_2);
     {
       var consequent = ($anchor2) => {
-        var span = root_112();
+        var span = root_113();
         append($anchor2, span);
       };
       if_block(node_6, ($render) => {
@@ -15046,18 +15232,18 @@ ${component_stack}
   // _components/PopUpShowBookingPayments.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   var import_xConstant = __toESM(require_xConstant());
-  var root_28 = from_html(`<button class="btn svelte-mbe54n" title="Restore"><!></button>`);
-  var root_34 = from_html(`<button class="btn delete svelte-mbe54n" title="Delete"><!></button>`);
-  var root_113 = from_html(`<tr><td class="num-row svelte-mbe54n"></td><td class="a-row svelte-mbe54n"><div class="actions svelte-mbe54n"><button class="btn edit svelte-mbe54n" title="Edit"><!></button> <!></div></td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td></tr>`);
+  var root_29 = from_html(`<button class="btn svelte-mbe54n" title="Restore"><!></button>`);
+  var root_35 = from_html(`<button class="btn delete svelte-mbe54n" title="Delete"><!></button>`);
+  var root_114 = from_html(`<tr><td class="num-row svelte-mbe54n"></td><td class="a-row svelte-mbe54n"><div class="actions svelte-mbe54n"><button class="btn edit svelte-mbe54n" title="Edit"><!></button> <!></div></td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td><td class="svelte-mbe54n"> </td></tr>`);
   var root_43 = from_html(`<tr class="svelte-mbe54n"><td class="num-row svelte-mbe54n">0</td><td colspan="6" class="svelte-mbe54n">no-data</td></tr>`);
-  var root14 = from_html(`<!> <div><div class="popup svelte-mbe54n"><header class="header svelte-mbe54n"><h2 class="svelte-mbe54n"> </h2> <button class="svelte-mbe54n"><!></button></header> <div class="forms svelte-mbe54n"><div class="table-root svelte-mbe54n"><div class="table-container svelte-mbe54n"><table class="svelte-mbe54n"><thead class="svelte-mbe54n"><tr class="svelte-mbe54n"><th style="width: 40px;" class="svelte-mbe54n">No</th><th class="a-row svelte-mbe54n" style="width: 70px;">Actions</th><th class="svelte-mbe54n">ID</th><th class="svelte-mbe54n">Payment At</th><th class="svelte-mbe54n">Total Paid</th><th class="svelte-mbe54n">Payment Method</th><th class="svelte-mbe54n">Payment Status</th><th class="textarea svelte-mbe54n">Note</th></tr></thead><tbody class="svelte-mbe54n"><!><!></tbody></table></div></div></div></div></div>`, 1);
-  var $css13 = {
+  var root15 = from_html(`<!> <div><div class="popup svelte-mbe54n"><header class="header svelte-mbe54n"><h2 class="svelte-mbe54n"> </h2> <button class="svelte-mbe54n"><!></button></header> <div class="forms svelte-mbe54n"><div class="table-root svelte-mbe54n"><div class="table-container svelte-mbe54n"><table class="svelte-mbe54n"><thead class="svelte-mbe54n"><tr class="svelte-mbe54n"><th style="width: 40px;" class="svelte-mbe54n">No</th><th class="a-row svelte-mbe54n" style="width: 70px;">Actions</th><th class="svelte-mbe54n">ID</th><th class="svelte-mbe54n">Payment At</th><th class="svelte-mbe54n">Total Paid</th><th class="svelte-mbe54n">Payment Method</th><th class="svelte-mbe54n">Payment Status</th><th class="textarea svelte-mbe54n">Note</th></tr></thead><tbody class="svelte-mbe54n"><!><!></tbody></table></div></div></div></div></div>`, 1);
+  var $css14 = {
     hash: "svelte-mbe54n",
     code: ".rotate-b {transition:all 0.2s ease-in-out;transform:rotate(90deg);}\n\n  @keyframes svelte-mbe54n-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(180deg);\n    }\n  }.spin {\n    animation: svelte-mbe54n-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.popup-container.svelte-mbe54n {display:none;position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2000;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);justify-content:center;padding:50px;overflow:auto;}.popup-container.show.svelte-mbe54n {display:flex;}.popup-container.svelte-mbe54n .popup:where(.svelte-mbe54n) {border-radius:8px;background-color:#FFF;height:fit-content;width:80%;display:flex;flex-direction:column;}.popup-container.svelte-mbe54n .popup:where(.svelte-mbe54n) header:where(.svelte-mbe54n) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-mbe54n .popup:where(.svelte-mbe54n) header:where(.svelte-mbe54n) h2:where(.svelte-mbe54n) {margin:0;}.popup-container.svelte-mbe54n .popup:where(.svelte-mbe54n) header:where(.svelte-mbe54n) button:where(.svelte-mbe54n) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-mbe54n .popup:where(.svelte-mbe54n) header:where(.svelte-mbe54n) button:where(.svelte-mbe54n):hover {background-color:#ef444420;}.popup-container.svelte-mbe54n .popup:where(.svelte-mbe54n) header:where(.svelte-mbe54n) button:where(.svelte-mbe54n):active {background-color:#ef444430;}.popup-container.svelte-mbe54n .popup:where(.svelte-mbe54n) .forms:where(.svelte-mbe54n) {padding:20px;display:flex;flex-direction:column;gap:10px;}.table-root.svelte-mbe54n {display:flex;flex-direction:column;background-color:#fff;border-left:1px solid var(--gray-003);border-right:1px solid var(--gray-003);padding:0;font-size:var(--font-base);}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) {overflow-x:auto;scrollbar-color:var(--gray-003) transparent;scrollbar-width:calc(100% - 20px);}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) {width:100%;background:#fff;border-top:1px solid var(--gray-003);border-bottom:1px solid var(--gray-003);box-shadow:none;text-align:left;border-collapse:separate;border-spacing:0;overflow:hidden;font-size:var(--font-base);}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) thead:where(.svelte-mbe54n) {box-shadow:none;border-bottom:1px solid var(--gray-003);}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) thead:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) th:where(.svelte-mbe54n) {padding:12px;background-color:var(--gray-001);text-transform:capitalize;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-003);min-width:fit-content;width:auto;text-wrap:nowrap;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) thead:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) th:where(.svelte-mbe54n):last-child {border-right:none;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) td:where(.svelte-mbe54n) {padding:8px 12px;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr.deleted:where(.svelte-mbe54n) {color:var(--red-005);}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) td:where(.svelte-mbe54n) {padding:8px 12px;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-004);}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) td:where(.svelte-mbe54n) .actions:where(.svelte-mbe54n) {display:flex;flex-direction:row;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) td:where(.svelte-mbe54n) .actions:where(.svelte-mbe54n) .btn:where(.svelte-mbe54n) {border:none;padding:6px;border-radius:8px;background-color:transparent;cursor:pointer;display:flex;justify-content:center;align-items:center;}.table-root .table-container table tbody tr td .actions .btn:hover svg {fill:var(--blue-005);}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) td:where(.svelte-mbe54n) .actions:where(.svelte-mbe54n) .btn:where(.svelte-mbe54n):hover {background-color:var(--blue-transparent);}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) td:where(.svelte-mbe54n) .actions:where(.svelte-mbe54n) .btn.delete:where(.svelte-mbe54n):hover {background-color:var(--red-transparent);}.table-root .table-container table tbody tr td .actions .btn.delete:hover svg {fill:var(--red-005);}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n):last-child td:where(.svelte-mbe54n) {border-bottom:none !important;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n):last-child td:where(.svelte-mbe54n):last-child {border-right:none !important;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) td.num-row:where(.svelte-mbe54n) {border-right:1px solid var(--gray-003);font-weight:600;text-align:center;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n):last-child td:where(.svelte-mbe54n) {border-bottom:none !important;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n):last-child td:where(.svelte-mbe54n):last-child {border-right:none !important;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) tbody:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) td:where(.svelte-mbe54n):last-child {border-right:none !important;}.table-root.svelte-mbe54n .table-container:where(.svelte-mbe54n) table:where(.svelte-mbe54n) thead:where(.svelte-mbe54n) tr:where(.svelte-mbe54n) th.textarea:where(.svelte-mbe54n) {min-width:280px !important;}\n\n	@media only screen and (max-width : 768px) {.popup-container.svelte-mbe54n {padding:10px;}.popup-container.svelte-mbe54n .popup:where(.svelte-mbe54n) {width:100%;}\n  }"
   };
   function PopUpShowBookingPayments($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css13);
+    append_styles($anchor, $css14);
     let isShow = mutable_source(
       /** @type {boolean} */
       false
@@ -15080,7 +15266,7 @@ ${component_stack}
     let isShowPopUpEditPayment = mutable_source(false);
     let isSubmitEditPayment = mutable_source(false);
     let editPaymentId = mutable_source();
-    let editPaymentAt = mutable_source((0, import_xFormatter3.dateISOFormat)(0));
+    let editPaymentAt = mutable_source((0, import_xFormatter4.dateISOFormat)(0));
     let editTotalPaidIDR = mutable_source(0);
     let editNote = mutable_source("");
     function onPopUpEditPayment(payment) {
@@ -15177,7 +15363,7 @@ ${component_stack}
     }
     var $exports = { Show, Hide, Reset };
     init();
-    var fragment = root14();
+    var fragment = root15();
     var node = first_child(fragment);
     bind_this(
       PopUpEditPayment(node, {
@@ -15247,7 +15433,7 @@ ${component_stack}
     var tbody = sibling(child(table));
     var node_2 = child(tbody);
     each(node_2, 1, () => payments() || [], index, ($anchor2, py, idx) => {
-      var tr = root_113();
+      var tr = root_114();
       var td = child(tr);
       td.textContent = idx + 1;
       var td_1 = sibling(td);
@@ -15265,7 +15451,7 @@ ${component_stack}
       var node_4 = sibling(button_1, 2);
       {
         var consequent = ($anchor3) => {
-          var button_2 = root_28();
+          var button_2 = root_29();
           var node_5 = child(button_2);
           Icon(node_5, {
             size: "15",
@@ -15279,7 +15465,7 @@ ${component_stack}
           append($anchor3, button_2);
         };
         var alternate = ($anchor3) => {
-          var button_3 = root_34();
+          var button_3 = root_35();
           var node_6 = child(button_3);
           Icon(node_6, {
             size: "15",
@@ -15334,7 +15520,7 @@ ${component_stack}
           set_text(text_6, (get2(py), untrack(() => get2(py).note)));
         },
         [
-          () => (deep_read_state(import_xFormatter3.formatPrice), get2(py), untrack(() => (0, import_xFormatter3.formatPrice)(get2(py).paidIDR, "IDR")))
+          () => (deep_read_state(import_xFormatter4.formatPrice), get2(py), untrack(() => (0, import_xFormatter4.formatPrice)(get2(py).paidIDR, "IDR")))
         ]
       );
       event("click", button_1, () => onPopUpEditPayment(get2(py)));
@@ -15374,16 +15560,16 @@ ${component_stack}
   var import_jsApi4 = __toESM(require_jsApi_GEN());
 
   // _components/PopUpAddPayment.svelte
-  var import_xFormatter4 = __toESM(require_xFormatter());
-  var root_29 = from_html(`<span>Submit</span>`);
-  var root15 = from_html(`<div><div class="popup svelte-14ycs2l"><header class="header svelte-14ycs2l"><h2 class="svelte-14ycs2l"> </h2> <button class="svelte-14ycs2l"><!></button></header> <div class="forms svelte-14ycs2l"><!> <!> <!> <!> <!> <!></div> <div class="foot svelte-14ycs2l"><div class="left"></div> <div class="right svelte-14ycs2l"><button class="cancel svelte-14ycs2l">Cancel</button> <button class="ok svelte-14ycs2l"><!> <!></button></div></div></div></div>`);
-  var $css14 = {
+  var import_xFormatter5 = __toESM(require_xFormatter());
+  var root_210 = from_html(`<span>Submit</span>`);
+  var root16 = from_html(`<div><div class="popup svelte-14ycs2l"><header class="header svelte-14ycs2l"><h2 class="svelte-14ycs2l"> </h2> <button class="svelte-14ycs2l"><!></button></header> <div class="forms svelte-14ycs2l"><!> <!> <!> <!> <!> <!></div> <div class="foot svelte-14ycs2l"><div class="left"></div> <div class="right svelte-14ycs2l"><button class="cancel svelte-14ycs2l">Cancel</button> <button class="ok svelte-14ycs2l"><!> <!></button></div></div></div></div>`);
+  var $css15 = {
     hash: "svelte-14ycs2l",
     code: "\n  @keyframes svelte-14ycs2l-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(360deg);\n    }\n  }.spin {\n    animation: svelte-14ycs2l-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.popup-container.svelte-14ycs2l {display:none;position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2000;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);justify-content:center;padding:50px;overflow:auto;}.popup-container.show.svelte-14ycs2l {display:flex;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) {border-radius:8px;background-color:#FFF;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) h2:where(.svelte-14ycs2l) {margin:0;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) button:where(.svelte-14ycs2l) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) button:where(.svelte-14ycs2l):hover {background-color:#ef444420;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) header:where(.svelte-14ycs2l) button:where(.svelte-14ycs2l):active {background-color:#ef444430;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .forms:where(.svelte-14ycs2l) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) {display:flex;flex-direction:row;justify-content:space-between;gap:10px;align-items:center;padding:15px 20px;border-top:1px solid var(--gray-004);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) .right:where(.svelte-14ycs2l) {display:flex;flex-direction:row;align-items:center;gap:10px;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button:where(.svelte-14ycs2l) {padding:8px 18px;border-radius:9999px;border:none;color:#FFF;cursor:pointer;font-weight:600;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.ok:where(.svelte-14ycs2l) {background-color:var(--green-006);display:flex;justify-content:center;align-items:center;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.ok:where(.svelte-14ycs2l):hover {background-color:var(--green-005);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.ok:where(.svelte-14ycs2l):disabled {cursor:not-allowed;background-color:var(--gray-003);color:var(--gray-007);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.cancel:where(.svelte-14ycs2l) {background-color:transparent;color:var(--gray-007);}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) .foot:where(.svelte-14ycs2l) button.cancel:where(.svelte-14ycs2l):hover {background-color:var(--gray-001);}.facilities-form.svelte-14ycs2l {display:flex;flex-direction:column;gap:3px;}\n\n  @media only screen and (max-width : 768px) {.popup-container.svelte-14ycs2l {padding:10px;}.popup-container.svelte-14ycs2l .popup:where(.svelte-14ycs2l) {width:100%;}\n  }"
   };
   function PopUpAddPayment($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css14);
+    append_styles($anchor, $css15);
     let isShow = mutable_source(
       /** @type {boolean} */
       false
@@ -15398,7 +15584,7 @@ ${component_stack}
     let bookings = prop($props, "bookings", 24, () => ({}));
     let bookingId = prop($props, "bookingId", 12, 0);
     let isBookingReadOnly = prop($props, "isBookingReadOnly", 8, false);
-    let paymentAt = prop($props, "paymentAt", 28, () => (0, import_xFormatter4.dateISOFormat)(0));
+    let paymentAt = prop($props, "paymentAt", 28, () => (0, import_xFormatter5.dateISOFormat)(0));
     const PaymentMethods = (
       /** @type {PaymentMethod[]} */
       ["Transfer", "Cash", "QRIS", "Donation"]
@@ -15436,7 +15622,7 @@ ${component_stack}
     }
     const reset2 = () => {
       bookingId(0);
-      paymentAt((0, import_xFormatter4.dateISOFormat)(0));
+      paymentAt((0, import_xFormatter5.dateISOFormat)(0));
       set(paidIDR, 0);
       set(paymentMethod, "Transfer");
       set(paymentStatus, "Paid");
@@ -15449,7 +15635,7 @@ ${component_stack}
     };
     var $exports = { Show, Hide };
     init();
-    var div = root15();
+    var div = root16();
     var div_1 = child(div);
     var header = child(div_1);
     var h2 = child(header);
@@ -15574,7 +15760,7 @@ ${component_stack}
     var node_7 = child(button_2);
     {
       var consequent_1 = ($anchor2) => {
-        var span = root_29();
+        var span = root_210();
         append($anchor2, span);
       };
       if_block(node_7, ($render) => {
@@ -15620,14 +15806,14 @@ ${component_stack}
   var import_jsApi3 = __toESM(require_jsApi_GEN());
 
   // _components/MultiSelect.svelte
-  var root16 = from_html(`<div><div class="input-box svelte-mai12d"><label class="label svelte-mai12d"> </label> <!> <!></div></div>`);
-  var $css15 = {
+  var root17 = from_html(`<div><div class="input-box svelte-mai12d"><label class="label svelte-mai12d"> </label> <!> <!></div></div>`);
+  var $css16 = {
     hash: "svelte-mai12d",
     code: ".input-box.svelte-mai12d {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);display:flex;flex-direction:column;gap:5px;}.input-box.svelte-mai12d .label:where(.svelte-mai12d) {font-size:var(--font-base);margin-left:10px;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;}"
   };
   function MultiSelect($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css15);
+    append_styles($anchor, $css16);
     let className = prop($props, "className", 8, "");
     let valuesSourceType = prop(
       $props,
@@ -15684,7 +15870,7 @@ ${component_stack}
     });
     legacy_pre_effect_reset();
     init();
-    var div = root16();
+    var div = root17();
     var div_1 = child(div);
     var label_1 = child(div_1);
     var text2 = child(label_1, true);
@@ -15744,16 +15930,16 @@ ${component_stack}
   }
 
   // _components/PopUpEditBooking.svelte
-  var import_xFormatter5 = __toESM(require_xFormatter());
-  var root_114 = from_html(`<span>Submit</span>`);
-  var root17 = from_html(`<div><div class="popup svelte-zgtf33"><header class="header svelte-zgtf33"><h2 class="svelte-zgtf33"> </h2> <button class="svelte-zgtf33"><!></button></header> <div class="forms svelte-zgtf33"><div class="input-box svelte-zgtf33"><label class="label svelte-zgtf33" for="paymentMethod">Room</label> <!></div> <!> <!> <div class="input-box svelte-zgtf33"><label class="label svelte-zgtf33" for="paymentMethod">Tenant</label> <!></div> <!> <!> <!> <!> <!></div> <div class="foot svelte-zgtf33"><div class="left"></div> <div class="right svelte-zgtf33"><button class="cancel svelte-zgtf33">Cancel</button> <button class="ok svelte-zgtf33"><!> <!></button></div></div></div></div>`);
-  var $css16 = {
+  var import_xFormatter6 = __toESM(require_xFormatter());
+  var root_115 = from_html(`<span>Submit</span>`);
+  var root18 = from_html(`<div><div class="popup svelte-zgtf33"><header class="header svelte-zgtf33"><h2 class="svelte-zgtf33"> </h2> <button class="svelte-zgtf33"><!></button></header> <div class="forms svelte-zgtf33"><div class="input-box svelte-zgtf33"><label class="label svelte-zgtf33" for="paymentMethod">Room</label> <!></div> <!> <!> <div class="input-box svelte-zgtf33"><label class="label svelte-zgtf33" for="paymentMethod">Tenant</label> <!></div> <!> <!> <!> <!> <!></div> <div class="foot svelte-zgtf33"><div class="left"></div> <div class="right svelte-zgtf33"><button class="cancel svelte-zgtf33">Cancel</button> <button class="ok svelte-zgtf33"><!> <!></button></div></div></div></div>`);
+  var $css17 = {
     hash: "svelte-zgtf33",
     code: ".rotate-b {transition:all 0.2s ease-in-out;transform:rotate(90deg);}\n\n  @keyframes svelte-zgtf33-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(180deg);\n    }\n  }.spin {\n    animation: svelte-zgtf33-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.popup-container.svelte-zgtf33 {display:none;position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2001;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);justify-content:center;padding:50px;overflow:auto;}.popup-container.show.svelte-zgtf33 {display:flex;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) {border-radius:8px;background-color:#FFF;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) header:where(.svelte-zgtf33) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) header:where(.svelte-zgtf33) h2:where(.svelte-zgtf33) {margin:0;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) header:where(.svelte-zgtf33) button:where(.svelte-zgtf33) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) header:where(.svelte-zgtf33) button:where(.svelte-zgtf33):hover {background-color:#ef444420;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) header:where(.svelte-zgtf33) button:where(.svelte-zgtf33):active {background-color:#ef444430;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) .forms:where(.svelte-zgtf33) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) .foot:where(.svelte-zgtf33) {display:flex;flex-direction:row;justify-content:space-between;gap:10px;align-items:center;padding:15px 20px;border-top:1px solid var(--gray-004);}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) .foot:where(.svelte-zgtf33) .right:where(.svelte-zgtf33) {display:flex;flex-direction:row;align-items:center;gap:10px;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) .foot:where(.svelte-zgtf33) button:where(.svelte-zgtf33) {padding:8px 18px;border-radius:9999px;border:none;color:#FFF;cursor:pointer;font-weight:600;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) .foot:where(.svelte-zgtf33) button.ok:where(.svelte-zgtf33) {background-color:var(--green-006);display:flex;justify-content:center;align-items:center;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) .foot:where(.svelte-zgtf33) button.ok:where(.svelte-zgtf33):hover {background-color:var(--green-005);}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) .foot:where(.svelte-zgtf33) button.ok:where(.svelte-zgtf33):disabled {cursor:not-allowed;background-color:var(--gray-003);color:var(--gray-007);}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) .foot:where(.svelte-zgtf33) button.cancel:where(.svelte-zgtf33) {background-color:transparent;color:var(--gray-007);}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) .foot:where(.svelte-zgtf33) button.cancel:where(.svelte-zgtf33):hover {background-color:var(--gray-001);}.input-totalprice.svelte-zgtf33 {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);display:flex;flex-direction:column;gap:5px;}.input-box.svelte-zgtf33 {position:relative;display:flex;flex-direction:column;width:100%;color:var(--gray-007);display:flex;flex-direction:column;gap:5px;}.input-box.svelte-zgtf33 .label:where(.svelte-zgtf33) {font-size:var(--font-base);margin-left:10px;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;}\n\n  @media only screen and (max-width : 768px) {.popup-container.svelte-zgtf33 {padding:10px;}.popup-container.svelte-zgtf33 .popup:where(.svelte-zgtf33) {width:100%;}\n  }"
   };
   function PopUpEditBooking($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css16);
+    append_styles($anchor, $css17);
     let isShow = prop(
       $props,
       "isShow",
@@ -15819,13 +16005,13 @@ ${component_stack}
     };
     function reset2() {
       set(roomId, 0);
-      set(dateStart, (0, import_xFormatter5.dateISOFormat)(0));
-      set(dateEnd, (0, import_xFormatter5.dateISOFormat)(30));
+      set(dateStart, (0, import_xFormatter6.dateISOFormat)(0));
+      set(dateEnd, (0, import_xFormatter6.dateISOFormat)(30));
       set(tenantId, 0);
       set(basePriceIDR, 0);
       set(facilitiesObj, {});
       set(totalPriceIDR, 0);
-      set(paidAt, (0, import_xFormatter5.dateISOFormat)(0));
+      set(paidAt, (0, import_xFormatter6.dateISOFormat)(0));
       set(extraTenants, []);
     }
     const cancel = () => {
@@ -15903,7 +16089,7 @@ ${component_stack}
     legacy_pre_effect_reset();
     var $exports = { Show, GetBookingById, Hide };
     init();
-    var div = root17();
+    var div = root18();
     var div_1 = child(div);
     var header = child(div_1);
     var h2 = child(header);
@@ -16056,7 +16242,7 @@ ${component_stack}
     var node_10 = child(button_2);
     {
       var consequent = ($anchor2) => {
-        var span = root_114();
+        var span = root_115();
         append($anchor2, span);
       };
       if_block(node_10, ($render) => {
@@ -16100,18 +16286,18 @@ ${component_stack}
   }
 
   // _partials/home/UnpaidBookingTenants.svelte
-  var root_115 = from_html(`<!> <!> <!>`, 1);
-  var root_35 = from_html(`<div class="card svelte-bcuz"><div class="heading svelte-bcuz"><h3 class="svelte-bcuz"> </h3> <div class="actions svelte-bcuz"><button class="btn svelte-bcuz" title="Input Payment"><!></button> <button class="btn svelte-bcuz" title="Show Payments"><!></button> <button class="btn svelte-bcuz" title="Edit Booking"><!></button></div></div> <div class="detail svelte-bcuz"><hr class="svelte-bcuz"/> <div class="desc svelte-bcuz"><span> </span> <span> </span> <span> </span></div> <hr class="svelte-bcuz"/> <div class="progress-container svelte-bcuz"><label for="" class="svelte-bcuz">Paid <b> </b> days</label> <div class="progress svelte-bcuz"><span class="blue svelte-bcuz"></span></div></div> <div class="progress-container svelte-bcuz"><label for="" class="svelte-bcuz">Occupancy Progress</label> <div class="progress svelte-bcuz"><span></span></div></div></div></div>`);
-  var root_210 = from_html(`<div class="cards svelte-bcuz"></div>`);
+  var root_116 = from_html(`<!> <!> <!>`, 1);
+  var root_36 = from_html(`<div class="card svelte-bcuz"><div class="heading svelte-bcuz"><h3 class="svelte-bcuz"> </h3> <div class="actions svelte-bcuz"><button class="btn svelte-bcuz" title="Input Payment"><!></button> <button class="btn svelte-bcuz" title="Show Payments"><!></button> <button class="btn svelte-bcuz" title="Edit Booking"><!></button></div></div> <div class="detail svelte-bcuz"><hr class="svelte-bcuz"/> <div class="desc svelte-bcuz"><span> </span> <span> </span> <span> </span></div> <hr class="svelte-bcuz"/> <div class="progress-container svelte-bcuz"><label for="" class="svelte-bcuz">Paid <b> </b> days</label> <div class="progress svelte-bcuz"><span class="blue svelte-bcuz"></span></div></div> <div class="progress-container svelte-bcuz"><label for="" class="svelte-bcuz">Occupancy Progress</label> <div class="progress svelte-bcuz"><span></span></div></div></div></div>`);
+  var root_211 = from_html(`<div class="cards svelte-bcuz"></div>`);
   var root_44 = from_html(`<div class="no-data"><p>No Unpaid Bookings</p></div>`);
-  var root18 = from_html(`<!> <section class="empty-unpaidBookingTenants svelte-bcuz"><h1 class="svelte-bcuz">Unpaid Bookings</h1> <!></section>`, 1);
-  var $css17 = {
+  var root19 = from_html(`<!> <section class="empty-unpaidBookingTenants svelte-bcuz"><h1 class="svelte-bcuz">Unpaid Bookings</h1> <!></section>`, 1);
+  var $css18 = {
     hash: "svelte-bcuz",
     code: ".empty-unpaidBookingTenants.svelte-bcuz {display:flex;flex-direction:column;gap:20px;}.empty-unpaidBookingTenants.svelte-bcuz h1:where(.svelte-bcuz) {margin:0;padding:0;font-size:var(--font-xl);}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) {display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:10px;}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) .card:where(.svelte-bcuz) {background-color:var(--gray-001);padding:20px;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;position:relative;overflow:hidden;}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) .card:where(.svelte-bcuz) .heading:where(.svelte-bcuz) {display:flex;flex-direction:row;align-items:start;justify-content:space-between;gap:5px;}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) .card:where(.svelte-bcuz) hr:where(.svelte-bcuz) {height:1px;background-color:var(--gray-004) !important;border:none;}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) .card:where(.svelte-bcuz) .detail:where(.svelte-bcuz) {display:flex;flex-direction:column;gap:10px;}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) .card:where(.svelte-bcuz) h3:where(.svelte-bcuz) {margin:0;padding:0;font-size:var(--font-lg);z-index:20;}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) .card:where(.svelte-bcuz) .desc:where(.svelte-bcuz) {display:flex;flex-direction:column;gap:5px;z-index:20;}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) .card:where(.svelte-bcuz) .actions:where(.svelte-bcuz) {display:flex;flex-direction:row;justify-content:flex-end;align-items:flex-end;gap:3px;width:fit-content;height:fit-content;}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) .card:where(.svelte-bcuz) .actions:where(.svelte-bcuz) .btn:where(.svelte-bcuz) {border:none;\n    /* color: #fff; */background-color:transparent;width:fit-content;padding:5px;border-radius:8px;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;gap:3px;cursor:pointer;}.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) .card:where(.svelte-bcuz) .actions:where(.svelte-bcuz) .btn:where(.svelte-bcuz):hover {background-color:var(--blue-transparent);}.empty-unpaidBookingTenants .cards .card .actions .btn:hover svg {fill:var(--blue-006);}\n\n  @media only screen and (max-width : 768px) {.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) {grid-template-columns:1fr;}\n  }\n\n  @media only screen and (max-width: 992px) {.empty-unpaidBookingTenants.svelte-bcuz .cards:where(.svelte-bcuz) {grid-template-columns:1fr 1fr;}\n  }.progress-container.svelte-bcuz {display:flex;flex-direction:column;gap:5px;}.progress-container.svelte-bcuz label:where(.svelte-bcuz) {font-size:12px;margin-left:5px;}.progress.svelte-bcuz {position:relative;width:100%;height:14px;background-color:var(--gray-003);border-radius:9999px;overflow:hidden;}.progress.svelte-bcuz span:where(.svelte-bcuz) {height:100%;display:block;}.progress span.green {background-image:linear-gradient(var(--green-004), var(--green-006));}.progress span.yellow {background-image:linear-gradient(var(--yellow-004), var(--yellow-006));}.progress span.red {background-image:linear-gradient(var(--red-004), var(--red-006));}.progress span.blue {background-image:linear-gradient(var(--blue-004), var(--blue-006));}"
   };
   function UnpaidBookingTenants($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css17);
+    append_styles($anchor, $css18);
     const tenants = (
       /** @type {Record<number, string>} */
       {/* tenants */}
@@ -16268,11 +16454,11 @@ ${component_stack}
       get2(popUpAddPayment).Show();
     }
     init();
-    var fragment = root18();
+    var fragment = root19();
     var node = first_child(fragment);
     {
       var consequent = ($anchor2) => {
-        var fragment_1 = root_115();
+        var fragment_1 = root_116();
         var node_1 = first_child(fragment_1);
         bind_this(
           PopUpShowBookingPayments(node_1, {
@@ -16348,11 +16534,11 @@ ${component_stack}
     var node_4 = sibling(child(section), 2);
     {
       var consequent_1 = ($anchor2) => {
-        var div = root_210();
+        var div = root_211();
         each(div, 5, () => unpaidBookingTenants || [], index, ($anchor3, ub) => {
           const prog = derived_safe_equal(() => getOccupancyProgress(get2(ub)));
           const paidPercent = derived_safe_equal(() => getProgressPaidPercentage(get2(ub)));
-          var div_1 = root_35();
+          var div_1 = root_36();
           var div_2 = child(div_1);
           var h3 = child(div_2);
           var text2 = child(h3, true);
@@ -16453,34 +16639,34 @@ ${component_stack}
   }
 
   // _partials/home/DoubleBookingReports.svelte
-  var root_36 = from_html(`<span> </span>`);
-  var root_211 = from_html(`<div class="card svelte-1o93jvl"><h3 class="svelte-1o93jvl"> </h3> <div class="desc svelte-1o93jvl"></div></div>`);
-  var root_116 = from_html(`<div class="cards svelte-1o93jvl"></div>`);
+  var root_37 = from_html(`<span> </span>`);
+  var root_213 = from_html(`<div class="card svelte-1o93jvl"><h3 class="svelte-1o93jvl"> </h3> <div class="desc svelte-1o93jvl"></div></div>`);
+  var root_117 = from_html(`<div class="cards svelte-1o93jvl"></div>`);
   var root_45 = from_html(`<div class="no-data"><p>No Double Bookings</p></div>`);
-  var root19 = from_html(`<section class="empty-doubleBookingReports svelte-1o93jvl"><h1 class="svelte-1o93jvl">Double Bookings</h1> <!></section>`);
-  var $css18 = {
+  var root20 = from_html(`<section class="empty-doubleBookingReports svelte-1o93jvl"><h1 class="svelte-1o93jvl">Double Bookings</h1> <!></section>`);
+  var $css19 = {
     hash: "svelte-1o93jvl",
     code: ".empty-doubleBookingReports.svelte-1o93jvl {display:flex;flex-direction:column;gap:20px;}.empty-doubleBookingReports.svelte-1o93jvl h1:where(.svelte-1o93jvl) {margin:0;padding:0;font-size:var(--font-xl);}.empty-doubleBookingReports.svelte-1o93jvl .cards:where(.svelte-1o93jvl) {display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;}.empty-doubleBookingReports.svelte-1o93jvl .cards:where(.svelte-1o93jvl) .card:where(.svelte-1o93jvl) {background-color:var(--gray-001);padding:20px;border-radius:8px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;}.empty-doubleBookingReports.svelte-1o93jvl .cards:where(.svelte-1o93jvl) .card:where(.svelte-1o93jvl) h3:where(.svelte-1o93jvl) {margin:0;padding:0;font-size:var(--font-lg);z-index:20;}.empty-doubleBookingReports.svelte-1o93jvl .cards:where(.svelte-1o93jvl) .card:where(.svelte-1o93jvl) .desc:where(.svelte-1o93jvl) {padding-top:10px;border-top:1px solid var(--gray-004);display:flex;flex-direction:column;gap:5px;z-index:20;font-size:12px;}\n\n  @media only screen and (max-width : 768px) {.empty-doubleBookingReports.svelte-1o93jvl .cards:where(.svelte-1o93jvl) {grid-template-columns:1fr;}\n  }\n\n  @media only screen and (max-width: 992px) {.empty-doubleBookingReports.svelte-1o93jvl .cards:where(.svelte-1o93jvl) {grid-template-columns:1fr 1fr;}\n  }"
   };
   function DoubleBookingReports($anchor) {
-    append_styles($anchor, $css18);
+    append_styles($anchor, $css19);
     const doubleBookingReports = (
       /** @type {DoubleBookingReport[]} */
       [/* doubleBookingReports */]
     );
-    var section = root19();
+    var section = root20();
     var node = sibling(child(section), 2);
     {
       var consequent = ($anchor2) => {
-        var div = root_116();
+        var div = root_117();
         each(div, 5, () => doubleBookingReports || [], index, ($anchor3, db) => {
-          var div_1 = root_211();
+          var div_1 = root_213();
           var h3 = child(div_1);
           var text2 = child(h3);
           reset(h3);
           var div_2 = sibling(h3, 2);
           each(div_2, 5, () => get2(db).tenants || [], index, ($anchor4, bk) => {
-            var span = root_36();
+            var span = root_37();
             var text_1 = child(span);
             reset(span);
             template_effect(() => set_text(text_1, `${get2(bk).tenantName ?? ""} (${get2(bk).dateStart ?? ""} s/d ${get2(bk).dateEnd ?? ""})`));
@@ -16508,27 +16694,27 @@ ${component_stack}
   }
 
   // _partials/home/UpcomingTenants.svelte
-  var root_213 = from_html(`<div class="card svelte-v6ut9b"><div class="tenant svelte-v6ut9b"><span class="svelte-v6ut9b">Previous Tenant:</span> <h3 class="svelte-v6ut9b"> </h3></div> <div class="tenant svelte-v6ut9b"><span class="svelte-v6ut9b">Next Tenant:</span> <h3 class="svelte-v6ut9b"> </h3></div> <div class="desc svelte-v6ut9b"><span> </span> <span> </span></div></div>`);
-  var root_117 = from_html(`<div class="cards svelte-v6ut9b"></div>`);
-  var root_37 = from_html(`<div class="no-data"><p>No Upcoming Tenants</p></div>`);
-  var root20 = from_html(`<section class="empty-upcomingTenants svelte-v6ut9b"><h1 class="svelte-v6ut9b">Upcoming Tenants</h1> <!></section>`);
-  var $css19 = {
+  var root_214 = from_html(`<div class="card svelte-v6ut9b"><div class="tenant svelte-v6ut9b"><span class="svelte-v6ut9b">Previous Tenant:</span> <h3 class="svelte-v6ut9b"> </h3></div> <div class="tenant svelte-v6ut9b"><span class="svelte-v6ut9b">Next Tenant:</span> <h3 class="svelte-v6ut9b"> </h3></div> <div class="desc svelte-v6ut9b"><span> </span> <span> </span></div></div>`);
+  var root_118 = from_html(`<div class="cards svelte-v6ut9b"></div>`);
+  var root_38 = from_html(`<div class="no-data"><p>No Upcoming Tenants</p></div>`);
+  var root21 = from_html(`<section class="empty-upcomingTenants svelte-v6ut9b"><h1 class="svelte-v6ut9b">Upcoming Tenants</h1> <!></section>`);
+  var $css20 = {
     hash: "svelte-v6ut9b",
     code: ".empty-upcomingTenants.svelte-v6ut9b {display:flex;flex-direction:column;gap:20px;}.empty-upcomingTenants.svelte-v6ut9b h1:where(.svelte-v6ut9b) {margin:0;padding:0;font-size:var(--font-xl);}.empty-upcomingTenants.svelte-v6ut9b .cards:where(.svelte-v6ut9b) {display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:10px;}.empty-upcomingTenants.svelte-v6ut9b .cards:where(.svelte-v6ut9b) .card:where(.svelte-v6ut9b) {background-color:var(--gray-001);padding:20px;border-radius:8px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;}.empty-upcomingTenants.svelte-v6ut9b .cards:where(.svelte-v6ut9b) .card:where(.svelte-v6ut9b) .tenant:where(.svelte-v6ut9b) {display:flex;flex-direction:column;}.empty-upcomingTenants.svelte-v6ut9b .cards:where(.svelte-v6ut9b) .card:where(.svelte-v6ut9b) .tenant:where(.svelte-v6ut9b) span:where(.svelte-v6ut9b) {font-size:12px;}.empty-upcomingTenants.svelte-v6ut9b .cards:where(.svelte-v6ut9b) .card:where(.svelte-v6ut9b) .tenant:where(.svelte-v6ut9b) h3:where(.svelte-v6ut9b) {margin:0;padding:0;font-size:var(--font-lg);z-index:20;}.empty-upcomingTenants.svelte-v6ut9b .cards:where(.svelte-v6ut9b) .card:where(.svelte-v6ut9b) .desc:where(.svelte-v6ut9b) {padding-top:10px;border-top:1px solid var(--gray-004);display:flex;flex-direction:column;gap:5px;z-index:20;}\n\n  @media only screen and (max-width : 768px) {.empty-upcomingTenants.svelte-v6ut9b .cards:where(.svelte-v6ut9b) {grid-template-columns:1fr;}\n  }\n\n  @media only screen and (max-width: 992px) {.empty-upcomingTenants.svelte-v6ut9b .cards:where(.svelte-v6ut9b) {grid-template-columns:1fr 1fr;}\n  }"
   };
   function UpcomingTenants($anchor) {
-    append_styles($anchor, $css19);
+    append_styles($anchor, $css20);
     const upcomingTenants = (
       /** @type {UpcomingTenant[]} */
       [/* upcomingTenants */]
     );
-    var section = root20();
+    var section = root21();
     var node = sibling(child(section), 2);
     {
       var consequent = ($anchor2) => {
-        var div = root_117();
+        var div = root_118();
         each(div, 5, () => upcomingTenants || [], index, ($anchor3, ub) => {
-          var div_1 = root_213();
+          var div_1 = root_214();
           var div_2 = child(div_1);
           var h3 = sibling(child(div_2), 2);
           var text2 = child(h3, true);
@@ -16560,7 +16746,7 @@ ${component_stack}
         append($anchor2, div);
       };
       var alternate = ($anchor2) => {
-        var div_5 = root_37();
+        var div_5 = root_38();
         append($anchor2, div_5);
       };
       if_block(node, ($render) => {
@@ -16573,7 +16759,7 @@ ${component_stack}
   }
 
   // index.svelte
-  var root_214 = from_html(`<div class="home-container svelte-49zqbc"><!> <!> <!> <!> <!></div>`);
+  var root_215 = from_html(`<div class="home-container svelte-49zqbc"><!> <!> <!> <!> <!> <!></div>`);
   var root_92 = from_html(`<span>Register</span>`);
   var root_72 = from_html(`<button class="svelte-49zqbc"><!> <!></button>`);
   var root_123 = from_html(`<span>Login</span>`);
@@ -16581,14 +16767,14 @@ ${component_stack}
   var root_133 = from_html(`<div class="oauth-container svelte-49zqbc"><div class="or-separator svelte-49zqbc"><span class="svelte-49zqbc"></span> <p class="svelte-49zqbc">or</p> <span class="svelte-49zqbc"></span></div></div>`);
   var root_142 = from_html(`<p class="svelte-49zqbc">Have no account? <a class="svelte-49zqbc">Register</a></p>`);
   var root_153 = from_html(`<p class="svelte-49zqbc">Already have account? <a class="svelte-49zqbc">Login</a></p>`);
-  var root_38 = from_html(`<section class="auth-section svelte-49zqbc"><div class="main-container svelte-49zqbc"><div class="title-container svelte-49zqbc"><p class="svelte-49zqbc">KostJC</p> <h1 class="svelte-49zqbc"> </h1></div> <div class="form-container svelte-49zqbc"><div class="input-container svelte-49zqbc"><!> <!> <!></div> <div class="button-container svelte-49zqbc"><!> <!></div> <!-- Oauth Buttons --> <!> <div class="foot-auth svelte-49zqbc"><!> <!></div></div></div></section>`);
-  var $css20 = {
+  var root_39 = from_html(`<section class="auth-section svelte-49zqbc"><div class="main-container svelte-49zqbc"><div class="title-container svelte-49zqbc"><p class="svelte-49zqbc">KostJC</p> <h1 class="svelte-49zqbc"> </h1></div> <div class="form-container svelte-49zqbc"><div class="input-container svelte-49zqbc"><!> <!> <!></div> <div class="button-container svelte-49zqbc"><!> <!></div> <!-- Oauth Buttons --> <!> <div class="foot-auth svelte-49zqbc"><!> <!></div></div></div></section>`);
+  var $css21 = {
     hash: "svelte-49zqbc",
     code: ".home-container.svelte-49zqbc {display:flex;flex-direction:column;padding:20px;gap:20px;}\n\n  @keyframes svelte-49zqbc-spin {\n    from {\n      transform : rotate(0deg);\n    }\n    to {\n      transform : rotate(360deg);\n    }\n  }.spin {\n    animation : svelte-49zqbc-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.auth-section.svelte-49zqbc {height:100%;width:100%;background-color:var(--gray-001);filter:drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));display:flex;color:var(--gray-008);}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) {width:480px;height:fit-content;padding:20px;border-radius:10px;display:flex;flex-direction:column;background-color:white;margin:50px auto;border:1px solid var(--gray-003);gap:10px;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .title-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:10px;width:100%;text-align:center;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .title-container:where(.svelte-49zqbc) p:where(.svelte-49zqbc) {font-size:16px;font-weight:600;color:var(--blue-005);margin:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .title-container:where(.svelte-49zqbc) h1:where(.svelte-49zqbc) {margin:0 0 5px 0;font-size:22px;font-weight:700;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:20px;width:100%;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .input-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:15px;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .button-container:where(.svelte-49zqbc) {height:fit-content;width:100%;display:flex;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .button-container:where(.svelte-49zqbc) button:where(.svelte-49zqbc) {margin:0;width:100%;padding:12px;font-size:15px;font-weight:600;background-color:var(--blue-006);border-radius:8px;color:white;border:none;cursor:pointer;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .button-container:where(.svelte-49zqbc) button:where(.svelte-49zqbc):hover {background-color : var(--blue-005);}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:10px;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) .or-separator:where(.svelte-49zqbc) {display:flex;flex-direction:row;align-items:center;width:100%;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) .or-separator:where(.svelte-49zqbc) span:where(.svelte-49zqbc) {flex-grow:1;height:0;border-top:1px solid var(--gray-002);padding:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) .or-separator:where(.svelte-49zqbc) p:where(.svelte-49zqbc) {width : fit-content;font-weight : 600;padding : 0 10px;margin:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:5px;text-align:center;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) p:where(.svelte-49zqbc) {font-weight:500;margin:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) a:where(.svelte-49zqbc) {color:var(--blue-006);text-decoration:none;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) a:where(.svelte-49zqbc):hover {color:var(--blue-005);text-decoration:underline;}\n\n  @media only screen and (max-width : 768px) {.auth-section.svelte-49zqbc {background-color:#FFF;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) {border:none;}\n  }"
   };
   function Index($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css20);
+    append_styles($anchor, $css21);
     let title = '#{title}';
     let user = mutable_source(
       /** @type {User} */
@@ -16723,17 +16909,19 @@ ${component_stack}
             return get2(user);
           },
           children: ($anchor3, $slotProps) => {
-            var div = root_214();
+            var div = root_215();
             var node_1 = child(div);
-            UnpaidBookingTenants(node_1, {});
+            UnpaidBookingRecap(node_1, {});
             var node_2 = sibling(node_1, 2);
-            AvailableRooms(node_2, {});
+            UnpaidBookingTenants(node_2, {});
             var node_3 = sibling(node_2, 2);
-            UpcomingTenants(node_3, {});
+            AvailableRooms(node_3, {});
             var node_4 = sibling(node_3, 2);
-            DoubleBookingReports(node_4, {});
+            UpcomingTenants(node_4, {});
             var node_5 = sibling(node_4, 2);
-            BirthDayAgenda(node_5, {});
+            DoubleBookingReports(node_5, {});
+            var node_6 = sibling(node_5, 2);
+            BirthDayAgenda(node_6, {});
             reset(div);
             append($anchor3, div);
           },
@@ -16741,7 +16929,7 @@ ${component_stack}
         });
       };
       var alternate = ($anchor2) => {
-        var section = root_38();
+        var section = root_39();
         var div_1 = child(section);
         var div_2 = child(div_1);
         var h1 = sibling(child(div_2), 2);
@@ -16750,7 +16938,7 @@ ${component_stack}
         reset(div_2);
         var div_3 = sibling(div_2, 2);
         var div_4 = child(div_3);
-        var node_6 = child(div_4);
+        var node_7 = child(div_4);
         {
           var consequent_1 = ($anchor3) => {
             InputBox($anchor3, {
@@ -16767,11 +16955,11 @@ ${component_stack}
               $legacy: true
             });
           };
-          if_block(node_6, ($render) => {
+          if_block(node_7, ($render) => {
             if (get2(Mode) === ModeLogin || get2(Mode) === ModeRegister) $render(consequent_1);
           });
         }
-        var node_7 = sibling(node_6, 2);
+        var node_8 = sibling(node_7, 2);
         {
           var consequent_2 = ($anchor3) => {
             InputBox($anchor3, {
@@ -16797,11 +16985,11 @@ ${component_stack}
               $legacy: true
             });
           };
-          if_block(node_7, ($render) => {
+          if_block(node_8, ($render) => {
             if (get2(Mode) === ModeLogin || get2(Mode) === ModeRegister) $render(consequent_2);
           });
         }
-        var node_8 = sibling(node_7, 2);
+        var node_9 = sibling(node_8, 2);
         {
           var consequent_3 = ($anchor3) => {
             InputBox($anchor3, {
@@ -16818,17 +17006,17 @@ ${component_stack}
               $legacy: true
             });
           };
-          if_block(node_8, ($render) => {
+          if_block(node_9, ($render) => {
             if (get2(Mode) === ModeRegister) $render(consequent_3);
           });
         }
         reset(div_4);
         var div_5 = sibling(div_4, 2);
-        var node_9 = child(div_5);
+        var node_10 = child(div_5);
         {
           var consequent_6 = ($anchor3) => {
             var button = root_72();
-            var node_10 = child(button);
+            var node_11 = child(button);
             {
               var consequent_4 = ($anchor4) => {
                 Icon($anchor4, {
@@ -16840,17 +17028,17 @@ ${component_stack}
                   }
                 });
               };
-              if_block(node_10, ($render) => {
+              if_block(node_11, ($render) => {
                 if (get2(isSubmitting) === true) $render(consequent_4);
               });
             }
-            var node_11 = sibling(node_10, 2);
+            var node_12 = sibling(node_11, 2);
             {
               var consequent_5 = ($anchor4) => {
                 var span = root_92();
                 append($anchor4, span);
               };
-              if_block(node_11, ($render) => {
+              if_block(node_12, ($render) => {
                 if (get2(isSubmitting) === false) $render(consequent_5);
               });
             }
@@ -16858,15 +17046,15 @@ ${component_stack}
             event("click", button, guestRegister);
             append($anchor3, button);
           };
-          if_block(node_9, ($render) => {
+          if_block(node_10, ($render) => {
             if (get2(Mode) === ModeRegister) $render(consequent_6);
           });
         }
-        var node_12 = sibling(node_9, 2);
+        var node_13 = sibling(node_10, 2);
         {
           var consequent_9 = ($anchor3) => {
             var button_1 = root_103();
-            var node_13 = child(button_1);
+            var node_14 = child(button_1);
             {
               var consequent_7 = ($anchor4) => {
                 Icon($anchor4, {
@@ -16878,17 +17066,17 @@ ${component_stack}
                   }
                 });
               };
-              if_block(node_13, ($render) => {
+              if_block(node_14, ($render) => {
                 if (get2(isSubmitting) === true) $render(consequent_7);
               });
             }
-            var node_14 = sibling(node_13, 2);
+            var node_15 = sibling(node_14, 2);
             {
               var consequent_8 = ($anchor4) => {
                 var span_1 = root_123();
                 append($anchor4, span_1);
               };
-              if_block(node_14, ($render) => {
+              if_block(node_15, ($render) => {
                 if (get2(isSubmitting) === false) $render(consequent_8);
               });
             }
@@ -16896,24 +17084,24 @@ ${component_stack}
             event("click", button_1, guestLogin);
             append($anchor3, button_1);
           };
-          if_block(node_12, ($render) => {
+          if_block(node_13, ($render) => {
             if (get2(Mode) === ModeLogin) $render(consequent_9);
           });
         }
         reset(div_5);
-        var node_15 = sibling(div_5, 2);
-        var node_16 = sibling(node_15, 2);
+        var node_16 = sibling(div_5, 2);
+        var node_17 = sibling(node_16, 2);
         {
           var consequent_10 = ($anchor3) => {
             var div_6 = root_133();
             append($anchor3, div_6);
           };
-          if_block(node_16, ($render) => {
+          if_block(node_17, ($render) => {
             if (get2(Mode) === ModeRegister || get2(Mode) === ModeLogin) $render(consequent_10);
           });
         }
-        var div_7 = sibling(node_16, 2);
-        var node_17 = child(div_7);
+        var div_7 = sibling(node_17, 2);
+        var node_18 = child(div_7);
         {
           var consequent_11 = ($anchor3) => {
             var p = root_142();
@@ -16923,11 +17111,11 @@ ${component_stack}
             event("click", a, () => set(Mode, ModeRegister));
             append($anchor3, p);
           };
-          if_block(node_17, ($render) => {
+          if_block(node_18, ($render) => {
             if (get2(Mode) !== ModeRegister) $render(consequent_11);
           });
         }
-        var node_18 = sibling(node_17, 2);
+        var node_19 = sibling(node_18, 2);
         {
           var consequent_12 = ($anchor3) => {
             var p_1 = root_153();
@@ -16937,7 +17125,7 @@ ${component_stack}
             event("click", a_1, () => set(Mode, ModeLogin));
             append($anchor3, p_1);
           };
-          if_block(node_18, ($render) => {
+          if_block(node_19, ($render) => {
             if (get2(Mode) !== ModeLogin) $render(consequent_12);
           });
         }
