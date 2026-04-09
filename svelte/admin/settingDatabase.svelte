@@ -20,6 +20,7 @@
   let isBackingUp = false;
 
   const roomsJsDownloadUrl = '/admin/settings/download/rooms.js';
+  $: latestBackupCode = backupSummaries?.[0]?.code || '20250508002713';
 
   async function backupDatabase() {
     if (isBackingUp) return;
@@ -50,19 +51,20 @@
 
     <section class="panel">
       <div class="panel-copy">
-        <h2>Database Downloads</h2>
-        <p>Download the current frontend [rooms.js] source for review or manual updates.</p>
+        <p>Download the current `rooms.js` source used by `benalu.dev` for review or manual updates.</p>
+        <p><strong>CLI:</strong> <code>cd /home/kyz/go/src/kostjc && go run main.go gen-rooms.js ../benalu.dev/src/</code></p>
       </div>
 
       <a class="download-button" href={roomsJsDownloadUrl}>
-        Download rooms.js
+        Download rooms.js for benalu.dev
       </a>
     </section>
 
     <section class="panel">
       <div class="panel-copy">
-        <h2>Database Backup</h2>
         <p>Create a fresh backup in the server backup directory using the current admin connection.</p>
+        <p><strong>CLI backup:</strong> <code>cd /home/kyz/go/src/kostjc && go run main.go backup</code></p>
+        <p><strong>CLI download:</strong> <code>make download-backup</code></p>
       </div>
 
       <button class="download-button" on:click={backupDatabase} disabled={isBackingUp}>
@@ -78,6 +80,7 @@
       <div class="panel-copy">
         <h2>Existing Backups</h2>
         <p>Rendered directly from the local `backup` directory when the page is loaded.</p>
+        <p><strong>CLI restore:</strong> <code>cd /home/kyz/go/src/kostjc && go run main.go restore {latestBackupCode}</code></p>
       </div>
 
       <div class="table-wrap">
@@ -109,6 +112,7 @@
         </table>
       </div>
     </section>
+
   </div>
 </LayoutMain>
 
@@ -140,11 +144,13 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    color: #111111 !important;
   }
 
   .panel-copy h2,
   .panel-copy p {
     margin: 0;
+    color: #111111 !important;
   }
 
   .download-button {
@@ -203,6 +209,13 @@
   .empty-state {
     color: var(--gray-007);
     text-align: center;
+  }
+
+  .panel-copy code {
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: var(--gray-002);
+    color: #111111;
   }
 
   @media only screen and (max-width: 768px) {

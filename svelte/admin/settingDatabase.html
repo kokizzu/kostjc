@@ -382,11 +382,13 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    color: #111111 !important;
   }
 
   .panel-copy.svelte-a6ulsj h2:where(.svelte-a6ulsj),
   .panel-copy.svelte-a6ulsj p:where(.svelte-a6ulsj) {
     margin: 0;
+    color: #111111 !important;
   }
 
   .download-button.svelte-a6ulsj {
@@ -445,6 +447,13 @@
   .empty-state.svelte-a6ulsj {
     color: var(--gray-007);
     text-align: center;
+  }
+
+  .panel-copy.svelte-a6ulsj code:where(.svelte-a6ulsj) {
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: var(--gray-002);
+    color: #111111;
   }
 
   @media only screen and (max-width: 768px) {
@@ -10659,14 +10668,15 @@ ${component_stack}
   var import_jsApi2 = __toESM(require_jsApi_GEN());
   var root_5 = from_html(`<tr class="svelte-a6ulsj"><td class="svelte-a6ulsj"> </td><td class="svelte-a6ulsj"> </td><td class="svelte-a6ulsj"> </td><td class="svelte-a6ulsj"> </td></tr>`);
   var root_6 = from_html(`<tr class="svelte-a6ulsj"><td colspan="4" class="empty-state svelte-a6ulsj">No backups found.</td></tr>`);
-  var root_12 = from_html(`<div class="setting-container svelte-a6ulsj"><!> <section class="panel svelte-a6ulsj"><div class="panel-copy svelte-a6ulsj"><h2 class="svelte-a6ulsj">Database Downloads</h2> <p class="svelte-a6ulsj">Download the current frontend [rooms.js] source for review or manual updates.</p></div> <a class="download-button svelte-a6ulsj">Download rooms.js</a></section> <section class="panel svelte-a6ulsj"><div class="panel-copy svelte-a6ulsj"><h2 class="svelte-a6ulsj">Database Backup</h2> <p class="svelte-a6ulsj">Create a fresh backup in the server backup directory using the current admin connection.</p></div> <button class="download-button svelte-a6ulsj"><!></button></section> <section class="panel panel-column svelte-a6ulsj"><div class="panel-copy svelte-a6ulsj"><h2 class="svelte-a6ulsj">Existing Backups</h2> <p class="svelte-a6ulsj">Rendered directly from the local \`backup\` directory when the page is loaded.</p></div> <div class="table-wrap svelte-a6ulsj"><table class="backup-table svelte-a6ulsj"><thead><tr><th class="svelte-a6ulsj">Code</th><th class="svelte-a6ulsj">Date</th><th class="svelte-a6ulsj">Tables</th><th class="svelte-a6ulsj">Size</th></tr></thead><tbody class="svelte-a6ulsj"><!></tbody></table></div></section></div>`);
+  var root_12 = from_html(`<div class="setting-container svelte-a6ulsj"><!> <section class="panel svelte-a6ulsj"><div class="panel-copy svelte-a6ulsj"><p class="svelte-a6ulsj">Download the current \`rooms.js\` source used by \`benalu.dev\` for review or manual updates.</p> <p class="svelte-a6ulsj"><strong>CLI:</strong> <code class="svelte-a6ulsj">cd /home/kyz/go/src/kostjc && go run main.go gen-rooms.js ../benalu.dev/src/</code></p></div> <a class="download-button svelte-a6ulsj">Download rooms.js for benalu.dev</a></section> <section class="panel svelte-a6ulsj"><div class="panel-copy svelte-a6ulsj"><p class="svelte-a6ulsj">Create a fresh backup in the server backup directory using the current admin connection.</p> <p class="svelte-a6ulsj"><strong>CLI backup:</strong> <code class="svelte-a6ulsj">cd /home/kyz/go/src/kostjc && go run main.go backup</code></p> <p class="svelte-a6ulsj"><strong>CLI download:</strong> <code class="svelte-a6ulsj">make download-backup</code></p></div> <button class="download-button svelte-a6ulsj"><!></button></section> <section class="panel panel-column svelte-a6ulsj"><div class="panel-copy svelte-a6ulsj"><h2 class="svelte-a6ulsj">Existing Backups</h2> <p class="svelte-a6ulsj">Rendered directly from the local \`backup\` directory when the page is loaded.</p> <p class="svelte-a6ulsj"><strong>CLI restore:</strong> <code class="svelte-a6ulsj"> </code></p></div> <div class="table-wrap svelte-a6ulsj"><table class="backup-table svelte-a6ulsj"><thead><tr><th class="svelte-a6ulsj">Code</th><th class="svelte-a6ulsj">Date</th><th class="svelte-a6ulsj">Tables</th><th class="svelte-a6ulsj">Size</th></tr></thead><tbody class="svelte-a6ulsj"><!></tbody></table></div></section></div>`);
   var $css6 = {
     hash: "svelte-a6ulsj",
-    code: ".setting-container.svelte-a6ulsj {display:flex;flex-direction:column;gap:20px;padding:20px;}.panel.svelte-a6ulsj {display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px;border:1px solid var(--gray-003);border-radius:12px;background:var(--gray-001);}.panel-column.svelte-a6ulsj {flex-direction:column;align-items:stretch;}.panel-copy.svelte-a6ulsj {display:flex;flex-direction:column;gap:8px;}.panel-copy.svelte-a6ulsj h2:where(.svelte-a6ulsj),\n  .panel-copy.svelte-a6ulsj p:where(.svelte-a6ulsj) {margin:0;}.download-button.svelte-a6ulsj {display:inline-flex;align-items:center;justify-content:center;min-width:180px;padding:12px 16px;border:0;border-radius:10px;text-decoration:none;color:white;background:var(--blue-005);font-weight:600;cursor:pointer;}.download-button.svelte-a6ulsj:hover {background:var(--blue-006);}.download-button.svelte-a6ulsj:disabled {background:var(--gray-005);cursor:wait;}.table-wrap.svelte-a6ulsj {width:100%;overflow-x:auto;}.backup-table.svelte-a6ulsj {width:100%;border-collapse:collapse;background:white;border-radius:10px;overflow:hidden;}.backup-table.svelte-a6ulsj th:where(.svelte-a6ulsj),\n  .backup-table.svelte-a6ulsj td:where(.svelte-a6ulsj) {padding:12px 14px;text-align:left;border-bottom:1px solid var(--gray-003);vertical-align:top;}.backup-table.svelte-a6ulsj th:where(.svelte-a6ulsj) {background:var(--gray-002);}.backup-table.svelte-a6ulsj tbody:where(.svelte-a6ulsj) tr:where(.svelte-a6ulsj):last-child td:where(.svelte-a6ulsj) {border-bottom:0;}.empty-state.svelte-a6ulsj {color:var(--gray-007);text-align:center;}\n\n  @media only screen and (max-width: 768px) {.panel.svelte-a6ulsj {flex-direction:column;align-items:flex-start;}.download-button.svelte-a6ulsj {width:100%;}\n  }"
+    code: ".setting-container.svelte-a6ulsj {display:flex;flex-direction:column;gap:20px;padding:20px;}.panel.svelte-a6ulsj {display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px;border:1px solid var(--gray-003);border-radius:12px;background:var(--gray-001);}.panel-column.svelte-a6ulsj {flex-direction:column;align-items:stretch;}.panel-copy.svelte-a6ulsj {display:flex;flex-direction:column;gap:8px;color:#111111 !important;}.panel-copy.svelte-a6ulsj h2:where(.svelte-a6ulsj),\n  .panel-copy.svelte-a6ulsj p:where(.svelte-a6ulsj) {margin:0;color:#111111 !important;}.download-button.svelte-a6ulsj {display:inline-flex;align-items:center;justify-content:center;min-width:180px;padding:12px 16px;border:0;border-radius:10px;text-decoration:none;color:white;background:var(--blue-005);font-weight:600;cursor:pointer;}.download-button.svelte-a6ulsj:hover {background:var(--blue-006);}.download-button.svelte-a6ulsj:disabled {background:var(--gray-005);cursor:wait;}.table-wrap.svelte-a6ulsj {width:100%;overflow-x:auto;}.backup-table.svelte-a6ulsj {width:100%;border-collapse:collapse;background:white;border-radius:10px;overflow:hidden;}.backup-table.svelte-a6ulsj th:where(.svelte-a6ulsj),\n  .backup-table.svelte-a6ulsj td:where(.svelte-a6ulsj) {padding:12px 14px;text-align:left;border-bottom:1px solid var(--gray-003);vertical-align:top;}.backup-table.svelte-a6ulsj th:where(.svelte-a6ulsj) {background:var(--gray-002);}.backup-table.svelte-a6ulsj tbody:where(.svelte-a6ulsj) tr:where(.svelte-a6ulsj):last-child td:where(.svelte-a6ulsj) {border-bottom:0;}.empty-state.svelte-a6ulsj {color:var(--gray-007);text-align:center;}.panel-copy.svelte-a6ulsj code:where(.svelte-a6ulsj) {padding:2px 6px;border-radius:6px;background:var(--gray-002);color:#111111;}\n\n  @media only screen and (max-width: 768px) {.panel.svelte-a6ulsj {flex-direction:column;align-items:flex-start;}.download-button.svelte-a6ulsj {width:100%;}\n  }"
   };
   function SettingDatabase($anchor, $props) {
     push($props, false);
     append_styles($anchor, $css6);
+    const latestBackupCode = mutable_source();
     let user = (
       /** @type {User} */
       {/* user */}
@@ -10698,6 +10708,11 @@ ${component_stack}
         }
       );
     }
+    legacy_pre_effect(() => {
+    }, () => {
+      set(latestBackupCode, backupSummaries?.[0]?.code || "20250508002713");
+    });
+    legacy_pre_effect_reset();
     init();
     Main($anchor, {
       access: segments,
@@ -10730,8 +10745,15 @@ ${component_stack}
         reset(button);
         reset(section_1);
         var section_2 = sibling(section_1, 2);
-        var div_1 = sibling(child(section_2), 2);
-        var table = child(div_1);
+        var div_1 = child(section_2);
+        var p = sibling(child(div_1), 4);
+        var code = sibling(child(p), 2);
+        var text_2 = child(code);
+        reset(code);
+        reset(p);
+        reset(div_1);
+        var div_2 = sibling(div_1, 2);
+        var table = child(div_2);
         var tbody = sibling(child(table));
         var node_2 = child(tbody);
         {
@@ -10741,26 +10763,28 @@ ${component_stack}
             each(node_3, 1, () => backupSummaries, index, ($anchor4, backup) => {
               var tr = root_5();
               var td = child(tr);
-              var text_2 = child(td, true);
+              var text_3 = child(td, true);
               reset(td);
               var td_1 = sibling(td);
-              var text_3 = child(td_1, true);
+              var text_4 = child(td_1, true);
               reset(td_1);
               var td_2 = sibling(td_1);
-              var text_4 = child(td_2, true);
+              var text_5 = child(td_2, true);
               reset(td_2);
               var td_3 = sibling(td_2);
-              var text_5 = child(td_3, true);
+              var text_6 = child(td_3, true);
               reset(td_3);
               reset(tr);
               template_effect(
                 ($0) => {
-                  set_text(text_2, get2(backup).code);
-                  set_text(text_3, get2(backup).date);
-                  set_text(text_4, $0);
-                  set_text(text_5, get2(backup).size);
+                  set_text(text_3, (get2(backup), untrack(() => get2(backup).code)));
+                  set_text(text_4, (get2(backup), untrack(() => get2(backup).date)));
+                  set_text(text_5, $0);
+                  set_text(text_6, (get2(backup), untrack(() => get2(backup).size)));
                 },
-                [() => (get2(backup).tables || []).join(", ")]
+                [
+                  () => (get2(backup), untrack(() => (get2(backup).tables || []).join(", ")))
+                ]
               );
               append($anchor4, tr);
             });
@@ -10771,16 +10795,19 @@ ${component_stack}
             append($anchor3, tr_1);
           };
           if_block(node_2, ($render) => {
-            if ((backupSummaries || []).length > 0) $render(consequent_1);
+            if (untrack(() => (backupSummaries || []).length > 0)) $render(consequent_1);
             else $render(alternate_1, -1);
           });
         }
         reset(tbody);
         reset(table);
-        reset(div_1);
+        reset(div_2);
         reset(section_2);
         reset(div);
-        template_effect(() => button.disabled = get2(isBackingUp));
+        template_effect(() => {
+          button.disabled = get2(isBackingUp);
+          set_text(text_2, `cd /home/kyz/go/src/kostjc && go run main.go restore ${get2(latestBackupCode) ?? ""}`);
+        });
         event("click", button, backupDatabase);
         append($anchor2, div);
       },
