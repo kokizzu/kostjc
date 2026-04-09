@@ -1398,13 +1398,17 @@ exports.AdminSettingFixInconsistencies = async function AdminSettingFixInconsist
 
 /**
  * @typedef {Object} AdminSettingsIn
+ * @property {String} cmd
  */
 const AdminSettingsIn = {
+  cmd: '', // string
 }
 /**
  * @typedef {Object} AdminSettingsOut
+ * @property {String} message
  */
 const AdminSettingsOut = {
+  message: '', // string
 }
 /**
  * @callback AdminSettingsCallback

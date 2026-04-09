@@ -1,7 +1,11 @@
 package presentation
 
 import (
+	"fmt"
+	"os"
 	"path/filepath"
+	"sort"
+	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -15,6 +19,106 @@ import (
 	"kostjc/model/mProperty/rqProperty"
 	"kostjc/model/zCrud"
 )
+
+func formatBytes(size int64) string {
+	const unit = 1024
+	if size < unit {
+		return fmt.Sprintf("%d B", size)
+	}
+
+	div, exp := int64(unit), 0
+	for n := size / unit; n >= unit; n /= unit {
+		div *= unit
+		exp++
+	}
+
+	return fmt.Sprintf("%.1f %ciB", float64(size)/float64(div), "KMGTPE"[exp])
+}
+
+func listBackupSummaries() []M.SX {
+	entries, err := os.ReadDir(`./backup`)
+	if err != nil {
+		return []M.SX{}
+	}
+
+	type rawSummary struct {
+		code   string
+		date   string
+		tables map[string]struct{}
+		size   int64
+	}
+
+	summaries := map[string]*rawSummary{}
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+
+		name := entry.Name()
+		if !strings.HasSuffix(name, `.jsonline.lz4`) {
+			continue
+		}
+
+		parts := strings.SplitN(name, `_`, 3)
+		if len(parts) < 3 {
+			continue
+		}
+
+		tableName := parts[0]
+		dateToken := strings.SplitN(parts[1], `-`, 2)[0]
+		if len(dateToken) != len(`20060102150405`) {
+			continue
+		}
+
+		parsedDate, err := time.Parse(`20060102150405`, dateToken)
+		if err != nil {
+			continue
+		}
+
+		info, err := entry.Info()
+		if err != nil {
+			continue
+		}
+
+		group, ok := summaries[dateToken]
+		if !ok {
+			group = &rawSummary{
+				code:   dateToken,
+				date:   parsedDate.Format(`2006-01-02 15:04:05`),
+				tables: map[string]struct{}{},
+			}
+			summaries[dateToken] = group
+		}
+
+		group.tables[tableName] = struct{}{}
+		group.size += info.Size()
+	}
+
+	keys := make([]string, 0, len(summaries))
+	for key := range summaries {
+		keys = append(keys, key)
+	}
+	sort.Sort(sort.Reverse(sort.StringSlice(keys)))
+
+	out := make([]M.SX, 0, len(keys))
+	for _, key := range keys {
+		summary := summaries[key]
+		tables := make([]string, 0, len(summary.tables))
+		for tableName := range summary.tables {
+			tables = append(tables, tableName)
+		}
+		sort.Strings(tables)
+
+		out = append(out, M.SX{
+			`code`:   summary.code,
+			`date`:   summary.date,
+			`tables`: tables,
+			`size`:   formatBytes(summary.size),
+		})
+	}
+
+	return out
+}
 
 func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 
@@ -900,9 +1004,10 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		}
 
 		return views.RenderAdminSettingDatabase(ctx, M.SX{
-			`user`:     user,
-			`title`:    conf.PROJECT_NAME + ` | Setting: Database`,
-			`segments`: segments,
+			`user`:           user,
+			`title`:          conf.PROJECT_NAME + ` | Setting: Database`,
+			`segments`:       segments,
+			`backupSummaries`: listBackupSummaries(),
 		})
 	})
 
