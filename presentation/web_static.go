@@ -154,15 +154,15 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		})
 	})
 
-	fw.Get(`/`+domain.StaffRevenueReportAction, func(ctx *fiber.Ctx) error {
+	fw.Get(`/`+domain.AdminRevenueReportAction, func(ctx *fiber.Ctx) error {
 		in, user, segments := userInfoFromContext(ctx, d)
 
-		if notBelowStaff(ctx, d, in.RequestCommon) {
+		if notAdmin(ctx, d, in.RequestCommon) {
 			return ctx.Redirect(`/`, 302)
 		}
 
-		in.RequestCommon.Action = domain.StaffRevenueReportAction
-		out := d.StaffRevenueReport(&domain.StaffRevenueReportIn{
+		in.RequestCommon.Action = domain.AdminRevenueReportAction
+		out := d.AdminRevenueReport(&domain.AdminRevenueReportIn{
 			RequestCommon: in.RequestCommon,
 			YearMonth:     time.Now().Format(rqProperty.DateFormatYYYYMM),
 		})
@@ -170,7 +170,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		bk := rqProperty.NewBookings(d.PropOltp)
 		bookings := bk.FindBookingChoices()
 
-		return views.RenderStaffRevenueReport(ctx, M.SX{
+		return views.RenderAdminRevenueReport(ctx, M.SX{
 			`title`:               conf.PROJECT_NAME + ` | Revenue Report`,
 			`user`:                user,
 			`segments`:            segments,

@@ -14,7 +14,7 @@
   import { notifier } from './_components/xNotifier';
   import LayoutMain from './_layouts/main.svelte';
   import ChartRevenueMonthly from './_partials/ChartRevenueMonthly.svelte';
-  import { StaffRevenueReport } from './jsApi.GEN';
+  import { AdminRevenueReport } from './jsApi.GEN';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -29,8 +29,8 @@
 
   async function getRevenueReports() {
     isLoading = true;
-    await StaffRevenueReport(// @ts-ignore
-      { yearMonth }, /** @type {import('./jsApi.GEN').StaffRevenueReportCallback} */
+    await AdminRevenueReport(// @ts-ignore
+      { yearMonth }, /** @type {import('./jsApi.GEN').AdminRevenueReportCallback} */
       /** @returns {Promise<void>} */
       function(/** @type any */ o) {
         if (o.error) {

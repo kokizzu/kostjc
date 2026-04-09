@@ -7,18 +7,18 @@ import (
 	"github.com/kokizzu/gotro/M"
 )
 
-//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file StaffRevenueReport.go
-//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type StaffRevenueReport.go
-//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type StaffRevenueReport.go
-//go:generate replacer -afterprefix "By\" form" "By,string\" form" type StaffRevenueReport.go
-//go:generate farify doublequote --file StaffRevenueReport.go
+//go:generate gomodifytags -all -add-tags json,form,query,long,msg -transform camelcase --skip-unexported -w -file AdminRevenueReport.go
+//go:generate replacer -afterprefix "Id\" form" "Id,string\" form" type AdminRevenueReport.go
+//go:generate replacer -afterprefix "json:\"id\"" "json:\"id,string\"" type AdminRevenueReport.go
+//go:generate replacer -afterprefix "By\" form" "By,string\" form" type AdminRevenueReport.go
+//go:generate farify doublequote --file AdminRevenueReport.go
 
 type (
-	StaffRevenueReportIn struct {
+	AdminRevenueReportIn struct {
 		RequestCommon
 		YearMonth string `json:"yearMonth" form:"yearMonth" query:"yearMonth" long:"yearMonth" msg:"yearMonth"`
 	}
-	StaffRevenueReportOut struct {
+	AdminRevenueReportOut struct {
 		ResponseCommon
 		User *rqAuth.Users `json:"user" form:"user" query:"user" long:"user" msg:"user"`
 
@@ -29,14 +29,14 @@ type (
 )
 
 const (
-	StaffRevenueReportAction = `staff/revenueReport`
+	AdminRevenueReportAction = `admin/revenueReport`
 
-	ErrStaffRevenueReportNotFound = `user not found`
+	ErrAdminRevenueReportNotFound = `user not found`
 )
 
-func (d *Domain) StaffRevenueReport(in *StaffRevenueReportIn) (out StaffRevenueReportOut) {
+func (d *Domain) AdminRevenueReport(in *AdminRevenueReportIn) (out AdminRevenueReportOut) {
 	defer d.InsertActionLog(&in.RequestCommon, &out.ResponseCommon)
-	sess := d.MustBelowStaff(in.RequestCommon, &out.ResponseCommon)
+	sess := d.MustAdmin(in.RequestCommon, &out.ResponseCommon)
 	if sess == nil {
 		return
 	}

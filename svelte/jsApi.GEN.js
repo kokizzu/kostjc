@@ -2727,14 +2727,14 @@ exports.StaffPricePerDayReport = async function StaffPricePerDayReport( i, cb ) 
 }
 
 /**
- * @typedef {Object} StaffRevenueReportIn
+ * @typedef {Object} AdminRevenueReportIn
  * @property {String} yearMonth
  */
-const StaffRevenueReportIn = {
+const AdminRevenueReportIn = {
   yearMonth: '', // string
 }
 /**
- * @typedef {Object} StaffRevenueReportOut
+ * @typedef {Object} AdminRevenueReportOut
  * @property {number} user.id
  * @property {String} user.email
  * @property {String} user.password
@@ -2755,7 +2755,7 @@ const StaffRevenueReportIn = {
  * @property {Object} revenueReports
  * @property {Object} chartRevenueReports
  */
-const StaffRevenueReportOut = {
+const AdminRevenueReportOut = {
   user: { // rqAuth.Users
     id: 0, // uint64
     email: '', // string
@@ -2782,17 +2782,17 @@ const StaffRevenueReportOut = {
   }, // []rqProperty.ChartRevenueReport
 }
 /**
- * @callback StaffRevenueReportCallback
- * @param {StaffRevenueReportOut} o
+ * @callback AdminRevenueReportCallback
+ * @param {AdminRevenueReportOut} o
  * @returns {Promise}
  */
 /**
- * @param  {StaffRevenueReportIn} i
- * @param {StaffRevenueReportCallback} cb
+ * @param  {AdminRevenueReportIn} i
+ * @param {AdminRevenueReportCallback} cb
  * @returns {Promise}
  */
-exports.StaffRevenueReport = async function StaffRevenueReport( i, cb ) {
-  return await axios.post( '/staff/revenueReport', i ).
+exports.AdminRevenueReport = async function AdminRevenueReport( i, cb ) {
+  return await axios.post( '/admin/revenueReport', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }

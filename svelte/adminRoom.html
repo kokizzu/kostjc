@@ -3043,8 +3043,8 @@
       exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
         return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.StaffRevenueReport = async function StaffRevenueReport(i, cb) {
-        return await axios.post("/staff/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      exports.AdminRevenueReport = async function AdminRevenueReport(i, cb) {
+        return await axios.post("/admin/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.StaffTenants = async function StaffTenants(i, cb) {
         return await axios.post("/staff/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -12178,9 +12178,9 @@ ${component_stack}
   var isOpenSideMenu = writable(false);
 
   // _partials/SideMenu.svelte
-  var root_1 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-admin-location" href="/admin/location"><!> <span>Locations</span></a> <a id="link-admin-facility" href="/admin/facility"><!> <span>Facilities</span></a> <a id="link-admin-building" href="/admin/building"><!> <span>Buildings</span></a> <a id="link-admin-room" href="/admin/room"><!> <span>Rooms</span></a> <a id="link-admin-payment" href="/admin/payment"><!> <span>Payments</span></a> <a id="link-admin-wifiDevice" href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a id="link-admin-userManagement" href="/admin/usersManagement"><!> <span>Users</span></a> <a id="link-admin-logs" href="/admin/bookingLogs"><!> <span>Logs</span></a> <a id="link-admin-setting" href="/admin/settingFixInconsistencies"><!> <span>Settings</span></a></nav>`, 1);
-  var root_2 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/location"><!> <span>Locations</span></a> <a href="/admin/facility"><!> <span>Facilities</span></a> <a href="/admin/building"><!> <span>Buildings</span></a> <a href="/admin/room"><!> <span>Rooms</span></a> <a href="/admin/payment"><!> <span>Payments</span></a> <a href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a href="/admin/usersManagement"><!> <span>Users</span></a> <a href="/admin/bookingLogs"><!> <span>Logs</span></a></nav>`, 1);
-  var root2 = from_html(`<aside class="side-menu-desktop svelte-p7ambs"><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside> <button aria-label="backdrop toggle menu"></button> <aside><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking-mobile" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants-mobile" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside>`, 1);
+  var root_1 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/revenueReport"><!> <span>Revenue Report</span></a> <a id="link-admin-location" href="/admin/location"><!> <span>Locations</span></a> <a id="link-admin-facility" href="/admin/facility"><!> <span>Facilities</span></a> <a id="link-admin-building" href="/admin/building"><!> <span>Buildings</span></a> <a id="link-admin-room" href="/admin/room"><!> <span>Rooms</span></a> <a id="link-admin-payment" href="/admin/payment"><!> <span>Payments</span></a> <a id="link-admin-wifiDevice" href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a id="link-admin-userManagement" href="/admin/usersManagement"><!> <span>Users</span></a> <a id="link-admin-logs" href="/admin/bookingLogs"><!> <span>Logs</span></a> <a id="link-admin-setting" href="/admin/settingFixInconsistencies"><!> <span>Settings</span></a></nav>`, 1);
+  var root_2 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/revenueReport"><!> <span>Revenue Report</span></a> <a href="/admin/location"><!> <span>Locations</span></a> <a href="/admin/facility"><!> <span>Facilities</span></a> <a href="/admin/building"><!> <span>Buildings</span></a> <a href="/admin/room"><!> <span>Rooms</span></a> <a href="/admin/payment"><!> <span>Payments</span></a> <a href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a href="/admin/usersManagement"><!> <span>Users</span></a> <a href="/admin/bookingLogs"><!> <span>Logs</span></a></nav>`, 1);
+  var root2 = from_html(`<aside class="side-menu-desktop svelte-p7ambs"><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a id="link-staff-booking" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><a href="/user"><!> <span>Profile</span></a> <button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside> <button aria-label="backdrop toggle menu"></button> <aside><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a id="link-staff-booking-mobile" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants-mobile" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><a href="/user"><!> <span>Profile</span></a> <button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside>`, 1);
   var $css = {
     hash: "svelte-p7ambs",
     code: "aside.side-menu-desktop.svelte-p7ambs {position:fixed;top:var(--navbar-height);left:0;bottom:0;width:var(--sidemenu-width);border-right:1px solid var(--gray-002);background-color:#FFF;font-size:var(--font-md);overflow-y:auto;scrollbar-color:var(--gray-003) transparent;scrollbar-width:calc(100% - 20px);padding:10px 0 20px 0;}aside.svelte-p7ambs .separator:where(.svelte-p7ambs) {width:100%;margin:auto;height:1px;background-color:var(--gray-002);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) {display:flex;flex-direction:column;gap:10px;height:fit-content;width:100%;margin:0;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu-title:where(.svelte-p7ambs) {margin:0;padding:10px 25px 10px 70px;border-bottom:1px solid var(--gray-002);font-weight:600;text-transform:uppercase;font-size:13px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) {display:flex;flex-direction:column;gap:5px;height:fit-content;flex-wrap:nowrap;width:100%;margin:0;padding:0 10px 0 40px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a:where(.svelte-p7ambs),\n  aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button:where(.svelte-p7ambs) {text-decoration:none;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:10px 15px;border-radius:8px;cursor:pointer;color:var(--gray-008);border:none;background-color:transparent;font-size:var(--font-lg);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a:where(.svelte-p7ambs):hover,\n  aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button:where(.svelte-p7ambs):hover {background-color:var(--gray-001);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a.active:where(.svelte-p7ambs) {background-color:var(--blue-transparent);color:var(--blue-007);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button.red:where(.svelte-p7ambs):hover {background-color:var(--red-transparent);color:var(--red-007);}.backdrop.svelte-p7ambs {position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0, 0, 0, 0.5);z-index:999;display:none;height:100dvh;}.backdrop.open.svelte-p7ambs {display:block;}aside.side-menu-mobile.svelte-p7ambs {left:-100%;width:70%;position:fixed;height:100dvh;top:0;bottom:0;z-index:1000;background-color:#FFF;border-top-right-radius:10px;border-bottom-right-radius:10px;overflow-y:auto;}aside.side-menu-mobile.open.svelte-p7ambs {transition:left 0.3s ease-in-out;left:0;}\n\n  @media only screen and (max-width : 768px) {aside.side-menu-desktop.svelte-p7ambs {display:none;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) {padding:20px 0;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) {padding:0 10px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu-title:where(.svelte-p7ambs) {padding:10px 25px;}\n  }"
@@ -12306,7 +12306,9 @@ ${component_stack}
     });
     next(2);
     reset(a);
-    var a_1 = sibling(a, 2);
+    reset(nav);
+    var nav_1 = sibling(nav, 4);
+    var a_1 = child(nav_1);
     let classes_1;
     var node_1 = child(a_1);
     Icon(node_1, {
@@ -12366,7 +12368,7 @@ ${component_stack}
     var node_6 = child(a_6);
     Icon(node_6, {
       get src() {
-        return RiDocumentFileChartLine;
+        return RiBusinessCalendarScheduleLine;
       },
       size: "20"
     });
@@ -12377,48 +12379,46 @@ ${component_stack}
     var node_7 = child(a_7);
     Icon(node_7, {
       get src() {
-        return RiUserFacesUser3Line;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_7);
-    reset(nav);
-    var nav_1 = sibling(nav, 4);
-    var a_8 = child(nav_1);
-    let classes_8;
-    var node_8 = child(a_8);
-    Icon(node_8, {
-      get src() {
-        return RiBusinessCalendarScheduleLine;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_8);
-    var a_9 = sibling(a_8, 2);
-    let classes_9;
-    var node_9 = child(a_9);
-    Icon(node_9, {
-      get src() {
         return RiUserFacesUserFollowLine;
       },
       size: "20"
     });
     next(2);
-    reset(a_9);
+    reset(a_7);
     reset(nav_1);
-    var node_10 = sibling(nav_1, 2);
+    var node_8 = sibling(nav_1, 2);
     {
       var consequent = ($anchor2) => {
         var fragment_1 = root_1();
         var nav_2 = sibling(first_child(fragment_1), 2);
-        var a_10 = child(nav_2);
+        var a_8 = child(nav_2);
+        let classes_8;
+        var node_9 = child(a_8);
+        Icon(node_9, {
+          get src() {
+            return RiDocumentFileChartLine;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_8);
+        var a_9 = sibling(a_8, 2);
+        let classes_9;
+        var node_10 = child(a_9);
+        Icon(node_10, {
+          get src() {
+            return RiMapMapPin2Line;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_9);
+        var a_10 = sibling(a_9, 2);
         let classes_10;
         var node_11 = child(a_10);
         Icon(node_11, {
           get src() {
-            return RiMapMapPin2Line;
+            return LuHandPlatter;
           },
           size: "20"
         });
@@ -12429,7 +12429,7 @@ ${component_stack}
         var node_12 = child(a_11);
         Icon(node_12, {
           get src() {
-            return LuHandPlatter;
+            return RiBuildingsHotelLine;
           },
           size: "20"
         });
@@ -12440,7 +12440,7 @@ ${component_stack}
         var node_13 = child(a_12);
         Icon(node_13, {
           get src() {
-            return RiBuildingsHotelLine;
+            return RiOthersDoorOpenLine;
           },
           size: "20"
         });
@@ -12451,7 +12451,7 @@ ${component_stack}
         var node_14 = child(a_13);
         Icon(node_14, {
           get src() {
-            return RiOthersDoorOpenLine;
+            return RiFinanceWallet3Line;
           },
           size: "20"
         });
@@ -12462,7 +12462,7 @@ ${component_stack}
         var node_15 = child(a_14);
         Icon(node_15, {
           get src() {
-            return RiFinanceWallet3Line;
+            return RiBuildingsHomeWifiLine;
           },
           size: "20"
         });
@@ -12473,7 +12473,7 @@ ${component_stack}
         var node_16 = child(a_15);
         Icon(node_16, {
           get src() {
-            return RiBuildingsHomeWifiLine;
+            return RiUserFacesGroupLine;
           },
           size: "20"
         });
@@ -12484,7 +12484,7 @@ ${component_stack}
         var node_17 = child(a_16);
         Icon(node_17, {
           get src() {
-            return RiUserFacesGroupLine;
+            return RiBusinessBarChartBoxLine;
           },
           size: "20"
         });
@@ -12495,35 +12495,25 @@ ${component_stack}
         var node_18 = child(a_17);
         Icon(node_18, {
           get src() {
-            return RiBusinessBarChartBoxLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_17);
-        var a_18 = sibling(a_17, 2);
-        let classes_18;
-        var node_19 = child(a_18);
-        Icon(node_19, {
-          get src() {
             return RiSystemSettingsLine;
           },
           size: "20"
         });
         next(2);
-        reset(a_18);
+        reset(a_17);
         reset(nav_2);
         template_effect(
           ($0, $1) => {
-            classes_10 = set_class(a_10, 1, "svelte-p7ambs", null, classes_10, { active: pathLv2 === "location" });
-            classes_11 = set_class(a_11, 1, "svelte-p7ambs", null, classes_11, { active: pathLv2 === "facility" });
-            classes_12 = set_class(a_12, 1, "svelte-p7ambs", null, classes_12, { active: pathLv2 === "building" });
-            classes_13 = set_class(a_13, 1, "svelte-p7ambs", null, classes_13, { active: pathLv2 === "room" });
-            classes_14 = set_class(a_14, 1, "svelte-p7ambs", null, classes_14, { active: pathLv2 === "payment" });
-            classes_15 = set_class(a_15, 1, "svelte-p7ambs", null, classes_15, { active: pathLv2 === "wifiDevice" });
-            classes_16 = set_class(a_16, 1, "svelte-p7ambs", null, classes_16, { active: pathLv2 === "usersManagement" });
-            classes_17 = set_class(a_17, 1, "svelte-p7ambs", null, classes_17, $0);
-            classes_18 = set_class(a_18, 1, "svelte-p7ambs", null, classes_18, $1);
+            classes_8 = set_class(a_8, 1, "svelte-p7ambs", null, classes_8, { active: pathAll === "/admin/revenueReport" });
+            classes_9 = set_class(a_9, 1, "svelte-p7ambs", null, classes_9, { active: pathLv2 === "location" });
+            classes_10 = set_class(a_10, 1, "svelte-p7ambs", null, classes_10, { active: pathLv2 === "facility" });
+            classes_11 = set_class(a_11, 1, "svelte-p7ambs", null, classes_11, { active: pathLv2 === "building" });
+            classes_12 = set_class(a_12, 1, "svelte-p7ambs", null, classes_12, { active: pathLv2 === "room" });
+            classes_13 = set_class(a_13, 1, "svelte-p7ambs", null, classes_13, { active: pathLv2 === "payment" });
+            classes_14 = set_class(a_14, 1, "svelte-p7ambs", null, classes_14, { active: pathLv2 === "wifiDevice" });
+            classes_15 = set_class(a_15, 1, "svelte-p7ambs", null, classes_15, { active: pathLv2 === "usersManagement" });
+            classes_16 = set_class(a_16, 1, "svelte-p7ambs", null, classes_16, $0);
+            classes_17 = set_class(a_17, 1, "svelte-p7ambs", null, classes_17, $1);
           },
           [
             () => ({ active: String(pathLv2).includes("Logs") || false }),
@@ -12532,12 +12522,23 @@ ${component_stack}
         );
         append($anchor2, fragment_1);
       };
-      if_block(node_10, ($render) => {
+      if_block(node_8, ($render) => {
         if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent);
       });
     }
-    var nav_3 = sibling(node_10, 4);
-    var button = child(nav_3);
+    var nav_3 = sibling(node_8, 4);
+    var a_18 = child(nav_3);
+    let classes_18;
+    var node_19 = child(a_18);
+    Icon(node_19, {
+      get src() {
+        return RiUserFacesUser3Line;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_18);
+    var button = sibling(a_18, 2);
     var node_20 = child(button);
     Icon(node_20, {
       get src() {
@@ -12565,7 +12566,9 @@ ${component_stack}
     });
     next(2);
     reset(a_19);
-    var a_20 = sibling(a_19, 2);
+    reset(nav_4);
+    var nav_5 = sibling(nav_4, 4);
+    var a_20 = child(nav_5);
     let classes_20;
     var node_22 = child(a_20);
     Icon(node_22, {
@@ -12625,7 +12628,7 @@ ${component_stack}
     var node_27 = child(a_25);
     Icon(node_27, {
       get src() {
-        return RiDocumentFileChartLine;
+        return RiBusinessCalendarScheduleLine;
       },
       size: "20"
     });
@@ -12636,48 +12639,46 @@ ${component_stack}
     var node_28 = child(a_26);
     Icon(node_28, {
       get src() {
-        return RiUserFacesUser3Line;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_26);
-    reset(nav_4);
-    var nav_5 = sibling(nav_4, 4);
-    var a_27 = child(nav_5);
-    let classes_27;
-    var node_29 = child(a_27);
-    Icon(node_29, {
-      get src() {
-        return RiBusinessCalendarScheduleLine;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_27);
-    var a_28 = sibling(a_27, 2);
-    let classes_28;
-    var node_30 = child(a_28);
-    Icon(node_30, {
-      get src() {
         return RiUserFacesUserFollowLine;
       },
       size: "20"
     });
     next(2);
-    reset(a_28);
+    reset(a_26);
     reset(nav_5);
-    var node_31 = sibling(nav_5, 2);
+    var node_29 = sibling(nav_5, 2);
     {
       var consequent_1 = ($anchor2) => {
         var fragment_2 = root_2();
         var nav_6 = sibling(first_child(fragment_2), 2);
-        var a_29 = child(nav_6);
+        var a_27 = child(nav_6);
+        let classes_27;
+        var node_30 = child(a_27);
+        Icon(node_30, {
+          get src() {
+            return RiDocumentFileChartLine;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_27);
+        var a_28 = sibling(a_27, 2);
+        let classes_28;
+        var node_31 = child(a_28);
+        Icon(node_31, {
+          get src() {
+            return RiMapMapPin2Line;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_28);
+        var a_29 = sibling(a_28, 2);
         let classes_29;
         var node_32 = child(a_29);
         Icon(node_32, {
           get src() {
-            return RiMapMapPin2Line;
+            return LuHandPlatter;
           },
           size: "20"
         });
@@ -12688,7 +12689,7 @@ ${component_stack}
         var node_33 = child(a_30);
         Icon(node_33, {
           get src() {
-            return LuHandPlatter;
+            return RiBuildingsHotelLine;
           },
           size: "20"
         });
@@ -12699,7 +12700,7 @@ ${component_stack}
         var node_34 = child(a_31);
         Icon(node_34, {
           get src() {
-            return RiBuildingsHotelLine;
+            return RiOthersDoorOpenLine;
           },
           size: "20"
         });
@@ -12710,7 +12711,7 @@ ${component_stack}
         var node_35 = child(a_32);
         Icon(node_35, {
           get src() {
-            return RiOthersDoorOpenLine;
+            return RiFinanceWallet3Line;
           },
           size: "20"
         });
@@ -12721,7 +12722,7 @@ ${component_stack}
         var node_36 = child(a_33);
         Icon(node_36, {
           get src() {
-            return RiFinanceWallet3Line;
+            return RiBuildingsHomeWifiLine;
           },
           size: "20"
         });
@@ -12732,7 +12733,7 @@ ${component_stack}
         var node_37 = child(a_34);
         Icon(node_37, {
           get src() {
-            return RiBuildingsHomeWifiLine;
+            return RiUserFacesGroupLine;
           },
           size: "20"
         });
@@ -12743,34 +12744,24 @@ ${component_stack}
         var node_38 = child(a_35);
         Icon(node_38, {
           get src() {
-            return RiUserFacesGroupLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_35);
-        var a_36 = sibling(a_35, 2);
-        let classes_36;
-        var node_39 = child(a_36);
-        Icon(node_39, {
-          get src() {
             return RiBusinessBarChartBoxLine;
           },
           size: "20"
         });
         next(2);
-        reset(a_36);
+        reset(a_35);
         reset(nav_6);
         template_effect(
           ($0) => {
-            classes_29 = set_class(a_29, 1, "svelte-p7ambs", null, classes_29, { active: pathLv2 === "location" });
-            classes_30 = set_class(a_30, 1, "svelte-p7ambs", null, classes_30, { active: pathLv2 === "facility" });
-            classes_31 = set_class(a_31, 1, "svelte-p7ambs", null, classes_31, { active: pathLv2 === "building" });
-            classes_32 = set_class(a_32, 1, "svelte-p7ambs", null, classes_32, { active: pathLv2 === "room" });
-            classes_33 = set_class(a_33, 1, "svelte-p7ambs", null, classes_33, { active: pathLv2 === "payment" });
-            classes_34 = set_class(a_34, 1, "svelte-p7ambs", null, classes_34, { active: pathLv2 === "wifiDevice" });
-            classes_35 = set_class(a_35, 1, "svelte-p7ambs", null, classes_35, { active: pathLv2 === "usersManagement" });
-            classes_36 = set_class(a_36, 1, "svelte-p7ambs", null, classes_36, $0);
+            classes_27 = set_class(a_27, 1, "svelte-p7ambs", null, classes_27, { active: pathAll === "/admin/revenueReport" });
+            classes_28 = set_class(a_28, 1, "svelte-p7ambs", null, classes_28, { active: pathLv2 === "location" });
+            classes_29 = set_class(a_29, 1, "svelte-p7ambs", null, classes_29, { active: pathLv2 === "facility" });
+            classes_30 = set_class(a_30, 1, "svelte-p7ambs", null, classes_30, { active: pathLv2 === "building" });
+            classes_31 = set_class(a_31, 1, "svelte-p7ambs", null, classes_31, { active: pathLv2 === "room" });
+            classes_32 = set_class(a_32, 1, "svelte-p7ambs", null, classes_32, { active: pathLv2 === "payment" });
+            classes_33 = set_class(a_33, 1, "svelte-p7ambs", null, classes_33, { active: pathLv2 === "wifiDevice" });
+            classes_34 = set_class(a_34, 1, "svelte-p7ambs", null, classes_34, { active: pathLv2 === "usersManagement" });
+            classes_35 = set_class(a_35, 1, "svelte-p7ambs", null, classes_35, $0);
           },
           [
             () => ({ active: String(pathLv2).includes("Logs") || false })
@@ -12778,12 +12769,23 @@ ${component_stack}
         );
         append($anchor2, fragment_2);
       };
-      if_block(node_31, ($render) => {
+      if_block(node_29, ($render) => {
         if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent_1);
       });
     }
-    var nav_7 = sibling(node_31, 4);
-    var button_2 = child(nav_7);
+    var nav_7 = sibling(node_29, 4);
+    var a_36 = child(nav_7);
+    let classes_36;
+    var node_39 = child(a_36);
+    Icon(node_39, {
+      get src() {
+        return RiUserFacesUser3Line;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_36);
+    var button_2 = sibling(a_36, 2);
     var node_40 = child(button_2);
     Icon(node_40, {
       get src() {
@@ -12801,24 +12803,22 @@ ${component_stack}
       classes_1 = set_class(a_1, 1, "svelte-p7ambs", null, classes_1, { active: pathAll === "/staff/occupancyReport" });
       classes_2 = set_class(a_2, 1, "svelte-p7ambs", null, classes_2, { active: pathAll === "/staff/occupancyHeatmap" });
       classes_3 = set_class(a_3, 1, "svelte-p7ambs", null, classes_3, { active: pathAll === "/staff/missingDataReport" });
-      classes_4 = set_class(a_4, 1, "svelte-p7ambs", null, classes_4, { active: pathAll === "/staff/revenueReport" });
-      classes_5 = set_class(a_5, 1, "svelte-p7ambs", null, classes_5, { active: pathAll === "/staff/wifiDeviceReport" });
-      classes_6 = set_class(a_6, 1, "svelte-p7ambs", null, classes_6, { active: pathAll === "/staff/pricePerDayReport" });
-      classes_7 = set_class(a_7, 1, "svelte-p7ambs", null, classes_7, { active: pathAll === "/user" });
-      classes_8 = set_class(a_8, 1, "svelte-p7ambs", null, classes_8, { active: pathLv1 === "staff" && pathLv2 === "booking" });
-      classes_9 = set_class(a_9, 1, "svelte-p7ambs", null, classes_9, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
+      classes_4 = set_class(a_4, 1, "svelte-p7ambs", null, classes_4, { active: pathAll === "/staff/wifiDeviceReport" });
+      classes_5 = set_class(a_5, 1, "svelte-p7ambs", null, classes_5, { active: pathAll === "/staff/pricePerDayReport" });
+      classes_6 = set_class(a_6, 1, "svelte-p7ambs", null, classes_6, { active: pathLv1 === "staff" && pathLv2 === "booking" });
+      classes_7 = set_class(a_7, 1, "svelte-p7ambs", null, classes_7, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
+      classes_18 = set_class(a_18, 1, "svelte-p7ambs", null, classes_18, { active: pathAll === "/user" });
       set_class(button_1, 1, `backdrop ${$isOpenSideMenu() ? "open" : ""}`, "svelte-p7ambs");
       set_class(aside_1, 1, `side-menu-mobile ${$isOpenSideMenu() ? "open" : ""}`, "svelte-p7ambs");
       classes_19 = set_class(a_19, 1, "svelte-p7ambs", null, classes_19, { active: pathLv1 === "" });
       classes_20 = set_class(a_20, 1, "svelte-p7ambs", null, classes_20, { active: pathAll === "/staff/occupancyReport" });
       classes_21 = set_class(a_21, 1, "svelte-p7ambs", null, classes_21, { active: pathAll === "/staff/occupancyHeatmap" });
       classes_22 = set_class(a_22, 1, "svelte-p7ambs", null, classes_22, { active: pathAll === "/staff/missingDataReport" });
-      classes_23 = set_class(a_23, 1, "svelte-p7ambs", null, classes_23, { active: pathAll === "/staff/revenueReport" });
-      classes_24 = set_class(a_24, 1, "svelte-p7ambs", null, classes_24, { active: pathAll === "/staff/wifiDeviceReport" });
-      classes_25 = set_class(a_25, 1, "svelte-p7ambs", null, classes_25, { active: pathAll === "/staff/pricePerDayReport" });
-      classes_26 = set_class(a_26, 1, "svelte-p7ambs", null, classes_26, { active: pathAll === "/user" });
-      classes_27 = set_class(a_27, 1, "svelte-p7ambs", null, classes_27, { active: pathLv1 === "staff" && pathLv2 === "booking" });
-      classes_28 = set_class(a_28, 1, "svelte-p7ambs", null, classes_28, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
+      classes_23 = set_class(a_23, 1, "svelte-p7ambs", null, classes_23, { active: pathAll === "/staff/wifiDeviceReport" });
+      classes_24 = set_class(a_24, 1, "svelte-p7ambs", null, classes_24, { active: pathAll === "/staff/pricePerDayReport" });
+      classes_25 = set_class(a_25, 1, "svelte-p7ambs", null, classes_25, { active: pathLv1 === "staff" && pathLv2 === "booking" });
+      classes_26 = set_class(a_26, 1, "svelte-p7ambs", null, classes_26, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
+      classes_36 = set_class(a_36, 1, "svelte-p7ambs", null, classes_36, { active: pathAll === "/user" });
     });
     event("click", button, logout);
     event("click", button_1, () => store_set(isOpenSideMenu, !$isOpenSideMenu()));
@@ -16444,7 +16444,7 @@ ${component_stack}
   var root13 = from_html(`<!> <!> <div class="table-root svelte-4f6m80"><div class="actions-container svelte-4f6m80"><div class="left svelte-4f6m80"><div class="actions-button svelte-4f6m80"><button class="btn" title="filter table"><!></button> <!-- Action buttons --> <!></div> <!></div> <div class="right svelte-4f6m80"><!></div></div> <div class="table-container svelte-4f6m80"><table class="svelte-4f6m80"><thead class="svelte-4f6m80"><tr class="svelte-4f6m80"><th class="no sticky svelte-4f6m80">No</th><th class="a-row svelte-4f6m80">Actions</th><!></tr></thead><tbody class="svelte-4f6m80"><!></tbody></table></div> <div class="pagination-container svelte-4f6m80"><div class="filter svelte-4f6m80"><div class="showing"><p class="svelte-4f6m80">Showing <span class="text-blue svelte-4f6m80"> </span> /</p></div> <div class="row-to-show svelte-4f6m80"><!> <button class="btn svelte-4f6m80"><span> </span> <!></button></div> <p class="svelte-4f6m80">record(s)</p></div> <div><p class="svelte-4f6m80">Total:<span class="text-blue svelte-4f6m80"> </span></p></div> <div class="pagination svelte-4f6m80"><button class="btn to svelte-4f6m80" title="Go to first page"><!></button> <button class="btn to svelte-4f6m80" title="Go to previous page"><!></button> <!> <button class="btn to svelte-4f6m80" title="Go to next page"><!></button> <button class="btn to svelte-4f6m80" title="Go to last page"><!></button></div></div></div>`, 1);
   var $css13 = {
     hash: "svelte-4f6m80",
-    code: '.popup-container.svelte-4f6m80 {position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2000;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);display:flex;justify-content:center;padding:50px;overflow:auto;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) {border-radius:8px;background-color:#fff;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) h2:where(.svelte-4f6m80) {margin:0;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) button:where(.svelte-4f6m80) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) button:where(.svelte-4f6m80):hover {background-color:#ef444420;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .forms:where(.svelte-4f6m80) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:flex-end;gap:10px;align-items:center;padding:10px 20px;border-top:1px solid var(--gray-004);}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) button:where(.svelte-4f6m80) {padding:8px 13px;border-radius:9999px;border:none;color:#fff;cursor:pointer;font-weight:600;display:flex;justify-content:center;align-items:center;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) button.ok:where(.svelte-4f6m80) {background-color:var(--green-006);border:1px solid var(--green-006);display:flex;justify-content:center;align-items:center;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) button.ok:where(.svelte-4f6m80):hover {background-color:var(--green-005);}\n\n  @keyframes svelte-4f6m80-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(360deg);\n    }\n  }.action-btn:hover svg {fill:var(--blue-005);}.spin {\n    animation: svelte-4f6m80-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.dropdown {transition:all 0.2s ease-in-out;}.rotate {transition:all 0.2s ease-in-out;transform:rotate(180deg);}.rotate_right {transition:all 0.2s ease-in-out;transform:rotate(-90deg);}.sort_icon {margin-bottom:-5px;}.table-root.svelte-4f6m80 {display:flex;flex-direction:column;background-color:#fff;border-radius:10px;border:1px solid var(--gray-003);padding:0 0 20px 0;font-size:var(--font-base);}.table-root.svelte-4f6m80 .text-blue:where(.svelte-4f6m80) {color:var(--blue-005);font-weight:600;padding:5px;}.table-root.svelte-4f6m80 p:where(.svelte-4f6m80) {margin:0;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:10px 15px;background-color:#fff;border-radius:10px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .left:where(.svelte-4f6m80),\n  .table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:10px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) {display:flex;flex-direction:row;width:fit-content;height:fit-content;position:relative;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) input.search:where(.svelte-4f6m80) {padding:12px 40px 12px 15px;border-radius:8px;border:1px solid var(--gray-003);background-color:transparent;width:370px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) input.search:where(.svelte-4f6m80):focus {border-color:var(--blue-005);outline:1px solid var(--blue-005);}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) .search-btn:where(.svelte-4f6m80) {position:absolute;background-color:transparent;padding:8px;display:flex;justify-content:center;align-items:center;border:none;border-radius:8px;cursor:pointer;right:5px;top:4px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) .search-btn:where(.svelte-4f6m80):hover {background-color:var(--blue-transparent);}.table-root .actions-container .right .search-handler .search-btn:hover svg {fill:var(--blue-005);}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .actions-button:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:5px;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) {overflow-x:auto;scrollbar-color:var(--gray-003) transparent;scrollbar-width:calc(100% - 20px);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) {width:100%;background:#fff;border-top:1px solid var(--gray-003);border-bottom:1px solid var(--gray-003);box-shadow:none;text-align:left;border-collapse:separate;border-spacing:0;font-size:var(--font-base);position:relative;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) .sticky:where(.svelte-4f6m80) {position:sticky;left:0;z-index:10;background-color:var(--gray-001);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) {box-shadow:none;border-bottom:1px solid var(--gray-003);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) {padding:12px;background-color:var(--gray-001);text-transform:capitalize;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-003);min-width:fit-content;width:auto;text-wrap:nowrap;position:relative;z-index:1;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:8px;background-color:transparent;border:none;border-radius:5px;cursor:pointer;text-transform:capitalize;font-weight:600;color:var(--gray-008);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):focus {outline:none;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):hover {background-color:var(--gray-002);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):disabled {color:var(--gray-008);background-color:transparent;cursor:default;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):disabled:hover {background-color:transparent;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.textarea:where(.svelte-4f6m80) {min-width:280px !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.datetime:where(.svelte-4f6m80) {min-width:140px !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr.deleted:where(.svelte-4f6m80) {color:var(--red-005);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.no:where(.svelte-4f6m80) {width:30px;cursor:default;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.a-row:where(.svelte-4f6m80) {max-width:fit-content;min-width:fit-content;width:fit-content;cursor:default;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80):last-child {border-right:none;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) {padding:8px 12px;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) {padding:8px 12px;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-004);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80) {border-bottom:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80):last-child {border-right:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td.num-row:where(.svelte-4f6m80) {border-right:1px solid var(--gray-003);font-weight:600;text-align:center;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80) {border-bottom:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80):last-child {border-right:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80):last-child {border-right:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) {display:flex;flex-direction:row;}.checkbox-cell.svelte-4f6m80 {text-align:center;}.checkbox-cell.svelte-4f6m80 input[type="checkbox"]:where(.svelte-4f6m80) {transform:scale(1.2);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80) {border:none;padding:6px;border-radius:8px;background-color:transparent;cursor:pointer;display:flex;justify-content:center;align-items:center;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80):hover {background-color:var(--blue-transparent);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) .btn.delete:where(.svelte-4f6m80):hover {background-color:var(--red-transparent);}.table-root .table-container table tbody tr td .actions .btn:hover svg {fill:var(--blue-005);}.table-root .table-container table tbody tr td .actions .btn.delete:hover svg {fill:var(--red-005);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 15px 0 15px;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:8px;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) {position:relative;width:fit-content;height:fit-content;z-index:11;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80) {border:none;background-color:var(--blue-transparent);color:var(--blue-005);width:fit-content;padding:3px 3px 3px 6px;font-weight:600;border:1px solid var(--blue-004);border-radius:9999px;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;gap:1px;cursor:pointer;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80):hover {background-color:var(--blue-002);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .rows:where(.svelte-4f6m80) {display:flex;flex-direction:column-reverse;position:absolute;width:100%;top:-200px;border-radius:5px;border:1px solid var(--gray-004);background-color:#fff;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .rows:where(.svelte-4f6m80) button:where(.svelte-4f6m80) {border:none;background-color:transparent;padding:5px;cursor:pointer;color:var(--gray-007);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .rows:where(.svelte-4f6m80) button:where(.svelte-4f6m80):hover {background-color:var(--blue-transparent);color:var(--blue-007);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:5px;overflow:hidden;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80) {border:none;background-color:transparent;display:flex;flex-direction:row;justify-content:center;align-items:center;padding:6px 10px;border-radius:9999px;cursor:pointer;gap:5px;color:var(--gray-007);border:1px solid transparent;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80):hover {border:1px solid var(--gray-004);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.active:where(.svelte-4f6m80) {background-color:var(--blue-transparent);color:var(--blue-006);font-weight:600;border:1px solid var(--blue-004);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.to:where(.svelte-4f6m80) {background-color:var(--blue-006);color:#fff;font-weight:600;border:none;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.to:where(.svelte-4f6m80):hover {background-color:var(--blue-005);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.to:where(.svelte-4f6m80):disabled {background-color:var(--gray-002);color:var(--gray-006);font-weight:600;border:1px solid var(--gray-004);cursor:not-allowed;}\n\n  @media only screen and (max-width: 768px) {.popup-container.svelte-4f6m80 {padding:10px;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) {width:100%;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) {flex-wrap:wrap;gap:10px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .left:where(.svelte-4f6m80),\n    .table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) {flex-wrap:wrap;width:100%;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80),\n    .table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) input.search:where(.svelte-4f6m80) {width:100%;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) {overflow-x:scroll;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) {flex-wrap:wrap;gap:10px;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) {gap:2px;width:100%;justify-content:center;}\n  }'
+    code: '.popup-container.svelte-4f6m80 {position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2000;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);display:flex;justify-content:center;padding:50px;overflow:auto;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) {border-radius:8px;background-color:#fff;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) h2:where(.svelte-4f6m80) {margin:0;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) button:where(.svelte-4f6m80) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) header:where(.svelte-4f6m80) button:where(.svelte-4f6m80):hover {background-color:#ef444420;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .forms:where(.svelte-4f6m80) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:flex-end;gap:10px;align-items:center;padding:10px 20px;border-top:1px solid var(--gray-004);}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) button:where(.svelte-4f6m80) {padding:8px 13px;border-radius:9999px;border:none;color:#fff;cursor:pointer;font-weight:600;display:flex;justify-content:center;align-items:center;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) button.ok:where(.svelte-4f6m80) {background-color:var(--green-006);border:1px solid var(--green-006);display:flex;justify-content:center;align-items:center;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) .foot:where(.svelte-4f6m80) button.ok:where(.svelte-4f6m80):hover {background-color:var(--green-005);}\n\n  @keyframes svelte-4f6m80-spin {\n    from {\n      transform: rotate(0deg);\n    }\n    to {\n      transform: rotate(360deg);\n    }\n  }.action-btn:hover svg {fill:var(--blue-005);}.spin {\n    animation: svelte-4f6m80-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.dropdown {transition:all 0.2s ease-in-out;}.rotate {transition:all 0.2s ease-in-out;transform:rotate(180deg);}.rotate_right {transition:all 0.2s ease-in-out;transform:rotate(-90deg);}.sort_icon {margin-bottom:-5px;}.table-root.svelte-4f6m80 {display:flex;flex-direction:column;background-color:#fff;border-radius:10px;border:1px solid var(--gray-003);padding:0 0 20px 0;font-size:var(--font-base);}.table-root.svelte-4f6m80 .text-blue:where(.svelte-4f6m80) {color:var(--blue-005);font-weight:600;padding:5px;}.table-root.svelte-4f6m80 p:where(.svelte-4f6m80) {margin:0;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:10px 15px;background-color:#fff;border-radius:10px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .left:where(.svelte-4f6m80),\n  .table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:10px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) {display:flex;flex-direction:row;width:fit-content;height:fit-content;position:relative;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) input.search:where(.svelte-4f6m80) {padding:12px 40px 12px 15px;border-radius:8px;border:1px solid var(--gray-003);background-color:transparent;width:370px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) input.search:where(.svelte-4f6m80):focus {border-color:var(--blue-005);outline:1px solid var(--blue-005);}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) .search-btn:where(.svelte-4f6m80) {position:absolute;background-color:transparent;padding:8px;display:flex;justify-content:center;align-items:center;border:none;border-radius:8px;cursor:pointer;right:5px;top:4px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) .search-btn:where(.svelte-4f6m80):hover {background-color:var(--blue-transparent);}.table-root .actions-container .right .search-handler .search-btn:hover svg {fill:var(--blue-005);}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .actions-button:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:5px;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) {overflow-x:auto;scrollbar-color:var(--gray-003) transparent;scrollbar-width:calc(100% - 20px);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) {width:100%;background:#fff;border-top:1px solid var(--gray-003);border-bottom:1px solid var(--gray-003);box-shadow:none;text-align:left;border-collapse:separate;border-spacing:0;font-size:var(--font-base);position:relative;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) .sticky:where(.svelte-4f6m80) {position:sticky;left:0;z-index:10;background-color:var(--gray-002);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) {box-shadow:none;border-bottom:1px solid var(--gray-003);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) {padding:12px;background-color:var(--gray-002);text-transform:capitalize;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-003);min-width:fit-content;width:auto;text-wrap:nowrap;position:relative;z-index:1;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:8px;background-color:transparent;border:none;border-radius:5px;cursor:pointer;text-transform:capitalize;font-weight:600;color:var(--gray-008);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):focus {outline:none;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):hover {background-color:var(--gray-002);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):disabled {color:var(--gray-008);background-color:transparent;cursor:default;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80) .heading:where(.svelte-4f6m80):disabled:hover {background-color:transparent;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.textarea:where(.svelte-4f6m80) {min-width:280px !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.datetime:where(.svelte-4f6m80) {min-width:140px !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr.deleted:where(.svelte-4f6m80) {color:var(--red-005);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.no:where(.svelte-4f6m80) {width:30px;cursor:default;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th.a-row:where(.svelte-4f6m80) {max-width:fit-content;min-width:fit-content;width:fit-content;cursor:default;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) thead:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) th:where(.svelte-4f6m80):last-child {border-right:none;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) {padding:2px 12px;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) {padding:2px 12px;border-right:1px solid var(--gray-004);border-bottom:1px solid var(--gray-004);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):nth-child(even) td:where(.svelte-4f6m80) {background-color:var(--gray-001);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):nth-child(odd) td:where(.svelte-4f6m80) {background-color:#fff;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr.deleted:where(.svelte-4f6m80) td:where(.svelte-4f6m80) {background-color:var(--red-transparent);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td.sticky:where(.svelte-4f6m80) {background-color:inherit;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80) {border-bottom:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80):last-child {border-right:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td.num-row:where(.svelte-4f6m80) {border-right:1px solid var(--gray-003);font-weight:600;text-align:center;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80) {border-bottom:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80):last-child td:where(.svelte-4f6m80):last-child {border-right:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80):last-child {border-right:none !important;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) {display:flex;flex-direction:row;}.checkbox-cell.svelte-4f6m80 {text-align:center;}.checkbox-cell.svelte-4f6m80 input[type="checkbox"]:where(.svelte-4f6m80) {transform:scale(1.2);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80) {border:none;padding:6px;border-radius:8px;background-color:transparent;cursor:pointer;display:flex;justify-content:center;align-items:center;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80):hover {background-color:var(--blue-transparent);}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) table:where(.svelte-4f6m80) tbody:where(.svelte-4f6m80) tr:where(.svelte-4f6m80) td:where(.svelte-4f6m80) .actions:where(.svelte-4f6m80) .btn.delete:where(.svelte-4f6m80):hover {background-color:var(--red-transparent);}.table-root .table-container table tbody tr td .actions .btn:hover svg {fill:var(--blue-005);}.table-root .table-container table tbody tr td .actions .btn.delete:hover svg {fill:var(--red-005);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 15px 0 15px;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:8px;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) {position:relative;width:fit-content;height:fit-content;z-index:11;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80) {border:none;background-color:var(--blue-transparent);color:var(--blue-005);width:fit-content;padding:3px 3px 3px 6px;font-weight:600;border:1px solid var(--blue-004);border-radius:9999px;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;gap:1px;cursor:pointer;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80):hover {background-color:var(--blue-002);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .rows:where(.svelte-4f6m80) {display:flex;flex-direction:column-reverse;position:absolute;width:100%;top:-200px;border-radius:5px;border:1px solid var(--gray-004);background-color:#fff;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .rows:where(.svelte-4f6m80) button:where(.svelte-4f6m80) {border:none;background-color:transparent;padding:5px;cursor:pointer;color:var(--gray-007);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .filter:where(.svelte-4f6m80) .row-to-show:where(.svelte-4f6m80) .rows:where(.svelte-4f6m80) button:where(.svelte-4f6m80):hover {background-color:var(--blue-transparent);color:var(--blue-007);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) {display:flex;flex-direction:row;align-items:center;gap:5px;overflow:hidden;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80) {border:none;background-color:transparent;display:flex;flex-direction:row;justify-content:center;align-items:center;padding:6px 10px;border-radius:9999px;cursor:pointer;gap:5px;color:var(--gray-007);border:1px solid transparent;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn:where(.svelte-4f6m80):hover {border:1px solid var(--gray-004);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.active:where(.svelte-4f6m80) {background-color:var(--blue-transparent);color:var(--blue-006);font-weight:600;border:1px solid var(--blue-004);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.to:where(.svelte-4f6m80) {background-color:var(--blue-006);color:#fff;font-weight:600;border:none;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.to:where(.svelte-4f6m80):hover {background-color:var(--blue-005);}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) .btn.to:where(.svelte-4f6m80):disabled {background-color:var(--gray-002);color:var(--gray-006);font-weight:600;border:1px solid var(--gray-004);cursor:not-allowed;}\n\n  @media only screen and (max-width: 768px) {.popup-container.svelte-4f6m80 {padding:10px;}.popup-container.svelte-4f6m80 .popup:where(.svelte-4f6m80) {width:100%;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) {flex-wrap:wrap;gap:10px;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .left:where(.svelte-4f6m80),\n    .table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) {flex-wrap:wrap;width:100%;}.table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80),\n    .table-root.svelte-4f6m80 .actions-container:where(.svelte-4f6m80) .right:where(.svelte-4f6m80) .search-handler:where(.svelte-4f6m80) input.search:where(.svelte-4f6m80) {width:100%;}.table-root.svelte-4f6m80 .table-container:where(.svelte-4f6m80) {overflow-x:scroll;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) {flex-wrap:wrap;gap:10px;}.table-root.svelte-4f6m80 .pagination-container:where(.svelte-4f6m80) .pagination:where(.svelte-4f6m80) {gap:2px;width:100%;justify-content:center;}\n  }'
   };
   function MasterTable($anchor, $props) {
     push($props, false);

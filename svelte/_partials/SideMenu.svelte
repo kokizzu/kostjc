@@ -119,6 +119,9 @@
         <Icon src={RiBuildingsHome2Line} size="20" />
         <span>Home</span>
       </a>
+    </nav>
+    <h3 class="nav-menu-title">Staff</h3>
+    <nav class="nav-menu">
       <a href="/staff/occupancyReport" class:active={pathAll === '/staff/occupancyReport'} >
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Occupancy Report</span>
@@ -131,10 +134,6 @@
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Missing Data Report</span>
       </a>
-      <a href="/staff/revenueReport" class:active={pathAll === '/staff/revenueReport'}>
-        <Icon src={RiDocumentFileChartLine} size="20" />
-        <span>Revenue Report</span>
-      </a>
       <a href="/staff/wifiDeviceReport" class:active={pathAll === '/staff/wifiDeviceReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Wifi Device Report</span>
@@ -143,13 +142,6 @@
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Price per day Report</span>
       </a>
-      <a href="/user" class:active={pathAll === '/user'}>
-        <Icon src={RiUserFacesUser3Line} size="20" />
-        <span>Profile</span>
-      </a>
-    </nav>
-    <h3 class="nav-menu-title">Staff</h3>
-    <nav class="nav-menu">
       <a id="link-staff-booking" href="/staff/booking" class:active={(pathLv1 === 'staff') && (pathLv2 === 'booking')}>
         <Icon src={RiBusinessCalendarScheduleLine} size="20" />
         <span>Bookings</span>
@@ -162,6 +154,10 @@
     {#if access.admin}
       <h3 class="nav-menu-title">Admin</h3>
       <nav class="nav-menu">
+        <a href="/admin/revenueReport" class:active={pathAll === '/admin/revenueReport'}>
+          <Icon src={RiDocumentFileChartLine} size="20" />
+          <span>Revenue Report</span>
+        </a>
         <a id="link-admin-location" href="/admin/location" class:active={pathLv2 === 'location'}>
           <Icon src={RiMapMapPin2Line} size="20" />
           <span>Locations</span>
@@ -202,6 +198,10 @@
     {/if}
     <span class="separator"></span>
     <nav class="nav-menu">
+      <a href="/user" class:active={pathAll === '/user'}>
+        <Icon src={RiUserFacesUser3Line} size="20" />
+        <span>Profile</span>
+      </a>
       <button class="red" on:click={logout}>
         <Icon src={RiSystemLogoutBoxRLine} size="20" />
         <span>Logout</span>
@@ -224,6 +224,9 @@
         <Icon src={RiBuildingsHome2Line} size="20" />
         <span>Home</span>
       </a>
+    </nav>
+    <h3 class="nav-menu-title">Staff</h3>
+    <nav class="nav-menu">
       <a href="/staff/occupancyReport" class:active={pathAll === '/staff/occupancyReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Occupancy Report</span>
@@ -236,10 +239,6 @@
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Missing Data Report</span>
       </a>
-      <a href="/staff/revenueReport" class:active={pathAll === '/staff/revenueReport'}>
-        <Icon src={RiDocumentFileChartLine} size="20" />
-        <span>Revenue Report</span>
-      </a>
       <a href="/staff/wifiDeviceReport" class:active={pathAll === '/staff/wifiDeviceReport'}>
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Wifi Device Report</span>
@@ -248,13 +247,6 @@
         <Icon src={RiDocumentFileChartLine} size="20" />
         <span>Price per day Report</span>
       </a>
-      <a href="/user" class:active={pathAll === '/user'}>
-        <Icon src={RiUserFacesUser3Line} size="20" />
-        <span>Profile</span>
-      </a>
-    </nav>
-    <h3 class="nav-menu-title">Staff</h3>
-    <nav class="nav-menu">
       <a id="link-staff-booking-mobile" href="/staff/booking" class:active={(pathLv1 === 'staff') && (pathLv2 === 'booking')}>
         <Icon src={RiBusinessCalendarScheduleLine} size="20" />
         <span>Bookings</span>
@@ -267,6 +259,10 @@
     {#if access.admin}
       <h3 class="nav-menu-title">Admin</h3>
       <nav class="nav-menu">
+        <a href="/admin/revenueReport" class:active={pathAll === '/admin/revenueReport'}>
+          <Icon src={RiDocumentFileChartLine} size="20" />
+          <span>Revenue Report</span>
+        </a>
         <a href="/admin/location" class:active={pathLv2 === 'location'}>
           <Icon src={RiMapMapPin2Line} size="20" />
           <span>Locations</span>
@@ -303,6 +299,10 @@
     {/if}
     <span class="separator"></span>
     <nav class="nav-menu">
+      <a href="/user" class:active={pathAll === '/user'}>
+        <Icon src={RiUserFacesUser3Line} size="20" />
+        <span>Profile</span>
+      </a>
       <button class="red" on:click={logout}>
         <Icon src={RiSystemLogoutBoxRLine} size="20" />
         <span>Logout</span>

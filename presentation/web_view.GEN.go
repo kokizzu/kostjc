@@ -37,7 +37,7 @@ var viewList = map[string]string{
 	`StaffOccupancyHeatmap`: `../svelte/staffOccupancyHeatmap.html`, // ../svelte/staffOccupancyHeatmap.svelte
 	`StaffOccupancyReport`: `../svelte/staffOccupancyReport.html`, // ../svelte/staffOccupancyReport.svelte
 	`StaffPricePerDayReport`: `../svelte/staffPricePerDayReport.html`, // ../svelte/staffPricePerDayReport.svelte
-	`StaffRevenueReport`: `../svelte/staffRevenueReport.html`, // ../svelte/staffRevenueReport.svelte
+	`AdminRevenueReport`: `../svelte/adminRevenueReport.html`, // ../svelte/adminRevenueReport.svelte
 	`StaffTenants`: `../svelte/staffTenants.html`, // ../svelte/staffTenants.svelte
 	`StaffWifiDeviceReport`: `../svelte/staffWifiDeviceReport.html`, // ../svelte/staffWifiDeviceReport.svelte
 	`User`: `../svelte/user.html`, // ../svelte/user.svelte
@@ -179,9 +179,9 @@ func (v *Views) RenderStaffPricePerDayReport(c *fiber.Ctx, m M.SX) error {
 	return c.SendString(v.cache[`StaffPricePerDayReport`].Str(m))
 }
 
-func (v *Views) RenderStaffRevenueReport(c *fiber.Ctx, m M.SX) error {
+func (v *Views) RenderAdminRevenueReport(c *fiber.Ctx, m M.SX) error {
 	c.Set("Content-Type", "text/html; charset=utf-8")
-	return c.SendString(v.cache[`StaffRevenueReport`].Str(m))
+	return c.SendString(v.cache[`AdminRevenueReport`].Str(m))
 }
 
 func (v *Views) RenderStaffTenants(c *fiber.Ctx, m M.SX) error {

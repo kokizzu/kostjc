@@ -934,7 +934,7 @@
     position: sticky;
     left: 0;
     z-index: 10;
-    background-color: var(--gray-001);
+    background-color: var(--gray-002);
   }
 
   .table-root .table-container table thead {
@@ -944,7 +944,7 @@
 
   .table-root .table-container table thead tr th {
     padding: 12px;
-		background-color: var(--gray-001);
+		background-color: var(--gray-002);
 		text-transform: capitalize;
 		border-right: 1px solid var(--gray-004);
 		border-bottom: 1px solid var(--gray-003);
@@ -1016,13 +1016,29 @@
   }
 
   .table-root .table-container table tbody tr td {
-    padding: 8px 12px;
+    padding: 2px 12px;
   }
 
 	.table-root .table-container table tbody tr td {
-    padding: 8px 12px;
+    padding: 2px 12px;
 		border-right: 1px solid var(--gray-004);
 		border-bottom: 1px solid var(--gray-004);
+  }
+
+  .table-root .table-container table tbody tr:nth-child(even) td {
+    background-color: var(--gray-001);
+  }
+
+  .table-root .table-container table tbody tr:nth-child(odd) td {
+    background-color: #fff;
+  }
+
+  .table-root .table-container table tbody tr.deleted td {
+    background-color: var(--red-transparent);
+  }
+
+  .table-root .table-container table tbody tr td.sticky {
+    background-color: inherit;
   }
 
 	.table-root .table-container table tbody tr:last-child td {

@@ -295,7 +295,7 @@
   }
 
   .table-row .cell {
-    padding: 12px;
+    padding: 2px 12px;
     font-size: 14px;
   }
 
@@ -371,7 +371,7 @@
 
     .table-header .cell,
     .table-row .cell {
-      padding: 8px 6px;
+      padding: 2px 6px;
       font-size: 11px;
     }
 
@@ -398,7 +398,7 @@
 
     .table-header .cell,
     .table-row .cell {
-      padding: 6px 4px;
+      padding: 2px 4px;
       font-size: 10px;
     }
   }

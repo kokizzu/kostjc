@@ -208,7 +208,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 30px;
-		padding: 20px;
+		padding: 20px 0;
 	}
 
 	.rooms-heatmap-wrapper {
@@ -247,7 +247,7 @@
 	}
 
 	.room-label {
-		padding: 8px;
+		padding: 0;
 		font-weight: 600;
 		text-align: left;
 		font-size: var(--font-md);
@@ -273,7 +273,7 @@
 		text-align: center;
 		font-size: 10px;
 		color: var(--gray-008);
-		padding: 2px;
+		padding: 0;
 		background-color: white;
 	}
 
@@ -313,7 +313,7 @@
 	}
 
 	.table-row .room-name {
-		padding: 8px;
+		padding: 0;
 		font-weight: 600;
 		text-align: left;
 		font-size: var(--font-md);
@@ -364,7 +364,7 @@
 	.table-row .room-name {
 		width: 50px;
 		font-size: 12px;
-		padding: 6px;
+		padding: 0;
 	}
 	}
 	@keyframes fadeIn {

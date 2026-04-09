@@ -705,7 +705,7 @@
   }
 
   table tbody tr td {
-    padding: 8px 12px;
+    padding: 2px 12px;
   }
 
   table tbody tr td .cells {

@@ -310,13 +310,13 @@ func ApiRoutes(fw *fiber.App, d *domain.Domain) {
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 
-	// StaffRevenueReport
-	fw.Post("/"+domain.StaffRevenueReportAction, func(c *fiber.Ctx) error {
-		in := domain.StaffRevenueReportIn{}
-		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.StaffRevenueReportAction); err != nil {
+	// AdminRevenueReport
+	fw.Post("/"+domain.AdminRevenueReportAction, func(c *fiber.Ctx) error {
+		in := domain.AdminRevenueReportIn{}
+		if err := webApiParseInput(c, &in.RequestCommon, &in, domain.AdminRevenueReportAction); err != nil {
 			return nil
 		}
-		out := d.StaffRevenueReport(&in)
+		out := d.AdminRevenueReport(&in)
 		return in.ToFiberCtx(c, out, &out.ResponseCommon, in)
 	})
 

@@ -2881,8 +2881,8 @@
       exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
         return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
-      exports.StaffRevenueReport = async function StaffRevenueReport(i, cb) {
-        return await axios.post("/staff/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      exports.AdminRevenueReport = async function AdminRevenueReport(i, cb) {
+        return await axios.post("/admin/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.StaffTenants = async function StaffTenants(i, cb) {
         return await axios.post("/staff/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -10263,9 +10263,9 @@ ${component_stack}
   var isOpenSideMenu = writable(false);
 
   // _partials/SideMenu.svelte
-  var root_1 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-admin-location" href="/admin/location"><!> <span>Locations</span></a> <a id="link-admin-facility" href="/admin/facility"><!> <span>Facilities</span></a> <a id="link-admin-building" href="/admin/building"><!> <span>Buildings</span></a> <a id="link-admin-room" href="/admin/room"><!> <span>Rooms</span></a> <a id="link-admin-payment" href="/admin/payment"><!> <span>Payments</span></a> <a id="link-admin-wifiDevice" href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a id="link-admin-userManagement" href="/admin/usersManagement"><!> <span>Users</span></a> <a id="link-admin-logs" href="/admin/bookingLogs"><!> <span>Logs</span></a> <a id="link-admin-setting" href="/admin/settingFixInconsistencies"><!> <span>Settings</span></a></nav>`, 1);
-  var root_2 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/location"><!> <span>Locations</span></a> <a href="/admin/facility"><!> <span>Facilities</span></a> <a href="/admin/building"><!> <span>Buildings</span></a> <a href="/admin/room"><!> <span>Rooms</span></a> <a href="/admin/payment"><!> <span>Payments</span></a> <a href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a href="/admin/usersManagement"><!> <span>Users</span></a> <a href="/admin/bookingLogs"><!> <span>Logs</span></a></nav>`, 1);
-  var root2 = from_html(`<aside class="side-menu-desktop svelte-p7ambs"><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside> <button aria-label="backdrop toggle menu"></button> <aside><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a> <a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/revenueReport"><!> <span>Revenue Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a href="/user"><!> <span>Profile</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a id="link-staff-booking-mobile" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants-mobile" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside>`, 1);
+  var root_1 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/revenueReport"><!> <span>Revenue Report</span></a> <a id="link-admin-location" href="/admin/location"><!> <span>Locations</span></a> <a id="link-admin-facility" href="/admin/facility"><!> <span>Facilities</span></a> <a id="link-admin-building" href="/admin/building"><!> <span>Buildings</span></a> <a id="link-admin-room" href="/admin/room"><!> <span>Rooms</span></a> <a id="link-admin-payment" href="/admin/payment"><!> <span>Payments</span></a> <a id="link-admin-wifiDevice" href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a id="link-admin-userManagement" href="/admin/usersManagement"><!> <span>Users</span></a> <a id="link-admin-logs" href="/admin/bookingLogs"><!> <span>Logs</span></a> <a id="link-admin-setting" href="/admin/settingFixInconsistencies"><!> <span>Settings</span></a></nav>`, 1);
+  var root_2 = from_html(`<h3 class="nav-menu-title svelte-p7ambs">Admin</h3> <nav class="nav-menu svelte-p7ambs"><a href="/admin/revenueReport"><!> <span>Revenue Report</span></a> <a href="/admin/location"><!> <span>Locations</span></a> <a href="/admin/facility"><!> <span>Facilities</span></a> <a href="/admin/building"><!> <span>Buildings</span></a> <a href="/admin/room"><!> <span>Rooms</span></a> <a href="/admin/payment"><!> <span>Payments</span></a> <a href="/admin/wifiDevice"><!> <span>Wifi Devices</span></a> <a href="/admin/usersManagement"><!> <span>Users</span></a> <a href="/admin/bookingLogs"><!> <span>Logs</span></a></nav>`, 1);
+  var root2 = from_html(`<aside class="side-menu-desktop svelte-p7ambs"><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a id="link-staff-booking" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><a href="/user"><!> <span>Profile</span></a> <button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside> <button aria-label="backdrop toggle menu"></button> <aside><div class="container svelte-p7ambs"><nav class="nav-menu svelte-p7ambs"><a href="/"><!> <span>Home</span></a></nav> <h3 class="nav-menu-title svelte-p7ambs">Staff</h3> <nav class="nav-menu svelte-p7ambs"><a href="/staff/occupancyReport"><!> <span>Occupancy Report</span></a> <a href="/staff/occupancyHeatmap"><!> <span>Occupancy Heatmap</span></a> <a href="/staff/missingDataReport"><!> <span>Missing Data Report</span></a> <a href="/staff/wifiDeviceReport"><!> <span>Wifi Device Report</span></a> <a href="/staff/pricePerDayReport"><!> <span>Price per day Report</span></a> <a id="link-staff-booking-mobile" href="/staff/booking"><!> <span>Bookings</span></a> <a id="link-staff-tenants-mobile" href="/staff/tenants"><!> <span>Tenants</span></a></nav> <!> <span class="separator svelte-p7ambs"></span> <nav class="nav-menu svelte-p7ambs"><a href="/user"><!> <span>Profile</span></a> <button class="red svelte-p7ambs"><!> <span>Logout</span></button></nav></div></aside>`, 1);
   var $css = {
     hash: "svelte-p7ambs",
     code: "aside.side-menu-desktop.svelte-p7ambs {position:fixed;top:var(--navbar-height);left:0;bottom:0;width:var(--sidemenu-width);border-right:1px solid var(--gray-002);background-color:#FFF;font-size:var(--font-md);overflow-y:auto;scrollbar-color:var(--gray-003) transparent;scrollbar-width:calc(100% - 20px);padding:10px 0 20px 0;}aside.svelte-p7ambs .separator:where(.svelte-p7ambs) {width:100%;margin:auto;height:1px;background-color:var(--gray-002);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) {display:flex;flex-direction:column;gap:10px;height:fit-content;width:100%;margin:0;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu-title:where(.svelte-p7ambs) {margin:0;padding:10px 25px 10px 70px;border-bottom:1px solid var(--gray-002);font-weight:600;text-transform:uppercase;font-size:13px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) {display:flex;flex-direction:column;gap:5px;height:fit-content;flex-wrap:nowrap;width:100%;margin:0;padding:0 10px 0 40px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a:where(.svelte-p7ambs),\n  aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button:where(.svelte-p7ambs) {text-decoration:none;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:10px 15px;border-radius:8px;cursor:pointer;color:var(--gray-008);border:none;background-color:transparent;font-size:var(--font-lg);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a:where(.svelte-p7ambs):hover,\n  aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button:where(.svelte-p7ambs):hover {background-color:var(--gray-001);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) a.active:where(.svelte-p7ambs) {background-color:var(--blue-transparent);color:var(--blue-007);}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) button.red:where(.svelte-p7ambs):hover {background-color:var(--red-transparent);color:var(--red-007);}.backdrop.svelte-p7ambs {position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0, 0, 0, 0.5);z-index:999;display:none;height:100dvh;}.backdrop.open.svelte-p7ambs {display:block;}aside.side-menu-mobile.svelte-p7ambs {left:-100%;width:70%;position:fixed;height:100dvh;top:0;bottom:0;z-index:1000;background-color:#FFF;border-top-right-radius:10px;border-bottom-right-radius:10px;overflow-y:auto;}aside.side-menu-mobile.open.svelte-p7ambs {transition:left 0.3s ease-in-out;left:0;}\n\n  @media only screen and (max-width : 768px) {aside.side-menu-desktop.svelte-p7ambs {display:none;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) {padding:20px 0;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu:where(.svelte-p7ambs) {padding:0 10px;}aside.svelte-p7ambs .container:where(.svelte-p7ambs) .nav-menu-title:where(.svelte-p7ambs) {padding:10px 25px;}\n  }"
@@ -10391,7 +10391,9 @@ ${component_stack}
     });
     next(2);
     reset(a);
-    var a_1 = sibling(a, 2);
+    reset(nav);
+    var nav_1 = sibling(nav, 4);
+    var a_1 = child(nav_1);
     let classes_1;
     var node_1 = child(a_1);
     Icon(node_1, {
@@ -10451,7 +10453,7 @@ ${component_stack}
     var node_6 = child(a_6);
     Icon(node_6, {
       get src() {
-        return RiDocumentFileChartLine;
+        return RiBusinessCalendarScheduleLine;
       },
       size: "20"
     });
@@ -10462,48 +10464,46 @@ ${component_stack}
     var node_7 = child(a_7);
     Icon(node_7, {
       get src() {
-        return RiUserFacesUser3Line;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_7);
-    reset(nav);
-    var nav_1 = sibling(nav, 4);
-    var a_8 = child(nav_1);
-    let classes_8;
-    var node_8 = child(a_8);
-    Icon(node_8, {
-      get src() {
-        return RiBusinessCalendarScheduleLine;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_8);
-    var a_9 = sibling(a_8, 2);
-    let classes_9;
-    var node_9 = child(a_9);
-    Icon(node_9, {
-      get src() {
         return RiUserFacesUserFollowLine;
       },
       size: "20"
     });
     next(2);
-    reset(a_9);
+    reset(a_7);
     reset(nav_1);
-    var node_10 = sibling(nav_1, 2);
+    var node_8 = sibling(nav_1, 2);
     {
       var consequent = ($anchor2) => {
         var fragment_1 = root_1();
         var nav_2 = sibling(first_child(fragment_1), 2);
-        var a_10 = child(nav_2);
+        var a_8 = child(nav_2);
+        let classes_8;
+        var node_9 = child(a_8);
+        Icon(node_9, {
+          get src() {
+            return RiDocumentFileChartLine;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_8);
+        var a_9 = sibling(a_8, 2);
+        let classes_9;
+        var node_10 = child(a_9);
+        Icon(node_10, {
+          get src() {
+            return RiMapMapPin2Line;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_9);
+        var a_10 = sibling(a_9, 2);
         let classes_10;
         var node_11 = child(a_10);
         Icon(node_11, {
           get src() {
-            return RiMapMapPin2Line;
+            return LuHandPlatter;
           },
           size: "20"
         });
@@ -10514,7 +10514,7 @@ ${component_stack}
         var node_12 = child(a_11);
         Icon(node_12, {
           get src() {
-            return LuHandPlatter;
+            return RiBuildingsHotelLine;
           },
           size: "20"
         });
@@ -10525,7 +10525,7 @@ ${component_stack}
         var node_13 = child(a_12);
         Icon(node_13, {
           get src() {
-            return RiBuildingsHotelLine;
+            return RiOthersDoorOpenLine;
           },
           size: "20"
         });
@@ -10536,7 +10536,7 @@ ${component_stack}
         var node_14 = child(a_13);
         Icon(node_14, {
           get src() {
-            return RiOthersDoorOpenLine;
+            return RiFinanceWallet3Line;
           },
           size: "20"
         });
@@ -10547,7 +10547,7 @@ ${component_stack}
         var node_15 = child(a_14);
         Icon(node_15, {
           get src() {
-            return RiFinanceWallet3Line;
+            return RiBuildingsHomeWifiLine;
           },
           size: "20"
         });
@@ -10558,7 +10558,7 @@ ${component_stack}
         var node_16 = child(a_15);
         Icon(node_16, {
           get src() {
-            return RiBuildingsHomeWifiLine;
+            return RiUserFacesGroupLine;
           },
           size: "20"
         });
@@ -10569,7 +10569,7 @@ ${component_stack}
         var node_17 = child(a_16);
         Icon(node_17, {
           get src() {
-            return RiUserFacesGroupLine;
+            return RiBusinessBarChartBoxLine;
           },
           size: "20"
         });
@@ -10580,35 +10580,25 @@ ${component_stack}
         var node_18 = child(a_17);
         Icon(node_18, {
           get src() {
-            return RiBusinessBarChartBoxLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_17);
-        var a_18 = sibling(a_17, 2);
-        let classes_18;
-        var node_19 = child(a_18);
-        Icon(node_19, {
-          get src() {
             return RiSystemSettingsLine;
           },
           size: "20"
         });
         next(2);
-        reset(a_18);
+        reset(a_17);
         reset(nav_2);
         template_effect(
           ($0, $1) => {
-            classes_10 = set_class(a_10, 1, "svelte-p7ambs", null, classes_10, { active: pathLv2 === "location" });
-            classes_11 = set_class(a_11, 1, "svelte-p7ambs", null, classes_11, { active: pathLv2 === "facility" });
-            classes_12 = set_class(a_12, 1, "svelte-p7ambs", null, classes_12, { active: pathLv2 === "building" });
-            classes_13 = set_class(a_13, 1, "svelte-p7ambs", null, classes_13, { active: pathLv2 === "room" });
-            classes_14 = set_class(a_14, 1, "svelte-p7ambs", null, classes_14, { active: pathLv2 === "payment" });
-            classes_15 = set_class(a_15, 1, "svelte-p7ambs", null, classes_15, { active: pathLv2 === "wifiDevice" });
-            classes_16 = set_class(a_16, 1, "svelte-p7ambs", null, classes_16, { active: pathLv2 === "usersManagement" });
-            classes_17 = set_class(a_17, 1, "svelte-p7ambs", null, classes_17, $0);
-            classes_18 = set_class(a_18, 1, "svelte-p7ambs", null, classes_18, $1);
+            classes_8 = set_class(a_8, 1, "svelte-p7ambs", null, classes_8, { active: pathAll === "/admin/revenueReport" });
+            classes_9 = set_class(a_9, 1, "svelte-p7ambs", null, classes_9, { active: pathLv2 === "location" });
+            classes_10 = set_class(a_10, 1, "svelte-p7ambs", null, classes_10, { active: pathLv2 === "facility" });
+            classes_11 = set_class(a_11, 1, "svelte-p7ambs", null, classes_11, { active: pathLv2 === "building" });
+            classes_12 = set_class(a_12, 1, "svelte-p7ambs", null, classes_12, { active: pathLv2 === "room" });
+            classes_13 = set_class(a_13, 1, "svelte-p7ambs", null, classes_13, { active: pathLv2 === "payment" });
+            classes_14 = set_class(a_14, 1, "svelte-p7ambs", null, classes_14, { active: pathLv2 === "wifiDevice" });
+            classes_15 = set_class(a_15, 1, "svelte-p7ambs", null, classes_15, { active: pathLv2 === "usersManagement" });
+            classes_16 = set_class(a_16, 1, "svelte-p7ambs", null, classes_16, $0);
+            classes_17 = set_class(a_17, 1, "svelte-p7ambs", null, classes_17, $1);
           },
           [
             () => ({ active: String(pathLv2).includes("Logs") || false }),
@@ -10617,12 +10607,23 @@ ${component_stack}
         );
         append($anchor2, fragment_1);
       };
-      if_block(node_10, ($render) => {
+      if_block(node_8, ($render) => {
         if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent);
       });
     }
-    var nav_3 = sibling(node_10, 4);
-    var button = child(nav_3);
+    var nav_3 = sibling(node_8, 4);
+    var a_18 = child(nav_3);
+    let classes_18;
+    var node_19 = child(a_18);
+    Icon(node_19, {
+      get src() {
+        return RiUserFacesUser3Line;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_18);
+    var button = sibling(a_18, 2);
     var node_20 = child(button);
     Icon(node_20, {
       get src() {
@@ -10650,7 +10651,9 @@ ${component_stack}
     });
     next(2);
     reset(a_19);
-    var a_20 = sibling(a_19, 2);
+    reset(nav_4);
+    var nav_5 = sibling(nav_4, 4);
+    var a_20 = child(nav_5);
     let classes_20;
     var node_22 = child(a_20);
     Icon(node_22, {
@@ -10710,7 +10713,7 @@ ${component_stack}
     var node_27 = child(a_25);
     Icon(node_27, {
       get src() {
-        return RiDocumentFileChartLine;
+        return RiBusinessCalendarScheduleLine;
       },
       size: "20"
     });
@@ -10721,48 +10724,46 @@ ${component_stack}
     var node_28 = child(a_26);
     Icon(node_28, {
       get src() {
-        return RiUserFacesUser3Line;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_26);
-    reset(nav_4);
-    var nav_5 = sibling(nav_4, 4);
-    var a_27 = child(nav_5);
-    let classes_27;
-    var node_29 = child(a_27);
-    Icon(node_29, {
-      get src() {
-        return RiBusinessCalendarScheduleLine;
-      },
-      size: "20"
-    });
-    next(2);
-    reset(a_27);
-    var a_28 = sibling(a_27, 2);
-    let classes_28;
-    var node_30 = child(a_28);
-    Icon(node_30, {
-      get src() {
         return RiUserFacesUserFollowLine;
       },
       size: "20"
     });
     next(2);
-    reset(a_28);
+    reset(a_26);
     reset(nav_5);
-    var node_31 = sibling(nav_5, 2);
+    var node_29 = sibling(nav_5, 2);
     {
       var consequent_1 = ($anchor2) => {
         var fragment_2 = root_2();
         var nav_6 = sibling(first_child(fragment_2), 2);
-        var a_29 = child(nav_6);
+        var a_27 = child(nav_6);
+        let classes_27;
+        var node_30 = child(a_27);
+        Icon(node_30, {
+          get src() {
+            return RiDocumentFileChartLine;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_27);
+        var a_28 = sibling(a_27, 2);
+        let classes_28;
+        var node_31 = child(a_28);
+        Icon(node_31, {
+          get src() {
+            return RiMapMapPin2Line;
+          },
+          size: "20"
+        });
+        next(2);
+        reset(a_28);
+        var a_29 = sibling(a_28, 2);
         let classes_29;
         var node_32 = child(a_29);
         Icon(node_32, {
           get src() {
-            return RiMapMapPin2Line;
+            return LuHandPlatter;
           },
           size: "20"
         });
@@ -10773,7 +10774,7 @@ ${component_stack}
         var node_33 = child(a_30);
         Icon(node_33, {
           get src() {
-            return LuHandPlatter;
+            return RiBuildingsHotelLine;
           },
           size: "20"
         });
@@ -10784,7 +10785,7 @@ ${component_stack}
         var node_34 = child(a_31);
         Icon(node_34, {
           get src() {
-            return RiBuildingsHotelLine;
+            return RiOthersDoorOpenLine;
           },
           size: "20"
         });
@@ -10795,7 +10796,7 @@ ${component_stack}
         var node_35 = child(a_32);
         Icon(node_35, {
           get src() {
-            return RiOthersDoorOpenLine;
+            return RiFinanceWallet3Line;
           },
           size: "20"
         });
@@ -10806,7 +10807,7 @@ ${component_stack}
         var node_36 = child(a_33);
         Icon(node_36, {
           get src() {
-            return RiFinanceWallet3Line;
+            return RiBuildingsHomeWifiLine;
           },
           size: "20"
         });
@@ -10817,7 +10818,7 @@ ${component_stack}
         var node_37 = child(a_34);
         Icon(node_37, {
           get src() {
-            return RiBuildingsHomeWifiLine;
+            return RiUserFacesGroupLine;
           },
           size: "20"
         });
@@ -10828,34 +10829,24 @@ ${component_stack}
         var node_38 = child(a_35);
         Icon(node_38, {
           get src() {
-            return RiUserFacesGroupLine;
-          },
-          size: "20"
-        });
-        next(2);
-        reset(a_35);
-        var a_36 = sibling(a_35, 2);
-        let classes_36;
-        var node_39 = child(a_36);
-        Icon(node_39, {
-          get src() {
             return RiBusinessBarChartBoxLine;
           },
           size: "20"
         });
         next(2);
-        reset(a_36);
+        reset(a_35);
         reset(nav_6);
         template_effect(
           ($0) => {
-            classes_29 = set_class(a_29, 1, "svelte-p7ambs", null, classes_29, { active: pathLv2 === "location" });
-            classes_30 = set_class(a_30, 1, "svelte-p7ambs", null, classes_30, { active: pathLv2 === "facility" });
-            classes_31 = set_class(a_31, 1, "svelte-p7ambs", null, classes_31, { active: pathLv2 === "building" });
-            classes_32 = set_class(a_32, 1, "svelte-p7ambs", null, classes_32, { active: pathLv2 === "room" });
-            classes_33 = set_class(a_33, 1, "svelte-p7ambs", null, classes_33, { active: pathLv2 === "payment" });
-            classes_34 = set_class(a_34, 1, "svelte-p7ambs", null, classes_34, { active: pathLv2 === "wifiDevice" });
-            classes_35 = set_class(a_35, 1, "svelte-p7ambs", null, classes_35, { active: pathLv2 === "usersManagement" });
-            classes_36 = set_class(a_36, 1, "svelte-p7ambs", null, classes_36, $0);
+            classes_27 = set_class(a_27, 1, "svelte-p7ambs", null, classes_27, { active: pathAll === "/admin/revenueReport" });
+            classes_28 = set_class(a_28, 1, "svelte-p7ambs", null, classes_28, { active: pathLv2 === "location" });
+            classes_29 = set_class(a_29, 1, "svelte-p7ambs", null, classes_29, { active: pathLv2 === "facility" });
+            classes_30 = set_class(a_30, 1, "svelte-p7ambs", null, classes_30, { active: pathLv2 === "building" });
+            classes_31 = set_class(a_31, 1, "svelte-p7ambs", null, classes_31, { active: pathLv2 === "room" });
+            classes_32 = set_class(a_32, 1, "svelte-p7ambs", null, classes_32, { active: pathLv2 === "payment" });
+            classes_33 = set_class(a_33, 1, "svelte-p7ambs", null, classes_33, { active: pathLv2 === "wifiDevice" });
+            classes_34 = set_class(a_34, 1, "svelte-p7ambs", null, classes_34, { active: pathLv2 === "usersManagement" });
+            classes_35 = set_class(a_35, 1, "svelte-p7ambs", null, classes_35, $0);
           },
           [
             () => ({ active: String(pathLv2).includes("Logs") || false })
@@ -10863,12 +10854,23 @@ ${component_stack}
         );
         append($anchor2, fragment_2);
       };
-      if_block(node_31, ($render) => {
+      if_block(node_29, ($render) => {
         if (deep_read_state(access()), untrack(() => access().admin)) $render(consequent_1);
       });
     }
-    var nav_7 = sibling(node_31, 4);
-    var button_2 = child(nav_7);
+    var nav_7 = sibling(node_29, 4);
+    var a_36 = child(nav_7);
+    let classes_36;
+    var node_39 = child(a_36);
+    Icon(node_39, {
+      get src() {
+        return RiUserFacesUser3Line;
+      },
+      size: "20"
+    });
+    next(2);
+    reset(a_36);
+    var button_2 = sibling(a_36, 2);
     var node_40 = child(button_2);
     Icon(node_40, {
       get src() {
@@ -10886,24 +10888,22 @@ ${component_stack}
       classes_1 = set_class(a_1, 1, "svelte-p7ambs", null, classes_1, { active: pathAll === "/staff/occupancyReport" });
       classes_2 = set_class(a_2, 1, "svelte-p7ambs", null, classes_2, { active: pathAll === "/staff/occupancyHeatmap" });
       classes_3 = set_class(a_3, 1, "svelte-p7ambs", null, classes_3, { active: pathAll === "/staff/missingDataReport" });
-      classes_4 = set_class(a_4, 1, "svelte-p7ambs", null, classes_4, { active: pathAll === "/staff/revenueReport" });
-      classes_5 = set_class(a_5, 1, "svelte-p7ambs", null, classes_5, { active: pathAll === "/staff/wifiDeviceReport" });
-      classes_6 = set_class(a_6, 1, "svelte-p7ambs", null, classes_6, { active: pathAll === "/staff/pricePerDayReport" });
-      classes_7 = set_class(a_7, 1, "svelte-p7ambs", null, classes_7, { active: pathAll === "/user" });
-      classes_8 = set_class(a_8, 1, "svelte-p7ambs", null, classes_8, { active: pathLv1 === "staff" && pathLv2 === "booking" });
-      classes_9 = set_class(a_9, 1, "svelte-p7ambs", null, classes_9, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
+      classes_4 = set_class(a_4, 1, "svelte-p7ambs", null, classes_4, { active: pathAll === "/staff/wifiDeviceReport" });
+      classes_5 = set_class(a_5, 1, "svelte-p7ambs", null, classes_5, { active: pathAll === "/staff/pricePerDayReport" });
+      classes_6 = set_class(a_6, 1, "svelte-p7ambs", null, classes_6, { active: pathLv1 === "staff" && pathLv2 === "booking" });
+      classes_7 = set_class(a_7, 1, "svelte-p7ambs", null, classes_7, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
+      classes_18 = set_class(a_18, 1, "svelte-p7ambs", null, classes_18, { active: pathAll === "/user" });
       set_class(button_1, 1, `backdrop ${$isOpenSideMenu() ? "open" : ""}`, "svelte-p7ambs");
       set_class(aside_1, 1, `side-menu-mobile ${$isOpenSideMenu() ? "open" : ""}`, "svelte-p7ambs");
       classes_19 = set_class(a_19, 1, "svelte-p7ambs", null, classes_19, { active: pathLv1 === "" });
       classes_20 = set_class(a_20, 1, "svelte-p7ambs", null, classes_20, { active: pathAll === "/staff/occupancyReport" });
       classes_21 = set_class(a_21, 1, "svelte-p7ambs", null, classes_21, { active: pathAll === "/staff/occupancyHeatmap" });
       classes_22 = set_class(a_22, 1, "svelte-p7ambs", null, classes_22, { active: pathAll === "/staff/missingDataReport" });
-      classes_23 = set_class(a_23, 1, "svelte-p7ambs", null, classes_23, { active: pathAll === "/staff/revenueReport" });
-      classes_24 = set_class(a_24, 1, "svelte-p7ambs", null, classes_24, { active: pathAll === "/staff/wifiDeviceReport" });
-      classes_25 = set_class(a_25, 1, "svelte-p7ambs", null, classes_25, { active: pathAll === "/staff/pricePerDayReport" });
-      classes_26 = set_class(a_26, 1, "svelte-p7ambs", null, classes_26, { active: pathAll === "/user" });
-      classes_27 = set_class(a_27, 1, "svelte-p7ambs", null, classes_27, { active: pathLv1 === "staff" && pathLv2 === "booking" });
-      classes_28 = set_class(a_28, 1, "svelte-p7ambs", null, classes_28, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
+      classes_23 = set_class(a_23, 1, "svelte-p7ambs", null, classes_23, { active: pathAll === "/staff/wifiDeviceReport" });
+      classes_24 = set_class(a_24, 1, "svelte-p7ambs", null, classes_24, { active: pathAll === "/staff/pricePerDayReport" });
+      classes_25 = set_class(a_25, 1, "svelte-p7ambs", null, classes_25, { active: pathLv1 === "staff" && pathLv2 === "booking" });
+      classes_26 = set_class(a_26, 1, "svelte-p7ambs", null, classes_26, { active: pathLv1 === "staff" && pathLv2 === "tenants" });
+      classes_36 = set_class(a_36, 1, "svelte-p7ambs", null, classes_36, { active: pathAll === "/user" });
     });
     event("click", button, logout);
     event("click", button_1, () => store_set(isOpenSideMenu, !$isOpenSideMenu()));

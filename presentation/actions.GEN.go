@@ -37,7 +37,7 @@ var allCommands = []string{
 	domain.StaffOccupancyHeatmapAction,
 	domain.StaffOccupancyReportAction,
 	domain.StaffPricePerDayReportAction,
-	domain.StaffRevenueReportAction,
+	domain.AdminRevenueReportAction,
 	domain.StaffTenantsAction,
 	domain.StaffWifiDeviceReportAction,
 	domain.UserLogoutAction,
