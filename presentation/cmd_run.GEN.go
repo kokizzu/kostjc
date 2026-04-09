@@ -92,6 +92,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.AdminPaymentLogs(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.AdminRevenueReportAction:
+		in := domain.AdminRevenueReportIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.AdminRevenueReport(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.AdminRoomAction:
 		in := domain.AdminRoomIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {
@@ -250,14 +258,6 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 			return
 		}
 		out := b.StaffPricePerDayReport(&in)
-		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
-
-	case domain.AdminRevenueReportAction:
-		in := domain.AdminRevenueReportIn{}
-		if !in.RequestCommon.FromCli(action, payload, &in) {
-			return
-		}
-		out := b.AdminRevenueReport(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
 	case domain.StaffTenantsAction:

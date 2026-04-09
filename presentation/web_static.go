@@ -1,6 +1,7 @@
 package presentation
 
 import (
+	"path/filepath"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -890,6 +891,30 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`rooms`:              rooms,
 			`roomIncosistencies`: out.RoomIncosistencies,
 		})
+	})
+
+	fw.Get(`/admin/settingDatabase`, func(ctx *fiber.Ctx) error {
+		in, user, segments := userInfoFromContext(ctx, d)
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		return views.RenderAdminSettingDatabase(ctx, M.SX{
+			`user`:     user,
+			`title`:    conf.PROJECT_NAME + ` | Setting: Database`,
+			`segments`: segments,
+		})
+	})
+
+	fw.Get(`/admin/settings/download/rooms.js`, func(ctx *fiber.Ctx) error {
+		in, _, _ := userInfoFromContext(ctx, d)
+		if notAdmin(ctx, d, in.RequestCommon) {
+			return ctx.Redirect(`/`, 302)
+		}
+
+		roomsJS := filepath.Clean(`../benalu.dev/src/rooms.js`)
+		ctx.Attachment(`rooms.js`)
+		return ctx.SendFile(roomsJS)
 	})
 
 	fw.Get(`/debug`, func(ctx *fiber.Ctx) error {

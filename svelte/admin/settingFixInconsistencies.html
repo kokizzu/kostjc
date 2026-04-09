@@ -2817,6 +2817,9 @@
       exports.AdminPaymentLogs = async function AdminPaymentLogs(i, cb) {
         return await axios.post("/admin/paymentLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminRevenueReport = async function AdminRevenueReport(i, cb) {
+        return await axios.post("/admin/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminRoom = async function AdminRoom(i, cb) {
         return await axios.post("/admin/room", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -2876,9 +2879,6 @@
       };
       exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
         return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.AdminRevenueReport = async function AdminRevenueReport(i, cb) {
-        return await axios.post("/admin/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.StaffTenants = async function StaffTenants(i, cb) {
         return await axios.post("/staff/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));
@@ -10900,7 +10900,7 @@ ${component_stack}
   }
 
   // _partials/SettingsSubMenu.svelte
-  var root8 = from_html(`<div class="admin-submenu svelte-ejl34a"><nav class="svelte-ejl34a"><a href="/admin/settingFixInconsistencies"><span class="title svelte-ejl34a">Fix Inconsistencies</span> <span class="block svelte-ejl34a"></span></a> <a href="/admin/settingDatabase"><span class="title svelte-ejl34a">--</span> <span class="block svelte-ejl34a"></span></a></nav></div>`);
+  var root8 = from_html(`<div class="admin-submenu svelte-ejl34a"><nav class="svelte-ejl34a"><a href="/admin/settingFixInconsistencies"><span class="title svelte-ejl34a">Fix Inconsistencies</span> <span class="block svelte-ejl34a"></span></a> <a href="/admin/settingDatabase"><span class="title svelte-ejl34a">Database</span> <span class="block svelte-ejl34a"></span></a></nav></div>`);
   var $css7 = {
     hash: "svelte-ejl34a",
     code: ".admin-submenu.svelte-ejl34a {display:flex;flex-direction:row;width:100%;height:fit-content;}.admin-submenu.svelte-ejl34a nav:where(.svelte-ejl34a) {display:flex;flex-direction:row;flex-wrap:wrap;width:100%;height:fit-content;gap:10px;}.admin-submenu.svelte-ejl34a nav:where(.svelte-ejl34a) a:where(.svelte-ejl34a) {height:fit-content;display:flex;flex-direction:column;text-decoration:none;color:var(--gray-008);}.admin-submenu.svelte-ejl34a nav:where(.svelte-ejl34a) a:where(.svelte-ejl34a):hover {background-color:var(--gray-001);}.admin-submenu.svelte-ejl34a nav:where(.svelte-ejl34a) a.active:where(.svelte-ejl34a) {color:var(--blue-005);}.admin-submenu.svelte-ejl34a nav:where(.svelte-ejl34a) a:where(.svelte-ejl34a) .title:where(.svelte-ejl34a) {flex-grow:1;padding:15px 10px;display:flex;align-items:center;}.admin-submenu.svelte-ejl34a nav:where(.svelte-ejl34a) a:where(.svelte-ejl34a) .block:where(.svelte-ejl34a) {height:3px;background-color:transparent;width:100%;}.admin-submenu.svelte-ejl34a nav:where(.svelte-ejl34a) a:where(.svelte-ejl34a):hover .block:where(.svelte-ejl34a) {background-color:var(--gray-005);}.admin-submenu.svelte-ejl34a nav:where(.svelte-ejl34a) a.active:where(.svelte-ejl34a) .block:where(.svelte-ejl34a) {background-color:var(--blue-005);}\n\n	@media only screen and (max-width: 768px) {\n	}"

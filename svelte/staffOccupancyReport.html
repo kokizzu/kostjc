@@ -3031,6 +3031,9 @@
       exports.AdminPaymentLogs = async function AdminPaymentLogs(i, cb) {
         return await axios.post("/admin/paymentLogs", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.AdminRevenueReport = async function AdminRevenueReport(i, cb) {
+        return await axios.post("/admin/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.AdminRoom = async function AdminRoom(i, cb) {
         return await axios.post("/admin/room", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -3090,9 +3093,6 @@
       };
       exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
         return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
-      };
-      exports.AdminRevenueReport = async function AdminRevenueReport(i, cb) {
-        return await axios.post("/admin/revenueReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
       exports.StaffTenants = async function StaffTenants(i, cb) {
         return await axios.post("/staff/tenants", i).then(wrapOk(cb)).catch(wrapErr(cb));

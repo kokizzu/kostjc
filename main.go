@@ -4,9 +4,13 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"path/filepath"
+	"sort"
+	"strings"
 	"time"
 
 	"kostjc/model/mAuth/wcAuth"
+	"kostjc/model/mProperty/rqProperty"
 
 	"github.com/fatih/color"
 	"github.com/kokizzu/gotro/D/Ch"
@@ -14,6 +18,7 @@ import (
 	"github.com/kokizzu/gotro/L"
 	"github.com/kokizzu/gotro/M"
 	"github.com/kokizzu/gotro/S"
+	"github.com/kokizzu/gotro/X"
 	"github.com/rs/zerolog"
 	"golang.org/x/sync/errgroup"
 
@@ -26,6 +31,177 @@ import (
 
 var VERSION = ``
 var log *zerolog.Logger
+
+type roomExport struct {
+	Name        string
+	ImageURL    string
+	Size        string
+	AvailableAt string
+	NormalPrice int64
+}
+
+func formatJSInt64(v int64) string {
+	s := fmt.Sprintf("%d", v)
+	if len(s) <= 3 {
+		return s
+	}
+
+	var b strings.Builder
+	prefixLen := len(s) % 3
+	if prefixLen > 0 {
+		b.WriteString(s[:prefixLen])
+		if len(s) > prefixLen {
+			b.WriteByte('_')
+		}
+	}
+	for i := prefixLen; i < len(s); i += 3 {
+		b.WriteString(s[i : i+3])
+		if i+3 < len(s) {
+			b.WriteByte('_')
+		}
+	}
+	return b.String()
+}
+
+func loadExistingRoomImageURLs(roomsJSPath string) map[string]string {
+	content, err := os.ReadFile(roomsJSPath)
+	if err != nil {
+		return map[string]string{}
+	}
+
+	res := map[string]string{}
+	var roomName string
+	for _, line := range strings.Split(string(content), "\n") {
+		trimmed := strings.TrimSpace(line)
+		if strings.HasPrefix(trimmed, `name: "`) {
+			roomName = strings.TrimSuffix(strings.TrimPrefix(trimmed, `name: "`), `",`)
+			roomName = strings.ToUpper(strings.TrimSpace(roomName))
+			continue
+		}
+		if roomName == `` || !strings.HasPrefix(trimmed, `image_url: "`) {
+			continue
+		}
+
+		imageURL := strings.TrimSuffix(strings.TrimPrefix(trimmed, `image_url: "`), `",`)
+		imageURL = strings.TrimSpace(imageURL)
+		if imageURL != `` {
+			res[roomName] = imageURL
+		}
+		roomName = ``
+	}
+	return res
+}
+
+func loadPreferredRoomImageURLs(outputFile string) map[string]string {
+	imageURLs := loadExistingRoomImageURLs(filepath.Clean(`../benalu.dev/src/rooms.js`))
+	if len(imageURLs) == 0 {
+		return loadExistingRoomImageURLs(outputFile)
+	}
+
+	for roomName, imageURL := range loadExistingRoomImageURLs(outputFile) {
+		if _, ok := imageURLs[roomName]; !ok {
+			imageURLs[roomName] = imageURL
+		}
+	}
+	return imageURLs
+}
+
+func generateRoomsJS(tConn *Tt.Adapter, outputDir string) error {
+	const query = `
+SELECT
+	r."roomName",
+	r."basePriceIDR",
+	r."roomSize",
+	r."imageUrl",
+	COALESCE(MAX(CASE WHEN b."deletedAt" = 0 THEN b."dateEnd" END), '') AS "availableAt"
+FROM "rooms" r
+LEFT JOIN "bookings" b ON b."roomId" = r."id"
+WHERE r."deletedAt" = 0
+GROUP BY r."id"
+ORDER BY r."roomName" ASC`
+
+	groupedRooms := map[string][]roomExport{}
+	for _, building := range []string{`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`} {
+		groupedRooms[building] = []roomExport{}
+	}
+
+	outputFile := filepath.Join(outputDir, `rooms.js`)
+	existingImageURLs := loadPreferredRoomImageURLs(outputFile)
+
+	rooms := rqProperty.NewRooms(tConn)
+	today := time.Now().Format(time.DateOnly)
+	rooms.Adapter.QuerySql(query, func(row []any) {
+		if len(row) != 5 {
+			return
+		}
+
+		roomName := strings.ToUpper(strings.TrimSpace(X.ToS(row[0])))
+		if roomName == `` {
+			return
+		}
+		building := roomName[:1]
+		if _, ok := groupedRooms[building]; !ok {
+			groupedRooms[building] = []roomExport{}
+		}
+
+		size := strings.TrimSpace(X.ToS(row[2]))
+		if size == `` {
+			size = `3x4`
+		}
+
+		imageURL := strings.TrimSpace(existingImageURLs[roomName])
+		if imageURL == `` {
+			imageURL = strings.TrimSpace(X.ToS(row[3]))
+		}
+		if imageURL == `` {
+			imageURL = `/placeholder-image.webp`
+		}
+
+		availableAt := strings.TrimSpace(X.ToS(row[4]))
+		if availableAt == `` {
+			availableAt = today
+		}
+
+		groupedRooms[building] = append(groupedRooms[building], roomExport{
+			Name:        roomName,
+			ImageURL:    imageURL,
+			Size:        size,
+			AvailableAt: availableAt,
+			NormalPrice: X.ToI(row[1]),
+		})
+	})
+
+	var b strings.Builder
+	for idx, building := range []string{`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`} {
+		rooms := groupedRooms[building]
+		sort.Slice(rooms, func(i, j int) bool {
+			return rooms[i].Name < rooms[j].Name
+		})
+
+		b.WriteString(`export const rooms`)
+		b.WriteString(building)
+		b.WriteString(` = [` + "\n")
+		for _, room := range rooms {
+			b.WriteString("  {\n")
+			b.WriteString(fmt.Sprintf("    name: %q,\n", room.Name))
+			b.WriteString(fmt.Sprintf("    image_url: %q,\n", room.ImageURL))
+			b.WriteString(fmt.Sprintf("    size: %q,\n", room.Size))
+			b.WriteString(fmt.Sprintf("    availableAt: %q,\n", room.AvailableAt))
+			b.WriteString(`    normalPrice: ` + formatJSInt64(room.NormalPrice) + ",\n")
+			b.WriteString("    facilities: [],\n")
+			b.WriteString("  },\n")
+		}
+		b.WriteString("]\n")
+		if idx < 9 {
+			b.WriteString("\n")
+		}
+	}
+
+	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+		return err
+	}
+	return os.WriteFile(outputFile, []byte(b.String()), 0o644)
+}
 
 func main() {
 	conf.VERSION = VERSION
@@ -40,7 +216,7 @@ func main() {
 
 	args := os.Args
 	if len(args) < 2 {
-		L.Print(`must start with: run, web, cron, migrate, or config as first argument`)
+		L.Print(`must start with: web, cli, cron, migrate, config, gen-rooms.js, or other supported mode as first argument`)
 		L.Print(args)
 		return
 	}
@@ -188,6 +364,16 @@ func main() {
 			return
 		}
 		L.LOG.Infof(`reset password success`)
+	case `gen-rooms.js`:
+		outputDir := `../benalu.dev/src/`
+		if len(os.Args) >= 3 && strings.TrimSpace(os.Args[2]) != `` {
+			outputDir = os.Args[2]
+		}
+		if err := generateRoomsJS(tConn, outputDir); err != nil {
+			L.LOG.Error(`failed generating rooms.js: `, err, ` outputDir: `, outputDir)
+			return
+		}
+		L.LOG.Info(`generated rooms.js: `, filepath.Join(outputDir, `rooms.js`))
 	default:
 		log.Error().Str(`mode`, mode).Msg(`unknown mode`)
 	}

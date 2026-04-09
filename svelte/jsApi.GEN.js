@@ -1075,6 +1075,77 @@ exports.AdminPaymentLogs = async function AdminPaymentLogs( i, cb ) {
 }
 
 /**
+ * @typedef {Object} AdminRevenueReportIn
+ * @property {String} yearMonth
+ */
+const AdminRevenueReportIn = {
+  yearMonth: '', // string
+}
+/**
+ * @typedef {Object} AdminRevenueReportOut
+ * @property {number} user.id
+ * @property {String} user.email
+ * @property {String} user.password
+ * @property {number} user.createdAt
+ * @property {number} user.createdBy
+ * @property {number} user.updatedAt
+ * @property {number} user.updatedBy
+ * @property {number} user.deletedAt
+ * @property {number} user.passwordSetAt
+ * @property {String} user.secretCode
+ * @property {number} user.secretCodeAt
+ * @property {number} user.verifiedAt
+ * @property {number} user.lastLoginAt
+ * @property {String} user.fullName
+ * @property {String} user.userName
+ * @property {String} user.role
+ * @property {Object} segments
+ * @property {Object} revenueReports
+ * @property {Object} chartRevenueReports
+ */
+const AdminRevenueReportOut = {
+  user: { // rqAuth.Users
+    id: 0, // uint64
+    email: '', // string
+    password: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    passwordSetAt: 0, // int64
+    secretCode: '', // string
+    secretCodeAt: 0, // int64
+    verifiedAt: 0, // int64
+    lastLoginAt: 0, // int64
+    fullName: '', // string
+    userName: '', // string
+    role: '', // string
+  }, // rqAuth.Users
+  segments: { // M.SB
+  }, // M.SB
+  revenueReports: { // []rqProperty.RevenueReport
+  }, // []rqProperty.RevenueReport
+  chartRevenueReports: { // []rqProperty.ChartRevenueReport
+  }, // []rqProperty.ChartRevenueReport
+}
+/**
+ * @callback AdminRevenueReportCallback
+ * @param {AdminRevenueReportOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {AdminRevenueReportIn} i
+ * @param {AdminRevenueReportCallback} cb
+ * @returns {Promise}
+ */
+exports.AdminRevenueReport = async function AdminRevenueReport( i, cb ) {
+  return await axios.post( '/admin/revenueReport', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} AdminRoomIn
  * @property {String} cmd
  * @property {Object} withMeta
@@ -2722,77 +2793,6 @@ const StaffPricePerDayReportOut = {
  */
 exports.StaffPricePerDayReport = async function StaffPricePerDayReport( i, cb ) {
   return await axios.post( '/staff/pricePerDayReport', i ).
-    then( wrapOk( cb ) ).
-    catch( wrapErr( cb ) )
-}
-
-/**
- * @typedef {Object} AdminRevenueReportIn
- * @property {String} yearMonth
- */
-const AdminRevenueReportIn = {
-  yearMonth: '', // string
-}
-/**
- * @typedef {Object} AdminRevenueReportOut
- * @property {number} user.id
- * @property {String} user.email
- * @property {String} user.password
- * @property {number} user.createdAt
- * @property {number} user.createdBy
- * @property {number} user.updatedAt
- * @property {number} user.updatedBy
- * @property {number} user.deletedAt
- * @property {number} user.passwordSetAt
- * @property {String} user.secretCode
- * @property {number} user.secretCodeAt
- * @property {number} user.verifiedAt
- * @property {number} user.lastLoginAt
- * @property {String} user.fullName
- * @property {String} user.userName
- * @property {String} user.role
- * @property {Object} segments
- * @property {Object} revenueReports
- * @property {Object} chartRevenueReports
- */
-const AdminRevenueReportOut = {
-  user: { // rqAuth.Users
-    id: 0, // uint64
-    email: '', // string
-    password: '', // string
-    createdAt: 0, // int64
-    createdBy: 0, // uint64
-    updatedAt: 0, // int64
-    updatedBy: 0, // uint64
-    deletedAt: 0, // int64
-    passwordSetAt: 0, // int64
-    secretCode: '', // string
-    secretCodeAt: 0, // int64
-    verifiedAt: 0, // int64
-    lastLoginAt: 0, // int64
-    fullName: '', // string
-    userName: '', // string
-    role: '', // string
-  }, // rqAuth.Users
-  segments: { // M.SB
-  }, // M.SB
-  revenueReports: { // []rqProperty.RevenueReport
-  }, // []rqProperty.RevenueReport
-  chartRevenueReports: { // []rqProperty.ChartRevenueReport
-  }, // []rqProperty.ChartRevenueReport
-}
-/**
- * @callback AdminRevenueReportCallback
- * @param {AdminRevenueReportOut} o
- * @returns {Promise}
- */
-/**
- * @param  {AdminRevenueReportIn} i
- * @param {AdminRevenueReportCallback} cb
- * @returns {Promise}
- */
-exports.AdminRevenueReport = async function AdminRevenueReport( i, cb ) {
-  return await axios.post( '/admin/revenueReport', i ).
     then( wrapOk( cb ) ).
     catch( wrapErr( cb ) )
 }

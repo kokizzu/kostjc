@@ -9,7 +9,7 @@
 			<span class="block"></span>
 		</a>
     <a href="/admin/settingDatabase" class:active={segment2==='settingDatabase'}>
-			<span class="title">--</span>
+			<span class="title">Database</span>
 			<span class="block"></span>
 		</a>
 	</nav>
