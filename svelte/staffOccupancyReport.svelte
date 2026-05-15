@@ -389,6 +389,21 @@
 
     return parseFloat((daysPaid || 0).toFixed(1))
   }
+
+  /**
+   * @param {BookingDetail} booking
+   * @returns {number}
+   */
+  function totalDays(booking) {
+    const dateStart = new Date(booking.dateStart);
+    const dateEnd = new Date(booking.dateEnd);
+
+    // Inclusive booking duration for display.
+    // @ts-ignore
+    const totalDays = ((dateEnd - dateStart) / msPerDay) + 1;
+
+    return parseFloat((totalDays || 0).toFixed(1));
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -545,7 +560,7 @@
                             <span class="{showPaid ? '' : 'hidden'}">{booking.amountPaid}</span>
                             <span>/</span>
                             <span class="{showPrice ? '' : 'hidden'}">{booking.totalPrice}</span> 
-                            <span>({daysPaid(booking)}d)</span>
+                            <span>({daysPaid(booking)}d/{totalDays(booking)}d)</span>
                           </span>
                           <div class="actions">
                             <button class="btn" title="Extend Booking" on:click={() => onExtendBooking(booking.roomId)}>
