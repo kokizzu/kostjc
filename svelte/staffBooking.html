@@ -16419,10 +16419,16 @@ ${component_stack}
     }
     async function OnEdit(id, payloads) {
       const booking2 = {
-        id: payloads[0],
-        buildingName: String(payloads[1]),
-        locationId: String(payloads[2]),
-        facilitiesObj: String(payloads[3])
+        id,
+        roomId: payloads[1],
+        dateStart: payloads[3],
+        dateEnd: payloads[4],
+        tenantId: payloads[5],
+        basePriceIDR: payloads[6],
+        facilitiesObj: String(payloads[7]),
+        totalPriceIDR: payloads[8],
+        paidAt: payloads[9],
+        extraTenants: payloads[10]
       };
       const i = (
         /** @type {any}*/
@@ -16440,7 +16446,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(bookings, o.bookings);
-          notifier.showSuccess(`Booking '${booking2.buildingName}' updated !!`);
+          notifier.showSuccess(`Booking #${booking2.id} updated !!`);
           OnRefresh(get2(pager));
         }
       );
