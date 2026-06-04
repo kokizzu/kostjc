@@ -16392,9 +16392,15 @@ ${component_stack}
     function daysPaid(booking) {
       const dateStart2 = new Date(booking.dateStart);
       const dateEnd2 = new Date(booking.dateEnd);
-      const totalDays = (dateEnd2 - dateStart2) / msPerDay;
-      const daysPaid2 = booking.amountPaid / booking.totalPrice * totalDays + 1;
+      const totalDays2 = (dateEnd2 - dateStart2) / msPerDay;
+      const daysPaid2 = booking.amountPaid / booking.totalPrice * totalDays2 + 1;
       return parseFloat((daysPaid2 || 0).toFixed(1));
+    }
+    function totalDays(booking) {
+      const dateStart2 = new Date(booking.dateStart);
+      const dateEnd2 = new Date(booking.dateEnd);
+      const totalDays2 = (dateEnd2 - dateStart2) / msPerDay + 1;
+      return parseFloat((totalDays2 || 0).toFixed(1));
     }
     init();
     var fragment = root18();
@@ -16731,7 +16737,7 @@ ${component_stack}
                     reset(button_5);
                     reset(div_7);
                     template_effect(
-                      ($0, $1, $2, $3) => {
+                      ($0, $1, $2, $3, $4) => {
                         set_class(span_1, 1, get2(showTenant) ? "" : "hidden", "svelte-xzorz5");
                         set_text(text_3, `${get2(booking).tenantName ?? ""} ${(get2(booking).extraTenants || []).length ? "*" : ""}`);
                         set_class(span_3, 1, get2(showDateStart) ? "" : "hidden", "svelte-xzorz5");
@@ -16757,13 +16763,14 @@ ${component_stack}
                         set_text(text_6, get2(booking).amountPaid);
                         set_class(span_7, 1, get2(showPrice) ? "" : "hidden", "svelte-xzorz5");
                         set_text(text_7, get2(booking).totalPrice);
-                        set_text(text_8, `(${$3 ?? ""}d)`);
+                        set_text(text_8, `(${$3 ?? ""}d/${$4 ?? ""}d)`);
                       },
                       [
                         () => !get2(booking).isNearEnding && !get2(booking).isExtended ? `${!isDateToCharge(get2(booking).dateStart) ? "date-warning" : "date-alert"}` : "",
                         () => !get2(booking).isExtended && get2(booking).isNearEnding ? `${isDateToCharge(get2(booking).dateStart) ? "date-alert" : "date-warning"}` : "",
                         () => !get2(booking).isExtended && get2(booking).isNearEnding && get2(showHDaysSince) ? `(${getRelativeDayLabel(get2(booking).dateEnd)})` : "",
-                        () => daysPaid(get2(booking))
+                        () => daysPaid(get2(booking)),
+                        () => totalDays(get2(booking))
                       ]
                     );
                     event("click", button_2, () => onExtendBooking(get2(booking).roomId));

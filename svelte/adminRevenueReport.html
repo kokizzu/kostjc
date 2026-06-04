@@ -419,8 +419,19 @@
   }
 
   /* align right */
-  td.r.svelte-1iyi2kb, th.r.svelte-1iyi2kb {
+  td.r.svelte-1iyi2kb {
     text-align: right;
+  }
+
+  .summary-row.svelte-1iyi2kb {
+    position: sticky;
+    top: 0;
+    background: var(--gray-002);
+    z-index: 9;
+  }
+
+  .summary-row.svelte-1iyi2kb td:where(.svelte-1iyi2kb) {
+    border-bottom: 2px solid var(--gray-004);
   }
 </style>
 <script>(() => {
@@ -25179,6 +25190,51 @@ ${component_stack}
       null
     );
     let chartRevenueReports = prop($props, "chartRevenueReports", 24, () => []);
+    function buildDatasets(data) {
+      return [
+        {
+          label: "Cash",
+          type: "bar",
+          data: (data || []).map((i) => Number(i.cashIDR || 0)),
+          borderColor: "#22c55e",
+          backgroundColor: "#22c55e60",
+          borderWidth: 1,
+          stack: "revenue"
+        },
+        {
+          label: "Transfer",
+          type: "bar",
+          data: (data || []).map((i) => Number(i.transferIDR || 0)),
+          borderColor: "#38bdf8",
+          backgroundColor: "#38bdf860",
+          borderWidth: 1,
+          stack: "revenue"
+        },
+        {
+          label: "Total",
+          type: "line",
+          data: (data || []).map((i) => Number(i.revenueIDR || 0)),
+          borderColor: "#2563eb",
+          backgroundColor: "#2563eb20",
+          pointRadius: 0,
+          tension: 0.1,
+          fill: false,
+          pointStyle: "circle",
+          pointBackgroundColor: "#2563eb",
+          pointBorderWidth: 2,
+          pointHitRadius: 10
+        },
+        {
+          label: "Donation",
+          type: "bar",
+          data: (data || []).map((i) => Number(i.donationIDR || 0)),
+          borderColor: "#f59e0b",
+          backgroundColor: "#f59e0b60",
+          borderWidth: 1,
+          stack: "revenue"
+        }
+      ];
+    }
     setTimeout(
       () => {
         const ElmChart = (
@@ -25195,27 +25251,16 @@ ${component_stack}
               );
               return dt.toLocaleDateString("en-US", { month: "short", day: "2-digit" });
             }),
-            datasets: [
-              {
-                label: "Revenue",
-                data: (chartRevenueReports() || []).map((i) => Number(i.revenueIDR)),
-                borderColor: "#2563eb",
-                backgroundColor: "#2563eb60",
-                pointRadius: 0,
-                tension: 0.1,
-                fill: true,
-                pointStyle: "circle",
-                pointBackgroundColor: "#2563eb",
-                pointBorderWidth: 2,
-                pointHitRadius: 10
-              }
-            ]
+            datasets: buildDatasets(chartRevenueReports())
           },
           options: {
-            plugins: { legend: { display: false }, tooltip: { enabled: true } },
+            plugins: { legend: { display: true }, tooltip: { enabled: true } },
             maintainAspectRatio: false,
             responsive: true,
-            scales: { y: { beginAtZero: true } }
+            scales: {
+              x: { stacked: true },
+              y: { beginAtZero: true, stacked: true }
+            }
           }
         });
       },
@@ -25231,21 +25276,7 @@ ${component_stack}
           new Date(i.date)
         );
         return dt.toLocaleDateString("en-US", { month: "short", day: "2-digit" });
-      }), chart.data.datasets = [
-        {
-          label: "Revenue",
-          data: (data || []).map((i) => Number(i.revenueIDR)),
-          borderColor: "#2563eb",
-          backgroundColor: "#2563eb60",
-          pointRadius: 0,
-          tension: 0.1,
-          fill: true,
-          pointStyle: "circle",
-          pointBackgroundColor: "#2563eb",
-          pointBorderWidth: 2,
-          pointHitRadius: 10
-        }
-      ];
+      }), chart.data.datasets = buildDatasets(data);
       chart.update();
     }
     var $exports = { updateData };
@@ -25258,12 +25289,12 @@ ${component_stack}
 
   // adminRevenueReport.svelte
   var import_jsApi2 = __toESM(require_jsApi_GEN());
-  var root_22 = from_html(`<tr class="svelte-1iyi2kb"><td class="svelte-1iyi2kb"> </td><td class="svelte-1iyi2kb"> </td><td class="r svelte-1iyi2kb"> </td><td class="r svelte-1iyi2kb"> </td></tr>`);
-  var root_3 = from_html(`<tr class="svelte-1iyi2kb"><td class="svelte-1iyi2kb">No data</td></tr>`);
-  var root_12 = from_html(`<div class="report-container svelte-1iyi2kb"><div class="actions svelte-1iyi2kb"><!></div> <!> <div class="table-container svelte-1iyi2kb"><table class="svelte-1iyi2kb"><thead class="svelte-1iyi2kb"><tr class="svelte-1iyi2kb"><th style="min-width: 100px;" class="svelte-1iyi2kb">Date Start</th><th style="min-width: 170px;" class="svelte-1iyi2kb">Booking</th><th class="svelte-1iyi2kb">Revenue (IDR)</th><th class="svelte-1iyi2kb">Donation (IDR)</th></tr></thead><tbody class="svelte-1iyi2kb"><!><!></tbody><tfoot><tr class="svelte-1iyi2kb"><th class="svelte-1iyi2kb"></th><th class="svelte-1iyi2kb"></th><th class="r svelte-1iyi2kb"> </th><th class="r svelte-1iyi2kb"> </th></tr></tfoot></table></div></div>`);
+  var root_22 = from_html(`<tr class="svelte-1iyi2kb"><td class="svelte-1iyi2kb"> </td><td class="svelte-1iyi2kb"> </td><td class="r svelte-1iyi2kb"> </td><td class="r svelte-1iyi2kb"> </td><td class="r svelte-1iyi2kb"> </td><td class="r svelte-1iyi2kb"> </td></tr>`);
+  var root_3 = from_html(`<tr class="svelte-1iyi2kb"><td colspan="6" class="svelte-1iyi2kb">No data</td></tr>`);
+  var root_12 = from_html(`<div class="report-container svelte-1iyi2kb"><div class="actions svelte-1iyi2kb"><!></div> <!> <div class="table-container svelte-1iyi2kb"><table class="svelte-1iyi2kb"><thead class="svelte-1iyi2kb"><tr class="svelte-1iyi2kb"><th style="min-width: 100px;" class="svelte-1iyi2kb">Date Start</th><th style="min-width: 170px;" class="svelte-1iyi2kb">Booking</th><th class="svelte-1iyi2kb">Cash</th><th class="svelte-1iyi2kb">Transfer</th><th class="svelte-1iyi2kb">Total</th><th class="svelte-1iyi2kb">Donation</th></tr></thead><tbody class="svelte-1iyi2kb"><tr class="summary-row svelte-1iyi2kb"><td class="svelte-1iyi2kb"><strong>Total</strong></td><td class="svelte-1iyi2kb"></td><td class="r svelte-1iyi2kb"><strong> </strong></td><td class="r svelte-1iyi2kb"><strong> </strong></td><td class="r svelte-1iyi2kb"><strong> </strong></td><td class="r svelte-1iyi2kb"><strong> </strong></td></tr><!><!></tbody></table></div></div>`);
   var $css7 = {
     hash: "svelte-1iyi2kb",
-    code: ".report-container.svelte-1iyi2kb {display:flex;flex-direction:column;gap:30px;padding:20px;}.report-container.svelte-1iyi2kb .actions:where(.svelte-1iyi2kb) {display:flex;flex-direction:row;gap:10px;justify-content:center;}.report-container .actions .year-month {width:300px;}.table-container.svelte-1iyi2kb {overflow-x:auto;}table.svelte-1iyi2kb {width:100%;border-collapse:collapse;}table.svelte-1iyi2kb thead:where(.svelte-1iyi2kb) {position:sticky;top:0;background-color:var(--gray-002);z-index:10;border:none;}table.svelte-1iyi2kb thead:where(.svelte-1iyi2kb) tr:where(.svelte-1iyi2kb) th:where(.svelte-1iyi2kb) {text-align:left;padding:8px 12px;text-wrap:nowrap;}table.svelte-1iyi2kb tbody:where(.svelte-1iyi2kb) tr:where(.svelte-1iyi2kb) {border-bottom:1px solid var(--gray-004);}table.svelte-1iyi2kb tr:where(.svelte-1iyi2kb) td:where(.svelte-1iyi2kb), table.svelte-1iyi2kb tr:where(.svelte-1iyi2kb) th:where(.svelte-1iyi2kb) {padding:4px 12px;}\n\n  @media only screen and (max-width : 768px) {.report-container.svelte-1iyi2kb .actions:where(.svelte-1iyi2kb) {flex-direction:column;}.report-container .actions .year-month {width:100%;}.report-container .actions .submit-btn {width:100% !important;}\n  }\n\n  /* align right */td.r.svelte-1iyi2kb, th.r.svelte-1iyi2kb {text-align:right;}"
+    code: ".report-container.svelte-1iyi2kb {display:flex;flex-direction:column;gap:30px;padding:20px;}.report-container.svelte-1iyi2kb .actions:where(.svelte-1iyi2kb) {display:flex;flex-direction:row;gap:10px;justify-content:center;}.report-container .actions .year-month {width:300px;}.table-container.svelte-1iyi2kb {overflow-x:auto;}table.svelte-1iyi2kb {width:100%;border-collapse:collapse;}table.svelte-1iyi2kb thead:where(.svelte-1iyi2kb) {position:sticky;top:0;background-color:var(--gray-002);z-index:10;border:none;}table.svelte-1iyi2kb thead:where(.svelte-1iyi2kb) tr:where(.svelte-1iyi2kb) th:where(.svelte-1iyi2kb) {text-align:left;padding:8px 12px;text-wrap:nowrap;}table.svelte-1iyi2kb tbody:where(.svelte-1iyi2kb) tr:where(.svelte-1iyi2kb) {border-bottom:1px solid var(--gray-004);}table.svelte-1iyi2kb tr:where(.svelte-1iyi2kb) td:where(.svelte-1iyi2kb), table.svelte-1iyi2kb tr:where(.svelte-1iyi2kb) th:where(.svelte-1iyi2kb) {padding:4px 12px;}\n\n  @media only screen and (max-width : 768px) {.report-container.svelte-1iyi2kb .actions:where(.svelte-1iyi2kb) {flex-direction:column;}.report-container .actions .year-month {width:100%;}.report-container .actions .submit-btn {width:100% !important;}\n  }\n\n  /* align right */td.r.svelte-1iyi2kb {text-align:right;}.summary-row.svelte-1iyi2kb {position:sticky;top:0;background:var(--gray-002);z-index:9;}.summary-row.svelte-1iyi2kb td:where(.svelte-1iyi2kb) {border-bottom:2px solid var(--gray-004);}"
   };
   function AdminRevenueReport_1($anchor, $props) {
     push($props, false);
@@ -25325,6 +25356,8 @@ ${component_stack}
       set(isLoading, false);
     }
     let sumRevenueIDR = mutable_source(0);
+    let sumCashIDR = mutable_source(0);
+    let sumTransferIDR = mutable_source(0);
     let sumDonationIDR = mutable_source(0);
     function formatDateLong(dateStr) {
       const dt = new Date(dateStr);
@@ -25336,11 +25369,15 @@ ${component_stack}
       });
     }
     legacy_pre_effect(
-      () => (get2(sumRevenueIDR), get2(sumDonationIDR), get2(revenueReports)),
+      () => (get2(sumCashIDR), get2(sumTransferIDR), get2(sumRevenueIDR), get2(sumDonationIDR), get2(revenueReports)),
       () => {
+        set(sumCashIDR, 0);
+        set(sumTransferIDR, 0);
         set(sumRevenueIDR, 0);
         set(sumDonationIDR, 0);
         for (let i = 0; i < (get2(revenueReports) || []).length; i++) {
+          set(sumCashIDR, get2(sumCashIDR) + (get2(revenueReports)[i].cashIDR | 0));
+          set(sumTransferIDR, get2(sumTransferIDR) + (get2(revenueReports)[i].transferIDR | 0));
           set(sumRevenueIDR, get2(sumRevenueIDR) + (get2(revenueReports)[i].revenueIDR | 0));
           set(sumDonationIDR, get2(sumDonationIDR) + (get2(revenueReports)[i].donationIDR | 0));
         }
@@ -25389,62 +25426,84 @@ ${component_stack}
         var div_2 = sibling(node_1, 2);
         var table = child(div_2);
         var tbody = sibling(child(table));
-        var node_2 = child(tbody);
+        var tr = child(tbody);
+        var td = sibling(child(tr), 2);
+        var strong = child(td);
+        var text2 = child(strong, true);
+        reset(strong);
+        reset(td);
+        var td_1 = sibling(td);
+        var strong_1 = child(td_1);
+        var text_1 = child(strong_1, true);
+        reset(strong_1);
+        reset(td_1);
+        var td_2 = sibling(td_1);
+        var strong_2 = child(td_2);
+        var text_2 = child(strong_2, true);
+        reset(strong_2);
+        reset(td_2);
+        var td_3 = sibling(td_2);
+        var strong_3 = child(td_3);
+        var text_3 = child(strong_3, true);
+        reset(strong_3);
+        reset(td_3);
+        reset(tr);
+        var node_2 = sibling(tr);
         each(node_2, 1, () => get2(revenueReports) || [], index, ($anchor3, data) => {
-          var tr = root_22();
-          var td = child(tr);
-          var text2 = child(td, true);
-          reset(td);
-          var td_1 = sibling(td);
-          var text_1 = child(td_1, true);
-          reset(td_1);
-          var td_2 = sibling(td_1);
-          var text_2 = child(td_2, true);
-          reset(td_2);
-          var td_3 = sibling(td_2);
-          var text_3 = child(td_3, true);
-          reset(td_3);
-          reset(tr);
+          var tr_1 = root_22();
+          var td_4 = child(tr_1);
+          var text_4 = child(td_4, true);
+          reset(td_4);
+          var td_5 = sibling(td_4);
+          var text_5 = child(td_5, true);
+          reset(td_5);
+          var td_6 = sibling(td_5);
+          var text_6 = child(td_6, true);
+          reset(td_6);
+          var td_7 = sibling(td_6);
+          var text_7 = child(td_7, true);
+          reset(td_7);
+          var td_8 = sibling(td_7);
+          var text_8 = child(td_8, true);
+          reset(td_8);
+          var td_9 = sibling(td_8);
+          var text_9 = child(td_9, true);
+          reset(td_9);
+          reset(tr_1);
           template_effect(
             ($0) => {
-              set_text(text2, $0);
-              set_text(text_1, (get2(data), untrack(() => bookings[get2(data).bookingId])));
-              set_text(text_2, (get2(data), untrack(() => get2(data).revenueIDR)));
-              set_text(text_3, (get2(data), untrack(() => get2(data).donationIDR)));
+              set_text(text_4, $0);
+              set_text(text_5, (get2(data), untrack(() => bookings[get2(data).bookingId])));
+              set_text(text_6, (get2(data), untrack(() => get2(data).cashIDR)));
+              set_text(text_7, (get2(data), untrack(() => get2(data).transferIDR)));
+              set_text(text_8, (get2(data), untrack(() => get2(data).revenueIDR)));
+              set_text(text_9, (get2(data), untrack(() => get2(data).donationIDR)));
             },
             [
               () => (get2(data), untrack(() => formatDateLong(get2(data).dateStart)))
             ]
           );
-          append($anchor3, tr);
+          append($anchor3, tr_1);
         });
         var node_3 = sibling(node_2);
         {
           var consequent = ($anchor3) => {
-            var tr_1 = root_3();
-            append($anchor3, tr_1);
+            var tr_2 = root_3();
+            append($anchor3, tr_2);
           };
           if_block(node_3, ($render) => {
             if (get2(revenueReports), untrack(() => !get2(revenueReports) || !get2(revenueReports).length)) $render(consequent);
           });
         }
         reset(tbody);
-        var tfoot = sibling(tbody);
-        var tr_2 = child(tfoot);
-        var th = sibling(child(tr_2), 2);
-        var text_4 = child(th, true);
-        reset(th);
-        var th_1 = sibling(th);
-        var text_5 = child(th_1, true);
-        reset(th_1);
-        reset(tr_2);
-        reset(tfoot);
         reset(table);
         reset(div_2);
         reset(div);
         template_effect(() => {
-          set_text(text_4, get2(sumRevenueIDR));
-          set_text(text_5, get2(sumDonationIDR));
+          set_text(text2, get2(sumCashIDR));
+          set_text(text_1, get2(sumTransferIDR));
+          set_text(text_2, get2(sumRevenueIDR));
+          set_text(text_3, get2(sumDonationIDR));
         });
         append($anchor2, div);
       },

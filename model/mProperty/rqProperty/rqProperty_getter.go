@@ -1335,6 +1335,8 @@ ORDER BY t."tenantName" ASC`
 type RevenueReport struct {
 	DateStart   string `json:"dateStart"`
 	BookingId   uint64 `json:"bookingId"`
+	CashIDR     int64  `json:"cashIDR"`
+	TransferIDR int64  `json:"transferIDR"`
 	RevenueIDR  int64  `json:"revenueIDR"`
 	DonationIDR int64  `json:"donationIDR"`
 }
@@ -1351,7 +1353,17 @@ SELECT
 	"bookings"."dateStart",
 	"bookings"."id" AS "bookingId",
 	SUM(CASE 
-		WHEN "paymentMethod" != 'Donation'
+		WHEN "paymentMethod" = 'Cash'
+			THEN "payments"."paidIDR"
+		ELSE 0
+	END) AS "cashIDR",
+	SUM(CASE 
+		WHEN "paymentMethod" = 'Transfer'
+			THEN "payments"."paidIDR"
+		ELSE 0
+	END) AS "transferIDR",
+	SUM(CASE 
+		WHEN "paymentMethod" IN ('Cash', 'Transfer')
 			THEN "payments"."paidIDR"
 		ELSE 0
 	END) AS "revenueIDR",
@@ -1368,14 +1380,18 @@ WHERE
 GROUP BY "bookings"."id"`
 
 	b.Adapter.QuerySql(query, func(row []any) {
-		if len(row) == 4 {
+		if len(row) == 6 {
 			dateStart := X.ToS(row[0])
 			bookingId := X.ToU(row[1])
-			revenueIDR := X.ToI(row[2])
-			donationIDR := X.ToI(row[3])
+			cashIDR := X.ToI(row[2])
+			transferIDR := X.ToI(row[3])
+			revenueIDR := X.ToI(row[4])
+			donationIDR := X.ToI(row[5])
 			out = append(out, RevenueReport{
 				DateStart:   dateStart,
 				BookingId:   bookingId,
+				CashIDR:     cashIDR,
+				TransferIDR: transferIDR,
 				RevenueIDR:  revenueIDR,
 				DonationIDR: donationIDR,
 			})
@@ -1737,8 +1753,11 @@ func isValidMonthYear(in string) (year int, month time.Month, isValid bool) {
 }
 
 type ChartRevenueReport struct {
-	Date       string `json:"date"`
-	RevenueIDR int64  `json:"revenueIDR"`
+	Date        string `json:"date"`
+	CashIDR     int64  `json:"cashIDR"`
+	TransferIDR int64  `json:"transferIDR"`
+	RevenueIDR  int64  `json:"revenueIDR"`
+	DonationIDR int64  `json:"donationIDR"`
 }
 
 func (p *Payments) GetChartRevenueReports(yearMonth string) (out []ChartRevenueReport) {
@@ -1761,10 +1780,25 @@ func (p *Payments) GetChartRevenueReports(yearMonth string) (out []ChartRevenueR
 SELECT
 	"paymentAt",
 	SUM(CASE 
-		WHEN "paymentMethod" != 'Donation'
+		WHEN "paymentMethod" = 'Cash'
 			THEN "paidIDR"
 		ELSE 0
-	END)
+	END) AS "cashIDR",
+	SUM(CASE 
+		WHEN "paymentMethod" = 'Transfer'
+			THEN "paidIDR"
+		ELSE 0
+	END) AS "transferIDR",
+	SUM(CASE 
+		WHEN "paymentMethod" IN ('Cash', 'Transfer')
+			THEN "paidIDR"
+		ELSE 0
+	END) AS "revenueIDR",
+	SUM(CASE 
+		WHEN "paymentMethod" = 'Donation'
+			THEN "paidIDR"
+		ELSE 0
+	END) AS "donationIDR"
 FROM "payments"
 WHERE
 	"deletedAt" = 0
@@ -1773,10 +1807,13 @@ WHERE
 GROUP BY "paymentAt"`
 
 	p.Adapter.QuerySql(query, func(row []any) {
-		if len(row) == 2 {
+		if len(row) == 5 {
 			out = append(out, ChartRevenueReport{
-				Date:       X.ToS(row[0]),
-				RevenueIDR: X.ToI(row[1]),
+				Date:        X.ToS(row[0]),
+				CashIDR:     X.ToI(row[1]),
+				TransferIDR: X.ToI(row[2]),
+				RevenueIDR:  X.ToI(row[3]),
+				DonationIDR: X.ToI(row[4]),
 			})
 		}
 	})

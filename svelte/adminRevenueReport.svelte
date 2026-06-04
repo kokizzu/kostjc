@@ -6,6 +6,8 @@
    * @typedef {Object} RevenueReport
    * @property {string} dateStart
    * @property {number} bookingId
+   * @property {number} cashIDR
+   * @property {number} transferIDR
    * @property {number} revenueIDR
    * @property {number} donationIDR
    */
@@ -49,12 +51,18 @@
   }
 
   let sumRevenueIDR = 0;
+  let sumCashIDR = 0;
+  let sumTransferIDR = 0;
   let sumDonationIDR = 0;
 
   $: {
+    sumCashIDR = 0;
+    sumTransferIDR = 0;
     sumRevenueIDR = 0;
     sumDonationIDR = 0;
     for(let i=0; i< (revenueReports || []).length; i++) {
+      sumCashIDR += revenueReports[i].cashIDR|0
+      sumTransferIDR += revenueReports[i].transferIDR|0
       sumRevenueIDR += revenueReports[i].revenueIDR|0
       sumDonationIDR += revenueReports[i].donationIDR|0
     }
@@ -90,15 +98,27 @@
           <tr>
             <th style="min-width: 100px;">Date Start</th>
             <th style="min-width: 170px;">Booking</th>
-            <th>Revenue (IDR)</th>
-            <th>Donation (IDR)</th>
+            <th>Cash</th>
+            <th>Transfer</th>
+            <th>Total</th>
+            <th>Donation</th>
           </tr>
         </thead>
         <tbody>
+          <tr class="summary-row">
+            <td><strong>Total</strong></td>
+            <td></td>
+            <td class="r"><strong>{sumCashIDR}</strong></td>
+            <td class="r"><strong>{sumTransferIDR}</strong></td>
+            <td class="r"><strong>{sumRevenueIDR}</strong></td>
+            <td class="r"><strong>{sumDonationIDR}</strong></td>
+          </tr>
           {#each (revenueReports || []) as data}
             <tr>
               <td>{formatDateLong(data.dateStart)}</td>
               <td>{bookings[data.bookingId]}</td>
+              <td class="r">{data.cashIDR}</td>
+              <td class="r">{data.transferIDR}</td>
               <td class="r">{data.revenueIDR}</td>
               <td class="r">{data.donationIDR}</td>
             </tr>
@@ -106,18 +126,10 @@
 
           {#if !revenueReports || !revenueReports.length}
             <tr>
-              <td>No data</td>
+              <td colspan="6">No data</td>
             </tr>
           {/if}
         </tbody>
-			<tfoot>
-				<tr>
-					<th></th>
-					<th></th>
-					<th class="r">{sumRevenueIDR}</th>
-					<th class="r">{sumDonationIDR}</th>
-				</tr>
-			</tfoot>
       </table>
     </div>
   </div>
@@ -188,7 +200,18 @@
   }
 
   /* align right */
-  td.r, th.r {
+  td.r {
     text-align: right;
+  }
+
+  .summary-row {
+    position: sticky;
+    top: 0;
+    background: var(--gray-002);
+    z-index: 9;
+  }
+
+  .summary-row td {
+    border-bottom: 2px solid var(--gray-004);
   }
 </style>

@@ -198,7 +198,10 @@ module.exports = {};
 /**
  * @typedef {Object} ChartRevenueReport
  * @property {string} date
+ * @property {number} cashIDR
+ * @property {number} transferIDR
  * @property {number} revenueIDR
+ * @property {number} donationIDR
  */
 module.exports = {};
 
