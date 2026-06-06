@@ -380,19 +380,38 @@
     width: 100%;
     background-color: var(--gray-001);
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
-    display: flex;
+    display: block;
     color: var(--gray-008);
   }
 
-  .auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) {
-    width: 480px;
+  .auth-grid.svelte-49zqbc {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    padding: 20px;
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .auth-card.svelte-49zqbc {
+    min-width: 0;
+  }
+
+  .summary-card-wrap.svelte-49zqbc {
+    min-width: 0;
+    grid-column: span 3;
+  }
+
+  .auth-card.svelte-49zqbc .main-container:where(.svelte-49zqbc) {
+    width: 100%;
     height: fit-content;
     padding: 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     background-color: white;
-    margin: 50px auto;
+    margin: 0;
     border: 1px solid var(--gray-003);
     gap: 10px;
   }
@@ -503,12 +522,31 @@
     text-decoration: underline;
   }
 
+  @media only screen and (min-width : 769px) and (max-width : 1080px) {
+    .auth-grid.svelte-49zqbc {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .summary-card-wrap.svelte-49zqbc {
+      grid-column: auto;
+    }
+  }
+
   @media only screen and (max-width : 768px) {
     .auth-section.svelte-49zqbc {
       background-color: #FFF;
     }
 
-    .auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) {
+    .auth-grid.svelte-49zqbc {
+      grid-template-columns: 1fr;
+      padding: 16px;
+    }
+
+    .summary-card-wrap.svelte-49zqbc {
+      grid-column: auto;
+    }
+
+    .auth-card.svelte-49zqbc .main-container:where(.svelte-49zqbc) {
       border: none;
     }
   }
@@ -4318,11 +4356,11 @@ ${component_stack}
       var effects = collected_effects = [];
       var render_effects = [];
       var updates = legacy_updates = [];
-      for (const root22 of roots) {
+      for (const root23 of roots) {
         try {
-          this.#traverse(root22, effects, render_effects);
+          this.#traverse(root23, effects, render_effects);
         } catch (e) {
-          reset_all(root22);
+          reset_all(root23);
           throw e;
         }
       }
@@ -4384,9 +4422,9 @@ ${component_stack}
      * @param {Effect[]} effects
      * @param {Effect[]} render_effects
      */
-    #traverse(root22, effects, render_effects) {
-      root22.f ^= CLEAN;
-      var effect2 = root22.first;
+    #traverse(root23, effects, render_effects) {
+      root23.f ^= CLEAN;
+      var effect2 = root23.first;
       while (effect2 !== null) {
         var flags2 = effect2.f;
         var is_branch = (flags2 & (BRANCH_EFFECT | ROOT_EFFECT)) !== 0;
@@ -4553,8 +4591,8 @@ ${component_stack}
           }
           if (batch.#roots.length > 0) {
             batch.apply();
-            for (var root22 of batch.#roots) {
-              batch.#traverse(root22, [], []);
+            for (var root23 of batch.#roots) {
+              batch.#traverse(root23, [], []);
             }
             batch.#roots = [];
           }
@@ -6909,7 +6947,7 @@ ${component_stack}
     }
     return false;
   }
-  function schedule_possible_effect_self_invalidation(signal, effect2, root22 = true) {
+  function schedule_possible_effect_self_invalidation(signal, effect2, root23 = true) {
     var reactions = signal.reactions;
     if (reactions === null) return;
     if (!async_mode_flag && current_sources !== null && includes.call(current_sources, signal)) {
@@ -6925,7 +6963,7 @@ ${component_stack}
           false
         );
       } else if (effect2 === reaction) {
-        if (root22) {
+        if (root23) {
           set_signal_status(reaction, DIRTY);
         } else if ((reaction.f & CLEAN) !== 0) {
           set_signal_status(reaction, MAYBE_DIRTY);
@@ -7696,21 +7734,21 @@ ${component_stack}
           /** @type {DocumentFragment} */
           create_fragment_from_html(wrapped)
         );
-        var root22 = (
+        var root23 = (
           /** @type {Element} */
           get_first_child(fragment)
         );
         if (is_fragment) {
           node = document.createDocumentFragment();
-          while (get_first_child(root22)) {
+          while (get_first_child(root23)) {
             node.appendChild(
               /** @type {TemplateNode} */
-              get_first_child(root22)
+              get_first_child(root23)
             );
           }
         } else {
           node = /** @type {Element} */
-          get_first_child(root22);
+          get_first_child(root23);
         }
       }
       var clone = (
@@ -8791,16 +8829,16 @@ ${component_stack}
   // node_modules/.pnpm/svelte@5.55.2/node_modules/svelte/src/internal/client/dom/css.js
   function append_styles(anchor, css) {
     effect(() => {
-      var root22 = anchor.getRootNode();
+      var root23 = anchor.getRootNode();
       var target2 = (
         /** @type {ShadowRoot} */
-        root22.host ? (
+        root23.host ? (
           /** @type {ShadowRoot} */
-          root22
+          root23
         ) : (
           /** @type {Document} */
-          root22.head ?? /** @type {Document} */
-          root22.ownerDocument.head
+          root23.head ?? /** @type {Document} */
+          root23.ownerDocument.head
         )
       );
       if (!target2.querySelector("#" + css.hash)) {
@@ -11545,7 +11583,7 @@ ${component_stack}
   function observeMove(element2, onMove) {
     let io = null;
     let timeoutId;
-    const root22 = getDocumentElement(element2);
+    const root23 = getDocumentElement(element2);
     function cleanup() {
       var _io;
       clearTimeout(timeoutId);
@@ -11574,8 +11612,8 @@ ${component_stack}
         return;
       }
       const insetTop = floor(top);
-      const insetRight = floor(root22.clientWidth - (left + width));
-      const insetBottom = floor(root22.clientHeight - (top + height));
+      const insetRight = floor(root23.clientWidth - (left + width));
+      const insetBottom = floor(root23.clientHeight - (top + height));
       const insetLeft = floor(left);
       const rootMargin = -insetTop + "px " + -insetRight + "px " + -insetBottom + "px " + -insetLeft + "px";
       const options = {
@@ -11606,7 +11644,7 @@ ${component_stack}
         io = new IntersectionObserver(handleObserve, {
           ...options,
           // Handle <iframe>s
-          root: root22.ownerDocument
+          root: root23.ownerDocument
         });
       } catch (_e) {
         io = new IntersectionObserver(handleObserve, options);
@@ -14605,13 +14643,13 @@ ${component_stack}
 
   // _partials/home/UnpaidBookingRecap.svelte
   var import_xFormatter2 = __toESM(require_xFormatter());
-  var root_28 = from_html(`<tr><td class="svelte-1x4k5tt"> </td><td class="svelte-1x4k5tt"> </td><td class="svelte-1x4k5tt"> </td><td class="days svelte-1x4k5tt"> </td><td class="svelte-1x4k5tt"> </td></tr>`);
+  var root_28 = from_html(`<tr class="svelte-1x4k5tt"><td class="svelte-1x4k5tt"> </td><td class="svelte-1x4k5tt"> </td><td class="svelte-1x4k5tt"> </td><td class="days svelte-1x4k5tt"> </td><td> </td></tr>`);
   var root_112 = from_html(`<div class="table-wrap svelte-1x4k5tt"><table class="svelte-1x4k5tt"><thead class="svelte-1x4k5tt"><tr><th class="svelte-1x4k5tt"><button><span>Tenant</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th><th class="svelte-1x4k5tt"><button><span>Total Unpaid</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th><th class="svelte-1x4k5tt"><button><span>Earliest Start</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th><th class="svelte-1x4k5tt"><button><span>Days</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th><th class="svelte-1x4k5tt"><button><span>Rooms</span> <span class="sort-icon svelte-1x4k5tt" aria-hidden="true">\u25BC</span></button></th></tr></thead><tbody class="svelte-1x4k5tt"></tbody></table></div>`);
   var root_33 = from_html(`<div class="empty-state svelte-1x4k5tt"><p class="svelte-1x4k5tt">No unpaid recap.</p></div>`);
   var root13 = from_html(`<section class="unpaid-booking-recap svelte-1x4k5tt"><div class="header svelte-1x4k5tt"><h1 class="svelte-1x4k5tt">Unpaid Recap</h1> <p class="svelte-1x4k5tt">Click a header to sort that column descending.</p></div> <!></section>`);
   var $css12 = {
     hash: "svelte-1x4k5tt",
-    code: ".unpaid-booking-recap.svelte-1x4k5tt {display:flex;flex-direction:column;gap:20px;}.header.svelte-1x4k5tt {display:flex;flex-direction:column;gap:4px;}.header.svelte-1x4k5tt h1:where(.svelte-1x4k5tt),\n  .header.svelte-1x4k5tt p:where(.svelte-1x4k5tt) {margin:0;}.header.svelte-1x4k5tt h1:where(.svelte-1x4k5tt) {font-size:var(--font-xl);}.header.svelte-1x4k5tt p:where(.svelte-1x4k5tt) {color:var(--gray-007);}.table-wrap.svelte-1x4k5tt {overflow-x:auto;border:1px solid var(--gray-003);border-radius:12px;background-color:#fff;}table.svelte-1x4k5tt {width:100%;border-collapse:collapse;min-width:680px;}thead.svelte-1x4k5tt {background:linear-gradient(135deg, var(--red-transparent), transparent 70%),\n      var(--gray-001);}th.svelte-1x4k5tt,\n  td.svelte-1x4k5tt {padding:3px 14px;text-align:left;border-bottom:1px solid var(--gray-003);vertical-align:top;}th.svelte-1x4k5tt {padding:0;}td.svelte-1x4k5tt {font-weight:500;transition:background-color 0.15s ease;}.sort-header.svelte-1x4k5tt {display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:3px 14px;border:none;background:transparent;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--gray-007);cursor:pointer;transition:color 0.15s ease, background-color 0.15s ease;}.sort-icon.svelte-1x4k5tt {flex:none;font-size:10px;opacity:0.45;transition:opacity 0.15s ease, transform 0.15s ease;}.sort-header.svelte-1x4k5tt:hover,\n  .sort-header.active.svelte-1x4k5tt {color:var(--red-006);}.sort-header.svelte-1x4k5tt:hover .sort-icon:where(.svelte-1x4k5tt),\n  .sort-header.active.svelte-1x4k5tt .sort-icon:where(.svelte-1x4k5tt) {opacity:1;transform:translateY(1px);}.sort-header.svelte-1x4k5tt:focus-visible {outline:2px solid var(--red-005);outline-offset:-2px;}tbody.svelte-1x4k5tt tr.room-purple:where(.svelte-1x4k5tt) td:where(.svelte-1x4k5tt) {background-color:#faf5ff;}tbody.svelte-1x4k5tt tr.room-yellow:where(.svelte-1x4k5tt) td:where(.svelte-1x4k5tt) {background-color:#fffdf2;}tbody.svelte-1x4k5tt tr:where(.svelte-1x4k5tt):hover td:where(.svelte-1x4k5tt) {background-color:var(--red-transparent);}tbody.svelte-1x4k5tt tr:where(.svelte-1x4k5tt):last-child td:where(.svelte-1x4k5tt) {border-bottom:none;}.days.svelte-1x4k5tt {font-weight:700;color:var(--red-006);}.empty-state.svelte-1x4k5tt {padding:18px;border-radius:12px;background-color:var(--gray-001);}.empty-state.svelte-1x4k5tt p:where(.svelte-1x4k5tt) {margin:0;}\n\n  @media only screen and (max-width: 768px) {td.svelte-1x4k5tt {font-size:13px;padding:3px 12px;}th.svelte-1x4k5tt {padding:0;}.sort-header.svelte-1x4k5tt {padding:3px 12px;font-size:13px;}\n  }"
+    code: ".unpaid-booking-recap.svelte-1x4k5tt {display:flex;flex-direction:column;gap:20px;}.header.svelte-1x4k5tt {display:flex;flex-direction:column;gap:4px;}.header.svelte-1x4k5tt h1:where(.svelte-1x4k5tt),\n  .header.svelte-1x4k5tt p:where(.svelte-1x4k5tt) {margin:0;}.header.svelte-1x4k5tt h1:where(.svelte-1x4k5tt) {font-size:var(--font-xl);}.header.svelte-1x4k5tt p:where(.svelte-1x4k5tt) {color:var(--gray-007);}.table-wrap.svelte-1x4k5tt {overflow-x:auto;border:1px solid var(--gray-003);border-radius:12px;background-color:#fff;}table.svelte-1x4k5tt {width:100%;border-collapse:collapse;min-width:680px;}thead.svelte-1x4k5tt {background:linear-gradient(135deg, var(--red-transparent), transparent 70%),\n      var(--gray-001);}th.svelte-1x4k5tt,\n  td.svelte-1x4k5tt {padding:3px 14px;text-align:left;border-bottom:1px solid var(--gray-003);vertical-align:top;}th.svelte-1x4k5tt {padding:0;}td.svelte-1x4k5tt {font-weight:500;transition:background-color 0.15s ease;}.sort-header.svelte-1x4k5tt {display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:3px 14px;border:none;background:transparent;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--gray-007);cursor:pointer;transition:color 0.15s ease, background-color 0.15s ease;}.sort-icon.svelte-1x4k5tt {flex:none;font-size:10px;opacity:0.45;transition:opacity 0.15s ease, transform 0.15s ease;}.sort-header.svelte-1x4k5tt:hover,\n  .sort-header.active.svelte-1x4k5tt {color:var(--red-006);}.sort-header.svelte-1x4k5tt:hover .sort-icon:where(.svelte-1x4k5tt),\n  .sort-header.active.svelte-1x4k5tt .sort-icon:where(.svelte-1x4k5tt) {opacity:1;transform:translateY(1px);}.sort-header.svelte-1x4k5tt:focus-visible {outline:2px solid var(--red-005);outline-offset:-2px;}tbody.svelte-1x4k5tt tr:where(.svelte-1x4k5tt):nth-child(odd) td:where(.svelte-1x4k5tt) {background-color:var(--gray-001);}tbody.svelte-1x4k5tt tr:where(.svelte-1x4k5tt):nth-child(even) td:where(.svelte-1x4k5tt) {background-color:var(--gray-002);}tbody.svelte-1x4k5tt tr:where(.svelte-1x4k5tt):hover td:where(.svelte-1x4k5tt) {background-color:var(--red-transparent);}.room-cell.room-purple.svelte-1x4k5tt {background-color:#faf5ff;color:#6b21a8;}.room-cell.room-yellow.svelte-1x4k5tt {background-color:#fffdf2;color:#a16207;}.room-cell.svelte-1x4k5tt {font-weight:700;}tbody.svelte-1x4k5tt tr:where(.svelte-1x4k5tt):last-child td:where(.svelte-1x4k5tt) {border-bottom:none;}.days.svelte-1x4k5tt {font-weight:700;color:var(--red-006);}.empty-state.svelte-1x4k5tt {padding:18px;border-radius:12px;background-color:var(--gray-001);}.empty-state.svelte-1x4k5tt p:where(.svelte-1x4k5tt) {margin:0;}\n\n  @media only screen and (max-width: 768px) {td.svelte-1x4k5tt {font-size:13px;padding:3px 12px;}th.svelte-1x4k5tt {padding:0;}.sort-header.svelte-1x4k5tt {padding:3px 12px;font-size:13px;}\n  }"
   };
   function UnpaidBookingRecap($anchor, $props) {
     push($props, false);
@@ -14733,7 +14771,6 @@ ${component_stack}
         var tbody = sibling(thead);
         each(tbody, 5, () => get2(sortedRecapItems), (item) => `${item.tenantName}-${item.earliestStartDate}`, ($anchor3, item) => {
           var tr_1 = root_28();
-          let classes_5;
           var td = child(tr_1);
           var text2 = child(td, true);
           reset(td);
@@ -14747,24 +14784,25 @@ ${component_stack}
           var text_3 = child(td_3, true);
           reset(td_3);
           var td_4 = sibling(td_3);
+          let classes_5;
           var text_4 = child(td_4, true);
           reset(td_4);
           reset(tr_1);
           template_effect(
             ($0, $1, $2) => {
-              classes_5 = set_class(tr_1, 1, "svelte-1x4k5tt", null, classes_5, $0);
               set_text(text2, (get2(item), untrack(() => get2(item).tenantName)));
-              set_text(text_1, $1);
+              set_text(text_1, $0);
               set_text(text_2, (get2(item), untrack(() => get2(item).earliestStartDate)));
               set_text(text_3, (get2(item), untrack(() => get2(item).overdueDays)));
+              classes_5 = set_class(td_4, 1, "room-cell svelte-1x4k5tt", null, classes_5, $1);
               set_text(text_4, $2);
             },
             [
+              () => (deep_read_state(import_xFormatter2.formatPrice), get2(item), untrack(() => (0, import_xFormatter2.formatPrice)(get2(item).unpaidAmount, "IDR"))),
               () => ({
                 "room-purple": hasPurpleRoom(get2(item).roomNames),
                 "room-yellow": !hasPurpleRoom(get2(item).roomNames)
               }),
-              () => (deep_read_state(import_xFormatter2.formatPrice), get2(item), untrack(() => (0, import_xFormatter2.formatPrice)(get2(item).unpaidAmount, "IDR"))),
               () => (get2(item), untrack(() => get2(item).roomNames.join(", ")))
             ]
           );
@@ -16573,23 +16611,223 @@ ${component_stack}
     append($anchor, section);
   }
 
+  // _partials/home/PublicSummary.svelte
+  var root_215 = from_html(`<li class="svelte-1qjgqcj"><span class="tenant svelte-1qjgqcj"> </span> <span> </span> <span class="date svelte-1qjgqcj"> </span> <span class="days svelte-1qjgqcj"> </span></li>`);
+  var root_119 = from_html(`<div class="row-grid row-head svelte-1qjgqcj"><span class="svelte-1qjgqcj">Tenant</span> <span class="svelte-1qjgqcj">Room</span> <span class="svelte-1qjgqcj">Last date</span> <span class="svelte-1qjgqcj">Late days</span></div> <ul class="row-grid svelte-1qjgqcj"></ul>`, 1);
+  var root_38 = from_html(`<p class="empty svelte-1qjgqcj">No unpaid tenant info available.</p>`);
+  var root_53 = from_html(`<li class="svelte-1qjgqcj"><span class="tenant svelte-1qjgqcj"> </span> <span> </span> <span class="date svelte-1qjgqcj"> </span> <span class="days svelte-1qjgqcj"> </span></li>`);
+  var root_45 = from_html(`<div class="row-grid row-head svelte-1qjgqcj"><span class="svelte-1qjgqcj">Tenant</span> <span class="svelte-1qjgqcj">Room</span> <span class="svelte-1qjgqcj">Last date</span> <span class="svelte-1qjgqcj">Days ago</span></div> <ul class="row-grid svelte-1qjgqcj"></ul>`, 1);
+  var root_62 = from_html(`<p class="empty svelte-1qjgqcj">No room extension info available.</p>`);
+  var root_83 = from_html(`<li class="svelte-1qjgqcj"><span class="tenant svelte-1qjgqcj"> </span> <span> </span></li>`);
+  var root_72 = from_html(`<div class="row-grid row-head occupant-head svelte-1qjgqcj"><span class="svelte-1qjgqcj">Tenant</span> <span class="svelte-1qjgqcj">Rooms</span></div> <ul class="occupant-list svelte-1qjgqcj"></ul>`, 1);
+  var root_92 = from_html(`<p class="empty svelte-1qjgqcj">No current occupants.</p>`);
+  var root22 = from_html(`<section class="public-summary svelte-1qjgqcj"><div class="summary-grid svelte-1qjgqcj"><div class="summary-card svelte-1qjgqcj"><h2 class="svelte-1qjgqcj">Still Not Paying (partial or fully)</h2> <p class="subtitle svelte-1qjgqcj">&lt;30 = current month ongoing</p> <!></div> <div class="summary-card svelte-1qjgqcj"><h2 class="svelte-1qjgqcj">Not Yet Extended</h2> <p class="subtitle svelte-1qjgqcj">negative = future</p> <!></div> <div class="summary-card svelte-1qjgqcj"><h2 class="svelte-1qjgqcj">Current Occupants</h2> <!></div></div></section>`);
+  var $css21 = {
+    hash: "svelte-1qjgqcj",
+    code: ".public-summary.svelte-1qjgqcj {padding:0 20px 20px;flex:1 1 0;min-width:0;width:100%;box-sizing:border-box;}.summary-grid.svelte-1qjgqcj {display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:16px;align-items:start;width:100%;min-width:0;}.summary-card.svelte-1qjgqcj {width:100%;min-width:0;background:#fff;border:1px solid var(--gray-003);border-radius:16px;padding:10px 12px;box-shadow:var(--shadow-md);align-self:start;}.summary-card.svelte-1qjgqcj h2:where(.svelte-1qjgqcj) {margin:0 0 12px;font-size:var(--font-lg);}.subtitle.svelte-1qjgqcj {margin:-6px 0 8px;color:var(--gray-006);font-size:var(--font-sm);}.summary-card.svelte-1qjgqcj ul:where(.svelte-1qjgqcj) {list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}.row-head.svelte-1qjgqcj,\n  .row-grid.svelte-1qjgqcj li:where(.svelte-1qjgqcj) {display:grid;grid-template-columns:minmax(0, 2.4fr) minmax(0, 1fr) 74px 56px;gap:6px;}.occupant-head.svelte-1qjgqcj,\n  .occupant-list.svelte-1qjgqcj li:where(.svelte-1qjgqcj) {display:grid;grid-template-columns:minmax(0, 2fr) minmax(0, 1.2fr);gap:6px;}.row-grid.svelte-1qjgqcj li:where(.svelte-1qjgqcj) {padding:5px 6px;border-radius:10px;background:var(--gray-001);align-items:center;line-height:1.15;}.row-head.svelte-1qjgqcj {margin-bottom:8px;padding:0 6px;color:var(--gray-006);font-size:var(--font-sm);font-weight:700;}.row-head.svelte-1qjgqcj span:where(.svelte-1qjgqcj) {text-transform:uppercase;letter-spacing:0.04em;}.tenant.svelte-1qjgqcj {font-weight:700;display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.room.svelte-1qjgqcj {color:var(--gray-009);font-weight:700;display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.occupant-rooms.svelte-1qjgqcj {font-weight:600;display:block;}.room.room-purple.svelte-1qjgqcj {background-color:#faf5ff;color:#6b21a8;}.room.room-yellow.svelte-1qjgqcj {background-color:#fffdf2;color:#a16207;}.date.svelte-1qjgqcj,\n  .days.svelte-1qjgqcj {color:var(--gray-006);font-size:var(--font-sm);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;}.empty.svelte-1qjgqcj {margin:0;color:var(--gray-006);}\n\n  @media (max-width: 1080px) {.summary-grid.svelte-1qjgqcj {grid-template-columns:repeat(2, minmax(0, 1fr));}.row-head.svelte-1qjgqcj,\n    .row-grid.svelte-1qjgqcj li:where(.svelte-1qjgqcj) {grid-template-columns:minmax(0, 2.2fr) minmax(0, 1fr) 74px;}\n  }\n\n  @media (max-width: 820px) {.row-head.svelte-1qjgqcj,\n    .row-grid.svelte-1qjgqcj li:where(.svelte-1qjgqcj) {grid-template-columns:minmax(0, 2fr) minmax(0, 1fr);}\n  }\n\n  @media (max-width: 620px) {.summary-grid.svelte-1qjgqcj {grid-template-columns:1fr;}\n  }\n\n  @media (max-width: 720px) {.public-summary.svelte-1qjgqcj {padding-inline:16px;}.row-head.svelte-1qjgqcj,\n    .row-grid.svelte-1qjgqcj li:where(.svelte-1qjgqcj) {grid-template-columns:1fr;}.occupant-head.svelte-1qjgqcj,\n    .occupant-list.svelte-1qjgqcj li:where(.svelte-1qjgqcj) {grid-template-columns:1fr;}\n  }"
+  };
+  function PublicSummary($anchor, $props) {
+    push($props, false);
+    append_styles($anchor, $css21);
+    let publicLoginSummary = prop(
+      $props,
+      "publicLoginSummary",
+      8,
+      /** @type {PublicLoginSummary} */
+      {/* publicLoginSummary */}
+    );
+    const unpaidTenants = publicLoginSummary()?.UnpaidTenants || [];
+    const rooms = publicLoginSummary()?.Rooms || [];
+    function formatDayLabel(days) {
+      if (days === 0) return "today";
+      return String(days);
+    }
+    function isPurpleRoom(roomName) {
+      return /^[ABC]/i.test((roomName || "").trim());
+    }
+    init();
+    var section = root22();
+    var div = child(section);
+    var div_1 = child(div);
+    var node = sibling(child(div_1), 4);
+    {
+      var consequent = ($anchor2) => {
+        var fragment = root_119();
+        var ul = sibling(first_child(fragment), 2);
+        each(ul, 5, () => unpaidTenants, index, ($anchor3, item) => {
+          var li = root_215();
+          var span = child(li);
+          var text2 = child(span, true);
+          reset(span);
+          var span_1 = sibling(span, 2);
+          let classes;
+          var text_1 = child(span_1, true);
+          reset(span_1);
+          var span_2 = sibling(span_1, 2);
+          var text_2 = child(span_2, true);
+          reset(span_2);
+          var span_3 = sibling(span_2, 2);
+          var text_3 = child(span_3, true);
+          reset(span_3);
+          reset(li);
+          template_effect(
+            ($0, $1) => {
+              set_text(text2, (get2(item), untrack(() => get2(item).TenantName)));
+              classes = set_class(span_1, 1, "room svelte-1qjgqcj", null, classes, $0);
+              set_text(text_1, (get2(item), untrack(() => get2(item).RoomName)));
+              set_text(text_2, (get2(item), untrack(() => get2(item).LastDate || "--")));
+              set_text(text_3, $1);
+            },
+            [
+              () => ({
+                "room-purple": isPurpleRoom(get2(item).RoomName),
+                "room-yellow": !isPurpleRoom(get2(item).RoomName)
+              }),
+              () => (get2(item), untrack(() => formatDayLabel(get2(item).DaysAgo)))
+            ]
+          );
+          append($anchor3, li);
+        });
+        reset(ul);
+        append($anchor2, fragment);
+      };
+      var alternate = ($anchor2) => {
+        var p = root_38();
+        append($anchor2, p);
+      };
+      if_block(node, ($render) => {
+        if (untrack(() => unpaidTenants.length)) $render(consequent);
+        else $render(alternate, -1);
+      });
+    }
+    reset(div_1);
+    var div_2 = sibling(div_1, 2);
+    var node_1 = sibling(child(div_2), 4);
+    {
+      var consequent_1 = ($anchor2) => {
+        var fragment_1 = root_45();
+        var ul_1 = sibling(first_child(fragment_1), 2);
+        each(ul_1, 5, () => rooms, index, ($anchor3, item) => {
+          var li_1 = root_53();
+          var span_4 = child(li_1);
+          var text_4 = child(span_4, true);
+          reset(span_4);
+          var span_5 = sibling(span_4, 2);
+          let classes_1;
+          var text_5 = child(span_5, true);
+          reset(span_5);
+          var span_6 = sibling(span_5, 2);
+          var text_6 = child(span_6, true);
+          reset(span_6);
+          var span_7 = sibling(span_6, 2);
+          var text_7 = child(span_7, true);
+          reset(span_7);
+          reset(li_1);
+          template_effect(
+            ($0, $1) => {
+              set_text(text_4, (get2(item), untrack(() => get2(item).LastTenant || "--")));
+              classes_1 = set_class(span_5, 1, "room svelte-1qjgqcj", null, classes_1, $0);
+              set_text(text_5, (get2(item), untrack(() => get2(item).RoomName)));
+              set_text(text_6, (get2(item), untrack(() => get2(item).LastDate || "--")));
+              set_text(text_7, $1);
+            },
+            [
+              () => ({
+                "room-purple": isPurpleRoom(get2(item).RoomName),
+                "room-yellow": !isPurpleRoom(get2(item).RoomName)
+              }),
+              () => (get2(item), untrack(() => formatDayLabel(get2(item).DaysAgo)))
+            ]
+          );
+          append($anchor3, li_1);
+        });
+        reset(ul_1);
+        append($anchor2, fragment_1);
+      };
+      var alternate_1 = ($anchor2) => {
+        var p_1 = root_62();
+        append($anchor2, p_1);
+      };
+      if_block(node_1, ($render) => {
+        if (untrack(() => rooms.length)) $render(consequent_1);
+        else $render(alternate_1, -1);
+      });
+    }
+    reset(div_2);
+    var div_3 = sibling(div_2, 2);
+    var node_2 = sibling(child(div_3), 2);
+    {
+      var consequent_2 = ($anchor2) => {
+        var fragment_2 = root_72();
+        var ul_2 = sibling(first_child(fragment_2), 2);
+        each(
+          ul_2,
+          5,
+          () => (deep_read_state(publicLoginSummary()), untrack(() => publicLoginSummary().Occupants)),
+          index,
+          ($anchor3, item) => {
+            var li_2 = root_83();
+            var span_8 = child(li_2);
+            var text_8 = child(span_8, true);
+            reset(span_8);
+            var span_9 = sibling(span_8, 2);
+            let classes_2;
+            var text_9 = child(span_9, true);
+            reset(span_9);
+            reset(li_2);
+            template_effect(
+              ($0, $1) => {
+                set_text(text_8, (get2(item), untrack(() => get2(item).TenantName)));
+                classes_2 = set_class(span_9, 1, "room occupant-rooms svelte-1qjgqcj", null, classes_2, $0);
+                set_text(text_9, $1);
+              },
+              [
+                () => ({
+                  "room-purple": isPurpleRoom(get2(item).RoomNames?.[0] || ""),
+                  "room-yellow": !isPurpleRoom(get2(item).RoomNames?.[0] || "")
+                }),
+                () => (get2(item), untrack(() => get2(item).RoomNames.join(", ")))
+              ]
+            );
+            append($anchor3, li_2);
+          }
+        );
+        reset(ul_2);
+        append($anchor2, fragment_2);
+      };
+      var alternate_2 = ($anchor2) => {
+        var p_2 = root_92();
+        append($anchor2, p_2);
+      };
+      if_block(node_2, ($render) => {
+        if (deep_read_state(publicLoginSummary()), untrack(() => publicLoginSummary()?.Occupants?.length)) $render(consequent_2);
+        else $render(alternate_2, -1);
+      });
+    }
+    reset(div_3);
+    reset(div);
+    reset(section);
+    append($anchor, section);
+    pop();
+  }
+
   // index.svelte
-  var root_215 = from_html(`<div class="home-container svelte-49zqbc"><!> <!> <!> <!> <!> <!></div>`);
-  var root_92 = from_html(`<span>Register</span>`);
-  var root_72 = from_html(`<button class="svelte-49zqbc"><!> <!></button>`);
+  var root_216 = from_html(`<div class="home-container svelte-49zqbc"><!> <!> <!> <!> <!> <!></div>`);
+  var root_93 = from_html(`<span>Register</span>`);
+  var root_73 = from_html(`<button class="svelte-49zqbc"><!> <!></button>`);
   var root_123 = from_html(`<span>Login</span>`);
   var root_103 = from_html(`<button class="svelte-49zqbc"><!> <!></button>`);
   var root_133 = from_html(`<div class="oauth-container svelte-49zqbc"><div class="or-separator svelte-49zqbc"><span class="svelte-49zqbc"></span> <p class="svelte-49zqbc">or</p> <span class="svelte-49zqbc"></span></div></div>`);
   var root_142 = from_html(`<p class="svelte-49zqbc">Have no account? <a class="svelte-49zqbc">Register</a></p>`);
   var root_153 = from_html(`<p class="svelte-49zqbc">Already have account? <a class="svelte-49zqbc">Login</a></p>`);
-  var root_38 = from_html(`<section class="auth-section svelte-49zqbc"><div class="main-container svelte-49zqbc"><div class="title-container svelte-49zqbc"><p class="svelte-49zqbc">KostJC</p> <h1 class="svelte-49zqbc"> </h1></div> <div class="form-container svelte-49zqbc"><div class="input-container svelte-49zqbc"><!> <!> <!></div> <div class="button-container svelte-49zqbc"><!> <!></div> <!-- Oauth Buttons --> <!> <div class="foot-auth svelte-49zqbc"><!> <!></div></div></div></section>`);
-  var $css21 = {
+  var root_39 = from_html(`<section class="auth-section svelte-49zqbc"><div class="auth-grid svelte-49zqbc"><div class="auth-card svelte-49zqbc"><div class="main-container svelte-49zqbc"><div class="title-container svelte-49zqbc"><p class="svelte-49zqbc">KostJC</p> <h1 class="svelte-49zqbc"> </h1></div> <div class="form-container svelte-49zqbc"><div class="input-container svelte-49zqbc"><!> <!> <!></div> <div class="button-container svelte-49zqbc"><!> <!></div> <!-- Oauth Buttons --> <!> <div class="foot-auth svelte-49zqbc"><!> <!></div></div></div></div> <div class="summary-card-wrap svelte-49zqbc"><!></div></div></section>`);
+  var $css22 = {
     hash: "svelte-49zqbc",
-    code: ".home-container.svelte-49zqbc {display:flex;flex-direction:column;padding:20px;gap:20px;}\n\n  @keyframes svelte-49zqbc-spin {\n    from {\n      transform : rotate(0deg);\n    }\n    to {\n      transform : rotate(360deg);\n    }\n  }.spin {\n    animation : svelte-49zqbc-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.auth-section.svelte-49zqbc {height:100%;width:100%;background-color:var(--gray-001);filter:drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));display:flex;color:var(--gray-008);}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) {width:480px;height:fit-content;padding:20px;border-radius:10px;display:flex;flex-direction:column;background-color:white;margin:50px auto;border:1px solid var(--gray-003);gap:10px;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .title-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:10px;width:100%;text-align:center;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .title-container:where(.svelte-49zqbc) p:where(.svelte-49zqbc) {font-size:16px;font-weight:600;color:var(--blue-005);margin:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .title-container:where(.svelte-49zqbc) h1:where(.svelte-49zqbc) {margin:0 0 5px 0;font-size:22px;font-weight:700;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:20px;width:100%;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .input-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:15px;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .button-container:where(.svelte-49zqbc) {height:fit-content;width:100%;display:flex;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .button-container:where(.svelte-49zqbc) button:where(.svelte-49zqbc) {margin:0;width:100%;padding:12px;font-size:15px;font-weight:600;background-color:var(--blue-006);border-radius:8px;color:white;border:none;cursor:pointer;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .button-container:where(.svelte-49zqbc) button:where(.svelte-49zqbc):hover {background-color : var(--blue-005);}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:10px;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) .or-separator:where(.svelte-49zqbc) {display:flex;flex-direction:row;align-items:center;width:100%;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) .or-separator:where(.svelte-49zqbc) span:where(.svelte-49zqbc) {flex-grow:1;height:0;border-top:1px solid var(--gray-002);padding:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) .or-separator:where(.svelte-49zqbc) p:where(.svelte-49zqbc) {width : fit-content;font-weight : 600;padding : 0 10px;margin:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:5px;text-align:center;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) p:where(.svelte-49zqbc) {font-weight:500;margin:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) a:where(.svelte-49zqbc) {color:var(--blue-006);text-decoration:none;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) a:where(.svelte-49zqbc):hover {color:var(--blue-005);text-decoration:underline;}\n\n  @media only screen and (max-width : 768px) {.auth-section.svelte-49zqbc {background-color:#FFF;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) {border:none;}\n  }"
+    code: ".home-container.svelte-49zqbc {display:flex;flex-direction:column;padding:20px;gap:20px;}\n\n  @keyframes svelte-49zqbc-spin {\n    from {\n      transform : rotate(0deg);\n    }\n    to {\n      transform : rotate(360deg);\n    }\n  }.spin {\n    animation : svelte-49zqbc-spin 1s cubic-bezier(0, 0, 0.2, 1) infinite;}.auth-section.svelte-49zqbc {height:100%;width:100%;background-color:var(--gray-001);filter:drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));display:block;color:var(--gray-008);}.auth-grid.svelte-49zqbc {display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:16px;padding:20px;align-items:start;width:100%;box-sizing:border-box;}.auth-card.svelte-49zqbc {min-width:0;}.summary-card-wrap.svelte-49zqbc {min-width:0;grid-column:span 3;}.auth-card.svelte-49zqbc .main-container:where(.svelte-49zqbc) {width:100%;height:fit-content;padding:20px;border-radius:10px;display:flex;flex-direction:column;background-color:white;margin:0;border:1px solid var(--gray-003);gap:10px;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .title-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:10px;width:100%;text-align:center;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .title-container:where(.svelte-49zqbc) p:where(.svelte-49zqbc) {font-size:16px;font-weight:600;color:var(--blue-005);margin:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .title-container:where(.svelte-49zqbc) h1:where(.svelte-49zqbc) {margin:0 0 5px 0;font-size:22px;font-weight:700;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:20px;width:100%;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .input-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:15px;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .button-container:where(.svelte-49zqbc) {height:fit-content;width:100%;display:flex;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .button-container:where(.svelte-49zqbc) button:where(.svelte-49zqbc) {margin:0;width:100%;padding:12px;font-size:15px;font-weight:600;background-color:var(--blue-006);border-radius:8px;color:white;border:none;cursor:pointer;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .button-container:where(.svelte-49zqbc) button:where(.svelte-49zqbc):hover {background-color : var(--blue-005);}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:10px;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) .or-separator:where(.svelte-49zqbc) {display:flex;flex-direction:row;align-items:center;width:100%;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) .or-separator:where(.svelte-49zqbc) span:where(.svelte-49zqbc) {flex-grow:1;height:0;border-top:1px solid var(--gray-002);padding:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .oauth-container:where(.svelte-49zqbc) .or-separator:where(.svelte-49zqbc) p:where(.svelte-49zqbc) {width : fit-content;font-weight : 600;padding : 0 10px;margin:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) {display:flex;flex-direction:column;gap:5px;text-align:center;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) p:where(.svelte-49zqbc) {font-weight:500;margin:0;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) a:where(.svelte-49zqbc) {color:var(--blue-006);text-decoration:none;}.auth-section.svelte-49zqbc .main-container:where(.svelte-49zqbc) .form-container:where(.svelte-49zqbc) .foot-auth:where(.svelte-49zqbc) a:where(.svelte-49zqbc):hover {color:var(--blue-005);text-decoration:underline;}\n\n  @media only screen and (min-width : 769px) and (max-width : 1080px) {.auth-grid.svelte-49zqbc {grid-template-columns:repeat(2, minmax(0, 1fr));}.summary-card-wrap.svelte-49zqbc {grid-column:auto;}\n  }\n\n  @media only screen and (max-width : 768px) {.auth-section.svelte-49zqbc {background-color:#FFF;}.auth-grid.svelte-49zqbc {grid-template-columns:1fr;padding:16px;}.summary-card-wrap.svelte-49zqbc {grid-column:auto;}.auth-card.svelte-49zqbc .main-container:where(.svelte-49zqbc) {border:none;}\n  }"
   };
   function Index($anchor, $props) {
     push($props, false);
-    append_styles($anchor, $css21);
+    append_styles($anchor, $css22);
     let title = '#{title}';
     let user = mutable_source(
       /** @type {User} */
@@ -16598,6 +16836,10 @@ ${component_stack}
     let segments = mutable_source(
       /** @type {Access} */
       {/* segments */}
+    );
+    const publicLoginSummary = (
+      /** @type {import('./_types/publicLoginSummary.js').PublicLoginSummary} */
+      {/* publicLoginSummary */}
     );
     function getCookie(name) {
       var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -16724,7 +16966,7 @@ ${component_stack}
             return get2(user);
           },
           children: ($anchor3, $slotProps) => {
-            var div = root_215();
+            var div = root_216();
             var node_1 = child(div);
             UnpaidBookingRecap(node_1, {});
             var node_2 = sibling(node_1, 2);
@@ -16744,16 +16986,18 @@ ${component_stack}
         });
       };
       var alternate = ($anchor2) => {
-        var section = root_38();
+        var section = root_39();
         var div_1 = child(section);
         var div_2 = child(div_1);
-        var h1 = sibling(child(div_2), 2);
+        var div_3 = child(div_2);
+        var div_4 = child(div_3);
+        var h1 = sibling(child(div_4), 2);
         var text2 = child(h1, true);
         reset(h1);
-        reset(div_2);
-        var div_3 = sibling(div_2, 2);
-        var div_4 = child(div_3);
-        var node_7 = child(div_4);
+        reset(div_4);
+        var div_5 = sibling(div_4, 2);
+        var div_6 = child(div_5);
+        var node_7 = child(div_6);
         {
           var consequent_1 = ($anchor3) => {
             InputBox($anchor3, {
@@ -16825,12 +17069,12 @@ ${component_stack}
             if (get2(Mode) === ModeRegister) $render(consequent_3);
           });
         }
-        reset(div_4);
-        var div_5 = sibling(div_4, 2);
-        var node_10 = child(div_5);
+        reset(div_6);
+        var div_7 = sibling(div_6, 2);
+        var node_10 = child(div_7);
         {
           var consequent_6 = ($anchor3) => {
-            var button = root_72();
+            var button = root_73();
             var node_11 = child(button);
             {
               var consequent_4 = ($anchor4) => {
@@ -16850,7 +17094,7 @@ ${component_stack}
             var node_12 = sibling(node_11, 2);
             {
               var consequent_5 = ($anchor4) => {
-                var span = root_92();
+                var span = root_93();
                 append($anchor4, span);
               };
               if_block(node_12, ($render) => {
@@ -16903,20 +17147,20 @@ ${component_stack}
             if (get2(Mode) === ModeLogin) $render(consequent_9);
           });
         }
-        reset(div_5);
-        var node_16 = sibling(div_5, 2);
+        reset(div_7);
+        var node_16 = sibling(div_7, 2);
         var node_17 = sibling(node_16, 2);
         {
           var consequent_10 = ($anchor3) => {
-            var div_6 = root_133();
-            append($anchor3, div_6);
+            var div_8 = root_133();
+            append($anchor3, div_8);
           };
           if_block(node_17, ($render) => {
             if (get2(Mode) === ModeRegister || get2(Mode) === ModeLogin) $render(consequent_10);
           });
         }
-        var div_7 = sibling(node_17, 2);
-        var node_18 = child(div_7);
+        var div_9 = sibling(node_17, 2);
+        var node_18 = child(div_9);
         {
           var consequent_11 = ($anchor3) => {
             var p = root_142();
@@ -16944,8 +17188,14 @@ ${component_stack}
             if (get2(Mode) !== ModeLogin) $render(consequent_12);
           });
         }
-        reset(div_7);
+        reset(div_9);
+        reset(div_5);
         reset(div_3);
+        reset(div_2);
+        var div_10 = sibling(div_2, 2);
+        var node_20 = child(div_10);
+        PublicSummary(node_20, { publicLoginSummary });
+        reset(div_10);
         reset(div_1);
         reset(section);
         template_effect(($0) => set_text(text2, $0), [() => get2(Mode).split("_").join(" ")]);

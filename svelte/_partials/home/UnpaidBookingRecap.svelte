@@ -186,12 +186,12 @@
         </thead>
         <tbody>
           {#each sortedRecapItems as item (`${item.tenantName}-${item.earliestStartDate}`)}
-            <tr class:room-purple={hasPurpleRoom(item.roomNames)} class:room-yellow={!hasPurpleRoom(item.roomNames)}>
+            <tr>
               <td>{item.tenantName}</td>
               <td>{formatPrice(item.unpaidAmount, 'IDR')}</td>
               <td>{item.earliestStartDate}</td>
               <td class="days">{item.overdueDays}</td>
-              <td>{item.roomNames.join(', ')}</td>
+              <td class:room-purple={hasPurpleRoom(item.roomNames)} class:room-yellow={!hasPurpleRoom(item.roomNames)} class="room-cell">{item.roomNames.join(', ')}</td>
             </tr>
           {/each}
         </tbody>
@@ -308,16 +308,30 @@
     outline-offset: -2px;
   }
 
-  tbody tr.room-purple td {
-    background-color: #faf5ff;
+  tbody tr:nth-child(odd) td {
+    background-color: var(--gray-001);
   }
 
-  tbody tr.room-yellow td {
-    background-color: #fffdf2;
+  tbody tr:nth-child(even) td {
+    background-color: var(--gray-002);
   }
 
   tbody tr:hover td {
     background-color: var(--red-transparent);
+  }
+
+  .room-cell.room-purple {
+    background-color: #faf5ff;
+    color: #6b21a8;
+  }
+
+  .room-cell.room-yellow {
+    background-color: #fffdf2;
+    color: #a16207;
+  }
+
+  .room-cell {
+    font-weight: 700;
   }
 
   tbody tr:last-child td {

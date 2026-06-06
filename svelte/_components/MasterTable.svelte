@@ -51,6 +51,7 @@
   export let CAN_OPEN_LINK    = /** @type {boolean} */ (false);
   export let LINKS            = /** @type {ExtendedAction[]} */ ([]);
   export let IS_CUSTOM_EDIT   = /** @type {boolean} */ (false);
+  export let CAN_EDIT_PASSWORD = /** @type {boolean} */ (false);
   export let UNSORTED_ROWS    = /** @type {string[]} */ ([]);
   export let EXTENDED_BUTTONS = /** @type {ExtendedActionButton[]} */ ([]);
   export let FIELD_TO_SEARCH  = /** @type {string} */ ('');
@@ -125,6 +126,7 @@
   let totalRowsCurrent = 0;
   // Payloads for modify rows
   let payloads = [];
+  let editPassword = '';
 
   // Toggle show rows options
   function toggleRowsNum() {
@@ -275,13 +277,15 @@
         payloads = [...payloads, row[i]];
       });
     }
+    editPassword = '';
 
     showPopUp = true;
     idToMod = id;
   }
 
   function handleSubmitEdit() {
-    OnEdit(idToMod, payloads);
+    const editPayloads = CAN_EDIT_PASSWORD ? [...payloads, editPassword] : payloads;
+    OnEdit(idToMod, editPayloads);
     showPopUp = false;
   }
 
@@ -415,6 +419,15 @@
             {/if}
           {/if}
         {/each}
+        {#if CAN_EDIT_PASSWORD}
+          <InputBox
+            id="edit-password"
+            label="Password"
+            placeholder="leave blank to keep current password"
+            bind:value={editPassword}
+            type="password"
+          />
+        {/if}
       </div>
       <div class="foot">
         <button class="ok" on:click={handleSubmitEdit}>Submit</button>

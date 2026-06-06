@@ -115,7 +115,8 @@
       email: payloads[1],
       userName: payloads[2],
       fullName: payloads[3],
-      role: payloads[4]
+      role: payloads[4],
+      password: payloads[5] || ''
     }
     const i = /** @type {any}*/ ({
       pager,
@@ -253,6 +254,7 @@
       CAN_SEARCH_ROW
       CAN_DELETE_ROW
       CAN_RESTORE_ROW
+      CAN_EDIT_PASSWORD
 
       {OnDelete}
       {OnRestore}

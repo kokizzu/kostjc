@@ -128,11 +128,13 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		room := rqProperty.NewRooms(d.PropOltp)
 		tenantsNearbyBirthdays := room.FindTenantsNearbyBirthdays()
 		availableRooms := room.FindAvailableRooms()
+		currentOccupants := room.FindCurrentOccupants()
 
 		booking := rqProperty.NewBookings(d.PropOltp)
 		unpaidBookingTenants := booking.FindUnpaidBookingTenants()
 		doubleBookingReports := booking.FindDoubleBookingReports()
 		upcomingTenants := booking.GetUpcomingTenants()
+		publicLoginSummary := buildPublicLoginSummary(unpaidBookingTenants, availableRooms, currentOccupants)
 
 		tenant := rqAuth.NewTenants(d.AuthOltp)
 		tenants := tenant.FindTenantChoices()
@@ -149,6 +151,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`upcomingTenants`:        upcomingTenants,
 			`tenants`:                tenants,
 			`rooms`:                  rooms,
+			`publicLoginSummary`:     publicLoginSummary,
 		})
 	})
 
@@ -1004,9 +1007,9 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		}
 
 		return views.RenderAdminSettingDatabase(ctx, M.SX{
-			`user`:           user,
-			`title`:          conf.PROJECT_NAME + ` | Setting: Database`,
-			`segments`:       segments,
+			`user`:            user,
+			`title`:           conf.PROJECT_NAME + ` | Setting: Database`,
+			`segments`:        segments,
 			`backupSummaries`: listBackupSummaries(),
 		})
 	})

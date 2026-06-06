@@ -15,10 +15,12 @@
   import UnpaidBookingTenants from './_partials/home/UnpaidBookingTenants.svelte';
   import DoubleBookingReports from './_partials/home/DoubleBookingReports.svelte';
   import UpcomingTenants from './_partials/home/UpcomingTenants.svelte';
+  import PublicSummary from './_partials/home/PublicSummary.svelte';
 
   let title = '#{title}';
   let user  = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
+  const publicLoginSummary = /** @type {import('./_types/publicLoginSummary.js').PublicLoginSummary} */ ({/* publicLoginSummary */});
 
   function getCookie(/** @type {string} */ name ) {
     var match = document.cookie.match( new RegExp( '(^| )' + name + '=([^;]+)' ) );
@@ -154,92 +156,99 @@
   </LayoutMain>
 {:else}
   <section class="auth-section">
-    <div class="main-container">
-      <div class="title-container">
-        <p>KostJC</p>
-        <h1>{Mode.split( '_' ).join( ' ' )}</h1>
-      </div>
-      <div class="form-container">
-        <div class="input-container">
-          {#if Mode === ModeLogin || Mode === ModeRegister}
-            <InputBox
-              id="email"
-              label="Email"
-              type="text"
-              bind:value={email}
-              autocomplete="on"
-            />
-          {/if}
+    <div class="auth-grid">
+      <div class="auth-card">
+        <div class="main-container">
+          <div class="title-container">
+            <p>KostJC</p>
+            <h1>{Mode.split( '_' ).join( ' ' )}</h1>
+          </div>
+          <div class="form-container">
+            <div class="input-container">
+              {#if Mode === ModeLogin || Mode === ModeRegister}
+                <InputBox
+                  id="email"
+                  label="Email"
+                  type="text"
+                  bind:value={email}
+                  autocomplete="on"
+                />
+              {/if}
 
-          {#if Mode === ModeLogin || Mode === ModeRegister}
-            <InputBox
-              id="password"
-              label="Password"
-              type="password"
-              bind:value={password}
-              onEnter={async () => {
-                switch ( Mode ) {
-                  case ModeLogin:
-                    await guestLogin();
-                    break;
-                  case ModeRegister:
-                    await guestRegister();
-                    break;
-                }
-              }}
-            />
-          {/if}
+              {#if Mode === ModeLogin || Mode === ModeRegister}
+                <InputBox
+                  id="password"
+                  label="Password"
+                  type="password"
+                  bind:value={password}
+                  onEnter={async () => {
+                    switch ( Mode ) {
+                      case ModeLogin:
+                        await guestLogin();
+                        break;
+                      case ModeRegister:
+                        await guestRegister();
+                        break;
+                    }
+                  }}
+                />
+              {/if}
 
-          {#if Mode === ModeRegister}
-            <InputBox
-              id="confirmPass"
-              label="Confirm Password"
-              type="password"
-              bind:value={confirmPassword}
-              onEnter={guestRegister}
-            />
-          {/if}
-        </div>
-        <div class="button-container">
-          {#if Mode===ModeRegister}
-            <button on:click={guestRegister}>
-              {#if isSubmitting===true}
-                <Icon className="spin" color='#FFF' size="15" src={FaSolidCircleNotch}/>
+              {#if Mode === ModeRegister}
+                <InputBox
+                  id="confirmPass"
+                  label="Confirm Password"
+                  type="password"
+                  bind:value={confirmPassword}
+                  onEnter={guestRegister}
+                />
               {/if}
-              {#if isSubmitting===false}
-                <span>Register</span>
+            </div>
+            <div class="button-container">
+              {#if Mode===ModeRegister}
+                <button on:click={guestRegister}>
+                  {#if isSubmitting===true}
+                    <Icon className="spin" color='#FFF' size="15" src={FaSolidCircleNotch}/>
+                  {/if}
+                  {#if isSubmitting===false}
+                    <span>Register</span>
+                  {/if}
+                </button>
               {/if}
-            </button>
-          {/if}
-          {#if Mode===ModeLogin}
-            <button on:click={guestLogin}>
-              {#if isSubmitting===true}
-                <Icon className="spin" color='#FFF' size="15" src={FaSolidCircleNotch}/>
+              {#if Mode===ModeLogin}
+                <button on:click={guestLogin}>
+                  {#if isSubmitting===true}
+                    <Icon className="spin" color='#FFF' size="15" src={FaSolidCircleNotch}/>
+                  {/if}
+                  {#if isSubmitting===false}
+                    <span>Login</span>
+                  {/if}
+                </button>
               {/if}
-              {#if isSubmitting===false}
-                <span>Login</span>
+            </div>
+            <!-- Oauth Buttons -->
+            {#if Mode===ModeRegister || Mode===ModeLogin}
+              <div class="oauth-container">
+                <div class="or-separator">
+                  <span></span>
+                  <p>or</p>
+                  <span></span>
+                </div>
+              </div>
+            {/if}
+            <div class="foot-auth">
+              {#if Mode!==ModeRegister}
+                <p>Have no account? <a href={`#${ModeRegister}`} on:click={() => (Mode = ModeRegister)}>Register</a></p>
               {/if}
-            </button>
-          {/if}
-        </div>
-        <!-- Oauth Buttons -->
-        {#if Mode===ModeRegister || Mode===ModeLogin}
-          <div class="oauth-container">
-            <div class="or-separator">
-              <span></span>
-              <p>or</p>
-              <span></span>
+              {#if Mode!==ModeLogin}
+                <p>Already have account? <a href={`#${ModeLogin}`} on:click={() => (Mode = ModeLogin)}>Login</a></p>
+              {/if}
             </div>
           </div>
-        {/if}
-        <div class="foot-auth">
-          {#if Mode!==ModeRegister}
-            <p>Have no account? <a href={`#${ModeRegister}`} on:click={() => (Mode = ModeRegister)}>Register</a></p>
-          {/if}
-          {#if Mode!==ModeLogin}
-            <p>Already have account? <a href={`#${ModeLogin}`} on:click={() => (Mode = ModeLogin)}>Login</a></p>
-          {/if}
         </div>
+      </div>
+      <div class="summary-card-wrap">
+        <PublicSummary {publicLoginSummary} />
       </div>
     </div>
   </section>
@@ -271,19 +280,38 @@
     width: 100%;
     background-color: var(--gray-001);
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
-    display: flex;
+    display: block;
     color: var(--gray-008);
   }
 
-  .auth-section .main-container {
-    width: 480px;
+  .auth-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    padding: 20px;
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .auth-card {
+    min-width: 0;
+  }
+
+  .summary-card-wrap {
+    min-width: 0;
+    grid-column: span 3;
+  }
+
+  .auth-card .main-container {
+    width: 100%;
     height: fit-content;
     padding: 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     background-color: white;
-    margin: 50px auto;
+    margin: 0;
     border: 1px solid var(--gray-003);
     gap: 10px;
   }
@@ -394,12 +422,31 @@
     text-decoration: underline;
   }
 
+  @media only screen and (min-width : 769px) and (max-width : 1080px) {
+    .auth-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .summary-card-wrap {
+      grid-column: auto;
+    }
+  }
+
   @media only screen and (max-width : 768px) {
     .auth-section {
       background-color: #FFF;
     }
 
-    .auth-section .main-container {
+    .auth-grid {
+      grid-template-columns: 1fr;
+      padding: 16px;
+    }
+
+    .summary-card-wrap {
+      grid-column: auto;
+    }
+
+    .auth-card .main-container {
       border: none;
     }
   }

@@ -6,6 +6,8 @@ import (
 	"kostjc/model/mAuth/wcAuth"
 	"kostjc/model/zCrud"
 
+	"strings"
+
 	"github.com/kokizzu/gotro/S"
 )
 
@@ -40,6 +42,16 @@ const (
 	ErrAdminUsersManagementDeleteFailed  = `failed to delete user`
 	ErrAdminUsersManagementRestoreFailed = `failed to restore user`
 )
+
+func applyAdminUserPassword(usr *wcAuth.UsersMutator, password string, now int64) bool {
+	if strings.TrimSpace(password) == "" {
+		return false
+	}
+	usr.SetSecretCode(``)
+	usr.SetSecretCodeAt(0)
+	usr.SetEncryptedPassword(password, now)
+	return true
+}
 
 var AdminUsersManagementMeta = zCrud.Meta{
 	Fields: []zCrud.Field{
@@ -162,13 +174,7 @@ func (d *Domain) AdminUsersManagement(in *AdminUsersManagementIn) (out AdminUser
 			usr.SetRole(in.User.Role)
 		}
 
-		if in.User.Id > 0 && in.User.Password != `` {
-			if len(in.User.Password) >= minPassLength {
-				usr.SetSecretCode(``)
-				usr.SetSecretCodeAt(0)
-				usr.SetEncryptedPassword(in.User.Password, in.UnixNow())
-			}
-		}
+		applyAdminUserPassword(usr, in.User.Password, in.UnixNow())
 
 		if usr.Id == 0 {
 			usr.SetCreatedAt(in.UnixNow())

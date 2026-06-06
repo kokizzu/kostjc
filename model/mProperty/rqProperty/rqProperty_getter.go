@@ -1201,6 +1201,11 @@ type AvailableRoom struct {
 	TotalPriceIDR  int64  `json:"totalPriceIDR"`
 }
 
+type CurrentOccupant struct {
+	TenantName string `json:"tenantName"`
+	RoomName   string `json:"roomName"`
+}
+
 func (r *Rooms) FindAvailableRooms() (out []AvailableRoom) {
 	const comment = `-- Rooms) FindAvailableRooms`
 	now := time.Now()
@@ -1260,6 +1265,37 @@ ORDER BY "dateEnd" ASC`
 			})
 		}
 	})
+	return
+}
+
+func (r *Rooms) FindCurrentOccupants() (out []CurrentOccupant) {
+	const comment = `-- Rooms) FindCurrentOccupants`
+
+	queryRows := comment + `
+SELECT
+	COALESCE("tenants"."tenantName", '') AS "tenantName",
+	COALESCE("rooms"."roomName", '') AS "roomName"
+FROM "rooms"
+LEFT JOIN "tenants" ON "rooms"."currentTenantId" = "tenants"."id"
+WHERE
+	"rooms"."deletedAt" = 0
+	AND "rooms"."currentTenantId" != 0
+ORDER BY "tenantName" ASC, "roomName" ASC`
+
+	r.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) == 2 {
+			tenantName := X.ToS(row[0])
+			roomName := X.ToS(row[1])
+			if tenantName == `` || roomName == `` {
+				return
+			}
+			out = append(out, CurrentOccupant{
+				TenantName: tenantName,
+				RoomName:   roomName,
+			})
+		}
+	})
+
 	return
 }
 
