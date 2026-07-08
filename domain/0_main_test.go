@@ -2,29 +2,22 @@ package domain
 
 import (
 	"context"
-	"database/sql"
 	"kostjc/conf"
 	"kostjc/model"
 	"kostjc/model/mAuth"
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mAuth/wcAuth"
 	"kostjc/model/xMailer"
-	"os"
 	"testing"
 
-	"github.com/kokizzu/gotro/D"
 	"github.com/kokizzu/gotro/D/Ch"
 	"github.com/kokizzu/gotro/D/Tt"
 	"github.com/kokizzu/gotro/L"
 	"github.com/kokizzu/gotro/M"
 	"github.com/kokizzu/lexid"
 	"github.com/kpango/fastime"
-	"github.com/ory/dockertest/v3"
-	"github.com/tarantool/go-tarantool"
 	"golang.org/x/sync/errgroup"
 )
-
-// create dockertest instance
 
 var testTt *Tt.Adapter
 var testCh *Ch.Adapter
@@ -47,104 +40,33 @@ const (
 )
 
 func TestMain(m *testing.M) {
-	if os.Getenv(`USE_COMPOSE`) != `` {
-		// use local docker compose
-		conf.LoadEnv()
-		testMailer = xMailer.Mailer{
-			SendMailFunc: func(toEmailName map[string]string, subject, text, html string) error {
-				return nil
-			},
-		}
-
-		var err error
-		eg := errgroup.Group{}
-		eg.Go(func() error {
-			chConf := conf.EnvClickhouse()
-			testCh, err = chConf.Connect()
-			return err
-		})
-		eg.Go(func() error {
-			ttConf := conf.EnvTarantool()
-			testTt, err = ttConf.Connect()
-			return err
-		})
-		err = eg.Wait()
-		L.PanicIf(err, `eg.Wait`)
-
-	} else {
-		// setup dockertest instance
-		dockerPool := D.InitDockerTest("")
-		defer dockerPool.Cleanup()
-		testMailer = xMailer.Mailer{
-			SendMailFunc: func(toEmailName map[string]string, subject, text, html string) error {
-				return nil
-			},
-		}
-
-		eg := errgroup.Group{}
-
-		// attach tarantool
-		eg.Go(func() error {
-			tdt := &Tt.TtDockerTest{
-				User:     "testT",
-				Password: "passT",
-			}
-			img := tdt.ImageVersion(dockerPool, ``)
-			dockerPool.Spawn(img, func(res *dockertest.Resource) error {
-				t, err := tdt.ConnectCheck(res)
-				if err != nil {
-					return err
-				}
-				testTt = &Tt.Adapter{
-					Connection: t,
-					Reconnect: func() *tarantool.Connection {
-						t, err := tdt.ConnectCheck(res)
-						L.IsError(err, `tdt.ConnectCheck`)
-						return t
-					},
-				}
-				return nil
-			})
+	conf.LoadEnv()
+	testMailer = xMailer.Mailer{
+		SendMailFunc: func(toEmailName map[string]string, subject, text, html string) error {
 			return nil
-		})
-
-		// attach clickhouse
-		eg.Go(func() error {
-			cdt := &Ch.ChDockerTest{
-				User:     "testC",
-				Password: "passC",
-				Database: "default",
-			}
-			img := cdt.ImageLatest(dockerPool)
-			dockerPool.Spawn(img, func(res *dockertest.Resource) error {
-				c, err := cdt.ConnectCheck(res)
-				if err != nil {
-					return err
-				}
-				testCh = &Ch.Adapter{
-					DB: c,
-					Reconnect: func() *sql.DB {
-						c, err := cdt.ConnectCheck(res)
-						L.IsError(err, `cdt.ConnectCheck`)
-						return c
-					},
-				}
-				return nil
-			})
-			return nil
-		})
-
-		err := eg.Wait()
-		L.PanicIf(err, `eg.Wait`)
+		},
 	}
+
+	eg := errgroup.Group{}
+	eg.Go(func() error {
+		chConf := conf.EnvClickhouse()
+		var err error
+		testCh, err = chConf.Connect()
+		return err
+	})
+	eg.Go(func() error {
+		ttConf := conf.EnvTarantool()
+		var err error
+		testTt, err = ttConf.Connect()
+		return err
+	})
+	L.PanicIf(eg.Wait(), `eg.Wait`)
 
 	// run migration
 	model.RunMigration(nil, testTt, testCh)
 
 	// run tests
 	m.Run()
-
-	// teardown dockertest instance
 }
 
 func testDomain() (*Domain, func()) {
