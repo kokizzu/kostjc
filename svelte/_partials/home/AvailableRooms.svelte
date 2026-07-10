@@ -9,6 +9,11 @@
    * @property {number} totalPriceIDR
    */
   const rooms = /** @type {AvailableRoom[]} */ ([/* availableRooms */]);
+  /**
+   * @typedef {Object} UnpaidBookingTenant
+   * @property {string} roomName
+   */
+  const unpaidBookingTenants = /** @type {UnpaidBookingTenant[]} */ ([/* unpaidBookingTenants */]);
   let sortedRooms = /** @type {AvailableRoom[]} */ ([]);
   let sortBy = /** @type {'default' | 'basePrice' | 'totalPrice'} */ ('default');
 
@@ -104,6 +109,14 @@
   function isPurpleRoom(roomName) {
     return /^[ABC]/i.test((roomName || '').trim());
   }
+
+  /**
+   * @param {string} roomName
+   * @returns {boolean}
+   */
+  function hasUnpaidBooking(roomName) {
+    return (unpaidBookingTenants || []).some(item => item.roomName === roomName);
+  }
 </script>
 
 <section class="empty-rooms">
@@ -141,6 +154,9 @@
     <div class="cards">
       {#each (sortedRooms || []) as r}
         <div class="card" class:room-purple={isPurpleRoom(r.roomName)} class:room-yellow={!isPurpleRoom(r.roomName)}>
+          {#if hasUnpaidBooking(r.roomName)}
+            <span class="warning-badge" title="still have outstanding payment" aria-label="still have outstanding payment">⚠</span>
+          {/if}
           <h3>Room {r.roomName}</h3>
           <div class="desc">
             <span>{@html r.isAvailableNow || r.availableAt == ''
@@ -239,12 +255,31 @@
   .empty-rooms .cards .card {
     background-color: var(--gray-001);
     padding: 10px;
+    padding-top: 18px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 6px;
     position: relative;
     overflow: hidden;
+  }
+
+  .warning-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 30;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: #fff7ed;
+    color: #c2410c;
+    font-size: 14px;
+    line-height: 1;
+    box-shadow: 0 0 0 1px rgba(194, 65, 12, 0.16);
   }
 
   .empty-rooms .cards .card.room-purple {

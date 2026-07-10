@@ -48,6 +48,24 @@ type PagerOut struct {
 	Order []string `json:"order" form:"order" query:"order" long:"order" msg:"order"`
 }
 
+func (p *PagerIn) DefaultOrderByIdDescTt(fieldToType map[string]Tt.DataType) []string {
+	if len(p.Order) == 0 {
+		if _, ok := fieldToType[`id`]; ok {
+			p.Order = []string{`-id`}
+		}
+	}
+	return p.Order
+}
+
+func (p *PagerIn) DefaultOrderByIdDescCh(fieldToType map[string]Ch.DataType) []string {
+	if len(p.Order) == 0 {
+		if _, ok := fieldToType[`id`]; ok {
+			p.Order = []string{`-id`}
+		}
+	}
+	return p.Order
+}
+
 func (p *PagerOut) LimitOffsetSql() string {
 	offsetStr := ``
 	if p.Page > 1 {

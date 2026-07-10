@@ -50,6 +50,7 @@
    * @typedef {Object} PaidProgress
    * @property {number} percentage
    * @property {ProgressColor} color
+   * @property {number} daysLeft
    */
 
   /**
@@ -72,6 +73,7 @@
     }
 
     const daysPaid = (data.totalPaid / data.totalPrice) * totalDays;
+    const daysLeft = daysPaid - Math.max(daysOccupied, 0);
 
     let color = /** @type {ProgressColor} */ ('green');
 
@@ -89,7 +91,8 @@
 
     return {
       percentage: Math.round(percentage),
-      color: color
+      color: color,
+      daysLeft: parseFloat(daysLeft.toFixed(1))
     };
   }
 
@@ -123,6 +126,14 @@
       percentage: Math.min(percentage, 100),
       daysPaid: parseFloat(daysPaid.toFixed(1))
     }
+  }
+
+  /**
+   * @param {number} daysLeft
+   * @returns {'left' | 'over'}
+   */
+  function getDaysLeftStatus(daysLeft) {
+    return daysLeft < 0 ? 'over' : 'left';
   }
 
   let popUpShowPayments = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpShowBookingPayments | any} */ (null);
@@ -291,7 +302,7 @@
               </div>
             </div>
             <div class="progress-container">
-              <label for="">Occupancy Progress</label>
+              <label for="">Occupancy Progress <b>{prog.daysLeft}</b>d {getDaysLeftStatus(prog.daysLeft)}</label>
               <div class="progress">
                 <span class={prog.color} style="width: {prog.percentage}%;"></span>
               </div>

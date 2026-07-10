@@ -73,7 +73,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -83,6 +83,8 @@ FROM ` + u.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 		row[0] = X.ToS(row[0]) // ensure id is string
 		res = append(res, row)
 	})
+
+	out.Order = in.Order
 
 	return
 }
@@ -123,7 +125,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -134,6 +136,8 @@ FROM ` + t.SqlTableName() + whereAndSql + orderBySql + limitOffsetSql
 		row[0] = X.ToS(row[0]) // ensure id is string
 		res = append(res, row)
 	})
+
+	out.Order = in.Order
 
 	return
 }

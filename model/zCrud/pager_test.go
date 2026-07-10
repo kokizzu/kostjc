@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/hexops/autogold/v2"
+	"github.com/kokizzu/gotro/D/Ch"
 	"github.com/kokizzu/gotro/D/Tt"
 )
 
@@ -582,4 +583,49 @@ WHERE ("name" IN ('&apos;; DROP TABLE users; --','&apos;) OR 1=1; --'))`),
 
 		})
 	}
+}
+
+func TestDefaultOrderByIdDesc(t *testing.T) {
+	t.Run(`tarantoolEmptyOrderDefaultsToIdDesc`, func(t *testing.T) {
+		in := PagerIn{}
+		order := in.DefaultOrderByIdDescTt(map[string]Tt.DataType{
+			`id`:   Tt.Unsigned,
+			`name`: Tt.String,
+		})
+
+		autogold.Expect([]string{`-id`}).Equal(t, order)
+		autogold.Expect([]string{`-id`}).Equal(t, in.Order)
+	})
+
+	t.Run(`tarantoolExplicitOrderIsPreserved`, func(t *testing.T) {
+		in := PagerIn{Order: []string{`+name`}}
+		order := in.DefaultOrderByIdDescTt(map[string]Tt.DataType{
+			`id`:   Tt.Unsigned,
+			`name`: Tt.String,
+		})
+
+		autogold.Expect([]string{`+name`}).Equal(t, order)
+		autogold.Expect([]string{`+name`}).Equal(t, in.Order)
+	})
+
+	t.Run(`tarantoolNoIdFieldStaysEmpty`, func(t *testing.T) {
+		in := PagerIn{}
+		order := in.DefaultOrderByIdDescTt(map[string]Tt.DataType{
+			`name`: Tt.String,
+		})
+
+		autogold.Expect([]string(nil)).Equal(t, order)
+		autogold.Expect([]string(nil)).Equal(t, in.Order)
+	})
+
+	t.Run(`clickhouseEmptyOrderDefaultsToIdDesc`, func(t *testing.T) {
+		in := PagerIn{}
+		order := in.DefaultOrderByIdDescCh(map[string]Ch.DataType{
+			`id`:   Ch.UInt64,
+			`name`: Ch.String,
+		})
+
+		autogold.Expect([]string{`-id`}).Equal(t, order)
+		autogold.Expect([]string{`-id`}).Equal(t, in.Order)
+	})
 }

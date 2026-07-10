@@ -56,6 +56,9 @@
         if (selectedBuildingId && !buildingChoices[String(selectedBuildingId)]) {
           selectedBuildingId = 0;
         }
+        if (focusedRoom && !roomNames.includes(focusedRoom)) {
+          focusedRoom = '';
+        }
         bookingsRenderKey += 1;
       }
     );
@@ -154,11 +157,16 @@
   let showPrice       = true;
   let showOnlyNotPaid = false;
   let showHDaysSince  = true;
+  let focusedRoom     = '';
   let selectedBuildingId = 0;
 
   $: buildingOptions = Object.entries(buildingChoices || {})
     .map(([id, name]) => ({ id: Number(id), name }))
     .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+
+  $: visibleRoomNames = focusedRoom
+    ? (roomNames || []).filter(room => room === focusedRoom)
+    : (roomNames || []);
 
   let isPopUpFormReady = false;
   onMount(async () => {
@@ -417,8 +425,21 @@
     return parseFloat((totalDays || 0).toFixed(1));
   }
 
+  /**
+   * @param {string} room
+   */
+  function toggleFocusedRoom(room) {
+    focusedRoom = focusedRoom === room ? '' : room;
+    if (focusedRoom) {
+      requestAnimationFrame(() => {
+        document.querySelector('.report-container .actions')?.scrollIntoView({ block: 'start' });
+      });
+    }
+  }
+
   async function onBuildingChange() {
     selectedBuildingId = Number(selectedBuildingId) || 0;
+    focusedRoom = '';
     await refreshBookings();
   }
 </script>
@@ -552,9 +573,23 @@
           </tr>
         </thead>
         <tbody>
-          {#each (roomNames || []) as room (room)}
+          {#each visibleRoomNames as room (room)}
             <tr>
-              <th>Room {room}</th>
+              <th class="room-header">
+                <div class="room-header-content">
+                  <span>Room {room}</span>
+                  <button
+                    class="row-focus-btn"
+                    class:active={focusedRoom === room}
+                    title={focusedRoom === room ? 'Show all rows' : 'Show only this row'}
+                    aria-label={focusedRoom === room ? 'Show all rows' : `Show only Room ${room}`}
+                    aria-pressed={focusedRoom === room}
+                    on:click={() => toggleFocusedRoom(room)}
+                  >
+                    <Icon src={RiSystemEyeLine} size="16" />
+                  </button>
+                </div>
+              </th>
               {#each (quartals || []) as quartal (`${room}-${quartal}`)}
                 <td>
                   <div class="cells">
@@ -650,13 +685,17 @@
   }
 
   .report-container .actions .quartal-shifter {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    width: min(100%, 520px);
     align-items: center;
-    gap: 16px;
+    justify-content: center;
+    column-gap: 16px;
   }
 
   .report-container .actions .quartal-shifter .btn {
+    width: 40px;
+    height: 40px;
     background-color: var(--gray-002);
     border: none;
     border-radius: 9999px;
@@ -676,6 +715,7 @@
   .report-container .actions .quartal-shifter .month-text {
     font-weight: 600;
     font-size: 18px;
+    text-align: center;
     user-select: none;
   }
 
@@ -774,6 +814,55 @@
     border-bottom: 1px solid var(--gray-004);
   }
 
+  table tbody tr .room-header {
+    min-width: 120px;
+    padding: 8px 12px;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  .room-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 28px;
+  }
+
+  .row-focus-btn {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--gray-007);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  }
+
+  table tbody tr:hover .row-focus-btn,
+  .room-header:focus-within .row-focus-btn {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .row-focus-btn:hover,
+  .row-focus-btn.active {
+    background-color: var(--blue-transparent);
+    color: var(--blue-006);
+  }
+
+  :global(.row-focus-btn:hover svg),
+  :global(.row-focus-btn.active svg) {
+    fill: var(--blue-006);
+  }
+
   table tbody tr td {
     padding: 2px 12px;
   }
@@ -864,6 +953,10 @@
   }
 
   @media only screen and (max-width : 768px) {
+    .report-container .actions .quartal-shifter .month-text {
+      font-size: 16px;
+    }
+
     .building-filter {
       min-width: min(100%, 260px);
     }

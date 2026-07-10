@@ -1,4 +1,13 @@
 
+compose-services:
+	docker compose up -d tarantool clickhouse
+
+compose-cmd: compose-services
+	./scripts/with-compose-test-env.sh $(CMD)
+
+test-domain: compose-services
+	./scripts/with-compose-test-env.sh go test ./domain $(ARGS)
+
 setup:
 	go get -u -v github.com/kokizzu/gotro@latest
 	go install github.com/air-verse/air@latest

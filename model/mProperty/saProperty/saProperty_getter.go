@@ -25,7 +25,7 @@ LIMIT 1`
 	L.IsError(err, comment+`: error while scanning total`)
 	out.CalculatePages(in.Page, in.PerPage, out.Total)
 
-	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	orderBySql := out.OrderBySqlCh(in.DefaultOrderByIdDescCh(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -63,7 +63,7 @@ LIMIT 1`
 	L.IsError(err, comment+`: error while scanning total`)
 	out.CalculatePages(in.Page, in.PerPage, out.Total)
 
-	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	orderBySql := out.OrderBySqlCh(in.DefaultOrderByIdDescCh(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -101,7 +101,7 @@ LIMIT 1`
 	L.IsError(err, comment+`: error while scanning total`)
 	out.CalculatePages(in.Page, in.PerPage, out.Total)
 
-	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	orderBySql := out.OrderBySqlCh(in.DefaultOrderByIdDescCh(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -139,7 +139,7 @@ LIMIT 1`
 	L.IsError(err, comment+`: error while scanning total`)
 	out.CalculatePages(in.Page, in.PerPage, out.Total)
 
-	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	orderBySql := out.OrderBySqlCh(in.DefaultOrderByIdDescCh(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -177,7 +177,7 @@ LIMIT 1`
 	L.IsError(err, comment+`: error while scanning total`)
 	out.CalculatePages(in.Page, in.PerPage, out.Total)
 
-	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	orderBySql := out.OrderBySqlCh(in.DefaultOrderByIdDescCh(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -215,7 +215,7 @@ LIMIT 1`
 	L.IsError(err, comment+`: error while scanning total`)
 	out.CalculatePages(in.Page, in.PerPage, out.Total)
 
-	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	orderBySql := out.OrderBySqlCh(in.DefaultOrderByIdDescCh(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -253,7 +253,7 @@ LIMIT 1`
 	L.IsError(err, comment+`: error while scanning total`)
 	out.CalculatePages(in.Page, in.PerPage, out.Total)
 
-	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	orderBySql := out.OrderBySqlCh(in.DefaultOrderByIdDescCh(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -291,7 +291,7 @@ LIMIT 1`
 	L.IsError(err, comment+`: error while scanning total`)
 	out.CalculatePages(in.Page, in.PerPage, out.Total)
 
-	orderBySql := out.OrderBySqlCh(in.Order, validFields)
+	orderBySql := out.OrderBySqlCh(in.DefaultOrderByIdDescCh(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `

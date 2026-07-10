@@ -181,12 +181,14 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 	case zCrud.CmdUpsert, zCrud.CmdDelete, zCrud.CmdRestore:
 		bk := wcProperty.NewBookingsMutator(d.PropOltp)
 		bk.Id = in.Booking.Id
+		previousRoomId := uint64(0)
 
 		if bk.Id > 0 {
 			if !bk.FindById() {
 				out.SetError(400, ErrAdminBookingNotFound)
 				return
 			}
+			previousRoomId = bk.RoomId
 
 			if in.Cmd == zCrud.CmdDelete {
 				if bk.DeletedAt == 0 {
@@ -274,28 +276,16 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 			bk.SetExtraTenants(in.Booking.ExtraTenants)
 		}
 
+		affectedRoomId := previousRoomId
 		if in.Booking.RoomId != 0 {
-			bk2 := rqProperty.NewBookings(d.PropOltp)
-			lastDateStartOfBooking := bk2.GetLastDateStartById(bk.Id)
-
-			room := wcProperty.NewRoomsMutator(d.PropOltp)
+			room := rqProperty.NewRooms(d.PropOltp)
 			room.Id = in.Booking.RoomId
 			if !room.FindById() {
 				out.SetError(400, ErrAdminBookingRoomNotFound)
 				return
 			}
 
-			if in.Booking.DateStart >= lastDateStartOfBooking {
-				room.SetCurrentTenantId(in.Booking.TenantId)
-				room.SetLastUseAt(in.Booking.DateEnd)
-				room.SetUpdatedAt(in.UnixNow())
-				room.SetUpdatedBy(sess.UserId)
-				if !room.DoUpdateById() {
-					out.SetError(500, ErrAdminBookingSaveFailed)
-					return
-				}
-			}
-
+			affectedRoomId = in.Booking.RoomId
 			bk.SetRoomId(in.Booking.RoomId)
 		}
 
@@ -310,6 +300,20 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 		if !bk.DoUpsert() {
 			out.SetError(500, ErrAdminBookingSaveFailed)
 			return
+		}
+
+		if affectedRoomId != 0 {
+			if !d.refreshRoomCurrentTenantFromLatestBooking(affectedRoomId, in.UnixNow(), sess.UserId) {
+				out.SetError(500, ErrAdminBookingSaveFailed)
+				return
+			}
+		}
+
+		if previousRoomId != 0 && previousRoomId != affectedRoomId {
+			if !d.refreshRoomCurrentTenantFromLatestBooking(previousRoomId, in.UnixNow(), sess.UserId) {
+				out.SetError(500, ErrAdminBookingSaveFailed)
+				return
+			}
 		}
 
 		if in.Pager.Page == 0 {
@@ -327,4 +331,33 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 	}
 
 	return
+}
+
+func (d *Domain) refreshRoomCurrentTenantFromLatestBooking(roomId uint64, updatedAt int64, updatedBy uint64) bool {
+	latestBooking := rqProperty.NewBookings(d.PropOltp)
+	hasLatestBooking := latestBooking.FindLatestByRoomId(roomId)
+
+	room := wcProperty.NewRoomsMutator(d.PropOltp)
+	room.Id = roomId
+	if !room.FindById() {
+		return false
+	}
+
+	currentTenantId := uint64(0)
+	lastUseAt := ``
+	if hasLatestBooking {
+		currentTenantId = latestBooking.TenantId
+		lastUseAt = latestBooking.DateEnd
+	}
+
+	changed := room.SetCurrentTenantId(currentTenantId)
+	changed = room.SetLastUseAt(lastUseAt) || changed
+	if !changed {
+		return true
+	}
+
+	room.SetUpdatedAt(updatedAt)
+	room.SetUpdatedBy(updatedBy)
+
+	return room.DoUpdateById()
 }

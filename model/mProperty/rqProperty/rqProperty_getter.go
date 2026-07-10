@@ -37,7 +37,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -90,7 +90,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -127,7 +127,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -182,7 +182,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	if S.Contains(orderBySql, `ORDER BY "id"`) {
@@ -356,7 +356,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -469,7 +469,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -506,7 +506,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -1470,7 +1470,7 @@ LIMIT 1`
 		out.CalculatePages(in.Page, in.PerPage, int(X.ToI(row[0])))
 	})
 
-	orderBySql := out.OrderBySqlTt(in.Order, validFields)
+	orderBySql := out.OrderBySqlTt(in.DefaultOrderByIdDescTt(validFields), validFields)
 	limitOffsetSql := out.LimitOffsetSql()
 
 	queryRows := comment + `
@@ -2185,6 +2185,28 @@ LIMIT 1`
 	})
 
 	return
+}
+
+func (b *Bookings) FindLatestByRoomId(roomId uint64) bool {
+	const comment = `-- Bookings) FindLatestByRoomId`
+
+	query := comment + `
+SELECT ` + b.SqlSelectAllFields() + `
+FROM "bookings"
+WHERE "roomId" = ` + I.UToS(roomId) + `
+ORDER BY "dateEnd" DESC, "dateStart" DESC, "id" DESC
+LIMIT 1`
+
+	found := false
+	b.Adapter.QuerySql(query, func(row []any) {
+		if len(row) != 17 {
+			return
+		}
+		b.FromArray(row)
+		found = true
+	})
+
+	return found
 }
 
 type BookingDetailPerMonth struct {

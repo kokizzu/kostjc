@@ -110,13 +110,16 @@
   }
 
   async function OnEdit(/** @type any */ id, /** @type any[]*/ payloads) {
+    const password = payloads[payloads.length - 1];
     const user = {
       id: id,
       email: payloads[1],
       userName: payloads[2],
       fullName: payloads[3],
-      role: payloads[4],
-      password: payloads[5] || ''
+      role: payloads[4]
+    }
+    if (typeof password === 'string' && password.trim() !== '') {
+      user.password = password;
     }
     const i = /** @type {any}*/ ({
       pager,
