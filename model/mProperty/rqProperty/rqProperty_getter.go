@@ -749,12 +749,19 @@ ORDER BY ` + r.SqlRoomName() + ` ASC`
 	return out
 }
 
-func (r *Rooms) FindRoomNames() (out []string) {
+func (r *Rooms) FindRoomNames(buildingId uint64) (out []string) {
 	const comment = `-- Rooms) FindRoomNames`
+
+	whereAndSql := `
+WHERE "deletedAt" = 0`
+	if buildingId > 0 {
+		whereAndSql += `
+AND "buildingId" = ` + strconv.FormatUint(buildingId, 10)
+	}
 
 	queryRows := comment + `
 SELECT ` + r.SqlRoomName() + ` FROM ` + r.SqlTableName() + `
-WHERE "deletedAt" = 0
+` + whereAndSql + `
 ORDER BY ` + r.SqlRoomName() + ` ASC`
 
 	r.Adapter.QuerySql(queryRows, func(row []any) {
@@ -801,7 +808,7 @@ func getEndOfMonth(ym string) string {
 	return endOfMonth.Format(time.DateOnly)
 }
 
-func (b *Bookings) FindBookingsPerQuartal(monthStart, monthEnd string) (out []BookingDetail) {
+func (b *Bookings) FindBookingsPerQuartal(monthStart, monthEnd string, buildingId uint64) (out []BookingDetail) {
 	const comment = `-- Bookings) FindBookingsPerQuartal`
 
 	if !(isValidYearMonth(monthStart) || isValidYearMonth(monthEnd)) {
@@ -811,6 +818,12 @@ func (b *Bookings) FindBookingsPerQuartal(monthStart, monthEnd string) (out []Bo
 
 	monthEnd = getEndOfMonth(monthEnd)
 	monthStart += "-01"
+
+	buildingFilterSql := ``
+	if buildingId > 0 {
+		buildingFilterSql = `
+	AND "rooms"."buildingId" = ` + strconv.FormatUint(buildingId, 10)
+	}
 
 	queryRows := comment + `
 SELECT 
@@ -846,6 +859,7 @@ WHERE
 			AND "bookings"."dateEnd" > ` + S.Z(monthEnd) + `
 		)
   )
+` + buildingFilterSql + `
 GROUP BY
 	"bookings"."id",
 	"rooms"."roomName"

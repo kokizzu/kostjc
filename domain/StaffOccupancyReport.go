@@ -18,14 +18,16 @@ type (
 		RequestCommon
 		MonthStart string `json:"monthStart" form:"monthStart" query:"monthStart" long:"monthStart" msg:"monthStart"`
 		MonthEnd   string `json:"monthEnd" form:"monthEnd" query:"monthEnd" long:"monthEnd" msg:"monthEnd"`
+		BuildingId uint64 `json:"buildingId" form:"buildingId" query:"buildingId" long:"buildingId" msg:"buildingId"`
 	}
 	StaffOccupancyReportOut struct {
 		ResponseCommon
 		User *rqAuth.Users `json:"user" form:"user" query:"user" long:"user" msg:"user"`
 
-		Segments  M.SB                       `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
-		RoomNames []string                   `json:"roomNames" form:"roomNames" query:"roomNames" long:"roomNames" msg:"roomNames"`
-		Bookings  []rqProperty.BookingDetail `json:"bookingsPerQuartal" form:"bookingsPerQuartal" query:"bookingsPerQuartal" long:"bookingsPerQuartal" msg:"bookingsPerQuartal"`
+		Segments        M.SB                       `json:"segments" form:"segments" query:"segments" long:"segments" msg:"segments"`
+		BuildingChoices map[uint64]string          `json:"buildingChoices" form:"buildingChoices" query:"buildingChoices" long:"buildingChoices" msg:"buildingChoices"`
+		RoomNames       []string                   `json:"roomNames" form:"roomNames" query:"roomNames" long:"roomNames" msg:"roomNames"`
+		Bookings        []rqProperty.BookingDetail `json:"bookingsPerQuartal" form:"bookingsPerQuartal" query:"bookingsPerQuartal" long:"bookingsPerQuartal" msg:"bookingsPerQuartal"`
 	}
 )
 
@@ -42,11 +44,14 @@ func (d *Domain) StaffOccupancyReport(in *StaffOccupancyReportIn) (out StaffOccu
 		return
 	}
 
+	building := rqProperty.NewBuildings(d.PropOltp)
+	out.BuildingChoices = building.FindBuildingChoices()
+
 	room := rqProperty.NewRooms(d.PropOltp)
-	out.RoomNames = room.FindRoomNames()
+	out.RoomNames = room.FindRoomNames(in.BuildingId)
 
 	booking := rqProperty.NewBookings(d.PropOltp)
-	out.Bookings = booking.FindBookingsPerQuartal(in.MonthStart, in.MonthEnd)
+	out.Bookings = booking.FindBookingsPerQuartal(in.MonthStart, in.MonthEnd, in.BuildingId)
 
 	return
 }

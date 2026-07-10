@@ -28,6 +28,7 @@
   let segments  = /** @type {Access} */ ({/* segments */});
   let bookingsPerQuartal = /** @type {BookingDetail[]} */ ([/* bookingsPerQuartal*/]);
   let roomNames = /** @type {string[]} */ ([/* roomNames */]);
+  let buildingChoices = /** @type {Record<string, string>} */ ({/* buildingChoices */});
   let tenants     = /** @type {Record<Number, string>} */({/* tenants */});
   let rooms       = /** @type {Record<Number, string>} */({/* rooms */});
   let facilities  = /** @type {Facility[]} */ ([/* facilities */]);
@@ -35,7 +36,7 @@
 
   async function refreshBookings() {
     await StaffOccupancyReport(// @ts-ignore
-      { monthStart, monthEnd }, /** @type {import('./jsApi.GEN').StaffOccupancyReportCallback} */
+      { monthStart, monthEnd, buildingId: Number(selectedBuildingId) || 0 }, /** @type {import('./jsApi.GEN').StaffOccupancyReportCallback} */
       /** @returns {Promise<void>} */
         function(/** @type any */ o) {
         if (o.error) {
@@ -49,6 +50,12 @@
           booking => ({ ...booking })
         );
         roomNames = [...(o.roomNames || [])];
+        if (o.buildingChoices) {
+          buildingChoices = { ...o.buildingChoices };
+        }
+        if (selectedBuildingId && !buildingChoices[String(selectedBuildingId)]) {
+          selectedBuildingId = 0;
+        }
         bookingsRenderKey += 1;
       }
     );
@@ -147,6 +154,11 @@
   let showPrice       = true;
   let showOnlyNotPaid = false;
   let showHDaysSince  = true;
+  let selectedBuildingId = 0;
+
+  $: buildingOptions = Object.entries(buildingChoices || {})
+    .map(([id, name]) => ({ id: Number(id), name }))
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
 
   let isPopUpFormReady = false;
   onMount(async () => {
@@ -404,6 +416,11 @@
 
     return parseFloat((totalDays || 0).toFixed(1));
   }
+
+  async function onBuildingChange() {
+    selectedBuildingId = Number(selectedBuildingId) || 0;
+    await refreshBookings();
+  }
 </script>
 
 {#if isPopUpFormReady}
@@ -466,6 +483,19 @@
         </div>
       </div>
       <div class="filters">
+        <label class="building-filter" for="building-filter">
+          <select
+            id="building-filter"
+            aria-label="Building"
+            bind:value={selectedBuildingId}
+            on:change={onBuildingChange}
+          >
+            <option value={0}>All Buildings</option>
+            {#each buildingOptions as building (building.id)}
+              <option value={building.id}>{building.name}</option>
+            {/each}
+          </select>
+        </label>
         <Switcher
           id="show-refunded"
           label="Show Refunded"
@@ -509,7 +539,7 @@
       </div>
     </div>
     <div class="table-container">
-      {#key `${bookingsRenderKey}-${monthStart}-${monthEnd}`}
+      {#key `${bookingsRenderKey}-${monthStart}-${monthEnd}-${selectedBuildingId}`}
       <table>
         <thead>
           <tr>
@@ -689,7 +719,32 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
+  }
+
+  .building-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 190px;
+    color: var(--gray-007);
+  }
+
+  .building-filter select {
+    height: 38px;
+    width: 100%;
+    border: 1px solid var(--gray-004);
+    border-radius: 8px;
+    background-color: #fff;
+    color: var(--gray-008);
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  .building-filter select:focus {
+    border-color: var(--blue-006);
+    outline: none;
   }
 
   .table-container {
@@ -809,6 +864,10 @@
   }
 
   @media only screen and (max-width : 768px) {
+    .building-filter {
+      min-width: min(100%, 260px);
+    }
+
     table thead th {
       min-width: 100px;
     }

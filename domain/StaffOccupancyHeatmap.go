@@ -42,7 +42,7 @@ func (d *Domain) StaffOccupancyHeatmap(in *StaffOccupancyHeatmapIn) (out StaffOc
 	}
 
 	room := rqProperty.NewRooms(d.PropOltp)
-	out.RoomNames = room.FindRoomNames()
+	out.RoomNames = room.FindRoomNames(0)
 
 	booking := rqProperty.NewBookings(d.PropOltp)
 	out.Bookings = booking.FindBookingsPerMonth(in.YearMonth)

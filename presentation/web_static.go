@@ -205,6 +205,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`user`:               user,
 			`segments`:           segments,
 			`bookingsPerQuartal`: out.Bookings,
+			`buildingChoices`:    out.BuildingChoices,
 			`roomNames`:          out.RoomNames,
 			`rooms`:              rooms,
 			`tenants`:            tenants,

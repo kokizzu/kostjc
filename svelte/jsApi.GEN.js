@@ -2665,10 +2665,12 @@ exports.StaffOccupancyHeatmap = async function StaffOccupancyHeatmap( i, cb ) {
  * @typedef {Object} StaffOccupancyReportIn
  * @property {String} monthStart
  * @property {String} monthEnd
+ * @property {number} buildingId
  */
 const StaffOccupancyReportIn = {
   monthStart: '', // string
   monthEnd: '', // string
+  buildingId: 0, // uint64
 }
 /**
  * @typedef {Object} StaffOccupancyReportOut
@@ -2689,6 +2691,7 @@ const StaffOccupancyReportIn = {
  * @property {String} user.userName
  * @property {String} user.role
  * @property {Object} segments
+ * @property {Object} buildingChoices
  * @property {Array<String>} roomNames
  * @property {Object} bookings
  */
@@ -2713,6 +2716,8 @@ const StaffOccupancyReportOut = {
   }, // rqAuth.Users
   segments: { // M.SB
   }, // M.SB
+  buildingChoices: { // map[uint64]string
+  }, // map[uint64]string
   roomNames: [], // []string
   bookings: { // []rqProperty.BookingDetail
   }, // []rqProperty.BookingDetail
