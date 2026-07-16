@@ -117,6 +117,7 @@ const AdminBookingIn = {
  * @property {Object} booking.extraTenants
  * @property {number} booking.roomId
  * @property {Object} bookings
+ * @property {Object} auditUsers
  */
 const AdminBookingOut = {
   pager: { // zCrud.PagerOut
@@ -159,6 +160,8 @@ const AdminBookingOut = {
   }, // rqProperty.Bookings
   bookings: { // [][]any
   }, // [][]any
+  auditUsers: { // map[uint64]string
+  }, // map[uint64]string
 }
 /**
  * @callback AdminBookingCallback
@@ -942,6 +945,7 @@ const AdminPaymentIn = {
  * @property {number} payment.restoredBy
  * @property {Object} payments
  * @property {Object} paymentsByBooking
+ * @property {Object} auditUsers
  */
 const AdminPaymentOut = {
   pager: { // zCrud.PagerOut
@@ -982,6 +986,8 @@ const AdminPaymentOut = {
   }, // [][]any
   paymentsByBooking: { // []rqProperty.Payments
   }, // []rqProperty.Payments
+  auditUsers: { // map[uint64]string
+  }, // map[uint64]string
 }
 /**
  * @callback AdminPaymentCallback
@@ -2454,6 +2460,7 @@ const StaffBookingIn = {
  * @property {Object} booking.extraTenants
  * @property {number} booking.roomId
  * @property {Object} bookings
+ * @property {Object} auditUsers
  */
 const StaffBookingOut = {
   pager: { // zCrud.PagerOut
@@ -2496,6 +2503,8 @@ const StaffBookingOut = {
   }, // rqProperty.Bookings
   bookings: { // [][]any
   }, // [][]any
+  auditUsers: { // map[uint64]string
+  }, // map[uint64]string
 }
 /**
  * @callback StaffBookingCallback

@@ -30,6 +30,7 @@ type (
 		Payment           rqProperty.Payments   `json:"payment" form:"payment" query:"payment" long:"payment" msg:"payment"`
 		Payments          [][]any               `json:"payments" form:"payments" query:"payments" long:"payments" msg:"payments"`
 		PaymentsByBooking []rqProperty.Payments `json:"paymentsByBooking" form:"paymentsByBooking" query:"paymentsByBooking" long:"paymentsByBooking" msg:"paymentsByBooking"`
+		AuditUsers        map[uint64]string     `json:"auditUsers" form:"auditUsers" query:"auditUsers" long:"auditUsers" msg:"auditUsers"`
 	}
 )
 
@@ -116,6 +117,27 @@ var AdminPaymentMeta = zCrud.Meta{
 			InputType: zCrud.InputTypeDateTime,
 			ReadOnly:  true,
 		},
+		{
+			Name:      mProperty.CreatedBy,
+			Label:     `Created By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  true,
+		},
+		{
+			Name:      mProperty.UpdatedBy,
+			Label:     `Updated By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  true,
+		},
+		{
+			Name:      mProperty.DeletedBy,
+			Label:     `Deleted By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  true,
+		},
 	},
 }
 
@@ -154,6 +176,7 @@ func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 			if in.Cmd == zCrud.CmdDelete {
 				if pym.DeletedAt == 0 {
 					pym.SetDeletedAt(in.UnixNow())
+					pym.SetDeletedBy(sess.UserId)
 				}
 			}
 
@@ -221,6 +244,7 @@ func (d *Domain) AdminPayment(in *AdminPaymentIn) (out AdminPaymentOut) {
 			&in.Pager,
 			&out.Pager,
 		)
+		out.AuditUsers = d.auditUserChoices(out.Payments, &AdminPaymentMeta)
 	}
 
 	return

@@ -374,6 +374,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`tenants`:    tenants,
 			`rooms`:      rooms,
 			`facilities`: facilities,
+			`auditUsers`: out.AuditUsers,
 			`fields`:     out.Meta.Fields,
 			`pager`:      out.Pager,
 		})
@@ -613,14 +614,15 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		out := d.AdminPayment(&in)
 
 		return views.RenderAdminPayment(ctx, M.SX{
-			`title`:    conf.PROJECT_NAME + ` | Payment Management`,
-			`user`:     user,
-			`segments`: segments,
-			`payment`:  out.Payment,
-			`payments`: out.Payments,
-			`bookings`: bookings,
-			`fields`:   out.Meta.Fields,
-			`pager`:    out.Pager,
+			`title`:      conf.PROJECT_NAME + ` | Payment Management`,
+			`user`:       user,
+			`segments`:   segments,
+			`payment`:    out.Payment,
+			`payments`:   out.Payments,
+			`bookings`:   bookings,
+			`auditUsers`: out.AuditUsers,
+			`fields`:     out.Meta.Fields,
+			`pager`:      out.Pager,
 		})
 	})
 
@@ -660,6 +662,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`tenants`:    tenants,
 			`facilities`: facilities,
 			`rooms`:      rooms,
+			`auditUsers`: out.AuditUsers,
 			`fields`:     out.Meta.Fields,
 			`pager`:      out.Pager,
 		})

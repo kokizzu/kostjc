@@ -17327,6 +17327,10 @@ ${component_stack}
       /** @type {Record<Number, string>} */
       {/* rooms */}
     );
+    let auditUsers = mutable_source(
+      /** @type {Record<Number, string>} */
+      {/* auditUsers */}
+    );
     let facilities = (
       /** @type {Facility[]} */
       [/* facilities */]
@@ -17389,6 +17393,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(bookings, o.bookings);
+          set(auditUsers, o.auditUsers || {});
         }
       );
     }
@@ -17413,6 +17418,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(bookings, o.bookings);
+          set(auditUsers, o.auditUsers || {});
           notifier.showSuccess(`Booking '${row[1]}' restored !!`);
           OnRefresh(get2(pager));
         }
@@ -17435,6 +17441,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(bookings, o.bookings);
+          set(auditUsers, o.auditUsers || {});
           notifier.showSuccess(`Booking '${row[1]}' deleted !!`);
           OnRefresh(get2(pager));
         }
@@ -17469,6 +17476,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(bookings, o.bookings);
+          set(auditUsers, o.auditUsers || {});
           notifier.showSuccess(`Booking #${booking.id} updated !!`);
           OnRefresh(get2(pager));
         }
@@ -17494,6 +17502,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(bookings, o.bookings);
+          set(auditUsers, o.auditUsers || {});
           notifier.showSuccess(`Booking created !!`);
           get2(popUpAddBooking).Hide();
           OnRefresh(get2(pager));
@@ -17534,57 +17543,65 @@ ${component_stack}
       children: ($anchor2, $slotProps) => {
         var div = root_111();
         var node_2 = sibling(child(div), 2);
-        MasterTableBooking(node_2, {
-          NAME: "Booking",
-          ACCESS: segments,
-          REFS: {
+        {
+          let $0 = derived_safe_equal(() => ({
             "tenantId": tenants,
             "extraTenants": tenants,
-            "roomId": rooms
-          },
-          COL_WIDTHS: { "tenantId": 200, "extraTenants": 300 },
-          tenants,
-          facilities,
-          CAN_SEARCH_ROW: true,
-          OnDelete,
-          OnRestore,
-          OnRefresh,
-          OnEdit,
-          get FIELDS() {
-            return get2(fields);
-          },
-          set FIELDS($value) {
-            set(fields, $value);
-          },
-          get PAGER() {
-            return get2(pager);
-          },
-          set PAGER($value) {
-            set(pager, $value);
-          },
-          get MASTER_ROWS() {
-            return get2(bookings);
-          },
-          set MASTER_ROWS($value) {
-            set(bookings, $value);
-          },
-          children: ($anchor3, $slotProps2) => {
-            var button = root17();
-            var node_3 = child(button);
-            Icon(node_3, {
-              color: "var(--gray-007)",
-              size: "18",
-              get src() {
-                return RiSystemAddBoxLine;
-              }
-            });
-            reset(button);
-            event("click", button, () => get2(popUpAddBooking).Show());
-            append($anchor3, button);
-          },
-          $slots: { default: true },
-          $legacy: true
-        });
+            "roomId": rooms,
+            "createdBy": get2(auditUsers),
+            "updatedBy": get2(auditUsers),
+            "deletedBy": get2(auditUsers)
+          }));
+          MasterTableBooking(node_2, {
+            NAME: "Booking",
+            ACCESS: segments,
+            get REFS() {
+              return get2($0);
+            },
+            COL_WIDTHS: { "tenantId": 200, "extraTenants": 300 },
+            tenants,
+            facilities,
+            CAN_SEARCH_ROW: true,
+            OnDelete,
+            OnRestore,
+            OnRefresh,
+            OnEdit,
+            get FIELDS() {
+              return get2(fields);
+            },
+            set FIELDS($value) {
+              set(fields, $value);
+            },
+            get PAGER() {
+              return get2(pager);
+            },
+            set PAGER($value) {
+              set(pager, $value);
+            },
+            get MASTER_ROWS() {
+              return get2(bookings);
+            },
+            set MASTER_ROWS($value) {
+              set(bookings, $value);
+            },
+            children: ($anchor3, $slotProps2) => {
+              var button = root17();
+              var node_3 = child(button);
+              Icon(node_3, {
+                color: "var(--gray-007)",
+                size: "18",
+                get src() {
+                  return RiSystemAddBoxLine;
+                }
+              });
+              reset(button);
+              event("click", button, () => get2(popUpAddBooking).Show());
+              append($anchor3, button);
+            },
+            $slots: { default: true },
+            $legacy: true
+          });
+        }
         reset(div);
         append($anchor2, div);
       },

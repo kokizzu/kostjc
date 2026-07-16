@@ -20369,6 +20369,10 @@ ${component_stack}
       /** @type {Record<Number, string>} */
       {/* bookings */}
     );
+    let auditUsers = mutable_source(
+      /** @type {Record<Number, string>} */
+      {/* auditUsers */}
+    );
     let fields = mutable_source(
       /** @type {Field[]} */
       [/* fields */]
@@ -20410,6 +20414,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(payments, o.payments);
+          set(auditUsers, o.auditUsers || {});
         }
       );
     }
@@ -20434,6 +20439,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(payments, o.payments);
+          set(auditUsers, o.auditUsers || {});
           notifier.showSuccess(`Payment #${row[0]} restored !!`);
           OnRefresh(get2(pager));
         }
@@ -20456,6 +20462,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(payments, o.payments);
+          set(auditUsers, o.auditUsers || {});
           notifier.showSuccess(`Payment deleted !!`);
           OnRefresh(get2(pager));
         }
@@ -20487,6 +20494,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(payments, o.payments);
+          set(auditUsers, o.auditUsers || {});
           notifier.showSuccess(`Payment #${payment2.id} updated !!`);
           OnRefresh(get2(pager));
         }
@@ -20511,6 +20519,7 @@ ${component_stack}
           }
           set(pager, o.pager);
           set(payments, o.payments);
+          set(auditUsers, o.auditUsers || {});
           notifier.showSuccess(`Payment created !!`);
           get2(popUpForms).Hide();
           OnRefresh(get2(pager));
@@ -20567,7 +20576,10 @@ ${component_stack}
           let $0 = derived_safe_equal(() => ({
             "bookingId": bookings,
             "paymentStatus": PaymentStatuses,
-            "paymentMethod": PaymentMethods
+            "paymentMethod": PaymentMethods,
+            "createdBy": get2(auditUsers),
+            "updatedBy": get2(auditUsers),
+            "deletedBy": get2(auditUsers)
           }));
           MasterTable(node_2, {
             NAME: "Payment",

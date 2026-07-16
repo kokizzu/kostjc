@@ -28,10 +28,11 @@ type (
 	}
 	StaffBookingOut struct {
 		ResponseCommon
-		Pager    zCrud.PagerOut      `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-		Meta     *zCrud.Meta         `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
-		Booking  rqProperty.Bookings `json:"booking" form:"booking" query:"booking" long:"booking" msg:"booking"`
-		Bookings [][]any             `json:"bookings" form:"bookings" query:"bookings" long:"bookings" msg:"bookings"`
+		Pager      zCrud.PagerOut      `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Meta       *zCrud.Meta         `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
+		Booking    rqProperty.Bookings `json:"booking" form:"booking" query:"booking" long:"booking" msg:"booking"`
+		Bookings   [][]any             `json:"bookings" form:"bookings" query:"bookings" long:"bookings" msg:"bookings"`
+		AuditUsers map[uint64]string   `json:"auditUsers" form:"auditUsers" query:"auditUsers" long:"auditUsers" msg:"auditUsers"`
 	}
 )
 
@@ -162,6 +163,7 @@ func (d *Domain) StaffBooking(in *StaffBookingIn) (out StaffBookingOut) {
 			&in.Pager,
 			&out.Pager,
 		)
+		out.AuditUsers = d.auditUserChoices(out.Bookings, &StaffBookingMeta)
 	}
 
 	return

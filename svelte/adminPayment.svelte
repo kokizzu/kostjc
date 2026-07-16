@@ -23,6 +23,7 @@
   let payment  = /** @type {Payment} */ ({/* payment */});
   let payments = /** @type {any[][]} */([/* payments */]);
   let bookings = /** @type {Record<Number, string>} */ ({/* bookings */});
+  let auditUsers = /** @type {Record<Number, string>} */ ({/* auditUsers */});
   let fields    = /** @type {Field[]} */ ([/* fields */]);
   let pager     = /** @type {PagerOut} */ ({/* pager */});
 
@@ -63,6 +64,7 @@
         }
         pager = o.pager;
         payments = o.payments;
+        auditUsers = o.auditUsers || {};
       }
     );
   }
@@ -87,6 +89,7 @@
 
         pager = o.pager;
         payments = o.payments;
+        auditUsers = o.auditUsers || {};
         notifier.showSuccess(`Payment #${row[0]} restored !!`);
 
         OnRefresh(pager);
@@ -114,6 +117,7 @@
 
         pager = o.pager;
         payments = o.payments;
+        auditUsers = o.auditUsers || {};
         notifier.showSuccess(`Payment deleted !!`);
 
         OnRefresh(pager);
@@ -148,6 +152,7 @@
 
         pager = o.pager;
         payments = o.payments;
+        auditUsers = o.auditUsers || {};
         notifier.showSuccess(`Payment #${payment.id} updated !!`);
 
         OnRefresh(pager);
@@ -176,6 +181,7 @@
         
         pager = o.pager;
         payments = o.payments;
+        auditUsers = o.auditUsers || {};
         notifier.showSuccess(`Payment created !!`);
 
         popUpForms.Hide();
@@ -227,7 +233,10 @@
       REFS={{
         'bookingId': bookings,
         'paymentStatus': PaymentStatuses,
-        'paymentMethod': PaymentMethods
+        'paymentMethod': PaymentMethods,
+        'createdBy': auditUsers,
+        'updatedBy': auditUsers,
+        'deletedBy': auditUsers
       }}
       COL_WIDTHS={{
         'bookingId': 370,

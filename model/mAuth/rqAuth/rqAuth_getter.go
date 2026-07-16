@@ -1,6 +1,8 @@
 package rqAuth
 
 import (
+	"sort"
+	"strconv"
 	"time"
 
 	"github.com/kokizzu/gotro/A"
@@ -249,6 +251,56 @@ ORDER BY ` + u.SqlId() + ` ASC`
 		nameToShow := X.ToS(row[1])
 		if nameToShow == "" {
 			nameToShow = X.ToS(row[2])
+		}
+
+		out[X.ToU(row[0])] = nameToShow
+	})
+
+	return out
+}
+
+func (u *Users) FindUserChoicesByIds(ids []uint64) map[uint64]string {
+	const comment = `-- Users) FindUserChoicesByIds`
+
+	if len(ids) == 0 {
+		return map[uint64]string{}
+	}
+
+	sort.Slice(ids, func(i, j int) bool {
+		return ids[i] < ids[j]
+	})
+
+	idStrs := make([]string, 0, len(ids))
+	var last uint64
+	for _, id := range ids {
+		if id == 0 || id == last {
+			continue
+		}
+		idStrs = append(idStrs, strconv.FormatUint(id, 10))
+		last = id
+	}
+	if len(idStrs) == 0 {
+		return map[uint64]string{}
+	}
+
+	queryRows := comment + `
+SELECT ` + u.SqlId() + `, ` + u.SqlFullName() + `, ` + u.SqlUserName() + `, ` + u.SqlEmail() + `
+FROM ` + u.SqlTableName() + `
+WHERE ` + u.SqlId() + ` IN (` + A.StrJoin(idStrs, `,`) + `)
+ORDER BY ` + u.SqlId() + ` ASC`
+
+	out := make(map[uint64]string)
+	u.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) != 4 {
+			return
+		}
+
+		nameToShow := X.ToS(row[1])
+		if nameToShow == "" {
+			nameToShow = X.ToS(row[2])
+		}
+		if nameToShow == "" {
+			nameToShow = X.ToS(row[3])
 		}
 
 		out[X.ToU(row[0])] = nameToShow

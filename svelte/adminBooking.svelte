@@ -22,6 +22,7 @@
   let bookings    = /** @type {any[][]} */([/* bookings */]);
   let tenants     = /** @type {Record<Number, string>} */({/* tenants */});
   let rooms       = /** @type {Record<Number, string>} */({/* rooms */});
+  let auditUsers  = /** @type {Record<Number, string>} */({/* auditUsers */});
   let facilities  = /** @type {Facility[]} */ ([/* facilities */]);
   let fields      = /** @type {Field[]} */ ([/* fields */]);
   let pager       = /** @type {PagerOut} */ ({/* pager */});
@@ -76,6 +77,7 @@
         }
         pager = o.pager;
         bookings = o.bookings;
+        auditUsers = o.auditUsers || {};
       }
     );
   }
@@ -100,6 +102,7 @@
 
         pager = o.pager;
         bookings = o.bookings;
+        auditUsers = o.auditUsers || {};
         notifier.showSuccess(`Booking '${row[1]}' restored !!`);
 
     
@@ -128,6 +131,7 @@
 
         pager = o.pager;
         bookings = o.bookings;
+        auditUsers = o.auditUsers || {};
         notifier.showSuccess(`Booking '${row[1]}' deleted !!`);
 
     
@@ -166,6 +170,7 @@
 
         pager = o.pager;
         bookings = o.bookings;
+        auditUsers = o.auditUsers || {};
         notifier.showSuccess(`Booking #${booking.id} updated !!`);
         OnRefresh(pager);
       }
@@ -195,6 +200,7 @@
         
         pager = o.pager;
         bookings = o.bookings;
+        auditUsers = o.auditUsers || {};
         notifier.showSuccess(`Booking created !!`);
 
         popUpAddBooking.Hide();
@@ -224,7 +230,10 @@
       REFS={{
         'tenantId': tenants,
         'extraTenants': tenants,
-        'roomId': rooms
+        'roomId': rooms,
+        'createdBy': auditUsers,
+        'updatedBy': auditUsers,
+        'deletedBy': auditUsers
       }}
       bind:FIELDS={fields}
       bind:PAGER={pager}

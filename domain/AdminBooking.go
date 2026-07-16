@@ -29,10 +29,11 @@ type (
 	}
 	AdminBookingOut struct {
 		ResponseCommon
-		Pager    zCrud.PagerOut       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
-		Meta     *zCrud.Meta          `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
-		Booking  *rqProperty.Bookings `json:"booking" form:"booking" query:"booking" long:"booking" msg:"booking"`
-		Bookings [][]any              `json:"bookings" form:"bookings" query:"bookings" long:"bookings" msg:"bookings"`
+		Pager      zCrud.PagerOut       `json:"pager" form:"pager" query:"pager" long:"pager" msg:"pager"`
+		Meta       *zCrud.Meta          `json:"meta" form:"meta" query:"meta" long:"meta" msg:"meta"`
+		Booking    *rqProperty.Bookings `json:"booking" form:"booking" query:"booking" long:"booking" msg:"booking"`
+		Bookings   [][]any              `json:"bookings" form:"bookings" query:"bookings" long:"bookings" msg:"bookings"`
+		AuditUsers map[uint64]string    `json:"auditUsers" form:"auditUsers" query:"auditUsers" long:"auditUsers" msg:"auditUsers"`
 	}
 )
 
@@ -148,6 +149,27 @@ var AdminBookingMeta = zCrud.Meta{
 			Label:     `Deleted At`,
 			DataType:  zCrud.DataTypeInt,
 			InputType: zCrud.InputTypeDateTime,
+			ReadOnly:  true,
+		},
+		{
+			Name:      mProperty.CreatedBy,
+			Label:     `Created By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  true,
+		},
+		{
+			Name:      mProperty.UpdatedBy,
+			Label:     `Updated By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
+			ReadOnly:  true,
+		},
+		{
+			Name:      mProperty.DeletedBy,
+			Label:     `Deleted By`,
+			DataType:  zCrud.DataTypeInt,
+			InputType: zCrud.InputTypeCombobox,
 			ReadOnly:  true,
 		},
 	},
@@ -328,6 +350,7 @@ func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {
 			&in.Pager,
 			&out.Pager,
 		)
+		out.AuditUsers = d.auditUserChoices(out.Bookings, &AdminBookingMeta)
 	}
 
 	return

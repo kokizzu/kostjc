@@ -193,12 +193,24 @@ LIMIT 1`
 		orderBySql = S.Replace(orderBySql, `ORDER BY "createdAt"`, `ORDER BY "bookings"."createdAt"`)
 	}
 
+	if S.Contains(orderBySql, `ORDER BY "createdBy"`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "createdBy"`, `ORDER BY "bookings"."createdBy"`)
+	}
+
 	if S.Contains(orderBySql, `ORDER BY "updatedAt"`) {
 		orderBySql = S.Replace(orderBySql, `ORDER BY "updatedAt"`, `ORDER BY "bookings"."updatedAt"`)
 	}
 
+	if S.Contains(orderBySql, `ORDER BY "updatedBy"`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "updatedBy"`, `ORDER BY "bookings"."updatedBy"`)
+	}
+
 	if S.Contains(orderBySql, `ORDER BY "deletedAt"`) {
 		orderBySql = S.Replace(orderBySql, `ORDER BY "deletedAt"`, `ORDER BY "bookings"."deletedAt"`)
+	}
+
+	if S.Contains(orderBySql, `ORDER BY "deletedBy"`) {
+		orderBySql = S.Replace(orderBySql, `ORDER BY "deletedBy"`, `ORDER BY "bookings"."deletedBy"`)
 	}
 
 	if S.Contains(orderBySql, `ORDER BY "extraTenants" DESC`) {
@@ -228,7 +240,10 @@ SELECT
 	"bookings"."extraTenants",
 	"bookings"."createdAt",
 	"bookings"."updatedAt",
-	"bookings"."deletedAt"
+	"bookings"."deletedAt",
+	"bookings"."createdBy",
+	"bookings"."updatedBy",
+	"bookings"."deletedBy"
 FROM ` + b.SqlTableName() + `
 LEFT JOIN "payments" ON "payments"."bookingId" = "bookings"."id"
 ` + whereAndSql + `
