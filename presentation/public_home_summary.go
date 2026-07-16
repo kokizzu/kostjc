@@ -33,10 +33,14 @@ type PublicOccupant struct {
 }
 
 func buildPublicLoginSummary(unpaid []rqProperty.UnpaidBookingTenant, rooms []rqProperty.AvailableRoom, occupants []rqProperty.CurrentOccupant) PublicLoginSummary {
+	return buildPublicLoginSummaryAt(unpaid, rooms, occupants, time.Now().UTC())
+}
+
+func buildPublicLoginSummaryAt(unpaid []rqProperty.UnpaidBookingTenant, rooms []rqProperty.AvailableRoom, occupants []rqProperty.CurrentOccupant, now time.Time) PublicLoginSummary {
 	seenUnpaid := map[string]struct{}{}
 	unpaidOut := make([]PublicUnpaidTenant, 0, len(unpaid))
 	usedRooms := map[string]struct{}{}
-	today := time.Now().UTC().Format(time.DateOnly)
+	today := now.UTC().Format(time.DateOnly)
 	for _, item := range unpaid {
 		if item.TenantName == "" || item.RoomName == "" {
 			continue
@@ -60,7 +64,7 @@ func buildPublicLoginSummary(unpaid []rqProperty.UnpaidBookingTenant, rooms []rq
 			TenantName: item.TenantName,
 			RoomName:   item.RoomName,
 			LastDate:   lastDate,
-			DaysAgo:    unpaidDays(item.DateStart, lastDate),
+			DaysAgo:    unpaidDaysAt(item.DateStart, lastDate, now),
 		})
 	}
 
@@ -81,7 +85,7 @@ func buildPublicLoginSummary(unpaid []rqProperty.UnpaidBookingTenant, rooms []rq
 			RoomName:   item.RoomName,
 			LastTenant: item.LastTenant,
 			LastDate:   lastDate,
-			DaysAgo:    signedDays(lastDate),
+			DaysAgo:    signedDaysAt(lastDate, now),
 		})
 	}
 
@@ -180,6 +184,10 @@ func lateDays(dateStr string) int {
 }
 
 func signedDays(dateStr string) int {
+	return signedDaysAt(dateStr, time.Now().UTC())
+}
+
+func signedDaysAt(dateStr string, now time.Time) int {
 	if dateStr == "" {
 		return 0
 	}
@@ -187,15 +195,19 @@ func signedDays(dateStr string) int {
 	if err != nil {
 		return 0
 	}
-	now := time.Now().UTC()
+	now = now.UTC()
 	dt = time.Date(dt.Year(), dt.Month(), dt.Day(), 0, 0, 0, 0, time.UTC)
 	now = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC)
 	return int(now.Sub(dt).Hours() / 24)
 }
 
 func unpaidDays(startDate, endDate string) int {
+	return unpaidDaysAt(startDate, endDate, time.Now().UTC())
+}
+
+func unpaidDaysAt(startDate, endDate string, now time.Time) int {
 	if startDate != "" {
-		return signedDays(startDate)
+		return signedDaysAt(startDate, now)
 	}
-	return signedDays(endDate)
+	return signedDaysAt(endDate, now)
 }

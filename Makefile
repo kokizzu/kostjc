@@ -1,9 +1,17 @@
 
+.PHONY: compose-services compose-cmd test test-unit test-domain setup local-tarantool local-clickhouse download-backup upload-backup modtidy fixtags orm views migrate backup-db restore-db frontend web
+
 compose-services:
 	docker compose up -d tarantool clickhouse
 
 compose-cmd: compose-services
 	./scripts/with-compose-test-env.sh $(CMD)
+
+test: test-unit test-domain
+
+test-unit:
+	go test ./domain -run TestAuditUser
+	go test ./presentation ./model/zCrud ./model/mAuth ./model/mProperty
 
 test-domain: compose-services
 	./scripts/with-compose-test-env.sh go test ./domain $(ARGS)

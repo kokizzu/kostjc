@@ -50,7 +50,7 @@ const (
 )
 
 var AdminBookingMeta = zCrud.Meta{
-	Fields: []zCrud.Field{
+	Fields: append([]zCrud.Field{
 		{
 			Name:      mProperty.Id,
 			Label:     `ID`,
@@ -151,28 +151,7 @@ var AdminBookingMeta = zCrud.Meta{
 			InputType: zCrud.InputTypeDateTime,
 			ReadOnly:  true,
 		},
-		{
-			Name:      mProperty.CreatedBy,
-			Label:     `Created By`,
-			DataType:  zCrud.DataTypeInt,
-			InputType: zCrud.InputTypeCombobox,
-			ReadOnly:  true,
-		},
-		{
-			Name:      mProperty.UpdatedBy,
-			Label:     `Updated By`,
-			DataType:  zCrud.DataTypeInt,
-			InputType: zCrud.InputTypeCombobox,
-			ReadOnly:  true,
-		},
-		{
-			Name:      mProperty.DeletedBy,
-			Label:     `Deleted By`,
-			DataType:  zCrud.DataTypeInt,
-			InputType: zCrud.InputTypeCombobox,
-			ReadOnly:  true,
-		},
-	},
+	}, auditUserMetaFields()...),
 }
 
 func (d *Domain) AdminBooking(in *AdminBookingIn) (out AdminBookingOut) {

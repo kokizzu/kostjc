@@ -16992,6 +16992,19 @@ ${component_stack}
   // adminPayment.svelte
   var import_xConstant = __toESM(require_xConstant());
 
+  // _components/xAuditUsers.js
+  function auditUsersFromResponse(o) {
+    return o?.auditUsers || {};
+  }
+  function auditUserRefs(auditUsers) {
+    const refs = auditUsers || {};
+    return {
+      createdBy: refs,
+      updatedBy: refs,
+      deletedBy: refs
+    };
+  }
+
   // node_modules/.pnpm/axios@1.18.1/node_modules/axios/lib/helpers/bind.js
   function bind(fn, thisArg) {
     return function wrap() {
@@ -20397,6 +20410,11 @@ ${component_stack}
       /** @type boolean */
       false
     );
+    function applyPaymentResponse(o) {
+      set(pager, o.pager);
+      set(payments, o.payments);
+      set(auditUsers, auditUsersFromResponse(o));
+    }
     onMount(() => set(isPopUpFormReady, true));
     async function OnRefresh(pagerIn) {
       const i = { pager: pagerIn, cmd: import_xConstant.CmdList };
@@ -20412,9 +20430,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(payments, o.payments);
-          set(auditUsers, o.auditUsers || {});
+          applyPaymentResponse(o);
         }
       );
     }
@@ -20437,9 +20453,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(payments, o.payments);
-          set(auditUsers, o.auditUsers || {});
+          applyPaymentResponse(o);
           notifier.showSuccess(`Payment #${row[0]} restored !!`);
           OnRefresh(get2(pager));
         }
@@ -20460,9 +20474,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(payments, o.payments);
-          set(auditUsers, o.auditUsers || {});
+          applyPaymentResponse(o);
           notifier.showSuccess(`Payment deleted !!`);
           OnRefresh(get2(pager));
         }
@@ -20492,9 +20504,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(payments, o.payments);
-          set(auditUsers, o.auditUsers || {});
+          applyPaymentResponse(o);
           notifier.showSuccess(`Payment #${payment2.id} updated !!`);
           OnRefresh(get2(pager));
         }
@@ -20517,9 +20527,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(payments, o.payments);
-          set(auditUsers, o.auditUsers || {});
+          applyPaymentResponse(o);
           notifier.showSuccess(`Payment created !!`);
           get2(popUpForms).Hide();
           OnRefresh(get2(pager));
@@ -20577,9 +20585,7 @@ ${component_stack}
             "bookingId": bookings,
             "paymentStatus": PaymentStatuses,
             "paymentMethod": PaymentMethods,
-            "createdBy": get2(auditUsers),
-            "updatedBy": get2(auditUsers),
-            "deletedBy": get2(auditUsers)
+            ...auditUserRefs(get2(auditUsers))
           }));
           MasterTable(node_2, {
             NAME: "Payment",

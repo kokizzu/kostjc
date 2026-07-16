@@ -17297,6 +17297,21 @@ ${component_stack}
 
   // adminBooking.svelte
   var import_xConstant = __toESM(require_xConstant());
+
+  // _components/xAuditUsers.js
+  function auditUsersFromResponse(o) {
+    return o?.auditUsers || {};
+  }
+  function auditUserRefs(auditUsers) {
+    const refs = auditUsers || {};
+    return {
+      createdBy: refs,
+      updatedBy: refs,
+      deletedBy: refs
+    };
+  }
+
+  // adminBooking.svelte
   var root17 = from_html(`<button class="btn" title="add booking"><!></button>`);
   var root_111 = from_html(`<div class="master-booking svelte-c88w9a"><h2 class="svelte-c88w9a">Booking Management</h2> <!></div>`);
   var root_26 = from_html(`<!> <!>`, 1);
@@ -17363,6 +17378,11 @@ ${component_stack}
       /** @type {string} */
       location.hash || ""
     );
+    function applyBookingResponse(o) {
+      set(pager, o.pager);
+      set(bookings, o.bookings);
+      set(auditUsers, auditUsersFromResponse(o));
+    }
     onMount(() => {
       if (hash2[0] === "#") hash2 = hash2.substring(1);
       if (hash2.includes(hashSearchByTenant)) {
@@ -17391,9 +17411,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(bookings, o.bookings);
-          set(auditUsers, o.auditUsers || {});
+          applyBookingResponse(o);
         }
       );
     }
@@ -17416,9 +17434,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(bookings, o.bookings);
-          set(auditUsers, o.auditUsers || {});
+          applyBookingResponse(o);
           notifier.showSuccess(`Booking '${row[1]}' restored !!`);
           OnRefresh(get2(pager));
         }
@@ -17439,9 +17455,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(bookings, o.bookings);
-          set(auditUsers, o.auditUsers || {});
+          applyBookingResponse(o);
           notifier.showSuccess(`Booking '${row[1]}' deleted !!`);
           OnRefresh(get2(pager));
         }
@@ -17474,9 +17488,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(bookings, o.bookings);
-          set(auditUsers, o.auditUsers || {});
+          applyBookingResponse(o);
           notifier.showSuccess(`Booking #${booking.id} updated !!`);
           OnRefresh(get2(pager));
         }
@@ -17500,9 +17512,7 @@ ${component_stack}
             notifier.showError(o.error);
             return;
           }
-          set(pager, o.pager);
-          set(bookings, o.bookings);
-          set(auditUsers, o.auditUsers || {});
+          applyBookingResponse(o);
           notifier.showSuccess(`Booking created !!`);
           get2(popUpAddBooking).Hide();
           OnRefresh(get2(pager));
@@ -17548,9 +17558,7 @@ ${component_stack}
             "tenantId": tenants,
             "extraTenants": tenants,
             "roomId": rooms,
-            "createdBy": get2(auditUsers),
-            "updatedBy": get2(auditUsers),
-            "deletedBy": get2(auditUsers)
+            ...auditUserRefs(get2(auditUsers))
           }));
           MasterTableBooking(node_2, {
             NAME: "Booking",

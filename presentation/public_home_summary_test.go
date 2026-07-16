@@ -2,12 +2,14 @@ package presentation
 
 import (
 	"testing"
+	"time"
 
 	"kostjc/model/mProperty/rqProperty"
 )
 
 func TestBuildPublicLoginSummary(t *testing.T) {
-	summary := buildPublicLoginSummary(
+	now := time.Date(2026, 4, 15, 0, 0, 0, 0, time.UTC)
+	summary := buildPublicLoginSummaryAt(
 		[]rqProperty.UnpaidBookingTenant{
 			{
 				BookingId:  1,
@@ -77,6 +79,7 @@ func TestBuildPublicLoginSummary(t *testing.T) {
 				RoomName:   "F-606",
 			},
 		},
+		now,
 	)
 
 	if len(summary.UnpaidTenants) != 2 {
@@ -109,20 +112,20 @@ func TestBuildPublicLoginSummary(t *testing.T) {
 	if summary.Rooms[2].RoomName != "C-303" || summary.Rooms[2].LastTenant != "Charlie" || summary.Rooms[2].LastDate != "2026-06-14" {
 		t.Fatalf("unexpected future unpaid room summary: %#v", summary.Rooms[2])
 	}
-	if got := summary.UnpaidTenants[0].DaysAgo; got != unpaidDays("2026-02-01", "2026-02-20") {
-		t.Fatalf("unexpected first unpaid days ago: got %d want %d", got, unpaidDays("2026-02-01", "2026-02-20"))
+	if got := summary.UnpaidTenants[0].DaysAgo; got != unpaidDaysAt("2026-02-01", "2026-02-20", now) {
+		t.Fatalf("unexpected first unpaid days ago: got %d want %d", got, unpaidDaysAt("2026-02-01", "2026-02-20", now))
 	}
-	if got := summary.UnpaidTenants[1].DaysAgo; got != unpaidDays("2026-03-01", "2026-03-10") {
-		t.Fatalf("unexpected second unpaid days ago: got %d want %d", got, unpaidDays("2026-03-01", "2026-03-10"))
+	if got := summary.UnpaidTenants[1].DaysAgo; got != unpaidDaysAt("2026-03-01", "2026-03-10", now) {
+		t.Fatalf("unexpected second unpaid days ago: got %d want %d", got, unpaidDaysAt("2026-03-01", "2026-03-10", now))
 	}
-	if got := summary.Rooms[0].DaysAgo; got != signedDays("2026-04-01") {
-		t.Fatalf("unexpected first room days ago: got %d want %d", got, signedDays("2026-04-01"))
+	if got := summary.Rooms[0].DaysAgo; got != signedDaysAt("2026-04-01", now) {
+		t.Fatalf("unexpected first room days ago: got %d want %d", got, signedDaysAt("2026-04-01", now))
 	}
-	if got := summary.Rooms[1].DaysAgo; got != signedDays("2026-05-01") {
-		t.Fatalf("unexpected second room days ago: got %d want %d", got, signedDays("2026-05-01"))
+	if got := summary.Rooms[1].DaysAgo; got != signedDaysAt("2026-05-01", now) {
+		t.Fatalf("unexpected second room days ago: got %d want %d", got, signedDaysAt("2026-05-01", now))
 	}
-	if got := summary.Rooms[2].DaysAgo; got != signedDays("2026-06-14") {
-		t.Fatalf("unexpected third room days ago: got %d want %d", got, signedDays("2026-06-14"))
+	if got := summary.Rooms[2].DaysAgo; got != signedDaysAt("2026-06-14", now) {
+		t.Fatalf("unexpected third room days ago: got %d want %d", got, signedDaysAt("2026-06-14", now))
 	}
 	if len(summary.Occupants) != 3 {
 		t.Fatalf("expected 3 occupants, got %d", len(summary.Occupants))

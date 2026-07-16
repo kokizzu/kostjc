@@ -16,6 +16,7 @@
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import { RiSystemAddBoxLine, RiBusinessCalendarScheduleLine } from './node_modules/svelte-icons-pack/dist/ri';
   import { CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
+  import { auditUserRefs, auditUsersFromResponse } from './_components/xAuditUsers';
   import axios from 'axios';
 
   let user      = /** @type {User} */ ({/* user */});
@@ -45,6 +46,12 @@
   } */ (null);
   let isSubmitAddPayment = /** @type boolean */ (false);
 
+  function applyPaymentResponse(/** @type any */ o) {
+    pager = o.pager;
+    payments = o.payments;
+    auditUsers = auditUsersFromResponse(o);
+  }
+
   onMount(() => isPopUpFormReady = true);
 
   async function OnRefresh(/** @type PagerIn */ pagerIn) {
@@ -62,9 +69,7 @@
           notifier.showError(o.error);
           return
         }
-        pager = o.pager;
-        payments = o.payments;
-        auditUsers = o.auditUsers || {};
+        applyPaymentResponse(o);
       }
     );
   }
@@ -87,9 +92,7 @@
           return
         }
 
-        pager = o.pager;
-        payments = o.payments;
-        auditUsers = o.auditUsers || {};
+        applyPaymentResponse(o);
         notifier.showSuccess(`Payment #${row[0]} restored !!`);
 
         OnRefresh(pager);
@@ -115,9 +118,7 @@
           return
         }
 
-        pager = o.pager;
-        payments = o.payments;
-        auditUsers = o.auditUsers || {};
+        applyPaymentResponse(o);
         notifier.showSuccess(`Payment deleted !!`);
 
         OnRefresh(pager);
@@ -150,9 +151,7 @@
           return
         }
 
-        pager = o.pager;
-        payments = o.payments;
-        auditUsers = o.auditUsers || {};
+        applyPaymentResponse(o);
         notifier.showSuccess(`Payment #${payment.id} updated !!`);
 
         OnRefresh(pager);
@@ -179,9 +178,7 @@
           return
         }
         
-        pager = o.pager;
-        payments = o.payments;
-        auditUsers = o.auditUsers || {};
+        applyPaymentResponse(o);
         notifier.showSuccess(`Payment created !!`);
 
         popUpForms.Hide();
@@ -234,9 +231,7 @@
         'bookingId': bookings,
         'paymentStatus': PaymentStatuses,
         'paymentMethod': PaymentMethods,
-        'createdBy': auditUsers,
-        'updatedBy': auditUsers,
-        'deletedBy': auditUsers
+        ...auditUserRefs(auditUsers)
       }}
       COL_WIDTHS={{
         'bookingId': 370,

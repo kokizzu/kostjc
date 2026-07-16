@@ -8,6 +8,8 @@ import (
 	"kostjc/model/mAuth/rqAuth"
 	"kostjc/model/mAuth/wcAuth"
 	"kostjc/model/xMailer"
+	"os"
+	"strings"
 	"testing"
 
 	"github.com/kokizzu/gotro/D/Ch"
@@ -47,6 +49,10 @@ func TestMain(m *testing.M) {
 		},
 	}
 
+	if isDomainUnitOnlyRun() {
+		os.Exit(m.Run())
+	}
+
 	eg := errgroup.Group{}
 	eg.Go(func() error {
 		chConf := conf.EnvClickhouse()
@@ -66,7 +72,33 @@ func TestMain(m *testing.M) {
 	model.RunMigration(nil, testTt, testCh)
 
 	// run tests
-	m.Run()
+	os.Exit(m.Run())
+}
+
+func isDomainUnitOnlyRun() bool {
+	for i, arg := range os.Args {
+		if arg == "-test.run" && i+1 < len(os.Args) {
+			return isDomainUnitOnlyPattern(os.Args[i+1])
+		}
+		if strings.HasPrefix(arg, "-test.run=") {
+			return isDomainUnitOnlyPattern(strings.TrimPrefix(arg, "-test.run="))
+		}
+	}
+	return false
+}
+
+func isDomainUnitOnlyPattern(pattern string) bool {
+	pattern = strings.TrimPrefix(pattern, "^")
+	pattern = strings.TrimSuffix(pattern, "$")
+	switch pattern {
+	case "TestAuditUser",
+		"TestAuditUserIds",
+		"TestAuditUserIdsMissingMeta",
+		"TestAuditUserMetaFields":
+		return true
+	default:
+		return false
+	}
 }
 
 func testDomain() (*Domain, func()) {

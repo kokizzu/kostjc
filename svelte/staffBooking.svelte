@@ -16,6 +16,7 @@
   import { RiSystemAddBoxLine } from './node_modules/svelte-icons-pack/dist/ri';
   import PopUpAddBooking from './_components/PopUpAddBooking.svelte';
   import { CmdDelete, CmdList, CmdRestore, CmdUpsert } from './_components/xConstant';
+  import { auditUserRefs, auditUsersFromResponse } from './_components/xAuditUsers';
 
   let user        = /** @type {User} */ ({/* user */});
   let segments    = /** @type {Access} */ ({/* segments */});
@@ -33,6 +34,12 @@
     import('svelte').SvelteComponent | HTMLElement| PopUpAddBooking |any
   } */ (null);
   let isSubmitAddBooking = /** @type boolean */ (false);
+
+  function applyBookingResponse(/** @type any */ o) {
+    pager = o.pager;
+    bookings = o.bookings;
+    auditUsers = auditUsersFromResponse(o);
+  }
 
   onMount(() => {
     isPopUpFormReady = true
@@ -53,9 +60,7 @@
           notifier.showError(o.error);
           return
         }
-        pager = o.pager;
-        bookings = o.bookings;
-        auditUsers = o.auditUsers || {};
+        applyBookingResponse(o);
       }
     );
   }
@@ -78,9 +83,7 @@
           return
         }
 
-        pager = o.pager;
-        bookings = o.bookings;
-        auditUsers = o.auditUsers || {};
+        applyBookingResponse(o);
         notifier.showSuccess(`Booking '${row[1]}' restored !!`);
 
         OnRefresh(pager);
@@ -106,9 +109,7 @@
           return
         }
 
-        pager = o.pager;
-        bookings = o.bookings;
-        auditUsers = o.auditUsers || {};
+        applyBookingResponse(o);
         notifier.showSuccess(`Booking '${row[1]}' deleted !!`);
 
         OnRefresh(pager);
@@ -144,9 +145,7 @@
           return
         }
 
-        pager = o.pager;
-        bookings = o.bookings;
-        auditUsers = o.auditUsers || {};
+        applyBookingResponse(o);
         notifier.showSuccess(`Booking #${booking.id} updated !!`);
 
         OnRefresh(pager);
@@ -174,9 +173,7 @@
           return
         }
         
-        pager = o.pager;
-        bookings = o.bookings;
-        auditUsers = o.auditUsers || {};
+        applyBookingResponse(o);
         notifier.showSuccess(`Booking created !!`);
 
         popUpForms.Hide();
@@ -207,9 +204,7 @@
         'tenantId': tenants,
         'extraTenants': tenants,
         'roomId': rooms,
-        'createdBy': auditUsers,
-        'updatedBy': auditUsers,
-        'deletedBy': auditUsers
+        ...auditUserRefs(auditUsers)
       }}
       bind:FIELDS={fields}
       bind:PAGER={pager}

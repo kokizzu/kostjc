@@ -28,10 +28,10 @@ func TestPagination(t *testing.T) {
 			countResult: 1,
 			fieldToType: map[string]Tt.DataType{},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql:    autogold.Expect(""),
 			orderBySql:     autogold.Expect(""),
-			expectOut:      autogold.Expect(PagerOut{Page: 1, PerPage: 10, Pages: 1, Total: 1}),
+			expectOut:      autogold.Expect(PagerOut{Page: 1, PerPage: 200, Pages: 1, Total: 1}),
 		},
 		{
 			name: `orderInvalid`,
@@ -44,10 +44,10 @@ func TestPagination(t *testing.T) {
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql:    autogold.Expect(""),
 			orderBySql:     autogold.Expect(""),
-			expectOut:      autogold.Expect(PagerOut{Page: 1, PerPage: 10, Pages: 1, Total: 1}),
+			expectOut:      autogold.Expect(PagerOut{Page: 1, PerPage: 200, Pages: 1, Total: 1}),
 		},
 		{
 			name: `orderAsc`,
@@ -60,11 +60,11 @@ func TestPagination(t *testing.T) {
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql:    autogold.Expect(""),
 			orderBySql: autogold.Expect(`
 ORDER BY "id"`),
-			expectOut: autogold.Expect(PagerOut{Page: 1, PerPage: 10, Pages: 1, Total: 1}),
+			expectOut: autogold.Expect(PagerOut{Page: 1, PerPage: 200, Pages: 1, Total: 1}),
 		},
 		{
 			name: `orderDesc`,
@@ -77,11 +77,11 @@ ORDER BY "id"`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql:    autogold.Expect(""),
 			orderBySql: autogold.Expect(`
 ORDER BY "id" DESC`),
-			expectOut: autogold.Expect(PagerOut{Page: 1, PerPage: 10, Pages: 1, Total: 1}),
+			expectOut: autogold.Expect(PagerOut{Page: 1, PerPage: 200, Pages: 1, Total: 1}),
 		},
 		{
 			name: `orderMulti`,
@@ -94,11 +94,11 @@ ORDER BY "id" DESC`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql:    autogold.Expect(""),
 			orderBySql: autogold.Expect(`
 ORDER BY "name" DESC, "id"`),
-			expectOut: autogold.Expect(PagerOut{Page: 1, PerPage: 10, Pages: 5, Total: 44}),
+			expectOut: autogold.Expect(PagerOut{Page: 1, PerPage: 200, Pages: 1, Total: 44}),
 		},
 		{
 			name: `filterEq`,
@@ -114,13 +114,13 @@ ORDER BY "name" DESC, "id"`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql: autogold.Expect(`
 WHERE ("id" IN (1))
 AND ("name" IN ('23'))`),
 			orderBySql: autogold.Expect(""),
 			expectOut: autogold.Expect(PagerOut{
-				Page: 1, PerPage: 10, Pages: 10, Total: 100,
+				Page: 1, PerPage: 200, Pages: 1, Total: 100,
 				Filters: map[string][]string{
 					"id":   {"1"},
 					"name": {"23"},
@@ -139,12 +139,12 @@ AND ("name" IN ('23'))`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql: autogold.Expect(`
 WHERE ("name" NOT IN (''))`),
 			orderBySql: autogold.Expect(""),
 			expectOut: autogold.Expect(PagerOut{
-				Page: 1, PerPage: 10, Pages: 10, Total: 100,
+				Page: 1, PerPage: 200, Pages: 1, Total: 100,
 				Filters: map[string][]string{
 					"name": {"<>"},
 				},
@@ -183,13 +183,13 @@ WHERE ("name" NOT IN (''))`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql: autogold.Expect(`
 WHERE ("id" IN (1,23))
 AND ("name" IN ('abc','def','ghij'))`),
 			orderBySql: autogold.Expect(""),
 			expectOut: autogold.Expect(PagerOut{
-				Page: 1, PerPage: 10, Pages: 5, Total: 50,
+				Page: 1, PerPage: 200, Pages: 1, Total: 50,
 				Filters: map[string][]string{
 					"id": {
 						"1",
@@ -251,13 +251,13 @@ AND ("name" NOT IN ('abc',''))`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql: autogold.Expect(`
 WHERE ("id">1)
 AND ("name"<='abc')`),
 			orderBySql: autogold.Expect(""),
 			expectOut: autogold.Expect(PagerOut{
-				Page: 1, PerPage: 10, Pages: 4, Total: 31,
+				Page: 1, PerPage: 200, Pages: 1, Total: 31,
 				Filters: map[string][]string{
 					"id":   {">1"},
 					"name": {"<=abc"},
@@ -331,13 +331,13 @@ AND ("name"<'abc')`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql: autogold.Expect(`
 WHERE ("id">=1)
 AND ("name"<'abc')`),
 			orderBySql: autogold.Expect(""),
 			expectOut: autogold.Expect(PagerOut{
-				Page: 1, PerPage: 10, Pages: 10, Total: 95,
+				Page: 1, PerPage: 200, Pages: 1, Total: 95,
 				Filters: map[string][]string{
 					"id":   {">=1"},
 					"name": {"<abc"},
@@ -358,13 +358,13 @@ AND ("name"<'abc')`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql: autogold.Expect(`
 WHERE (("id">1 AND "id"<=23))
 AND ("name"<'def' OR "name">='ghij' OR "name" IN ('abc'))`),
 			orderBySql: autogold.Expect(""),
 			expectOut: autogold.Expect(PagerOut{
-				Page: 1, PerPage: 10, Pages: 4, Total: 39,
+				Page: 1, PerPage: 200, Pages: 1, Total: 39,
 				Filters: map[string][]string{
 					"id": {
 						">1",
@@ -391,12 +391,12 @@ AND ("name"<'def' OR "name">='ghij' OR "name" IN ('abc'))`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql: autogold.Expect(`
 WHERE ("name" NOT LIKE 'a%bc' OR "name" LIKE '%def%')`),
 			orderBySql: autogold.Expect(""),
 			expectOut: autogold.Expect(PagerOut{
-				Page: 1, PerPage: 10, Pages: 1, Total: 3,
+				Page: 1, PerPage: 200, Pages: 1, Total: 3,
 				Filters: map[string][]string{
 					"name": {
 						"<>a*bc",
@@ -419,13 +419,13 @@ WHERE ("name" NOT LIKE 'a%bc' OR "name" LIKE '%def%')`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql: autogold.Expect(`
 WHERE ("id"<=1 OR "id">23 OR "id" IN (4,9) OR "id" NOT IN (-5,44))
 AND (("name">'def' AND "name"<='ghij') OR "name" IN ('abc','','xyz','foo') OR "name" NOT IN ('a',''))`),
 			orderBySql: autogold.Expect(""),
 			expectOut: autogold.Expect(PagerOut{
-				Page: 1, PerPage: 10, Pages: 1, Total: 10,
+				Page: 1, PerPage: 200, Pages: 1, Total: 10,
 				Filters: map[string][]string{
 					"id": {
 						"4",
@@ -462,12 +462,12 @@ AND (("name">'def' AND "name"<='ghij') OR "name" IN ('abc','','xyz','foo') OR "n
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql: autogold.Expect(`
 WHERE ("name" IN ('&apos;; DROP TABLE users; --','&apos;) OR 1=1; --'))`),
 			orderBySql: autogold.Expect(""),
 			expectOut: autogold.Expect(PagerOut{
-				Page: 1, PerPage: 10, Pages: 1, Total: 2,
+				Page: 1, PerPage: 200, Pages: 1, Total: 2,
 				Filters: map[string][]string{
 					"id": {},
 					"name": {
@@ -540,10 +540,10 @@ WHERE ("name" IN ('&apos;; DROP TABLE users; --','&apos;) OR 1=1; --'))`),
 				`name`: Tt.String,
 			},
 
-			limitOffsetSql: autogold.Expect("\nLIMIT 10"),
+			limitOffsetSql: autogold.Expect("\nLIMIT 200"),
 			whereAndSql:    autogold.Expect(""),
 			orderBySql:     autogold.Expect(""),
-			expectOut:      autogold.Expect(PagerOut{Page: 1, PerPage: 10, Pages: 2, Total: 11}),
+			expectOut:      autogold.Expect(PagerOut{Page: 1, PerPage: 200, Pages: 1, Total: 11}),
 		},
 		{
 			name: `limitOverflow`,
