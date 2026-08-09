@@ -113,3 +113,69 @@ func TestStaffPaymentPromiseRejectsBookingForDifferentPerson(t *testing.T) {
 	require.True(t, out.HasError())
 	require.Equal(t, ErrStaffPaymentPromiseBookingMismatch, out.Error)
 }
+
+func TestStaffPaymentPromisePaidBookingDoesNotCarryToExtensionAvailableRoom(t *testing.T) {
+	d, closer := testDomain()
+	defer closer()
+
+	suffix := lexid.ID()
+	tenant := createTestTenant(t, d, `Paid Promise Extension Tenant`, `ktp-paid-promise-`+suffix)
+	room := createTestRoom(t, d, `paid-promise-extension-room-`+suffix)
+	bookingToExtend := upsertTestBooking(t, d, rqProperty.Bookings{
+		RoomId:        room.Id,
+		TenantId:      tenant.Id,
+		DateStart:     `2026-06-04`,
+		DateEnd:       `2026-07-04`,
+		BasePriceIDR:  1_000_000,
+		TotalPriceIDR: 1_000_000,
+	})
+
+	promiseOut := d.StaffPaymentPromise(&StaffPaymentPromiseIn{
+		RequestCommon: testStaffRequestCommon(StaffPaymentPromiseAction),
+		Cmd:           zCrud.CmdUpsert,
+		Promise: rqProperty.PaymentPromises{
+			TenantId:     tenant.Id,
+			BookingId:    bookingToExtend.Id,
+			PromisedAt:   `2026-07-04`,
+			PromisePayAt: `2026-07-30`,
+		},
+	})
+	require.False(t, promiseOut.HasError(), promiseOut.Error)
+
+	paymentOut := d.AdminPayment(&AdminPaymentIn{
+		RequestCommon: testAdminRequestCommon(AdminPaymentAction),
+		Cmd:           zCrud.CmdUpsert,
+		Payment: rqProperty.Payments{
+			BookingId:     bookingToExtend.Id,
+			PaymentAt:     `2026-07-30`,
+			PaidIDR:       1_000_000,
+			PaymentMethod: `Transfer`,
+			PaymentStatus: `Paid`,
+		},
+	})
+	require.False(t, paymentOut.HasError(), paymentOut.Error)
+
+	upsertTestBooking(t, d, rqProperty.Bookings{
+		RoomId:        room.Id,
+		TenantId:      tenant.Id,
+		DateStart:     `2026-07-04`,
+		DateEnd:       `2026-08-04`,
+		BasePriceIDR:  1_000_000,
+		TotalPriceIDR: 1_000_000,
+	})
+
+	availableRooms := rqProperty.NewRooms(d.PropOltp).FindAvailableRooms()
+	var extensionRoom *rqProperty.AvailableRoom
+	for index := range availableRooms {
+		if availableRooms[index].RoomName == room.RoomName {
+			extensionRoom = &availableRooms[index]
+			break
+		}
+	}
+	require.NotNil(t, extensionRoom)
+	require.Equal(t, `2026-08-04`, extensionRoom.AvailableAt)
+	require.Equal(t, tenant.Id, extensionRoom.CurrentTenantId)
+
+	latestPromises := rqProperty.NewPaymentPromises(d.PropOltp).FindLatestByTenantIds([]uint64{tenant.Id})
+	require.NotContains(t, latestPromises, tenant.Id, `a fully paid booking promise must not appear on its next extension`)
+}

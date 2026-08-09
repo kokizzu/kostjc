@@ -1456,19 +1456,42 @@ func (p *PaymentPromises) FindLatestByTenantIds(tenantIds []uint64) map[uint64]P
 	}
 
 	queryRows := comment + `
-SELECT ` + p.SqlSelectAllFields() + `
-FROM ` + p.SqlTableName() + `
-WHERE "deletedAt" = 0
-	AND "tenantId" IN (` + strings.Join(idTokens, `,`) + `)
-ORDER BY "createdAt" DESC, "id" DESC`
+SELECT
+	pp."id",
+	pp."tenantId",
+	pp."bookingId",
+	pp."promisedAt",
+	pp."promisePayAt",
+	pp."createdAt",
+	pp."createdBy",
+	pp."updatedAt",
+	pp."updatedBy",
+	pp."deletedAt",
+	pp."deletedBy",
+	pp."restoredBy",
+	pp."note",
+	COALESCE(SUM(CASE WHEN py."deletedAt" = 0 THEN py."paidIDR" ELSE 0 END), 0) AS "totalPaidIDR",
+	COALESCE(b."totalPriceIDR", 0) AS "totalPriceIDR"
+FROM ` + p.SqlTableName() + ` pp
+LEFT JOIN "bookings" b ON b."id" = pp."bookingId" AND b."deletedAt" = 0
+LEFT JOIN "payments" py ON py."bookingId" = pp."bookingId"
+WHERE pp."deletedAt" = 0
+	AND pp."tenantId" IN (` + strings.Join(idTokens, `,`) + `)
+GROUP BY pp."id"
+ORDER BY pp."createdAt" DESC, pp."id" DESC`
 
 	p.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) != 13 {
+		if len(row) != 15 {
 			return
 		}
 
 		promise := PaymentPromises{}
-		promise.FromArray(A.X(row))
+		promise.FromArray(A.X(row[:13]))
+		totalPaidIDR := X.ToI(row[13])
+		totalPriceIDR := X.ToI(row[14])
+		if promise.BookingId > 0 && totalPaidIDR >= totalPriceIDR {
+			return
+		}
 		if _, ok := out[promise.TenantId]; ok {
 			return
 		}
