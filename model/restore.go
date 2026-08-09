@@ -59,6 +59,11 @@ func RestoreDatabase(tConn *Tt.Adapter, dateTime string) {
 		L.LOG.Error(err)
 	}
 
+	fmt.Println(color.GreenString("# Restore Table PaymentPromises #"))
+	if err := restoreTablePaymentPromises(tConn, dateTime); err != nil {
+		L.LOG.Error(err)
+	}
+
 	fmt.Println(color.GreenString("# Restore Table Stocks #"))
 	if err := restoreTableStocks(tConn, dateTime); err != nil {
 		L.LOG.Error(err)
@@ -648,6 +653,84 @@ func restoreTablePayments(tConn *Tt.Adapter, dateTime string) error {
 
 					if !pym.DoUpsert() {
 						errMsg := `Err pym.DoUpsert(): ` + pym.SpaceName()
+						stat.Fail(errMsg)
+						return errors.New(errMsg)
+					}
+
+					stat.Ok(true)
+
+					return nil
+				}()
+				if err != nil {
+					return err
+				}
+			}
+
+			return nil
+		}(); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func restoreTablePaymentPromises(tConn *Tt.Adapter, dateTime string) error {
+	backupFiles, err := getBackupFilesByTableNameByDatetime(`paymentPromises`, dateTime)
+	if err != nil {
+		return err
+	}
+
+	for idx, f := range backupFiles {
+		filePath := (backupDir + `/` + f)
+		if err := func() error {
+			defer subTaskPrint(color.BlueString("[%d] Restoring file %s", (idx + 1), filePath))()
+
+			file, err := os.Open(filePath)
+			if err != nil {
+				L.LOG.Error("failed to open file: ", err)
+				return err
+			}
+			defer file.Close()
+
+			reader := lz4.NewReader(file)
+			scanner := bufio.NewScanner(reader)
+
+			stat := &ImporterStat{}
+			defer stat.Print(`last`)
+
+			var idxLine int = 0
+			for scanner.Scan() {
+				stat.Total++
+				stat.Print()
+				idxLine++
+
+				line := scanner.Text()
+
+				err := func() error {
+					var row []any
+					err := json.Unmarshal([]byte(line), &row)
+					if err != nil {
+						stat.Fail(`Err json.Unmarshal([]byte(line), &row): ` + err.Error())
+						return err
+					}
+					if len(row) == 12 {
+						row = append(row, ``)
+					}
+
+					promise := wcProperty.NewPaymentPromisesMutator(tConn)
+					promise.FromUncensoredArray(row)
+
+					if promise.FindById() {
+						if !promise.DoOverwriteById() {
+							errMsg := `Err promise.DoOverwriteById(): ` + promise.SpaceName()
+							stat.Fail(errMsg)
+							return errors.New(errMsg)
+						}
+					}
+
+					if !promise.DoUpsert() {
+						errMsg := `Err promise.DoUpsert(): ` + promise.SpaceName()
 						stat.Fail(errMsg)
 						return errors.New(errMsg)
 					}

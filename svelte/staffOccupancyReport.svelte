@@ -7,12 +7,12 @@
   /** @typedef {import('./_types/property.js').Payment} Payment */
 
   import LayoutMain from './_layouts/main.svelte';
-  import { AdminBooking, AdminPayment, StaffOccupancyReport } from './jsApi.GEN';
+  import { AdminBooking, AdminPayment, StaffMissingDataReport, StaffOccupancyReport } from './jsApi.GEN';
   import { Icon } from './node_modules/svelte-icons-pack/dist';
   import {
     RiArrowsArrowRightSLine, RiArrowsArrowLeftSLine,
     RiSystemExternalLinkLine, RiFinanceWallet3Line,
-    RiSystemEyeLine, RiDesignBallPenLine
+    RiSystemEyeLine, RiDesignBallPenLine, RiSystemHistoryFill
   } from './node_modules/svelte-icons-pack/dist/ri';
   import PopUpExtendBooking from './_components/PopUpExtendBooking.svelte';
   import Switcher from './_components/Switcher.svelte';
@@ -23,6 +23,7 @@
   import PopUpShowBookingPayments from './_components/PopUpShowBookingPayments.svelte';
   import PopUpAddPayment from './_components/PopUpAddPayment.svelte';
   import PopUpEditBooking from './_components/PopUpEditBooking.svelte';
+  import PopUpShowBookingMissingTenant from './_components/PopUpShowBookingMissingTenant.svelte';
 
   let user      = /** @type {User} */ ({/* user */});
   let segments  = /** @type {Access} */ ({/* segments */});
@@ -263,6 +264,41 @@
   let bookingIdToShowPayment = /** @type {number} */ (0);
   let paymentsForBooking = /** @type {Payment[]} */ ([]);
 
+  let billingHistoryPopup = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpShowBookingMissingTenant | any} */ (null);
+  let billingHistoryTenantName = '';
+  let billingHistoryBookings = /** @type {import('./_types/property').TenantBookingDetail[]} */ ([]);
+  let billingHistoryPayments = /** @type {import('./_types/property').PaymentOfBooking[]} */ ([]);
+  let isBillingHistoryLoading = false;
+
+  /**
+   * @param {number} tenantId
+   * @param {string} tenantName
+   */
+  async function showBillingHistory(tenantId, tenantName) {
+    billingHistoryTenantName = tenantName;
+    billingHistoryBookings = [];
+    billingHistoryPayments = [];
+    isBillingHistoryLoading = true;
+    billingHistoryPopup.Show();
+
+    await StaffMissingDataReport(
+      { tenantId, cmd: CmdForm, yearMonth: '' },
+      /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type {any} */ output) {
+        isBillingHistoryLoading = false;
+        if (output.error) {
+          console.log(output);
+          notifier.showError(output.error || 'Could not load billing history');
+          return;
+        }
+
+        billingHistoryBookings = output.bookings || [];
+        billingHistoryPayments = output.payments || [];
+      },
+    );
+  }
+
   async function showPaymentsForBooking(/** @type {number} */ bookingId) {
     bookingIdToShowPayment = bookingId;  // @ts-ignore
     await AdminPayment({
@@ -463,6 +499,14 @@
     Refresh={refreshBookings}
   />
 
+  <PopUpShowBookingMissingTenant
+    bind:this={billingHistoryPopup}
+    tenantName={billingHistoryTenantName}
+    bookings={billingHistoryBookings}
+    payments={billingHistoryPayments}
+    isLoading={isBillingHistoryLoading}
+  />
+
   <PopUpAddPayment
     isBookingReadOnly
     bind:bookingId={bookingIdToPay}
@@ -602,7 +646,17 @@
                         "
                       >
                         {#if booking.tenantName}
-                          <span class="{showTenant ? '' : 'hidden'}">{booking.tenantName} {(booking.extraTenants || []).length ? '*' : ''}</span> 
+                          <div class:tenant-line={showTenant} class:hidden={!showTenant}>
+                            <button
+                              class="billing-history-button"
+                              title={`Show bills and payments for ${booking.tenantName}`}
+                              aria-label={`Show bills and payments for ${booking.tenantName}`}
+                              on:click={() => showBillingHistory(booking.tenantId, booking.tenantName)}
+                            >
+                              <Icon src={RiSystemHistoryFill} size="16" />
+                            </button>
+                            <span>{booking.tenantName} {(booking.extraTenants || []).length ? '*' : ''}</span>
+                          </div>
                           <span>
                             <span class="{showDateStart ? '' : 'hidden'}">{booking.dateStart}</span>
                             <span> s/d </span>
@@ -672,8 +726,8 @@
   .report-container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding: 20px;
+    gap: 6px;
+    padding: 2px;
   }
 
   .report-container .actions {
@@ -681,7 +735,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 4px;
   }
 
   .report-container .actions .quartal-shifter {
@@ -690,7 +744,7 @@
     width: min(100%, 520px);
     align-items: center;
     justify-content: center;
-    column-gap: 16px;
+    column-gap: 6px;
   }
 
   .report-container .actions .quartal-shifter .btn {
@@ -704,7 +758,7 @@
     justify-content: center;
     align-items: center;
     color: var(--gray-008);
-    padding: 8px;
+    padding: 2px;
   }
 
   .report-container .actions .quartal-shifter .btn:hover {
@@ -723,7 +777,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 6px;
   }
 
   .report-container .actions .legends .legend {
@@ -760,25 +814,25 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
+    gap: 4px;
   }
 
   .building-filter {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
     min-width: 190px;
     color: var(--gray-007);
   }
 
   .building-filter select {
-    height: 38px;
+    height: 32px;
     width: 100%;
     border: 1px solid var(--gray-004);
     border-radius: 8px;
     background-color: #fff;
     color: var(--gray-008);
-    padding: 0 12px;
+    padding: 0 4px;
     font-size: 14px;
   }
 
@@ -807,7 +861,7 @@
 
   table thead tr th {
     text-align: left;
-    padding: 8px 12px;
+    padding: 2px 4px;
   }
 
   table tbody tr {
@@ -816,7 +870,7 @@
 
   table tbody tr .room-header {
     min-width: 120px;
-    padding: 8px 12px;
+    padding: 2px 4px;
     vertical-align: top;
     white-space: nowrap;
   }
@@ -825,7 +879,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 4px;
     min-height: 28px;
   }
 
@@ -864,13 +918,13 @@
   }
 
   table tbody tr td {
-    padding: 2px 12px;
+    padding: 1px 4px;
   }
 
   table tbody tr td .cells {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 3px;
   }
 
   table tbody tr td .cell {
@@ -879,37 +933,46 @@
     gap: 1px;
     font-size: 12px;
     position: relative;
-    padding: 2px 3px;
+    min-height: 58px;
+    padding: 1px 2px;
     border-radius: 4px;
     overflow: hidden;
     cursor: pointer;
   }
 
   table tbody tr td .cell .actions {
-    display: none;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: repeat(2, 27px);
+    grid-template-rows: repeat(2, 27px);
+    justify-content: center;
+    align-items: center;
     gap: 3px;
     position: absolute;
-    right: 0;
-    top: 0;
-    padding: 0 5px 5px 0;
-    background-color: var(--blue-transparent);
-    width: 100%;
-    height: 100%;
+    right: 3px;
+    top: 3px;
+    width: 60px;
+    height: 60px;
+    padding: 2px;
+    border-radius: 7px;
+    background-color: color-mix(in srgb, var(--blue-transparent), #fff 70%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
   }
 
-  table tbody tr td .cell:hover .actions {
-    display: flex;
+  table tbody tr td .cell:hover .actions,
+  table tbody tr td .cell:focus-within .actions {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   table tbody tr td .cell .actions .btn {
     border: none;
     /* color: #fff; */
     background-color: transparent;
-    width: fit-content;
-    padding: 5px;
+    width: 27px;
+    height: 27px;
+    padding: 2px;
     border-radius: 8px;
     display: flex;
     flex-direction: row;
@@ -927,23 +990,58 @@
     fill: var(--blue-006);
   }
 
+  .tenant-line {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    min-width: 0;
+    font-weight: 600;
+  }
+
+  .billing-history-button {
+    width: 23px;
+    height: 23px;
+    flex: 0 0 23px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--gray-002);
+    color: var(--gray-007);
+    cursor: pointer;
+  }
+
+  .billing-history-button:hover,
+  .billing-history-button:focus-visible {
+    outline: none;
+    background-color: var(--blue-transparent);
+    color: var(--blue-006);
+  }
+
+  :global(.billing-history-button:hover svg),
+  :global(.billing-history-button:focus-visible svg) {
+    fill: var(--blue-006);
+  }
+
   table tbody tr td .date-warning {
     color: var(--yellow-006);
-    padding: 2px 3px;
+    padding: 1px 2px;
     border-radius: 4px;
     background-color: var(--yellow-transparent);
   }
 
   table tbody tr td .date-alert {
     color: var(--red-006);
-    padding: 2px 3px;
+    padding: 1px 2px;
     border-radius: 4px;
     background-color: var(--red-transparent);
   }
 
   table tbody tr td .cell.refunded {
     color: var(--violet-006) !important;
-    padding: 4px 6px;
+    padding: 2px 3px;
     border-radius: 4px;
     background-color: var(--violet-transparent);
   }
@@ -969,11 +1067,8 @@
     }
 
     table tbody tr td .cell .actions {
-      display: flex;
-      position: static;
-      background-color: var(--gray-002);
-      border-radius: 5px;
-      padding: 5px 10px;
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 </style>

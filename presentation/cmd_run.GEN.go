@@ -252,6 +252,14 @@ func cmdRun(b *domain.Domain, action string, payload []byte) {
 		out := b.StaffOccupancyReport(&in)
 		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
 
+	case domain.StaffPaymentPromiseAction:
+		in := domain.StaffPaymentPromiseIn{}
+		if !in.RequestCommon.FromCli(action, payload, &in) {
+			return
+		}
+		out := b.StaffPaymentPromise(&in)
+		in.RequestCommon.ToCli(os.Stdout, out, out.ResponseCommon)
+
 	case domain.StaffPricePerDayReportAction:
 		in := domain.StaffPricePerDayReportIn{}
 		if !in.RequestCommon.FromCli(action, payload, &in) {

@@ -89,6 +89,24 @@ module.exports = {};
 module.exports = {};
 
 /**
+ * @typedef {Object} PaymentPromise
+ * @property {string|number} id
+ * @property {string|number} tenantId
+ * @property {string|number} bookingId
+ * @property {string} promisedAt
+ * @property {string} promisePayAt
+ * @property {string} note
+ * @property {number} createdAt
+ * @property {string|number} createdBy
+ * @property {number} updatedAt
+ * @property {string|number} updatedBy
+ * @property {number} deletedAt
+ * @property {string|number} deletedBy
+ * @property {string|number} restoredBy
+ */
+module.exports = {};
+
+/**
  * @typedef {Object} Stock
  * @property {string|number} id
  * @property {string} stockName
@@ -211,6 +229,8 @@ module.exports = {};
  * @property {number} paymentId
  * @property {string} paymentAt
  * @property {number} paidIDR
+ * @property {string} paymentMethod
+ * @property {string} note
  */
 module.exports = {};
 

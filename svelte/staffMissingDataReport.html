@@ -3786,6 +3786,9 @@
       exports.StaffOccupancyReport = async function StaffOccupancyReport(i, cb) {
         return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.StaffPaymentPromise = async function StaffPaymentPromise(i, cb) {
+        return await axios.post("/staff/paymentPromise", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
         return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
@@ -3994,6 +3997,36 @@
         CmdToggleWaAdded: CmdToggleWaAdded2,
         CmdToggleTeleAdded: CmdToggleTeleAdded2,
         CmdUpdatePayment
+      };
+    }
+  });
+
+  // _helper/billingHistory.js
+  var require_billingHistory = __commonJS({
+    "_helper/billingHistory.js"(exports, module) {
+      var millisecondsPerDay = 1e3 * 60 * 60 * 24;
+      function dateAsUtc(value) {
+        const [year, month, day] = (value || "").slice(0, 10).split("-").map(Number);
+        if (!year || !month || !day) return null;
+        const result = Date.UTC(year, month - 1, day);
+        const parsed = new Date(result);
+        if (parsed.getUTCFullYear() !== year || parsed.getUTCMonth() !== month - 1 || parsed.getUTCDate() !== day) {
+          return null;
+        }
+        return result;
+      }
+      function paymentTiming2(paymentAt, bookingStart) {
+        const paidDate = dateAsUtc(paymentAt);
+        const startDate = dateAsUtc(bookingStart);
+        if (paidDate === null || startDate === null) return "Payment timing unavailable";
+        const days = Math.round((paidDate - startDate) / millisecondsPerDay);
+        if (days === 0) return "ontime";
+        const count = Math.abs(days);
+        return days > 0 ? `+${count}d late` : `-${count}d early`;
+      }
+      module.exports = {
+        dateAsUtc,
+        paymentTiming: paymentTiming2
       };
     }
   });
@@ -5629,6 +5662,12 @@ ${component_stack}
       }
       next2(promise);
     });
+  }
+  // @__NO_SIDE_EFFECTS__
+  function user_derived(fn) {
+    const d = /* @__PURE__ */ derived(fn);
+    if (!async_mode_flag) push_reaction_value(d);
+    return d;
   }
   // @__NO_SIDE_EFFECTS__
   function derived_safe_equal(fn) {
@@ -10614,6 +10653,17 @@ ${component_stack}
   }
 
   // node_modules/.pnpm/svelte@5.56.4/node_modules/svelte/src/internal/client/dom/legacy/event-modifiers.js
+  function self2(fn) {
+    return function(...args) {
+      var event2 = (
+        /** @type {Event} */
+        args[0]
+      );
+      if (event2.target === this) {
+        fn?.apply(this, args);
+      }
+    };
+  }
   function stopPropagation(fn) {
     return function(...args) {
       var event2 = (
@@ -15907,12 +15957,19 @@ ${component_stack}
   var import_xConstant2 = __toESM(require_xConstant());
 
   // _components/PopUpShowBookingMissingTenant.svelte
-  var root13 = from_html(`<span class="svelte-hvaoo8"> </span>`);
-  var root_16 = from_html(`<div class="booking svelte-hvaoo8"><h3 class="svelte-hvaoo8"> </h3> <div class="detail svelte-hvaoo8"><span> </span> <span> </span></div> <div class="payments svelte-hvaoo8"></div></div>`);
-  var root_24 = from_html(`<div><div class="popup svelte-hvaoo8"><header class="header svelte-hvaoo8"><h2 class="svelte-hvaoo8"> </h2> <button class="svelte-hvaoo8"><!></button></header> <div class="bookings svelte-hvaoo8"></div></div></div>`);
+  var import_billingHistory = __toESM(require_billingHistory());
+  var root13 = from_html(`<div class="message svelte-hvaoo8" aria-live="polite">Loading billing history\u2026</div>`);
+  var root_16 = from_html(`<div class="message svelte-hvaoo8">No bookings found for this tenant.</div>`);
+  var root_24 = from_html(`<span class="debt svelte-hvaoo8"><strong>Debt</strong> </span>`);
+  var root_33 = from_html(`<span class="svelte-hvaoo8"> </span>`);
+  var root_43 = from_html(`<p class="payment-note svelte-hvaoo8"> </p>`);
+  var root_53 = from_html(`<div class="payment svelte-hvaoo8"><p class="payment-main svelte-hvaoo8"><strong> </strong> <!> <strong class="payment-amount svelte-hvaoo8"> </strong></p> <div class="payment-meta svelte-hvaoo8"><span class="svelte-hvaoo8"> </span> <strong> </strong></div> <!></div>`);
+  var root_63 = from_html(`<p class="no-payments svelte-hvaoo8">No payments associated with this booking.</p>`);
+  var root_73 = from_html(`<article class="booking svelte-hvaoo8"><section class="booking-summary svelte-hvaoo8"><h3 class="svelte-hvaoo8"> <span class="svelte-hvaoo8">Room <strong> </strong></span></h3> <p class="svelte-hvaoo8"> </p> <p class="amounts svelte-hvaoo8"><strong>Bill</strong> <strong>Paid</strong> <!></p></section> <section class="payments"></section></article>`);
+  var root_83 = from_html(`<div role="presentation"><div class="popup svelte-hvaoo8" role="dialog" aria-modal="true" tabindex="-1"><header class="header svelte-hvaoo8"><div class="title svelte-hvaoo8"><h2 class="svelte-hvaoo8">Billing &amp; Payment History</h2></div> <div class="header-right svelte-hvaoo8"><p class="svelte-hvaoo8"> </p> <button class="close-button svelte-hvaoo8" title="Close" aria-label="Close billing and payment history"><!></button></div></header> <div class="bookings svelte-hvaoo8"><!></div></div></div>`);
   var $css12 = {
     hash: "svelte-hvaoo8",
-    code: ".popup-container.svelte-hvaoo8 {display:none;position:fixed;width:100%;height:100%;top:0;left:0;bottom:0;right:0;z-index:2000;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);justify-content:center;padding:50px;overflow:auto;}.popup-container.show.svelte-hvaoo8 {display:flex;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) {border-radius:8px;background-color:#FFF;height:fit-content;width:500px;display:flex;flex-direction:column;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) header:where(.svelte-hvaoo8) {display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--gray-004);}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) header:where(.svelte-hvaoo8) h2:where(.svelte-hvaoo8) {margin:0;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) header:where(.svelte-hvaoo8) button:where(.svelte-hvaoo8) {display:flex;justify-content:center;align-items:center;padding:5px;border-radius:50%;border:none;background-color:transparent;cursor:pointer;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) header:where(.svelte-hvaoo8) button:where(.svelte-hvaoo8):hover {background-color:#ef444420;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) header:where(.svelte-hvaoo8) button:where(.svelte-hvaoo8):active {background-color:#ef444430;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) .bookings:where(.svelte-hvaoo8) {padding:20px;display:flex;flex-direction:column;gap:10px;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) .bookings:where(.svelte-hvaoo8) .booking:where(.svelte-hvaoo8) {display:flex;flex-direction:column;gap:5px;background-color:var(--gray-001);border:1px solid var(--gray-002);border-radius:8px;padding:10px;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) .bookings:where(.svelte-hvaoo8) .booking:where(.svelte-hvaoo8) h3:where(.svelte-hvaoo8) {margin:0;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) .bookings:where(.svelte-hvaoo8) .booking:where(.svelte-hvaoo8) .detail:where(.svelte-hvaoo8) {display:flex;flex-direction:column;gap:5px;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) .bookings:where(.svelte-hvaoo8) .booking:where(.svelte-hvaoo8) .payments:where(.svelte-hvaoo8) {display:flex;flex-direction:column;gap:0;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) .bookings:where(.svelte-hvaoo8) .booking:where(.svelte-hvaoo8) .payments:where(.svelte-hvaoo8) span:where(.svelte-hvaoo8) {border-bottom:1px solid var(--gray-003);padding:5px 2px;}\n\n  @media only screen and (max-width : 768px) {.popup-container.svelte-hvaoo8 {padding:10px;}.popup-container.svelte-hvaoo8 .popup:where(.svelte-hvaoo8) {width:100%;}\n  }"
+    code: ".popup-container.svelte-hvaoo8 {display:none;position:fixed;inset:0;z-index:2000;overflow:auto;align-items:flex-start;justify-content:center;padding:2px;background-color:rgba(0 0 0 / 40%);backdrop-filter:blur(1px);}.popup-container.show.svelte-hvaoo8 {display:flex;}.popup.svelte-hvaoo8 {width:fit-content;max-width:calc(100vw - 4px);height:fit-content;display:flex;flex-direction:column;border-radius:8px;background-color:#fff;box-shadow:0 18px 50px rgba(0 0 0 / 20%);}.header.svelte-hvaoo8 {display:flex;align-items:center;justify-content:space-between;gap:4px;padding:4px;border-bottom:1px solid var(--gray-004);}.title.svelte-hvaoo8,\n  .header-right.svelte-hvaoo8 {display:flex;align-items:center;gap:4px;min-width:0;}.header-right.svelte-hvaoo8 {justify-content:flex-end;}.header.svelte-hvaoo8 h2:where(.svelte-hvaoo8),\n  .header.svelte-hvaoo8 p:where(.svelte-hvaoo8) {margin:0;}.header.svelte-hvaoo8 h2:where(.svelte-hvaoo8) {font-size:var(--font-lg);}.header.svelte-hvaoo8 p:where(.svelte-hvaoo8) {color:var(--gray-007);font-weight:600;white-space:nowrap;}.close-button.svelte-hvaoo8 {display:flex;align-items:center;justify-content:center;flex:0 0 auto;padding:2px;border:none;border-radius:50%;background-color:transparent;cursor:pointer;}.close-button.svelte-hvaoo8:hover {background-color:var(--red-transparent);}.bookings.svelte-hvaoo8 {min-height:120px;padding:2px 4px;width:fit-content;max-width:100%;display:flex;flex-direction:column;gap:0;}.message.svelte-hvaoo8 {padding:4px;border-radius:8px;background-color:var(--gray-001);color:var(--gray-007);text-align:center;}.booking.svelte-hvaoo8 {display:grid;grid-template-columns:minmax(260px, max-content) minmax(360px, max-content);gap:4px;padding:3px 0;border-bottom:1px solid var(--gray-003);}.booking.svelte-hvaoo8:last-child {border-bottom:none;}.booking-summary.svelte-hvaoo8 {min-width:0;}.booking-summary.svelte-hvaoo8 h3:where(.svelte-hvaoo8),\n  .booking-summary.svelte-hvaoo8 p:where(.svelte-hvaoo8),\n  .payment-main.svelte-hvaoo8,\n  .payment-note.svelte-hvaoo8,\n  .no-payments.svelte-hvaoo8 {margin:0;}.booking-summary.svelte-hvaoo8 h3:where(.svelte-hvaoo8) {display:flex;flex-wrap:nowrap;gap:4px;align-items:baseline;font-size:14px;white-space:nowrap;}.booking-summary.svelte-hvaoo8 h3:where(.svelte-hvaoo8) span:where(.svelte-hvaoo8) {color:var(--gray-007);font-size:12px;font-weight:400;}.booking-summary.svelte-hvaoo8 p:where(.svelte-hvaoo8),\n  .payment-meta.svelte-hvaoo8,\n  .payment-note.svelte-hvaoo8,\n  .no-payments.svelte-hvaoo8 {color:var(--gray-007);font-size:12px;line-height:1.35;}.amounts.svelte-hvaoo8 {display:flex;flex-wrap:wrap;gap:3px 6px;}.debt.svelte-hvaoo8 {color:var(--red-006);font-weight:700;}.payment.svelte-hvaoo8 {display:grid;grid-template-columns:minmax(220px, 1fr) max-content;column-gap:8px;padding:0 0 3px;border-bottom:1px solid var(--gray-002);}.payment.svelte-hvaoo8:last-child {padding-bottom:0;border-bottom:none;}.payment-main.svelte-hvaoo8 {display:flex;flex-wrap:wrap;gap:3px 6px;align-items:baseline;}.payment-main.svelte-hvaoo8 span:where(.svelte-hvaoo8) {color:var(--gray-008);}.payment-meta.svelte-hvaoo8 {display:flex;flex-wrap:wrap;justify-content:flex-end;gap:3px 6px;text-align:right;white-space:nowrap;}.payment-note.svelte-hvaoo8 {grid-column:1 / -1;}.payment-amount.svelte-hvaoo8,\n  .timing.svelte-hvaoo8 {font-weight:700;}.timing.svelte-hvaoo8 {padding:1px 3px;border-radius:4px;}.timing.late.svelte-hvaoo8 {color:var(--red-006);background-color:var(--red-transparent);}.timing.early.svelte-hvaoo8 {color:var(--blue-006);background-color:var(--blue-transparent);}.timing.ontime.svelte-hvaoo8 {color:var(--green-007);background-color:var(--green-transparent);}.no-payments.svelte-hvaoo8 {padding:0;}\n\n  @media only screen and (max-width: 768px) {.popup-container.svelte-hvaoo8 {padding:2px;}.booking.svelte-hvaoo8 {grid-template-columns:1fr;}.payment.svelte-hvaoo8 {grid-template-columns:1fr;}.payment-meta.svelte-hvaoo8 {justify-content:flex-start;text-align:left;}\n  }"
   };
   function PopUpShowBookingMissingTenant($anchor, $props) {
     push($props, false);
@@ -15920,21 +15977,58 @@ ${component_stack}
     let tenantName = prop($props, "tenantName", 8, "");
     let bookings = prop($props, "bookings", 24, () => []);
     let payments = prop($props, "payments", 24, () => []);
+    let isLoading = prop($props, "isLoading", 8, false);
     let isShow = mutable_source(false);
     const Show = () => set(isShow, true);
     const Hide = () => set(isShow, false);
     function getPaymentsByBookingId(bookingId) {
-      return payments().filter((p) => p.bookingId == bookingId);
+      return payments().filter((payment) => payment.bookingId == bookingId).sort((left, right) => {
+        const dateOrder = (left.paymentAt || "").localeCompare(right.paymentAt || "");
+        return dateOrder || left.paymentId - right.paymentId;
+      });
+    }
+    function compactIDR(value) {
+      const number = Number(value || 0);
+      const sign = number < 0 ? "-" : "";
+      const abs = Math.abs(number);
+      if (abs >= 1e6) {
+        return `${sign}${trimCompactNumber(abs / 1e6)}M`;
+      }
+      if (abs >= 1e3) {
+        return `${sign}${trimCompactNumber(abs / 1e3)}K`;
+      }
+      return `${sign}${abs}`;
+    }
+    function compactPaymentIDR(value) {
+      const number = Number(value || 0);
+      return number < 0 ? compactIDR(number) : `+${compactIDR(number)}`;
+    }
+    function debtAmount(booking) {
+      return Math.max(0, (booking.totalPriceIDR || 0) - (booking.totalPaidIDR || 0));
+    }
+    function paymentTimingClass(paymentAt, bookingStart) {
+      const timing = (0, import_billingHistory.paymentTiming)(paymentAt, bookingStart);
+      if (timing.includes("late")) return "late";
+      if (timing.includes("early")) return "early";
+      return "ontime";
+    }
+    function trimCompactNumber(value) {
+      return value.toFixed(value >= 10 || Number.isInteger(value) ? 0 : 1).replace(/\.0$/, "");
+    }
+    function onKeydown(event2) {
+      if (get2(isShow) && event2.key === "Escape") Hide();
     }
     var $exports = { Show, Hide };
     init();
-    var div = root_24();
+    var div = root_83();
+    event("keydown", $window, onKeydown);
     var div_1 = child(div);
     var header = child(div_1);
-    var h2 = child(header);
-    var text2 = child(h2);
-    reset(h2);
-    var button = sibling(h2, 2);
+    var div_2 = sibling(child(header), 2);
+    var p = child(div_2);
+    var text2 = child(p, true);
+    reset(p);
+    var button = sibling(p, 2);
     var node = child(button);
     Icon(node, {
       size: "22",
@@ -15944,52 +16038,166 @@ ${component_stack}
       }
     });
     reset(button);
-    reset(header);
-    var div_2 = sibling(header, 2);
-    each(div_2, 5, bookings, index, ($anchor2, b) => {
-      var div_3 = root_16();
-      var h3 = child(div_3);
-      var text_1 = child(h3);
-      reset(h3);
-      var div_4 = sibling(h3, 2);
-      var span = child(div_4);
-      var text_2 = child(span);
-      reset(span);
-      var span_1 = sibling(span, 2);
-      var text_3 = child(span_1);
-      reset(span_1);
-      reset(div_4);
-      var div_5 = sibling(div_4, 2);
-      each(
-        div_5,
-        5,
-        () => (get2(b), untrack(() => getPaymentsByBookingId(get2(b).bookingId))),
-        index,
-        ($anchor3, p) => {
-          var span_2 = root13();
-          var text_4 = child(span_2);
-          reset(span_2);
-          template_effect(() => set_text(text_4, `Payment #${(get2(p), untrack(() => get2(p).paymentId)) ?? ""} Rp${(get2(p), untrack(() => get2(p).paidIDR)) ?? ""} ${(get2(p), untrack(() => get2(p).paymentAt)) ?? ""}`));
-          append($anchor3, span_2);
-        }
-      );
-      reset(div_5);
-      reset(div_3);
-      template_effect(() => {
-        set_text(text_1, `Booking #${(get2(b), untrack(() => get2(b).bookingId)) ?? ""}, Room ${(get2(b), untrack(() => get2(b).roomName)) ?? ""}`);
-        set_text(text_2, `${(get2(b), untrack(() => get2(b).dateStart)) ?? ""} s/d ${(get2(b), untrack(() => get2(b).dateEnd)) ?? ""}`);
-        set_text(text_3, `${(get2(b), untrack(() => get2(b).totalPaidIDR)) ?? ""}/${(get2(b), untrack(() => get2(b).totalPriceIDR)) ?? ""}`);
-      });
-      append($anchor2, div_3);
-    });
     reset(div_2);
+    reset(header);
+    var div_3 = sibling(header, 2);
+    var node_1 = child(div_3);
+    {
+      var consequent = ($anchor2) => {
+        var div_4 = root13();
+        append($anchor2, div_4);
+      };
+      var consequent_1 = ($anchor2) => {
+        var div_5 = root_16();
+        append($anchor2, div_5);
+      };
+      var alternate = ($anchor2) => {
+        var fragment = comment();
+        var node_2 = first_child(fragment);
+        each(node_2, 1, bookings, (booking) => booking.bookingId, ($anchor3, booking) => {
+          var article = root_73();
+          var section = child(article);
+          var h3 = child(section);
+          var text_1 = child(h3);
+          var span = sibling(text_1);
+          var strong = sibling(child(span));
+          var text_2 = child(strong, true);
+          reset(strong);
+          reset(span);
+          reset(h3);
+          var p_1 = sibling(h3, 2);
+          var text_3 = child(p_1);
+          reset(p_1);
+          var p_2 = sibling(p_1, 2);
+          var text_4 = sibling(child(p_2));
+          var text_5 = sibling(text_4, 2);
+          var node_3 = sibling(text_5);
+          {
+            var consequent_2 = ($anchor4) => {
+              var span_1 = root_24();
+              var text_6 = sibling(child(span_1));
+              reset(span_1);
+              template_effect(($0) => set_text(text_6, ` ${$0 ?? ""}`), [
+                () => (get2(booking), untrack(() => compactIDR(debtAmount(get2(booking)))))
+              ]);
+              append($anchor4, span_1);
+            };
+            var d = user_derived(() => (get2(booking), untrack(() => debtAmount(get2(booking)) > 0)));
+            if_block(node_3, ($render) => {
+              if (get2(d)) $render(consequent_2);
+            });
+          }
+          reset(p_2);
+          reset(section);
+          var section_1 = sibling(section, 2);
+          each(
+            section_1,
+            5,
+            () => (get2(booking), untrack(() => getPaymentsByBookingId(get2(booking).bookingId))),
+            (payment) => payment.paymentId,
+            ($anchor4, payment) => {
+              var div_6 = root_53();
+              var p_3 = child(div_6);
+              var strong_1 = child(p_3);
+              var text_7 = child(strong_1);
+              reset(strong_1);
+              var node_4 = sibling(strong_1, 2);
+              {
+                var consequent_3 = ($anchor5) => {
+                  var span_2 = root_33();
+                  var text_8 = child(span_2, true);
+                  reset(span_2);
+                  template_effect(() => set_text(text_8, (get2(payment), untrack(() => get2(payment).paymentMethod))));
+                  append($anchor5, span_2);
+                };
+                if_block(node_4, ($render) => {
+                  if (get2(payment), untrack(() => get2(payment).paymentMethod)) $render(consequent_3);
+                });
+              }
+              var strong_2 = sibling(node_4, 2);
+              var text_9 = child(strong_2, true);
+              reset(strong_2);
+              reset(p_3);
+              var div_7 = sibling(p_3, 2);
+              var span_3 = child(div_7);
+              var text_10 = child(span_3, true);
+              reset(span_3);
+              var strong_3 = sibling(span_3, 2);
+              var text_11 = child(strong_3, true);
+              reset(strong_3);
+              reset(div_7);
+              var node_5 = sibling(div_7, 2);
+              {
+                var consequent_4 = ($anchor5) => {
+                  var p_4 = root_43();
+                  var text_12 = child(p_4, true);
+                  reset(p_4);
+                  template_effect(() => set_text(text_12, (get2(payment), untrack(() => get2(payment).note))));
+                  append($anchor5, p_4);
+                };
+                if_block(node_5, ($render) => {
+                  if (get2(payment), untrack(() => get2(payment).note)) $render(consequent_4);
+                });
+              }
+              reset(div_6);
+              template_effect(
+                ($0, $1, $2) => {
+                  set_text(text_7, `Payment #${(get2(payment), untrack(() => get2(payment).paymentId)) ?? ""}`);
+                  set_text(text_9, $0);
+                  set_text(text_10, (get2(payment), untrack(() => get2(payment).paymentAt)));
+                  set_class(strong_3, 1, $1, "svelte-hvaoo8");
+                  set_text(text_11, $2);
+                },
+                [
+                  () => (get2(payment), untrack(() => compactPaymentIDR(get2(payment).paidIDR))),
+                  () => (get2(payment), get2(booking), untrack(() => `timing ${paymentTimingClass(get2(payment).paymentAt, get2(booking).dateStart)}`)),
+                  () => (deep_read_state(import_billingHistory.paymentTiming), get2(payment), get2(booking), untrack(() => (0, import_billingHistory.paymentTiming)(get2(payment).paymentAt, get2(booking).dateStart)))
+                ]
+              );
+              append($anchor4, div_6);
+            },
+            ($anchor4) => {
+              var p_5 = root_63();
+              append($anchor4, p_5);
+            }
+          );
+          reset(section_1);
+          reset(article);
+          template_effect(
+            ($0, $1) => {
+              set_attribute2(section, "aria-label", (get2(booking), untrack(() => `Booking ${get2(booking).bookingId}`)));
+              set_text(text_1, `Booking #${(get2(booking), untrack(() => get2(booking).bookingId)) ?? ""} `);
+              set_text(text_2, (get2(booking), untrack(() => get2(booking).roomName || "\u2014")));
+              set_text(text_3, `${(get2(booking), untrack(() => get2(booking).dateStart)) ?? ""} to ${(get2(booking), untrack(() => get2(booking).dateEnd)) ?? ""}`);
+              set_text(text_4, ` ${$0 ?? ""} `);
+              set_text(text_5, ` ${$1 ?? ""} `);
+              set_attribute2(section_1, "aria-label", (get2(booking), untrack(() => `Payments for booking ${get2(booking).bookingId}`)));
+            },
+            [
+              () => (get2(booking), untrack(() => compactIDR(get2(booking).totalPriceIDR))),
+              () => (get2(booking), untrack(() => compactIDR(get2(booking).totalPaidIDR)))
+            ]
+          );
+          append($anchor3, article);
+        });
+        append($anchor2, fragment);
+      };
+      if_block(node_1, ($render) => {
+        if (isLoading()) $render(consequent);
+        else if (deep_read_state(bookings()), untrack(() => bookings().length === 0)) $render(consequent_1, 1);
+        else $render(alternate, -1);
+      });
+    }
+    reset(div_3);
     reset(div_1);
     reset(div);
     template_effect(() => {
       set_class(div, 1, `popup-container ${get2(isShow) ? "show" : ""}`, "svelte-hvaoo8");
-      set_text(text2, `Booking History of ${tenantName() ?? ""}`);
+      set_attribute2(div_1, "aria-label", `Billing and payment history for ${tenantName()}`);
+      set_text(text2, tenantName());
     });
     event("click", button, Hide);
+    event("click", div, self2(Hide));
     append($anchor, div);
     bind_prop($props, "Show", Show);
     bind_prop($props, "Hide", Hide);
@@ -16356,14 +16564,19 @@ ${component_stack}
       /** @type {PaymentOfBooking[]} */
       []
     );
+    let isBillingHistoryLoading = mutable_source(false);
     async function showPopUpShowBookingTenant(tenantId, name) {
       set(tenantName, name);
+      set(bookingsOfTenant, []);
+      set(paymentsOfBookingOfTenant, []);
+      set(isBillingHistoryLoading, true);
       get2(popUpShowBookingMissingTenant).Show();
       await (0, import_jsApi3.StaffMissingDataReport)(
         { tenantId, cmd: import_xConstant.CmdForm, yearMonth: "" },
         /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
         /** @returns {Promise<void>} */
         function(o) {
+          set(isBillingHistoryLoading, false);
           if (o.error) {
             console.log(o);
             notifier.showError(o.error || "something went wrong");
@@ -16405,6 +16618,9 @@ ${component_stack}
         var node_2 = sibling(node_1, 2);
         bind_this(
           PopUpShowBookingMissingTenant(node_2, {
+            get isLoading() {
+              return get2(isBillingHistoryLoading);
+            },
             get tenantName() {
               return get2(tenantName);
             },

@@ -687,6 +687,36 @@ func (b *Payments) Truncate() bool {
 	return b.Adapter.ExecBoxSpace(b.SpaceName()+`:truncate`, A.X{})
 }
 
+func (p *PaymentPromises) GetRows(offset, limit uint32) (res [][]any) {
+	resp, err := p.Adapter.Select(p.SpaceName(), p.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `failed to query property`) {
+		return
+	}
+
+	res = resp.Tuples()
+
+	return
+}
+
+func (p *PaymentPromises) CountTotalAllRows() (total uint64) {
+	queryCount := `
+	SELECT COUNT(1)
+	FROM ` + p.SqlTableName() + `
+	LIMIT 1`
+
+	p.Adapter.QuerySql(queryCount, func(row []any) {
+		if len(row) >= 1 {
+			total = X.ToU(row[0])
+		}
+	})
+
+	return
+}
+
+func (p *PaymentPromises) Truncate() bool {
+	return p.Adapter.ExecBoxSpace(p.SpaceName()+`:truncate`, A.X{})
+}
+
 func (b *Rooms) GetRows(offset, limit uint32) (res [][]any) {
 	resp, err := b.Adapter.Select(b.SpaceName(), b.UniqueIndexId(), offset, limit, tarantool.IterAll, A.X{})
 	if L.IsError(err, `failed to query property`) {
@@ -1222,12 +1252,13 @@ func getAgeByBirthday(birthday string) int {
 }
 
 type AvailableRoom struct {
-	RoomName       string `json:"roomName"`
-	AvailableAt    string `json:"availableAt"`
-	IsAvailableNow bool   `json:"isAvailableNow"`
-	LastTenant     string `json:"lastTenant"`
-	BasePriceIDR   int64  `json:"basePriceIDR"`
-	TotalPriceIDR  int64  `json:"totalPriceIDR"`
+	RoomName        string `json:"roomName"`
+	AvailableAt     string `json:"availableAt"`
+	IsAvailableNow  bool   `json:"isAvailableNow"`
+	CurrentTenantId uint64 `json:"currentTenantId"`
+	LastTenant      string `json:"lastTenant"`
+	BasePriceIDR    int64  `json:"basePriceIDR"`
+	TotalPriceIDR   int64  `json:"totalPriceIDR"`
 }
 
 type CurrentOccupant struct {
@@ -1264,6 +1295,7 @@ SELECT
 		WHEN "dateEnd" < '` + dateTimeNow + `'
 		THEN 'TRUE'
 	ELSE 'FALSE' END AS "isAvailable",
+	"currentTenantId",
 	"tenantName",
 	COALESCE("basePriceIDR", 0) AS "basePriceIDR",
 	COALESCE("totalPriceIDR", 0) AS "totalPriceIDR"
@@ -1277,20 +1309,22 @@ WHERE
 	AND "deletedAt" = 0
 ORDER BY "dateEnd" ASC`
 	r.Adapter.QuerySql(queryRows, func(row []any) {
-		if len(row) == 6 {
+		if len(row) == 7 {
 			roomName := X.ToS(row[0])
 			availableAt := X.ToS(row[1])
 			isAvailableNow := X.ToBool(row[2])
-			tenantName := X.ToS(row[3])
-			basePriceIDR := X.ToI(row[4])
-			totalPriceIDR := X.ToI(row[5])
+			currentTenantId := X.ToU(row[3])
+			tenantName := X.ToS(row[4])
+			basePriceIDR := X.ToI(row[5])
+			totalPriceIDR := X.ToI(row[6])
 			out = append(out, AvailableRoom{
-				RoomName:       roomName,
-				AvailableAt:    availableAt,
-				IsAvailableNow: isAvailableNow,
-				LastTenant:     tenantName,
-				BasePriceIDR:   basePriceIDR,
-				TotalPriceIDR:  totalPriceIDR,
+				RoomName:        roomName,
+				AvailableAt:     availableAt,
+				IsAvailableNow:  isAvailableNow,
+				CurrentTenantId: currentTenantId,
+				LastTenant:      tenantName,
+				BasePriceIDR:    basePriceIDR,
+				TotalPriceIDR:   totalPriceIDR,
 			})
 		}
 	})
@@ -1330,6 +1364,7 @@ ORDER BY "tenantName" ASC, "roomName" ASC`
 
 type UnpaidBookingTenant struct {
 	BookingId  uint64 `json:"bookingId"`
+	TenantId   uint64 `json:"tenantId"`
 	TenantName string `json:"tenantName"`
 	RoomName   string `json:"roomName"`
 	TotalPaid  int64  `json:"totalPaid"`
@@ -1347,7 +1382,7 @@ SELECT
 	t."id",
 	t."tenantName",
 	r."roomName",
-	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
+	COALESCE(SUM(CASE WHEN p."deletedAt" = 0 THEN p."paidIDR" ELSE 0 END), 0) AS totalPaidIDR,
 	b."totalPriceIDR",
 	b."dateStart",
 	b."dateEnd"
@@ -1370,6 +1405,7 @@ ORDER BY t."tenantName" ASC`
 		}
 
 		bookingId := X.ToU(row[0])
+		tenantId := X.ToU(row[1])
 		tenantName := X.ToS(row[2])
 		roomName := X.ToS(row[3])
 		totalPaid := X.ToI(row[4])
@@ -1379,6 +1415,7 @@ ORDER BY t."tenantName" ASC`
 
 		out = append(out, UnpaidBookingTenant{
 			BookingId:  bookingId,
+			TenantId:   tenantId,
 			TenantName: tenantName,
 			RoomName:   roomName,
 			TotalPaid:  totalPaid,
@@ -1395,6 +1432,51 @@ ORDER BY t."tenantName" ASC`
 	})
 
 	return
+}
+
+func (p *PaymentPromises) FindLatestByTenantIds(tenantIds []uint64) map[uint64]PaymentPromises {
+	const comment = `-- PaymentPromises) FindLatestByTenantIds`
+
+	out := map[uint64]PaymentPromises{}
+	if len(tenantIds) == 0 {
+		return out
+	}
+
+	seen := map[uint64]bool{}
+	idTokens := make([]string, 0, len(tenantIds))
+	for _, tenantId := range tenantIds {
+		if tenantId == 0 || seen[tenantId] {
+			continue
+		}
+		seen[tenantId] = true
+		idTokens = append(idTokens, fmt.Sprintf(`%d`, tenantId))
+	}
+	if len(idTokens) == 0 {
+		return out
+	}
+
+	queryRows := comment + `
+SELECT ` + p.SqlSelectAllFields() + `
+FROM ` + p.SqlTableName() + `
+WHERE "deletedAt" = 0
+	AND "tenantId" IN (` + strings.Join(idTokens, `,`) + `)
+ORDER BY "createdAt" DESC, "id" DESC`
+
+	p.Adapter.QuerySql(queryRows, func(row []any) {
+		if len(row) != 13 {
+			return
+		}
+
+		promise := PaymentPromises{}
+		promise.FromArray(A.X(row))
+		if _, ok := out[promise.TenantId]; ok {
+			return
+		}
+
+		out[promise.TenantId] = promise
+	})
+
+	return out
 }
 
 type RevenueReport struct {
@@ -1945,10 +2027,12 @@ ORDER BY b."dateStart" ASC`
 }
 
 type PaymentOfBooking struct {
-	BookingId uint64 `json:"bookingId"`
-	PaymentId uint64 `json:"paymentId"`
-	PaymentAt string `json:"paymentAt"`
-	PaidIDR   int64  `json:"paidIDR"`
+	BookingId     uint64 `json:"bookingId"`
+	PaymentId     uint64 `json:"paymentId"`
+	PaymentAt     string `json:"paymentAt"`
+	PaidIDR       int64  `json:"paidIDR"`
+	PaymentMethod string `json:"paymentMethod"`
+	Note          string `json:"note"`
 }
 
 func (p *Payments) GetPaymentsByTenantId(tenantId uint64) (out []PaymentOfBooking) {
@@ -1959,7 +2043,9 @@ SELECT
 	p."bookingId",
 	p."id",
 	p."paymentAt",
-	p."paidIDR"
+	p."paidIDR",
+	p."paymentMethod",
+	p."note"
 FROM "payments" p
 LEFT JOIN "bookings" b
 	ON b."id" = p."bookingId"
@@ -1968,15 +2054,17 @@ WHERE p."deletedAt" = 0
 	AND b."deletedAt" = 0`
 
 	p.Adapter.QuerySql(query, func(row []any) {
-		if len(row) != 4 {
+		if len(row) != 6 {
 			return
 		}
 
 		out = append(out, PaymentOfBooking{
-			BookingId: X.ToU(row[0]),
-			PaymentId: X.ToU(row[1]),
-			PaymentAt: X.ToS(row[2]),
-			PaidIDR:   X.ToI(row[3]),
+			BookingId:     X.ToU(row[0]),
+			PaymentId:     X.ToU(row[1]),
+			PaymentAt:     X.ToS(row[2]),
+			PaidIDR:       X.ToI(row[3]),
+			PaymentMethod: X.ToS(row[4]),
+			Note:          X.ToS(row[5]),
 		})
 	})
 
@@ -1998,7 +2086,7 @@ func (b *Bookings) GetBookingsByTenantId(tenantId uint64) (out []TenantBookingDe
 	query := comment + `
 SELECT
 	b."id",
-	COALESCE(SUM(p."paidIDR"), 0) AS totalPaidIDR,
+	COALESCE(SUM(CASE WHEN p."deletedAt" = 0 THEN p."paidIDR" ELSE 0 END), 0) AS totalPaidIDR,
 	b."totalPriceIDR",
 	b."dateStart",
 	b."dateEnd",

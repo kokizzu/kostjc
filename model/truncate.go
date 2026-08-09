@@ -41,6 +41,11 @@ func TruncateDatabase(tConn *Tt.Adapter) {
 		L.LOG.Error(`failed to truncate table payments`)
 	}
 
+	fmt.Println(color.BlueString("# Truncating Table PaymentPromises #"))
+	if !rqProperty.NewPaymentPromises(tConn).Truncate() {
+		L.LOG.Error(`failed to truncate table paymentPromises`)
+	}
+
 	fmt.Println(color.BlueString("# Truncating Table Stocks #"))
 	if !rqProperty.NewStocks(tConn).Truncate() {
 		L.LOG.Error(`failed to truncate table stocks`)

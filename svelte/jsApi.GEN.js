@@ -2748,6 +2748,90 @@ exports.StaffOccupancyReport = async function StaffOccupancyReport( i, cb ) {
 }
 
 /**
+ * @typedef {Object} StaffPaymentPromiseIn
+ * @property {String} cmd
+ * @property {number} promise.id
+ * @property {number} promise.tenantId
+ * @property {number} promise.bookingId
+ * @property {String} promise.promisedAt
+ * @property {String} promise.promisePayAt
+ * @property {number} promise.createdAt
+ * @property {number} promise.createdBy
+ * @property {number} promise.updatedAt
+ * @property {number} promise.updatedBy
+ * @property {number} promise.deletedAt
+ * @property {number} promise.deletedBy
+ * @property {number} promise.restoredBy
+ * @property {String} promise.note
+ */
+const StaffPaymentPromiseIn = {
+  cmd: '', // string
+  promise: { // rqProperty.PaymentPromises
+    id: 0, // uint64
+    tenantId: 0, // uint64
+    bookingId: 0, // uint64
+    promisedAt: '', // string
+    promisePayAt: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+    note: '', // string
+  }, // rqProperty.PaymentPromises
+}
+/**
+ * @typedef {Object} StaffPaymentPromiseOut
+ * @property {number} promise.id
+ * @property {number} promise.tenantId
+ * @property {number} promise.bookingId
+ * @property {String} promise.promisedAt
+ * @property {String} promise.promisePayAt
+ * @property {number} promise.createdAt
+ * @property {number} promise.createdBy
+ * @property {number} promise.updatedAt
+ * @property {number} promise.updatedBy
+ * @property {number} promise.deletedAt
+ * @property {number} promise.deletedBy
+ * @property {number} promise.restoredBy
+ * @property {String} promise.note
+ */
+const StaffPaymentPromiseOut = {
+  promise: { // rqProperty.PaymentPromises
+    id: 0, // uint64
+    tenantId: 0, // uint64
+    bookingId: 0, // uint64
+    promisedAt: '', // string
+    promisePayAt: '', // string
+    createdAt: 0, // int64
+    createdBy: 0, // uint64
+    updatedAt: 0, // int64
+    updatedBy: 0, // uint64
+    deletedAt: 0, // int64
+    deletedBy: 0, // uint64
+    restoredBy: 0, // uint64
+    note: '', // string
+  }, // rqProperty.PaymentPromises
+}
+/**
+ * @callback StaffPaymentPromiseCallback
+ * @param {StaffPaymentPromiseOut} o
+ * @returns {Promise}
+ */
+/**
+ * @param  {StaffPaymentPromiseIn} i
+ * @param {StaffPaymentPromiseCallback} cb
+ * @returns {Promise}
+ */
+exports.StaffPaymentPromise = async function StaffPaymentPromise( i, cb ) {
+  return await axios.post( '/staff/paymentPromise', i ).
+    then( wrapOk( cb ) ).
+    catch( wrapErr( cb ) )
+}
+
+/**
  * @typedef {Object} StaffPricePerDayReportIn
  * @property {String} yearMonth
  */

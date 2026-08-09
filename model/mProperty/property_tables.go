@@ -108,6 +108,13 @@ const (
 )
 
 const (
+	TablePaymentPromises Tt.TableName = `paymentPromises`
+
+	PromisedAt   = `promisedAt`
+	PromisePayAt = `promisePayAt`
+)
+
+const (
 	TableStocks Tt.TableName = `stocks`
 
 	StockName    = `stockName`
@@ -240,6 +247,25 @@ var TarantoolTables = map[Tt.TableName]*Tt.TableProp{
 			{DeletedAt, Tt.Integer},
 			{DeletedBy, Tt.Unsigned},
 			{RestoredBy, Tt.Unsigned},
+		},
+		AutoIncrementId: true,
+		Engine:          Tt.Memtx,
+	},
+	TablePaymentPromises: {
+		Fields: []Tt.Field{
+			{Id, Tt.Unsigned},
+			{TenantId, Tt.Unsigned},
+			{BookingId, Tt.Unsigned},
+			{PromisedAt, Tt.String},
+			{PromisePayAt, Tt.String},
+			{CreatedAt, Tt.Integer},
+			{CreatedBy, Tt.Unsigned},
+			{UpdatedAt, Tt.Integer},
+			{UpdatedBy, Tt.Unsigned},
+			{DeletedAt, Tt.Integer},
+			{DeletedBy, Tt.Unsigned},
+			{RestoredBy, Tt.Unsigned},
+			{Note, Tt.String},
 		},
 		AutoIncrementId: true,
 		Engine:          Tt.Memtx,

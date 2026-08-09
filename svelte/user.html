@@ -3954,6 +3954,9 @@
       exports.StaffOccupancyReport = async function StaffOccupancyReport(i, cb) {
         return await axios.post("/staff/occupancyReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };
+      exports.StaffPaymentPromise = async function StaffPaymentPromise(i, cb) {
+        return await axios.post("/staff/paymentPromise", i).then(wrapOk(cb)).catch(wrapErr(cb));
+      };
       exports.StaffPricePerDayReport = async function StaffPricePerDayReport(i, cb) {
         return await axios.post("/staff/pricePerDayReport", i).then(wrapOk(cb)).catch(wrapErr(cb));
       };

@@ -1,9 +1,13 @@
 package presentation
 
 import (
+	"bytes"
+	stdjson "encoding/json"
 	"fmt"
 	"kostjc/conf"
 	"kostjc/domain"
+	"reflect"
+	"strings"
 	"time"
 
 	"github.com/fatih/color"
@@ -48,8 +52,9 @@ func webApiParseInput(ctx *fiber.Ctx, reqCommon *domain.RequestCommon, in any, u
 	}
 	if len(body) > 0 {
 		retry := true
-		if body[0] == '{' || ctx.Get(`content-type`) == `application/json` {
-			if err := json.Unmarshal(body, in); err == nil {
+		trimmedBody := bytes.TrimSpace(body)
+		if len(trimmedBody) > 0 && (trimmedBody[0] == '{' || strings.HasPrefix(ctx.Get(`content-type`), `application/json`)) {
+			if err := unmarshalWebJSON(trimmedBody, in); err == nil {
 				retry = false
 			}
 		}
@@ -79,6 +84,162 @@ func webApiParseInput(ctx *fiber.Ctx, reqCommon *domain.RequestCommon, in any, u
 	}
 	reqCommon.FromFiberCtx(ctx, ctx.UserContext())
 	return nil
+}
+
+func unmarshalWebJSON(body []byte, in any) error {
+	err := json.Unmarshal(body, in)
+	if err == nil {
+		return nil
+	}
+
+	normalized, changed, normalizeErr := normalizeJSONStringTaggedNumbers(body, reflect.TypeOf(in))
+	if normalizeErr != nil || !changed {
+		return err
+	}
+	if retryErr := json.Unmarshal(normalized, in); retryErr != nil {
+		return retryErr
+	}
+	return nil
+}
+
+func normalizeJSONStringTaggedNumbers(body []byte, typ reflect.Type) ([]byte, bool, error) {
+	var value any
+	decoder := stdjson.NewDecoder(bytes.NewReader(body))
+	decoder.UseNumber()
+	if err := decoder.Decode(&value); err != nil {
+		return nil, false, err
+	}
+
+	if !normalizeJSONValueForType(value, indirectType(typ)) {
+		return nil, false, nil
+	}
+
+	normalized, err := stdjson.Marshal(value)
+	return normalized, true, err
+}
+
+func normalizeJSONValueForType(value any, typ reflect.Type) bool {
+	if typ == nil {
+		return false
+	}
+	typ = indirectType(typ)
+
+	switch typ.Kind() {
+	case reflect.Struct:
+		object, ok := value.(map[string]any)
+		if !ok {
+			return false
+		}
+		return normalizeJSONObjectForStruct(object, typ)
+	case reflect.Slice, reflect.Array:
+		items, ok := value.([]any)
+		if !ok {
+			return false
+		}
+		changed := false
+		elemType := indirectType(typ.Elem())
+		for _, item := range items {
+			if normalizeJSONValueForType(item, elemType) {
+				changed = true
+			}
+		}
+		return changed
+	case reflect.Map:
+		object, ok := value.(map[string]any)
+		if !ok {
+			return false
+		}
+		valueType := indirectType(typ.Elem())
+		if valueType.Kind() == reflect.Interface {
+			return false
+		}
+		changed := false
+		for _, item := range object {
+			if normalizeJSONValueForType(item, valueType) {
+				changed = true
+			}
+		}
+		return changed
+	default:
+		return false
+	}
+}
+
+func normalizeJSONObjectForStruct(object map[string]any, typ reflect.Type) bool {
+	changed := false
+	for i := 0; i < typ.NumField(); i++ {
+		field := typ.Field(i)
+		if field.PkgPath != `` && !field.Anonymous {
+			continue
+		}
+
+		name, stringify, skip := jsonFieldInfo(field)
+		if skip {
+			continue
+		}
+		if field.Anonymous && name == `` {
+			if normalizeJSONValueForType(object, field.Type) {
+				changed = true
+			}
+			continue
+		}
+		if name == `` {
+			name = field.Name
+		}
+
+		actualName := name
+		fieldValue, ok := object[actualName]
+		if !ok {
+			for candidate := range object {
+				if strings.EqualFold(candidate, name) {
+					actualName = candidate
+					fieldValue = object[candidate]
+					ok = true
+					break
+				}
+			}
+		}
+		if !ok {
+			continue
+		}
+		if stringify {
+			if number, ok := fieldValue.(stdjson.Number); ok {
+				object[actualName] = number.String()
+				changed = true
+				continue
+			}
+		}
+		if normalizeJSONValueForType(fieldValue, field.Type) {
+			changed = true
+		}
+	}
+	return changed
+}
+
+func jsonFieldInfo(field reflect.StructField) (name string, stringify bool, skip bool) {
+	tag := field.Tag.Get(`json`)
+	if tag == `-` {
+		return ``, false, true
+	}
+	if tag == `` {
+		return ``, false, false
+	}
+	parts := strings.Split(tag, `,`)
+	name = parts[0]
+	for _, option := range parts[1:] {
+		if option == `string` {
+			stringify = true
+			break
+		}
+	}
+	return name, stringify, false
+}
+
+func indirectType(typ reflect.Type) reflect.Type {
+	for typ != nil && typ.Kind() == reflect.Ptr {
+		typ = typ.Elem()
+	}
+	return typ
 }
 
 func (w *WebServer) Start(log *zerolog.Logger) {

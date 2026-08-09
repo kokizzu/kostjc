@@ -277,9 +277,13 @@
   let tenantName = '';
   let bookingsOfTenant = /** @type {TenantBookingDetail[]} */ ([]);
   let paymentsOfBookingOfTenant = /** @type {PaymentOfBooking[]} */ ([]);
+  let isBillingHistoryLoading = false;
 
   async function showPopUpShowBookingTenant(/** @type {number} */ tenantId, /** @type {string} */ name) {
     tenantName = name;
+    bookingsOfTenant = [];
+    paymentsOfBookingOfTenant = [];
+    isBillingHistoryLoading = true;
     popUpShowBookingMissingTenant.Show();
     await StaffMissingDataReport({
       tenantId: tenantId,
@@ -289,6 +293,7 @@
     /** @type {import('./jsApi.GEN').StaffMissingDataReportCallback} */
     /** @returns {Promise<void>} */
     function(/** @type {any} */ o) {
+      isBillingHistoryLoading = false;
       if (o.error) {
         console.log(o);
         notifier.showError(o.error || 'something went wrong');
@@ -315,6 +320,7 @@
     bind:tenantName
     bind:bookings={bookingsOfTenant}
     bind:payments={paymentsOfBookingOfTenant}
+    isLoading={isBillingHistoryLoading}
   />
 {/if}
 

@@ -37,6 +37,7 @@ var allCommands = []string{
 	domain.StaffMissingDataReportAction,
 	domain.StaffOccupancyHeatmapAction,
 	domain.StaffOccupancyReportAction,
+	domain.StaffPaymentPromiseAction,
 	domain.StaffPricePerDayReportAction,
 	domain.StaffTenantsAction,
 	domain.StaffWifiDeviceReportAction,

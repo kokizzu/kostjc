@@ -135,6 +135,15 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 		doubleBookingReports := booking.FindDoubleBookingReports()
 		upcomingTenants := booking.GetUpcomingTenants()
 		publicLoginSummary := buildPublicLoginSummary(unpaidBookingTenants, availableRooms, currentOccupants)
+		paymentPromiseTenantIds := make([]uint64, 0, len(unpaidBookingTenants)+len(availableRooms))
+		for _, item := range unpaidBookingTenants {
+			paymentPromiseTenantIds = append(paymentPromiseTenantIds, item.TenantId)
+		}
+		for _, item := range availableRooms {
+			paymentPromiseTenantIds = append(paymentPromiseTenantIds, item.CurrentTenantId)
+		}
+		paymentPromise := rqProperty.NewPaymentPromises(d.PropOltp)
+		paymentPromises := paymentPromise.FindLatestByTenantIds(paymentPromiseTenantIds)
 
 		tenant := rqAuth.NewTenants(d.AuthOltp)
 		tenants := tenant.FindTenantChoices()
@@ -149,6 +158,7 @@ func (w *WebServer) WebStatic(fw *fiber.App, d *domain.Domain) {
 			`unpaidBookingTenants`:   unpaidBookingTenants,
 			`doubleBookingReports`:   doubleBookingReports,
 			`upcomingTenants`:        upcomingTenants,
+			`paymentPromises`:        paymentPromises,
 			`tenants`:                tenants,
 			`rooms`:                  rooms,
 			`publicLoginSummary`:     publicLoginSummary,

@@ -77,6 +77,11 @@ func BackupDatabase(tConn *Tt.Adapter) {
 		L.LOG.Fatal(err)
 	}
 
+	fmt.Println(color.BlueString("# Backup Table PaymentPromises #"))
+	if err := backupTable(tConn, rqProperty.NewPaymentPromises, `paymentPromises`); err != nil {
+		L.LOG.Fatal(err)
+	}
+
 	fmt.Println(color.BlueString("# Backup Table Stocks #"))
 	if err := backupTable(tConn, rqProperty.NewStocks, `stocks`); err != nil {
 		L.LOG.Fatal(err)

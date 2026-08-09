@@ -1,9 +1,16 @@
 <script>
   import { formatPrice } from '../../_components/xFormatter';
+  import { StaffMissingDataReport } from '../../jsApi.GEN';
+  import { CmdForm } from '../../_components/xConstant';
+  import { notifier } from '../../_components/xNotifier';
+  import { Icon } from '../../node_modules/svelte-icons-pack/dist';
+  import { RiSystemHistoryFill } from '../../node_modules/svelte-icons-pack/dist/ri';
+  import PopUpShowBookingMissingTenant from '../../_components/PopUpShowBookingMissingTenant.svelte';
 
   /**
    * @typedef {Object} UnpaidBookingTenant
    * @property {number} bookingId
+   * @property {number} tenantId
    * @property {string} tenantName
    * @property {string} roomName
    * @property {number} totalPaid
@@ -14,6 +21,7 @@
 
   /**
    * @typedef {Object} UnpaidBookingRecapItem
+   * @property {number} tenantId
    * @property {string} tenantName
    * @property {number} unpaidAmount
    * @property {string} earliestStartDate
@@ -25,6 +33,40 @@
 
   const unpaidBookingTenants = /** @type {UnpaidBookingTenant[]} */ ([/* unpaidBookingTenants */]);
   let sortBy = /** @type {SortKey} */ ('overdueDays');
+  let billingHistoryPopup = /** @type {import('svelte').SvelteComponent | HTMLElement | PopUpShowBookingMissingTenant | any} */ (null);
+  let billingHistoryTenantName = '';
+  let billingHistoryBookings = /** @type {import('../../_types/property').TenantBookingDetail[]} */ ([]);
+  let billingHistoryPayments = /** @type {import('../../_types/property').PaymentOfBooking[]} */ ([]);
+  let isBillingHistoryLoading = false;
+
+  /**
+   * @param {number} tenantId
+   * @param {string} tenantName
+   */
+  async function showBillingHistory(tenantId, tenantName) {
+    billingHistoryTenantName = tenantName;
+    billingHistoryBookings = [];
+    billingHistoryPayments = [];
+    isBillingHistoryLoading = true;
+    billingHistoryPopup.Show();
+
+    await StaffMissingDataReport(
+      { tenantId, cmd: CmdForm, yearMonth: '' },
+      /** @type {import('../../jsApi.GEN').StaffMissingDataReportCallback} */
+      /** @returns {Promise<void>} */
+      function(/** @type {any} */ output) {
+        isBillingHistoryLoading = false;
+        if (output.error) {
+          console.log(output);
+          notifier.showError(output.error || 'Could not load billing history');
+          return;
+        }
+
+        billingHistoryBookings = output.bookings || [];
+        billingHistoryPayments = output.payments || [];
+      },
+    );
+  }
 
   /**
    * @param {string} dateStr
@@ -93,9 +135,10 @@
           const unpaidAmount = Math.max(0, (booking.totalPrice || 0) - (booking.totalPaid || 0));
           if (unpaidAmount <= 0) return acc;
 
-          const key = booking.tenantName || `booking-${booking.bookingId}`;
+          const key = booking.tenantId ? String(booking.tenantId) : `booking-${booking.bookingId}`;
           if (!acc[key]) {
             acc[key] = {
+              tenantId: booking.tenantId,
               tenantName: booking.tenantName,
               unpaidAmount: 0,
               earliestStartDate: booking.dateStart,
@@ -141,6 +184,14 @@
   });
 </script>
 
+<PopUpShowBookingMissingTenant
+  bind:this={billingHistoryPopup}
+  tenantName={billingHistoryTenantName}
+  bookings={billingHistoryBookings}
+  payments={billingHistoryPayments}
+  isLoading={isBillingHistoryLoading}
+/>
+
 <section class="unpaid-booking-recap">
   <div class="header">
     <h1>Unpaid Recap</h1>
@@ -152,6 +203,7 @@
       <table>
         <thead>
           <tr>
+            <th class="action-heading"><span class="visually-hidden">Actions</span></th>
             <th>
               <button class="sort-header" class:active={sortBy === 'tenantName'} on:click={() => sortByColumn('tenantName')}>
                 <span>Tenant</span>
@@ -185,8 +237,18 @@
           </tr>
         </thead>
         <tbody>
-          {#each sortedRecapItems as item (`${item.tenantName}-${item.earliestStartDate}`)}
+          {#each sortedRecapItems as item (`${item.tenantId}-${item.earliestStartDate}`)}
             <tr>
+              <td class="action-cell">
+                <button
+                  class="billing-history-button"
+                  title={`Show bills and payments for ${item.tenantName}`}
+                  aria-label={`Show bills and payments for ${item.tenantName}`}
+                  on:click={() => showBillingHistory(item.tenantId, item.tenantName)}
+                >
+                  <Icon size="17" src={RiSystemHistoryFill} />
+                </button>
+              </td>
               <td>{item.tenantName}</td>
               <td>{formatPrice(item.unpaidAmount, 'IDR')}</td>
               <td>{item.earliestStartDate}</td>
@@ -241,6 +303,56 @@
     width: 100%;
     border-collapse: collapse;
     min-width: 680px;
+  }
+
+  .action-heading,
+  .action-cell {
+    width: 46px;
+    min-width: 46px;
+    text-align: center;
+  }
+
+  .action-cell {
+    padding: 2px 8px;
+    vertical-align: middle;
+  }
+
+  .billing-history-button {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--gray-007);
+    cursor: pointer;
+  }
+
+  .billing-history-button:hover,
+  .billing-history-button:focus-visible {
+    outline: none;
+    background-color: var(--blue-transparent);
+    color: var(--blue-006);
+  }
+
+  :global(.billing-history-button:hover svg),
+  :global(.billing-history-button:focus-visible svg) {
+    fill: var(--blue-006);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   thead {

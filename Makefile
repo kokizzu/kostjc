@@ -1,5 +1,8 @@
 
-.PHONY: compose-services compose-cmd test test-unit test-domain setup local-tarantool local-clickhouse download-backup upload-backup modtidy fixtags orm views migrate backup-db restore-db frontend web
+.PHONY: check-worktree compose-services compose-cmd test test-unit test-domain setup local-tarantool local-clickhouse download-backup upload-backup modtidy fixtags orm views migrate backup-db restore-db frontend frontend-build frontend-test verify-billing-history web
+
+check-worktree:
+	bash ./scripts/check-worktree.sh
 
 compose-services:
 	docker compose up -d tarantool clickhouse
@@ -71,6 +74,14 @@ restore-db:
 frontend:
 	cd svelte && pnpm i && bun watch
 	#pnpm watch
+
+frontend-build:
+	bash ./scripts/build-frontend.sh
+
+frontend-test:
+	bash ./scripts/test-frontend.sh
+
+verify-billing-history: frontend-build frontend-test test-unit test-domain check-worktree
 
 web:
 	air web

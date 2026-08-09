@@ -1427,6 +1427,358 @@ var LocationsFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
 
 // DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
 
+// PaymentPromises DAO reader/query struct
+type PaymentPromises struct {
+	Adapter      *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
+	Id           uint64      `json:"id,string" form:"id" query:"id" long:"id" msg:"id"`
+	TenantId     uint64      `json:"tenantId,string" form:"tenantId" query:"tenantId" long:"tenantId" msg:"tenantId"`
+	BookingId    uint64      `json:"bookingId,string" form:"bookingId" query:"bookingId" long:"bookingId" msg:"bookingId"`
+	PromisedAt   string      `json:"promisedAt" form:"promisedAt" query:"promisedAt" long:"promisedAt" msg:"promisedAt"`
+	PromisePayAt string      `json:"promisePayAt" form:"promisePayAt" query:"promisePayAt" long:"promisePayAt" msg:"promisePayAt"`
+	CreatedAt    int64       `json:"createdAt" form:"createdAt" query:"createdAt" long:"createdAt" msg:"createdAt"`
+	CreatedBy    uint64      `json:"createdBy,string" form:"createdBy" query:"createdBy" long:"createdBy" msg:"createdBy"`
+	UpdatedAt    int64       `json:"updatedAt" form:"updatedAt" query:"updatedAt" long:"updatedAt" msg:"updatedAt"`
+	UpdatedBy    uint64      `json:"updatedBy,string" form:"updatedBy" query:"updatedBy" long:"updatedBy" msg:"updatedBy"`
+	DeletedAt    int64       `json:"deletedAt" form:"deletedAt" query:"deletedAt" long:"deletedAt" msg:"deletedAt"`
+	DeletedBy    uint64      `json:"deletedBy,string" form:"deletedBy" query:"deletedBy" long:"deletedBy" msg:"deletedBy"`
+	RestoredBy   uint64      `json:"restoredBy,string" form:"restoredBy" query:"restoredBy" long:"restoredBy" msg:"restoredBy"`
+	Note         string      `json:"note" form:"note" query:"note" long:"note" msg:"note"`
+}
+
+// NewPaymentPromises create new ORM reader/query object
+func NewPaymentPromises(adapter *Tt.Adapter) *PaymentPromises {
+	return &PaymentPromises{Adapter: adapter}
+}
+
+// SpaceName returns full package and table name
+func (p *PaymentPromises) SpaceName() string { //nolint:dupl false positive
+	return string(mProperty.TablePaymentPromises) // casting required to string from Tt.TableName
+}
+
+// SqlTableName returns quoted table name
+func (p *PaymentPromises) SqlTableName() string { //nolint:dupl false positive
+	return `"paymentPromises"`
+}
+
+func (p *PaymentPromises) UniqueIndexId() string { //nolint:dupl false positive
+	return `id`
+}
+
+// FindById Find one by Id
+func (p *PaymentPromises) FindById() bool { //nolint:dupl false positive
+	res, err := p.Adapter.Select(p.SpaceName(), p.UniqueIndexId(), 0, 1, tarantool.IterEq, A.X{p.Id})
+	if L.IsError(err, `PaymentPromises.FindById failed: `+p.SpaceName()) {
+		return false
+	}
+	rows := res.Tuples()
+	if len(rows) == 1 {
+		p.FromArray(rows[0])
+		return true
+	}
+	return false
+}
+
+// SqlSelectAllFields generate Sql select fields
+func (p *PaymentPromises) SqlSelectAllFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "tenantId"
+	, "bookingId"
+	, "promisedAt"
+	, "promisePayAt"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	, "note"
+	`
+}
+
+// SqlSelectAllUncensoredFields generate Sql select fields
+func (p *PaymentPromises) SqlSelectAllUncensoredFields() string { //nolint:dupl false positive
+	return ` "id"
+	, "tenantId"
+	, "bookingId"
+	, "promisedAt"
+	, "promisePayAt"
+	, "createdAt"
+	, "createdBy"
+	, "updatedAt"
+	, "updatedBy"
+	, "deletedAt"
+	, "deletedBy"
+	, "restoredBy"
+	, "note"
+	`
+}
+
+// ToUpdateArray generate slice of update command
+func (p *PaymentPromises) ToUpdateArray() A.X { //nolint:dupl false positive
+	return A.X{
+		A.X{`=`, 0, p.Id},
+		A.X{`=`, 1, p.TenantId},
+		A.X{`=`, 2, p.BookingId},
+		A.X{`=`, 3, p.PromisedAt},
+		A.X{`=`, 4, p.PromisePayAt},
+		A.X{`=`, 5, p.CreatedAt},
+		A.X{`=`, 6, p.CreatedBy},
+		A.X{`=`, 7, p.UpdatedAt},
+		A.X{`=`, 8, p.UpdatedBy},
+		A.X{`=`, 9, p.DeletedAt},
+		A.X{`=`, 10, p.DeletedBy},
+		A.X{`=`, 11, p.RestoredBy},
+		A.X{`=`, 12, p.Note},
+	}
+}
+
+// IdxId return name of the index
+func (p *PaymentPromises) IdxId() int { //nolint:dupl false positive
+	return 0
+}
+
+// SqlId return name of the column being indexed
+func (p *PaymentPromises) SqlId() string { //nolint:dupl false positive
+	return `"id"`
+}
+
+// IdxTenantId return name of the index
+func (p *PaymentPromises) IdxTenantId() int { //nolint:dupl false positive
+	return 1
+}
+
+// SqlTenantId return name of the column being indexed
+func (p *PaymentPromises) SqlTenantId() string { //nolint:dupl false positive
+	return `"tenantId"`
+}
+
+// IdxBookingId return name of the index
+func (p *PaymentPromises) IdxBookingId() int { //nolint:dupl false positive
+	return 2
+}
+
+// SqlBookingId return name of the column being indexed
+func (p *PaymentPromises) SqlBookingId() string { //nolint:dupl false positive
+	return `"bookingId"`
+}
+
+// IdxPromisedAt return name of the index
+func (p *PaymentPromises) IdxPromisedAt() int { //nolint:dupl false positive
+	return 3
+}
+
+// SqlPromisedAt return name of the column being indexed
+func (p *PaymentPromises) SqlPromisedAt() string { //nolint:dupl false positive
+	return `"promisedAt"`
+}
+
+// IdxPromisePayAt return name of the index
+func (p *PaymentPromises) IdxPromisePayAt() int { //nolint:dupl false positive
+	return 4
+}
+
+// SqlPromisePayAt return name of the column being indexed
+func (p *PaymentPromises) SqlPromisePayAt() string { //nolint:dupl false positive
+	return `"promisePayAt"`
+}
+
+// IdxCreatedAt return name of the index
+func (p *PaymentPromises) IdxCreatedAt() int { //nolint:dupl false positive
+	return 5
+}
+
+// SqlCreatedAt return name of the column being indexed
+func (p *PaymentPromises) SqlCreatedAt() string { //nolint:dupl false positive
+	return `"createdAt"`
+}
+
+// IdxCreatedBy return name of the index
+func (p *PaymentPromises) IdxCreatedBy() int { //nolint:dupl false positive
+	return 6
+}
+
+// SqlCreatedBy return name of the column being indexed
+func (p *PaymentPromises) SqlCreatedBy() string { //nolint:dupl false positive
+	return `"createdBy"`
+}
+
+// IdxUpdatedAt return name of the index
+func (p *PaymentPromises) IdxUpdatedAt() int { //nolint:dupl false positive
+	return 7
+}
+
+// SqlUpdatedAt return name of the column being indexed
+func (p *PaymentPromises) SqlUpdatedAt() string { //nolint:dupl false positive
+	return `"updatedAt"`
+}
+
+// IdxUpdatedBy return name of the index
+func (p *PaymentPromises) IdxUpdatedBy() int { //nolint:dupl false positive
+	return 8
+}
+
+// SqlUpdatedBy return name of the column being indexed
+func (p *PaymentPromises) SqlUpdatedBy() string { //nolint:dupl false positive
+	return `"updatedBy"`
+}
+
+// IdxDeletedAt return name of the index
+func (p *PaymentPromises) IdxDeletedAt() int { //nolint:dupl false positive
+	return 9
+}
+
+// SqlDeletedAt return name of the column being indexed
+func (p *PaymentPromises) SqlDeletedAt() string { //nolint:dupl false positive
+	return `"deletedAt"`
+}
+
+// IdxDeletedBy return name of the index
+func (p *PaymentPromises) IdxDeletedBy() int { //nolint:dupl false positive
+	return 10
+}
+
+// SqlDeletedBy return name of the column being indexed
+func (p *PaymentPromises) SqlDeletedBy() string { //nolint:dupl false positive
+	return `"deletedBy"`
+}
+
+// IdxRestoredBy return name of the index
+func (p *PaymentPromises) IdxRestoredBy() int { //nolint:dupl false positive
+	return 11
+}
+
+// SqlRestoredBy return name of the column being indexed
+func (p *PaymentPromises) SqlRestoredBy() string { //nolint:dupl false positive
+	return `"restoredBy"`
+}
+
+// IdxNote return name of the index
+func (p *PaymentPromises) IdxNote() int { //nolint:dupl false positive
+	return 12
+}
+
+// SqlNote return name of the column being indexed
+func (p *PaymentPromises) SqlNote() string { //nolint:dupl false positive
+	return `"note"`
+}
+
+// ToArray receiver fields to slice
+func (p *PaymentPromises) ToArray() A.X { //nolint:dupl false positive
+	var id any = nil
+	if p.Id != 0 {
+		id = p.Id
+	}
+	return A.X{
+		id,
+		p.TenantId,     // 1
+		p.BookingId,    // 2
+		p.PromisedAt,   // 3
+		p.PromisePayAt, // 4
+		p.CreatedAt,    // 5
+		p.CreatedBy,    // 6
+		p.UpdatedAt,    // 7
+		p.UpdatedBy,    // 8
+		p.DeletedAt,    // 9
+		p.DeletedBy,    // 10
+		p.RestoredBy,   // 11
+		p.Note,         // 12
+	}
+}
+
+// FromArray convert slice to receiver fields
+func (p *PaymentPromises) FromArray(a A.X) *PaymentPromises { //nolint:dupl false positive
+	p.Id = X.ToU(a[0])
+	p.TenantId = X.ToU(a[1])
+	p.BookingId = X.ToU(a[2])
+	p.PromisedAt = X.ToS(a[3])
+	p.PromisePayAt = X.ToS(a[4])
+	p.CreatedAt = X.ToI(a[5])
+	p.CreatedBy = X.ToU(a[6])
+	p.UpdatedAt = X.ToI(a[7])
+	p.UpdatedBy = X.ToU(a[8])
+	p.DeletedAt = X.ToI(a[9])
+	p.DeletedBy = X.ToU(a[10])
+	p.RestoredBy = X.ToU(a[11])
+	p.Note = X.ToS(a[12])
+	return p
+}
+
+// FromUncensoredArray convert slice to receiver fields
+func (p *PaymentPromises) FromUncensoredArray(a A.X) *PaymentPromises { //nolint:dupl false positive
+	p.Id = X.ToU(a[0])
+	p.TenantId = X.ToU(a[1])
+	p.BookingId = X.ToU(a[2])
+	p.PromisedAt = X.ToS(a[3])
+	p.PromisePayAt = X.ToS(a[4])
+	p.CreatedAt = X.ToI(a[5])
+	p.CreatedBy = X.ToU(a[6])
+	p.UpdatedAt = X.ToI(a[7])
+	p.UpdatedBy = X.ToU(a[8])
+	p.DeletedAt = X.ToI(a[9])
+	p.DeletedBy = X.ToU(a[10])
+	p.RestoredBy = X.ToU(a[11])
+	p.Note = X.ToS(a[12])
+	return p
+}
+
+// FindOffsetLimit returns slice of struct, order by idx, eg. .UniqueIndex*()
+func (p *PaymentPromises) FindOffsetLimit(offset, limit uint32, idx string) []PaymentPromises { //nolint:dupl false positive
+	var rows []PaymentPromises
+	res, err := p.Adapter.Select(p.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `PaymentPromises.FindOffsetLimit failed: `+p.SpaceName()) {
+		return rows
+	}
+	for _, row := range res.Tuples() {
+		item := PaymentPromises{}
+		rows = append(rows, *item.FromArray(row))
+	}
+	return rows
+}
+
+// FindArrOffsetLimit returns as slice of slice order by idx eg. .UniqueIndex*()
+func (p *PaymentPromises) FindArrOffsetLimit(offset, limit uint32, idx string) ([]A.X, Tt.QueryMeta) { //nolint:dupl false positive
+	var rows []A.X
+	res, err := p.Adapter.Select(p.SpaceName(), idx, offset, limit, tarantool.IterAll, A.X{})
+	if L.IsError(err, `PaymentPromises.FindOffsetLimit failed: `+p.SpaceName()) {
+		return rows, Tt.QueryMetaFrom(res, err)
+	}
+	tuples := res.Tuples()
+	rows = make([]A.X, len(tuples))
+	for z, row := range tuples {
+		rows[z] = row
+	}
+	return rows, Tt.QueryMetaFrom(res, nil)
+}
+
+// Total count number of rows
+func (p *PaymentPromises) Total() int64 { //nolint:dupl false positive
+	rows := p.Adapter.CallBoxSpace(p.SpaceName()+`:count`, A.X{})
+	if len(rows) > 0 && len(rows[0]) > 0 {
+		return X.ToI(rows[0][0])
+	}
+	return 0
+}
+
+// PaymentPromisesFieldTypeMap returns key value of field name and key
+var PaymentPromisesFieldTypeMap = map[string]Tt.DataType{ //nolint:dupl false positive
+	`id`:           Tt.Unsigned,
+	`tenantId`:     Tt.Unsigned,
+	`bookingId`:    Tt.Unsigned,
+	`promisedAt`:   Tt.String,
+	`promisePayAt`: Tt.String,
+	`createdAt`:    Tt.Integer,
+	`createdBy`:    Tt.Unsigned,
+	`updatedAt`:    Tt.Integer,
+	`updatedBy`:    Tt.Unsigned,
+	`deletedAt`:    Tt.Integer,
+	`deletedBy`:    Tt.Unsigned,
+	`restoredBy`:   Tt.Unsigned,
+	`note`:         Tt.String,
+}
+
+// DO NOT EDIT, will be overwritten by github.com/kokizzu/D/Tt/tarantool_orm_generator.go
+
 // Payments DAO reader/query struct
 type Payments struct {
 	Adapter       *Tt.Adapter `json:"-" msg:"-" query:"-" form:"-" long:"adapter"`
