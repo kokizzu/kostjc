@@ -93,12 +93,13 @@ test('billing popup shows compact two-column booking and payment detail', () => 
   assert.match(billingPopup, /class="payments"/);
   assert.match(billingPopup, /grid-template-columns: minmax\(260px, max-content\) minmax\(360px, max-content\)/);
   assert.match(billingPopup, /Booking #\{booking\.bookingId\} <span>Room <strong>\{booking\.roomName \|\| '—'\}<\/strong><\/span>/);
-  assert.match(billingPopup, /<strong>Bill<\/strong> \{compactIDR\(booking\.totalPriceIDR\)\}/);
-  assert.match(billingPopup, /<strong>Paid<\/strong> \{compactIDR\(booking\.totalPaidIDR\)\}/);
+  assert.match(billingPopup, /<strong>Bill<\/strong> \{compactIDRFromThousands\(booking\.totalPriceIDR\)\}/);
+  assert.match(billingPopup, /<strong>Paid<\/strong> \{compactIDRFromThousands\(booking\.totalPaidIDR\)\}/);
   assert.doesNotMatch(billingPopup, /Outstanding/);
-  assert.match(billingPopup, /<span class="debt"><strong>Debt<\/strong> \{compactIDR\(debtAmount\(booking\)\)\}<\/span>/);
+  assert.match(billingPopup, /<span class="debt"><strong>Debt<\/strong> \{compactIDRFromThousands\(debtAmount\(booking\)\)\}<\/span>/);
   assert.match(billingPopup, /\{payment\.paymentMethod\}/);
   assert.match(billingPopup, /class="payment-amount"/);
+  assert.match(billingPopup, /compactPaymentIDRFromThousands\(payment\.paidIDR\)/);
   assert.match(billingPopup, /\{payment\.note\}/);
   assert.match(billingPopup, /paymentTiming\(payment\.paymentAt, booking\.dateStart\)/);
   assert.match(billingPopup, /\.timing\.late/);

@@ -4,7 +4,11 @@
 
   import { Icon } from '../node_modules/svelte-icons-pack/dist';
   import { IoClose } from '../node_modules/svelte-icons-pack/dist/io';
-  import { paymentTiming } from '../_helper/billingHistory';
+  import {
+    compactIDRFromThousands,
+    compactPaymentIDRFromThousands,
+    paymentTiming,
+  } from '../_helper/billingHistory';
 
   export let tenantName = '';
   export let bookings = /** @type {TenantBookingDetail[]} */ ([]);
@@ -30,34 +34,6 @@
   }
 
   /**
-   * @param {number} value
-   * @returns {string}
-   */
-  function compactIDR(value) {
-    const number = Number(value || 0);
-    const sign = number < 0 ? '-' : '';
-    const abs = Math.abs(number);
-
-    if (abs >= 1_000_000) {
-      return `${sign}${trimCompactNumber(abs / 1_000_000)}M`;
-    }
-    if (abs >= 1_000) {
-      return `${sign}${trimCompactNumber(abs / 1_000)}K`;
-    }
-
-    return `${sign}${abs}`;
-  }
-
-  /**
-   * @param {number} value
-   * @returns {string}
-   */
-  function compactPaymentIDR(value) {
-    const number = Number(value || 0);
-    return number < 0 ? compactIDR(number) : `+${compactIDR(number)}`;
-  }
-
-  /**
    * @param {TenantBookingDetail} booking
    * @returns {number}
    */
@@ -75,14 +51,6 @@
     if (timing.includes('late')) return 'late';
     if (timing.includes('early')) return 'early';
     return 'ontime';
-  }
-
-  /**
-   * @param {number} value
-   * @returns {string}
-   */
-  function trimCompactNumber(value) {
-    return value.toFixed(value >= 10 || Number.isInteger(value) ? 0 : 1).replace(/\.0$/, '');
   }
 
   /** @param {KeyboardEvent} event */
@@ -119,10 +87,10 @@
               <h3>Booking #{booking.bookingId} <span>Room <strong>{booking.roomName || '—'}</strong></span></h3>
               <p>{booking.dateStart} to {booking.dateEnd}</p>
               <p class="amounts">
-                <strong>Bill</strong> {compactIDR(booking.totalPriceIDR)}
-                <strong>Paid</strong> {compactIDR(booking.totalPaidIDR)}
+                <strong>Bill</strong> {compactIDRFromThousands(booking.totalPriceIDR)}
+                <strong>Paid</strong> {compactIDRFromThousands(booking.totalPaidIDR)}
                 {#if debtAmount(booking) > 0}
-                  <span class="debt"><strong>Debt</strong> {compactIDR(debtAmount(booking))}</span>
+                  <span class="debt"><strong>Debt</strong> {compactIDRFromThousands(debtAmount(booking))}</span>
                 {/if}
               </p>
             </section>
@@ -135,7 +103,7 @@
                     {#if payment.paymentMethod}
                       <span>{payment.paymentMethod}</span>
                     {/if}
-                    <strong class="payment-amount">{compactPaymentIDR(payment.paidIDR)}</strong>
+                    <strong class="payment-amount">{compactPaymentIDRFromThousands(payment.paidIDR)}</strong>
                   </p>
                   <div class="payment-meta">
                     <span>{payment.paymentAt}</span>

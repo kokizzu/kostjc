@@ -1,7 +1,13 @@
 const assert = require('node:assert/strict');
 const test = require('node:test');
 
-const { dateAsUtc, paymentTiming } = require('./billingHistory');
+const { compactIDRFromThousands, compactPaymentIDRFromThousands, dateAsUtc, paymentTiming } = require('./billingHistory');
+
+test('billing history formats stored thousands as real IDR amounts', () => {
+  assert.equal(compactIDRFromThousands(1500), '1.5M');
+  assert.equal(compactIDRFromThousands(500), '500K');
+  assert.equal(compactPaymentIDRFromThousands(1500), '+1.5M');
+});
 
 test('payment timing reports offsets from the booking start date', () => {
   assert.equal(paymentTiming('2026-07-10', '2026-07-10'), 'ontime');

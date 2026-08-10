@@ -4163,6 +4163,25 @@
   var require_billingHistory = __commonJS({
     "_helper/billingHistory.js"(exports, module) {
       var millisecondsPerDay = 1e3 * 60 * 60 * 24;
+      function compactIDRFromThousands2(value) {
+        const number = Number(value || 0) * 1e3;
+        const sign = number < 0 ? "-" : "";
+        const abs = Math.abs(number);
+        if (abs >= 1e6) {
+          return `${sign}${trimCompactNumber(abs / 1e6)}M`;
+        }
+        if (abs >= 1e3) {
+          return `${sign}${trimCompactNumber(abs / 1e3)}K`;
+        }
+        return `${sign}${abs}`;
+      }
+      function compactPaymentIDRFromThousands2(value) {
+        const number = Number(value || 0);
+        return number < 0 ? compactIDRFromThousands2(number) : `+${compactIDRFromThousands2(number)}`;
+      }
+      function trimCompactNumber(value) {
+        return value.toFixed(value >= 10 || Number.isInteger(value) ? 0 : 1).replace(/\.0$/, "");
+      }
       function dateAsUtc(value) {
         const [year, month, day] = (value || "").slice(0, 10).split("-").map(Number);
         if (!year || !month || !day) return null;
@@ -4183,6 +4202,8 @@
         return days > 0 ? `+${count}d late` : `-${count}d early`;
       }
       module.exports = {
+        compactIDRFromThousands: compactIDRFromThousands2,
+        compactPaymentIDRFromThousands: compactPaymentIDRFromThousands2,
         dateAsUtc,
         paymentTiming: paymentTiming2
       };
@@ -15755,22 +15776,6 @@ ${component_stack}
         return dateOrder || left.paymentId - right.paymentId;
       });
     }
-    function compactIDR(value) {
-      const number = Number(value || 0);
-      const sign = number < 0 ? "-" : "";
-      const abs = Math.abs(number);
-      if (abs >= 1e6) {
-        return `${sign}${trimCompactNumber(abs / 1e6)}M`;
-      }
-      if (abs >= 1e3) {
-        return `${sign}${trimCompactNumber(abs / 1e3)}K`;
-      }
-      return `${sign}${abs}`;
-    }
-    function compactPaymentIDR(value) {
-      const number = Number(value || 0);
-      return number < 0 ? compactIDR(number) : `+${compactIDR(number)}`;
-    }
     function debtAmount(booking) {
       return Math.max(0, (booking.totalPriceIDR || 0) - (booking.totalPaidIDR || 0));
     }
@@ -15779,9 +15784,6 @@ ${component_stack}
       if (timing.includes("late")) return "late";
       if (timing.includes("early")) return "early";
       return "ontime";
-    }
-    function trimCompactNumber(value) {
-      return value.toFixed(value >= 10 || Number.isInteger(value) ? 0 : 1).replace(/\.0$/, "");
     }
     function onKeydown(event2) {
       if (get2(isShow) && event2.key === "Escape") Hide();
@@ -15846,7 +15848,7 @@ ${component_stack}
               var text_6 = sibling(child(span_1));
               reset(span_1);
               template_effect(($0) => set_text(text_6, ` ${$0 ?? ""}`), [
-                () => (get2(booking), untrack(() => compactIDR(debtAmount(get2(booking)))))
+                () => (deep_read_state(import_billingHistory.compactIDRFromThousands), get2(booking), untrack(() => (0, import_billingHistory.compactIDRFromThousands)(debtAmount(get2(booking)))))
               ]);
               append($anchor4, span_1);
             };
@@ -15917,7 +15919,7 @@ ${component_stack}
                   set_text(text_11, $2);
                 },
                 [
-                  () => (get2(payment), untrack(() => compactPaymentIDR(get2(payment).paidIDR))),
+                  () => (deep_read_state(import_billingHistory.compactPaymentIDRFromThousands), get2(payment), untrack(() => (0, import_billingHistory.compactPaymentIDRFromThousands)(get2(payment).paidIDR))),
                   () => (get2(payment), get2(booking), untrack(() => `timing ${paymentTimingClass(get2(payment).paymentAt, get2(booking).dateStart)}`)),
                   () => (deep_read_state(import_billingHistory.paymentTiming), get2(payment), get2(booking), untrack(() => (0, import_billingHistory.paymentTiming)(get2(payment).paymentAt, get2(booking).dateStart)))
                 ]
@@ -15942,8 +15944,8 @@ ${component_stack}
               set_attribute2(section_1, "aria-label", (get2(booking), untrack(() => `Payments for booking ${get2(booking).bookingId}`)));
             },
             [
-              () => (get2(booking), untrack(() => compactIDR(get2(booking).totalPriceIDR))),
-              () => (get2(booking), untrack(() => compactIDR(get2(booking).totalPaidIDR)))
+              () => (deep_read_state(import_billingHistory.compactIDRFromThousands), get2(booking), untrack(() => (0, import_billingHistory.compactIDRFromThousands)(get2(booking).totalPriceIDR))),
+              () => (deep_read_state(import_billingHistory.compactIDRFromThousands), get2(booking), untrack(() => (0, import_billingHistory.compactIDRFromThousands)(get2(booking).totalPaidIDR)))
             ]
           );
           append($anchor3, article);

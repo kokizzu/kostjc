@@ -3,6 +3,45 @@
 const millisecondsPerDay = 1000 * 60 * 60 * 24;
 
 /**
+ * Billing values are stored in thousands of IDR. Convert to the real IDR
+ * amount before applying compact K/M labels.
+ *
+ * @param {number} value
+ * @returns {string}
+ */
+function compactIDRFromThousands(value) {
+  const number = Number(value || 0) * 1_000;
+  const sign = number < 0 ? '-' : '';
+  const abs = Math.abs(number);
+
+  if (abs >= 1_000_000) {
+    return `${sign}${trimCompactNumber(abs / 1_000_000)}M`;
+  }
+  if (abs >= 1_000) {
+    return `${sign}${trimCompactNumber(abs / 1_000)}K`;
+  }
+
+  return `${sign}${abs}`;
+}
+
+/**
+ * @param {number} value
+ * @returns {string}
+ */
+function compactPaymentIDRFromThousands(value) {
+  const number = Number(value || 0);
+  return number < 0 ? compactIDRFromThousands(number) : `+${compactIDRFromThousands(number)}`;
+}
+
+/**
+ * @param {number} value
+ * @returns {string}
+ */
+function trimCompactNumber(value) {
+  return value.toFixed(value >= 10 || Number.isInteger(value) ? 0 : 1).replace(/\.0$/, '');
+}
+
+/**
  * @param {string} value
  * @returns {number | null}
  */
@@ -39,6 +78,8 @@ function paymentTiming(paymentAt, bookingStart) {
 }
 
 module.exports = {
+  compactIDRFromThousands,
+  compactPaymentIDRFromThousands,
   dateAsUtc,
   paymentTiming,
 };
